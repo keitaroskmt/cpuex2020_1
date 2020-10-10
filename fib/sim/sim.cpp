@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
             break;
 
         default:
-            printf("Usage: %s [-s] [-c] [-n argment] \n", argv[0]);
+            printf("Usage: %s [-s] [-c] [-p] [-n argment] \n", argv[0]);
             break;
         }
     }
@@ -125,7 +125,7 @@ int main(int argc, char *argv[])
             break;
         loop--;
     }
-    printf("%d\n", cur_env.GPR[reg_name.at("$v0")]);
+    printf("ans: %d\n", cur_env.GPR[reg_name.at("$v0")]);
     if (is_stat)
         print_stats();
 
