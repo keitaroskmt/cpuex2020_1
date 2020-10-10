@@ -4,53 +4,130 @@
 #include <regex>
 #include <map>
 #include <errno.h>
+#include <unistd.h>
 #include "sim.h"
 
 int cur_opnum;
 op_info *ops;
 core_env cur_env;
-std::map<std::string, int> reg_name;
 std::map<std::string, int> label_pos;
 int jump_num = 1;
 unsigned int *stack = (unsigned int *)malloc(sizeof(unsigned int) * 1000000);
 int exec_op(op_info op, core_env env, std::map<std::string, int> label_pos);
 int load_ops(FILE *fp);
-void reg_name_set();
+void print_state(core_env env);
+int exec_step(bool print_process);
+void print_stats();
 
-int main(void)
+int main(int argc, char *argv[])
 {
+    int opt;
+    bool is_step = false;
+    bool is_stat = false;
+    bool print_process = false;
+    int n = 1;
+
+    while ((opt = getopt(argc, argv, "scpn:")) != -1)
+    {
+        switch (opt)
+        {
+        case 's':
+            is_step = true;
+            break;
+
+        case 'c':
+            is_stat = true;
+            break;
+
+        case 'p':
+            print_process = true;
+            break;
+
+        case 'n':
+            n = atoi(optarg);
+            break;
+
+        default:
+            printf("Usage: %s [-s] [-c] [-n argment] \n", argv[0]);
+            break;
+        }
+    }
+
     FILE *fp;
+    std::string cmd;
+    std::smatch cmd_re;
     int end;
     int errno;
+    int line = 0;
+    int loop = 0;
+    char buf[256];
 
     cur_env.PC = 0;
-    fp = fopen("./test.s", "r");
-    if (fp == NULL)
-    {
+    // 事前に行数取得
+    if ((fp = fopen("./test.s", "r")) == NULL)
         perror("fopen error");
-    }
-    // とりあえず100行までのプログラム前提(動的にやるにはwcコマンドなど?)
-    ops = (op_info *)malloc(sizeof(op_info) * 100);
 
-    reg_name_set();
-    end = load_ops(fp);
+    while (fgets(buf, 256, fp) != NULL)
+        line++;
+
+    fclose(fp);
+
+    ops = (op_info *)malloc(sizeof(op_info) * line);
+
+    if ((fp = fopen("./test.s", "r")) == NULL)
+        perror("fopen error");
+
+    // 命令のパース
+    if ((end = load_ops(fp)) == 0)
+        return 0;
+
+    fclose(fp);
     cur_opnum = 0;
     // stackはとりあえず100万要素確保
-    cur_env.GPR[reg_name["$sp"]] = 4000000;
-    cur_env.GPR[reg_name["$a0"]] = 5;
+    cur_env.GPR[reg_name.at("$sp")] = 4000000;
+    // フィボナッチに最初に渡すn
+    cur_env.GPR[reg_name.at("$a0")] = n;
 
+    // step実行
     while (cur_opnum < end)
     {
-        if (ops[cur_opnum].type == 0)
+        if (is_step && loop == 0)
         {
-            printf("%d\t%d\t%s\t%s\t%s\t%s\t%d\n", cur_env.PC, cur_opnum, ops[cur_opnum].opcode.c_str(), ops[cur_opnum].opland[0].c_str(), ops[cur_opnum].opland[1].c_str(), ops[cur_opnum].opland[2].c_str(), ops[cur_opnum].offset);
-            if (exec_op(ops[cur_opnum], cur_env, label_pos))
-                break;
-            cur_env.PC++;
+            while (true)
+            {
+                cmd = get_line(100);
+                if (cmd == "s\n")
+                {
+                    loop = 1;
+                    break;
+                }
+                else if (regex_match(cmd, cmd_re, std::regex("^(\\d+)s\n$")))
+                {
+                    loop = stoi(cmd_re[1].str());
+                    break;
+                }
+                else if (cmd == "pr\n")
+                    print_state(cur_env);
+                else if (cmd == "ps\n")
+                    print_stats();
+                else if (cmd == "r\n")
+                {
+                    loop = -1;
+                    break;
+                }
+                else if (cmd == "h\n")
+                    printf("1 step: 's', Nstep: 'Ns'(N=int), run all: 'r', print reg: 'pr', print stat: 'ps', exit: 'exit'\n");
+                else if (cmd == "exit\n")
+                    return 0;
+            }
         }
-        cur_opnum++;
+        if (exec_step(print_process))
+            break;
+        loop--;
     }
-    printf("%d\n", cur_env.GPR[reg_name["$v0"]]);
+    printf("%d\n", cur_env.GPR[reg_name.at("$v0")]);
+    if (is_stat)
+        print_stats();
 
     return 0;
 }
@@ -117,9 +194,34 @@ int load_ops(FILE *fp)
             ops[i].type = 2;
             ops[i].other = results[1];
         }
+        // 例外処理
+        else
+        {
+            printf("there is a something wrong with '%s'", s1.c_str());
+            return 0;
+        }
         i++;
     }
     return i;
+}
+
+int exec_step(bool print_process)
+{
+    if (ops[cur_opnum].type == 0)
+    {
+        if (print_process)
+            printf("%d\t%d\t%s\t%s\t%s\t%s\t%d\n", cur_env.PC, cur_opnum, ops[cur_opnum].opcode.c_str(), ops[cur_opnum].opland[0].c_str(), ops[cur_opnum].opland[1].c_str(), ops[cur_opnum].opland[2].c_str(), ops[cur_opnum].offset);
+        if (exec_op(ops[cur_opnum], cur_env, label_pos))
+            return 1;
+        cur_env.PC++;
+    }
+    else if (ops[cur_opnum].type == 1)
+    {
+        if (print_process)
+            printf("%s:\n", ops[cur_opnum].label.c_str());
+    }
+    cur_opnum++;
+    return 0;
 }
 
 int exec_op(op_info op, core_env env, std::map<std::string, int> label_pos)
@@ -128,20 +230,20 @@ int exec_op(op_info op, core_env env, std::map<std::string, int> label_pos)
     std::string label;
     if (op.opcode == "add")
     {
-        rs = cur_env.GPR[reg_name[op.opland[1]]];
-        rt = cur_env.GPR[reg_name[op.opland[2]]];
-        cur_env.GPR[reg_name[op.opland[0]]] = rs + rt;
+        rs = cur_env.GPR[reg_name.at(op.opland[1])];
+        rt = cur_env.GPR[reg_name.at(op.opland[2])];
+        cur_env.GPR[reg_name.at(op.opland[0])] = rs + rt;
     }
     else if (op.opcode == "addi")
     {
-        rs = cur_env.GPR[reg_name[op.opland[1]]];
+        rs = cur_env.GPR[reg_name.at(op.opland[1])];
         imm = stoi(op.opland[2]);
-        cur_env.GPR[reg_name[op.opland[0]]] = rs + imm;
+        cur_env.GPR[reg_name.at(op.opland[0])] = rs + imm;
     }
     else if (op.opcode == "bgt")
     {
-        rs = cur_env.GPR[reg_name[op.opland[0]]];
-        rt = cur_env.GPR[reg_name[op.opland[1]]];
+        rs = cur_env.GPR[reg_name.at(op.opland[0])];
+        rt = cur_env.GPR[reg_name.at(op.opland[1])];
         label = op.opland[2];
         if (rs > rt)
             cur_opnum = label_pos[label];
@@ -149,105 +251,57 @@ int exec_op(op_info op, core_env env, std::map<std::string, int> label_pos)
     else if (op.opcode == "j")
     {
         label = op.opland[0];
-        cur_opnum = label_pos[label];
+        cur_opnum = label_pos[label] - 1;
     }
     else if (op.opcode == "jal")
     {
         label = op.opland[0];
         cur_env.GPR[31] = cur_opnum + 1;
-        cur_opnum = label_pos[label];
+        cur_opnum = label_pos[label] - 1;
     }
     else if (op.opcode == "jr")
     {
-        rs = cur_env.GPR[reg_name[op.opland[0]]];
-        if (rs < 50)
-            cur_opnum = rs - 1;
-        else
-            return 1;
+        rs = cur_env.GPR[reg_name.at(op.opland[0])];
+        cur_opnum = rs - 1;
     }
     else if (op.opcode == "lw")
     {
-        sp = cur_env.GPR[reg_name["$sp"]] + op.offset;
-        cur_env.GPR[reg_name[op.opland[0]]] = stack[sp / 4];
+        sp = cur_env.GPR[reg_name.at("$sp")] + op.offset;
+        cur_env.GPR[reg_name.at(op.opland[0])] = stack[sp / 4];
     }
     else if (op.opcode == "sw")
     {
-        sp = cur_env.GPR[reg_name["$sp"]] + op.offset;
-        stack[sp / 4] = cur_env.GPR[reg_name[op.opland[0]]];
+        sp = cur_env.GPR[reg_name.at("$sp")] + op.offset;
+        stack[sp / 4] = cur_env.GPR[reg_name.at(op.opland[0])];
     }
     else if (op.opcode == "move")
     {
-        rt = cur_env.GPR[reg_name[op.opland[1]]];
-        cur_env.GPR[reg_name[op.opland[0]]] = rt;
+        rt = cur_env.GPR[reg_name.at(op.opland[1])];
+        cur_env.GPR[reg_name.at(op.opland[0])] = rt;
     }
+    // 例外処理
+    else
+    {
+        printf("%s is not supported\n", op.opcode.c_str());
+        return 1;
+    }
+    op_counter[op.opcode] += 1;
+    op_counter["total"] += 1;
     return 0;
 }
 
-void reg_name_set()
+void print_state(core_env env)
 {
-    reg_name["$zero"] = 0;
-    reg_name["$at"] = 1;
-    reg_name["$v0"] = 2;
-    reg_name["$v1"] = 3;
-    reg_name["$a0"] = 4;
-    reg_name["$a1"] = 5;
-    reg_name["$a2"] = 6;
-    reg_name["$a3"] = 7;
-    reg_name["$t0"] = 8;
-    reg_name["$t1"] = 9;
-    reg_name["$t2"] = 10;
-    reg_name["$t3"] = 11;
-    reg_name["$t4"] = 12;
-    reg_name["$t5"] = 13;
-    reg_name["$t6"] = 14;
-    reg_name["$t7"] = 15;
-    reg_name["$s0"] = 16;
-    reg_name["$s1"] = 17;
-    reg_name["$s2"] = 18;
-    reg_name["$s3"] = 19;
-    reg_name["$s4"] = 20;
-    reg_name["$s5"] = 21;
-    reg_name["$s6"] = 22;
-    reg_name["$s7"] = 23;
-    reg_name["$t8"] = 24;
-    reg_name["$t9"] = 25;
-    reg_name["$k0"] = 26;
-    reg_name["$k1"] = 27;
-    reg_name["$gp"] = 28;
-    reg_name["$fp"] = 29;
-    reg_name["$sp"] = 30;
-    reg_name["$ra"] = 31;
-    reg_name["$f0"] = 32;
-    reg_name["$f1"] = 33;
-    reg_name["$f2"] = 34;
-    reg_name["$f3"] = 35;
-    reg_name["$f4"] = 36;
-    reg_name["$f5"] = 37;
-    reg_name["$f6"] = 38;
-    reg_name["$f7"] = 39;
-    reg_name["$f8"] = 40;
-    reg_name["$f9"] = 41;
-    reg_name["$f10"] = 42;
-    reg_name["$f11"] = 43;
-    reg_name["$f12"] = 44;
-    reg_name["$f13"] = 45;
-    reg_name["$f14"] = 46;
-    reg_name["$f15"] = 47;
-    reg_name["$f16"] = 48;
-    reg_name["$f17"] = 49;
-    reg_name["$f18"] = 50;
-    reg_name["$f19"] = 51;
-    reg_name["$f20"] = 52;
-    reg_name["$f21"] = 53;
-    reg_name["$f22"] = 54;
-    reg_name["$f23"] = 55;
-    reg_name["$f24"] = 56;
-    reg_name["$f25"] = 57;
-    reg_name["$f26"] = 58;
-    reg_name["$f27"] = 59;
-    reg_name["$f28"] = 60;
-    reg_name["$f29"] = 61;
-    reg_name["$f30"] = 62;
-    reg_name["$f31"] = 63;
+    printf("%d\t", env.PC);
+    printf("GPR\n0-3\t%d\t%d\t%d\t%d\n4-7\t%d\t%d\t%d\t%d\n8-11\t%d\t%d\t%d\t%d\n12-15\t%d\t%d\t%d\t%d\n16-19\t%d\t%d\t%d\t%d\n20-23\t%d\t%d\t%d\t%d\n24-27\t%d\t%d\t%d\t%d\n28-31\t%d\t%X\t%X\t%d\nFPR FPCC: %s\n0-3\t%f\t%f\t%f\t%f\n4-7\t%f\t%f\t%f\t%f\n8-11\t%f\t%f\t%f\t%f\n12-15\t%f\t%f\t%f\t%f\n16-19\t%f\t%f\t%f\t%f\n20-23\t%f\t%f\t%f\t%f\n24-27\t%f\t%f\t%f\t%f\n28-31\t%f\t%f\t%f\t%f\n\n", env.GPR[0], env.GPR[1], env.GPR[2], env.GPR[3], env.GPR[4], env.GPR[5], env.GPR[6], env.GPR[7], env.GPR[8], env.GPR[9], env.GPR[10], env.GPR[11], env.GPR[12], env.GPR[13], env.GPR[14], env.GPR[15], env.GPR[16], env.GPR[17], env.GPR[18], env.GPR[19], env.GPR[20], env.GPR[21], env.GPR[22], env.GPR[23], env.GPR[24], env.GPR[25], env.GPR[26], env.GPR[27], env.GPR[28], env.GPR[29], env.GPR[30], env.GPR[31], env.FPCC, env.FPR[0], env.FPR[1], env.FPR[2], env.FPR[3], env.FPR[4], env.FPR[5], env.FPR[6], env.FPR[7], env.FPR[8], env.FPR[9], env.FPR[10], env.FPR[11], env.FPR[12], env.FPR[13], env.FPR[14], env.FPR[15], env.FPR[16], env.FPR[17], env.FPR[18], env.FPR[19], env.FPR[20], env.FPR[21], env.FPR[22], env.FPR[23], env.FPR[24], env.FPR[25], env.FPR[26], env.FPR[27], env.FPR[28], env.FPR[29], env.FPR[30], env.FPR[31]);
+    return;
+}
+
+void print_stats()
+{
+    for (auto itr = op_counter.begin(); itr != op_counter.end(); ++itr)
+    {
+        printf("%s:\t%d\n", (itr->first).c_str(), itr->second);
+    }
     return;
 }
