@@ -132,6 +132,7 @@ int main(int argc, char *argv[])
     return 0;
 }
 
+// アセンブリをパースして命令列にする
 int load_ops(FILE *fp)
 {
     std::smatch results;
@@ -205,6 +206,7 @@ int load_ops(FILE *fp)
     return i;
 }
 
+// 1step実行する 命令なら実行し、その他なら読み飛ばす
 int exec_step(bool print_process)
 {
     if (ops[cur_opnum].type == 0)
@@ -224,6 +226,7 @@ int exec_step(bool print_process)
     return 0;
 }
 
+// 1命令実行する
 int exec_op(op_info op, core_env env, std::map<std::string, int> label_pos)
 {
     int rs, rt, imm, sp;
@@ -290,6 +293,7 @@ int exec_op(op_info op, core_env env, std::map<std::string, int> label_pos)
     return 0;
 }
 
+// レジスタの状態を出力する
 void print_state(core_env env)
 {
     printf("%d\t", env.PC);
@@ -297,6 +301,7 @@ void print_state(core_env env)
     return;
 }
 
+// 命令実行数を出力する
 void print_stats()
 {
     for (auto itr = op_counter.begin(); itr != op_counter.end(); ++itr)

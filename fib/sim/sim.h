@@ -2,6 +2,7 @@
 #include <string>
 #include <map>
 
+// レジスタなどのコアの内部環境の保持
 typedef struct
 {
     int PC;
@@ -12,6 +13,7 @@ typedef struct
     int PJ;
 } core_env;
 
+// アセンブリを1行ごとにパースしてこの命令フォーマットに変換する
 typedef struct
 {
     int type; // op = 0, label = 1, other = 2
@@ -23,6 +25,7 @@ typedef struct
     std::string other;
 } op_info;
 
+// step実行時のコマンド取得
 std::string get_line(int size)
 {
 
@@ -40,6 +43,7 @@ std::string get_line(int size)
     return str;
 }
 
+// レジスタ名を番号に変換する
 const std::map<std::string, int> reg_name = {
     {"$zero", 0},
     {"$at", 1},
@@ -106,6 +110,7 @@ const std::map<std::string, int> reg_name = {
     {"$f30", 62},
     {"$f31", 63}};
 
+// 命令の実行数を保持する
 std::map<std::string, int> op_counter = {
     {"add", 0},
     {"addi", 0},
