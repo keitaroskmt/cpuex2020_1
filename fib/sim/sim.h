@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-using namespace std;
 
 typedef struct
 {
@@ -16,8 +15,9 @@ typedef struct
 {
     int type; // op = 0, label = 1, other = 2
     int opland_num;
-    string opland[3];
-    string opcode;
-    string label;
-    string other;
+    int offset;
+    std::string opland[3];
+    std::string opcode;
+    std::string label;
+    std::string other;
 } op_info;
