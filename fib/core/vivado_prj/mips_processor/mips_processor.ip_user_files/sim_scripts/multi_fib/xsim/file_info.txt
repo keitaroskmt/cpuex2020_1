@@ -1,0 +1,4 @@
+multi_fib_sim_clk_gen_0_0.v,verilog,xil_defaultlib,../../../bd/multi_fib/ip/multi_fib_sim_clk_gen_0_0/sim/multi_fib_sim_clk_gen_0_0.v,
+multi_fib_multicycle_cpu_0_1.v,verilog,xil_defaultlib,../../../bd/multi_fib/ip/multi_fib_multicycle_cpu_0_1/sim/multi_fib_multicycle_cpu_0_1.v,
+multi_fib.v,verilog,xil_defaultlib,../../../bd/multi_fib/sim/multi_fib.v,
+glbl.v,Verilog,xil_defaultlib,glbl.v

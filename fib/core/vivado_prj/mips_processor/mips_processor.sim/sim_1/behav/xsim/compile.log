@@ -1,0 +1,20 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/nowi74/cpuex2020_1/fib/core/src/alu.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module alu
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/nowi74/cpuex2020_1/fib/core/src/inst_data_mem_dis.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module inst_data_mem_dis
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/nowi74/cpuex2020_1/fib/core/src/multi_control_unit.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module multi_control_unit
+INFO: [VRFC 10-311] analyzing module multi_main_decoder
+INFO: [VRFC 10-311] analyzing module multi_ALU_decoder
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/nowi74/cpuex2020_1/fib/core/src/rams_dp_wf.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module rams_dp_wf
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/nowi74/cpuex2020_1/fib/core/src/multicycle_fib.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module multicycle_cpu
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/nowi74/cpuex2020_1/fib/core/vivado_prj/mips_processor/mips_processor.ip_user_files/bd/multi_fib/ip/multi_fib_sim_clk_gen_0_0/sim/multi_fib_sim_clk_gen_0_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module multi_fib_sim_clk_gen_0_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/nowi74/cpuex2020_1/fib/core/vivado_prj/mips_processor/mips_processor.ip_user_files/bd/multi_fib/ip/multi_fib_multicycle_cpu_0_1/sim/multi_fib_multicycle_cpu_0_1.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module multi_fib_multicycle_cpu_0_1
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/nowi74/cpuex2020_1/fib/core/vivado_prj/mips_processor/mips_processor.ip_user_files/bd/multi_fib/sim/multi_fib.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module multi_fib
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/nowi74/cpuex2020_1/fib/core/vivado_prj/mips_processor/mips_processor.srcs/sources_1/bd/multi_fib/hdl/multi_fib_wrapper.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module multi_fib_wrapper

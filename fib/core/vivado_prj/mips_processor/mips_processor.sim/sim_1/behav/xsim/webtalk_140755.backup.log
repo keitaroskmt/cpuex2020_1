@@ -1,0 +1,14 @@
+#-----------------------------------------------------------
+# Webtalk v2020.1 (64-bit)
+# SW Build 2902540 on Wed May 27 19:54:35 MDT 2020
+# IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
+# Start of session at: Mon Oct 12 14:30:48 2020
+# Process ID: 140755
+# Current directory: /home/nowi74/cpuex2020_1/fib/core/vivado_prj/mips_processor/mips_processor.sim/sim_1/behav/xsim
+# Command line: wbtcv -mode batch -source /home/nowi74/cpuex2020_1/fib/core/vivado_prj/mips_processor/mips_processor.sim/sim_1/behav/xsim/xsim.dir/multi_fib_wrapper_behav/webtalk/xsim_webtalk.tcl -notrace
+# Log file: /home/nowi74/cpuex2020_1/fib/core/vivado_prj/mips_processor/mips_processor.sim/sim_1/behav/xsim/webtalk.log
+# Journal file: /home/nowi74/cpuex2020_1/fib/core/vivado_prj/mips_processor/mips_processor.sim/sim_1/behav/xsim/webtalk.jou
+#-----------------------------------------------------------
+source /home/nowi74/cpuex2020_1/fib/core/vivado_prj/mips_processor/mips_processor.sim/sim_1/behav/xsim/xsim.dir/multi_fib_wrapper_behav/webtalk/xsim_webtalk.tcl -notrace
+webtalk_transmit: Time (s): cpu = 00:00:00.75 ; elapsed = 00:00:11 . Memory (MB): peak = 393.020 ; gain = 0.000 ; free physical = 5878 ; free virtual = 25240
+INFO: [Common 17-206] Exiting Webtalk at Mon Oct 12 14:30:59 2020...
