@@ -25,9 +25,10 @@ int main(int argc, char *argv[])
     bool is_step = false;
     bool is_stat = false;
     bool print_process = false;
-    int n = 1;
+    // int n = 1;
 
-    while ((opt = getopt(argc, argv, "scpn:")) != -1)
+    // while ((opt = getopt(argc, argv, "scpn:")) != -1)
+    while ((opt = getopt(argc, argv, "scp")) != -1)
     {
         switch (opt)
         {
@@ -43,12 +44,13 @@ int main(int argc, char *argv[])
             print_process = true;
             break;
 
-        case 'n':
-            n = atoi(optarg);
-            break;
+            // case 'n':
+            //     n = atoi(optarg);
+            //     break;
 
         default:
-            printf("Usage: %s [-s] [-c] [-p] [-n argment] \n", argv[0]);
+            // printf("Usage: %s [-s] [-c] [-p] [-n argment] \n", argv[0]);
+            printf("Usage: %s [-s] [-c] [-p] \n", argv[0]);
             break;
         }
     }
@@ -64,7 +66,7 @@ int main(int argc, char *argv[])
 
     cur_env.PC = 0;
     // 事前に行数取得
-    if ((fp = fopen("./test.s", "r")) == NULL)
+    if ((fp = fopen("./fib.s", "r")) == NULL)
         perror("fopen error");
 
     while (fgets(buf, 256, fp) != NULL)
@@ -74,19 +76,20 @@ int main(int argc, char *argv[])
 
     ops = (op_info *)malloc(sizeof(op_info) * line);
 
-    if ((fp = fopen("./test.s", "r")) == NULL)
+    if ((fp = fopen("./fib.s", "r")) == NULL)
         perror("fopen error");
 
+    cur_opnum = 0;
     // 命令のパース
     if ((end = load_ops(fp)) == 0)
         return 0;
 
     fclose(fp);
-    cur_opnum = 0;
     // stackはとりあえず100万要素確保
-    cur_env.GPR[reg_name.at("$sp")] = 4000000;
+    cur_env.GPR[reg_name.at("%sp")] = 4000000;
     // フィボナッチに最初に渡すn
-    cur_env.GPR[reg_name.at("$a0")] = n;
+    // (10/22 仕様変更に伴い使えなくなった。)
+    // cur_env.GPR[reg_name.at("%a0")] = n;
 
     // step実行
     while (cur_opnum < end)
@@ -125,7 +128,7 @@ int main(int argc, char *argv[])
             break;
         loop--;
     }
-    printf("ans: %d\n", cur_env.GPR[reg_name.at("$v0")]);
+    printf("ans: %d\n", cur_env.GPR[reg_name.at("%v0")]);
     if (is_stat)
         print_stats();
 
@@ -156,7 +159,7 @@ int load_ops(FILE *fp)
             ops[i].opland[1] = results[3].str();
             ops[i].opland[2] = results[4].str();
         }
-        // ex. lw  $a0, 0($sp)
+        // ex. lw  $a0, 0(%sp)
         else if (regex_match(s1, results, std::regex("^\t(.+?)\t(.+?), (\\d+)\\((.+?)\\)\n?$")))
         {
             ops[i].type = 0;
@@ -182,18 +185,27 @@ int load_ops(FILE *fp)
             ops[i].opcode = results[1].str();
             ops[i].opland[0] = results[2].str();
         }
+        // ex ret
+        else if (regex_match(s1, results, std::regex("^\t(.+?)\n?$")))
+        {
+            ops[i].type = 0;
+            ops[i].opland_num = 0;
+            ops[i].opcode = results[1].str();
+        }
         // ex. Label:
         else if (regex_match(s1, results, std::regex("^(.+?):\n?$")))
         {
             ops[i].type = 1;
-            ops[i].label = results[1];
+            ops[i].label = results[1].str();
             label_pos[ops[i].label] = i;
         }
         // ex. .global
-        else if (regex_match(s1, results, std::regex("^[.](.+?)\n?$")))
+        else if (regex_match(s1, results, std::regex("^[.](.+?)\t.+?\n?$")))
         {
             ops[i].type = 2;
-            ops[i].other = results[1];
+            ops[i].other = results[1].str();
+            if (results[1].str() == "global")
+                cur_opnum = i;
         }
         // 例外処理
         else
@@ -251,6 +263,15 @@ int exec_op(op_info op, core_env env, std::map<std::string, int> label_pos)
         if (rs > rt)
             cur_opnum = label_pos[label];
     }
+    else if (op.opcode == "slt")
+    {
+        rs = cur_env.GPR[reg_name.at(op.opland[1])];
+        rt = cur_env.GPR[reg_name.at(op.opland[2])];
+        if (rs < rt)
+            cur_env.GPR[reg_name.at(op.opland[0])] = 1;
+        else
+            cur_env.GPR[reg_name.at(op.opland[0])] = 0;
+    }
     else if (op.opcode == "j")
     {
         label = op.opland[0];
@@ -267,20 +288,36 @@ int exec_op(op_info op, core_env env, std::map<std::string, int> label_pos)
         rs = cur_env.GPR[reg_name.at(op.opland[0])];
         cur_opnum = rs - 1;
     }
+    else if (op.opcode == "bne")
+    {
+        rs = cur_env.GPR[reg_name.at(op.opland[0])];
+        rt = cur_env.GPR[reg_name.at(op.opland[1])];
+        label = op.opland[2];
+        if (rs != rt)
+            cur_opnum = label_pos[label] - 1;
+    }
     else if (op.opcode == "lw")
     {
-        sp = cur_env.GPR[reg_name.at("$sp")] + op.offset;
+        sp = cur_env.GPR[reg_name.at("%sp")] + op.offset;
         cur_env.GPR[reg_name.at(op.opland[0])] = stack[sp / 4];
     }
     else if (op.opcode == "sw")
     {
-        sp = cur_env.GPR[reg_name.at("$sp")] + op.offset;
+        sp = cur_env.GPR[reg_name.at("%sp")] + op.offset;
         stack[sp / 4] = cur_env.GPR[reg_name.at(op.opland[0])];
     }
     else if (op.opcode == "move")
     {
         rt = cur_env.GPR[reg_name.at(op.opland[1])];
         cur_env.GPR[reg_name.at(op.opland[0])] = rt;
+    }
+    else if (op.opcode == "ret")
+    {
+        return 1;
+    }
+    else if (op.opcode == "nop")
+    {
+        ;
     }
     // 例外処理
     else
