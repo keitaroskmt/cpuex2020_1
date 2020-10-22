@@ -46,8 +46,8 @@ const map<string, unsigned int> reg_name = {
     {"%k0", 26},
     {"%k1", 27},
     {"%gp", 28},
-    {"%fp", 29},
-    {"%sp", 30},
+    {"%sp", 29},
+    {"%fp", 30},
     {"%ra", 31}
 };
 

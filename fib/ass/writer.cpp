@@ -57,7 +57,7 @@ unsigned int Writer::encode(vector<string> &v) {
             op = 0x0;
             rs = reg_name.at(v[2]);
             rt = 0x0;
-            rd = 0x0;
+            rd = reg_name.at(v[2]);
             shamt = 0x0;
             funct = 0x8;
 
