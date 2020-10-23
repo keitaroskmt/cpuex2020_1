@@ -12,6 +12,10 @@ output [31:0] rd;
 integer i;
 initial for (i=0; i<32; i=i+1) RAM[i] = 0;
 
+initial begin
+    $readmemb("initialize.mem",RAM,0,31);
+end
+
 //reg [31:0] rd_reg;
 //assign rd = rd_reg;
 
@@ -30,8 +34,8 @@ initial for (i=0; i<32; i=i+1) RAM[i] = 0;
 always @(posedge clk) begin
     if (we) begin
         RAM[wa] <=  wd;
-    end 
-end 
+    end
+end
 
 assign rd = RAM[ra];
 

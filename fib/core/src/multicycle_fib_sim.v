@@ -1,24 +1,25 @@
+`timescale  1 ns / 100 ps
 `default_nettype none
 
-module multicycle_cpu
-    (//input wire SYSCLK_300_P, SYSCLK_300_N,
-     //input wire CPU_RESET,
-     input wire clk,
-     input wire rstn,
-     // output wire [31:0] pc_wire,
-    // output wire [5:0] opcode,
+module multicycle_cpu_sim
+    (input wire SYSCLK_300_P, SYSCLK_300_N,
+     input wire CPU_RESET,
+     //input wire clk,
+     //input wire rstn,
+  //    output wire [31:0] pc_wire,
+   //  output wire [5:0] opcode,
     // output wire [5:0] funct,
-     //output wire         IorD,
-     //output wire         MemWrite,
-     //output wire         IRWrite,
-     //output wire         PCWrite,
-     //output wire         Branch,
-     //output wire         ToggleEqual,
-     //output wire [1:0]   PCSrc,
-     //output wire [2:0]   ALUControl,
-     //output wire [1:0]   ALUSrcB,
-     //output wire         ALUSrcA,
-     //output wire         RegWrite,
+    // output wire         IorD,
+    // output wire         MemWrite,
+    // output wire         IRWrite,
+    // output wire         PCWrite,
+    // output wire         Branch,
+    // output wire         ToggleEqual,
+    // output wire [1:0]   PCSrc,
+    // output wire [2:0]   ALUControl,
+    // output wire [1:0]   ALUSrcB,
+    // output wire         ALUSrcA,
+    // output wire         RegWrite,
      //output wire [1:0]   RegDst,
      //output wire [1:0]   MemtoReg,
      //output wire [31:0] alu_srcA,
@@ -28,14 +29,16 @@ module multicycle_cpu
      output reg [7:0] led
      );
      wire clk;
+     
+     IBUFGDS clk_inst (
+        .O(clk),
+        .I(SYSCLK_300_P),
+        .IB(SYSCLK_300_N)
+     );
 
-    //IBUFGDS clk_inst (
-        //.O(clk),
-        //.I(SYSCLK_300_P),
-        //.IB(SYSCLK_300_N)
-     //);
 
-
+     reg clkr;
+     reg rstnr;
      wire [31:0] pc_wire;
      wire [5:0] opcode;
      wire [5:0] funct;
@@ -58,6 +61,7 @@ module multicycle_cpu
      wire [4:0] state;
 
      wire [31:0] adr;
+     wire [31:0] sr2_adr;
      wire [31:0] rd;
      wire [31:0] inst;
      wire [31:0] data;
@@ -86,8 +90,21 @@ module multicycle_cpu
 
      initial begin
          pc = 0;
+         //clkr = 0;
+         //rstnr = 1'b1;
      end
 
+     //wire clk;
+     //wire rstn;
+
+
+    //always #500 begin
+        //clkr <= ~clkr;
+        //rstnr <= 1'b0;
+    //end
+
+    //assign clk = clkr;
+    //assign rstn = rstnr;
 
      //fetch stage
      always @(posedge clk) begin
@@ -103,7 +120,6 @@ module multicycle_cpu
         en = 1'b1;
     end
 
-    wire sr2_adr;
     assign sr2_adr = {2'b00,adr[31:2]};
     rams_sp_rf idmd(clk,en,MemWrite,sr2_adr,output2,rd);
 
@@ -125,7 +141,7 @@ module multicycle_cpu
      assign regdst = (RegDst == 2'b00 ? inst[20:16] :(RegDst == 2'b01 ? inst[15:11] : 5'b11111));
      assign mem_to_reg = (MemtoReg == 2'b00 ? alu_out : (MemtoReg == 2'b01 ? data : pc ));
 
-     multi_control_unit mcu(opcode,funct,clk,rstn,IorD,MemWrite,IRWrite,PCWrite,Branch,ToggleEqual,PCSrc,ALUControl,ALUSrcB,ALUSrcA,RegWrite,RegDst,MemtoReg,state);
+     multi_control_unit mcu(opcode,funct,clk,CPU_RESET,IorD,MemWrite,IRWrite,PCWrite,Branch,ToggleEqual,PCSrc,ALUControl,ALUSrcB,ALUSrcA,RegWrite,RegDst,MemtoReg,state);
      rams_dp_wf rf1(clk,RegWrite,regdst,mem_to_reg,op1,output_rf1);
      rams_dp_wf rf2(clk,RegWrite,regdst,mem_to_reg,op2,output_rf2);
 
@@ -150,10 +166,9 @@ module multicycle_cpu
      //write back stage
      always @(posedge clk) begin
          alu_out_reg <= alu_result;
-        // if(pc_wire == 8'd148 && RegWrite == 1'b1) begin
-        // if(pc_wire == 8'd108 && RegWrite == 1'b1) begin
-           //led <= alu_out[7:0];
-         //end
+         if(pc_wire == 8'd148 && RegWrite == 1'b1) begin
+           led <= alu_out[7:0];
+         end
      end
 
      assign alu_out = alu_out_reg;

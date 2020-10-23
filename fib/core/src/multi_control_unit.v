@@ -17,13 +17,13 @@ module multi_control_unit(
     output wire         ALUSrcA,
     output wire         RegWrite,
     output wire [1:0]   RegDst,
-    output wire [1:0]   MemtoReg
+    output wire [1:0]   MemtoReg,
+    output wire  [4:0] state
 );
 
 wire [1:0] PCSrc_temp;
 wire       PCWrite_temp;
 wire [1:0] ALUOp;
-wire  [4:0] state;
 
 multi_main_decoder md(Op,clk,rstn,IorD,MemWrite,IRWrite,PCWrite_temp,Branch,ToggleEqual,PCSrc_temp,ALUSrcB,ALUSrcA,RegWrite,RegDst,MemtoReg,ALUOp,state);
 multi_ALU_decoder ad(Op,Funct,ALUOp,PCSrc_temp,PCWrite_temp,state,ALUControl,PCSrc,PCWrite);
@@ -58,8 +58,8 @@ module multi_main_decoder(
     localparam s_Decode =           3;
     localparam s_MemAdr =           4;
     localparam s_MemRead =          5;
-    localparam s_MemReadWait =      6;  
-    localparam s_MemReadWait2 =     7;  
+    localparam s_MemReadWait =      6;
+    localparam s_MemReadWait2 =     7;
     localparam s_MemWriteback =     8;
     localparam s_MemWrite =         9;
     localparam s_Execute =         10;
@@ -70,8 +70,8 @@ module multi_main_decoder(
     localparam s_Jump =            15;
     localparam s_Jumpandlink =     16;
     localparam s_Branchnotequal =  17;
-                                     
-always @(posedge clk) begin        
+
+always @(posedge clk) begin
     if(~rstn) begin //reset all regters.
         state    <= s_Fetch;
         IorD     <= 1'b0;
@@ -90,10 +90,10 @@ always @(posedge clk) begin
     end else if (state == s_Fetch) begin
         state    <= s_FetchWait;
         PCWrite_temp  <= 1'b0; //set down this bit so as not to write in PC.
-    end else if (state == s_FetchWait) begin
-        state <= s_FetchWait2;
+  //  end else if (state == s_FetchWait) begin
+     //   state <= s_FetchWait2;
         IRWrite  <= 1'b1; //instruction leaks from the memory in this phase.
-    end else if (state == s_FetchWait2) begin
+    end else if (state == s_FetchWait) begin
         state    <= s_Decode;
         IRWrite  <= 1'b0; //instruction leaks from the memory in this phase.
         ALUSrcA <= 1'b0;
@@ -290,18 +290,18 @@ module multi_ALU_decoder
      output wire [2:0] ALUControl,
      output wire [1:0] PCSrc,
      output wire       PCWrite
-     ); //jr命令専用。jr命令かどうかはfunctフィールドも見ないとわからないからALUdecoderの管轄
+     ); //jr命令専用。jr命令かど�?か�?�functフィールドも見な�?とわからな�?からALUdecoderの管�?
 
     localparam s_Execute = 10;
     assign ALUControl = (ALUOp == 2'b00) ? 4'b010 //Opcodeフィールドですでにaddと判明してるケース
                                    : ((ALUOp == 2'b01) ? 4'b110 //Opcodeフィールドですでにsubtractと判明してるケース
                                    : ((Funct == 6'b100000) ? 4'b010 //add命令
                                    : ((Funct == 6'b100010) ? 4'b110 //subtract命令
-                                   : ((Funct == 6'b100100) ? 4'b000 //and命令。
-                                   : ((Funct == 6'b100101) ? 4'b001 //or命令。
-                                   : ((Funct == 6'b101010) ? 4'b111 //slt命令。
-                                   : ((Funct == 6'b001000) ? 4'b010 //jr命令。この時だけRegtoPCを立てて置き、他ではすべて下げる。jr命令がなぜかR形式命令のため、回路を複雑化させないためにはレジスタ書き込みは行わなければならない。よって$raレジスタと$0レジスタをaddして、$raに書き戻す、という無意味な操作をするために、ALUにaddの指示を出す。したがって、このために、jrの機械語形式には注意が必要。
-                                   : 4'b0))))))); //else. とりま全部0に。
+                                   : ((Funct == 6'b100100) ? 4'b000 //and命令�?
+                                   : ((Funct == 6'b100101) ? 4'b001 //or命令�?
+                                   : ((Funct == 6'b101010) ? 4'b111 //slt命令�?
+                                   : ((Funct == 6'b001000) ? 4'b010 //jr命令。この時だけRegtoPCを立てて置き�?�他ではすべて下げる�?�jr命令がなぜかR形式命令のため、回路を�?雑化させな�?ためにはレジスタ書き込みは行わなければならな�?。よって$raレジスタと$0レジスタをaddして�?$raに書き戻す�?�と�?�?無意味な操作をするために、ALUにaddの�?示を�?�す�?�したがって、このために、jrの機械語形式には注意が�?要�??
+                                   : 4'b0))))))); //else. とりま全部0に�?
     assign {PCSrc,PCWrite} = (Op == 6'b000000 && Funct == 6'b001000 && state == s_Execute) ? 3'b001 : {PCSrc_temp,PCWrite_temp}; // jump asserts when only jr.
 
 

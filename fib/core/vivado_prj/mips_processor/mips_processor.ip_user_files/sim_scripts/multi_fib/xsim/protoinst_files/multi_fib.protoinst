@@ -1,9 +1,0 @@
-{
-	"version": "1.0",
-	"modules": {
-		"multi_fib": {
-			"proto_instances": {
-			}
-		}
-	}
-}
