@@ -1,0 +1,8 @@
+verilog xil_defaultlib  \
+"../../../bd/fib_sim/ip/fib_sim_multicycle_cpu_sim_0_0/sim/fib_sim_multicycle_cpu_sim_0_0.v" \
+"../../../bd/fib_sim/ip/fib_sim_sim_clk_gen_0_0/sim/fib_sim_sim_clk_gen_0_0.v" \
+"../../../bd/fib_sim/sim/fib_sim.v" \
+
+verilog xil_defaultlib "glbl.v"
+
+nosort

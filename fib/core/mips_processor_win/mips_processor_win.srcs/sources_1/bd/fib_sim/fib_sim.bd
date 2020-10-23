@@ -1,0 +1,67 @@
+{
+  "design": {
+    "design_info": {
+      "boundary_crc": "0x0",
+      "device": "xcku040-ffva1156-2-e",
+      "name": "fib_sim",
+      "synth_flow_mode": "Hierarchical",
+      "tool_version": "2019.2.1"
+    },
+    "design_tree": {
+      "sim_clk_gen_0": "",
+      "multicycle_cpu_sim_0": ""
+    },
+    "components": {
+      "sim_clk_gen_0": {
+        "vlnv": "xilinx.com:ip:sim_clk_gen:1.0",
+        "xci_name": "fib_sim_sim_clk_gen_0_0",
+        "parameters": {
+          "FREQ_HZ": {
+            "value": "1000000"
+          },
+          "INITIAL_RESET_CLOCK_CYCLES": {
+            "value": "0"
+          }
+        }
+      },
+      "multicycle_cpu_sim_0": {
+        "vlnv": "xilinx.com:module_ref:multicycle_cpu_sim:1.0",
+        "xci_name": "fib_sim_multicycle_cpu_sim_0_0",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "multicycle_cpu_sim",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "clk": {
+            "type": "clk",
+            "direction": "I"
+          },
+          "rstn": {
+            "type": "rst",
+            "direction": "I"
+          },
+          "led": {
+            "direction": "O",
+            "left": "7",
+            "right": "0"
+          }
+        }
+      }
+    },
+    "nets": {
+      "sim_clk_gen_0_clk": {
+        "ports": [
+          "sim_clk_gen_0/clk",
+          "multicycle_cpu_sim_0/clk"
+        ]
+      },
+      "sim_clk_gen_0_sync_rst": {
+        "ports": [
+          "sim_clk_gen_0/sync_rst",
+          "multicycle_cpu_sim_0/rstn"
+        ]
+      }
+    }
+  }
+}

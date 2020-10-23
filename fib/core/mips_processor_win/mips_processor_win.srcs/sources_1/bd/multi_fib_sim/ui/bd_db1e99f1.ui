@@ -1,0 +1,18 @@
+{
+   "ActiveEmotionalView":"Default View",
+   "Default View_ScaleFactor":"1.25",
+   "Default View_TopLeft":"-140,57",
+   "ExpandedHierarchyInLayout":"",
+   "guistr":"# # String gsaved with Nlview 7.0.21  2019-05-29 bk=1.5064 VDI=41 GEI=36 GUI=JA:9.0 non-TLS
+#  -string -flagsOSRD
+preplace portBus led -pg 1 -lvl 3 -x 480 -y 100 -defaultsOSRD
+preplace inst sim_clk_gen_0 -pg 1 -lvl 1 -x 100 -y 260 -defaultsOSRD
+preplace inst multicycle_cpu_sim_0 -pg 1 -lvl 2 -x 340 -y 260 -defaultsOSRD
+preplace netloc sim_clk_gen_0_clk 1 1 1 N 250
+preplace netloc sim_clk_gen_0_sync_rst 1 1 1 N 270
+preplace netloc multicycle_cpu_sim_0_led 1 2 1 440 100n
+levelinfo -pg 1 -10 100 340 480
+pagesize -pg 1 -db -bbox -sgen -10 0 580 520
+"
+}
+0

@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2019.2.1 (64-bit)
+# SW Build 2729669 on Thu Dec  5 04:49:17 MST 2019
+# IP Build 2729494 on Thu Dec  5 07:38:25 MST 2019
+# Start of session at: Fri Oct 23 02:40:06 2020
+# Process ID: 300
+# Current directory: C:/mips_processor_win/mips_processor_win.runs/multi_fib_fpga_clk_wiz_0_1_synth_1
+# Command line: vivado.exe -log multi_fib_fpga_clk_wiz_0_1.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source multi_fib_fpga_clk_wiz_0_1.tcl
+# Log file: C:/mips_processor_win/mips_processor_win.runs/multi_fib_fpga_clk_wiz_0_1_synth_1/multi_fib_fpga_clk_wiz_0_1.vds
+# Journal file: C:/mips_processor_win/mips_processor_win.runs/multi_fib_fpga_clk_wiz_0_1_synth_1\vivado.jou
+#-----------------------------------------------------------
+source multi_fib_fpga_clk_wiz_0_1.tcl -notrace
