@@ -1,3 +1,4 @@
 .vscode
 fib/sim/sim
 fib/sim/sim.dSYM/*
+1st/fpu/finv_table/*
