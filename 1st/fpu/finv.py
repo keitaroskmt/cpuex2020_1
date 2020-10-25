@@ -22,8 +22,7 @@ with open('finv_output.txt', 'w') as outfile:
             ans = c - ((line[1] * d) >> 13)
         outfile.write(f'{ans:023b}\n')
 
-
-# with open('finv_table.mem', 'r') as infile:
+# with open('finv_table_bin.mem', 'r') as infile:
 #     table = infile.read().splitlines()
 
 # for i, line in enumerate(table):
@@ -31,7 +30,7 @@ with open('finv_output.txt', 'w') as outfile:
 #     table[i] = [table[i][j] for j in range(3)]
 
 # new_table = [table[i][1] + table[i][2] for i in range(len(table))]
-# with open('finv_table_hex.mem', 'w') as outfile:
+# with open('finv_table_hex_re.mem', 'w') as outfile:
 #     for s_value in new_table:
 #         val = int(s_value, 2)
-#         outfile.write(f'{val:09X}\n')
+#         outfile.write(f'x"{val:09X}",\n')
