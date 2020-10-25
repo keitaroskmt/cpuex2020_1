@@ -1,12 +1,12 @@
 `timescale  1 ns / 100 ps
 `default_nettype none
 
-module multicycle_cpu_sim
-    (input wire SYSCLK_300_P, SYSCLK_300_N,
-     input wire CPU_RESET,
-     //input wire clk,
-     //input wire rstn,
-  //    output wire [31:0] pc_wire,
+module multicycle_cpu
+    (//input wire SYSCLK_300_P, SYSCLK_300_N,
+     //input wire CPU_RESET,
+     input wire clk,
+     input wire rstn,
+     //output wire [31:0] pc_wire,
    //  output wire [5:0] opcode,
     // output wire [5:0] funct,
     // output wire         IorD,
@@ -25,16 +25,18 @@ module multicycle_cpu_sim
      //output wire [31:0] alu_srcA,
      //output wire [31:0] alu_srcB,
      //output wire [31:0] alu_result,
+     //output wire        ShiftD,
+     //output wire        Shift,
      //output wire [4:0] state,
      output reg [7:0] led
      );
      wire clk;
-     
-     IBUFGDS clk_inst (
-        .O(clk),
-        .I(SYSCLK_300_P),
-        .IB(SYSCLK_300_N)
-     );
+
+     //IBUFGDS clk_inst (
+        //.O(clk),
+        //.I(SYSCLK_300_P),
+        //.IB(SYSCLK_300_N)
+     //);
 
 
      reg clkr;
@@ -58,6 +60,9 @@ module multicycle_cpu_sim
      wire [31:0] alu_srcA;
      wire [31:0] alu_srcB;
      wire [31:0] alu_result;
+     wire        ShiftD;
+     wire        Shift;
+     wire        BorL;
      wire [4:0] state;
 
      wire [31:0] adr;
@@ -74,9 +79,12 @@ module multicycle_cpu_sim
      wire [31:0] output_rf2;
      wire [31:0] output1;
      wire [31:0] output2;
+     wire [31:0] shifted;
+     wire [31:0] output2_or_shifted;
      wire [27:0] jump_address;
      wire [31:0] alu_out;
      wire zero;
+     wire [31:0] branch_or_lui;
      wire [31:0] SignImm;
      wire pcen;
 
@@ -141,7 +149,7 @@ module multicycle_cpu_sim
      assign regdst = (RegDst == 2'b00 ? inst[20:16] :(RegDst == 2'b01 ? inst[15:11] : 5'b11111));
      assign mem_to_reg = (MemtoReg == 2'b00 ? alu_out : (MemtoReg == 2'b01 ? data : pc ));
 
-     multi_control_unit mcu(opcode,funct,clk,CPU_RESET,IorD,MemWrite,IRWrite,PCWrite,Branch,ToggleEqual,PCSrc,ALUControl,ALUSrcB,ALUSrcA,RegWrite,RegDst,MemtoReg,state);
+     multi_control_unit mcu(opcode,funct,clk,rstn,IorD,MemWrite,IRWrite,PCWrite,Branch,ToggleEqual,PCSrc,ALUControl,ALUSrcB,ALUSrcA,RegWrite,RegDst,MemtoReg,ShiftD,Shift,BorL,state);
      rams_dp_wf rf1(clk,RegWrite,regdst,mem_to_reg,op1,output_rf1);
      rams_dp_wf rf2(clk,RegWrite,regdst,mem_to_reg,op2,output_rf2);
 
@@ -155,9 +163,13 @@ module multicycle_cpu_sim
      assign output1 = output_rf1_reg;
      assign output2 = output_rf2_reg;
 
+     assign shifted = ShiftD ? output2 >> inst[10:6] : output2 << inst[10:6];
+     assign output2_or_shifted = Shift ? shifted : output2;
+
      assign SignImm = (inst[15] ? {16'b1111111111111111,inst[15:0]} : {16'd0,inst[15:0]});
      assign alu_srcA = (~ALUSrcA ? pc_wire : output1);
-     assign alu_srcB = (ALUSrcB == 2'b00 ? output2 :(ALUSrcB == 2'b01 ? 32'b100 : (ALUSrcB == 2'b10 ? SignImm : {SignImm[29:0],2'b00})));
+     assign branch_or_lui = BorL ? (SignImm << 5'd16) : (SignImm << 2'd2);
+     assign alu_srcB = (ALUSrcB == 2'b00 ? output2_or_shifted :(ALUSrcB == 2'b01 ? 32'b100 : (ALUSrcB == 2'b10 ? SignImm : branch_or_lui)));
      assign pcen = PCWrite | (Branch & (ToggleEqual ^ zero));
 
      alu a(ALUControl,alu_srcA,alu_srcB,alu_result,zero);
