@@ -43,9 +43,10 @@ let fletd(x, e1, e2) = Let((x, Type.Float), e1, e2)
 let seq(e1, e2) = Let((Id.gentmp Type.Unit, Type.Unit), e1, e2)
 
 let regs = (* Array.init 16 (fun i -> Printf.sprintf "%%r%d" i) *)
-  [| "%1"; "%2"; "%3"; "%4";
-     "%5"; "%6"; "%7"; "%8"; "%9"; "%10"; "%11"; "%12";
-     "%13"; "%14"; "%15"; "%16"; "%17"; "%18" |]
+  [| "%v0"; "%v1"; "%a0"; "%a1";
+     "%a2"; "%a3"; "%t0"; "%t1"; "%t2"; "%t3"; "%t4"; "%t5"; "%t6"; "%t7";
+     "%s0"; "%s1"; "%s2"; "%s3"; "%s4"; "%s5"; "%s6"; "%s7"; "%t8"; "%t9";
+     "%k0"; "%k1"; |]
 let fregs = Array.init 16 (fun i -> Printf.sprintf "%%f%d" (i * 2))
 let allregs = Array.to_list regs
 let allfregs = Array.to_list fregs
