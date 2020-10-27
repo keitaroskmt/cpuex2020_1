@@ -158,7 +158,7 @@ module fmul_2nd
 
     assign y = (zero == 1) ? {s, 8'b0, 23'b0} :
                (inf == 1) ? {s, 8'b11111111, 23'b0} : {s, e, m};
-    
+
 endmodule
 
 
