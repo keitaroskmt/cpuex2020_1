@@ -1,1 +1,1 @@
-x86/asm.mli
+MIPS/asm.mli

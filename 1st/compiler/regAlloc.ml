@@ -1,1 +1,1 @@
-x86/regAlloc.ml
+MIPS/regAlloc.ml
