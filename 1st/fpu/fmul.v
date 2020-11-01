@@ -137,7 +137,6 @@ module fmul_2nd
 );
 
     wire [47:0] m1am2a;
-    wire zero;
     wire inf;
     wire [22:0] m;
     wire [7:0] e;
@@ -153,8 +152,6 @@ module fmul_2nd
     assign e_9 = (m1am2a[47] == 0) ? ea : eb;
     assign e = e_9 - 9'd127;
 
-    assign zero = (e1 == 8'b0) ? 1'b1 :
-                  (e2 == 8'b0) ? 1'b1 : 0;
     assign subnormal = (ea < 9'd128 & m1am2a[47] == 0) ? 1'b1 :
                        (eb < 9'd128 & m1am2a[47] == 1) ? 1'b1 : 0;
     assign inf = (ea > 9'd381 & m1am2a[47] == 0) ? 1'b1 :
@@ -166,8 +163,7 @@ module fmul_2nd
     assign subnormal_m = {1'b1, m} >> shift_e;
     assign shifted_m = subnormal_m[22:0];
 
-    assign y = (zero == 1) ? {s, 8'b0, 23'b0} :
-               (subnormal == 1) ? {s, 8'b0, shifted_m}:
+    assign y = (subnormal == 1) ? {s, 8'b0, shifted_m}:
                (inf == 1) ? {s, 8'b11111111, 23'b0} : {s, e, m};
 
 endmodule
