@@ -45,7 +45,6 @@ module finv_1st
      input wire [35:0] val,
      output wire [31:0] y);
 
-    wire f;
     wire [9:0] a0;
     wire [12:0] a1;
     wire [25:0] cor_n;
@@ -69,12 +68,11 @@ module finv_1st
     assign a1 = m[12:0];
     assign cor_n = a1 * d;
     assign cor = (a0 < 10'd424) ? (cor_n >> 12) : (cor_n >> 13);
-    assign f = (m == 23'b0) ? 0 : 1;
     assign e0 = 8'd254 - e;
-    assign e1 = e0 - f;
-    assign minus_e = e + f;
+    assign e1 = e0 - 1;
+    assign minus_e = e + 1;
     assign subnormal = (e > 8'd253) ? 1 :
-                       (f >= e0) ? 1 : 0;
+                       (1 >= e0) ? 1 : 0;
     assign shift_e = (subnormal == 1) ? minus_e - 254 : 0;
     assign ans_e = (e == 0) ? 0 : e1;
     assign m1 = c - cor;
