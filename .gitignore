@@ -7,4 +7,5 @@ fib/sim/sim.dSYM/*
 1st/fpu/fmul/*
 1st/fpu/finv/*
 1st/fpu/fdiv/*
+1st/fpu/fsqrt/*
 .DS_Store
