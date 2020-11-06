@@ -44,26 +44,35 @@ output.ml main.mli main.ml
 # inprod inprod-rec inprod-loop matmul matmul-flat \
 # manyargs tmp
 
-TESTS = fib
-# TESTS = tmp
+TESTS = fib float_fib adder
 
-do_test: $(TESTS:%=test/%.cmp)
+do_test: $(TESTS:%=mytest/%.s)
 
-.PRECIOUS: test/%.s test/% test/%.res test/%.ans test/%.cmp
-TRASH = $(TESTS:%=test/%.s) $(TESTS:%=test/%) $(TESTS:%=test/%.res) $(TESTS:%=test/%.ans) $(TESTS:%=test/%.cmp) \
-	$(TESTS:%=test/%.iter) $(TESTS:%=test/%.closure) $(TESTS:%=test/%.cse) $(TESTS:%=test/%.alpha) \
-	$(TESTS:%=test/%.knormal) $(TESTS:%=test/%.synt)
+.PRECIOUS: mytest/%.s
+TRASH = $(TESTS:%=mytest/%.s) $(TESTS:%=mytest/%) $(TESTS:%=mytest/%.res) $(TESTS:%=mytest/%.ans) $(TESTS:%=mytest/%.cmp) \
+	$(TESTS:%=mytest/%.iter) $(TESTS:%=mytest/%.closure) $(TESTS:%=mytest/%.cse) $(TESTS:%=test/%.alpha) \
+	$(TESTS:%=mytest/%.knormal) $(TESTS:%=mytest/%.synt)
 
-test/%.s: $(RESULT) test/%.ml
-	./$(RESULT) test/$*
-test/%: test/%.s libmincaml.S stub.c
-	$(CC) $(CFLAGS) -m32 $^ -lm -o $@
-test/%.res: test/%
-	$< > $@
-test/%.ans: test/%.ml
-	ocaml $< > $@
-test/%.cmp: test/%.res test/%.ans
-	diff $^ > $@
+mytest/%.s: $(RESULT) mytest/%.ml
+	./$(RESULT) mytest/$*
+
+# do_test: $(TESTS:%=test/%.cmp)
+#
+# .PRECIOUS: test/%.s test/% test/%.res test/%.ans test/%.cmp
+# TRASH = $(TESTS:%=test/%.s) $(TESTS:%=test/%) $(TESTS:%=test/%.res) $(TESTS:%=test/%.ans) $(TESTS:%=test/%.cmp) \
+# 	$(TESTS:%=test/%.iter) $(TESTS:%=test/%.closure) $(TESTS:%=test/%.cse) $(TESTS:%=test/%.alpha) \
+# 	$(TESTS:%=test/%.knormal) $(TESTS:%=test/%.synt)
+#
+# test/%.s: $(RESULT) test/%.ml
+# 	./$(RESULT) test/$*
+# test/%: test/%.s libmincaml.S stub.c
+# 	$(CC) $(CFLAGS) -m32 $^ -lm -o $@
+# test/%.res: test/%
+# 	$< > $@
+# test/%.ans: test/%.ml
+# 	ocaml $< > $@
+# test/%.cmp: test/%.res test/%.ans
+# 	diff $^ > $@
 
 min-caml.html: main.mli main.ml id.ml m.ml s.ml \
 		syntax.ml type.ml parser.mly lexer.mll typing.mli typing.ml kNormal.mli kNormal.ml \

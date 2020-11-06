@@ -47,29 +47,24 @@ let regs = (* Array.init 16 (fun i -> Printf.sprintf "%%r%d" i) *)
      "%a2"; "%a3"; "%t0"; "%t1"; "%t2"; "%t3"; "%t4"; "%t5"; "%t6"; "%t7";
      "%s0"; "%s1"; "%s2"; "%s3"; "%s4"; "%s5"; "%s6"; "%s7"; "%t8"; "%t9";
      "%k0"; "%k1"; |]
-let fregs = Array.init 16 (fun i -> Printf.sprintf "%%f%d" (i * 2))
+let fregs = Array.init 30 (fun i -> Printf.sprintf "%%f%d" i)
 let allregs = Array.to_list regs
 let allfregs = Array.to_list fregs
+(* int *)
 let reg_cl = regs.(Array.length regs - 1) (* closure address (caml2html: sparcasm_regcl) *)
 let reg_sw = regs.(Array.length regs - 2) (* temporary for swap *)
-let reg_fsw = fregs.(Array.length fregs - 1) (* temporary for swap *)
 let reg_zero = "%zero" (* zero pointer *)
 let reg_sp = "%sp" (* stack pointer *)
-let reg_hp = "%min_caml_hp" (* heap pointer (caml2html: sparcasm_reghp) *)
-let reg_gp = "%gp"
+let reg_hp = "%hp" (* heap pointer (caml2html: sparcasm_reghp) *)
+let hp_init = 10000
+let reg_gp = "%min_caml_gp"
 let reg_ra = "%ra" (* return address *)
 let reg_at = "%at" (* for assembler *)
+(* float *)
+let reg_fsw = fregs.(Array.length fregs - 1) (* temporary for swap *)
+let reg_fat = "%30" (* for assembler *)
+let reg_fzero = "%f31"
 let is_reg x = (x.[0] = '%')
-let co_freg_table =
-  let ht = Hashtbl.create 16 in
-  for i = 0 to 15 do
-    Hashtbl.add
-      ht
-      (Printf.sprintf "%%f%d" (i * 2))
-      (Printf.sprintf "%%f%d" (i * 2 + 1))
-  done;
-  ht
-let co_freg freg = Hashtbl.find co_freg_table freg (* "companion" freg *)
 
 (* super-tenuki *)
 let rec remove_and_uniq xs = function
