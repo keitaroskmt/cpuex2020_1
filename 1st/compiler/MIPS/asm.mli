@@ -48,10 +48,12 @@ val reg_sw : Id.t
 val reg_zero : Id.t
 val reg_sp : Id.t
 val reg_hp : Id.t
-val hp_init : int
 val reg_gp : Id.t
 val reg_ra : Id.t
 val reg_at : Id.t
+
+val sp_init : int
+val hp_init : int
 
 val reg_fsw : Id.t
 val reg_fat : Id.t

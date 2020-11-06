@@ -313,6 +313,9 @@ let f oc (Prog(data, fundefs, e)) =
   Printf.fprintf oc ".align\t8\n";
   load_float_imm oc data 0;
   float_table := data;
+  Printf.fprintf oc "# Initialize register\n";
+  load_imm oc reg_sp (Int32.of_int sp_init);
+  load_imm oc reg_hp (Int32.of_int hp_init);
   Printf.fprintf oc ".section\t\".text\"\n";
   List.iter (fun fundef -> h oc fundef) fundefs;
   Printf.fprintf oc ".global\tmin_caml_start\n";

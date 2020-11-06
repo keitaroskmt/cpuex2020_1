@@ -56,7 +56,6 @@ let reg_sw = regs.(Array.length regs - 2) (* temporary for swap *)
 let reg_zero = "%zero" (* zero pointer *)
 let reg_sp = "%sp" (* stack pointer *)
 let reg_hp = "%hp" (* heap pointer (caml2html: sparcasm_reghp) *)
-let hp_init = 10000
 let reg_gp = "%min_caml_gp"
 let reg_ra = "%ra" (* return address *)
 let reg_at = "%at" (* for assembler *)
@@ -65,6 +64,9 @@ let reg_fsw = fregs.(Array.length fregs - 1) (* temporary for swap *)
 let reg_fat = "%30" (* for assembler *)
 let reg_fzero = "%f31"
 let is_reg x = (x.[0] = '%')
+
+let sp_init = 8192
+let hp_init = 16384
 
 (* super-tenuki *)
 let rec remove_and_uniq xs = function
