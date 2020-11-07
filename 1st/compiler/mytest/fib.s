@@ -1,14 +1,11 @@
 .section	".rodata"
 .align	8
 # Initialize register
-	ori	%sp, %zero, 0
-	addi	%at, %zero, 16
-	sll	%sp, %sp, %at
+	lui	%sp, 0
 	ori	%sp, %sp, 8192
-	ori	%hp, %zero, 0
-	addi	%at, %zero, 16
-	sll	%hp, %hp, %at
+	lui	%hp, 0
 	ori	%hp, %hp, 16384
+# Initialize float table
 .section	".text"
 fib.10:
 	addi	%at, %zero, 1

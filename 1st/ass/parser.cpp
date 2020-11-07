@@ -3,6 +3,7 @@
 Parser::Parser(const char *fname) {
     file_name = fname;
     current_num = 1;
+    data_num = 0;
     total_num = 0;
 }
 
@@ -22,7 +23,7 @@ int Parser::parse_file() {
     f.close();
 
     // 先頭にはj global_labelを挿入
-    code_map[0] = {"J", "j", global_label};
+    code_map[data_num] = {"J", "j", global_label};
 
     return current_num;
 }
@@ -51,6 +52,10 @@ void Parser::parse_code(string line) {
     else if (regex_match(line, res, regex("^\t(.+?)\t(.+?), (\\d+)\\((.+?)\\)\n?$"))) {
         code_map[current_num++] = {inst_format.at(res[1].str()), res[1].str(), res[2].str(), res[3].str(), res[4].str()};
     }
+    // op 2つ
+    else if (regex_match(line, res, regex("^\t(.+?)\t(.+?), (.+?)\n?$"))) {
+        code_map[current_num++] = {inst_format.at(res[1].str()), res[1].str(), res[2].str(), res[3].str()};
+    }
     // op 1つ
     else if (regex_match(line, res, regex("^\t(.+?)\t(.+?)\n?$"))) {
         code_map[current_num++] = {inst_format.at(res[1].str()), res[1].str(), res[2].str()};
@@ -58,6 +63,11 @@ void Parser::parse_code(string line) {
     // .global
     else if (regex_match(line, res, regex("^[.]global\t(.+?)\n?$"))) {
         global_label = res[1].str();
+    }
+    // text section
+    else if (regex_match(line, res, regex(".section\t\".text\"\n?$"))) {
+        data_num = current_num;
+        current_num++;
     }
     // .sectionなど 読み飛ばし
     else if (regex_match(line, res, regex("^[.](.+?)\n?$"))) {

@@ -5,6 +5,7 @@ type t =
 and exp =
   | Nop
   | Set of int
+  | SetF of Id.l
   | SetL of Id.l
   | Mov of Id.t
   | Neg of Id.t
@@ -19,8 +20,8 @@ and exp =
   | FSubD of Id.t * Id.t
   | FMulD of Id.t * Id.t
   | FDivD of Id.t * Id.t
-  | LdDF of Id.t * id_or_imm
-  | StDF of Id.t * Id.t * id_or_imm
+  | LdF of Id.t * id_or_imm
+  | StF of Id.t * Id.t * id_or_imm
   | Comment of string
   (* virtual instructions *)
   | IfEq of Id.t * id_or_imm * t * t

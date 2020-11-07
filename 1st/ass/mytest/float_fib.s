@@ -57,7 +57,9 @@ min_caml_start:
 	lw	%ra, 4(%sp)
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 8
-	jal	min_caml_print_float
+	# jal	min_caml_print_float
+	nop
 	addi	%sp, %sp, -8
 	lw	%ra, 4(%sp)
-	ret
+	# ret
+	fadd	%f0, %f0, %fzero

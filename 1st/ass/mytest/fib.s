@@ -1,5 +1,10 @@
 .section	".rodata"
 .align	8
+# Initialize register
+	lui	%sp, 0
+	ori	%sp, %sp, 8192
+	lui	%hp, 0
+	ori	%hp, %hp, 16384
 .section	".text"
 fib.10:
 	addi	%at, %zero, 1
@@ -37,7 +42,7 @@ min_caml_start:
 	lw	%ra, 4(%sp)
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 8
-	#jal	min_caml_print_int
+	# jal	min_caml_print_int
 	nop
 	addi	%sp, %sp, -8
 	lw	%ra, 4(%sp)

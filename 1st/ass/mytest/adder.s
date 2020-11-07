@@ -5,7 +5,6 @@
 	ori	%sp, %sp, 8192
 	lui	%hp, 0
 	ori	%hp, %hp, 16384
-# Initialize float table
 .section	".text"
 adder.11:
 	lw	%v1, 4(%k1)
@@ -37,7 +36,8 @@ min_caml_start:
 	lw	%ra, 4(%sp)
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 8
-	jal	min_caml_print_int
+	# jal	min_caml_print_int
+	nop
 	addi	%sp, %sp, -8
 	lw	%ra, 4(%sp)
 	ret

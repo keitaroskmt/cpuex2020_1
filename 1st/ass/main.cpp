@@ -21,9 +21,6 @@ int main(int argc, char *argv[]) {
     Parser parser((s+".s").c_str());
     parser.total_num = parser.parse_file();
 
-    //parser.print_label();
-    //parser.print_code();
-
     Writer writer((s+".out").c_str(), &parser);
 
     if (debug_flag) {

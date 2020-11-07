@@ -45,7 +45,7 @@ const map<string, unsigned int> reg_name = {
     {"%t9", 25},
     {"%k0", 26},
     {"%k1", 27},
-    {"%gp", 28},
+    {"%hp", 28},
     {"%sp", 29},
     {"%fp", 30},
     {"%ra", 31}
@@ -83,6 +83,6 @@ const map<string, unsigned int> freg_name = {
     {"%f28", 28},
     {"%f29", 29},
     {"%f30", 30},
-    {"%f31", 31}
+    {"%fzero", 31}
 };
 
