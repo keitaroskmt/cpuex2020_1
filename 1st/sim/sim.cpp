@@ -12,6 +12,8 @@
 #include "myutil.h"
 
 int cur_opnum;
+int initialize_end;
+int global_start;
 op_info *ops;
 core_env cur_env;
 std::map<std::string, int> label_pos;
@@ -78,17 +80,23 @@ int main(int argc, char *argv[])
     if ((fp = fopen(file_name.c_str(), "r")) == NULL)
         perror("fopen error");
 
-    cur_opnum = 0;
     // 命令のパース
     if ((end = load_ops(fp)) == 0)
         return 0;
 
     fclose(fp);
     // stackはとりあえず100万要素確保
-    cur_env.GPR[reg_name.at("%sp")] = 4000000;
+    // (2020/11/08) アセンブリの方で最初に確保するようになったのでこの処理は不要
+    // cur_env.GPR[reg_name.at("%sp")] = 4000000;
+
+    cur_opnum = 0;
+
     // step実行
     while (cur_opnum < end)
     {
+        if (cur_opnum == initialize_end)
+            cur_opnum = global_start;
+
         if (is_step && loop == 0)
         {
             while (true)
@@ -123,9 +131,15 @@ int main(int argc, char *argv[])
             break;
         loop--;
     }
-    printf("ans: %d\n", cur_env.GPR[reg_name.at("%v0")]);
+    printf("register state\n");
+    print_state(cur_env);
+    printf("v0: %d\n", cur_env.GPR[reg_name.at("%v0")]);
+    printf("f0: %f\n", cur_env.FPR[reg_name.at("%f0") - 32]);
     if (is_stat)
+    {
+        printf("\ninstruction statistics\n");
         print_stats();
+    }
 
     return 0;
 }

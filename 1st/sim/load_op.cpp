@@ -72,12 +72,14 @@ int load_ops(FILE *fp)
             label_pos[ops[i].label] = i;
         }
         // ex. .global
-        else if (regex_match(s1, results, std::regex("^[.](.+?)\t.+?\n?$")))
+        else if (regex_match(s1, results, std::regex("^[.](.+?)\t(.+?)\n?$")))
         {
             ops[i].type = 2;
             ops[i].other = results[1].str();
             if (results[1].str() == "global")
-                cur_opnum = i;
+                global_start = i;
+            else if (results[1].str() == "section" && results[2].str() == "\".text\"")
+                initialize_end = i;
         }
         // 例外処理
         else

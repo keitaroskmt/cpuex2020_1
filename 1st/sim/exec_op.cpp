@@ -10,6 +10,11 @@ int exec_op(op_info op, core_env env, std::map<std::string, int> label_pos)
 {
     unsigned int rs, rt, imm, sp;
     float frs, frt;
+    union
+    {
+        float f;
+        int i;
+    } fi;
     std::string label;
     if (op.opcode == "add")
     {
@@ -116,8 +121,16 @@ int exec_op(op_info op, core_env env, std::map<std::string, int> label_pos)
     else if (op.opcode == "addi")
     {
         rs = cur_env.GPR[reg_name.at(op.opland[1])];
-        imm = stoi(op.opland[2]);
-        cur_env.GPR[reg_name.at(op.opland[0])] = rs + imm;
+        if (label_pos.find(op.opland[2]) != label_pos.end())
+        {
+            label = label = op.opland[2];
+            cur_env.GPR[reg_name.at(op.opland[0])] = rs + label_pos[label];
+        }
+        else
+        {
+            imm = stoi(op.opland[2]);
+            cur_env.GPR[reg_name.at(op.opland[0])] = rs + imm;
+        }
     }
     else if (op.opcode == "slti")
     {
@@ -147,12 +160,12 @@ int exec_op(op_info op, core_env env, std::map<std::string, int> label_pos)
     }
     else if (op.opcode == "lw")
     {
-        sp = cur_env.GPR[reg_name.at("%sp")] + op.offset;
+        sp = cur_env.GPR[reg_name.at(op.opland[1])] + op.offset;
         cur_env.GPR[reg_name.at(op.opland[0])] = stack[sp / 4];
     }
     else if (op.opcode == "sw")
     {
-        sp = cur_env.GPR[reg_name.at("%sp")] + op.offset;
+        sp = cur_env.GPR[reg_name.at(op.opland[1])] + op.offset;
         stack[sp / 4] = cur_env.GPR[reg_name.at(op.opland[0])];
     }
     else if (op.opcode == "in")
@@ -241,13 +254,15 @@ int exec_op(op_info op, core_env env, std::map<std::string, int> label_pos)
     }
     else if (op.opcode == "flw")
     {
-        sp = cur_env.GPR[reg_name.at("%sp")] + op.offset;
-        cur_env.FPR[reg_name.at(op.opland[0]) - 32] = stack[sp / 4];
+        sp = cur_env.GPR[reg_name.at(op.opland[1])] + op.offset;
+        fi.i = stack[sp / 4];
+        cur_env.FPR[reg_name.at(op.opland[0]) - 32] = fi.f;
     }
     else if (op.opcode == "fsw")
     {
-        sp = cur_env.GPR[reg_name.at("%sp")] + op.offset;
-        stack[sp / 4] = cur_env.FPR[reg_name.at(op.opland[0]) - 32];
+        sp = cur_env.GPR[reg_name.at(op.opland[1])] + op.offset;
+        fi.f = cur_env.FPR[reg_name.at(op.opland[0]) - 32];
+        stack[sp / 4] = fi.i;
     }
     else if (op.opcode == "ret")
     {
