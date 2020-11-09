@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string>
 #include <map>
+#include <vector>
 #include <errno.h>
 #include "sim.h"
 #include "myutil.h"

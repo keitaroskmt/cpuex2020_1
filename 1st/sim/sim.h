@@ -26,7 +26,7 @@ typedef struct
 extern int cur_opnum;
 extern int initialize_end;
 extern int global_start;
-extern op_info *ops;
+extern std::vector<op_info> ops;
 extern core_env cur_env;
 extern std::map<std::string, int> label_pos;
 extern unsigned int *stack;

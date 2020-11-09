@@ -3,6 +3,7 @@
 #include <fcntl.h>
 #include <regex>
 #include <map>
+#include <vector>
 #include <errno.h>
 #include <unistd.h>
 #include <math.h>
@@ -14,7 +15,7 @@
 int cur_opnum;
 int initialize_end;
 int global_start;
-op_info *ops;
+std::vector<op_info> ops;
 core_env cur_env;
 std::map<std::string, int> label_pos;
 unsigned int *stack = (unsigned int *)malloc(sizeof(unsigned int) * 1000000);
@@ -74,8 +75,6 @@ int main(int argc, char *argv[])
         line++;
 
     fclose(fp);
-
-    ops = (op_info *)malloc(sizeof(op_info) * line);
 
     if ((fp = fopen(file_name.c_str(), "r")) == NULL)
         perror("fopen error");
@@ -141,7 +140,6 @@ int main(int argc, char *argv[])
         print_stats();
     }
     free(stack);
-    free(ops);
     return 0;
 }
 

@@ -1,6 +1,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <string>
+#include <vector>
 #include <map>
 #include "sim.h"
 #include "myutil.h"

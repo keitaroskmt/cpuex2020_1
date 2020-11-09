@@ -2,6 +2,7 @@
 #include <string>
 #include <fcntl.h>
 #include <regex>
+#include <vector>
 #include <map>
 #include <unistd.h>
 #include "sim.h"
@@ -12,6 +13,7 @@ int load_ops(FILE *fp)
 {
     std::smatch results;
     std::string s1;
+    op_info new_op = {0};
     char buf[100];
     int i = 0;
 
@@ -24,62 +26,69 @@ int load_ops(FILE *fp)
         // ex. add  $a0, $a0, $a1
         else if (regex_match(s1, results, std::regex("^\t(.+?)\t(.+?), (.+?), (.+?)\n?$")))
         {
-            ops[i].type = 0;
-            ops[i].opland_num = 3;
-            ops[i].opcode = results[1].str();
-            ops[i].opland[0] = results[2].str();
-            ops[i].opland[1] = results[3].str();
-            ops[i].opland[2] = results[4].str();
+            new_op.type = 0;
+            new_op.opland_num = 3;
+            new_op.opcode = results[1].str();
+            new_op.opland[0] = results[2].str();
+            new_op.opland[1] = results[3].str();
+            new_op.opland[2] = results[4].str();
+            ops.push_back(new_op);
         }
         // ex. lw  $a0, 0(%sp)
         else if (regex_match(s1, results, std::regex("^\t(.+?)\t(.+?), (\\d+)\\((.+?)\\)\n?$")))
         {
-            ops[i].type = 0;
-            ops[i].opland_num = 3;
-            ops[i].opcode = results[1].str();
-            ops[i].opland[0] = results[2].str();
-            ops[i].offset = stoi(results[3].str());
-            ops[i].opland[1] = results[4].str();
+            new_op.type = 0;
+            new_op.opland_num = 3;
+            new_op.opcode = results[1].str();
+            new_op.opland[0] = results[2].str();
+            new_op.offset = stoi(results[3].str());
+            new_op.opland[1] = results[4].str();
+            ops.push_back(new_op);
         }
         else if (regex_match(s1, results, std::regex("^\t(.+?)\t(.+?), (.+?)\n?$")))
         {
-            ops[i].type = 0;
-            ops[i].opland_num = 2;
-            ops[i].opcode = results[1].str();
-            ops[i].opland[0] = results[2].str();
-            ops[i].opland[1] = results[3].str();
+            new_op.type = 0;
+            new_op.opland_num = 2;
+            new_op.opcode = results[1].str();
+            new_op.opland[0] = results[2].str();
+            new_op.opland[1] = results[3].str();
+            ops.push_back(new_op);
         }
         // ex. j    Return
         else if (regex_match(s1, results, std::regex("^\t(.+?)\t(.+?)\n?$")))
         {
-            ops[i].type = 0;
-            ops[i].opland_num = 1;
-            ops[i].opcode = results[1].str();
-            ops[i].opland[0] = results[2].str();
+            new_op.type = 0;
+            new_op.opland_num = 1;
+            new_op.opcode = results[1].str();
+            new_op.opland[0] = results[2].str();
+            ops.push_back(new_op);
         }
         // ex ret
         else if (regex_match(s1, results, std::regex("^\t(.+?)\n?$")))
         {
-            ops[i].type = 0;
-            ops[i].opland_num = 0;
-            ops[i].opcode = results[1].str();
+            new_op.type = 0;
+            new_op.opland_num = 0;
+            new_op.opcode = results[1].str();
+            ops.push_back(new_op);
         }
         // ex. Label:
         else if (regex_match(s1, results, std::regex("^(.+?):\n?$")))
         {
-            ops[i].type = 1;
-            ops[i].label = results[1].str();
-            label_pos[ops[i].label] = i;
+            new_op.type = 1;
+            new_op.label = results[1].str();
+            label_pos[new_op.label] = i;
+            ops.push_back(new_op);
         }
         // ex. .global
         else if (regex_match(s1, results, std::regex("^[.](.+?)\t(.+?)\n?$")))
         {
-            ops[i].type = 2;
-            ops[i].other = results[1].str();
+            new_op.type = 2;
+            new_op.other = results[1].str();
             if (results[1].str() == "global")
                 global_start = i;
             else if (results[1].str() == "section" && results[2].str() == "\".text\"")
                 initialize_end = i;
+            ops.push_back(new_op);
         }
         // 例外処理
         else
