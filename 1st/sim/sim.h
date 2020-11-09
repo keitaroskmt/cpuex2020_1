@@ -16,6 +16,7 @@ typedef struct
 {
     int type; // op = 0, label = 1, other = 2
     int opland_num;
+    int op_idx;
     int offset;
     std::string opland[3];
     std::string opcode;
