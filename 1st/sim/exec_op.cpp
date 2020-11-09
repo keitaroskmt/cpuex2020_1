@@ -224,9 +224,9 @@ int exec_op(op_info op, core_env env, std::map<std::string, int> label_pos)
         frs = cur_env.FPR[reg_name.at(op.opland[1]) - 32];
         frt = cur_env.FPR[reg_name.at(op.opland[2]) - 32];
         if (frs < frt)
-            cur_env.FPR[reg_name.at(op.opland[0]) - 32] = 1;
+            cur_env.GPR[reg_name.at(op.opland[0])] = 1;
         else
-            cur_env.FPR[reg_name.at(op.opland[0]) - 32] = 0;
+            cur_env.GPR[reg_name.at(op.opland[0])] = 0;
     }
     else if (op.opcode == "fbeq")
     {

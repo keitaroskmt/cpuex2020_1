@@ -1,5 +1,9 @@
 .section	".rodata"
 .align	8
+	lui	%sp, 0
+	ori	%sp, %sp, 8192
+	lui	%hp, 0
+	ori	%hp, %hp, 16384
 .section	".text"
 fib.10:
 	addi	%at, %zero, 1

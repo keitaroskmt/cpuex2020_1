@@ -140,7 +140,8 @@ int main(int argc, char *argv[])
         printf("\ninstruction statistics\n");
         print_stats();
     }
-
+    free(stack);
+    free(ops);
     return 0;
 }
 
