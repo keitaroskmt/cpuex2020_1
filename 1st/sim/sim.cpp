@@ -149,7 +149,7 @@ int exec_step(bool print_process)
     if (ops[cur_opnum].type == 0)
     {
         if (print_process)
-            printf("%d\t%d\t%s\t%s\t%s\t%s\t%d\n", cur_env.PC, ops[cur_opnum].op_idx, ops[cur_opnum].opcode.c_str(), ops[cur_opnum].opland[0].c_str(), ops[cur_opnum].opland[1].c_str(), ops[cur_opnum].opland[2].c_str(), ops[cur_opnum].offset);
+            printf("%d\t%d\t%s\t%s\t%s\t%s\t%d\n", cur_env.PC, 4 * ops[cur_opnum].op_idx, ops[cur_opnum].opcode.c_str(), ops[cur_opnum].opland[0].c_str(), ops[cur_opnum].opland[1].c_str(), ops[cur_opnum].opland[2].c_str(), ops[cur_opnum].offset);
         if (exec_op(ops[cur_opnum], cur_env, label_pos))
             return 1;
         cur_env.PC++;
