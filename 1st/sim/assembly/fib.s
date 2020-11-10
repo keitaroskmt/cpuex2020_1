@@ -4,6 +4,7 @@
 	ori	%sp, %sp, 8192
 	lui	%hp, 0
 	ori	%hp, %hp, 16384
+	j	min_caml_start
 .section	".text"
 fib.10:
 	addi	%at, %zero, 1

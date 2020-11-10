@@ -13,8 +13,6 @@
 #include "myutil.h"
 
 int cur_opnum;
-int initialize_end;
-int global_start;
 std::vector<op_info> ops;
 core_env cur_env;
 std::map<std::string, int> label_pos;
@@ -84,17 +82,12 @@ int main(int argc, char *argv[])
         return 0;
 
     fclose(fp);
-    // stackはとりあえず100万要素確保
-    // (2020/11/08) アセンブリの方で最初に確保するようになったのでこの処理は不要
-    // cur_env.GPR[reg_name.at("%sp")] = 4000000;
 
     cur_opnum = 0;
 
     // step実行
     while (cur_opnum < end)
     {
-        if (cur_opnum == initialize_end)
-            cur_opnum = global_start;
 
         if (is_step && loop == 0)
         {
@@ -128,7 +121,8 @@ int main(int argc, char *argv[])
         }
         if (exec_step(print_process))
             break;
-        loop--;
+        if (ops[cur_opnum].type == 0)
+            loop--;
     }
     printf("register state\n");
     print_state(cur_env);

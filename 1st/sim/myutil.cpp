@@ -9,8 +9,46 @@
 // レジスタの状態を出力する
 void print_state(core_env env)
 {
+    union
+    {
+        float f;
+        int i;
+    } f0, f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, f19, f20, f21, f22, f23, f24, f25, f26, f27, f28, f29, f30, f31;
+    f0.f = env.FPR[0];
+    f1.f = env.FPR[1];
+    f2.f = env.FPR[2];
+    f3.f = env.FPR[3];
+    f4.f = env.FPR[4];
+    f5.f = env.FPR[5];
+    f6.f = env.FPR[6];
+    f7.f = env.FPR[7];
+    f8.f = env.FPR[8];
+    f9.f = env.FPR[9];
+    f10.f = env.FPR[10];
+    f11.f = env.FPR[11];
+    f12.f = env.FPR[12];
+    f13.f = env.FPR[13];
+    f14.f = env.FPR[14];
+    f15.f = env.FPR[15];
+    f16.f = env.FPR[16];
+    f17.f = env.FPR[17];
+    f18.f = env.FPR[18];
+    f19.f = env.FPR[19];
+    f20.f = env.FPR[20];
+    f21.f = env.FPR[21];
+    f22.f = env.FPR[22];
+    f23.f = env.FPR[23];
+    f24.f = env.FPR[24];
+    f25.f = env.FPR[25];
+    f26.f = env.FPR[26];
+    f27.f = env.FPR[27];
+    f28.f = env.FPR[28];
+    f29.f = env.FPR[29];
+    f30.f = env.FPR[30];
+    f31.f = env.FPR[31];
     printf("%d\t", env.PC);
-    printf("GPR\n0-3\t%d\t%d\t%d\t%d\n4-7\t%d\t%d\t%d\t%d\n8-11\t%d\t%d\t%d\t%d\n12-15\t%d\t%d\t%d\t%d\n16-19\t%d\t%d\t%d\t%d\n20-23\t%d\t%d\t%d\t%d\n24-27\t%d\t%d\t%d\t%d\n28-31\t%d\t%d\t%d\t%d\nFPR FPCC: %s\n0-3\t%f\t%f\t%f\t%f\n4-7\t%f\t%f\t%f\t%f\n8-11\t%f\t%f\t%f\t%f\n12-15\t%f\t%f\t%f\t%f\n16-19\t%f\t%f\t%f\t%f\n20-23\t%f\t%f\t%f\t%f\n24-27\t%f\t%f\t%f\t%f\n28-31\t%f\t%f\t%f\t%f\n\n", env.GPR[0], env.GPR[1], env.GPR[2], env.GPR[3], env.GPR[4], env.GPR[5], env.GPR[6], env.GPR[7], env.GPR[8], env.GPR[9], env.GPR[10], env.GPR[11], env.GPR[12], env.GPR[13], env.GPR[14], env.GPR[15], env.GPR[16], env.GPR[17], env.GPR[18], env.GPR[19], env.GPR[20], env.GPR[21], env.GPR[22], env.GPR[23], env.GPR[24], env.GPR[25], env.GPR[26], env.GPR[27], env.GPR[28], env.GPR[29], env.GPR[30], env.GPR[31], env.FPCC, env.FPR[0], env.FPR[1], env.FPR[2], env.FPR[3], env.FPR[4], env.FPR[5], env.FPR[6], env.FPR[7], env.FPR[8], env.FPR[9], env.FPR[10], env.FPR[11], env.FPR[12], env.FPR[13], env.FPR[14], env.FPR[15], env.FPR[16], env.FPR[17], env.FPR[18], env.FPR[19], env.FPR[20], env.FPR[21], env.FPR[22], env.FPR[23], env.FPR[24], env.FPR[25], env.FPR[26], env.FPR[27], env.FPR[28], env.FPR[29], env.FPR[30], env.FPR[31]);
+    printf("GPR\n0-3\t%d\t%d\t%d\t%d\n4-7\t%d\t%d\t%d\t%d\n8-11\t%d\t%d\t%d\t%d\n12-15\t%d\t%d\t%d\t%d\n16-19\t%d\t%d\t%d\t%d\n20-23\t%d\t%d\t%d\t%d\n24-27\t%d\t%d\t%d\t%d\n28-31\t%d\t%d\t%d\t%d\n\n", env.GPR[0], env.GPR[1], env.GPR[2], env.GPR[3], env.GPR[4], env.GPR[5], env.GPR[6], env.GPR[7], env.GPR[8], env.GPR[9], env.GPR[10], env.GPR[11], env.GPR[12], env.GPR[13], env.GPR[14], env.GPR[15], env.GPR[16], env.GPR[17], env.GPR[18], env.GPR[19], env.GPR[20], env.GPR[21], env.GPR[22], env.GPR[23], env.GPR[24], env.GPR[25], env.GPR[26], env.GPR[27], env.GPR[28], env.GPR[29], env.GPR[30], env.GPR[31]);
+    printf("FPR FPCC: %s\n0-3(real)\t%f\t%f\t%f\t%f\n0-3(hex)\t%08X\t%08X\t%08X\t%08X\n4-7(real)\t%f\t%f\t%f\t%f\n4-7(hex)\t%08X\t%08X\t%08X\t%08X\n8-11(real)\t%f\t%f\t%f\t%f\n8-11(hex)\t%08X\t%08X\t%08X\t%08X\n12-15(real)\t%f\t%f\t%f\t%f\n12-15(hex)\t%08X\t%08X\t%08X\t%08X\n16-19(real)\t%f\t%f\t%f\t%f\n16-19(hex)\t%08X\t%08X\t%08X\t%08X\n20-23(real)\t%f\t%f\t%f\t%f\n20-23(hex)\t%08X\t%08X\t%08X\t%08X\n24-27(real)\t%f\t%f\t%f\t%f\n24-27(hex)\t%08X\t%08X\t%08X\t%08X\n28-31(real)\t%f\t%f\t%f\t%f\n28-31(hex)\t%08X\t%08X\t%08X\t%08X\n\n", env.FPCC, f0.f, f1.f, f2.f, f3.f, f0.i, f1.i, f2.i, f3.i, f4.f, f5.f, f6.f, f7.f, f4.i, f5.i, f6.i, f7.i, f8.f, f9.f, f10.f, f11.f, f8.i, f9.i, f10.i, f11.i, f12.f, f13.f, f14.f, f15.f, f12.i, f13.i, f14.i, f15.i, f16.f, f17.f, f18.f, f19.f, f16.i, f17.i, f18.i, f19.i, f20.f, f21.f, f22.f, f23.f, f20.i, f21.i, f22.i, f23.i, f24.f, f25.f, f26.f, f27.f, f24.i, f25.i, f26.i, f27.i, f28.f, f29.f, f30.f, f31.f, f28.i, f29.i, f30.i, f31.i);
     return;
 }
 

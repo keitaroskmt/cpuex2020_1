@@ -13,13 +13,13 @@ int load_ops(FILE *fp)
 {
     std::smatch results;
     std::string s1;
-    op_info new_op = {0};
     char buf[100];
     int i = 0;
     int idx = 0;
 
     while (fgets(buf, 100, fp) != NULL)
     {
+        op_info new_op = {0};
         s1 = buf;
         // 空行読み飛ばし
         if (s1 == "\n")
@@ -95,10 +95,10 @@ int load_ops(FILE *fp)
         {
             new_op.type = 2;
             new_op.other = results[1].str();
-            if (results[1].str() == "global")
-                global_start = i;
-            else if (results[1].str() == "section" && results[2].str() == "\".text\"")
-                initialize_end = i;
+            // if (results[1].str() == "global")
+            //     global_start = i;
+            // else if (results[1].str() == "section" && results[2].str() == "\".text\"")
+            //     initialize_end = i;
             ops.push_back(new_op);
         }
         // 例外処理
