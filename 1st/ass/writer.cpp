@@ -1,6 +1,15 @@
 #include "parser.hpp"
 #include "writer.hpp"
 
+
+bool isnum(string s) {
+    for (int i = 0; i < (int)s.size(); ++i) {
+        if (i == 0 && s[i] == '-') continue;
+        if (!('0' <= s[i] && s[i] <= '9')) return false;
+    }
+    return true;
+}
+
 Writer::Writer(const char *fname, Parser *p) {
     file_name = fname;
     parser = p;
@@ -32,11 +41,7 @@ unsigned int Writer::encode(vector<string> &v) {
             op = 0x0;
             rd = reg_name.at(v[2]);
             rs = reg_name.at(v[3]);
-            if (v[4][0] != '%') { // レジスタ名でない, すなわちラベル
-                rt = parser->label_map.at(v[4]);
-            } else {
-                rt = reg_name.at(v[4]);
-            }
+            rt = reg_name.at(v[4]);
             shamt = 0x0;
             funct = 0x20;
 
@@ -84,7 +89,7 @@ unsigned int Writer::encode(vector<string> &v) {
             op = 0x0;
             rd = reg_name.at(v[2]);
             rt = reg_name.at(v[3]);
-            shamt = reg_name.at(v[4]);
+            shamt = stoi(v[4]);
             rs = 0x0;
             funct = 0x0;
 
@@ -92,7 +97,7 @@ unsigned int Writer::encode(vector<string> &v) {
             op = 0x0;
             rd = reg_name.at(v[2]);
             rt = reg_name.at(v[3]);
-            shamt = reg_name.at(v[4]);
+            shamt = stoi(v[4]);
             rs = 0x0;
             funct = 0x2;
 
@@ -108,7 +113,7 @@ unsigned int Writer::encode(vector<string> &v) {
             op = 0x0;
             rs = reg_name.at(v[2]);
             rt = 0x0;
-            rd = reg_name.at("%ra");
+            rd = reg_name.at(v[2]);
             shamt = 0x0;
             funct = 0x9;
 
@@ -165,7 +170,12 @@ unsigned int Writer::encode(vector<string> &v) {
             op = 0x8;
             rt = reg_name.at(v[2]);
             rs = reg_name.at(v[3]);
-            imm = stoi(v[4]);
+
+            if (isnum(v[4])) { // 即値のとき
+                imm = stoi(v[4]);
+            } else {
+                imm = parser->label_map.at(v[4]) * 4;
+            }
 
         } else if (v[1] == "slti") {
             op = 0xa;
@@ -283,7 +293,7 @@ unsigned int Writer::encode(vector<string> &v) {
 
         } else if (v[1] == "fslt") {
             op = 0x17;
-            rd = freg_name.at(v[2]);
+            rd = reg_name.at(v[2]);
             rs = freg_name.at(v[3]);
             rt = freg_name.at(v[4]);
             shamt = 0x0;

@@ -30,7 +30,7 @@ let syntax_check f =
     try
         Id.counter := 0;
         Typing.extenv := M.empty;
-        Syntax.syntax_debug outchan (Parser.exp Lexer.token (Lexing.from_channel inchan));
+        Typing.syntax_debug outchan (Parser.exp Lexer.token (Lexing.from_channel inchan));
         close_in inchan;
         close_out outchan;
     with e -> (close_in inchan; close_out outchan; raise e)

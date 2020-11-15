@@ -9,7 +9,7 @@ let file f = (* ファイルをコンパイルしてファイルに出力する (caml2html: main_file
     close_out outchan;
   with
   | e -> (close_in inchan; close_out outchan; raise e));
-  (*syntax_check f;
+ (*syntax_check f;
   knormal_check f;
   alpha_check f;
   cse_check f;

@@ -96,7 +96,7 @@ let rec g env e = (* 型推論ルーチン (caml2html: typing_g) *)
     | Neg(e) ->
         unify Type.Int (g env e);
         Type.Int
-    | Add(e1, e2) | Sub(e1, e2) -> (* 足し算（と引き算）の型推論 (caml2html: typing_add) *)
+    | Add(e1, e2) | Sub(e1, e2) | Mul (e1, e2) | Div(e1, e2) -> (* 足し算（と引き算）の型推論 (caml2html: typing_add) *)
         unify Type.Int (g env e1);
         unify Type.Int (g env e2);
         Type.Int
@@ -153,15 +153,171 @@ let rec g env e = (* 型推論ルーチン (caml2html: typing_g) *)
         Type.Unit
   with Unify(t1, t2) -> raise (Error(deref_term e, deref_typ t1, deref_typ t2))
 
+
+(* --------- fは下へ --------------------------*)
+
+(* for debug *)
+let syntax_debug oc l =
+    let rec print_tab level =
+        if level = 0 then ()
+        else (Printf.fprintf oc "\t"; print_tab (level-1))
+
+    and  print_syntax e level =
+       (print_tab level;
+        match e with
+        | Unit ->
+            Printf.fprintf oc "()\n"
+        | Bool b ->
+            Printf.fprintf oc "Bool %s\n" (string_of_bool b)
+        | Int i ->
+            Printf.fprintf oc "Int %s\n" (string_of_int i)
+        | Float f ->
+            Printf.fprintf oc "Float %s\n" (string_of_float f)
+        | Not e1 ->
+            (Printf.fprintf oc "Not\n";
+             print_syntax e1 (level+1))
+        | Neg e1 ->
+            (Printf.fprintf oc "Neg\n";
+             print_syntax e1 (level+1))
+        | Add (e1, e2) ->
+            (Printf.fprintf oc "Add\n";
+             print_syntax e1 (level+1);
+             print_syntax e2 (level+1))
+        | Sub (e1, e2) ->
+            (Printf.fprintf oc "Sub\n";
+             print_syntax e1 (level+1);
+             print_syntax e2 (level+1))
+        | Mul (e1, e2) ->
+            (Printf.fprintf oc "Mul\n";
+             print_syntax e1 (level+1);
+             print_syntax e2 (level+1))
+        | Div (e1, e2) ->
+            (Printf.fprintf oc "Div\n";
+             print_syntax e1 (level+1);
+             print_syntax e2 (level+1))
+        | FNeg e1 ->
+            (Printf.fprintf oc "FNeg\n";
+             print_syntax e1 (level+1))
+        | FAdd (e1, e2) ->
+            (Printf.fprintf oc "FAdd\n";
+             print_syntax e1 (level+1);
+             print_syntax e2 (level+1))
+        | FSub (e1, e2) ->
+            (Printf.fprintf oc "FSub\n";
+             print_syntax e1 (level+1);
+             print_syntax e2 (level+1))
+        | FMul (e1, e2) ->
+            (Printf.fprintf oc "FMul\n";
+             print_syntax e1 (level+1);
+             print_syntax e2 (level+1))
+        | FDiv (e1, e2) ->
+            (Printf.fprintf oc "FDiv\n";
+             print_syntax e1 (level+1);
+             print_syntax e2 (level+1))
+        | Eq (e1, e2) ->
+            (Printf.fprintf oc "Eq\n";
+             print_syntax e1 (level+1);
+             print_syntax e2 (level+1))
+        | LE (e1, e2) ->
+            (Printf.fprintf oc "LE\n";
+             print_syntax e1 (level+1);
+             print_syntax e2 (level+1))
+        | If (e1, e2, e3) ->
+            (Printf.fprintf oc "If\n";
+             print_syntax e1 (level+1);
+             print_syntax e2 (level+1);
+             print_syntax e3 (level+1))
+        | Let ((id, t), e1, e2) ->
+            (Printf.fprintf oc "Let\n";
+             print_tab (level+1);
+             print_id_type (id, t);
+             Printf.fprintf oc "\n";
+             print_syntax e1 (level+1);
+             print_syntax e2 (level+1))
+        | Var id ->
+             Printf.fprintf oc "Var %s\n" id
+        (*
+            (Printf.fprintf oc "Var\n";
+             print_tab (level+1);
+             Printf.fprintf oc "%s\n" id)
+             *)
+        | LetRec (e1, e2) ->
+            (Printf.fprintf oc "LetRec\n";
+             print_fundef e1 (level+1);
+             print_syntax e2 (level+1))
+        | App (e1, e2) ->
+            (Printf.fprintf oc "App\n";
+             print_syntax e1 (level+1);
+             List.iter (fun x -> print_syntax x (level+1)) e2)
+        | Tuple e1 ->
+            (Printf.fprintf oc "Tuple\n";
+             List.iter (fun x -> print_syntax x (level+1)) e1)
+        | LetTuple (e1, e2, e3) ->
+            (Printf.fprintf oc "LetTuple\n";
+             print_tab(level+1);
+             print_id_type_list e1;
+             Printf.fprintf oc "\n";
+             print_syntax e2 (level+1);
+             print_syntax e3 (level+1))
+        | Array (e1, e2) ->
+            (Printf.fprintf oc "Array\n";
+             print_syntax e1 (level+1);
+             print_syntax e2 (level+1))
+        | Get (e1, e2) ->
+            (Printf.fprintf oc "Get\n";
+             print_syntax e1 (level+1);
+             print_syntax e2 (level+1))
+        | Put (e1, e2, e3) ->
+            (Printf.fprintf oc "Put\n";
+             print_syntax e1 (level+1);
+             print_syntax e2 (level+1);
+             print_syntax e3 (level+1))
+        )
+
+    and print_id_type (id, t) =
+       (Printf.fprintf oc "(%s : " id;
+        Type.print_type oc t;
+        Printf.fprintf oc ")")
+
+    and print_id_type_list list =
+         let rec p lst =
+         match lst with
+         | [(id, t)] -> (print_id_type (id, t); Printf.fprintf oc "]")
+         | (id, t) :: rest -> (print_id_type (id, t); Printf.fprintf oc ", "; p rest)
+         in
+        (Printf.fprintf oc "["; p list)
+
+    and print_fundef fundef level =
+       (print_tab level;
+        Printf.fprintf oc "name : \n";
+        print_tab (level+1);
+        print_id_type fundef.name;
+        Printf.fprintf oc "\n";
+        print_tab level;
+        Printf.fprintf oc "args : \n";
+        print_tab (level+1);
+        print_id_type_list fundef.args;
+        Printf.fprintf oc "\n";
+        print_tab level;
+        Printf.fprintf oc "body : \n";
+        print_syntax fundef.body (level+1))
+
+    in
+    print_syntax l 0
+
+
 let f e =
     extenv := M.empty;
     extenv := M.add "sin" (Type.Fun([Type.Float], Type.Float)) !extenv;
     extenv := M.add "cos" (Type.Fun([Type.Float], Type.Float)) !extenv;
     extenv := M.add "sqrt" (Type.Fun([Type.Float], Type.Float)) !extenv;
-    extenv := M.add "abs_float" (Type.Fun([Type.Float], Type.Float)) !extenv;
-    extenv := M.add "float_of_int" (Type.Fun([Type.Int], Type.Float)) !extenv;
-    extenv := M.add "int_of_float" (Type.Fun([Type.Float], Type.Int)) !extenv;
-    extenv := M.add "print_float" (Type.Fun([Type.Float] , Type.Unit)) !extenv;
+    extenv := M.add "print_float" (Type.Fun([Type.Float], Type.Unit)) !extenv;
+    extenv := M.add "fequal" (Type.Fun([Type.Float; Type.Float], Type.Bool)) !extenv;
+    extenv := M.add "fless" (Type.Fun([Type.Float; Type.Float], Type.Bool)) !extenv;
+    (*
+    extenv := M.add "read_float" (Type.Fun([Type.Unit], Type.Float)) !extenv;
+    extenv := M.add "read_int" (Type.Fun([Type.Unit], Type.Int)) !extenv;
+    *)
 (*
   (match deref_typ (g M.empty e) with
   | Type.Unit -> ()
@@ -169,9 +325,15 @@ let f e =
 *)
   (try unify Type.Unit (g M.empty e)
   with
-   | Unify _ -> failwith "top level does not have type unit"
+   | Unify _ ->
+        (try
+         unify Type.Int (g M.empty e)
+        with
+            | Unify _ -> failwith "top level does not have type unit or int"
+        )
    | Error(e, t1, t2) ->
-        (Type.print_type stderr t1;
+        (syntax_debug stderr e;
+         Type.print_type stderr t1;
          Printf.fprintf stderr " ";
          Type.print_type stderr t2;
          failwith "typing error"));

@@ -46,7 +46,7 @@ fundef
 body 
 	Let
 		(Td1.13 : Float)
-		Float 30.
+		Float 10.
 		Let
 			(Td2.12 : Float)
 			AppDir

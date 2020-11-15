@@ -6,7 +6,7 @@
 	lui	%hp, 0
 	ori	%hp, %hp, 16384
 # Initialize float table
-	lui	%at, 16880
+	lui	%at, 16672
 	ori	%at, %at, 0
 	sw	%at, 0(%hp)
 	addi	%hp, %hp, 4
@@ -21,10 +21,10 @@
 .section	".text"
 float_fib.10:
 	flw	%f1, 16392(%zero)
-	fslt	%f30, %f1, %f0
-	fbne	%f30, %fzero, fbeq_else.27
+	fslt	%at, %f1, %f0
+	bne	%at, %zero, beq_else.27
 	jr	%ra
-fbeq_else.27:
+beq_else.27:
 	flw	%f1, 16392(%zero)
 	fsub	%f1, %f0, %f1
 	fsw	%f0, 0(%sp)
@@ -61,5 +61,4 @@ min_caml_start:
 	nop
 	addi	%sp, %sp, -8
 	lw	%ra, 4(%sp)
-	# ret
-	fadd	%f0, %f0, %fzero
+	ret

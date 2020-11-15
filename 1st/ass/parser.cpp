@@ -2,7 +2,7 @@
 
 Parser::Parser(const char *fname) {
     file_name = fname;
-    current_num = 1;
+    current_num = 0;
     data_num = 0;
     total_num = 0;
 }

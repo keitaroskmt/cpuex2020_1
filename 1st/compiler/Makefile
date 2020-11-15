@@ -44,7 +44,7 @@ output.ml main.mli main.ml
 # inprod inprod-rec inprod-loop matmul matmul-flat \
 # manyargs tmp
 
-TESTS = fib float_fib adder
+TESTS = fib float_fib adder tmp
 
 do_test: $(TESTS:%=mytest/%.s)
 

@@ -13,7 +13,7 @@ adder.11:
 make_adder.5:
 	add	%v1, %zero, %hp
 	addi	%hp, %hp, 8
-	add	%a0, %zero, adder.11
+	addi	%a0, %zero, adder.11
 	sw	%a0, 0(%v1)
 	sw	%v0, 4(%v1)
 	add	%v0, %zero, %v1

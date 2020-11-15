@@ -5,6 +5,12 @@ OCAMLOPT=$(OCAMLBASE)/ocamlopt
 
 all: native
 
+main.ml : globals.ml library.ml minrt.ml
+	cp /dev/null main.ml
+	cat globals.ml >> main.ml
+	cat library.ml >> main.ml
+	cat minrt.ml >> main.ml
+
 clean:
 	rm -f *.cm? *.o
 

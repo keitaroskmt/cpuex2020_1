@@ -90,7 +90,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprime) *)
            (load_imm oc reg_at (Int32.of_int addr);
             Printf.fprintf oc "\tflw\t%s, 0(%s) # %f\n" x reg_at d)
   | NonTail(x), SetL(Id.L(y)) ->
-        Printf.fprintf oc "\tadd\t%s, %s, %s\n" x reg_zero y
+        Printf.fprintf oc "\taddi\t%s, %s, %s\n" x reg_zero y
   | NonTail(x), Mov(y) when x = y -> ()
   | NonTail(x), Mov(y) ->
         Printf.fprintf oc "\tadd\t%s, %s, %s\n" x reg_zero y
@@ -104,14 +104,33 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprime) *)
        (match z' with
         | V(z) -> Printf.fprintf oc "\tsub\t%s, %s, %s\n" x y z
         | C(i) -> Printf.fprintf oc "\taddi\t%s, %s, %d\n" x y (-i))
+  | NonTail(x), Mul(y, z') ->
+       (match z' with
+        | V(z) -> failwith "Mul Error"
+        | C(i) ->
+           (match i with
+            | 2 -> Printf.fprintf oc "\tsll\t%s, %s, 1\n" x y
+            | 4 -> Printf.fprintf oc "\tsll\t%s, %s, 2\n" x y
+            | 8 -> Printf.fprintf oc "\tsll\t%s, %s, 3\n" x y
+            | _ -> failwith "Mul is supported 2, 4, 8"))
+  | NonTail(x), Div(y, z') ->
+       (match z' with
+        | V(z) -> failwith "Div Error"
+        | C(i) ->
+        (* srl命令のみ 負の数はだめ *)
+            (match i with
+            | 2 -> Printf.fprintf oc "\tsrl\t%s, %s, 1\n" x y
+            | 4 -> Printf.fprintf oc "\tsrl\t%s, %s, 2\n" x y
+            | 8 -> Printf.fprintf oc "\tsrl\t%s, %s, 3\n" x y
+            | _ -> failwith "Div is supported 2, 4, 8"))
   | NonTail(x), SLL(y, z') ->
        (match z' with
        | V(z) -> Printf.fprintf oc "\tsll\t%s, %s, %s\n" x y z
-       | C(i) -> Printf.fprintf oc "\tslli\t%s, %s, %d\n" x y i)
+       | C(i) -> Printf.fprintf oc "\tsll\t%s, %s, %d\n" x y i)
   | NonTail(x), Ld(y, z') ->
        (match z' with
        | V(z) -> Printf.fprintf oc "\tadd\t%s, %s, %s\n" reg_at y z;
-                 Printf.fprintf oc "\tlw\t%s, 0(%s)" x reg_at
+                 Printf.fprintf oc "\tlw\t%s, 0(%s)\n" x reg_at
        | C(i) -> Printf.fprintf oc "\tlw\t%s, %d(%s)\n" x i y)
   | NonTail(_), St(x, y, z') ->
        (match z' with
@@ -164,10 +183,10 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprime) *)
   | Tail, (Nop | St _ | StF _ | Comment _ | Save _ as exp) ->
       g' oc (NonTail(Id.gentmp Type.Unit), exp);
       Printf.fprintf oc "\tjr\t%s\n" reg_ra;
-  | Tail, (Set _ | SetF _ | SetL _ | Mov _ | Neg _ | Add _ | Sub _ | SLL _ | Ld _ as exp) ->
+  | Tail, (Set _ | SetL _ | Mov _ | Neg _ | Add _ | Sub _ | Mul _ | Div _ | SLL _ | Ld _ as exp) ->
       g' oc (NonTail(regs.(0)), exp);
       Printf.fprintf oc "\tjr\t%s\n" reg_ra;
-  | Tail, (FMovD _ | FNegD _ | FAddD _ | FSubD _ | FMulD _ | FDivD _ | LdF _ as exp) ->
+  | Tail, (SetF _ | FMovD _ | FNegD _ | FAddD _ | FSubD _ | FMulD _ | FDivD _ | LdF _ as exp) ->
       g' oc (NonTail(fregs.(0)), exp);
       Printf.fprintf oc "\tjr\t%s\n" reg_ra;
   | Tail, (Restore(x) as exp) ->
@@ -201,8 +220,8 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprime) *)
   | Tail, IfFEq(x, y, e1, e2) ->
         g'_tail_ifeq oc x y e1 e2 "fbeq" "fbne"
   | Tail, IfFLE(x, y, e1, e2) ->
-        Printf.fprintf oc "\tfslt\t%s, %s, %s\n" reg_fat y x;
-        g'_tail_ifeq oc reg_fat reg_fzero e1 e2 "fbeq" "fbne"
+        Printf.fprintf oc "\tfslt\t%s, %s, %s\n" reg_at y x;
+        g'_tail_ifeq oc reg_at reg_zero e1 e2 "beq" "bne"
   | NonTail(z), IfEq(x, y', e1, e2) ->
       (match y' with
       | V(y) -> g'_non_tail_ifeq oc (NonTail(z)) x y e1 e2 "beq" "bne"
@@ -226,8 +245,8 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprime) *)
   | NonTail(z), IfFEq(x, y, e1, e2) ->
         g'_non_tail_ifeq oc (NonTail(z)) x y e1 e2 "fbeq" "fbne"
   | NonTail(z), IfFLE(x, y, e1, e2) ->
-        Printf.fprintf oc "\tfslt\t%s, %s, %s\n" reg_fat y x;
-        g'_non_tail_ifeq oc (NonTail(z)) reg_fat reg_fzero e1 e2 "fbeq" "fbne"
+        Printf.fprintf oc "\tslt\t%s, %s, %s\n" reg_at y x;
+        g'_non_tail_ifeq oc (NonTail(z)) reg_at reg_zero e1 e2 "beq" "bne"
 
   (* 関数呼び出しの仮想命令の実装 (caml2html: emit_call) *)
   | Tail, CallCls(x, ys, zs) -> (* 末尾呼び出し (caml2html: emit_tailcall) *)
