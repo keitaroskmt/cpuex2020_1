@@ -16,7 +16,7 @@ int cur_opnum;
 std::vector<op_info> ops;
 core_env cur_env;
 std::map<std::string, int> label_pos;
-unsigned int *stack = (unsigned int *)malloc(sizeof(unsigned int) * 1000000);
+int *stack = (int *)malloc(sizeof(int) * 1000000);
 int exec_step(bool print_process);
 
 int main(int argc, char *argv[])

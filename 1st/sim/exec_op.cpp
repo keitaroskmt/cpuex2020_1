@@ -9,7 +9,7 @@
 // 1命令実行する
 int exec_op(op_info op, core_env env, std::map<std::string, int> label_pos)
 {
-    unsigned int rs, rt, imm, sp;
+    int rs, rt, imm, sp;
     float frs, frt;
     union
     {

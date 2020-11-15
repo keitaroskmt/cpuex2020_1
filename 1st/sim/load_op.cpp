@@ -24,6 +24,9 @@ int load_ops(FILE *fp)
         // 空行読み飛ばし
         if (s1 == "\n")
             continue;
+        // コメント行読み飛ばし
+        else if (regex_match(s1, results, std::regex("^#.+?\n$")))
+            continue;
         // ex. add  $a0, $a0, $a1
         else if (regex_match(s1, results, std::regex("^\t(.+?)\t(.+?), (.+?), (.+?)\n?$")))
         {

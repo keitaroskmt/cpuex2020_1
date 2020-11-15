@@ -4,7 +4,7 @@
 typedef struct
 {
     int PC;
-    unsigned int GPR[32];
+    int GPR[32];
     float FPR[32];
     char FPCC[9];
     unsigned int *DAT;
@@ -28,4 +28,4 @@ extern int cur_opnum;
 extern std::vector<op_info> ops;
 extern core_env cur_env;
 extern std::map<std::string, int> label_pos;
-extern unsigned int *stack;
+extern int *stack;
