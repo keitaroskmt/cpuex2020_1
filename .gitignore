@@ -1,12 +1,3 @@
 .vscode
 fib/sim/sim
 fib/sim/sim.dSYM/*
-1st/fpu/finv_table/*
-1st/fpu/fsqrt_table/*
-1st/fpu/fadd/*
-1st/fpu/fsub/*
-1st/fpu/fmul/*
-1st/fpu/finv/*
-1st/fpu/fdiv/*
-1st/fpu/fsqrt/*
-.DS_Store
