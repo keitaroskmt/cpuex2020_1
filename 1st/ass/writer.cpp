@@ -374,6 +374,13 @@ void Writer::debug() {
     cout << endl;
 
     for (auto v : parser->code_map) {
+        // ラベル挿入
+        for (auto w : parser->label_map) {
+            if (w.second == v.first) {
+                cout << endl;
+                cout << w.first << endl;
+            }
+        }
         cout << "L." << v.first << " ";
         for (auto x : v.second) {
             cout << x << " ";

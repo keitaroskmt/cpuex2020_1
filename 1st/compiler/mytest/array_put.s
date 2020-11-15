@@ -23,13 +23,14 @@
 	sw	%at, 0(%hp)
 	addi	%hp, %hp, 4
 .section	".text"
+	j	min_caml_start
 inprod.32:
 	slti	%at, %a0, 0
 	bne	%at, %zero, beq_else.84
-	slli	%a1, %a0, 2
+	sll	%a1, %a0, 2
 	add	%at, %v0, %a1
 	flw	%f0, 0(%at)
-	slli	%a1, %a0, 2
+	sll	%a1, %a0, 2
 	add	%at, %v1, %a1
 	flw	%f1, 0(%at)
 	fmul	%f0, %f0, %f1
@@ -44,7 +45,7 @@ inprod.32:
 	fadd	%f0, %f1, %f0
 	jr	%ra
 beq_else.84:
-	flw	%v0, 16396(%zero)
+	flw	%f0, 16396(%zero)
 	jr	%ra
 .global	min_caml_start
 min_caml_start:

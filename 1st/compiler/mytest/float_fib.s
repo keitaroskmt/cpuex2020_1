@@ -19,6 +19,7 @@
 	sw	%at, 0(%hp)
 	addi	%hp, %hp, 4
 .section	".text"
+	j	min_caml_start
 float_fib.10:
 	flw	%f1, 16392(%zero)
 	fslt	%at, %f1, %f0

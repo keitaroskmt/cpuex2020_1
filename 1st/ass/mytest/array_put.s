@@ -23,6 +23,31 @@
 	sw	%at, 0(%hp)
 	addi	%hp, %hp, 4
 .section	".text"
+	j	min_caml_start
+#  min_caml_create_array
+min_caml_create_array:
+	addi	%a0, %v0, 0
+	addi	%v0, %hp, 0
+create_array_loop:
+	beq	%a0, %zero, create_array_cont
+	jr	%ra
+create_array_cont:
+	sw	%v1, 0(%hp)
+	addi	%a0, %a0, -1
+	addi	%hp, %hp, 4
+	j	create_array_loop
+#  min_caml_create_float_array
+min_caml_create_float_array:
+	addi	%a0, %v0, 0
+	addi	%v0, %hp, 0
+create_float_array_loop:
+	beq	%a0, %zero, create_float_array_cont
+	jr	%ra
+create_float_array_cont:
+	fsw	%f0, 0(%hp)
+	addi	%a0, %a0, -1
+	addi	%hp, %hp, 4
+	j	create_float_array_loop
 inprod.32:
 	slti	%at, %a0, 0
 	bne	%at, %zero, beq_else.84
@@ -44,7 +69,7 @@ inprod.32:
 	fadd	%f0, %f1, %f0
 	jr	%ra
 beq_else.84:
-	flw	%v0, 16396(%zero)
+	flw	%f0, 16396(%zero)
 	jr	%ra
 .global	min_caml_start
 min_caml_start:
@@ -86,7 +111,9 @@ min_caml_start:
 	lw	%ra, 4(%sp)
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 8
-	jal	min_caml_print_float
+	# jal	min_caml_print_float
+	nop
 	addi	%sp, %sp, -8
 	lw	%ra, 4(%sp)
-	ret
+	# ret
+	fadd	%f0, %f0, %fzero

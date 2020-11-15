@@ -340,6 +340,7 @@ let f oc (Prog(data, fundefs, e)) =
   load_float_imm oc data 0;
   float_table := data;
   Printf.fprintf oc ".section\t\".text\"\n";
+    Printf.fprintf oc "\tj\tmin_caml_start\n";
   List.iter (fun fundef -> h oc fundef) fundefs;
   Printf.fprintf oc ".global\tmin_caml_start\n";
   Printf.fprintf oc "min_caml_start:\n";

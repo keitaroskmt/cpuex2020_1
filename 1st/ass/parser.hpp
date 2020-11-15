@@ -17,7 +17,6 @@ class Parser {
 
         int total_num;
 
-        string global_label;
         map<string, int> label_map;
         map<int, vector<string>> code_map;
     protected:

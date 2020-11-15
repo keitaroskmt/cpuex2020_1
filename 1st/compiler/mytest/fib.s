@@ -7,6 +7,7 @@
 	ori	%hp, %hp, 16384
 # Initialize float table
 .section	".text"
+	j	min_caml_start
 fib.10:
 	addi	%at, %zero, 1
 	slt	%at, %at, %v0

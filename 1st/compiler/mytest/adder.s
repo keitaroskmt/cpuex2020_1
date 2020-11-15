@@ -7,6 +7,7 @@
 	ori	%hp, %hp, 16384
 # Initialize float table
 .section	".text"
+	j	min_caml_start
 adder.11:
 	lw	%v1, 4(%k1)
 	add	%v0, %v1, %v0

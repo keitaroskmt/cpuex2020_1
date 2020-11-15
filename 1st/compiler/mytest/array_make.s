@@ -19,6 +19,7 @@
 	sw	%at, 0(%hp)
 	addi	%hp, %hp, 4
 .section	".text"
+	j	min_caml_start
 inprod.14:
 	slti	%at, %a0, 0
 	bne	%at, %zero, beq_else.41

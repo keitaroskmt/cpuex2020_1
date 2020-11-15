@@ -1,0 +1,24 @@
+Prog 
+fundef 
+	name : 
+		(L (sin.3): Float -> Float)
+	args : 
+		[(x.4 : Float)]
+	formal_fv : 
+		[]
+	body : 
+		FAdd
+			x.4
+			x.4
+body 
+	Let
+		(Td1.6 : Float)
+		Float 10.
+		Let
+			(Td2.5 : Float)
+			AppDir
+				L (sin.3)
+				[Td1.6]
+			AppDir
+				L (min_caml_print_float)
+				[Td2.5]

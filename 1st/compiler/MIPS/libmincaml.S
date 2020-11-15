@@ -80,43 +80,36 @@ min_caml_read_float:
 	ldd	[%fp-24], %f0
 	retl
 	nop
-.global min_caml_create_array
+
+##################################################
+#  min_caml_create_array
 min_caml_create_array:
-	mov	%i2, %i4
-	mov	%i1, %i2
+	addi	%a0, %v0, 0
+	addi	%v0, %hp, 0
 create_array_loop:
-	tst	%i4
-	bnz	create_array_cont
-	nop
-	andcc	%i1, 4, %g0
-	bz	create_array_exit
-	nop
-	add	%i1, 4, %i1
-create_array_exit:
-	retl
-	nop
+	beq	%a0, %zero, create_array_cont
+	jr	%ra
 create_array_cont:
-	st	%i3, [%i1]
-	dec	%i4
-	add	%i1, 4, %i1
-	b	create_array_loop
-	nop
-.global min_caml_create_float_array
+	sw	%v1, 0(%hp)
+	addi	%a0, %a0, -1
+	addi	%hp, %hp, 4
+	j	create_array_loop
+
+#  min_caml_create_float_array
 min_caml_create_float_array:
-	mov	%i2, %i3
-	mov	%i1, %i2
+	addi	%a0, %v0, 0
+	addi	%v0, %hp, 0
 create_float_array_loop:
-	tst	%i3
-	bnz	create_float_array_cont
-	nop
-	retl
-	nop
+	beq	%a0, %zero, create_float_array_cont
+	jr	%ra
 create_float_array_cont:
-	std	%f0, [%i1]
-	dec	%i3
-	add	%i1, 8, %i1
-	b	create_float_array_loop
-	nop
+	fsw	%f0, 0(%hp)
+	addi	%a0, %a0, -1
+	addi	%hp, %hp, 4
+	j	create_float_array_loop
+
+##################################################
+
 .global min_caml_abs_float
 min_caml_abs_float:
 	fabss	%f0, %f0

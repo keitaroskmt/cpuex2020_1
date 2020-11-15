@@ -22,9 +22,6 @@ int Parser::parse_file() {
     }
     f.close();
 
-    // 先頭にはj global_labelを挿入
-    code_map[data_num] = {"J", "j", global_label};
-
     return current_num;
 }
 
@@ -60,14 +57,15 @@ void Parser::parse_code(string line) {
     else if (regex_match(line, res, regex("^\t(.+?)\t(.+?)\n?$"))) {
         code_map[current_num++] = {inst_format.at(res[1].str()), res[1].str(), res[2].str()};
     }
+    /*
     // .global
     else if (regex_match(line, res, regex("^[.]global\t(.+?)\n?$"))) {
         global_label = res[1].str();
     }
+    */
     // text section
     else if (regex_match(line, res, regex(".section\t\".text\"\n?$"))) {
         data_num = current_num;
-        current_num++;
     }
     // .sectionなど 読み飛ばし
     else if (regex_match(line, res, regex("^[.](.+?)\n?$"))) {
@@ -98,8 +96,12 @@ int Parser::get_linenum_by_label(string label) {
 
 void Parser::print_label() {
     cout << "Print_label" << endl;
+    map<int, string> mp;
     for (auto v : label_map) {
-        cout << v.first << " L." << v.second << endl;
+        mp[v.second] = v.first;
+    }
+    for (auto v : mp) {
+        cout << " L." << v.first << " " << v.second << endl;
     }
 }
 
