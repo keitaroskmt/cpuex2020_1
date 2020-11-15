@@ -1,0 +1,4 @@
+arch_1st_multicycle_cpu_0_0.v,verilog,xil_defaultlib,../../../bd/arch_1st/ip/arch_1st_multicycle_cpu_0_0/sim/arch_1st_multicycle_cpu_0_0.v,
+arch_1st.v,verilog,xil_defaultlib,../../../bd/arch_1st/sim/arch_1st.v,
+arch_1st_sim_clk_gen_0_0.v,verilog,xil_defaultlib,../../../bd/arch_1st/ip/arch_1st_sim_clk_gen_0_0/sim/arch_1st_sim_clk_gen_0_0.v,
+glbl.v,Verilog,xil_defaultlib,glbl.v

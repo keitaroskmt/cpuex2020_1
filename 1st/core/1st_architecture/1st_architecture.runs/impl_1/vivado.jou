@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2019.2.1 (64-bit)
+# SW Build 2729669 on Thu Dec  5 04:49:17 MST 2019
+# IP Build 2729494 on Thu Dec  5 07:38:25 MST 2019
+# Start of session at: Sun Nov 15 21:46:44 2020
+# Process ID: 12256
+# Current directory: C:/Users/nowi74/cpuex2020_1/1st/core/1st_architecture/1st_architecture.runs/impl_1
+# Command line: vivado.exe -log arch_1st_wrapper.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source arch_1st_wrapper.tcl -notrace
+# Log file: C:/Users/nowi74/cpuex2020_1/1st/core/1st_architecture/1st_architecture.runs/impl_1/arch_1st_wrapper.vdi
+# Journal file: C:/Users/nowi74/cpuex2020_1/1st/core/1st_architecture/1st_architecture.runs/impl_1\vivado.jou
+#-----------------------------------------------------------
+source arch_1st_wrapper.tcl -notrace
