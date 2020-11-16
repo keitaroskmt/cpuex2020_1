@@ -340,6 +340,18 @@ unsigned int Writer::encode(vector<string> &v) {
             rt = freg_name.at(v[2]);
             imm = stoi(v[3]);
             rs = reg_name.at(v[4]);
+
+        } else if (v[1] == "ftoi") {
+            op = 0x38;
+            rt = reg_name.at(v[2]);
+            rs = freg_name.at(v[3]);
+            imm = 0x0;
+
+        } else if (v[1] == "itof") {
+            op = 0x39;
+            rt = freg_name.at(v[2]);
+            rs = reg_name.at(v[3]);
+            imm = 0x0;
         }
 
         op &= 0b111111;

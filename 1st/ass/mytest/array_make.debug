@@ -51,8 +51,8 @@ L.18 I addi %v0 %hp 0
 001000 11100 00010 00000 00000 000000
 
 create_array_loop
-L.19 I beq %a0 %zero create_array_cont 
-000100 00000 00100 00000 00000 000001
+L.19 I bne %a0 %zero create_array_cont 
+000101 00000 00100 00000 00000 000001
 L.20 R jr %ra 
 000000 11111 00000 11111 00000 001000
 
@@ -73,8 +73,8 @@ L.26 I addi %v0 %hp 0
 001000 11100 00010 00000 00000 000000
 
 create_float_array_loop
-L.27 I beq %a0 %zero create_float_array_cont 
-000100 00000 00100 00000 00000 000001
+L.27 I bne %a0 %zero create_float_array_cont 
+000101 00000 00100 00000 00000 000001
 L.28 R jr %ra 
 000000 11111 00000 11111 00000 001000
 

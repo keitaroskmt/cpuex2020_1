@@ -141,7 +141,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprime) *)
   | NonTail(x), FMovD(y) ->
         Printf.fprintf oc "\tfadd\t%s, %s, %s\n" x reg_fzero y
   | NonTail(x), FNegD(y) ->
-        Printf.fprintf oc "\tfsub\t%s, %s, %s\n" x reg_fzero y
+        Printf.fprintf oc "\fneg\t%s, %s\n" x y
   | NonTail(x), FAddD(y, z) ->
         Printf.fprintf oc "\tfadd\t%s, %s, %s\n" x y z
   | NonTail(x), FSubD(y, z) ->
@@ -150,6 +150,14 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprime) *)
         Printf.fprintf oc "\tfmul\t%s, %s, %s\n" x y z
   | NonTail(x), FDivD(y, z) ->
         Printf.fprintf oc "\tfdiv\t%s, %s, %s\n" x y z
+  | NonTail(x), FAbs(y) ->
+        Printf.fprintf oc "\fabs\t%s, %s\n" x y
+  | NonTail(x), FSqr(y) ->
+        Printf.fprintf oc "\fsqrt\t%s, %s\n" x y
+  | NonTail(x), Ftoi(y) ->
+        Printf.fprintf oc "\ftoi\t%s, %s\n" x y
+  | NonTail(x), Itof(y) ->
+        Printf.fprintf oc "\itof\t%s, %s\n" x y
   | NonTail(x), LdF(y, z') ->
        (match z' with
        | V(z) -> Printf.fprintf oc "\tadd\t%s, %s, %s\n" reg_at y z;
@@ -183,10 +191,10 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprime) *)
   | Tail, (Nop | St _ | StF _ | Comment _ | Save _ as exp) ->
       g' oc (NonTail(Id.gentmp Type.Unit), exp);
       Printf.fprintf oc "\tjr\t%s\n" reg_ra;
-  | Tail, (Set _ | SetL _ | Mov _ | Neg _ | Add _ | Sub _ | Mul _ | Div _ | SLL _ | Ld _ as exp) ->
+  | Tail, (Set _ | SetL _ | Mov _ | Neg _ | Add _ | Sub _ | Mul _ | Div _ | Ftoi _ | SLL _ | Ld _ as exp) ->
       g' oc (NonTail(regs.(0)), exp);
       Printf.fprintf oc "\tjr\t%s\n" reg_ra;
-  | Tail, (SetF _ | FMovD _ | FNegD _ | FAddD _ | FSubD _ | FMulD _ | FDivD _ | LdF _ as exp) ->
+  | Tail, (SetF _ | FMovD _ | FNegD _ | FAbs _ | FSqr _ | Itof _ | FAddD _ | FSubD _ | FMulD _ | FDivD _ | LdF _ as exp) ->
       g' oc (NonTail(fregs.(0)), exp);
       Printf.fprintf oc "\tjr\t%s\n" reg_ra;
   | Tail, (Restore(x) as exp) ->

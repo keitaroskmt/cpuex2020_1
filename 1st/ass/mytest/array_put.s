@@ -29,7 +29,7 @@ min_caml_create_array:
 	addi	%a0, %v0, 0
 	addi	%v0, %hp, 0
 create_array_loop:
-	beq	%a0, %zero, create_array_cont
+	bne	%a0, %zero, create_array_cont
 	jr	%ra
 create_array_cont:
 	sw	%v1, 0(%hp)
@@ -41,7 +41,7 @@ min_caml_create_float_array:
 	addi	%a0, %v0, 0
 	addi	%v0, %hp, 0
 create_float_array_loop:
-	beq	%a0, %zero, create_float_array_cont
+	bne	%a0, %zero, create_float_array_cont
 	jr	%ra
 create_float_array_cont:
 	fsw	%f0, 0(%hp)

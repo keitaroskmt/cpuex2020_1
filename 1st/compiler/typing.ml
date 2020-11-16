@@ -310,10 +310,14 @@ let f e =
     extenv := M.empty;
     extenv := M.add "sin" (Type.Fun([Type.Float], Type.Float)) !extenv;
     extenv := M.add "cos" (Type.Fun([Type.Float], Type.Float)) !extenv;
-    extenv := M.add "sqrt" (Type.Fun([Type.Float], Type.Float)) !extenv;
     extenv := M.add "print_float" (Type.Fun([Type.Float], Type.Unit)) !extenv;
     extenv := M.add "fequal" (Type.Fun([Type.Float; Type.Float], Type.Bool)) !extenv;
     extenv := M.add "fless" (Type.Fun([Type.Float; Type.Float], Type.Bool)) !extenv;
+    extenv := M.add "fabs" (Type.Fun([Type.Float], Type.Float)) !extenv;
+    extenv := M.add "fneg" (Type.Fun([Type.Float], Type.Float)) !extenv;
+    extenv := M.add "sqrt" (Type.Fun([Type.Float], Type.Float)) !extenv;
+    extenv := M.add "itof" (Type.Fun([Type.Int], Type.Float)) !extenv;
+    extenv := M.add "ftoi" (Type.Fun([Type.Float], Type.Int)) !extenv;
     (*
     extenv := M.add "read_float" (Type.Fun([Type.Unit], Type.Float)) !extenv;
     extenv := M.add "read_int" (Type.Fun([Type.Unit], Type.Int)) !extenv;

@@ -86,9 +86,9 @@ let reflections =
 (* reflectionsã®æœ‰åŠ¹ãªè¦ç´ æ•° *) 
 
 let n_reflections = create_array 1 0 in
-let rec fequal e1 e2 = let x = e1 +. e2 in true
+let rec fequal e1 e2 = (e1 = e2)
 in
-let rec fless e1 e2 = let x = e1 +. e2 in true
+let rec fless e1 e2 = e1 < e2
 in
 
 let rec fispos x = x > 0.0
@@ -106,12 +106,14 @@ in
 let rec fsqr x = x *. x
 in
 
+(* fabs, fneg, fsqrt¤Ï¥Ï¡¼¥É¥¦¥§¥¢¼ÂÁõ
 let rec fabs x = x +. x
 in
 let rec fneg x = x +. x
 in
 let rec sqrt x = x +. x
 in
+*)
 let rec floor x = x +. x
 in
 

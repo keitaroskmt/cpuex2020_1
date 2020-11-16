@@ -63,4 +63,6 @@ const map<string, string> inst_format = {
     {"fbne", "FI"},
     {"flw", "FI"},
     {"fsw", "FI"},
+    {"ftoi", "FI"},
+    {"itof", "FI"},
 };

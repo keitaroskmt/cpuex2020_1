@@ -25,6 +25,10 @@ type t = (* クロージャ変換後の式 (caml2html: closure_t) *)
   | Get of Id.t * Id.t
   | Put of Id.t * Id.t * Id.t
   | ExtArray of Id.l
+  | FAbs of Id.t
+  | FSqr of Id.t
+  | Ftoi of Id.t
+  | Itof of Id.t
 type fundef = { name : Id.l * Type.t;
                 args : (Id.t * Type.t) list;
                 formal_fv : (Id.t * Type.t) list;
@@ -33,7 +37,7 @@ type prog = Prog of fundef list * t
 
 let rec fv = function
   | Unit | Int(_) | Float(_) | ExtArray(_) -> S.empty
-  | Neg(x) | FNeg(x) -> S.singleton x
+  | Neg(x) | FNeg(x) | FAbs(x) | FSqr(x) | Ftoi(x) | Itof(x) -> S.singleton x
   | Add(x, y) | Sub(x, y) | Mul(x, y) | Div(x, y) | FAdd(x, y) | FSub(x, y) | FMul(x, y) | FDiv(x, y) | Get(x, y) -> S.of_list [x; y]
   | IfEq(x, y, e1, e2)| IfLE(x, y, e1, e2) -> S.add x (S.add y (S.union (fv e1) (fv e2)))
   | Let((x, t), e1, e2) -> S.union (fv e1) (S.remove x (fv e2))
@@ -102,7 +106,14 @@ let rec g env known = function (* クロージャ変換ルーチン本体 (caml2html: closure
   | KNormal.Get(x, y) -> Get(x, y)
   | KNormal.Put(x, y, z) -> Put(x, y, z)
   | KNormal.ExtArray(x) -> ExtArray(Id.L(x))
-  | KNormal.ExtFunApp(x, ys) -> AppDir(Id.L("min_caml_" ^ x), ys)
+  | KNormal.ExtFunApp(x, ys) ->
+       (match x with
+        | "fabs" -> FAbs(List.hd ys)
+        | "fneg" -> FNeg(List.hd ys)
+        | "sqrt" -> FSqr(List.hd ys)
+        | "ftoi" -> Ftoi(List.hd ys)
+        | "itof" -> Itof(List.hd ys)
+        | _ -> AppDir(Id.L("min_caml_" ^ x), ys))
 
 let f e =
   toplevel := [];
@@ -259,6 +270,22 @@ let closure_debug oc l =
              print_tab (level+1);
              print_lavel e1;
              Printf.fprintf oc "\n")
+        | FAbs e1 ->
+            (Printf.fprintf oc "FAbs\n";
+             print_tab (level+1);
+             Printf.fprintf oc "%s\n" e1)
+        | FSqr e1 ->
+            (Printf.fprintf oc "FSqr\n";
+             print_tab (level+1);
+             Printf.fprintf oc "%s\n" e1)
+        | Ftoi e1 ->
+            (Printf.fprintf oc "Ftoi\n";
+             print_tab (level+1);
+             Printf.fprintf oc "%s\n" e1)
+        | Itof e1 ->
+            (Printf.fprintf oc "Itof\n";
+             print_tab (level+1);
+             Printf.fprintf oc "%s\n" e1)
         )
 
     and print_lavel e1 =
