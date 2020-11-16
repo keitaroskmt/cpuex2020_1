@@ -308,9 +308,6 @@ let syntax_debug oc l =
 
 let f e =
     extenv := M.empty;
-    extenv := M.add "sin" (Type.Fun([Type.Float], Type.Float)) !extenv;
-    extenv := M.add "cos" (Type.Fun([Type.Float], Type.Float)) !extenv;
-    extenv := M.add "print_float" (Type.Fun([Type.Float], Type.Unit)) !extenv;
     extenv := M.add "fequal" (Type.Fun([Type.Float; Type.Float], Type.Bool)) !extenv;
     extenv := M.add "fless" (Type.Fun([Type.Float; Type.Float], Type.Bool)) !extenv;
     extenv := M.add "fabs" (Type.Fun([Type.Float], Type.Float)) !extenv;

@@ -2,9 +2,9 @@
 .align	8
 # Initialize register
 	lui	%sp, 0
-	ori	%sp, %sp, 8192
+	ori	%sp, %sp, 16384
 	lui	%hp, 0
-	ori	%hp, %hp, 16384
+	ori	%hp, %hp, 8192
 # Initialize float table
 .section	".text"
 	j	min_caml_start

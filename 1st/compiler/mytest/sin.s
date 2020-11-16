@@ -2,9 +2,9 @@
 .align	8
 # Initialize register
 	lui	%sp, 0
-	ori	%sp, %sp, 8192
+	ori	%sp, %sp, 16384
 	lui	%hp, 0
-	ori	%hp, %hp, 16384
+	ori	%hp, %hp, 8192
 # Initialize float table
 	lui	%at, 16672
 	ori	%at, %at, 0
@@ -17,7 +17,7 @@ sin.3:
 	jr	%ra
 .global	min_caml_start
 min_caml_start:
-	flw	%f0, 16384(%zero)
+	flw	%f0, 8192(%zero)
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 8
 	jal	sin.3

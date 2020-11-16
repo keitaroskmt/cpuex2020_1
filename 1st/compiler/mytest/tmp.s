@@ -2,9 +2,9 @@
 .align	8
 # Initialize register
 	lui	%sp, 0
-	ori	%sp, %sp, 8192
+	ori	%sp, %sp, 16384
 	lui	%hp, 0
-	ori	%hp, %hp, 16384
+	ori	%hp, %hp, 8192
 # Initialize float table
 	lui	%at, 16256
 	ori	%at, %at, 0
@@ -19,7 +19,7 @@
 f.8:
 	slti	%at, %v0, 0
 	bne	%at, %zero, beq_else.21
-	flw	%f0, 16384(%zero)
+	flw	%f0, 8192(%zero)
 	addi	%v0, %v0, -1
 	fsw	%f0, 0(%sp)
 	sw	%ra, 4(%sp)
@@ -31,7 +31,7 @@ f.8:
 	fadd	%f0, %f1, %f0
 	jr	%ra
 beq_else.21:
-	flw	%f0, 16388(%zero)
+	flw	%f0, 8196(%zero)
 	jr	%ra
 .global	min_caml_start
 min_caml_start:

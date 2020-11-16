@@ -151,13 +151,13 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprime) *)
   | NonTail(x), FDivD(y, z) ->
         Printf.fprintf oc "\tfdiv\t%s, %s, %s\n" x y z
   | NonTail(x), FAbs(y) ->
-        Printf.fprintf oc "\fabs\t%s, %s\n" x y
+        Printf.fprintf oc "\tfabs\t%s, %s\n" x y
   | NonTail(x), FSqr(y) ->
-        Printf.fprintf oc "\fsqrt\t%s, %s\n" x y
+        Printf.fprintf oc "\tfsqrt\t%s, %s\n" x y
   | NonTail(x), Ftoi(y) ->
-        Printf.fprintf oc "\ftoi\t%s, %s\n" x y
+        Printf.fprintf oc "\tftoi\t%s, %s\n" x y
   | NonTail(x), Itof(y) ->
-        Printf.fprintf oc "\itof\t%s, %s\n" x y
+        Printf.fprintf oc "\titof\t%s, %s\n" x y
   | NonTail(x), LdF(y, z') ->
        (match z' with
        | V(z) -> Printf.fprintf oc "\tadd\t%s, %s, %s\n" reg_at y z;

@@ -18,25 +18,80 @@ in
 let rec fsqr x = x *. x
 in
 
-(* fabs, fneg, fsqrt¤Ï¥Ï¡¼¥É¥¦¥§¥¢¼ÂÁõ
-let rec fabs x = x +. x
-in
-let rec fneg x = x +. x
-in
-let rec sqrt x = x +. x
-in
-*)
+(* int -> float ä¸­èº«åŒã˜bitã‚’ itofã§ãƒãƒ¼ãƒ‰ã‚¦ã‚§ã‚¢å®Ÿè£… *)
+(* float -> int ä¸­èº«åŒã˜bitã‚’ ftoiã§ãƒãƒ¼ãƒ‰ã‚¦ã‚§ã‚¢å®Ÿè£… *)
 
-let rec floor x = x +. x
+(* 8388608.0ã§å‰²ã£ãŸã¨ãã®å•† *)
+let rec int_of_float_sub1 x n =
+    if x < 8388608.0 then n
+    else int_of_float_sub1 (x -. 8388608.0) (n+1)
 in
 
-let rec int_of_float x = if x = 1.0 then 1 else 0
+(* 8388608.0ã§å‰²ã£ãŸã¨ãã®ã‚ã¾ã‚Š *)
+let rec int_of_float_sub2 x =
+    if x < 8388608.0 then x
+    else int_of_float_sub2 (x -. 8388608.0)
 in
 
-(* int -> float Ãæ¿ÈÆ±¤¸bit¤ò itof¤Ç¥Ï¡¼¥É¥¦¥§¥¢¼ÂÁõ *)
-(* float -> int Ãæ¿ÈÆ±¤¸bit¤ò ftoi¤Ç¥Ï¡¼¥É¥¦¥§¥¢¼ÂÁõ *)
+(* 8388608ã‚’må›ãŸã™ *)
+let rec int_of_float_sub3 m acm =
+    if m = 0 then acm
+    else int_of_float_sub3 (m-1) (8388608 + acm)
+in
 
-let rec float_of_int x = 1.0
+let rec int_of_float x =
+    let flag = if fisneg x then false else true in
+    let x_abs = fabs x in
+    let res =
+    (
+    if x_abs < 8388608.0 then ftoi (x_abs +. 8388608.0) - 1258291200
+    else
+        ftoi (int_of_float_sub2 x_abs +. 8388608.0) - 1258291200
+        + int_of_float_sub3 (int_of_float_sub1 x_abs 0) 0
+    ) in
+    if flag then res else -res
+in
+
+
+(* 8388608ã§å‰²ã£ãŸã¨ãã®å•† *)
+let rec float_of_int_sub1 x n =
+    if x < 8388608 then n
+    else float_of_int_sub1 (x - 8388608) (n+1)
+in
+
+(* 8388608ã§å‰²ã£ãŸã¨ãã®ã‚ã¾ã‚Š *)
+let rec float_of_int_sub2 x =
+    if x < 8388608 then x
+    else float_of_int_sub2 (x - 8388608)
+in
+
+(* 8388608.0ã‚’må›ãŸã™ *)
+let rec float_of_int_sub3 m acm =
+    if m = 0 then acm
+    else float_of_int_sub3 (m-1) (8388608.0 +. acm)
+in
+
+let rec float_of_int x =
+    let flag = if x < 0 then false else true in
+    let x_abs = if x < 0 then -x else x in
+    let res =
+    (
+    if x_abs < 8388608 then itof (x_abs + 1258291200) -. 8388608.0
+    else
+        itof (float_of_int_sub2 x_abs + 1258291200) -. 8388608.0
+        +. float_of_int_sub3 (float_of_int_sub1 x_abs 0) 0.0
+    ) in
+    if flag then res else fneg res
+in
+
+let rec floor x =
+    let flag = if fisneg x then false else true in
+    let x_abs = fabs x in
+    let res =
+        if x_abs >= 8388608.0 then x_abs else float_of_int (int_of_float x_abs) in
+    let resm =
+        if res > x then res -. 1.0 else res in
+    if flag then resm else fneg resm
 in
 
 let rec kernel_sin x =
@@ -73,10 +128,10 @@ in
 let rec reduction_2pi x =
     let pi = 3.14159265358979 in
     let pi2 = 2.0 *. pi in
-    let rec f s t =
-        if t < s then s else f (2.0 *. s) t in
-    let p = f pi2 x in
-    let rec g s t =
+    let rec f s t = (* while (x >= p) *)
+        if s < t then t else f t (2.0 *. s) in
+    let p = f x pi2 in
+    let rec g s t = (* while (x >= pi2) *)
         if s < pi2 then s else
         if s >= t then g (s -. t) (t /. 2.0) else g s (t /. 2.0) in
     g x p
@@ -95,50 +150,38 @@ let rec cos x =
     let pi = 3.14159265358979 in
     let flag = true in
     let x = reduction_2pi (fabs x) in
+    (* if (x >= pi) *)
     let flag = if x >= pi then not flag else flag in
     let x = if x >= pi then x -. pi else x in
-    let flag = if x >= pi then not flag else flag in
+    (* if (x >= pi / 2) *)
+    let flag = if x >= pi /. 2.0 then not flag else flag in
     let x = if x >= pi /. 2.0 then pi -. x else x in
     let res = if x <= (pi /. 4.0) then kernel_cos x else kernel_sin (pi /. 2.0 -. x) in
-    if flag then res else res *. (-.1.0)
+    if flag then res else fneg res
 in
 
 let rec sin x =
     let pi = 3.14159265358979 in
     let flag = if fisneg x then false else true in
     let x = reduction_2pi (fabs x) in
+    (* if (x >= pi) *)
     let flag = if x >= pi then not flag else flag in
     let x = if x >= pi then x -. pi else x in
+    (* if (x >= pi / 2 *)
     let x = if x >= pi /. 2.0 then pi -. x else x in
     let res = if x <= (pi /. 4.0) then kernel_sin x else kernel_cos (pi /. 2.0 -. x) in
-    if flag then res else res *. (-.1.0)
+    if flag then res else fneg res
 in
 
 let rec atan x =
     let pi = 3.14159265358979 in
     let flag = if fisneg x then false else true in
-    let x = fabs x in
-    if x < 0.4375 then kernel_atan x
+    let x_abs = fabs x in
+    if x_abs < 0.4375 then kernel_atan x
     else (
         let res =
-        if x < 2.4375 then pi /. 4.0 +. kernel_atan ((x -. 1.0) /. (x +. 1.0))
-        else pi /. 2.0 -. kernel_atan (1.0 /. x) in
-        if flag then res else res *. (-.1.0)
+        if x_abs < 2.4375 then pi /. 4.0 +. kernel_atan ((x_abs -. 1.0) /. (x_abs +. 1.0))
+        else pi /. 2.0 -. kernel_atan (1.0 /. x_abs) in
+        if flag then res else fneg res
     )
 in
-
-
-let rec print_char x = ()
-in
-let rec print_int x = ()
-in
-
-let rec read_token in_token = ()
-in
-
-(*
-let rec read_float  = ()
-in
-let rec read_int = ()
-in
-*)
