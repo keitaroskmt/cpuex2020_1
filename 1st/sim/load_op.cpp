@@ -98,10 +98,6 @@ int load_ops(FILE *fp)
         {
             new_op.type = 2;
             new_op.other = results[1].str();
-            // if (results[1].str() == "global")
-            //     global_start = i;
-            // else if (results[1].str() == "section" && results[2].str() == "\".text\"")
-            //     initialize_end = i;
             ops.push_back(new_op);
         }
         // 例外処理

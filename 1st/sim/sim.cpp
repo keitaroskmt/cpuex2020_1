@@ -57,7 +57,10 @@ int main(int argc, char *argv[])
     std::string cmd;
     std::smatch cmd_re;
     std::string file_name;
+    std::string reg;
     int end;
+    int sp;
+    int offset;
     int errno;
     int line = 0;
     int loop = 0;
@@ -104,17 +107,40 @@ int main(int argc, char *argv[])
                     loop = stoi(cmd_re[1].str());
                     break;
                 }
+                else if (regex_match(cmd, cmd_re, std::regex("^stack (\\d+)\n?$")))
+                {
+                    sp = stoi(cmd_re[1].str());
+                    printf("stack[%d] = %d\n", sp, stack[sp / 4]);
+                }
+                else if (regex_match(cmd, cmd_re, std::regex("^stack (-?\\d+)\\((.+?)\\)\n?$")))
+                {
+                    offset = stoi(cmd_re[1].str());
+                    reg = cmd_re[2].str();
+                    sp = cur_env.GPR[reg_name.at(reg)] + offset;
+                    printf("stack[%d] = %d\n", sp, stack[sp / 4]);
+                }
                 else if (cmd == "pr\n")
                     print_state(cur_env);
                 else if (cmd == "ps\n")
                     print_stats();
+                else if (cmd == "pfs\n")
+                    is_stat = true;
+                else if (cmd == "pp\n")
+                    print_process = true;
+                else if (cmd == "endpp\n")
+                    print_process = false;
                 else if (cmd == "r\n")
                 {
                     loop = -1;
                     break;
                 }
                 else if (cmd == "h\n")
-                    printf("1 step: 's', Nstep: 'Ns'(N=int), run all: 'r', print reg: 'pr', print stat: 'ps', exit: 'exit'\n");
+                {
+                    printf("1 step: 's', Nstep: 'Ns'(N=int), run all: 'r', print reg: 'pr'\n");
+                    printf("print stat: 'ps', print process: 'pp', end print process: 'endpp'\n");
+                    printf("print final stat: 'pfs', print stack[N]: 'stack N'\n");
+                    printf("print stack[n(%%reg)]: 'stack n(%%reg)', exit: 'exit'\n");
+                }
                 else if (cmd == "exit\n")
                     return 0;
             }
