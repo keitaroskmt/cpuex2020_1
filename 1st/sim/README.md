@@ -21,8 +21,8 @@ sim $ ./sim [-s] [-c] [-p] [-n arg]
 cmd(help:'h'):h
 1 step: 's', Nstep: 'Ns'(N=int), run all: 'r', print reg: 'pr'
 print stat: 'ps', print process: 'pp', end print process: 'endpp'
-print final stat: 'pfs', print stack[N]: 'stack N'
-print stack[n(%reg)]: 'stack n(%reg)', exit: 'exit'
+print final stat: 'pfs', print stack[N]: 'stack N k'
+print stack[n(%reg)]: 'stack n(%reg) k', exit: 'exit'
 ```
 
 - 説明
@@ -35,8 +35,8 @@ print stack[n(%reg)]: 'stack n(%reg)', exit: 'exit'
   - pp: 起動時に-p をつけ忘れた or 途中から表示したいときに使う
   - endpp: pp の表示を終了したいときに使う
   - pfs: -c をつけ忘れたときに使う
-  - stack N: アドレス N に保存されているものを参照する
-  - stack n(%reg): アドレス n + [%reg] に保存されているものを参照する
+  - stack N k: アドレス N の周囲 k 個の範囲に保存されているものを参照する(アドレス N だけが欲しい場合は k=0 を指定する)
+  - stack n(%reg) k: アドレス n + [%reg] の周囲 k 個の範囲に保存されているものを参照する
   - exit: ctrl+c と同じ
 
 - -c:
