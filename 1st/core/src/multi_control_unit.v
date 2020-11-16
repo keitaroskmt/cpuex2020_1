@@ -19,6 +19,7 @@ module multi_control_unit(
     output wire         ALUorFPU,
     output wire [1:0]   ALUSrcB,
     output wire         ALUSrcA,
+    output wire         AndiOri,
     output wire         RegWrite,
     output wire [1:0]   RegDst,
     output wire [1:0]   MemtoReg,
@@ -43,7 +44,7 @@ assign RegConcat = (Op == 6'b010111) ? 3'b110 //slt
                    :((Op[4:3]==2'b10) ? 3'b111
                    : 3'b000))))); //浮動小数命令のとき�??��レジスタのアドレスに位置をつける. RegConcat = {rs,rt,rd}
 
-multi_main_decoder md(Op,Funct,clk,rstn,UBusy,Rx_ready,IorD,MemWrite,IRWrite,PCWrite_temp,Branch,ToggleEqual,PCSrc_temp,FPUControl,ALUorFPU,ALUSrcB,ALUSrcA,RegWrite,RegDst,MemtoReg,ALUOp,BorL,Out,Tx_start,state);
+multi_main_decoder md(Op,Funct,clk,rstn,UBusy,Rx_ready,IorD,MemWrite,IRWrite,PCWrite_temp,Branch,ToggleEqual,PCSrc_temp,FPUControl,ALUorFPU,ALUSrcB,ALUSrcA,AndiOri,RegWrite,RegDst,MemtoReg,ALUOp,BorL,Out,Tx_start,state);
 multi_ALU_decoder ad(Op,Funct,ALUOp,PCSrc_temp,PCWrite_temp,state,ALUControl,PCSrc,PCWrite,ShiftD,Shift);
 
 endmodule
@@ -67,6 +68,7 @@ module multi_main_decoder(
     output reg         ALUorFPU,
     output reg [1:0]   ALUSrcB,
     output reg         ALUSrcA,
+    output reg         AndiOri,
     output reg         RegWrite,
     output reg [1:0]   RegDst,
     output reg [1:0]   MemtoReg,
@@ -265,11 +267,13 @@ always @(posedge clk) begin
             ALUSrcA <= 1'b1;
             ALUSrcB <= 2'b10;
             ALUOp   <= 3'b010;
+            AndiOri <= 1'b1;
         end else if (Op == 6'b001101) begin //ori
             state <= s_IMMExecute;
             ALUSrcA <= 1'b1;
             ALUSrcB <= 2'b10;
             ALUOp   <= 3'b011;
+            AndiOri <= 1'b1;
         end else if (Op == 6'b001010) begin //slti
             state <= s_IMMExecute;
             ALUSrcA <= 1'b1;
@@ -460,6 +464,7 @@ always @(posedge clk) begin
         MemtoReg <= 1'b00;
         RegWrite <= 1'b1;
         MemWrite <= 1'b0;
+        AndiOri <= 1'b0;
     end else if (state == s_IMMWriteback) begin
         state    <= s_Fetch;
         IorD     <= 1'b0;

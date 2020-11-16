@@ -13,10 +13,10 @@ output [31:0] dout;
 reg [31:0] dout;
 
 initial begin
-    $readmemb("array_make.mem",RAM,0,83);
+    $readmemb("array_put.mem",RAM,0,99);
 end
 integer i;
-initial for (i=84; i<65536; i=i+1) RAM[i] = 0;
+initial for (i=100; i<65536; i=i+1) RAM[i] = 0;
 
 always @(posedge clk)
 begin

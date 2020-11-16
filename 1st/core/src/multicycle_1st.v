@@ -37,6 +37,7 @@ module multicycle_cpu
      wire         ALUorFPU;
      wire [1:0]   ALUSrcB;
      wire         ALUSrcA;
+     wire         AndiOri;
      wire         RegWrite;
      wire [1:0]   RegDst;
      wire [1:0]   MemtoReg;
@@ -88,6 +89,8 @@ module multicycle_cpu
      (*mark_debug = "true"*)reg [31:0] alu_out_reg;
      (*mark_debug = "true"*)reg [31:0] sdata;
      (*mark_debug = "true"*)reg [31:0] rdata_reg;
+     (*mark_debug = "true"*)reg [31:0] counter;
+
 
 
 
@@ -97,6 +100,17 @@ module multicycle_cpu
 
      //fetch stage
      always @(posedge clk) begin
+         if(~rstn) begin
+           pc <= 0;
+           inst_reg <= 0;
+           data_reg <= 0;
+           output_rf1_reg <= 0;
+           output_rf2_reg <= 0;
+           alu_out_reg <= 0;
+           sdata <= 0;
+           rdata_reg <= 0;
+           counter <= 0;
+         end
          if (pcen) begin
             pc <= pc_;
          end
@@ -117,6 +131,7 @@ module multicycle_cpu
      always @(posedge clk) begin
          if (IRWrite) begin
             inst_reg <= rd;
+            counter <= counter + 1'b1;
          end
             data_reg <= rd;
      end
@@ -130,7 +145,7 @@ module multicycle_cpu
      assign regdst = (RegDst == 2'b00 ? {RegConcat[0],inst[20:16]} :(RegDst == 2'b01 ? {RegConcat[0],inst[15:11]} : 5'b11111));
      assign mem_to_reg = (MemtoReg == 2'b00 ? alu_out : (MemtoReg == 2'b01 ? data : (MemtoReg == 2'b10 ? pc : Indata )));
 
-     multi_control_unit mcu(opcode,funct,clk,rstn,UBusy,Rx_ready,IorD,MemWrite,IRWrite,PCWrite,Branch,ToggleEqual,PCSrc,ALUControl,FPUControl,ALUorFPU,ALUSrcB,ALUSrcA,RegWrite,RegDst,MemtoReg,ShiftD,Shift,BorL,RegConcat,Out,Tx_start,state);
+     multi_control_unit mcu(opcode,funct,clk,rstn,UBusy,Rx_ready,IorD,MemWrite,IRWrite,PCWrite,Branch,ToggleEqual,PCSrc,ALUControl,FPUControl,ALUorFPU,ALUSrcB,ALUSrcA,AndiOri,RegWrite,RegDst,MemtoReg,ShiftD,Shift,BorL,RegConcat,Out,Tx_start,state);
      rams_dp_wf rf1(clk,RegWrite,regdst,mem_to_reg,op1,output_rf1);
      rams_dp_wf rf2(clk,RegWrite,regdst,mem_to_reg,op2,output_rf2);
 
@@ -162,9 +177,9 @@ module multicycle_cpu
      assign shifted = ShiftD ? output2 >> inst[10:6] : output2 << inst[10:6];
      assign output2_or_shifted = Shift ? shifted : output2;
 
-     assign SignImm = (inst[15] ? {16'b1111111111111111,inst[15:0]} : {16'd0,inst[15:0]});
+     assign SignImm = AndiOri ? {16'd0,inst[15:0]} : (inst[15] ? {16'b1111111111111111,inst[15:0]} : {16'd0,inst[15:0]});
      assign srcA = (~ALUSrcA ? pc_wire : output1);
-     assign branch_or_lui = BorL ? (SignImm << 5'd16) : (SignImm << 2'd2);
+     assign branch_or_lui = BorL ? (inst[15:0]<< 5'd16) : (SignImm << 2'd2);
      assign srcB = (ALUSrcB == 2'b00 ? output2_or_shifted :(ALUSrcB == 2'b01 ? 32'b100 : (ALUSrcB == 2'b10 ? SignImm : branch_or_lui)));
      assign pcen = PCWrite | (Branch & (ToggleEqual ^ zero));
 
