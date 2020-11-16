@@ -13,48 +13,68 @@ sim $ ./sim [-s] [-c] [-p] [-n arg]
 
 ## オプション
 
--s:
-step 実行。インタプリタが立ち上がる。
-'h'でコマンド一覧表示。以下のコマンドが使える。
+- -s:
+  step 実行。インタプリタが立ち上がる。
+  'h'でコマンド一覧表示。以下のコマンドが使える。
 
 ```bash
 cmd(help:'h'):h
-1 step: 's', Nstep: 'Ns'(N=int), run all: 'r', print reg: 'pr', print stat: 'ps', exit: 'exit'
+1 step: 's', Nstep: 'Ns'(N=int), run all: 'r', print reg: 'pr'
+print stat: 'ps', print process: 'pp', end print process: 'endpp'
+print final stat: 'pfs', print stack[N]: 'stack N'
+print stack[n(%reg)]: 'stack n(%reg)', exit: 'exit'
 ```
 
--c:
-終了時に命令数の統計を表示。
+- 説明
 
--n arg:
-入力のファイル名を指定する。
-例えば"assembly/fib.s"を指定するときは`-n fib`とする。
+  - s: 1step 進める
+  - Ns: Nstep 進める
+  - r: 最後まで実行
+  - pr: 現在のレジスタの表示
+  - ps: 現在の命令数の統計を表示
+  - pp: 起動時に-p をつけ忘れた or 途中から表示したいときに使う
+  - endpp: pp の表示を終了したいときに使う
+  - pfs: -c をつけ忘れたときに使う
+  - stack N: アドレス N に保存されているものを参照する
+  - stack n(%reg): アドレス n + [%reg] に保存されているものを参照する
+  - exit: ctrl+c と同じ
 
--p:
-実行した行を表示する。実行例は以下。
-行は左から PC, 命令インデックス, opcode, opland1, ..., offset となっている。
+- -c:
+  終了時に命令数の統計を表示。
+
+- -n arg:
+  入力のファイル名を指定する。
+  例えば"assembly/fib.s"を指定するときは`-n fib`とする。
+
+- -p:
+  実行した行を表示する。実行例は以下。
+  行は左から PC, 命令インデックス, opcode, opland1, ..., offset となっている。
 
 ```bash
-sim $ ./sim -p
+sim $ ./sim -n fib -p
+0	0	lui	%sp	0		0
+1	4	ori	%sp	%sp	8192	0
+2	8	lui	%hp	0		0
+3	12	ori	%hp	%hp	16384	0
+4	16	j	min_caml_start			0
 min_caml_start:
-0	31	addi	%v0	%zero	1	0
-1	32	sw	%ra	%sp		4
-2	33	addi	%sp	%sp	8	0
-3	34	jal	fib.10			0
+5	116	addi	%v0	%zero	1	0
+6	120	sw	%ra	%sp		4
+7	124	addi	%sp	%sp	8	0
+8	128	jal	fib.10			0
 fib.10:
-4	4	addi	%at	%zero	1	0
-5	5	slt	%at	%at	%v0	0
-6	6	bne	%at	%zero	beq_else.24	0
-7	7	jr	%ra			0
-8	35	addi	%sp	%sp	-8	0
-9	36	lw	%ra	%sp		4
-10	37	sw	%ra	%sp		4
-11	38	addi	%sp	%sp	8	0
-12	39	nop				0
-13	40	addi	%sp	%sp	-8	0
-14	41	lw	%ra	%sp		4
-15	42	ret				0
-ans: 1
-sim $
+9	20	addi	%at	%zero	1	0
+10	24	slt	%at	%at	%v0	0
+11	28	bne	%at	%zero	beq_else.24	0
+12	32	jr	%ra			0
+13	132	addi	%sp	%sp	-8	0
+14	136	lw	%ra	%sp		4
+15	140	sw	%ra	%sp		4
+16	144	addi	%sp	%sp	8	0
+17	148	nop				0
+18	152	addi	%sp	%sp	-8	0
+19	156	lw	%ra	%sp		4
+20	160	ret				0
 ```
 
 ## 注意
