@@ -40,7 +40,7 @@ let rec int_of_float_sub3 m acm =
 in
 
 let rec int_of_float x =
-    let flag = if fisneg x then false else true in
+    let flag = x >= 0.0 in
     let x_abs = fabs x in
     let res =
     (
@@ -72,7 +72,7 @@ let rec float_of_int_sub3 m acm =
 in
 
 let rec float_of_int x =
-    let flag = if x < 0 then false else true in
+    let flag = x > 0 in
     let x_abs = if x < 0 then -x else x in
     let res =
     (
@@ -85,13 +85,13 @@ let rec float_of_int x =
 in
 
 let rec floor x =
-    let flag = if fisneg x then false else true in
+    let flag = x >= 0.0 in
     let x_abs = fabs x in
     let res =
         if x_abs >= 8388608.0 then x_abs else float_of_int (int_of_float x_abs) in
-    let resm =
-        if res > x then res -. 1.0 else res in
-    if flag then resm else fneg resm
+    let res_ =
+        if flag then res else fneg res in
+    if res_ > x then res_ -. 1.0 else res_
 in
 
 let rec kernel_sin x =
@@ -129,7 +129,7 @@ let rec reduction_2pi x =
     let pi = 3.14159265358979 in
     let pi2 = 2.0 *. pi in
     let rec f s t = (* while (x >= p) *)
-        if s < t then t else f t (2.0 *. s) in
+        if s < t then t else f s (2.0 *. t) in
     let p = f x pi2 in
     let rec g s t = (* while (x >= pi2) *)
         if s < pi2 then s else
@@ -162,7 +162,7 @@ in
 
 let rec sin x =
     let pi = 3.14159265358979 in
-    let flag = if fisneg x then false else true in
+    let flag = x >= 0.0 in
     let x = reduction_2pi (fabs x) in
     (* if (x >= pi) *)
     let flag = if x >= pi then not flag else flag in
@@ -175,7 +175,7 @@ in
 
 let rec atan x =
     let pi = 3.14159265358979 in
-    let flag = if fisneg x then false else true in
+    let flag = x >= 0.0 in
     let x_abs = fabs x in
     if x_abs < 0.4375 then kernel_atan x
     else (

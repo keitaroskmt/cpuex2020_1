@@ -141,7 +141,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprime) *)
   | NonTail(x), FMovD(y) ->
         Printf.fprintf oc "\tfadd\t%s, %s, %s\n" x reg_fzero y
   | NonTail(x), FNegD(y) ->
-        Printf.fprintf oc "\fneg\t%s, %s\n" x y
+        Printf.fprintf oc "\tfneg\t%s, %s\n" x y
   | NonTail(x), FAddD(y, z) ->
         Printf.fprintf oc "\tfadd\t%s, %s, %s\n" x y z
   | NonTail(x), FSubD(y, z) ->
@@ -341,14 +341,26 @@ let f oc (Prog(data, fundefs, e)) =
   Format.eprintf "generating assembly...@.";
   Printf.fprintf oc ".section\t\".rodata\"\n";
   Printf.fprintf oc ".align\t8\n";
-  Printf.fprintf oc "# Initialize register\n";
+  Printf.fprintf oc "# ------------ Initialize register ------------\n";
   load_imm oc reg_sp (Int32.of_int sp_init);
   load_imm oc reg_hp (Int32.of_int hp_init);
-  Printf.fprintf oc "# Initialize float table\n";
+  Printf.fprintf oc "# ------------ Initialize float table ---------\n";
   load_float_imm oc data 0;
   float_table := data;
+  Printf.fprintf oc "# ------------ Text Section -------------------\n";
   Printf.fprintf oc ".section\t\".text\"\n";
     Printf.fprintf oc "\tj\tmin_caml_start\n";
+  Printf.fprintf oc "# ------------ libmincaml.S -------------------\n";
+   (
+    let inchan = open_in "libmincaml.S" in
+    try
+        while true do
+            let line = input_line inchan in Printf.fprintf oc "%s\n" line;
+        done
+    with
+    | End_of_file -> (close_in inchan)
+   );
+  Printf.fprintf oc "# ------------ body ---------------------------\n";
   List.iter (fun fundef -> h oc fundef) fundefs;
   Printf.fprintf oc ".global\tmin_caml_start\n";
   Printf.fprintf oc "min_caml_start:\n";
