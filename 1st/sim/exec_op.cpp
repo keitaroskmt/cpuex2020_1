@@ -383,6 +383,24 @@ int exec_op(op_info op, core_env env, std::map<std::string, int> label_pos, bool
         if (print_calc)
             printf("sw\t%f(%08X),\tstack[%d(%08X)(%d(%08X)) = %d(%08X)]\n", frs.f, frs.i, op.offset, op.offset, rt, rt, sp, sp);
     }
+    else if (op.opcode == "ftoi")
+    {
+        frs.f = cur_env.FPR[reg_name.at(op.opland[1]) - 32];
+        rt = int(frs.f);
+        cur_env.GPR[reg_name.at(op.opland[0])] = rt;
+
+        if (print_calc)
+            printf("ftoi\t%d(%08X),\t%f(%08X)\n", rt, rt, frs.f, frs.i);
+    }
+    else if (op.opcode == "itof")
+    {
+        rs = cur_env.GPR[reg_name.at(op.opland[1])];
+        frt.f = float(rs);
+        cur_env.FPR[reg_name.at(op.opland[0]) - 32] = frt.f;
+
+        if (print_calc)
+            printf("itof\t%f(%08X),\t%d(%08X)\n", frt.f, frt.i, rs, rs);
+    }
     else if (op.opcode == "ret")
     {
         return 1;
