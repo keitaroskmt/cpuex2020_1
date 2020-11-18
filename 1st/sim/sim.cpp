@@ -11,6 +11,7 @@
 #include "exec_op.h"
 #include "load_op.h"
 #include "myutil.h"
+#include "exec_cmd.h"
 
 int cur_opnum;
 std::vector<op_info> ops;
@@ -26,9 +27,10 @@ int main(int argc, char *argv[])
     bool is_stat = true;
     bool print_process = false;
     bool print_calc = false;
+    bool print_bytecode = false;
     std::string n = "fib";
 
-    while ((opt = getopt(argc, argv, "scpn:")) != -1)
+    while ((opt = getopt(argc, argv, "sbcpn:")) != -1)
     {
         switch (opt)
         {
@@ -40,6 +42,10 @@ int main(int argc, char *argv[])
             print_calc = true;
             break;
 
+        case 'b':
+            print_bytecode = true;
+            break;
+
         case 'p':
             print_process = true;
             break;
@@ -49,20 +55,15 @@ int main(int argc, char *argv[])
             break;
 
         default:
-            printf("Usage: %s [-s] [-c] [-p] [-n argment] \n", argv[0]);
+            printf("Usage: %s [-s] [-b] [-c] [-p] [-n argment] \n", argv[0]);
             break;
         }
     }
 
     FILE *fp;
-    std::string cmd;
-    std::smatch cmd_re;
+
     std::string file_name;
-    std::string reg;
     int end;
-    int sp;
-    int j;
-    int offset;
     int errno;
     int line = 0;
     int loop = 0;
@@ -93,79 +94,18 @@ int main(int argc, char *argv[])
     // step実行
     while (cur_opnum < end)
     {
-
         if (is_step && loop == 0)
-        {
-            while (true)
-            {
-                cmd = get_line(100);
-                if (cmd == "s\n")
-                {
-                    loop = 1;
-                    break;
-                }
-                else if (regex_match(cmd, cmd_re, std::regex("^(\\d+)s\n$")))
-                {
-                    loop = stoi(cmd_re[1].str());
-                    break;
-                }
-                else if (regex_match(cmd, cmd_re, std::regex("^stack (\\d+) (\\d+)\n?$")))
-                {
-                    sp = stoi(cmd_re[1].str());
-                    j = stoi(cmd_re[2].str());
+            // コマンド受付 & 実行
+            if (exec_cmd(&loop, &is_stat, &print_bytecode, &print_calc, &print_process))
+                return 0;
 
-                    for (int i = sp - 4 * j; i <= sp + 4 * j; i += 4)
-                        printf("stack[%d] = (hex) %08X\t(dec) %d\n", i, stack[i / 4], stack[i / 4]);
-                }
-                else if (regex_match(cmd, cmd_re, std::regex("^stack (-?\\d+)\\((.+?)\\) (\\d+)\n?$")))
-                {
-                    offset = stoi(cmd_re[1].str());
-                    reg = cmd_re[2].str();
-                    sp = cur_env.GPR[reg_name.at(reg)] + offset;
-                    j = stoi(cmd_re[3].str());
-
-                    for (int i = sp - 4 * j; i <= sp + 4 * j; i += 4)
-                        printf("stack[%d] = (hex) %08X\t(dec) %d\n", i, stack[i / 4], stack[i / 4]);
-                }
-                else if (cmd == "pr\n")
-                    print_state(cur_env);
-                else if (cmd == "ps\n")
-                    print_stats();
-                else if (cmd == "nopfs\n")
-                    is_stat = false;
-                else if (cmd == "pc\n")
-                    print_calc = true;
-                else if (cmd == "endpc\n")
-                    print_calc = false;
-                else if (cmd == "pp\n")
-                    print_process = true;
-                else if (cmd == "endpp\n")
-                    print_process = false;
-                else if (cmd == "r\n")
-                {
-                    loop = -1;
-                    break;
-                }
-                else if (cmd == "h\n")
-                {
-                    printf("1 step: 's', Nstep: 'Ns'(N=int), run all: 'r', print reg: 'pr'\n");
-                    printf("print stat: 'ps', (end) print process: '(end)pp'\n");
-                    printf("no print final stat: 'nopfs', print stack[N]: 'stack N k'\n");
-                    printf("print stack[n(%%reg)]: 'stack n(%%reg) k', (end) print culc: '(end)pc'\nexit: 'exit'\n");
-                }
-                else if (cmd == "exit\n")
-                    return 0;
-                else if (cmd == "\n")
-                    ;
-                else
-                    printf("command not found\n");
-            }
-        }
         if (exec_step(print_process, print_calc))
             break;
+
         if (ops[cur_opnum].type == 0)
             loop--;
     }
+
     printf("register state\n");
     print_state(cur_env);
     printf("v0: %d\n", cur_env.GPR[reg_name.at("%v0")]);
@@ -186,6 +126,7 @@ int exec_step(bool print_process, bool print_calc)
     {
         if (print_process)
             printf("%d\t%d\t%s\t%s\t%s\t%s\t%d\n", cur_env.PC, 4 * ops[cur_opnum].op_idx, ops[cur_opnum].opcode.c_str(), ops[cur_opnum].opland[0].c_str(), ops[cur_opnum].opland[1].c_str(), ops[cur_opnum].opland[2].c_str(), ops[cur_opnum].offset);
+
         if (exec_op(ops[cur_opnum], cur_env, label_pos, print_calc))
             return 1;
         cur_env.PC++;
