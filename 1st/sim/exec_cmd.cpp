@@ -8,11 +8,15 @@
 int exec_cmd(int *loop, bool *is_stat, bool *print_bytecode, bool *print_calc, bool *print_process)
 {
     std::string cmd;
+    std::string base;
     std::smatch cmd_re;
     std::string reg;
-    int sp;
-    int j;
-    int offset;
+    int sp, j, offset;
+    union
+    {
+        int i;
+        float f;
+    } subst;
     while (true)
     {
         cmd = get_line(100);
@@ -26,6 +30,7 @@ int exec_cmd(int *loop, bool *is_stat, bool *print_bytecode, bool *print_calc, b
             *loop = stoi(cmd_re[1].str());
             break;
         }
+        // stack表示 絶対アドレス指定
         else if (regex_match(cmd, cmd_re, std::regex("^stack (\\d+) (\\d+)\n?$")))
         {
             sp = stoi(cmd_re[1].str());
@@ -34,6 +39,20 @@ int exec_cmd(int *loop, bool *is_stat, bool *print_bytecode, bool *print_calc, b
             for (int i = sp - 4 * j; i <= sp + 4 * j; i += 4)
                 printf("stack[%d] = (hex) %08X\t(dec) %d\n", i, stack[i / 4], stack[i / 4]);
         }
+        // stack代入 絶対アドレス指定
+        else if (regex_match(cmd, cmd_re, std::regex("^stackin (\\d+) ([0-9A-Fa-f.]+)\\s?(.*?)\n?$")))
+        {
+            sp = stoi(cmd_re[1].str());
+            base = cmd_re[3].str();
+            if (base == "hex" || base == "16")
+                subst.i = stoi(cmd_re[2].str(), nullptr, 16);
+            else if (base == "float" || base == "f")
+                subst.f = stof(cmd_re[2].str());
+            else
+                subst.i = stoi(cmd_re[2].str());
+            stack[sp / 4] = subst.i;
+        }
+        // stack表示 相対アドレス指定
         else if (regex_match(cmd, cmd_re, std::regex("^stack (-?\\d+)\\((.+?)\\) (\\d+)\n?$")))
         {
             offset = stoi(cmd_re[1].str());
@@ -43,6 +62,43 @@ int exec_cmd(int *loop, bool *is_stat, bool *print_bytecode, bool *print_calc, b
 
             for (int i = sp - 4 * j; i <= sp + 4 * j; i += 4)
                 printf("stack[%d] = (hex) %08X\t(dec) %d\n", i, stack[i / 4], stack[i / 4]);
+        }
+        // stack代入 相対アドレス指定
+        else if (regex_match(cmd, cmd_re, std::regex("^stackin (-?\\d+)\\((.+?)\\) ([0-9A-Fa-f]+)\\s?(.*?)\n?$")))
+        {
+            offset = stoi(cmd_re[1].str());
+            reg = cmd_re[2].str();
+            sp = cur_env.GPR[reg_name.at(reg)] + offset;
+            base = cmd_re[4].str();
+            if (base == "hex" || base == "16")
+                subst.i = stoi(cmd_re[3].str(), nullptr, 16);
+            else if (base == "float" || base == "f")
+                subst.f = stof(cmd_re[2].str());
+            else
+                subst.i = stoi(cmd_re[3].str());
+            stack[sp / 4] = subst.i;
+        }
+        // レジスタ代入
+        else if (regex_match(cmd, cmd_re, std::regex("^regin (.+?) ([0-9A-Fa-f]+)\\s?(.*?)\n?$")))
+        {
+            reg = cmd_re[1].str();
+            base = cmd_re[3].str();
+            if (base == "hex" || base == "16")
+                subst.i = stoi(cmd_re[2].str(), nullptr, 16);
+            else
+                subst.i = stoi(cmd_re[2].str());
+            cur_env.GPR[reg_name.at(reg)] = subst.i;
+        }
+        // レジスタ代入 浮動小数
+        else if (regex_match(cmd, cmd_re, std::regex("^regfin (.+?) ([0-9A-Fa-f\\.]+)\\s?(.*?)\n?$")))
+        {
+            reg = cmd_re[1].str();
+            base = cmd_re[3].str();
+            if (base == "hex" || base == "16")
+                subst.i = stoi(cmd_re[2].str(), nullptr, 16);
+            else
+                subst.f = stof(cmd_re[2].str());
+            cur_env.FPR[reg_name.at(reg) - 32] = subst.f;
         }
         else if (cmd == "pr\n")
             print_state(cur_env);
@@ -69,10 +125,7 @@ int exec_cmd(int *loop, bool *is_stat, bool *print_bytecode, bool *print_calc, b
         }
         else if (cmd == "h\n")
         {
-            printf("1 step: 's', Nstep: 'Ns'(N=int), run all: 'r', print reg: 'pr'\n");
-            printf("print stat: 'ps', (end) print process: '(end)pp'\n");
-            printf("no print final stat: 'nopfs', print stack[N]: 'stack N k'\n");
-            printf("print stack[n(%%reg)]: 'stack n(%%reg) k', (end) print culc: '(end)pc'\nexit: 'exit'\n");
+            printf("please read README.md\n");
         }
         else if (cmd == "exit\n")
             return 1;

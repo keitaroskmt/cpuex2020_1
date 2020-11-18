@@ -17,16 +17,7 @@ sim $ ./sim [-s] [-c] [-p] [-n arg]
   step 実行。インタプリタが立ち上がる。
   'h'でコマンド一覧表示。以下のコマンドが使える。
 
-```bash
-cmd(help:'h'):h
-1 step: 's', Nstep: 'Ns'(N=int), run all: 'r', print reg: 'pr'
-print stat: 'ps', (end) print process: '(end)pp'
-no print final stat: 'nopfs', print stack[N]: 'stack N k'
-print stack[n(%reg)]: 'stack n(%reg) k', (end) print culc: '(end)pc'
-exit: 'exit'
-```
-
-- 説明
+- コマンド説明
 
   - s: 1step 進める
   - Ns: Nstep 進める
@@ -39,7 +30,11 @@ exit: 'exit'
   - endpp: pc の表示を終了
   - pfs: -c をつけ忘れたときに使う
   - stack N k: アドレス N の周囲 k 個の範囲に保存されているものを参照する(アドレス N だけが欲しい場合は k=0 を指定する)
+  - stackin N k (base): アドレス N に k を代入する k は base を指定しなければ 10 進数 base="16","hex"で 16 進数 base="float","f"で浮動小数
   - stack n(%reg) k: アドレス n + [%reg] の周囲 k 個の範囲に保存されているものを参照する
+  - stackin n(%reg) k (base): 上と同じ
+  - regin %reg k (base) 整数レジスタへの代入 base を指定しなければ 10 進数 base="16","hex"で 16 進数
+  - regfin %reg k (base) 浮動小数レジスタへの代入 base を指定しなければ小数点ありの表記(10.0 とか) base="16","hex"で 16 進数
   - exit: ctrl+c と同じ
 
 - -c:
