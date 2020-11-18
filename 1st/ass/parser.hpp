@@ -51,6 +51,8 @@ const map<string, string> inst_format = {
     {"lui", "I"},
     {"lw", "I"},
     {"sw", "I"},
+    {"in", "I"},
+    {"out", "I"},
     {"fadd", "FR"},
     {"fsub", "FR"},
     {"fmul", "FR"},

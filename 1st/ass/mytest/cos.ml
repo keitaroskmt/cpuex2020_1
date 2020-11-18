@@ -192,6 +192,6 @@ let rec rad x =
     x *. 0.017453293
 in
 let v1 = rad (read_float ()) in
-let sin_v1 = sin v1
+let cos_v1 = cos v1
 in
-print_float sin_v1
+print_float cos_v1

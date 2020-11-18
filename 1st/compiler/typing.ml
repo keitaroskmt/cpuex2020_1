@@ -330,7 +330,12 @@ let f e =
         (try
          unify Type.Int (g M.empty e)
         with
-            | Unify _ -> failwith "top level does not have type unit or int"
+            | Unify _ ->
+            (try
+                unify Type.Float (g M.empty e)
+            with
+            | Unify _ -> failwith "top level does not have type unit or int, float"
+            )
         )
    | Error(e, t1, t2) ->
         (syntax_debug stderr e;

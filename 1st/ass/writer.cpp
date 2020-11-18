@@ -213,6 +213,18 @@ unsigned int Writer::encode(vector<string> &v) {
             imm = stoi(v[3]);
             rs = reg_name.at(v[4]);
 
+        } else if (v[1] == "in") {
+            op = 0x1a;
+            rt = reg_name.at(v[2]);
+            rs = 0x0;
+            imm = 0x0;
+
+        } else if (v[1] == "out") {
+            op = 0x1b;
+            rt = reg_name.at(v[2]);
+            rs = 0x0;
+            imm = 0x0;
+
         }
         op &= 0b111111;
         rs &= 0b11111;
@@ -362,9 +374,9 @@ unsigned int Writer::encode(vector<string> &v) {
         return (op << 26) | (rs << 21) | (rt << 16) | imm;
     }
 
-    // ret デバッグ用にaddi $v0 $v0 0とする.
+    // ret デバッグ用にfadd $f0 $f0 0とする. (intはprintできる)
     else if (v[0] == "ret") {
-        return 0b00100000010000100000000000000000;
+        return 0b01000000000111110000000000000000
     }
 
     // nop 0うめ

@@ -253,7 +253,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprime) *)
   | NonTail(z), IfFEq(x, y, e1, e2) ->
         g'_non_tail_ifeq oc (NonTail(z)) x y e1 e2 "fbeq" "fbne"
   | NonTail(z), IfFLE(x, y, e1, e2) ->
-        Printf.fprintf oc "\tslt\t%s, %s, %s\n" reg_at y x;
+        Printf.fprintf oc "\tfslt\t%s, %s, %s\n" reg_at y x;
         g'_non_tail_ifeq oc (NonTail(z)) reg_at reg_zero e1 e2 "beq" "bne"
 
   (* 関数呼び出しの仮想命令の実装 (caml2html: emit_call) *)

@@ -224,100 +224,100 @@ fundef
 						g.301
 						[x.221, p.300]
 	name : 
-		(L (sin.224): Float -> Float)
+		(L (cos.222): Float -> Float)
 	args : 
-		[(x.225 : Float)]
+		[(x.223 : Float)]
 	formal_fv : 
 		[]
 	body : 
 		Let
-			(pi.256 : Float)
+			(pi.274 : Float)
 			Float 3.14159265359
 			Let
-				(Td21.273 : Float)
-				Float 0.
+				(Td32.294 : Float)
+				FAbs
+					x.223
 				Let
-					(flag.257 : Bool)
-					IfLE
-						Td21.273
-						x.225
-						Int 1
-						Int 0
+					(x.276 : Float)
+					AppDir
+						L (reduction_2pi.220)
+						[Td32.294]
 					Let
-						(Td22.272 : Float)
-						FAbs
-							x.225
+						(flag.277 : Bool)
+						IfLE
+							pi.274
+							x.276
+							Int 0
+							Int 1
 						Let
-							(x.258 : Float)
-							AppDir
-								L (reduction_2pi.220)
-								[Td22.272]
+							(x.278 : Float)
+							IfLE
+								pi.274
+								x.276
+								FSub
+									x.276
+									pi.274
+								Var x.276
 							Let
-								(flag.259 : Bool)
-								IfLE
-									pi.256
-									x.258
-									Let
-										(Ti23.271 : Int)
-										Int 0
-										IfEq
-											flag.257
-											Ti23.271
-											Int 1
-											Int 0
-									Var flag.257
+								(Td35.290 : Float)
+								Float 1.57079632679
 								Let
-									(x.260 : Float)
+									(flag.279 : Bool)
 									IfLE
-										pi.256
-										x.258
-										FSub
-											x.258
-											pi.256
-										Var x.258
+										Td35.290
+										x.278
+										Let
+											(Ti36.291 : Int)
+											Int 0
+											IfEq
+												flag.277
+												Ti36.291
+												Int 1
+												Int 0
+										Var flag.277
 									Let
-										(Td25.269 : Float)
+										(Td38.288 : Float)
 										Float 1.57079632679
 										Let
-											(x.261 : Float)
+											(x.280 : Float)
 											IfLE
-												Td25.269
-												x.260
+												Td38.288
+												x.278
 												FSub
-													pi.256
-													x.260
-												Var x.260
+													pi.274
+													x.278
+												Var x.278
 											Let
-												(Td27.264 : Float)
+												(Td40.283 : Float)
 												Float 0.785398163397
 												Let
-													(res.262 : Float)
+													(res.281 : Float)
 													IfLE
-														x.261
-														Td27.264
+														x.280
+														Td40.283
 														AppDir
-															L (kernel_sin.214)
-															[x.261]
+															L (kernel_cos.216)
+															[x.280]
 														Let
-															(Td29.266 : Float)
+															(Td42.285 : Float)
 															Float 1.57079632679
 															Let
-																(Td30.265 : Float)
+																(Td43.284 : Float)
 																FSub
-																	Td29.266
-																	x.261
+																	Td42.285
+																	x.280
 																AppDir
-																	L (kernel_cos.216)
-																	[Td30.265]
+																	L (kernel_sin.214)
+																	[Td43.284]
 													Let
-														(Ti31.263 : Int)
+														(Ti44.282 : Int)
 														Int 0
 														IfEq
-															flag.259
-															Ti31.263
+															flag.279
+															Ti44.282
 															FNeg
-																res.262
-															Var res.262
+																res.281
+															Var res.281
 	name : 
 		(L (rad.228): Float -> Float)
 	args : 
@@ -346,8 +346,8 @@ body
 					L (rad.228)
 					[Td2.232]
 				Let
-					(sin_v1.231 : Float)
+					(cos_v1.231 : Float)
 					AppDir
-						L (sin.224)
+						L (cos.222)
 						[v1.230]
-					Var sin_v1.231
+					Var cos_v1.231

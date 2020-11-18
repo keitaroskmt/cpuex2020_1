@@ -18,10 +18,6 @@
 	ori	%at, %at, 4059
 	sw	%at, 0(%hp)
 	addi	%hp, %hp, 4
-	lui	%at, 0
-	ori	%at, %at, 0
-	sw	%at, 0(%hp)
-	addi	%hp, %hp, 4
 	lui	%at, 16457
 	ori	%at, %at, 4059
 	sw	%at, 0(%hp)
@@ -144,15 +140,15 @@ create_float_array_cont:
 kernel_sin.214:
 	fmul	%f1, %f0, %f0
 	fmul	%f2, %f1, %f1
-	flw	%f3, 8244(%zero)
+	flw	%f3, 8240(%zero)
 	fmul	%f3, %f3, %f0
 	fmul	%f3, %f3, %f1
 	fsub	%f3, %f0, %f3
-	flw	%f4, 8240(%zero)
+	flw	%f4, 8236(%zero)
 	fmul	%f4, %f4, %f0
 	fmul	%f4, %f4, %f2
 	fadd	%f3, %f3, %f4
-	flw	%f4, 8236(%zero)
+	flw	%f4, 8232(%zero)
 	fmul	%f0, %f4, %f0
 	fmul	%f0, %f0, %f1
 	fmul	%f0, %f0, %f2
@@ -161,47 +157,47 @@ kernel_sin.214:
 kernel_cos.216:
 	fmul	%f0, %f0, %f0
 	fmul	%f1, %f0, %f0
-	flw	%f2, 8232(%zero)
-	flw	%f3, 8228(%zero)
+	flw	%f2, 8228(%zero)
+	flw	%f3, 8224(%zero)
 	fmul	%f3, %f3, %f0
 	fsub	%f2, %f2, %f3
-	flw	%f3, 8224(%zero)
+	flw	%f3, 8220(%zero)
 	fmul	%f3, %f3, %f1
 	fadd	%f2, %f2, %f3
-	flw	%f3, 8220(%zero)
+	flw	%f3, 8216(%zero)
 	fmul	%f0, %f3, %f0
 	fmul	%f0, %f0, %f1
 	fsub	%f0, %f2, %f0
 	jr	%ra
 f.297:
 	fslt	%at, %f0, %f1
-	bne	%at, %zero, beq_else.474
-	flw	%f2, 8216(%zero)
+	bne	%at, %zero, beq_else.472
+	flw	%f2, 8212(%zero)
 	fmul	%f1, %f2, %f1
 	j	f.297
-beq_else.474:
+beq_else.472:
 	fadd	%f0, %fzero, %f1
 	jr	%ra
 g.301:
 	flw	%f2, 4(%k1)
 	fslt	%at, %f0, %f2
-	bne	%at, %zero, beq_else.475
+	bne	%at, %zero, beq_else.473
 	fslt	%at, %f0, %f1
-	bne	%at, %zero, beq_else.476
+	bne	%at, %zero, beq_else.474
 	fsub	%f0, %f0, %f1
-	flw	%f2, 8216(%zero)
+	flw	%f2, 8212(%zero)
 	fdiv	%f1, %f1, %f2
 	lw	%at, 0(%k1)
 	jr	%at
-beq_else.476:
-	flw	%f2, 8216(%zero)
+beq_else.474:
+	flw	%f2, 8212(%zero)
 	fdiv	%f1, %f1, %f2
 	lw	%at, 0(%k1)
 	jr	%at
-beq_else.475:
+beq_else.473:
 	jr	%ra
 reduction_2pi.220:
-	flw	%f1, 8212(%zero)
+	flw	%f1, 8208(%zero)
 	fsw	%f0, 0(%sp)
 	fsw	%f1, 4(%sp)
 	sw	%ra, 12(%sp)
@@ -219,28 +215,32 @@ reduction_2pi.220:
 	flw	%f0, 0(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-sin.224:
-	flw	%f1, 8208(%zero)
-	flw	%f2, 8204(%zero)
-	fslt	%at, %f0, %f2
-	bne	%at, %zero, beq_else.477
+cos.222:
+	flw	%f1, 8204(%zero)
+	fabs	%f0, %f0
+	fsw	%f1, 0(%sp)
+	sw	%ra, 4(%sp)
+	addi	%sp, %sp, 8
+	jal	reduction_2pi.220
+	addi	%sp, %sp, -8
+	lw	%ra, 4(%sp)
+	flw	%f1, 0(%sp)
+	fslt	%at, %f0, %f1
+	bne	%at, %zero, beq_else.475
+	addi	%v0, %zero, 0
+	j	beq_cont.476
+beq_else.475:
 	addi	%v0, %zero, 1
+beq_cont.476:
+	fslt	%at, %f0, %f1
+	bne	%at, %zero, beq_else.477
+	fsub	%f0, %f0, %f1
 	j	beq_cont.478
 beq_else.477:
-	addi	%v0, %zero, 0
 beq_cont.478:
-	fabs	%f0, %f0
-	sw	%v0, 0(%sp)
-	fsw	%f1, 4(%sp)
-	sw	%ra, 12(%sp)
-	addi	%sp, %sp, 16
-	jal	reduction_2pi.220
-	addi	%sp, %sp, -16
-	lw	%ra, 12(%sp)
-	flw	%f1, 4(%sp)
-	fslt	%at, %f0, %f1
+	flw	%f2, 8200(%zero)
+	fslt	%at, %f0, %f2
 	bne	%at, %zero, beq_else.479
-	lw	%v0, 0(%sp)
 	addi	%at, %zero, 0
 	bne	%v0, %at, beq_else.481
 	addi	%v0, %zero, 1
@@ -250,46 +250,39 @@ beq_else.481:
 beq_cont.482:
 	j	beq_cont.480
 beq_else.479:
-	lw	%v0, 0(%sp)
 beq_cont.480:
-	fslt	%at, %f0, %f1
+	flw	%f2, 8200(%zero)
+	fslt	%at, %f0, %f2
 	bne	%at, %zero, beq_else.483
-	fsub	%f0, %f0, %f1
+	fsub	%f0, %f1, %f0
 	j	beq_cont.484
 beq_else.483:
 beq_cont.484:
-	flw	%f2, 8200(%zero)
-	fslt	%at, %f0, %f2
-	bne	%at, %zero, beq_else.485
-	fsub	%f0, %f1, %f0
-	j	beq_cont.486
-beq_else.485:
-beq_cont.486:
 	flw	%f1, 8196(%zero)
-	sw	%v0, 8(%sp)
+	sw	%v0, 4(%sp)
 	fslt	%at, %f1, %f0
-	bne	%at, %zero, beq_else.487
-	sw	%ra, 12(%sp)
-	addi	%sp, %sp, 16
-	jal	kernel_sin.214
-	addi	%sp, %sp, -16
-	lw	%ra, 12(%sp)
-	j	beq_cont.488
-beq_else.487:
-	flw	%f1, 8200(%zero)
-	fsub	%f0, %f1, %f0
+	bne	%at, %zero, beq_else.485
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
 	jal	kernel_cos.216
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
-beq_cont.488:
-	lw	%v0, 8(%sp)
+	j	beq_cont.486
+beq_else.485:
+	flw	%f1, 8200(%zero)
+	fsub	%f0, %f1, %f0
+	sw	%ra, 12(%sp)
+	addi	%sp, %sp, 16
+	jal	kernel_sin.214
+	addi	%sp, %sp, -16
+	lw	%ra, 12(%sp)
+beq_cont.486:
+	lw	%v0, 4(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.489
+	bne	%v0, %at, beq_else.487
 	fneg	%f0, %f0
 	jr	%ra
-beq_else.489:
+beq_else.487:
 	jr	%ra
 rad.228:
 	flw	%f1, 8192(%zero)
@@ -309,8 +302,14 @@ min_caml_start:
 	lw	%ra, 4(%sp)
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 8
-	jal	sin.224
+	jal	cos.222
 	addi	%sp, %sp, -8
 	lw	%ra, 4(%sp)
-	fadd	%g0, %fzero, %f0
-	ret
+	sw	%ra, 4(%sp)
+	addi	%sp, %sp, 8
+	# jal	min_caml_print_float
+	nop
+	addi	%sp, %sp, -8
+	lw	%ra, 4(%sp)
+	# ret
+	fadd	%f0, %f0, %fzero

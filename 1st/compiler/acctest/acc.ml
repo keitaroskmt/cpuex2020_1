@@ -361,7 +361,7 @@ let rec sin_test () =
         max_ulp := if !max_ulp < x then x else !max_ulp;
 		i := !i + 1;
     done;
-    Printf.printf "sin_max_error0000   : %f\n" !max;
+    Printf.printf "sin_max_error       : %f\n" !max;
     Printf.printf "sin_max_error_ulp   : %ld\n" !max_ulp
 
 let rec atan_test () = 
@@ -407,7 +407,7 @@ let rec atan_test () =
 
 
 
-atan_test ();;
+sin_test ();;
 (*
 int_of_float_test ();;
 float_of_int_test ();;
