@@ -1,7 +1,10 @@
 .vscode
 fib/sim/sim
 fib/sim/sim.dSYM/*
+1st/sim/sim
+1st/sim/sim.dSYM/*
 1st/fpu/finv_table/*
+1st/fpu/fsqrt_table/*
 1st/fpu/fadd/*
 1st/fpu/fsub/*
 1st/fpu/fmul/*

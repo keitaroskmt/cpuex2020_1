@@ -2,4 +2,4 @@
 
 dev-fpu branch
 
-test from Win
+(2020/11/15) 1st fpuのマージ
