@@ -51,9 +51,8 @@ module finv_1st
     wire [13:0] cor;
     wire [22:0] ans_m;
     wire [22:0] m1;
-    wire [22:0] m2;
+    wire [23:0] m2;
     wire [22:0] shifted_m;
-    wire [7:0] e0;
     wire [7:0] e1;
     wire [7:0] ans_e;
     wire [22:0] c;
@@ -68,18 +67,17 @@ module finv_1st
     assign a1 = m[12:0];
     assign cor_n = a1 * d;
     assign cor = (a0 < 10'd424) ? (cor_n >> 12) : (cor_n >> 13);
-    assign e0 = 8'd254 - e;
-    assign e1 = e0 - 1;
+    assign e1 = 8'd253 - e;
     assign minus_e = e + 1;
-    assign subnormal = (e > 8'd253) ? 1 :
-                       (1 >= e0) ? 1 : 0;
+    assign subnormal = (e == 8'd253 && m > 0) ? 1 :
+                       (e > 8'd253) ? 1 : 0;
     assign shift_e = (subnormal == 1) ? minus_e - 254 : 0;
     assign ans_e = (e == 0) ? 0 : e1;
     assign m1 = c - cor;
-    assign m2 = (m == 23'b0) ? {1'b1, 22'b0} : {1'b1, m1[22:1]};
+    assign m2 = (m == 23'b0) ? {1'b1, 23'b0} : {2'b01, m1[22:1]};
     assign shifted_m = m2 >> shift_e;
     assign ans_m = (e == 0) ? 0 :
-                   (subnormal == 1) ? shifted_m : m1;
+                   (subnormal == 1) ? shifted_m[22:0] : m1;
     assign y = (subnormal == 1) ? {s, 8'b0, ans_m} : {s, ans_e, ans_m};
 
 endmodule
