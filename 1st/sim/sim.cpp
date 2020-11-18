@@ -17,14 +17,15 @@ std::vector<op_info> ops;
 core_env cur_env;
 std::map<std::string, int> label_pos;
 int *stack = (int *)malloc(sizeof(int) * 1000000);
-int exec_step(bool print_process);
+int exec_step(bool print_process, bool print_calc);
 
 int main(int argc, char *argv[])
 {
     int opt;
     bool is_step = false;
-    bool is_stat = false;
+    bool is_stat = true;
     bool print_process = false;
+    bool print_calc = false;
     std::string n = "fib";
 
     while ((opt = getopt(argc, argv, "scpn:")) != -1)
@@ -36,7 +37,7 @@ int main(int argc, char *argv[])
             break;
 
         case 'c':
-            is_stat = true;
+            print_calc = true;
             break;
 
         case 'p':
@@ -114,7 +115,7 @@ int main(int argc, char *argv[])
                     j = stoi(cmd_re[2].str());
 
                     for (int i = sp - 4 * j; i <= sp + 4 * j; i += 4)
-                        printf("stack[%d] = (hex) %08X\t(real) %d\n", i, stack[i / 4], stack[i / 4]);
+                        printf("stack[%d] = (hex) %08X\t(dec) %d\n", i, stack[i / 4], stack[i / 4]);
                 }
                 else if (regex_match(cmd, cmd_re, std::regex("^stack (-?\\d+)\\((.+?)\\) (\\d+)\n?$")))
                 {
@@ -124,14 +125,18 @@ int main(int argc, char *argv[])
                     j = stoi(cmd_re[3].str());
 
                     for (int i = sp - 4 * j; i <= sp + 4 * j; i += 4)
-                        printf("stack[%d] = (hex) %08X\t(real) %d\n", i, stack[i / 4], stack[i / 4]);
+                        printf("stack[%d] = (hex) %08X\t(dec) %d\n", i, stack[i / 4], stack[i / 4]);
                 }
                 else if (cmd == "pr\n")
                     print_state(cur_env);
                 else if (cmd == "ps\n")
                     print_stats();
-                else if (cmd == "pfs\n")
-                    is_stat = true;
+                else if (cmd == "nopfs\n")
+                    is_stat = false;
+                else if (cmd == "pc\n")
+                    print_calc = true;
+                else if (cmd == "endpc\n")
+                    print_calc = false;
                 else if (cmd == "pp\n")
                     print_process = true;
                 else if (cmd == "endpp\n")
@@ -144,15 +149,19 @@ int main(int argc, char *argv[])
                 else if (cmd == "h\n")
                 {
                     printf("1 step: 's', Nstep: 'Ns'(N=int), run all: 'r', print reg: 'pr'\n");
-                    printf("print stat: 'ps', print process: 'pp', end print process: 'endpp'\n");
-                    printf("print final stat: 'pfs', print stack[N]: 'stack N k'\n");
-                    printf("print stack[n(%%reg)]: 'stack n(%%reg) k', exit: 'exit'\n");
+                    printf("print stat: 'ps', (end) print process: '(end)pp'\n");
+                    printf("no print final stat: 'nopfs', print stack[N]: 'stack N k'\n");
+                    printf("print stack[n(%%reg)]: 'stack n(%%reg) k', (end) print culc: '(end)pc'\nexit: 'exit'\n");
                 }
                 else if (cmd == "exit\n")
                     return 0;
+                else if (cmd == "\n")
+                    ;
+                else
+                    printf("command not found\n");
             }
         }
-        if (exec_step(print_process))
+        if (exec_step(print_process, print_calc))
             break;
         if (ops[cur_opnum].type == 0)
             loop--;
@@ -171,13 +180,13 @@ int main(int argc, char *argv[])
 }
 
 // 1step実行する 命令なら実行し、その他なら読み飛ばす
-int exec_step(bool print_process)
+int exec_step(bool print_process, bool print_calc)
 {
     if (ops[cur_opnum].type == 0)
     {
         if (print_process)
             printf("%d\t%d\t%s\t%s\t%s\t%s\t%d\n", cur_env.PC, 4 * ops[cur_opnum].op_idx, ops[cur_opnum].opcode.c_str(), ops[cur_opnum].opland[0].c_str(), ops[cur_opnum].opland[1].c_str(), ops[cur_opnum].opland[2].c_str(), ops[cur_opnum].offset);
-        if (exec_op(ops[cur_opnum], cur_env, label_pos))
+        if (exec_op(ops[cur_opnum], cur_env, label_pos, print_calc))
             return 1;
         cur_env.PC++;
     }
