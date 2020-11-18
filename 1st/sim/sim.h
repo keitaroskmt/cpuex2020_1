@@ -24,7 +24,7 @@ typedef struct
     std::string other;
 } op_info;
 
-extern int cur_opnum;
+extern int cur_opnum, cur_in;
 extern std::vector<op_info> ops;
 extern core_env cur_env;
 extern std::map<std::string, int> label_pos;

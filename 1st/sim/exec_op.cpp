@@ -5,11 +5,13 @@
 #include <map>
 #include "sim.h"
 #include "myutil.h"
+#include "file_io.h"
 
 // 1命令実行する
 int exec_op(op_info op, core_env env, std::map<std::string, int> label_pos, bool print_calc)
 {
     int rs, rt, rd, imm, sp;
+    unsigned char temp;
     union
     {
         float f;
@@ -240,12 +242,17 @@ int exec_op(op_info op, core_env env, std::map<std::string, int> label_pos, bool
     }
     else if (op.opcode == "in")
     {
-        // cur_env.GPR[reg_name.at(op.opland[0])] = 'hogehoge'; // 何かしら書く
+        rt = cur_env.GPR[reg_name.at(op.opland[0])];
+        rt = rt & 0xFFFFFF00;
+        rs = in_bytes[cur_in] & 0xFF;
+        cur_env.GPR[reg_name.at(op.opland[0])] = rt + rs;
+        cur_in++;
     }
     else if (op.opcode == "out")
     {
         rt = cur_env.GPR[reg_name.at(op.opland[0])];
-        // "hogehoge" = rt; // 何かしら書く
+        temp = rt & 0xFF;
+        out_bytes.push_back(temp);
     }
     else if (op.opcode == "fadd")
     {

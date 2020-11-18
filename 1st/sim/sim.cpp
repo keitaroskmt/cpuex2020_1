@@ -12,8 +12,9 @@
 #include "load_op.h"
 #include "myutil.h"
 #include "exec_cmd.h"
+#include "file_io.h"
 
-int cur_opnum;
+int cur_opnum, cur_in;
 std::vector<op_info> ops;
 core_env cur_env;
 std::map<std::string, int> label_pos;
@@ -28,9 +29,12 @@ int main(int argc, char *argv[])
     bool print_process = false;
     bool print_calc = false;
     bool print_bytecode = false;
+    bool is_in = false;
+    bool is_out = false;
     std::string n = "fib";
+    std::string infile = "ball";
 
-    while ((opt = getopt(argc, argv, "sbcpn:")) != -1)
+    while ((opt = getopt(argc, argv, "sbcpn:i:o")) != -1)
     {
         switch (opt)
         {
@@ -54,8 +58,17 @@ int main(int argc, char *argv[])
             n = optarg;
             break;
 
+        case 'i':
+            is_in = true;
+            infile = optarg;
+            break;
+
+        case 'o':
+            is_out = true;
+            break;
+
         default:
-            printf("Usage: %s [-s] [-b] [-c] [-p] [-n argment] \n", argv[0]);
+            printf("Usage: %s [-s] [-b] [-c] [-p] [-n arg] [-i arg] [-o]\n", argv[0]);
             break;
         }
     }
@@ -89,7 +102,15 @@ int main(int argc, char *argv[])
 
     fclose(fp);
 
+    // sldファイルの読み込み
+    if (is_in)
+    {
+        infile = "io/in/" + infile;
+        read_file(infile);
+    }
+
     cur_opnum = 0;
+    cur_in = 0;
 
     // step実行
     while (cur_opnum < end)
@@ -116,6 +137,8 @@ int main(int argc, char *argv[])
         print_stats();
     }
     free(stack);
+    if (is_out)
+        write_file("io/out/out.txt");
     return 0;
 }
 
