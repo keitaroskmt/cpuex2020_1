@@ -63,6 +63,18 @@ std::string get_line(int size)
     return str;
 }
 
+bool isnum(std::string s)
+{
+    for (int i = 0; i < (int)s.size(); ++i)
+    {
+        if (i == 0 && s[i] == '-')
+            continue;
+        if (!('0' <= s[i] && s[i] <= '9'))
+            return false;
+    }
+    return true;
+}
+
 // レジスタ名を番号に変換する
 const std::map<std::string, int> reg_name = {
     {"%zero", 0},

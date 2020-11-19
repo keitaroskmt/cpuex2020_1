@@ -5,7 +5,7 @@
 #include "sim.h"
 #include "myutil.h"
 
-int exec_cmd(int *loop, bool *is_stat, bool *print_bytecode, bool *print_calc, bool *print_process)
+int exec_cmd(int *loop, bool *is_stat, bool *print_bc, bool *print_calc, bool *print_process)
 {
     std::string cmd;
     std::string base;
@@ -107,9 +107,9 @@ int exec_cmd(int *loop, bool *is_stat, bool *print_bytecode, bool *print_calc, b
         else if (cmd == "nopfs\n")
             *is_stat = false;
         else if (cmd == "pb\n")
-            *print_bytecode = true;
+            *print_bc = true;
         else if (cmd == "endpb\n")
-            *print_bytecode = false;
+            *print_bc = false;
         else if (cmd == "pc\n")
             *print_calc = true;
         else if (cmd == "endpc\n")

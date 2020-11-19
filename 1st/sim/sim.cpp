@@ -13,13 +13,14 @@
 #include "myutil.h"
 #include "exec_cmd.h"
 #include "file_io.h"
+#include "print_bytecode.h"
 
 int cur_opnum, cur_in;
 std::vector<op_info> ops;
 core_env cur_env;
-std::map<std::string, int> label_pos;
+std::map<std::string, int> label_pos, label_pos_bc;
 int *stack = (int *)malloc(sizeof(int) * 1000000);
-int exec_step(bool print_process, bool print_calc);
+int exec_step(bool print_process, bool print_calc, bool print_bytecode);
 
 int main(int argc, char *argv[])
 {
@@ -28,7 +29,7 @@ int main(int argc, char *argv[])
     bool is_stat = true;
     bool print_process = false;
     bool print_calc = false;
-    bool print_bytecode = false;
+    bool print_bc = false;
     bool mandelbrot = false;
     bool is_in = false;
     bool is_out = false;
@@ -48,7 +49,7 @@ int main(int argc, char *argv[])
             break;
 
         case 'b':
-            print_bytecode = true;
+            print_bc = true;
             break;
 
         case 'p':
@@ -122,10 +123,10 @@ int main(int argc, char *argv[])
     {
         if (is_step && loop == 0)
             // コマンド受付 & 実行
-            if (exec_cmd(&loop, &is_stat, &print_bytecode, &print_calc, &print_process))
+            if (exec_cmd(&loop, &is_stat, &print_bc, &print_calc, &print_process))
                 return 0;
 
-        if (exec_step(print_process, print_calc))
+        if (exec_step(print_process, print_calc, print_bc))
             break;
 
         if (ops[cur_opnum].type == 0)
@@ -149,12 +150,15 @@ int main(int argc, char *argv[])
 }
 
 // 1step実行する 命令なら実行し、その他なら読み飛ばす
-int exec_step(bool print_process, bool print_calc)
+int exec_step(bool print_process, bool print_calc, bool print_bc)
 {
     if (ops[cur_opnum].type == 0)
     {
         if (print_process)
             printf("%d\t%d\t%s\t%s\t%s\t%s\t%d\n", cur_env.PC, 4 * ops[cur_opnum].op_idx, ops[cur_opnum].opcode.c_str(), ops[cur_opnum].opland[0].c_str(), ops[cur_opnum].opland[1].c_str(), ops[cur_opnum].opland[2].c_str(), ops[cur_opnum].offset);
+
+        if (print_bc)
+            print_bytecode(ops[cur_opnum]);
 
         if (exec_op(ops[cur_opnum], print_calc))
             return 1;
