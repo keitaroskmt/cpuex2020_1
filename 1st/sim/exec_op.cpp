@@ -377,7 +377,7 @@ int exec_op(op_info op, bool print_calc)
     else if (op.opcode == "ftoi")
     {
         frs.f = cur_env.FPR[op.opland_bit[1]];
-        rt = int(frs.f);
+        rt = frs.i;
         cur_env.GPR[op.opland_bit[0]] = rt;
 
         if (print_calc)
@@ -386,7 +386,7 @@ int exec_op(op_info op, bool print_calc)
     else if (op.opcode == "itof")
     {
         rs = cur_env.GPR[op.opland_bit[1]];
-        frt.f = float(rs);
+        frt.i = rs;
         cur_env.FPR[op.opland_bit[0]] = frt.f;
 
         if (print_calc)
