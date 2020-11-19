@@ -42,7 +42,7 @@ int read_file(std::string infile_name)
     return 0;
 }
 
-int write_file(std::string outfile_name)
+int write_file(std::string outfile_name, bool mandelbrot)
 {
     char temp1;
     int temp2;
@@ -50,19 +50,31 @@ int write_file(std::string outfile_name)
     std::ofstream outfile;
     outfile.open(outfile_name, std::ios::out);
 
-    temp1 = out_bytes[0];
-    outfile << temp1;
-    temp1 = out_bytes[1];
-    outfile << temp1;
-    temp1 = out_bytes[2];
-    outfile << temp1;
-
-    for (int i = 3; i < size; i += 5)
+    if (mandelbrot)
     {
-        temp1 = out_bytes[i + 4];
-        temp2 = out_bytes[i] + (out_bytes[i + 1] << 8) + (out_bytes[i + 2] << 16) + (out_bytes[i + 3] << 24);
-        outfile << temp2;
+        for (int i = 0; i < size; i += 4)
+        {
+            temp2 = out_bytes[i] + (out_bytes[i + 1] << 8) + (out_bytes[i + 2] << 16) + (out_bytes[i + 3] << 24);
+            outfile << temp2;
+        }
+    }
+    else
+    {
+
+        temp1 = out_bytes[0];
         outfile << temp1;
+        temp1 = out_bytes[1];
+        outfile << temp1;
+        temp1 = out_bytes[2];
+        outfile << temp1;
+
+        for (int i = 3; i < size; i += 5)
+        {
+            temp1 = out_bytes[i + 4];
+            temp2 = out_bytes[i] + (out_bytes[i + 1] << 8) + (out_bytes[i + 2] << 16) + (out_bytes[i + 3] << 24);
+            outfile << temp2;
+            outfile << temp1;
+        }
     }
     return 0;
 }

@@ -18,6 +18,8 @@ typedef struct
     int opland_num;
     int op_idx;
     int offset;
+    int opland_bit[3];
+    int label_num;
     std::string opland[3];
     std::string opcode;
     std::string label;

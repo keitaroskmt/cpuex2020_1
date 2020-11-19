@@ -172,4 +172,6 @@ std::map<std::string, int> op_counter = {
     {"fsw", 0},
     {"ftoi", 0},
     {"itof", 0},
+    {"in", 0},
+    {"out", 0},
     {"total", 0}};

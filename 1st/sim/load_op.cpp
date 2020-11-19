@@ -8,6 +8,8 @@
 #include "sim.h"
 #include "myutil.h"
 
+int reg_label_2_num(int end);
+
 // アセンブリをパースして命令列にする
 int load_ops(FILE *fp)
 {
@@ -108,5 +110,28 @@ int load_ops(FILE *fp)
         }
         i++;
     }
+    reg_label_2_num(i);
     return i;
+}
+
+int reg_label_2_num(int end)
+{
+    int j = 0;
+    while (j < end)
+    {
+        if (ops[j].type == 1)
+            ops[j].label_num = label_pos[ops[j].label];
+        for (int k = 0; k < 3; k++)
+        {
+            if (ops[j].opland[k].find("%") != std::string::npos)
+                ops[j].opland_bit[k] = reg_name.at(ops[j].opland[k]) % 32;
+            else if (label_pos.find(ops[j].opland[k]) != label_pos.end())
+                ops[j].opland_bit[k] = label_pos[ops[j].opland[k]];
+            else if (ops[j].opland[k] != "")
+                ops[j].opland_bit[k] = stoi(ops[j].opland[k]);
+        }
+
+        j++;
+    }
+    return 0;
 }

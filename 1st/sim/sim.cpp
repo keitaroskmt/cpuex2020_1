@@ -29,12 +29,13 @@ int main(int argc, char *argv[])
     bool print_process = false;
     bool print_calc = false;
     bool print_bytecode = false;
+    bool mandelbrot = false;
     bool is_in = false;
     bool is_out = false;
     std::string n = "fib";
     std::string infile = "ball";
 
-    while ((opt = getopt(argc, argv, "sbcpn:i:o")) != -1)
+    while ((opt = getopt(argc, argv, "sbcpn:i:om")) != -1)
     {
         switch (opt)
         {
@@ -65,6 +66,10 @@ int main(int argc, char *argv[])
 
         case 'o':
             is_out = true;
+            break;
+
+        case 'm':
+            mandelbrot = true;
             break;
 
         default:
@@ -138,7 +143,8 @@ int main(int argc, char *argv[])
     }
     free(stack);
     if (is_out)
-        write_file("io/out/out.txt");
+        write_file("io/out/out.txt", mandelbrot);
+
     return 0;
 }
 
@@ -150,7 +156,7 @@ int exec_step(bool print_process, bool print_calc)
         if (print_process)
             printf("%d\t%d\t%s\t%s\t%s\t%s\t%d\n", cur_env.PC, 4 * ops[cur_opnum].op_idx, ops[cur_opnum].opcode.c_str(), ops[cur_opnum].opland[0].c_str(), ops[cur_opnum].opland[1].c_str(), ops[cur_opnum].opland[2].c_str(), ops[cur_opnum].offset);
 
-        if (exec_op(ops[cur_opnum], cur_env, label_pos, print_calc))
+        if (exec_op(ops[cur_opnum], cur_env, print_calc))
             return 1;
         cur_env.PC++;
     }

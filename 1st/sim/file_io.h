@@ -16,7 +16,7 @@ typedef union
 } RegUnion;
 
 int read_file(std::string infile_name);
-int write_file(std::string outfile_name);
+int write_file(std::string outfile_name, bool mandelbrot);
 
 extern std::vector<unsigned char> in_bytes;
 extern std::vector<unsigned char> out_bytes;
