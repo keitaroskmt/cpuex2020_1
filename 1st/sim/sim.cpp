@@ -133,7 +133,7 @@ int main(int argc, char *argv[])
     }
 
     printf("register state\n");
-    print_state(cur_env);
+    print_state();
     printf("v0: %d\n", cur_env.GPR[reg_name.at("%v0")]);
     printf("f0: %f\n", cur_env.FPR[reg_name.at("%f0") - 32]);
     if (is_stat)
@@ -156,7 +156,7 @@ int exec_step(bool print_process, bool print_calc)
         if (print_process)
             printf("%d\t%d\t%s\t%s\t%s\t%s\t%d\n", cur_env.PC, 4 * ops[cur_opnum].op_idx, ops[cur_opnum].opcode.c_str(), ops[cur_opnum].opland[0].c_str(), ops[cur_opnum].opland[1].c_str(), ops[cur_opnum].opland[2].c_str(), ops[cur_opnum].offset);
 
-        if (exec_op(ops[cur_opnum], cur_env, print_calc))
+        if (exec_op(ops[cur_opnum], print_calc))
             return 1;
         cur_env.PC++;
     }

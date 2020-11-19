@@ -8,7 +8,7 @@
 #include "file_io.h"
 
 // 1命令実行する
-int exec_op(op_info op, core_env env, bool print_calc)
+int exec_op(op_info op, bool print_calc)
 {
     int rs, rt, rd, imm, sp;
     unsigned char temp;

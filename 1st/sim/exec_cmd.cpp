@@ -101,7 +101,7 @@ int exec_cmd(int *loop, bool *is_stat, bool *print_bytecode, bool *print_calc, b
             cur_env.FPR[reg_name.at(reg) - 32] = subst.f;
         }
         else if (cmd == "pr\n")
-            print_state(cur_env);
+            print_state();
         else if (cmd == "ps\n")
             print_stats();
         else if (cmd == "nopfs\n")

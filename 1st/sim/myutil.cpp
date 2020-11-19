@@ -7,7 +7,7 @@
 #include "myutil.h"
 
 // レジスタの状態を出力する
-void print_state(core_env env)
+void print_state()
 {
     union fi
     {
@@ -16,14 +16,14 @@ void print_state(core_env env)
     };
     union fi fpr[32];
     for (int i = 0; i < 32; i++)
-        fpr[i].f = env.FPR[i];
+        fpr[i].f = cur_env.FPR[i];
 
-    printf("PC: %d\nGPR\n", env.PC);
+    printf("PC: %d\nGPR\n", cur_env.PC);
     for (int i = 0; i < 32; i += 4)
     {
-        printf("%d-%d\t%d\t%d\t%d\t%d\n", i, i + 3, env.GPR[i], env.GPR[i + 1], env.GPR[i + 2], env.GPR[i + 3]);
+        printf("%d-%d\t%d\t%d\t%d\t%d\n", i, i + 3, cur_env.GPR[i], cur_env.GPR[i + 1], cur_env.GPR[i + 2], cur_env.GPR[i + 3]);
     }
-    printf("\nFPR FPCC: %s\n", env.FPCC);
+    printf("\nFPR FPCC: %s\n", cur_env.FPCC);
     for (int i = 0; i < 32; i += 4)
     {
         printf("%d-%d\treal\t%f\t%f\t%f\t%f\n", i, i + 3, fpr[i].f, fpr[i + 1].f, fpr[i + 2].f, fpr[i + 3].f);
