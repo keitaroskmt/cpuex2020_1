@@ -110,10 +110,14 @@ create_float_array_cont:
 	j	create_float_array_loop
 # ------------ body ---------------------------
 float_of_int_sub1.236:
-	addi	%a0, %zero, 8388608
+	lui	%at, 128
+	ori	%at, %at, 0
+	add	%a0, %zero, %at
 	slt	%at, %v0, %a0
 	bne	%at, %zero, beq_else.560
-	addi	%a0, %zero, 8388608
+	lui	%at, 128
+	ori	%at, %at, 0
+	add	%a0, %zero, %at
 	sub	%v0, %v0, %a0
 	addi	%v1, %v1, 1
 	j	float_of_int_sub1.236
@@ -121,10 +125,14 @@ beq_else.560:
 	add	%v0, %zero, %v1
 	jr	%ra
 float_of_int_sub2.239:
-	addi	%v1, %zero, 8388608
+	lui	%at, 128
+	ori	%at, %at, 0
+	add	%v1, %zero, %at
 	slt	%at, %v0, %v1
 	bne	%at, %zero, beq_else.561
-	addi	%v1, %zero, 8388608
+	lui	%at, 128
+	ori	%at, %at, 0
+	add	%v1, %zero, %at
 	sub	%v0, %v0, %v1
 	j	float_of_int_sub2.239
 beq_else.561:
@@ -153,7 +161,9 @@ beq_cont.564:
 beq_else.565:
 	sub	%v0, %zero, %v0
 beq_cont.566:
-	addi	%a0, %zero, 8388608
+	lui	%at, 128
+	ori	%at, %at, 0
+	add	%a0, %zero, %at
 	sw	%v1, 0(%sp)
 	slt	%at, %v0, %a0
 	bne	%at, %zero, beq_else.567
@@ -163,7 +173,9 @@ beq_cont.566:
 	jal	float_of_int_sub2.239
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
-	addi	%v1, %zero, 1258291200
+	lui	%at, 19200
+	ori	%at, %at, 0
+	add	%v1, %zero, %at
 	add	%v0, %v0, %v1
 	itof	%f0, %v0
 	flw	%f1, 8212(%zero)
@@ -186,7 +198,9 @@ beq_cont.566:
 	fadd	%f0, %f1, %f0
 	j	beq_cont.568
 beq_else.567:
-	addi	%a0, %zero, 1258291200
+	lui	%at, 19200
+	ori	%at, %at, 0
+	add	%a0, %zero, %at
 	add	%v0, %v0, %a0
 	itof	%f0, %v0
 	flw	%f1, 8212(%zero)
