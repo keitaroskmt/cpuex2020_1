@@ -269,7 +269,7 @@ unsigned int Writer::encode(vector<string> &v) {
             funct = 0x0;
 
         } else if (v[1] == "fdiv") {
-            op = 0x14;
+            op = 0x13;
             rd = freg_name.at(v[2]);
             rs = freg_name.at(v[3]);
             rt = freg_name.at(v[4]);
@@ -277,7 +277,7 @@ unsigned int Writer::encode(vector<string> &v) {
             funct = 0x0;
 
         } else if (v[1] == "fneg") {
-            op = 0x13;
+            op = 0x14;
             rd = freg_name.at(v[2]);
             rt = freg_name.at(v[3]);
             rs = 0x0;
