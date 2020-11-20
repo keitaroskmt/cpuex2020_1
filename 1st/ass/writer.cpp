@@ -167,6 +167,11 @@ unsigned int Writer::encode(vector<string> &v) {
             imm = parser->label_map.at(v[4]) - (current_num + 1);
 
         } else if (v[1] == "addi") {
+            // プログラム全体の評価値 (適当にnopとしておく)
+            if (v[2] == "%g0") {
+                return 0;
+            }
+
             op = 0x8;
             rt = reg_name.at(v[2]);
             rs = reg_name.at(v[3]);
@@ -376,7 +381,8 @@ unsigned int Writer::encode(vector<string> &v) {
 
     // ret デバッグ用にfadd $f0 $f0 0とする. (intはprintできる)
     else if (v[0] == "ret") {
-        return 0b01000000000111110000000000000000
+        // return 0b01000000000111110000000000000000;
+        return 0;
     }
 
     // nop 0うめ

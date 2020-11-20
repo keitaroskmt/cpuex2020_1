@@ -305,5 +305,9 @@ min_caml_start:
 	jal	cos.222
 	addi	%sp, %sp, -8
 	lw	%ra, 4(%sp)
-	fadd	%g0, %fzero, %f0
+	sw	%ra, 4(%sp)
+	addi	%sp, %sp, 8
+	jal	min_caml_print_float
+	addi	%sp, %sp, -8
+	lw	%ra, 4(%sp)
 	ret

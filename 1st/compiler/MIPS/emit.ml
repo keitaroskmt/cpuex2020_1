@@ -70,6 +70,19 @@ let rec load_float_imm oc data n =
         Printf.fprintf oc "\taddi\t%s, %s, 4\n" reg_hp reg_hp;
         load_float_imm oc rest (n+1))
 
+let addi oc r1 r2 i =
+    if -65536 <= i && i <= 65535 then
+        Printf.fprintf oc "\taddi\t%s, %s, %d\n" r1 r2 i
+    else
+       (
+        let upper = i asr 16 in
+        let lower = i land 0xffff in
+        Printf.fprintf oc "\tlui\t%s, %d\n" reg_at upper;
+        Printf.fprintf oc "\tori\t%s, %s, %d\n" reg_at reg_at lower;
+        Printf.fprintf oc "\tadd\t%s, %s, %s\n" r1 r2 reg_at
+        )
+
+
 type dest = Tail | NonTail of Id.t (* 末尾かどうかを表すデータ型 (caml2html: emit_dest) *)
 let rec g oc = function (* 命令列のアセンブリ生成 (caml2html: emit_g) *)
   | dest, Ans(exp) -> g' oc (dest, exp)
@@ -81,7 +94,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprime) *)
   (* 末尾でなかったら計算結果をdestにセット (caml2html: emit_nontail) *)
   | NonTail(_), Nop -> ()
   | NonTail(x), Set(i) ->
-        Printf.fprintf oc "\taddi\t%s, %s, %d\n" x reg_zero i
+        addi oc x reg_zero i
   | NonTail(x), SetF(Id.L(y)) ->
         let (addr, d) = get_float_address y !float_table 0 in
         if addr < 32768 then
@@ -90,7 +103,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprime) *)
            (load_imm oc reg_at (Int32.of_int addr);
             Printf.fprintf oc "\tflw\t%s, 0(%s) # %f\n" x reg_at d)
   | NonTail(x), SetL(Id.L(y)) ->
-        Printf.fprintf oc "\taddi\t%s, %s, %s\n" x reg_zero y
+      Printf.fprintf oc "\taddi\t%s, %s, %s\n" x reg_zero y
   | NonTail(x), Mov(y) when x = y -> ()
   | NonTail(x), Mov(y) ->
         Printf.fprintf oc "\tadd\t%s, %s, %s\n" x reg_zero y
@@ -99,11 +112,11 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprime) *)
   | NonTail(x), Add(y, z') ->
        (match z' with
         | V(z) -> Printf.fprintf oc "\tadd\t%s, %s, %s\n" x y z
-        | C(i) -> Printf.fprintf oc "\taddi\t%s, %s, %d\n" x y i)
+        | C(i) -> addi oc x y i)
   | NonTail(x), Sub(y, z') ->
        (match z' with
         | V(z) -> Printf.fprintf oc "\tsub\t%s, %s, %s\n" x y z
-        | C(i) -> Printf.fprintf oc "\taddi\t%s, %s, %d\n" x y (-i))
+        | C(i) -> addi oc x y (-i))
   | NonTail(x), Mul(y, z') ->
        (match z' with
         | V(z) -> failwith "Mul Error"
@@ -208,14 +221,14 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprime) *)
   | Tail, IfEq(x, y', e1, e2) ->
       (match y' with
       | V(y) -> g'_tail_ifeq oc x y e1 e2 "beq" "bne"
-      | C(i) -> Printf.fprintf oc "\taddi\t%s, %s, %d\n" reg_at reg_zero i;
+      | C(i) -> addi oc reg_at reg_zero i;
                 g'_tail_ifeq oc x reg_at e1 e2 "beq" "bne")
   | Tail, IfLE(x, y', e1, e2) ->
         (* LE -> not GT *)
       (match y' with
       | V(y) -> Printf.fprintf oc "\tslt\t%s, %s, %s\n" reg_at y x;
                 g'_tail_ifeq oc reg_at reg_zero e1 e2 "beq" "bne"
-      | C(i) -> Printf.fprintf oc "\taddi\t%s, %s, %d\n" reg_at reg_zero i;
+      | C(i) -> addi oc reg_at reg_zero i;
                 Printf.fprintf oc "\tslt\t%s, %s, %s\n" reg_at reg_at x;
                 g'_tail_ifeq oc reg_at reg_zero e1 e2 "beq" "bne")
   | Tail, IfGE(x, y', e1, e2) ->
@@ -233,14 +246,14 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprime) *)
   | NonTail(z), IfEq(x, y', e1, e2) ->
       (match y' with
       | V(y) -> g'_non_tail_ifeq oc (NonTail(z)) x y e1 e2 "beq" "bne"
-      | C(i) -> Printf.fprintf oc "\taddi\t%s, %s, %d\n" reg_at reg_zero i;
+      | C(i) -> addi oc reg_at reg_zero i;
                 g'_non_tail_ifeq oc (NonTail(z)) x reg_at e1 e2 "beq" "bne")
   | NonTail(z), IfLE(x, y', e1, e2) ->
         (* LE -> not GT *)
       (match y' with
       | V(y) -> Printf.fprintf oc "\tslt\t%s, %s, %s\n" reg_at y x;
                 g'_non_tail_ifeq oc (NonTail(z)) reg_at reg_zero e1 e2 "beq" "bne"
-      | C(i) -> Printf.fprintf oc "\taddi\t%s, %s, %d\n" reg_at reg_zero i;
+      | C(i) -> addi oc reg_at reg_zero i;
                 Printf.fprintf oc "\tslt\t%s, %s, %s\n" reg_at reg_at x;
                 g'_non_tail_ifeq oc (NonTail(z)) reg_at reg_zero e1 e2 "beq" "bne")
  | NonTail(z), IfGE(x, y', e1, e2) ->
@@ -268,10 +281,10 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprime) *)
       g'_args oc [(x, reg_cl)] ys zs;
       let ss = stacksize () in
       Printf.fprintf oc "\tsw\t%s, %d(%s)\n" reg_ra (ss - 4) reg_sp;
-      Printf.fprintf oc "\taddi\t%s, %s, %d\n" reg_sp reg_sp ss;
+      addi oc reg_sp reg_sp ss;
       Printf.fprintf oc "\tlw\t%s, 0(%s)\n" reg_at reg_cl;
       Printf.fprintf oc "\tjalr\t%s\n" reg_at;
-      Printf.fprintf oc "\taddi\t%s, %s, %d\n" reg_sp reg_sp (-ss);
+      addi oc reg_sp reg_sp (-ss);
       Printf.fprintf oc "\tlw\t%s, %d(%s)\n" reg_ra (ss - 4) reg_sp;
       if List.mem a allregs && a <> regs.(0) then
         Printf.fprintf oc "\taddi\t%s, %s, 0\n" a regs.(0)
@@ -281,9 +294,9 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprime) *)
       g'_args oc [] ys zs;
       let ss = stacksize () in
       Printf.fprintf oc "\tsw\t%s, %d(%s)\n" reg_ra (ss - 4) reg_sp;
-      Printf.fprintf oc "\taddi\t%s, %s, %d\n" reg_sp reg_sp ss;
+      addi oc reg_sp reg_sp ss;
       Printf.fprintf oc "\tjal\t%s\n" x;
-      Printf.fprintf oc "\taddi\t%s, %s, %d\n" reg_sp reg_sp (-ss);
+      addi oc reg_sp reg_sp (-ss);
       Printf.fprintf oc "\tlw\t%s, %d(%s)\n" reg_ra (ss - 4) reg_sp;
       if List.mem a allregs && a <> regs.(0) then
         Printf.fprintf oc "\taddi\t%s, %s, 0\n" a regs.(0)

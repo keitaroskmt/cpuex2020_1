@@ -17,8 +17,8 @@ class Writer {
 
 
 const map<string, unsigned int> reg_name = {
-	{"%zero", 0}, 
-	{"%at", 1},
+    {"%zero", 0},
+    {"%at", 1},
     {"%v0", 2},
     {"%v1", 3},
     {"%a0", 4},

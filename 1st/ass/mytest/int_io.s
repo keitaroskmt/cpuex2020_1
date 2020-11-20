@@ -88,9 +88,9 @@ create_float_array_cont:
 fib.31:
 	addi	%at, %zero, 1
 	slt	%at, %at, %v0
-	bne	%at, %zero, beq_else.65
+	bne	%at, %zero, beq_else.67
 	jr	%ra
-beq_else.65:
+beq_else.67:
 	addi	%v1, %v0, -1
 	sw	%v0, 0(%sp)
 	addi	%v0, %v1, 0
@@ -118,7 +118,9 @@ min_caml_start:
 	jal	min_caml_read_int
 	addi	%sp, %sp, -8
 	lw	%ra, 4(%sp)
-	addi	%v0, %zero, 80
+	addi	%v1, %zero, 80
+	sw	%v0, 0(%sp)
+	addi	%v0, %v1, 0
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 8
 	jal	min_caml_print_char
@@ -136,7 +138,7 @@ min_caml_start:
 	jal	min_caml_print_char
 	addi	%sp, %sp, -8
 	lw	%ra, 4(%sp)
-	addi	%v0, %zero, 10
+	lw	%v0, 0(%sp)
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 8
 	jal	fib.31
@@ -153,7 +155,8 @@ min_caml_start:
 	jal	min_caml_print_char
 	addi	%sp, %sp, -8
 	lw	%ra, 4(%sp)
-	addi	%v0, %zero, 12
+	lw	%v0, 0(%sp)
+	addi	%v0, %v0, 2
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 8
 	jal	fib.31

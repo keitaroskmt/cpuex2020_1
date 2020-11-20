@@ -342,6 +342,11 @@ let rec sin_test () =
         Printf.printf "ulp   : %ld\n" x;
         max := if !max < diff then diff else !max;
         max_ulp := if !max_ulp < x then x else !max_ulp;
+        if !max_ulp > 1000l then(
+            Printf.printf "%ld\n" (ftoi (mysin !var));
+         failwith "error";
+        )
+
 		i := !i + 1;
     done;
 
@@ -407,7 +412,7 @@ let rec atan_test () =
 
 
 
-sin_test ();;
+float_of_int_test ();;
 (*
 int_of_float_test ();;
 float_of_int_test ();;

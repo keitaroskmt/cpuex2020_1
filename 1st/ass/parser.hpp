@@ -10,7 +10,7 @@ using namespace std;
 class Parser {
     public:
         Parser(const char *);
-		int parse_file();
+        int parse_file();
 
         void print_label();
         void print_code();
@@ -24,7 +24,7 @@ class Parser {
         int data_num;
         int current_num;
 
-		void parse_code(string);
+        void parse_code(string);
 
         int get_linenum_by_label(string);
 };

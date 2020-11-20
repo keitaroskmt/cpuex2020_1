@@ -350,4 +350,6 @@ body
 					AppDir
 						L (cos.222)
 						[v1.230]
-					Var cos_v1.231
+					AppDir
+						L (min_caml_print_float)
+						[cos_v1.231]
