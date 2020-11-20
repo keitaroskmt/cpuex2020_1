@@ -2,9 +2,10 @@
 #include <map>
 #include <string>
 #include <iostream>
+#include <vector>
 #include <bitset>
-#include "sim.h"
 #include "print_bytecode.h"
+#include "sim.h"
 #include "myutil.h"
 
 int print_bytecode(op_info op)

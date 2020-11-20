@@ -5,6 +5,7 @@
 #include <vector>
 #include <map>
 #include <unistd.h>
+#include "load_op.h"
 #include "sim.h"
 #include "myutil.h"
 

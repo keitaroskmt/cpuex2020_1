@@ -3,8 +3,8 @@
 #include <map>
 #include <vector>
 #include <errno.h>
-#include "sim.h"
 #include "myutil.h"
+#include "sim.h"
 
 // レジスタの状態を出力する
 void print_state()

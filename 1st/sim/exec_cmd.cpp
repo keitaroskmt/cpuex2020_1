@@ -2,6 +2,7 @@
 #include <regex>
 #include <stdio.h>
 #include <map>
+#include "exec_cmd.h"
 #include "sim.h"
 #include "myutil.h"
 

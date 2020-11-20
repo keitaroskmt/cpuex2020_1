@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include "exec_op.h"
 #include "sim.h"
 #include "myutil.h"
 #include "file_io.h"
