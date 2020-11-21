@@ -81,7 +81,9 @@ int print_bytecode(op_info op)
             rs = op.opland_bit[1] & 0b11111;
 
         rt = op.opland_bit[0] & 0b11111;
-        if (isnum(op.opland[2]))
+        if (op.opcode == "lw" || op.opcode == "sw" || op.opcode == "flw" || op.opcode == "fsw")
+            imm = op.offset;
+        else if (isnum(op.opland[2]))
             imm = op.opland_bit[2] & 0xffff;
         else
             imm = label_pos_bc[op.opland[2]] & 0xffff;
