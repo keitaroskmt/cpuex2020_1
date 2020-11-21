@@ -111,6 +111,7 @@ int load_ops(FILE *fp)
             return 0;
         }
         i++;
+        posbc2pos[idx] = i;
     }
     reg_label_2_num(i);
     return i;

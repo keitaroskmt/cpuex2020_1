@@ -114,7 +114,10 @@ int exec_op(op_info op, bool print_calc)
     else if (op.opcode == "jr")
     {
         rs = cur_env.GPR[op.opland_bit[0]];
-        cur_opnum = rs - 1;
+        if (op.opland_bit[0] == 31)
+            cur_opnum = posbc2pos[rs - 1];
+        else
+            cur_opnum = rs - 1;
     }
     else if (op.opcode == "move")
     {
@@ -127,13 +130,13 @@ int exec_op(op_info op, bool print_calc)
     }
     else if (op.opcode == "jal")
     {
-        cur_env.GPR[31] = cur_opnum + 1;
+        cur_env.GPR[31] = op.op_idx + 1;
         cur_opnum = op.opland_bit[0] - 1;
     }
     else if (op.opcode == "jalr")
     {
         rs = cur_env.GPR[op.opland_bit[0]];
-        cur_env.GPR[31] = cur_opnum + 1;
+        cur_env.GPR[31] = op.op_idx + 1;
         cur_opnum = rs - 1;
     }
     else if (op.opcode == "beq")

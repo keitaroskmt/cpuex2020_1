@@ -7,6 +7,7 @@
 #include <errno.h>
 #include <unistd.h>
 #include <math.h>
+#include <time.h>
 #include "sim.h"
 #include "exec_op.h"
 #include "load_op.h"
@@ -19,11 +20,13 @@ int cur_opnum, cur_in;
 std::vector<op_info> ops;
 core_env cur_env;
 std::map<std::string, int> label_pos, label_pos_bc;
+std::map<int, int> posbc2pos;
 int *stack = (int *)malloc(sizeof(int) * 1000000);
 int exec_step(bool print_process, bool print_calc, bool print_bytecode);
 
 int main(int argc, char *argv[])
 {
+    clock_t start_time = clock();
     int opt;
     bool is_step = false;
     bool is_stat = true;
@@ -33,10 +36,11 @@ int main(int argc, char *argv[])
     bool mandelbrot = false;
     bool is_in = false;
     bool is_out = false;
+    bool measure_time = false;
     std::string n = "fib";
     std::string infile = "ball";
 
-    while ((opt = getopt(argc, argv, "sbcpn:i:om")) != -1)
+    while ((opt = getopt(argc, argv, "sbcpn:i:omd")) != -1)
     {
         switch (opt)
         {
@@ -71,6 +75,10 @@ int main(int argc, char *argv[])
 
         case 'm':
             mandelbrot = true;
+            break;
+
+        case 'd':
+            measure_time = true;
             break;
 
         default:
@@ -146,6 +154,10 @@ int main(int argc, char *argv[])
     if (is_out)
         write_file("io/out/out.txt", mandelbrot);
 
+    clock_t end_time = clock();
+    const double time = static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC * 1000.0;
+    if (measure_time)
+        printf("time %.1lf[s]\n", time / 1000);
     return 0;
 }
 
