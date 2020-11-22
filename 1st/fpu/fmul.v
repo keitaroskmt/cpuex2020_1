@@ -20,10 +20,7 @@ module fmul
     wire s;
     wire [8:0] ea;
     wire [8:0] eb;
-    wire [23:0] m1ahm2ah;
-    wire [23:0] m1ahm2al;
-    wire [23:0] m1alm2ah;
-    wire [23:0] m1alm2al;
+    wire [47:0] m1am2a;
     wire [31:0] y_wire;
 
     reg reg_s1;
@@ -35,13 +32,10 @@ module fmul
     reg reg_s;
     reg [8:0] reg_ea;
     reg [8:0] reg_eb;
-    reg [23:0] reg_m1ahm2ah;
-    reg [23:0] reg_m1ahm2al;
-    reg [23:0] reg_m1alm2ah;
-    reg [23:0] reg_m1alm2al;
+    reg [47:0] reg_m1am2a;
 
-    fmul_1st u1(x1, x2, s1, s2, e1, e2, m1, m2, s, ea, eb, m1ahm2ah, m1ahm2al, m1alm2ah, m1alm2al);
-    fmul_2nd u2(reg_s1, reg_s2, reg_e1, reg_e2, reg_m1, reg_m2, reg_s, reg_ea, reg_eb, reg_m1ahm2ah, reg_m1ahm2al, reg_m1alm2ah, reg_m1alm2al, y_wire);
+    fmul_1st u1(x1, x2, s1, s2, e1, e2, m1, m2, s, ea, eb, m1am2a);
+    fmul_2nd u2(reg_s1, reg_s2, reg_e1, reg_e2, reg_m1, reg_m2, reg_s, reg_ea, reg_eb, reg_m1am2a, y_wire);
 
     always @(posedge clk) begin
         reg_s1 <= s1;
@@ -53,10 +47,7 @@ module fmul
         reg_s <= s;
         reg_ea <= ea;
         reg_eb <= eb;
-        reg_m1ahm2ah <= m1ahm2ah;
-        reg_m1ahm2al <= m1ahm2al;
-        reg_m1alm2ah <= m1alm2ah;
-        reg_m1alm2al <= m1alm2al;
+        reg_m1am2a <= m1am2a;
         y <= y_wire;
     end
 
@@ -75,10 +66,7 @@ module fmul_1st
     output wire s,
     output wire [8:0] ea,
     output wire [8:0] eb,
-    output wire [23:0] m1ahm2ah,
-    output wire [23:0] m1ahm2al,
-    output wire [23:0] m1alm2ah,
-    output wire [23:0] m1alm2al
+    output wire [47:0] m1am2a
 );
     wire [8:0] e1a;
     wire [8:0] e2a;
@@ -88,7 +76,13 @@ module fmul_1st
     wire [11:0] m1a_l;
     wire [11:0] m2a_h;
     wire [11:0] m2a_l;
+    wire [23:0] m1ahm2ah;
+    wire [23:0] m1ahm2al;
+    wire [23:0] m1alm2ah;
+    wire [23:0] m1alm2al;
 
+    // x1が正規化数なのは仮定して良い
+    // x2は非正規化数の場合があるその場合、23bit目か22bit目のどちらかが必ず立っている
     assign s1 = x1[31];
     assign s2 = x2[31];
     assign e1 = x1[30:23];
@@ -115,6 +109,7 @@ module fmul_1st
     assign m1alm2ah = m1a_l * m2a_h;
     assign m1alm2al = m1a_l * m2a_l;
 
+    assign m1am2a = (m1ahm2ah << 24) + (m1ahm2al << 12) + (m1alm2ah << 12) + m1alm2al;
 
 endmodule
 
@@ -129,36 +124,51 @@ module fmul_2nd
     input wire s,
     input wire [8:0] ea,
     input wire [8:0] eb,
-    input wire [23:0] m1ahm2ah,
-    input wire [23:0] m1ahm2al,
-    input wire [23:0] m1alm2ah,
-    input wire [23:0] m1alm2al,
+    input wire [47:0] m1am2a,
     output wire [31:0] y
 );
 
-    wire [47:0] m1am2a;
+
     wire inf;
     wire [22:0] m;
     wire [7:0] e;
+    wire [8:0] ec;
+    wire [8:0] ed;
     wire [8:0] e_9;
-    wire [6:0] shift_e;
+    wire [7:0] shift_e;
     wire subnormal;
     wire [23:0] subnormal_m;
     wire [22:0] shifted_m;
 
-    assign m1am2a = (m1ahm2ah << 24) + (m1ahm2al << 12) + (m1alm2ah << 12) + m1alm2al;
+    assign ec = ea - 1;
+    assign ed = ea - 2;
+    // eb:48bit ea:47bit ec:46bit ed:45bit用
 
-    assign m = (m1am2a[47] == 1) ? m1am2a[46:24] : m1am2a[45:23]; // 正規化数なら47bit目は絶対立ってる
-    assign e_9 = (m1am2a[47] == 0) ? ea : eb;
+    assign m = (m1am2a[47] == 1) ? m1am2a[46:24] :
+               (m1am2a[46] == 1) ? m1am2a[45:23] :
+               (m1am2a[45] == 1) ? m1am2a[44:22] : m1am2a[43:21]; // 正規化数なら47bit目は絶対立ってる
+
+    assign e_9 = (m1am2a[47] == 1) ? eb :
+                 (m1am2a[46] == 1) ? ea :
+                 (m1am2a[45] == 1) ? ec : ed;
+
     assign e = e_9 - 9'd127;
 
-    assign subnormal = (ea < 9'd128 & m1am2a[47] == 0) ? 1'b1 :
-                       (eb < 9'd128 & m1am2a[47] == 1) ? 1'b1 : 0;
-    assign inf = (ea > 9'd381 & m1am2a[47] == 0) ? 1'b1 :
-                 (eb > 9'd381 & m1am2a[47] == 1) ? 1'b1 : 0; //または、eb=382かつm1a*m2aの48bit目が立ってる
+    assign subnormal = (eb < 9'd128 & e_9 == eb) ? 1'b1 :
+                       (ea < 9'd128 & e_9 == ea) ? 1'b1 :
+                       (ec < 9'd128 & e_9 == ec) ? 1'b1 :
+                       (ed < 9'd128 & e_9 == ed) ? 1'b1 : 0;
 
-    assign shift_e = (subnormal == 1 & ea < 9'd128 & m1am2a[47] == 0) ? 128 - ea :
-                     (subnormal == 1 & eb < 9'd128 & m1am2a[47] == 1) ? 128 - eb : 0;
+    assign inf = (eb > 9'd381 & e_9 == eb) ? 1'b1 :
+                 (ea > 9'd381 & e_9 == ea) ? 1'b1 :
+                 (ec > 9'd381 & e_9 == ec) ? 1'b1 :
+                 (ed > 9'd381 & e_9 == ed) ? 1'b1 : 0; //または、eb=382かつm1a*m2aの48bit目が立ってる
+
+    assign shift_e = (subnormal == 1 & eb < 9'd128 & e_9 == eb) ? 128 - eb :
+                     (subnormal == 1 & ea < 9'd128 & e_9 == ea) ? 128 - ea :
+                     (subnormal == 1 & ec < 9'd128 & e_9 == ec) ? 128 - ec :
+                     (subnormal == 1 & ed < 9'd128 & e_9 == ed) ? 128 - ed : 0;
+
 
     assign subnormal_m = {1'b1, m} >> shift_e;
     assign shifted_m = subnormal_m[22:0];
