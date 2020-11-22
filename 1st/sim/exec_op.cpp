@@ -215,7 +215,7 @@ int exec_op(op_info op, bool print_calc)
     {
         rs = cur_env.GPR[op.opland_bit[1]];
         sp = rs + op.offset;
-        rd = stack[sp / 4];
+        rd = stack[sp / 4].first;
         cur_env.GPR[op.opland_bit[0]] = rd;
 
         if (print_calc)
@@ -226,7 +226,8 @@ int exec_op(op_info op, bool print_calc)
         rt = cur_env.GPR[op.opland_bit[1]];
         sp = rt + op.offset;
         rs = cur_env.GPR[op.opland_bit[0]];
-        stack[sp / 4] = rs;
+        stack[sp / 4].first = rs;
+        stack[sp / 4].second = cur_env.PC;
 
         if (print_calc)
             printf("sw\t%d(%08X),\tstack[%d(%08X)(%d(%08X)) = %d(%08X)]\n", rs, rs, op.offset, op.offset, rt, rt, sp, sp);
@@ -367,7 +368,7 @@ int exec_op(op_info op, bool print_calc)
     {
         rs = cur_env.GPR[op.opland_bit[1]];
         sp = rs + op.offset;
-        frd.i = stack[sp / 4];
+        frd.i = stack[sp / 4].first;
         cur_env.FPR[op.opland_bit[0]] = frd.f;
 
         if (print_calc)
@@ -378,7 +379,8 @@ int exec_op(op_info op, bool print_calc)
         rt = cur_env.GPR[op.opland_bit[1]];
         sp = rt + op.offset;
         frs.f = cur_env.FPR[op.opland_bit[0]];
-        stack[sp / 4] = frs.i;
+        stack[sp / 4].first = frs.i;
+        stack[sp / 4].second = cur_env.PC;
 
         if (print_calc)
             printf("sw\t%f(%08X),\tstack[%d(%08X)(%d(%08X)) = %d(%08X)]\n", frs.f, frs.i, op.offset, op.offset, rt, rt, sp, sp);

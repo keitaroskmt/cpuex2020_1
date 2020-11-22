@@ -32,4 +32,4 @@ extern core_env cur_env;
 extern std::map<std::string, int> label_pos, label_pos_bc;
 extern std::map<std::string, long long int> label_counter;
 extern std::map<int, int> posbc2pos;
-extern int *stack;
+extern std::vector<std::pair<int, unsigned long long int>> stack;

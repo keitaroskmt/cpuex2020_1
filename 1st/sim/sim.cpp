@@ -2,6 +2,7 @@
 #include <string>
 #include <fcntl.h>
 #include <regex>
+#include <utility>
 #include <map>
 #include <vector>
 #include <errno.h>
@@ -24,7 +25,7 @@ core_env cur_env;
 std::map<std::string, int> label_pos, label_pos_bc;
 std::map<std::string, long long int> label_counter;
 std::map<int, int> posbc2pos;
-int *stack = (int *)malloc(sizeof(int) * 1000000);
+std::vector<std::pair<int, unsigned long long int>> stack(1000000, std::make_pair(0, 0));
 int exec_step(bool print_process, bool print_calc, bool print_bytecode, bool label_count);
 
 int main(int argc, char *argv[])
@@ -105,8 +106,6 @@ int main(int argc, char *argv[])
     int line = 0;
     int loop = 0;
     char buf[256];
-    if (stack == NULL)
-        perror("malloc error");
 
     cur_env.PC = 0;
     // 事前に行数取得
@@ -166,7 +165,6 @@ int main(int argc, char *argv[])
     if (label_count)
         print_label_stats();
 
-    free(stack);
     if (is_out)
         write_file("io/out/" + outfile, mandelbrot);
 
