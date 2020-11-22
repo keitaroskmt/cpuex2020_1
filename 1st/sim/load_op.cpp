@@ -95,6 +95,7 @@ int load_ops(FILE *fp)
             new_op.label = results[1].str();
             label_pos[new_op.label] = i;
             label_pos_bc[new_op.label] = idx;
+            label_counter[new_op.label] = 0;
             ops.push_back(new_op);
         }
         // ex. .global

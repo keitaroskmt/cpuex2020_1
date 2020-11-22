@@ -18,7 +18,7 @@ void print_state()
     for (int i = 0; i < 32; i++)
         fpr[i].f = cur_env.FPR[i];
 
-    printf("PC: %d\nGPR\n", cur_env.PC);
+    printf("PC: %llu\nGPR\n", cur_env.PC);
     for (int i = 0; i < 32; i += 4)
     {
         printf("%d-%d\t%d\t%d\t%d\t%d\n", i, i + 3, cur_env.GPR[i], cur_env.GPR[i + 1], cur_env.GPR[i + 2], cur_env.GPR[i + 3]);
@@ -36,7 +36,26 @@ void print_state()
 // 命令実行数を出力する
 void print_stats()
 {
+    printf("\ninstruction statistics\n");
     for (auto itr = op_counter.begin(); itr != op_counter.end(); ++itr)
+    {
+        // 使った命令だけを表示
+        if (itr->second != 0)
+            printf("%s:\t%d\n", (itr->first).c_str(), itr->second);
+    }
+    printf("\nlabel statistics\n");
+    for (auto itr = label_counter.begin(); itr != label_counter.end(); ++itr)
+    {
+        // 使った命令だけを表示
+        if (itr->second != 0)
+            printf("%s:\t%d\n", (itr->first).c_str(), itr->second);
+    }
+    return;
+}
+void print_label_stats()
+{
+    printf("\nlabel statistics\n");
+    for (auto itr = label_counter.begin(); itr != label_counter.end(); ++itr)
     {
         // 使った命令だけを表示
         if (itr->second != 0)
@@ -143,7 +162,7 @@ const std::map<std::string, int> reg_name = {
     {"%fzero", 63}};
 
 // 命令の実行数を保持する
-std::map<std::string, int> op_counter = {
+std::map<std::string, long long int> op_counter = {
     {"add", 0},
     {"sub", 0},
     {"and", 0},

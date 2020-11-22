@@ -3,7 +3,7 @@
 // レジスタなどのコアの内部環境の保持
 typedef struct
 {
-    int PC;
+    unsigned long long int PC;
     int GPR[32];
     float FPR[32];
     char FPCC[9];
@@ -29,6 +29,6 @@ typedef struct
 extern int cur_opnum, cur_in;
 extern std::vector<op_info> ops;
 extern core_env cur_env;
-extern std::map<std::string, int> label_pos, label_pos_bc;
+extern std::map<std::string, int> label_pos, label_pos_bc, label_counter;
 extern std::map<int, int> posbc2pos;
 extern int *stack;

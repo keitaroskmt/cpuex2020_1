@@ -8,6 +8,8 @@
 #include <unistd.h>
 #include <math.h>
 #include <time.h>
+#include <string.h>
+#include <iostream>
 #include "sim.h"
 #include "exec_op.h"
 #include "load_op.h"
@@ -20,9 +22,10 @@ int cur_opnum, cur_in;
 std::vector<op_info> ops;
 core_env cur_env;
 std::map<std::string, int> label_pos, label_pos_bc;
+std::map<std::string, long long int> label_counter;
 std::map<int, int> posbc2pos;
 int *stack = (int *)malloc(sizeof(int) * 1000000);
-int exec_step(bool print_process, bool print_calc, bool print_bytecode);
+int exec_step(bool print_process, bool print_calc, bool print_bytecode, bool label_count);
 
 int main(int argc, char *argv[])
 {
@@ -34,13 +37,15 @@ int main(int argc, char *argv[])
     bool print_calc = false;
     bool print_bc = false;
     bool mandelbrot = false;
+    bool label_count = false;
     bool is_in = false;
     bool is_out = false;
     bool measure_time = false;
     std::string n = "fib";
-    std::string infile = "ball";
+    std::string infile = "sin.txt";
+    std::string outfile = "out.txt";
 
-    while ((opt = getopt(argc, argv, "sbcpn:i:omd")) != -1)
+    while ((opt = getopt(argc, argv, "sbcpn:i:o:mdl")) != -1)
     {
         switch (opt)
         {
@@ -71,6 +76,7 @@ int main(int argc, char *argv[])
 
         case 'o':
             is_out = true;
+            outfile = optarg;
             break;
 
         case 'm':
@@ -81,8 +87,12 @@ int main(int argc, char *argv[])
             measure_time = true;
             break;
 
+        case 'l':
+            label_count = true;
+            break;
+
         default:
-            printf("Usage: %s [-s] [-b] [-c] [-p] [-n arg] [-i arg] [-o]\n", argv[0]);
+            printf("Usage: %s [-s] [-b] [-c] [-p] [-n arg] [-i arg] [-o arg]\n", argv[0]);
             break;
         }
     }
@@ -95,6 +105,8 @@ int main(int argc, char *argv[])
     int line = 0;
     int loop = 0;
     char buf[256];
+    if (stack == NULL)
+        perror("malloc error");
 
     cur_env.PC = 0;
     // 事前に行数取得
@@ -134,11 +146,15 @@ int main(int argc, char *argv[])
             if (exec_cmd(&loop, &is_stat, &print_bc, &print_calc, &print_process))
                 return 0;
 
-        if (exec_step(print_process, print_calc, print_bc))
+        if (exec_step(print_process, print_calc, print_bc, label_count))
             break;
 
         if (ops[cur_opnum].type == 0)
+        {
+            if (measure_time && cur_env.PC && cur_env.PC % 1000000000 == 0)
+                std::cout << cur_env.PC / 1000000000 << "G..." << std::flush;
             loop--;
+        }
     }
 
     printf("register state\n");
@@ -146,13 +162,13 @@ int main(int argc, char *argv[])
     printf("v0: %d\n", cur_env.GPR[reg_name.at("%v0")]);
     printf("f0: %f\n", cur_env.FPR[reg_name.at("%f0") - 32]);
     if (is_stat)
-    {
-        printf("\ninstruction statistics\n");
         print_stats();
-    }
+    if (label_count)
+        print_label_stats();
+
     free(stack);
     if (is_out)
-        write_file("io/out/out.txt", mandelbrot);
+        write_file("io/out/" + outfile, mandelbrot);
 
     clock_t end_time = clock();
     const double time = static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC * 1000.0;
@@ -162,12 +178,12 @@ int main(int argc, char *argv[])
 }
 
 // 1step実行する 命令なら実行し、その他なら読み飛ばす
-int exec_step(bool print_process, bool print_calc, bool print_bc)
+int exec_step(bool print_process, bool print_calc, bool print_bc, bool label_count)
 {
     if (ops[cur_opnum].type == 0)
     {
         if (print_process)
-            printf("%d\t%d\t%s\t%s\t%s\t%s\t%d\n", cur_env.PC, 4 * ops[cur_opnum].op_idx, ops[cur_opnum].opcode.c_str(), ops[cur_opnum].opland[0].c_str(), ops[cur_opnum].opland[1].c_str(), ops[cur_opnum].opland[2].c_str(), ops[cur_opnum].offset);
+            printf("%llu\t%d\t%s\t%s\t%s\t%s\t%d\n", cur_env.PC, 4 * ops[cur_opnum].op_idx, ops[cur_opnum].opcode.c_str(), ops[cur_opnum].opland[0].c_str(), ops[cur_opnum].opland[1].c_str(), ops[cur_opnum].opland[2].c_str(), ops[cur_opnum].offset);
 
         if (print_bc)
             print_bytecode(ops[cur_opnum]);
@@ -178,8 +194,11 @@ int exec_step(bool print_process, bool print_calc, bool print_bc)
     }
     else if (ops[cur_opnum].type == 1)
     {
+        std::string label = ops[cur_opnum].label;
         if (print_process)
-            printf("%s:\n", ops[cur_opnum].label.c_str());
+            printf("%s:\n", label.c_str());
+        if (label_count)
+            label_counter[label]++;
     }
     cur_opnum++;
     return 0;

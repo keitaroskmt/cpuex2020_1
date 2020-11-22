@@ -233,6 +233,11 @@ int exec_op(op_info op, bool print_calc)
     }
     else if (op.opcode == "in")
     {
+        if (cur_in == in_bytes.size())
+        {
+            printf("too many in inst\n");
+            return 1;
+        }
         rt = cur_env.GPR[op.opland_bit[0]];
         rt = rt & 0xFFFFFF00;
         rs = in_bytes[cur_in] & 0xFF;
