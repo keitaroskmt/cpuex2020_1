@@ -41,14 +41,7 @@ void print_stats()
     {
         // 使った命令だけを表示
         if (itr->second != 0)
-            printf("%s:\t%d\n", (itr->first).c_str(), itr->second);
-    }
-    printf("\nlabel statistics\n");
-    for (auto itr = label_counter.begin(); itr != label_counter.end(); ++itr)
-    {
-        // 使った命令だけを表示
-        if (itr->second != 0)
-            printf("%s:\t%d\n", (itr->first).c_str(), itr->second);
+            printf("%s:\t%lld\n", (itr->first).c_str(), itr->second);
     }
     return;
 }
@@ -59,7 +52,7 @@ void print_label_stats()
     {
         // 使った命令だけを表示
         if (itr->second != 0)
-            printf("%s:\t%d\n", (itr->first).c_str(), itr->second);
+            printf("%s:\t%lld\n", (itr->first).c_str(), itr->second);
     }
     return;
 }

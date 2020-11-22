@@ -29,6 +29,7 @@ typedef struct
 extern int cur_opnum, cur_in;
 extern std::vector<op_info> ops;
 extern core_env cur_env;
-extern std::map<std::string, int> label_pos, label_pos_bc, label_counter;
+extern std::map<std::string, int> label_pos, label_pos_bc;
+extern std::map<std::string, long long int> label_counter;
 extern std::map<int, int> posbc2pos;
 extern int *stack;
