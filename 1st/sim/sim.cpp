@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
     bool label_count = false;
     bool is_in = false;
     bool is_out = false;
-    bool measure_time = false;
+    bool debug_mode = false;
     std::string n = "fib";
     std::string infile = "sin.txt";
     std::string outfile = "out.txt";
@@ -85,7 +85,7 @@ int main(int argc, char *argv[])
             break;
 
         case 'd':
-            measure_time = true;
+            debug_mode = true;
             break;
 
         case 'l':
@@ -105,6 +105,8 @@ int main(int argc, char *argv[])
     int errno;
     int line = 0;
     int loop = 0;
+    int max_sp = 0;
+    int max_hp = 0;
     char buf[256];
 
     cur_env.PC = 0;
@@ -150,8 +152,15 @@ int main(int argc, char *argv[])
 
         if (ops[cur_opnum].type == 0)
         {
-            if (measure_time && cur_env.PC && cur_env.PC % 1000000000 == 0)
-                std::cout << cur_env.PC / 1000000000 << "G..." << std::flush;
+            if (debug_mode)
+            {
+                if (cur_env.PC && cur_env.PC % 1000000000 == 0)
+                    std::cout << cur_env.PC / 1000000000 << "G..." << std::flush;
+                if (cur_env.GPR[29] > max_sp)
+                    max_sp = cur_env.GPR[29];
+                if (cur_env.GPR[28] > max_hp)
+                    max_hp = cur_env.GPR[28];
+            }
             loop--;
         }
     }
@@ -170,8 +179,11 @@ int main(int argc, char *argv[])
 
     clock_t end_time = clock();
     const double time = static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC * 1000.0;
-    if (measure_time)
+    if (debug_mode)
+    {
         printf("time %.1lf[s]\n", time / 1000);
+        printf("max sp: %d\nmax hp %d\n", max_sp, max_hp);
+    }
     return 0;
 }
 
