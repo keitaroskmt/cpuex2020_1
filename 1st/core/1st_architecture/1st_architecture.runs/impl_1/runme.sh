@@ -24,7 +24,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='C:/Users/nowi74/cpuex2020_1/1st/core/1st_architecture/1st_architecture.runs/impl_1'
+HD_PWD='C:/Users/nowi74/OneDrive/cpuexcore/1st/core/1st_architecture/1st_architecture.runs/impl_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log
@@ -41,7 +41,7 @@ EAStep()
 }
 
 # pre-commands:
-/bin/touch .write_bitstream.begin.rst
+/bin/touch .init_design.begin.rst
 EAStep vivado -log arch_1st_wrapper.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source arch_1st_wrapper.tcl -notrace
 
 

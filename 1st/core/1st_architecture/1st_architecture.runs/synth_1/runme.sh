@@ -24,7 +24,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='C:/Users/nowi74/cpuex2020_1/1st/core/1st_architecture/1st_architecture.runs/synth_1'
+HD_PWD='C:/Users/nowi74/OneDrive/cpuexcore/1st/core/1st_architecture/1st_architecture.runs/synth_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log

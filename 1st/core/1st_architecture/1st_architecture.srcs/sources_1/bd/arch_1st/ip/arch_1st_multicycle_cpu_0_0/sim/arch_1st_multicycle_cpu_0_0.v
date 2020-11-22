@@ -56,26 +56,21 @@
 (* DowngradeIPIdentifiedWarnings = "yes" *)
 module arch_1st_multicycle_cpu_0_0 (
   clk,
-  rstn,
-  led,
+  rstn_,
   rxd,
   txd
 );
 
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME clk, ASSOCIATED_RESET rstn, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN arch_1st_clk_wiz_0_0_clk_out1, INSERT_VIP 0" *)
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME clk, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN arch_1st_clk_wiz_0_0_clk_out1, INSERT_VIP 0" *)
 (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 clk CLK" *)
 input wire clk;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME rstn, POLARITY ACTIVE_LOW, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 rstn RST" *)
-input wire rstn;
-output wire [7 : 0] led;
+input wire rstn_;
 input wire rxd;
 output wire txd;
 
   multicycle_cpu inst (
     .clk(clk),
-    .rstn(rstn),
-    .led(led),
+    .rstn_(rstn_),
     .rxd(rxd),
     .txd(txd)
   );

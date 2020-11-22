@@ -11,15 +11,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="199587200fs"></ZoomStartTime>
-      <ZoomEndTime time="199920601fs"></ZoomEndTime>
-      <Cursor1Time time="199725000fs"></Cursor1Time>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="240917fs"></ZoomEndTime>
+      <Cursor1Time time="2293235000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="129"></NameColumnWidth>
-      <ValueColumnWidth column_width="72"></ValueColumnWidth>
+      <NameColumnWidth column_width="160"></NameColumnWidth>
+      <ValueColumnWidth column_width="111"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="71" />
+   <WVObjectSize size="75" />
    <wave_markers>
       <marker time="2383421" label="" />
       <marker time="3094000" label="" />
@@ -33,22 +33,41 @@
       <obj_property name="ElementShortName">rstn</obj_property>
       <obj_property name="ObjectShortName">rstn</obj_property>
    </wvobject>
-   <wvobject fp_name="/arch_1st_wrapper/arch_1st_i/multicycle_cpu_0/inst/led" type="array">
-      <obj_property name="ElementShortName">led[7:0]</obj_property>
-      <obj_property name="ObjectShortName">led[7:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   <wvobject fp_name="/arch_1st_wrapper/arch_1st_i/multicycle_cpu_0/inst/rstn2" type="logic">
+      <obj_property name="ElementShortName">rstn2</obj_property>
+      <obj_property name="ObjectShortName">rstn2</obj_property>
    </wvobject>
-   <wvobject fp_name="/arch_1st_wrapper/arch_1st_i/multicycle_cpu_0/inst/txd" type="logic">
-      <obj_property name="ElementShortName">txd</obj_property>
-      <obj_property name="ObjectShortName">txd</obj_property>
+   <wvobject fp_name="/arch_1st_wrapper/arch_1st_i/multicycle_cpu_0/inst/rstn1" type="logic">
+      <obj_property name="ElementShortName">rstn1</obj_property>
+      <obj_property name="ObjectShortName">rstn1</obj_property>
    </wvobject>
    <wvobject fp_name="/arch_1st_wrapper/arch_1st_i/multicycle_cpu_0/inst/rxd" type="logic">
       <obj_property name="ElementShortName">rxd</obj_property>
       <obj_property name="ObjectShortName">rxd</obj_property>
    </wvobject>
+   <wvobject fp_name="/arch_1st_wrapper/arch_1st_i/multicycle_cpu_0/inst/txd" type="logic">
+      <obj_property name="ElementShortName">txd</obj_property>
+      <obj_property name="ObjectShortName">txd</obj_property>
+   </wvobject>
+   <wvobject fp_name="/arch_1st_wrapper/arch_1st_i/multicycle_cpu_0/inst/counter" type="array">
+      <obj_property name="ElementShortName">counter[31:0]</obj_property>
+      <obj_property name="ObjectShortName">counter[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/arch_1st_wrapper/arch_1st_i/multicycle_cpu_0/inst/led" type="array">
+      <obj_property name="ElementShortName">led[7:0]</obj_property>
+      <obj_property name="ObjectShortName">led[7:0]</obj_property>
+   </wvobject>
    <wvobject fp_name="/arch_1st_wrapper/arch_1st_i/multicycle_cpu_0/inst/ferr" type="logic">
       <obj_property name="ElementShortName">ferr</obj_property>
       <obj_property name="ObjectShortName">ferr</obj_property>
+   </wvobject>
+   <wvobject fp_name="/arch_1st_wrapper/arch_1st_i/multicycle_cpu_0/inst/pc" type="array">
+      <obj_property name="ElementShortName">pc[31:0]</obj_property>
+      <obj_property name="ObjectShortName">pc[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/arch_1st_wrapper/arch_1st_i/multicycle_cpu_0/inst/pc_" type="array">
+      <obj_property name="ElementShortName">pc_[31:0]</obj_property>
+      <obj_property name="ObjectShortName">pc_[31:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/arch_1st_wrapper/arch_1st_i/multicycle_cpu_0/inst/pc_wire" type="array">
       <obj_property name="ElementShortName">pc_wire[31:0]</obj_property>
@@ -58,12 +77,10 @@
    <wvobject fp_name="/arch_1st_wrapper/arch_1st_i/multicycle_cpu_0/inst/opcode" type="array">
       <obj_property name="ElementShortName">opcode[5:0]</obj_property>
       <obj_property name="ObjectShortName">opcode[5:0]</obj_property>
-      <obj_property name="Radix">BINARYRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/arch_1st_wrapper/arch_1st_i/multicycle_cpu_0/inst/funct" type="array">
       <obj_property name="ElementShortName">funct[5:0]</obj_property>
       <obj_property name="ObjectShortName">funct[5:0]</obj_property>
-      <obj_property name="Radix">BINARYRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/arch_1st_wrapper/arch_1st_i/multicycle_cpu_0/inst/UBusy" type="logic">
       <obj_property name="ElementShortName">UBusy</obj_property>
@@ -117,19 +134,13 @@
       <obj_property name="ElementShortName">ALUSrcA</obj_property>
       <obj_property name="ObjectShortName">ALUSrcA</obj_property>
    </wvobject>
+   <wvobject fp_name="/arch_1st_wrapper/arch_1st_i/multicycle_cpu_0/inst/AndiOri" type="logic">
+      <obj_property name="ElementShortName">AndiOri</obj_property>
+      <obj_property name="ObjectShortName">AndiOri</obj_property>
+   </wvobject>
    <wvobject fp_name="/arch_1st_wrapper/arch_1st_i/multicycle_cpu_0/inst/RegWrite" type="logic">
       <obj_property name="ElementShortName">RegWrite</obj_property>
       <obj_property name="ObjectShortName">RegWrite</obj_property>
-   </wvobject>
-   <wvobject fp_name="/arch_1st_wrapper/arch_1st_i/multicycle_cpu_0/inst/mem_to_reg" type="array">
-      <obj_property name="ElementShortName">mem_to_reg[31:0]</obj_property>
-      <obj_property name="ObjectShortName">mem_to_reg[31:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/arch_1st_wrapper/arch_1st_i/multicycle_cpu_0/inst/regdst" type="array">
-      <obj_property name="ElementShortName">regdst[5:0]</obj_property>
-      <obj_property name="ObjectShortName">regdst[5:0]</obj_property>
-      <obj_property name="Radix">BINARYRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/arch_1st_wrapper/arch_1st_i/multicycle_cpu_0/inst/RegDst" type="array">
       <obj_property name="ElementShortName">RegDst[1:0]</obj_property>
@@ -150,7 +161,6 @@
    <wvobject fp_name="/arch_1st_wrapper/arch_1st_i/multicycle_cpu_0/inst/alu_result" type="array">
       <obj_property name="ElementShortName">alu_result[31:0]</obj_property>
       <obj_property name="ObjectShortName">alu_result[31:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/arch_1st_wrapper/arch_1st_i/multicycle_cpu_0/inst/fpu_result" type="array">
       <obj_property name="ElementShortName">fpu_result[31:0]</obj_property>
@@ -212,10 +222,6 @@
       <obj_property name="ElementShortName">data[31:0]</obj_property>
       <obj_property name="ObjectShortName">data[31:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/arch_1st_wrapper/arch_1st_i/multicycle_cpu_0/inst/pc_" type="array">
-      <obj_property name="ElementShortName">pc_[31:0]</obj_property>
-      <obj_property name="ObjectShortName">pc_[31:0]</obj_property>
-   </wvobject>
    <wvobject fp_name="/arch_1st_wrapper/arch_1st_i/multicycle_cpu_0/inst/op1" type="array">
       <obj_property name="ElementShortName">op1[5:0]</obj_property>
       <obj_property name="ObjectShortName">op1[5:0]</obj_property>
@@ -223,6 +229,14 @@
    <wvobject fp_name="/arch_1st_wrapper/arch_1st_i/multicycle_cpu_0/inst/op2" type="array">
       <obj_property name="ElementShortName">op2[5:0]</obj_property>
       <obj_property name="ObjectShortName">op2[5:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/arch_1st_wrapper/arch_1st_i/multicycle_cpu_0/inst/regdst" type="array">
+      <obj_property name="ElementShortName">regdst[5:0]</obj_property>
+      <obj_property name="ObjectShortName">regdst[5:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/arch_1st_wrapper/arch_1st_i/multicycle_cpu_0/inst/mem_to_reg" type="array">
+      <obj_property name="ElementShortName">mem_to_reg[31:0]</obj_property>
+      <obj_property name="ObjectShortName">mem_to_reg[31:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/arch_1st_wrapper/arch_1st_i/multicycle_cpu_0/inst/output_rf1" type="array">
       <obj_property name="ElementShortName">output_rf1[31:0]</obj_property>
@@ -279,10 +293,6 @@
    <wvobject fp_name="/arch_1st_wrapper/arch_1st_i/multicycle_cpu_0/inst/pcen" type="logic">
       <obj_property name="ElementShortName">pcen</obj_property>
       <obj_property name="ObjectShortName">pcen</obj_property>
-   </wvobject>
-   <wvobject fp_name="/arch_1st_wrapper/arch_1st_i/multicycle_cpu_0/inst/pc" type="array">
-      <obj_property name="ElementShortName">pc[31:0]</obj_property>
-      <obj_property name="ObjectShortName">pc[31:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/arch_1st_wrapper/arch_1st_i/multicycle_cpu_0/inst/inst_reg" type="array">
       <obj_property name="ElementShortName">inst_reg[31:0]</obj_property>

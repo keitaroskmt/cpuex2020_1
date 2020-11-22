@@ -2,11 +2,11 @@
 # Vivado v2019.2.1 (64-bit)
 # SW Build 2729669 on Thu Dec  5 04:49:17 MST 2019
 # IP Build 2729494 on Thu Dec  5 07:38:25 MST 2019
-# Start of session at: Sun Nov 15 21:34:47 2020
-# Process ID: 6240
-# Current directory: C:/Users/nowi74/cpuex2020_1/1st/core/1st_architecture/1st_architecture.runs/synth_1
+# Start of session at: Sun Nov 22 18:54:02 2020
+# Process ID: 9340
+# Current directory: C:/Users/nowi74/OneDrive/cpuexcore/1st/core/1st_architecture/1st_architecture.runs/synth_1
 # Command line: vivado.exe -log arch_1st_wrapper.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source arch_1st_wrapper.tcl
-# Log file: C:/Users/nowi74/cpuex2020_1/1st/core/1st_architecture/1st_architecture.runs/synth_1/arch_1st_wrapper.vds
-# Journal file: C:/Users/nowi74/cpuex2020_1/1st/core/1st_architecture/1st_architecture.runs/synth_1\vivado.jou
+# Log file: C:/Users/nowi74/OneDrive/cpuexcore/1st/core/1st_architecture/1st_architecture.runs/synth_1/arch_1st_wrapper.vds
+# Journal file: C:/Users/nowi74/OneDrive/cpuexcore/1st/core/1st_architecture/1st_architecture.runs/synth_1\vivado.jou
 #-----------------------------------------------------------
 source arch_1st_wrapper.tcl -notrace

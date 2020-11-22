@@ -1,7 +1,7 @@
 Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2019.2.1 (win64) Build 2729669 Thu Dec  5 04:49:17 MST 2019
-| Date         : Sun Nov 15 21:46:11 2020
+| Date         : Sun Nov 22 19:04:55 2020
 | Host         : LAPTOP-G1I2TTIP running 64-bit major release  (build 9200)
 | Command      : report_methodology -file arch_1st_wrapper_methodology_drc_routed.rpt -pb arch_1st_wrapper_methodology_drc_routed.pb -rpx arch_1st_wrapper_methodology_drc_routed.rpx
 | Design       : arch_1st_wrapper
@@ -20,7 +20,7 @@ Table of Contents
 1. REPORT SUMMARY
 -----------------
             Netlist: netlist
-          Floorplan: checkpoint_arch_1st_wrapper
+          Floorplan: design_1
       Design limits: <entire design considered>
              Max violations: <unlimited>
              Violations found: 5

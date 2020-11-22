@@ -1,45 +1,45 @@
 Vivado Simulator 2019.2
 Copyright 1986-1999, 2001-2019 Xilinx, Inc. All Rights Reserved.
-Running: C:/Xilinx/Vivado/2019.2/bin/unwrapped/win64.o/xelab.exe -wto 01961f57f7a14896be55f584f33c857b --incr --debug typical --relax --mt 2 -L xil_defaultlib -L sim_clk_gen_v1_0_2 -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot arch_1st_wrapper_behav xil_defaultlib.arch_1st_wrapper xil_defaultlib.glbl -log elaborate.log 
+Running: C:/Xilinx/Vivado/2019.2/bin/unwrapped/win64.o/xelab.exe -wto 01961f57f7a14896be55f584f33c857b --incr --debug typical --relax --mt 2 -L xil_defaultlib -L sim_clk_gen_v1_0_2 -L util_vector_logic_v2_0_1 -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot arch_1st_wrapper_behav xil_defaultlib.arch_1st_wrapper xil_defaultlib.glbl -log elaborate.log 
 Using 2 slave threads.
 Starting static elaboration
 Pass Through NonSizing Optimizer
-WARNING: [VRFC 10-526] concatenation with unsized literal; will interpret as 32 bits [C:/Users/nowi74/cpuex2020_1/1st/core/src/fpu/fabs.v:7]
+WARNING: [VRFC 10-526] concatenation with unsized literal; will interpret as 32 bits [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fabs.v:7]
 Completed static elaboration
 Starting simulation data flow analysis
-WARNING: [XSIM 43-4099] "C:/Users/nowi74/cpuex2020_1/1st/core/src/rams_sp_rf.v" Line 3. Module rams_sp_rf doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/nowi74/cpuex2020_1/1st/core/src/multi_control_unit.v" Line 3. Module multi_control_unit doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/nowi74/cpuex2020_1/1st/core/src/multi_control_unit.v" Line 52. Module multi_main_decoder doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/nowi74/cpuex2020_1/1st/core/src/multi_control_unit.v" Line 553. Module multi_ALU_decoder doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/nowi74/cpuex2020_1/1st/core/src/rams_dp_wf.v" Line 4. Module rams_dp_wf doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/nowi74/cpuex2020_1/1st/core/src/rams_dp_wf.v" Line 4. Module rams_dp_wf doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/rams_sp_rf.v" Line 3. Module rams_sp_rf doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/multi_control_unit.v" Line 3. Module multi_control_unit doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/multi_control_unit.v" Line 55. Module multi_main_decoder doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/multi_control_unit.v" Line 602. Module multi_ALU_decoder doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/rams_dp_wf.v" Line 4. Module rams_dp_wf doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/rams_dp_wf.v" Line 4. Module rams_dp_wf doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "D:/hardware/hardware7/uart_loopback_win/uart_tx.sv" Line 3. Module uart_tx_default doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "D:/hardware/hardware7/uart_loopback_win/uart_rx.sv" Line 3. Module uart_rx_default doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/nowi74/cpuex2020_1/1st/core/src/alu.v" Line 2. Module alu doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/nowi74/cpuex2020_1/1st/core/src/fpu.v" Line 2. Module fpu doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/nowi74/cpuex2020_1/1st/core/src/fpu/fadd.v" Line 3. Module fadd doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/nowi74/cpuex2020_1/1st/core/src/fpu/fadd.v" Line 91. Module fadd_1st doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/nowi74/cpuex2020_1/1st/core/src/fpu/fadd.v" Line 147. Module fadd_2nd doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/nowi74/cpuex2020_1/1st/core/src/fpu/fadd.v" Line 205. Module fadd_3rd doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/nowi74/cpuex2020_1/1st/core/src/fpu/fsub.v" Line 3. Module fsub doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/nowi74/cpuex2020_1/1st/core/src/fpu/fsub.v" Line 91. Module fsub_1st doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/nowi74/cpuex2020_1/1st/core/src/fpu/fsub.v" Line 147. Module fsub_2nd doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/nowi74/cpuex2020_1/1st/core/src/fpu/fsub.v" Line 205. Module fsub_3rd doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/nowi74/cpuex2020_1/1st/core/src/fpu/fmul.v" Line 3. Module fmul doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/nowi74/cpuex2020_1/1st/core/src/fpu/fmul.v" Line 65. Module fmul_1st doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/nowi74/cpuex2020_1/1st/core/src/fpu/fmul.v" Line 121. Module fmul_2nd doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/nowi74/cpuex2020_1/1st/core/src/fpu/fdiv.v" Line 3. Module fdiv doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/nowi74/cpuex2020_1/1st/core/src/fpu/finv.v" Line 3. Module finv doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/nowi74/cpuex2020_1/1st/core/src/fpu/finv.v" Line 88. Module finv_table doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/nowi74/cpuex2020_1/1st/core/src/fpu/finv.v" Line 41. Module finv_1st doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/nowi74/cpuex2020_1/1st/core/src/fpu/fmul.v" Line 3. Module fmul doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/nowi74/cpuex2020_1/1st/core/src/fpu/fmul.v" Line 65. Module fmul_1st doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/nowi74/cpuex2020_1/1st/core/src/fpu/fmul.v" Line 121. Module fmul_2nd doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/nowi74/cpuex2020_1/1st/core/src/fpu/fneg.v" Line 3. Module fneg doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/nowi74/cpuex2020_1/1st/core/src/fpu/fabs.v" Line 3. Module fabs doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/nowi74/cpuex2020_1/1st/core/src/fpu/fsqrt.v" Line 3. Module fsqrt doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/nowi74/cpuex2020_1/1st/core/src/fpu/fsqrt.v" Line 77. Module fsqrt_table doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/nowi74/cpuex2020_1/1st/core/src/fpu/fsqrt.v" Line 43. Module fsqrt_1st doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/alu.v" Line 2. Module alu doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu.v" Line 2. Module fpu doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fadd.v" Line 3. Module fadd doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fadd.v" Line 91. Module fadd_1st doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fadd.v" Line 147. Module fadd_2nd doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fadd.v" Line 205. Module fadd_3rd doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fsub.v" Line 3. Module fsub doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fsub.v" Line 91. Module fsub_1st doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fsub.v" Line 147. Module fsub_2nd doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fsub.v" Line 205. Module fsub_3rd doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fmul.v" Line 3. Module fmul doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fmul.v" Line 65. Module fmul_1st doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fmul.v" Line 121. Module fmul_2nd doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fdiv.v" Line 3. Module fdiv doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/finv.v" Line 3. Module finv doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/finv.v" Line 86. Module finv_table doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/finv.v" Line 41. Module finv_1st doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fmul.v" Line 3. Module fmul doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fmul.v" Line 65. Module fmul_1st doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fmul.v" Line 121. Module fmul_2nd doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fneg.v" Line 3. Module fneg doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fabs.v" Line 3. Module fabs doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fsqrt.v" Line 3. Module fsqrt doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fsqrt.v" Line 77. Module fsqrt_table doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fsqrt.v" Line 43. Module fsqrt_1st doesn't have a timescale but at least one module in design has a timescale.
 Completed simulation data flow analysis
 Time Resolution for simulation is 1ps
 Compiling module xil_defaultlib.rams_sp_rf
@@ -73,8 +73,14 @@ Compiling module xil_defaultlib.fsqrt
 Compiling module xil_defaultlib.fpu
 Compiling module xil_defaultlib.multicycle_cpu
 Compiling module xil_defaultlib.arch_1st_multicycle_cpu_0_0
+Compiling module xil_defaultlib.send_reset
+Compiling module xil_defaultlib.arch_1st_send_reset_0_0
 Compiling module sim_clk_gen_v1_0_2.sim_clk_gen(CLOCK_PERIOD=10,INIT...
 Compiling module xil_defaultlib.arch_1st_sim_clk_gen_0_0
+Compiling module sim_clk_gen_v1_0_2.sim_clk_gen(CLOCK_PERIOD=9.00900...
+Compiling module xil_defaultlib.arch_1st_sim_clk_gen_1_0
+Compiling module util_vector_logic_v2_0_1.util_vector_logic_v2_0_1_util_ve...
+Compiling module xil_defaultlib.arch_1st_util_vector_logic_0_0
 Compiling module xil_defaultlib.arch_1st
 Compiling module xil_defaultlib.arch_1st_wrapper
 Compiling module xil_defaultlib.glbl

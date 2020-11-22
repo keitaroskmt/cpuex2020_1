@@ -1,0 +1,1439 @@
+#-----------------------------------------------------------
+# Vivado v2019.2.1 (64-bit)
+# SW Build 2729669 on Thu Dec  5 04:49:17 MST 2019
+# IP Build 2729494 on Thu Dec  5 07:38:25 MST 2019
+# Start of session at: Sun Nov 22 18:52:04 2020
+# Process ID: 13636
+# Current directory: C:/Users/nowi74/OneDrive/cpuexcore/1st/core/1st_architecture/1st_architecture.runs/arch_1st_multicycle_cpu_0_0_synth_1
+# Command line: vivado.exe -log arch_1st_multicycle_cpu_0_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source arch_1st_multicycle_cpu_0_0.tcl
+# Log file: C:/Users/nowi74/OneDrive/cpuexcore/1st/core/1st_architecture/1st_architecture.runs/arch_1st_multicycle_cpu_0_0_synth_1/arch_1st_multicycle_cpu_0_0.vds
+# Journal file: C:/Users/nowi74/OneDrive/cpuexcore/1st/core/1st_architecture/1st_architecture.runs/arch_1st_multicycle_cpu_0_0_synth_1\vivado.jou
+#-----------------------------------------------------------
+source arch_1st_multicycle_cpu_0_0.tcl -notrace
+Command: synth_design -top arch_1st_multicycle_cpu_0_0 -part xcku040-ffva1156-2-e -mode out_of_context
+Starting synth_design
+WARNING: [IP_Flow 19-3571] IP 'arch_1st_multicycle_cpu_0_0' is restricted:
+* Module reference is stale and needs refreshing.
+Attempting to get a license for feature 'Synthesis' and/or device 'xcku040'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xcku040'
+INFO: [Device 21-403] Loading part xcku040-ffva1156-2-e
+INFO: Launching helper process for spawning children vivado processes
+INFO: Helper process launched with PID 15260 
+WARNING: [Synth 8-1849] concatenation with unsized literal; will interpret as 32 bits [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fabs.v:7]
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1494.137 ; gain = 237.223
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'arch_1st_multicycle_cpu_0_0' [c:/Users/nowi74/OneDrive/cpuexcore/1st/core/1st_architecture/1st_architecture.srcs/sources_1/bd/arch_1st/ip/arch_1st_multicycle_cpu_0_0/synth/arch_1st_multicycle_cpu_0_0.v:58]
+INFO: [Synth 8-6157] synthesizing module 'multicycle_cpu' [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/multicycle_1st.v:4]
+INFO: [Synth 8-5534] Detected attribute (* mark_debug = "true" *) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/multicycle_1st.v:10]
+INFO: [Synth 8-5534] Detected attribute (* mark_debug = "true" *) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/multicycle_1st.v:11]
+INFO: [Synth 8-5534] Detected attribute (* mark_debug = "true" *) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/multicycle_1st.v:26]
+INFO: [Synth 8-5534] Detected attribute (* mark_debug = "true" *) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/multicycle_1st.v:27]
+INFO: [Synth 8-5534] Detected attribute (* mark_debug = "true" *) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/multicycle_1st.v:28]
+INFO: [Synth 8-5534] Detected attribute (* mark_debug = "true" *) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/multicycle_1st.v:46]
+INFO: [Synth 8-5534] Detected attribute (* mark_debug = "true" *) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/multicycle_1st.v:47]
+INFO: [Synth 8-5534] Detected attribute (* mark_debug = "true" *) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/multicycle_1st.v:50]
+INFO: [Synth 8-5534] Detected attribute (* mark_debug = "true" *) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/multicycle_1st.v:59]
+INFO: [Synth 8-5534] Detected attribute (* ASYNC_REG = "true" *) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/multicycle_1st.v:97]
+INFO: [Synth 8-6157] synthesizing module 'rams_sp_rf' [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/rams_sp_rf.v:3]
+INFO: [Synth 8-5534] Detected attribute (* ram_style = "block" *) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/rams_sp_rf.v:12]
+INFO: [Synth 8-3876] $readmem data file 'int_io.mem' is read successfully [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/rams_sp_rf.v:16]
+INFO: [Synth 8-6155] done synthesizing module 'rams_sp_rf' (1#1) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/rams_sp_rf.v:3]
+INFO: [Synth 8-6157] synthesizing module 'multi_control_unit' [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/multi_control_unit.v:3]
+INFO: [Synth 8-6157] synthesizing module 'multi_main_decoder' [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/multi_control_unit.v:55]
+	Parameter s_Fetch bound to: 0 - type: integer 
+	Parameter s_FetchWait bound to: 1 - type: integer 
+	Parameter s_FetchWait2 bound to: 2 - type: integer 
+	Parameter s_Decode bound to: 3 - type: integer 
+	Parameter s_MemAdr bound to: 4 - type: integer 
+	Parameter s_MemRead bound to: 5 - type: integer 
+	Parameter s_MemReadWait bound to: 6 - type: integer 
+	Parameter s_MemReadWait2 bound to: 7 - type: integer 
+	Parameter s_MemWriteback bound to: 8 - type: integer 
+	Parameter s_MemWrite bound to: 9 - type: integer 
+	Parameter s_Execute bound to: 10 - type: integer 
+	Parameter s_LoadUI bound to: 11 - type: integer 
+	Parameter s_LuiWriteback bound to: 12 - type: integer 
+	Parameter s_ALUWriteback bound to: 13 - type: integer 
+	Parameter s_Branch bound to: 14 - type: integer 
+	Parameter s_IMMExecute bound to: 15 - type: integer 
+	Parameter s_IMMWriteback bound to: 16 - type: integer 
+	Parameter s_Jump bound to: 17 - type: integer 
+	Parameter s_Jumpandlink bound to: 18 - type: integer 
+	Parameter s_Branchnotequal bound to: 19 - type: integer 
+	Parameter s_FPUExecute bound to: 20 - type: integer 
+	Parameter s_FPUWait5 bound to: 21 - type: integer 
+	Parameter s_FPUWait4 bound to: 22 - type: integer 
+	Parameter s_FPUWait3 bound to: 23 - type: integer 
+	Parameter s_FPUWait2 bound to: 24 - type: integer 
+	Parameter s_FPUWait1 bound to: 25 - type: integer 
+	Parameter s_FPUWriteback bound to: 26 - type: integer 
+	Parameter s_FSLTExecute bound to: 27 - type: integer 
+	Parameter s_FSLTWriteback bound to: 28 - type: integer 
+	Parameter s_OutPre bound to: 29 - type: integer 
+	Parameter s_OutWait bound to: 30 - type: integer 
+	Parameter s_Out bound to: 31 - type: integer 
+	Parameter s_InWait bound to: 32 - type: integer 
+	Parameter s_InPre bound to: 33 - type: integer 
+	Parameter s_In bound to: 34 - type: integer 
+	Parameter s_Jumpandlinkregister bound to: 35 - type: integer 
+	Parameter s_Ftoi bound to: 36 - type: integer 
+	Parameter s_Itof bound to: 37 - type: integer 
+	Parameter s_FtoiItofWB bound to: 38 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'multi_main_decoder' (2#1) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/multi_control_unit.v:55]
+INFO: [Synth 8-6157] synthesizing module 'multi_ALU_decoder' [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/multi_control_unit.v:602]
+	Parameter s_Execute bound to: 10 - type: integer 
+	Parameter s_Jumpandlinkregister bound to: 35 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'multi_ALU_decoder' (3#1) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/multi_control_unit.v:602]
+INFO: [Synth 8-6155] done synthesizing module 'multi_control_unit' (4#1) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/multi_control_unit.v:3]
+INFO: [Synth 8-6157] synthesizing module 'rams_dp_wf' [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/rams_dp_wf.v:4]
+INFO: [Synth 8-5534] Detected attribute (* ram_style = "distributed" *) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/rams_dp_wf.v:11]
+INFO: [Synth 8-6155] done synthesizing module 'rams_dp_wf' (5#1) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/rams_dp_wf.v:4]
+INFO: [Synth 8-6157] synthesizing module 'uart_tx' [D:/hardware/hardware7/uart_loopback_win/uart_tx.sv:3]
+	Parameter CLK_PER_HALF_BIT bound to: 5208 - type: integer 
+	Parameter e_clk_bit bound to: 10415 - type: integer 
+	Parameter e_clk_stop_bit bound to: 9373 - type: integer 
+	Parameter s_idle bound to: 0 - type: integer 
+	Parameter s_start_bit bound to: 1 - type: integer 
+	Parameter s_bit_0 bound to: 2 - type: integer 
+	Parameter s_bit_1 bound to: 3 - type: integer 
+	Parameter s_bit_2 bound to: 4 - type: integer 
+	Parameter s_bit_3 bound to: 5 - type: integer 
+	Parameter s_bit_4 bound to: 6 - type: integer 
+	Parameter s_bit_5 bound to: 7 - type: integer 
+	Parameter s_bit_6 bound to: 8 - type: integer 
+	Parameter s_bit_7 bound to: 9 - type: integer 
+	Parameter s_stop_bit bound to: 10 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'uart_tx' (6#1) [D:/hardware/hardware7/uart_loopback_win/uart_tx.sv:3]
+INFO: [Synth 8-6157] synthesizing module 'uart_rx' [D:/hardware/hardware7/uart_loopback_win/uart_rx.sv:3]
+	Parameter CLK_PER_HALF_BIT bound to: 5208 - type: integer 
+	Parameter e_clk_bit bound to: 10415 - type: integer 
+	Parameter s_idle bound to: 0 - type: integer 
+	Parameter s_half_clk_bit_wait bound to: 1 - type: integer 
+	Parameter s_start_bit bound to: 2 - type: integer 
+	Parameter s_bit_0 bound to: 3 - type: integer 
+	Parameter s_bit_1 bound to: 4 - type: integer 
+	Parameter s_bit_2 bound to: 5 - type: integer 
+	Parameter s_bit_3 bound to: 6 - type: integer 
+	Parameter s_bit_4 bound to: 7 - type: integer 
+	Parameter s_bit_5 bound to: 8 - type: integer 
+	Parameter s_bit_6 bound to: 9 - type: integer 
+	Parameter s_bit_7 bound to: 10 - type: integer 
+	Parameter s_stop_bit bound to: 11 - type: integer 
+INFO: [Synth 8-5534] Detected attribute (* ASYNC_REG = "true" *) [D:/hardware/hardware7/uart_loopback_win/uart_rx.sv:64]
+WARNING: [Synth 8-6014] Unused sequential element fin_stop_bit_reg was removed.  [D:/hardware/hardware7/uart_loopback_win/uart_rx.sv:73]
+INFO: [Synth 8-6155] done synthesizing module 'uart_rx' (7#1) [D:/hardware/hardware7/uart_loopback_win/uart_rx.sv:3]
+INFO: [Synth 8-6157] synthesizing module 'alu' [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/alu.v:2]
+INFO: [Synth 8-6155] done synthesizing module 'alu' (8#1) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/alu.v:2]
+INFO: [Synth 8-6157] synthesizing module 'fpu' [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu.v:2]
+INFO: [Synth 8-6157] synthesizing module 'fadd' [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fadd.v:3]
+INFO: [Synth 8-6157] synthesizing module 'fadd_1st' [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fadd.v:91]
+INFO: [Synth 8-6155] done synthesizing module 'fadd_1st' (9#1) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fadd.v:91]
+INFO: [Synth 8-6157] synthesizing module 'fadd_2nd' [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fadd.v:147]
+WARNING: [Synth 8-589] replacing case/wildcard equality operator === with logical equality operator == [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fadd.v:173]
+INFO: [Synth 8-6155] done synthesizing module 'fadd_2nd' (10#1) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fadd.v:147]
+INFO: [Synth 8-6157] synthesizing module 'fadd_3rd' [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fadd.v:205]
+INFO: [Synth 8-6155] done synthesizing module 'fadd_3rd' (11#1) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fadd.v:205]
+INFO: [Synth 8-6155] done synthesizing module 'fadd' (12#1) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fadd.v:3]
+INFO: [Synth 8-6157] synthesizing module 'fsub' [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fsub.v:3]
+INFO: [Synth 8-6157] synthesizing module 'fsub_1st' [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fsub.v:91]
+INFO: [Synth 8-6155] done synthesizing module 'fsub_1st' (13#1) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fsub.v:91]
+INFO: [Synth 8-6157] synthesizing module 'fsub_2nd' [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fsub.v:147]
+WARNING: [Synth 8-589] replacing case/wildcard equality operator === with logical equality operator == [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fsub.v:173]
+INFO: [Synth 8-6155] done synthesizing module 'fsub_2nd' (14#1) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fsub.v:147]
+INFO: [Synth 8-6157] synthesizing module 'fsub_3rd' [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fsub.v:205]
+INFO: [Synth 8-6155] done synthesizing module 'fsub_3rd' (15#1) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fsub.v:205]
+INFO: [Synth 8-6155] done synthesizing module 'fsub' (16#1) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fsub.v:3]
+INFO: [Synth 8-6157] synthesizing module 'fmul' [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fmul.v:3]
+INFO: [Synth 8-6157] synthesizing module 'fmul_1st' [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fmul.v:65]
+INFO: [Synth 8-6155] done synthesizing module 'fmul_1st' (17#1) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fmul.v:65]
+INFO: [Synth 8-6157] synthesizing module 'fmul_2nd' [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fmul.v:121]
+INFO: [Synth 8-6155] done synthesizing module 'fmul_2nd' (18#1) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fmul.v:121]
+INFO: [Synth 8-6155] done synthesizing module 'fmul' (19#1) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fmul.v:3]
+INFO: [Synth 8-6157] synthesizing module 'fdiv' [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fdiv.v:3]
+INFO: [Synth 8-6157] synthesizing module 'finv' [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/finv.v:3]
+INFO: [Synth 8-6157] synthesizing module 'finv_table' [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/finv.v:86]
+INFO: [Synth 8-6155] done synthesizing module 'finv_table' (20#1) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/finv.v:86]
+INFO: [Synth 8-6157] synthesizing module 'finv_1st' [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/finv.v:41]
+INFO: [Synth 8-6155] done synthesizing module 'finv_1st' (21#1) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/finv.v:41]
+INFO: [Synth 8-6155] done synthesizing module 'finv' (22#1) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/finv.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'fdiv' (23#1) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fdiv.v:3]
+INFO: [Synth 8-6157] synthesizing module 'fneg' [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fneg.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'fneg' (24#1) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fneg.v:3]
+INFO: [Synth 8-6157] synthesizing module 'fabs' [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fabs.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'fabs' (25#1) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fabs.v:3]
+INFO: [Synth 8-6157] synthesizing module 'fsqrt' [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fsqrt.v:3]
+INFO: [Synth 8-6157] synthesizing module 'fsqrt_table' [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fsqrt.v:77]
+INFO: [Synth 8-6155] done synthesizing module 'fsqrt_table' (26#1) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fsqrt.v:77]
+INFO: [Synth 8-6157] synthesizing module 'fsqrt_1st' [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fsqrt.v:43]
+INFO: [Synth 8-6155] done synthesizing module 'fsqrt_1st' (27#1) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fsqrt.v:43]
+INFO: [Synth 8-6155] done synthesizing module 'fsqrt' (28#1) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fsqrt.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'fpu' (29#1) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu.v:2]
+INFO: [Synth 8-6071] Mark debug on the nets applies keep_hierarchy on instance 'ur'. This will prevent further optimization [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/multicycle_1st.v:192]
+INFO: [Synth 8-6071] Mark debug on the nets applies keep_hierarchy on instance 'ut'. This will prevent further optimization [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/multicycle_1st.v:191]
+INFO: [Synth 8-6071] Mark debug on the nets applies keep_hierarchy on instance 'mcu'. This will prevent further optimization [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/multicycle_1st.v:174]
+INFO: [Synth 8-6071] Mark debug on the nets applies keep_hierarchy on instance 'f'. This will prevent further optimization [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/multicycle_1st.v:213]
+INFO: [Synth 8-6071] Mark debug on the nets applies keep_hierarchy on instance 'a'. This will prevent further optimization [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/multicycle_1st.v:212]
+WARNING: [Synth 8-6014] Unused sequential element counter_reg was removed.  [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/multicycle_1st.v:117]
+WARNING: [Synth 8-6014] Unused sequential element led_reg was removed.  [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/multicycle_1st.v:137]
+INFO: [Synth 8-6155] done synthesizing module 'multicycle_cpu' (30#1) [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/multicycle_1st.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'arch_1st_multicycle_cpu_0_0' (31#1) [c:/Users/nowi74/OneDrive/cpuexcore/1st/core/1st_architecture/1st_architecture.srcs/sources_1/bd/arch_1st/ip/arch_1st_multicycle_cpu_0_0/synth/arch_1st_multicycle_cpu_0_0.v:58]
+WARNING: [Synth 8-3331] design fsqrt_1st has unconnected port m[22]
+WARNING: [Synth 8-3331] design fsqrt_1st has unconnected port m[21]
+WARNING: [Synth 8-3331] design fsqrt_1st has unconnected port m[20]
+WARNING: [Synth 8-3331] design fsqrt_1st has unconnected port m[19]
+WARNING: [Synth 8-3331] design fsqrt_1st has unconnected port m[18]
+WARNING: [Synth 8-3331] design fsqrt_1st has unconnected port m[17]
+WARNING: [Synth 8-3331] design fsqrt_1st has unconnected port m[16]
+WARNING: [Synth 8-3331] design fsqrt_1st has unconnected port m[15]
+WARNING: [Synth 8-3331] design fsqrt_1st has unconnected port m[14]
+WARNING: [Synth 8-3331] design fsqrt_table has unconnected port rstn
+WARNING: [Synth 8-3331] design fabs has unconnected port x[31]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port s1
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port s2
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port e1[7]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port e1[6]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port e1[5]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port e1[4]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port e1[3]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port e1[2]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port e1[1]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port e1[0]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port e2[7]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port e2[6]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port e2[5]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port e2[4]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port e2[3]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port e2[2]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port e2[1]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port e2[0]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m1[22]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m1[21]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m1[20]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m1[19]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m1[18]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m1[17]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m1[16]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m1[15]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m1[14]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m1[13]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m1[12]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m1[11]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m1[10]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m1[9]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m1[8]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m1[7]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m1[6]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m1[5]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m1[4]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m1[3]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m1[2]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m1[1]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m1[0]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m2[22]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m2[21]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m2[20]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m2[19]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m2[18]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m2[17]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m2[16]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m2[15]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m2[14]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m2[13]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m2[12]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m2[11]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m2[10]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m2[9]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m2[8]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m2[7]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m2[6]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m2[5]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m2[4]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m2[3]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m2[2]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m2[1]
+WARNING: [Synth 8-3331] design fmul_2nd has unconnected port m2[0]
+WARNING: [Synth 8-3331] design fmul has unconnected port rstn
+WARNING: [Synth 8-3331] design finv_table has unconnected port rstn
+WARNING: [Synth 8-3331] design fsub_3rd has unconnected port mye[25]
+WARNING: [Synth 8-3331] design fsub_3rd has unconnected port mye[24]
+WARNING: [Synth 8-3331] design fsub_3rd has unconnected port mye[23]
+WARNING: [Synth 8-3331] design fsub_3rd has unconnected port mye[22]
+WARNING: [Synth 8-3331] design fsub_3rd has unconnected port mye[21]
+WARNING: [Synth 8-3331] design fsub_3rd has unconnected port mye[20]
+WARNING: [Synth 8-3331] design fsub_3rd has unconnected port mye[19]
+WARNING: [Synth 8-3331] design fsub_3rd has unconnected port mye[18]
+WARNING: [Synth 8-3331] design fsub_3rd has unconnected port mye[17]
+WARNING: [Synth 8-3331] design fsub_3rd has unconnected port mye[16]
+WARNING: [Synth 8-3331] design fsub_3rd has unconnected port mye[15]
+WARNING: [Synth 8-3331] design fsub_3rd has unconnected port mye[14]
+WARNING: [Synth 8-3331] design fsub_3rd has unconnected port mye[13]
+WARNING: [Synth 8-3331] design fsub_3rd has unconnected port mye[12]
+WARNING: [Synth 8-3331] design fsub_3rd has unconnected port mye[11]
+WARNING: [Synth 8-3331] design fsub_3rd has unconnected port mye[10]
+WARNING: [Synth 8-3331] design fsub_3rd has unconnected port mye[9]
+WARNING: [Synth 8-3331] design fsub_3rd has unconnected port mye[8]
+WARNING: [Synth 8-3331] design fsub_3rd has unconnected port mye[7]
+WARNING: [Synth 8-3331] design fsub_3rd has unconnected port mye[6]
+WARNING: [Synth 8-3331] design fsub_3rd has unconnected port mye[5]
+WARNING: [Synth 8-3331] design fsub_3rd has unconnected port mye[4]
+WARNING: [Synth 8-3331] design fsub_3rd has unconnected port mye[3]
+INFO: [Common 17-14] Message 'Synth 8-3331' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 1882.500 ; gain = 625.586
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:15 ; elapsed = 00:00:15 . Memory (MB): peak = 1882.500 ; gain = 625.586
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:15 ; elapsed = 00:00:15 . Memory (MB): peak = 1882.500 ; gain = 625.586
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.097 . Memory (MB): peak = 1882.500 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1882.500 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+WARNING: [Constraints 18-5210] No constraints selected for write.
+Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.123 . Memory (MB): peak = 1882.500 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:21 ; elapsed = 00:00:21 . Memory (MB): peak = 1882.500 ; gain = 625.586
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xcku040-ffva1156-2-e
+INFO: [Synth 8-6742] Reading net delay rules and data
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:21 ; elapsed = 00:00:21 . Memory (MB): peak = 1882.500 ; gain = 625.586
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:21 ; elapsed = 00:00:21 . Memory (MB): peak = 1882.500 ; gain = 625.586
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'multi_main_decoder'
+INFO: [Synth 8-5546] ROM "p_0_in" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5818] HDL ADVISOR - The operator resource <adder> is shared. To prevent sharing consider applying a KEEP on the output of the operator [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fadd.v:170]
+INFO: [Synth 8-5818] HDL ADVISOR - The operator resource <adder> is shared. To prevent sharing consider applying a KEEP on the output of the operator [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fsub.v:170]
+INFO: [Synth 8-5779] Default cascade height of 8 will be used for BRAM '"rams_sp_rf:/RAM_reg"'.
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 4 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 4 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 4 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 4 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 4 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 4 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 4 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 4 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 1 for RAM "rams_sp_rf:/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 1 for RAM "rams_sp_rf:/RAM_reg"
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                 iSTATE1 |                           000000 |                           000000
+                 iSTATE0 |                           000001 |                           000001
+                iSTATE36 |                           000010 |                           000011
+                iSTATE28 |                           000011 |                           000100
+                iSTATE26 |                           000100 |                           000101
+                iSTATE24 |                           000101 |                           000110
+                iSTATE27 |                           000110 |                           001000
+                iSTATE25 |                           000111 |                           001001
+                iSTATE20 |                           001000 |                           001011
+                iSTATE17 |                           001001 |                           001100
+                iSTATE13 |                           001010 |                           010100
+                iSTATE10 |                           001011 |                           010101
+                 iSTATE7 |                           001100 |                           010110
+                 iSTATE4 |                           001101 |                           010111
+                iSTATE11 |                           001110 |                           011000
+                 iSTATE8 |                           001111 |                           011001
+                 iSTATE5 |                           010000 |                           011010
+                 iSTATE2 |                           010001 |                           011011
+                iSTATE34 |                           010010 |                           011100
+                iSTATE15 |                           010011 |                           001110
+                iSTATE18 |                           010100 |                           010011
+                 iSTATE3 |                           010101 |                           100011
+                iSTATE22 |                           010110 |                           001010
+                iSTATE16 |                           010111 |                           001101
+                iSTATE12 |                           011000 |                           001111
+                iSTATE23 |                           011001 |                           010000
+                iSTATE21 |                           011010 |                           010001
+                iSTATE19 |                           011011 |                           010010
+                iSTATE32 |                           011100 |                           011101
+                iSTATE30 |                           011101 |                           011110
+                iSTATE29 |                           011110 |                           011111
+                  iSTATE |                           011111 |                           111111
+                iSTATE14 |                           100000 |                           100000
+                 iSTATE9 |                           100001 |                           100001
+                 iSTATE6 |                           100010 |                           100010
+                iSTATE35 |                           100011 |                           100100
+                iSTATE33 |                           100100 |                           100101
+                iSTATE31 |                           100101 |                           100110
+*
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'multi_main_decoder'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 1882.500 ; gain = 625.586
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   4 Input     48 Bit       Adders := 2     
+	   3 Input     32 Bit       Adders := 2     
+	   2 Input     32 Bit       Adders := 2     
+	   3 Input     27 Bit       Adders := 2     
+	   2 Input     25 Bit       Adders := 2     
+	   3 Input     23 Bit       Adders := 1     
+	   2 Input     23 Bit       Adders := 1     
+	   2 Input      9 Bit       Adders := 6     
+	   3 Input      9 Bit       Adders := 2     
+	   2 Input      8 Bit       Adders := 9     
+	   3 Input      8 Bit       Adders := 2     
+	   2 Input      7 Bit       Adders := 4     
+	   2 Input      6 Bit       Adders := 2     
++---XORs : 
+	   2 Input      1 Bit         XORs := 3     
++---Registers : 
+	               36 Bit    Registers := 2     
+	               32 Bit    Registers := 18    
+	               27 Bit    Registers := 4     
+	               25 Bit    Registers := 4     
+	               24 Bit    Registers := 8     
+	               23 Bit    Registers := 14    
+	               10 Bit    Registers := 1     
+	                9 Bit    Registers := 4     
+	                8 Bit    Registers := 22    
+	                6 Bit    Registers := 2     
+	                5 Bit    Registers := 4     
+	                3 Bit    Registers := 4     
+	                2 Bit    Registers := 4     
+	                1 Bit    Registers := 48    
++---RAMs : 
+	           16384K Bit         RAMs := 1     
++---ROMs : 
+	                              ROMs := 2     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 22    
+	   4 Input     32 Bit        Muxes := 3     
+	   2 Input     29 Bit        Muxes := 1     
+	   2 Input     27 Bit        Muxes := 8     
+	   2 Input     25 Bit        Muxes := 8     
+	   4 Input     25 Bit        Muxes := 2     
+	   2 Input     24 Bit        Muxes := 5     
+	   2 Input     23 Bit        Muxes := 4     
+	   2 Input     14 Bit        Muxes := 1     
+	   2 Input      9 Bit        Muxes := 1     
+	   2 Input      8 Bit        Muxes := 22    
+	   2 Input      7 Bit        Muxes := 4     
+	  38 Input      6 Bit        Muxes := 1     
+	  37 Input      6 Bit        Muxes := 1     
+	  15 Input      6 Bit        Muxes := 1     
+	   2 Input      6 Bit        Muxes := 7     
+	  13 Input      6 Bit        Muxes := 1     
+	   5 Input      6 Bit        Muxes := 1     
+	   4 Input      6 Bit        Muxes := 2     
+	   2 Input      5 Bit        Muxes := 2     
+	  27 Input      5 Bit        Muxes := 2     
+	  15 Input      3 Bit        Muxes := 3     
+	   3 Input      3 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 7     
+	   9 Input      3 Bit        Muxes := 1     
+	  37 Input      3 Bit        Muxes := 1     
+	  14 Input      3 Bit        Muxes := 1     
+	   4 Input      3 Bit        Muxes := 1     
+	   8 Input      3 Bit        Muxes := 2     
+	   5 Input      3 Bit        Muxes := 1     
+	  10 Input      2 Bit        Muxes := 4     
+	   2 Input      2 Bit        Muxes := 6     
+	   5 Input      2 Bit        Muxes := 3     
+	  15 Input      2 Bit        Muxes := 8     
+	  12 Input      2 Bit        Muxes := 2     
+	  11 Input      2 Bit        Muxes := 2     
+	  13 Input      2 Bit        Muxes := 1     
+	   4 Input      2 Bit        Muxes := 4     
+	   3 Input      2 Bit        Muxes := 3     
+	  14 Input      2 Bit        Muxes := 1     
+	   9 Input      2 Bit        Muxes := 1     
+	  28 Input      2 Bit        Muxes := 2     
+	  35 Input      2 Bit        Muxes := 2     
+	   2 Input      1 Bit        Muxes := 77    
+	   9 Input      1 Bit        Muxes := 9     
+	  15 Input      1 Bit        Muxes := 7     
+	  13 Input      1 Bit        Muxes := 1     
+	   6 Input      1 Bit        Muxes := 2     
+	  11 Input      1 Bit        Muxes := 3     
+	   3 Input      1 Bit        Muxes := 11    
+	   7 Input      1 Bit        Muxes := 1     
+	  25 Input      1 Bit        Muxes := 3     
+	  37 Input      1 Bit        Muxes := 2     
+	  31 Input      1 Bit        Muxes := 1     
+	  29 Input      1 Bit        Muxes := 3     
+	  18 Input      1 Bit        Muxes := 1     
+	   5 Input      1 Bit        Muxes := 8     
+	  24 Input      1 Bit        Muxes := 1     
+	  19 Input      1 Bit        Muxes := 1     
+	  10 Input      1 Bit        Muxes := 1     
+	  21 Input      1 Bit        Muxes := 3     
+	   4 Input      1 Bit        Muxes := 5     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Hierarchical Component Statistics 
+---------------------------------------------------------------------------------
+Hierarchical RTL Component report 
+Module rams_sp_rf 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 1     
++---RAMs : 
+	           16384K Bit         RAMs := 1     
+Module multi_main_decoder 
+Detailed RTL Component Info : 
++---Registers : 
+	                3 Bit    Registers := 2     
+	                2 Bit    Registers := 4     
+	                1 Bit    Registers := 13    
++---Muxes : 
+	  38 Input      6 Bit        Muxes := 1     
+	  37 Input      6 Bit        Muxes := 1     
+	  15 Input      6 Bit        Muxes := 1     
+	   2 Input      6 Bit        Muxes := 3     
+	  13 Input      6 Bit        Muxes := 1     
+	   5 Input      6 Bit        Muxes := 1     
+	  15 Input      3 Bit        Muxes := 2     
+	   3 Input      3 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 4     
+	   9 Input      3 Bit        Muxes := 1     
+	  37 Input      3 Bit        Muxes := 1     
+	  14 Input      3 Bit        Muxes := 1     
+	   4 Input      3 Bit        Muxes := 1     
+	   8 Input      3 Bit        Muxes := 1     
+	  10 Input      2 Bit        Muxes := 4     
+	   2 Input      2 Bit        Muxes := 5     
+	   5 Input      2 Bit        Muxes := 3     
+	  15 Input      2 Bit        Muxes := 8     
+	  12 Input      2 Bit        Muxes := 2     
+	  11 Input      2 Bit        Muxes := 2     
+	  13 Input      2 Bit        Muxes := 1     
+	   4 Input      2 Bit        Muxes := 4     
+	   3 Input      2 Bit        Muxes := 3     
+	  14 Input      2 Bit        Muxes := 1     
+	   9 Input      2 Bit        Muxes := 1     
+	  28 Input      2 Bit        Muxes := 2     
+	  35 Input      2 Bit        Muxes := 2     
+	   2 Input      1 Bit        Muxes := 40    
+	   9 Input      1 Bit        Muxes := 9     
+	  15 Input      1 Bit        Muxes := 7     
+	  13 Input      1 Bit        Muxes := 1     
+	   6 Input      1 Bit        Muxes := 2     
+	  11 Input      1 Bit        Muxes := 3     
+	   3 Input      1 Bit        Muxes := 9     
+	   7 Input      1 Bit        Muxes := 1     
+	  25 Input      1 Bit        Muxes := 3     
+	  37 Input      1 Bit        Muxes := 2     
+	  31 Input      1 Bit        Muxes := 1     
+	  29 Input      1 Bit        Muxes := 3     
+	  18 Input      1 Bit        Muxes := 1     
+	   5 Input      1 Bit        Muxes := 8     
+	  24 Input      1 Bit        Muxes := 1     
+	  19 Input      1 Bit        Muxes := 1     
+	  10 Input      1 Bit        Muxes := 1     
+	  21 Input      1 Bit        Muxes := 3     
+	   4 Input      1 Bit        Muxes := 4     
+Module multi_ALU_decoder 
+Detailed RTL Component Info : 
++---Muxes : 
+	  15 Input      3 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 2     
+	   2 Input      2 Bit        Muxes := 1     
+Module multi_control_unit 
+Detailed RTL Component Info : 
++---Muxes : 
+	   2 Input      3 Bit        Muxes := 1     
+	   5 Input      3 Bit        Muxes := 1     
+	   8 Input      3 Bit        Muxes := 1     
+Module uart_tx 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      6 Bit       Adders := 1     
++---Registers : 
+	                8 Bit    Registers := 1     
+	                6 Bit    Registers := 1     
+	                1 Bit    Registers := 5     
++---Muxes : 
+	   2 Input      8 Bit        Muxes := 1     
+	   2 Input      6 Bit        Muxes := 1     
+	   4 Input      6 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 9     
+	   3 Input      1 Bit        Muxes := 2     
+	   4 Input      1 Bit        Muxes := 1     
+Module uart_rx 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      6 Bit       Adders := 1     
++---Registers : 
+	                8 Bit    Registers := 1     
+	                6 Bit    Registers := 1     
+	                3 Bit    Registers := 1     
+	                1 Bit    Registers := 5     
++---Muxes : 
+	   2 Input      6 Bit        Muxes := 1     
+	   4 Input      6 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 14    
+Module alu 
+Detailed RTL Component Info : 
++---Adders : 
+	   3 Input     32 Bit       Adders := 1     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 6     
+Module fadd_1st 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      9 Bit       Adders := 1     
+	   2 Input      8 Bit       Adders := 1     
++---Muxes : 
+	   2 Input     25 Bit        Muxes := 4     
+	   2 Input      8 Bit        Muxes := 4     
+	   2 Input      5 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 1     
+Module fadd_2nd 
+Detailed RTL Component Info : 
++---Adders : 
+	   3 Input     27 Bit       Adders := 1     
+	   2 Input      8 Bit       Adders := 1     
++---Muxes : 
+	   2 Input     27 Bit        Muxes := 3     
+	   2 Input      8 Bit        Muxes := 1     
+	  27 Input      5 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 1     
+Module fadd_3rd 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     32 Bit       Adders := 1     
+	   2 Input     25 Bit       Adders := 1     
+	   3 Input      8 Bit       Adders := 1     
+	   2 Input      8 Bit       Adders := 1     
++---Muxes : 
+	   2 Input     27 Bit        Muxes := 1     
+	   4 Input     25 Bit        Muxes := 1     
+	   2 Input      8 Bit        Muxes := 2     
+	   2 Input      1 Bit        Muxes := 2     
+Module fadd 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 1     
+	               27 Bit    Registers := 2     
+	               25 Bit    Registers := 2     
+	               23 Bit    Registers := 4     
+	                8 Bit    Registers := 7     
+	                5 Bit    Registers := 2     
+	                1 Bit    Registers := 8     
+Module fsub_1st 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      9 Bit       Adders := 1     
+	   2 Input      8 Bit       Adders := 1     
++---Muxes : 
+	   2 Input     25 Bit        Muxes := 4     
+	   2 Input      8 Bit        Muxes := 4     
+	   2 Input      5 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 1     
+Module fsub_2nd 
+Detailed RTL Component Info : 
++---Adders : 
+	   3 Input     27 Bit       Adders := 1     
+	   2 Input      8 Bit       Adders := 1     
++---Muxes : 
+	   2 Input     27 Bit        Muxes := 3     
+	   2 Input      8 Bit        Muxes := 1     
+	  27 Input      5 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 1     
+Module fsub_3rd 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     32 Bit       Adders := 1     
+	   2 Input     25 Bit       Adders := 1     
+	   3 Input      8 Bit       Adders := 1     
+	   2 Input      8 Bit       Adders := 1     
++---Muxes : 
+	   2 Input     27 Bit        Muxes := 1     
+	   4 Input     25 Bit        Muxes := 1     
+	   2 Input      8 Bit        Muxes := 2     
+	   2 Input      1 Bit        Muxes := 2     
+Module fsub 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 1     
+	               27 Bit    Registers := 2     
+	               25 Bit    Registers := 2     
+	               23 Bit    Registers := 4     
+	                8 Bit    Registers := 7     
+	                5 Bit    Registers := 2     
+	                1 Bit    Registers := 8     
+Module fmul_1st 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      9 Bit       Adders := 1     
+	   3 Input      9 Bit       Adders := 1     
++---XORs : 
+	   2 Input      1 Bit         XORs := 1     
++---Muxes : 
+	   2 Input     24 Bit        Muxes := 2     
+	   2 Input      8 Bit        Muxes := 2     
+Module fmul_2nd 
+Detailed RTL Component Info : 
++---Adders : 
+	   4 Input     48 Bit       Adders := 1     
+	   2 Input      8 Bit       Adders := 1     
+	   2 Input      7 Bit       Adders := 2     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 2     
+	   2 Input     23 Bit        Muxes := 1     
+	   2 Input      8 Bit        Muxes := 1     
+	   2 Input      7 Bit        Muxes := 2     
+	   2 Input      1 Bit        Muxes := 2     
+Module fmul 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 1     
+	               24 Bit    Registers := 4     
+	               23 Bit    Registers := 2     
+	                9 Bit    Registers := 2     
+	                8 Bit    Registers := 2     
+	                1 Bit    Registers := 3     
+Module finv_table 
+Detailed RTL Component Info : 
++---Registers : 
+	               36 Bit    Registers := 1     
++---ROMs : 
+	                              ROMs := 1     
+Module finv_1st 
+Detailed RTL Component Info : 
++---Adders : 
+	   3 Input     23 Bit       Adders := 1     
+	   2 Input      9 Bit       Adders := 1     
+	   2 Input      8 Bit       Adders := 1     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 1     
+	   2 Input     24 Bit        Muxes := 1     
+	   2 Input     23 Bit        Muxes := 2     
+	   2 Input     14 Bit        Muxes := 1     
+	   2 Input      9 Bit        Muxes := 1     
+	   2 Input      8 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 1     
+Module finv 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 1     
+	               23 Bit    Registers := 1     
+	                8 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
+Module fdiv 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 3     
+Module fsqrt_table 
+Detailed RTL Component Info : 
++---Registers : 
+	               36 Bit    Registers := 1     
++---ROMs : 
+	                              ROMs := 1     
+Module fsqrt_1st 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     23 Bit       Adders := 1     
+	   2 Input      9 Bit       Adders := 1     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 1     
+	   2 Input     29 Bit        Muxes := 1     
+Module fsqrt 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 1     
+	               23 Bit    Registers := 1     
+	               10 Bit    Registers := 1     
+	                8 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
+Module fpu 
+Detailed RTL Component Info : 
++---Adders : 
+	   3 Input     32 Bit       Adders := 1     
++---Muxes : 
+	   2 Input      1 Bit        Muxes := 1     
+Module multicycle_cpu 
+Detailed RTL Component Info : 
++---XORs : 
+	   2 Input      1 Bit         XORs := 1     
++---Registers : 
+	               32 Bit    Registers := 8     
+	                3 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
++---Muxes : 
+	   4 Input     32 Bit        Muxes := 3     
+	   2 Input     32 Bit        Muxes := 10    
+	   2 Input      6 Bit        Muxes := 2     
+---------------------------------------------------------------------------------
+Finished RTL Hierarchical Component Statistics
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 1920 (col length:120)
+BRAMs: 1200 (col length: RAMB18 120 RAMB36 60)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+Warning: Parallel synthesis criteria is not met 
+INFO: [Synth 8-4471] merging register 'fsq/reg_s_reg' into 'fdv/u1/reg_s_reg' [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fsqrt.v:30]
+INFO: [Synth 8-4471] merging register 'fsq/reg_e_reg[7:0]' into 'fdv/u1/reg_e_reg[7:0]' [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fsqrt.v:30]
+INFO: [Synth 8-4471] merging register 'fsq/reg_m_reg[22:0]' into 'fdv/u1/reg_m_reg[22:0]' [C:/Users/nowi74/OneDrive/cpuexcore/1st/core/src/1st_arch/fpu/fsqrt.v:30]
+DSP Report: Generating DSP fml/reg_m1ahm2al_reg, operation Mode is: (A*B)'.
+DSP Report: register fml/reg_m1ahm2al_reg is absorbed into DSP fml/reg_m1ahm2al_reg.
+DSP Report: operator fml/u1/m1ahm2al is absorbed into DSP fml/reg_m1ahm2al_reg.
+DSP Report: Generating DSP fml/reg_m1alm2ah_reg, operation Mode is: (A*B)'.
+DSP Report: register fml/reg_m1alm2ah_reg is absorbed into DSP fml/reg_m1alm2ah_reg.
+DSP Report: operator fml/u1/m1alm2ah is absorbed into DSP fml/reg_m1alm2ah_reg.
+DSP Report: Generating DSP fml/reg_m1alm2al_reg, operation Mode is: (A*B)'.
+DSP Report: register fml/reg_m1alm2al_reg is absorbed into DSP fml/reg_m1alm2al_reg.
+DSP Report: operator fml/u1/m1alm2al is absorbed into DSP fml/reg_m1alm2al_reg.
+DSP Report: Generating DSP fml/reg_m1ahm2ah_reg, operation Mode is: (A*B)'.
+DSP Report: register fml/reg_m1ahm2ah_reg is absorbed into DSP fml/reg_m1ahm2ah_reg.
+DSP Report: operator fml/u1/m1ahm2ah is absorbed into DSP fml/reg_m1ahm2ah_reg.
+DSP Report: Generating DSP fdv/u1/u2/cor_n, operation Mode is: A2*B2.
+DSP Report: register fdv/u1/u1/dout_reg is absorbed into DSP fdv/u1/u2/cor_n.
+DSP Report: register fdv/u1/reg_m_reg is absorbed into DSP fdv/u1/u2/cor_n.
+DSP Report: operator fdv/u1/u2/cor_n is absorbed into DSP fdv/u1/u2/cor_n.
+DSP Report: Generating DSP fdv/u2/reg_m1ahm2al_reg, operation Mode is: (A*B)'.
+DSP Report: register fdv/u2/reg_m1ahm2al_reg is absorbed into DSP fdv/u2/reg_m1ahm2al_reg.
+DSP Report: operator fdv/u2/u1/m1ahm2al is absorbed into DSP fdv/u2/reg_m1ahm2al_reg.
+DSP Report: Generating DSP fdv/u2/reg_m1alm2ah_reg, operation Mode is: (A*B)'.
+DSP Report: register fdv/u2/reg_m1alm2ah_reg is absorbed into DSP fdv/u2/reg_m1alm2ah_reg.
+DSP Report: operator fdv/u2/u1/m1alm2ah is absorbed into DSP fdv/u2/reg_m1alm2ah_reg.
+DSP Report: Generating DSP fdv/u2/reg_m1alm2al_reg, operation Mode is: (A*B)'.
+DSP Report: register fdv/u2/reg_m1alm2al_reg is absorbed into DSP fdv/u2/reg_m1alm2al_reg.
+DSP Report: operator fdv/u2/u1/m1alm2al is absorbed into DSP fdv/u2/reg_m1alm2al_reg.
+DSP Report: Generating DSP fdv/u2/reg_m1ahm2ah_reg, operation Mode is: (A*B)'.
+DSP Report: register fdv/u2/reg_m1ahm2ah_reg is absorbed into DSP fdv/u2/reg_m1ahm2ah_reg.
+DSP Report: operator fdv/u2/u1/m1ahm2ah is absorbed into DSP fdv/u2/reg_m1ahm2ah_reg.
+DSP Report: Generating DSP fsq/u2/cor_n, operation Mode is: ((D' or 0)+(0 or A2))*B.
+DSP Report: register fdv/u1/reg_m_reg is absorbed into DSP fsq/u2/cor_n.
+DSP Report: register fsq/u2/cor_n is absorbed into DSP fsq/u2/cor_n.
+DSP Report: operator fsq/u2/cor_n0 is absorbed into DSP fsq/u2/cor_n.
+DSP Report: operator fsq/u2/cor_n0 is absorbed into DSP fsq/u2/cor_n.
+INFO: [Synth 8-5779] Default cascade height of 8 will be used for BRAM '"inst/idmd/RAM_reg"'.
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "inst/idmd/RAM_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "inst/idmd/RAM_reg"
+INFO: [Common 17-14] Message 'Synth 8-5555' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Synth 8-3886] merging instance 'inst/f/fsq/reg_key_reg[0]' (FD) to 'inst/f/fdv/u1/reg_m_reg[14]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fsq/reg_key_reg[1]' (FD) to 'inst/f/fdv/u1/reg_m_reg[15]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fsq/reg_key_reg[2]' (FD) to 'inst/f/fdv/u1/reg_m_reg[16]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fsq/reg_key_reg[3]' (FD) to 'inst/f/fdv/u1/reg_m_reg[17]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fsq/reg_key_reg[4]' (FD) to 'inst/f/fdv/u1/reg_m_reg[18]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fsq/reg_key_reg[5]' (FD) to 'inst/f/fdv/u1/reg_m_reg[19]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fsq/reg_key_reg[6]' (FD) to 'inst/f/fdv/u1/reg_m_reg[20]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fsq/reg_key_reg[7]' (FD) to 'inst/f/fdv/u1/reg_m_reg[21]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fsq/reg_key_reg[8]' (FD) to 'inst/f/fdv/u1/reg_m_reg[22]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/u1/y_reg[31]' (FD) to 'inst/f/fsq/y_reg[31]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fsq/reg_key_reg[9]' (FD) to 'inst/f/fdv/u1/reg_e_reg[0]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fsb/reg_mi_reg[24]' (FD) to 'inst/f/fsb/reg_myd_reg[26]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fsb/reg_ms_reg[24]' (FD) to 'inst/f/fsb/reg_myd_reg[26]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fad/reg_mi_reg[24]' (FD) to 'inst/f/fad/reg_myd_reg[26]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fad/reg_ms_reg[24]' (FD) to 'inst/f/fad/reg_myd_reg[26]'
+INFO: [Synth 8-3886] merging instance 'inst/rdata_reg_reg[31]' (FDRE) to 'inst/rdata_reg_reg[30]'
+INFO: [Synth 8-3886] merging instance 'inst/rdata_reg_reg[30]' (FDRE) to 'inst/rdata_reg_reg[29]'
+INFO: [Synth 8-3886] merging instance 'inst/rdata_reg_reg[29]' (FDRE) to 'inst/rdata_reg_reg[28]'
+INFO: [Synth 8-3886] merging instance 'inst/rdata_reg_reg[28]' (FDRE) to 'inst/rdata_reg_reg[27]'
+INFO: [Synth 8-3886] merging instance 'inst/rdata_reg_reg[27]' (FDRE) to 'inst/rdata_reg_reg[26]'
+INFO: [Synth 8-3886] merging instance 'inst/rdata_reg_reg[26]' (FDRE) to 'inst/rdata_reg_reg[25]'
+INFO: [Synth 8-3886] merging instance 'inst/rdata_reg_reg[25]' (FDRE) to 'inst/rdata_reg_reg[24]'
+INFO: [Synth 8-3886] merging instance 'inst/rdata_reg_reg[24]' (FDRE) to 'inst/rdata_reg_reg[23]'
+INFO: [Synth 8-3886] merging instance 'inst/rdata_reg_reg[23]' (FDRE) to 'inst/rdata_reg_reg[22]'
+INFO: [Synth 8-3886] merging instance 'inst/rdata_reg_reg[22]' (FDRE) to 'inst/rdata_reg_reg[21]'
+INFO: [Synth 8-3886] merging instance 'inst/rdata_reg_reg[21]' (FDRE) to 'inst/rdata_reg_reg[13]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (inst/f/fsb/\reg_myd_reg[26] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (inst/f/fad/\reg_myd_reg[26] )
+INFO: [Synth 8-3886] merging instance 'inst/rdata_reg_reg[13]' (FDRE) to 'inst/rdata_reg_reg[12]'
+INFO: [Synth 8-3886] merging instance 'inst/rdata_reg_reg[12]' (FDRE) to 'inst/rdata_reg_reg[11]'
+INFO: [Synth 8-3886] merging instance 'inst/rdata_reg_reg[11]' (FDRE) to 'inst/rdata_reg_reg[10]'
+INFO: [Synth 8-3886] merging instance 'inst/rdata_reg_reg[10]' (FDRE) to 'inst/rdata_reg_reg[9]'
+INFO: [Synth 8-3886] merging instance 'inst/rdata_reg_reg[9]' (FDRE) to 'inst/rdata_reg_reg[8]'
+INFO: [Synth 8-3886] merging instance 'inst/rdata_reg_reg[8]' (FDRE) to 'inst/rdata_reg_reg[20]'
+INFO: [Synth 8-3886] merging instance 'inst/rdata_reg_reg[20]' (FDRE) to 'inst/rdata_reg_reg[19]'
+INFO: [Synth 8-3886] merging instance 'inst/rdata_reg_reg[19]' (FDRE) to 'inst/rdata_reg_reg[18]'
+INFO: [Synth 8-3886] merging instance 'inst/rdata_reg_reg[18]' (FDRE) to 'inst/rdata_reg_reg[17]'
+INFO: [Synth 8-3886] merging instance 'inst/rdata_reg_reg[17]' (FDRE) to 'inst/rdata_reg_reg[16]'
+INFO: [Synth 8-3886] merging instance 'inst/rdata_reg_reg[16]' (FDRE) to 'inst/rdata_reg_reg[15]'
+INFO: [Synth 8-3886] merging instance 'inst/rdata_reg_reg[15]' (FDRE) to 'inst/rdata_reg_reg[14]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (inst/\rdata_reg_reg[14] )
+INFO: [Synth 8-3886] merging instance 'inst/idmd/i_0/RAM_reg_mux_sel_reg_393' (FD) to 'inst/idmd/i_0/RAM_reg_mux_sel_reg_262'
+INFO: [Synth 8-3886] merging instance 'inst/idmd/i_0/RAM_reg_mux_sel_reg_394' (FD) to 'inst/idmd/i_0/RAM_reg_mux_sel_reg_263'
+INFO: [Synth 8-3886] merging instance 'inst/idmd/i_0/RAM_reg_mux_sel_reg_395' (FD) to 'inst/idmd/i_0/RAM_reg_mux_sel_reg_460'
+INFO: [Synth 8-3886] merging instance 'inst/idmd/i_0/RAM_reg_mux_sel_reg_460' (FD) to 'inst/idmd/i_0/RAM_reg_mux_sel_reg_264'
+INFO: [Synth 8-3886] merging instance 'inst/idmd/i_0/RAM_reg_mux_sel_reg_261' (FD) to 'inst/idmd/i_0/RAM_reg_mux_sel_reg_1'
+INFO: [Synth 8-3886] merging instance 'inst/idmd/i_0/RAM_reg_mux_sel_reg_262' (FD) to 'inst/idmd/i_0/RAM_reg_mux_sel_reg_2'
+INFO: [Synth 8-3886] merging instance 'inst/idmd/i_0/RAM_reg_mux_sel_reg_263' (FD) to 'inst/idmd/i_0/RAM_reg_mux_sel_reg_3'
+INFO: [Synth 8-3886] merging instance 'inst/idmd/i_0/RAM_reg_mux_sel_reg_264' (FD) to 'inst/idmd/i_0/RAM_reg_mux_sel_reg_4'
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:01:05 ; elapsed = 00:01:07 . Memory (MB): peak = 1882.500 ; gain = 625.586
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+ROM:
++------------+-----------------+---------------+----------------+
+|Module Name | RTL Object      | Depth x Width | Implemented As | 
++------------+-----------------+---------------+----------------+
+|fpu         | p_0_out         | 1024x36       | LUT            | 
+|fpu         | fsq/u1/dout_reg | 1024x36       | Block RAM      | 
+|fpu         | fsq/u1/dout_reg | 1024x36       | Block RAM      | 
++------------+-----------------+---------------+----------------+
+
+
+Block RAM: Preliminary Mapping	Report (see note below)
++------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+---------------------------------------------------------------------------------------------------------------------+
+|Module Name | RTL Object | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | Cascade Heights                                                                                                     | 
++------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+---------------------------------------------------------------------------------------------------------------------+
+|inst/idmd   | RAM_reg    | 512 K x 32(READ_FIRST) | W | R |                        |   |   | Port A           | 0      | 464    | 8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8 | 
++------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+---------------------------------------------------------------------------------------------------------------------+
+
+Note: The table above is a preliminary report that shows the Block RAMs at the current stage of the synthesis flow. Some Block RAMs may be reimplemented as non Block RAM primitives later in the synthesis flow. Multiple instantiated Block RAMs are reported only once. 
+
+Distributed RAM: Preliminary Mapping	Report (see note below)
++------------+-------------+----------------+----------------------+--------------+
+|Module Name | RTL Object  | Inference      | Size (Depth x Width) | Primitives   | 
++------------+-------------+----------------+----------------------+--------------+
+|inst        | rf2/RAM_reg | User Attribute | 64 x 32              | RAM64M8 x 5	 | 
+|inst        | rf1/RAM_reg | User Attribute | 64 x 32              | RAM64M8 x 5	 | 
++------------+-------------+----------------+----------------------+--------------+
+
+Note: The table above is a preliminary report that shows the Distributed RAMs at the current stage of the synthesis flow. Some Distributed RAMs may be reimplemented as non Distributed RAM primitives later in the synthesis flow. Multiple instantiated RAMs are reported only once.
+
+DSP: Preliminary Mapping	Report (see note below)
++------------+-------------------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name | DSP Mapping             | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++------------+-------------------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|fpu         | (A*B)'                  | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|fpu         | (A*B)'                  | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|fpu         | (A*B)'                  | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|fpu         | (A*B)'                  | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|fpu         | A2*B2                   | 13     | 13     | -      | -      | 26     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|fpu         | (A*B)'                  | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|fpu         | (A*B)'                  | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|fpu         | (A*B)'                  | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|fpu         | (A*B)'                  | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|fpu         | ((D' or 0)+(0 or A2))*B | 14     | 14     | -      | 15     | 29     | 1    | 0    | -    | 1    | 0     | 0    | 0    | 
++------------+-------------------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+Note: The table above is a preliminary report that shows the DSPs inferred at the current stage of the synthesis flow. Some DSP may be reimplemented as non DSP primitives later in the synthesis flow. Multiple instantiated DSPs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:13 ; elapsed = 00:01:16 . Memory (MB): peak = 1908.727 ; gain = 651.813
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:01:14 ; elapsed = 00:01:17 . Memory (MB): peak = 1912.020 ; gain = 655.105
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+Block RAM: Final Mapping	Report
++------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+---------------------------------------------------------------------------------------------------------------------+
+|Module Name | RTL Object | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | Cascade Heights                                                                                                     | 
++------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+---------------------------------------------------------------------------------------------------------------------+
+|inst/idmd   | RAM_reg    | 512 K x 32(READ_FIRST) | W | R |                        |   |   | Port A           | 0      | 464    | 8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8 | 
++------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+---------------------------------------------------------------------------------------------------------------------+
+
+
+Distributed RAM: Final Mapping	Report
++------------+-------------+----------------+----------------------+--------------+
+|Module Name | RTL Object  | Inference      | Size (Depth x Width) | Primitives   | 
++------------+-------------+----------------+----------------------+--------------+
+|inst        | rf2/RAM_reg | User Attribute | 64 x 32              | RAM64M8 x 5	 | 
+|inst        | rf1/RAM_reg | User Attribute | 64 x 32              | RAM64M8 x 5	 | 
++------------+-------------+----------------+----------------------+--------------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/x1_reg_1_reg[12]' (FD) to 'inst/f/fsb/reg_m1_1_reg[12]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/x1_reg_1_reg[13]' (FD) to 'inst/f/fsb/reg_m1_1_reg[13]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/x1_reg_1_reg[14]' (FD) to 'inst/f/fsb/reg_m1_1_reg[14]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/x1_reg_1_reg[15]' (FD) to 'inst/f/fsb/reg_m1_1_reg[15]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/x1_reg_1_reg[16]' (FD) to 'inst/f/fsb/reg_m1_1_reg[16]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/x1_reg_1_reg[17]' (FD) to 'inst/f/fsb/reg_m1_1_reg[17]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/x1_reg_1_reg[18]' (FD) to 'inst/f/fsb/reg_m1_1_reg[18]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/x1_reg_1_reg[19]' (FD) to 'inst/f/fsb/reg_m1_1_reg[19]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/x1_reg_1_reg[20]' (FD) to 'inst/f/fsb/reg_m1_1_reg[20]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/x1_reg_1_reg[21]' (FD) to 'inst/f/fsb/reg_m1_1_reg[21]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/x1_reg_1_reg[22]' (FD) to 'inst/f/fsb/reg_m1_1_reg[22]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/x1_reg_1_reg[23]' (FD) to 'inst/f/fsb/reg_e1_1_reg[0]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/x1_reg_1_reg[24]' (FD) to 'inst/f/fad/reg_e1_1_reg[1]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/x1_reg_1_reg[25]' (FD) to 'inst/f/fad/reg_e1_1_reg[2]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/x1_reg_1_reg[26]' (FD) to 'inst/f/fad/reg_e1_1_reg[3]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/x1_reg_1_reg[27]' (FD) to 'inst/f/fad/reg_e1_1_reg[4]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/x1_reg_1_reg[28]' (FD) to 'inst/f/fad/reg_e1_1_reg[5]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/x1_reg_1_reg[29]' (FD) to 'inst/f/fad/reg_e1_1_reg[6]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/x1_reg_1_reg[30]' (FD) to 'inst/f/fad/reg_e1_1_reg[7]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/x1_reg_1_reg[0]' (FD) to 'inst/f/fsb/reg_m1_1_reg[0]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/x1_reg_1_reg[1]' (FD) to 'inst/f/fsb/reg_m1_1_reg[1]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/x1_reg_1_reg[2]' (FD) to 'inst/f/fsb/reg_m1_1_reg[2]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/x1_reg_1_reg[3]' (FD) to 'inst/f/fsb/reg_m1_1_reg[3]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/x1_reg_1_reg[4]' (FD) to 'inst/f/fsb/reg_m1_1_reg[4]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/x1_reg_1_reg[5]' (FD) to 'inst/f/fsb/reg_m1_1_reg[5]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/x1_reg_1_reg[6]' (FD) to 'inst/f/fsb/reg_m1_1_reg[6]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/x1_reg_1_reg[7]' (FD) to 'inst/f/fsb/reg_m1_1_reg[7]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/x1_reg_1_reg[8]' (FD) to 'inst/f/fsb/reg_m1_1_reg[8]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/x1_reg_1_reg[9]' (FD) to 'inst/f/fsb/reg_m1_1_reg[9]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/x1_reg_1_reg[10]' (FD) to 'inst/f/fsb/reg_m1_1_reg[10]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/x1_reg_1_reg[11]' (FD) to 'inst/f/fsb/reg_m1_1_reg[11]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/u1/reg_m_reg[17]' (FD) to 'inst/f/fad/reg_m2_1_reg[17]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/u1/reg_m_reg[16]' (FD) to 'inst/f/fad/reg_m2_1_reg[16]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/u1/reg_m_reg[19]' (FD) to 'inst/f/fsb/reg_m2_1_reg[19]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/u1/reg_m_reg[18]' (FD) to 'inst/f/fsb/reg_m2_1_reg[18]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/u1/reg_m_reg[20]' (FD) to 'inst/f/fsb/reg_m2_1_reg[20]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/u1/reg_m_reg[5]' (FD) to 'inst/f/fsb/reg_m2_1_reg[5]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/u1/reg_m_reg[15]' (FD) to 'inst/f/fad/reg_m2_1_reg[15]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/u1/reg_m_reg[1]' (FD) to 'inst/f/fsb/reg_m2_1_reg[1]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/u1/reg_m_reg[21]' (FD) to 'inst/f/fsb/reg_m2_1_reg[21]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/u1/reg_m_reg[8]' (FD) to 'inst/f/fsb/reg_m2_1_reg[8]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/u1/reg_m_reg[14]' (FD) to 'inst/f/fad/reg_m2_1_reg[14]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/u1/reg_m_reg[9]' (FD) to 'inst/f/fsb/reg_m2_1_reg[9]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/u1/reg_m_reg[13]' (FD) to 'inst/f/fsb/reg_m2_1_reg[13]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/u1/reg_m_reg[6]' (FD) to 'inst/f/fsb/reg_m2_1_reg[6]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/u1/reg_m_reg[12]' (FD) to 'inst/f/fsb/reg_m2_1_reg[12]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/u1/reg_m_reg[11]' (FD) to 'inst/f/fsb/reg_m2_1_reg[11]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/u1/reg_m_reg[0]' (FD) to 'inst/f/fsb/reg_m2_1_reg[0]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/u1/reg_m_reg[10]' (FD) to 'inst/f/fsb/reg_m2_1_reg[10]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/u1/reg_m_reg[7]' (FD) to 'inst/f/fsb/reg_m2_1_reg[7]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/u1/reg_m_reg[4]' (FD) to 'inst/f/fsb/reg_m2_1_reg[4]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/u1/reg_m_reg[2]' (FD) to 'inst/f/fsb/reg_m2_1_reg[2]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/u1/reg_m_reg[22]' (FD) to 'inst/f/fsb/reg_m2_1_reg[22]'
+INFO: [Synth 8-3886] merging instance 'inst/f/fdv/u1/reg_m_reg[3]' (FD) to 'inst/f/fsb/reg_m2_1_reg[3]'
+INFO: [Common 17-14] Message 'Synth 8-3886' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Synth 8-7053] The timing for the instance inst/f/fsq/u1/dout_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_12 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_20 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_28 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_36 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_44 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_52 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_60 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_68 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_76 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_84 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_92 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_100 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_108 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_116 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_124 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_132 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_140 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_148 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_156 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_164 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_172 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_180 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_188 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_196 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_204 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_212 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_220 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_228 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_236 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_244 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_252 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_260 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_272 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_280 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_288 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_296 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_304 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_312 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_320 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_328 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_336 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_344 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_352 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_360 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_368 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_376 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_384 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_392 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_403 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_411 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_419 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_427 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_435 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_443 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_451 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_459 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_468 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7053] The timing for the instance inst/idmd/RAM_reg_bram_476 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:01:17 ; elapsed = 00:01:20 . Memory (MB): peak = 1976.266 ; gain = 719.352
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+INFO: [Synth 8-5365] Flop fdv/u1/u1/dout_reg[35] is being inverted and renamed to fdv/u1/u1/dout_reg[35]_inv.
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:01:22 ; elapsed = 00:01:25 . Memory (MB): peak = 1982.480 ; gain = 725.566
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:01:22 ; elapsed = 00:01:25 . Memory (MB): peak = 1982.480 ; gain = 725.566
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:22 ; elapsed = 00:01:25 . Memory (MB): peak = 1982.480 ; gain = 725.566
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:01:22 ; elapsed = 00:01:25 . Memory (MB): peak = 1982.480 ; gain = 725.566
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:01:22 ; elapsed = 00:01:25 . Memory (MB): peak = 1982.480 ; gain = 725.566
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:01:22 ; elapsed = 00:01:25 . Memory (MB): peak = 1982.480 ; gain = 725.566
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+Static Shift Register Report:
++------------+---------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|Module Name | RTL Name      | Length | Width | Reset Signal | Pull out first Reg | Pull out last Reg | SRL16E | SRLC32E | 
++------------+---------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|fpu         | fdv/y_reg[31] | 3      | 1     | NO           | NO                 | YES               | 1      | 0       | 
++------------+---------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+------------------+------+
+|      |Cell              |Count |
++------+------------------+------+
+|1     |CARRY8            |    62|
+|2     |DSP_ALU_1         |    10|
+|3     |DSP_A_B_DATA      |     5|
+|4     |DSP_A_B_DATA_1    |     1|
+|5     |DSP_A_B_DATA_2    |     1|
+|6     |DSP_A_B_DATA_3    |     1|
+|7     |DSP_A_B_DATA_4    |     1|
+|8     |DSP_A_B_DATA_5    |     1|
+|9     |DSP_C_DATA        |     2|
+|10    |DSP_C_DATA_1      |     8|
+|11    |DSP_MULTIPLIER    |     9|
+|12    |DSP_MULTIPLIER_1  |     1|
+|13    |DSP_M_DATA_1      |    10|
+|14    |DSP_OUTPUT        |     2|
+|15    |DSP_OUTPUT_1      |     8|
+|16    |DSP_PREADD        |    10|
+|17    |DSP_PREADD_DATA   |     9|
+|18    |DSP_PREADD_DATA_1 |     1|
+|19    |LUT1              |    17|
+|20    |LUT2              |   167|
+|21    |LUT3              |   719|
+|22    |LUT4              |   450|
+|23    |LUT5              |   611|
+|24    |LUT6              |  2603|
+|25    |MUXF7             |   301|
+|26    |MUXF8             |   109|
+|27    |RAM64M8           |    10|
+|28    |RAMB36E2          |     1|
+|29    |RAMB36E2_1        |   192|
+|30    |RAMB36E2_10       |     8|
+|31    |RAMB36E2_11       |     7|
+|32    |RAMB36E2_12       |     1|
+|33    |RAMB36E2_13       |    12|
+|34    |RAMB36E2_14       |     2|
+|35    |RAMB36E2_15       |     1|
+|36    |RAMB36E2_16       |     1|
+|37    |RAMB36E2_2        |    32|
+|38    |RAMB36E2_3        |    31|
+|39    |RAMB36E2_4        |     1|
+|40    |RAMB36E2_5        |    96|
+|41    |RAMB36E2_6        |    16|
+|42    |RAMB36E2_7        |    15|
+|43    |RAMB36E2_8        |     1|
+|44    |RAMB36E2_9        |    48|
+|45    |SRL16E            |     1|
+|46    |FDRE              |  1305|
+|47    |FDSE              |    29|
++------+------------------+------+
+
+Report Instance Areas: 
++------+---------------------------+------------------------------------+------+
+|      |Instance                   |Module                              |Cells |
++------+---------------------------+------------------------------------+------+
+|1     |top                        |                                    |  6929|
+|2     |  inst                     |multicycle_cpu                      |  6929|
+|3     |    mcu                    |multi_control_unit                  |   244|
+|4     |      md                   |multi_main_decoder                  |   236|
+|5     |    ut                     |uart_tx                             |    92|
+|6     |    ur                     |uart_rx                             |    88|
+|7     |    a                      |alu                                 |    79|
+|8     |    f                      |fpu                                 |  3270|
+|9     |      fad                  |fadd                                |   882|
+|10    |        u1                 |fadd_1st                            |    75|
+|11    |        u2                 |fadd_2nd                            |   186|
+|12    |        u3                 |fadd_3rd                            |    77|
+|13    |      fdv                  |fdiv                                |  1331|
+|14    |        u1                 |finv                                |   997|
+|15    |          u1               |finv_table                          |   603|
+|16    |          u2               |finv_1st                            |   339|
+|17    |            cor_n          |\fdv/u1/u2/cor_n_funnel             |     8|
+|18    |        u2                 |fmul_1                              |   270|
+|19    |          reg_m1ahm2al_reg |\fdv/u2/reg_m1ahm2al_reg_funnel__1  |     8|
+|20    |          reg_m1alm2ah_reg |\fdv/u2/reg_m1alm2ah_reg_funnel__1  |     8|
+|21    |          reg_m1alm2al_reg |\fdv/u2/reg_m1alm2al_reg_funnel__1  |     8|
+|22    |          reg_m1ahm2ah_reg |\fml/reg_m1ahm2al_reg_funnel__9     |     8|
+|23    |          u2               |fmul_2nd_2                          |   176|
+|24    |      fml                  |fmul                                |   297|
+|25    |        reg_m1ahm2al_reg   |\fml/reg_m1ahm2al_reg_funnel__5     |     8|
+|26    |        reg_m1alm2ah_reg   |\fml/reg_m1ahm2al_reg_funnel__7     |     8|
+|27    |        reg_m1alm2al_reg   |\fml/reg_m1ahm2al_reg_funnel__8     |     8|
+|28    |        reg_m1ahm2ah_reg   |\fml/reg_m1ahm2al_reg_funnel__6     |     8|
+|29    |        u2                 |fmul_2nd                            |   176|
+|30    |      fsb                  |fsub                                |   632|
+|31    |        u1                 |fsub_1st                            |    75|
+|32    |        u2                 |fsub_2nd                            |   156|
+|33    |        u3                 |fsub_3rd                            |    76|
+|34    |      fsq                  |fsqrt                               |    92|
+|35    |        u1                 |fsqrt_table                         |     4|
+|36    |        u2                 |fsqrt_1st                           |    22|
+|37    |          cor_n            |\fsq/u2/cor_n_funnel                |     8|
+|38    |    idmd                   |rams_sp_rf                          |  2179|
+|39    |    rf1                    |rams_dp_wf                          |    43|
+|40    |    rf2                    |rams_dp_wf_0                        |     5|
++------+---------------------------+------------------------------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:01:22 ; elapsed = 00:01:25 . Memory (MB): peak = 1982.480 ; gain = 725.566
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 67 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:01:07 ; elapsed = 00:01:24 . Memory (MB): peak = 1982.480 ; gain = 725.566
+Synthesis Optimization Complete : Time (s): cpu = 00:01:23 ; elapsed = 00:01:25 . Memory (MB): peak = 1982.480 ; gain = 725.566
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.284 . Memory (MB): peak = 1994.500 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 492 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 1 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 2006.160 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 20 instances were transformed.
+  DSP48E2 => DSP48E2 (DSP_ALU, DSP_A_B_DATA, DSP_C_DATA, DSP_MULTIPLIER, DSP_M_DATA, DSP_OUTPUT, DSP_PREADD, DSP_PREADD_DATA): 10 instances
+  RAM64M8 => RAM64M8 (RAMD64E(x8)): 10 instances
+
+INFO: [Common 17-83] Releasing license: Synthesis
+369 Infos, 108 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:01:31 ; elapsed = 00:01:36 . Memory (MB): peak = 2006.160 ; gain = 1296.906
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 2006.160 ; gain = 0.000
+WARNING: [Constraints 18-5210] No constraints selected for write.
+Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
+INFO: [Common 17-1381] The checkpoint 'C:/Users/nowi74/OneDrive/cpuexcore/1st/core/1st_architecture/1st_architecture.runs/arch_1st_multicycle_cpu_0_0_synth_1/arch_1st_multicycle_cpu_0_0.dcp' has been generated.
+WARNING: [Common 17-576] 'use_project_ipc' is deprecated. This option is deprecated and no longer used.
+INFO: [Coretcl 2-1174] Renamed 29 cell refs.
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 2006.160 ; gain = 0.000
+WARNING: [Constraints 18-5210] No constraints selected for write.
+Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
+INFO: [Common 17-1381] The checkpoint 'C:/Users/nowi74/OneDrive/cpuexcore/1st/core/1st_architecture/1st_architecture.runs/arch_1st_multicycle_cpu_0_0_synth_1/arch_1st_multicycle_cpu_0_0.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file arch_1st_multicycle_cpu_0_0_utilization_synth.rpt -pb arch_1st_multicycle_cpu_0_0_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Sun Nov 22 18:54:00 2020...

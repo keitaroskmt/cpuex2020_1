@@ -163,8 +163,27 @@ proc create_root_design { parentCell } {
 
 
   # Create interface ports
+  set sysclk_125 [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:diff_clock_rtl:1.0 sysclk_125 ]
+  set_property -dict [ list \
+   CONFIG.FREQ_HZ {125000000} \
+   ] $sysclk_125
+
 
   # Create ports
+  set USB_UART_RX [ create_bd_port -dir O -type data USB_UART_RX ]
+  set USB_UART_TX [ create_bd_port -dir I -type data USB_UART_TX ]
+  set reset [ create_bd_port -dir I -type rst reset ]
+  set_property -dict [ list \
+   CONFIG.POLARITY {ACTIVE_HIGH} \
+ ] $reset
+
+  # Create instance: clk_wiz_0, and set properties
+  set clk_wiz_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:clk_wiz:6.0 clk_wiz_0 ]
+  set_property -dict [ list \
+   CONFIG.CLK_IN1_BOARD_INTERFACE {sysclk_125} \
+   CONFIG.RESET_BOARD_INTERFACE {reset} \
+   CONFIG.USE_BOARD_FLOW {true} \
+ ] $clk_wiz_0
 
   # Create instance: multicycle_cpu_0, and set properties
   set block_name multicycle_cpu
@@ -177,15 +196,15 @@ proc create_root_design { parentCell } {
      return 1
    }
   
-  # Create instance: sim_clk_gen_0, and set properties
-  set sim_clk_gen_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:sim_clk_gen:1.0 sim_clk_gen_0 ]
-  set_property -dict [ list \
-   CONFIG.INITIAL_RESET_CLOCK_CYCLES {0} \
- ] $sim_clk_gen_0
+  # Create interface connections
+  connect_bd_intf_net -intf_net sysclk_125_1 [get_bd_intf_ports sysclk_125] [get_bd_intf_pins clk_wiz_0/CLK_IN1_D]
 
   # Create port connections
-  connect_bd_net -net sim_clk_gen_0_clk [get_bd_pins multicycle_cpu_0/clk] [get_bd_pins sim_clk_gen_0/clk]
-  connect_bd_net -net sim_clk_gen_0_sync_rst [get_bd_pins multicycle_cpu_0/rstn] [get_bd_pins sim_clk_gen_0/sync_rst]
+  connect_bd_net -net USB_UART_TX_1 [get_bd_ports USB_UART_TX] [get_bd_pins multicycle_cpu_0/rxd]
+  connect_bd_net -net clk_wiz_0_clk_out1 [get_bd_pins clk_wiz_0/clk_out1] [get_bd_pins multicycle_cpu_0/clk]
+  connect_bd_net -net clk_wiz_0_locked [get_bd_pins clk_wiz_0/locked] [get_bd_pins multicycle_cpu_0/rstn_]
+  connect_bd_net -net multicycle_cpu_0_txd [get_bd_ports USB_UART_RX] [get_bd_pins multicycle_cpu_0/txd]
+  connect_bd_net -net reset_1 [get_bd_ports reset] [get_bd_pins clk_wiz_0/reset]
 
   # Create address segments
 

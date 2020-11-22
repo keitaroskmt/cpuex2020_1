@@ -1,34 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="impl_1" LaunchPart="xcku040-ffva1156-2-e" LaunchTime="1605443884">
-  <File Type="ROUTE-BUS-SKEW" Name="arch_1st_wrapper_bus_skew_routed.rpt"/>
-  <File Type="PA-DCP" Name="arch_1st_wrapper.dcp"/>
-  <File Type="OPT-HWDEF" Name="arch_1st_wrapper.hwdef"/>
+<GenRun Id="impl_1" LaunchPart="xcku040-ffva1156-2-e" LaunchTime="1606038721">
+  <File Type="BITSTR-BMM" Name="arch_1st_wrapper_bd.bmm"/>
+  <File Type="OPT-METHODOLOGY-DRC" Name="arch_1st_wrapper_methodology_drc_opted.rpt"/>
+  <File Type="INIT-TIMING" Name="arch_1st_wrapper_timing_summary_init.rpt"/>
   <File Type="ROUTE-PWR" Name="arch_1st_wrapper_power_routed.rpt"/>
   <File Type="PA-TCL" Name="arch_1st_wrapper.tcl"/>
-  <File Type="BITSTR-BMM" Name="arch_1st_wrapper_bd.bmm"/>
+  <File Type="OPT-TIMING" Name="arch_1st_wrapper_timing_summary_opted.rpt"/>
   <File Type="OPT-DCP" Name="arch_1st_wrapper_opt.dcp"/>
-  <File Type="REPORTS-TCL" Name="arch_1st_wrapper_reports.tcl"/>
   <File Type="ROUTE-PWR-SUM" Name="arch_1st_wrapper_power_summary_routed.pb"/>
+  <File Type="REPORTS-TCL" Name="arch_1st_wrapper_reports.tcl"/>
   <File Type="OPT-DRC" Name="arch_1st_wrapper_drc_opted.rpt"/>
+  <File Type="OPT-HWDEF" Name="arch_1st_wrapper.hwdef"/>
   <File Type="PWROPT-DCP" Name="arch_1st_wrapper_pwropt.dcp"/>
+  <File Type="PWROPT-DRC" Name="arch_1st_wrapper_drc_pwropted.rpt"/>
+  <File Type="PWROPT-TIMING" Name="arch_1st_wrapper_timing_summary_pwropted.rpt"/>
   <File Type="PLACE-DCP" Name="arch_1st_wrapper_placed.dcp"/>
   <File Type="PLACE-IO" Name="arch_1st_wrapper_io_placed.rpt"/>
+  <File Type="PLACE-CLK" Name="arch_1st_wrapper_clock_utilization_placed.rpt"/>
   <File Type="PLACE-UTIL" Name="arch_1st_wrapper_utilization_placed.rpt"/>
   <File Type="PLACE-UTIL-PB" Name="arch_1st_wrapper_utilization_placed.pb"/>
   <File Type="PLACE-CTRL" Name="arch_1st_wrapper_control_sets_placed.rpt"/>
+  <File Type="PLACE-SIMILARITY" Name="arch_1st_wrapper_incremental_reuse_placed.rpt"/>
   <File Type="PLACE-PRE-SIMILARITY" Name="arch_1st_wrapper_incremental_reuse_pre_placed.rpt"/>
+  <File Type="PLACE-TIMING" Name="arch_1st_wrapper_timing_summary_placed.rpt"/>
   <File Type="POSTPLACE-PWROPT-DCP" Name="arch_1st_wrapper_postplace_pwropt.dcp"/>
   <File Type="BG-BIN" Name="arch_1st_wrapper.bin"/>
+  <File Type="POSTPLACE-PWROPT-TIMING" Name="arch_1st_wrapper_timing_summary_postplace_pwropted.rpt"/>
   <File Type="PHYSOPT-DCP" Name="arch_1st_wrapper_physopt.dcp"/>
+  <File Type="PHYSOPT-DRC" Name="arch_1st_wrapper_drc_physopted.rpt"/>
   <File Type="BITSTR-MSK" Name="arch_1st_wrapper.msk"/>
+  <File Type="PHYSOPT-TIMING" Name="arch_1st_wrapper_timing_summary_physopted.rpt"/>
   <File Type="ROUTE-ERROR-DCP" Name="arch_1st_wrapper_routed_error.dcp"/>
   <File Type="ROUTE-DCP" Name="arch_1st_wrapper_routed.dcp"/>
   <File Type="ROUTE-BLACKBOX-DCP" Name="arch_1st_wrapper_routed_bb.dcp"/>
   <File Type="ROUTE-DRC" Name="arch_1st_wrapper_drc_routed.rpt"/>
   <File Type="ROUTE-DRC-PB" Name="arch_1st_wrapper_drc_routed.pb"/>
   <File Type="ROUTE-DRC-RPX" Name="arch_1st_wrapper_drc_routed.rpx"/>
-  <File Type="ROUTE-METHODOLOGY-DRC" Name="arch_1st_wrapper_methodology_drc_routed.rpt"/>
   <File Type="BITSTR-MMI" Name="arch_1st_wrapper.mmi"/>
+  <File Type="ROUTE-METHODOLOGY-DRC" Name="arch_1st_wrapper_methodology_drc_routed.rpt"/>
   <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="arch_1st_wrapper_methodology_drc_routed.rpx"/>
   <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="arch_1st_wrapper_methodology_drc_routed.pb"/>
   <File Type="ROUTE-PWR-RPX" Name="arch_1st_wrapper_power_routed.rpx"/>
@@ -37,12 +46,20 @@
   <File Type="ROUTE-TIMINGSUMMARY" Name="arch_1st_wrapper_timing_summary_routed.rpt"/>
   <File Type="ROUTE-TIMING-PB" Name="arch_1st_wrapper_timing_summary_routed.pb"/>
   <File Type="ROUTE-TIMING-RPX" Name="arch_1st_wrapper_timing_summary_routed.rpx"/>
+  <File Type="ROUTE-SIMILARITY" Name="arch_1st_wrapper_incremental_reuse_routed.rpt"/>
   <File Type="ROUTE-CLK" Name="arch_1st_wrapper_clock_utilization_routed.rpt"/>
+  <File Type="ROUTE-BUS-SKEW" Name="arch_1st_wrapper_bus_skew_routed.rpt"/>
   <File Type="ROUTE-BUS-SKEW-PB" Name="arch_1st_wrapper_bus_skew_routed.pb"/>
   <File Type="ROUTE-BUS-SKEW-RPX" Name="arch_1st_wrapper_bus_skew_routed.rpx"/>
   <File Type="POSTROUTE-PHYSOPT-DCP" Name="arch_1st_wrapper_postroute_physopt.dcp"/>
   <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="arch_1st_wrapper_postroute_physopt_bb.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING" Name="arch_1st_wrapper_timing_summary_postroute_physopted.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-PB" Name="arch_1st_wrapper_timing_summary_postroute_physopted.pb"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-RPX" Name="arch_1st_wrapper_timing_summary_postroute_physopted.rpx"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW" Name="arch_1st_wrapper_bus_skew_postroute_physopted.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-PB" Name="arch_1st_wrapper_bus_skew_postroute_physopted.pb"/>
   <File Type="BG-BIT" Name="arch_1st_wrapper.bit"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-RPX" Name="arch_1st_wrapper_bus_skew_postroute_physopted.rpx"/>
   <File Type="BITSTR-RBT" Name="arch_1st_wrapper.rbt"/>
   <File Type="BITSTR-NKY" Name="arch_1st_wrapper.nky"/>
   <File Type="PDI-FILE" Name="arch_1st_wrapper.pdi"/>
@@ -51,6 +68,7 @@
   <File Type="RNPI_FILE" Name="arch_1st_wrapper.rnpi"/>
   <File Type="NPI_FILE" Name="arch_1st_wrapper.npi"/>
   <File Type="RBD_FILE" Name="arch_1st_wrapper.rbd"/>
+  <File Type="BITSTR-LTX" Name="debug_nets.ltx"/>
   <File Type="BITSTR-LTX" Name="arch_1st_wrapper.ltx"/>
   <File Type="BITSTR-SYSDEF" Name="arch_1st_wrapper.sysdef"/>
   <File Type="BG-BGN" Name="arch_1st_wrapper.bgn"/>
@@ -59,91 +77,91 @@
   <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
     <Filter Type="Srcs"/>
-    <File Path="$PPRDIR/../src/alu.v">
+    <File Path="$PPRDIR/../src/1st_arch/alu.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../src/fpu/fabs.v">
+    <File Path="$PPRDIR/../src/1st_arch/fpu/fabs.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../src/fpu/fadd.v">
+    <File Path="$PPRDIR/../src/1st_arch/fpu/fadd.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../src/fpu/fdiv.v">
+    <File Path="$PPRDIR/../src/1st_arch/fpu/fdiv.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../src/fpu/finv.v">
+    <File Path="$PPRDIR/../src/1st_arch/fpu/finv.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../src/fpu/fmul.v">
+    <File Path="$PPRDIR/../src/1st_arch/fpu/fmul.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../src/fpu/fneg.v">
+    <File Path="$PPRDIR/../src/1st_arch/fpu/fneg.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../src/fpu.v">
+    <File Path="$PPRDIR/../src/1st_arch/fpu.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../src/fpu/fsqrt.v">
+    <File Path="$PPRDIR/../src/1st_arch/fpu/fsqrt.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../src/fpu/fsub.v">
+    <File Path="$PPRDIR/../src/1st_arch/fpu/fsub.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../src/multi_control_unit.v">
+    <File Path="$PPRDIR/../src/1st_arch/multi_control_unit.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../src/rams_dp_wf.v">
+    <File Path="$PPRDIR/../src/1st_arch/rams_dp_wf.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../src/rams_sp_rf.v">
+    <File Path="$PPRDIR/../src/1st_arch/rams_sp_rf.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
@@ -164,7 +182,7 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../src/multicycle_1st.v">
+    <File Path="$PPRDIR/../src/1st_arch/multicycle_1st.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
@@ -185,6 +203,14 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
+    <File Path="$PPRDIR/../src/reset_test.v">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <File Path="$PPRDIR/../src/in_testbench.sv">
       <FileInfo>
         <Attr Name="AutoDisabled" Val="1"/>
@@ -193,23 +219,39 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../src/initialize.mem">
-      <FileInfo>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PPRDIR/../src/fib.mem">
-      <FileInfo>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PPRDIR/../src/fpu/fmove.v">
+    <File Path="$PPRDIR/../src/1st_arch/uart_tx.sv">
       <FileInfo>
         <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../src/1st_arch/fpu/fmove.v">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../src/1st_arch/uart_rx.sv">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../src/mytest/int_io.mem">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../src/mytest/fib.mem">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
@@ -248,7 +290,6 @@
     <Step Id="route_design"/>
     <Step Id="post_route_phys_opt_design"/>
     <Step Id="write_bitstream"/>
-    <Step Id="write_device_image"/>
   </Strategy>
   <BlockFileSet Type="BlockSrcs" Name="arch_1st_multicycle_cpu_0_0"/>
 </GenRun>

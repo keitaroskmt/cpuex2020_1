@@ -1,7 +1,7 @@
 Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2019.2.1 (win64) Build 2729669 Thu Dec  5 04:49:17 MST 2019
-| Date         : Sun Nov 15 21:35:37 2020
+| Date         : Sun Nov 22 18:54:44 2020
 | Host         : LAPTOP-G1I2TTIP running 64-bit major release  (build 9200)
 | Command      : report_utilization -file arch_1st_wrapper_utilization_synth.rpt -pb arch_1st_wrapper_utilization_synth.pb
 | Design       : arch_1st_wrapper
@@ -93,7 +93,7 @@ Table of Contents
 +------------+------+-------+-----------+-------+
 |  Site Type | Used | Fixed | Available | Util% |
 +------------+------+-------+-----------+-------+
-| Bonded IOB |   11 |     0 |       520 |  2.12 |
+| Bonded IOB |    3 |     0 |       520 |  0.58 |
 +------------+------+-------+-----------+-------+
 
 
@@ -152,9 +152,9 @@ Table of Contents
 +----------+------+---------------------+
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
-| OBUF     |    9 |                 I/O |
 | INBUF    |    2 |                 I/O |
 | IBUFCTRL |    2 |              Others |
+| OBUF     |    1 |                 I/O |
 +----------+------+---------------------+
 
 
