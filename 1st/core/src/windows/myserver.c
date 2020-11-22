@@ -544,7 +544,7 @@ static void parse_arguments(int argc, char* argv[], app_settings* as)
   extern int optind, opterr, optopt;*/
 
   as->cs.comport_id = 1;
-  as->cs.baud = 115200;
+  as->cs.baud = 9600;
   as->cs.stopbit_len = ONESTOPBIT;
   as->cs.parity_type = NOPARITY;
   as->cs.n_databits = 8;

@@ -5,11 +5,13 @@ module multicycle_cpu
     (//input wire SYSCLK_300_P, SYSCLK_300_N,
      //input wire CPU_RESET,
      input wire clk,
-     input wire rstn,
+     input wire rstn_,
      //(*mark_debug = "true"*)output reg [7:0] led,
      (*mark_debug = "true"*)input wire rxd,
      (*mark_debug = "true"*)output wire txd
      );
+
+
 
      //IBUFGDS clk_inst (
         //.O(clk),
@@ -90,7 +92,9 @@ module multicycle_cpu
      reg [31:0] sdata;
      reg [31:0] rdata_reg;
      reg [31:0] counter;
+     reg rstn;
 
+    (* ASYNC_REG = "true" *) reg [2:0] sync_reg;
 
 
 
@@ -100,25 +104,46 @@ module multicycle_cpu
      end
 
      //fetch stage
-     always @(posedge clk) begin
-         //if(~rstn) begin
-           //pc <= 0;
-           //inst_reg <= 0;
-           //data_reg <= 0;
-           //output_rf1_reg <= 0;
-           //output_rf2_reg <= 0;
-           //alu_out_reg <= 0;
-           //sdata <= 0;
-           //rdata_reg <= 0;
-           //counter <= 0;
-         //end
-         if (pcen) begin
-            pc <= pc_;
-         end
-     end
+    always @(posedge clk) begin
+        if(~rstn) begin
+           pc <= 0;
+           inst_reg <= 0;
+           data_reg <= 0;
+           output_rf1_reg <= 0;
+           output_rf2_reg <= 0;
+           alu_out_reg <= 0;
+           sdata <= 0;
+           rdata_reg <= 0;
+           counter <= 0;
+           sync_reg <= 3'b111;
+        end else begin
+            if (pcen) begin
+                pc <= pc_;
+            end
+            if (IRWrite) begin
+                inst_reg <= rd;
+                counter <= counter + 1'b1;
+            end
+            data_reg <= rd;
+            if (Out) begin
+                sdata <= output_rf2;
+            end else if (Rx_ready) begin
+                rdata_reg <= {24'b0,rdata};
+            end
+            output_rf1_reg <= output_rf1;
+            output_rf2_reg <= output_rf2;
+            alu_out_reg <= cal_result;
+            if(pc_wire == 8'd164 && RegWrite == 1'b1) begin
+                led <= alu_out[7:0];
+            end
+        end
+        sync_reg[0] <= rstn_;
+        sync_reg[2:1] <= sync_reg [1:0];
+        rstn <= sync_reg[2];
+    end
 
-     assign pc_wire = pc;
-     assign adr = (~IorD ? pc_wire : alu_out);
+    assign pc_wire = pc;
+    assign adr = (~IorD ? pc_wire : alu_out);
     reg en;
     initial begin
         en = 1'b1;
@@ -129,13 +154,13 @@ module multicycle_cpu
 
 
     //decode,memory access stage
-     always @(posedge clk) begin
-         if (IRWrite) begin
-            inst_reg <= rd;
-            counter <= counter + 1'b1;
-         end
-            data_reg <= rd;
-     end
+     //always @(posedge clk) begin
+         //if (IRWrite) begin
+            //inst_reg <= rd;
+            //counter <= counter + 1'b1;
+         //end
+            //data_reg <= rd;
+     //end
 
      assign inst = inst_reg;
      assign data = data_reg;
@@ -150,13 +175,13 @@ module multicycle_cpu
      rams_dp_wf rf1(clk,RegWrite,regdst,mem_to_reg,op1,output_rf1);
      rams_dp_wf rf2(clk,RegWrite,regdst,mem_to_reg,op2,output_rf2);
 
-     always @(posedge clk) begin
-         if (Out) begin
-             sdata <= output_rf2;
-         end else if (Rx_ready) begin
-             rdata_reg <= {24'b0,rdata};
-         end
-     end
+     //always @(posedge clk) begin
+         //if (Out) begin
+             //sdata <= output_rf2;
+         //end else if (Rx_ready) begin
+             //rdata_reg <= {24'b0,rdata};
+         //end
+     //end
 
      assign Indata = rdata_reg;
 
@@ -167,10 +192,10 @@ module multicycle_cpu
      uart_rx ur(rdata,Rx_ready,ferr,rxd,clk,rstn);
 
      //execute stage
-     always @(posedge clk) begin
-        output_rf1_reg <= output_rf1;
-        output_rf2_reg <= output_rf2;
-     end
+     //always @(posedge clk) begin
+        //output_rf1_reg <= output_rf1;
+        //output_rf2_reg <= output_rf2;
+     //end
 
      assign output1 = output_rf1_reg;
      assign output2 = output_rf2_reg;
@@ -191,12 +216,12 @@ module multicycle_cpu
 
 
      //write back stage
-     always @(posedge clk) begin
-         alu_out_reg <= cal_result;
-         if(pc_wire == 8'd164 && RegWrite == 1'b1) begin
-           led <= alu_out[7:0];
-         end
-     end
+     //always @(posedge clk) begin
+         //alu_out_reg <= cal_result;
+         //if(pc_wire == 8'd164 && RegWrite == 1'b1) begin
+           //led <= alu_out[7:0];
+         //end
+     //end
 
      assign alu_out = alu_out_reg;
      assign jump_address = {pc_wire[31:28],inst[25:0],2'b00};
