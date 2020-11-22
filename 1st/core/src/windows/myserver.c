@@ -414,11 +414,14 @@ static void wait_for_0xaa(void)
  */
 static void send_sld_data(void)
 {
-  fprintf(stderr, "sending SLD data:\n");
+  //fprintf(stderr, "sending SLD data:\n");
   startTime = GetTickCount();
   sld_words[0].i = 11;
   sld_n_words = 1;
   com_write((char*)sld_words, sld_n_words*sizeof(sld_words[0]));
+  //for (int j=0;j<sld_n_words;j++){
+    //printf("%d\n",sld_words[j].i);
+  //}
 
 }
 
@@ -541,7 +544,7 @@ static void parse_arguments(int argc, char* argv[], app_settings* as)
   extern int optind, opterr, optopt;*/
 
   as->cs.comport_id = 1;
-  as->cs.baud = 9600;
+  as->cs.baud = 115200;
   as->cs.stopbit_len = ONESTOPBIT;
   as->cs.parity_type = NOPARITY;
   as->cs.n_databits = 8;
@@ -614,15 +617,49 @@ int main(int argc, char* argv[])
 
   /* receive the PPM image */
 //  recv_ppm_data(out);
- int c;
- c = com_getc();
- printf("%d\n",c);
+//int n = 160000;
+//for(int i=0;i<n;i++){
+ int c1,c2,c3,c4;
+ c1 = com_getc();
+ printf("%d\n",c1);
+ c1 = com_getc();
+ printf("%d\n",c1);
+ c1 = com_getc();
+ printf("%d\n",c1);
+ c1 = com_getc();
+ printf("%d\n",c1);
+ c2 = com_getc();
+ printf("%d\n",c2);
+ c3= com_getc();
+ printf("%d\n",c3);
+ c4= com_getc();
+ printf("%d\n",c4);
+ c1 = com_getc();
+ printf("%d\n",c1);
+ c1 = com_getc();
+ printf("%d\n",c1);
+ c2 = com_getc();
+ printf("%d\n",c2);
+ c3= com_getc();
+ printf("%d\n",c3);
+ c4= com_getc();
+ printf("%d\n",c4);
+ c1 = com_getc();
+ printf("%d\n",c1);
+ c1 = com_getc();
+ printf("%d\n",c1);
+ c2 = com_getc();
+ printf("%d\n",c2);
+ c3= com_getc();
+ printf("%d\n",c3);
+ c4= com_getc();
+ printf("%d\n",c4);
 
 
 
   DWORD elapsedTime = endTime - startTime;
-  fprintf(stderr, "elapsed time : %lu.%03lu s\n",
-          elapsedTime/1000, elapsedTime%1000);
+  //fprintf(stderr, "elapsed time : %lu.%03lu s\n",
+ //         elapsedTime/1000, elapsedTime%1000);
   fclose(out);
 
   return 0;

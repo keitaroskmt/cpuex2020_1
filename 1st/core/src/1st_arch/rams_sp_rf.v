@@ -9,14 +9,14 @@ input [31:0] addr;
 input [31:0] di;
 output [31:0] dout;
 
-(*ram_style = "block"*)reg [31:0] RAM [65535:0];
+(*ram_style = "block"*)reg [31:0] RAM [524287:0];
 reg [31:0] dout;
 
 initial begin
-    $readmemb("array_put.mem",RAM,0,99);
+    $readmemb("int_io.mem",RAM,0,300);
 end
 integer i;
-initial for (i=100; i<65536; i=i+1) RAM[i] = 0;
+initial for (i=301; i<65536; i=i+1) RAM[i] = 0;
 
 always @(posedge clk)
 begin

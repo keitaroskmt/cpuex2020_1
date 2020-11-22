@@ -1,6 +1,6 @@
 `default_nettype none
 
-module uart_tx #(CLK_PER_HALF_BIT = 5208) ( // 115200bits/s
+module uart_tx #(CLK_PER_HALF_BIT = 435) ( // 115200bits/s
                input wire [7:0] sdata,
                input wire       tx_start,
                output logic     tx_busy,

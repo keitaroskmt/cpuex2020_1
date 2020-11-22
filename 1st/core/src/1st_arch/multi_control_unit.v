@@ -41,8 +41,10 @@ assign RegConcat = (Op == 6'b010111) ? 3'b110 //slt
                    :((Op == 6'b110110) ? 3'b010 //sw01x
                    :((Op == 6'b110100) ? 3'b110 //beq11x
                    :((Op == 6'b110101) ? 3'b110 //bne11x
+                   :((Op == 6'b111000) ? 3'b100 //ftoi1x0
+                   :((Op == 6'b111001) ? 3'b001 //itof0x1
                    :((Op[4:3]==2'b10) ? 3'b111
-                   : 3'b000))))); //浮動小数命令のとき�??��レジスタのアドレスに位置をつける. RegConcat = {rs,rt,rd}
+                   : 3'b000))))))); //浮動小数命令のとき�??��レジスタのアドレスに位置をつける. RegConcat = {rs,rt,rd}
 
 multi_main_decoder md(Op,Funct,clk,rstn,UBusy,Rx_ready,IorD,MemWrite,IRWrite,PCWrite_temp,Branch,ToggleEqual,PCSrc_temp,FPUControl,ALUorFPU,ALUSrcB,ALUSrcA,AndiOri,RegWrite,RegDst,MemtoReg,ALUOp,BorL,Out,Tx_start,state);
 multi_ALU_decoder ad(Op,Funct,ALUOp,PCSrc_temp,PCWrite_temp,state,ALUControl,PCSrc,PCWrite,ShiftD,Shift);
@@ -116,6 +118,9 @@ module multi_main_decoder(
     localparam s_InPre =           33;
     localparam s_In =              34;
     localparam s_Jumpandlinkregister = 35;
+    localparam s_Ftoi =            36;
+    localparam s_Itof =            37;
+    localparam s_FtoiItofWB =      38;
 
 
 always @(posedge clk) begin
@@ -132,6 +137,7 @@ always @(posedge clk) begin
         ALUorFPU <= 1'b0;
         ALUSrcB  <= 2'b01;
         ALUSrcA  <= 1'b0;
+        AndiOri <= 1'b1;
         RegWrite <= 1'b0;
         RegDst   <= 2'b0;
         MemtoReg <= 2'b0;
@@ -195,6 +201,12 @@ always @(posedge clk) begin
             ALUSrcA <= 1'b1;
             ALUSrcB <= 2'b00;
             FPUControl <= 3'b010;
+            ALUorFPU <= 1'b1;
+        end else if (Op == 6'b010011) begin //fdiv
+            state <= s_FPUExecute;
+            ALUSrcA <= 1'b1;
+            ALUSrcB <= 2'b00;
+            FPUControl <= 3'b011;
             ALUorFPU <= 1'b1;
         end else if (Op == 6'b010100) begin //fneg
             state <= s_FPUWait1;
@@ -295,6 +307,16 @@ always @(posedge clk) begin
             Out <= 1'b1;
         end else if (Op == 6'b011010) begin //in
             state <= s_InWait;
+        end else if (Op == 6'b111000) begin //ftoi
+            state <= s_Ftoi;
+            ALUSrcA <= 1'b1;
+            ALUSrcB <= 2'b10;
+            ALUOp <= 3'b000;
+        end else if (Op == 6'b111001) begin //itof
+            state <= s_Itof;
+            ALUSrcA <= 1'b1;
+            ALUSrcB <= 2'b10;
+            ALUOp <= 3'b000;
         end
     end else if (state == s_MemAdr) begin
         if ((Op == 6'b100011) | (Op == 6'b110011)) begin //lw or flw
@@ -540,6 +562,28 @@ always @(posedge clk) begin
         RegWrite <= 1'b1;
     end else if (state == s_In) begin
         state    <= s_Fetch;
+        IorD     <= 1'b0;
+        ALUSrcA  <= 1'b0;
+        ALUSrcB  <= 2'b01;
+        ALUOp    <= 3'b000;
+        ToggleEqual <= 1'b0; //when returning from BranchnotEqual state, we should set down this bit.
+        PCSrc_temp    <= 2'b00;
+        //IRWrite  <= 1'b1;
+        PCWrite_temp  <= 1'b1;
+        RegWrite <= 1'b0;
+        MemWrite <= 1'b0;
+    end else if (state == s_Ftoi) begin
+        state <= s_FtoiItofWB;
+        RegDst <= 2'b00;
+        MemtoReg <= 2'b00;
+        RegWrite <= 1'b1;
+    end else if (state == s_Itof) begin
+        state <= s_FtoiItofWB;
+        RegDst <= 2'b00;
+        MemtoReg <= 2'b00;
+        RegWrite <= 1'b1;
+    end else if (state == s_FtoiItofWB) begin
+        state <= s_Fetch;
         IorD     <= 1'b0;
         ALUSrcA  <= 1'b0;
         ALUSrcB  <= 2'b01;

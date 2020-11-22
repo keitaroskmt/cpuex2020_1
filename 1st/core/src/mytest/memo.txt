@@ -25,3 +25,19 @@ array_make
 
 array_put
 - arrayへの代入ができているかのテスト(上ができてこれができないならヒープ周りのバグ)
+
+int_io
+- read_int(), print_int(), print_char()のテスト
+- 以下のように出力 (出力側でreadする必要あり？)
+P3
+(fib x) (fib (x+2)) 255
+
+sin, cos
+- ライブラリ関数, read_floatのテスト
+- sin, cosのみ
+- read_floatでは単精度のfloatであることに気を付ける
+- 90.0を入力 -> sinはほぼ1, cosはほぼ0など
+
+mandelbrot
+- 400 * 400 = 160000回print_int
+- mandelbrot.ansが答えでdiffをとって確認

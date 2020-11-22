@@ -10,12 +10,12 @@ input [5:0] ra;
 output [31:0] rd;
 (* ram_style = "distributed" *)reg [31:0] RAM [0:63];
 
-//integer i;
-//initial for (i=0; i<32; i=i+1) RAM[i] = 0;
+integer i;
+initial for (i=0; i<64; i=i+1) RAM[i] = 0;
 
-initial begin
-    $readmemb("initialize.mem",RAM,0,63);
-end
+//initial begin
+  //  $readmemb("initialize.mem",RAM,0,63);
+//end
 
 //reg [31:0] rd_reg;
 //assign rd = rd_reg;

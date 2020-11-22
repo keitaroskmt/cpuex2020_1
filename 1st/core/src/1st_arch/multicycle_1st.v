@@ -4,9 +4,9 @@
 module multicycle_cpu
     (//input wire SYSCLK_300_P, SYSCLK_300_N,
      //input wire CPU_RESET,
-     (*mark_debug = "true"*)input wire clk,
-     (*mark_debug = "true"*)input wire rstn,
-     (*mark_debug = "true"*)output reg [7:0] led,
+     input wire clk,
+     input wire rstn,
+     //(*mark_debug = "true"*)output reg [7:0] led,
      (*mark_debug = "true"*)input wire rxd,
      (*mark_debug = "true"*)output wire txd
      );
@@ -19,11 +19,11 @@ module multicycle_cpu
 
      //(*mark_debug = "true"*)wire         txd;
      //(*mark_debug = "true"*)wire         rxd;
-     //reg  [7:0]     led;
+     reg  [7:0]     led;
      wire          ferr;
-     wire [31:0] pc_wire;
-     wire [5:0] opcode;
-     wire [5:0] funct;
+     (*mark_debug = "true"*)wire [31:0] pc_wire;
+     (*mark_debug = "true"*)wire [5:0] opcode;
+     (*mark_debug = "true"*)wire [5:0] funct;
      wire         UBusy;
      wire         IorD;
      wire         MemWrite;
@@ -41,11 +41,11 @@ module multicycle_cpu
      wire         RegWrite;
      wire [1:0]   RegDst;
      wire [1:0]   MemtoReg;
-     wire [31:0]  srcA;
-     wire [31:0]  srcB;
+     (*mark_debug = "true"*)wire [31:0]  srcA;
+     (*mark_debug = "true"*)wire [31:0]  srcB;
      wire [31:0]  alu_result;
      wire [31:0]  fpu_result;
-     wire [31:0]  cal_result;
+     (*mark_debug = "true"*)wire [31:0]  cal_result;
      wire         ShiftD;
      wire         Shift;
      wire         BorL;
@@ -81,36 +81,37 @@ module multicycle_cpu
      wire [31:0] SignImm;
      wire pcen;
 
-     (*mark_debug = "true"*)reg [31:0] pc;
-     (*mark_debug = "true"*)reg [31:0] inst_reg;
-     (*mark_debug = "true"*)reg [31:0] data_reg;
-     (*mark_debug = "true"*)reg [31:0] output_rf1_reg;
-     (*mark_debug = "true"*)reg [31:0] output_rf2_reg;
-     (*mark_debug = "true"*)reg [31:0] alu_out_reg;
-     (*mark_debug = "true"*)reg [31:0] sdata;
-     (*mark_debug = "true"*)reg [31:0] rdata_reg;
-     (*mark_debug = "true"*)reg [31:0] counter;
+     reg [31:0] pc;
+     reg [31:0] inst_reg;
+     reg [31:0] data_reg;
+     reg [31:0] output_rf1_reg;
+     reg [31:0] output_rf2_reg;
+     reg [31:0] alu_out_reg;
+     reg [31:0] sdata;
+     reg [31:0] rdata_reg;
+     reg [31:0] counter;
 
 
 
 
      initial begin
          pc = 0;
+         counter <= 0;
      end
 
      //fetch stage
      always @(posedge clk) begin
-         if(~rstn) begin
-           pc <= 0;
-           inst_reg <= 0;
-           data_reg <= 0;
-           output_rf1_reg <= 0;
-           output_rf2_reg <= 0;
-           alu_out_reg <= 0;
-           sdata <= 0;
-           rdata_reg <= 0;
-           counter <= 0;
-         end
+         //if(~rstn) begin
+           //pc <= 0;
+           //inst_reg <= 0;
+           //data_reg <= 0;
+           //output_rf1_reg <= 0;
+           //output_rf2_reg <= 0;
+           //alu_out_reg <= 0;
+           //sdata <= 0;
+           //rdata_reg <= 0;
+           //counter <= 0;
+         //end
          if (pcen) begin
             pc <= pc_;
          end
