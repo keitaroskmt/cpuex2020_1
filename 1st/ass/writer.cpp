@@ -339,7 +339,7 @@ unsigned int Writer::encode(vector<string> &v) {
             // 相対アドレス
             imm = parser->label_map.at(v[4]) - (current_num + 1);
 
-        } else if (v[1] == "bne") {
+        } else if (v[1] == "fbne") {
             op = 0x35;
             rt = freg_name.at(v[2]);
             rs = freg_name.at(v[3]);

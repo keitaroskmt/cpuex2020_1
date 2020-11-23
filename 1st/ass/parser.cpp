@@ -104,8 +104,9 @@ void Parser::preprocess_file(fstream &f) {
         if (itr != string::npos) {
             line.erase(itr, line.size());
         }
-
-        preprocess_buffer.push_back(line);
+        if (line != "") {
+            preprocess_buffer.push_back(line);
+        }
     }
     f.close();
 

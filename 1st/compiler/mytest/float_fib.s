@@ -1,10 +1,10 @@
 .section	".rodata"
 .align	8
 # ------------ Initialize register ------------
-	lui	%sp, 0
-	ori	%sp, %sp, 16384
+	lui	%sp, 6
+	ori	%sp, %sp, 6784
 	lui	%hp, 0
-	ori	%hp, %hp, 8192
+	ori	%hp, %hp, 10000
 # ------------ Initialize float table ---------
 	lui	%at, 16672
 	ori	%at, %at, 0
@@ -98,12 +98,12 @@ create_float_array_cont:
 	j	create_float_array_loop
 # ------------ body ---------------------------
 float_fib.10:
-	flw	%f1, 8200(%zero)
+	flw	%f1, 10008(%zero)
 	fslt	%at, %f1, %f0
 	bne	%at, %zero, beq_else.27
 	jr	%ra
 beq_else.27:
-	flw	%f1, 8200(%zero)
+	flw	%f1, 10008(%zero)
 	fsub	%f1, %f0, %f1
 	fsw	%f0, 0(%sp)
 	fadd	%f0, %f1, %fzero
@@ -112,7 +112,7 @@ beq_else.27:
 	jal	float_fib.10
 	addi	%sp, %sp, -8
 	lw	%ra, 4(%sp)
-	flw	%f1, 8196(%zero)
+	flw	%f1, 10004(%zero)
 	flw	%f2, 0(%sp)
 	fsub	%f1, %f2, %f1
 	fsw	%f0, 4(%sp)
@@ -127,7 +127,7 @@ beq_else.27:
 	jr	%ra
 .global	min_caml_start
 min_caml_start:
-	flw	%f0, 8192(%zero)
+	flw	%f0, 10000(%zero)
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 8
 	jal	float_fib.10
