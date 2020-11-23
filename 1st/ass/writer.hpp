@@ -2,7 +2,7 @@
 
 class Writer {
     public:
-        Writer(const char *fname, Parser *p);
+        Writer(string fname, Parser *p);
 
         void assemble();
         void debug();
@@ -10,7 +10,7 @@ class Writer {
     protected:
         int current_num;
         Parser *parser;
-        const char *file_name;
+        string file_name;
 
         unsigned int encode(vector<string> &);
 };

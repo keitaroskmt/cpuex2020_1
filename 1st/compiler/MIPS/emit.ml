@@ -71,7 +71,7 @@ let rec load_float_imm oc data n =
         load_float_imm oc rest (n+1))
 
 let addi oc r1 r2 i =
-    if -65536 <= i && i <= 65535 then
+    if -32768 <= i && i <= 32767 then
         Printf.fprintf oc "\taddi\t%s, %s, %d\n" r1 r2 i
     else
        (

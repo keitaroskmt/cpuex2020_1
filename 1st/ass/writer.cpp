@@ -10,7 +10,7 @@ bool isnum(string s) {
     return true;
 }
 
-Writer::Writer(const char *fname, Parser *p) {
+Writer::Writer(string fname, Parser *p) {
     file_name = fname;
     parser = p;
     current_num = 0;
