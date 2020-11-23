@@ -24,7 +24,7 @@ std::vector<op_info> ops;
 core_env cur_env;
 std::map<std::string, int> label_pos, label_pos_bc;
 std::map<std::string, long long int> label_counter;
-std::map<int, int> posbc2pos;
+std::map<int, int> posbc2pos, pos2posbc;
 std::vector<std::pair<int, unsigned long long int>> stack(1000000, std::make_pair(0, 0));
 int exec_step(bool print_process, bool print_calc, bool print_bytecode, bool label_count);
 

@@ -65,7 +65,7 @@ int print_bytecode(op_info op)
     }
     else if (op.opcode == "j" || op.opcode == "jal")
     {
-        imm = label_pos_bc[op.opland[0]] & 0x3ffffff;
+        imm = (label_pos_bc[op.opland[0]] * 4) & 0x3ffffff;
         if (op.opcode == "j")
             shamt = 0b000010;
         else
@@ -86,11 +86,7 @@ int print_bytecode(op_info op)
         else if (isnum(op.opland[2]))
             imm = op.opland_bit[2] & 0xffff;
         else
-        {
-            if (label_pos_bc[op.opland[2]] * 4 > 32767)
-                std::cout << "pseudo-instruction(lui, ori, add)" << std::endl;
-            imm = label_pos_bc[op.opland[2]] & 0xffff;
-        }
+            imm = (label_pos_bc[op.opland[2]] * 4) & 0xffff;
 
         if (op.opcode == "beq")
             shamt = 0b000100;

@@ -113,6 +113,7 @@ int load_ops(FILE *fp)
         }
         i++;
         posbc2pos[idx] = i;
+        pos2posbc[i] = idx;
     }
     reg_label_2_num(i);
     return i;
@@ -130,7 +131,7 @@ int reg_label_2_num(int end)
             if (ops[j].opland[k].find("%") != std::string::npos)
                 ops[j].opland_bit[k] = reg_name.at(ops[j].opland[k]) % 32;
             else if (label_pos.find(ops[j].opland[k]) != label_pos.end())
-                ops[j].opland_bit[k] = label_pos[ops[j].opland[k]];
+                ops[j].opland_bit[k] = pos2posbc[label_pos[ops[j].opland[k]]] * 4;
             else if (ops[j].opland[k] != "")
                 ops[j].opland_bit[k] = stoi(ops[j].opland[k]);
         }

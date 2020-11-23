@@ -106,7 +106,7 @@ int exec_op(op_info op, bool print_calc)
         rs = cur_env.GPR[op.opland_bit[0]];
         rt = cur_env.GPR[op.opland_bit[1]];
         if (rs > rt)
-            cur_opnum = op.opland_bit[2];
+            cur_opnum = posbc2pos[op.opland_bit[2] / 4] - 2;
 
         if (print_calc)
             printf("bgt\t%d(%08X),\t%d(%08X),\t%s\n", rs, rs, rt, rt, op.opland[2].c_str());
@@ -114,10 +114,10 @@ int exec_op(op_info op, bool print_calc)
     else if (op.opcode == "jr")
     {
         rs = cur_env.GPR[op.opland_bit[0]];
-        if (op.opland_bit[0] == 31)
-            cur_opnum = posbc2pos[rs - 1];
+        if (ops[posbc2pos[rs / 4] - 1].type == 1)
+            cur_opnum = posbc2pos[rs / 4] - 2;
         else
-            cur_opnum = rs - 1;
+            cur_opnum = posbc2pos[rs / 4] - 1;
     }
     else if (op.opcode == "move")
     {
@@ -126,25 +126,28 @@ int exec_op(op_info op, bool print_calc)
     }
     else if (op.opcode == "j")
     {
-        cur_opnum = op.opland_bit[0] - 1;
+        cur_opnum = posbc2pos[op.opland_bit[0] / 4] - 2;
     }
     else if (op.opcode == "jal")
     {
-        cur_env.GPR[31] = op.op_idx + 1;
-        cur_opnum = op.opland_bit[0] - 1;
+        cur_env.GPR[31] = (op.op_idx + 1) * 4;
+        cur_opnum = posbc2pos[op.opland_bit[0] / 4] - 2;
     }
     else if (op.opcode == "jalr")
     {
         rs = cur_env.GPR[op.opland_bit[0]];
-        cur_env.GPR[31] = op.op_idx + 1;
-        cur_opnum = rs - 1;
+        cur_env.GPR[31] = (op.op_idx + 1) * 4;
+        if (ops[posbc2pos[rs / 4] - 1].type == 1)
+            cur_opnum = posbc2pos[rs / 4] - 2;
+        else
+            cur_opnum = posbc2pos[rs / 4] - 1;
     }
     else if (op.opcode == "beq")
     {
         rs = cur_env.GPR[op.opland_bit[0]];
         rt = cur_env.GPR[op.opland_bit[1]];
         if (rs == rt)
-            cur_opnum = op.opland_bit[2] - 1;
+            cur_opnum = posbc2pos[op.opland_bit[2] / 4] - 2;
 
         if (print_calc)
             printf("beq\t%d(%08X),\t%d(%08X),\t%s\n", rs, rs, rt, rt, op.opland[2].c_str());
@@ -154,7 +157,7 @@ int exec_op(op_info op, bool print_calc)
         rs = cur_env.GPR[op.opland_bit[0]];
         rt = cur_env.GPR[op.opland_bit[1]];
         if (rs != rt)
-            cur_opnum = op.opland_bit[2] - 1;
+            cur_opnum = posbc2pos[op.opland_bit[2] / 4] - 2;
 
         if (print_calc)
             printf("bne\t%d(%08X),\t%d(%08X),\t%s\n", rs, rs, rt, rt, op.opland[2].c_str());
@@ -339,7 +342,7 @@ int exec_op(op_info op, bool print_calc)
         frs.f = cur_env.FPR[op.opland_bit[0]];
         frt.f = cur_env.FPR[op.opland_bit[1]];
         if (frs.f == frt.f)
-            cur_opnum = op.opland_bit[2] - 1;
+            cur_opnum = posbc2pos[op.opland_bit[2] / 4] - 2;
 
         if (print_calc)
             printf("fbeq\t%f(%08X),\t%f(%08X),\t%s\n", frs.f, frs.i, frt.f, frt.i, op.opland[2].c_str());
@@ -349,7 +352,7 @@ int exec_op(op_info op, bool print_calc)
         frs.f = cur_env.FPR[op.opland_bit[0]];
         frt.f = cur_env.FPR[op.opland_bit[1]];
         if (frs.f != frt.f)
-            cur_opnum = op.opland_bit[2] - 1;
+            cur_opnum = posbc2pos[op.opland_bit[2] / 4] - 2;
 
         if (print_calc)
             printf("fbne\t%f(%08X),\t%f(%08X),\t%s\n", frs.f, frs.i, frt.f, frt.i, op.opland[2].c_str());
@@ -359,7 +362,7 @@ int exec_op(op_info op, bool print_calc)
         frs.f = cur_env.FPR[op.opland_bit[0]];
         frt.f = cur_env.FPR[op.opland_bit[1]];
         if (frs.f > frt.f)
-            cur_opnum = op.opland_bit[2] - 1;
+            cur_opnum = posbc2pos[op.opland_bit[2] / 4] - 2;
 
         if (print_calc)
             printf("fbgt\t%f(%08X),\t%f(%08X),\t%s\n", frs.f, frs.i, frt.f, frt.i, op.opland[2].c_str());
