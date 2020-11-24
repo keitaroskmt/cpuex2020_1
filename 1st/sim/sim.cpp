@@ -1,3 +1,4 @@
+// todo labelをその次の命令行に組み込む 高速化する
 #include <stdio.h>
 #include <string>
 #include <fcntl.h>
@@ -200,6 +201,9 @@ int exec_step(bool print_process, bool print_calc, bool print_bc, bool label_cou
 
         if (exec_op(ops[cur_opnum], print_calc))
             return 1;
+
+        if (print_bc || print_process || print_calc)
+            printf("\n");
         cur_env.PC++;
     }
     else if (ops[cur_opnum].type == 1)
