@@ -1,10 +1,13 @@
 #include <string>
 #include <regex>
 #include <stdio.h>
+#include <iostream>
+#include <bitset>
 #include <map>
 #include "exec_cmd.h"
 #include "sim.h"
 #include "myutil.h"
+#include "file_io.h"
 
 int exec_cmd(int *loop, bool *is_stat, bool *print_bc, bool *print_calc, bool *print_process)
 {
@@ -119,6 +122,11 @@ int exec_cmd(int *loop, bool *is_stat, bool *print_bc, bool *print_calc, bool *p
             *print_process = true;
         else if (cmd == "endpp\n")
             *print_process = false;
+        else if (cmd == "pi\n")
+        {
+            for (int i = 0; i < in_bytes.size(); i++)
+                std::cout << std::bitset<8>(in_bytes[i]) << std::endl;
+        }
         else if (cmd == "r\n")
         {
             *loop = -1;
