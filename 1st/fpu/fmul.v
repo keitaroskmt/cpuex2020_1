@@ -136,6 +136,7 @@ module fmul_2nd
     wire [8:0] ed;
     wire [8:0] e_9;
     wire [7:0] shift_e;
+    wire zero;
     wire subnormal;
     wire [23:0] subnormal_m;
     wire [22:0] shifted_m;
@@ -164,16 +165,18 @@ module fmul_2nd
                  (ec > 9'd381 & e_9 == ec) ? 1'b1 :
                  (ed > 9'd381 & e_9 == ed) ? 1'b1 : 0; //または、eb=382かつm1a*m2aの48bit目が立ってる
 
-    assign shift_e = (subnormal == 1 & eb < 9'd128 & e_9 == eb) ? 128 - eb :
-                     (subnormal == 1 & ea < 9'd128 & e_9 == ea) ? 128 - ea :
-                     (subnormal == 1 & ec < 9'd128 & e_9 == ec) ? 128 - ec :
-                     (subnormal == 1 & ed < 9'd128 & e_9 == ed) ? 128 - ed : 0;
+    assign shift_e = (subnormal == 1 & eb < 9'd128 & e_9 == eb) ? 8'd128 - eb :
+                     (subnormal == 1 & ea < 9'd128 & e_9 == ea) ? 8'd128 - ea :
+                     (subnormal == 1 & ec < 9'd128 & e_9 == ec) ? 8'd128 - ec :
+                     (subnormal == 1 & ed < 9'd128 & e_9 == ed) ? 8'd128 - ed : 0;
 
+    assign zero = (e1 == 8'b0 | e2 == 8'b0) ? 1 : 0;
 
     assign subnormal_m = {1'b1, m} >> shift_e;
     assign shifted_m = subnormal_m[22:0];
 
-    assign y = (subnormal == 1) ? {s, 8'b0, shifted_m}:
+    assign y = (zero == 1) ? {s, 8'b0, 23'b0} :
+               (subnormal == 1) ? {s, 8'b0, shifted_m} :
                (inf == 1) ? {s, 8'b11111111, 23'b0} : {s, e, m};
 
 endmodule
