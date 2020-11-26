@@ -186,31 +186,50 @@ let rec atan x =
     )
 in
 
-(* 10で割った商 *)
-let rec print_int_sub1 x n =
-    if x < 10 then n else print_int_sub1 (x - 10) (n + 1)
-in
 
-(* 10で割ったあまり *)
-let rec print_int_sub2 x =
-    if x < 10 then x else print_int_sub2 (x - 10)
-in
-
-let rec print_int x =
-    let d1 = print_int_sub1 x 0 in
-    let r1 = print_int_sub2 x in
-    print_char (48 + r1);
-    if d1 > 0 then
-    (
-        let d2 = print_int_sub1 d1 0 in
-        let r2 = print_int_sub2 d1 in
-        print_char (48 + r2);
-        if d2 > 0 then
-        (
-            let r3 = print_int_sub2 d2 in
-            print_char (48 + r3)
-        )
-        else ()
-    )
-    else ()
-in
+(* 本体 *)
+(*MINCAML*) let rec dbl f = f +. f in
+(*NOMINCAML let dbl f = 2. *. f in *)
+(*NOMINCAML for y = 0 to 399 do *)
+(*MINCAML*) let rec yloop y =
+(*MINCAML*)   if y >= 10 then () else
+(*NOMINCAML   for x = 0 to 399 do *)
+(*MINCAML*)   let rec xloop x y =
+(*MINCAML*)     if x >= 10 then () else
+                let cr = dbl (float_of_int x) /. 10.0 -. 1.5 in
+                let ci = dbl (float_of_int y) /. 10.0 -. 1.0 in
+                let rec iloop i zr zi zr2 zi2 cr ci =
+                  if i = 0 then print_int 1 else
+                  let tr = zr2 -. zi2 +. cr in
+                  let ti = dbl zr *. zi +. ci in
+                  let zr = tr in
+                  let zi = ti in
+                  let zr2 = zr *. zr in
+                  let zi2 = zi *. zi in
+                  if zr2 +. zi2 > 2.0 *. 2.0 then print_int 0 else
+                  iloop (i - 1) zr zi zr2 zi2 cr ci in
+                iloop 1000 0.0 0.0 0.0 0.0 cr ci;
+(*
+                let i = ref 1000 in
+                let zr = ref 0.0 in
+                let zi = ref 0.0 in
+                let zr2 = ref 0.0 in
+                let zi2 = ref 0.0 in
+                while (if !i = 0 then (print_int 1; false) else
+                       let tr = !zr2 -. !zi2 +. cr in
+                       let ti = dbl !zr *. !zi +. ci in
+                       zr := tr;
+                       zi := ti;
+                       zr2 := !zr *. !zr;
+                       zi2 := !zi *. !zi;
+                       if !zr2 +. !zi2 > 2.0 *. 2.0 then (print_int 0; false) else
+                       true) do
+                  i := !i - 1
+                done;
+*)
+(*MINCAML*)     xloop (x + 1) y in
+(*MINCAML*)   xloop 0 y;
+(*NOMINCAML   done; *)
+(*MINCAML*)   yloop (y + 1) in
+(*MINCAML*) yloop 0
+(*NOMINCAML done; *)

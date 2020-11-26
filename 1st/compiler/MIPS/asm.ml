@@ -73,7 +73,7 @@ let reg_fzero = "%fzero"
 let is_reg x = (x.[0] = '%')
 
 let hp_init = 10000
-let sp_init = 400000
+let sp_init = 1000000
 
 (* super-tenuki *)
 let rec remove_and_uniq xs = function

@@ -1,0 +1,3711 @@
+Prog 
+fundef 
+	name : 
+		(L (fispos.2618): Float -> Bool)
+	args : 
+		[(x.2619 : Float)]
+	formal_fv : 
+		[]
+	body : 
+		Let
+			(Td2581.6296 : Float)
+			Float 0.
+			IfLE
+				x.2619
+				Td2581.6296
+				Int 0
+				Int 1
+	name : 
+		(L (fisneg.2620): Float -> Bool)
+	args : 
+		[(x.2621 : Float)]
+	formal_fv : 
+		[]
+	body : 
+		Let
+			(Td2580.6295 : Float)
+			Float 0.
+			IfLE
+				Td2580.6295
+				x.2621
+				Int 0
+				Int 1
+	name : 
+		(L (fiszero.2622): Float -> Bool)
+	args : 
+		[(x.2623 : Float)]
+	formal_fv : 
+		[]
+	body : 
+		Let
+			(Td2579.6294 : Float)
+			Float 0.
+			IfEq
+				x.2623
+				Td2579.6294
+				Int 1
+				Int 0
+	name : 
+		(L (fsqr.2629): Float -> Float)
+	args : 
+		[(x.2630 : Float)]
+	formal_fv : 
+		[]
+	body : 
+		FMul
+			x.2630
+			x.2630
+	name : 
+		(L (float_of_int_sub1.2641): Int -> Int -> Int)
+	args : 
+		[(x.2642 : Int), (n.2643 : Int)]
+	formal_fv : 
+		[]
+	body : 
+		Let
+			(Ti2541.6253 : Int)
+			Int 8388608
+			IfLE
+				Ti2541.6253
+				x.2642
+				Let
+					(Ti2542.6257 : Int)
+					Int 8388608
+					Let
+						(Ti2543.6254 : Int)
+						Sub
+							x.2642
+							Ti2542.6257
+						Let
+							(Ti2544.6256 : Int)
+							Int 1
+							Let
+								(Ti2545.6255 : Int)
+								Add
+									n.2643
+									Ti2544.6256
+								AppDir
+									L (float_of_int_sub1.2641)
+									[Ti2543.6254, Ti2545.6255]
+				Var n.2643
+	name : 
+		(L (float_of_int_sub2.2644): Int -> Int)
+	args : 
+		[(x.2645 : Int)]
+	formal_fv : 
+		[]
+	body : 
+		Let
+			(Ti2538.6250 : Int)
+			Int 8388608
+			IfLE
+				Ti2538.6250
+				x.2645
+				Let
+					(Ti2539.6252 : Int)
+					Int 8388608
+					Let
+						(Ti2540.6251 : Int)
+						Sub
+							x.2645
+							Ti2539.6252
+						AppDir
+							L (float_of_int_sub2.2644)
+							[Ti2540.6251]
+				Var x.2645
+	name : 
+		(L (float_of_int_sub3.2646): Int -> Float -> Float)
+	args : 
+		[(m.2647 : Int), (acm.2648 : Float)]
+	formal_fv : 
+		[]
+	body : 
+		Let
+			(Ti2533.6245 : Int)
+			Int 0
+			IfEq
+				m.2647
+				Ti2533.6245
+				Var acm.2648
+				Let
+					(Ti2534.6249 : Int)
+					Int 1
+					Let
+						(Ti2535.6246 : Int)
+						Sub
+							m.2647
+							Ti2534.6249
+						Let
+							(Td2536.6248 : Float)
+							Float 8388608.
+							Let
+								(Td2537.6247 : Float)
+								FAdd
+									Td2536.6248
+									acm.2648
+								AppDir
+									L (float_of_int_sub3.2646)
+									[Ti2535.6246, Td2537.6247]
+	name : 
+		(L (float_of_int.2649): Int -> Float)
+	args : 
+		[(x.2650 : Int)]
+	formal_fv : 
+		[]
+	body : 
+		Let
+			(Ti2515.6244 : Int)
+			Int 0
+			Let
+				(flag.6224 : Bool)
+				IfLE
+					x.2650
+					Ti2515.6244
+					Int 0
+					Int 1
+				Let
+					(Ti2516.6243 : Int)
+					Int 0
+					Let
+						(x_abs.6225 : Int)
+						IfLE
+							Ti2516.6243
+							x.2650
+							Var x.2650
+							Neg
+								x.2650
+						Let
+							(Ti2517.6228 : Int)
+							Int 8388608
+							Let
+								(res.6226 : Float)
+								IfLE
+									Ti2517.6228
+									x_abs.6225
+									Let
+										(Ti2518.6241 : Int)
+										AppDir
+											L (float_of_int_sub2.2644)
+											[x_abs.6225]
+										Let
+											(Ti2519.6242 : Int)
+											Int 1258291200
+											Let
+												(Ti2520.6240 : Int)
+												Add
+													Ti2518.6241
+													Ti2519.6242
+												Let
+													(Td2521.6238 : Float)
+													Itof
+														Ti2520.6240
+													Let
+														(Td2522.6239 : Float)
+														Float 8388608.
+														Let
+															(Td2523.6233 : Float)
+															FSub
+																Td2521.6238
+																Td2522.6239
+															Let
+																(Ti2524.6237 : Int)
+																Int 0
+																Let
+																	(Ti2525.6235 : Int)
+																	AppDir
+																		L (float_of_int_sub1.2641)
+																		[x_abs.6225, Ti2524.6237]
+																	Let
+																		(Td2526.6236 : Float)
+																		Float 0.
+																		Let
+																			(Td2527.6234 : Float)
+																			AppDir
+																				L (float_of_int_sub3.2646)
+																				[Ti2525.6235, Td2526.6236]
+																			FAdd
+																				Td2523.6233
+																				Td2527.6234
+									Let
+										(Ti2528.6232 : Int)
+										Int 1258291200
+										Let
+											(Ti2529.6231 : Int)
+											Add
+												x_abs.6225
+												Ti2528.6232
+											Let
+												(Td2530.6229 : Float)
+												Itof
+													Ti2529.6231
+												Let
+													(Td2531.6230 : Float)
+													Float 8388608.
+													FSub
+														Td2530.6229
+														Td2531.6230
+								Let
+									(Ti2532.6227 : Int)
+									Int 0
+									IfEq
+										flag.6224
+										Ti2532.6227
+										FNeg
+											res.6226
+										Var res.6226
+	name : 
+		(L (kernel_sin.2653): Float -> Float)
+	args : 
+		[(x.2654 : Float)]
+	formal_fv : 
+		[]
+	body : 
+		Let
+			(x2.6201 : Float)
+			FMul
+				x.2654
+				x.2654
+			Let
+				(x4.6202 : Float)
+				FMul
+					x2.6201
+					x2.6201
+				Let
+					(Td2498.6214 : Float)
+					Float 0.16666668
+					Let
+						(Td2499.6213 : Float)
+						FMul
+							Td2498.6214
+							x.2654
+						Let
+							(Td2500.6212 : Float)
+							FMul
+								Td2499.6213
+								x2.6201
+							Let
+								(Td2501.6208 : Float)
+								FSub
+									x.2654
+									Td2500.6212
+								Let
+									(Td2502.6211 : Float)
+									Float 0.008332824
+									Let
+										(Td2503.6210 : Float)
+										FMul
+											Td2502.6211
+											x.2654
+										Let
+											(Td2504.6209 : Float)
+											FMul
+												Td2503.6210
+												x4.6202
+											Let
+												(Td2505.6203 : Float)
+												FAdd
+													Td2501.6208
+													Td2504.6209
+												Let
+													(Td2506.6207 : Float)
+													Float 0.00019587841
+													Let
+														(Td2507.6206 : Float)
+														FMul
+															Td2506.6207
+															x.2654
+														Let
+															(Td2508.6205 : Float)
+															FMul
+																Td2507.6206
+																x2.6201
+															Let
+																(Td2509.6204 : Float)
+																FMul
+																	Td2508.6205
+																	x4.6202
+																FSub
+																	Td2505.6203
+																	Td2509.6204
+	name : 
+		(L (kernel_cos.2655): Float -> Float)
+	args : 
+		[(x.2656 : Float)]
+	formal_fv : 
+		[]
+	body : 
+		Let
+			(x2.6189 : Float)
+			FMul
+				x.2656
+				x.2656
+			Let
+				(x4.6190 : Float)
+				FMul
+					x2.6189
+					x2.6189
+				Let
+					(Td2488.6198 : Float)
+					Float 1.
+					Let
+						(Td2489.6200 : Float)
+						Float 0.5
+						Let
+							(Td2490.6199 : Float)
+							FMul
+								Td2489.6200
+								x2.6189
+							Let
+								(Td2491.6195 : Float)
+								FSub
+									Td2488.6198
+									Td2490.6199
+								Let
+									(Td2492.6197 : Float)
+									Float 0.04166368
+									Let
+										(Td2493.6196 : Float)
+										FMul
+											Td2492.6197
+											x4.6190
+										Let
+											(Td2494.6191 : Float)
+											FAdd
+												Td2491.6195
+												Td2493.6196
+											Let
+												(Td2495.6194 : Float)
+												Float 0.0013695068
+												Let
+													(Td2496.6193 : Float)
+													FMul
+														Td2495.6194
+														x2.6189
+													Let
+														(Td2497.6192 : Float)
+														FMul
+															Td2496.6193
+															x4.6190
+														FSub
+															Td2494.6191
+															Td2497.6192
+	name : 
+		(L (f.6145): Float -> Float -> Float)
+	args : 
+		[(s.6146 : Float), (t.6147 : Float)]
+	formal_fv : 
+		[]
+	body : 
+		IfLE
+			t.6147
+			s.6146
+			Let
+				(Td2460.6158 : Float)
+				Float 2.
+				Let
+					(Td2461.6157 : Float)
+					FMul
+						Td2460.6158
+						t.6147
+					AppDir
+						L (f.6145)
+						[s.6146, Td2461.6157]
+			Var t.6147
+	name : 
+		(L (g.6149): Float -> Float -> Float)
+	args : 
+		[(s.6150 : Float), (t.6151 : Float)]
+	formal_fv : 
+		[(pi2.6144 : Float)]
+	body : 
+		IfLE
+			pi2.6144
+			s.6150
+			IfLE
+				t.6151
+				s.6150
+				Let
+					(Td2455.6154 : Float)
+					FSub
+						s.6150
+						t.6151
+					Let
+						(Td2456.6156 : Float)
+						Float 2.
+						Let
+							(Td2457.6155 : Float)
+							FDiv
+								t.6151
+								Td2456.6156
+							AppCls
+								g.6149
+								[Td2455.6154, Td2457.6155]
+				Let
+					(Td2458.6153 : Float)
+					Float 2.
+					Let
+						(Td2459.6152 : Float)
+						FDiv
+							t.6151
+							Td2458.6153
+						AppCls
+							g.6149
+							[s.6150, Td2459.6152]
+			Var s.6150
+	name : 
+		(L (reduction_2pi.2659): Float -> Float)
+	args : 
+		[(x.2660 : Float)]
+	formal_fv : 
+		[]
+	body : 
+		Let
+			(pi2.6144 : Float)
+			Float 6.28318530718
+			Let
+				(p.6148 : Float)
+				AppDir
+					L (f.6145)
+					[x.2660, pi2.6144]
+				MakeCls
+					(g.6149 : Float -> Float -> Float)
+					entry: 
+						L (g.6149)
+					actual_fv: 
+						[pi2.6144]
+					AppCls
+						g.6149
+						[x.2660, p.6148]
+	name : 
+		(L (cos.2661): Float -> Float)
+	args : 
+		[(x.2662 : Float)]
+	formal_fv : 
+		[]
+	body : 
+		Let
+			(pi.6122 : Float)
+			Float 3.14159265359
+			Let
+				(Td2441.6142 : Float)
+				FAbs
+					x.2662
+				Let
+					(x.6124 : Float)
+					AppDir
+						L (reduction_2pi.2659)
+						[Td2441.6142]
+					Let
+						(flag.6125 : Bool)
+						IfLE
+							pi.6122
+							x.6124
+							Int 0
+							Int 1
+						Let
+							(x.6126 : Float)
+							IfLE
+								pi.6122
+								x.6124
+								FSub
+									x.6124
+									pi.6122
+								Var x.6124
+							Let
+								(Td2444.6138 : Float)
+								Float 1.57079632679
+								Let
+									(flag.6127 : Bool)
+									IfLE
+										Td2444.6138
+										x.6126
+										Let
+											(Ti2445.6139 : Int)
+											Int 0
+											IfEq
+												flag.6125
+												Ti2445.6139
+												Int 1
+												Int 0
+										Var flag.6125
+									Let
+										(Td2447.6136 : Float)
+										Float 1.57079632679
+										Let
+											(x.6128 : Float)
+											IfLE
+												Td2447.6136
+												x.6126
+												FSub
+													pi.6122
+													x.6126
+												Var x.6126
+											Let
+												(Td2449.6131 : Float)
+												Float 0.785398163397
+												Let
+													(res.6129 : Float)
+													IfLE
+														x.6128
+														Td2449.6131
+														AppDir
+															L (kernel_cos.2655)
+															[x.6128]
+														Let
+															(Td2451.6133 : Float)
+															Float 1.57079632679
+															Let
+																(Td2452.6132 : Float)
+																FSub
+																	Td2451.6133
+																	x.6128
+																AppDir
+																	L (kernel_sin.2653)
+																	[Td2452.6132]
+													Let
+														(Ti2453.6130 : Int)
+														Int 0
+														IfEq
+															flag.6127
+															Ti2453.6130
+															FNeg
+																res.6129
+															Var res.6129
+	name : 
+		(L (sin.2663): Float -> Float)
+	args : 
+		[(x.2664 : Float)]
+	formal_fv : 
+		[]
+	body : 
+		Let
+			(pi.6104 : Float)
+			Float 3.14159265359
+			Let
+				(Td2430.6121 : Float)
+				Float 0.
+				Let
+					(flag.6105 : Bool)
+					IfLE
+						Td2430.6121
+						x.2664
+						Int 1
+						Int 0
+					Let
+						(Td2431.6120 : Float)
+						FAbs
+							x.2664
+						Let
+							(x.6106 : Float)
+							AppDir
+								L (reduction_2pi.2659)
+								[Td2431.6120]
+							Let
+								(flag.6107 : Bool)
+								IfLE
+									pi.6104
+									x.6106
+									Let
+										(Ti2432.6119 : Int)
+										Int 0
+										IfEq
+											flag.6105
+											Ti2432.6119
+											Int 1
+											Int 0
+									Var flag.6105
+								Let
+									(x.6108 : Float)
+									IfLE
+										pi.6104
+										x.6106
+										FSub
+											x.6106
+											pi.6104
+										Var x.6106
+									Let
+										(Td2434.6117 : Float)
+										Float 1.57079632679
+										Let
+											(x.6109 : Float)
+											IfLE
+												Td2434.6117
+												x.6108
+												FSub
+													pi.6104
+													x.6108
+												Var x.6108
+											Let
+												(Td2436.6112 : Float)
+												Float 0.785398163397
+												Let
+													(res.6110 : Float)
+													IfLE
+														x.6109
+														Td2436.6112
+														AppDir
+															L (kernel_sin.2653)
+															[x.6109]
+														Let
+															(Td2438.6114 : Float)
+															Float 1.57079632679
+															Let
+																(Td2439.6113 : Float)
+																FSub
+																	Td2438.6114
+																	x.6109
+																AppDir
+																	L (kernel_cos.2655)
+																	[Td2439.6113]
+													Let
+														(Ti2440.6111 : Int)
+														Int 0
+														IfEq
+															flag.6107
+															Ti2440.6111
+															FNeg
+																res.6110
+															Var res.6110
+	name : 
+		(L (sgn.2667): Float -> Float)
+	args : 
+		[(x.2668 : Float)]
+	formal_fv : 
+		[]
+	body : 
+		Let
+			(Tb2409.6079 : Bool)
+			AppDir
+				L (fiszero.2622)
+				[x.2668]
+			Let
+				(Ti2410.6080 : Int)
+				Int 0
+				IfEq
+					Tb2409.6079
+					Ti2410.6080
+					Let
+						(Tb2411.6081 : Bool)
+						AppDir
+							L (fispos.2618)
+							[x.2668]
+						Let
+							(Ti2412.6082 : Int)
+							Int 0
+							IfEq
+								Tb2411.6081
+								Ti2412.6082
+								Float -1.
+								Float 1.
+					Float 0.
+	name : 
+		(L (vecunit_sgn.2693): Float list -> Bool -> ())
+	args : 
+		[(v.2694 : Float list), (inv.2695 : Bool)]
+	formal_fv : 
+		[]
+	body : 
+		Let
+			(Ti2318.6005 : Int)
+			Int 0
+			Let
+				(Td2319.6004 : Float)
+				Get
+					v.2694
+					Ti2318.6005
+				Let
+					(Td2320.6000 : Float)
+					AppDir
+						L (fsqr.2629)
+						[Td2319.6004]
+					Let
+						(Ti2321.6003 : Int)
+						Int 1
+						Let
+							(Td2322.6002 : Float)
+							Get
+								v.2694
+								Ti2321.6003
+							Let
+								(Td2323.6001 : Float)
+								AppDir
+									L (fsqr.2629)
+									[Td2322.6002]
+								Let
+									(Td2324.5996 : Float)
+									FAdd
+										Td2320.6000
+										Td2323.6001
+									Let
+										(Ti2325.5999 : Int)
+										Int 2
+										Let
+											(Td2326.5998 : Float)
+											Get
+												v.2694
+												Ti2325.5999
+											Let
+												(Td2327.5997 : Float)
+												AppDir
+													L (fsqr.2629)
+													[Td2326.5998]
+												Let
+													(Td2328.5995 : Float)
+													FAdd
+														Td2324.5996
+														Td2327.5997
+													Let
+														(l.5974 : Float)
+														FSqr
+															Td2328.5995
+														Let
+															(Tb2329.5990 : Bool)
+															AppDir
+																L (fiszero.2622)
+																[l.5974]
+															Let
+																(Ti2330.5991 : Int)
+																Int 0
+																Let
+																	(il.5975 : Float)
+																	IfEq
+																		Tb2329.5990
+																		Ti2330.5991
+																		Let
+																			(Ti2331.5992 : Int)
+																			Int 0
+																			IfEq
+																				inv.2695
+																				Ti2331.5992
+																				Let
+																					(Td2332.5994 : Float)
+																					Float 1.
+																					FDiv
+																						Td2332.5994
+																						l.5974
+																				Let
+																					(Td2333.5993 : Float)
+																					Float -1.
+																					FDiv
+																						Td2333.5993
+																						l.5974
+																		Float 1.
+																	Let
+																		(Ti2334.5986 : Int)
+																		Int 0
+																		Let
+																			(Ti2335.5989 : Int)
+																			Int 0
+																			Let
+																				(Td2336.5988 : Float)
+																				Get
+																					v.2694
+																					Ti2335.5989
+																				Let
+																					(Td2337.5987 : Float)
+																					FMul
+																						Td2336.5988
+																						il.5975
+																					Let
+																						(Tu10.5976 : ())
+																						Put
+																							v.2694
+																							Ti2334.5986
+																							Td2337.5987
+																						Let
+																							(Ti2338.5982 : Int)
+																							Int 1
+																							Let
+																								(Ti2339.5985 : Int)
+																								Int 1
+																								Let
+																									(Td2340.5984 : Float)
+																									Get
+																										v.2694
+																										Ti2339.5985
+																									Let
+																										(Td2341.5983 : Float)
+																										FMul
+																											Td2340.5984
+																											il.5975
+																										Let
+																											(Tu9.5977 : ())
+																											Put
+																												v.2694
+																												Ti2338.5982
+																												Td2341.5983
+																											Let
+																												(Ti2342.5978 : Int)
+																												Int 2
+																												Let
+																													(Ti2343.5981 : Int)
+																													Int 2
+																													Let
+																														(Td2344.5980 : Float)
+																														Get
+																															v.2694
+																															Ti2343.5981
+																														Let
+																															(Td2345.5979 : Float)
+																															FMul
+																																Td2344.5980
+																																il.5975
+																															Put
+																																v.2694
+																																Ti2342.5978
+																																Td2345.5979
+	name : 
+		(L (rad.2792): Float -> Float)
+	args : 
+		[(x.2793 : Float)]
+	formal_fv : 
+		[]
+	body : 
+		Let
+			(Td2179.5509 : Float)
+			Float 0.017453293
+			FMul
+				x.2793
+				Td2179.5509
+	name : 
+		(L (read_screen_settings.2794): () -> ())
+	args : 
+		[(Tu21.2795 : ())]
+	formal_fv : 
+		[(screen.2584 : Float list), (screenx_dir.2604 : Float list), (screeny_dir.2605 : Float list), (screenz_dir.2606 : Float list), (viewpoint.2585 : Float list)]
+	body : 
+		Let
+			(Ti2124.5506 : Int)
+			Int 0
+			Let
+				(Tu2125.5508 : ())
+				()
+				Let
+					(Td2126.5507 : Float)
+					AppDir
+						L (min_caml_read_float)
+						[Tu2125.5508]
+					Let
+						(Tu35.5434 : ())
+						Put
+							screen.2584
+							Ti2124.5506
+							Td2126.5507
+						Let
+							(Ti2127.5503 : Int)
+							Int 1
+							Let
+								(Tu2128.5505 : ())
+								()
+								Let
+									(Td2129.5504 : Float)
+									AppDir
+										L (min_caml_read_float)
+										[Tu2128.5505]
+									Let
+										(Tu34.5435 : ())
+										Put
+											screen.2584
+											Ti2127.5503
+											Td2129.5504
+										Let
+											(Ti2130.5500 : Int)
+											Int 2
+											Let
+												(Tu2131.5502 : ())
+												()
+												Let
+													(Td2132.5501 : Float)
+													AppDir
+														L (min_caml_read_float)
+														[Tu2131.5502]
+													Let
+														(Tu33.5436 : ())
+														Put
+															screen.2584
+															Ti2130.5500
+															Td2132.5501
+														Let
+															(Tu2133.5499 : ())
+															()
+															Let
+																(Td2134.5498 : Float)
+																AppDir
+																	L (min_caml_read_float)
+																	[Tu2133.5499]
+																Let
+																	(v1.5437 : Float)
+																	AppDir
+																		L (rad.2792)
+																		[Td2134.5498]
+																	Let
+																		(cos_v1.5438 : Float)
+																		AppDir
+																			L (cos.2661)
+																			[v1.5437]
+																		Let
+																			(sin_v1.5439 : Float)
+																			AppDir
+																				L (sin.2663)
+																				[v1.5437]
+																			Let
+																				(Tu2135.5497 : ())
+																				()
+																				Let
+																					(Td2136.5496 : Float)
+																					AppDir
+																						L (min_caml_read_float)
+																						[Tu2135.5497]
+																					Let
+																						(v2.5440 : Float)
+																						AppDir
+																							L (rad.2792)
+																							[Td2136.5496]
+																						Let
+																							(cos_v2.5441 : Float)
+																							AppDir
+																								L (cos.2661)
+																								[v2.5440]
+																							Let
+																								(sin_v2.5442 : Float)
+																								AppDir
+																									L (sin.2663)
+																									[v2.5440]
+																								Let
+																									(Ti2137.5492 : Int)
+																									Int 0
+																									Let
+																										(Td2138.5494 : Float)
+																										FMul
+																											cos_v1.5438
+																											sin_v2.5442
+																										Let
+																											(Td2139.5495 : Float)
+																											Float 200.
+																											Let
+																												(Td2140.5493 : Float)
+																												FMul
+																													Td2138.5494
+																													Td2139.5495
+																												Let
+																													(Tu32.5443 : ())
+																													Put
+																														screenz_dir.2606
+																														Ti2137.5492
+																														Td2140.5493
+																													Let
+																														(Ti2141.5489 : Int)
+																														Int 1
+																														Let
+																															(Td2142.5491 : Float)
+																															Float -200.
+																															Let
+																																(Td2143.5490 : Float)
+																																FMul
+																																	sin_v1.5439
+																																	Td2142.5491
+																																Let
+																																	(Tu31.5444 : ())
+																																	Put
+																																		screenz_dir.2606
+																																		Ti2141.5489
+																																		Td2143.5490
+																																	Let
+																																		(Ti2144.5485 : Int)
+																																		Int 2
+																																		Let
+																																			(Td2145.5487 : Float)
+																																			FMul
+																																				cos_v1.5438
+																																				cos_v2.5441
+																																			Let
+																																				(Td2146.5488 : Float)
+																																				Float 200.
+																																				Let
+																																					(Td2147.5486 : Float)
+																																					FMul
+																																						Td2145.5487
+																																						Td2146.5488
+																																					Let
+																																						(Tu30.5445 : ())
+																																						Put
+																																							screenz_dir.2606
+																																							Ti2144.5485
+																																							Td2147.5486
+																																						Let
+																																							(Ti2148.5484 : Int)
+																																							Int 0
+																																							Let
+																																								(Tu29.5446 : ())
+																																								Put
+																																									screenx_dir.2604
+																																									Ti2148.5484
+																																									cos_v2.5441
+																																								Let
+																																									(Ti2149.5482 : Int)
+																																									Int 1
+																																									Let
+																																										(Td2150.5483 : Float)
+																																										Float 0.
+																																										Let
+																																											(Tu28.5447 : ())
+																																											Put
+																																												screenx_dir.2604
+																																												Ti2149.5482
+																																												Td2150.5483
+																																											Let
+																																												(Ti2151.5480 : Int)
+																																												Int 2
+																																												Let
+																																													(Td2152.5481 : Float)
+																																													FNeg
+																																														sin_v2.5442
+																																													Let
+																																														(Tu27.5448 : ())
+																																														Put
+																																															screenx_dir.2604
+																																															Ti2151.5480
+																																															Td2152.5481
+																																														Let
+																																															(Ti2153.5477 : Int)
+																																															Int 0
+																																															Let
+																																																(Td2154.5479 : Float)
+																																																FNeg
+																																																	sin_v1.5439
+																																																Let
+																																																	(Td2155.5478 : Float)
+																																																	FMul
+																																																		Td2154.5479
+																																																		sin_v2.5442
+																																																	Let
+																																																		(Tu26.5449 : ())
+																																																		Put
+																																																			screeny_dir.2605
+																																																			Ti2153.5477
+																																																			Td2155.5478
+																																																		Let
+																																																			(Ti2156.5475 : Int)
+																																																			Int 1
+																																																			Let
+																																																				(Td2157.5476 : Float)
+																																																				FNeg
+																																																					cos_v1.5438
+																																																				Let
+																																																					(Tu25.5450 : ())
+																																																					Put
+																																																						screeny_dir.2605
+																																																						Ti2156.5475
+																																																						Td2157.5476
+																																																					Let
+																																																						(Ti2158.5472 : Int)
+																																																						Int 2
+																																																						Let
+																																																							(Td2159.5474 : Float)
+																																																							FNeg
+																																																								sin_v1.5439
+																																																							Let
+																																																								(Td2160.5473 : Float)
+																																																								FMul
+																																																									Td2159.5474
+																																																									cos_v2.5441
+																																																								Let
+																																																									(Tu24.5451 : ())
+																																																									Put
+																																																										screeny_dir.2605
+																																																										Ti2158.5472
+																																																										Td2160.5473
+																																																									Let
+																																																										(Ti2161.5466 : Int)
+																																																										Int 0
+																																																										Let
+																																																											(Ti2162.5471 : Int)
+																																																											Int 0
+																																																											Let
+																																																												(Td2163.5468 : Float)
+																																																												Get
+																																																													screen.2584
+																																																													Ti2162.5471
+																																																												Let
+																																																													(Ti2164.5470 : Int)
+																																																													Int 0
+																																																													Let
+																																																														(Td2165.5469 : Float)
+																																																														Get
+																																																															screenz_dir.2606
+																																																															Ti2164.5470
+																																																														Let
+																																																															(Td2166.5467 : Float)
+																																																															FSub
+																																																																Td2163.5468
+																																																																Td2165.5469
+																																																															Let
+																																																																(Tu23.5452 : ())
+																																																																Put
+																																																																	viewpoint.2585
+																																																																	Ti2161.5466
+																																																																	Td2166.5467
+																																																																Let
+																																																																	(Ti2167.5460 : Int)
+																																																																	Int 1
+																																																																	Let
+																																																																		(Ti2168.5465 : Int)
+																																																																		Int 1
+																																																																		Let
+																																																																			(Td2169.5462 : Float)
+																																																																			Get
+																																																																				screen.2584
+																																																																				Ti2168.5465
+																																																																			Let
+																																																																				(Ti2170.5464 : Int)
+																																																																				Int 1
+																																																																				Let
+																																																																					(Td2171.5463 : Float)
+																																																																					Get
+																																																																						screenz_dir.2606
+																																																																						Ti2170.5464
+																																																																					Let
+																																																																						(Td2172.5461 : Float)
+																																																																						FSub
+																																																																							Td2169.5462
+																																																																							Td2171.5463
+																																																																						Let
+																																																																							(Tu22.5453 : ())
+																																																																							Put
+																																																																								viewpoint.2585
+																																																																								Ti2167.5460
+																																																																								Td2172.5461
+																																																																							Let
+																																																																								(Ti2173.5454 : Int)
+																																																																								Int 2
+																																																																								Let
+																																																																									(Ti2174.5459 : Int)
+																																																																									Int 2
+																																																																									Let
+																																																																										(Td2175.5456 : Float)
+																																																																										Get
+																																																																											screen.2584
+																																																																											Ti2174.5459
+																																																																										Let
+																																																																											(Ti2176.5458 : Int)
+																																																																											Int 2
+																																																																											Let
+																																																																												(Td2177.5457 : Float)
+																																																																												Get
+																																																																													screenz_dir.2606
+																																																																													Ti2176.5458
+																																																																												Let
+																																																																													(Td2178.5455 : Float)
+																																																																													FSub
+																																																																														Td2175.5456
+																																																																														Td2177.5457
+																																																																													Put
+																																																																														viewpoint.2585
+																																																																														Ti2173.5454
+																																																																														Td2178.5455
+	name : 
+		(L (read_light.2796): () -> ())
+	args : 
+		[(Tu36.2797 : ())]
+	formal_fv : 
+		[(beam.2587 : Float list), (light.2586 : Float list)]
+	body : 
+		Let
+			(Tu2110.5433 : ())
+			()
+			Let
+				(nl.5410 : Int)
+				AppDir
+					L (min_caml_read_int)
+					[Tu2110.5433]
+				Let
+					(Tu2111.5432 : ())
+					()
+					Let
+						(Td2112.5431 : Float)
+						AppDir
+							L (min_caml_read_float)
+							[Tu2111.5432]
+						Let
+							(l1.5411 : Float)
+							AppDir
+								L (rad.2792)
+								[Td2112.5431]
+							Let
+								(sl1.5412 : Float)
+								AppDir
+									L (sin.2663)
+									[l1.5411]
+								Let
+									(Ti2113.5429 : Int)
+									Int 1
+									Let
+										(Td2114.5430 : Float)
+										FNeg
+											sl1.5412
+										Let
+											(Tu39.5413 : ())
+											Put
+												light.2586
+												Ti2113.5429
+												Td2114.5430
+											Let
+												(Tu2115.5428 : ())
+												()
+												Let
+													(Td2116.5427 : Float)
+													AppDir
+														L (min_caml_read_float)
+														[Tu2115.5428]
+													Let
+														(l2.5414 : Float)
+														AppDir
+															L (rad.2792)
+															[Td2116.5427]
+														Let
+															(cl1.5415 : Float)
+															AppDir
+																L (cos.2661)
+																[l1.5411]
+															Let
+																(sl2.5416 : Float)
+																AppDir
+																	L (sin.2663)
+																	[l2.5414]
+																Let
+																	(Ti2117.5425 : Int)
+																	Int 0
+																	Let
+																		(Td2118.5426 : Float)
+																		FMul
+																			cl1.5415
+																			sl2.5416
+																		Let
+																			(Tu38.5417 : ())
+																			Put
+																				light.2586
+																				Ti2117.5425
+																				Td2118.5426
+																			Let
+																				(cl2.5418 : Float)
+																				AppDir
+																					L (cos.2661)
+																					[l2.5414]
+																				Let
+																					(Ti2119.5423 : Int)
+																					Int 2
+																					Let
+																						(Td2120.5424 : Float)
+																						FMul
+																							cl1.5415
+																							cl2.5418
+																						Let
+																							(Tu37.5419 : ())
+																							Put
+																								light.2586
+																								Ti2119.5423
+																								Td2120.5424
+																							Let
+																								(Ti2121.5420 : Int)
+																								Int 0
+																								Let
+																									(Tu2122.5422 : ())
+																									()
+																									Let
+																										(Td2123.5421 : Float)
+																										AppDir
+																											L (min_caml_read_float)
+																											[Tu2122.5422]
+																										Put
+																											beam.2587
+																											Ti2121.5420
+																											Td2123.5421
+	name : 
+		(L (rotate_quadratic_matrix.2798): Float list -> Float list -> ())
+	args : 
+		[(abc.2799 : Float list), (rot.2800 : Float list)]
+	formal_fv : 
+		[]
+	body : 
+		Let
+			(Ti2023.5409 : Int)
+			Int 0
+			Let
+				(Td2024.5408 : Float)
+				Get
+					rot.2800
+					Ti2023.5409
+				Let
+					(cos_x.5300 : Float)
+					AppDir
+						L (cos.2661)
+						[Td2024.5408]
+					Let
+						(Ti2025.5407 : Int)
+						Int 0
+						Let
+							(Td2026.5406 : Float)
+							Get
+								rot.2800
+								Ti2025.5407
+							Let
+								(sin_x.5301 : Float)
+								AppDir
+									L (sin.2663)
+									[Td2026.5406]
+								Let
+									(Ti2027.5405 : Int)
+									Int 1
+									Let
+										(Td2028.5404 : Float)
+										Get
+											rot.2800
+											Ti2027.5405
+										Let
+											(cos_y.5302 : Float)
+											AppDir
+												L (cos.2661)
+												[Td2028.5404]
+											Let
+												(Ti2029.5403 : Int)
+												Int 1
+												Let
+													(Td2030.5402 : Float)
+													Get
+														rot.2800
+														Ti2029.5403
+													Let
+														(sin_y.5303 : Float)
+														AppDir
+															L (sin.2663)
+															[Td2030.5402]
+														Let
+															(Ti2031.5401 : Int)
+															Int 2
+															Let
+																(Td2032.5400 : Float)
+																Get
+																	rot.2800
+																	Ti2031.5401
+																Let
+																	(cos_z.5304 : Float)
+																	AppDir
+																		L (cos.2661)
+																		[Td2032.5400]
+																	Let
+																		(Ti2033.5399 : Int)
+																		Int 2
+																		Let
+																			(Td2034.5398 : Float)
+																			Get
+																				rot.2800
+																				Ti2033.5399
+																			Let
+																				(sin_z.5305 : Float)
+																				AppDir
+																					L (sin.2663)
+																					[Td2034.5398]
+																				Let
+																					(m00.5306 : Float)
+																					FMul
+																						cos_y.5302
+																						cos_z.5304
+																					Let
+																						(Td2035.5397 : Float)
+																						FMul
+																							sin_x.5301
+																							sin_y.5303
+																						Let
+																							(Td2036.5395 : Float)
+																							FMul
+																								Td2035.5397
+																								cos_z.5304
+																							Let
+																								(Td2037.5396 : Float)
+																								FMul
+																									cos_x.5300
+																									sin_z.5305
+																								Let
+																									(m01.5307 : Float)
+																									FSub
+																										Td2036.5395
+																										Td2037.5396
+																									Let
+																										(Td2038.5394 : Float)
+																										FMul
+																											cos_x.5300
+																											sin_y.5303
+																										Let
+																											(Td2039.5392 : Float)
+																											FMul
+																												Td2038.5394
+																												cos_z.5304
+																											Let
+																												(Td2040.5393 : Float)
+																												FMul
+																													sin_x.5301
+																													sin_z.5305
+																												Let
+																													(m02.5308 : Float)
+																													FAdd
+																														Td2039.5392
+																														Td2040.5393
+																													Let
+																														(m10.5309 : Float)
+																														FMul
+																															cos_y.5302
+																															sin_z.5305
+																														Let
+																															(Td2041.5391 : Float)
+																															FMul
+																																sin_x.5301
+																																sin_y.5303
+																															Let
+																																(Td2042.5389 : Float)
+																																FMul
+																																	Td2041.5391
+																																	sin_z.5305
+																																Let
+																																	(Td2043.5390 : Float)
+																																	FMul
+																																		cos_x.5300
+																																		cos_z.5304
+																																	Let
+																																		(m11.5310 : Float)
+																																		FAdd
+																																			Td2042.5389
+																																			Td2043.5390
+																																		Let
+																																			(Td2044.5388 : Float)
+																																			FMul
+																																				cos_x.5300
+																																				sin_y.5303
+																																			Let
+																																				(Td2045.5386 : Float)
+																																				FMul
+																																					Td2044.5388
+																																					sin_z.5305
+																																				Let
+																																					(Td2046.5387 : Float)
+																																					FMul
+																																						sin_x.5301
+																																						cos_z.5304
+																																					Let
+																																						(m12.5311 : Float)
+																																						FSub
+																																							Td2045.5386
+																																							Td2046.5387
+																																						Let
+																																							(m20.5312 : Float)
+																																							FNeg
+																																								sin_y.5303
+																																							Let
+																																								(m21.5313 : Float)
+																																								FMul
+																																									sin_x.5301
+																																									cos_y.5302
+																																								Let
+																																									(m22.5314 : Float)
+																																									FMul
+																																										cos_x.5300
+																																										cos_y.5302
+																																									Let
+																																										(Ti2047.5385 : Int)
+																																										Int 0
+																																										Let
+																																											(ao.5315 : Float)
+																																											Get
+																																												abc.2799
+																																												Ti2047.5385
+																																											Let
+																																												(Ti2048.5384 : Int)
+																																												Int 1
+																																												Let
+																																													(bo.5316 : Float)
+																																													Get
+																																														abc.2799
+																																														Ti2048.5384
+																																													Let
+																																														(Ti2049.5383 : Int)
+																																														Int 2
+																																														Let
+																																															(co.5317 : Float)
+																																															Get
+																																																abc.2799
+																																																Ti2049.5383
+																																															Let
+																																																(Ti2050.5374 : Int)
+																																																Int 0
+																																																Let
+																																																	(Td2051.5382 : Float)
+																																																	AppDir
+																																																		L (fsqr.2629)
+																																																		[m00.5306]
+																																																	Let
+																																																		(Td2052.5379 : Float)
+																																																		FMul
+																																																			ao.5315
+																																																			Td2051.5382
+																																																		Let
+																																																			(Td2053.5381 : Float)
+																																																			AppDir
+																																																				L (fsqr.2629)
+																																																				[m10.5309]
+																																																			Let
+																																																				(Td2054.5380 : Float)
+																																																				FMul
+																																																					bo.5316
+																																																					Td2053.5381
+																																																				Let
+																																																					(Td2055.5376 : Float)
+																																																					FAdd
+																																																						Td2052.5379
+																																																						Td2054.5380
+																																																					Let
+																																																						(Td2056.5378 : Float)
+																																																						AppDir
+																																																							L (fsqr.2629)
+																																																							[m20.5312]
+																																																						Let
+																																																							(Td2057.5377 : Float)
+																																																							FMul
+																																																								co.5317
+																																																								Td2056.5378
+																																																							Let
+																																																								(Td2058.5375 : Float)
+																																																								FAdd
+																																																									Td2055.5376
+																																																									Td2057.5377
+																																																								Let
+																																																									(Tu44.5318 : ())
+																																																									Put
+																																																										abc.2799
+																																																										Ti2050.5374
+																																																										Td2058.5375
+																																																									Let
+																																																										(Ti2059.5365 : Int)
+																																																										Int 1
+																																																										Let
+																																																											(Td2060.5373 : Float)
+																																																											AppDir
+																																																												L (fsqr.2629)
+																																																												[m01.5307]
+																																																											Let
+																																																												(Td2061.5370 : Float)
+																																																												FMul
+																																																													ao.5315
+																																																													Td2060.5373
+																																																												Let
+																																																													(Td2062.5372 : Float)
+																																																													AppDir
+																																																														L (fsqr.2629)
+																																																														[m11.5310]
+																																																													Let
+																																																														(Td2063.5371 : Float)
+																																																														FMul
+																																																															bo.5316
+																																																															Td2062.5372
+																																																														Let
+																																																															(Td2064.5367 : Float)
+																																																															FAdd
+																																																																Td2061.5370
+																																																																Td2063.5371
+																																																															Let
+																																																																(Td2065.5369 : Float)
+																																																																AppDir
+																																																																	L (fsqr.2629)
+																																																																	[m21.5313]
+																																																																Let
+																																																																	(Td2066.5368 : Float)
+																																																																	FMul
+																																																																		co.5317
+																																																																		Td2065.5369
+																																																																	Let
+																																																																		(Td2067.5366 : Float)
+																																																																		FAdd
+																																																																			Td2064.5367
+																																																																			Td2066.5368
+																																																																		Let
+																																																																			(Tu43.5319 : ())
+																																																																			Put
+																																																																				abc.2799
+																																																																				Ti2059.5365
+																																																																				Td2067.5366
+																																																																			Let
+																																																																				(Ti2068.5356 : Int)
+																																																																				Int 2
+																																																																				Let
+																																																																					(Td2069.5364 : Float)
+																																																																					AppDir
+																																																																						L (fsqr.2629)
+																																																																						[m02.5308]
+																																																																					Let
+																																																																						(Td2070.5361 : Float)
+																																																																						FMul
+																																																																							ao.5315
+																																																																							Td2069.5364
+																																																																						Let
+																																																																							(Td2071.5363 : Float)
+																																																																							AppDir
+																																																																								L (fsqr.2629)
+																																																																								[m12.5311]
+																																																																							Let
+																																																																								(Td2072.5362 : Float)
+																																																																								FMul
+																																																																									bo.5316
+																																																																									Td2071.5363
+																																																																								Let
+																																																																									(Td2073.5358 : Float)
+																																																																									FAdd
+																																																																										Td2070.5361
+																																																																										Td2072.5362
+																																																																									Let
+																																																																										(Td2074.5360 : Float)
+																																																																										AppDir
+																																																																											L (fsqr.2629)
+																																																																											[m22.5314]
+																																																																										Let
+																																																																											(Td2075.5359 : Float)
+																																																																											FMul
+																																																																												co.5317
+																																																																												Td2074.5360
+																																																																											Let
+																																																																												(Td2076.5357 : Float)
+																																																																												FAdd
+																																																																													Td2073.5358
+																																																																													Td2075.5359
+																																																																												Let
+																																																																													(Tu42.5320 : ())
+																																																																													Put
+																																																																														abc.2799
+																																																																														Ti2068.5356
+																																																																														Td2076.5357
+																																																																													Let
+																																																																														(Ti2077.5345 : Int)
+																																																																														Int 0
+																																																																														Let
+																																																																															(Td2078.5347 : Float)
+																																																																															Float 2.
+																																																																															Let
+																																																																																(Td2079.5355 : Float)
+																																																																																FMul
+																																																																																	ao.5315
+																																																																																	m01.5307
+																																																																																Let
+																																																																																	(Td2080.5352 : Float)
+																																																																																	FMul
+																																																																																		Td2079.5355
+																																																																																		m02.5308
+																																																																																	Let
+																																																																																		(Td2081.5354 : Float)
+																																																																																		FMul
+																																																																																			bo.5316
+																																																																																			m11.5310
+																																																																																		Let
+																																																																																			(Td2082.5353 : Float)
+																																																																																			FMul
+																																																																																				Td2081.5354
+																																																																																				m12.5311
+																																																																																			Let
+																																																																																				(Td2083.5349 : Float)
+																																																																																				FAdd
+																																																																																					Td2080.5352
+																																																																																					Td2082.5353
+																																																																																				Let
+																																																																																					(Td2084.5351 : Float)
+																																																																																					FMul
+																																																																																						co.5317
+																																																																																						m21.5313
+																																																																																					Let
+																																																																																						(Td2085.5350 : Float)
+																																																																																						FMul
+																																																																																							Td2084.5351
+																																																																																							m22.5314
+																																																																																						Let
+																																																																																							(Td2086.5348 : Float)
+																																																																																							FAdd
+																																																																																								Td2083.5349
+																																																																																								Td2085.5350
+																																																																																							Let
+																																																																																								(Td2087.5346 : Float)
+																																																																																								FMul
+																																																																																									Td2078.5347
+																																																																																									Td2086.5348
+																																																																																								Let
+																																																																																									(Tu41.5321 : ())
+																																																																																									Put
+																																																																																										rot.2800
+																																																																																										Ti2077.5345
+																																																																																										Td2087.5346
+																																																																																									Let
+																																																																																										(Ti2088.5334 : Int)
+																																																																																										Int 1
+																																																																																										Let
+																																																																																											(Td2089.5336 : Float)
+																																																																																											Float 2.
+																																																																																											Let
+																																																																																												(Td2090.5344 : Float)
+																																																																																												FMul
+																																																																																													ao.5315
+																																																																																													m00.5306
+																																																																																												Let
+																																																																																													(Td2091.5341 : Float)
+																																																																																													FMul
+																																																																																														Td2090.5344
+																																																																																														m02.5308
+																																																																																													Let
+																																																																																														(Td2092.5343 : Float)
+																																																																																														FMul
+																																																																																															bo.5316
+																																																																																															m10.5309
+																																																																																														Let
+																																																																																															(Td2093.5342 : Float)
+																																																																																															FMul
+																																																																																																Td2092.5343
+																																																																																																m12.5311
+																																																																																															Let
+																																																																																																(Td2094.5338 : Float)
+																																																																																																FAdd
+																																																																																																	Td2091.5341
+																																																																																																	Td2093.5342
+																																																																																																Let
+																																																																																																	(Td2095.5340 : Float)
+																																																																																																	FMul
+																																																																																																		co.5317
+																																																																																																		m20.5312
+																																																																																																	Let
+																																																																																																		(Td2096.5339 : Float)
+																																																																																																		FMul
+																																																																																																			Td2095.5340
+																																																																																																			m22.5314
+																																																																																																		Let
+																																																																																																			(Td2097.5337 : Float)
+																																																																																																			FAdd
+																																																																																																				Td2094.5338
+																																																																																																				Td2096.5339
+																																																																																																			Let
+																																																																																																				(Td2098.5335 : Float)
+																																																																																																				FMul
+																																																																																																					Td2089.5336
+																																																																																																					Td2097.5337
+																																																																																																				Let
+																																																																																																					(Tu40.5322 : ())
+																																																																																																					Put
+																																																																																																						rot.2800
+																																																																																																						Ti2088.5334
+																																																																																																						Td2098.5335
+																																																																																																					Let
+																																																																																																						(Ti2099.5323 : Int)
+																																																																																																						Int 2
+																																																																																																						Let
+																																																																																																							(Td2100.5325 : Float)
+																																																																																																							Float 2.
+																																																																																																							Let
+																																																																																																								(Td2101.5333 : Float)
+																																																																																																								FMul
+																																																																																																									ao.5315
+																																																																																																									m00.5306
+																																																																																																								Let
+																																																																																																									(Td2102.5330 : Float)
+																																																																																																									FMul
+																																																																																																										Td2101.5333
+																																																																																																										m01.5307
+																																																																																																									Let
+																																																																																																										(Td2103.5332 : Float)
+																																																																																																										FMul
+																																																																																																											bo.5316
+																																																																																																											m10.5309
+																																																																																																										Let
+																																																																																																											(Td2104.5331 : Float)
+																																																																																																											FMul
+																																																																																																												Td2103.5332
+																																																																																																												m11.5310
+																																																																																																											Let
+																																																																																																												(Td2105.5327 : Float)
+																																																																																																												FAdd
+																																																																																																													Td2102.5330
+																																																																																																													Td2104.5331
+																																																																																																												Let
+																																																																																																													(Td2106.5329 : Float)
+																																																																																																													FMul
+																																																																																																														co.5317
+																																																																																																														m20.5312
+																																																																																																													Let
+																																																																																																														(Td2107.5328 : Float)
+																																																																																																														FMul
+																																																																																																															Td2106.5329
+																																																																																																															m21.5313
+																																																																																																														Let
+																																																																																																															(Td2108.5326 : Float)
+																																																																																																															FAdd
+																																																																																																																Td2105.5327
+																																																																																																																Td2107.5328
+																																																																																																															Let
+																																																																																																																(Td2109.5324 : Float)
+																																																																																																																FMul
+																																																																																																																	Td2100.5325
+																																																																																																																	Td2108.5326
+																																																																																																																Put
+																																																																																																																	rot.2800
+																																																																																																																	Ti2099.5323
+																																																																																																																	Td2109.5324
+	name : 
+		(L (read_nth_object.2801): Int -> Bool)
+	args : 
+		[(n.2802 : Int)]
+	formal_fv : 
+		[(objects.2583 : Int * Int * Int * Int * Float list * Float list * Bool * Float list * Float list * Float list * Float list) list)]
+	body : 
+		Let
+			(Tu1930.5299 : ())
+			()
+			Let
+				(texture.5172 : Int)
+				AppDir
+					L (min_caml_read_int)
+					[Tu1930.5299]
+				Let
+					(Ti1932.5173 : Int)
+					Int -1
+					IfEq
+						texture.5172
+						Ti1932.5173
+						Int 0
+						Let
+							(Tu1933.5297 : ())
+							()
+							Let
+								(form.5174 : Int)
+								AppDir
+									L (min_caml_read_int)
+									[Tu1933.5297]
+								Let
+									(Tu1934.5296 : ())
+									()
+									Let
+										(refltype.5175 : Int)
+										AppDir
+											L (min_caml_read_int)
+											[Tu1934.5296]
+										Let
+											(Tu1935.5295 : ())
+											()
+											Let
+												(isrot_p.5176 : Int)
+												AppDir
+													L (min_caml_read_int)
+													[Tu1935.5295]
+												Let
+													(Ti1936.5293 : Int)
+													Int 3
+													Let
+														(Td1937.5294 : Float)
+														Float 0.
+														Let
+															(abc.5177 : Float list)
+															AppDir
+																L (min_caml_create_float_array)
+																[Ti1936.5293, Td1937.5294]
+															Let
+																(Ti1938.5290 : Int)
+																Int 0
+																Let
+																	(Tu1939.5292 : ())
+																	()
+																	Let
+																		(Td1940.5291 : Float)
+																		AppDir
+																			L (min_caml_read_float)
+																			[Tu1939.5292]
+																		Let
+																			(Tu63.5178 : ())
+																			Put
+																				abc.5177
+																				Ti1938.5290
+																				Td1940.5291
+																			Let
+																				(Ti1941.5287 : Int)
+																				Int 1
+																				Let
+																					(Tu1942.5289 : ())
+																					()
+																					Let
+																						(Td1943.5288 : Float)
+																						AppDir
+																							L (min_caml_read_float)
+																							[Tu1942.5289]
+																						Let
+																							(Tu62.5179 : ())
+																							Put
+																								abc.5177
+																								Ti1941.5287
+																								Td1943.5288
+																							Let
+																								(Ti1944.5284 : Int)
+																								Int 2
+																								Let
+																									(Tu1945.5286 : ())
+																									()
+																									Let
+																										(Td1946.5285 : Float)
+																										AppDir
+																											L (min_caml_read_float)
+																											[Tu1945.5286]
+																										Let
+																											(Tu61.5180 : ())
+																											Put
+																												abc.5177
+																												Ti1944.5284
+																												Td1946.5285
+																											Let
+																												(Ti1947.5282 : Int)
+																												Int 3
+																												Let
+																													(Td1948.5283 : Float)
+																													Float 0.
+																													Let
+																														(xyz.5181 : Float list)
+																														AppDir
+																															L (min_caml_create_float_array)
+																															[Ti1947.5282, Td1948.5283]
+																														Let
+																															(Ti1949.5279 : Int)
+																															Int 0
+																															Let
+																																(Tu1950.5281 : ())
+																																()
+																																Let
+																																	(Td1951.5280 : Float)
+																																	AppDir
+																																		L (min_caml_read_float)
+																																		[Tu1950.5281]
+																																	Let
+																																		(Tu60.5182 : ())
+																																		Put
+																																			xyz.5181
+																																			Ti1949.5279
+																																			Td1951.5280
+																																		Let
+																																			(Ti1952.5276 : Int)
+																																			Int 1
+																																			Let
+																																				(Tu1953.5278 : ())
+																																				()
+																																				Let
+																																					(Td1954.5277 : Float)
+																																					AppDir
+																																						L (min_caml_read_float)
+																																						[Tu1953.5278]
+																																					Let
+																																						(Tu59.5183 : ())
+																																						Put
+																																							xyz.5181
+																																							Ti1952.5276
+																																							Td1954.5277
+																																						Let
+																																							(Ti1955.5273 : Int)
+																																							Int 2
+																																							Let
+																																								(Tu1956.5275 : ())
+																																								()
+																																								Let
+																																									(Td1957.5274 : Float)
+																																									AppDir
+																																										L (min_caml_read_float)
+																																										[Tu1956.5275]
+																																									Let
+																																										(Tu58.5184 : ())
+																																										Put
+																																											xyz.5181
+																																											Ti1955.5273
+																																											Td1957.5274
+																																										Let
+																																											(Tu1958.5272 : ())
+																																											()
+																																											Let
+																																												(Td1959.5271 : Float)
+																																												AppDir
+																																													L (min_caml_read_float)
+																																													[Tu1958.5272]
+																																												Let
+																																													(m_invert.5185 : Bool)
+																																													AppDir
+																																														L (fisneg.2620)
+																																														[Td1959.5271]
+																																													Let
+																																														(Ti1960.5269 : Int)
+																																														Int 2
+																																														Let
+																																															(Td1961.5270 : Float)
+																																															Float 0.
+																																															Let
+																																																(reflparam.5186 : Float list)
+																																																AppDir
+																																																	L (min_caml_create_float_array)
+																																																	[Ti1960.5269, Td1961.5270]
+																																																Let
+																																																	(Ti1962.5266 : Int)
+																																																	Int 0
+																																																	Let
+																																																		(Tu1963.5268 : ())
+																																																		()
+																																																		Let
+																																																			(Td1964.5267 : Float)
+																																																			AppDir
+																																																				L (min_caml_read_float)
+																																																				[Tu1963.5268]
+																																																			Let
+																																																				(Tu57.5187 : ())
+																																																				Put
+																																																					reflparam.5186
+																																																					Ti1962.5266
+																																																					Td1964.5267
+																																																				Let
+																																																					(Ti1965.5263 : Int)
+																																																					Int 1
+																																																					Let
+																																																						(Tu1966.5265 : ())
+																																																						()
+																																																						Let
+																																																							(Td1967.5264 : Float)
+																																																							AppDir
+																																																								L (min_caml_read_float)
+																																																								[Tu1966.5265]
+																																																							Let
+																																																								(Tu56.5188 : ())
+																																																								Put
+																																																									reflparam.5186
+																																																									Ti1965.5263
+																																																									Td1967.5264
+																																																								Let
+																																																									(Ti1968.5261 : Int)
+																																																									Int 3
+																																																									Let
+																																																										(Td1969.5262 : Float)
+																																																										Float 0.
+																																																										Let
+																																																											(color.5189 : Float list)
+																																																											AppDir
+																																																												L (min_caml_create_float_array)
+																																																												[Ti1968.5261, Td1969.5262]
+																																																											Let
+																																																												(Ti1970.5258 : Int)
+																																																												Int 0
+																																																												Let
+																																																													(Tu1971.5260 : ())
+																																																													()
+																																																													Let
+																																																														(Td1972.5259 : Float)
+																																																														AppDir
+																																																															L (min_caml_read_float)
+																																																															[Tu1971.5260]
+																																																														Let
+																																																															(Tu55.5190 : ())
+																																																															Put
+																																																																color.5189
+																																																																Ti1970.5258
+																																																																Td1972.5259
+																																																															Let
+																																																																(Ti1973.5255 : Int)
+																																																																Int 1
+																																																																Let
+																																																																	(Tu1974.5257 : ())
+																																																																	()
+																																																																	Let
+																																																																		(Td1975.5256 : Float)
+																																																																		AppDir
+																																																																			L (min_caml_read_float)
+																																																																			[Tu1974.5257]
+																																																																		Let
+																																																																			(Tu54.5191 : ())
+																																																																			Put
+																																																																				color.5189
+																																																																				Ti1973.5255
+																																																																				Td1975.5256
+																																																																			Let
+																																																																				(Ti1976.5252 : Int)
+																																																																				Int 2
+																																																																				Let
+																																																																					(Tu1977.5254 : ())
+																																																																					()
+																																																																					Let
+																																																																						(Td1978.5253 : Float)
+																																																																						AppDir
+																																																																							L (min_caml_read_float)
+																																																																							[Tu1977.5254]
+																																																																						Let
+																																																																							(Tu53.5192 : ())
+																																																																							Put
+																																																																								color.5189
+																																																																								Ti1976.5252
+																																																																								Td1978.5253
+																																																																							Let
+																																																																								(Ti1979.5250 : Int)
+																																																																								Int 3
+																																																																								Let
+																																																																									(Td1980.5251 : Float)
+																																																																									Float 0.
+																																																																									Let
+																																																																										(rotation.5193 : Float list)
+																																																																										AppDir
+																																																																											L (min_caml_create_float_array)
+																																																																											[Ti1979.5250, Td1980.5251]
+																																																																										Let
+																																																																											(Ti1981.5235 : Int)
+																																																																											Int 0
+																																																																											Let
+																																																																												(Tu52.5194 : ())
+																																																																												IfEq
+																																																																													isrot_p.5176
+																																																																													Ti1981.5235
+																																																																													()
+																																																																													Let
+																																																																														(Ti1982.5246 : Int)
+																																																																														Int 0
+																																																																														Let
+																																																																															(Tu1983.5249 : ())
+																																																																															()
+																																																																															Let
+																																																																																(Td1984.5248 : Float)
+																																																																																AppDir
+																																																																																	L (min_caml_read_float)
+																																																																																	[Tu1983.5249]
+																																																																																Let
+																																																																																	(Td1985.5247 : Float)
+																																																																																	AppDir
+																																																																																		L (rad.2792)
+																																																																																		[Td1984.5248]
+																																																																																	Let
+																																																																																		(Tu46.5236 : ())
+																																																																																		Put
+																																																																																			rotation.5193
+																																																																																			Ti1982.5246
+																																																																																			Td1985.5247
+																																																																																		Let
+																																																																																			(Ti1986.5242 : Int)
+																																																																																			Int 1
+																																																																																			Let
+																																																																																				(Tu1987.5245 : ())
+																																																																																				()
+																																																																																				Let
+																																																																																					(Td1988.5244 : Float)
+																																																																																					AppDir
+																																																																																						L (min_caml_read_float)
+																																																																																						[Tu1987.5245]
+																																																																																					Let
+																																																																																						(Td1989.5243 : Float)
+																																																																																						AppDir
+																																																																																							L (rad.2792)
+																																																																																							[Td1988.5244]
+																																																																																						Let
+																																																																																							(Tu45.5237 : ())
+																																																																																							Put
+																																																																																								rotation.5193
+																																																																																								Ti1986.5242
+																																																																																								Td1989.5243
+																																																																																							Let
+																																																																																								(Ti1990.5238 : Int)
+																																																																																								Int 2
+																																																																																								Let
+																																																																																									(Tu1991.5241 : ())
+																																																																																									()
+																																																																																									Let
+																																																																																										(Td1992.5240 : Float)
+																																																																																										AppDir
+																																																																																											L (min_caml_read_float)
+																																																																																											[Tu1991.5241]
+																																																																																										Let
+																																																																																											(Td1993.5239 : Float)
+																																																																																											AppDir
+																																																																																												L (rad.2792)
+																																																																																												[Td1992.5240]
+																																																																																											Put
+																																																																																												rotation.5193
+																																																																																												Ti1990.5238
+																																																																																												Td1993.5239
+																																																																												Let
+																																																																													(Ti1994.5234 : Int)
+																																																																													Int 2
+																																																																													Let
+																																																																														(m_invert2.5195 : Bool)
+																																																																														IfEq
+																																																																															form.5174
+																																																																															Ti1994.5234
+																																																																															Int 1
+																																																																															Var m_invert.5185
+																																																																														Let
+																																																																															(Ti1995.5232 : Int)
+																																																																															Int 4
+																																																																															Let
+																																																																																(Td1996.5233 : Float)
+																																																																																Float 0.
+																																																																																Let
+																																																																																	(ctbl.5196 : Float list)
+																																																																																	AppDir
+																																																																																		L (min_caml_create_float_array)
+																																																																																		[Ti1995.5232, Td1996.5233]
+																																																																																	Let
+																																																																																		(obj.5197 : Int * Int * Int * Int * Float list * Float list * Bool * Float list * Float list * Float list * Float list))
+																																																																																		Tuple
+																																																																																			[texture.5172, form.5174, refltype.5175, isrot_p.5176, abc.5177, xyz.5181, m_invert2.5195, reflparam.5186, color.5189, rotation.5193, ctbl.5196]
+																																																																																		Let
+																																																																																			(Tu51.5198 : ())
+																																																																																			Put
+																																																																																				objects.2583
+																																																																																				n.2802
+																																																																																				obj.5197
+																																																																																			Let
+																																																																																				(Ti1997.5202 : Int)
+																																																																																				Int 3
+																																																																																				Let
+																																																																																					(Tu50.5199 : ())
+																																																																																					IfEq
+																																																																																						form.5174
+																																																																																						Ti1997.5202
+																																																																																						Let
+																																																																																							(Ti1998.5231 : Int)
+																																																																																							Int 0
+																																																																																							Let
+																																																																																								(a.5206 : Float)
+																																																																																								Get
+																																																																																									abc.5177
+																																																																																									Ti1998.5231
+																																																																																								Let
+																																																																																									(Ti1999.5225 : Int)
+																																																																																									Int 0
+																																																																																									Let
+																																																																																										(Tb2000.5227 : Bool)
+																																																																																										AppDir
+																																																																																											L (fiszero.2622)
+																																																																																											[a.5206]
+																																																																																										Let
+																																																																																											(Ti2001.5228 : Int)
+																																																																																											Int 0
+																																																																																											Let
+																																																																																												(Td2004.5226 : Float)
+																																																																																												IfEq
+																																																																																													Tb2000.5227
+																																																																																													Ti2001.5228
+																																																																																													Let
+																																																																																														(Td2002.5229 : Float)
+																																																																																														AppDir
+																																																																																															L (sgn.2667)
+																																																																																															[a.5206]
+																																																																																														Let
+																																																																																															(Td2003.5230 : Float)
+																																																																																															AppDir
+																																																																																																L (fsqr.2629)
+																																																																																																[a.5206]
+																																																																																															FDiv
+																																																																																																Td2002.5229
+																																																																																																Td2003.5230
+																																																																																													Float 0.
+																																																																																												Let
+																																																																																													(Tu48.5207 : ())
+																																																																																													Put
+																																																																																														abc.5177
+																																																																																														Ti1999.5225
+																																																																																														Td2004.5226
+																																																																																													Let
+																																																																																														(Ti2005.5224 : Int)
+																																																																																														Int 1
+																																																																																														Let
+																																																																																															(b.5208 : Float)
+																																																																																															Get
+																																																																																																abc.5177
+																																																																																																Ti2005.5224
+																																																																																															Let
+																																																																																																(Ti2006.5218 : Int)
+																																																																																																Int 1
+																																																																																																Let
+																																																																																																	(Tb2007.5220 : Bool)
+																																																																																																	AppDir
+																																																																																																		L (fiszero.2622)
+																																																																																																		[b.5208]
+																																																																																																	Let
+																																																																																																		(Ti2008.5221 : Int)
+																																																																																																		Int 0
+																																																																																																		Let
+																																																																																																			(Td2011.5219 : Float)
+																																																																																																			IfEq
+																																																																																																				Tb2007.5220
+																																																																																																				Ti2008.5221
+																																																																																																				Let
+																																																																																																					(Td2009.5222 : Float)
+																																																																																																					AppDir
+																																																																																																						L (sgn.2667)
+																																																																																																						[b.5208]
+																																																																																																					Let
+																																																																																																						(Td2010.5223 : Float)
+																																																																																																						AppDir
+																																																																																																							L (fsqr.2629)
+																																																																																																							[b.5208]
+																																																																																																						FDiv
+																																																																																																							Td2009.5222
+																																																																																																							Td2010.5223
+																																																																																																				Float 0.
+																																																																																																			Let
+																																																																																																				(Tu47.5209 : ())
+																																																																																																				Put
+																																																																																																					abc.5177
+																																																																																																					Ti2006.5218
+																																																																																																					Td2011.5219
+																																																																																																				Let
+																																																																																																					(Ti2012.5217 : Int)
+																																																																																																					Int 2
+																																																																																																					Let
+																																																																																																						(c.5210 : Float)
+																																																																																																						Get
+																																																																																																							abc.5177
+																																																																																																							Ti2012.5217
+																																																																																																						Let
+																																																																																																							(Ti2013.5211 : Int)
+																																																																																																							Int 2
+																																																																																																							Let
+																																																																																																								(Tb2014.5213 : Bool)
+																																																																																																								AppDir
+																																																																																																									L (fiszero.2622)
+																																																																																																									[c.5210]
+																																																																																																								Let
+																																																																																																									(Ti2015.5214 : Int)
+																																																																																																									Int 0
+																																																																																																									Let
+																																																																																																										(Td2018.5212 : Float)
+																																																																																																										IfEq
+																																																																																																											Tb2014.5213
+																																																																																																											Ti2015.5214
+																																																																																																											Let
+																																																																																																												(Td2016.5215 : Float)
+																																																																																																												AppDir
+																																																																																																													L (sgn.2667)
+																																																																																																													[c.5210]
+																																																																																																												Let
+																																																																																																													(Td2017.5216 : Float)
+																																																																																																													AppDir
+																																																																																																														L (fsqr.2629)
+																																																																																																														[c.5210]
+																																																																																																													FDiv
+																																																																																																														Td2016.5215
+																																																																																																														Td2017.5216
+																																																																																																											Float 0.
+																																																																																																										Put
+																																																																																																											abc.5177
+																																																																																																											Ti2013.5211
+																																																																																																											Td2018.5212
+																																																																																						Let
+																																																																																							(Ti2019.5203 : Int)
+																																																																																							Int 2
+																																																																																							IfEq
+																																																																																								form.5174
+																																																																																								Ti2019.5203
+																																																																																								Let
+																																																																																									(Ti2020.5205 : Int)
+																																																																																									Int 0
+																																																																																									Let
+																																																																																										(Ti2021.5204 : Int)
+																																																																																										IfEq
+																																																																																											m_invert.5185
+																																																																																											Ti2020.5205
+																																																																																											Int 1
+																																																																																											Int 0
+																																																																																										AppDir
+																																																																																											L (vecunit_sgn.2693)
+																																																																																											[abc.5177, Ti2021.5204]
+																																																																																								()
+																																																																																					Let
+																																																																																						(Ti2022.5201 : Int)
+																																																																																						Int 0
+																																																																																						Let
+																																																																																							(Tu49.5200 : ())
+																																																																																							IfEq
+																																																																																								isrot_p.5176
+																																																																																								Ti2022.5201
+																																																																																								()
+																																																																																								AppDir
+																																																																																									L (rotate_quadratic_matrix.2798)
+																																																																																									[abc.5177, rotation.5193]
+																																																																																							Int 1
+	name : 
+		(L (read_object.2803): Int -> ())
+	args : 
+		[(n.2804 : Int)]
+	formal_fv : 
+		[(n_objects.2582 : Int list), (read_nth_object.2801 : Int -> Bool)]
+	body : 
+		Let
+			(Ti1924.5166 : Int)
+			Int 60
+			IfLE
+				Ti1924.5166
+				n.2804
+				()
+				Let
+					(Tb1925.5167 : Bool)
+					AppCls
+						read_nth_object.2801
+						[n.2804]
+					Let
+						(Ti1926.5168 : Int)
+						Int 0
+						IfEq
+							Tb1925.5167
+							Ti1926.5168
+							Let
+								(Ti1927.5171 : Int)
+								Int 0
+								Put
+									n_objects.2582
+									Ti1927.5171
+									n.2804
+							Let
+								(Ti1928.5170 : Int)
+								Int 1
+								Let
+									(Ti1929.5169 : Int)
+									Add
+										n.2804
+										Ti1928.5170
+									AppCls
+										read_object.2803
+										[Ti1929.5169]
+	name : 
+		(L (read_all_object.2805): () -> ())
+	args : 
+		[(Tu64.2806 : ())]
+	formal_fv : 
+		[(read_object.2803 : Int -> ())]
+	body : 
+		Let
+			(Ti1923.5165 : Int)
+			Int 0
+			AppCls
+				read_object.2803
+				[Ti1923.5165]
+	name : 
+		(L (read_net_item.2807): Int -> Int list)
+	args : 
+		[(length.2808 : Int)]
+	formal_fv : 
+		[]
+	body : 
+		Let
+			(Tu1914.5164 : ())
+			()
+			Let
+				(item.5153 : Int)
+				AppDir
+					L (min_caml_read_int)
+					[Tu1914.5164]
+				Let
+					(Ti1916.5154 : Int)
+					Int -1
+					IfEq
+						item.5153
+						Ti1916.5154
+						Let
+							(Ti1917.5162 : Int)
+							Int 1
+							Let
+								(Ti1918.5159 : Int)
+								Add
+									length.2808
+									Ti1917.5162
+								Let
+									(Ti1920.5160 : Int)
+									Int -1
+									AppDir
+										L (min_caml_create_array)
+										[Ti1918.5159, Ti1920.5160]
+						Let
+							(Ti1921.5158 : Int)
+							Int 1
+							Let
+								(Ti1922.5157 : Int)
+								Add
+									length.2808
+									Ti1921.5158
+								Let
+									(v.5155 : Int list)
+									AppDir
+										L (read_net_item.2807)
+										[Ti1922.5157]
+									Let
+										(Tu65.5156 : ())
+										Put
+											v.5155
+											length.2808
+											item.5153
+										Var v.5155
+	name : 
+		(L (read_or_network.2809): Int -> Int list list)
+	args : 
+		[(length.2810 : Int)]
+	formal_fv : 
+		[]
+	body : 
+		Let
+			(Ti1905.5152 : Int)
+			Int 0
+			Let
+				(net.5141 : Int list)
+				AppDir
+					L (read_net_item.2807)
+					[Ti1905.5152]
+				Let
+					(Ti1906.5151 : Int)
+					Int 0
+					Let
+						(Ti1907.5142 : Int)
+						Get
+							net.5141
+							Ti1906.5151
+						Let
+							(Ti1909.5143 : Int)
+							Int -1
+							IfEq
+								Ti1907.5142
+								Ti1909.5143
+								Let
+									(Ti1910.5149 : Int)
+									Int 1
+									Let
+										(Ti1911.5148 : Int)
+										Add
+											length.2810
+											Ti1910.5149
+										AppDir
+											L (min_caml_create_array)
+											[Ti1911.5148, net.5141]
+								Let
+									(Ti1912.5147 : Int)
+									Int 1
+									Let
+										(Ti1913.5146 : Int)
+										Add
+											length.2810
+											Ti1912.5147
+										Let
+											(v.5144 : Int list list)
+											AppDir
+												L (read_or_network.2809)
+												[Ti1913.5146]
+											Let
+												(Tu66.5145 : ())
+												Put
+													v.5144
+													length.2810
+													net.5141
+												Var v.5144
+	name : 
+		(L (read_and_network.2811): Int -> ())
+	args : 
+		[(n.2812 : Int)]
+	formal_fv : 
+		[(and_net.2588 : Int list list)]
+	body : 
+		Let
+			(Ti1898.5140 : Int)
+			Int 0
+			Let
+				(net.5132 : Int list)
+				AppDir
+					L (read_net_item.2807)
+					[Ti1898.5140]
+				Let
+					(Ti1899.5139 : Int)
+					Int 0
+					Let
+						(Ti1900.5133 : Int)
+						Get
+							net.5132
+							Ti1899.5139
+						Let
+							(Ti1902.5134 : Int)
+							Int -1
+							IfEq
+								Ti1900.5133
+								Ti1902.5134
+								()
+								Let
+									(Tu67.5135 : ())
+									Put
+										and_net.2588
+										n.2812
+										net.5132
+									Let
+										(Ti1903.5137 : Int)
+										Int 1
+										Let
+											(Ti1904.5136 : Int)
+											Add
+												n.2812
+												Ti1903.5137
+											AppCls
+												read_and_network.2811
+												[Ti1904.5136]
+	name : 
+		(L (read_parameter.2813): () -> ())
+	args : 
+		[(Tu68.2814 : ())]
+	formal_fv : 
+		[(or_net.2589 : Int list list list), (read_all_object.2805 : () -> ()), (read_and_network.2811 : Int -> ()), (read_light.2796 : () -> ()), (read_screen_settings.2794 : () -> ())]
+	body : 
+		Let
+			(Tu1891.5131 : ())
+			()
+			Let
+				(Tu72.5121 : ())
+				AppCls
+					read_screen_settings.2794
+					[Tu1891.5131]
+				Let
+					(Tu1892.5130 : ())
+					()
+					Let
+						(Tu71.5122 : ())
+						AppCls
+							read_light.2796
+							[Tu1892.5130]
+						Let
+							(Tu1893.5129 : ())
+							()
+							Let
+								(Tu70.5123 : ())
+								AppCls
+									read_all_object.2805
+									[Tu1893.5129]
+								Let
+									(Ti1894.5128 : Int)
+									Int 0
+									Let
+										(Tu69.5124 : ())
+										AppCls
+											read_and_network.2811
+											[Ti1894.5128]
+										Let
+											(Ti1895.5125 : Int)
+											Int 0
+											Let
+												(Ti1896.5127 : Int)
+												Int 0
+												Let
+													(Ta1897.5126 : Int list list)
+													AppDir
+														L (read_or_network.2809)
+														[Ti1896.5127]
+													Put
+														or_net.2589
+														Ti1895.5125
+														Ta1897.5126
+	name : 
+		(L (write_ppm_header.3056): () -> ())
+	args : 
+		[(Tu173.3057 : ())]
+	formal_fv : 
+		[(image_size.2599 : Int list)]
+	body : 
+		Let
+			(Ti684.3637 : Int)
+			Int 80
+			Let
+				(Tu181.3617 : ())
+				AppDir
+					L (min_caml_print_char)
+					[Ti684.3637]
+				Let
+					(Ti687.3634 : Int)
+					Int 51
+					Let
+						(Tu180.3618 : ())
+						AppDir
+							L (min_caml_print_char)
+							[Ti687.3634]
+						Let
+							(Ti688.3633 : Int)
+							Int 10
+							Let
+								(Tu179.3619 : ())
+								AppDir
+									L (min_caml_print_char)
+									[Ti688.3633]
+								Let
+									(Ti689.3632 : Int)
+									Int 0
+									Let
+										(Ti690.3631 : Int)
+										Get
+											image_size.2599
+											Ti689.3632
+										Let
+											(Tu178.3620 : ())
+											AppDir
+												L (min_caml_print_int)
+												[Ti690.3631]
+											Let
+												(Ti691.3630 : Int)
+												Int 32
+												Let
+													(Tu177.3621 : ())
+													AppDir
+														L (min_caml_print_char)
+														[Ti691.3630]
+													Let
+														(Ti692.3629 : Int)
+														Int 1
+														Let
+															(Ti693.3628 : Int)
+															Get
+																image_size.2599
+																Ti692.3629
+															Let
+																(Tu176.3622 : ())
+																AppDir
+																	L (min_caml_print_int)
+																	[Ti693.3628]
+																Let
+																	(Ti694.3627 : Int)
+																	Int 32
+																	Let
+																		(Tu175.3623 : ())
+																		AppDir
+																			L (min_caml_print_char)
+																			[Ti694.3627]
+																		Let
+																			(Ti695.3626 : Int)
+																			Int 255
+																			Let
+																				(Tu174.3624 : ())
+																				AppDir
+																					L (min_caml_print_int)
+																					[Ti695.3626]
+																				Let
+																					(Ti696.3625 : Int)
+																					Int 10
+																					AppDir
+																						L (min_caml_print_char)
+																						[Ti696.3625]
+	name : 
+		(L (create_float5x3array.3088): () -> Float list list)
+	args : 
+		[(Tu206.3089 : ())]
+	formal_fv : 
+		[]
+	body : 
+		Let
+			(Ti558.3472 : Int)
+			Int 3
+			Let
+				(Td559.3473 : Float)
+				Float 0.
+				Let
+					(vec.3449 : Float list)
+					AppDir
+						L (min_caml_create_float_array)
+						[Ti558.3472, Td559.3473]
+					Let
+						(Ti560.3471 : Int)
+						Int 5
+						Let
+							(array.3450 : Float list list)
+							AppDir
+								L (min_caml_create_array)
+								[Ti560.3471, vec.3449]
+							Let
+								(Ti561.3467 : Int)
+								Int 1
+								Let
+									(Ti562.3469 : Int)
+									Int 3
+									Let
+										(Td563.3470 : Float)
+										Float 0.
+										Let
+											(Ta564.3468 : Float list)
+											AppDir
+												L (min_caml_create_float_array)
+												[Ti562.3469, Td563.3470]
+											Let
+												(Tu210.3451 : ())
+												Put
+													array.3450
+													Ti561.3467
+													Ta564.3468
+												Let
+													(Ti565.3463 : Int)
+													Int 2
+													Let
+														(Ti566.3465 : Int)
+														Int 3
+														Let
+															(Td567.3466 : Float)
+															Float 0.
+															Let
+																(Ta568.3464 : Float list)
+																AppDir
+																	L (min_caml_create_float_array)
+																	[Ti566.3465, Td567.3466]
+																Let
+																	(Tu209.3452 : ())
+																	Put
+																		array.3450
+																		Ti565.3463
+																		Ta568.3464
+																	Let
+																		(Ti569.3459 : Int)
+																		Int 3
+																		Let
+																			(Ti570.3461 : Int)
+																			Int 3
+																			Let
+																				(Td571.3462 : Float)
+																				Float 0.
+																				Let
+																					(Ta572.3460 : Float list)
+																					AppDir
+																						L (min_caml_create_float_array)
+																						[Ti570.3461, Td571.3462]
+																					Let
+																						(Tu208.3453 : ())
+																						Put
+																							array.3450
+																							Ti569.3459
+																							Ta572.3460
+																						Let
+																							(Ti573.3455 : Int)
+																							Int 4
+																							Let
+																								(Ti574.3457 : Int)
+																								Int 3
+																								Let
+																									(Td575.3458 : Float)
+																									Float 0.
+																									Let
+																										(Ta576.3456 : Float list)
+																										AppDir
+																											L (min_caml_create_float_array)
+																											[Ti574.3457, Td575.3458]
+																										Let
+																											(Tu207.3454 : ())
+																											Put
+																												array.3450
+																												Ti573.3455
+																												Ta576.3456
+																											Var array.3450
+	name : 
+		(L (create_pixel.3090): () -> Float list * Float list list * Int list * Bool list * Float list list * Float list list * Int list * Float list list))
+	args : 
+		[(Tu211.3091 : ())]
+	formal_fv : 
+		[]
+	body : 
+		Let
+			(Ti546.3447 : Int)
+			Int 3
+			Let
+				(Td547.3448 : Float)
+				Float 0.
+				Let
+					(m_rgb.3429 : Float list)
+					AppDir
+						L (min_caml_create_float_array)
+						[Ti546.3447, Td547.3448]
+					Let
+						(Tu548.3446 : ())
+						()
+						Let
+							(m_isect_ps.3430 : Float list list)
+							AppDir
+								L (create_float5x3array.3088)
+								[Tu548.3446]
+							Let
+								(Ti549.3444 : Int)
+								Int 5
+								Let
+									(Ti550.3445 : Int)
+									Int 0
+									Let
+										(m_sids.3431 : Int list)
+										AppDir
+											L (min_caml_create_array)
+											[Ti549.3444, Ti550.3445]
+										Let
+											(Ti551.3442 : Int)
+											Int 5
+											Let
+												(Ti552.3443 : Int)
+												Int 0
+												Let
+													(m_cdif.3432 : Bool list)
+													AppDir
+														L (min_caml_create_array)
+														[Ti551.3442, Ti552.3443]
+													Let
+														(Tu553.3441 : ())
+														()
+														Let
+															(m_engy.3433 : Float list list)
+															AppDir
+																L (create_float5x3array.3088)
+																[Tu553.3441]
+															Let
+																(Tu554.3440 : ())
+																()
+																Let
+																	(m_r20p.3434 : Float list list)
+																	AppDir
+																		L (create_float5x3array.3088)
+																		[Tu554.3440]
+																	Let
+																		(Ti555.3438 : Int)
+																		Int 1
+																		Let
+																			(Ti556.3439 : Int)
+																			Int 0
+																			Let
+																				(m_gid.3435 : Int list)
+																				AppDir
+																					L (min_caml_create_array)
+																					[Ti555.3438, Ti556.3439]
+																				Let
+																					(Tu557.3437 : ())
+																					()
+																					Let
+																						(m_nvectors.3436 : Float list list)
+																						AppDir
+																							L (create_float5x3array.3088)
+																							[Tu557.3437]
+																						Tuple
+																							[m_rgb.3429, m_isect_ps.3430, m_sids.3431, m_cdif.3432, m_engy.3433, m_r20p.3434, m_gid.3435, m_nvectors.3436]
+	name : 
+		(L (init_line_elements.3092): Float list * Float list list * Int list * Bool list * Float list list * Float list list * Int list * Float list list) list -> Int -> Float list * Float list list * Int list * Bool list * Float list list * Float list list * Int list * Float list list) list)
+	args : 
+		[(line.3093 : Float list * Float list list * Int list * Bool list * Float list list * Float list list * Int list * Float list list) list), (n.3094 : Int)]
+	formal_fv : 
+		[]
+	body : 
+		Let
+			(Ti541.3423 : Int)
+			Int 0
+			IfLE
+				Ti541.3423
+				n.3094
+				Let
+					(Tu542.3428 : ())
+					()
+					Let
+						(Tt543.3427 : Float list * Float list list * Int list * Bool list * Float list list * Float list list * Int list * Float list list))
+						AppDir
+							L (create_pixel.3090)
+							[Tu542.3428]
+						Let
+							(Tu212.3424 : ())
+							Put
+								line.3093
+								n.3094
+								Tt543.3427
+							Let
+								(Ti544.3426 : Int)
+								Int 1
+								Let
+									(Ti545.3425 : Int)
+									Sub
+										n.3094
+										Ti544.3426
+									AppDir
+										L (init_line_elements.3092)
+										[line.3093, Ti545.3425]
+				Var line.3093
+	name : 
+		(L (create_pixelline.3095): () -> Float list * Float list list * Int list * Bool list * Float list list * Float list list * Int list * Float list list) list)
+	args : 
+		[(Tu213.3096 : ())]
+	formal_fv : 
+		[(image_size.2599 : Int list)]
+	body : 
+		Let
+			(Ti533.3422 : Int)
+			Int 0
+			Let
+				(Ti534.3419 : Int)
+				Get
+					image_size.2599
+					Ti533.3422
+				Let
+					(Tu535.3421 : ())
+					()
+					Let
+						(Tt536.3420 : Float list * Float list list * Int list * Bool list * Float list list * Float list list * Int list * Float list list))
+						AppDir
+							L (create_pixel.3090)
+							[Tu535.3421]
+						Let
+							(line.3414 : Float list * Float list list * Int list * Bool list * Float list list * Float list list * Int list * Float list list) list)
+							AppDir
+								L (min_caml_create_array)
+								[Ti534.3419, Tt536.3420]
+							Let
+								(Ti537.3418 : Int)
+								Int 0
+								Let
+									(Ti538.3416 : Int)
+									Get
+										image_size.2599
+										Ti537.3418
+									Let
+										(Ti539.3417 : Int)
+										Int 2
+										Let
+											(Ti540.3415 : Int)
+											Sub
+												Ti538.3416
+												Ti539.3417
+											AppDir
+												L (init_line_elements.3092)
+												[line.3414, Ti540.3415]
+	name : 
+		(L (rt.3148): Int -> Int -> ())
+	args : 
+		[(size_x.3149 : Int), (size_y.3150 : Int)]
+	formal_fv : 
+		[(create_pixelline.3095 : () -> Float list * Float list list * Int list * Bool list * Float list list * Float list list * Int list * Float list list) list), (image_center.2600 : Int list), (image_size.2599 : Int list), (read_parameter.2813 : () -> ()), (scan_pitch.2601 : Float list), (write_ppm_header.3056 : () -> ())]
+	body : 
+		Let
+			(Ti331.3179 : Int)
+			Int 0
+			Let
+				(Tu242.3154 : ())
+				Put
+					image_size.2599
+					Ti331.3179
+					size_x.3149
+				Let
+					(Ti332.3178 : Int)
+					Int 1
+					Let
+						(Tu241.3155 : ())
+						Put
+							image_size.2599
+							Ti332.3178
+							size_y.3150
+						Let
+							(Ti333.3175 : Int)
+							Int 0
+							Let
+								(Ti334.3177 : Int)
+								Int 2
+								Let
+									(Ti335.3176 : Int)
+									Div
+										size_x.3149
+										Ti334.3177
+									Let
+										(Tu240.3156 : ())
+										Put
+											image_center.2600
+											Ti333.3175
+											Ti335.3176
+										Let
+											(Ti336.3172 : Int)
+											Int 1
+											Let
+												(Ti337.3174 : Int)
+												Int 2
+												Let
+													(Ti338.3173 : Int)
+													Div
+														size_y.3150
+														Ti337.3174
+													Let
+														(Tu239.3157 : ())
+														Put
+															image_center.2600
+															Ti336.3172
+															Ti338.3173
+														Let
+															(Ti339.3168 : Int)
+															Int 0
+															Let
+																(Td340.3170 : Float)
+																Float 128.
+																Let
+																	(Td341.3171 : Float)
+																	AppDir
+																		L (float_of_int.2649)
+																		[size_x.3149]
+																	Let
+																		(Td342.3169 : Float)
+																		FDiv
+																			Td340.3170
+																			Td341.3171
+																		Let
+																			(Tu238.3158 : ())
+																			Put
+																				scan_pitch.2601
+																				Ti339.3168
+																				Td342.3169
+																			Let
+																				(Tu343.3167 : ())
+																				()
+																				Let
+																					(prev.3159 : Float list * Float list list * Int list * Bool list * Float list list * Float list list * Int list * Float list list) list)
+																					AppCls
+																						create_pixelline.3095
+																						[Tu343.3167]
+																					Let
+																						(Tu344.3166 : ())
+																						()
+																						Let
+																							(cur.3160 : Float list * Float list list * Int list * Bool list * Float list list * Float list list * Int list * Float list list) list)
+																							AppCls
+																								create_pixelline.3095
+																								[Tu344.3166]
+																							Let
+																								(Tu345.3165 : ())
+																								()
+																								Let
+																									(next.3161 : Float list * Float list list * Int list * Bool list * Float list list * Float list list * Int list * Float list list) list)
+																									AppCls
+																										create_pixelline.3095
+																										[Tu345.3165]
+																									Let
+																										(Tu346.3164 : ())
+																										()
+																										Let
+																											(Tu237.3162 : ())
+																											AppCls
+																												read_parameter.2813
+																												[Tu346.3164]
+																											Let
+																												(Tu347.3163 : ())
+																												()
+																												AppCls
+																													write_ppm_header.3056
+																													[Tu347.3163]
+body 
+	Let
+		(Ti244.6390 : Int)
+		Int 1
+		Let
+			(Ti245.6391 : Int)
+			Int 0
+			Let
+				(n_objects.2582 : Int list)
+				AppDir
+					L (min_caml_create_array)
+					[Ti244.6390, Ti245.6391]
+				Let
+					(Ti246.6388 : Int)
+					Int 0
+					Let
+						(Td247.6389 : Float)
+						Float 0.
+						Let
+							(dummy.6380 : Float list)
+							AppDir
+								L (min_caml_create_float_array)
+								[Ti246.6388, Td247.6389]
+							Let
+								(Ti248.6381 : Int)
+								Int 60
+								Let
+									(Ti249.6383 : Int)
+									Int 0
+									Let
+										(Ti250.6384 : Int)
+										Int 0
+										Let
+											(Ti251.6385 : Int)
+											Int 0
+											Let
+												(Ti252.6386 : Int)
+												Int 0
+												Let
+													(Ti253.6387 : Int)
+													Int 0
+													Let
+														(Tt254.6382 : Int * Int * Int * Int * Float list * Float list * Int * Float list * Float list * Float list * Float list))
+														Tuple
+															[Ti249.6383, Ti250.6384, Ti251.6385, Ti252.6386, dummy.6380, dummy.6380, Ti253.6387, dummy.6380, dummy.6380, dummy.6380, dummy.6380]
+														Let
+															(objects.2583 : Int * Int * Int * Int * Float list * Float list * Bool * Float list * Float list * Float list * Float list) list)
+															AppDir
+																L (min_caml_create_array)
+																[Ti248.6381, Tt254.6382]
+															Let
+																(Ti255.6378 : Int)
+																Int 3
+																Let
+																	(Td256.6379 : Float)
+																	Float 0.
+																	Let
+																		(screen.2584 : Float list)
+																		AppDir
+																			L (min_caml_create_float_array)
+																			[Ti255.6378, Td256.6379]
+																		Let
+																			(Ti257.6376 : Int)
+																			Int 3
+																			Let
+																				(Td258.6377 : Float)
+																				Float 0.
+																				Let
+																					(viewpoint.2585 : Float list)
+																					AppDir
+																						L (min_caml_create_float_array)
+																						[Ti257.6376, Td258.6377]
+																					Let
+																						(Ti259.6374 : Int)
+																						Int 3
+																						Let
+																							(Td260.6375 : Float)
+																							Float 0.
+																							Let
+																								(light.2586 : Float list)
+																								AppDir
+																									L (min_caml_create_float_array)
+																									[Ti259.6374, Td260.6375]
+																								Let
+																									(Ti261.6372 : Int)
+																									Int 1
+																									Let
+																										(Td262.6373 : Float)
+																										Float 255.
+																										Let
+																											(beam.2587 : Float list)
+																											AppDir
+																												L (min_caml_create_float_array)
+																												[Ti261.6372, Td262.6373]
+																											Let
+																												(Ti263.6367 : Int)
+																												Int 50
+																												Let
+																													(Ti264.6369 : Int)
+																													Int 1
+																													Let
+																														(Ti266.6370 : Int)
+																														Int -1
+																														Let
+																															(Ta267.6368 : Int list)
+																															AppDir
+																																L (min_caml_create_array)
+																																[Ti264.6369, Ti266.6370]
+																															Let
+																																(and_net.2588 : Int list list)
+																																AppDir
+																																	L (min_caml_create_array)
+																																	[Ti263.6367, Ta267.6368]
+																																Let
+																																	(Ti268.6362 : Int)
+																																	Int 1
+																																	Let
+																																		(Ti269.6364 : Int)
+																																		Int 1
+																																		Let
+																																			(Ti270.6366 : Int)
+																																			Int 0
+																																			Let
+																																				(Ta271.6365 : Int list)
+																																				Get
+																																					and_net.2588
+																																					Ti270.6366
+																																				Let
+																																					(Ta272.6363 : Int list list)
+																																					AppDir
+																																						L (min_caml_create_array)
+																																						[Ti269.6364, Ta271.6365]
+																																					Let
+																																						(or_net.2589 : Int list list list)
+																																						AppDir
+																																							L (min_caml_create_array)
+																																							[Ti268.6362, Ta272.6363]
+																																						Let
+																																							(Ti273.6360 : Int)
+																																							Int 1
+																																							Let
+																																								(Td274.6361 : Float)
+																																								Float 0.
+																																								Let
+																																									(solver_dist.2590 : Float list)
+																																									AppDir
+																																										L (min_caml_create_float_array)
+																																										[Ti273.6360, Td274.6361]
+																																									Let
+																																										(Ti275.6358 : Int)
+																																										Int 1
+																																										Let
+																																											(Ti276.6359 : Int)
+																																											Int 0
+																																											Let
+																																												(intsec_rectside.2591 : Int list)
+																																												AppDir
+																																													L (min_caml_create_array)
+																																													[Ti275.6358, Ti276.6359]
+																																												Let
+																																													(Ti277.6356 : Int)
+																																													Int 1
+																																													Let
+																																														(Td278.6357 : Float)
+																																														Float 1000000000.
+																																														Let
+																																															(tmin.2592 : Float list)
+																																															AppDir
+																																																L (min_caml_create_float_array)
+																																																[Ti277.6356, Td278.6357]
+																																															Let
+																																																(Ti279.6354 : Int)
+																																																Int 3
+																																																Let
+																																																	(Td280.6355 : Float)
+																																																	Float 0.
+																																																	Let
+																																																		(intersection_point.2593 : Float list)
+																																																		AppDir
+																																																			L (min_caml_create_float_array)
+																																																			[Ti279.6354, Td280.6355]
+																																																		Let
+																																																			(Ti281.6352 : Int)
+																																																			Int 1
+																																																			Let
+																																																				(Ti282.6353 : Int)
+																																																				Int 0
+																																																				Let
+																																																					(intersected_object_id.2594 : Int list)
+																																																					AppDir
+																																																						L (min_caml_create_array)
+																																																						[Ti281.6352, Ti282.6353]
+																																																					Let
+																																																						(Ti283.6350 : Int)
+																																																						Int 3
+																																																						Let
+																																																							(Td284.6351 : Float)
+																																																							Float 0.
+																																																							Let
+																																																								(nvector.2595 : Float list)
+																																																								AppDir
+																																																									L (min_caml_create_float_array)
+																																																									[Ti283.6350, Td284.6351]
+																																																								Let
+																																																									(Ti285.6348 : Int)
+																																																									Int 3
+																																																									Let
+																																																										(Td286.6349 : Float)
+																																																										Float 0.
+																																																										Let
+																																																											(texture_color.2596 : Float list)
+																																																											AppDir
+																																																												L (min_caml_create_float_array)
+																																																												[Ti285.6348, Td286.6349]
+																																																											Let
+																																																												(Ti287.6346 : Int)
+																																																												Int 3
+																																																												Let
+																																																													(Td288.6347 : Float)
+																																																													Float 0.
+																																																													Let
+																																																														(diffuse_ray.2597 : Float list)
+																																																														AppDir
+																																																															L (min_caml_create_float_array)
+																																																															[Ti287.6346, Td288.6347]
+																																																														Let
+																																																															(Ti289.6344 : Int)
+																																																															Int 3
+																																																															Let
+																																																																(Td290.6345 : Float)
+																																																																Float 0.
+																																																																Let
+																																																																	(rgb.2598 : Float list)
+																																																																	AppDir
+																																																																		L (min_caml_create_float_array)
+																																																																		[Ti289.6344, Td290.6345]
+																																																																	Let
+																																																																		(Ti291.6342 : Int)
+																																																																		Int 2
+																																																																		Let
+																																																																			(Ti292.6343 : Int)
+																																																																			Int 0
+																																																																			Let
+																																																																				(image_size.2599 : Int list)
+																																																																				AppDir
+																																																																					L (min_caml_create_array)
+																																																																					[Ti291.6342, Ti292.6343]
+																																																																				Let
+																																																																					(Ti293.6340 : Int)
+																																																																					Int 2
+																																																																					Let
+																																																																						(Ti294.6341 : Int)
+																																																																						Int 0
+																																																																						Let
+																																																																							(image_center.2600 : Int list)
+																																																																							AppDir
+																																																																								L (min_caml_create_array)
+																																																																								[Ti293.6340, Ti294.6341]
+																																																																							Let
+																																																																								(Ti295.6338 : Int)
+																																																																								Int 1
+																																																																								Let
+																																																																									(Td296.6339 : Float)
+																																																																									Float 0.
+																																																																									Let
+																																																																										(scan_pitch.2601 : Float list)
+																																																																										AppDir
+																																																																											L (min_caml_create_float_array)
+																																																																											[Ti295.6338, Td296.6339]
+																																																																										Let
+																																																																											(Ti297.6336 : Int)
+																																																																											Int 3
+																																																																											Let
+																																																																												(Td298.6337 : Float)
+																																																																												Float 0.
+																																																																												Let
+																																																																													(startp.2602 : Float list)
+																																																																													AppDir
+																																																																														L (min_caml_create_float_array)
+																																																																														[Ti297.6336, Td298.6337]
+																																																																													Let
+																																																																														(Ti299.6334 : Int)
+																																																																														Int 3
+																																																																														Let
+																																																																															(Td300.6335 : Float)
+																																																																															Float 0.
+																																																																															Let
+																																																																																(startp_fast.2603 : Float list)
+																																																																																AppDir
+																																																																																	L (min_caml_create_float_array)
+																																																																																	[Ti299.6334, Td300.6335]
+																																																																																Let
+																																																																																	(Ti301.6332 : Int)
+																																																																																	Int 3
+																																																																																	Let
+																																																																																		(Td302.6333 : Float)
+																																																																																		Float 0.
+																																																																																		Let
+																																																																																			(screenx_dir.2604 : Float list)
+																																																																																			AppDir
+																																																																																				L (min_caml_create_float_array)
+																																																																																				[Ti301.6332, Td302.6333]
+																																																																																			Let
+																																																																																				(Ti303.6330 : Int)
+																																																																																				Int 3
+																																																																																				Let
+																																																																																					(Td304.6331 : Float)
+																																																																																					Float 0.
+																																																																																					Let
+																																																																																						(screeny_dir.2605 : Float list)
+																																																																																						AppDir
+																																																																																							L (min_caml_create_float_array)
+																																																																																							[Ti303.6330, Td304.6331]
+																																																																																						Let
+																																																																																							(Ti305.6328 : Int)
+																																																																																							Int 3
+																																																																																							Let
+																																																																																								(Td306.6329 : Float)
+																																																																																								Float 0.
+																																																																																								Let
+																																																																																									(screenz_dir.2606 : Float list)
+																																																																																									AppDir
+																																																																																										L (min_caml_create_float_array)
+																																																																																										[Ti305.6328, Td306.6329]
+																																																																																									Let
+																																																																																										(Ti307.6326 : Int)
+																																																																																										Int 3
+																																																																																										Let
+																																																																																											(Td308.6327 : Float)
+																																																																																											Float 0.
+																																																																																											Let
+																																																																																												(ptrace_dirvec.2607 : Float list)
+																																																																																												AppDir
+																																																																																													L (min_caml_create_float_array)
+																																																																																													[Ti307.6326, Td308.6327]
+																																																																																												Let
+																																																																																													(Ti309.6324 : Int)
+																																																																																													Int 0
+																																																																																													Let
+																																																																																														(Td310.6325 : Float)
+																																																																																														Float 0.
+																																																																																														Let
+																																																																																															(dummyf.6317 : Float list)
+																																																																																															AppDir
+																																																																																																L (min_caml_create_float_array)
+																																																																																																[Ti309.6324, Td310.6325]
+																																																																																															Let
+																																																																																																(Ti311.6323 : Int)
+																																																																																																Int 0
+																																																																																																Let
+																																																																																																	(dummyff.6318 : Float list list)
+																																																																																																	AppDir
+																																																																																																		L (min_caml_create_array)
+																																																																																																		[Ti311.6323, dummyf.6317]
+																																																																																																	Let
+																																																																																																		(Ti312.6321 : Int)
+																																																																																																		Int 0
+																																																																																																		Let
+																																																																																																			(Tt313.6322 : Float list * Float list list))
+																																																																																																			Tuple
+																																																																																																				[dummyf.6317, dummyff.6318]
+																																																																																																			Let
+																																																																																																				(dummy_vs.6319 : Float list * Float list list) list)
+																																																																																																				AppDir
+																																																																																																					L (min_caml_create_array)
+																																																																																																					[Ti312.6321, Tt313.6322]
+																																																																																																				Let
+																																																																																																					(Ti314.6320 : Int)
+																																																																																																					Int 5
+																																																																																																					Let
+																																																																																																						(dirvecs.2608 : Float list * Float list list) list list)
+																																																																																																						AppDir
+																																																																																																							L (min_caml_create_array)
+																																																																																																							[Ti314.6320, dummy_vs.6319]
+																																																																																																						Let
+																																																																																																							(Ti315.6315 : Int)
+																																																																																																							Int 0
+																																																																																																							Let
+																																																																																																								(Td316.6316 : Float)
+																																																																																																								Float 0.
+																																																																																																								Let
+																																																																																																									(dummyf2.6309 : Float list)
+																																																																																																									AppDir
+																																																																																																										L (min_caml_create_float_array)
+																																																																																																										[Ti315.6315, Td316.6316]
+																																																																																																									Let
+																																																																																																										(Ti317.6313 : Int)
+																																																																																																										Int 3
+																																																																																																										Let
+																																																																																																											(Td318.6314 : Float)
+																																																																																																											Float 0.
+																																																																																																											Let
+																																																																																																												(v3.6310 : Float list)
+																																																																																																												AppDir
+																																																																																																													L (min_caml_create_float_array)
+																																																																																																													[Ti317.6313, Td318.6314]
+																																																																																																												Let
+																																																																																																													(Ti319.6312 : Int)
+																																																																																																													Int 60
+																																																																																																													Let
+																																																																																																														(consts.6311 : Float list list)
+																																																																																																														AppDir
+																																																																																																															L (min_caml_create_array)
+																																																																																																															[Ti319.6312, dummyf2.6309]
+																																																																																																														Let
+																																																																																																															(Ti320.6307 : Int)
+																																																																																																															Int 0
+																																																																																																															Let
+																																																																																																																(Td321.6308 : Float)
+																																																																																																																Float 0.
+																																																																																																																Let
+																																																																																																																	(dummyf3.6299 : Float list)
+																																																																																																																	AppDir
+																																																																																																																		L (min_caml_create_float_array)
+																																																																																																																		[Ti320.6307, Td321.6308]
+																																																																																																																	Let
+																																																																																																																		(Ti322.6306 : Int)
+																																																																																																																		Int 0
+																																																																																																																		Let
+																																																																																																																			(dummyff3.6300 : Float list list)
+																																																																																																																			AppDir
+																																																																																																																				L (min_caml_create_array)
+																																																																																																																				[Ti322.6306, dummyf3.6299]
+																																																																																																																			Let
+																																																																																																																				(dummydv.6301 : Float list * Float list list))
+																																																																																																																				Tuple
+																																																																																																																					[dummyf3.6299, dummyff3.6300]
+																																																																																																																				Let
+																																																																																																																					(Ti323.6302 : Int)
+																																																																																																																					Int 180
+																																																																																																																					Let
+																																																																																																																						(Ti324.6304 : Int)
+																																																																																																																						Int 0
+																																																																																																																						Let
+																																																																																																																							(Td325.6305 : Float)
+																																																																																																																							Float 0.
+																																																																																																																							Let
+																																																																																																																								(Tt326.6303 : Int * Float list * Float list list) * Float))
+																																																																																																																								Tuple
+																																																																																																																									[Ti324.6304, dummydv.6301, Td325.6305]
+																																																																																																																								Let
+																																																																																																																									(reflections.2610 : Int * Float list * Float list list) * Float) list)
+																																																																																																																									AppDir
+																																																																																																																										L (min_caml_create_array)
+																																																																																																																										[Ti323.6302, Tt326.6303]
+																																																																																																																									Let
+																																																																																																																										(Ti327.6297 : Int)
+																																																																																																																										Int 1
+																																																																																																																										Let
+																																																																																																																											(Ti328.6298 : Int)
+																																																																																																																											Int 0
+																																																																																																																											Let
+																																																																																																																												(n_reflections.2611 : Int list)
+																																																																																																																												AppDir
+																																																																																																																													L (min_caml_create_array)
+																																																																																																																													[Ti327.6297, Ti328.6298]
+																																																																																																																												MakeCls
+																																																																																																																													(read_screen_settings.2794 : () -> ())
+																																																																																																																													entry: 
+																																																																																																																														L (read_screen_settings.2794)
+																																																																																																																													actual_fv: 
+																																																																																																																														[screen.2584, screenx_dir.2604, screeny_dir.2605, screenz_dir.2606, viewpoint.2585]
+																																																																																																																													MakeCls
+																																																																																																																														(read_light.2796 : () -> ())
+																																																																																																																														entry: 
+																																																																																																																															L (read_light.2796)
+																																																																																																																														actual_fv: 
+																																																																																																																															[beam.2587, light.2586]
+																																																																																																																														MakeCls
+																																																																																																																															(read_nth_object.2801 : Int -> Bool)
+																																																																																																																															entry: 
+																																																																																																																																L (read_nth_object.2801)
+																																																																																																																															actual_fv: 
+																																																																																																																																[objects.2583]
+																																																																																																																															MakeCls
+																																																																																																																																(read_object.2803 : Int -> ())
+																																																																																																																																entry: 
+																																																																																																																																	L (read_object.2803)
+																																																																																																																																actual_fv: 
+																																																																																																																																	[n_objects.2582, read_nth_object.2801]
+																																																																																																																																MakeCls
+																																																																																																																																	(read_all_object.2805 : () -> ())
+																																																																																																																																	entry: 
+																																																																																																																																		L (read_all_object.2805)
+																																																																																																																																	actual_fv: 
+																																																																																																																																		[read_object.2803]
+																																																																																																																																	MakeCls
+																																																																																																																																		(read_and_network.2811 : Int -> ())
+																																																																																																																																		entry: 
+																																																																																																																																			L (read_and_network.2811)
+																																																																																																																																		actual_fv: 
+																																																																																																																																			[and_net.2588]
+																																																																																																																																		MakeCls
+																																																																																																																																			(read_parameter.2813 : () -> ())
+																																																																																																																																			entry: 
+																																																																																																																																				L (read_parameter.2813)
+																																																																																																																																			actual_fv: 
+																																																																																																																																				[or_net.2589, read_all_object.2805, read_and_network.2811, read_light.2796, read_screen_settings.2794]
+																																																																																																																																			MakeCls
+																																																																																																																																				(write_ppm_header.3056 : () -> ())
+																																																																																																																																				entry: 
+																																																																																																																																					L (write_ppm_header.3056)
+																																																																																																																																				actual_fv: 
+																																																																																																																																					[image_size.2599]
+																																																																																																																																				MakeCls
+																																																																																																																																					(create_pixelline.3095 : () -> Float list * Float list list * Int list * Bool list * Float list list * Float list list * Int list * Float list list) list)
+																																																																																																																																					entry: 
+																																																																																																																																						L (create_pixelline.3095)
+																																																																																																																																					actual_fv: 
+																																																																																																																																						[image_size.2599]
+																																																																																																																																					MakeCls
+																																																																																																																																						(rt.3148 : Int -> Int -> ())
+																																																																																																																																						entry: 
+																																																																																																																																							L (rt.3148)
+																																																																																																																																						actual_fv: 
+																																																																																																																																							[create_pixelline.3095, image_center.2600, image_size.2599, read_parameter.2813, scan_pitch.2601, write_ppm_header.3056]
+																																																																																																																																						Let
+																																																																																																																																							(Ti329.3152 : Int)
+																																																																																																																																							Int 2
+																																																																																																																																							Let
+																																																																																																																																								(Ti330.3153 : Int)
+																																																																																																																																								Int 2
+																																																																																																																																								Let
+																																																																																																																																									(Tu243.3151 : ())
+																																																																																																																																									AppCls
+																																																																																																																																										rt.3148
+																																																																																																																																										[Ti329.3152, Ti330.3153]
+																																																																																																																																									Int 0

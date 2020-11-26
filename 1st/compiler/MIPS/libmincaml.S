@@ -2,16 +2,6 @@
 min_caml_print_char:
 	out	%v0
 	jr	%ra
-# min_caml_print_int
-min_caml_print_int:
-	out	%v0
-	srl	%v0, %v0, 8
-	out	%v0
-	srl	%v0, %v0, 8
-	out	%v0
-	srl	%v0, %v0, 8
-	out	%v0
-	jr	%ra
 # min_caml_read_int
 min_caml_read_int:
 	addi	%v0, %zero, 0

@@ -1,7 +1,7 @@
 .section	".rodata"
 .align	8
-	lui	%sp, 6
-	ori	%sp, %sp, 6784
+	lui	%sp, 15
+	ori	%sp, %sp, 16960
 	lui	%hp, 0
 	ori	%hp, %hp, 10000
 	lui	%at, 17152

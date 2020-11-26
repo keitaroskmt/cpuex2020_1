@@ -1,7 +1,7 @@
 #include <stdio.h> 
 #include <stdlib.h> 
 
-double Tak (double x, double y, double z)
+float Tak (float x, float y, float z)
 {
   if (y >= x) return z;
   return Tak(Tak(x-1,y,z), Tak(y-1,z,x), Tak(z-1,x,y));

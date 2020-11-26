@@ -1,8 +1,8 @@
 .section	".rodata"
 .align	8
 # ------------ Initialize register ------------
-	lui	%sp, 6
-	ori	%sp, %sp, 6784
+	lui	%sp, 15
+	ori	%sp, %sp, 16960
 	lui	%hp, 0
 	ori	%hp, %hp, 10000
 # ------------ Initialize float table ---------
@@ -28,16 +28,6 @@
 # ------------ libmincaml.S -------------------
 # min_caml_print_char
 min_caml_print_char:
-	out	%v0
-	jr	%ra
-# min_caml_print_int
-min_caml_print_int:
-	out	%v0
-	srl	%v0, %v0, 8
-	out	%v0
-	srl	%v0, %v0, 8
-	out	%v0
-	srl	%v0, %v0, 8
 	out	%v0
 	jr	%ra
 # min_caml_read_int

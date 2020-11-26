@@ -273,35 +273,6 @@ let rec atan x =
         if flag then res else fneg res
     )
 in
-
-(* 10で割った商 *)
-let rec print_int_sub1 x n =
-    if x < 10 then n else print_int_sub1 (x - 10) (n + 1)
-in
-
-(* 10で割ったあまり *)
-let rec print_int_sub2 x =
-    if x < 10 then x else print_int_sub2 (x - 10)
-in
-
-let rec print_int x =
-    let d1 = print_int_sub1 x 0 in
-    let r1 = print_int_sub2 x in
-    print_char (48 + r1);
-    if d1 > 0 then
-    (
-        let d2 = print_int_sub1 d1 0 in
-        let r2 = print_int_sub2 d1 in
-        print_char (48 + r2);
-        if d2 > 0 then
-        (
-            let r3 = print_int_sub2 d2 in
-            print_char (48 + r3)
-        )
-        else ()
-    )
-    else ()
-in
 (****************************************************************)
 (*                                                              *)
 (* Ray Tracing Program for (Mini) Objective Caml                *)
@@ -2600,12 +2571,6 @@ let rec rt size_x size_y =
  let next = create_pixelline () in
  read_parameter();
  write_ppm_header ();
- init_dirvecs();
- veccpy (d_vec light_dirvec) light;
- setup_dirvec_constants light_dirvec;
- setup_reflections (n_objects.(0) - 1);
- pretrace_line cur 0 0;
- scan_line 0 prev cur next 2
 )
 in
 
