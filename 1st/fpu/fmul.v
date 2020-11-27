@@ -170,7 +170,8 @@ module fmul_2nd
                      (subnormal == 1 & ec < 9'd128 & e_9 == ec) ? 8'd128 - ec :
                      (subnormal == 1 & ed < 9'd128 & e_9 == ed) ? 8'd128 - ed : 0;
 
-    assign zero = (e1 == 8'b0 | e2 == 8'b0) ? 1 : 0;
+    assign zero = (e1 == 8'b0) ? 1 :
+                  (e2 == 8'b0 & m2[22:21] == 2'b0) ? 1 : 0;
 
     assign subnormal_m = {1'b1, m} >> shift_e;
     assign shifted_m = subnormal_m[22:0];
