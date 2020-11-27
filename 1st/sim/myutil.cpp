@@ -9,12 +9,7 @@
 // レジスタの状態を出力する
 void print_state()
 {
-    union fi
-    {
-        float f;
-        int i;
-    };
-    union fi fpr[32];
+    fi fpr[32];
     for (int i = 0; i < 32; i++)
         fpr[i].f = cur_env.FPR[i];
 

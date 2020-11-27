@@ -16,11 +16,7 @@ int exec_cmd(int *loop, bool *is_stat, bool *print_bc, bool *print_calc, bool *p
     std::smatch cmd_re;
     std::string reg;
     int sp, j, offset;
-    union
-    {
-        int i;
-        float f;
-    } subst;
+    fi subst;
     while (true)
     {
         cmd = get_line(100);
@@ -108,6 +104,8 @@ int exec_cmd(int *loop, bool *is_stat, bool *print_bc, bool *print_calc, bool *p
             print_state();
         else if (cmd == "ps\n")
             print_stats();
+        else if (cmd == "pls\n")
+            print_label_stats();
         else if (cmd == "nopfs\n")
             *is_stat = false;
         else if (cmd == "pb\n")
