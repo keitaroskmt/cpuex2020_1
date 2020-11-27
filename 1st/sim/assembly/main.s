@@ -261,109 +261,109 @@ create_float_array_cont:
 	addi	%a0, %a0, -1
 	addi	%hp, %hp, 4
 	j	create_float_array_loop
-fless.2651:
+fless.2658:
 	fslt	%at, %f0, %f1
-	bne	%at, %zero, beq_else.9150
+	bne	%at, %zero, beq_else.9170
 	addi	%v0, %zero, 0
 	jr	%ra
-beq_else.9150:
+beq_else.9170:
 	addi	%v0, %zero, 1
 	jr	%ra
-fispos.2654:
+fispos.2661:
 	flw	%f1, 20192(%zero)
 	fslt	%at, %f1, %f0
-	bne	%at, %zero, beq_else.9151
+	bne	%at, %zero, beq_else.9171
 	addi	%v0, %zero, 0
 	jr	%ra
-beq_else.9151:
+beq_else.9171:
 	addi	%v0, %zero, 1
 	jr	%ra
-fisneg.2656:
+fisneg.2663:
 	flw	%f1, 20192(%zero)
 	fslt	%at, %f0, %f1
-	bne	%at, %zero, beq_else.9152
+	bne	%at, %zero, beq_else.9172
 	addi	%v0, %zero, 0
 	jr	%ra
-beq_else.9152:
+beq_else.9172:
 	addi	%v0, %zero, 1
 	jr	%ra
-fiszero.2658:
+fiszero.2665:
 	flw	%f1, 20192(%zero)
-	fbne	%f0, %f1, fbeq_else.9153
+	fbne	%f0, %f1, fbeq_else.9173
 	addi	%v0, %zero, 1
 	jr	%ra
-fbeq_else.9153:
+fbeq_else.9173:
 	addi	%v0, %zero, 0
 	jr	%ra
-xor.2660:
+xor.2667:
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9154
+	bne	%v0, %at, beq_else.9174
 	add	%v0, %zero, %v1
 	jr	%ra
-beq_else.9154:
+beq_else.9174:
 	addi	%at, %zero, 0
-	bne	%v1, %at, beq_else.9155
+	bne	%v1, %at, beq_else.9175
 	addi	%v0, %zero, 1
 	jr	%ra
-beq_else.9155:
+beq_else.9175:
 	addi	%v0, %zero, 0
 	jr	%ra
-fhalf.2663:
+fhalf.2670:
 	flw	%f1, 20188(%zero)
 	fmul	%f0, %f0, %f1
 	jr	%ra
-fsqr.2665:
+fsqr.2672:
 	fmul	%f0, %f0, %f0
 	jr	%ra
-int_of_float_sub1.2667:
+int_of_float_sub1.2674:
 	flw	%f1, 20184(%zero)
 	fslt	%at, %f0, %f1
-	bne	%at, %zero, beq_else.9156
+	bne	%at, %zero, beq_else.9176
 	flw	%f1, 20184(%zero)
 	fsub	%f0, %f0, %f1
 	addi	%v0, %v0, 1
-	j	int_of_float_sub1.2667
-beq_else.9156:
+	j	int_of_float_sub1.2674
+beq_else.9176:
 	jr	%ra
-int_of_float_sub2.2670:
+int_of_float_sub2.2677:
 	flw	%f1, 20184(%zero)
 	fslt	%at, %f0, %f1
-	bne	%at, %zero, beq_else.9157
+	bne	%at, %zero, beq_else.9177
 	flw	%f1, 20184(%zero)
 	fsub	%f0, %f0, %f1
-	j	int_of_float_sub2.2670
-beq_else.9157:
+	j	int_of_float_sub2.2677
+beq_else.9177:
 	jr	%ra
-int_of_float_sub3.2672:
+int_of_float_sub3.2679:
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9158
+	bne	%v0, %at, beq_else.9178
 	add	%v0, %zero, %v1
 	jr	%ra
-beq_else.9158:
+beq_else.9178:
 	addi	%v0, %v0, -1
 	lui	%at, 128
 	ori	%at, %at, 0
 	add	%a0, %zero, %at
 	add	%v1, %a0, %v1
-	j	int_of_float_sub3.2672
-int_of_float.2675:
+	j	int_of_float_sub3.2679
+int_of_float.2682:
 	flw	%f1, 20192(%zero)
 	fslt	%at, %f0, %f1
-	bne	%at, %zero, beq_else.9159
+	bne	%at, %zero, beq_else.9179
 	addi	%v0, %zero, 1
-	j	beq_cont.9160
-beq_else.9159:
+	j	beq_cont.9180
+beq_else.9179:
 	addi	%v0, %zero, 0
-beq_cont.9160:
+beq_cont.9180:
 	fabs	%f0, %f0
 	flw	%f1, 20184(%zero)
 	sw	%v0, 0(%sp)
 	fslt	%at, %f0, %f1
-	bne	%at, %zero, beq_else.9161
+	bne	%at, %zero, beq_else.9181
 	fsw	%f0, 4(%sp)
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	int_of_float_sub2.2670
+	jal	int_of_float_sub2.2677
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	flw	%f1, 20184(%zero)
@@ -379,19 +379,19 @@ beq_cont.9160:
 	addi	%v0, %v1, 0
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	int_of_float_sub1.2667
+	jal	int_of_float_sub1.2674
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	addi	%v1, %zero, 0
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	int_of_float_sub3.2672
+	jal	int_of_float_sub3.2679
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	lw	%v1, 8(%sp)
 	add	%v0, %v1, %v0
-	j	beq_cont.9162
-beq_else.9161:
+	j	beq_cont.9182
+beq_else.9181:
 	flw	%f1, 20184(%zero)
 	fadd	%f0, %f0, %f1
 	ftoi	%v1, %f0
@@ -399,76 +399,76 @@ beq_else.9161:
 	ori	%at, %at, 0
 	add	%a0, %zero, %at
 	sub	%v0, %v1, %a0
-beq_cont.9162:
+beq_cont.9182:
 	lw	%v1, 0(%sp)
 	addi	%at, %zero, 0
-	bne	%v1, %at, beq_else.9163
+	bne	%v1, %at, beq_else.9183
 	sub	%v0, %zero, %v0
 	jr	%ra
-beq_else.9163:
+beq_else.9183:
 	jr	%ra
-float_of_int_sub1.2677:
+float_of_int_sub1.2684:
 	lui	%at, 128
 	ori	%at, %at, 0
 	add	%a0, %zero, %at
 	slt	%at, %v0, %a0
-	bne	%at, %zero, beq_else.9164
+	bne	%at, %zero, beq_else.9184
 	lui	%at, 128
 	ori	%at, %at, 0
 	add	%a0, %zero, %at
 	sub	%v0, %v0, %a0
 	addi	%v1, %v1, 1
-	j	float_of_int_sub1.2677
-beq_else.9164:
+	j	float_of_int_sub1.2684
+beq_else.9184:
 	add	%v0, %zero, %v1
 	jr	%ra
-float_of_int_sub2.2680:
+float_of_int_sub2.2687:
 	lui	%at, 128
 	ori	%at, %at, 0
 	add	%v1, %zero, %at
 	slt	%at, %v0, %v1
-	bne	%at, %zero, beq_else.9165
+	bne	%at, %zero, beq_else.9185
 	lui	%at, 128
 	ori	%at, %at, 0
 	add	%v1, %zero, %at
 	sub	%v0, %v0, %v1
-	j	float_of_int_sub2.2680
-beq_else.9165:
+	j	float_of_int_sub2.2687
+beq_else.9185:
 	jr	%ra
-float_of_int_sub3.2682:
+float_of_int_sub3.2689:
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9166
+	bne	%v0, %at, beq_else.9186
 	jr	%ra
-beq_else.9166:
+beq_else.9186:
 	addi	%v0, %v0, -1
 	flw	%f1, 20184(%zero)
 	fadd	%f0, %f1, %f0
-	j	float_of_int_sub3.2682
-float_of_int.2685:
+	j	float_of_int_sub3.2689
+float_of_int.2692:
 	addi	%at, %zero, 0
 	slt	%at, %at, %v0
-	bne	%at, %zero, beq_else.9167
+	bne	%at, %zero, beq_else.9187
 	addi	%v1, %zero, 0
-	j	beq_cont.9168
-beq_else.9167:
+	j	beq_cont.9188
+beq_else.9187:
 	addi	%v1, %zero, 1
-beq_cont.9168:
+beq_cont.9188:
 	slti	%at, %v0, 0
-	bne	%at, %zero, beq_else.9169
-	j	beq_cont.9170
-beq_else.9169:
+	bne	%at, %zero, beq_else.9189
+	j	beq_cont.9190
+beq_else.9189:
 	sub	%v0, %zero, %v0
-beq_cont.9170:
+beq_cont.9190:
 	lui	%at, 128
 	ori	%at, %at, 0
 	add	%a0, %zero, %at
 	sw	%v1, 0(%sp)
 	slt	%at, %v0, %a0
-	bne	%at, %zero, beq_else.9171
+	bne	%at, %zero, beq_else.9191
 	sw	%v0, 4(%sp)
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	float_of_int_sub2.2680
+	jal	float_of_int_sub2.2687
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	lui	%at, 19200
@@ -483,19 +483,19 @@ beq_cont.9170:
 	fsw	%f0, 8(%sp)
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	float_of_int_sub1.2677
+	jal	float_of_int_sub1.2684
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	flw	%f0, 20192(%zero)
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	float_of_int_sub3.2682
+	jal	float_of_int_sub3.2689
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	flw	%f1, 8(%sp)
 	fadd	%f0, %f1, %f0
-	j	beq_cont.9172
-beq_else.9171:
+	j	beq_cont.9192
+beq_else.9191:
 	lui	%at, 19200
 	ori	%at, %at, 0
 	add	%a0, %zero, %at
@@ -503,60 +503,60 @@ beq_else.9171:
 	itof	%f0, %v0
 	flw	%f1, 20184(%zero)
 	fsub	%f0, %f0, %f1
-beq_cont.9172:
+beq_cont.9192:
 	lw	%v0, 0(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9173
+	bne	%v0, %at, beq_else.9193
 	fneg	%f0, %f0
 	jr	%ra
-beq_else.9173:
+beq_else.9193:
 	jr	%ra
-floor.2687:
+floor.2694:
 	flw	%f1, 20192(%zero)
 	fslt	%at, %f0, %f1
-	bne	%at, %zero, beq_else.9174
+	bne	%at, %zero, beq_else.9194
 	addi	%v0, %zero, 1
-	j	beq_cont.9175
-beq_else.9174:
+	j	beq_cont.9195
+beq_else.9194:
 	addi	%v0, %zero, 0
-beq_cont.9175:
+beq_cont.9195:
 	fabs	%f1, %f0
 	flw	%f2, 20184(%zero)
 	fsw	%f0, 0(%sp)
 	sw	%v0, 4(%sp)
 	fslt	%at, %f1, %f2
-	bne	%at, %zero, beq_else.9176
+	bne	%at, %zero, beq_else.9196
 	fadd	%f0, %fzero, %f1
-	j	beq_cont.9177
-beq_else.9176:
+	j	beq_cont.9197
+beq_else.9196:
 	fadd	%f0, %f1, %fzero
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	int_of_float.2675
+	jal	int_of_float.2682
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	float_of_int.2685
+	jal	float_of_int.2692
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
-beq_cont.9177:
+beq_cont.9197:
 	lw	%v0, 4(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9178
+	bne	%v0, %at, beq_else.9198
 	fneg	%f0, %f0
-	j	beq_cont.9179
-beq_else.9178:
-beq_cont.9179:
+	j	beq_cont.9199
+beq_else.9198:
+beq_cont.9199:
 	flw	%f1, 0(%sp)
 	fslt	%at, %f1, %f0
-	bne	%at, %zero, beq_else.9180
+	bne	%at, %zero, beq_else.9200
 	jr	%ra
-beq_else.9180:
+beq_else.9200:
 	flw	%f1, 20180(%zero)
 	fsub	%f0, %f0, %f1
 	jr	%ra
-kernel_sin.2689:
+kernel_sin.2696:
 	fmul	%f1, %f0, %f0
 	fmul	%f2, %f1, %f1
 	flw	%f3, 20176(%zero)
@@ -573,7 +573,7 @@ kernel_sin.2689:
 	fmul	%f0, %f0, %f2
 	fsub	%f0, %f3, %f0
 	jr	%ra
-kernel_cos.2691:
+kernel_cos.2698:
 	fmul	%f0, %f0, %f0
 	fmul	%f1, %f0, %f0
 	flw	%f2, 20180(%zero)
@@ -588,7 +588,7 @@ kernel_cos.2691:
 	fmul	%f0, %f0, %f1
 	fsub	%f0, %f2, %f0
 	jr	%ra
-kernel_atan.2693:
+kernel_atan.2700:
 	fmul	%f1, %f0, %f0
 	fmul	%f2, %f1, %f1
 	fmul	%f3, %f2, %f2
@@ -620,210 +620,210 @@ kernel_atan.2693:
 	fmul	%f0, %f0, %f3
 	fadd	%f0, %f1, %f0
 	jr	%ra
-f.6229:
+f.6243:
 	fslt	%at, %f0, %f1
-	bne	%at, %zero, beq_else.9181
+	bne	%at, %zero, beq_else.9201
 	flw	%f2, 20132(%zero)
 	fmul	%f1, %f2, %f1
-	j	f.6229
-beq_else.9181:
+	j	f.6243
+beq_else.9201:
 	fadd	%f0, %fzero, %f1
 	jr	%ra
-g.6233:
+g.6247:
 	flw	%f2, 4(%k1)
 	fslt	%at, %f0, %f2
-	bne	%at, %zero, beq_else.9182
+	bne	%at, %zero, beq_else.9202
 	fslt	%at, %f0, %f1
-	bne	%at, %zero, beq_else.9183
+	bne	%at, %zero, beq_else.9203
 	fsub	%f0, %f0, %f1
 	flw	%f2, 20132(%zero)
 	fdiv	%f1, %f1, %f2
 	lw	%at, 0(%k1)
 	jr	%at
-beq_else.9183:
+beq_else.9203:
 	flw	%f2, 20132(%zero)
 	fdiv	%f1, %f1, %f2
 	lw	%at, 0(%k1)
 	jr	%at
-beq_else.9182:
+beq_else.9202:
 	jr	%ra
-reduction_2pi.2695:
+reduction_2pi.2702:
 	flw	%f1, 20128(%zero)
 	fsw	%f0, 0(%sp)
 	fsw	%f1, 4(%sp)
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	f.6229
+	jal	f.6243
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	fadd	%f1, %f0, %fzero
 	add	%k1, %zero, %hp
 	addi	%hp, %hp, 8
-	addi	%v0, %zero, g.6233
+	addi	%v0, %zero, g.6247
 	sw	%v0, 0(%k1)
 	flw	%f0, 4(%sp)
 	fsw	%f0, 4(%k1)
 	flw	%f0, 0(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-cos.2697:
+cos.2704:
 	flw	%f1, 20124(%zero)
 	fabs	%f0, %f0
 	fsw	%f1, 0(%sp)
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 8
-	jal	reduction_2pi.2695
+	jal	reduction_2pi.2702
 	addi	%sp, %sp, -8
 	lw	%ra, 4(%sp)
 	flw	%f1, 0(%sp)
 	fslt	%at, %f0, %f1
-	bne	%at, %zero, beq_else.9184
+	bne	%at, %zero, beq_else.9204
 	addi	%v0, %zero, 0
-	j	beq_cont.9185
-beq_else.9184:
+	j	beq_cont.9205
+beq_else.9204:
 	addi	%v0, %zero, 1
-beq_cont.9185:
+beq_cont.9205:
 	fslt	%at, %f0, %f1
-	bne	%at, %zero, beq_else.9186
+	bne	%at, %zero, beq_else.9206
 	fsub	%f0, %f0, %f1
-	j	beq_cont.9187
-beq_else.9186:
-beq_cont.9187:
+	j	beq_cont.9207
+beq_else.9206:
+beq_cont.9207:
 	flw	%f2, 20120(%zero)
 	fslt	%at, %f0, %f2
-	bne	%at, %zero, beq_else.9188
+	bne	%at, %zero, beq_else.9208
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9190
-	addi	%v0, %zero, 1
-	j	beq_cont.9191
-beq_else.9190:
-	addi	%v0, %zero, 0
-beq_cont.9191:
-	j	beq_cont.9189
-beq_else.9188:
-beq_cont.9189:
-	flw	%f2, 20120(%zero)
-	fslt	%at, %f0, %f2
-	bne	%at, %zero, beq_else.9192
-	fsub	%f0, %f1, %f0
-	j	beq_cont.9193
-beq_else.9192:
-beq_cont.9193:
-	flw	%f1, 20116(%zero)
-	sw	%v0, 4(%sp)
-	fslt	%at, %f1, %f0
-	bne	%at, %zero, beq_else.9194
-	sw	%ra, 12(%sp)
-	addi	%sp, %sp, 16
-	jal	kernel_cos.2691
-	addi	%sp, %sp, -16
-	lw	%ra, 12(%sp)
-	j	beq_cont.9195
-beq_else.9194:
-	flw	%f1, 20120(%zero)
-	fsub	%f0, %f1, %f0
-	sw	%ra, 12(%sp)
-	addi	%sp, %sp, 16
-	jal	kernel_sin.2689
-	addi	%sp, %sp, -16
-	lw	%ra, 12(%sp)
-beq_cont.9195:
-	lw	%v0, 4(%sp)
-	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9196
-	fneg	%f0, %f0
-	jr	%ra
-beq_else.9196:
-	jr	%ra
-sin.2699:
-	flw	%f1, 20124(%zero)
-	flw	%f2, 20192(%zero)
-	fslt	%at, %f0, %f2
-	bne	%at, %zero, beq_else.9197
-	addi	%v0, %zero, 1
-	j	beq_cont.9198
-beq_else.9197:
-	addi	%v0, %zero, 0
-beq_cont.9198:
-	fabs	%f0, %f0
-	sw	%v0, 0(%sp)
-	fsw	%f1, 4(%sp)
-	sw	%ra, 12(%sp)
-	addi	%sp, %sp, 16
-	jal	reduction_2pi.2695
-	addi	%sp, %sp, -16
-	lw	%ra, 12(%sp)
-	flw	%f1, 4(%sp)
-	fslt	%at, %f0, %f1
-	bne	%at, %zero, beq_else.9199
-	lw	%v0, 0(%sp)
-	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9201
-	addi	%v0, %zero, 1
-	j	beq_cont.9202
-beq_else.9201:
-	addi	%v0, %zero, 0
-beq_cont.9202:
-	j	beq_cont.9200
-beq_else.9199:
-	lw	%v0, 0(%sp)
-beq_cont.9200:
-	fslt	%at, %f0, %f1
-	bne	%at, %zero, beq_else.9203
-	fsub	%f0, %f0, %f1
-	j	beq_cont.9204
-beq_else.9203:
-beq_cont.9204:
-	flw	%f2, 20120(%zero)
-	fslt	%at, %f0, %f2
-	bne	%at, %zero, beq_else.9205
-	fsub	%f0, %f1, %f0
-	j	beq_cont.9206
-beq_else.9205:
-beq_cont.9206:
-	flw	%f1, 20116(%zero)
-	sw	%v0, 8(%sp)
-	fslt	%at, %f1, %f0
-	bne	%at, %zero, beq_else.9207
-	sw	%ra, 12(%sp)
-	addi	%sp, %sp, 16
-	jal	kernel_sin.2689
-	addi	%sp, %sp, -16
-	lw	%ra, 12(%sp)
-	j	beq_cont.9208
-beq_else.9207:
-	flw	%f1, 20120(%zero)
-	fsub	%f0, %f1, %f0
-	sw	%ra, 12(%sp)
-	addi	%sp, %sp, 16
-	jal	kernel_cos.2691
-	addi	%sp, %sp, -16
-	lw	%ra, 12(%sp)
-beq_cont.9208:
-	lw	%v0, 8(%sp)
-	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9209
-	fneg	%f0, %f0
-	jr	%ra
-beq_else.9209:
-	jr	%ra
-atan.2701:
-	flw	%f1, 20192(%zero)
-	fslt	%at, %f0, %f1
-	bne	%at, %zero, beq_else.9210
+	bne	%v0, %at, beq_else.9210
 	addi	%v0, %zero, 1
 	j	beq_cont.9211
 beq_else.9210:
 	addi	%v0, %zero, 0
 beq_cont.9211:
+	j	beq_cont.9209
+beq_else.9208:
+beq_cont.9209:
+	flw	%f2, 20120(%zero)
+	fslt	%at, %f0, %f2
+	bne	%at, %zero, beq_else.9212
+	fsub	%f0, %f1, %f0
+	j	beq_cont.9213
+beq_else.9212:
+beq_cont.9213:
+	flw	%f1, 20116(%zero)
+	sw	%v0, 4(%sp)
+	fslt	%at, %f1, %f0
+	bne	%at, %zero, beq_else.9214
+	sw	%ra, 12(%sp)
+	addi	%sp, %sp, 16
+	jal	kernel_cos.2698
+	addi	%sp, %sp, -16
+	lw	%ra, 12(%sp)
+	j	beq_cont.9215
+beq_else.9214:
+	flw	%f1, 20120(%zero)
+	fsub	%f0, %f1, %f0
+	sw	%ra, 12(%sp)
+	addi	%sp, %sp, 16
+	jal	kernel_sin.2696
+	addi	%sp, %sp, -16
+	lw	%ra, 12(%sp)
+beq_cont.9215:
+	lw	%v0, 4(%sp)
+	addi	%at, %zero, 0
+	bne	%v0, %at, beq_else.9216
+	fneg	%f0, %f0
+	jr	%ra
+beq_else.9216:
+	jr	%ra
+sin.2706:
+	flw	%f1, 20124(%zero)
+	flw	%f2, 20192(%zero)
+	fslt	%at, %f0, %f2
+	bne	%at, %zero, beq_else.9217
+	addi	%v0, %zero, 1
+	j	beq_cont.9218
+beq_else.9217:
+	addi	%v0, %zero, 0
+beq_cont.9218:
+	fabs	%f0, %f0
+	sw	%v0, 0(%sp)
+	fsw	%f1, 4(%sp)
+	sw	%ra, 12(%sp)
+	addi	%sp, %sp, 16
+	jal	reduction_2pi.2702
+	addi	%sp, %sp, -16
+	lw	%ra, 12(%sp)
+	flw	%f1, 4(%sp)
+	fslt	%at, %f0, %f1
+	bne	%at, %zero, beq_else.9219
+	lw	%v0, 0(%sp)
+	addi	%at, %zero, 0
+	bne	%v0, %at, beq_else.9221
+	addi	%v0, %zero, 1
+	j	beq_cont.9222
+beq_else.9221:
+	addi	%v0, %zero, 0
+beq_cont.9222:
+	j	beq_cont.9220
+beq_else.9219:
+	lw	%v0, 0(%sp)
+beq_cont.9220:
+	fslt	%at, %f0, %f1
+	bne	%at, %zero, beq_else.9223
+	fsub	%f0, %f0, %f1
+	j	beq_cont.9224
+beq_else.9223:
+beq_cont.9224:
+	flw	%f2, 20120(%zero)
+	fslt	%at, %f0, %f2
+	bne	%at, %zero, beq_else.9225
+	fsub	%f0, %f1, %f0
+	j	beq_cont.9226
+beq_else.9225:
+beq_cont.9226:
+	flw	%f1, 20116(%zero)
+	sw	%v0, 8(%sp)
+	fslt	%at, %f1, %f0
+	bne	%at, %zero, beq_else.9227
+	sw	%ra, 12(%sp)
+	addi	%sp, %sp, 16
+	jal	kernel_sin.2696
+	addi	%sp, %sp, -16
+	lw	%ra, 12(%sp)
+	j	beq_cont.9228
+beq_else.9227:
+	flw	%f1, 20120(%zero)
+	fsub	%f0, %f1, %f0
+	sw	%ra, 12(%sp)
+	addi	%sp, %sp, 16
+	jal	kernel_cos.2698
+	addi	%sp, %sp, -16
+	lw	%ra, 12(%sp)
+beq_cont.9228:
+	lw	%v0, 8(%sp)
+	addi	%at, %zero, 0
+	bne	%v0, %at, beq_else.9229
+	fneg	%f0, %f0
+	jr	%ra
+beq_else.9229:
+	jr	%ra
+atan.2708:
+	flw	%f1, 20192(%zero)
+	fslt	%at, %f0, %f1
+	bne	%at, %zero, beq_else.9230
+	addi	%v0, %zero, 1
+	j	beq_cont.9231
+beq_else.9230:
+	addi	%v0, %zero, 0
+beq_cont.9231:
 	fabs	%f1, %f0
 	flw	%f2, 20112(%zero)
 	fslt	%at, %f1, %f2
-	bne	%at, %zero, beq_else.9212
+	bne	%at, %zero, beq_else.9232
 	flw	%f0, 20108(%zero)
 	sw	%v0, 0(%sp)
 	fslt	%at, %f1, %f0
-	bne	%at, %zero, beq_else.9213
+	bne	%at, %zero, beq_else.9233
 	flw	%f0, 20120(%zero)
 	flw	%f2, 20180(%zero)
 	fdiv	%f1, %f2, %f1
@@ -831,13 +831,13 @@ beq_cont.9211:
 	fadd	%f0, %f1, %fzero
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	kernel_atan.2693
+	jal	kernel_atan.2700
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	flw	%f1, 4(%sp)
 	fsub	%f0, %f1, %f0
-	j	beq_cont.9214
-beq_else.9213:
+	j	beq_cont.9234
+beq_else.9233:
 	flw	%f0, 20116(%zero)
 	flw	%f2, 20180(%zero)
 	fsub	%f2, %f1, %f2
@@ -848,43 +848,43 @@ beq_else.9213:
 	fadd	%f0, %f1, %fzero
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	kernel_atan.2693
+	jal	kernel_atan.2700
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	flw	%f1, 8(%sp)
 	fadd	%f0, %f1, %f0
-beq_cont.9214:
+beq_cont.9234:
 	lw	%v0, 0(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9215
+	bne	%v0, %at, beq_else.9235
 	fneg	%f0, %f0
 	jr	%ra
-beq_else.9215:
+beq_else.9235:
 	jr	%ra
-beq_else.9212:
-	j	kernel_atan.2693
-print_int_sub1.2703:
+beq_else.9232:
+	j	kernel_atan.2700
+print_int_sub1.2710:
 	slti	%at, %v0, 10
-	bne	%at, %zero, beq_else.9216
+	bne	%at, %zero, beq_else.9236
 	addi	%v0, %v0, -10
 	addi	%v1, %v1, 1
-	j	print_int_sub1.2703
-beq_else.9216:
+	j	print_int_sub1.2710
+beq_else.9236:
 	add	%v0, %zero, %v1
 	jr	%ra
-print_int_sub2.2706:
+print_int_sub2.2713:
 	slti	%at, %v0, 10
-	bne	%at, %zero, beq_else.9217
+	bne	%at, %zero, beq_else.9237
 	addi	%v0, %v0, -10
-	j	print_int_sub2.2706
-beq_else.9217:
+	j	print_int_sub2.2713
+beq_else.9237:
 	jr	%ra
-print_int.2708:
+print_int.2715:
 	addi	%v1, %zero, 0
 	sw	%v0, 0(%sp)
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 8
-	jal	print_int_sub1.2703
+	jal	print_int_sub1.2710
 	addi	%sp, %sp, -8
 	lw	%ra, 4(%sp)
 	lw	%v1, 0(%sp)
@@ -892,108 +892,124 @@ print_int.2708:
 	addi	%v0, %v1, 0
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	print_int_sub2.2706
-	addi	%sp, %sp, -16
-	lw	%ra, 12(%sp)
-	addi	%v0, %v0, 48
-	sw	%ra, 12(%sp)
-	addi	%sp, %sp, 16
-	jal	min_caml_print_char
-	addi	%sp, %sp, -16
-	lw	%ra, 12(%sp)
-	lw	%v0, 4(%sp)
-	addi	%at, %zero, 0
-	slt	%at, %at, %v0
-	bne	%at, %zero, beq_else.9218
-	jr	%ra
-beq_else.9218:
-	addi	%v1, %zero, 0
-	sw	%ra, 12(%sp)
-	addi	%sp, %sp, 16
-	jal	print_int_sub1.2703
+	jal	print_int_sub2.2713
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	lw	%v1, 4(%sp)
-	sw	%v0, 8(%sp)
-	addi	%v0, %v1, 0
-	sw	%ra, 12(%sp)
-	addi	%sp, %sp, 16
-	jal	print_int_sub2.2706
-	addi	%sp, %sp, -16
-	lw	%ra, 12(%sp)
-	addi	%v0, %v0, 48
-	sw	%ra, 12(%sp)
-	addi	%sp, %sp, 16
-	jal	min_caml_print_char
-	addi	%sp, %sp, -16
-	lw	%ra, 12(%sp)
-	lw	%v0, 8(%sp)
 	addi	%at, %zero, 0
-	slt	%at, %at, %v0
-	bne	%at, %zero, beq_else.9220
-	jr	%ra
-beq_else.9220:
-	sw	%ra, 12(%sp)
-	addi	%sp, %sp, 16
-	jal	print_int_sub2.2706
-	addi	%sp, %sp, -16
-	lw	%ra, 12(%sp)
+	slt	%at, %at, %v1
+	bne	%at, %zero, beq_else.9238
 	addi	%v0, %v0, 48
 	j	min_caml_print_char
-sgn.2710:
+beq_else.9238:
+	addi	%a0, %zero, 0
+	sw	%v0, 8(%sp)
+	addi	%v0, %v1, 0
+	addi	%v1, %a0, 0
+	sw	%ra, 12(%sp)
+	addi	%sp, %sp, 16
+	jal	print_int_sub1.2710
+	addi	%sp, %sp, -16
+	lw	%ra, 12(%sp)
+	lw	%v1, 4(%sp)
+	sw	%v0, 12(%sp)
+	addi	%v0, %v1, 0
+	sw	%ra, 20(%sp)
+	addi	%sp, %sp, 24
+	jal	print_int_sub2.2713
+	addi	%sp, %sp, -24
+	lw	%ra, 20(%sp)
+	lw	%v1, 12(%sp)
+	addi	%at, %zero, 0
+	slt	%at, %at, %v1
+	bne	%at, %zero, beq_else.9239
+	addi	%v0, %v0, 48
+	sw	%ra, 20(%sp)
+	addi	%sp, %sp, 24
+	jal	min_caml_print_char
+	addi	%sp, %sp, -24
+	lw	%ra, 20(%sp)
+	lw	%v0, 8(%sp)
+	addi	%v0, %v0, 48
+	j	min_caml_print_char
+beq_else.9239:
+	sw	%v0, 16(%sp)
+	addi	%v0, %v1, 0
+	sw	%ra, 20(%sp)
+	addi	%sp, %sp, 24
+	jal	print_int_sub2.2713
+	addi	%sp, %sp, -24
+	lw	%ra, 20(%sp)
+	addi	%v0, %v0, 48
+	sw	%ra, 20(%sp)
+	addi	%sp, %sp, 24
+	jal	min_caml_print_char
+	addi	%sp, %sp, -24
+	lw	%ra, 20(%sp)
+	lw	%v0, 16(%sp)
+	addi	%v0, %v0, 48
+	sw	%ra, 20(%sp)
+	addi	%sp, %sp, 24
+	jal	min_caml_print_char
+	addi	%sp, %sp, -24
+	lw	%ra, 20(%sp)
+	lw	%v0, 8(%sp)
+	addi	%v0, %v0, 48
+	j	min_caml_print_char
+sgn.2717:
 	fsw	%f0, 0(%sp)
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 8
-	jal	fiszero.2658
+	jal	fiszero.2665
 	addi	%sp, %sp, -8
 	lw	%ra, 4(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9222
+	bne	%v0, %at, beq_else.9240
 	flw	%f0, 0(%sp)
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 8
-	jal	fispos.2654
+	jal	fispos.2661
 	addi	%sp, %sp, -8
 	lw	%ra, 4(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9223
+	bne	%v0, %at, beq_else.9241
 	flw	%f0, 20104(%zero)
 	jr	%ra
-beq_else.9223:
+beq_else.9241:
 	flw	%f0, 20180(%zero)
 	jr	%ra
-beq_else.9222:
+beq_else.9240:
 	flw	%f0, 20192(%zero)
 	jr	%ra
-fneg_cond.2712:
+fneg_cond.2719:
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9224
+	bne	%v0, %at, beq_else.9242
 	fneg	%f0, %f0
 	jr	%ra
-beq_else.9224:
+beq_else.9242:
 	jr	%ra
-add_mod5.2715:
+add_mod5.2722:
 	add	%v0, %v0, %v1
 	slti	%at, %v0, 5
-	bne	%at, %zero, beq_else.9225
+	bne	%at, %zero, beq_else.9243
 	addi	%v0, %v0, -5
 	jr	%ra
-beq_else.9225:
+beq_else.9243:
 	jr	%ra
-vecset.2718:
+vecset.2725:
 	fsw	%f0, 0(%v0)
 	fsw	%f1, 4(%v0)
 	fsw	%f2, 8(%v0)
 	jr	%ra
-vecfill.2723:
+vecfill.2730:
 	fsw	%f0, 0(%v0)
 	fsw	%f0, 4(%v0)
 	fsw	%f0, 8(%v0)
 	jr	%ra
-vecbzero.2726:
+vecbzero.2733:
 	flw	%f0, 20192(%zero)
-	j	vecfill.2723
-veccpy.2728:
+	j	vecfill.2730
+veccpy.2735:
 	flw	%f0, 0(%v1)
 	fsw	%f0, 0(%v0)
 	flw	%f0, 4(%v1)
@@ -1001,13 +1017,13 @@ veccpy.2728:
 	flw	%f0, 8(%v1)
 	fsw	%f0, 8(%v0)
 	jr	%ra
-vecunit_sgn.2736:
+vecunit_sgn.2743:
 	flw	%f0, 0(%v0)
 	sw	%v1, 0(%sp)
 	sw	%v0, 4(%sp)
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	fsqr.2665
+	jal	fsqr.2672
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	lw	%v0, 4(%sp)
@@ -1016,7 +1032,7 @@ vecunit_sgn.2736:
 	fadd	%f0, %f1, %fzero
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	fsqr.2665
+	jal	fsqr.2672
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	flw	%f1, 8(%sp)
@@ -1027,7 +1043,7 @@ vecunit_sgn.2736:
 	fadd	%f0, %f1, %fzero
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	fsqr.2665
+	jal	fsqr.2672
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	flw	%f1, 12(%sp)
@@ -1036,27 +1052,27 @@ vecunit_sgn.2736:
 	fsw	%f0, 16(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	fiszero.2658
+	jal	fiszero.2665
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9229
+	bne	%v0, %at, beq_else.9247
 	lw	%v0, 0(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9231
+	bne	%v0, %at, beq_else.9249
 	flw	%f0, 20180(%zero)
 	flw	%f1, 16(%sp)
 	fdiv	%f0, %f0, %f1
-	j	beq_cont.9232
-beq_else.9231:
+	j	beq_cont.9250
+beq_else.9249:
 	flw	%f0, 20104(%zero)
 	flw	%f1, 16(%sp)
 	fdiv	%f0, %f0, %f1
-beq_cont.9232:
-	j	beq_cont.9230
-beq_else.9229:
+beq_cont.9250:
+	j	beq_cont.9248
+beq_else.9247:
 	flw	%f0, 20180(%zero)
-beq_cont.9230:
+beq_cont.9248:
 	lw	%v0, 4(%sp)
 	flw	%f1, 0(%v0)
 	fmul	%f1, %f1, %f0
@@ -1068,7 +1084,7 @@ beq_cont.9230:
 	fmul	%f0, %f1, %f0
 	fsw	%f0, 8(%v0)
 	jr	%ra
-veciprod.2739:
+veciprod.2746:
 	flw	%f0, 0(%v0)
 	flw	%f1, 0(%v1)
 	fmul	%f0, %f0, %f1
@@ -1081,7 +1097,7 @@ veciprod.2739:
 	fmul	%f1, %f1, %f2
 	fadd	%f0, %f0, %f1
 	jr	%ra
-veciprod2.2742:
+veciprod2.2749:
 	flw	%f3, 0(%v0)
 	fmul	%f0, %f3, %f0
 	flw	%f3, 4(%v0)
@@ -1091,7 +1107,7 @@ veciprod2.2742:
 	fmul	%f1, %f1, %f2
 	fadd	%f0, %f0, %f1
 	jr	%ra
-vecaccum.2747:
+vecaccum.2754:
 	flw	%f1, 0(%v0)
 	flw	%f2, 0(%v1)
 	fmul	%f2, %f0, %f2
@@ -1108,7 +1124,7 @@ vecaccum.2747:
 	fadd	%f0, %f1, %f0
 	fsw	%f0, 8(%v0)
 	jr	%ra
-vecadd.2751:
+vecadd.2758:
 	flw	%f0, 0(%v0)
 	flw	%f1, 0(%v1)
 	fadd	%f0, %f0, %f1
@@ -1122,7 +1138,7 @@ vecadd.2751:
 	fadd	%f0, %f0, %f1
 	fsw	%f0, 8(%v0)
 	jr	%ra
-vecscale.2757:
+vecscale.2764:
 	flw	%f1, 0(%v0)
 	fmul	%f1, %f1, %f0
 	fsw	%f1, 0(%v0)
@@ -1133,7 +1149,7 @@ vecscale.2757:
 	fmul	%f0, %f1, %f0
 	fsw	%f0, 8(%v0)
 	jr	%ra
-vecaccumv.2760:
+vecaccumv.2767:
 	flw	%f0, 0(%v0)
 	flw	%f1, 0(%v1)
 	flw	%f2, 0(%a0)
@@ -1153,132 +1169,132 @@ vecaccumv.2760:
 	fadd	%f0, %f0, %f1
 	fsw	%f0, 8(%v0)
 	jr	%ra
-o_texturetype.2764:
+o_texturetype.2771:
 	lw	%v0, 0(%v0)
 	jr	%ra
-o_form.2766:
+o_form.2773:
 	lw	%v0, 4(%v0)
 	jr	%ra
-o_reflectiontype.2768:
+o_reflectiontype.2775:
 	lw	%v0, 8(%v0)
 	jr	%ra
-o_isinvert.2770:
+o_isinvert.2777:
 	lw	%v0, 24(%v0)
 	jr	%ra
-o_isrot.2772:
+o_isrot.2779:
 	lw	%v0, 12(%v0)
 	jr	%ra
-o_param_a.2774:
+o_param_a.2781:
 	lw	%v0, 16(%v0)
 	flw	%f0, 0(%v0)
 	jr	%ra
-o_param_b.2776:
+o_param_b.2783:
 	lw	%v0, 16(%v0)
 	flw	%f0, 4(%v0)
 	jr	%ra
-o_param_c.2778:
+o_param_c.2785:
 	lw	%v0, 16(%v0)
 	flw	%f0, 8(%v0)
 	jr	%ra
-o_param_abc.2780:
+o_param_abc.2787:
 	lw	%v0, 16(%v0)
 	jr	%ra
-o_param_x.2782:
+o_param_x.2789:
 	lw	%v0, 20(%v0)
 	flw	%f0, 0(%v0)
 	jr	%ra
-o_param_y.2784:
+o_param_y.2791:
 	lw	%v0, 20(%v0)
 	flw	%f0, 4(%v0)
 	jr	%ra
-o_param_z.2786:
+o_param_z.2793:
 	lw	%v0, 20(%v0)
 	flw	%f0, 8(%v0)
 	jr	%ra
-o_diffuse.2788:
+o_diffuse.2795:
 	lw	%v0, 28(%v0)
 	flw	%f0, 0(%v0)
 	jr	%ra
-o_hilight.2790:
+o_hilight.2797:
 	lw	%v0, 28(%v0)
 	flw	%f0, 4(%v0)
 	jr	%ra
-o_color_red.2792:
+o_color_red.2799:
 	lw	%v0, 32(%v0)
 	flw	%f0, 0(%v0)
 	jr	%ra
-o_color_green.2794:
+o_color_green.2801:
 	lw	%v0, 32(%v0)
 	flw	%f0, 4(%v0)
 	jr	%ra
-o_color_blue.2796:
+o_color_blue.2803:
 	lw	%v0, 32(%v0)
 	flw	%f0, 8(%v0)
 	jr	%ra
-o_param_r1.2798:
+o_param_r1.2805:
 	lw	%v0, 36(%v0)
 	flw	%f0, 0(%v0)
 	jr	%ra
-o_param_r2.2800:
+o_param_r2.2807:
 	lw	%v0, 36(%v0)
 	flw	%f0, 4(%v0)
 	jr	%ra
-o_param_r3.2802:
+o_param_r3.2809:
 	lw	%v0, 36(%v0)
 	flw	%f0, 8(%v0)
 	jr	%ra
-o_param_ctbl.2804:
+o_param_ctbl.2811:
 	lw	%v0, 40(%v0)
 	jr	%ra
-p_rgb.2806:
+p_rgb.2813:
 	lw	%v0, 0(%v0)
 	jr	%ra
-p_intersection_points.2808:
+p_intersection_points.2815:
 	lw	%v0, 4(%v0)
 	jr	%ra
-p_surface_ids.2810:
+p_surface_ids.2817:
 	lw	%v0, 8(%v0)
 	jr	%ra
-p_calc_diffuse.2812:
+p_calc_diffuse.2819:
 	lw	%v0, 12(%v0)
 	jr	%ra
-p_energy.2814:
+p_energy.2821:
 	lw	%v0, 16(%v0)
 	jr	%ra
-p_received_ray_20percent.2816:
+p_received_ray_20percent.2823:
 	lw	%v0, 20(%v0)
 	jr	%ra
-p_group_id.2818:
+p_group_id.2825:
 	lw	%v0, 24(%v0)
 	lw	%v0, 0(%v0)
 	jr	%ra
-p_set_group_id.2820:
+p_set_group_id.2827:
 	lw	%v0, 24(%v0)
 	sw	%v1, 0(%v0)
 	jr	%ra
-p_nvectors.2823:
+p_nvectors.2830:
 	lw	%v0, 28(%v0)
 	jr	%ra
-d_vec.2825:
+d_vec.2832:
 	lw	%v0, 0(%v0)
 	jr	%ra
-d_const.2827:
+d_const.2834:
 	lw	%v0, 4(%v0)
 	jr	%ra
-r_surface_id.2829:
+r_surface_id.2836:
 	lw	%v0, 0(%v0)
 	jr	%ra
-r_dvec.2831:
+r_dvec.2838:
 	lw	%v0, 4(%v0)
 	jr	%ra
-r_bright.2833:
+r_bright.2840:
 	flw	%f0, 8(%v0)
 	jr	%ra
-rad.2835:
+rad.2842:
 	flw	%f1, 20100(%zero)
 	fmul	%f0, %f0, %f1
 	jr	%ra
-read_screen_settings.2837:
+read_screen_settings.2844:
 	lw	%v0, 20(%k1)
 	lw	%v1, 16(%k1)
 	lw	%a0, 12(%k1)
@@ -1317,13 +1333,13 @@ read_screen_settings.2837:
 	lw	%ra, 20(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	rad.2835
+	jal	rad.2842
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	fsw	%f0, 20(%sp)
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	cos.2697
+	jal	cos.2704
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	flw	%f1, 20(%sp)
@@ -1331,7 +1347,7 @@ read_screen_settings.2837:
 	fadd	%f0, %f1, %fzero
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	sin.2699
+	jal	sin.2706
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	fsw	%f0, 28(%sp)
@@ -1342,13 +1358,13 @@ read_screen_settings.2837:
 	lw	%ra, 36(%sp)
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	rad.2835
+	jal	rad.2842
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	fsw	%f0, 32(%sp)
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	cos.2697
+	jal	cos.2704
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	flw	%f1, 32(%sp)
@@ -1356,7 +1372,7 @@ read_screen_settings.2837:
 	fadd	%f0, %f1, %fzero
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	sin.2699
+	jal	sin.2706
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	flw	%f1, 24(%sp)
@@ -1404,7 +1420,7 @@ read_screen_settings.2837:
 	fsub	%f0, %f0, %f1
 	fsw	%f0, 8(%a0)
 	jr	%ra
-read_light.2839:
+read_light.2846:
 	lw	%v0, 8(%k1)
 	lw	%v1, 4(%k1)
 	sw	%v1, 0(%sp)
@@ -1421,13 +1437,13 @@ read_light.2839:
 	lw	%ra, 12(%sp)
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	rad.2835
+	jal	rad.2842
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	fsw	%f0, 8(%sp)
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	sin.2699
+	jal	sin.2706
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	fneg	%f0, %f0
@@ -1440,7 +1456,7 @@ read_light.2839:
 	lw	%ra, 12(%sp)
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	rad.2835
+	jal	rad.2842
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	flw	%f1, 8(%sp)
@@ -1448,7 +1464,7 @@ read_light.2839:
 	fadd	%f0, %f1, %fzero
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	cos.2697
+	jal	cos.2704
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	flw	%f1, 12(%sp)
@@ -1456,7 +1472,7 @@ read_light.2839:
 	fadd	%f0, %f1, %fzero
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	sin.2699
+	jal	sin.2706
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	flw	%f1, 16(%sp)
@@ -1466,7 +1482,7 @@ read_light.2839:
 	flw	%f0, 12(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	cos.2697
+	jal	cos.2704
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	flw	%f1, 16(%sp)
@@ -1481,13 +1497,13 @@ read_light.2839:
 	lw	%v0, 0(%sp)
 	fsw	%f0, 0(%v0)
 	jr	%ra
-rotate_quadratic_matrix.2841:
+rotate_quadratic_matrix.2848:
 	flw	%f0, 0(%v1)
 	sw	%v0, 0(%sp)
 	sw	%v1, 4(%sp)
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	cos.2697
+	jal	cos.2704
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	lw	%v0, 4(%sp)
@@ -1496,7 +1512,7 @@ rotate_quadratic_matrix.2841:
 	fadd	%f0, %f1, %fzero
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	sin.2699
+	jal	sin.2706
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	lw	%v0, 4(%sp)
@@ -1505,7 +1521,7 @@ rotate_quadratic_matrix.2841:
 	fadd	%f0, %f1, %fzero
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	cos.2697
+	jal	cos.2704
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	lw	%v0, 4(%sp)
@@ -1514,7 +1530,7 @@ rotate_quadratic_matrix.2841:
 	fadd	%f0, %f1, %fzero
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	sin.2699
+	jal	sin.2706
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	lw	%v0, 4(%sp)
@@ -1523,7 +1539,7 @@ rotate_quadratic_matrix.2841:
 	fadd	%f0, %f1, %fzero
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	cos.2697
+	jal	cos.2704
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	lw	%v0, 4(%sp)
@@ -1532,7 +1548,7 @@ rotate_quadratic_matrix.2841:
 	fadd	%f0, %f1, %fzero
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	sin.2699
+	jal	sin.2706
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	flw	%f1, 24(%sp)
@@ -1580,7 +1596,7 @@ rotate_quadratic_matrix.2841:
 	fadd	%f0, %f3, %fzero
 	sw	%ra, 76(%sp)
 	addi	%sp, %sp, 80
-	jal	fsqr.2665
+	jal	fsqr.2672
 	addi	%sp, %sp, -80
 	lw	%ra, 76(%sp)
 	flw	%f1, 72(%sp)
@@ -1590,7 +1606,7 @@ rotate_quadratic_matrix.2841:
 	fadd	%f0, %f2, %fzero
 	sw	%ra, 84(%sp)
 	addi	%sp, %sp, 88
-	jal	fsqr.2665
+	jal	fsqr.2672
 	addi	%sp, %sp, -88
 	lw	%ra, 84(%sp)
 	flw	%f1, 64(%sp)
@@ -1602,7 +1618,7 @@ rotate_quadratic_matrix.2841:
 	fadd	%f0, %f2, %fzero
 	sw	%ra, 84(%sp)
 	addi	%sp, %sp, 88
-	jal	fsqr.2665
+	jal	fsqr.2672
 	addi	%sp, %sp, -88
 	lw	%ra, 84(%sp)
 	flw	%f1, 56(%sp)
@@ -1614,7 +1630,7 @@ rotate_quadratic_matrix.2841:
 	flw	%f0, 52(%sp)
 	sw	%ra, 84(%sp)
 	addi	%sp, %sp, 88
-	jal	fsqr.2665
+	jal	fsqr.2672
 	addi	%sp, %sp, -88
 	lw	%ra, 84(%sp)
 	flw	%f1, 72(%sp)
@@ -1624,7 +1640,7 @@ rotate_quadratic_matrix.2841:
 	fadd	%f0, %f2, %fzero
 	sw	%ra, 92(%sp)
 	addi	%sp, %sp, 96
-	jal	fsqr.2665
+	jal	fsqr.2672
 	addi	%sp, %sp, -96
 	lw	%ra, 92(%sp)
 	flw	%f1, 64(%sp)
@@ -1636,7 +1652,7 @@ rotate_quadratic_matrix.2841:
 	fadd	%f0, %f2, %fzero
 	sw	%ra, 92(%sp)
 	addi	%sp, %sp, 96
-	jal	fsqr.2665
+	jal	fsqr.2672
 	addi	%sp, %sp, -96
 	lw	%ra, 92(%sp)
 	flw	%f1, 56(%sp)
@@ -1648,7 +1664,7 @@ rotate_quadratic_matrix.2841:
 	flw	%f0, 40(%sp)
 	sw	%ra, 92(%sp)
 	addi	%sp, %sp, 96
-	jal	fsqr.2665
+	jal	fsqr.2672
 	addi	%sp, %sp, -96
 	lw	%ra, 92(%sp)
 	flw	%f1, 72(%sp)
@@ -1658,7 +1674,7 @@ rotate_quadratic_matrix.2841:
 	fadd	%f0, %f2, %fzero
 	sw	%ra, 100(%sp)
 	addi	%sp, %sp, 104
-	jal	fsqr.2665
+	jal	fsqr.2672
 	addi	%sp, %sp, -104
 	lw	%ra, 100(%sp)
 	flw	%f1, 64(%sp)
@@ -1670,7 +1686,7 @@ rotate_quadratic_matrix.2841:
 	fadd	%f0, %f2, %fzero
 	sw	%ra, 100(%sp)
 	addi	%sp, %sp, 104
-	jal	fsqr.2665
+	jal	fsqr.2672
 	addi	%sp, %sp, -104
 	lw	%ra, 100(%sp)
 	flw	%f1, 56(%sp)
@@ -1725,7 +1741,7 @@ rotate_quadratic_matrix.2841:
 	fmul	%f0, %f0, %f1
 	fsw	%f0, 8(%v0)
 	jr	%ra
-read_nth_object.2844:
+read_nth_object.2851:
 	lw	%v1, 4(%k1)
 	sw	%v1, 0(%sp)
 	sw	%v0, 4(%sp)
@@ -1735,10 +1751,10 @@ read_nth_object.2844:
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	addi	%at, %zero, -1
-	bne	%v0, %at, beq_else.9242
+	bne	%v0, %at, beq_else.9260
 	addi	%v0, %zero, 0
 	jr	%ra
-beq_else.9242:
+beq_else.9260:
 	sw	%v0, 8(%sp)
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
@@ -1825,7 +1841,7 @@ beq_else.9242:
 	lw	%ra, 36(%sp)
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	fisneg.2656
+	jal	fisneg.2663
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	addi	%v1, %zero, 2
@@ -1892,9 +1908,9 @@ beq_else.9242:
 	lw	%ra, 44(%sp)
 	lw	%v1, 20(%sp)
 	addi	%at, %zero, 0
-	bne	%v1, %at, beq_else.9243
-	j	beq_cont.9244
-beq_else.9243:
+	bne	%v1, %at, beq_else.9261
+	j	beq_cont.9262
+beq_else.9261:
 	sw	%v0, 44(%sp)
 	sw	%ra, 52(%sp)
 	addi	%sp, %sp, 56
@@ -1903,7 +1919,7 @@ beq_else.9243:
 	lw	%ra, 52(%sp)
 	sw	%ra, 52(%sp)
 	addi	%sp, %sp, 56
-	jal	rad.2835
+	jal	rad.2842
 	addi	%sp, %sp, -56
 	lw	%ra, 52(%sp)
 	lw	%v0, 44(%sp)
@@ -1915,7 +1931,7 @@ beq_else.9243:
 	lw	%ra, 52(%sp)
 	sw	%ra, 52(%sp)
 	addi	%sp, %sp, 56
-	jal	rad.2835
+	jal	rad.2842
 	addi	%sp, %sp, -56
 	lw	%ra, 52(%sp)
 	lw	%v0, 44(%sp)
@@ -1927,20 +1943,20 @@ beq_else.9243:
 	lw	%ra, 52(%sp)
 	sw	%ra, 52(%sp)
 	addi	%sp, %sp, 56
-	jal	rad.2835
+	jal	rad.2842
 	addi	%sp, %sp, -56
 	lw	%ra, 52(%sp)
 	lw	%v0, 44(%sp)
 	fsw	%f0, 8(%v0)
-beq_cont.9244:
+beq_cont.9262:
 	lw	%v1, 12(%sp)
 	addi	%at, %zero, 2
-	bne	%v1, %at, beq_else.9245
+	bne	%v1, %at, beq_else.9263
 	addi	%a0, %zero, 1
-	j	beq_cont.9246
-beq_else.9245:
+	j	beq_cont.9264
+beq_else.9263:
 	lw	%a0, 32(%sp)
-beq_cont.9246:
+beq_cont.9264:
 	addi	%a1, %zero, 4
 	flw	%f0, 20192(%zero)
 	sw	%a0, 48(%sp)
@@ -1980,20 +1996,20 @@ beq_cont.9246:
 	add	%at, %t0, %a3
 	sw	%v1, 0(%at)
 	addi	%at, %zero, 3
-	bne	%a2, %at, beq_else.9247
+	bne	%a2, %at, beq_else.9265
 	flw	%f0, 0(%a0)
 	fsw	%f0, 52(%sp)
 	sw	%ra, 60(%sp)
 	addi	%sp, %sp, 64
-	jal	fiszero.2658
+	jal	fiszero.2665
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9249
+	bne	%v0, %at, beq_else.9267
 	flw	%f0, 52(%sp)
 	sw	%ra, 60(%sp)
 	addi	%sp, %sp, 64
-	jal	sgn.2710
+	jal	sgn.2717
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	flw	%f1, 52(%sp)
@@ -2001,30 +2017,30 @@ beq_cont.9246:
 	fadd	%f0, %f1, %fzero
 	sw	%ra, 60(%sp)
 	addi	%sp, %sp, 64
-	jal	fsqr.2665
+	jal	fsqr.2672
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	flw	%f1, 56(%sp)
 	fdiv	%f0, %f1, %f0
-	j	beq_cont.9250
-beq_else.9249:
+	j	beq_cont.9268
+beq_else.9267:
 	flw	%f0, 20192(%zero)
-beq_cont.9250:
+beq_cont.9268:
 	lw	%v0, 24(%sp)
 	fsw	%f0, 0(%v0)
 	flw	%f0, 4(%v0)
 	fsw	%f0, 60(%sp)
 	sw	%ra, 68(%sp)
 	addi	%sp, %sp, 72
-	jal	fiszero.2658
+	jal	fiszero.2665
 	addi	%sp, %sp, -72
 	lw	%ra, 68(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9251
+	bne	%v0, %at, beq_else.9269
 	flw	%f0, 60(%sp)
 	sw	%ra, 68(%sp)
 	addi	%sp, %sp, 72
-	jal	sgn.2710
+	jal	sgn.2717
 	addi	%sp, %sp, -72
 	lw	%ra, 68(%sp)
 	flw	%f1, 60(%sp)
@@ -2032,30 +2048,30 @@ beq_cont.9250:
 	fadd	%f0, %f1, %fzero
 	sw	%ra, 68(%sp)
 	addi	%sp, %sp, 72
-	jal	fsqr.2665
+	jal	fsqr.2672
 	addi	%sp, %sp, -72
 	lw	%ra, 68(%sp)
 	flw	%f1, 64(%sp)
 	fdiv	%f0, %f1, %f0
-	j	beq_cont.9252
-beq_else.9251:
+	j	beq_cont.9270
+beq_else.9269:
 	flw	%f0, 20192(%zero)
-beq_cont.9252:
+beq_cont.9270:
 	lw	%v0, 24(%sp)
 	fsw	%f0, 4(%v0)
 	flw	%f0, 8(%v0)
 	fsw	%f0, 68(%sp)
 	sw	%ra, 76(%sp)
 	addi	%sp, %sp, 80
-	jal	fiszero.2658
+	jal	fiszero.2665
 	addi	%sp, %sp, -80
 	lw	%ra, 76(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9253
+	bne	%v0, %at, beq_else.9271
 	flw	%f0, 68(%sp)
 	sw	%ra, 76(%sp)
 	addi	%sp, %sp, 80
-	jal	sgn.2710
+	jal	sgn.2717
 	addi	%sp, %sp, -80
 	lw	%ra, 76(%sp)
 	flw	%f1, 68(%sp)
@@ -2063,61 +2079,61 @@ beq_cont.9252:
 	fadd	%f0, %f1, %fzero
 	sw	%ra, 76(%sp)
 	addi	%sp, %sp, 80
-	jal	fsqr.2665
+	jal	fsqr.2672
 	addi	%sp, %sp, -80
 	lw	%ra, 76(%sp)
 	flw	%f1, 72(%sp)
 	fdiv	%f0, %f1, %f0
-	j	beq_cont.9254
-beq_else.9253:
+	j	beq_cont.9272
+beq_else.9271:
 	flw	%f0, 20192(%zero)
-beq_cont.9254:
+beq_cont.9272:
 	lw	%v0, 24(%sp)
 	fsw	%f0, 8(%v0)
-	j	beq_cont.9248
-beq_else.9247:
+	j	beq_cont.9266
+beq_else.9265:
 	addi	%at, %zero, 2
-	bne	%a2, %at, beq_else.9255
+	bne	%a2, %at, beq_else.9273
 	lw	%v1, 32(%sp)
 	addi	%at, %zero, 0
-	bne	%v1, %at, beq_else.9257
+	bne	%v1, %at, beq_else.9275
 	addi	%v1, %zero, 1
-	j	beq_cont.9258
-beq_else.9257:
+	j	beq_cont.9276
+beq_else.9275:
 	addi	%v1, %zero, 0
-beq_cont.9258:
+beq_cont.9276:
 	addi	%v0, %a0, 0
 	sw	%ra, 76(%sp)
 	addi	%sp, %sp, 80
-	jal	vecunit_sgn.2736
+	jal	vecunit_sgn.2743
 	addi	%sp, %sp, -80
 	lw	%ra, 76(%sp)
-	j	beq_cont.9256
-beq_else.9255:
-beq_cont.9256:
-beq_cont.9248:
+	j	beq_cont.9274
+beq_else.9273:
+beq_cont.9274:
+beq_cont.9266:
 	lw	%v0, 20(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9259
-	j	beq_cont.9260
-beq_else.9259:
+	bne	%v0, %at, beq_else.9277
+	j	beq_cont.9278
+beq_else.9277:
 	lw	%v0, 24(%sp)
 	lw	%v1, 44(%sp)
 	sw	%ra, 76(%sp)
 	addi	%sp, %sp, 80
-	jal	rotate_quadratic_matrix.2841
+	jal	rotate_quadratic_matrix.2848
 	addi	%sp, %sp, -80
 	lw	%ra, 76(%sp)
-beq_cont.9260:
+beq_cont.9278:
 	addi	%v0, %zero, 1
 	jr	%ra
-read_object.2846:
+read_object.2853:
 	lw	%v1, 8(%k1)
 	lw	%a0, 4(%k1)
 	slti	%at, %v0, 60
-	bne	%at, %zero, beq_else.9261
+	bne	%at, %zero, beq_else.9279
 	jr	%ra
-beq_else.9261:
+beq_else.9279:
 	sw	%k1, 0(%sp)
 	sw	%a0, 4(%sp)
 	sw	%v0, 8(%sp)
@@ -2129,23 +2145,23 @@ beq_else.9261:
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9263
+	bne	%v0, %at, beq_else.9281
 	lw	%v0, 4(%sp)
 	lw	%v1, 8(%sp)
 	sw	%v1, 0(%v0)
 	jr	%ra
-beq_else.9263:
+beq_else.9281:
 	lw	%v0, 8(%sp)
 	addi	%v0, %v0, 1
 	lw	%k1, 0(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-read_all_object.2848:
+read_all_object.2855:
 	lw	%k1, 4(%k1)
 	addi	%v0, %zero, 0
 	lw	%at, 0(%k1)
 	jr	%at
-read_net_item.2850:
+read_net_item.2857:
 	sw	%v0, 0(%sp)
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 8
@@ -2153,19 +2169,19 @@ read_net_item.2850:
 	addi	%sp, %sp, -8
 	lw	%ra, 4(%sp)
 	addi	%at, %zero, -1
-	bne	%v0, %at, beq_else.9265
+	bne	%v0, %at, beq_else.9283
 	lw	%v0, 0(%sp)
 	addi	%v0, %v0, 1
 	addi	%v1, %zero, -1
 	j	min_caml_create_array
-beq_else.9265:
+beq_else.9283:
 	lw	%v1, 0(%sp)
 	addi	%a0, %v1, 1
 	sw	%v0, 4(%sp)
 	addi	%v0, %a0, 0
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	read_net_item.2850
+	jal	read_net_item.2857
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	lw	%v1, 0(%sp)
@@ -2174,30 +2190,30 @@ beq_else.9265:
 	add	%at, %v0, %v1
 	sw	%a0, 0(%at)
 	jr	%ra
-read_or_network.2852:
+read_or_network.2859:
 	addi	%v1, %zero, 0
 	sw	%v0, 0(%sp)
 	addi	%v0, %v1, 0
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 8
-	jal	read_net_item.2850
+	jal	read_net_item.2857
 	addi	%sp, %sp, -8
 	lw	%ra, 4(%sp)
 	addi	%v1, %v0, 0
 	lw	%v0, 0(%v1)
 	addi	%at, %zero, -1
-	bne	%v0, %at, beq_else.9266
+	bne	%v0, %at, beq_else.9284
 	lw	%v0, 0(%sp)
 	addi	%v0, %v0, 1
 	j	min_caml_create_array
-beq_else.9266:
+beq_else.9284:
 	lw	%v0, 0(%sp)
 	addi	%a0, %v0, 1
 	sw	%v1, 4(%sp)
 	addi	%v0, %a0, 0
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	read_or_network.2852
+	jal	read_or_network.2859
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	lw	%v1, 0(%sp)
@@ -2206,7 +2222,7 @@ beq_else.9266:
 	add	%at, %v0, %v1
 	sw	%a0, 0(%at)
 	jr	%ra
-read_and_network.2854:
+read_and_network.2861:
 	lw	%v1, 4(%k1)
 	addi	%a0, %zero, 0
 	sw	%k1, 0(%sp)
@@ -2215,14 +2231,14 @@ read_and_network.2854:
 	addi	%v0, %a0, 0
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	read_net_item.2850
+	jal	read_net_item.2857
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	lw	%v1, 0(%v0)
 	addi	%at, %zero, -1
-	bne	%v1, %at, beq_else.9267
+	bne	%v1, %at, beq_else.9285
 	jr	%ra
-beq_else.9267:
+beq_else.9285:
 	lw	%v1, 8(%sp)
 	sll	%a0, %v1, 2
 	lw	%a1, 4(%sp)
@@ -2232,7 +2248,7 @@ beq_else.9267:
 	lw	%k1, 0(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-read_parameter.2856:
+read_parameter.2863:
 	lw	%v0, 20(%k1)
 	lw	%v1, 16(%k1)
 	lw	%a0, 12(%k1)
@@ -2274,13 +2290,13 @@ read_parameter.2856:
 	addi	%v0, %zero, 0
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	read_or_network.2852
+	jal	read_or_network.2859
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	lw	%v1, 0(%sp)
 	sw	%v0, 0(%v1)
 	jr	%ra
-solver_rect_surface.2858:
+solver_rect_surface.2865:
 	lw	%a3, 4(%k1)
 	sll	%t0, %a0, 2
 	add	%at, %v1, %t0
@@ -2297,15 +2313,15 @@ solver_rect_surface.2858:
 	fadd	%f0, %f3, %fzero
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	fiszero.2658
+	jal	fiszero.2665
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9270
+	bne	%v0, %at, beq_else.9288
 	lw	%v0, 32(%sp)
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	o_param_abc.2780
+	jal	o_param_abc.2787
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	lw	%v1, 32(%sp)
@@ -2313,7 +2329,7 @@ solver_rect_surface.2858:
 	addi	%v0, %v1, 0
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	o_isinvert.2770
+	jal	o_isinvert.2777
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	lw	%v1, 28(%sp)
@@ -2324,14 +2340,14 @@ solver_rect_surface.2858:
 	sw	%v0, 40(%sp)
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	fisneg.2656
+	jal	fisneg.2663
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	addi	%v1, %v0, 0
 	lw	%v0, 40(%sp)
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	xor.2660
+	jal	xor.2667
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	lw	%v1, 28(%sp)
@@ -2341,7 +2357,7 @@ solver_rect_surface.2858:
 	flw	%f0, 0(%at)
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	fneg_cond.2712
+	jal	fneg_cond.2719
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	flw	%f1, 20(%sp)
@@ -2369,14 +2385,14 @@ solver_rect_surface.2858:
 	fadd	%f1, %f2, %fzero
 	sw	%ra, 52(%sp)
 	addi	%sp, %sp, 56
-	jal	fless.2651
+	jal	fless.2658
 	addi	%sp, %sp, -56
 	lw	%ra, 52(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9271
+	bne	%v0, %at, beq_else.9289
 	addi	%v0, %zero, 0
 	jr	%ra
-beq_else.9271:
+beq_else.9289:
 	lw	%v0, 8(%sp)
 	sll	%v1, %v0, 2
 	lw	%a0, 24(%sp)
@@ -2394,23 +2410,23 @@ beq_else.9271:
 	fadd	%f1, %f2, %fzero
 	sw	%ra, 52(%sp)
 	addi	%sp, %sp, 56
-	jal	fless.2651
+	jal	fless.2658
 	addi	%sp, %sp, -56
 	lw	%ra, 52(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9272
+	bne	%v0, %at, beq_else.9290
 	addi	%v0, %zero, 0
 	jr	%ra
-beq_else.9272:
+beq_else.9290:
 	lw	%v0, 0(%sp)
 	flw	%f0, 44(%sp)
 	fsw	%f0, 0(%v0)
 	addi	%v0, %zero, 1
 	jr	%ra
-beq_else.9270:
+beq_else.9288:
 	addi	%v0, %zero, 0
 	jr	%ra
-solver_rect.2867:
+solver_rect.2874:
 	lw	%k1, 4(%k1)
 	addi	%a0, %zero, 0
 	addi	%a1, %zero, 1
@@ -2428,7 +2444,7 @@ solver_rect.2867:
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9273
+	bne	%v0, %at, beq_else.9291
 	addi	%a0, %zero, 1
 	addi	%a1, %zero, 2
 	addi	%a2, %zero, 0
@@ -2445,7 +2461,7 @@ solver_rect.2867:
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9274
+	bne	%v0, %at, beq_else.9292
 	addi	%a0, %zero, 2
 	addi	%a1, %zero, 0
 	addi	%a2, %zero, 1
@@ -2462,19 +2478,19 @@ solver_rect.2867:
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9275
+	bne	%v0, %at, beq_else.9293
 	addi	%v0, %zero, 0
 	jr	%ra
-beq_else.9275:
+beq_else.9293:
 	addi	%v0, %zero, 3
 	jr	%ra
-beq_else.9274:
+beq_else.9292:
 	addi	%v0, %zero, 2
 	jr	%ra
-beq_else.9273:
+beq_else.9291:
 	addi	%v0, %zero, 1
 	jr	%ra
-solver_surface.2873:
+solver_surface.2880:
 	lw	%a0, 4(%k1)
 	sw	%a0, 0(%sp)
 	fsw	%f2, 4(%sp)
@@ -2483,7 +2499,7 @@ solver_surface.2873:
 	sw	%v1, 16(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	o_param_abc.2780
+	jal	o_param_abc.2787
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	addi	%v1, %v0, 0
@@ -2491,27 +2507,27 @@ solver_surface.2873:
 	sw	%v1, 20(%sp)
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	veciprod.2739
+	jal	veciprod.2746
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	fsw	%f0, 24(%sp)
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	fispos.2654
+	jal	fispos.2661
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9276
+	bne	%v0, %at, beq_else.9294
 	addi	%v0, %zero, 0
 	jr	%ra
-beq_else.9276:
+beq_else.9294:
 	flw	%f0, 12(%sp)
 	flw	%f1, 8(%sp)
 	flw	%f2, 4(%sp)
 	lw	%v0, 20(%sp)
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	veciprod2.2742
+	jal	veciprod2.2749
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	fneg	%f0, %f0
@@ -2521,21 +2537,21 @@ beq_else.9276:
 	fsw	%f0, 0(%v0)
 	addi	%v0, %zero, 1
 	jr	%ra
-quadratic.2879:
+quadratic.2886:
 	fsw	%f0, 0(%sp)
 	fsw	%f2, 4(%sp)
 	fsw	%f1, 8(%sp)
 	sw	%v0, 12(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	fsqr.2665
+	jal	fsqr.2672
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	lw	%v0, 12(%sp)
 	fsw	%f0, 16(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	o_param_a.2774
+	jal	o_param_a.2781
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	flw	%f1, 16(%sp)
@@ -2545,14 +2561,14 @@ quadratic.2879:
 	fadd	%f0, %f1, %fzero
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	fsqr.2665
+	jal	fsqr.2672
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	lw	%v0, 12(%sp)
 	fsw	%f0, 24(%sp)
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	o_param_b.2776
+	jal	o_param_b.2783
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	flw	%f1, 24(%sp)
@@ -2564,14 +2580,14 @@ quadratic.2879:
 	fadd	%f0, %f1, %fzero
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	fsqr.2665
+	jal	fsqr.2672
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	lw	%v0, 12(%sp)
 	fsw	%f0, 32(%sp)
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	o_param_c.2778
+	jal	o_param_c.2785
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	flw	%f1, 32(%sp)
@@ -2582,14 +2598,14 @@ quadratic.2879:
 	fsw	%f0, 36(%sp)
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	o_isrot.2772
+	jal	o_isrot.2779
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9277
+	bne	%v0, %at, beq_else.9295
 	flw	%f0, 36(%sp)
 	jr	%ra
-beq_else.9277:
+beq_else.9295:
 	flw	%f0, 4(%sp)
 	flw	%f1, 8(%sp)
 	fmul	%f2, %f1, %f0
@@ -2597,7 +2613,7 @@ beq_else.9277:
 	fsw	%f2, 40(%sp)
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	o_param_r1.2798
+	jal	o_param_r1.2805
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	flw	%f1, 40(%sp)
@@ -2612,7 +2628,7 @@ beq_else.9277:
 	fsw	%f2, 48(%sp)
 	sw	%ra, 52(%sp)
 	addi	%sp, %sp, 56
-	jal	o_param_r2.2800
+	jal	o_param_r2.2807
 	addi	%sp, %sp, -56
 	lw	%ra, 52(%sp)
 	flw	%f1, 48(%sp)
@@ -2627,7 +2643,7 @@ beq_else.9277:
 	fsw	%f1, 56(%sp)
 	sw	%ra, 60(%sp)
 	addi	%sp, %sp, 64
-	jal	o_param_r3.2802
+	jal	o_param_r3.2809
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	flw	%f1, 56(%sp)
@@ -2635,7 +2651,7 @@ beq_else.9277:
 	flw	%f1, 52(%sp)
 	fadd	%f0, %f1, %f0
 	jr	%ra
-bilinear.2884:
+bilinear.2891:
 	fmul	%f6, %f0, %f3
 	fsw	%f3, 0(%sp)
 	fsw	%f0, 4(%sp)
@@ -2647,7 +2663,7 @@ bilinear.2884:
 	fsw	%f6, 28(%sp)
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	o_param_a.2774
+	jal	o_param_a.2781
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	flw	%f1, 28(%sp)
@@ -2660,7 +2676,7 @@ bilinear.2884:
 	fsw	%f3, 36(%sp)
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	o_param_b.2776
+	jal	o_param_b.2783
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	flw	%f1, 36(%sp)
@@ -2675,7 +2691,7 @@ bilinear.2884:
 	fsw	%f3, 44(%sp)
 	sw	%ra, 52(%sp)
 	addi	%sp, %sp, 56
-	jal	o_param_c.2778
+	jal	o_param_c.2785
 	addi	%sp, %sp, -56
 	lw	%ra, 52(%sp)
 	flw	%f1, 44(%sp)
@@ -2686,14 +2702,14 @@ bilinear.2884:
 	fsw	%f0, 48(%sp)
 	sw	%ra, 52(%sp)
 	addi	%sp, %sp, 56
-	jal	o_isrot.2772
+	jal	o_isrot.2779
 	addi	%sp, %sp, -56
 	lw	%ra, 52(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9278
+	bne	%v0, %at, beq_else.9296
 	flw	%f0, 48(%sp)
 	jr	%ra
-beq_else.9278:
+beq_else.9296:
 	flw	%f0, 20(%sp)
 	flw	%f1, 12(%sp)
 	fmul	%f2, %f1, %f0
@@ -2705,7 +2721,7 @@ beq_else.9278:
 	fsw	%f2, 52(%sp)
 	sw	%ra, 60(%sp)
 	addi	%sp, %sp, 64
-	jal	o_param_r1.2798
+	jal	o_param_r1.2805
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	flw	%f1, 52(%sp)
@@ -2722,7 +2738,7 @@ beq_else.9278:
 	fsw	%f1, 60(%sp)
 	sw	%ra, 68(%sp)
 	addi	%sp, %sp, 72
-	jal	o_param_r2.2800
+	jal	o_param_r2.2807
 	addi	%sp, %sp, -72
 	lw	%ra, 68(%sp)
 	flw	%f1, 60(%sp)
@@ -2741,7 +2757,7 @@ beq_else.9278:
 	fsw	%f1, 68(%sp)
 	sw	%ra, 76(%sp)
 	addi	%sp, %sp, 80
-	jal	o_param_r3.2802
+	jal	o_param_r3.2809
 	addi	%sp, %sp, -80
 	lw	%ra, 76(%sp)
 	flw	%f1, 68(%sp)
@@ -2750,13 +2766,13 @@ beq_else.9278:
 	fadd	%f0, %f1, %f0
 	sw	%ra, 76(%sp)
 	addi	%sp, %sp, 80
-	jal	fhalf.2663
+	jal	fhalf.2670
 	addi	%sp, %sp, -80
 	lw	%ra, 76(%sp)
 	flw	%f1, 48(%sp)
 	fadd	%f0, %f1, %f0
 	jr	%ra
-solver_second.2892:
+solver_second.2899:
 	lw	%a0, 4(%k1)
 	flw	%f3, 0(%v1)
 	flw	%f4, 4(%v1)
@@ -2772,17 +2788,17 @@ solver_second.2892:
 	fadd	%f0, %f3, %fzero
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	quadratic.2879
+	jal	quadratic.2886
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	fsw	%f0, 24(%sp)
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	fiszero.2658
+	jal	fiszero.2665
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9279
+	bne	%v0, %at, beq_else.9297
 	lw	%v0, 20(%sp)
 	flw	%f0, 0(%v0)
 	flw	%f1, 4(%v0)
@@ -2793,7 +2809,7 @@ solver_second.2892:
 	lw	%v0, 16(%sp)
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	bilinear.2884
+	jal	bilinear.2891
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	flw	%f1, 12(%sp)
@@ -2806,31 +2822,31 @@ solver_second.2892:
 	fadd	%f2, %f3, %fzero
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	quadratic.2879
+	jal	quadratic.2886
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	lw	%v0, 16(%sp)
 	fsw	%f0, 32(%sp)
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	o_form.2766
+	jal	o_form.2773
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	addi	%at, %zero, 3
-	bne	%v0, %at, beq_else.9280
+	bne	%v0, %at, beq_else.9298
 	flw	%f0, 20180(%zero)
 	flw	%f1, 32(%sp)
 	fsub	%f0, %f1, %f0
-	j	beq_cont.9281
-beq_else.9280:
+	j	beq_cont.9299
+beq_else.9298:
 	flw	%f0, 32(%sp)
-beq_cont.9281:
+beq_cont.9299:
 	flw	%f1, 28(%sp)
 	fsw	%f0, 36(%sp)
 	fadd	%f0, %f1, %fzero
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	fsqr.2665
+	jal	fsqr.2672
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	flw	%f1, 36(%sp)
@@ -2840,31 +2856,31 @@ beq_cont.9281:
 	fsw	%f0, 40(%sp)
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	fispos.2654
+	jal	fispos.2661
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9282
+	bne	%v0, %at, beq_else.9300
 	addi	%v0, %zero, 0
 	jr	%ra
-beq_else.9282:
+beq_else.9300:
 	flw	%f0, 40(%sp)
 	fsqrt	%f0, %f0
 	lw	%v0, 16(%sp)
 	fsw	%f0, 44(%sp)
 	sw	%ra, 52(%sp)
 	addi	%sp, %sp, 56
-	jal	o_isinvert.2770
+	jal	o_isinvert.2777
 	addi	%sp, %sp, -56
 	lw	%ra, 52(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9283
+	bne	%v0, %at, beq_else.9301
 	flw	%f0, 44(%sp)
 	fneg	%f0, %f0
-	j	beq_cont.9284
-beq_else.9283:
+	j	beq_cont.9302
+beq_else.9301:
 	flw	%f0, 44(%sp)
-beq_cont.9284:
+beq_cont.9302:
 	flw	%f1, 28(%sp)
 	fsub	%f0, %f0, %f1
 	flw	%f1, 24(%sp)
@@ -2873,10 +2889,10 @@ beq_cont.9284:
 	fsw	%f0, 0(%v0)
 	addi	%v0, %zero, 1
 	jr	%ra
-beq_else.9279:
+beq_else.9297:
 	addi	%v0, %zero, 0
 	jr	%ra
-solver.2898:
+solver.2905:
 	lw	%a1, 16(%k1)
 	lw	%a2, 12(%k1)
 	lw	%a3, 8(%k1)
@@ -2894,7 +2910,7 @@ solver.2898:
 	fsw	%f0, 24(%sp)
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	o_param_x.2782
+	jal	o_param_x.2789
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	flw	%f1, 24(%sp)
@@ -2907,7 +2923,7 @@ solver.2898:
 	addi	%v0, %v1, 0
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	o_param_y.2784
+	jal	o_param_y.2791
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	flw	%f1, 32(%sp)
@@ -2919,7 +2935,7 @@ solver.2898:
 	fsw	%f1, 40(%sp)
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	o_param_z.2786
+	jal	o_param_z.2793
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	flw	%f1, 40(%sp)
@@ -2928,11 +2944,11 @@ solver.2898:
 	fsw	%f0, 44(%sp)
 	sw	%ra, 52(%sp)
 	addi	%sp, %sp, 56
-	jal	o_form.2766
+	jal	o_form.2773
 	addi	%sp, %sp, -56
 	lw	%ra, 52(%sp)
 	addi	%at, %zero, 1
-	bne	%v0, %at, beq_else.9285
+	bne	%v0, %at, beq_else.9303
 	flw	%f0, 28(%sp)
 	flw	%f1, 36(%sp)
 	flw	%f2, 44(%sp)
@@ -2941,9 +2957,9 @@ solver.2898:
 	lw	%k1, 12(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-beq_else.9285:
+beq_else.9303:
 	addi	%at, %zero, 2
-	bne	%v0, %at, beq_else.9286
+	bne	%v0, %at, beq_else.9304
 	flw	%f0, 28(%sp)
 	flw	%f1, 36(%sp)
 	flw	%f2, 44(%sp)
@@ -2952,7 +2968,7 @@ beq_else.9285:
 	lw	%k1, 4(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-beq_else.9286:
+beq_else.9304:
 	flw	%f0, 28(%sp)
 	flw	%f1, 36(%sp)
 	flw	%f2, 44(%sp)
@@ -2961,7 +2977,7 @@ beq_else.9286:
 	lw	%k1, 0(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-solver_rect_fast.2902:
+solver_rect_fast.2909:
 	lw	%a1, 4(%k1)
 	flw	%f3, 0(%a0)
 	fsub	%f3, %f3, %f0
@@ -2982,21 +2998,21 @@ solver_rect_fast.2902:
 	fsw	%f4, 32(%sp)
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	o_param_b.2776
+	jal	o_param_b.2783
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	fadd	%f1, %f0, %fzero
 	flw	%f0, 32(%sp)
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	fless.2651
+	jal	fless.2658
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9287
+	bne	%v0, %at, beq_else.9305
 	addi	%v0, %zero, 0
-	j	beq_cont.9288
-beq_else.9287:
+	j	beq_cont.9306
+beq_else.9305:
 	lw	%v0, 28(%sp)
 	flw	%f0, 8(%v0)
 	flw	%f1, 24(%sp)
@@ -3009,39 +3025,39 @@ beq_else.9287:
 	addi	%v0, %v1, 0
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	o_param_c.2778
+	jal	o_param_c.2785
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	fadd	%f1, %f0, %fzero
 	flw	%f0, 36(%sp)
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	fless.2651
+	jal	fless.2658
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9289
+	bne	%v0, %at, beq_else.9307
 	addi	%v0, %zero, 0
-	j	beq_cont.9290
-beq_else.9289:
+	j	beq_cont.9308
+beq_else.9307:
 	lw	%v0, 12(%sp)
 	flw	%f0, 4(%v0)
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	fiszero.2658
+	jal	fiszero.2665
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9291
+	bne	%v0, %at, beq_else.9309
 	addi	%v0, %zero, 1
-	j	beq_cont.9292
-beq_else.9291:
+	j	beq_cont.9310
+beq_else.9309:
 	addi	%v0, %zero, 0
-beq_cont.9292:
-beq_cont.9290:
-beq_cont.9288:
+beq_cont.9310:
+beq_cont.9308:
+beq_cont.9306:
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9293
+	bne	%v0, %at, beq_else.9311
 	lw	%v0, 12(%sp)
 	flw	%f0, 8(%v0)
 	flw	%f1, 8(%sp)
@@ -3060,21 +3076,21 @@ beq_cont.9288:
 	addi	%v0, %a0, 0
 	sw	%ra, 52(%sp)
 	addi	%sp, %sp, 56
-	jal	o_param_a.2774
+	jal	o_param_a.2781
 	addi	%sp, %sp, -56
 	lw	%ra, 52(%sp)
 	fadd	%f1, %f0, %fzero
 	flw	%f0, 44(%sp)
 	sw	%ra, 52(%sp)
 	addi	%sp, %sp, 56
-	jal	fless.2651
+	jal	fless.2658
 	addi	%sp, %sp, -56
 	lw	%ra, 52(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9294
+	bne	%v0, %at, beq_else.9312
 	addi	%v0, %zero, 0
-	j	beq_cont.9295
-beq_else.9294:
+	j	beq_cont.9313
+beq_else.9312:
 	lw	%v0, 28(%sp)
 	flw	%f0, 8(%v0)
 	flw	%f1, 40(%sp)
@@ -3087,39 +3103,39 @@ beq_else.9294:
 	addi	%v0, %v1, 0
 	sw	%ra, 52(%sp)
 	addi	%sp, %sp, 56
-	jal	o_param_c.2778
+	jal	o_param_c.2785
 	addi	%sp, %sp, -56
 	lw	%ra, 52(%sp)
 	fadd	%f1, %f0, %fzero
 	flw	%f0, 48(%sp)
 	sw	%ra, 52(%sp)
 	addi	%sp, %sp, 56
-	jal	fless.2651
+	jal	fless.2658
 	addi	%sp, %sp, -56
 	lw	%ra, 52(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9296
+	bne	%v0, %at, beq_else.9314
 	addi	%v0, %zero, 0
-	j	beq_cont.9297
-beq_else.9296:
+	j	beq_cont.9315
+beq_else.9314:
 	lw	%v0, 12(%sp)
 	flw	%f0, 12(%v0)
 	sw	%ra, 52(%sp)
 	addi	%sp, %sp, 56
-	jal	fiszero.2658
+	jal	fiszero.2665
 	addi	%sp, %sp, -56
 	lw	%ra, 52(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9298
+	bne	%v0, %at, beq_else.9316
 	addi	%v0, %zero, 1
-	j	beq_cont.9299
-beq_else.9298:
+	j	beq_cont.9317
+beq_else.9316:
 	addi	%v0, %zero, 0
-beq_cont.9299:
-beq_cont.9297:
-beq_cont.9295:
+beq_cont.9317:
+beq_cont.9315:
+beq_cont.9313:
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9300
+	bne	%v0, %at, beq_else.9318
 	lw	%v0, 12(%sp)
 	flw	%f0, 16(%v0)
 	flw	%f1, 20(%sp)
@@ -3138,21 +3154,21 @@ beq_cont.9295:
 	addi	%v0, %a0, 0
 	sw	%ra, 60(%sp)
 	addi	%sp, %sp, 64
-	jal	o_param_a.2774
+	jal	o_param_a.2781
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	fadd	%f1, %f0, %fzero
 	flw	%f0, 56(%sp)
 	sw	%ra, 60(%sp)
 	addi	%sp, %sp, 64
-	jal	fless.2651
+	jal	fless.2658
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9301
+	bne	%v0, %at, beq_else.9319
 	addi	%v0, %zero, 0
-	j	beq_cont.9302
-beq_else.9301:
+	j	beq_cont.9320
+beq_else.9319:
 	lw	%v0, 28(%sp)
 	flw	%f0, 4(%v0)
 	flw	%f1, 52(%sp)
@@ -3164,60 +3180,60 @@ beq_else.9301:
 	fsw	%f0, 60(%sp)
 	sw	%ra, 68(%sp)
 	addi	%sp, %sp, 72
-	jal	o_param_b.2776
+	jal	o_param_b.2783
 	addi	%sp, %sp, -72
 	lw	%ra, 68(%sp)
 	fadd	%f1, %f0, %fzero
 	flw	%f0, 60(%sp)
 	sw	%ra, 68(%sp)
 	addi	%sp, %sp, 72
-	jal	fless.2651
+	jal	fless.2658
 	addi	%sp, %sp, -72
 	lw	%ra, 68(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9303
+	bne	%v0, %at, beq_else.9321
 	addi	%v0, %zero, 0
-	j	beq_cont.9304
-beq_else.9303:
+	j	beq_cont.9322
+beq_else.9321:
 	lw	%v0, 12(%sp)
 	flw	%f0, 20(%v0)
 	sw	%ra, 68(%sp)
 	addi	%sp, %sp, 72
-	jal	fiszero.2658
+	jal	fiszero.2665
 	addi	%sp, %sp, -72
 	lw	%ra, 68(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9305
+	bne	%v0, %at, beq_else.9323
 	addi	%v0, %zero, 1
-	j	beq_cont.9306
-beq_else.9305:
+	j	beq_cont.9324
+beq_else.9323:
 	addi	%v0, %zero, 0
-beq_cont.9306:
-beq_cont.9304:
-beq_cont.9302:
+beq_cont.9324:
+beq_cont.9322:
+beq_cont.9320:
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9307
+	bne	%v0, %at, beq_else.9325
 	addi	%v0, %zero, 0
 	jr	%ra
-beq_else.9307:
+beq_else.9325:
 	lw	%v0, 0(%sp)
 	flw	%f0, 52(%sp)
 	fsw	%f0, 0(%v0)
 	addi	%v0, %zero, 3
 	jr	%ra
-beq_else.9300:
+beq_else.9318:
 	lw	%v0, 0(%sp)
 	flw	%f0, 40(%sp)
 	fsw	%f0, 0(%v0)
 	addi	%v0, %zero, 2
 	jr	%ra
-beq_else.9293:
+beq_else.9311:
 	lw	%v0, 0(%sp)
 	flw	%f0, 24(%sp)
 	fsw	%f0, 0(%v0)
 	addi	%v0, %zero, 1
 	jr	%ra
-solver_surface_fast.2909:
+solver_surface_fast.2916:
 	lw	%v0, 4(%k1)
 	flw	%f3, 0(%v1)
 	sw	%v0, 0(%sp)
@@ -3228,14 +3244,14 @@ solver_surface_fast.2909:
 	fadd	%f0, %f3, %fzero
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	fisneg.2656
+	jal	fisneg.2663
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9308
+	bne	%v0, %at, beq_else.9326
 	addi	%v0, %zero, 0
 	jr	%ra
-beq_else.9308:
+beq_else.9326:
 	lw	%v0, 16(%sp)
 	flw	%f0, 4(%v0)
 	flw	%f1, 12(%sp)
@@ -3252,7 +3268,7 @@ beq_else.9308:
 	fsw	%f0, 0(%v0)
 	addi	%v0, %zero, 1
 	jr	%ra
-solver_second_fast.2915:
+solver_second_fast.2922:
 	lw	%a0, 4(%k1)
 	flw	%f3, 0(%v1)
 	sw	%a0, 0(%sp)
@@ -3265,11 +3281,11 @@ solver_second_fast.2915:
 	fadd	%f0, %f3, %fzero
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	fiszero.2658
+	jal	fiszero.2665
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9309
+	bne	%v0, %at, beq_else.9327
 	lw	%v0, 24(%sp)
 	flw	%f0, 4(%v0)
 	flw	%f1, 20(%sp)
@@ -3290,31 +3306,31 @@ solver_second_fast.2915:
 	fadd	%f1, %f3, %fzero
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	quadratic.2879
+	jal	quadratic.2886
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	lw	%v0, 8(%sp)
 	fsw	%f0, 32(%sp)
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	o_form.2766
+	jal	o_form.2773
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	addi	%at, %zero, 3
-	bne	%v0, %at, beq_else.9310
+	bne	%v0, %at, beq_else.9328
 	flw	%f0, 20180(%zero)
 	flw	%f1, 32(%sp)
 	fsub	%f0, %f1, %f0
-	j	beq_cont.9311
-beq_else.9310:
+	j	beq_cont.9329
+beq_else.9328:
 	flw	%f0, 32(%sp)
-beq_cont.9311:
+beq_cont.9329:
 	flw	%f1, 28(%sp)
 	fsw	%f0, 36(%sp)
 	fadd	%f0, %f1, %fzero
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	fsqr.2665
+	jal	fsqr.2672
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	flw	%f1, 36(%sp)
@@ -3324,22 +3340,22 @@ beq_cont.9311:
 	fsw	%f0, 40(%sp)
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	fispos.2654
+	jal	fispos.2661
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9312
+	bne	%v0, %at, beq_else.9330
 	addi	%v0, %zero, 0
 	jr	%ra
-beq_else.9312:
+beq_else.9330:
 	lw	%v0, 8(%sp)
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	o_isinvert.2770
+	jal	o_isinvert.2777
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9313
+	bne	%v0, %at, beq_else.9331
 	flw	%f0, 40(%sp)
 	fsqrt	%f0, %f0
 	flw	%f1, 28(%sp)
@@ -3349,8 +3365,8 @@ beq_else.9312:
 	fmul	%f0, %f0, %f1
 	lw	%v0, 0(%sp)
 	fsw	%f0, 0(%v0)
-	j	beq_cont.9314
-beq_else.9313:
+	j	beq_cont.9332
+beq_else.9331:
 	flw	%f0, 40(%sp)
 	fsqrt	%f0, %f0
 	flw	%f1, 28(%sp)
@@ -3360,13 +3376,13 @@ beq_else.9313:
 	fmul	%f0, %f0, %f1
 	lw	%v0, 0(%sp)
 	fsw	%f0, 0(%v0)
-beq_cont.9314:
+beq_cont.9332:
 	addi	%v0, %zero, 1
 	jr	%ra
-beq_else.9309:
+beq_else.9327:
 	addi	%v0, %zero, 0
 	jr	%ra
-solver_fast.2921:
+solver_fast.2928:
 	lw	%a1, 16(%k1)
 	lw	%a2, 12(%k1)
 	lw	%a3, 8(%k1)
@@ -3386,7 +3402,7 @@ solver_fast.2921:
 	addi	%v0, %t0, 0
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	o_param_x.2782
+	jal	o_param_x.2789
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	flw	%f1, 28(%sp)
@@ -3399,7 +3415,7 @@ solver_fast.2921:
 	addi	%v0, %v1, 0
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	o_param_y.2784
+	jal	o_param_y.2791
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	flw	%f1, 36(%sp)
@@ -3411,7 +3427,7 @@ solver_fast.2921:
 	fsw	%f1, 44(%sp)
 	sw	%ra, 52(%sp)
 	addi	%sp, %sp, 56
-	jal	o_param_z.2786
+	jal	o_param_z.2793
 	addi	%sp, %sp, -56
 	lw	%ra, 52(%sp)
 	flw	%f1, 44(%sp)
@@ -3420,7 +3436,7 @@ solver_fast.2921:
 	fsw	%f0, 48(%sp)
 	sw	%ra, 52(%sp)
 	addi	%sp, %sp, 56
-	jal	d_const.2827
+	jal	d_const.2834
 	addi	%sp, %sp, -56
 	lw	%ra, 52(%sp)
 	lw	%v1, 12(%sp)
@@ -3432,15 +3448,15 @@ solver_fast.2921:
 	addi	%v0, %v1, 0
 	sw	%ra, 60(%sp)
 	addi	%sp, %sp, 64
-	jal	o_form.2766
+	jal	o_form.2773
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	addi	%at, %zero, 1
-	bne	%v0, %at, beq_else.9315
+	bne	%v0, %at, beq_else.9333
 	lw	%v0, 16(%sp)
 	sw	%ra, 60(%sp)
 	addi	%sp, %sp, 64
-	jal	d_vec.2825
+	jal	d_vec.2832
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	addi	%v1, %v0, 0
@@ -3452,9 +3468,9 @@ solver_fast.2921:
 	lw	%k1, 8(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-beq_else.9315:
+beq_else.9333:
 	addi	%at, %zero, 2
-	bne	%v0, %at, beq_else.9316
+	bne	%v0, %at, beq_else.9334
 	flw	%f0, 32(%sp)
 	flw	%f1, 40(%sp)
 	flw	%f2, 48(%sp)
@@ -3463,7 +3479,7 @@ beq_else.9315:
 	lw	%k1, 4(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-beq_else.9316:
+beq_else.9334:
 	flw	%f0, 32(%sp)
 	flw	%f1, 40(%sp)
 	flw	%f2, 48(%sp)
@@ -3472,7 +3488,7 @@ beq_else.9316:
 	lw	%k1, 0(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-solver_surface_fast2.2925:
+solver_surface_fast2.2932:
 	lw	%v0, 4(%k1)
 	flw	%f0, 0(%v1)
 	sw	%v0, 0(%sp)
@@ -3480,14 +3496,14 @@ solver_surface_fast2.2925:
 	sw	%v1, 8(%sp)
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	fisneg.2656
+	jal	fisneg.2663
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9317
+	bne	%v0, %at, beq_else.9335
 	addi	%v0, %zero, 0
 	jr	%ra
-beq_else.9317:
+beq_else.9335:
 	lw	%v0, 8(%sp)
 	flw	%f0, 0(%v0)
 	lw	%v0, 4(%sp)
@@ -3497,7 +3513,7 @@ beq_else.9317:
 	fsw	%f0, 0(%v0)
 	addi	%v0, %zero, 1
 	jr	%ra
-solver_second_fast2.2932:
+solver_second_fast2.2939:
 	lw	%a1, 4(%k1)
 	flw	%f3, 0(%v1)
 	sw	%a1, 0(%sp)
@@ -3511,11 +3527,11 @@ solver_second_fast2.2932:
 	fadd	%f0, %f3, %fzero
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	fiszero.2658
+	jal	fiszero.2665
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9318
+	bne	%v0, %at, beq_else.9336
 	lw	%v0, 28(%sp)
 	flw	%f0, 4(%v0)
 	flw	%f1, 24(%sp)
@@ -3534,7 +3550,7 @@ solver_second_fast2.2932:
 	fsw	%f1, 36(%sp)
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	fsqr.2665
+	jal	fsqr.2672
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	flw	%f1, 36(%sp)
@@ -3544,22 +3560,22 @@ solver_second_fast2.2932:
 	fsw	%f0, 40(%sp)
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	fispos.2654
+	jal	fispos.2661
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9319
+	bne	%v0, %at, beq_else.9337
 	addi	%v0, %zero, 0
 	jr	%ra
-beq_else.9319:
+beq_else.9337:
 	lw	%v0, 4(%sp)
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	o_isinvert.2770
+	jal	o_isinvert.2777
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9320
+	bne	%v0, %at, beq_else.9338
 	flw	%f0, 40(%sp)
 	fsqrt	%f0, %f0
 	flw	%f1, 32(%sp)
@@ -3569,8 +3585,8 @@ beq_else.9319:
 	fmul	%f0, %f0, %f1
 	lw	%v0, 0(%sp)
 	fsw	%f0, 0(%v0)
-	j	beq_cont.9321
-beq_else.9320:
+	j	beq_cont.9339
+beq_else.9338:
 	flw	%f0, 40(%sp)
 	fsqrt	%f0, %f0
 	flw	%f1, 32(%sp)
@@ -3580,13 +3596,13 @@ beq_else.9320:
 	fmul	%f0, %f0, %f1
 	lw	%v0, 0(%sp)
 	fsw	%f0, 0(%v0)
-beq_cont.9321:
+beq_cont.9339:
 	addi	%v0, %zero, 1
 	jr	%ra
-beq_else.9318:
+beq_else.9336:
 	addi	%v0, %zero, 0
 	jr	%ra
-solver_fast2.2939:
+solver_fast2.2946:
 	lw	%a0, 16(%k1)
 	lw	%a1, 12(%k1)
 	lw	%a2, 8(%k1)
@@ -3603,7 +3619,7 @@ solver_fast2.2939:
 	addi	%v0, %a3, 0
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	o_param_ctbl.2804
+	jal	o_param_ctbl.2811
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	flw	%f0, 0(%v0)
@@ -3617,7 +3633,7 @@ solver_fast2.2939:
 	addi	%v0, %v1, 0
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	d_const.2827
+	jal	d_const.2834
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	lw	%v1, 16(%sp)
@@ -3629,15 +3645,15 @@ solver_fast2.2939:
 	addi	%v0, %v1, 0
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	o_form.2766
+	jal	o_form.2773
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	addi	%at, %zero, 1
-	bne	%v0, %at, beq_else.9322
+	bne	%v0, %at, beq_else.9340
 	lw	%v0, 20(%sp)
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	d_vec.2825
+	jal	d_vec.2832
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	addi	%v1, %v0, 0
@@ -3649,9 +3665,9 @@ solver_fast2.2939:
 	lw	%k1, 8(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-beq_else.9322:
+beq_else.9340:
 	addi	%at, %zero, 2
-	bne	%v0, %at, beq_else.9323
+	bne	%v0, %at, beq_else.9341
 	flw	%f0, 36(%sp)
 	flw	%f1, 32(%sp)
 	flw	%f2, 28(%sp)
@@ -3661,7 +3677,7 @@ beq_else.9322:
 	lw	%k1, 4(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-beq_else.9323:
+beq_else.9341:
 	flw	%f0, 36(%sp)
 	flw	%f1, 32(%sp)
 	flw	%f2, 28(%sp)
@@ -3671,7 +3687,7 @@ beq_else.9323:
 	lw	%k1, 0(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-setup_rect_table.2942:
+setup_rect_table.2949:
 	addi	%a0, %zero, 6
 	flw	%f0, 20192(%zero)
 	sw	%v1, 0(%sp)
@@ -3687,15 +3703,15 @@ setup_rect_table.2942:
 	sw	%v0, 8(%sp)
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	fiszero.2658
+	jal	fiszero.2665
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9324
+	bne	%v0, %at, beq_else.9342
 	lw	%v0, 0(%sp)
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	o_isinvert.2770
+	jal	o_isinvert.2777
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	lw	%v1, 4(%sp)
@@ -3703,14 +3719,14 @@ setup_rect_table.2942:
 	sw	%v0, 12(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	fisneg.2656
+	jal	fisneg.2663
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	addi	%v1, %v0, 0
 	lw	%v0, 12(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	xor.2660
+	jal	xor.2667
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	lw	%v1, 0(%sp)
@@ -3718,13 +3734,13 @@ setup_rect_table.2942:
 	addi	%v0, %v1, 0
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	o_param_a.2774
+	jal	o_param_a.2781
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	lw	%v0, 16(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	fneg_cond.2712
+	jal	fneg_cond.2719
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	lw	%v0, 8(%sp)
@@ -3734,25 +3750,25 @@ setup_rect_table.2942:
 	flw	%f1, 0(%v1)
 	fdiv	%f0, %f0, %f1
 	fsw	%f0, 4(%v0)
-	j	beq_cont.9325
-beq_else.9324:
+	j	beq_cont.9343
+beq_else.9342:
 	flw	%f0, 20192(%zero)
 	lw	%v0, 8(%sp)
 	fsw	%f0, 4(%v0)
-beq_cont.9325:
+beq_cont.9343:
 	lw	%v1, 4(%sp)
 	flw	%f0, 4(%v1)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	fiszero.2658
+	jal	fiszero.2665
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9326
+	bne	%v0, %at, beq_else.9344
 	lw	%v0, 0(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	o_isinvert.2770
+	jal	o_isinvert.2777
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	lw	%v1, 4(%sp)
@@ -3760,14 +3776,14 @@ beq_cont.9325:
 	sw	%v0, 20(%sp)
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	fisneg.2656
+	jal	fisneg.2663
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	addi	%v1, %v0, 0
 	lw	%v0, 20(%sp)
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	xor.2660
+	jal	xor.2667
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	lw	%v1, 0(%sp)
@@ -3775,13 +3791,13 @@ beq_cont.9325:
 	addi	%v0, %v1, 0
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	o_param_b.2776
+	jal	o_param_b.2783
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	lw	%v0, 24(%sp)
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	fneg_cond.2712
+	jal	fneg_cond.2719
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	lw	%v0, 8(%sp)
@@ -3791,25 +3807,25 @@ beq_cont.9325:
 	flw	%f1, 4(%v1)
 	fdiv	%f0, %f0, %f1
 	fsw	%f0, 12(%v0)
-	j	beq_cont.9327
-beq_else.9326:
+	j	beq_cont.9345
+beq_else.9344:
 	flw	%f0, 20192(%zero)
 	lw	%v0, 8(%sp)
 	fsw	%f0, 12(%v0)
-beq_cont.9327:
+beq_cont.9345:
 	lw	%v1, 4(%sp)
 	flw	%f0, 8(%v1)
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	fiszero.2658
+	jal	fiszero.2665
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9328
+	bne	%v0, %at, beq_else.9346
 	lw	%v0, 0(%sp)
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	o_isinvert.2770
+	jal	o_isinvert.2777
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	lw	%v1, 4(%sp)
@@ -3817,14 +3833,14 @@ beq_cont.9327:
 	sw	%v0, 28(%sp)
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	fisneg.2656
+	jal	fisneg.2663
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	addi	%v1, %v0, 0
 	lw	%v0, 28(%sp)
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	xor.2660
+	jal	xor.2667
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	lw	%v1, 0(%sp)
@@ -3832,13 +3848,13 @@ beq_cont.9327:
 	addi	%v0, %v1, 0
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	o_param_c.2778
+	jal	o_param_c.2785
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	lw	%v0, 32(%sp)
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	fneg_cond.2712
+	jal	fneg_cond.2719
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	lw	%v0, 8(%sp)
@@ -3848,14 +3864,14 @@ beq_cont.9327:
 	flw	%f1, 8(%v1)
 	fdiv	%f0, %f0, %f1
 	fsw	%f0, 20(%v0)
-	j	beq_cont.9329
-beq_else.9328:
+	j	beq_cont.9347
+beq_else.9346:
 	flw	%f0, 20192(%zero)
 	lw	%v0, 8(%sp)
 	fsw	%f0, 20(%v0)
-beq_cont.9329:
+beq_cont.9347:
 	jr	%ra
-setup_surface_table.2945:
+setup_surface_table.2952:
 	addi	%a0, %zero, 4
 	flw	%f0, 20192(%zero)
 	sw	%v1, 0(%sp)
@@ -3874,7 +3890,7 @@ setup_surface_table.2945:
 	addi	%v0, %a0, 0
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	o_param_a.2774
+	jal	o_param_a.2781
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	flw	%f1, 12(%sp)
@@ -3887,7 +3903,7 @@ setup_surface_table.2945:
 	addi	%v0, %v1, 0
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	o_param_b.2776
+	jal	o_param_b.2783
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	flw	%f1, 20(%sp)
@@ -3901,7 +3917,7 @@ setup_surface_table.2945:
 	fsw	%f1, 28(%sp)
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	o_param_c.2778
+	jal	o_param_c.2785
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	flw	%f1, 28(%sp)
@@ -3911,16 +3927,16 @@ setup_surface_table.2945:
 	fsw	%f0, 32(%sp)
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	fispos.2654
+	jal	fispos.2661
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9330
+	bne	%v0, %at, beq_else.9348
 	flw	%f0, 20192(%zero)
 	lw	%v0, 8(%sp)
 	fsw	%f0, 0(%v0)
-	j	beq_cont.9331
-beq_else.9330:
+	j	beq_cont.9349
+beq_else.9348:
 	flw	%f0, 20104(%zero)
 	flw	%f1, 32(%sp)
 	fdiv	%f0, %f0, %f1
@@ -3930,7 +3946,7 @@ beq_else.9330:
 	addi	%v0, %v1, 0
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	o_param_a.2774
+	jal	o_param_a.2781
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	flw	%f1, 32(%sp)
@@ -3942,7 +3958,7 @@ beq_else.9330:
 	addi	%v0, %v1, 0
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	o_param_b.2776
+	jal	o_param_b.2783
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	flw	%f1, 32(%sp)
@@ -3954,7 +3970,7 @@ beq_else.9330:
 	addi	%v0, %v1, 0
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	o_param_c.2778
+	jal	o_param_c.2785
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	flw	%f1, 32(%sp)
@@ -3962,9 +3978,9 @@ beq_else.9330:
 	fneg	%f0, %f0
 	lw	%v0, 8(%sp)
 	fsw	%f0, 12(%v0)
-beq_cont.9331:
+beq_cont.9349:
 	jr	%ra
-setup_second_table.2948:
+setup_second_table.2955:
 	addi	%a0, %zero, 5
 	flw	%f0, 20192(%zero)
 	sw	%v1, 0(%sp)
@@ -3984,7 +4000,7 @@ setup_second_table.2948:
 	addi	%v0, %a0, 0
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	quadratic.2879
+	jal	quadratic.2886
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	lw	%v0, 4(%sp)
@@ -3995,7 +4011,7 @@ setup_second_table.2948:
 	addi	%v0, %v1, 0
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	o_param_a.2774
+	jal	o_param_a.2781
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	flw	%f1, 16(%sp)
@@ -4009,7 +4025,7 @@ setup_second_table.2948:
 	addi	%v0, %v1, 0
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	o_param_b.2776
+	jal	o_param_b.2783
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	flw	%f1, 24(%sp)
@@ -4023,7 +4039,7 @@ setup_second_table.2948:
 	addi	%v0, %v1, 0
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	o_param_c.2778
+	jal	o_param_c.2785
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	flw	%f1, 32(%sp)
@@ -4037,11 +4053,11 @@ setup_second_table.2948:
 	addi	%v0, %v1, 0
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	o_isrot.2772
+	jal	o_isrot.2779
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9332
+	bne	%v0, %at, beq_else.9350
 	lw	%v0, 8(%sp)
 	flw	%f0, 20(%sp)
 	fsw	%f0, 4(%v0)
@@ -4049,8 +4065,8 @@ setup_second_table.2948:
 	fsw	%f0, 8(%v0)
 	flw	%f0, 36(%sp)
 	fsw	%f0, 12(%v0)
-	j	beq_cont.9333
-beq_else.9332:
+	j	beq_cont.9351
+beq_else.9350:
 	lw	%v0, 4(%sp)
 	flw	%f0, 8(%v0)
 	lw	%v1, 0(%sp)
@@ -4058,7 +4074,7 @@ beq_else.9332:
 	addi	%v0, %v1, 0
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	o_param_r2.2800
+	jal	o_param_r2.2807
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	flw	%f1, 40(%sp)
@@ -4071,7 +4087,7 @@ beq_else.9332:
 	addi	%v0, %v1, 0
 	sw	%ra, 52(%sp)
 	addi	%sp, %sp, 56
-	jal	o_param_r3.2802
+	jal	o_param_r3.2809
 	addi	%sp, %sp, -56
 	lw	%ra, 52(%sp)
 	flw	%f1, 48(%sp)
@@ -4080,7 +4096,7 @@ beq_else.9332:
 	fadd	%f0, %f1, %f0
 	sw	%ra, 52(%sp)
 	addi	%sp, %sp, 56
-	jal	fhalf.2663
+	jal	fhalf.2670
 	addi	%sp, %sp, -56
 	lw	%ra, 52(%sp)
 	flw	%f1, 20(%sp)
@@ -4094,7 +4110,7 @@ beq_else.9332:
 	addi	%v0, %a0, 0
 	sw	%ra, 60(%sp)
 	addi	%sp, %sp, 64
-	jal	o_param_r1.2798
+	jal	o_param_r1.2805
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	flw	%f1, 52(%sp)
@@ -4107,7 +4123,7 @@ beq_else.9332:
 	addi	%v0, %v1, 0
 	sw	%ra, 68(%sp)
 	addi	%sp, %sp, 72
-	jal	o_param_r3.2802
+	jal	o_param_r3.2809
 	addi	%sp, %sp, -72
 	lw	%ra, 68(%sp)
 	flw	%f1, 60(%sp)
@@ -4116,7 +4132,7 @@ beq_else.9332:
 	fadd	%f0, %f1, %f0
 	sw	%ra, 68(%sp)
 	addi	%sp, %sp, 72
-	jal	fhalf.2663
+	jal	fhalf.2670
 	addi	%sp, %sp, -72
 	lw	%ra, 68(%sp)
 	flw	%f1, 28(%sp)
@@ -4130,7 +4146,7 @@ beq_else.9332:
 	addi	%v0, %a0, 0
 	sw	%ra, 68(%sp)
 	addi	%sp, %sp, 72
-	jal	o_param_r1.2798
+	jal	o_param_r1.2805
 	addi	%sp, %sp, -72
 	lw	%ra, 68(%sp)
 	flw	%f1, 64(%sp)
@@ -4142,7 +4158,7 @@ beq_else.9332:
 	fsw	%f1, 72(%sp)
 	sw	%ra, 76(%sp)
 	addi	%sp, %sp, 80
-	jal	o_param_r2.2800
+	jal	o_param_r2.2807
 	addi	%sp, %sp, -80
 	lw	%ra, 76(%sp)
 	flw	%f1, 72(%sp)
@@ -4151,36 +4167,36 @@ beq_else.9332:
 	fadd	%f0, %f1, %f0
 	sw	%ra, 76(%sp)
 	addi	%sp, %sp, 80
-	jal	fhalf.2663
+	jal	fhalf.2670
 	addi	%sp, %sp, -80
 	lw	%ra, 76(%sp)
 	flw	%f1, 36(%sp)
 	fsub	%f0, %f1, %f0
 	lw	%v0, 8(%sp)
 	fsw	%f0, 12(%v0)
-beq_cont.9333:
+beq_cont.9351:
 	flw	%f0, 12(%sp)
 	sw	%ra, 76(%sp)
 	addi	%sp, %sp, 80
-	jal	fiszero.2658
+	jal	fiszero.2665
 	addi	%sp, %sp, -80
 	lw	%ra, 76(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9334
+	bne	%v0, %at, beq_else.9352
 	flw	%f0, 20180(%zero)
 	flw	%f1, 12(%sp)
 	fdiv	%f0, %f0, %f1
 	lw	%v0, 8(%sp)
 	fsw	%f0, 16(%v0)
-	j	beq_cont.9335
-beq_else.9334:
-beq_cont.9335:
+	j	beq_cont.9353
+beq_else.9352:
+beq_cont.9353:
 	lw	%v0, 8(%sp)
 	jr	%ra
-iter_setup_dirvec_constants.2951:
+iter_setup_dirvec_constants.2958:
 	lw	%a0, 4(%k1)
 	slti	%at, %v1, 0
-	bne	%at, %zero, beq_else.9336
+	bne	%at, %zero, beq_else.9354
 	sll	%a1, %v1, 2
 	add	%at, %a0, %a1
 	lw	%a0, 0(%at)
@@ -4190,7 +4206,7 @@ iter_setup_dirvec_constants.2951:
 	sw	%v0, 12(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	d_const.2827
+	jal	d_const.2834
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	lw	%v1, 12(%sp)
@@ -4198,7 +4214,7 @@ iter_setup_dirvec_constants.2951:
 	addi	%v0, %v1, 0
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	d_vec.2825
+	jal	d_vec.2832
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	lw	%v1, 8(%sp)
@@ -4206,16 +4222,16 @@ iter_setup_dirvec_constants.2951:
 	addi	%v0, %v1, 0
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	o_form.2766
+	jal	o_form.2773
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	addi	%at, %zero, 1
-	bne	%v0, %at, beq_else.9337
+	bne	%v0, %at, beq_else.9355
 	lw	%v0, 20(%sp)
 	lw	%v1, 8(%sp)
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	setup_rect_table.2942
+	jal	setup_rect_table.2949
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	lw	%v1, 4(%sp)
@@ -4223,15 +4239,15 @@ iter_setup_dirvec_constants.2951:
 	lw	%a1, 16(%sp)
 	add	%at, %a1, %a0
 	sw	%v0, 0(%at)
-	j	beq_cont.9338
-beq_else.9337:
+	j	beq_cont.9356
+beq_else.9355:
 	addi	%at, %zero, 2
-	bne	%v0, %at, beq_else.9339
+	bne	%v0, %at, beq_else.9357
 	lw	%v0, 20(%sp)
 	lw	%v1, 8(%sp)
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	setup_surface_table.2945
+	jal	setup_surface_table.2952
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	lw	%v1, 4(%sp)
@@ -4239,13 +4255,13 @@ beq_else.9337:
 	lw	%a1, 16(%sp)
 	add	%at, %a1, %a0
 	sw	%v0, 0(%at)
-	j	beq_cont.9340
-beq_else.9339:
+	j	beq_cont.9358
+beq_else.9357:
 	lw	%v0, 20(%sp)
 	lw	%v1, 8(%sp)
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	setup_second_table.2948
+	jal	setup_second_table.2955
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	lw	%v1, 4(%sp)
@@ -4253,26 +4269,26 @@ beq_else.9339:
 	lw	%a1, 16(%sp)
 	add	%at, %a1, %a0
 	sw	%v0, 0(%at)
-beq_cont.9340:
-beq_cont.9338:
+beq_cont.9358:
+beq_cont.9356:
 	addi	%v1, %v1, -1
 	lw	%v0, 12(%sp)
 	lw	%k1, 0(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-beq_else.9336:
+beq_else.9354:
 	jr	%ra
-setup_dirvec_constants.2954:
+setup_dirvec_constants.2961:
 	lw	%v1, 8(%k1)
 	lw	%k1, 4(%k1)
 	lw	%v1, 0(%v1)
 	addi	%v1, %v1, -1
 	lw	%at, 0(%k1)
 	jr	%at
-setup_startp_constants.2956:
+setup_startp_constants.2963:
 	lw	%a0, 4(%k1)
 	slti	%at, %v1, 0
-	bne	%at, %zero, beq_else.9342
+	bne	%at, %zero, beq_else.9360
 	sll	%a1, %v1, 2
 	add	%at, %a0, %a1
 	lw	%a0, 0(%at)
@@ -4283,7 +4299,7 @@ setup_startp_constants.2956:
 	addi	%v0, %a0, 0
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	o_param_ctbl.2804
+	jal	o_param_ctbl.2811
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	lw	%v1, 12(%sp)
@@ -4291,7 +4307,7 @@ setup_startp_constants.2956:
 	addi	%v0, %v1, 0
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	o_form.2766
+	jal	o_form.2773
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	lw	%v1, 8(%sp)
@@ -4302,7 +4318,7 @@ setup_startp_constants.2956:
 	addi	%v0, %a0, 0
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	o_param_x.2782
+	jal	o_param_x.2789
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	flw	%f1, 24(%sp)
@@ -4316,7 +4332,7 @@ setup_startp_constants.2956:
 	addi	%v0, %a0, 0
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	o_param_y.2784
+	jal	o_param_y.2791
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	flw	%f1, 28(%sp)
@@ -4330,7 +4346,7 @@ setup_startp_constants.2956:
 	addi	%v0, %a0, 0
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	o_param_z.2786
+	jal	o_param_z.2793
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	flw	%f1, 32(%sp)
@@ -4339,12 +4355,12 @@ setup_startp_constants.2956:
 	fsw	%f0, 8(%v0)
 	lw	%v1, 20(%sp)
 	addi	%at, %zero, 2
-	bne	%v1, %at, beq_else.9343
+	bne	%v1, %at, beq_else.9361
 	lw	%v1, 12(%sp)
 	addi	%v0, %v1, 0
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	o_param_abc.2780
+	jal	o_param_abc.2787
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	lw	%v1, 16(%sp)
@@ -4353,18 +4369,18 @@ setup_startp_constants.2956:
 	flw	%f2, 8(%v1)
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	veciprod2.2742
+	jal	veciprod2.2749
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	lw	%v0, 16(%sp)
 	fsw	%f0, 12(%v0)
-	j	beq_cont.9344
-beq_else.9343:
+	j	beq_cont.9362
+beq_else.9361:
 	addi	%at, %zero, 2
 	slt	%at, %at, %v1
-	bne	%at, %zero, beq_else.9345
-	j	beq_cont.9346
-beq_else.9345:
+	bne	%at, %zero, beq_else.9363
+	j	beq_cont.9364
+beq_else.9363:
 	flw	%f0, 0(%v0)
 	flw	%f1, 4(%v0)
 	flw	%f2, 8(%v0)
@@ -4372,30 +4388,30 @@ beq_else.9345:
 	addi	%v0, %a0, 0
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	quadratic.2879
+	jal	quadratic.2886
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	lw	%v0, 20(%sp)
 	addi	%at, %zero, 3
-	bne	%v0, %at, beq_else.9347
+	bne	%v0, %at, beq_else.9365
 	flw	%f1, 20180(%zero)
 	fsub	%f0, %f0, %f1
-	j	beq_cont.9348
-beq_else.9347:
-beq_cont.9348:
+	j	beq_cont.9366
+beq_else.9365:
+beq_cont.9366:
 	lw	%v0, 16(%sp)
 	fsw	%f0, 12(%v0)
-beq_cont.9346:
-beq_cont.9344:
+beq_cont.9364:
+beq_cont.9362:
 	lw	%v0, 4(%sp)
 	addi	%v1, %v0, -1
 	lw	%v0, 8(%sp)
 	lw	%k1, 0(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-beq_else.9342:
+beq_else.9360:
 	jr	%ra
-setup_startp.2959:
+setup_startp.2966:
 	lw	%v1, 12(%k1)
 	lw	%a0, 8(%k1)
 	lw	%a1, 4(%k1)
@@ -4407,7 +4423,7 @@ setup_startp.2959:
 	addi	%v0, %k0, 0
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	veccpy.2728
+	jal	veccpy.2735
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	lw	%v0, 8(%sp)
@@ -4417,7 +4433,7 @@ setup_startp.2959:
 	lw	%k1, 4(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-is_rect_outside.2961:
+is_rect_outside.2968:
 	fabs	%f0, %f0
 	fsw	%f2, 0(%sp)
 	sw	%v0, 4(%sp)
@@ -4425,86 +4441,86 @@ is_rect_outside.2961:
 	fsw	%f0, 12(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	o_param_a.2774
+	jal	o_param_a.2781
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	fadd	%f1, %f0, %fzero
 	flw	%f0, 12(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	fless.2651
+	jal	fless.2658
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9350
+	bne	%v0, %at, beq_else.9368
 	addi	%v0, %zero, 0
-	j	beq_cont.9351
-beq_else.9350:
+	j	beq_cont.9369
+beq_else.9368:
 	flw	%f0, 8(%sp)
 	fabs	%f0, %f0
 	lw	%v0, 4(%sp)
 	fsw	%f0, 16(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	o_param_b.2776
+	jal	o_param_b.2783
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	fadd	%f1, %f0, %fzero
 	flw	%f0, 16(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	fless.2651
+	jal	fless.2658
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9352
+	bne	%v0, %at, beq_else.9370
 	addi	%v0, %zero, 0
-	j	beq_cont.9353
-beq_else.9352:
+	j	beq_cont.9371
+beq_else.9370:
 	flw	%f0, 0(%sp)
 	fabs	%f0, %f0
 	lw	%v0, 4(%sp)
 	fsw	%f0, 20(%sp)
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	o_param_c.2778
+	jal	o_param_c.2785
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	fadd	%f1, %f0, %fzero
 	flw	%f0, 20(%sp)
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	fless.2651
+	jal	fless.2658
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
-beq_cont.9353:
-beq_cont.9351:
+beq_cont.9371:
+beq_cont.9369:
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9354
+	bne	%v0, %at, beq_else.9372
 	lw	%v0, 4(%sp)
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	o_isinvert.2770
+	jal	o_isinvert.2777
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9355
+	bne	%v0, %at, beq_else.9373
 	addi	%v0, %zero, 1
 	jr	%ra
-beq_else.9355:
+beq_else.9373:
 	addi	%v0, %zero, 0
 	jr	%ra
-beq_else.9354:
+beq_else.9372:
 	lw	%v0, 4(%sp)
-	j	o_isinvert.2770
-is_plane_outside.2966:
+	j	o_isinvert.2777
+is_plane_outside.2973:
 	sw	%v0, 0(%sp)
 	fsw	%f2, 4(%sp)
 	fsw	%f1, 8(%sp)
 	fsw	%f0, 12(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	o_param_abc.2780
+	jal	o_param_abc.2787
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	flw	%f0, 12(%sp)
@@ -4512,96 +4528,96 @@ is_plane_outside.2966:
 	flw	%f2, 4(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	veciprod2.2742
+	jal	veciprod2.2749
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	lw	%v0, 0(%sp)
 	fsw	%f0, 16(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	o_isinvert.2770
+	jal	o_isinvert.2777
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	flw	%f0, 16(%sp)
 	sw	%v0, 20(%sp)
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	fisneg.2656
+	jal	fisneg.2663
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	addi	%v1, %v0, 0
 	lw	%v0, 20(%sp)
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	xor.2660
+	jal	xor.2667
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9356
+	bne	%v0, %at, beq_else.9374
 	addi	%v0, %zero, 1
 	jr	%ra
-beq_else.9356:
+beq_else.9374:
 	addi	%v0, %zero, 0
 	jr	%ra
-is_second_outside.2971:
+is_second_outside.2978:
 	sw	%v0, 0(%sp)
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 8
-	jal	quadratic.2879
+	jal	quadratic.2886
 	addi	%sp, %sp, -8
 	lw	%ra, 4(%sp)
 	lw	%v0, 0(%sp)
 	fsw	%f0, 4(%sp)
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	o_form.2766
+	jal	o_form.2773
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	addi	%at, %zero, 3
-	bne	%v0, %at, beq_else.9357
+	bne	%v0, %at, beq_else.9375
 	flw	%f0, 20180(%zero)
 	flw	%f1, 4(%sp)
 	fsub	%f0, %f1, %f0
-	j	beq_cont.9358
-beq_else.9357:
+	j	beq_cont.9376
+beq_else.9375:
 	flw	%f0, 4(%sp)
-beq_cont.9358:
+beq_cont.9376:
 	lw	%v0, 0(%sp)
 	fsw	%f0, 8(%sp)
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	o_isinvert.2770
+	jal	o_isinvert.2777
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	flw	%f0, 8(%sp)
 	sw	%v0, 12(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	fisneg.2656
+	jal	fisneg.2663
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	addi	%v1, %v0, 0
 	lw	%v0, 12(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	xor.2660
+	jal	xor.2667
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9359
+	bne	%v0, %at, beq_else.9377
 	addi	%v0, %zero, 1
 	jr	%ra
-beq_else.9359:
+beq_else.9377:
 	addi	%v0, %zero, 0
 	jr	%ra
-is_outside.2976:
+is_outside.2983:
 	fsw	%f2, 0(%sp)
 	fsw	%f1, 4(%sp)
 	sw	%v0, 8(%sp)
 	fsw	%f0, 12(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	o_param_x.2782
+	jal	o_param_x.2789
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	flw	%f1, 12(%sp)
@@ -4610,7 +4626,7 @@ is_outside.2976:
 	fsw	%f0, 16(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	o_param_y.2784
+	jal	o_param_y.2791
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	flw	%f1, 4(%sp)
@@ -4619,7 +4635,7 @@ is_outside.2976:
 	fsw	%f0, 20(%sp)
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	o_param_z.2786
+	jal	o_param_z.2793
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	flw	%f1, 0(%sp)
@@ -4628,40 +4644,40 @@ is_outside.2976:
 	fsw	%f0, 24(%sp)
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	o_form.2766
+	jal	o_form.2773
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	addi	%at, %zero, 1
-	bne	%v0, %at, beq_else.9360
+	bne	%v0, %at, beq_else.9378
 	flw	%f0, 16(%sp)
 	flw	%f1, 20(%sp)
 	flw	%f2, 24(%sp)
 	lw	%v0, 8(%sp)
-	j	is_rect_outside.2961
-beq_else.9360:
+	j	is_rect_outside.2968
+beq_else.9378:
 	addi	%at, %zero, 2
-	bne	%v0, %at, beq_else.9361
+	bne	%v0, %at, beq_else.9379
 	flw	%f0, 16(%sp)
 	flw	%f1, 20(%sp)
 	flw	%f2, 24(%sp)
 	lw	%v0, 8(%sp)
-	j	is_plane_outside.2966
-beq_else.9361:
+	j	is_plane_outside.2973
+beq_else.9379:
 	flw	%f0, 16(%sp)
 	flw	%f1, 20(%sp)
 	flw	%f2, 24(%sp)
 	lw	%v0, 8(%sp)
-	j	is_second_outside.2971
-check_all_inside.2981:
+	j	is_second_outside.2978
+check_all_inside.2988:
 	lw	%a0, 4(%k1)
 	sll	%a1, %v0, 2
 	add	%at, %v1, %a1
 	lw	%a1, 0(%at)
 	addi	%at, %zero, -1
-	bne	%a1, %at, beq_else.9362
+	bne	%a1, %at, beq_else.9380
 	addi	%v0, %zero, 1
 	jr	%ra
-beq_else.9362:
+beq_else.9380:
 	sll	%a1, %a1, 2
 	add	%at, %a0, %a1
 	lw	%a0, 0(%at)
@@ -4674,11 +4690,11 @@ beq_else.9362:
 	addi	%v0, %a0, 0
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	is_outside.2976
+	jal	is_outside.2983
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9363
+	bne	%v0, %at, beq_else.9381
 	lw	%v0, 20(%sp)
 	addi	%v0, %v0, 1
 	flw	%f0, 8(%sp)
@@ -4688,10 +4704,10 @@ beq_else.9362:
 	lw	%k1, 16(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-beq_else.9363:
+beq_else.9381:
 	addi	%v0, %zero, 0
 	jr	%ra
-shadow_check_and_group.2987:
+shadow_check_and_group.2994:
 	lw	%a0, 28(%k1)
 	lw	%a1, 24(%k1)
 	lw	%a2, 20(%k1)
@@ -4703,10 +4719,10 @@ shadow_check_and_group.2987:
 	add	%at, %v1, %t3
 	lw	%t3, 0(%at)
 	addi	%at, %zero, -1
-	bne	%t3, %at, beq_else.9364
+	bne	%t3, %at, beq_else.9382
 	addi	%v0, %zero, 0
 	jr	%ra
-beq_else.9364:
+beq_else.9382:
 	sll	%t3, %v0, 2
 	add	%at, %v1, %t3
 	lw	%t3, 0(%at)
@@ -4733,19 +4749,19 @@ beq_else.9364:
 	flw	%f0, 0(%v1)
 	fsw	%f0, 36(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9365
+	bne	%v0, %at, beq_else.9383
 	addi	%v0, %zero, 0
-	j	beq_cont.9366
-beq_else.9365:
+	j	beq_cont.9384
+beq_else.9383:
 	flw	%f1, 20088(%zero)
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	fless.2651
+	jal	fless.2658
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
-beq_cont.9366:
+beq_cont.9384:
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9367
+	bne	%v0, %at, beq_else.9385
 	lw	%v0, 28(%sp)
 	sll	%v0, %v0, 2
 	lw	%v1, 24(%sp)
@@ -4753,21 +4769,21 @@ beq_cont.9366:
 	lw	%v0, 0(%at)
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	o_isinvert.2770
+	jal	o_isinvert.2777
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9368
+	bne	%v0, %at, beq_else.9386
 	addi	%v0, %zero, 0
 	jr	%ra
-beq_else.9368:
+beq_else.9386:
 	lw	%v0, 20(%sp)
 	addi	%v0, %v0, 1
 	lw	%v1, 12(%sp)
 	lw	%k1, 16(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-beq_else.9367:
+beq_else.9385:
 	flw	%f0, 20084(%zero)
 	flw	%f1, 36(%sp)
 	fadd	%f0, %f1, %f0
@@ -4799,27 +4815,27 @@ beq_else.9367:
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9369
+	bne	%v0, %at, beq_else.9387
 	lw	%v0, 20(%sp)
 	addi	%v0, %v0, 1
 	lw	%v1, 12(%sp)
 	lw	%k1, 16(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-beq_else.9369:
+beq_else.9387:
 	addi	%v0, %zero, 1
 	jr	%ra
-shadow_check_one_or_group.2990:
+shadow_check_one_or_group.2997:
 	lw	%a0, 8(%k1)
 	lw	%a1, 4(%k1)
 	sll	%a2, %v0, 2
 	add	%at, %v1, %a2
 	lw	%a2, 0(%at)
 	addi	%at, %zero, -1
-	bne	%a2, %at, beq_else.9370
+	bne	%a2, %at, beq_else.9388
 	addi	%v0, %zero, 0
 	jr	%ra
-beq_else.9370:
+beq_else.9388:
 	sll	%a2, %a2, 2
 	add	%at, %a1, %a2
 	lw	%a1, 0(%at)
@@ -4837,17 +4853,17 @@ beq_else.9370:
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9371
+	bne	%v0, %at, beq_else.9389
 	lw	%v0, 8(%sp)
 	addi	%v0, %v0, 1
 	lw	%v1, 0(%sp)
 	lw	%k1, 4(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-beq_else.9371:
+beq_else.9389:
 	addi	%v0, %zero, 1
 	jr	%ra
-shadow_check_one_or_matrix.2993:
+shadow_check_one_or_matrix.3000:
 	lw	%a0, 20(%k1)
 	lw	%a1, 16(%k1)
 	lw	%a2, 12(%k1)
@@ -4858,20 +4874,20 @@ shadow_check_one_or_matrix.2993:
 	lw	%t1, 0(%at)
 	lw	%t2, 0(%t1)
 	addi	%at, %zero, -1
-	bne	%t2, %at, beq_else.9372
+	bne	%t2, %at, beq_else.9390
 	addi	%v0, %zero, 0
 	jr	%ra
-beq_else.9372:
+beq_else.9390:
 	sw	%t1, 0(%sp)
 	sw	%a2, 4(%sp)
 	sw	%v1, 8(%sp)
 	sw	%k1, 12(%sp)
 	sw	%v0, 16(%sp)
 	addi	%at, %zero, 99
-	bne	%t2, %at, beq_else.9373
+	bne	%t2, %at, beq_else.9391
 	addi	%v0, %zero, 1
-	j	beq_cont.9374
-beq_else.9373:
+	j	beq_cont.9392
+beq_else.9391:
 	sw	%a1, 20(%sp)
 	addi	%v1, %a3, 0
 	addi	%v0, %t2, 0
@@ -4884,23 +4900,23 @@ beq_else.9373:
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9375
+	bne	%v0, %at, beq_else.9393
 	addi	%v0, %zero, 0
-	j	beq_cont.9376
-beq_else.9375:
+	j	beq_cont.9394
+beq_else.9393:
 	lw	%v0, 20(%sp)
 	flw	%f0, 0(%v0)
 	flw	%f1, 20080(%zero)
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	fless.2651
+	jal	fless.2658
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9377
+	bne	%v0, %at, beq_else.9395
 	addi	%v0, %zero, 0
-	j	beq_cont.9378
-beq_else.9377:
+	j	beq_cont.9396
+beq_else.9395:
 	addi	%v0, %zero, 1
 	lw	%v1, 0(%sp)
 	lw	%k1, 4(%sp)
@@ -4911,24 +4927,24 @@ beq_else.9377:
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9379
+	bne	%v0, %at, beq_else.9397
 	addi	%v0, %zero, 0
-	j	beq_cont.9380
-beq_else.9379:
+	j	beq_cont.9398
+beq_else.9397:
 	addi	%v0, %zero, 1
-beq_cont.9380:
-beq_cont.9378:
-beq_cont.9376:
-beq_cont.9374:
+beq_cont.9398:
+beq_cont.9396:
+beq_cont.9394:
+beq_cont.9392:
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9381
+	bne	%v0, %at, beq_else.9399
 	lw	%v0, 16(%sp)
 	addi	%v0, %v0, 1
 	lw	%v1, 8(%sp)
 	lw	%k1, 12(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-beq_else.9381:
+beq_else.9399:
 	addi	%v0, %zero, 1
 	lw	%v1, 0(%sp)
 	lw	%k1, 4(%sp)
@@ -4939,17 +4955,17 @@ beq_else.9381:
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9382
+	bne	%v0, %at, beq_else.9400
 	lw	%v0, 16(%sp)
 	addi	%v0, %v0, 1
 	lw	%v1, 8(%sp)
 	lw	%k1, 12(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-beq_else.9382:
+beq_else.9400:
 	addi	%v0, %zero, 1
 	jr	%ra
-solve_each_element.2996:
+solve_each_element.3003:
 	lw	%a1, 36(%k1)
 	lw	%a2, 32(%k1)
 	lw	%a3, 28(%k1)
@@ -4963,9 +4979,9 @@ solve_each_element.2996:
 	add	%at, %v1, %t6
 	lw	%t6, 0(%at)
 	addi	%at, %zero, -1
-	bne	%t6, %at, beq_else.9383
+	bne	%t6, %at, beq_else.9401
 	jr	%ra
-beq_else.9383:
+beq_else.9401:
 	sw	%t2, 0(%sp)
 	sw	%t4, 4(%sp)
 	sw	%t3, 8(%sp)
@@ -4990,7 +5006,7 @@ beq_else.9383:
 	addi	%sp, %sp, -56
 	lw	%ra, 52(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9385
+	bne	%v0, %at, beq_else.9403
 	lw	%v0, 48(%sp)
 	sll	%v0, %v0, 2
 	lw	%v1, 44(%sp)
@@ -4998,13 +5014,13 @@ beq_else.9383:
 	lw	%v0, 0(%at)
 	sw	%ra, 52(%sp)
 	addi	%sp, %sp, 56
-	jal	o_isinvert.2770
+	jal	o_isinvert.2777
 	addi	%sp, %sp, -56
 	lw	%ra, 52(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9386
+	bne	%v0, %at, beq_else.9404
 	jr	%ra
-beq_else.9386:
+beq_else.9404:
 	lw	%v0, 40(%sp)
 	addi	%v0, %v0, 1
 	lw	%v1, 32(%sp)
@@ -5012,7 +5028,7 @@ beq_else.9386:
 	lw	%k1, 36(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-beq_else.9385:
+beq_else.9403:
 	lw	%v1, 24(%sp)
 	flw	%f1, 0(%v1)
 	flw	%f0, 20192(%zero)
@@ -5020,25 +5036,25 @@ beq_else.9385:
 	fsw	%f1, 56(%sp)
 	sw	%ra, 60(%sp)
 	addi	%sp, %sp, 64
-	jal	fless.2651
+	jal	fless.2658
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9388
-	j	beq_cont.9389
-beq_else.9388:
+	bne	%v0, %at, beq_else.9406
+	j	beq_cont.9407
+beq_else.9406:
 	lw	%v0, 20(%sp)
 	flw	%f1, 0(%v0)
 	flw	%f0, 56(%sp)
 	sw	%ra, 60(%sp)
 	addi	%sp, %sp, 64
-	jal	fless.2651
+	jal	fless.2658
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9390
-	j	beq_cont.9391
-beq_else.9390:
+	bne	%v0, %at, beq_else.9408
+	j	beq_cont.9409
+beq_else.9408:
 	flw	%f0, 20084(%zero)
 	flw	%f1, 56(%sp)
 	fadd	%f0, %f1, %f0
@@ -5075,9 +5091,9 @@ beq_else.9390:
 	addi	%sp, %sp, -80
 	lw	%ra, 76(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9392
-	j	beq_cont.9393
-beq_else.9392:
+	bne	%v0, %at, beq_else.9410
+	j	beq_cont.9411
+beq_else.9410:
 	lw	%v0, 20(%sp)
 	flw	%f0, 72(%sp)
 	fsw	%f0, 0(%v0)
@@ -5087,7 +5103,7 @@ beq_else.9392:
 	lw	%v0, 8(%sp)
 	sw	%ra, 76(%sp)
 	addi	%sp, %sp, 80
-	jal	vecset.2718
+	jal	vecset.2725
 	addi	%sp, %sp, -80
 	lw	%ra, 76(%sp)
 	lw	%v0, 4(%sp)
@@ -5096,9 +5112,9 @@ beq_else.9392:
 	lw	%v0, 0(%sp)
 	lw	%v1, 52(%sp)
 	sw	%v1, 0(%v0)
-beq_cont.9393:
-beq_cont.9391:
-beq_cont.9389:
+beq_cont.9411:
+beq_cont.9409:
+beq_cont.9407:
 	lw	%v0, 40(%sp)
 	addi	%v0, %v0, 1
 	lw	%v1, 32(%sp)
@@ -5106,16 +5122,16 @@ beq_cont.9389:
 	lw	%k1, 36(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-solve_one_or_network.3000:
+solve_one_or_network.3007:
 	lw	%a1, 8(%k1)
 	lw	%a2, 4(%k1)
 	sll	%a3, %v0, 2
 	add	%at, %v1, %a3
 	lw	%a3, 0(%at)
 	addi	%at, %zero, -1
-	bne	%a3, %at, beq_else.9394
+	bne	%a3, %at, beq_else.9412
 	jr	%ra
-beq_else.9394:
+beq_else.9412:
 	sll	%a3, %a3, 2
 	add	%at, %a2, %a3
 	lw	%a2, 0(%at)
@@ -5140,7 +5156,7 @@ beq_else.9394:
 	lw	%k1, 8(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-trace_or_matrix.3004:
+trace_or_matrix.3011:
 	lw	%a1, 20(%k1)
 	lw	%a2, 16(%k1)
 	lw	%a3, 12(%k1)
@@ -5151,15 +5167,15 @@ trace_or_matrix.3004:
 	lw	%t2, 0(%at)
 	lw	%t3, 0(%t2)
 	addi	%at, %zero, -1
-	bne	%t3, %at, beq_else.9396
+	bne	%t3, %at, beq_else.9414
 	jr	%ra
-beq_else.9396:
+beq_else.9414:
 	sw	%a0, 0(%sp)
 	sw	%v1, 4(%sp)
 	sw	%k1, 8(%sp)
 	sw	%v0, 12(%sp)
 	addi	%at, %zero, 99
-	bne	%t3, %at, beq_else.9398
+	bne	%t3, %at, beq_else.9416
 	addi	%a1, %zero, 1
 	addi	%v1, %t2, 0
 	addi	%v0, %a1, 0
@@ -5170,8 +5186,8 @@ beq_else.9396:
 	jalr	%at
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
-	j	beq_cont.9399
-beq_else.9398:
+	j	beq_cont.9417
+beq_else.9416:
 	sw	%t2, 16(%sp)
 	sw	%t1, 20(%sp)
 	sw	%a1, 24(%sp)
@@ -5187,22 +5203,22 @@ beq_else.9398:
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9400
-	j	beq_cont.9401
-beq_else.9400:
+	bne	%v0, %at, beq_else.9418
+	j	beq_cont.9419
+beq_else.9418:
 	lw	%v0, 28(%sp)
 	flw	%f0, 0(%v0)
 	lw	%v0, 24(%sp)
 	flw	%f1, 0(%v0)
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	fless.2651
+	jal	fless.2658
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9402
-	j	beq_cont.9403
-beq_else.9402:
+	bne	%v0, %at, beq_else.9420
+	j	beq_cont.9421
+beq_else.9420:
 	addi	%v0, %zero, 1
 	lw	%v1, 16(%sp)
 	lw	%a0, 0(%sp)
@@ -5213,9 +5229,9 @@ beq_else.9402:
 	jalr	%at
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
-beq_cont.9403:
-beq_cont.9401:
-beq_cont.9399:
+beq_cont.9421:
+beq_cont.9419:
+beq_cont.9417:
 	lw	%v0, 12(%sp)
 	addi	%v0, %v0, 1
 	lw	%v1, 4(%sp)
@@ -5223,7 +5239,7 @@ beq_cont.9399:
 	lw	%k1, 8(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-judge_intersection.3008:
+judge_intersection.3015:
 	lw	%v1, 12(%k1)
 	lw	%a0, 8(%k1)
 	lw	%a1, 4(%k1)
@@ -5248,18 +5264,18 @@ judge_intersection.3008:
 	fsw	%f1, 4(%sp)
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	fless.2651
+	jal	fless.2658
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9404
+	bne	%v0, %at, beq_else.9422
 	addi	%v0, %zero, 0
 	jr	%ra
-beq_else.9404:
+beq_else.9422:
 	flw	%f1, 20072(%zero)
 	flw	%f0, 4(%sp)
-	j	fless.2651
-solve_each_element_fast.3010:
+	j	fless.2658
+solve_each_element_fast.3017:
 	lw	%a1, 36(%k1)
 	lw	%a2, 32(%k1)
 	lw	%a3, 28(%k1)
@@ -5285,7 +5301,7 @@ solve_each_element_fast.3010:
 	addi	%v0, %a0, 0
 	sw	%ra, 52(%sp)
 	addi	%sp, %sp, 56
-	jal	d_vec.2825
+	jal	d_vec.2832
 	addi	%sp, %sp, -56
 	lw	%ra, 52(%sp)
 	lw	%v1, 48(%sp)
@@ -5294,9 +5310,9 @@ solve_each_element_fast.3010:
 	add	%at, %a1, %a0
 	lw	%a0, 0(%at)
 	addi	%at, %zero, -1
-	bne	%a0, %at, beq_else.9405
+	bne	%a0, %at, beq_else.9423
 	jr	%ra
-beq_else.9405:
+beq_else.9423:
 	lw	%a2, 36(%sp)
 	lw	%k1, 40(%sp)
 	sw	%v0, 52(%sp)
@@ -5310,7 +5326,7 @@ beq_else.9405:
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9407
+	bne	%v0, %at, beq_else.9425
 	lw	%v0, 56(%sp)
 	sll	%v0, %v0, 2
 	lw	%v1, 32(%sp)
@@ -5318,13 +5334,13 @@ beq_else.9405:
 	lw	%v0, 0(%at)
 	sw	%ra, 60(%sp)
 	addi	%sp, %sp, 64
-	jal	o_isinvert.2770
+	jal	o_isinvert.2777
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9408
+	bne	%v0, %at, beq_else.9426
 	jr	%ra
-beq_else.9408:
+beq_else.9426:
 	lw	%v0, 48(%sp)
 	addi	%v0, %v0, 1
 	lw	%v1, 44(%sp)
@@ -5332,7 +5348,7 @@ beq_else.9408:
 	lw	%k1, 28(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-beq_else.9407:
+beq_else.9425:
 	lw	%v1, 24(%sp)
 	flw	%f1, 0(%v1)
 	flw	%f0, 20192(%zero)
@@ -5340,25 +5356,25 @@ beq_else.9407:
 	fsw	%f1, 64(%sp)
 	sw	%ra, 68(%sp)
 	addi	%sp, %sp, 72
-	jal	fless.2651
+	jal	fless.2658
 	addi	%sp, %sp, -72
 	lw	%ra, 68(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9410
-	j	beq_cont.9411
-beq_else.9410:
+	bne	%v0, %at, beq_else.9428
+	j	beq_cont.9429
+beq_else.9428:
 	lw	%v0, 20(%sp)
 	flw	%f1, 0(%v0)
 	flw	%f0, 64(%sp)
 	sw	%ra, 68(%sp)
 	addi	%sp, %sp, 72
-	jal	fless.2651
+	jal	fless.2658
 	addi	%sp, %sp, -72
 	lw	%ra, 68(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9412
-	j	beq_cont.9413
-beq_else.9412:
+	bne	%v0, %at, beq_else.9430
+	j	beq_cont.9431
+beq_else.9430:
 	flw	%f0, 20084(%zero)
 	flw	%f1, 64(%sp)
 	fadd	%f0, %f1, %f0
@@ -5393,9 +5409,9 @@ beq_else.9412:
 	addi	%sp, %sp, -88
 	lw	%ra, 84(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9414
-	j	beq_cont.9415
-beq_else.9414:
+	bne	%v0, %at, beq_else.9432
+	j	beq_cont.9433
+beq_else.9432:
 	lw	%v0, 20(%sp)
 	flw	%f0, 80(%sp)
 	fsw	%f0, 0(%v0)
@@ -5405,7 +5421,7 @@ beq_else.9414:
 	lw	%v0, 8(%sp)
 	sw	%ra, 84(%sp)
 	addi	%sp, %sp, 88
-	jal	vecset.2718
+	jal	vecset.2725
 	addi	%sp, %sp, -88
 	lw	%ra, 84(%sp)
 	lw	%v0, 4(%sp)
@@ -5414,9 +5430,9 @@ beq_else.9414:
 	lw	%v0, 0(%sp)
 	lw	%v1, 60(%sp)
 	sw	%v1, 0(%v0)
-beq_cont.9415:
-beq_cont.9413:
-beq_cont.9411:
+beq_cont.9433:
+beq_cont.9431:
+beq_cont.9429:
 	lw	%v0, 48(%sp)
 	addi	%v0, %v0, 1
 	lw	%v1, 44(%sp)
@@ -5424,16 +5440,16 @@ beq_cont.9411:
 	lw	%k1, 28(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-solve_one_or_network_fast.3014:
+solve_one_or_network_fast.3021:
 	lw	%a1, 8(%k1)
 	lw	%a2, 4(%k1)
 	sll	%a3, %v0, 2
 	add	%at, %v1, %a3
 	lw	%a3, 0(%at)
 	addi	%at, %zero, -1
-	bne	%a3, %at, beq_else.9416
+	bne	%a3, %at, beq_else.9434
 	jr	%ra
-beq_else.9416:
+beq_else.9434:
 	sll	%a3, %a3, 2
 	add	%at, %a2, %a3
 	lw	%a2, 0(%at)
@@ -5458,7 +5474,7 @@ beq_else.9416:
 	lw	%k1, 8(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-trace_or_matrix_fast.3018:
+trace_or_matrix_fast.3025:
 	lw	%a1, 16(%k1)
 	lw	%a2, 12(%k1)
 	lw	%a3, 8(%k1)
@@ -5468,15 +5484,15 @@ trace_or_matrix_fast.3018:
 	lw	%t1, 0(%at)
 	lw	%t2, 0(%t1)
 	addi	%at, %zero, -1
-	bne	%t2, %at, beq_else.9418
+	bne	%t2, %at, beq_else.9436
 	jr	%ra
-beq_else.9418:
+beq_else.9436:
 	sw	%a0, 0(%sp)
 	sw	%v1, 4(%sp)
 	sw	%k1, 8(%sp)
 	sw	%v0, 12(%sp)
 	addi	%at, %zero, 99
-	bne	%t2, %at, beq_else.9420
+	bne	%t2, %at, beq_else.9438
 	addi	%a1, %zero, 1
 	addi	%v1, %t1, 0
 	addi	%v0, %a1, 0
@@ -5487,8 +5503,8 @@ beq_else.9418:
 	jalr	%at
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
-	j	beq_cont.9421
-beq_else.9420:
+	j	beq_cont.9439
+beq_else.9438:
 	sw	%t1, 16(%sp)
 	sw	%t0, 20(%sp)
 	sw	%a1, 24(%sp)
@@ -5503,22 +5519,22 @@ beq_else.9420:
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9422
-	j	beq_cont.9423
-beq_else.9422:
+	bne	%v0, %at, beq_else.9440
+	j	beq_cont.9441
+beq_else.9440:
 	lw	%v0, 28(%sp)
 	flw	%f0, 0(%v0)
 	lw	%v0, 24(%sp)
 	flw	%f1, 0(%v0)
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	fless.2651
+	jal	fless.2658
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9424
-	j	beq_cont.9425
-beq_else.9424:
+	bne	%v0, %at, beq_else.9442
+	j	beq_cont.9443
+beq_else.9442:
 	addi	%v0, %zero, 1
 	lw	%v1, 16(%sp)
 	lw	%a0, 0(%sp)
@@ -5529,9 +5545,9 @@ beq_else.9424:
 	jalr	%at
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
-beq_cont.9425:
-beq_cont.9423:
-beq_cont.9421:
+beq_cont.9443:
+beq_cont.9441:
+beq_cont.9439:
 	lw	%v0, 12(%sp)
 	addi	%v0, %v0, 1
 	lw	%v1, 4(%sp)
@@ -5539,7 +5555,7 @@ beq_cont.9421:
 	lw	%k1, 8(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-judge_intersection_fast.3022:
+judge_intersection_fast.3029:
 	lw	%v1, 12(%k1)
 	lw	%a0, 8(%k1)
 	lw	%a1, 4(%k1)
@@ -5564,18 +5580,18 @@ judge_intersection_fast.3022:
 	fsw	%f1, 4(%sp)
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	fless.2651
+	jal	fless.2658
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9426
+	bne	%v0, %at, beq_else.9444
 	addi	%v0, %zero, 0
 	jr	%ra
-beq_else.9426:
+beq_else.9444:
 	flw	%f1, 20072(%zero)
 	flw	%f0, 4(%sp)
-	j	fless.2651
-get_nvector_rect.3024:
+	j	fless.2658
+get_nvector_rect.3031:
 	lw	%v1, 8(%k1)
 	lw	%a0, 4(%k1)
 	lw	%a0, 0(%a0)
@@ -5585,7 +5601,7 @@ get_nvector_rect.3024:
 	addi	%v0, %v1, 0
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	vecbzero.2726
+	jal	vecbzero.2733
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	lw	%v0, 8(%sp)
@@ -5598,7 +5614,7 @@ get_nvector_rect.3024:
 	sw	%v1, 12(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	sgn.2710
+	jal	sgn.2717
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	fneg	%f0, %f0
@@ -5608,13 +5624,13 @@ get_nvector_rect.3024:
 	add	%at, %v1, %v0
 	fsw	%f0, 0(%at)
 	jr	%ra
-get_nvector_plane.3026:
+get_nvector_plane.3033:
 	lw	%v1, 4(%k1)
 	sw	%v0, 0(%sp)
 	sw	%v1, 4(%sp)
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	o_param_a.2774
+	jal	o_param_a.2781
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	fneg	%f0, %f0
@@ -5624,7 +5640,7 @@ get_nvector_plane.3026:
 	addi	%v0, %v1, 0
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	o_param_b.2776
+	jal	o_param_b.2783
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	fneg	%f0, %f0
@@ -5634,14 +5650,14 @@ get_nvector_plane.3026:
 	addi	%v0, %v1, 0
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	o_param_c.2778
+	jal	o_param_c.2785
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	fneg	%f0, %f0
 	lw	%v0, 4(%sp)
 	fsw	%f0, 8(%v0)
 	jr	%ra
-get_nvector_second.3028:
+get_nvector_second.3035:
 	lw	%v1, 8(%k1)
 	lw	%a0, 4(%k1)
 	flw	%f0, 0(%a0)
@@ -5651,7 +5667,7 @@ get_nvector_second.3028:
 	fsw	%f0, 12(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	o_param_x.2782
+	jal	o_param_x.2789
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	flw	%f1, 12(%sp)
@@ -5664,7 +5680,7 @@ get_nvector_second.3028:
 	addi	%v0, %v1, 0
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	o_param_y.2784
+	jal	o_param_y.2791
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	flw	%f1, 20(%sp)
@@ -5676,7 +5692,7 @@ get_nvector_second.3028:
 	fsw	%f1, 28(%sp)
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	o_param_z.2786
+	jal	o_param_z.2793
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	flw	%f1, 28(%sp)
@@ -5685,7 +5701,7 @@ get_nvector_second.3028:
 	fsw	%f0, 32(%sp)
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	o_param_a.2774
+	jal	o_param_a.2781
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	flw	%f1, 16(%sp)
@@ -5694,7 +5710,7 @@ get_nvector_second.3028:
 	fsw	%f0, 36(%sp)
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	o_param_b.2776
+	jal	o_param_b.2783
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	flw	%f1, 24(%sp)
@@ -5703,7 +5719,7 @@ get_nvector_second.3028:
 	fsw	%f0, 40(%sp)
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	o_param_c.2778
+	jal	o_param_c.2785
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	flw	%f1, 32(%sp)
@@ -5712,11 +5728,11 @@ get_nvector_second.3028:
 	fsw	%f0, 44(%sp)
 	sw	%ra, 52(%sp)
 	addi	%sp, %sp, 56
-	jal	o_isrot.2772
+	jal	o_isrot.2779
 	addi	%sp, %sp, -56
 	lw	%ra, 52(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9429
+	bne	%v0, %at, beq_else.9447
 	lw	%v0, 0(%sp)
 	flw	%f0, 36(%sp)
 	fsw	%f0, 0(%v0)
@@ -5724,12 +5740,12 @@ get_nvector_second.3028:
 	fsw	%f0, 4(%v0)
 	flw	%f0, 44(%sp)
 	fsw	%f0, 8(%v0)
-	j	beq_cont.9430
-beq_else.9429:
+	j	beq_cont.9448
+beq_else.9447:
 	lw	%v0, 4(%sp)
 	sw	%ra, 52(%sp)
 	addi	%sp, %sp, 56
-	jal	o_param_r3.2802
+	jal	o_param_r3.2809
 	addi	%sp, %sp, -56
 	lw	%ra, 52(%sp)
 	flw	%f1, 24(%sp)
@@ -5738,7 +5754,7 @@ beq_else.9429:
 	fsw	%f0, 48(%sp)
 	sw	%ra, 52(%sp)
 	addi	%sp, %sp, 56
-	jal	o_param_r2.2800
+	jal	o_param_r2.2807
 	addi	%sp, %sp, -56
 	lw	%ra, 52(%sp)
 	flw	%f1, 32(%sp)
@@ -5747,7 +5763,7 @@ beq_else.9429:
 	fadd	%f0, %f2, %f0
 	sw	%ra, 52(%sp)
 	addi	%sp, %sp, 56
-	jal	fhalf.2663
+	jal	fhalf.2670
 	addi	%sp, %sp, -56
 	lw	%ra, 52(%sp)
 	flw	%f1, 36(%sp)
@@ -5758,7 +5774,7 @@ beq_else.9429:
 	addi	%v0, %v1, 0
 	sw	%ra, 52(%sp)
 	addi	%sp, %sp, 56
-	jal	o_param_r3.2802
+	jal	o_param_r3.2809
 	addi	%sp, %sp, -56
 	lw	%ra, 52(%sp)
 	flw	%f1, 16(%sp)
@@ -5767,7 +5783,7 @@ beq_else.9429:
 	fsw	%f0, 52(%sp)
 	sw	%ra, 60(%sp)
 	addi	%sp, %sp, 64
-	jal	o_param_r1.2798
+	jal	o_param_r1.2805
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	flw	%f1, 32(%sp)
@@ -5776,7 +5792,7 @@ beq_else.9429:
 	fadd	%f0, %f1, %f0
 	sw	%ra, 60(%sp)
 	addi	%sp, %sp, 64
-	jal	fhalf.2663
+	jal	fhalf.2670
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	flw	%f1, 40(%sp)
@@ -5787,7 +5803,7 @@ beq_else.9429:
 	addi	%v0, %v1, 0
 	sw	%ra, 60(%sp)
 	addi	%sp, %sp, 64
-	jal	o_param_r2.2800
+	jal	o_param_r2.2807
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	flw	%f1, 16(%sp)
@@ -5796,7 +5812,7 @@ beq_else.9429:
 	fsw	%f0, 56(%sp)
 	sw	%ra, 60(%sp)
 	addi	%sp, %sp, 64
-	jal	o_param_r1.2798
+	jal	o_param_r1.2805
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	flw	%f1, 24(%sp)
@@ -5805,25 +5821,25 @@ beq_else.9429:
 	fadd	%f0, %f1, %f0
 	sw	%ra, 60(%sp)
 	addi	%sp, %sp, 64
-	jal	fhalf.2663
+	jal	fhalf.2670
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	flw	%f1, 44(%sp)
 	fadd	%f0, %f1, %f0
 	lw	%v0, 0(%sp)
 	fsw	%f0, 8(%v0)
-beq_cont.9430:
+beq_cont.9448:
 	lw	%v1, 4(%sp)
 	addi	%v0, %v1, 0
 	sw	%ra, 60(%sp)
 	addi	%sp, %sp, 64
-	jal	o_isinvert.2770
+	jal	o_isinvert.2777
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	addi	%v1, %v0, 0
 	lw	%v0, 0(%sp)
-	j	vecunit_sgn.2736
-get_nvector.3030:
+	j	vecunit_sgn.2743
+get_nvector.3037:
 	lw	%a0, 12(%k1)
 	lw	%a1, 8(%k1)
 	lw	%a2, 4(%k1)
@@ -5834,35 +5850,35 @@ get_nvector.3030:
 	sw	%a1, 16(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	o_form.2766
+	jal	o_form.2773
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	addi	%at, %zero, 1
-	bne	%v0, %at, beq_else.9431
+	bne	%v0, %at, beq_else.9449
 	lw	%v0, 12(%sp)
 	lw	%k1, 16(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-beq_else.9431:
+beq_else.9449:
 	addi	%at, %zero, 2
-	bne	%v0, %at, beq_else.9432
+	bne	%v0, %at, beq_else.9450
 	lw	%v0, 4(%sp)
 	lw	%k1, 8(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-beq_else.9432:
+beq_else.9450:
 	lw	%v0, 4(%sp)
 	lw	%k1, 0(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-utexture.3033:
+utexture.3040:
 	lw	%a0, 4(%k1)
 	sw	%v1, 0(%sp)
 	sw	%a0, 4(%sp)
 	sw	%v0, 8(%sp)
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	o_texturetype.2764
+	jal	o_texturetype.2771
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	lw	%v1, 8(%sp)
@@ -5870,7 +5886,7 @@ utexture.3033:
 	addi	%v0, %v1, 0
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	o_color_red.2792
+	jal	o_color_red.2799
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	lw	%v0, 4(%sp)
@@ -5879,7 +5895,7 @@ utexture.3033:
 	addi	%v0, %v1, 0
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	o_color_green.2794
+	jal	o_color_green.2801
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	lw	%v0, 4(%sp)
@@ -5888,14 +5904,14 @@ utexture.3033:
 	addi	%v0, %v1, 0
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	o_color_blue.2796
+	jal	o_color_blue.2803
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	lw	%v0, 4(%sp)
 	fsw	%f0, 8(%v0)
 	lw	%v1, 12(%sp)
 	addi	%at, %zero, 1
-	bne	%v1, %at, beq_else.9433
+	bne	%v1, %at, beq_else.9451
 	lw	%v1, 0(%sp)
 	flw	%f0, 0(%v1)
 	lw	%a0, 8(%sp)
@@ -5903,7 +5919,7 @@ utexture.3033:
 	addi	%v0, %a0, 0
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	o_param_x.2782
+	jal	o_param_x.2789
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	flw	%f1, 16(%sp)
@@ -5914,7 +5930,7 @@ utexture.3033:
 	fadd	%f0, %f1, %fzero
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	floor.2687
+	jal	floor.2694
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	flw	%f1, 20028(%zero)
@@ -5924,7 +5940,7 @@ utexture.3033:
 	flw	%f1, 20040(%zero)
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	fless.2651
+	jal	fless.2658
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	lw	%v1, 0(%sp)
@@ -5935,7 +5951,7 @@ utexture.3033:
 	addi	%v0, %v1, 0
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	o_param_z.2786
+	jal	o_param_z.2793
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	flw	%f1, 28(%sp)
@@ -5946,7 +5962,7 @@ utexture.3033:
 	fadd	%f0, %f1, %fzero
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	floor.2687
+	jal	floor.2694
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	flw	%f1, 20028(%zero)
@@ -5956,47 +5972,47 @@ utexture.3033:
 	flw	%f1, 20040(%zero)
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	fless.2651
+	jal	fless.2658
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	lw	%v1, 24(%sp)
 	addi	%at, %zero, 0
-	bne	%v1, %at, beq_else.9434
+	bne	%v1, %at, beq_else.9452
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9436
+	bne	%v0, %at, beq_else.9454
 	flw	%f0, 20048(%zero)
-	j	beq_cont.9437
-beq_else.9436:
+	j	beq_cont.9455
+beq_else.9454:
 	flw	%f0, 20192(%zero)
-beq_cont.9437:
-	j	beq_cont.9435
-beq_else.9434:
+beq_cont.9455:
+	j	beq_cont.9453
+beq_else.9452:
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9438
+	bne	%v0, %at, beq_else.9456
 	flw	%f0, 20192(%zero)
-	j	beq_cont.9439
-beq_else.9438:
+	j	beq_cont.9457
+beq_else.9456:
 	flw	%f0, 20048(%zero)
-beq_cont.9439:
-beq_cont.9435:
+beq_cont.9457:
+beq_cont.9453:
 	lw	%v0, 4(%sp)
 	fsw	%f0, 4(%v0)
 	jr	%ra
-beq_else.9433:
+beq_else.9451:
 	addi	%at, %zero, 2
-	bne	%v1, %at, beq_else.9441
+	bne	%v1, %at, beq_else.9459
 	lw	%v1, 0(%sp)
 	flw	%f0, 4(%v1)
 	flw	%f1, 20036(%zero)
 	fmul	%f0, %f0, %f1
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	sin.2699
+	jal	sin.2706
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	fsqr.2665
+	jal	fsqr.2672
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	flw	%f1, 20048(%zero)
@@ -6009,9 +6025,9 @@ beq_else.9433:
 	fmul	%f0, %f1, %f0
 	fsw	%f0, 4(%v0)
 	jr	%ra
-beq_else.9441:
+beq_else.9459:
 	addi	%at, %zero, 3
-	bne	%v1, %at, beq_else.9443
+	bne	%v1, %at, beq_else.9461
 	lw	%v1, 0(%sp)
 	flw	%f0, 0(%v1)
 	lw	%a0, 8(%sp)
@@ -6019,7 +6035,7 @@ beq_else.9441:
 	addi	%v0, %a0, 0
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	o_param_x.2782
+	jal	o_param_x.2789
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	flw	%f1, 36(%sp)
@@ -6031,7 +6047,7 @@ beq_else.9441:
 	fsw	%f1, 44(%sp)
 	sw	%ra, 52(%sp)
 	addi	%sp, %sp, 56
-	jal	o_param_z.2786
+	jal	o_param_z.2793
 	addi	%sp, %sp, -56
 	lw	%ra, 52(%sp)
 	flw	%f1, 44(%sp)
@@ -6041,7 +6057,7 @@ beq_else.9441:
 	fadd	%f0, %f1, %fzero
 	sw	%ra, 52(%sp)
 	addi	%sp, %sp, 56
-	jal	fsqr.2665
+	jal	fsqr.2672
 	addi	%sp, %sp, -56
 	lw	%ra, 52(%sp)
 	flw	%f1, 48(%sp)
@@ -6049,7 +6065,7 @@ beq_else.9441:
 	fadd	%f0, %f1, %fzero
 	sw	%ra, 60(%sp)
 	addi	%sp, %sp, 64
-	jal	fsqr.2665
+	jal	fsqr.2672
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	flw	%f1, 52(%sp)
@@ -6060,7 +6076,7 @@ beq_else.9441:
 	fsw	%f0, 56(%sp)
 	sw	%ra, 60(%sp)
 	addi	%sp, %sp, 64
-	jal	floor.2687
+	jal	floor.2694
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	flw	%f1, 56(%sp)
@@ -6069,12 +6085,12 @@ beq_else.9441:
 	fmul	%f0, %f0, %f1
 	sw	%ra, 60(%sp)
 	addi	%sp, %sp, 64
-	jal	cos.2697
+	jal	cos.2704
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	sw	%ra, 60(%sp)
 	addi	%sp, %sp, 64
-	jal	fsqr.2665
+	jal	fsqr.2672
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	flw	%f1, 20048(%zero)
@@ -6087,9 +6103,9 @@ beq_else.9441:
 	fmul	%f0, %f0, %f1
 	fsw	%f0, 8(%v0)
 	jr	%ra
-beq_else.9443:
+beq_else.9461:
 	addi	%at, %zero, 4
-	bne	%v1, %at, beq_else.9445
+	bne	%v1, %at, beq_else.9463
 	lw	%v1, 0(%sp)
 	flw	%f0, 0(%v1)
 	lw	%a0, 8(%sp)
@@ -6097,7 +6113,7 @@ beq_else.9443:
 	addi	%v0, %a0, 0
 	sw	%ra, 68(%sp)
 	addi	%sp, %sp, 72
-	jal	o_param_x.2782
+	jal	o_param_x.2789
 	addi	%sp, %sp, -72
 	lw	%ra, 68(%sp)
 	flw	%f1, 60(%sp)
@@ -6106,7 +6122,7 @@ beq_else.9443:
 	fsw	%f0, 64(%sp)
 	sw	%ra, 68(%sp)
 	addi	%sp, %sp, 72
-	jal	o_param_a.2774
+	jal	o_param_a.2781
 	addi	%sp, %sp, -72
 	lw	%ra, 68(%sp)
 	fsqrt	%f0, %f0
@@ -6120,7 +6136,7 @@ beq_else.9443:
 	addi	%v0, %v1, 0
 	sw	%ra, 76(%sp)
 	addi	%sp, %sp, 80
-	jal	o_param_z.2786
+	jal	o_param_z.2793
 	addi	%sp, %sp, -80
 	lw	%ra, 76(%sp)
 	flw	%f1, 72(%sp)
@@ -6129,7 +6145,7 @@ beq_else.9443:
 	fsw	%f0, 76(%sp)
 	sw	%ra, 84(%sp)
 	addi	%sp, %sp, 88
-	jal	o_param_c.2778
+	jal	o_param_c.2785
 	addi	%sp, %sp, -88
 	lw	%ra, 84(%sp)
 	fsqrt	%f0, %f0
@@ -6140,7 +6156,7 @@ beq_else.9443:
 	fadd	%f0, %f1, %fzero
 	sw	%ra, 84(%sp)
 	addi	%sp, %sp, 88
-	jal	fsqr.2665
+	jal	fsqr.2672
 	addi	%sp, %sp, -88
 	lw	%ra, 84(%sp)
 	flw	%f1, 80(%sp)
@@ -6148,7 +6164,7 @@ beq_else.9443:
 	fadd	%f0, %f1, %fzero
 	sw	%ra, 92(%sp)
 	addi	%sp, %sp, 96
-	jal	fsqr.2665
+	jal	fsqr.2672
 	addi	%sp, %sp, -96
 	lw	%ra, 92(%sp)
 	flw	%f1, 84(%sp)
@@ -6161,32 +6177,32 @@ beq_else.9443:
 	fadd	%f0, %f2, %fzero
 	sw	%ra, 92(%sp)
 	addi	%sp, %sp, 96
-	jal	fless.2651
+	jal	fless.2658
 	addi	%sp, %sp, -96
 	lw	%ra, 92(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9446
+	bne	%v0, %at, beq_else.9464
 	flw	%f0, 68(%sp)
 	flw	%f1, 80(%sp)
 	fdiv	%f0, %f1, %f0
 	fabs	%f0, %f0
 	sw	%ra, 92(%sp)
 	addi	%sp, %sp, 96
-	jal	atan.2701
+	jal	atan.2708
 	addi	%sp, %sp, -96
 	lw	%ra, 92(%sp)
 	flw	%f1, 20060(%zero)
 	fmul	%f0, %f0, %f1
 	flw	%f1, 20056(%zero)
 	fdiv	%f0, %f0, %f1
-	j	beq_cont.9447
-beq_else.9446:
+	j	beq_cont.9465
+beq_else.9464:
 	flw	%f0, 20064(%zero)
-beq_cont.9447:
+beq_cont.9465:
 	fsw	%f0, 92(%sp)
 	sw	%ra, 100(%sp)
 	addi	%sp, %sp, 104
-	jal	floor.2687
+	jal	floor.2694
 	addi	%sp, %sp, -104
 	lw	%ra, 100(%sp)
 	flw	%f1, 92(%sp)
@@ -6198,7 +6214,7 @@ beq_cont.9447:
 	fsw	%f1, 100(%sp)
 	sw	%ra, 108(%sp)
 	addi	%sp, %sp, 112
-	jal	o_param_y.2784
+	jal	o_param_y.2791
 	addi	%sp, %sp, -112
 	lw	%ra, 108(%sp)
 	flw	%f1, 100(%sp)
@@ -6207,7 +6223,7 @@ beq_cont.9447:
 	fsw	%f0, 104(%sp)
 	sw	%ra, 108(%sp)
 	addi	%sp, %sp, 112
-	jal	o_param_b.2776
+	jal	o_param_b.2783
 	addi	%sp, %sp, -112
 	lw	%ra, 108(%sp)
 	fsqrt	%f0, %f0
@@ -6221,32 +6237,32 @@ beq_cont.9447:
 	fadd	%f0, %f2, %fzero
 	sw	%ra, 116(%sp)
 	addi	%sp, %sp, 120
-	jal	fless.2651
+	jal	fless.2658
 	addi	%sp, %sp, -120
 	lw	%ra, 116(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9448
+	bne	%v0, %at, beq_else.9466
 	flw	%f0, 88(%sp)
 	flw	%f1, 108(%sp)
 	fdiv	%f0, %f1, %f0
 	fabs	%f0, %f0
 	sw	%ra, 116(%sp)
 	addi	%sp, %sp, 120
-	jal	atan.2701
+	jal	atan.2708
 	addi	%sp, %sp, -120
 	lw	%ra, 116(%sp)
 	flw	%f1, 20060(%zero)
 	fmul	%f0, %f0, %f1
 	flw	%f1, 20056(%zero)
 	fdiv	%f0, %f0, %f1
-	j	beq_cont.9449
-beq_else.9448:
+	j	beq_cont.9467
+beq_else.9466:
 	flw	%f0, 20064(%zero)
-beq_cont.9449:
+beq_cont.9467:
 	fsw	%f0, 112(%sp)
 	sw	%ra, 116(%sp)
 	addi	%sp, %sp, 120
-	jal	floor.2687
+	jal	floor.2694
 	addi	%sp, %sp, -120
 	lw	%ra, 116(%sp)
 	flw	%f1, 112(%sp)
@@ -6260,7 +6276,7 @@ beq_cont.9449:
 	fadd	%f0, %f2, %fzero
 	sw	%ra, 124(%sp)
 	addi	%sp, %sp, 128
-	jal	fsqr.2665
+	jal	fsqr.2672
 	addi	%sp, %sp, -128
 	lw	%ra, 124(%sp)
 	flw	%f1, 120(%sp)
@@ -6272,7 +6288,7 @@ beq_cont.9449:
 	fadd	%f0, %f1, %fzero
 	sw	%ra, 132(%sp)
 	addi	%sp, %sp, 136
-	jal	fsqr.2665
+	jal	fsqr.2672
 	addi	%sp, %sp, -136
 	lw	%ra, 132(%sp)
 	flw	%f1, 124(%sp)
@@ -6280,16 +6296,16 @@ beq_cont.9449:
 	fsw	%f0, 128(%sp)
 	sw	%ra, 132(%sp)
 	addi	%sp, %sp, 136
-	jal	fisneg.2656
+	jal	fisneg.2663
 	addi	%sp, %sp, -136
 	lw	%ra, 132(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9450
+	bne	%v0, %at, beq_else.9468
 	flw	%f0, 128(%sp)
-	j	beq_cont.9451
-beq_else.9450:
+	j	beq_cont.9469
+beq_else.9468:
 	flw	%f0, 20192(%zero)
-beq_cont.9451:
+beq_cont.9469:
 	flw	%f1, 20048(%zero)
 	fmul	%f0, %f1, %f0
 	flw	%f1, 20044(%zero)
@@ -6297,9 +6313,9 @@ beq_cont.9451:
 	lw	%v0, 4(%sp)
 	fsw	%f0, 8(%v0)
 	jr	%ra
-beq_else.9445:
+beq_else.9463:
 	jr	%ra
-add_light.3036:
+add_light.3043:
 	lw	%v0, 8(%k1)
 	lw	%v1, 4(%k1)
 	fsw	%f2, 0(%sp)
@@ -6309,41 +6325,41 @@ add_light.3036:
 	sw	%v1, 16(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	fispos.2654
+	jal	fispos.2661
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9454
-	j	beq_cont.9455
-beq_else.9454:
+	bne	%v0, %at, beq_else.9472
+	j	beq_cont.9473
+beq_else.9472:
 	flw	%f0, 8(%sp)
 	lw	%v0, 16(%sp)
 	lw	%v1, 12(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	vecaccum.2747
+	jal	vecaccum.2754
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
-beq_cont.9455:
+beq_cont.9473:
 	flw	%f0, 4(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	fispos.2654
+	jal	fispos.2661
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9456
+	bne	%v0, %at, beq_else.9474
 	jr	%ra
-beq_else.9456:
+beq_else.9474:
 	flw	%f0, 4(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	fsqr.2665
+	jal	fsqr.2672
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	fsqr.2665
+	jal	fsqr.2672
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	flw	%f1, 0(%sp)
@@ -6359,7 +6375,7 @@ beq_else.9456:
 	fadd	%f0, %f1, %f0
 	fsw	%f0, 8(%v0)
 	jr	%ra
-trace_reflections.3040:
+trace_reflections.3047:
 	lw	%a0, 32(%k1)
 	lw	%a1, 28(%k1)
 	lw	%a2, 24(%k1)
@@ -6369,7 +6385,7 @@ trace_reflections.3040:
 	lw	%t2, 8(%k1)
 	lw	%t3, 4(%k1)
 	slti	%at, %v0, 0
-	bne	%at, %zero, beq_else.9459
+	bne	%at, %zero, beq_else.9477
 	sll	%t4, %v0, 2
 	add	%at, %a1, %t4
 	lw	%a1, 0(%at)
@@ -6389,7 +6405,7 @@ trace_reflections.3040:
 	addi	%v0, %a1, 0
 	sw	%ra, 52(%sp)
 	addi	%sp, %sp, 56
-	jal	r_dvec.2831
+	jal	r_dvec.2838
 	addi	%sp, %sp, -56
 	lw	%ra, 52(%sp)
 	lw	%k1, 48(%sp)
@@ -6401,9 +6417,9 @@ trace_reflections.3040:
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9460
-	j	beq_cont.9461
-beq_else.9460:
+	bne	%v0, %at, beq_else.9478
+	j	beq_cont.9479
+beq_else.9478:
 	lw	%v0, 44(%sp)
 	lw	%v0, 0(%v0)
 	sll	%v0, %v0, 2
@@ -6415,11 +6431,11 @@ beq_else.9460:
 	addi	%v0, %v1, 0
 	sw	%ra, 60(%sp)
 	addi	%sp, %sp, 64
-	jal	r_surface_id.2829
+	jal	r_surface_id.2836
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	lw	%v1, 56(%sp)
-	bne	%v1, %v0, beq_else.9462
+	bne	%v1, %v0, beq_else.9480
 	addi	%v0, %zero, 0
 	lw	%v1, 32(%sp)
 	lw	%v1, 0(%v1)
@@ -6431,25 +6447,25 @@ beq_else.9460:
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9464
+	bne	%v0, %at, beq_else.9482
 	lw	%v0, 52(%sp)
 	sw	%ra, 60(%sp)
 	addi	%sp, %sp, 64
-	jal	d_vec.2825
+	jal	d_vec.2832
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	addi	%v1, %v0, 0
 	lw	%v0, 24(%sp)
 	sw	%ra, 60(%sp)
 	addi	%sp, %sp, 64
-	jal	veciprod.2739
+	jal	veciprod.2746
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	lw	%v0, 36(%sp)
 	fsw	%f0, 60(%sp)
 	sw	%ra, 68(%sp)
 	addi	%sp, %sp, 72
-	jal	r_bright.2833
+	jal	r_bright.2840
 	addi	%sp, %sp, -72
 	lw	%ra, 68(%sp)
 	flw	%f1, 20(%sp)
@@ -6461,14 +6477,14 @@ beq_else.9460:
 	fsw	%f0, 68(%sp)
 	sw	%ra, 76(%sp)
 	addi	%sp, %sp, 80
-	jal	d_vec.2825
+	jal	d_vec.2832
 	addi	%sp, %sp, -80
 	lw	%ra, 76(%sp)
 	addi	%v1, %v0, 0
 	lw	%v0, 16(%sp)
 	sw	%ra, 76(%sp)
 	addi	%sp, %sp, 80
-	jal	veciprod.2739
+	jal	veciprod.2746
 	addi	%sp, %sp, -80
 	lw	%ra, 76(%sp)
 	flw	%f1, 68(%sp)
@@ -6482,13 +6498,13 @@ beq_else.9460:
 	jalr	%at
 	addi	%sp, %sp, -80
 	lw	%ra, 76(%sp)
-	j	beq_cont.9465
-beq_else.9464:
-beq_cont.9465:
-	j	beq_cont.9463
-beq_else.9462:
-beq_cont.9463:
-beq_cont.9461:
+	j	beq_cont.9483
+beq_else.9482:
+beq_cont.9483:
+	j	beq_cont.9481
+beq_else.9480:
+beq_cont.9481:
+beq_cont.9479:
 	lw	%v0, 4(%sp)
 	addi	%v0, %v0, -1
 	flw	%f0, 20(%sp)
@@ -6497,9 +6513,9 @@ beq_cont.9461:
 	lw	%k1, 0(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-beq_else.9459:
+beq_else.9477:
 	jr	%ra
-trace_ray.3045:
+trace_ray.3052:
 	lw	%a1, 80(%k1)
 	lw	%a2, 76(%k1)
 	lw	%a3, 72(%k1)
@@ -6522,7 +6538,7 @@ trace_ray.3045:
 	lw	%t8, 4(%k1)
 	addi	%at, %zero, 4
 	slt	%at, %at, %v0
-	bne	%at, %zero, beq_else.9467
+	bne	%at, %zero, beq_else.9485
 	sw	%k1, 0(%sp)
 	fsw	%f1, 4(%sp)
 	sw	%a3, 8(%sp)
@@ -6552,7 +6568,7 @@ trace_ray.3045:
 	addi	%v0, %a0, 0
 	sw	%ra, 108(%sp)
 	addi	%sp, %sp, 112
-	jal	p_surface_ids.2810
+	jal	p_surface_ids.2817
 	addi	%sp, %sp, -112
 	lw	%ra, 108(%sp)
 	lw	%v1, 96(%sp)
@@ -6566,7 +6582,7 @@ trace_ray.3045:
 	addi	%sp, %sp, -112
 	lw	%ra, 108(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9468
+	bne	%v0, %at, beq_else.9486
 	addi	%v0, %zero, -1
 	lw	%v1, 92(%sp)
 	sll	%a0, %v1, 2
@@ -6574,31 +6590,31 @@ trace_ray.3045:
 	add	%at, %a1, %a0
 	sw	%v0, 0(%at)
 	addi	%at, %zero, 0
-	bne	%v1, %at, beq_else.9469
+	bne	%v1, %at, beq_else.9487
 	jr	%ra
-beq_else.9469:
+beq_else.9487:
 	lw	%v0, 96(%sp)
 	lw	%v1, 88(%sp)
 	sw	%ra, 108(%sp)
 	addi	%sp, %sp, 112
-	jal	veciprod.2739
+	jal	veciprod.2746
 	addi	%sp, %sp, -112
 	lw	%ra, 108(%sp)
 	fneg	%f0, %f0
 	fsw	%f0, 108(%sp)
 	sw	%ra, 116(%sp)
 	addi	%sp, %sp, 120
-	jal	fispos.2654
+	jal	fispos.2661
 	addi	%sp, %sp, -120
 	lw	%ra, 116(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9471
+	bne	%v0, %at, beq_else.9489
 	jr	%ra
-beq_else.9471:
+beq_else.9489:
 	flw	%f0, 108(%sp)
 	sw	%ra, 116(%sp)
 	addi	%sp, %sp, 120
-	jal	fsqr.2665
+	jal	fsqr.2672
 	addi	%sp, %sp, -120
 	lw	%ra, 116(%sp)
 	flw	%f1, 108(%sp)
@@ -6619,7 +6635,7 @@ beq_else.9471:
 	fadd	%f0, %f1, %f0
 	fsw	%f0, 8(%v0)
 	jr	%ra
-beq_else.9468:
+beq_else.9486:
 	lw	%v0, 72(%sp)
 	lw	%v0, 0(%v0)
 	sll	%v1, %v0, 2
@@ -6631,7 +6647,7 @@ beq_else.9468:
 	addi	%v0, %v1, 0
 	sw	%ra, 124(%sp)
 	addi	%sp, %sp, 128
-	jal	o_reflectiontype.2768
+	jal	o_reflectiontype.2775
 	addi	%sp, %sp, -128
 	lw	%ra, 124(%sp)
 	lw	%v1, 116(%sp)
@@ -6639,7 +6655,7 @@ beq_else.9468:
 	addi	%v0, %v1, 0
 	sw	%ra, 124(%sp)
 	addi	%sp, %sp, 128
-	jal	o_diffuse.2788
+	jal	o_diffuse.2795
 	addi	%sp, %sp, -128
 	lw	%ra, 124(%sp)
 	flw	%f1, 84(%sp)
@@ -6658,7 +6674,7 @@ beq_else.9468:
 	lw	%v1, 56(%sp)
 	sw	%ra, 132(%sp)
 	addi	%sp, %sp, 136
-	jal	veccpy.2728
+	jal	veccpy.2735
 	addi	%sp, %sp, -136
 	lw	%ra, 132(%sp)
 	lw	%v0, 116(%sp)
@@ -6683,7 +6699,7 @@ beq_else.9468:
 	lw	%v0, 44(%sp)
 	sw	%ra, 132(%sp)
 	addi	%sp, %sp, 136
-	jal	p_intersection_points.2808
+	jal	p_intersection_points.2815
 	addi	%sp, %sp, -136
 	lw	%ra, 132(%sp)
 	lw	%v1, 92(%sp)
@@ -6694,13 +6710,13 @@ beq_else.9468:
 	addi	%v1, %a0, 0
 	sw	%ra, 132(%sp)
 	addi	%sp, %sp, 136
-	jal	veccpy.2728
+	jal	veccpy.2735
 	addi	%sp, %sp, -136
 	lw	%ra, 132(%sp)
 	lw	%v0, 44(%sp)
 	sw	%ra, 132(%sp)
 	addi	%sp, %sp, 136
-	jal	p_calc_diffuse.2812
+	jal	p_calc_diffuse.2819
 	addi	%sp, %sp, -136
 	lw	%ra, 132(%sp)
 	lw	%v1, 116(%sp)
@@ -6708,17 +6724,17 @@ beq_else.9468:
 	addi	%v0, %v1, 0
 	sw	%ra, 132(%sp)
 	addi	%sp, %sp, 136
-	jal	o_diffuse.2788
+	jal	o_diffuse.2795
 	addi	%sp, %sp, -136
 	lw	%ra, 132(%sp)
 	flw	%f1, 20188(%zero)
 	sw	%ra, 132(%sp)
 	addi	%sp, %sp, 136
-	jal	fless.2651
+	jal	fless.2658
 	addi	%sp, %sp, -136
 	lw	%ra, 132(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9474
+	bne	%v0, %at, beq_else.9492
 	addi	%v0, %zero, 1
 	lw	%v1, 92(%sp)
 	sll	%a0, %v1, 2
@@ -6728,7 +6744,7 @@ beq_else.9468:
 	lw	%v0, 44(%sp)
 	sw	%ra, 132(%sp)
 	addi	%sp, %sp, 136
-	jal	p_energy.2814
+	jal	p_energy.2821
 	addi	%sp, %sp, -136
 	lw	%ra, 132(%sp)
 	lw	%v1, 92(%sp)
@@ -6741,7 +6757,7 @@ beq_else.9468:
 	addi	%v0, %a0, 0
 	sw	%ra, 140(%sp)
 	addi	%sp, %sp, 144
-	jal	veccpy.2728
+	jal	veccpy.2735
 	addi	%sp, %sp, -144
 	lw	%ra, 140(%sp)
 	lw	%v0, 92(%sp)
@@ -6755,13 +6771,13 @@ beq_else.9468:
 	addi	%v0, %v1, 0
 	sw	%ra, 140(%sp)
 	addi	%sp, %sp, 144
-	jal	vecscale.2757
+	jal	vecscale.2764
 	addi	%sp, %sp, -144
 	lw	%ra, 140(%sp)
 	lw	%v0, 44(%sp)
 	sw	%ra, 140(%sp)
 	addi	%sp, %sp, 144
-	jal	p_nvectors.2823
+	jal	p_nvectors.2830
 	addi	%sp, %sp, -144
 	lw	%ra, 140(%sp)
 	lw	%v1, 92(%sp)
@@ -6772,25 +6788,25 @@ beq_else.9468:
 	addi	%v1, %a0, 0
 	sw	%ra, 140(%sp)
 	addi	%sp, %sp, 144
-	jal	veccpy.2728
+	jal	veccpy.2735
 	addi	%sp, %sp, -144
 	lw	%ra, 140(%sp)
-	j	beq_cont.9475
-beq_else.9474:
+	j	beq_cont.9493
+beq_else.9492:
 	addi	%v0, %zero, 0
 	lw	%v1, 92(%sp)
 	sll	%a0, %v1, 2
 	lw	%a1, 128(%sp)
 	add	%at, %a1, %a0
 	sw	%v0, 0(%at)
-beq_cont.9475:
+beq_cont.9493:
 	flw	%f0, 20020(%zero)
 	lw	%v0, 96(%sp)
 	lw	%v1, 36(%sp)
 	fsw	%f0, 136(%sp)
 	sw	%ra, 140(%sp)
 	addi	%sp, %sp, 144
-	jal	veciprod.2739
+	jal	veciprod.2746
 	addi	%sp, %sp, -144
 	lw	%ra, 140(%sp)
 	flw	%f1, 136(%sp)
@@ -6799,13 +6815,13 @@ beq_cont.9475:
 	lw	%v1, 36(%sp)
 	sw	%ra, 140(%sp)
 	addi	%sp, %sp, 144
-	jal	vecaccum.2747
+	jal	vecaccum.2754
 	addi	%sp, %sp, -144
 	lw	%ra, 140(%sp)
 	lw	%v0, 116(%sp)
 	sw	%ra, 140(%sp)
 	addi	%sp, %sp, 144
-	jal	o_hilight.2790
+	jal	o_hilight.2797
 	addi	%sp, %sp, -144
 	lw	%ra, 140(%sp)
 	flw	%f1, 84(%sp)
@@ -6822,12 +6838,12 @@ beq_cont.9475:
 	addi	%sp, %sp, -152
 	lw	%ra, 148(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9476
+	bne	%v0, %at, beq_else.9494
 	lw	%v0, 36(%sp)
 	lw	%v1, 88(%sp)
 	sw	%ra, 148(%sp)
 	addi	%sp, %sp, 152
-	jal	veciprod.2739
+	jal	veciprod.2746
 	addi	%sp, %sp, -152
 	lw	%ra, 148(%sp)
 	fneg	%f0, %f0
@@ -6838,7 +6854,7 @@ beq_cont.9475:
 	fsw	%f0, 144(%sp)
 	sw	%ra, 148(%sp)
 	addi	%sp, %sp, 152
-	jal	veciprod.2739
+	jal	veciprod.2746
 	addi	%sp, %sp, -152
 	lw	%ra, 148(%sp)
 	fneg	%f1, %f0
@@ -6851,9 +6867,9 @@ beq_cont.9475:
 	jalr	%at
 	addi	%sp, %sp, -152
 	lw	%ra, 148(%sp)
-	j	beq_cont.9477
-beq_else.9476:
-beq_cont.9477:
+	j	beq_cont.9495
+beq_else.9494:
+beq_cont.9495:
 	lw	%v0, 56(%sp)
 	lw	%k1, 20(%sp)
 	sw	%ra, 148(%sp)
@@ -6879,35 +6895,35 @@ beq_cont.9477:
 	flw	%f1, 84(%sp)
 	sw	%ra, 148(%sp)
 	addi	%sp, %sp, 152
-	jal	fless.2651
+	jal	fless.2658
 	addi	%sp, %sp, -152
 	lw	%ra, 148(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9478
+	bne	%v0, %at, beq_else.9496
 	jr	%ra
-beq_else.9478:
+beq_else.9496:
 	lw	%v0, 92(%sp)
 	slti	%at, %v0, 4
-	bne	%at, %zero, beq_else.9480
-	j	beq_cont.9481
-beq_else.9480:
+	bne	%at, %zero, beq_else.9498
+	j	beq_cont.9499
+beq_else.9498:
 	addi	%v1, %v0, 1
 	addi	%a0, %zero, -1
 	sll	%v1, %v1, 2
 	lw	%a1, 104(%sp)
 	add	%at, %a1, %v1
 	sw	%a0, 0(%at)
-beq_cont.9481:
+beq_cont.9499:
 	lw	%v1, 120(%sp)
 	addi	%at, %zero, 2
-	bne	%v1, %at, beq_else.9482
+	bne	%v1, %at, beq_else.9500
 	flw	%f0, 20180(%zero)
 	lw	%v1, 116(%sp)
 	fsw	%f0, 148(%sp)
 	addi	%v0, %v1, 0
 	sw	%ra, 156(%sp)
 	addi	%sp, %sp, 160
-	jal	o_diffuse.2788
+	jal	o_diffuse.2795
 	addi	%sp, %sp, -160
 	lw	%ra, 156(%sp)
 	flw	%f1, 148(%sp)
@@ -6925,11 +6941,11 @@ beq_cont.9481:
 	lw	%k1, 0(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-beq_else.9482:
+beq_else.9500:
 	jr	%ra
-beq_else.9467:
+beq_else.9485:
 	jr	%ra
-trace_diffuse_ray.3051:
+trace_diffuse_ray.3058:
 	lw	%v1, 48(%k1)
 	lw	%a0, 44(%k1)
 	lw	%a1, 40(%k1)
@@ -6963,9 +6979,9 @@ trace_diffuse_ray.3051:
 	addi	%sp, %sp, -56
 	lw	%ra, 52(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9485
+	bne	%v0, %at, beq_else.9503
 	jr	%ra
-beq_else.9485:
+beq_else.9503:
 	lw	%v0, 48(%sp)
 	lw	%v0, 0(%v0)
 	sll	%v0, %v0, 2
@@ -6977,7 +6993,7 @@ beq_else.9485:
 	addi	%v0, %v1, 0
 	sw	%ra, 60(%sp)
 	addi	%sp, %sp, 64
-	jal	d_vec.2825
+	jal	d_vec.2832
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	addi	%v1, %v0, 0
@@ -7009,48 +7025,48 @@ beq_else.9485:
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9487
+	bne	%v0, %at, beq_else.9505
 	lw	%v0, 16(%sp)
 	lw	%v1, 12(%sp)
 	sw	%ra, 60(%sp)
 	addi	%sp, %sp, 64
-	jal	veciprod.2739
+	jal	veciprod.2746
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	fneg	%f0, %f0
 	fsw	%f0, 56(%sp)
 	sw	%ra, 60(%sp)
 	addi	%sp, %sp, 64
-	jal	fispos.2654
+	jal	fispos.2661
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9488
+	bne	%v0, %at, beq_else.9506
 	flw	%f0, 20192(%zero)
-	j	beq_cont.9489
-beq_else.9488:
+	j	beq_cont.9507
+beq_else.9506:
 	flw	%f0, 56(%sp)
-beq_cont.9489:
+beq_cont.9507:
 	flw	%f1, 8(%sp)
 	fmul	%f0, %f1, %f0
 	lw	%v0, 52(%sp)
 	fsw	%f0, 60(%sp)
 	sw	%ra, 68(%sp)
 	addi	%sp, %sp, 72
-	jal	o_diffuse.2788
+	jal	o_diffuse.2795
 	addi	%sp, %sp, -72
 	lw	%ra, 68(%sp)
 	flw	%f1, 60(%sp)
 	fmul	%f0, %f1, %f0
 	lw	%v0, 4(%sp)
 	lw	%v1, 0(%sp)
-	j	vecaccum.2747
-beq_else.9487:
+	j	vecaccum.2754
+beq_else.9505:
 	jr	%ra
-iter_trace_diffuse_rays.3054:
+iter_trace_diffuse_rays.3061:
 	lw	%a2, 4(%k1)
 	slti	%at, %a1, 0
-	bne	%at, %zero, beq_else.9491
+	bne	%at, %zero, beq_else.9509
 	sll	%a3, %a1, 2
 	add	%at, %v0, %a3
 	lw	%a3, 0(%at)
@@ -7063,23 +7079,23 @@ iter_trace_diffuse_rays.3054:
 	addi	%v0, %a3, 0
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	d_vec.2825
+	jal	d_vec.2832
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	lw	%v1, 20(%sp)
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	veciprod.2739
+	jal	veciprod.2746
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	fsw	%f0, 24(%sp)
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	fisneg.2656
+	jal	fisneg.2663
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9492
+	bne	%v0, %at, beq_else.9510
 	lw	%v0, 16(%sp)
 	sll	%v1, %v0, 2
 	lw	%a0, 12(%sp)
@@ -7096,8 +7112,8 @@ iter_trace_diffuse_rays.3054:
 	jalr	%at
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
-	j	beq_cont.9493
-beq_else.9492:
+	j	beq_cont.9511
+beq_else.9510:
 	lw	%v0, 16(%sp)
 	addi	%v1, %v0, 1
 	sll	%v1, %v1, 2
@@ -7115,7 +7131,7 @@ beq_else.9492:
 	jalr	%at
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
-beq_cont.9493:
+beq_cont.9511:
 	lw	%v0, 16(%sp)
 	addi	%a1, %v0, -2
 	lw	%v0, 12(%sp)
@@ -7124,9 +7140,9 @@ beq_cont.9493:
 	lw	%k1, 4(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-beq_else.9491:
+beq_else.9509:
 	jr	%ra
-trace_diffuse_rays.3059:
+trace_diffuse_rays.3066:
 	lw	%a1, 8(%k1)
 	lw	%a2, 4(%k1)
 	sw	%a0, 0(%sp)
@@ -7148,7 +7164,7 @@ trace_diffuse_rays.3059:
 	lw	%k1, 12(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-trace_diffuse_ray_80percent.3063:
+trace_diffuse_ray_80percent.3070:
 	lw	%a1, 8(%k1)
 	lw	%a2, 4(%k1)
 	sw	%a0, 0(%sp)
@@ -7157,9 +7173,9 @@ trace_diffuse_ray_80percent.3063:
 	sw	%a2, 12(%sp)
 	sw	%v0, 16(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9495
-	j	beq_cont.9496
-beq_else.9495:
+	bne	%v0, %at, beq_else.9513
+	j	beq_cont.9514
+beq_else.9513:
 	lw	%a3, 0(%a2)
 	addi	%v0, %a3, 0
 	addi	%k1, %a1, 0
@@ -7169,12 +7185,12 @@ beq_else.9495:
 	jalr	%at
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
-beq_cont.9496:
+beq_cont.9514:
 	lw	%v0, 16(%sp)
 	addi	%at, %zero, 1
-	bne	%v0, %at, beq_else.9497
-	j	beq_cont.9498
-beq_else.9497:
+	bne	%v0, %at, beq_else.9515
+	j	beq_cont.9516
+beq_else.9515:
 	lw	%v1, 12(%sp)
 	lw	%a0, 4(%v1)
 	lw	%a1, 4(%sp)
@@ -7189,12 +7205,12 @@ beq_else.9497:
 	jalr	%at
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
-beq_cont.9498:
+beq_cont.9516:
 	lw	%v0, 16(%sp)
 	addi	%at, %zero, 2
-	bne	%v0, %at, beq_else.9499
-	j	beq_cont.9500
-beq_else.9499:
+	bne	%v0, %at, beq_else.9517
+	j	beq_cont.9518
+beq_else.9517:
 	lw	%v1, 12(%sp)
 	lw	%a0, 8(%v1)
 	lw	%a1, 4(%sp)
@@ -7209,12 +7225,12 @@ beq_else.9499:
 	jalr	%at
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
-beq_cont.9500:
+beq_cont.9518:
 	lw	%v0, 16(%sp)
 	addi	%at, %zero, 3
-	bne	%v0, %at, beq_else.9501
-	j	beq_cont.9502
-beq_else.9501:
+	bne	%v0, %at, beq_else.9519
+	j	beq_cont.9520
+beq_else.9519:
 	lw	%v1, 12(%sp)
 	lw	%a0, 12(%v1)
 	lw	%a1, 4(%sp)
@@ -7229,12 +7245,12 @@ beq_else.9501:
 	jalr	%at
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
-beq_cont.9502:
+beq_cont.9520:
 	lw	%v0, 16(%sp)
 	addi	%at, %zero, 4
-	bne	%v0, %at, beq_else.9503
+	bne	%v0, %at, beq_else.9521
 	jr	%ra
-beq_else.9503:
+beq_else.9521:
 	lw	%v0, 12(%sp)
 	lw	%v0, 16(%v0)
 	lw	%v1, 4(%sp)
@@ -7242,7 +7258,7 @@ beq_else.9503:
 	lw	%k1, 8(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-calc_diffuse_using_1point.3067:
+calc_diffuse_using_1point.3074:
 	lw	%a0, 12(%k1)
 	lw	%a1, 8(%k1)
 	lw	%a2, 4(%k1)
@@ -7253,7 +7269,7 @@ calc_diffuse_using_1point.3067:
 	sw	%v0, 16(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	p_received_ray_20percent.2816
+	jal	p_received_ray_20percent.2823
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	lw	%v1, 16(%sp)
@@ -7261,7 +7277,7 @@ calc_diffuse_using_1point.3067:
 	addi	%v0, %v1, 0
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	p_nvectors.2823
+	jal	p_nvectors.2830
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	lw	%v1, 16(%sp)
@@ -7269,7 +7285,7 @@ calc_diffuse_using_1point.3067:
 	addi	%v0, %v1, 0
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	p_intersection_points.2808
+	jal	p_intersection_points.2815
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	lw	%v1, 16(%sp)
@@ -7277,7 +7293,7 @@ calc_diffuse_using_1point.3067:
 	addi	%v0, %v1, 0
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	p_energy.2814
+	jal	p_energy.2821
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	lw	%v1, 12(%sp)
@@ -7291,13 +7307,13 @@ calc_diffuse_using_1point.3067:
 	addi	%v0, %a1, 0
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	veccpy.2728
+	jal	veccpy.2735
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	lw	%v0, 16(%sp)
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	p_group_id.2818
+	jal	p_group_id.2825
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	lw	%v1, 12(%sp)
@@ -7325,8 +7341,8 @@ calc_diffuse_using_1point.3067:
 	lw	%v1, 0(%at)
 	lw	%v0, 0(%sp)
 	lw	%a0, 8(%sp)
-	j	vecaccumv.2760
-calc_diffuse_using_5points.3070:
+	j	vecaccumv.2767
+calc_diffuse_using_5points.3077:
 	lw	%a3, 8(%k1)
 	lw	%t0, 4(%k1)
 	sll	%t1, %v0, 2
@@ -7341,7 +7357,7 @@ calc_diffuse_using_5points.3070:
 	addi	%v0, %v1, 0
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	p_received_ray_20percent.2816
+	jal	p_received_ray_20percent.2823
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	lw	%v1, 20(%sp)
@@ -7354,7 +7370,7 @@ calc_diffuse_using_5points.3070:
 	addi	%v0, %a0, 0
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	p_received_ray_20percent.2816
+	jal	p_received_ray_20percent.2823
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	lw	%v1, 20(%sp)
@@ -7366,7 +7382,7 @@ calc_diffuse_using_5points.3070:
 	addi	%v0, %a0, 0
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	p_received_ray_20percent.2816
+	jal	p_received_ray_20percent.2823
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	lw	%v1, 20(%sp)
@@ -7379,7 +7395,7 @@ calc_diffuse_using_5points.3070:
 	addi	%v0, %a0, 0
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	p_received_ray_20percent.2816
+	jal	p_received_ray_20percent.2823
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	lw	%v1, 20(%sp)
@@ -7391,7 +7407,7 @@ calc_diffuse_using_5points.3070:
 	addi	%v0, %a0, 0
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	p_received_ray_20percent.2816
+	jal	p_received_ray_20percent.2823
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	lw	%v1, 8(%sp)
@@ -7405,7 +7421,7 @@ calc_diffuse_using_5points.3070:
 	addi	%v0, %a1, 0
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	veccpy.2728
+	jal	veccpy.2735
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	lw	%v0, 8(%sp)
@@ -7417,7 +7433,7 @@ calc_diffuse_using_5points.3070:
 	addi	%v0, %a0, 0
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	vecadd.2751
+	jal	vecadd.2758
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	lw	%v0, 8(%sp)
@@ -7429,7 +7445,7 @@ calc_diffuse_using_5points.3070:
 	addi	%v0, %a0, 0
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	vecadd.2751
+	jal	vecadd.2758
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	lw	%v0, 8(%sp)
@@ -7441,7 +7457,7 @@ calc_diffuse_using_5points.3070:
 	addi	%v0, %a0, 0
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	vecadd.2751
+	jal	vecadd.2758
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	lw	%v0, 8(%sp)
@@ -7453,7 +7469,7 @@ calc_diffuse_using_5points.3070:
 	addi	%v0, %a0, 0
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	vecadd.2751
+	jal	vecadd.2758
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	lw	%v0, 20(%sp)
@@ -7463,7 +7479,7 @@ calc_diffuse_using_5points.3070:
 	lw	%v0, 0(%at)
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	p_energy.2814
+	jal	p_energy.2821
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	lw	%v1, 8(%sp)
@@ -7472,19 +7488,19 @@ calc_diffuse_using_5points.3070:
 	lw	%v1, 0(%at)
 	lw	%v0, 0(%sp)
 	lw	%a0, 4(%sp)
-	j	vecaccumv.2760
-do_without_neighbors.3076:
+	j	vecaccumv.2767
+do_without_neighbors.3083:
 	lw	%a0, 4(%k1)
 	addi	%at, %zero, 4
 	slt	%at, %at, %v1
-	bne	%at, %zero, beq_else.9505
+	bne	%at, %zero, beq_else.9523
 	sw	%k1, 0(%sp)
 	sw	%a0, 4(%sp)
 	sw	%v0, 8(%sp)
 	sw	%v1, 12(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	p_surface_ids.2810
+	jal	p_surface_ids.2817
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	lw	%v1, 12(%sp)
@@ -7492,11 +7508,11 @@ do_without_neighbors.3076:
 	add	%at, %v0, %a0
 	lw	%v0, 0(%at)
 	slti	%at, %v0, 0
-	bne	%at, %zero, beq_else.9506
+	bne	%at, %zero, beq_else.9524
 	lw	%v0, 8(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	p_calc_diffuse.2812
+	jal	p_calc_diffuse.2819
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	lw	%v1, 12(%sp)
@@ -7504,9 +7520,9 @@ do_without_neighbors.3076:
 	add	%at, %v0, %a0
 	lw	%v0, 0(%at)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9507
-	j	beq_cont.9508
-beq_else.9507:
+	bne	%v0, %at, beq_else.9525
+	j	beq_cont.9526
+beq_else.9525:
 	lw	%v0, 8(%sp)
 	lw	%k1, 4(%sp)
 	sw	%ra, 20(%sp)
@@ -7515,52 +7531,52 @@ beq_else.9507:
 	jalr	%at
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
-beq_cont.9508:
+beq_cont.9526:
 	lw	%v0, 12(%sp)
 	addi	%v1, %v0, 1
 	lw	%v0, 8(%sp)
 	lw	%k1, 0(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-beq_else.9506:
+beq_else.9524:
 	jr	%ra
-beq_else.9505:
+beq_else.9523:
 	jr	%ra
-neighbors_exist.3079:
+neighbors_exist.3086:
 	lw	%a0, 4(%k1)
 	lw	%a1, 4(%a0)
 	addi	%a2, %v1, 1
 	slt	%at, %a2, %a1
-	bne	%at, %zero, beq_else.9511
+	bne	%at, %zero, beq_else.9529
 	addi	%v0, %zero, 0
 	jr	%ra
-beq_else.9511:
+beq_else.9529:
 	addi	%at, %zero, 0
 	slt	%at, %at, %v1
-	bne	%at, %zero, beq_else.9512
+	bne	%at, %zero, beq_else.9530
 	addi	%v0, %zero, 0
 	jr	%ra
-beq_else.9512:
+beq_else.9530:
 	lw	%v1, 0(%a0)
 	addi	%a0, %v0, 1
 	slt	%at, %a0, %v1
-	bne	%at, %zero, beq_else.9513
+	bne	%at, %zero, beq_else.9531
 	addi	%v0, %zero, 0
 	jr	%ra
-beq_else.9513:
+beq_else.9531:
 	addi	%at, %zero, 0
 	slt	%at, %at, %v0
-	bne	%at, %zero, beq_else.9514
+	bne	%at, %zero, beq_else.9532
 	addi	%v0, %zero, 0
 	jr	%ra
-beq_else.9514:
+beq_else.9532:
 	addi	%v0, %zero, 1
 	jr	%ra
-get_surface_id.3083:
+get_surface_id.3090:
 	sw	%v1, 0(%sp)
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 8
-	jal	p_surface_ids.2810
+	jal	p_surface_ids.2817
 	addi	%sp, %sp, -8
 	lw	%ra, 4(%sp)
 	lw	%v1, 0(%sp)
@@ -7568,7 +7584,7 @@ get_surface_id.3083:
 	add	%at, %v0, %v1
 	lw	%v0, 0(%at)
 	jr	%ra
-neighbors_are_available.3086:
+neighbors_are_available.3093:
 	sll	%a3, %v0, 2
 	add	%at, %a0, %a3
 	lw	%a3, 0(%at)
@@ -7581,7 +7597,7 @@ neighbors_are_available.3086:
 	addi	%v0, %a3, 0
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	get_surface_id.3083
+	jal	get_surface_id.3090
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	lw	%v1, 16(%sp)
@@ -7595,11 +7611,11 @@ neighbors_are_available.3086:
 	addi	%v0, %a0, 0
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	get_surface_id.3083
+	jal	get_surface_id.3090
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	lw	%v1, 20(%sp)
-	bne	%v0, %v1, beq_else.9515
+	bne	%v0, %v1, beq_else.9533
 	lw	%v0, 16(%sp)
 	sll	%a0, %v0, 2
 	lw	%a1, 4(%sp)
@@ -7610,11 +7626,11 @@ neighbors_are_available.3086:
 	addi	%v0, %a0, 0
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	get_surface_id.3083
+	jal	get_surface_id.3090
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	lw	%v1, 20(%sp)
-	bne	%v0, %v1, beq_else.9516
+	bne	%v0, %v1, beq_else.9534
 	lw	%v0, 16(%sp)
 	addi	%a0, %v0, -1
 	sll	%a0, %a0, 2
@@ -7626,11 +7642,11 @@ neighbors_are_available.3086:
 	addi	%v0, %a0, 0
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	get_surface_id.3083
+	jal	get_surface_id.3090
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	lw	%v1, 20(%sp)
-	bne	%v0, %v1, beq_else.9517
+	bne	%v0, %v1, beq_else.9535
 	lw	%v0, 16(%sp)
 	addi	%v0, %v0, 1
 	sll	%v0, %v0, 2
@@ -7641,26 +7657,26 @@ neighbors_are_available.3086:
 	addi	%v1, %a0, 0
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	get_surface_id.3083
+	jal	get_surface_id.3090
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	lw	%v1, 20(%sp)
-	bne	%v0, %v1, beq_else.9518
+	bne	%v0, %v1, beq_else.9536
 	addi	%v0, %zero, 1
 	jr	%ra
-beq_else.9518:
+beq_else.9536:
 	addi	%v0, %zero, 0
 	jr	%ra
-beq_else.9517:
+beq_else.9535:
 	addi	%v0, %zero, 0
 	jr	%ra
-beq_else.9516:
+beq_else.9534:
 	addi	%v0, %zero, 0
 	jr	%ra
-beq_else.9515:
+beq_else.9533:
 	addi	%v0, %zero, 0
 	jr	%ra
-try_exploit_neighbors.3092:
+try_exploit_neighbors.3099:
 	lw	%t0, 8(%k1)
 	lw	%t1, 4(%k1)
 	sll	%t2, %v0, 2
@@ -7668,7 +7684,7 @@ try_exploit_neighbors.3092:
 	lw	%t2, 0(%at)
 	addi	%at, %zero, 4
 	slt	%at, %at, %a3
-	bne	%at, %zero, beq_else.9519
+	bne	%at, %zero, beq_else.9537
 	sw	%v1, 0(%sp)
 	sw	%k1, 4(%sp)
 	sw	%t1, 8(%sp)
@@ -7683,11 +7699,11 @@ try_exploit_neighbors.3092:
 	addi	%v0, %t2, 0
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	get_surface_id.3083
+	jal	get_surface_id.3090
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	slti	%at, %v0, 0
-	bne	%at, %zero, beq_else.9520
+	bne	%at, %zero, beq_else.9538
 	lw	%v0, 36(%sp)
 	lw	%v1, 32(%sp)
 	lw	%a0, 28(%sp)
@@ -7695,11 +7711,11 @@ try_exploit_neighbors.3092:
 	lw	%a2, 20(%sp)
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	neighbors_are_available.3086
+	jal	neighbors_are_available.3093
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9521
+	bne	%v0, %at, beq_else.9539
 	lw	%v0, 36(%sp)
 	sll	%v0, %v0, 2
 	lw	%v1, 28(%sp)
@@ -7709,11 +7725,11 @@ try_exploit_neighbors.3092:
 	lw	%k1, 16(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-beq_else.9521:
+beq_else.9539:
 	lw	%v0, 12(%sp)
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	p_calc_diffuse.2812
+	jal	p_calc_diffuse.2819
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	lw	%a2, 20(%sp)
@@ -7721,9 +7737,9 @@ beq_else.9521:
 	add	%at, %v0, %v1
 	lw	%v0, 0(%at)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9522
-	j	beq_cont.9523
-beq_else.9522:
+	bne	%v0, %at, beq_else.9540
+	j	beq_cont.9541
+beq_else.9540:
 	lw	%v0, 36(%sp)
 	lw	%v1, 32(%sp)
 	lw	%a0, 28(%sp)
@@ -7735,7 +7751,7 @@ beq_else.9522:
 	jalr	%at
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
-beq_cont.9523:
+beq_cont.9541:
 	lw	%v0, 20(%sp)
 	addi	%a3, %v0, 1
 	lw	%v0, 36(%sp)
@@ -7746,11 +7762,11 @@ beq_cont.9523:
 	lw	%k1, 4(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-beq_else.9520:
+beq_else.9538:
 	jr	%ra
-beq_else.9519:
+beq_else.9537:
 	jr	%ra
-write_ppm_header.3099:
+write_ppm_header.3106:
 	lw	%v0, 4(%k1)
 	addi	%v1, %zero, 80
 	sw	%v0, 0(%sp)
@@ -7777,7 +7793,7 @@ write_ppm_header.3099:
 	addi	%v0, %v1, 0
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 8
-	jal	print_int.2708
+	jal	print_int.2715
 	addi	%sp, %sp, -8
 	lw	%ra, 4(%sp)
 	addi	%v0, %zero, 32
@@ -7790,7 +7806,7 @@ write_ppm_header.3099:
 	lw	%v0, 4(%v0)
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 8
-	jal	print_int.2708
+	jal	print_int.2715
 	addi	%sp, %sp, -8
 	lw	%ra, 4(%sp)
 	addi	%v0, %zero, 32
@@ -7802,38 +7818,38 @@ write_ppm_header.3099:
 	addi	%v0, %zero, 255
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 8
-	jal	print_int.2708
+	jal	print_int.2715
 	addi	%sp, %sp, -8
 	lw	%ra, 4(%sp)
 	addi	%v0, %zero, 10
 	j	min_caml_print_char
-write_rgb_element.3101:
+write_rgb_element.3108:
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 8
-	jal	int_of_float.2675
+	jal	int_of_float.2682
 	addi	%sp, %sp, -8
 	lw	%ra, 4(%sp)
 	addi	%at, %zero, 255
 	slt	%at, %at, %v0
-	bne	%at, %zero, beq_else.9526
+	bne	%at, %zero, beq_else.9544
 	slti	%at, %v0, 0
-	bne	%at, %zero, beq_else.9528
-	j	beq_cont.9529
-beq_else.9528:
+	bne	%at, %zero, beq_else.9546
+	j	beq_cont.9547
+beq_else.9546:
 	addi	%v0, %zero, 0
-beq_cont.9529:
-	j	beq_cont.9527
-beq_else.9526:
+beq_cont.9547:
+	j	beq_cont.9545
+beq_else.9544:
 	addi	%v0, %zero, 255
-beq_cont.9527:
-	j	print_int.2708
-write_rgb.3103:
+beq_cont.9545:
+	j	print_int.2715
+write_rgb.3110:
 	lw	%v0, 4(%k1)
 	flw	%f0, 0(%v0)
 	sw	%v0, 0(%sp)
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 8
-	jal	write_rgb_element.3101
+	jal	write_rgb_element.3108
 	addi	%sp, %sp, -8
 	lw	%ra, 4(%sp)
 	addi	%v0, %zero, 32
@@ -7846,7 +7862,7 @@ write_rgb.3103:
 	flw	%f0, 4(%v0)
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 8
-	jal	write_rgb_element.3101
+	jal	write_rgb_element.3108
 	addi	%sp, %sp, -8
 	lw	%ra, 4(%sp)
 	addi	%v0, %zero, 32
@@ -7859,18 +7875,18 @@ write_rgb.3103:
 	flw	%f0, 8(%v0)
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 8
-	jal	write_rgb_element.3101
+	jal	write_rgb_element.3108
 	addi	%sp, %sp, -8
 	lw	%ra, 4(%sp)
 	addi	%v0, %zero, 10
 	j	min_caml_print_char
-pretrace_diffuse_rays.3105:
+pretrace_diffuse_rays.3112:
 	lw	%a0, 12(%k1)
 	lw	%a1, 8(%k1)
 	lw	%a2, 4(%k1)
 	addi	%at, %zero, 4
 	slt	%at, %at, %v1
-	bne	%at, %zero, beq_else.9530
+	bne	%at, %zero, beq_else.9548
 	sw	%k1, 0(%sp)
 	sw	%a0, 4(%sp)
 	sw	%a1, 8(%sp)
@@ -7879,15 +7895,15 @@ pretrace_diffuse_rays.3105:
 	sw	%v0, 20(%sp)
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	get_surface_id.3083
+	jal	get_surface_id.3090
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	slti	%at, %v0, 0
-	bne	%at, %zero, beq_else.9531
+	bne	%at, %zero, beq_else.9549
 	lw	%v0, 20(%sp)
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	p_calc_diffuse.2812
+	jal	p_calc_diffuse.2819
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	lw	%v1, 16(%sp)
@@ -7895,13 +7911,13 @@ pretrace_diffuse_rays.3105:
 	add	%at, %v0, %a0
 	lw	%v0, 0(%at)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9532
-	j	beq_cont.9533
-beq_else.9532:
+	bne	%v0, %at, beq_else.9550
+	j	beq_cont.9551
+beq_else.9550:
 	lw	%v0, 20(%sp)
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	p_group_id.2818
+	jal	p_group_id.2825
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	lw	%v1, 12(%sp)
@@ -7909,13 +7925,13 @@ beq_else.9532:
 	addi	%v0, %v1, 0
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	vecbzero.2726
+	jal	vecbzero.2733
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	lw	%v0, 20(%sp)
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	p_nvectors.2823
+	jal	p_nvectors.2830
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	lw	%v1, 20(%sp)
@@ -7923,7 +7939,7 @@ beq_else.9532:
 	addi	%v0, %v1, 0
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	p_intersection_points.2808
+	jal	p_intersection_points.2815
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	lw	%v1, 24(%sp)
@@ -7952,7 +7968,7 @@ beq_else.9532:
 	lw	%v0, 20(%sp)
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	p_received_ray_20percent.2816
+	jal	p_received_ray_20percent.2823
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	lw	%v1, 16(%sp)
@@ -7963,21 +7979,21 @@ beq_else.9532:
 	addi	%v1, %a0, 0
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	veccpy.2728
+	jal	veccpy.2735
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
-beq_cont.9533:
+beq_cont.9551:
 	lw	%v0, 16(%sp)
 	addi	%v1, %v0, 1
 	lw	%v0, 20(%sp)
 	lw	%k1, 0(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-beq_else.9531:
+beq_else.9549:
 	jr	%ra
-beq_else.9530:
+beq_else.9548:
 	jr	%ra
-pretrace_pixels.3108:
+pretrace_pixels.3115:
 	lw	%a1, 36(%k1)
 	lw	%a2, 32(%k1)
 	lw	%a3, 28(%k1)
@@ -7988,7 +8004,7 @@ pretrace_pixels.3108:
 	lw	%t4, 8(%k1)
 	lw	%t5, 4(%k1)
 	slti	%at, %v1, 0
-	bne	%at, %zero, beq_else.9536
+	bne	%at, %zero, beq_else.9554
 	flw	%f3, 0(%t1)
 	lw	%t1, 0(%t5)
 	sub	%t1, %v1, %t1
@@ -8010,7 +8026,7 @@ pretrace_pixels.3108:
 	addi	%v0, %t1, 0
 	sw	%ra, 60(%sp)
 	addi	%sp, %sp, 64
-	jal	float_of_int.2685
+	jal	float_of_int.2692
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	flw	%f1, 56(%sp)
@@ -8038,20 +8054,20 @@ pretrace_pixels.3108:
 	addi	%v0, %k0, 0
 	sw	%ra, 60(%sp)
 	addi	%sp, %sp, 64
-	jal	vecunit_sgn.2736
+	jal	vecunit_sgn.2743
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	lw	%v0, 32(%sp)
 	sw	%ra, 60(%sp)
 	addi	%sp, %sp, 64
-	jal	vecbzero.2726
+	jal	vecbzero.2733
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	lw	%v0, 28(%sp)
 	lw	%v1, 24(%sp)
 	sw	%ra, 60(%sp)
 	addi	%sp, %sp, 64
-	jal	veccpy.2728
+	jal	veccpy.2735
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	addi	%v0, %zero, 0
@@ -8079,13 +8095,13 @@ pretrace_pixels.3108:
 	addi	%v0, %v1, 0
 	sw	%ra, 60(%sp)
 	addi	%sp, %sp, 64
-	jal	p_rgb.2806
+	jal	p_rgb.2813
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	lw	%v1, 32(%sp)
 	sw	%ra, 60(%sp)
 	addi	%sp, %sp, 64
-	jal	veccpy.2728
+	jal	veccpy.2735
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	lw	%v0, 20(%sp)
@@ -8098,7 +8114,7 @@ pretrace_pixels.3108:
 	addi	%v1, %a1, 0
 	sw	%ra, 60(%sp)
 	addi	%sp, %sp, 64
-	jal	p_set_group_id.2820
+	jal	p_set_group_id.2827
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	lw	%v0, 20(%sp)
@@ -8124,7 +8140,7 @@ pretrace_pixels.3108:
 	addi	%v0, %a0, 0
 	sw	%ra, 68(%sp)
 	addi	%sp, %sp, 72
-	jal	add_mod5.2715
+	jal	add_mod5.2722
 	addi	%sp, %sp, -72
 	lw	%ra, 68(%sp)
 	addi	%a0, %v0, 0
@@ -8136,9 +8152,9 @@ pretrace_pixels.3108:
 	lw	%k1, 0(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-beq_else.9536:
+beq_else.9554:
 	jr	%ra
-pretrace_line.3115:
+pretrace_line.3122:
 	lw	%a1, 24(%k1)
 	lw	%a2, 20(%k1)
 	lw	%a3, 16(%k1)
@@ -8158,7 +8174,7 @@ pretrace_line.3115:
 	addi	%v0, %v1, 0
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	float_of_int.2685
+	jal	float_of_int.2692
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	flw	%f1, 24(%sp)
@@ -8189,7 +8205,7 @@ pretrace_line.3115:
 	fadd	%f1, %f29, %fzero
 	lw	%at, 0(%k1)
 	jr	%at
-scan_pixel.3119:
+scan_pixel.3126:
 	lw	%a3, 24(%k1)
 	lw	%t0, 20(%k1)
 	lw	%t1, 16(%k1)
@@ -8198,9 +8214,9 @@ scan_pixel.3119:
 	lw	%t4, 4(%k1)
 	lw	%t3, 0(%t3)
 	slt	%at, %v0, %t3
-	bne	%at, %zero, beq_else.9538
+	bne	%at, %zero, beq_else.9556
 	jr	%ra
-beq_else.9538:
+beq_else.9556:
 	sll	%t3, %v0, 2
 	add	%at, %a1, %t3
 	lw	%t3, 0(%at)
@@ -8218,14 +8234,14 @@ beq_else.9538:
 	addi	%v0, %t3, 0
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	p_rgb.2806
+	jal	p_rgb.2813
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	addi	%v1, %v0, 0
 	lw	%v0, 40(%sp)
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	veccpy.2728
+	jal	veccpy.2735
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	lw	%v0, 32(%sp)
@@ -8239,7 +8255,7 @@ beq_else.9538:
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9540
+	bne	%v0, %at, beq_else.9558
 	lw	%v0, 32(%sp)
 	sll	%v1, %v0, 2
 	lw	%a0, 20(%sp)
@@ -8255,8 +8271,8 @@ beq_else.9538:
 	jalr	%at
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
-	j	beq_cont.9541
-beq_else.9540:
+	j	beq_cont.9559
+beq_else.9558:
 	addi	%a3, %zero, 0
 	lw	%v0, 32(%sp)
 	lw	%v1, 28(%sp)
@@ -8270,7 +8286,7 @@ beq_else.9540:
 	jalr	%at
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
-beq_cont.9541:
+beq_cont.9559:
 	lw	%k1, 4(%sp)
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
@@ -8287,15 +8303,15 @@ beq_cont.9541:
 	lw	%k1, 0(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-scan_line.3125:
+scan_line.3132:
 	lw	%a3, 12(%k1)
 	lw	%t0, 8(%k1)
 	lw	%t1, 4(%k1)
 	lw	%t2, 4(%t1)
 	slt	%at, %v0, %t2
-	bne	%at, %zero, beq_else.9542
+	bne	%at, %zero, beq_else.9560
 	jr	%ra
-beq_else.9542:
+beq_else.9560:
 	lw	%t1, 4(%t1)
 	addi	%t1, %t1, -1
 	sw	%k1, 0(%sp)
@@ -8306,9 +8322,9 @@ beq_else.9542:
 	sw	%v0, 20(%sp)
 	sw	%a3, 24(%sp)
 	slt	%at, %v0, %t1
-	bne	%at, %zero, beq_else.9544
-	j	beq_cont.9545
-beq_else.9544:
+	bne	%at, %zero, beq_else.9562
+	j	beq_cont.9563
+beq_else.9562:
 	addi	%t1, %v0, 1
 	addi	%a0, %a2, 0
 	addi	%v1, %t1, 0
@@ -8320,7 +8336,7 @@ beq_else.9544:
 	jalr	%at
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
-beq_cont.9545:
+beq_cont.9563:
 	addi	%v0, %zero, 0
 	lw	%v1, 20(%sp)
 	lw	%a0, 16(%sp)
@@ -8341,7 +8357,7 @@ beq_cont.9545:
 	addi	%v0, %a0, 0
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	add_mod5.2715
+	jal	add_mod5.2722
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	addi	%a2, %v0, 0
@@ -8352,7 +8368,7 @@ beq_cont.9545:
 	lw	%k1, 0(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-create_float5x3array.3131:
+create_float5x3array.3138:
 	addi	%v0, %zero, 3
 	flw	%f0, 20192(%zero)
 	sw	%ra, 4(%sp)
@@ -8407,7 +8423,7 @@ create_float5x3array.3131:
 	sw	%v0, 16(%v1)
 	add	%v0, %zero, %v1
 	jr	%ra
-create_pixel.3133:
+create_pixel.3140:
 	addi	%v0, %zero, 3
 	flw	%f0, 20192(%zero)
 	sw	%ra, 4(%sp)
@@ -8418,7 +8434,7 @@ create_pixel.3133:
 	sw	%v0, 0(%sp)
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 8
-	jal	create_float5x3array.3131
+	jal	create_float5x3array.3138
 	addi	%sp, %sp, -8
 	lw	%ra, 4(%sp)
 	addi	%v1, %zero, 5
@@ -8444,13 +8460,13 @@ create_pixel.3133:
 	sw	%v0, 12(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	create_float5x3array.3131
+	jal	create_float5x3array.3138
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	sw	%v0, 16(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	create_float5x3array.3131
+	jal	create_float5x3array.3138
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	addi	%v1, %zero, 1
@@ -8466,7 +8482,7 @@ create_pixel.3133:
 	sw	%v0, 24(%sp)
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	create_float5x3array.3131
+	jal	create_float5x3array.3138
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	add	%v1, %zero, %hp
@@ -8488,14 +8504,14 @@ create_pixel.3133:
 	sw	%v0, 0(%v1)
 	add	%v0, %zero, %v1
 	jr	%ra
-init_line_elements.3135:
+init_line_elements.3142:
 	slti	%at, %v1, 0
-	bne	%at, %zero, beq_else.9546
+	bne	%at, %zero, beq_else.9564
 	sw	%v0, 0(%sp)
 	sw	%v1, 4(%sp)
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	create_pixel.3133
+	jal	create_pixel.3140
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	lw	%v1, 4(%sp)
@@ -8505,17 +8521,17 @@ init_line_elements.3135:
 	sw	%v0, 0(%at)
 	addi	%v1, %v1, -1
 	addi	%v0, %a1, 0
-	j	init_line_elements.3135
-beq_else.9546:
+	j	init_line_elements.3142
+beq_else.9564:
 	jr	%ra
-create_pixelline.3138:
+create_pixelline.3145:
 	lw	%v0, 4(%k1)
 	lw	%v1, 0(%v0)
 	sw	%v0, 0(%sp)
 	sw	%v1, 4(%sp)
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	create_pixel.3133
+	jal	create_pixel.3140
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	addi	%v1, %v0, 0
@@ -8528,12 +8544,12 @@ create_pixelline.3138:
 	lw	%v1, 0(%sp)
 	lw	%v1, 0(%v1)
 	addi	%v1, %v1, -2
-	j	init_line_elements.3135
-tan.3140:
+	j	init_line_elements.3142
+tan.3147:
 	fsw	%f0, 0(%sp)
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 8
-	jal	sin.2699
+	jal	sin.2706
 	addi	%sp, %sp, -8
 	lw	%ra, 4(%sp)
 	flw	%f1, 0(%sp)
@@ -8541,13 +8557,13 @@ tan.3140:
 	fadd	%f0, %f1, %fzero
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	cos.2697
+	jal	cos.2704
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	flw	%f1, 4(%sp)
 	fdiv	%f0, %f1, %f0
 	jr	%ra
-adjust_position.3142:
+adjust_position.3149:
 	fmul	%f0, %f0, %f0
 	flw	%f2, 20016(%zero)
 	fadd	%f0, %f0, %f2
@@ -8559,23 +8575,23 @@ adjust_position.3142:
 	fadd	%f0, %f2, %fzero
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	atan.2701
+	jal	atan.2708
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	flw	%f1, 4(%sp)
 	fmul	%f0, %f0, %f1
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 16
-	jal	tan.3140
+	jal	tan.3147
 	addi	%sp, %sp, -16
 	lw	%ra, 12(%sp)
 	flw	%f1, 0(%sp)
 	fmul	%f0, %f0, %f1
 	jr	%ra
-calc_dirvec.3145:
+calc_dirvec.3152:
 	lw	%a1, 4(%k1)
 	slti	%at, %v0, 5
-	bne	%at, %zero, beq_else.9547
+	bne	%at, %zero, beq_else.9565
 	sw	%a0, 0(%sp)
 	sw	%a1, 4(%sp)
 	sw	%v1, 8(%sp)
@@ -8583,7 +8599,7 @@ calc_dirvec.3145:
 	fsw	%f1, 16(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	fsqr.2665
+	jal	fsqr.2672
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	flw	%f1, 16(%sp)
@@ -8591,7 +8607,7 @@ calc_dirvec.3145:
 	fadd	%f0, %f1, %fzero
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	fsqr.2665
+	jal	fsqr.2672
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	flw	%f1, 20(%sp)
@@ -8621,7 +8637,7 @@ calc_dirvec.3145:
 	addi	%v0, %a0, 0
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	d_vec.2825
+	jal	d_vec.2832
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	flw	%f0, 36(%sp)
@@ -8629,7 +8645,7 @@ calc_dirvec.3145:
 	flw	%f2, 28(%sp)
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	vecset.2718
+	jal	vecset.2725
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	lw	%v0, 0(%sp)
@@ -8641,7 +8657,7 @@ calc_dirvec.3145:
 	addi	%v0, %v1, 0
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	d_vec.2825
+	jal	d_vec.2832
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	flw	%f0, 32(%sp)
@@ -8652,7 +8668,7 @@ calc_dirvec.3145:
 	fadd	%f1, %f3, %fzero
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	vecset.2718
+	jal	vecset.2725
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	lw	%v0, 0(%sp)
@@ -8664,7 +8680,7 @@ calc_dirvec.3145:
 	addi	%v0, %v1, 0
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	d_vec.2825
+	jal	d_vec.2832
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	flw	%f0, 36(%sp)
@@ -8676,7 +8692,7 @@ calc_dirvec.3145:
 	fadd	%f0, %f4, %fzero
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	vecset.2718
+	jal	vecset.2725
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	lw	%v0, 0(%sp)
@@ -8688,7 +8704,7 @@ calc_dirvec.3145:
 	addi	%v0, %v1, 0
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	d_vec.2825
+	jal	d_vec.2832
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	flw	%f0, 36(%sp)
@@ -8702,7 +8718,7 @@ calc_dirvec.3145:
 	fadd	%f1, %f3, %fzero
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	vecset.2718
+	jal	vecset.2725
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	lw	%v0, 0(%sp)
@@ -8714,7 +8730,7 @@ calc_dirvec.3145:
 	addi	%v0, %v1, 0
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	d_vec.2825
+	jal	d_vec.2832
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	flw	%f0, 36(%sp)
@@ -8727,7 +8743,7 @@ calc_dirvec.3145:
 	fadd	%f1, %f3, %fzero
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	vecset.2718
+	jal	vecset.2725
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	lw	%v0, 0(%sp)
@@ -8738,15 +8754,15 @@ calc_dirvec.3145:
 	lw	%v0, 0(%at)
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	d_vec.2825
+	jal	d_vec.2832
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	flw	%f0, 28(%sp)
 	fneg	%f0, %f0
 	flw	%f1, 36(%sp)
 	flw	%f2, 32(%sp)
-	j	vecset.2718
-beq_else.9547:
+	j	vecset.2725
+beq_else.9565:
 	fsw	%f2, 40(%sp)
 	sw	%a0, 0(%sp)
 	sw	%v1, 8(%sp)
@@ -8757,7 +8773,7 @@ beq_else.9547:
 	fadd	%f1, %f2, %fzero
 	sw	%ra, 60(%sp)
 	addi	%sp, %sp, 64
-	jal	adjust_position.3142
+	jal	adjust_position.3149
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	lw	%v0, 52(%sp)
@@ -8767,7 +8783,7 @@ beq_else.9547:
 	sw	%v0, 60(%sp)
 	sw	%ra, 68(%sp)
 	addi	%sp, %sp, 72
-	jal	adjust_position.3142
+	jal	adjust_position.3149
 	addi	%sp, %sp, -72
 	lw	%ra, 68(%sp)
 	fadd	%f1, %f0, %fzero
@@ -8780,10 +8796,10 @@ beq_else.9547:
 	lw	%k1, 44(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-calc_dirvecs.3153:
+calc_dirvecs.3160:
 	lw	%a1, 4(%k1)
 	slti	%at, %v0, 0
-	bne	%at, %zero, beq_else.9548
+	bne	%at, %zero, beq_else.9566
 	sw	%k1, 0(%sp)
 	sw	%v0, 4(%sp)
 	fsw	%f0, 8(%sp)
@@ -8792,7 +8808,7 @@ calc_dirvecs.3153:
 	sw	%a1, 20(%sp)
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	float_of_int.2685
+	jal	float_of_int.2692
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	flw	%f1, 20152(%zero)
@@ -8815,7 +8831,7 @@ calc_dirvecs.3153:
 	lw	%v0, 4(%sp)
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	float_of_int.2685
+	jal	float_of_int.2692
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	flw	%f1, 20152(%zero)
@@ -8845,7 +8861,7 @@ calc_dirvecs.3153:
 	addi	%v0, %a0, 0
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	add_mod5.2715
+	jal	add_mod5.2722
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	addi	%v1, %v0, 0
@@ -8855,12 +8871,12 @@ calc_dirvecs.3153:
 	lw	%k1, 0(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-beq_else.9548:
+beq_else.9566:
 	jr	%ra
-calc_dirvec_rows.3158:
+calc_dirvec_rows.3165:
 	lw	%a1, 4(%k1)
 	slti	%at, %v0, 0
-	bne	%at, %zero, beq_else.9550
+	bne	%at, %zero, beq_else.9568
 	sw	%k1, 0(%sp)
 	sw	%v0, 4(%sp)
 	sw	%a0, 8(%sp)
@@ -8868,7 +8884,7 @@ calc_dirvec_rows.3158:
 	sw	%a1, 16(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	float_of_int.2685
+	jal	float_of_int.2692
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	flw	%f1, 20152(%zero)
@@ -8893,7 +8909,7 @@ calc_dirvec_rows.3158:
 	addi	%v0, %a0, 0
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	add_mod5.2715
+	jal	add_mod5.2722
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	addi	%v1, %v0, 0
@@ -8903,9 +8919,9 @@ calc_dirvec_rows.3158:
 	lw	%k1, 0(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-beq_else.9550:
+beq_else.9568:
 	jr	%ra
-create_dirvec.3162:
+create_dirvec.3169:
 	lw	%v0, 4(%k1)
 	addi	%v1, %zero, 3
 	flw	%f0, 20192(%zero)
@@ -8932,10 +8948,10 @@ create_dirvec.3162:
 	sw	%v0, 0(%v1)
 	add	%v0, %zero, %v1
 	jr	%ra
-create_dirvec_elements.3164:
+create_dirvec_elements.3171:
 	lw	%a0, 4(%k1)
 	slti	%at, %v1, 0
-	bne	%at, %zero, beq_else.9552
+	bne	%at, %zero, beq_else.9570
 	sw	%k1, 0(%sp)
 	sw	%v0, 4(%sp)
 	sw	%v1, 8(%sp)
@@ -8956,14 +8972,14 @@ create_dirvec_elements.3164:
 	addi	%v0, %a1, 0
 	lw	%at, 0(%k1)
 	jr	%at
-beq_else.9552:
+beq_else.9570:
 	jr	%ra
-create_dirvecs.3167:
+create_dirvecs.3174:
 	lw	%v1, 12(%k1)
 	lw	%a0, 8(%k1)
 	lw	%a1, 4(%k1)
 	slti	%at, %v0, 0
-	bne	%at, %zero, beq_else.9554
+	bne	%at, %zero, beq_else.9572
 	addi	%a2, %zero, 120
 	sw	%k1, 0(%sp)
 	sw	%a0, 4(%sp)
@@ -9006,12 +9022,12 @@ create_dirvecs.3167:
 	lw	%k1, 0(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-beq_else.9554:
+beq_else.9572:
 	jr	%ra
-init_dirvec_constants.3169:
+init_dirvec_constants.3176:
 	lw	%a0, 4(%k1)
 	slti	%at, %v1, 0
-	bne	%at, %zero, beq_else.9556
+	bne	%at, %zero, beq_else.9574
 	sll	%a1, %v1, 2
 	add	%at, %v0, %a1
 	lw	%a1, 0(%at)
@@ -9032,13 +9048,13 @@ init_dirvec_constants.3169:
 	lw	%k1, 4(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-beq_else.9556:
+beq_else.9574:
 	jr	%ra
-init_vecset_constants.3172:
+init_vecset_constants.3179:
 	lw	%v1, 8(%k1)
 	lw	%a0, 4(%k1)
 	slti	%at, %v0, 0
-	bne	%at, %zero, beq_else.9558
+	bne	%at, %zero, beq_else.9576
 	sll	%a1, %v0, 2
 	add	%at, %a0, %a1
 	lw	%a0, 0(%at)
@@ -9059,9 +9075,9 @@ init_vecset_constants.3172:
 	lw	%k1, 0(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-beq_else.9558:
+beq_else.9576:
 	jr	%ra
-init_dirvecs.3174:
+init_dirvecs.3181:
 	lw	%v0, 12(%k1)
 	lw	%v1, 8(%k1)
 	lw	%a0, 4(%k1)
@@ -9090,7 +9106,7 @@ init_dirvecs.3174:
 	lw	%k1, 0(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-add_reflection.3176:
+add_reflection.3183:
 	lw	%a0, 12(%k1)
 	lw	%a1, 8(%k1)
 	lw	%k1, 4(%k1)
@@ -9111,7 +9127,7 @@ add_reflection.3176:
 	sw	%v0, 32(%sp)
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	d_vec.2825
+	jal	d_vec.2832
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	flw	%f0, 28(%sp)
@@ -9119,7 +9135,7 @@ add_reflection.3176:
 	flw	%f2, 20(%sp)
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	vecset.2718
+	jal	vecset.2725
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	lw	%v0, 32(%sp)
@@ -9144,7 +9160,7 @@ add_reflection.3176:
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
 	jr	%ra
-setup_rect_reflection.3183:
+setup_rect_reflection.3190:
 	lw	%a0, 12(%k1)
 	lw	%a1, 8(%k1)
 	lw	%a2, 4(%k1)
@@ -9160,7 +9176,7 @@ setup_rect_reflection.3183:
 	addi	%v0, %v1, 0
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	o_diffuse.2788
+	jal	o_diffuse.2795
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	flw	%f1, 20(%sp)
@@ -9231,7 +9247,7 @@ setup_rect_reflection.3183:
 	lw	%v1, 0(%sp)
 	sw	%v0, 0(%v1)
 	jr	%ra
-setup_surface_reflection.3186:
+setup_surface_reflection.3193:
 	lw	%a0, 12(%k1)
 	lw	%a1, 8(%k1)
 	lw	%a2, 4(%k1)
@@ -9249,7 +9265,7 @@ setup_surface_reflection.3186:
 	addi	%v0, %v1, 0
 	sw	%ra, 28(%sp)
 	addi	%sp, %sp, 32
-	jal	o_diffuse.2788
+	jal	o_diffuse.2795
 	addi	%sp, %sp, -32
 	lw	%ra, 28(%sp)
 	flw	%f1, 24(%sp)
@@ -9258,14 +9274,14 @@ setup_surface_reflection.3186:
 	fsw	%f0, 28(%sp)
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	o_param_abc.2780
+	jal	o_param_abc.2787
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	addi	%v1, %v0, 0
 	lw	%v0, 16(%sp)
 	sw	%ra, 36(%sp)
 	addi	%sp, %sp, 40
-	jal	veciprod.2739
+	jal	veciprod.2746
 	addi	%sp, %sp, -40
 	lw	%ra, 36(%sp)
 	flw	%f1, 20132(%zero)
@@ -9274,7 +9290,7 @@ setup_surface_reflection.3186:
 	fsw	%f1, 36(%sp)
 	sw	%ra, 44(%sp)
 	addi	%sp, %sp, 48
-	jal	o_param_a.2774
+	jal	o_param_a.2781
 	addi	%sp, %sp, -48
 	lw	%ra, 44(%sp)
 	flw	%f1, 36(%sp)
@@ -9291,7 +9307,7 @@ setup_surface_reflection.3186:
 	addi	%v0, %v1, 0
 	sw	%ra, 52(%sp)
 	addi	%sp, %sp, 56
-	jal	o_param_b.2776
+	jal	o_param_b.2783
 	addi	%sp, %sp, -56
 	lw	%ra, 52(%sp)
 	flw	%f1, 44(%sp)
@@ -9308,7 +9324,7 @@ setup_surface_reflection.3186:
 	addi	%v0, %v1, 0
 	sw	%ra, 60(%sp)
 	addi	%sp, %sp, 64
-	jal	o_param_c.2778
+	jal	o_param_c.2785
 	addi	%sp, %sp, -64
 	lw	%ra, 60(%sp)
 	flw	%f1, 52(%sp)
@@ -9335,12 +9351,12 @@ setup_surface_reflection.3186:
 	lw	%v1, 0(%sp)
 	sw	%v0, 0(%v1)
 	jr	%ra
-setup_reflections.3189:
+setup_reflections.3196:
 	lw	%v1, 12(%k1)
 	lw	%a0, 8(%k1)
 	lw	%a1, 4(%k1)
 	slti	%at, %v0, 0
-	bne	%at, %zero, beq_else.9563
+	bne	%at, %zero, beq_else.9581
 	sll	%a2, %v0, 2
 	add	%at, %a1, %a2
 	lw	%a1, 0(%at)
@@ -9351,55 +9367,55 @@ setup_reflections.3189:
 	addi	%v0, %a1, 0
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	o_reflectiontype.2768
+	jal	o_reflectiontype.2775
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	addi	%at, %zero, 2
-	bne	%v0, %at, beq_else.9564
+	bne	%v0, %at, beq_else.9582
 	lw	%v0, 12(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	o_diffuse.2788
+	jal	o_diffuse.2795
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	flw	%f1, 20180(%zero)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	fless.2651
+	jal	fless.2658
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.9565
+	bne	%v0, %at, beq_else.9583
 	jr	%ra
-beq_else.9565:
+beq_else.9583:
 	lw	%v0, 12(%sp)
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 24
-	jal	o_form.2766
+	jal	o_form.2773
 	addi	%sp, %sp, -24
 	lw	%ra, 20(%sp)
 	addi	%at, %zero, 1
-	bne	%v0, %at, beq_else.9567
+	bne	%v0, %at, beq_else.9585
 	lw	%v0, 4(%sp)
 	lw	%v1, 12(%sp)
 	lw	%k1, 8(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-beq_else.9567:
+beq_else.9585:
 	addi	%at, %zero, 2
-	bne	%v0, %at, beq_else.9568
+	bne	%v0, %at, beq_else.9586
 	lw	%v0, 4(%sp)
 	lw	%v1, 12(%sp)
 	lw	%k1, 0(%sp)
 	lw	%at, 0(%k1)
 	jr	%at
-beq_else.9568:
+beq_else.9586:
 	jr	%ra
-beq_else.9564:
+beq_else.9582:
 	jr	%ra
-beq_else.9563:
+beq_else.9581:
 	jr	%ra
-rt.3191:
+rt.3198:
 	lw	%a0, 56(%k1)
 	lw	%a1, 52(%k1)
 	lw	%a2, 48(%k1)
@@ -9436,7 +9452,7 @@ rt.3191:
 	fsw	%f0, 48(%sp)
 	sw	%ra, 52(%sp)
 	addi	%sp, %sp, 56
-	jal	float_of_int.2685
+	jal	float_of_int.2692
 	addi	%sp, %sp, -56
 	lw	%ra, 52(%sp)
 	flw	%f1, 48(%sp)
@@ -9491,13 +9507,13 @@ rt.3191:
 	lw	%v0, 24(%sp)
 	sw	%ra, 68(%sp)
 	addi	%sp, %sp, 72
-	jal	d_vec.2825
+	jal	d_vec.2832
 	addi	%sp, %sp, -72
 	lw	%ra, 68(%sp)
 	lw	%v1, 20(%sp)
 	sw	%ra, 68(%sp)
 	addi	%sp, %sp, 72
-	jal	veccpy.2728
+	jal	veccpy.2735
 	addi	%sp, %sp, -72
 	lw	%ra, 68(%sp)
 	lw	%v0, 24(%sp)
@@ -9947,7 +9963,7 @@ min_caml_start:
 	lw	%ra, 140(%sp)
 	add	%v1, %zero, %hp
 	addi	%hp, %hp, 24
-	addi	%a0, %zero, read_screen_settings.2837
+	addi	%a0, %zero, read_screen_settings.2844
 	sw	%a0, 0(%v1)
 	lw	%a0, 12(%sp)
 	sw	%a0, 20(%v1)
@@ -9961,7 +9977,7 @@ min_caml_start:
 	sw	%t0, 4(%v1)
 	add	%t0, %zero, %hp
 	addi	%hp, %hp, 16
-	addi	%t1, %zero, read_light.2839
+	addi	%t1, %zero, read_light.2846
 	sw	%t1, 0(%t0)
 	lw	%t1, 16(%sp)
 	sw	%t1, 8(%t0)
@@ -9969,31 +9985,31 @@ min_caml_start:
 	sw	%t2, 4(%t0)
 	add	%t3, %zero, %hp
 	addi	%hp, %hp, 8
-	addi	%t4, %zero, read_nth_object.2844
+	addi	%t4, %zero, read_nth_object.2851
 	sw	%t4, 0(%t3)
 	lw	%t4, 4(%sp)
 	sw	%t4, 4(%t3)
 	add	%t5, %zero, %hp
 	addi	%hp, %hp, 16
-	addi	%t6, %zero, read_object.2846
+	addi	%t6, %zero, read_object.2853
 	sw	%t6, 0(%t5)
 	sw	%t3, 8(%t5)
 	lw	%t3, 0(%sp)
 	sw	%t3, 4(%t5)
 	add	%t6, %zero, %hp
 	addi	%hp, %hp, 8
-	addi	%t7, %zero, read_all_object.2848
+	addi	%t7, %zero, read_all_object.2855
 	sw	%t7, 0(%t6)
 	sw	%t5, 4(%t6)
 	add	%t5, %zero, %hp
 	addi	%hp, %hp, 8
-	addi	%t7, %zero, read_and_network.2854
+	addi	%t7, %zero, read_and_network.2861
 	sw	%t7, 0(%t5)
 	lw	%t7, 28(%sp)
 	sw	%t7, 4(%t5)
 	add	%s0, %zero, %hp
 	addi	%hp, %hp, 24
-	addi	%s1, %zero, read_parameter.2856
+	addi	%s1, %zero, read_parameter.2863
 	sw	%s1, 0(%s0)
 	sw	%v1, 20(%s0)
 	sw	%t0, 16(%s0)
@@ -10003,28 +10019,28 @@ min_caml_start:
 	sw	%v1, 4(%s0)
 	add	%t0, %zero, %hp
 	addi	%hp, %hp, 8
-	addi	%t5, %zero, solver_rect_surface.2858
+	addi	%t5, %zero, solver_rect_surface.2865
 	sw	%t5, 0(%t0)
 	lw	%t5, 40(%sp)
 	sw	%t5, 4(%t0)
 	add	%t6, %zero, %hp
 	addi	%hp, %hp, 8
-	addi	%s1, %zero, solver_rect.2867
+	addi	%s1, %zero, solver_rect.2874
 	sw	%s1, 0(%t6)
 	sw	%t0, 4(%t6)
 	add	%t0, %zero, %hp
 	addi	%hp, %hp, 8
-	addi	%s1, %zero, solver_surface.2873
+	addi	%s1, %zero, solver_surface.2880
 	sw	%s1, 0(%t0)
 	sw	%t5, 4(%t0)
 	add	%s1, %zero, %hp
 	addi	%hp, %hp, 8
-	addi	%s2, %zero, solver_second.2892
+	addi	%s2, %zero, solver_second.2899
 	sw	%s2, 0(%s1)
 	sw	%t5, 4(%s1)
 	add	%s2, %zero, %hp
 	addi	%hp, %hp, 24
-	addi	%s3, %zero, solver.2898
+	addi	%s3, %zero, solver.2905
 	sw	%s3, 0(%s2)
 	sw	%t0, 16(%s2)
 	sw	%s1, 12(%s2)
@@ -10032,22 +10048,22 @@ min_caml_start:
 	sw	%t4, 4(%s2)
 	add	%t0, %zero, %hp
 	addi	%hp, %hp, 8
-	addi	%t6, %zero, solver_rect_fast.2902
+	addi	%t6, %zero, solver_rect_fast.2909
 	sw	%t6, 0(%t0)
 	sw	%t5, 4(%t0)
 	add	%t6, %zero, %hp
 	addi	%hp, %hp, 8
-	addi	%s1, %zero, solver_surface_fast.2909
+	addi	%s1, %zero, solver_surface_fast.2916
 	sw	%s1, 0(%t6)
 	sw	%t5, 4(%t6)
 	add	%s1, %zero, %hp
 	addi	%hp, %hp, 8
-	addi	%s3, %zero, solver_second_fast.2915
+	addi	%s3, %zero, solver_second_fast.2922
 	sw	%s3, 0(%s1)
 	sw	%t5, 4(%s1)
 	add	%s3, %zero, %hp
 	addi	%hp, %hp, 24
-	addi	%s4, %zero, solver_fast.2921
+	addi	%s4, %zero, solver_fast.2928
 	sw	%s4, 0(%s3)
 	sw	%t6, 16(%s3)
 	sw	%s1, 12(%s3)
@@ -10055,17 +10071,17 @@ min_caml_start:
 	sw	%t4, 4(%s3)
 	add	%t6, %zero, %hp
 	addi	%hp, %hp, 8
-	addi	%s1, %zero, solver_surface_fast2.2925
+	addi	%s1, %zero, solver_surface_fast2.2932
 	sw	%s1, 0(%t6)
 	sw	%t5, 4(%t6)
 	add	%s1, %zero, %hp
 	addi	%hp, %hp, 8
-	addi	%s4, %zero, solver_second_fast2.2932
+	addi	%s4, %zero, solver_second_fast2.2939
 	sw	%s4, 0(%s1)
 	sw	%t5, 4(%s1)
 	add	%s4, %zero, %hp
 	addi	%hp, %hp, 24
-	addi	%s5, %zero, solver_fast2.2939
+	addi	%s5, %zero, solver_fast2.2946
 	sw	%s5, 0(%s4)
 	sw	%t6, 16(%s4)
 	sw	%s1, 12(%s4)
@@ -10073,23 +10089,23 @@ min_caml_start:
 	sw	%t4, 4(%s4)
 	add	%t0, %zero, %hp
 	addi	%hp, %hp, 8
-	addi	%t6, %zero, iter_setup_dirvec_constants.2951
+	addi	%t6, %zero, iter_setup_dirvec_constants.2958
 	sw	%t6, 0(%t0)
 	sw	%t4, 4(%t0)
 	add	%t6, %zero, %hp
 	addi	%hp, %hp, 16
-	addi	%s1, %zero, setup_dirvec_constants.2954
+	addi	%s1, %zero, setup_dirvec_constants.2961
 	sw	%s1, 0(%t6)
 	sw	%t3, 8(%t6)
 	sw	%t0, 4(%t6)
 	add	%t0, %zero, %hp
 	addi	%hp, %hp, 8
-	addi	%s1, %zero, setup_startp_constants.2956
+	addi	%s1, %zero, setup_startp_constants.2963
 	sw	%s1, 0(%t0)
 	sw	%t4, 4(%t0)
 	add	%s1, %zero, %hp
 	addi	%hp, %hp, 16
-	addi	%s5, %zero, setup_startp.2959
+	addi	%s5, %zero, setup_startp.2966
 	sw	%s5, 0(%s1)
 	lw	%s5, 92(%sp)
 	sw	%s5, 12(%s1)
@@ -10097,12 +10113,12 @@ min_caml_start:
 	sw	%t3, 4(%s1)
 	add	%t0, %zero, %hp
 	addi	%hp, %hp, 8
-	addi	%s6, %zero, check_all_inside.2981
+	addi	%s6, %zero, check_all_inside.2988
 	sw	%s6, 0(%t0)
 	sw	%t4, 4(%t0)
 	add	%s6, %zero, %hp
 	addi	%hp, %hp, 32
-	addi	%s7, %zero, shadow_check_and_group.2987
+	addi	%s7, %zero, shadow_check_and_group.2994
 	sw	%s7, 0(%s6)
 	sw	%s3, 28(%s6)
 	sw	%t5, 24(%s6)
@@ -10115,13 +10131,13 @@ min_caml_start:
 	sw	%t0, 4(%s6)
 	add	%t9, %zero, %hp
 	addi	%hp, %hp, 16
-	addi	%k0, %zero, shadow_check_one_or_group.2990
+	addi	%k0, %zero, shadow_check_one_or_group.2997
 	sw	%k0, 0(%t9)
 	sw	%s6, 8(%t9)
 	sw	%t7, 4(%t9)
 	add	%s6, %zero, %hp
 	addi	%hp, %hp, 24
-	addi	%k0, %zero, shadow_check_one_or_matrix.2993
+	addi	%k0, %zero, shadow_check_one_or_matrix.3000
 	sw	%k0, 0(%s6)
 	sw	%s3, 20(%s6)
 	sw	%t5, 16(%s6)
@@ -10130,7 +10146,7 @@ min_caml_start:
 	sw	%t8, 4(%s6)
 	add	%s3, %zero, %hp
 	addi	%hp, %hp, 40
-	addi	%t9, %zero, solve_each_element.2996
+	addi	%t9, %zero, solve_each_element.3003
 	sw	%t9, 0(%s3)
 	lw	%t9, 48(%sp)
 	sw	%t9, 36(%s3)
@@ -10149,13 +10165,13 @@ min_caml_start:
 	add	%s0, %zero, %hp
 	addi	%hp, %hp, 16
 	sw	%t6, 144(%sp)
-	addi	%t6, %zero, solve_one_or_network.3000
+	addi	%t6, %zero, solve_one_or_network.3007
 	sw	%t6, 0(%s0)
 	sw	%s3, 8(%s0)
 	sw	%t7, 4(%s0)
 	add	%t6, %zero, %hp
 	addi	%hp, %hp, 24
-	addi	%s3, %zero, trace_or_matrix.3004
+	addi	%s3, %zero, trace_or_matrix.3011
 	sw	%s3, 0(%t6)
 	sw	%t9, 20(%t6)
 	sw	%k0, 16(%t6)
@@ -10164,14 +10180,14 @@ min_caml_start:
 	sw	%s0, 4(%t6)
 	add	%s0, %zero, %hp
 	addi	%hp, %hp, 16
-	addi	%s2, %zero, judge_intersection.3008
+	addi	%s2, %zero, judge_intersection.3015
 	sw	%s2, 0(%s0)
 	sw	%t6, 12(%s0)
 	sw	%t9, 8(%s0)
 	sw	%v1, 4(%s0)
 	add	%t6, %zero, %hp
 	addi	%hp, %hp, 40
-	addi	%s2, %zero, solve_each_element_fast.3010
+	addi	%s2, %zero, solve_each_element_fast.3017
 	sw	%s2, 0(%t6)
 	sw	%t9, 36(%t6)
 	sw	%s5, 32(%t6)
@@ -10184,13 +10200,13 @@ min_caml_start:
 	sw	%t0, 4(%t6)
 	add	%t0, %zero, %hp
 	addi	%hp, %hp, 16
-	addi	%s2, %zero, solve_one_or_network_fast.3014
+	addi	%s2, %zero, solve_one_or_network_fast.3021
 	sw	%s2, 0(%t0)
 	sw	%t6, 8(%t0)
 	sw	%t7, 4(%t0)
 	add	%t6, %zero, %hp
 	addi	%hp, %hp, 24
-	addi	%t7, %zero, trace_or_matrix_fast.3018
+	addi	%t7, %zero, trace_or_matrix_fast.3025
 	sw	%t7, 0(%t6)
 	sw	%t9, 16(%t6)
 	sw	%s4, 12(%t6)
@@ -10198,52 +10214,52 @@ min_caml_start:
 	sw	%t0, 4(%t6)
 	add	%t0, %zero, %hp
 	addi	%hp, %hp, 16
-	addi	%t5, %zero, judge_intersection_fast.3022
+	addi	%t5, %zero, judge_intersection_fast.3029
 	sw	%t5, 0(%t0)
 	sw	%t6, 12(%t0)
 	sw	%t9, 8(%t0)
 	sw	%v1, 4(%t0)
 	add	%t5, %zero, %hp
 	addi	%hp, %hp, 16
-	addi	%t6, %zero, get_nvector_rect.3024
+	addi	%t6, %zero, get_nvector_rect.3031
 	sw	%t6, 0(%t5)
 	lw	%t6, 60(%sp)
 	sw	%t6, 8(%t5)
 	sw	%k1, 4(%t5)
 	add	%t7, %zero, %hp
 	addi	%hp, %hp, 8
-	addi	%s2, %zero, get_nvector_plane.3026
+	addi	%s2, %zero, get_nvector_plane.3033
 	sw	%s2, 0(%t7)
 	sw	%t6, 4(%t7)
 	add	%s2, %zero, %hp
 	addi	%hp, %hp, 16
-	addi	%s3, %zero, get_nvector_second.3028
+	addi	%s3, %zero, get_nvector_second.3035
 	sw	%s3, 0(%s2)
 	sw	%t6, 8(%s2)
 	sw	%t8, 4(%s2)
 	add	%s3, %zero, %hp
 	addi	%hp, %hp, 16
-	addi	%s4, %zero, get_nvector.3030
+	addi	%s4, %zero, get_nvector.3037
 	sw	%s4, 0(%s3)
 	sw	%s2, 12(%s3)
 	sw	%t5, 8(%s3)
 	sw	%t7, 4(%s3)
 	add	%t5, %zero, %hp
 	addi	%hp, %hp, 8
-	addi	%t7, %zero, utexture.3033
+	addi	%t7, %zero, utexture.3040
 	sw	%t7, 0(%t5)
 	lw	%t7, 64(%sp)
 	sw	%t7, 4(%t5)
 	add	%s2, %zero, %hp
 	addi	%hp, %hp, 16
-	addi	%s4, %zero, add_light.3036
+	addi	%s4, %zero, add_light.3043
 	sw	%s4, 0(%s2)
 	sw	%t7, 8(%s2)
 	lw	%s4, 72(%sp)
 	sw	%s4, 4(%s2)
 	add	%s5, %zero, %hp
 	addi	%hp, %hp, 40
-	addi	%t3, %zero, trace_reflections.3040
+	addi	%t3, %zero, trace_reflections.3047
 	sw	%t3, 0(%s5)
 	sw	%s6, 32(%s5)
 	lw	%t3, 136(%sp)
@@ -10256,7 +10272,7 @@ min_caml_start:
 	sw	%s2, 4(%s5)
 	add	%t3, %zero, %hp
 	addi	%hp, %hp, 88
-	addi	%a2, %zero, trace_ray.3045
+	addi	%a2, %zero, trace_ray.3052
 	sw	%a2, 0(%t3)
 	sw	%t5, 80(%t3)
 	sw	%s5, 76(%t3)
@@ -10280,7 +10296,7 @@ min_caml_start:
 	sw	%s2, 4(%t3)
 	add	%a2, %zero, %hp
 	addi	%hp, %hp, 56
-	addi	%t2, %zero, trace_diffuse_ray.3051
+	addi	%t2, %zero, trace_diffuse_ray.3058
 	sw	%t2, 0(%a2)
 	sw	%t5, 48(%a2)
 	sw	%t7, 44(%a2)
@@ -10297,72 +10313,72 @@ min_caml_start:
 	sw	%v1, 4(%a2)
 	add	%t0, %zero, %hp
 	addi	%hp, %hp, 8
-	addi	%t2, %zero, iter_trace_diffuse_rays.3054
+	addi	%t2, %zero, iter_trace_diffuse_rays.3061
 	sw	%t2, 0(%t0)
 	sw	%a2, 4(%t0)
 	add	%a2, %zero, %hp
 	addi	%hp, %hp, 16
-	addi	%t2, %zero, trace_diffuse_rays.3059
+	addi	%t2, %zero, trace_diffuse_rays.3066
 	sw	%t2, 0(%a2)
 	sw	%s1, 8(%a2)
 	sw	%t0, 4(%a2)
 	add	%t0, %zero, %hp
 	addi	%hp, %hp, 16
-	addi	%t2, %zero, trace_diffuse_ray_80percent.3063
+	addi	%t2, %zero, trace_diffuse_ray_80percent.3070
 	sw	%t2, 0(%t0)
 	sw	%a2, 8(%t0)
 	lw	%t2, 116(%sp)
 	sw	%t2, 4(%t0)
 	add	%t5, %zero, %hp
 	addi	%hp, %hp, 16
-	addi	%t6, %zero, calc_diffuse_using_1point.3067
+	addi	%t6, %zero, calc_diffuse_using_1point.3074
 	sw	%t6, 0(%t5)
 	sw	%t0, 12(%t5)
 	sw	%s4, 8(%t5)
 	sw	%v1, 4(%t5)
 	add	%t0, %zero, %hp
 	addi	%hp, %hp, 16
-	addi	%t6, %zero, calc_diffuse_using_5points.3070
+	addi	%t6, %zero, calc_diffuse_using_5points.3077
 	sw	%t6, 0(%t0)
 	sw	%s4, 8(%t0)
 	sw	%v1, 4(%t0)
 	add	%t6, %zero, %hp
 	addi	%hp, %hp, 8
-	addi	%t7, %zero, do_without_neighbors.3076
+	addi	%t7, %zero, do_without_neighbors.3083
 	sw	%t7, 0(%t6)
 	sw	%t5, 4(%t6)
 	add	%t5, %zero, %hp
 	addi	%hp, %hp, 8
-	addi	%t7, %zero, neighbors_exist.3079
+	addi	%t7, %zero, neighbors_exist.3086
 	sw	%t7, 0(%t5)
 	lw	%t7, 76(%sp)
 	sw	%t7, 4(%t5)
 	add	%s0, %zero, %hp
 	addi	%hp, %hp, 16
-	addi	%s1, %zero, try_exploit_neighbors.3092
+	addi	%s1, %zero, try_exploit_neighbors.3099
 	sw	%s1, 0(%s0)
 	sw	%t6, 8(%s0)
 	sw	%t0, 4(%s0)
 	add	%t0, %zero, %hp
 	addi	%hp, %hp, 8
-	addi	%s1, %zero, write_ppm_header.3099
+	addi	%s1, %zero, write_ppm_header.3106
 	sw	%s1, 0(%t0)
 	sw	%t7, 4(%t0)
 	add	%s1, %zero, %hp
 	addi	%hp, %hp, 8
-	addi	%s2, %zero, write_rgb.3103
+	addi	%s2, %zero, write_rgb.3110
 	sw	%s2, 0(%s1)
 	sw	%s4, 4(%s1)
 	add	%s2, %zero, %hp
 	addi	%hp, %hp, 16
-	addi	%s3, %zero, pretrace_diffuse_rays.3105
+	addi	%s3, %zero, pretrace_diffuse_rays.3112
 	sw	%s3, 0(%s2)
 	sw	%a2, 12(%s2)
 	sw	%t2, 8(%s2)
 	sw	%v1, 4(%s2)
 	add	%v1, %zero, %hp
 	addi	%hp, %hp, 40
-	addi	%a2, %zero, pretrace_pixels.3108
+	addi	%a2, %zero, pretrace_pixels.3115
 	sw	%a2, 0(%v1)
 	sw	%a0, 36(%v1)
 	sw	%t3, 32(%v1)
@@ -10378,7 +10394,7 @@ min_caml_start:
 	sw	%a2, 4(%v1)
 	add	%a3, %zero, %hp
 	addi	%hp, %hp, 32
-	addi	%t3, %zero, pretrace_line.3115
+	addi	%t3, %zero, pretrace_line.3122
 	sw	%t3, 0(%a3)
 	sw	%a1, 24(%a3)
 	lw	%a1, 100(%sp)
@@ -10389,7 +10405,7 @@ min_caml_start:
 	sw	%a2, 4(%a3)
 	add	%v1, %zero, %hp
 	addi	%hp, %hp, 32
-	addi	%a1, %zero, scan_pixel.3119
+	addi	%a1, %zero, scan_pixel.3126
 	sw	%a1, 0(%v1)
 	sw	%s1, 24(%v1)
 	sw	%s0, 20(%v1)
@@ -10399,39 +10415,39 @@ min_caml_start:
 	sw	%t6, 4(%v1)
 	add	%a1, %zero, %hp
 	addi	%hp, %hp, 16
-	addi	%t3, %zero, scan_line.3125
+	addi	%t3, %zero, scan_line.3132
 	sw	%t3, 0(%a1)
 	sw	%v1, 12(%a1)
 	sw	%a3, 8(%a1)
 	sw	%t7, 4(%a1)
 	add	%v1, %zero, %hp
 	addi	%hp, %hp, 8
-	addi	%t3, %zero, create_pixelline.3138
+	addi	%t3, %zero, create_pixelline.3145
 	sw	%t3, 0(%v1)
 	sw	%t7, 4(%v1)
 	add	%t3, %zero, %hp
 	addi	%hp, %hp, 8
-	addi	%t5, %zero, calc_dirvec.3145
+	addi	%t5, %zero, calc_dirvec.3152
 	sw	%t5, 0(%t3)
 	sw	%t2, 4(%t3)
 	add	%t5, %zero, %hp
 	addi	%hp, %hp, 8
 	lui	%at, 0
-	ori	%at, %at, 33080
+	ori	%at, %at, 33144
 	add	%t6, %zero, %at
 	sw	%t6, 0(%t5)
 	sw	%t3, 4(%t5)
 	add	%t3, %zero, %hp
 	addi	%hp, %hp, 8
 	lui	%at, 0
-	ori	%at, %at, 33380
+	ori	%at, %at, 33444
 	add	%t6, %zero, %at
 	sw	%t6, 0(%t3)
 	sw	%t5, 4(%t3)
 	add	%t5, %zero, %hp
 	addi	%hp, %hp, 8
 	lui	%at, 0
-	ori	%at, %at, 33564
+	ori	%at, %at, 33628
 	add	%t6, %zero, %at
 	sw	%t6, 0(%t5)
 	lw	%t6, 0(%sp)
@@ -10439,14 +10455,14 @@ min_caml_start:
 	add	%s0, %zero, %hp
 	addi	%hp, %hp, 8
 	lui	%at, 0
-	ori	%at, %at, 33668
+	ori	%at, %at, 33732
 	add	%s1, %zero, %at
 	sw	%s1, 0(%s0)
 	sw	%t5, 4(%s0)
 	add	%s1, %zero, %hp
 	addi	%hp, %hp, 16
 	lui	%at, 0
-	ori	%at, %at, 33764
+	ori	%at, %at, 33828
 	add	%s2, %zero, %at
 	sw	%s2, 0(%s1)
 	sw	%t2, 12(%s1)
@@ -10455,7 +10471,7 @@ min_caml_start:
 	add	%s0, %zero, %hp
 	addi	%hp, %hp, 8
 	lui	%at, 0
-	ori	%at, %at, 33956
+	ori	%at, %at, 34020
 	add	%s2, %zero, %at
 	sw	%s2, 0(%s0)
 	lw	%s2, 144(%sp)
@@ -10463,7 +10479,7 @@ min_caml_start:
 	add	%s3, %zero, %hp
 	addi	%hp, %hp, 16
 	lui	%at, 0
-	ori	%at, %at, 34052
+	ori	%at, %at, 34116
 	add	%s4, %zero, %at
 	sw	%s4, 0(%s3)
 	sw	%s0, 8(%s3)
@@ -10471,7 +10487,7 @@ min_caml_start:
 	add	%t2, %zero, %hp
 	addi	%hp, %hp, 16
 	lui	%at, 0
-	ori	%at, %at, 34152
+	ori	%at, %at, 34216
 	add	%s0, %zero, %at
 	sw	%s0, 0(%t2)
 	sw	%s3, 12(%t2)
@@ -10480,7 +10496,7 @@ min_caml_start:
 	add	%t3, %zero, %hp
 	addi	%hp, %hp, 16
 	lui	%at, 0
-	ori	%at, %at, 34264
+	ori	%at, %at, 34328
 	add	%s0, %zero, %at
 	sw	%s0, 0(%t3)
 	sw	%s2, 12(%t3)
@@ -10490,7 +10506,7 @@ min_caml_start:
 	add	%t5, %zero, %hp
 	addi	%hp, %hp, 16
 	lui	%at, 0
-	ori	%at, %at, 34476
+	ori	%at, %at, 34540
 	add	%s0, %zero, %at
 	sw	%s0, 0(%t5)
 	sw	%v0, 12(%t5)
@@ -10499,7 +10515,7 @@ min_caml_start:
 	add	%s0, %zero, %hp
 	addi	%hp, %hp, 16
 	lui	%at, 0
-	ori	%at, %at, 34820
+	ori	%at, %at, 34884
 	add	%s1, %zero, %at
 	sw	%s1, 0(%s0)
 	sw	%v0, 12(%s0)
@@ -10508,7 +10524,7 @@ min_caml_start:
 	add	%v0, %zero, %hp
 	addi	%hp, %hp, 16
 	lui	%at, 0
-	ori	%at, %at, 35232
+	ori	%at, %at, 35296
 	add	%t3, %zero, %at
 	sw	%t3, 0(%v0)
 	sw	%s0, 12(%v0)
@@ -10517,7 +10533,7 @@ min_caml_start:
 	add	%k1, %zero, %hp
 	addi	%hp, %hp, 64
 	lui	%at, 0
-	ori	%at, %at, 35464
+	ori	%at, %at, 35528
 	add	%t3, %zero, %at
 	sw	%t3, 0(%k1)
 	sw	%t0, 56(%k1)
@@ -10536,8 +10552,8 @@ min_caml_start:
 	sw	%t7, 12(%k1)
 	sw	%a2, 8(%k1)
 	sw	%v1, 4(%k1)
-	addi	%v0, %zero, 2
-	addi	%v1, %zero, 2
+	addi	%v0, %zero, 128
+	addi	%v1, %zero, 128
 	sw	%ra, 148(%sp)
 	addi	%sp, %sp, 152
 	lw	%at, 0(%k1)

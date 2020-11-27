@@ -59,27 +59,8 @@ int write_file(std::string outfile_name, bool mandelbrot)
     }
     else
     {
-        outfile << out_bytes[0] << out_bytes[1] << out_bytes[2];
-
-        int j, i = 3;
-        std::vector<char> temp(3);
-        while (i < size)
-        {
-            j = 0;
-            while (out_bytes[i] != 10 & out_bytes[i] != 32)
-            {
-                temp[j] = out_bytes[i];
-                i++;
-                j++;
-            }
-            while (j > 0)
-            {
-                outfile << temp[j - 1];
-                j--;
-            }
+        for (int i = 0; i < size; i++)
             outfile << out_bytes[i];
-            i++;
-        }
     }
     return 0;
 }
