@@ -186,6 +186,34 @@ let rec atan x =
     )
 in
 
+(* 10で割った商 *)
+let rec print_int_sub1 x n =
+    if x < 10 then n else print_int_sub1 (x - 10) (n + 1)
+in
+
+(* 10で割ったあまり *)
+let rec print_int_sub2 x =
+    if x < 10 then x else print_int_sub2 (x - 10)
+in
+
+let rec print_int x =
+    let d1 = print_int_sub1 x 0 in
+    let r1 = print_int_sub2 x in
+    print_char (48 + r1);
+    if d1 > 0 then
+    (
+        let d2 = print_int_sub1 d1 0 in
+        let r2 = print_int_sub2 d1 in
+        print_char (48 + r2);
+        if d2 > 0 then
+        (
+            let r3 = print_int_sub2 d2 in
+            print_char (48 + r3)
+        )
+        else ()
+    )
+    else ()
+in
 
 (* 本体 *)
 (*MINCAML*) let rec dbl f = f +. f in

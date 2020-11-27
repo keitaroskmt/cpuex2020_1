@@ -4,7 +4,7 @@
 	lui	%sp, 15
 	ori	%sp, %sp, 16960
 	lui	%hp, 0
-	ori	%hp, %hp, 10000
+	ori	%hp, %hp, 20000
 # ------------ Initialize float table ---------
 	lui	%at, 16529
 	ori	%at, %at, 60293
@@ -108,19 +108,19 @@ inprod.14:
 	fadd	%f0, %f1, %f0
 	jr	%ra
 beq_else.41:
-	flw	%f0, 10008(%zero)
+	flw	%f0, 20008(%zero)
 	jr	%ra
 .global	min_caml_start
 min_caml_start:
 	addi	%v0, %zero, 3
-	flw	%f0, 10004(%zero)
+	flw	%f0, 20004(%zero)
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 8
 	jal	min_caml_create_float_array
 	addi	%sp, %sp, -8
 	lw	%ra, 4(%sp)
 	addi	%v1, %zero, 3
-	flw	%f0, 10000(%zero)
+	flw	%f0, 20000(%zero)
 	sw	%v0, 0(%sp)
 	addi	%v0, %v1, 0
 	sw	%ra, 4(%sp)

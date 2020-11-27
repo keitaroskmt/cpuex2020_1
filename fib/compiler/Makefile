@@ -25,7 +25,7 @@ clean:: nobackup
 # inline.mli inline.ml constFold.mli constFold.ml elim.mli elim.ml \
 # closure.mli closure.ml asm.mli asm.ml virtual.mli virtual.ml \
 # simm.mli simm.ml regAlloc.mli regAlloc.ml emit.mli emit.ml \
-# main.mli main.ml
+# main.mli main_io.ml
 
 SOURCES = float.c type.ml id.ml m.ml s.ml \
 typing.mli typing.ml syntax.ml parser.mly lexer.mll kNormal.mli kNormal.ml \
@@ -65,7 +65,7 @@ test/%.ans: test/%.ml
 test/%.cmp: test/%.res test/%.ans
 	diff $^ > $@
 
-min-caml.html: main.mli main.ml id.ml m.ml s.ml \
+min-caml.html: main.mli ../../1st/ass/mytest/main_io.ml id.ml m.ml s.ml \
 		syntax.ml type.ml parser.mly lexer.mll typing.mli typing.ml kNormal.mli kNormal.ml \
 		alpha.mli alpha.ml beta.mli beta.ml assoc.mli assoc.ml \
 		inline.mli inline.ml constFold.mli constFold.ml elim.mli elim.ml \

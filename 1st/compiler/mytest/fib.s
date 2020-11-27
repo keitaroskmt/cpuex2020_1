@@ -4,7 +4,7 @@
 	lui	%sp, 15
 	ori	%sp, %sp, 16960
 	lui	%hp, 0
-	ori	%hp, %hp, 10000
+	ori	%hp, %hp, 20000
 # ------------ Initialize float table ---------
 # ------------ Text Section -------------------
 .section	".text"
