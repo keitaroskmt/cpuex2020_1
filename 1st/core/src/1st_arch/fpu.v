@@ -2,10 +2,11 @@
 module fpu (
     input wire clk,
     input wire rstn,
-    input wire [2:0] fpu_control,
+    input wire [3:0] fpu_control,
     input wire [31:0] srcA,
     input wire [31:0] srcB,
-    output wire [31:0] fpu_result
+    output wire [31:0] fpu_result,
+    output wire zero
 );
 
 wire [31:0] add;
@@ -13,10 +14,11 @@ wire [31:0] sub;
 wire [31:0] mul;
 wire [31:0] div;
 wire [31:0] sqrt;
+wire [31:0] branch;
 wire [31:0] neg;
 wire [31:0] abs;
 wire slt;
-wire [31:0] dif;
+wire [32:0] dif;
 wire ovfa;
 wire ovfs;
 wire ovfm;
@@ -32,17 +34,27 @@ fsqrt fsq(srcB,sqrt,clk,rstn);
 
 
 //fslt
-assign dif = srcA - srcB;
-assign slt = (srcA[31]==1'b1&&srcB[31]==1'b1) ? ~dif[31] : dif[31];
+assign dif = srcA + (~srcB) + 1'b1;
+assign slt = (srcA[31]==1'b1&&srcB[31]==1'b0) ? srcA[31]
+             :((srcA[31]==1'b0&&srcB[31]==1'b1) ? srcA[31]
+             :((srcA[31]==1'b1&&srcB[31]==1'b1) ? ~dif[31] : dif[31]));
 
-assign fpu_result = (fpu_control == 3'b000) ? add
-                    :((fpu_control == 3'b001) ? sub
-                    :((fpu_control == 3'b010) ? mul
-                    :((fpu_control == 3'b011) ? div
-                    :((fpu_control == 3'b100) ? neg
-                    :((fpu_control == 3'b101) ? abs
-                    :((fpu_control == 3'b110) ? sqrt
-                    :((fpu_control == 3'b111) ? {31'b0,slt}
+
+//fbeq,fbne
+assign zero = (srcA[30:0]==31'h00000000 &&srcB[30:0]==31'h00000000) ? 1'b1
+                :((srcA == srcB) ? 1'b1
+                :1'b0);
+
+
+
+assign fpu_result = (fpu_control == 4'b0000) ? add
+                    :((fpu_control == 4'b001) ? sub
+                    :((fpu_control == 4'b0010) ? mul
+                    :((fpu_control == 4'b0011) ? div
+                    :((fpu_control == 4'b0100) ? neg
+                    :((fpu_control == 4'b0101) ? abs
+                    :((fpu_control == 4'b0110) ? sqrt
+                    :((fpu_control == 4'b0111) ? {31'b0,slt}
                     : 31'd0)))))));
 
 endmodule

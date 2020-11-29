@@ -41,3 +41,16 @@ sin, cos
 mandelbrot
 - 400 * 400 = 160000回print_int
 - mandelbrot.ansが答えでdiffをとって確認
+
+harmonic
+- 答え 18997896
+
+tak
+- 答え 11000000
+
+mandelbrot_10
+- 10 * 10 = 100
+- spはかなり大きめに設定
+
+main_io
+- パラメータを読んで, .ppmの先頭を書くだけ

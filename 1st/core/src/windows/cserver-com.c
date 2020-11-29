@@ -172,6 +172,8 @@ static BOOL ppm_recv_header(ppm_info* pi)
   if(!isspace(my_getc()))
     return FALSE;
   *pi = p;
+
+  printf("p.width: %d\n",p.width);
   return TRUE;
 }
 
@@ -450,7 +452,7 @@ static void recv_ppm_data(FILE* out)
             n_pixels - u);
       exit(1);
     }
-    if(((u + 1) & 127) == 0)
+    if(((u + 1) & 1) == 0)
       fprintf(stderr, "\treceived %u/%u pixels.\r", u + 1, n_pixels);
   }
   endTime = GetTickCount();
@@ -540,7 +542,7 @@ static void parse_arguments(int argc, char* argv[], app_settings* as)
   extern int optind, opterr, optopt;*/
 
   as->cs.comport_id = 1;
-  as->cs.baud = 9600;
+  as->cs.baud = 115200;
   as->cs.stopbit_len = ONESTOPBIT;
   as->cs.parity_type = NOPARITY;
   as->cs.n_databits = 8;
@@ -609,7 +611,7 @@ int main(int argc, char* argv[])
   //*wait_for_0xaa();
 
   /* send the SLD data */
-  //send_sld_data();
+  send_sld_data();
 
   /* receive the PPM image */
   recv_ppm_data(out);

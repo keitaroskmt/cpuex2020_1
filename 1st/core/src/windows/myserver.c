@@ -6,6 +6,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <windows.h>
+#include <limits.h>
 #include <time.h>
 #include "util.h"
 #include "com.h"
@@ -408,6 +409,22 @@ static void wait_for_0xaa(void)
   fprintf(stderr, "\treceived.\n");
 }
 
+void printb(unsigned int v) {
+  unsigned int mask = (int)1 << (sizeof(v) * CHAR_BIT - 1);
+  int buf[32];
+  int i=0;
+  do{
+    buf[i] = (mask & v ? 1 : 0);
+    i++;
+  }while (mask >>= 1);
+
+  for (int j=3;j>=0;j--){
+    for(int k=0;k<8;k++){
+      printf("%d",buf[8*j+k]);
+    }
+    printf("\n");
+  }
+}
 
 /*-----------------------------------------------------------------------------
  * send the SLD data in a binary format.
@@ -421,6 +438,8 @@ static void send_sld_data(void)
   com_write((char*)sld_words, sld_n_words*sizeof(sld_words[0]));
   //for (int j=0;j<sld_n_words;j++){
     //printf("%d\n",sld_words[j].i);
+    //printb(sld_words[j].i);
+    //printf("\n");
   //}
 
 }
@@ -544,7 +563,7 @@ static void parse_arguments(int argc, char* argv[], app_settings* as)
   extern int optind, opterr, optopt;*/
 
   as->cs.comport_id = 1;
-  as->cs.baud = 9600;
+  as->cs.baud = 115200;
   as->cs.stopbit_len = ONESTOPBIT;
   as->cs.parity_type = NOPARITY;
   as->cs.n_databits = 8;
@@ -615,46 +634,63 @@ int main(int argc, char* argv[])
   /* send the SLD data */
   send_sld_data();
 
-  /* receive the PPM image */
-//  recv_ppm_data(out);
-//int n = 160000;
-//for(int i=0;i<n;i++){
- int c1,c2,c3,c4;
- c1 = com_getc();
- printf("%d\n",c1);
- c1 = com_getc();
- printf("%d\n",c1);
- c1 = com_getc();
- printf("%d\n",c1);
- c1 = com_getc();
- printf("%d\n",c1);
- c2 = com_getc();
- printf("%d\n",c2);
- c3= com_getc();
- printf("%d\n",c3);
- c4= com_getc();
- printf("%d\n",c4);
- c1 = com_getc();
- printf("%d\n",c1);
- c1 = com_getc();
- printf("%d\n",c1);
- c2 = com_getc();
- printf("%d\n",c2);
- c3= com_getc();
- printf("%d\n",c3);
- c4= com_getc();
- printf("%d\n",c4);
- c1 = com_getc();
- printf("%d\n",c1);
- c1 = com_getc();
- printf("%d\n",c1);
- c2 = com_getc();
- printf("%d\n",c2);
- c3= com_getc();
- printf("%d\n",c3);
- c4= com_getc();
- printf("%d\n",c4);
 
+  /* receive the PPM image */
+  recv_ppm_data(out);
+//FILE *fp;
+//fp = fopen("mandelbrot10_out.txt","w");
+
+//int n = 100;
+//char x;
+//for(int i=0;i<n;i++){
+//int c1,c2,c3,c4;
+ //c1 = com_getc();
+ //printf("%d\n",c1);
+ //c1 = com_getc();
+ //printf("%d\n",c1);
+ //c1 = com_getc();
+ //printf("%d\n",c1);
+// x = '0';
+ //c1 = com_getc();
+ //x += c1;
+ //fwrite(&x,sizeof(x),1,fp);
+//printf("%d\n",c1);
+ //c2 = com_getc();
+ //printf("%d\n",c2);
+//c3= com_getc();
+ //printf("%d\n",c3);
+//c4= com_getc();
+ //printf("%d\n",c4);
+ //c1 = com_getc();
+ //printf("%d\n",c1);
+ //c1 = com_getc();
+ //printf("%d\n",c1);
+ //c2 = com_getc();
+ //printf("%d\n",c2);
+ //c3= com_getc();
+ //printf("%d\n",c3);
+ //c4= com_getc();
+ //printf("%d\n",c4);
+ //c1 = com_getc();
+ //printf("%d\n",c1);
+ //c1 = com_getc();
+ //printf("%d\n",c1);
+ //c2 = com_getc();
+ //printf("%d\n",c2);
+ //c3= com_getc();
+ //printf("%d\n",c3);
+ //c4= com_getc();
+ //printf("%d\n",c4);
+ //c1 = com_getc();
+ //printf("%d\n",c1);
+ //c2 = com_getc();
+ //printf("%d\n",c2);
+ //c3= com_getc();
+ //printf("%d\n",c3);
+ //c4= com_getc();
+ //printf("%d\n",c4);
+//}
+//fclose(fp);
 
 
   DWORD elapsedTime = endTime - startTime;

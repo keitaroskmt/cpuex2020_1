@@ -7,11 +7,13 @@ module multicycle_cpu
      input wire clk,
      input wire rstn_,
      //(*mark_debug = "true"*)output reg [7:0] led,
-     (*mark_debug = "true"*)input wire rxd,
-     (*mark_debug = "true"*)output wire txd
+     input wire rxd,
+     output wire txd
      );
-
-
+    //reg rxd;
+    //initial begin
+      //rxd=1;
+    //end
 
      //IBUFGDS clk_inst (
         //.O(clk),
@@ -21,7 +23,7 @@ module multicycle_cpu
 
      //(*mark_debug = "true"*)wire         txd;
      //(*mark_debug = "true"*)wire         rxd;
-     reg  [7:0]     led;
+     //reg  [7:0]     led;
      wire          ferr;
      (*mark_debug = "true"*)wire [31:0] pc_wire;
      (*mark_debug = "true"*)wire [5:0] opcode;
@@ -35,7 +37,7 @@ module multicycle_cpu
      wire         ToggleEqual;
      wire [1:0]   PCSrc;
      wire [2:0]   ALUControl;
-     wire [2:0]   FPUControl;
+     wire [3:0]   FPUControl;
      wire         ALUorFPU;
      wire [1:0]   ALUSrcB;
      wire         ALUSrcA;
@@ -79,6 +81,8 @@ module multicycle_cpu
      wire [27:0] jump_address;
      wire [31:0] alu_out;
      wire zero;
+     wire azero;
+     wire fzero;
      wire [31:0] branch_or_lui;
      wire [31:0] SignImm;
      wire pcen;
@@ -91,7 +95,7 @@ module multicycle_cpu
      reg [31:0] alu_out_reg;
      reg [31:0] sdata;
      reg [31:0] rdata_reg;
-     reg [31:0] counter;
+     (*mark_debug = "true"*)reg [33:0] counter;
      reg rstn;
 
     (* ASYNC_REG = "true" *) reg [2:0] sync_reg;
@@ -134,7 +138,7 @@ module multicycle_cpu
             output_rf2_reg <= output_rf2;
             alu_out_reg <= cal_result;
             if(pc_wire == 8'd164 && RegWrite == 1'b1) begin
-                led <= alu_out[7:0];
+//              led <= alu_out[7:0];
             end
         end
         sync_reg[0] <= rstn_;
@@ -207,10 +211,11 @@ module multicycle_cpu
      assign srcA = (~ALUSrcA ? pc_wire : output1);
      assign branch_or_lui = BorL ? (inst[15:0]<< 5'd16) : (SignImm << 2'd2);
      assign srcB = (ALUSrcB == 2'b00 ? output2_or_shifted :(ALUSrcB == 2'b01 ? 32'b100 : (ALUSrcB == 2'b10 ? SignImm : branch_or_lui)));
+     assign zero = (ALUorFPU == 1'b1) ? fzero : azero;
      assign pcen = PCWrite | (Branch & (ToggleEqual ^ zero));
 
-     alu a(ALUControl,srcA,srcB,alu_result,zero);
-     fpu f(clk,rstn,FPUControl,srcA,srcB,fpu_result);
+     alu a(ALUControl,srcA,srcB,alu_result,azero);
+     fpu f(clk,rstn,FPUControl,srcA,srcB,fpu_result,fzero);
 
      assign cal_result = ALUorFPU ? fpu_result : alu_result;
 

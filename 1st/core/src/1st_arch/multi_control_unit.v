@@ -15,7 +15,7 @@ module multi_control_unit(
     output wire         ToggleEqual,
     output wire [1:0]   PCSrc,
     output wire [2:0]   ALUControl,
-    output wire [2:0]   FPUControl,
+    output wire [3:0]   FPUControl,
     output wire         ALUorFPU,
     output wire [1:0]   ALUSrcB,
     output wire         ALUSrcA,
@@ -39,8 +39,8 @@ wire [2:0] ALUOp;
 assign RegConcat = (Op == 6'b010111) ? 3'b110 //slt
                    :((Op == 6'b110011) ? 3'b001 //lw0x1
                    :((Op == 6'b110110) ? 3'b010 //sw01x
-                   :((Op == 6'b110100) ? 3'b110 //beq11x
-                   :((Op == 6'b110101) ? 3'b110 //bne11x
+                   :((Op == 6'b110100) ? 3'b110 //fbeq11x
+                   :((Op == 6'b110101) ? 3'b110 //fbne11x
                    :((Op == 6'b111000) ? 3'b100 //ftoi1x0
                    :((Op == 6'b111001) ? 3'b001 //itof0x1
                    :((Op[4:3]==2'b10) ? 3'b111
@@ -66,7 +66,7 @@ module multi_main_decoder(
     output reg         Branch,
     output reg         ToggleEqual,
     output reg [1:0]   PCSrc_temp,
-    output reg [2:0]   FPUControl,
+    output reg [3:0]   FPUControl,
     output reg         ALUorFPU,
     output reg [1:0]   ALUSrcB,
     output reg         ALUSrcA,
@@ -121,6 +121,8 @@ module multi_main_decoder(
     localparam s_Ftoi =            36;
     localparam s_Itof =            37;
     localparam s_FtoiItofWB =      38;
+    localparam s_FBranch =         39;
+    localparam s_FBranchnotequal = 40;
 
 
 always @(posedge clk) begin
@@ -188,57 +190,65 @@ always @(posedge clk) begin
             state <= s_FPUExecute;
             ALUSrcA <= 1'b1;
             ALUSrcB <= 2'b00;
-            FPUControl <= 3'b000;
+            FPUControl <= 4'b0000;
             ALUorFPU <= 1'b1;
         end else if (Op == 6'b010001) begin //fsub
             state <= s_FPUExecute;
             ALUSrcA <= 1'b1;
             ALUSrcB <= 2'b00;
-            FPUControl <= 3'b001;
+            FPUControl <= 4'b0001;
             ALUorFPU <= 1'b1;
         end else if (Op == 6'b010010) begin //fmul
             state <= s_FPUExecute;
             ALUSrcA <= 1'b1;
             ALUSrcB <= 2'b00;
-            FPUControl <= 3'b010;
+            FPUControl <= 4'b0010;
             ALUorFPU <= 1'b1;
         end else if (Op == 6'b010011) begin //fdiv
             state <= s_FPUExecute;
             ALUSrcA <= 1'b1;
             ALUSrcB <= 2'b00;
-            FPUControl <= 3'b011;
+            FPUControl <= 4'b0011;
             ALUorFPU <= 1'b1;
         end else if (Op == 6'b010100) begin //fneg
             state <= s_FPUWait1;
             ALUSrcA <= 1'b1;
             ALUSrcB <= 2'b00;
-            FPUControl <= 3'b100;
+            FPUControl <= 4'b0100;
             ALUorFPU <= 1'b1;
         end else if (Op == 6'b010101) begin //fabs
             state <= s_FPUWait1;
             ALUSrcA <= 1'b1;
             ALUSrcB <= 2'b00;
-            FPUControl <= 3'b101;
+            FPUControl <= 4'b0101;
+            ALUorFPU <= 1'b1;
+        end else if (Op == 6'b010110) begin //fsqrt
+            state <= s_FPUExecute;
+            ALUSrcA <= 1'b1;
+            ALUSrcB <= 2'b00;
+            FPUControl <= 4'b0110;
             ALUorFPU <= 1'b1;
         end else if (Op == 6'b010111) begin //fslt
             state <= s_FSLTExecute;
             ALUSrcA <= 1'b1;
             ALUSrcB <= 2'b00;
-            FPUControl <= 3'b111;
+            FPUControl <= 4'b0111;
             ALUorFPU <= 1'b1;
         end else if (Op == 6'b110100) begin //fbeq
-            state <= s_Branch;
+            state <= s_FBranch;
             ALUSrcA <= 1'b1;
             ALUSrcB <= 2'b00;
-            ALUOp   <= 3'b001;
+            FPUControl <= 4'b1000;
+            ALUorFPU <= 1'b1;
             PCSrc_temp   <= 2'b01;
             Branch  <= 1'b1;
         end else if (Op == 6'b110101) begin //fbne
-            state <= s_Branchnotequal;
+            state <= s_FBranchnotequal;
             ALUSrcA     <= 1'b1;
             ALUSrcB     <= 2'b00;
-            ALUOp   <= 3'b001;
-            PCSrc_temp       <= 2'b01;
+            FPUControl <= 4'b1000;
+            ALUorFPU <= 1'b1;
+            PCSrc_temp  <= 2'b01;
             Branch      <= 1'b1;
             ToggleEqual <= 1'b1;
         end else if (Op == 6'b000000 && Funct == 6'b001001) begin //jalr
@@ -479,6 +489,34 @@ always @(posedge clk) begin
         PCWrite_temp  <= 1'b1;
         RegWrite <= 1'b0;
         MemWrite <= 1'b0;
+        Branch <= 1'b0;
+    end else if (state == s_FBranch) begin
+        state   <= s_Fetch;
+        IorD     <= 1'b0;
+        ALUSrcA  <= 1'b0;
+        ALUSrcB  <= 2'b01;
+        ALUOp    <= 3'b000;
+        ToggleEqual <= 1'b0; //when returning from BranchnotEqual state, we should set down this bit.
+        PCSrc_temp    <= 2'b00;
+        //IRWrite  <= 1'b1;
+        PCWrite_temp  <= 1'b1;
+        RegWrite <= 1'b0;
+        MemWrite <= 1'b0;
+        ALUorFPU <= 1'b0;
+        Branch <= 1'b0;
+    end else if (state == s_FBranchnotequal) begin
+        state    <= s_Fetch;
+        IorD     <= 1'b0;
+        ALUSrcA  <= 1'b0;
+        ALUSrcB  <= 2'b01;
+        ALUOp    <= 3'b000;
+        ToggleEqual <= 1'b0; //when returning from BranchnotEqual state, we should set down this bit.
+        PCSrc_temp    <= 2'b00;
+        //IRWrite  <= 1'b1;
+        PCWrite_temp  <= 1'b1;
+        RegWrite <= 1'b0;
+        MemWrite <= 1'b0;
+        ALUorFPU <= 1'b0;
         Branch <= 1'b0;
     end else if (state == s_IMMExecute) begin
         state   <= s_IMMWriteback;
