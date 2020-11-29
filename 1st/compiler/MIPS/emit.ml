@@ -101,7 +101,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprime) *)
             Printf.fprintf oc "\tflw\t%s, %d(%s)\n" x addr reg_zero
         else
            (load_imm oc reg_at (Int32.of_int addr);
-            Printf.fprintf oc "\tflw\t%s, 0(%s) # %f\n" x reg_at d)
+            Printf.fprintf oc "\tflw\t%s, 0(%s)# %f\n" x reg_at d)
   | NonTail(x), SetL(Id.L(y)) ->
       Printf.fprintf oc "\taddi\t%s, %s, %s\n" x reg_zero y
   | NonTail(x), Mov(y) when x = y -> ()

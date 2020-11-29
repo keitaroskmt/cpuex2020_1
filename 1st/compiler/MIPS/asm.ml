@@ -72,8 +72,8 @@ let reg_fat = "%f30" (* for assembler *)
 let reg_fzero = "%fzero"
 let is_reg x = (x.[0] = '%')
 
-let hp_init = 20000
-let sp_init = 1000000
+let hp_init = 60000
+let sp_init = 600000
 
 (* super-tenuki *)
 let rec remove_and_uniq xs = function

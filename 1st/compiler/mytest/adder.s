@@ -1,10 +1,10 @@
 .section	".rodata"
 .align	8
 # ------------ Initialize register ------------
-	lui	%sp, 15
-	ori	%sp, %sp, 16960
+	lui	%sp, 9
+	ori	%sp, %sp, 10176
 	lui	%hp, 0
-	ori	%hp, %hp, 20000
+	ori	%hp, %hp, 60000
 # ------------ Initialize float table ---------
 # ------------ Text Section -------------------
 .section	".text"

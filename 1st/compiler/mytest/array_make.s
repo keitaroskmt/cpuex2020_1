@@ -1,10 +1,10 @@
 .section	".rodata"
 .align	8
 # ------------ Initialize register ------------
-	lui	%sp, 15
-	ori	%sp, %sp, 16960
+	lui	%sp, 9
+	ori	%sp, %sp, 10176
 	lui	%hp, 0
-	ori	%hp, %hp, 20000
+	ori	%hp, %hp, 60000
 # ------------ Initialize float table ---------
 	lui	%at, 16529
 	ori	%at, %at, 60293
@@ -108,19 +108,25 @@ inprod.14:
 	fadd	%f0, %f1, %f0
 	jr	%ra
 beq_else.41:
-	flw	%f0, 20008(%zero)
+	lui	%at, 0
+	ori	%at, %at, 60008
+	flw	%f0, 0(%at)# 0.000000
 	jr	%ra
 .global	min_caml_start
 min_caml_start:
 	addi	%v0, %zero, 3
-	flw	%f0, 20004(%zero)
+	lui	%at, 0
+	ori	%at, %at, 60004
+	flw	%f0, 0(%at)# 1.230000
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 8
 	jal	min_caml_create_float_array
 	addi	%sp, %sp, -8
 	lw	%ra, 4(%sp)
 	addi	%v1, %zero, 3
-	flw	%f0, 20000(%zero)
+	lui	%at, 0
+	ori	%at, %at, 60000
+	flw	%f0, 0(%at)# 4.560000
 	sw	%v0, 0(%sp)
 	addi	%v0, %v1, 0
 	sw	%ra, 4(%sp)
