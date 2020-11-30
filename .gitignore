@@ -1,0 +1,11 @@
+fib/sim/.vscode
+.vscode
+fib/sim/sim
+fib/sim/sim.dSYM/*
+1st/fpu/*
+1st/sim/sim
+1st/sim/sim.dSYM/*
+1st/sim/.vscode
+1st/sim/test/*
+1st/sim/io/out/*
+1st/sim/debug
