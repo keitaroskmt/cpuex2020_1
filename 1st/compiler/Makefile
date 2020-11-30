@@ -44,7 +44,7 @@ output.ml main.mli main.ml
 # inprod inprod-rec inprod-loop matmul matmul-flat \
 # manyargs tmp
 
-TESTS = fib float_fib adder tmp array_make array_put int_io sin cos
+TESTS = fib float_fib adder array_make array_put sin cos mandelbrot main
 
 do_test: $(TESTS:%=mytest/%.s)
 

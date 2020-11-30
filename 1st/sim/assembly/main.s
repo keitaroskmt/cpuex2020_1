@@ -10960,8 +10960,8 @@ min_caml_start:
 	sw	%t7, 12(%k1)
 	sw	%a2, 8(%k1)
 	sw	%v1, 4(%k1)
-	addi	%v0, %zero, 32
-	addi	%v1, %zero, 32
+	addi	%v0, %zero, 16
+	addi	%v1, %zero, 16
 	sw	%ra, 148(%sp)
 	addi	%sp, %sp, 152
 	lw	%at, 0(%k1)
