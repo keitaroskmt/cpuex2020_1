@@ -124,8 +124,8 @@ module fsub_1st
     assign e2 = x2[30:23];
     assign m1 = x1[22:0];
     assign m2 = x2[22:0];
-    assign m1a = (e1 == 8'b0) ? {2'b0, m1} : {2'b01, m1};
-    assign m2a = (e2 == 8'b0) ? {2'b0, m2} : {2'b01, m2};
+    assign m1a = (e1 == 8'b0) ? {25'b0} : {2'b01, m1};
+    assign m2a = (e2 == 8'b0) ? {25'b0} : {2'b01, m2};
     assign e1a = (e1 == 8'b0) ? 8'b1 : e1;
     assign e2a = (e2 == 8'b0) ? 8'b1 : e2;
     assign e2ai = ~e2a;
