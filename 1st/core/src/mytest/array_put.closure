@@ -1,0 +1,153 @@
+Prog 
+fundef 
+	name : 
+		(L (inprod.32): Float list -> Float list -> Int -> Float)
+	args : 
+		[(v1.33 : Float list), (v2.34 : Float list), (i.35 : Int)]
+	formal_fv : 
+		[]
+	body : 
+		Let
+			(Ti25.62 : Int)
+			Int 0
+			IfLE
+				Ti25.62
+				i.35
+				Let
+					(Td26.67 : Float)
+					Get
+						v1.33
+						i.35
+					Let
+						(Td27.68 : Float)
+						Get
+							v2.34
+							i.35
+						Let
+							(Td28.63 : Float)
+							FMul
+								Td26.67
+								Td27.68
+							Let
+								(Ti29.66 : Int)
+								Int 1
+								Let
+									(Ti30.65 : Int)
+									Sub
+										i.35
+										Ti29.66
+									Let
+										(Td31.64 : Float)
+										AppDir
+											L (inprod.32)
+											[v1.33, v2.34, Ti30.65]
+										FAdd
+											Td28.63
+											Td31.64
+				Float 0.
+body 
+	Let
+		(Ti7.60 : Int)
+		Int 3
+		Let
+			(Td8.61 : Float)
+			Float 1.
+			Let
+				(v1.36 : Float list)
+				AppDir
+					L (min_caml_create_float_array)
+					[Ti7.60, Td8.61]
+				Let
+					(Ti9.58 : Int)
+					Int 0
+					Let
+						(Td10.59 : Float)
+						Float 1.23
+						Let
+							(Tu6.37 : ())
+							Put
+								v1.36
+								Ti9.58
+								Td10.59
+							Let
+								(Ti11.56 : Int)
+								Int 1
+								Let
+									(Td12.57 : Float)
+									Float 1.23
+									Let
+										(Tu5.38 : ())
+										Put
+											v1.36
+											Ti11.56
+											Td12.57
+										Let
+											(Ti13.54 : Int)
+											Int 2
+											Let
+												(Td14.55 : Float)
+												Float 1.23
+												Let
+													(Tu4.39 : ())
+													Put
+														v1.36
+														Ti13.54
+														Td14.55
+													Let
+														(Ti15.52 : Int)
+														Int 3
+														Let
+															(Td16.53 : Float)
+															Float 1.
+															Let
+																(v2.40 : Float list)
+																AppDir
+																	L (min_caml_create_float_array)
+																	[Ti15.52, Td16.53]
+																Let
+																	(Ti17.50 : Int)
+																	Int 0
+																	Let
+																		(Td18.51 : Float)
+																		Float 4.56
+																		Let
+																			(Tu3.41 : ())
+																			Put
+																				v2.40
+																				Ti17.50
+																				Td18.51
+																			Let
+																				(Ti19.48 : Int)
+																				Int 1
+																				Let
+																					(Td20.49 : Float)
+																					Float 4.56
+																					Let
+																						(Tu2.42 : ())
+																						Put
+																							v2.40
+																							Ti19.48
+																							Td20.49
+																						Let
+																							(Ti21.46 : Int)
+																							Int 2
+																							Let
+																								(Td22.47 : Float)
+																								Float 4.56
+																								Let
+																									(Tu1.43 : ())
+																									Put
+																										v2.40
+																										Ti21.46
+																										Td22.47
+																									Let
+																										(Ti23.45 : Int)
+																										Int 2
+																										Let
+																											(Td24.44 : Float)
+																											AppDir
+																												L (inprod.32)
+																												[v1.36, v2.40, Ti23.45]
+																											AppDir
+																												L (min_caml_print_float)
+																												[Td24.44]

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenRun Id="impl_1" LaunchPart="xcku040-ffva1156-2-e" LaunchTime="1603522402">
+  <File Type="BITSTR-BMM" Name="multi_cycle_fib_wrapper_bd.bmm"/>
+  <File Type="OPT-METHODOLOGY-DRC" Name="multi_cycle_fib_wrapper_methodology_drc_opted.rpt"/>
+  <File Type="INIT-TIMING" Name="multi_cycle_fib_wrapper_timing_summary_init.rpt"/>
+  <File Type="ROUTE-PWR" Name="multi_cycle_fib_wrapper_power_routed.rpt"/>
+  <File Type="PA-TCL" Name="multi_cycle_fib_wrapper.tcl"/>
+  <File Type="OPT-TIMING" Name="multi_cycle_fib_wrapper_timing_summary_opted.rpt"/>
+  <File Type="OPT-DCP" Name="multi_cycle_fib_wrapper_opt.dcp"/>
+  <File Type="ROUTE-PWR-SUM" Name="multi_cycle_fib_wrapper_power_summary_routed.pb"/>
+  <File Type="REPORTS-TCL" Name="multi_cycle_fib_wrapper_reports.tcl"/>
+  <File Type="OPT-DRC" Name="multi_cycle_fib_wrapper_drc_opted.rpt"/>
+  <File Type="OPT-HWDEF" Name="multi_cycle_fib_wrapper.hwdef"/>
+  <File Type="PWROPT-DCP" Name="multi_cycle_fib_wrapper_pwropt.dcp"/>
+  <File Type="PWROPT-DRC" Name="multi_cycle_fib_wrapper_drc_pwropted.rpt"/>
+  <File Type="PWROPT-TIMING" Name="multi_cycle_fib_wrapper_timing_summary_pwropted.rpt"/>
+  <File Type="PLACE-DCP" Name="multi_cycle_fib_wrapper_placed.dcp"/>
+  <File Type="PLACE-IO" Name="multi_cycle_fib_wrapper_io_placed.rpt"/>
+  <File Type="PLACE-CLK" Name="multi_cycle_fib_wrapper_clock_utilization_placed.rpt"/>
+  <File Type="PLACE-UTIL" Name="multi_cycle_fib_wrapper_utilization_placed.rpt"/>
+  <File Type="PLACE-UTIL-PB" Name="multi_cycle_fib_wrapper_utilization_placed.pb"/>
+  <File Type="PLACE-CTRL" Name="multi_cycle_fib_wrapper_control_sets_placed.rpt"/>
+  <File Type="PLACE-SIMILARITY" Name="multi_cycle_fib_wrapper_incremental_reuse_placed.rpt"/>
+  <File Type="PLACE-PRE-SIMILARITY" Name="multi_cycle_fib_wrapper_incremental_reuse_pre_placed.rpt"/>
+  <File Type="PLACE-TIMING" Name="multi_cycle_fib_wrapper_timing_summary_placed.rpt"/>
+  <File Type="POSTPLACE-PWROPT-DCP" Name="multi_cycle_fib_wrapper_postplace_pwropt.dcp"/>
+  <File Type="BG-BIN" Name="multi_cycle_fib_wrapper.bin"/>
+  <File Type="POSTPLACE-PWROPT-TIMING" Name="multi_cycle_fib_wrapper_timing_summary_postplace_pwropted.rpt"/>
+  <File Type="PHYSOPT-DCP" Name="multi_cycle_fib_wrapper_physopt.dcp"/>
+  <File Type="PHYSOPT-DRC" Name="multi_cycle_fib_wrapper_drc_physopted.rpt"/>
+  <File Type="BITSTR-MSK" Name="multi_cycle_fib_wrapper.msk"/>
+  <File Type="PHYSOPT-TIMING" Name="multi_cycle_fib_wrapper_timing_summary_physopted.rpt"/>
+  <File Type="ROUTE-ERROR-DCP" Name="multi_cycle_fib_wrapper_routed_error.dcp"/>
+  <File Type="ROUTE-DCP" Name="multi_cycle_fib_wrapper_routed.dcp"/>
+  <File Type="ROUTE-BLACKBOX-DCP" Name="multi_cycle_fib_wrapper_routed_bb.dcp"/>
+  <File Type="ROUTE-DRC" Name="multi_cycle_fib_wrapper_drc_routed.rpt"/>
+  <File Type="ROUTE-DRC-PB" Name="multi_cycle_fib_wrapper_drc_routed.pb"/>
+  <File Type="ROUTE-DRC-RPX" Name="multi_cycle_fib_wrapper_drc_routed.rpx"/>
+  <File Type="BITSTR-MMI" Name="multi_cycle_fib_wrapper.mmi"/>
+  <File Type="ROUTE-METHODOLOGY-DRC" Name="multi_cycle_fib_wrapper_methodology_drc_routed.rpt"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="multi_cycle_fib_wrapper_methodology_drc_routed.rpx"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="multi_cycle_fib_wrapper_methodology_drc_routed.pb"/>
+  <File Type="ROUTE-PWR-RPX" Name="multi_cycle_fib_wrapper_power_routed.rpx"/>
+  <File Type="ROUTE-STATUS" Name="multi_cycle_fib_wrapper_route_status.rpt"/>
+  <File Type="ROUTE-STATUS-PB" Name="multi_cycle_fib_wrapper_route_status.pb"/>
+  <File Type="ROUTE-TIMINGSUMMARY" Name="multi_cycle_fib_wrapper_timing_summary_routed.rpt"/>
+  <File Type="ROUTE-TIMING-PB" Name="multi_cycle_fib_wrapper_timing_summary_routed.pb"/>
+  <File Type="ROUTE-TIMING-RPX" Name="multi_cycle_fib_wrapper_timing_summary_routed.rpx"/>
+  <File Type="ROUTE-SIMILARITY" Name="multi_cycle_fib_wrapper_incremental_reuse_routed.rpt"/>
+  <File Type="ROUTE-CLK" Name="multi_cycle_fib_wrapper_clock_utilization_routed.rpt"/>
+  <File Type="ROUTE-BUS-SKEW" Name="multi_cycle_fib_wrapper_bus_skew_routed.rpt"/>
+  <File Type="ROUTE-BUS-SKEW-PB" Name="multi_cycle_fib_wrapper_bus_skew_routed.pb"/>
+  <File Type="ROUTE-BUS-SKEW-RPX" Name="multi_cycle_fib_wrapper_bus_skew_routed.rpx"/>
+  <File Type="POSTROUTE-PHYSOPT-DCP" Name="multi_cycle_fib_wrapper_postroute_physopt.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="multi_cycle_fib_wrapper_postroute_physopt_bb.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING" Name="multi_cycle_fib_wrapper_timing_summary_postroute_physopted.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-PB" Name="multi_cycle_fib_wrapper_timing_summary_postroute_physopted.pb"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-RPX" Name="multi_cycle_fib_wrapper_timing_summary_postroute_physopted.rpx"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW" Name="multi_cycle_fib_wrapper_bus_skew_postroute_physopted.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-PB" Name="multi_cycle_fib_wrapper_bus_skew_postroute_physopted.pb"/>
+  <File Type="BG-BIT" Name="multi_cycle_fib_wrapper.bit"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-RPX" Name="multi_cycle_fib_wrapper_bus_skew_postroute_physopted.rpx"/>
+  <File Type="BITSTR-RBT" Name="multi_cycle_fib_wrapper.rbt"/>
+  <File Type="BITSTR-NKY" Name="multi_cycle_fib_wrapper.nky"/>
+  <File Type="PDI-FILE" Name="multi_cycle_fib_wrapper.pdi"/>
+  <File Type="RCFI_FILE" Name="multi_cycle_fib_wrapper.rcfi"/>
+  <File Type="CFI_FILE" Name="multi_cycle_fib_wrapper.cfi"/>
+  <File Type="RNPI_FILE" Name="multi_cycle_fib_wrapper.rnpi"/>
+  <File Type="NPI_FILE" Name="multi_cycle_fib_wrapper.npi"/>
+  <File Type="RBD_FILE" Name="multi_cycle_fib_wrapper.rbd"/>
+  <File Type="BITSTR-LTX" Name="debug_nets.ltx"/>
+  <File Type="BITSTR-LTX" Name="multi_cycle_fib_wrapper.ltx"/>
+  <File Type="BITSTR-SYSDEF" Name="multi_cycle_fib_wrapper.sysdef"/>
+  <File Type="BG-BGN" Name="multi_cycle_fib_wrapper.bgn"/>
+  <File Type="BG-DRC" Name="multi_cycle_fib_wrapper.drc"/>
+  <File Type="RDI-RDI" Name="multi_cycle_fib_wrapper.vdi"/>
+  <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
+  <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
+    <Filter Type="Srcs"/>
+    <File Path="$PPRDIR/../src/alu.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../src/multi_control_unit.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../src/rams_dp_wf.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../src/rams_sp_rf.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../src/multicycle_fib_sim.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/bd/multi_cycle_fib/multi_cycle_fib.bd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/bd/multi_cycle_fib/hdl/multi_cycle_fib_wrapper.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../src/initialize.mem">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../src/t_inst.mem">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="DesignMode" Val="RTL"/>
+      <Option Name="TopModule" Val="multi_cycle_fib_wrapper"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
+    <Filter Type="Constrs"/>
+    <File Path="$PPRDIR/../../../../Downloads/kcu105-xdc-rdf0349/KCU105_Rev1.0_02292016.xdc">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="ConstrsType" Val="XDC"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="utils" Type="Utils" RelSrcDir="$PSRCDIR/utils_1">
+    <Filter Type="Utils"/>
+    <Config>
+      <Option Name="TopAutoSet" Val="TRUE"/>
+    </Config>
+  </FileSet>
+  <Strategy Version="1" Minor="2">
+    <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2019">
+      <Desc>Default settings for Implementation.</Desc>
+    </StratHandle>
+    <Step Id="init_design"/>
+    <Step Id="opt_design"/>
+    <Step Id="power_opt_design"/>
+    <Step Id="place_design"/>
+    <Step Id="post_place_power_opt_design"/>
+    <Step Id="phys_opt_design" EnableStepBool="1"/>
+    <Step Id="route_design"/>
+    <Step Id="post_route_phys_opt_design"/>
+    <Step Id="write_bitstream"/>
+  </Strategy>
+  <BlockFileSet Type="BlockSrcs" Name="multi_cycle_fib_multicycle_cpu_0_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="multi_cycle_fib_clk_wiz_0_0"/>
+</GenRun>
