@@ -1,9 +1,0 @@
-{
-	"version": "1.0",
-	"modules": {
-		"arch_1st": {
-			"proto_instances": {
-			}
-		}
-	}
-}
