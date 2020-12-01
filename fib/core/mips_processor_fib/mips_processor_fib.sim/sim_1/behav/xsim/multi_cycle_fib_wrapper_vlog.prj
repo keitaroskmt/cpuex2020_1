@@ -1,0 +1,17 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../../src/alu.v" \
+"../../../../../src/multi_control_unit.v" \
+"../../../../../src/rams_dp_wf.v" \
+"../../../../../src/rams_sp_rf.v" \
+"../../../../../src/multicycle_fib_sim.v" \
+"../../../../mips_processor_fib.ip_user_files/bd/multi_cycle_fib/ip/multi_cycle_fib_multicycle_cpu_0_0/sim/multi_cycle_fib_multicycle_cpu_0_0.v" \
+"../../../../mips_processor_fib.ip_user_files/bd/multi_cycle_fib/ip/multi_cycle_fib_sim_clk_gen_0_0/sim/multi_cycle_fib_sim_clk_gen_0_0.v" \
+"../../../../mips_processor_fib.ip_user_files/bd/multi_cycle_fib/sim/multi_cycle_fib.v" \
+"../../../../mips_processor_fib.srcs/sources_1/bd/multi_cycle_fib/hdl/multi_cycle_fib_wrapper.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

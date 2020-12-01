@@ -1,0 +1,47 @@
+Prog 
+fundef 
+	name : 
+		(L (f.8): Int -> Float)
+	args : 
+		[(i.9 : Int)]
+	formal_fv : 
+		[]
+	body : 
+		Let
+			(Ti3.12 : Int)
+			Int 0
+			IfLE
+				Ti3.12
+				i.9
+				Let
+					(Td4.13 : Float)
+					Float 1.
+					Let
+						(Ti5.16 : Int)
+						Int 1
+						Let
+							(Ti6.15 : Int)
+							Sub
+								i.9
+								Ti5.16
+							Let
+								(Td7.14 : Float)
+								AppDir
+									L (f.8)
+									[Ti6.15]
+								FAdd
+									Td4.13
+									Td7.14
+				Float 0.
+body 
+	Let
+		(Ti1.11 : Int)
+		Int 10
+		Let
+			(Td2.10 : Float)
+			AppDir
+				L (f.8)
+				[Ti1.11]
+			AppDir
+				L (min_caml_print_float)
+				[Td2.10]
