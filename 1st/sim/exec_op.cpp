@@ -7,9 +7,10 @@
 #include "sim.h"
 #include "myutil.h"
 #include "file_io.h"
+#include "fpu.h"
 
 // 1命令実行する
-int exec_op(op_info op, bool print_calc)
+int exec_op(op_info op, bool print_calc, bool use_fpu)
 {
     int rs, rt, rd, imm, sp;
     unsigned char temp;
@@ -254,7 +255,10 @@ int exec_op(op_info op, bool print_calc)
     {
         frs.f = cur_env.FPR[op.opland_bit[1]];
         frt.f = cur_env.FPR[op.opland_bit[2]];
-        frd.f = frs.f + frt.f;
+        if (use_fpu)
+            frd.f = fadd(frs, frt);
+        else
+            frd.f = frs.f + frt.f;
         cur_env.FPR[op.opland_bit[0]] = frd.f;
 
         if (print_calc)
@@ -264,7 +268,10 @@ int exec_op(op_info op, bool print_calc)
     {
         frs.f = cur_env.FPR[op.opland_bit[1]];
         frt.f = cur_env.FPR[op.opland_bit[2]];
-        frd.f = frs.f - frt.f;
+        if (use_fpu)
+            frd.f = fsub(frs, frt);
+        else
+            frd.f = frs.f - frt.f;
         cur_env.FPR[op.opland_bit[0]] = frd.f;
 
         if (print_calc)
@@ -274,7 +281,10 @@ int exec_op(op_info op, bool print_calc)
     {
         frs.f = cur_env.FPR[op.opland_bit[1]];
         frt.f = cur_env.FPR[op.opland_bit[2]];
-        frd.f = frs.f * frt.f;
+        if (use_fpu)
+            frd.f = fmul(frs, frt);
+        else
+            frd.f = frs.f * frt.f;
         cur_env.FPR[op.opland_bit[0]] = frd.f;
 
         if (print_calc)
@@ -284,7 +294,10 @@ int exec_op(op_info op, bool print_calc)
     {
         frs.f = cur_env.FPR[op.opland_bit[1]];
         frt.f = cur_env.FPR[op.opland_bit[2]];
-        frd.f = frs.f / frt.f;
+        if (use_fpu)
+            frd.f = fdiv(frs, frt);
+        else
+            frd.f = frs.f / frt.f;
         cur_env.FPR[op.opland_bit[0]] = frd.f;
 
         if (print_calc)
@@ -314,7 +327,10 @@ int exec_op(op_info op, bool print_calc)
     else if (op.opcode == "fsqrt")
     {
         frt.f = cur_env.FPR[op.opland_bit[1]];
-        frd.f = sqrtf(frt.f);
+        if (use_fpu)
+            frd.f = fsqrt(frt);
+        else
+            frd.f = sqrtf(frt.f);
         cur_env.FPR[op.opland_bit[0]] = frd.f;
 
         if (print_calc)
