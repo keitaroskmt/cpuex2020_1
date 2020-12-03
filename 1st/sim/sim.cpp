@@ -19,6 +19,8 @@
 #include "exec_cmd.h"
 #include "file_io.h"
 #include "print_bytecode.h"
+#include "ftable.h"
+#include "fpu.h"
 
 int cur_opnum, cur_in;
 std::vector<op_info> ops;
@@ -27,7 +29,7 @@ std::map<std::string, int> label_pos, label_pos_bc;
 std::map<std::string, long long int> label_counter;
 std::map<int, int> posbc2pos, pos2posbc;
 std::vector<std::pair<int, unsigned long long int>> stack(1000000, std::make_pair(0, 0));
-int exec_step(bool print_process, bool print_calc, bool print_bytecode, bool label_count);
+int exec_step(bool print_process, bool print_calc, bool print_bytecode, bool label_count, bool use_fpu);
 
 int main(int argc, char *argv[])
 {
@@ -43,11 +45,12 @@ int main(int argc, char *argv[])
     bool is_in = false;
     bool is_out = false;
     bool debug_mode = false;
+    bool use_fpu = false;
     std::string n = "fib";
     std::string infile = "sin.txt";
     std::string outfile = "out.txt";
 
-    while ((opt = getopt(argc, argv, "sbcpn:i:o:mdl")) != -1)
+    while ((opt = getopt(argc, argv, "sbcpn:i:o:mdlf")) != -1)
     {
         switch (opt)
         {
@@ -93,6 +96,10 @@ int main(int argc, char *argv[])
             label_count = true;
             break;
 
+        case 'f':
+            use_fpu = true;
+            break;
+
         default:
             printf("Usage: %s [-s] [-b] [-c] [-p] [-n arg] [-i arg] [-o arg]\n", argv[0]);
             break;
@@ -136,6 +143,9 @@ int main(int argc, char *argv[])
 
     fclose(fp);
 
+    if (use_fpu)
+        ftable_init();
+
     // sldファイルの読み込み
     if (is_in)
     {
@@ -155,7 +165,7 @@ int main(int argc, char *argv[])
             if (exec_cmd(&loop, &is_stat, &print_bc, &print_calc, &print_process))
                 return 0;
 
-        if (exec_step(print_process, print_calc, print_bc, label_count))
+        if (exec_step(print_process, print_calc, print_bc, label_count, use_fpu))
             break;
 
         if (ops[cur_opnum].type == 0)
@@ -196,7 +206,7 @@ int main(int argc, char *argv[])
 }
 
 // 1step実行する 命令なら実行し、その他なら読み飛ばす
-int exec_step(bool print_process, bool print_calc, bool print_bc, bool label_count)
+int exec_step(bool print_process, bool print_calc, bool print_bc, bool label_count, bool use_fpu)
 {
     if (ops[cur_opnum].type == 0)
     {
@@ -206,7 +216,7 @@ int exec_step(bool print_process, bool print_calc, bool print_bc, bool label_cou
         if (print_bc)
             print_bytecode(ops[cur_opnum]);
 
-        if (exec_op(ops[cur_opnum], print_calc))
+        if (exec_op(ops[cur_opnum], print_calc, use_fpu))
             return 1;
 
         if (print_bc || print_process || print_calc)
