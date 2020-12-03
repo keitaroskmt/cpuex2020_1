@@ -30,6 +30,9 @@ int load_ops(FILE *fp)
         // コメント行読み飛ばし
         else if (regex_match(s1, results, std::regex("^\t?#.+?\n?$")))
             continue;
+        // %g0を含む行の読み飛ばし
+        else if (s1 == "\taddi\t%g0, %zero, 0\n")
+            continue;
         // ex. add  $a0, $a0, $a1
         else if (regex_match(s1, results, std::regex("^\t(.+?)\t(.+?), (.+?), (.+?)\n?$")))
         {
@@ -131,7 +134,7 @@ int reg_label_2_num(int end)
             if (ops[j].opland[k].find("%") != std::string::npos)
                 ops[j].opland_bit[k] = reg_name.at(ops[j].opland[k]) % 32;
             else if (label_pos.find(ops[j].opland[k]) != label_pos.end())
-                ops[j].opland_bit[k] = pos2posbc[label_pos[ops[j].opland[k]]] * 4;
+                ops[j].opland_bit[k] = pos2posbc[label_pos[ops[j].opland[k]]];
             else if (ops[j].opland[k] != "")
                 ops[j].opland_bit[k] = stoi(ops[j].opland[k]);
         }

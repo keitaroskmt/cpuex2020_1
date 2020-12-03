@@ -195,13 +195,12 @@ int main(int argc, char *argv[])
     if (is_out)
         write_file("io/out/" + outfile, mandelbrot);
 
-    clock_t end_time = clock();
-    const double time = static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC * 1000.0;
     if (debug_mode)
     {
-        printf("time %.1lf[s]\n", time / 1000);
+        print_time(start_time);
         printf("max sp: %d\nmax hp %d\n", max_sp, max_hp);
     }
+
     return 0;
 }
 
@@ -211,7 +210,7 @@ int exec_step(bool print_process, bool print_calc, bool print_bc, bool label_cou
     if (ops[cur_opnum].type == 0)
     {
         if (print_process)
-            printf("%llu\t%d\t%s\t%s\t%s\t%s\t%d\n", cur_env.PC, 4 * ops[cur_opnum].op_idx, ops[cur_opnum].opcode.c_str(), ops[cur_opnum].opland[0].c_str(), ops[cur_opnum].opland[1].c_str(), ops[cur_opnum].opland[2].c_str(), ops[cur_opnum].offset);
+            printf("%llu\t%d\t%s\t%s\t%s\t%s\t%d\n", cur_env.PC, ops[cur_opnum].op_idx, ops[cur_opnum].opcode.c_str(), ops[cur_opnum].opland[0].c_str(), ops[cur_opnum].opland[1].c_str(), ops[cur_opnum].opland[2].c_str(), ops[cur_opnum].offset);
 
         if (print_bc)
             print_bytecode(ops[cur_opnum]);
