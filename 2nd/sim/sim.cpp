@@ -1,4 +1,3 @@
-// todo labelをその次の命令行に組み込む 高速化する
 #include <stdio.h>
 #include <string>
 #include <fcntl.h>

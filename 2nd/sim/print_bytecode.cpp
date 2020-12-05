@@ -83,10 +83,17 @@ int print_bytecode(op_info op)
         rt = op.opland_bit[0] & 0b11111;
         if (op.opcode == "lw" || op.opcode == "sw" || op.opcode == "flw" || op.opcode == "fsw")
             imm = op.offset;
+        else if (op.opcode == "lui")
+            imm = op.opland_bit[1] & 0xffff;
         else if (isnum(op.opland[2]))
             imm = op.opland_bit[2] & 0xffff;
         else
-            imm = (label_pos_bc[op.opland[2]]) & 0xffff;
+        {
+            if (op.opcode == "bne" || op.opcode == "fbne")
+                imm = ((label_pos_bc[op.opland[2]]) & 0xffff) - op.op_idx - 1;
+            else
+                imm = (label_pos_bc[op.opland[2]]) & 0xffff;
+        }
 
         if (op.opcode == "beq")
             shamt = 0b000100;
