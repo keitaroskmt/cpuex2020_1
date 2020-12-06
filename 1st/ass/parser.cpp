@@ -9,7 +9,7 @@ Parser::Parser(string fname) {
 
 int Parser::parse_file() {
     fstream f;
-    preprocess_file(f);
+    // preprocess_file(f);
 
     string line;
 

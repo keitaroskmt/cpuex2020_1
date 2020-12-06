@@ -1,23 +1,23 @@
 .section	".rodata"
 .align	8
 # ------------ Initialize register ------------
-	lui	%sp, 9
-	ori	%sp, %sp, 10176
+	lui	%sp, 2
+	ori	%sp, %sp, 18928
 	lui	%hp, 0
-	ori	%hp, %hp, 60000
+	ori	%hp, %hp, 15000
 # ------------ Initialize float table ---------
 	lui	%at, 16672
 	ori	%at, %at, 0
 	sw	%at, 0(%hp)
-	addi	%hp, %hp, 4
+	addi	%hp, %hp, 1
 	lui	%at, 16384
 	ori	%at, %at, 0
 	sw	%at, 0(%hp)
-	addi	%hp, %hp, 4
+	addi	%hp, %hp, 1
 	lui	%at, 16256
 	ori	%at, %at, 0
 	sw	%at, 0(%hp)
-	addi	%hp, %hp, 4
+	addi	%hp, %hp, 1
 # ------------ Text Section -------------------
 .section	".text"
 	j	min_caml_start
@@ -72,7 +72,7 @@ create_array_loop:
 create_array_cont:
 	sw	%v1, 0(%hp)
 	addi	%a0, %a0, -1
-	addi	%hp, %hp, 4
+	addi	%hp, %hp, 1
 	j	create_array_loop
 #  min_caml_create_float_array
 min_caml_create_float_array:
@@ -84,56 +84,48 @@ create_float_array_loop:
 create_float_array_cont:
 	fsw	%f0, 0(%hp)
 	addi	%a0, %a0, -1
-	addi	%hp, %hp, 4
+	addi	%hp, %hp, 1
 	j	create_float_array_loop
 # ------------ body ---------------------------
 float_fib.10:
-	lui	%at, 0
-	ori	%at, %at, 60008
-	flw	%f1, 0(%at)# 1.000000
+	flw	%f1, 15002(%zero)
 	fslt	%at, %f1, %f0
 	bne	%at, %zero, beq_else.27
 	jr	%ra
 beq_else.27:
-	lui	%at, 0
-	ori	%at, %at, 60008
-	flw	%f1, 0(%at)# 1.000000
+	flw	%f1, 15002(%zero)
 	fsub	%f1, %f0, %f1
 	fsw	%f0, 0(%sp)
 	fadd	%f0, %f1, %fzero
-	sw	%ra, 4(%sp)
-	addi	%sp, %sp, 8
+	sw	%ra, 1(%sp)
+	addi	%sp, %sp, 2
 	jal	float_fib.10
-	addi	%sp, %sp, -8
-	lw	%ra, 4(%sp)
-	lui	%at, 0
-	ori	%at, %at, 60004
-	flw	%f1, 0(%at)# 2.000000
+	addi	%sp, %sp, -2
+	lw	%ra, 1(%sp)
+	flw	%f1, 15001(%zero)
 	flw	%f2, 0(%sp)
 	fsub	%f1, %f2, %f1
-	fsw	%f0, 4(%sp)
+	fsw	%f0, 1(%sp)
 	fadd	%f0, %f1, %fzero
-	sw	%ra, 12(%sp)
-	addi	%sp, %sp, 16
+	sw	%ra, 2(%sp)
+	addi	%sp, %sp, 3
 	jal	float_fib.10
-	addi	%sp, %sp, -16
-	lw	%ra, 12(%sp)
-	flw	%f1, 4(%sp)
+	addi	%sp, %sp, -3
+	lw	%ra, 2(%sp)
+	flw	%f1, 1(%sp)
 	fadd	%f0, %f1, %f0
 	jr	%ra
 .global	min_caml_start
 min_caml_start:
-	lui	%at, 0
-	ori	%at, %at, 60000
-	flw	%f0, 0(%at)# 10.000000
-	sw	%ra, 4(%sp)
-	addi	%sp, %sp, 8
+	flw	%f0, 15000(%zero)
+	sw	%ra, 0(%sp)
+	addi	%sp, %sp, 1
 	jal	float_fib.10
-	addi	%sp, %sp, -8
-	lw	%ra, 4(%sp)
-	sw	%ra, 4(%sp)
-	addi	%sp, %sp, 8
+	addi	%sp, %sp, -1
+	lw	%ra, 0(%sp)
+	sw	%ra, 0(%sp)
+	addi	%sp, %sp, 1
 	jal	min_caml_print_float
-	addi	%sp, %sp, -8
-	lw	%ra, 4(%sp)
+	addi	%sp, %sp, -1
+	lw	%ra, 0(%sp)
 	ret

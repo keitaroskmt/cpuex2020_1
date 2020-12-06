@@ -1,51 +1,41 @@
 .section	".rodata"
 .align	8
 # ------------ Initialize register ------------
-	lui	%sp, 0
-	ori	%sp, %sp, 16384
+	lui	%sp, 2
+	ori	%sp, %sp, 18928
 	lui	%hp, 0
-	ori	%hp, %hp, 8192
+	ori	%hp, %hp, 15000
 # ------------ Initialize float table ---------
 	lui	%at, 16256
 	ori	%at, %at, 0
 	sw	%at, 0(%hp)
-	addi	%hp, %hp, 4
+	addi	%hp, %hp, 1
 	lui	%at, 16320
 	ori	%at, %at, 0
 	sw	%at, 0(%hp)
-	addi	%hp, %hp, 4
+	addi	%hp, %hp, 1
 	lui	%at, 17352
 	ori	%at, %at, 0
 	sw	%at, 0(%hp)
-	addi	%hp, %hp, 4
+	addi	%hp, %hp, 1
 	lui	%at, 16512
 	ori	%at, %at, 0
 	sw	%at, 0(%hp)
-	addi	%hp, %hp, 4
+	addi	%hp, %hp, 1
 	lui	%at, 0
 	ori	%at, %at, 0
 	sw	%at, 0(%hp)
-	addi	%hp, %hp, 4
+	addi	%hp, %hp, 1
 	lui	%at, 19200
 	ori	%at, %at, 0
 	sw	%at, 0(%hp)
-	addi	%hp, %hp, 4
+	addi	%hp, %hp, 1
 # ------------ Text Section -------------------
 .section	".text"
 	j	min_caml_start
 # ------------ libmincaml.S -------------------
 # min_caml_print_char
 min_caml_print_char:
-	out	%v0
-	jr	%ra
-# min_caml_print_int
-min_caml_print_int:
-	out	%v0
-	srl	%v0, %v0, 8
-	out	%v0
-	srl	%v0, %v0, 8
-	out	%v0
-	srl	%v0, %v0, 8
 	out	%v0
 	jr	%ra
 # min_caml_read_int
@@ -94,7 +84,7 @@ create_array_loop:
 create_array_cont:
 	sw	%v1, 0(%hp)
 	addi	%a0, %a0, -1
-	addi	%hp, %hp, 4
+	addi	%hp, %hp, 1
 	j	create_array_loop
 #  min_caml_create_float_array
 min_caml_create_float_array:
@@ -106,7 +96,7 @@ create_float_array_loop:
 create_float_array_cont:
 	fsw	%f0, 0(%hp)
 	addi	%a0, %a0, -1
-	addi	%hp, %hp, 4
+	addi	%hp, %hp, 1
 	j	create_float_array_loop
 # ------------ body ---------------------------
 float_of_int_sub1.236:
@@ -143,7 +133,7 @@ float_of_int_sub3.241:
 	jr	%ra
 beq_else.562:
 	addi	%v0, %v0, -1
-	flw	%f1, 8212(%zero)
+	flw	%f1, 15005(%zero)
 	fadd	%f0, %f1, %f0
 	j	float_of_int_sub3.241
 float_of_int.244:
@@ -167,34 +157,34 @@ beq_cont.566:
 	sw	%v1, 0(%sp)
 	slt	%at, %v0, %a0
 	bne	%at, %zero, beq_else.567
-	sw	%v0, 4(%sp)
-	sw	%ra, 12(%sp)
-	addi	%sp, %sp, 16
+	sw	%v0, 1(%sp)
+	sw	%ra, 2(%sp)
+	addi	%sp, %sp, 3
 	jal	float_of_int_sub2.239
-	addi	%sp, %sp, -16
-	lw	%ra, 12(%sp)
+	addi	%sp, %sp, -3
+	lw	%ra, 2(%sp)
 	lui	%at, 19200
 	ori	%at, %at, 0
 	add	%v1, %zero, %at
 	add	%v0, %v0, %v1
 	itof	%f0, %v0
-	flw	%f1, 8212(%zero)
+	flw	%f1, 15005(%zero)
 	fsub	%f0, %f0, %f1
 	addi	%v1, %zero, 0
-	lw	%v0, 4(%sp)
-	fsw	%f0, 8(%sp)
-	sw	%ra, 12(%sp)
-	addi	%sp, %sp, 16
+	lw	%v0, 1(%sp)
+	fsw	%f0, 2(%sp)
+	sw	%ra, 3(%sp)
+	addi	%sp, %sp, 4
 	jal	float_of_int_sub1.236
-	addi	%sp, %sp, -16
-	lw	%ra, 12(%sp)
-	flw	%f0, 8208(%zero)
-	sw	%ra, 12(%sp)
-	addi	%sp, %sp, 16
+	addi	%sp, %sp, -4
+	lw	%ra, 3(%sp)
+	flw	%f0, 15004(%zero)
+	sw	%ra, 3(%sp)
+	addi	%sp, %sp, 4
 	jal	float_of_int_sub3.241
-	addi	%sp, %sp, -16
-	lw	%ra, 12(%sp)
-	flw	%f1, 8(%sp)
+	addi	%sp, %sp, -4
+	lw	%ra, 3(%sp)
+	flw	%f1, 2(%sp)
 	fadd	%f0, %f1, %f0
 	j	beq_cont.568
 beq_else.567:
@@ -203,7 +193,7 @@ beq_else.567:
 	add	%a0, %zero, %at
 	add	%v0, %v0, %a0
 	itof	%f0, %v0
-	flw	%f1, 8212(%zero)
+	flw	%f1, 15005(%zero)
 	fsub	%f0, %f0, %f1
 beq_cont.568:
 	lw	%v0, 0(%sp)
@@ -225,27 +215,27 @@ beq_else.570:
 	fsub	%f2, %f2, %f3
 	fadd	%f2, %f2, %f4
 	fsw	%f4, 0(%sp)
-	sw	%v0, 4(%sp)
-	fsw	%f2, 8(%sp)
-	fsw	%f5, 12(%sp)
-	fsw	%f1, 16(%sp)
-	sw	%ra, 20(%sp)
-	addi	%sp, %sp, 24
+	sw	%v0, 1(%sp)
+	fsw	%f2, 2(%sp)
+	fsw	%f5, 3(%sp)
+	fsw	%f1, 4(%sp)
+	sw	%ra, 5(%sp)
+	addi	%sp, %sp, 6
 	jal	dbl.262
-	addi	%sp, %sp, -24
-	lw	%ra, 20(%sp)
-	flw	%f1, 16(%sp)
+	addi	%sp, %sp, -6
+	lw	%ra, 5(%sp)
+	flw	%f1, 4(%sp)
 	fmul	%f0, %f0, %f1
-	flw	%f5, 12(%sp)
+	flw	%f5, 3(%sp)
 	fadd	%f1, %f0, %f5
-	flw	%f0, 8(%sp)
+	flw	%f0, 2(%sp)
 	fmul	%f2, %f0, %f0
 	fmul	%f3, %f1, %f1
 	fadd	%f4, %f2, %f3
-	flw	%f6, 8204(%zero)
+	flw	%f6, 15003(%zero)
 	fslt	%at, %f6, %f4
 	bne	%at, %zero, beq_else.571
-	lw	%v0, 4(%sp)
+	lw	%v0, 1(%sp)
 	addi	%v0, %v0, -1
 	flw	%f4, 0(%sp)
 	j	iloop.278
@@ -258,51 +248,51 @@ xloop.268:
 	jr	%ra
 beq_else.572:
 	sw	%v0, 0(%sp)
-	sw	%v1, 4(%sp)
-	sw	%ra, 12(%sp)
-	addi	%sp, %sp, 16
+	sw	%v1, 1(%sp)
+	sw	%ra, 2(%sp)
+	addi	%sp, %sp, 3
 	jal	float_of_int.244
-	addi	%sp, %sp, -16
-	lw	%ra, 12(%sp)
-	sw	%ra, 12(%sp)
-	addi	%sp, %sp, 16
+	addi	%sp, %sp, -3
+	lw	%ra, 2(%sp)
+	sw	%ra, 2(%sp)
+	addi	%sp, %sp, 3
 	jal	dbl.262
-	addi	%sp, %sp, -16
-	lw	%ra, 12(%sp)
-	flw	%f1, 8200(%zero)
+	addi	%sp, %sp, -3
+	lw	%ra, 2(%sp)
+	flw	%f1, 15002(%zero)
 	fdiv	%f0, %f0, %f1
-	flw	%f1, 8196(%zero)
+	flw	%f1, 15001(%zero)
 	fsub	%f0, %f0, %f1
-	lw	%v0, 4(%sp)
-	fsw	%f0, 8(%sp)
-	sw	%ra, 12(%sp)
-	addi	%sp, %sp, 16
+	lw	%v0, 1(%sp)
+	fsw	%f0, 2(%sp)
+	sw	%ra, 3(%sp)
+	addi	%sp, %sp, 4
 	jal	float_of_int.244
-	addi	%sp, %sp, -16
-	lw	%ra, 12(%sp)
-	sw	%ra, 12(%sp)
-	addi	%sp, %sp, 16
+	addi	%sp, %sp, -4
+	lw	%ra, 3(%sp)
+	sw	%ra, 3(%sp)
+	addi	%sp, %sp, 4
 	jal	dbl.262
-	addi	%sp, %sp, -16
-	lw	%ra, 12(%sp)
-	flw	%f1, 8200(%zero)
+	addi	%sp, %sp, -4
+	lw	%ra, 3(%sp)
+	flw	%f1, 15002(%zero)
 	fdiv	%f0, %f0, %f1
-	flw	%f1, 8192(%zero)
+	flw	%f1, 15000(%zero)
 	fsub	%f5, %f0, %f1
 	addi	%v0, %zero, 1000
-	flw	%f0, 8208(%zero)
-	flw	%f1, 8208(%zero)
-	flw	%f2, 8208(%zero)
-	flw	%f3, 8208(%zero)
-	flw	%f4, 8(%sp)
-	sw	%ra, 12(%sp)
-	addi	%sp, %sp, 16
+	flw	%f0, 15004(%zero)
+	flw	%f1, 15004(%zero)
+	flw	%f2, 15004(%zero)
+	flw	%f3, 15004(%zero)
+	flw	%f4, 2(%sp)
+	sw	%ra, 3(%sp)
+	addi	%sp, %sp, 4
 	jal	iloop.278
-	addi	%sp, %sp, -16
-	lw	%ra, 12(%sp)
+	addi	%sp, %sp, -4
+	lw	%ra, 3(%sp)
 	lw	%v0, 0(%sp)
 	addi	%v0, %v0, 1
-	lw	%v1, 4(%sp)
+	lw	%v1, 1(%sp)
 	j	xloop.268
 yloop.264:
 	slti	%at, %v0, 400
@@ -314,20 +304,20 @@ beq_else.574:
 	addi	%k0, %v1, 0
 	addi	%v1, %v0, 0
 	addi	%v0, %k0, 0
-	sw	%ra, 4(%sp)
-	addi	%sp, %sp, 8
+	sw	%ra, 1(%sp)
+	addi	%sp, %sp, 2
 	jal	xloop.268
-	addi	%sp, %sp, -8
-	lw	%ra, 4(%sp)
+	addi	%sp, %sp, -2
+	lw	%ra, 1(%sp)
 	lw	%v0, 0(%sp)
 	addi	%v0, %v0, 1
 	j	yloop.264
 .global	min_caml_start
 min_caml_start:
 	addi	%v0, %zero, 0
-	sw	%ra, 4(%sp)
-	addi	%sp, %sp, 8
+	sw	%ra, 0(%sp)
+	addi	%sp, %sp, 1
 	jal	yloop.264
-	addi	%sp, %sp, -8
-	lw	%ra, 4(%sp)
+	addi	%sp, %sp, -1
+	lw	%ra, 0(%sp)
 	ret

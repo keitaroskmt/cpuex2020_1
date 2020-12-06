@@ -72,8 +72,12 @@ let reg_fat = "%f30" (* for assembler *)
 let reg_fzero = "%fzero"
 let is_reg x = (x.[0] = '%')
 
+(*
 let hp_init = 60000
 let sp_init = 600000
+*)
+let hp_init = 15000
+let sp_init = 150000
 
 (* super-tenuki *)
 let rec remove_and_uniq xs = function
@@ -104,4 +108,6 @@ let rec concat e1 xt e2 =
   | Ans(exp) -> Let(xt, exp, e2)
   | Let(yt, exp, e1') -> Let(yt, exp, concat e1' xt e2)
 
+(*
 let align i = (if i mod 8 = 0 then i else i + 4)
+*)

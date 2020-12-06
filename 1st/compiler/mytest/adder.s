@@ -1,10 +1,10 @@
 .section	".rodata"
 .align	8
 # ------------ Initialize register ------------
-	lui	%sp, 9
-	ori	%sp, %sp, 10176
+	lui	%sp, 2
+	ori	%sp, %sp, 18928
 	lui	%hp, 0
-	ori	%hp, %hp, 60000
+	ori	%hp, %hp, 15000
 # ------------ Initialize float table ---------
 # ------------ Text Section -------------------
 .section	".text"
@@ -60,7 +60,7 @@ create_array_loop:
 create_array_cont:
 	sw	%v1, 0(%hp)
 	addi	%a0, %a0, -1
-	addi	%hp, %hp, 4
+	addi	%hp, %hp, 1
 	j	create_array_loop
 #  min_caml_create_float_array
 min_caml_create_float_array:
@@ -72,40 +72,40 @@ create_float_array_loop:
 create_float_array_cont:
 	fsw	%f0, 0(%hp)
 	addi	%a0, %a0, -1
-	addi	%hp, %hp, 4
+	addi	%hp, %hp, 1
 	j	create_float_array_loop
 # ------------ body ---------------------------
 adder.11:
-	lw	%v1, 4(%k1)
+	lw	%v1, 1(%k1)
 	add	%v0, %v1, %v0
 	jr	%ra
 make_adder.5:
 	add	%v1, %zero, %hp
-	addi	%hp, %hp, 8
+	addi	%hp, %hp, 2
 	addi	%a0, %zero, adder.11
 	sw	%a0, 0(%v1)
-	sw	%v0, 4(%v1)
+	sw	%v0, 1(%v1)
 	add	%v0, %zero, %v1
 	jr	%ra
 .global	min_caml_start
 min_caml_start:
 	addi	%v0, %zero, 3
-	sw	%ra, 4(%sp)
-	addi	%sp, %sp, 8
+	sw	%ra, 0(%sp)
+	addi	%sp, %sp, 1
 	jal	make_adder.5
-	addi	%sp, %sp, -8
-	lw	%ra, 4(%sp)
+	addi	%sp, %sp, -1
+	lw	%ra, 0(%sp)
 	addi	%k1, %v0, 0
 	addi	%v0, %zero, 7
-	sw	%ra, 4(%sp)
-	addi	%sp, %sp, 8
+	sw	%ra, 0(%sp)
+	addi	%sp, %sp, 1
 	lw	%at, 0(%k1)
 	jalr	%at
-	addi	%sp, %sp, -8
-	lw	%ra, 4(%sp)
-	sw	%ra, 4(%sp)
-	addi	%sp, %sp, 8
+	addi	%sp, %sp, -1
+	lw	%ra, 0(%sp)
+	sw	%ra, 0(%sp)
+	addi	%sp, %sp, 1
 	jal	min_caml_print_int
-	addi	%sp, %sp, -8
-	lw	%ra, 4(%sp)
+	addi	%sp, %sp, -1
+	lw	%ra, 0(%sp)
 	ret

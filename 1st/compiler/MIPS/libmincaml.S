@@ -48,7 +48,7 @@ create_array_loop:
 create_array_cont:
 	sw	%v1, 0(%hp)
 	addi	%a0, %a0, -1
-	addi	%hp, %hp, 4
+	addi	%hp, %hp, 1
 	j	create_array_loop
 #  min_caml_create_float_array
 min_caml_create_float_array:
@@ -60,5 +60,5 @@ create_float_array_loop:
 create_float_array_cont:
 	fsw	%f0, 0(%hp)
 	addi	%a0, %a0, -1
-	addi	%hp, %hp, 4
+	addi	%hp, %hp, 1
 	j	create_float_array_loop

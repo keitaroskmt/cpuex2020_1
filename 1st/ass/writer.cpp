@@ -179,7 +179,7 @@ unsigned int Writer::encode(vector<string> &v) {
             if (isnum(v[4])) { // 即値のとき
                 imm = stoi(v[4]);
             } else {
-                imm = parser->label_map.at(v[4]) * 4;
+                imm = parser->label_map.at(v[4]);
             }
 
         } else if (v[1] == "slti") {

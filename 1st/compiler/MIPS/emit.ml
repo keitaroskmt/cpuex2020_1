@@ -19,8 +19,8 @@ let locate x =
     | y :: zs when x = y -> 0 :: List.map succ (loc zs)
     | y :: zs -> List.map succ (loc zs) in
   loc !stackmap
-let offset x = 4 * List.hd (locate x)
-let stacksize () = align ((List.length !stackmap + 1) * 4)
+let offset x = List.hd (locate x)
+let stacksize () = List.length !stackmap + 1
 
 let pp_id_or_imm = function
   | V(x) -> x
@@ -47,7 +47,7 @@ let rec get_float_address label data n =
     | [] -> raise Float_address_error
     | (Id.L(x), d) :: rest ->
         (if x = label then (hp_init + n, d)
-        else get_float_address label rest (n + 4))
+        else get_float_address label rest (n + 1))
 
 let load_imm oc dest v =
     let upper = Int32.shift_right_logical v 16 in
@@ -67,7 +67,7 @@ let rec load_float_imm oc data n =
     | (Id.L(x), d) :: rest ->
         (load_imm oc reg_at (get d);
         Printf.fprintf oc "\tsw\t%s, 0(%s)\n" reg_at reg_hp;
-        Printf.fprintf oc "\taddi\t%s, %s, 4\n" reg_hp reg_hp;
+        Printf.fprintf oc "\taddi\t%s, %s, 1\n" reg_hp reg_hp;
         load_float_imm oc rest (n+1))
 
 let addi oc r1 r2 i =
@@ -280,12 +280,12 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprime) *)
   | NonTail(a), CallCls(x, ys, zs) ->
       g'_args oc [(x, reg_cl)] ys zs;
       let ss = stacksize () in
-      Printf.fprintf oc "\tsw\t%s, %d(%s)\n" reg_ra (ss - 4) reg_sp;
+      Printf.fprintf oc "\tsw\t%s, %d(%s)\n" reg_ra (ss - 1) reg_sp;
       addi oc reg_sp reg_sp ss;
       Printf.fprintf oc "\tlw\t%s, 0(%s)\n" reg_at reg_cl;
       Printf.fprintf oc "\tjalr\t%s\n" reg_at;
       addi oc reg_sp reg_sp (-ss);
-      Printf.fprintf oc "\tlw\t%s, %d(%s)\n" reg_ra (ss - 4) reg_sp;
+      Printf.fprintf oc "\tlw\t%s, %d(%s)\n" reg_ra (ss - 1) reg_sp;
       if List.mem a allregs && a <> regs.(0) then
         Printf.fprintf oc "\taddi\t%s, %s, 0\n" a regs.(0)
       else if List.mem a allfregs && a <> fregs.(0) then
@@ -293,11 +293,11 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprime) *)
   | NonTail(a), CallDir(Id.L(x), ys, zs) ->
       g'_args oc [] ys zs;
       let ss = stacksize () in
-      Printf.fprintf oc "\tsw\t%s, %d(%s)\n" reg_ra (ss - 4) reg_sp;
+      Printf.fprintf oc "\tsw\t%s, %d(%s)\n" reg_ra (ss - 1) reg_sp;
       addi oc reg_sp reg_sp ss;
       Printf.fprintf oc "\tjal\t%s\n" x;
       addi oc reg_sp reg_sp (-ss);
-      Printf.fprintf oc "\tlw\t%s, %d(%s)\n" reg_ra (ss - 4) reg_sp;
+      Printf.fprintf oc "\tlw\t%s, %d(%s)\n" reg_ra (ss - 1) reg_sp;
       if List.mem a allregs && a <> regs.(0) then
         Printf.fprintf oc "\taddi\t%s, %s, 0\n" a regs.(0)
       else if List.mem a allfregs && a <> fregs.(0) then
