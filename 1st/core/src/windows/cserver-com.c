@@ -125,8 +125,10 @@ static int ppm_recv_text_number()
     if(c == '#') {  /* skip a comment line*/
       do {
         c = my_getc();
-        if(c == EOF)
-          return -1;
+        if(c == EOF){
+      //    printf("\nerror character1:%d\n",c);
+          return 256;
+        }
       } while(c != '\n');
     } else
       break;
@@ -138,7 +140,11 @@ static int ppm_recv_text_number()
     integer_detected = TRUE;
   }
   my_ungetc(c);
-  return integer_detected ? n : -1;
+  if (!integer_detected){
+  //  printf("\nerror character2:%d\n",c);
+    return 256;
+  }
+  return integer_detected ? n : 0;
 }
 
 /*-----------------------------------------------------------------------------

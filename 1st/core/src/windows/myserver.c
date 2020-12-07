@@ -433,15 +433,13 @@ static void send_sld_data(void)
 {
   //fprintf(stderr, "sending SLD data:\n");
   startTime = GetTickCount();
-  sld_words[0].i = 11;
-  sld_n_words = 1;
+  //sld_words[0].i = 11;
   com_write((char*)sld_words, sld_n_words*sizeof(sld_words[0]));
-  //for (int j=0;j<sld_n_words;j++){
+  for (int j=0;j<sld_n_words;j++){
     //printf("%d\n",sld_words[j].i);
-    //printb(sld_words[j].i);
+    printb(sld_words[j].i);
     //printf("\n");
-  //}
-
+  }
 }
 
 /*-----------------------------------------------------------------------------

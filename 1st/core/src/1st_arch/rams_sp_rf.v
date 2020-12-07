@@ -14,7 +14,7 @@ output [31:0] dout;
 reg [31:0] dout;
 
 initial begin
-    $readmemb("main2.mem",RAM,0,12000);
+    $readmemb("main.mem",RAM,0,12000);
 end
 
 //integer i;

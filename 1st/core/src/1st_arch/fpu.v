@@ -23,6 +23,7 @@ wire ovfa;
 wire ovfs;
 wire ovfm;
 wire ovfd;
+wire [31:0] fpu_result_pre;
 
 fadd fad(srcA,srcB,add,ovfa,clk,rstn);
 fsub fsb(srcA,srcB,sub,ovfs,clk,rstn);
@@ -47,7 +48,7 @@ assign zero = (srcA[30:0]==31'h00000000 &&srcB[30:0]==31'h00000000) ? 1'b1
 
 
 
-assign fpu_result = (fpu_control == 4'b0000) ? add
+assign fpu_result_pre = (fpu_control == 4'b0000) ? add
                     :((fpu_control == 4'b001) ? sub
                     :((fpu_control == 4'b0010) ? mul
                     :((fpu_control == 4'b0011) ? div
@@ -56,6 +57,8 @@ assign fpu_result = (fpu_control == 4'b0000) ? add
                     :((fpu_control == 4'b0110) ? sqrt
                     :((fpu_control == 4'b0111) ? {31'b0,slt}
                     : 31'd0)))))));
+
+assign fpu_result = (fpu_result_pre == 32'h80000000) ? 32'h00000000 : fpu_result_pre;
 
 endmodule
 

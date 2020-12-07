@@ -5,13 +5,13 @@ module rams_dp_wf2 (clk, ra, rd);
 input wire clk;
 input wire [11:0] ra;
 output wire [7:0] rd;
-(* ram_style = "distributed" *)reg [7:0] RAM [0:250];
+(* ram_style = "distributed" *)reg [7:0] RAM [0:1500];
 
 //integer i;
 //initial for (i=0; i<64; i=i+1) RAM[i] = 0;
 
 initial begin
-    $readmemb("base_sld.mem",RAM,0,250);
+    $readmemb("contest_sld.mem",RAM,0,1500);
 end
 
 assign rd = RAM[ra];
