@@ -31,6 +31,19 @@ let expand xts ini addf addi =
     (fun (offset, acc) x t ->
       (offset + 1, addi x t offset acc))
 
+let rec load_global l =
+    match l with
+    | [] -> []
+    | x :: rest ->
+        (try
+            let (addr, t) = List.assoc x !FixAddress.global_address in
+            (* 関数適用時に引数のグローバル変数の名前を書き換えないとレジスタ割り当てに失敗する *)
+            let z = Id.genid "g" in
+            (z, addr) :: (load_global rest)
+        with
+        | Not_found -> (x, -1) :: (load_global rest)
+        )
+
 let rec g env = function (* 式の仮想マシンコード生成 (caml2html: virtual_g) *)
   | Closure.Unit -> Ans(Nop)
   | Closure.Int(i) -> Ans(Set(i))
@@ -56,24 +69,38 @@ let rec g env = function (* 式の仮想マシンコード生成 (caml2html: virtual_g) *)
   | Closure.FMul(x, y) -> Ans(FMulD(x, y))
   | Closure.FDiv(x, y) -> Ans(FDivD(x, y))
   | Closure.IfEq(x, y, e1, e2) ->
-      (match M.find x env with
-      | Type.Bool | Type.Int -> Ans(IfEq(x, V(y), g env e1, g env e2))
-      | Type.Float -> Ans(IfFEq(x, y, g env e1, g env e2))
-      | _ -> failwith "equality supported only for bool, int, and float")
+      (
+      try
+          (match M.find x env with
+          | Type.Bool | Type.Int -> Ans(IfEq(x, V(y), g env e1, g env e2))
+          | Type.Float -> Ans(IfFEq(x, y, g env e1, g env e2))
+          | _ -> failwith "equality supported only for bool, int, and float")
+      with Not_found -> failwith "IfEq"
+      )
   | Closure.IfLE(x, y, e1, e2) ->
-      (match M.find x env with
-      | Type.Bool | Type.Int -> Ans(IfLE(x, V(y), g env e1, g env e2))
-      | Type.Float -> Ans(IfFLE(x, y, g env e1, g env e2))
-      | _ -> failwith "inequality supported only for bool, int, and float")
+      (
+      try
+          (match M.find x env with
+          | Type.Bool | Type.Int -> Ans(IfLE(x, V(y), g env e1, g env e2))
+          | Type.Float -> Ans(IfFLE(x, y, g env e1, g env e2))
+          | _ -> failwith "inequality supported only for bool, int, and float")
+      with Not_found -> failwith "IfLE"
+      )
   | Closure.Let((x, t1), e1, e2) ->
       let e1' = g env e1 in
       let e2' = g (M.add x t1 env) e2 in
       concat e1' (x, t1) e2'
   | Closure.Var(x) ->
-      (match M.find x env with
-      | Type.Unit -> Ans(Nop)
-      | Type.Float -> Ans(FMovD(x))
-      | _ -> Ans(Mov(x)))
+        (
+        try
+            let (addr, t) = List.assoc x !FixAddress.global_address in Ans(Set(addr))
+        with
+        | Not_found ->
+            (match M.find x env with
+            | Type.Unit -> Ans(Nop)
+            | Type.Float -> Ans(FMovD(x))
+            | _ -> Ans(Mov(x)))
+         )
   | Closure.MakeCls((x, t), { Closure.entry = l; Closure.actual_fv = ys }, e2) -> (* クロージャの生成 (caml2html: virtual_makecls) *)
       (* Closureのアドレスをセットしてから、自由変数の値をストア *)
       let e2' = g (M.add x t env) e2 in
@@ -90,22 +117,38 @@ let rec g env = function (* 式の仮想マシンコード生成 (caml2html: virtual_g) *)
                   seq(St(z, x, C(0)),
                       store_fv))))
   | Closure.AppCls(x, ys) ->
-      let (int, float) = separate (List.map (fun y -> (y, M.find y env)) ys) in
-      Ans(CallCls(x, int, float))
+    (
+    try
+      let (int, float) = separate (List.map (fun y -> (y, try M.find y env with Not_found -> Type.Int)) ys) in
+      let arg = load_global int in
+      List.fold_left (fun exp (name, addr) -> if addr >= 0 then Let((name, Type.Int), Set(addr), exp) else exp)
+        (Ans(CallCls(x, (List.map (fun (name, addr) -> name) arg), float))) arg
+    with Not_found -> failwith "AppCls"
+    )
   | Closure.AppDir(Id.L(x), ys) ->
-      let (int, float) = separate (List.map (fun y -> (y, M.find y env)) ys) in
-      Ans(CallDir(Id.L(x), int, float))
+    (
+    try
+      let (int, float) = separate (List.map (fun y -> (y, try M.find y env with Not_found -> Type.Int)) ys) in
+      let arg = load_global int in
+      List.fold_left (fun exp (name, addr) -> if addr >= 0 then Let((name, Type.Int), Set(addr), exp) else exp)
+        (Ans(CallDir(Id.L(x), (List.map (fun (name, addr) -> name) arg), float))) arg
+    with Not_found -> failwith "AppDir"
+    )
   | Closure.Tuple(xs) -> (* 組の生成 (caml2html: virtual_tuple) *)
+    (
+    try
       let y = Id.genid "t" in
       let (offset, store) =
         expand
-          (List.map (fun x -> (x, M.find x env)) xs)
+          (List.map (fun x -> (x, try M.find x env with Not_found -> Type.Int)) xs)
           (0, Ans(Mov(y)))
           (fun x offset store -> seq(StF(x, y, C(offset)), store))
           (fun x _ offset store -> seq(St(x, y, C(offset)), store)) in
-      Let((y, Type.Tuple(List.map (fun x -> M.find x env) xs)), Mov(reg_hp),
+      Let((y, Type.Tuple(List.map (fun x -> try M.find x env with Not_found -> Type.Int) xs)), Mov(reg_hp),
           Let((reg_hp, Type.Int), Add(reg_hp, C(offset)),
               store))
+    with Not_found -> failwith "Tuple"
+    )
   | Closure.LetTuple(xts, y, e2) ->
       let s = Closure.fv e2 in
       let (offset, load) =
@@ -120,21 +163,58 @@ let rec g env = function (* 式の仮想マシンコード生成 (caml2html: virtual_g) *)
             Let((x, t), Ld(y, C(offset)), load)) in
       load
   | Closure.Get(x, y) -> (* 配列の読み出し (caml2html: virtual_get) *)
-      (match M.find x env with
-      | Type.Array(Type.Unit) -> Ans(Nop)
-      | Type.Array(Type.Float) ->
-              Ans(LdF(x, V(y)))
-      | Type.Array(_) ->
-              Ans(Ld(x, V(y)))
-      | _ -> assert false)
+        (
+        try
+            (
+            let (addr, t) = List.assoc x !FixAddress.global_address in
+            let addrid = Id.genid "v" in
+           (match t with
+            | Type.Int -> Let((addrid, Type.Int), Set(addr), Ans(Ld(addrid, V(y))))
+            | Type.Float -> Let((addrid, Type.Int), Set(addr), Ans(LdF(addrid, V(y))))
+            | _ -> assert false)
+            )
+        with
+        | Not_found ->
+            (match M.find x env with
+            | Type.Array(Type.Unit) -> Ans(Nop)
+            | Type.Array(Type.Float) ->
+                  Ans(LdF(x, V(y)))
+            | Type.Array(_) ->
+                  Ans(Ld(x, V(y)))
+            | _ -> assert false)
+        )
   | Closure.Put(x, y, z) ->
-      (match M.find x env with
-      | Type.Array(Type.Unit) -> Ans(Nop)
-      | Type.Array(Type.Float) ->
-              Ans(StF(z, x, V(y)))
-      | Type.Array(_) ->
-              Ans(St(z, x, V(y)))
-      | _ -> assert false)
+        (
+        try
+            (
+            let (addr, t) = List.assoc x !FixAddress.global_address in
+            let addrid = Id.genid "v" in
+            if List.mem_assoc z !FixAddress.global_address then
+                (
+                let (z_addr, z_t) = List.assoc z !FixAddress.global_address in
+                let z_addrid = Id.genid "w" in
+                Let((z_addrid, Type.Int), Set(z_addr),
+                (match t with
+                | Type.Int -> Let((addrid, Type.Int), Set(addr), Ans(St(z_addrid, addrid, V(y))))
+                | Type.Float -> Let((addrid, Type.Int), Set(addr), Ans(StF(z_addrid, addrid, V(y))))
+                | _ -> assert false))
+                )
+            else
+           (match t with
+            | Type.Int -> Let((addrid, Type.Int), Set(addr), Ans(St(z, addrid, V(y))))
+            | Type.Float -> Let((addrid, Type.Int), Set(addr), Ans(StF(z, addrid, V(y))))
+            | _ -> assert false)
+            )
+        with
+        | Not_found ->
+            (match M.find x env with
+            | Type.Array(Type.Unit) -> Ans(Nop)
+            | Type.Array(Type.Float) ->
+                  Ans(StF(z, x, V(y)))
+            | Type.Array(_) ->
+                  Ans(St(z, x, V(y)))
+            | _ -> assert false)
+        )
   | Closure.ExtArray(Id.L(x)) -> Ans(SetL(Id.L("min_caml_" ^ x)))
   | Closure.FAbs(x) -> Ans(FAbs(x))
   | Closure.FSqr(x) -> Ans(FSqr(x))

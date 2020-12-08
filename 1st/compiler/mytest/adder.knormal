@@ -1,0 +1,35 @@
+LetRec
+	name : 
+		(make_adder : Int -> Int -> Int)
+	args : 
+		[(x : Int)]
+	body : 
+		LetRec
+			name : 
+				(adder : Int -> Int)
+			args : 
+				[(y : Int)]
+			body : 
+				Add
+					x
+					y
+			Var adder
+	Let
+		(Ti4 : Int)
+		Let
+			(Tf2 : Int -> Int)
+			Let
+				(Ti1 : Int)
+				Int 3
+				App
+					make_adder
+					[Ti1]
+			Let
+				(Ti3 : Int)
+				Int 7
+				App
+					Tf2
+					[Ti3]
+		ExtFunApp
+			print_int
+			[Ti4]

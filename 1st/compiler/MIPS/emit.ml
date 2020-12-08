@@ -19,7 +19,7 @@ let locate x =
     | y :: zs when x = y -> 0 :: List.map succ (loc zs)
     | y :: zs -> List.map succ (loc zs) in
   loc !stackmap
-let offset x = List.hd (locate x)
+let offset x = if (locate x) = [] then (Printf.fprintf stdout ("%s\n") x; failwith "err") else List.hd (locate x)
 let stacksize () = List.length !stackmap + 1
 
 let pp_id_or_imm = function
@@ -46,7 +46,7 @@ let rec get_float_address label data n =
     match data with
     | [] -> raise Float_address_error
     | (Id.L(x), d) :: rest ->
-        (if x = label then (hp_init + n, d)
+        (if x = label then (!FixAddress.hp_init + n, d)
         else get_float_address label rest (n + 1))
 
 let load_imm oc dest v =
@@ -356,7 +356,7 @@ let f oc (Prog(data, fundefs, e)) =
   Printf.fprintf oc ".align\t8\n";
   Printf.fprintf oc "# ------------ Initialize register ------------\n";
   load_imm oc reg_sp (Int32.of_int sp_init);
-  load_imm oc reg_hp (Int32.of_int hp_init);
+  load_imm oc reg_hp (Int32.of_int !FixAddress.hp_init);
   Printf.fprintf oc "# ------------ Initialize float table ---------\n";
   load_float_imm oc data 0;
   float_table := data;

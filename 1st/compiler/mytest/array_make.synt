@@ -1,0 +1,44 @@
+LetRec
+	name : 
+		(inprod : none)
+	args : 
+		[(v1 : none), (v2 : none), (i : none)]
+	body : 
+		If
+			Not
+				LE
+					Int 0
+					Var i
+			Float 0.
+			FAdd
+				FMul
+					Get
+						Var v1
+						Var i
+					Get
+						Var v2
+						Var i
+				App
+					Var inprod
+					Var v1
+					Var v2
+					Sub
+						Var i
+						Int 1
+	Let
+		(v1 : none)
+		Array
+			Int 3
+			Float 1.23
+		Let
+			(v2 : none)
+			Array
+				Int 3
+				Float 4.56
+			App
+				Var print_float
+				App
+					Var inprod
+					Var v1
+					Var v2
+					Int 2

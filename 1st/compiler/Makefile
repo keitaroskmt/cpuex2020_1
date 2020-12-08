@@ -32,6 +32,7 @@ typing.mli typing.ml syntax.ml parser.mly lexer.mll kNormal.mli kNormal.ml \
 alpha.mli alpha.ml beta.mli beta.ml assoc.mli assoc.ml \
 cse.mli cse.ml \
 inline.mli inline.ml constFold.mli constFold.ml elim.mli elim.ml \
+fixAddress.mli fixAddress.ml \
 closure.mli closure.ml asm.mli asm.ml virtual.mli virtual.ml \
 simm.mli simm.ml regAlloc.mli regAlloc.ml emit.mli emit.ml \
 output.ml main.mli main.ml
@@ -44,7 +45,7 @@ output.ml main.mli main.ml
 # inprod inprod-rec inprod-loop matmul matmul-flat \
 # manyargs tmp
 
-TESTS = fib float_fib adder array_make array_put sin cos mandelbrot main
+TESTS = fib float_fib adder array_make array_put sin cos mandelbrot
 
 do_test: $(TESTS:%=mytest/%.s)
 

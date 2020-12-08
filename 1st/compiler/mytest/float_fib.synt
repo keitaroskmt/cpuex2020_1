@@ -1,0 +1,27 @@
+LetRec
+	name : 
+		(float_fib : none)
+	args : 
+		[(n : none)]
+	body : 
+		If
+			LE
+				Var n
+				Float 1.
+			Var n
+			FAdd
+				App
+					Var float_fib
+					FSub
+						Var n
+						Float 1.
+				App
+					Var float_fib
+					FSub
+						Var n
+						Float 2.
+	App
+		Var print_float
+		App
+			Var float_fib
+			Float 10.

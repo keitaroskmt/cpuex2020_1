@@ -60,7 +60,6 @@ val reg_ra : Id.t
 val reg_at : Id.t
 
 val sp_init : int
-val hp_init : int
 
 val reg_fsw : Id.t
 val reg_fat : Id.t

@@ -76,7 +76,6 @@ let is_reg x = (x.[0] = '%')
 let hp_init = 60000
 let sp_init = 600000
 *)
-let hp_init = 15000
 let sp_init = 150000
 
 (* super-tenuki *)
