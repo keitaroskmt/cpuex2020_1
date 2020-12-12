@@ -36,8 +36,8 @@ int exec_cmd(int *loop, bool *is_stat, bool *print_bc, bool *print_calc, bool *p
             sp = stoi(cmd_re[1].str());
             j = stoi(cmd_re[2].str());
 
-            for (int i = sp - 4 * j; i <= sp + 4 * j; i += 4)
-                printf("stack[%d] = (hex) %08X\t(dec) %d\tPC = %llu\n", i, stack[i / 4].first, stack[i / 4].first, stack[i / 4].second);
+            for (int i = sp - j; i <= sp + j; i++)
+                printf("stack[%d] = (hex) %08X\t(dec) %d\tPC = %llu\n", i, stack[i].first, stack[i].first, stack[i].second);
         }
         // stack代入 絶対アドレス指定
         else if (regex_match(cmd, cmd_re, std::regex("^stackin (\\d+) ([0-9A-Fa-f.]+)\\s?(.*?)\n?$")))
@@ -50,7 +50,7 @@ int exec_cmd(int *loop, bool *is_stat, bool *print_bc, bool *print_calc, bool *p
                 subst.f = stof(cmd_re[2].str());
             else
                 subst.i = stoi(cmd_re[2].str());
-            stack[sp / 4].first = subst.i;
+            stack[sp].first = subst.i;
         }
         // stack表示 相対アドレス指定
         else if (regex_match(cmd, cmd_re, std::regex("^stack (-?\\d+)\\((.+?)\\) (\\d+)\n?$")))
@@ -60,8 +60,8 @@ int exec_cmd(int *loop, bool *is_stat, bool *print_bc, bool *print_calc, bool *p
             sp = cur_env.GPR[reg_name.at(reg)] + offset;
             j = stoi(cmd_re[3].str());
 
-            for (int i = sp - 4 * j; i <= sp + 4 * j; i += 4)
-                printf("stack[%d] = (hex) %08X\t(dec) %d\tPC = %llu\n", i, stack[i / 4].first, stack[i / 4].first, stack[i / 4].second);
+            for (int i = sp - j; i <= sp + j; i++)
+                printf("stack[%d] = (hex) %08X\t(dec) %d\tPC = %llu\n", i, stack[i].first, stack[i].first, stack[i].second);
         }
         // stack代入 相対アドレス指定
         else if (regex_match(cmd, cmd_re, std::regex("^stackin (-?\\d+)\\((.+?)\\) ([0-9A-Fa-f]+)\\s?(.*?)\n?$")))
@@ -76,7 +76,7 @@ int exec_cmd(int *loop, bool *is_stat, bool *print_bc, bool *print_calc, bool *p
                 subst.f = stof(cmd_re[2].str());
             else
                 subst.i = stoi(cmd_re[3].str());
-            stack[sp / 4].first = subst.i;
+            stack[sp].first = subst.i;
         }
         // レジスタ代入
         else if (regex_match(cmd, cmd_re, std::regex("^regin (.+?) ([0-9A-Fa-f]+)\\s?(.*?)\n?$")))

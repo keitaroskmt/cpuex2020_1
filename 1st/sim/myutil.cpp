@@ -3,6 +3,7 @@
 #include <map>
 #include <vector>
 #include <errno.h>
+#include <time.h>
 #include "myutil.h"
 #include "sim.h"
 
@@ -50,6 +51,13 @@ void print_label_stats()
             printf("%s:\t%lld\n", (itr->first).c_str(), itr->second);
     }
     return;
+}
+
+void print_time(clock_t start_time)
+{
+    clock_t end_time = clock();
+    const double time = static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC * 1000.0;
+    printf("time %.1lf[s]\n", time / 1000);
 }
 
 // step実行時のコマンド取得
