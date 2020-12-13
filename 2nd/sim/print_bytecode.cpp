@@ -11,7 +11,7 @@
 int print_bytecode(op_info op)
 {
     // レジスタの中身ではなくレジスタ番号の話
-    unsigned int rs, rt, rd, imm, imm_, funct, shamt = 0;
+    unsigned int rs, rt, rd, imm, imm_, funct = 0, shamt = 0;
 
     if (op.opcode == "add" || op.opcode == "sub" || op.opcode == "and" || op.opcode == "or" || op.opcode == "nor")
     {
@@ -199,7 +199,7 @@ int print_bytecode(op_info op)
     }
     else if (op.opcode == "ret")
     {
-        std::cout << "001000 00010 00010 0000000000000000(addi %v0 %v0 0)" << std::endl;
+        std::cout << "ret" << std::endl;
     }
     else if (op.opcode == "nop")
     {
