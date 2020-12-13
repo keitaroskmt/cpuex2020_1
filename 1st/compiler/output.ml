@@ -7,10 +7,10 @@ let rec iter n e = (* 最適化処理をくりかえす (caml2html: main_iter) *)
   if e = e' then e else
   iter (n - 1) e'
 
-let lexbuf outchan l = (* バッファをコンパイルしてチャンネルへ出力する (caml2html: main_lexbuf) *)
+let lexbuf (outchan, datachan) l = (* バッファをコンパイルしてチャンネルへ出力する (caml2html: main_lexbuf) *)
   Id.counter := 0;
   Typing.extenv := M.empty;
-  Emit.f outchan
+  Emit.f (outchan, datachan)
     (RegAlloc.f
        (Simm.f
           (Virtual.f
@@ -23,7 +23,7 @@ let lexbuf outchan l = (* バッファをコンパイルしてチャンネルへ出力する (caml2htm
                          (Typing.f
                             (Parser.exp Lexer.token l))))))))))
 
-let string s = lexbuf stdout (Lexing.from_string s) (* 文字列をコンパイルして標準出力に表示する (caml2html: main_string) *)
+let string s = lexbuf (stdout, stdout) (Lexing.from_string s) (* 文字列をコンパイルして標準出力に表示する (caml2html: main_string) *)
 
 let syntax_check f =
     let inchan = open_in (f ^ ".ml") in

@@ -61,14 +61,33 @@ let load_imm oc dest v =
     Printf.fprintf oc "\tori\t%s, %s, %ld\n" dest dest lower
     *)
 
-let rec load_float_imm oc data n =
+let rec to_bits x i =
+    if i = 32 then "" else
+         (to_bits (Int32.shift_right x 1) (i+1)) ^
+             (if (Int32.logand x 1l) = 1l then "1" else "0")
+
+(* データセクション 応急処置 *)
+let rec preprocess_data dc i =
+    if i = 0 then () else
+       (Printf.fprintf dc "%s\n" (to_bits 0l 0);
+        preprocess_data dc (i-1))
+
+let rec load_float_imm dc data acc =
     match data with
-    | [] -> ()
+    | [] -> acc
     | (Id.L(x), d) :: rest ->
+    (*
+        Printf.fprintf dc "%ld\n" (get d);
+        Printf.fprintf dc "%f\n" d;
+        *)
+        Printf.fprintf dc "%s\n" (to_bits (get d) 0);
+            load_float_imm dc rest (acc + 1)
+    (*
         (load_imm oc reg_at (get d);
         Printf.fprintf oc "\tsw\t%s, 0(%s)\n" reg_at reg_hp;
         Printf.fprintf oc "\taddi\t%s, %s, 1\n" reg_hp reg_hp;
         load_float_imm oc rest (n+1))
+    *)
 
 let addi oc r1 r2 i =
     if -32768 <= i && i <= 32767 then
@@ -350,16 +369,18 @@ let h oc { name = Id.L(x); args = _; fargs = _; body = e; ret = _ } =
   stackmap := [];
   g oc (Tail, e)
 
-let f oc (Prog(data, fundefs, e)) =
+let f (oc, dc) (Prog(data, fundefs, e)) =
   Format.eprintf "generating assembly...@.";
   Printf.fprintf oc ".section\t\".rodata\"\n";
   Printf.fprintf oc ".align\t8\n";
+  Printf.fprintf oc "# ------------ Initialize float table ---------\n";
+  preprocess_data dc !FixAddress.hp_init;
+  Format.eprintf "hp_init: %d\n" !FixAddress.hp_init;
+  let float_hp = load_float_imm dc data 0 in
+  float_table := data;
   Printf.fprintf oc "# ------------ Initialize register ------------\n";
   load_imm oc reg_sp (Int32.of_int sp_init);
-  load_imm oc reg_hp (Int32.of_int !FixAddress.hp_init);
-  Printf.fprintf oc "# ------------ Initialize float table ---------\n";
-  load_float_imm oc data 0;
-  float_table := data;
+  load_imm oc reg_hp (Int32.of_int (!FixAddress.hp_init + float_hp));
   Printf.fprintf oc "# ------------ Text Section -------------------\n";
   Printf.fprintf oc ".section\t\".text\"\n";
     Printf.fprintf oc "\tj\tmin_caml_start\n";

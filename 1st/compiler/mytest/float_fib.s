@@ -1,23 +1,11 @@
 .section	".rodata"
 .align	8
-# ------------ Initialize register ------------
-	lui	%sp, 2
-	ori	%sp, %sp, 18928
-	lui	%hp, 0
-	ori	%hp, %hp, 15000
 # ------------ Initialize float table ---------
-	lui	%at, 16672
-	ori	%at, %at, 0
-	sw	%at, 0(%hp)
-	addi	%hp, %hp, 1
-	lui	%at, 16384
-	ori	%at, %at, 0
-	sw	%at, 0(%hp)
-	addi	%hp, %hp, 1
-	lui	%at, 16256
-	ori	%at, %at, 0
-	sw	%at, 0(%hp)
-	addi	%hp, %hp, 1
+# ------------ Initialize register ------------
+	lui	%sp, 1
+	ori	%sp, %sp, 64464
+	lui	%hp, 0
+	ori	%hp, %hp, 3
 # ------------ Text Section -------------------
 .section	".text"
 	j	min_caml_start
@@ -86,14 +74,38 @@ create_float_array_cont:
 	addi	%a0, %a0, -1
 	addi	%hp, %hp, 1
 	j	create_float_array_loop
+#  min_caml_create_extarray
+min_caml_create_extarray:
+	addi	%a1, %v0, 0
+	addi	%v0, %a0, 0
+create_extarray_loop:
+	bne	%a1, %zero, create_extarray_cont
+	jr	%ra
+create_extarray_cont:
+	sw	%v1, 0(%a0)
+	addi	%a1, %a1, -1
+	addi	%a0, %a0, 1
+	j	create_extarray_loop
+#  min_caml_create_float_extarray
+min_caml_create_float_extarray:
+	addi	%a0, %v0, 0
+	addi	%v0, %v1, 0
+create_float_extarray_loop:
+	bne	%a0, %zero, create_float_extarray_cont
+	jr	%ra
+create_float_extarray_cont:
+	fsw	%f0, 0(%v1)
+	addi	%a0, %a0, -1
+	addi	%v1, %v1, 1
+	j	create_float_extarray_loop
 # ------------ body ---------------------------
 float_fib.10:
-	flw	%f1, 15002(%zero)
+	flw	%f1, 2(%zero)
 	fslt	%at, %f1, %f0
 	bne	%at, %zero, beq_else.27
 	jr	%ra
 beq_else.27:
-	flw	%f1, 15002(%zero)
+	flw	%f1, 2(%zero)
 	fsub	%f1, %f0, %f1
 	fsw	%f0, 0(%sp)
 	fadd	%f0, %f1, %fzero
@@ -102,7 +114,7 @@ beq_else.27:
 	jal	float_fib.10
 	addi	%sp, %sp, -2
 	lw	%ra, 1(%sp)
-	flw	%f1, 15001(%zero)
+	flw	%f1, 1(%zero)
 	flw	%f2, 0(%sp)
 	fsub	%f1, %f2, %f1
 	fsw	%f0, 1(%sp)
@@ -117,7 +129,7 @@ beq_else.27:
 	jr	%ra
 .global	min_caml_start
 min_caml_start:
-	flw	%f0, 15000(%zero)
+	flw	%f0, 0(%zero)
 	sw	%ra, 0(%sp)
 	addi	%sp, %sp, 1
 	jal	float_fib.10

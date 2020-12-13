@@ -1,7 +1,7 @@
 open KNormal
 (* *)
 
-let hp_init = ref 15000
+let hp_init = ref 0
 
 let global_address = ref []
 let global_value = ref []
@@ -33,23 +33,27 @@ let rec g env = function
                 let addr = !hp_init in
                 hp_init := !hp_init + size;
                 global_address := (x, (addr, Type.Int)) :: !global_address;
-                g env e2
+                let z = Id.genid "a" in
+                Let((z, Type.Int), Int(addr),
+                    Let((x, t), ExtFunApp("create_extarray", [x1; x2; z]), g (M.add x (Int(addr)) env) e2))
             else
-                ()
+                Let((x, t), e1, g (M.add x e1 env) e2)
         | ExtFunApp("create_float_array", [x1; x2]) ->
             if memi x1 env then
                 let Int(size) = M.find x1 env in
                 let addr = !hp_init in
                 hp_init := !hp_init + size;
                 global_address := (x, (addr, Type.Float)) :: !global_address;
-                g env e2
+                let z = Id.genid "a" in
+                Let((z, Type.Int), Int(addr),
+                    Let((x, t), ExtFunApp("create_float_extarray", [x1; x2; z]), g (M.add x (Int(addr)) env) e2))
             else
-                ()
-        | _ -> g (M.add x e1 env) e2
+                Let((x, t), e1, g (M.add x e1 env) e2)
+        | _ -> Let((x, t), e1, g (M.add x e1 env) e2)
         )
-    | e -> ()
+    | e -> e
 
 let global_debug () =
     List.iter (fun (x, (addr, ty)) -> Format.eprintf "%s -> %d\n" x addr) !global_address
 
-let f e = (g M.empty e); global_debug (); e
+let f e = g M.empty e

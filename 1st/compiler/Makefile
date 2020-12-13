@@ -52,7 +52,7 @@ do_test: $(TESTS:%=mytest/%.s)
 .PRECIOUS: mytest/%.s
 TRASH = $(TESTS:%=mytest/%.s) $(TESTS:%=mytest/%) $(TESTS:%=mytest/%.res) $(TESTS:%=mytest/%.ans) $(TESTS:%=mytest/%.cmp) \
 	$(TESTS:%=mytest/%.iter) $(TESTS:%=mytest/%.closure) $(TESTS:%=mytest/%.cse) $(TESTS:%=test/%.alpha) \
-	$(TESTS:%=mytest/%.knormal) $(TESTS:%=mytest/%.synt)
+	$(TESTS:%=mytest/%.knormal) $(TESTS:%=mytest/%.synt) $(TESTS:%=mytest/%.data)
 
 mytest/%.s: $(RESULT) mytest/%.ml
 	./$(RESULT) mytest/$*
