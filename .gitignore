@@ -11,4 +11,15 @@ fib/sim/sim.dSYM/*
 1st/fpu/finv/*
 1st/fpu/fdiv/*
 1st/fpu/fsqrt/*
+2nd/fpu/finv_table/*
+2nd/fpu/fsqrt_table/*
+2nd/fpu/fadd/*
+2nd/fpu/fsub/*
+2nd/fpu/fmul/*
+2nd/fpu/finv/*
+2nd/fpu/fdiv/*
+2nd/fpu/fsqrt/*
+2nd/fpu/ftoi/*
+2nd/fpu/itof/*
+2nd/fpu/floor/*
 .DS_Store
