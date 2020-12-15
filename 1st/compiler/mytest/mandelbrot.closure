@@ -142,8 +142,9 @@ fundef
 													Ti144.481
 												Let
 													(Td146.477 : Float)
-													Itof
-														Ti145.479
+													AppDir
+														L (min_caml_itof)
+														[Ti145.479]
 													Let
 														(Td147.478 : Float)
 														Float 8388608.
@@ -181,8 +182,9 @@ fundef
 												Ti153.471
 											Let
 												(Td155.468 : Float)
-												Itof
-													Ti154.470
+												AppDir
+													L (min_caml_itof)
+													[Ti154.470]
 												Let
 													(Td156.469 : Float)
 													Float 8388608.

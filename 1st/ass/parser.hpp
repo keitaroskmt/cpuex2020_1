@@ -71,4 +71,5 @@ const map<string, string> inst_format = {
     {"fsw", "FI"},
     {"ftoi", "FI"},
     {"itof", "FI"},
+    {"floor", "FI"},
 };

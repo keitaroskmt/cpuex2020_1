@@ -369,6 +369,11 @@ unsigned int Writer::encode(vector<string> &v) {
             rt = freg_name.at(v[2]);
             rs = reg_name.at(v[3]);
             imm = 0x0;
+        } else if (v[1] == "floor") {
+            op = 0x3a;
+            rt = freg_name.at(v[2]);
+            rs = freg_name.at(v[3]);
+            imm = 0x0;
         }
 
         op &= 0b111111;

@@ -26,6 +26,7 @@ and exp =
   | FSqr of Id.t
   | Ftoi of Id.t
   | Itof of Id.t
+  | Floor of Id.t
   | LdF of Id.t * id_or_imm
   | StF of Id.t * Id.t * id_or_imm
   | Comment of string

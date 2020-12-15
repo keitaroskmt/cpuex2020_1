@@ -29,6 +29,7 @@ type t = (* クロージャ変換後の式 (caml2html: closure_t) *)
   | FSqr of Id.t
   | Ftoi of Id.t
   | Itof of Id.t
+  | Floor of Id.t
 type fundef = { name : Id.l * Type.t;
                 args : (Id.t * Type.t) list;
                 formal_fv : (Id.t * Type.t) list;
@@ -45,7 +46,7 @@ let rec fv_list l =
 
 let rec fv = function
   | Unit | Int(_) | Float(_) | ExtArray(_) -> S.empty
-  | Neg(x) | FNeg(x) | FAbs(x) | FSqr(x) | Ftoi(x) | Itof(x) -> fv_unit x
+  | Neg(x) | FNeg(x) | FAbs(x) | FSqr(x) | Ftoi(x) | Itof(x) | Floor(x) -> fv_unit x
   | Add(x, y) | Sub(x, y) | Mul(x, y) | Div(x, y) | FAdd(x, y) | FSub(x, y) | FMul(x, y) | FDiv(x, y) | Get(x, y) -> fv_list [x; y]
   | IfEq(x, y, e1, e2)| IfLE(x, y, e1, e2) -> S.union (fv_unit x) (S.union (fv_unit y) (S.union (fv e1) (fv e2)))
   | Let((x, t), e1, e2) -> S.union (fv e1) (S.remove x (fv e2))
@@ -119,8 +120,9 @@ let rec g env known = function (* クロージャ変換ルーチン本体 (caml2html: closure
         | "fabs" -> FAbs(List.hd ys)
         | "fneg" -> FNeg(List.hd ys)
         | "sqrt" -> FSqr(List.hd ys)
-        | "ftoi" -> Ftoi(List.hd ys)
-        | "itof" -> Itof(List.hd ys)
+        | "int_of_float" -> Ftoi(List.hd ys)
+        | "float_of_int" -> Itof(List.hd ys)
+        | "floor" -> Floor(List.hd ys)
         | _ -> AppDir(Id.L("min_caml_" ^ x), ys))
 
 let f e =
@@ -292,6 +294,10 @@ let closure_debug oc l =
              Printf.fprintf oc "%s\n" e1)
         | Itof e1 ->
             (Printf.fprintf oc "Itof\n";
+             print_tab (level+1);
+             Printf.fprintf oc "%s\n" e1)
+        | Floor e1 ->
+            (Printf.fprintf oc "Floor\n";
              print_tab (level+1);
              Printf.fprintf oc "%s\n" e1)
         )
