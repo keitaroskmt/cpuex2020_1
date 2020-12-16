@@ -26,6 +26,12 @@ typedef struct
     std::string other;
 } op_info;
 
+typedef union
+{
+    float f;
+    int i;
+} fi;
+
 extern int cur_opnum, cur_in;
 extern std::vector<op_info> ops;
 extern core_env cur_env;

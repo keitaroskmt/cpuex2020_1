@@ -114,7 +114,10 @@ int main(int argc, char *argv[])
     // 事前に行数取得
     file_name = "assembly/" + n + ".s";
     if ((fp = fopen(file_name.c_str(), "r")) == NULL)
+    {
         perror("fopen error");
+        return 1;
+    }
 
     while (fgets(buf, 256, fp) != NULL)
         line++;
@@ -122,7 +125,10 @@ int main(int argc, char *argv[])
     fclose(fp);
 
     if ((fp = fopen(file_name.c_str(), "r")) == NULL)
+    {
         perror("fopen error");
+        return 1;
+    }
 
     // 命令のパース
     if ((end = load_ops(fp)) == 0)
@@ -134,7 +140,8 @@ int main(int argc, char *argv[])
     if (is_in)
     {
         infile = "io/in/" + infile;
-        read_file(infile);
+        if (read_file(infile))
+            return 1;
     }
 
     cur_opnum = 0;

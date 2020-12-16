@@ -44,37 +44,23 @@ int read_file(std::string infile_name)
 
 int write_file(std::string outfile_name, bool mandelbrot)
 {
-    char temp1;
-    int temp2;
     int size = out_bytes.size();
     std::ofstream outfile;
     outfile.open(outfile_name, std::ios::out);
 
     if (mandelbrot)
     {
+        int temp;
         for (int i = 0; i < size; i += 4)
         {
-            temp2 = out_bytes[i] + (out_bytes[i + 1] << 8) + (out_bytes[i + 2] << 16) + (out_bytes[i + 3] << 24);
-            outfile << temp2;
+            temp = out_bytes[i] + (out_bytes[i + 1] << 8) + (out_bytes[i + 2] << 16) + (out_bytes[i + 3] << 24);
+            outfile << temp;
         }
     }
     else
     {
-
-        temp1 = out_bytes[0];
-        outfile << temp1;
-        temp1 = out_bytes[1];
-        outfile << temp1;
-        temp1 = out_bytes[2];
-        outfile << temp1;
-
-        for (int i = 3; i < size; i += 5)
-        {
-            temp1 = out_bytes[i + 4];
-            temp2 = out_bytes[i] + (out_bytes[i + 1] << 8) + (out_bytes[i + 2] << 16) + (out_bytes[i + 3] << 24);
-            outfile << temp2;
-            outfile << temp1;
-        }
+        for (int i = 0; i < size; i++)
+            outfile << out_bytes[i];
     }
     return 0;
 }

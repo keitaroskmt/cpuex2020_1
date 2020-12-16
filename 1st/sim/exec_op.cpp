@@ -13,11 +13,7 @@ int exec_op(op_info op, bool print_calc)
 {
     int rs, rt, rd, imm, sp;
     unsigned char temp;
-    union
-    {
-        float f;
-        int i;
-    } frs, frt, frd;
+    fi frs, frt, frd;
     if (op.opcode == "add")
     {
         rs = cur_env.GPR[op.opland_bit[1]];
