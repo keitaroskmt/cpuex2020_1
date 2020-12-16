@@ -101,7 +101,7 @@ create_float_extarray_cont:
 # ------------ body ---------------------------
 inprod.14:
 	slti	%at, %a0, 0
-	bne	%at, %zero, beq_else.39
+	bne	%at, %zero, beq_else.93
 	add	%at, %v0, %a0
 	flw	%f0, 0(%at)
 	add	%at, %v1, %a0
@@ -109,15 +109,60 @@ inprod.14:
 	fmul	%f0, %f0, %f1
 	addi	%a0, %a0, -1
 	fsw	%f0, 0(%sp)
-	sw	%ra, 1(%sp)
-	addi	%sp, %sp, 2
+	slti	%at, %a0, 0
+	bne	%at, %zero, beq_else.94
+	add	%at, %v0, %a0
+	flw	%f1, 0(%at)
+	add	%at, %v1, %a0
+	flw	%f2, 0(%at)
+	fmul	%f1, %f1, %f2
+	addi	%a0, %a0, -1
+	fsw	%f1, 1(%sp)
+	slti	%at, %a0, 0
+	bne	%at, %zero, beq_else.96
+	add	%at, %v0, %a0
+	flw	%f2, 0(%at)
+	add	%at, %v1, %a0
+	flw	%f3, 0(%at)
+	fmul	%f2, %f2, %f3
+	addi	%a0, %a0, -1
+	fsw	%f2, 2(%sp)
+	slti	%at, %a0, 0
+	bne	%at, %zero, beq_else.98
+	add	%at, %v0, %a0
+	flw	%f3, 0(%at)
+	add	%at, %v1, %a0
+	flw	%f4, 0(%at)
+	fmul	%f3, %f3, %f4
+	addi	%a0, %a0, -1
+	fsw	%f3, 3(%sp)
+	sw	%ra, 4(%sp)
+	addi	%sp, %sp, 5
 	jal	inprod.14
-	addi	%sp, %sp, -2
-	lw	%ra, 1(%sp)
+	addi	%sp, %sp, -5
+	lw	%ra, 4(%sp)
+	flw	%f1, 3(%sp)
+	fadd	%f0, %f1, %f0
+	j	beq_cont.99
+beq_else.98:
+	flw	%f0, 2(%zero)
+beq_cont.99:
+	flw	%f1, 2(%sp)
+	fadd	%f0, %f1, %f0
+	j	beq_cont.97
+beq_else.96:
+	flw	%f0, 2(%zero)
+beq_cont.97:
+	flw	%f1, 1(%sp)
+	fadd	%f0, %f1, %f0
+	j	beq_cont.95
+beq_else.94:
+	flw	%f0, 2(%zero)
+beq_cont.95:
 	flw	%f1, 0(%sp)
 	fadd	%f0, %f1, %f0
 	jr	%ra
-beq_else.39:
+beq_else.93:
 	flw	%f0, 2(%zero)
 	jr	%ra
 .global	min_caml_start
@@ -139,16 +184,34 @@ min_caml_start:
 	addi	%sp, %sp, -2
 	lw	%ra, 1(%sp)
 	addi	%v1, %v0, 0
-	addi	%a0, %zero, 2
 	lw	%v0, 0(%sp)
-	sw	%ra, 1(%sp)
-	addi	%sp, %sp, 2
+	flw	%f0, 2(%v0)
+	flw	%f1, 2(%v1)
+	fmul	%f0, %f0, %f1
+	flw	%f1, 1(%v0)
+	flw	%f2, 1(%v1)
+	fmul	%f1, %f1, %f2
+	flw	%f2, 0(%v0)
+	flw	%f3, 0(%v1)
+	fmul	%f2, %f2, %f3
+	addi	%a0, %zero, -1
+	fsw	%f0, 1(%sp)
+	fsw	%f1, 2(%sp)
+	fsw	%f2, 3(%sp)
+	sw	%ra, 4(%sp)
+	addi	%sp, %sp, 5
 	jal	inprod.14
-	addi	%sp, %sp, -2
-	lw	%ra, 1(%sp)
-	sw	%ra, 1(%sp)
-	addi	%sp, %sp, 2
+	addi	%sp, %sp, -5
+	lw	%ra, 4(%sp)
+	flw	%f1, 3(%sp)
+	fadd	%f0, %f1, %f0
+	flw	%f1, 2(%sp)
+	fadd	%f0, %f1, %f0
+	flw	%f1, 1(%sp)
+	fadd	%f0, %f1, %f0
+	sw	%ra, 4(%sp)
+	addi	%sp, %sp, 5
 	jal	min_caml_print_float
-	addi	%sp, %sp, -2
-	lw	%ra, 1(%sp)
+	addi	%sp, %sp, -5
+	lw	%ra, 4(%sp)
 	ret

@@ -18,37 +18,11 @@ min_caml_print_char:
 min_caml_read_int:
 	addi	%v0, %zero, 0
 	in	%v0
-	addi	%v1, %zero, 0
-	in	%v1
-	sll	%v1, %v1, 8
-	or	%v0, %v0, %v1
-	addi	%v1, %zero, 0
-	in	%v1
-	sll	%v1, %v1, 16
-	or	%v0, %v0, %v1
-	addi	%v1, %zero, 0
-	in	%v1
-	sll	%v1, %v1, 24
-	or	%v0, %v0, %v1
 	jr	%ra
 # min_caml_read_float
 min_caml_read_float:
-	addi	%v0, %zero, 0
-	in	%v0
-	addi	%v1, %zero, 0
-	in	%v1
-	sll	%v1, %v1, 8
-	or	%v0, %v0, %v1
-	addi	%v1, %zero, 0
-	in	%v1
-	sll	%v1, %v1, 16
-	or	%v0, %v0, %v1
-	addi	%v1, %zero, 0
-	in	%v1
-	sll	%v1, %v1, 24
-	or	%v0, %v0, %v1
-	sw	%v0, 0(%hp)
-	flw	%f0, 0(%hp)
+	fmov	%f0, %fzero
+	fin	%f0
 	jr	%ra
 #  min_caml_create_array
 min_caml_create_array:
@@ -101,14 +75,13 @@ create_float_extarray_cont:
 # ------------ body ---------------------------
 float_fib.10:
 	flw	%f1, 2(%zero)
-	fslt	%at, %f1, %f0
-	bne	%at, %zero, beq_else.27
+	fblt	%f1, %f0, fbgt_else.27
 	jr	%ra
-beq_else.27:
+fbgt_else.27:
 	flw	%f1, 2(%zero)
 	fsub	%f1, %f0, %f1
 	fsw	%f0, 0(%sp)
-	fadd	%f0, %f1, %fzero
+	fmov	%f0, %f1
 	sw	%ra, 1(%sp)
 	addi	%sp, %sp, 2
 	jal	float_fib.10
@@ -118,7 +91,7 @@ beq_else.27:
 	flw	%f2, 0(%sp)
 	fsub	%f1, %f2, %f1
 	fsw	%f0, 1(%sp)
-	fadd	%f0, %f1, %fzero
+	fmov	%f0, %f1
 	sw	%ra, 2(%sp)
 	addi	%sp, %sp, 3
 	jal	float_fib.10

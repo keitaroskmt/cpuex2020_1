@@ -12,15 +12,15 @@ class Parser {
     public:
         Parser(string);
         int parse_file();
-        void preprocess_file(fstream &);
+        // void preprocess_file(fstream &);
 
         void print_label();
         void print_code();
 
         int total_num;
 
-        vector<string> preprocess_buffer;
-        vector<string> buffer_tmp;
+        // vector<string> preprocess_buffer;
+        // vector<string> buffer_tmp;
         map<string, int> label_map;
         map<int, vector<string>> code_map;
     protected:
@@ -39,7 +39,6 @@ const map<string, string> inst_format = {
     {"and", "R"},
     {"or", "R"},
     {"nor", "R"},
-    {"slt", "R"},
     {"sll", "R"},
     {"srl", "R"},
     {"jr", "R"},
@@ -48,15 +47,17 @@ const map<string, string> inst_format = {
     {"jal", "J"},
     {"beq", "I"},
     {"bne", "I"},
+    {"blt", "I"},
     {"addi", "I"},
-    {"slti", "I"},
-    {"andi", "I"},
     {"ori", "I"},
     {"lui", "I"},
     {"lw", "I"},
     {"sw", "I"},
     {"in", "I"},
+    {"fin", "I"},
     {"out", "I"},
+    {"beqi", "II"},
+    {"blti", "II"},
     {"fadd", "FR"},
     {"fsub", "FR"},
     {"fmul", "FR"},
@@ -64,9 +65,10 @@ const map<string, string> inst_format = {
     {"fneg", "FR"},
     {"fabs", "FR"},
     {"fsqrt", "FR"},
-    {"fslt", "FR"},
+    {"fmov", "FR"},
     {"fbeq", "FI"},
     {"fbne", "FI"},
+    {"fblt", "FI"},
     {"flw", "FI"},
     {"fsw", "FI"},
     {"ftoi", "FI"},

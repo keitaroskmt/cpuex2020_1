@@ -88,6 +88,38 @@ void Parser::parse_code(string line) {
     }
 }
 
+
+int Parser::get_linenum_by_label(string label) {
+    if (!label_map.count(label)) {
+        cerr << "No " << label << "founded" << endl;
+        return 0;
+    }
+    return label_map[label];
+}
+
+void Parser::print_label() {
+    cout << "Print_label" << endl;
+    map<int, string> mp;
+    for (auto v : label_map) {
+        mp[v.second] = v.first;
+    }
+    for (auto v : mp) {
+        cout << " L." << v.first << " " << v.second << endl;
+    }
+}
+
+void Parser::print_code() {
+    cout << "Print_code" << endl;
+    for (auto v : code_map) {
+        cout << "L." << v.first << " ";
+        for (auto x : v.second) {
+            cout << x << " ";
+        }
+        cout << endl;
+    }
+}
+
+/*
 // addiの引数にラベルが来るときで16bitをはみ出すときの応急処置
 void Parser::preprocess_file(fstream &f) {
     string line;
@@ -168,33 +200,4 @@ void Parser::preprocess_file(fstream &f) {
 
     return;
 }
-
-int Parser::get_linenum_by_label(string label) {
-    if (!label_map.count(label)) {
-        cerr << "No " << label << "founded" << endl;
-        return 0;
-    }
-    return label_map[label];
-}
-
-void Parser::print_label() {
-    cout << "Print_label" << endl;
-    map<int, string> mp;
-    for (auto v : label_map) {
-        mp[v.second] = v.first;
-    }
-    for (auto v : mp) {
-        cout << " L." << v.first << " " << v.second << endl;
-    }
-}
-
-void Parser::print_code() {
-    cout << "Print_code" << endl;
-    for (auto v : code_map) {
-        cout << "L." << v.first << " ";
-        for (auto x : v.second) {
-            cout << x << " ";
-        }
-        cout << endl;
-    }
-}
+*/

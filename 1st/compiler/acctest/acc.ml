@@ -415,7 +415,7 @@ let rec atan_test () =
 
 
 
-floor_test ();;
+float_of_int_test ();;
 (*
 int_of_float_test ();;
 float_of_int_test ();;

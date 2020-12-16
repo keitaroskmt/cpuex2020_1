@@ -158,6 +158,7 @@ unsigned int Writer::encode(vector<string> &v) {
             rs = reg_name.at(v[3]);
             // 相対アドレス
             imm = parser->label_map.at(v[4]) - (current_num + 1);
+            assert(0 <= imm && imm <= 65535);
 
         } else if (v[1] == "bne") {
             op = 0x5;
@@ -165,6 +166,7 @@ unsigned int Writer::encode(vector<string> &v) {
             rs = reg_name.at(v[3]);
             // 相対アドレス
             imm = parser->label_map.at(v[4]) - (current_num + 1);
+            assert(0 <= imm && imm <= 65535);
 
         } else if (v[1] == "addi") {
             // プログラム全体の評価値 (適当にnopとしておく)
@@ -180,6 +182,7 @@ unsigned int Writer::encode(vector<string> &v) {
                 imm = stoi(v[4]);
             } else {
                 imm = parser->label_map.at(v[4]);
+                assert(0 <= imm && imm <= 65535);
             }
 
         } else if (v[1] == "slti") {

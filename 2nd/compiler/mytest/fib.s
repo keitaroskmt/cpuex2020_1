@@ -18,37 +18,11 @@ min_caml_print_char:
 min_caml_read_int:
 	addi	%v0, %zero, 0
 	in	%v0
-	addi	%v1, %zero, 0
-	in	%v1
-	sll	%v1, %v1, 8
-	or	%v0, %v0, %v1
-	addi	%v1, %zero, 0
-	in	%v1
-	sll	%v1, %v1, 16
-	or	%v0, %v0, %v1
-	addi	%v1, %zero, 0
-	in	%v1
-	sll	%v1, %v1, 24
-	or	%v0, %v0, %v1
 	jr	%ra
 # min_caml_read_float
 min_caml_read_float:
-	addi	%v0, %zero, 0
-	in	%v0
-	addi	%v1, %zero, 0
-	in	%v1
-	sll	%v1, %v1, 8
-	or	%v0, %v0, %v1
-	addi	%v1, %zero, 0
-	in	%v1
-	sll	%v1, %v1, 16
-	or	%v0, %v0, %v1
-	addi	%v1, %zero, 0
-	in	%v1
-	sll	%v1, %v1, 24
-	or	%v0, %v0, %v1
-	sw	%v0, 0(%hp)
-	flw	%f0, 0(%hp)
+	fmov	%f0, %fzero
+	fin	%f0
 	jr	%ra
 #  min_caml_create_array
 min_caml_create_array:
@@ -101,10 +75,9 @@ create_float_extarray_cont:
 # ------------ body ---------------------------
 fib.10:
 	addi	%at, %zero, 1
-	slt	%at, %at, %v0
-	bne	%at, %zero, beq_else.24
+	blt	%at, %v0, bgt_else.24
 	jr	%ra
-beq_else.24:
+bgt_else.24:
 	addi	%v1, %v0, -1
 	sw	%v0, 0(%sp)
 	addi	%v0, %v1, 0

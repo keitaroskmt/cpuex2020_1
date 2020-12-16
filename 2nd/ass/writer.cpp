@@ -77,16 +77,8 @@ unsigned int Writer::encode(vector<string> &v) {
             shamt = 0x0;
             funct = 0x27;
 
-        } else if (v[1] == "slt") {
-            op = 0x0;
-            rd = reg_name.at(v[2]);
-            rs = reg_name.at(v[3]);
-            rt = reg_name.at(v[4]);
-            shamt = 0x0;
-            funct = 0x2a;
-
         } else if (v[1] == "sll") {
-            op = 0x0;
+            op = 0x2;
             rd = reg_name.at(v[2]);
             rt = reg_name.at(v[3]);
             shamt = stoi(v[4]);
@@ -94,15 +86,15 @@ unsigned int Writer::encode(vector<string> &v) {
             funct = 0x0;
 
         } else if (v[1] == "srl") {
-            op = 0x0;
+            op = 0x3;
             rd = reg_name.at(v[2]);
             rt = reg_name.at(v[3]);
             shamt = stoi(v[4]);
             rs = 0x0;
-            funct = 0x2;
+            funct = 0x0;
 
         } else if (v[1] == "jr") {
-            op = 0x0;
+            op = 0x22;
             rs = reg_name.at(v[2]);
             rt = 0x0;
             rd = reg_name.at(v[2]);
@@ -110,7 +102,7 @@ unsigned int Writer::encode(vector<string> &v) {
             funct = 0x8;
 
         } else if (v[1] == "jalr") {
-            op = 0x0;
+            op = 0x23;
             rs = reg_name.at(v[2]);
             rt = 0x0;
             rd = reg_name.at(v[2]);
@@ -134,11 +126,11 @@ unsigned int Writer::encode(vector<string> &v) {
         unsigned int op, addr;
 
         if (v[1] == "j") {
-            op = 0x2;
+            op = 0x20;
             addr = parser->label_map.at(v[2]);
 
         } else if (v[1] == "jal") {
-            op = 0x3;
+            op = 0x21;
             addr = parser->label_map.at(v[2]);
         }
         op &= 0b111111;
@@ -153,16 +145,23 @@ unsigned int Writer::encode(vector<string> &v) {
         unsigned int op, rs, rt, imm;
         
         if (v[1] == "beq") {
-            op = 0x4;
-            rt = reg_name.at(v[2]);
-            rs = reg_name.at(v[3]);
+            op = 0x24;
+            rs = reg_name.at(v[2]);
+            rt = reg_name.at(v[3]);
             // 相対アドレス
             imm = parser->label_map.at(v[4]) - (current_num + 1);
 
         } else if (v[1] == "bne") {
-            op = 0x5;
-            rt = reg_name.at(v[2]);
-            rs = reg_name.at(v[3]);
+            op = 0x25;
+            rs = reg_name.at(v[2]);
+            rt = reg_name.at(v[3]);
+            // 相対アドレス
+            imm = parser->label_map.at(v[4]) - (current_num + 1);
+
+        } else if (v[1] == "blt") {
+            op = 0x26;
+            rs = reg_name.at(v[2]);
+            rt = reg_name.at(v[3]);
             // 相対アドレス
             imm = parser->label_map.at(v[4]) - (current_num + 1);
 
@@ -172,7 +171,7 @@ unsigned int Writer::encode(vector<string> &v) {
                 return 0;
             }
 
-            op = 0x8;
+            op = 0x1;
             rt = reg_name.at(v[2]);
             rs = reg_name.at(v[3]);
 
@@ -180,52 +179,47 @@ unsigned int Writer::encode(vector<string> &v) {
                 imm = stoi(v[4]);
             } else {
                 imm = parser->label_map.at(v[4]);
+                assert(imm <= 32767);
             }
 
-        } else if (v[1] == "slti") {
-            op = 0xa;
-            rt = reg_name.at(v[2]);
-            rs = reg_name.at(v[3]);
-            imm = stoi(v[4]);
-
-        } else if (v[1] == "andi") {
-            op = 0xc;
-            rt = reg_name.at(v[2]);
-            rs = reg_name.at(v[3]);
-            imm = stoi(v[4]);
-
         } else if (v[1] == "ori") {
-            op = 0xd;
+            op = 0x4;
             rt = reg_name.at(v[2]);
             rs = reg_name.at(v[3]);
             imm = stoi(v[4]);
 
         } else if (v[1] == "lui") {
-            op = 0xf;
+            op = 0x5;
             rt = reg_name.at(v[2]);
             rs = 0x0;
             imm = stoi(v[3]);
 
         } else if (v[1] == "lw") {
-            op = 0x23;
+            op = 0x6;
             rt = reg_name.at(v[2]);
             imm = stoi(v[3]);
             rs = reg_name.at(v[4]);
 
         } else if (v[1] == "sw") {
-            op = 0x2b;
+            op = 0x7;
             rt = reg_name.at(v[2]);
             imm = stoi(v[3]);
             rs = reg_name.at(v[4]);
 
         } else if (v[1] == "in") {
-            op = 0x1a;
+            op = 0x8;
             rt = reg_name.at(v[2]);
             rs = 0x0;
             imm = 0x0;
 
+        } else if (v[1] == "fin") {
+            op = 0x9;
+            rt = freg_name.at(v[2]);
+            rs = 0x0;
+            imm = 0x0;
+
         } else if (v[1] == "out") {
-            op = 0x1b;
+            op = 0xa;
             rt = reg_name.at(v[2]);
             rs = 0x0;
             imm = 0x0;
@@ -239,13 +233,42 @@ unsigned int Writer::encode(vector<string> &v) {
         return (op << 26) | (rs << 21) | (rt << 16) | imm;
     }
 
+    // opcode 31-26, rs 25-21, c2 20-13, c1 12-0
+    else if (v[0] == "II") {
+        unsigned int op, rs, c1, c2;
+
+        if (v[1] == "beqi") {
+            op = 0x30;
+            rs = reg_name.at(v[2]);
+            c2 = stoi(v[3]);
+
+            // 相対アドレス
+            c1 = parser->label_map.at(v[4]) - (current_num + 1);
+
+        } else if (v[1] == "blti") {
+            op = 0x38;
+            rs = reg_name.at(v[2]);
+            c2 = stoi(v[3]);
+
+            // 相対アドレス
+            c1 = parser->label_map.at(v[4]) - (current_num + 1);
+        }
+
+        op &= 0b111111;
+        rs &= 0b11111;
+        c2 &= 0xff;
+        c1 &= 0x1fff;
+
+        return (op << 26) | (rs << 21) | (c2 << 13) | c1;
+    }
+
     // FR形式
     // opcode 31-26, rs 25-21, rt 20-16, rd 15-11, shamt 10-6, funct 5-0
-    if (v[0] == "FR") {
+    else if (v[0] == "FR") {
         unsigned int op, rs, rt, rd, shamt, funct;
 
         if (v[1] == "fadd") {
-            op = 0x10;
+            op = 0xb;
             rd = freg_name.at(v[2]);
             rs = freg_name.at(v[3]);
             rt = freg_name.at(v[4]);
@@ -253,7 +276,7 @@ unsigned int Writer::encode(vector<string> &v) {
             funct = 0x0;
 
         } else if (v[1] == "fsub") {
-            op = 0x11;
+            op = 0xc;
             rd = freg_name.at(v[2]);
             rs = freg_name.at(v[3]);
             rt = freg_name.at(v[4]);
@@ -261,7 +284,7 @@ unsigned int Writer::encode(vector<string> &v) {
             funct = 0x0;
 
         } else if (v[1] == "fmul") {
-            op = 0x12;
+            op = 0xd;
             rd = freg_name.at(v[2]);
             rs = freg_name.at(v[3]);
             rt = freg_name.at(v[4]);
@@ -269,7 +292,7 @@ unsigned int Writer::encode(vector<string> &v) {
             funct = 0x0;
 
         } else if (v[1] == "fdiv") {
-            op = 0x13;
+            op = 0xe;
             rd = freg_name.at(v[2]);
             rs = freg_name.at(v[3]);
             rt = freg_name.at(v[4]);
@@ -277,7 +300,7 @@ unsigned int Writer::encode(vector<string> &v) {
             funct = 0x0;
 
         } else if (v[1] == "fneg") {
-            op = 0x14;
+            op = 0xf;
             rd = freg_name.at(v[2]);
             rt = freg_name.at(v[3]);
             rs = 0x0;
@@ -285,7 +308,7 @@ unsigned int Writer::encode(vector<string> &v) {
             funct = 0x0;
 
         } else if (v[1] == "fabs") {
-            op = 0x15;
+            op = 0x10;
             rd = freg_name.at(v[2]);
             rt = freg_name.at(v[3]);
             rs = 0x0;
@@ -293,28 +316,21 @@ unsigned int Writer::encode(vector<string> &v) {
             funct = 0x0;
 
         } else if (v[1] == "fsqrt") {
-            op = 0x16;
+            op = 0x11;
             rd = freg_name.at(v[2]);
             rt = freg_name.at(v[3]);
             rs = 0x0;
             shamt = 0x0;
             funct = 0x0;
 
-        } else if (v[1] == "fsqrt") {
-            op = 0x16;
-            rd = freg_name.at(v[2]);
-            rt = freg_name.at(v[3]);
-            rs = 0x0;
-            shamt = 0x0;
-            funct = 0x0;
-
-        } else if (v[1] == "fslt") {
-            op = 0x17;
-            rd = reg_name.at(v[2]);
+        } else if (v[1] == "fmov") {
+            op = 0x13;
+            rt = freg_name.at(v[2]);
             rs = freg_name.at(v[3]);
-            rt = freg_name.at(v[4]);
+            rd = 0x0;
             shamt = 0x0;
             funct = 0x0;
+
         }
 
         op &= 0b111111;
@@ -333,44 +349,52 @@ unsigned int Writer::encode(vector<string> &v) {
         unsigned int op, rs, rt, imm;
 
         if (v[1] == "fbeq") {
-            op = 0x34;
-            rt = freg_name.at(v[2]);
-            rs = freg_name.at(v[3]);
+            op = 0x27;
+            rs = freg_name.at(v[2]);
+            rt = freg_name.at(v[3]);
             // 相対アドレス
             imm = parser->label_map.at(v[4]) - (current_num + 1);
 
         } else if (v[1] == "fbne") {
-            op = 0x35;
-            rt = freg_name.at(v[2]);
-            rs = freg_name.at(v[3]);
+            op = 0x28;
+            rs = freg_name.at(v[2]);
+            rt = freg_name.at(v[3]);
+            // 相対アドレス
+            imm = parser->label_map.at(v[4]) - (current_num + 1);
+
+        } else if (v[1] == "fblt") {
+            op = 0x29;
+            rs = freg_name.at(v[2]);
+            rt = freg_name.at(v[3]);
             // 相対アドレス
             imm = parser->label_map.at(v[4]) - (current_num + 1);
 
         } else if (v[1] == "flw") {
-            op = 0x33;
+            op = 0x14;
             rt = freg_name.at(v[2]);
             imm = stoi(v[3]);
             rs = reg_name.at(v[4]);
 
         } else if (v[1] == "fsw") {
-            op = 0x36;
+            op = 0x15;
             rt = freg_name.at(v[2]);
             imm = stoi(v[3]);
             rs = reg_name.at(v[4]);
 
         } else if (v[1] == "ftoi") {
-            op = 0x38;
+            op = 0x16;
             rt = reg_name.at(v[2]);
             rs = freg_name.at(v[3]);
             imm = 0x0;
 
         } else if (v[1] == "itof") {
-            op = 0x39;
+            op = 0x17;
             rt = freg_name.at(v[2]);
             rs = reg_name.at(v[3]);
             imm = 0x0;
+
         } else if (v[1] == "floor") {
-            op = 0x3a;
+            op = 0x18;
             rt = freg_name.at(v[2]);
             rs = freg_name.at(v[3]);
             imm = 0x0;

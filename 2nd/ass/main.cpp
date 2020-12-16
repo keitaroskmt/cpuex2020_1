@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
     Parser parser(s + ".s");
     parser.total_num = parser.parse_file();
 
-    Writer writer(s + ".out", &parser);
+    Writer writer(s + ".mem", &parser);
 
     if (debug_flag) {
         writer.debug();

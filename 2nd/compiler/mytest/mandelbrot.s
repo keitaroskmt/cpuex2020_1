@@ -18,37 +18,11 @@ min_caml_print_char:
 min_caml_read_int:
 	addi	%v0, %zero, 0
 	in	%v0
-	addi	%v1, %zero, 0
-	in	%v1
-	sll	%v1, %v1, 8
-	or	%v0, %v0, %v1
-	addi	%v1, %zero, 0
-	in	%v1
-	sll	%v1, %v1, 16
-	or	%v0, %v0, %v1
-	addi	%v1, %zero, 0
-	in	%v1
-	sll	%v1, %v1, 24
-	or	%v0, %v0, %v1
 	jr	%ra
 # min_caml_read_float
 min_caml_read_float:
-	addi	%v0, %zero, 0
-	in	%v0
-	addi	%v1, %zero, 0
-	in	%v1
-	sll	%v1, %v1, 8
-	or	%v0, %v0, %v1
-	addi	%v1, %zero, 0
-	in	%v1
-	sll	%v1, %v1, 16
-	or	%v0, %v0, %v1
-	addi	%v1, %zero, 0
-	in	%v1
-	sll	%v1, %v1, 24
-	or	%v0, %v0, %v1
-	sw	%v0, 0(%hp)
-	flw	%f0, 0(%hp)
+	fmov	%f0, %fzero
+	fin	%f0
 	jr	%ra
 #  min_caml_create_array
 min_caml_create_array:
@@ -103,60 +77,54 @@ float_of_int_sub1.236:
 	lui	%at, 128
 	ori	%at, %at, 0
 	add	%a0, %zero, %at
-	slt	%at, %v0, %a0
-	bne	%at, %zero, beq_else.561
+	blt	%v0, %a0, bgt_else.561
 	lui	%at, 128
 	ori	%at, %at, 0
 	add	%a0, %zero, %at
 	sub	%v0, %v0, %a0
 	addi	%v1, %v1, 1
 	j	float_of_int_sub1.236
-beq_else.561:
+bgt_else.561:
 	add	%v0, %zero, %v1
 	jr	%ra
 float_of_int_sub2.239:
 	lui	%at, 128
 	ori	%at, %at, 0
 	add	%v1, %zero, %at
-	slt	%at, %v0, %v1
-	bne	%at, %zero, beq_else.562
+	blt	%v0, %v1, bgt_else.562
 	lui	%at, 128
 	ori	%at, %at, 0
 	add	%v1, %zero, %at
 	sub	%v0, %v0, %v1
 	j	float_of_int_sub2.239
-beq_else.562:
+bgt_else.562:
 	jr	%ra
 float_of_int_sub3.241:
-	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.563
-	jr	%ra
-beq_else.563:
+	beqi	%v0, 0, bnei_else.563
 	addi	%v0, %v0, -1
 	flw	%f1, 5(%zero)
 	fadd	%f0, %f1, %f0
 	j	float_of_int_sub3.241
+bnei_else.563:
+	jr	%ra
 float_of_int.244:
 	addi	%at, %zero, 0
-	slt	%at, %at, %v0
-	bne	%at, %zero, beq_else.564
+	blt	%at, %v0, bgt_else.564
 	addi	%v1, %zero, 0
-	j	beq_cont.565
-beq_else.564:
+	j	bgt_cont.565
+bgt_else.564:
 	addi	%v1, %zero, 1
-beq_cont.565:
-	slti	%at, %v0, 0
-	bne	%at, %zero, beq_else.566
-	j	beq_cont.567
-beq_else.566:
+bgt_cont.565:
+	blti	%v0, 0, bgti_else.566
+	j	bgti_cont.567
+bgti_else.566:
 	sub	%v0, %zero, %v0
-beq_cont.567:
+bgti_cont.567:
 	lui	%at, 128
 	ori	%at, %at, 0
 	add	%a0, %zero, %at
 	sw	%v1, 0(%sp)
-	slt	%at, %v0, %a0
-	bne	%at, %zero, beq_else.568
+	blt	%v0, %a0, bgt_else.568
 	sw	%v0, 1(%sp)
 	sw	%ra, 2(%sp)
 	addi	%sp, %sp, 3
@@ -190,8 +158,8 @@ beq_cont.567:
 	lw	%ra, 3(%sp)
 	flw	%f1, 2(%sp)
 	fadd	%f0, %f1, %f0
-	j	beq_cont.569
-beq_else.568:
+	j	bgt_cont.569
+bgt_else.568:
 	lui	%at, 19200
 	ori	%at, %at, 0
 	add	%a0, %zero, %at
@@ -203,23 +171,18 @@ beq_else.568:
 	lw	%ra, 3(%sp)
 	flw	%f1, 5(%zero)
 	fsub	%f0, %f0, %f1
-beq_cont.569:
+bgt_cont.569:
 	lw	%v0, 0(%sp)
-	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.570
-	fneg	%f0, %f0
+	beqi	%v0, 0, bnei_else.570
 	jr	%ra
-beq_else.570:
+bnei_else.570:
+	fneg	%f0, %f0
 	jr	%ra
 dbl.262:
 	fadd	%f0, %f0, %f0
 	jr	%ra
 iloop.278:
-	addi	%at, %zero, 0
-	bne	%v0, %at, beq_else.571
-	addi	%v0, %zero, 1
-	j	min_caml_print_int
-beq_else.571:
+	beqi	%v0, 0, bnei_else.571
 	fsub	%f2, %f2, %f3
 	fadd	%f2, %f2, %f4
 	fsw	%f4, 0(%sp)
@@ -241,20 +204,21 @@ beq_else.571:
 	fmul	%f3, %f1, %f1
 	fadd	%f4, %f2, %f3
 	flw	%f6, 3(%zero)
-	fslt	%at, %f6, %f4
-	bne	%at, %zero, beq_else.572
+	fblt	%f6, %f4, fbgt_else.572
 	lw	%v0, 1(%sp)
 	addi	%v0, %v0, -1
 	flw	%f4, 0(%sp)
 	j	iloop.278
-beq_else.572:
+fbgt_else.572:
 	addi	%v0, %zero, 0
 	j	min_caml_print_int
+bnei_else.571:
+	addi	%v0, %zero, 1
+	j	min_caml_print_int
 xloop.268:
-	slti	%at, %v0, 400
-	bne	%at, %zero, beq_else.573
+	blti	%v0, 400, bgti_else.573
 	jr	%ra
-beq_else.573:
+bgti_else.573:
 	sw	%v0, 0(%sp)
 	sw	%v1, 1(%sp)
 	sw	%ra, 2(%sp)
@@ -303,10 +267,9 @@ beq_else.573:
 	lw	%v1, 1(%sp)
 	j	xloop.268
 yloop.264:
-	slti	%at, %v0, 400
-	bne	%at, %zero, beq_else.575
+	blti	%v0, 400, bgti_else.575
 	jr	%ra
-beq_else.575:
+bgti_else.575:
 	addi	%v1, %zero, 0
 	sw	%v0, 0(%sp)
 	addi	%k0, %v1, 0

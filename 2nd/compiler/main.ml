@@ -3,7 +3,7 @@ open Output
 let file f = (* ファイルをコンパイルしてファイルに出力する (caml2html: main_file) *)
  (let inchan = open_in (f ^ ".ml") in
   let outchan = open_out (f ^ ".s") in
-  let datachan = open_out (f ^ ".data") in
+  let datachan = open_out (f ^ "_data.mem") in
   try
     lexbuf (outchan, datachan) (Lexing.from_channel inchan);
     close_in inchan;
