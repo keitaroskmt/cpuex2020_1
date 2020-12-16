@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2019.2.1 (64-bit)
+# SW Build 2729669 on Thu Dec  5 04:49:17 MST 2019
+# IP Build 2729494 on Thu Dec  5 07:38:25 MST 2019
+# Start of session at: Sat Oct 24 15:54:09 2020
+# Process ID: 8996
+# Current directory: C:/Users/nowi74/cpuex2020_1/fib/core/mips_processor_fib/mips_processor_fib.runs/synth_1
+# Command line: vivado.exe -log multi_cycle_fib_wrapper.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source multi_cycle_fib_wrapper.tcl
+# Log file: C:/Users/nowi74/cpuex2020_1/fib/core/mips_processor_fib/mips_processor_fib.runs/synth_1/multi_cycle_fib_wrapper.vds
+# Journal file: C:/Users/nowi74/cpuex2020_1/fib/core/mips_processor_fib/mips_processor_fib.runs/synth_1\vivado.jou
+#-----------------------------------------------------------
+source multi_cycle_fib_wrapper.tcl -notrace

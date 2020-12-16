@@ -1,0 +1,13 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../../src/alu.v" \
+"../../../../../src/multi_control_unit.v" \
+"../../../../../src/rams_dp_wf.v" \
+"../../../../../src/rams_sp_rf.v" \
+"../../../../../src/multicycle_fib_sim.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

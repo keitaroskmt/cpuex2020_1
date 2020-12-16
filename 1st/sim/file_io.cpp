@@ -3,7 +3,9 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <map>
 #include "file_io.h"
+#include "sim.h"
 
 std::vector<unsigned char> in_bytes;
 std::vector<unsigned char> out_bytes;
@@ -61,6 +63,26 @@ int write_file(std::string outfile_name, bool mandelbrot)
     {
         for (int i = 0; i < size; i++)
             outfile << out_bytes[i];
+    }
+    return 0;
+}
+
+int data_load(std::string datafile_name)
+{
+    std::ifstream infile(datafile_name);
+
+    if (!infile)
+    {
+        std::cout << "file open error";
+        return 1;
+    }
+
+    std::string str;
+    int hp = 0;
+    while (getline(infile, str))
+    {
+        stack[hp].first = static_cast<int>(std::stoul(str, nullptr, 2));
+        hp++;
     }
     return 0;
 }
