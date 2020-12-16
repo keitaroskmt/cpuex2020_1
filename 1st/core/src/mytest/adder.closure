@@ -1,0 +1,46 @@
+Prog 
+fundef 
+	name : 
+		(L (adder.11): Int -> Int)
+	args : 
+		[(y.12 : Int)]
+	formal_fv : 
+		[(x.6 : Int)]
+	body : 
+		Add
+			x.6
+			y.12
+	name : 
+		(L (make_adder.5): Int -> Int -> Int)
+	args : 
+		[(x.6 : Int)]
+	formal_fv : 
+		[]
+	body : 
+		MakeCls
+			(adder.11 : Int -> Int)
+			entry: 
+				L (adder.11)
+			actual_fv: 
+				[x.6]
+			Var adder.11
+body 
+	Let
+		(Ti1.10 : Int)
+		Int 3
+		Let
+			(Tf2.8 : Int -> Int)
+			AppDir
+				L (make_adder.5)
+				[Ti1.10]
+			Let
+				(Ti3.9 : Int)
+				Int 7
+				Let
+					(Ti4.7 : Int)
+					AppCls
+						Tf2.8
+						[Ti3.9]
+					AppDir
+						L (min_caml_print_int)
+						[Ti4.7]

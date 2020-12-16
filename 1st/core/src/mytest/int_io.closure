@@ -1,283 +1,134 @@
 Prog 
 fundef 
 	name : 
-		(L (print_int_sub1.274): Int -> Int -> Int)
+		(L (fib.31): Int -> Int)
 	args : 
-		[(x.275 : Int), (n.276 : Int)]
+		[(n.32 : Int)]
 	formal_fv : 
 		[]
 	body : 
 		Let
-			(Ti45.333 : Int)
-			Int 10
-			IfLE
-				Ti45.333
-				x.275
-				Let
-					(Ti46.337 : Int)
-					Int 10
-					Let
-						(Ti47.334 : Int)
-						Sub
-							x.275
-							Ti46.337
-						Let
-							(Ti48.336 : Int)
-							Int 1
-							Let
-								(Ti49.335 : Int)
-								Add
-									n.276
-									Ti48.336
-								AppDir
-									L (print_int_sub1.274)
-									[Ti47.334, Ti49.335]
-				Var n.276
-	name : 
-		(L (print_int_sub2.277): Int -> Int)
-	args : 
-		[(x.278 : Int)]
-	formal_fv : 
-		[]
-	body : 
-		Let
-			(Ti42.330 : Int)
-			Int 10
-			IfLE
-				Ti42.330
-				x.278
-				Let
-					(Ti43.332 : Int)
-					Int 10
-					Let
-						(Ti44.331 : Int)
-						Sub
-							x.278
-							Ti43.332
-						AppDir
-							L (print_int_sub2.277)
-							[Ti44.331]
-				Var x.278
-	name : 
-		(L (print_int.279): Int -> ())
-	args : 
-		[(x.280 : Int)]
-	formal_fv : 
-		[]
-	body : 
-		Let
-			(Ti32.329 : Int)
-			Int 0
-			Let
-				(d1.313 : Int)
-				AppDir
-					L (print_int_sub1.274)
-					[x.280, Ti32.329]
-				Let
-					(r1.314 : Int)
-					AppDir
-						L (print_int_sub2.277)
-						[x.280]
-					Let
-						(Ti33.328 : Int)
-						Int 48
-						Let
-							(Ti34.327 : Int)
-							Add
-								Ti33.328
-								r1.314
-							Let
-								(Tu2.315 : ())
-								AppDir
-									L (min_caml_print_char)
-									[Ti34.327]
-								Let
-									(Ti35.316 : Int)
-									Int 0
-									IfLE
-										d1.313
-										Ti35.316
-										()
-										Let
-											(Ti36.326 : Int)
-											Int 0
-											Let
-												(d2.317 : Int)
-												AppDir
-													L (print_int_sub1.274)
-													[d1.313, Ti36.326]
-												Let
-													(r2.318 : Int)
-													AppDir
-														L (print_int_sub2.277)
-														[d1.313]
-													Let
-														(Ti37.325 : Int)
-														Int 48
-														Let
-															(Ti38.324 : Int)
-															Add
-																Ti37.325
-																r2.318
-															Let
-																(Tu1.319 : ())
-																AppDir
-																	L (min_caml_print_char)
-																	[Ti38.324]
-																Let
-																	(Ti39.320 : Int)
-																	Int 0
-																	IfLE
-																		d2.317
-																		Ti39.320
-																		()
-																		Let
-																			(r3.321 : Int)
-																			AppDir
-																				L (print_int_sub2.277)
-																				[d2.317]
-																			Let
-																				(Ti40.323 : Int)
-																				Int 48
-																				Let
-																					(Ti41.322 : Int)
-																					Add
-																						Ti40.323
-																						r3.321
-																					AppDir
-																						L (min_caml_print_char)
-																						[Ti41.322]
-	name : 
-		(L (fib.282): Int -> Int)
-	args : 
-		[(n.283 : Int)]
-	formal_fv : 
-		[]
-	body : 
-		Let
-			(Ti25.305 : Int)
+			(Ti23.54 : Int)
 			Int 1
 			IfLE
-				n.283
-				Ti25.305
-				Var n.283
+				n.32
+				Ti23.54
+				Var n.32
 				Let
-					(Ti26.311 : Int)
+					(Ti24.60 : Int)
 					Int 1
 					Let
-						(Ti27.310 : Int)
+						(Ti25.59 : Int)
 						Sub
-							n.283
-							Ti26.311
+							n.32
+							Ti24.60
 						Let
-							(Ti28.306 : Int)
+							(Ti26.55 : Int)
 							AppDir
-								L (fib.282)
-								[Ti27.310]
+								L (fib.31)
+								[Ti25.59]
 							Let
-								(Ti29.309 : Int)
+								(Ti27.58 : Int)
 								Int 2
 								Let
-									(Ti30.308 : Int)
+									(Ti28.57 : Int)
 									Sub
-										n.283
-										Ti29.309
+										n.32
+										Ti27.58
 									Let
-										(Ti31.307 : Int)
+										(Ti29.56 : Int)
 										AppDir
-											L (fib.282)
-											[Ti30.308]
+											L (fib.31)
+											[Ti28.57]
 										Add
-											Ti28.306
-											Ti31.307
+											Ti26.55
+											Ti29.56
 body 
 	Let
-		(Tu11.312 : ())
+		(Tu9.61 : ())
 		()
 		Let
-			(x.281 : Int)
+			(n.30 : Int)
 			AppDir
 				L (min_caml_read_int)
-				[Tu11.312]
+				[Tu9.61]
 			Let
-				(Ti12.304 : Int)
+				(Ti10.53 : Int)
 				Int 80
 				Let
-					(Tu10.284 : ())
+					(Tu8.33 : ())
 					AppDir
 						L (min_caml_print_char)
-						[Ti12.304]
+						[Ti10.53]
 					Let
-						(Ti15.301 : Int)
+						(Ti13.50 : Int)
 						Int 51
 						Let
-							(Tu9.285 : ())
+							(Tu7.34 : ())
 							AppDir
 								L (min_caml_print_char)
-								[Ti15.301]
+								[Ti13.50]
 							Let
-								(Ti16.300 : Int)
+								(Ti14.49 : Int)
 								Int 10
 								Let
-									(Tu8.286 : ())
+									(Tu6.35 : ())
 									AppDir
 										L (min_caml_print_char)
-										[Ti16.300]
+										[Ti14.49]
 									Let
-										(Ti17.299 : Int)
-										AppDir
-											L (fib.282)
-											[x.281]
+										(Ti15.48 : Int)
+										Int 10
 										Let
-											(Tu7.287 : ())
+											(Ti16.47 : Int)
 											AppDir
-												L (print_int.279)
-												[Ti17.299]
+												L (fib.31)
+												[Ti15.48]
 											Let
-												(Ti18.298 : Int)
-												Int 32
+												(Tu5.36 : ())
+												AppDir
+													L (min_caml_print_int)
+													[Ti16.47]
 												Let
-													(Tu6.288 : ())
-													AppDir
-														L (min_caml_print_char)
-														[Ti18.298]
+													(Ti17.46 : Int)
+													Int 32
 													Let
-														(Ti19.297 : Int)
-														Int 2
+														(Tu4.37 : ())
+														AppDir
+															L (min_caml_print_char)
+															[Ti17.46]
 														Let
-															(Ti20.296 : Int)
-															Add
-																x.281
-																Ti19.297
+															(Ti18.45 : Int)
+															Int 12
 															Let
-																(Ti21.295 : Int)
+																(Ti19.44 : Int)
 																AppDir
-																	L (fib.282)
-																	[Ti20.296]
+																	L (fib.31)
+																	[Ti18.45]
 																Let
-																	(Tu5.289 : ())
+																	(Tu3.38 : ())
 																	AppDir
-																		L (print_int.279)
-																		[Ti21.295]
+																		L (min_caml_print_int)
+																		[Ti19.44]
 																	Let
-																		(Ti22.294 : Int)
+																		(Ti20.43 : Int)
 																		Int 32
 																		Let
-																			(Tu4.290 : ())
+																			(Tu2.39 : ())
 																			AppDir
 																				L (min_caml_print_char)
-																				[Ti22.294]
+																				[Ti20.43]
 																			Let
-																				(Ti23.293 : Int)
+																				(Ti21.42 : Int)
 																				Int 255
 																				Let
-																					(Tu3.291 : ())
+																					(Tu1.40 : ())
 																					AppDir
-																						L (print_int.279)
-																						[Ti23.293]
+																						L (min_caml_print_int)
+																						[Ti21.42]
 																					Let
-																						(Ti24.292 : Int)
+																						(Ti22.41 : Int)
 																						Int 10
 																						AppDir
 																							L (min_caml_print_char)
-																							[Ti24.292]
+																							[Ti22.41]

@@ -55,14 +55,15 @@ module multicycle_cpu
      wire         BorL;
      wire [2:0]   RegConcat;
      wire         Out;
-     wire         Tx_start;
+     (*mark_debug = "true"*)wire         Tx_start;
      wire         Rx_ready;
 
      (*mark_debug = "true"*)wire [5:0]   state;
 
      wire [31:0] adr;
      wire [31:0] sr2_adr;
-     wire [31:0] rd;
+     wire [31:0] ird;
+     wire [31:0] drd;
      wire [31:0] inst;
      wire [31:0] data;
      wire [31:0] pc_;
@@ -78,7 +79,7 @@ module multicycle_cpu
      wire [31:0] output2_or_shifted;
      wire [7:0] rdata;
      wire [31:0] Indata;
-     wire [27:0] jump_address;
+     wire [31:0] jump_address;
      wire [31:0] alu_out;
      wire zero;
      wire azero;
@@ -93,7 +94,7 @@ module multicycle_cpu
      reg [31:0] output_rf1_reg;
      reg [31:0] output_rf2_reg;
      reg [31:0] alu_out_reg;
-     reg [31:0] sdata;
+     (*mark_debug = "true"*)reg [31:0] sdata;
      reg [31:0] rdata_reg;
      (*mark_debug = "true"*)reg [33:0] counter;
      reg rstn;
@@ -125,10 +126,10 @@ module multicycle_cpu
                 pc <= pc_;
             end
             if (IRWrite) begin
-                inst_reg <= rd;
+                inst_reg <= ird;
                 counter <= counter + 1'b1;
             end
-            data_reg <= rd;
+            data_reg <= drd;
             if (Out) begin
                 sdata <= output_rf2;
             end else if (Rx_ready) begin
@@ -149,23 +150,18 @@ module multicycle_cpu
     assign pc_wire = pc;
     assign adr = (~IorD ? pc_wire : alu_out);
     reg en;
+    reg we;
     initial begin
         en = 1'b1;
+        we = 1'b0;
     end
 
-    assign sr2_adr = {2'b00,adr[31:2]};
-    rams_sp_rf idmd(clk,en,MemWrite,sr2_adr,output2,rd);
+//    assign sr2_adr = {2'b00,adr[31:2]};
+    rams_sp_rf2 im(clk,en,we,adr,output2,ird);
+    rams_sp_rf dm(clk,en,MemWrite,adr,output2,drd);
 
 
     //decode,memory access stage
-     //always @(posedge clk) begin
-         //if (IRWrite) begin
-            //inst_reg <= rd;
-            //counter <= counter + 1'b1;
-         //end
-            //data_reg <= rd;
-     //end
-
      assign inst = inst_reg;
      assign data = data_reg;
      assign opcode = inst[31:26];
@@ -179,28 +175,12 @@ module multicycle_cpu
      rams_dp_wf rf1(clk,RegWrite,regdst,mem_to_reg,op1,output_rf1);
      rams_dp_wf rf2(clk,RegWrite,regdst,mem_to_reg,op2,output_rf2);
 
-     //always @(posedge clk) begin
-         //if (Out) begin
-             //sdata <= output_rf2;
-         //end else if (Rx_ready) begin
-             //rdata_reg <= {24'b0,rdata};
-         //end
-     //end
-
      assign Indata = rdata_reg;
 
-     //wire data10;
-
-     //send_10 sd(clk,rstn,data10);
      uart_tx ut(sdata[7:0],Tx_start,UBusy,txd,clk,rstn);
      uart_rx ur(rdata,Rx_ready,ferr,rxd,clk,rstn);
 
      //execute stage
-     //always @(posedge clk) begin
-        //output_rf1_reg <= output_rf1;
-        //output_rf2_reg <= output_rf2;
-     //end
-
      assign output1 = output_rf1_reg;
      assign output2 = output_rf2_reg;
 
@@ -209,8 +189,8 @@ module multicycle_cpu
 
      assign SignImm = AndiOri ? {16'd0,inst[15:0]} : (inst[15] ? {16'b1111111111111111,inst[15:0]} : {16'd0,inst[15:0]});
      assign srcA = (~ALUSrcA ? pc_wire : output1);
-     assign branch_or_lui = BorL ? (inst[15:0]<< 5'd16) : (SignImm << 2'd2);
-     assign srcB = (ALUSrcB == 2'b00 ? output2_or_shifted :(ALUSrcB == 2'b01 ? 32'b100 : (ALUSrcB == 2'b10 ? SignImm : branch_or_lui)));
+     assign branch_or_lui = BorL ? (inst[15:0]<< 5'd16) : SignImm;
+     assign srcB = (ALUSrcB == 2'b00 ? output2_or_shifted :(ALUSrcB == 2'b01 ? 32'd1 : (ALUSrcB == 2'b10 ? SignImm : branch_or_lui)));
      assign zero = (ALUorFPU == 1'b1) ? fzero : azero;
      assign pcen = PCWrite | (Branch & (ToggleEqual ^ zero));
 
@@ -221,15 +201,8 @@ module multicycle_cpu
 
 
      //write back stage
-     //always @(posedge clk) begin
-         //alu_out_reg <= cal_result;
-         //if(pc_wire == 8'd164 && RegWrite == 1'b1) begin
-           //led <= alu_out[7:0];
-         //end
-     //end
-
      assign alu_out = alu_out_reg;
-     assign jump_address = {pc_wire[31:28],inst[25:0],2'b00};
+     assign jump_address = {pc_wire[31:26],inst[25:0]};
      assign pc_ = (PCSrc == 2'b00 ? alu_result :(PCSrc == 2'b01 ? alu_out : jump_address));
 
 
