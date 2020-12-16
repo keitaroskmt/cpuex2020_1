@@ -38,9 +38,9 @@ always @(posedge clk) begin
     end
 end
 
-(*mark_debug = "true"*)wire [31:0] hp;
+//(*mark_debug = "true"*)wire [31:0] hp;
 
 assign rd = RAM[ra];
-assign hp = RAM[6'b011100];
+//assign hp = RAM[6'b011100];
 
 endmodule

@@ -43,8 +43,9 @@ assign RegConcat = (Op == 6'b010111) ? 3'b110 //slt
                    :((Op == 6'b110101) ? 3'b110 //fbne11x
                    :((Op == 6'b111000) ? 3'b100 //ftoi1x0
                    :((Op == 6'b111001) ? 3'b001 //itof0x1
+                   :((Op == 6'b111010) ? 3'b111 //floor0x1
                    :((Op[4:3]==2'b10) ? 3'b111
-                   : 3'b000))))))); //浮動小数命令のとき�??��レジスタのアドレスに位置をつける. RegConcat = {rs,rt,rd}
+                   : 3'b000)))))))); //浮動小数命令のとき�??��レジスタのアドレスに位置をつける. RegConcat = {rs,rt,rd}
 
 multi_main_decoder md(Op,Funct,clk,rstn,UBusy,Rx_ready,IorD,MemWrite,IRWrite,PCWrite_temp,Branch,ToggleEqual,PCSrc_temp,FPUControl,ALUorFPU,ALUSrcB,ALUSrcA,AndiOri,RegWrite,RegDst,MemtoReg,ALUOp,BorL,Out,Tx_start,state);
 multi_ALU_decoder ad(Op,Funct,ALUOp,PCSrc_temp,PCWrite_temp,state,ALUControl,PCSrc,PCWrite,ShiftD,Shift);
@@ -123,6 +124,8 @@ module multi_main_decoder(
     localparam s_FtoiItofWB =      38;
     localparam s_FBranch =         39;
     localparam s_FBranchnotequal = 40;
+    localparam s_FPUExecute2 =     41;
+    localparam s_FPUExecute2_wait =42;
 
 
 always @(posedge clk) begin
@@ -228,6 +231,24 @@ always @(posedge clk) begin
             ALUSrcB <= 2'b00;
             FPUControl <= 4'b0110;
             ALUorFPU <= 1'b1;
+        end else if (Op == 6'b111000) begin //ftoi
+            state <= s_FPUExecute2;
+            ALUSrcA <= 1'b1;
+            ALUSrcB <= 2'b00;
+            FPUControl <= 4'b1001;
+            ALUorFPU <= 1'b1;
+        end else if (Op == 6'b111001) begin //itof
+            state <= s_FPUExecute2;
+            ALUSrcA <= 1'b1;
+            ALUSrcB <= 2'b00;
+            FPUControl <= 4'b1000;
+            ALUorFPU <= 1'b1;
+        end else if (Op == 6'b111010) begin //floor
+            state <= s_FPUExecute2;
+            ALUSrcA <= 1'b1;
+            ALUSrcB <= 2'b00;
+            FPUControl <= 4'b1010;
+            ALUorFPU <= 1'b1;
         end else if (Op == 6'b010111) begin //fslt
             state <= s_FSLTExecute;
             ALUSrcA <= 1'b1;
@@ -317,16 +338,6 @@ always @(posedge clk) begin
             Out <= 1'b1;
         end else if (Op == 6'b011010) begin //in
             state <= s_InWait;
-        end else if (Op == 6'b111000) begin //ftoi
-            state <= s_Ftoi;
-            ALUSrcA <= 1'b1;
-            ALUSrcB <= 2'b10;
-            ALUOp <= 3'b000;
-        end else if (Op == 6'b111001) begin //itof
-            state <= s_Itof;
-            ALUSrcA <= 1'b1;
-            ALUSrcB <= 2'b10;
-            ALUOp <= 3'b000;
         end
     end else if (state == s_MemAdr) begin
         if ((Op == 6'b100011) | (Op == 6'b110011)) begin //lw or flw
@@ -398,6 +409,12 @@ always @(posedge clk) begin
            state   <= s_FPUWait5;
         end else if (Op == 6'b010110) begin //fsqrt
            state   <= s_FPUWait2;
+        //end else if (Op == 6'b111001) begin //itof
+           //state   <= s_FPUWait1;
+        //end else if (Op == 6'b111000) begin //ftoi
+           //state   <= s_FPUWait1;
+        //end else if (Op == 6'b111010) begin //floor
+           //state   <= s_FPUWait1;
         end
     end else if (state == s_FPUWait5) begin
         state   <= s_FPUWait4;
@@ -410,6 +427,16 @@ always @(posedge clk) begin
     end else if (state == s_FPUWait1) begin
         state   <= s_FPUWriteback;
         RegDst   <= 2'b01;
+        MemtoReg <= 2'b00;
+        BorL    <= 1'b0;
+        RegWrite <= 1'b1;
+        PCWrite_temp  <= 1'b0;
+        ALUorFPU <= 1'b0;
+    end else if (state == s_FPUExecute2) begin
+        state <= s_FPUExecute2_wait;
+    end else if (state == s_FPUExecute2_wait) begin
+        state   <= s_FPUWriteback;
+        RegDst   <= 2'b00; //ftoi,itof,floorはRegDstが違うのでわざわざ作り直した
         MemtoReg <= 2'b00;
         BorL    <= 1'b0;
         RegWrite <= 1'b1;
@@ -610,28 +637,28 @@ always @(posedge clk) begin
         PCWrite_temp  <= 1'b1;
         RegWrite <= 1'b0;
         MemWrite <= 1'b0;
-    end else if (state == s_Ftoi) begin
-        state <= s_FtoiItofWB;
-        RegDst <= 2'b00;
-        MemtoReg <= 2'b00;
-        RegWrite <= 1'b1;
-    end else if (state == s_Itof) begin
-        state <= s_FtoiItofWB;
-        RegDst <= 2'b00;
-        MemtoReg <= 2'b00;
-        RegWrite <= 1'b1;
-    end else if (state == s_FtoiItofWB) begin
-        state <= s_Fetch;
-        IorD     <= 1'b0;
-        ALUSrcA  <= 1'b0;
-        ALUSrcB  <= 2'b01;
-        ALUOp    <= 3'b000;
-        ToggleEqual <= 1'b0; //when returning from BranchnotEqual state, we should set down this bit.
-        PCSrc_temp    <= 2'b00;
-        //IRWrite  <= 1'b1;
-        PCWrite_temp  <= 1'b1;
-        RegWrite <= 1'b0;
-        MemWrite <= 1'b0;
+    //end else if (state == s_Ftoi) begin
+        //state <= s_FtoiItofWB;
+        //RegDst <= 2'b00;
+        //MemtoReg <= 2'b00;
+        //RegWrite <= 1'b1;
+    //end else if (state == s_Itof) begin
+        //state <= s_FtoiItofWB;
+        //RegDst <= 2'b00;
+        //MemtoReg <= 2'b00;
+        //RegWrite <= 1'b1;
+    //end else if (state == s_FtoiItofWB) begin
+        //state <= s_Fetch;
+        //IorD     <= 1'b0;
+        //ALUSrcA  <= 1'b0;
+        //ALUSrcB  <= 2'b01;
+        //ALUOp    <= 3'b000;
+        //ToggleEqual <= 1'b0; //when returning from BranchnotEqual state, we should set down this bit.
+        //PCSrc_temp    <= 2'b00;
+        ////IRWrite  <= 1'b1;
+        //PCWrite_temp  <= 1'b1;
+        //RegWrite <= 1'b0;
+        //MemWrite <= 1'b0;
     end
   end
 endmodule

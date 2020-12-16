@@ -83,7 +83,7 @@ let reflections =
   let dummydv = (dummyf3, dummyff3) in
   create_array 180 (0, dummydv, 0.0) in
 
-(* reflectionsの有効な要素数 *)
+(* reflectionsの有効な要素数 *) 
 
 let n_reflections = create_array 1 0 in
 let rec fequal e1 e2 = (e1 = e2)
@@ -106,6 +106,7 @@ in
 let rec fsqr x = x *. x
 in
 
+(*
 (* int -> float 中身同じbitを itofでハードウェア実装 *)
 (* float -> int 中身同じbitを ftoiでハードウェア実装 *)
 
@@ -181,6 +182,7 @@ let rec floor x =
         if flag then res else fneg res in
     if res_ > x then res_ -. 1.0 else res_
 in
+*)
 
 let rec kernel_sin x =
     let x2 = x *. x in

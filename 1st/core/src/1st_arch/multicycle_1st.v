@@ -62,7 +62,8 @@ module multicycle_cpu
 
      wire [31:0] adr;
      wire [31:0] sr2_adr;
-     wire [31:0] rd;
+     wire [31:0] ird;
+     wire [31:0] drd;
      wire [31:0] inst;
      wire [31:0] data;
      wire [31:0] pc_;
@@ -125,10 +126,10 @@ module multicycle_cpu
                 pc <= pc_;
             end
             if (IRWrite) begin
-                inst_reg <= rd;
+                inst_reg <= ird;
                 counter <= counter + 1'b1;
             end
-            data_reg <= rd;
+            data_reg <= drd;
             if (Out) begin
                 sdata <= output_rf2;
             end else if (Rx_ready) begin
@@ -149,12 +150,15 @@ module multicycle_cpu
     assign pc_wire = pc;
     assign adr = (~IorD ? pc_wire : alu_out);
     reg en;
+    reg we;
     initial begin
         en = 1'b1;
+        we = 1'b0;
     end
 
 //    assign sr2_adr = {2'b00,adr[31:2]};
-    rams_sp_rf idmd(clk,en,MemWrite,adr,output2,rd);
+    rams_sp_rf2 im(clk,en,we,adr,output2,ird);
+    rams_sp_rf dm(clk,en,MemWrite,adr,output2,drd);
 
 
     //decode,memory access stage

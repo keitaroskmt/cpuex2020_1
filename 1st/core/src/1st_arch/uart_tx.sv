@@ -4,7 +4,7 @@ module uart_tx #(CLK_PER_HALF_BIT = 435) ( // 115200bits/s
                input wire [7:0] sdata,
                input wire       tx_start,
                output logic     tx_busy,
-               (*mark_debug = "true"*)output logic     txd,
+               output logic     txd,
                input wire       clk,
                input wire       rstn);
 
@@ -13,11 +13,11 @@ module uart_tx #(CLK_PER_HALF_BIT = 435) ( // 115200bits/s
    localparam e_clk_stop_bit = (CLK_PER_HALF_BIT*2*9)/10 - 1;
 
    logic [7:0]                  txbuf;
-   (*mark_debug = "true"*)logic [5:0]                  status;
-   (*mark_debug = "true"*)logic [31:0]                 counter;
-   (*mark_debug = "true"*)logic                        next;
+   logic [5:0]                  status;
+   logic [31:0]                 counter;
+   logic                        next;
    logic                        fin_stop_bit;
-   (*mark_debug = "true"*)logic                        rst_ctr;
+   logic                        rst_ctr;
 
    localparam s_idle = 0;
    localparam s_start_bit = 1;
@@ -80,7 +80,7 @@ module uart_tx #(CLK_PER_HALF_BIT = 435) ( // 115200bits/s
                txd <= 1;
                status <= s_idle;
                tx_busy <= 0;
-               counter <= 0; //s_idle時はcounterは0に固定
+               //counter <= 0; //s_idle時はcounterは0に固定
             end
          end else if (next) begin
             if (status == s_bit_7) begin
