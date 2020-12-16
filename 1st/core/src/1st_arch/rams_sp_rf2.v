@@ -10,11 +10,11 @@ input [31:0] di;
 output [31:0] dout;
 
 
-(*ram_style = "block"*)reg [31:0] RAM [15000:0];
+(*ram_style = "block"*)reg [31:0] RAM [20000:0];
 reg [31:0] dout;
 
 initial begin
-    $readmemb("main1.mem",RAM,0,12000);
+    $readmemb("main.mem",RAM,0,20000);
 end
 
 //integer i;
