@@ -208,3 +208,73 @@ float fdiv(fi in1, fi in2)
     mid.f = finv(in2);
     return fmul(in1, mid);
 }
+
+float itof(int x)
+{
+    int s, k, e, m, m1;
+    unsigned int ux;
+    ieee y;
+    s = (x < 0) ? 1 : 0;
+    ux = (s) ? ~(x - 1) : abs(x);
+    for (int i = 30; i >= 0; i--)
+    {
+        if (ux / (1 << i))
+        {
+            k = i;
+            break;
+        }
+        if (i == 0)
+            k = 31;
+    }
+    m1 = (k <= 23) ? (ux << 1) << (23 - k) : (ux << 1) >> (k - 23);
+    m = (k <= 23) ? (m1 >> 1) % (1 << 23) : ((m1 + 1) >> 1) % (1 << 23);
+    e = 127 + k;
+    if (k == 31)
+        y.u = 0;
+    else
+    {
+        y.b.s = s;
+        y.b.e = e;
+        y.b.m = m;
+    }
+
+    return y.f;
+}
+
+int ftoi(fi in)
+{
+    unsigned long long int y1 = 0, y2 = 0, y3 = 0;
+    int y;
+    ieee x;
+    x.u = in.i;
+    if (x.b.e >= 150)
+        y1 = ((((1U << 23U) + x.b.m) << 1U) << (x.b.e - 150U)) % (1LLU << 33U);
+    else if (x.b.e < 126)
+        y1 = 0;
+    else
+        y1 = ((((1U << 23U) + x.b.m) << 1U) >> (150U - x.b.e)) % (1LLU << 33U);
+    y2 = y1 + 1;
+    if (x.b.e >= 150 && x.b.s)
+        y3 = ((y1 >> 1U) % (1U << 31U));
+    else if (x.b.e >= 150)
+        y3 = ((y1 >> 1U) % (1U << 31U));
+    else if (x.b.s)
+        y3 = ((y2 >> 1U) % (1U << 31U));
+    else
+        y3 = ((y2 >> 1U) % (1U << 31U));
+    y = x.b.s ? -y3 : y3;
+    return y;
+}
+
+float floor(fi in)
+{
+    unsigned int m1, m2, m3, e1;
+    ieee x, y;
+    x.u = in.i;
+    m3 = (x.b.m >> (150 - x.b.e)) << (150 - x.b.e);
+    m2 = (x.b.s && x.b.e < 150 && x.b.m != m3) ? x.b.m + (1 << (150 - x.b.e)) : x.b.m;
+    m1 = (x.b.e >= 150) ? m2 : (m2 >> (150 - x.b.e)) << (150 - x.b.e);
+    e1 = x.b.e + 1;
+    y.u = (x.b.e >= 127 && x.b.s && (m2 / (1 << 23))) ? (x.b.s << 31) + (e1 << 23) : (x.b.e >= 127) ? (x.b.s << 31) + (x.b.e << 23) + m1 : (x.b.s && x.b.e > 0) ? (1 << 31) + (127 << 23) : 0;
+    return y.f;
+}

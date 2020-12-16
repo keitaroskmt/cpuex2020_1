@@ -7,3 +7,6 @@ float fmul(fi x1, fi x2);
 float fdiv(fi x1, fi x2);
 float finv(fi x);
 float fsqrt(fi x);
+float itof(int x);
+int ftoi(fi x);
+float floor(fi x);

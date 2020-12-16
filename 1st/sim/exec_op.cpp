@@ -403,7 +403,7 @@ int exec_op(op_info op, bool print_calc, bool use_fpu)
     else if (op.opcode == "ftoi")
     {
         frs.f = cur_env.FPR[op.opland_bit[1]];
-        rt = frs.i;
+        rt = ftoi(frs);
         cur_env.GPR[op.opland_bit[0]] = rt;
 
         if (print_calc)
@@ -412,11 +412,20 @@ int exec_op(op_info op, bool print_calc, bool use_fpu)
     else if (op.opcode == "itof")
     {
         rs = cur_env.GPR[op.opland_bit[1]];
-        frt.i = rs;
+        frt.f = itof(rs);
         cur_env.FPR[op.opland_bit[0]] = frt.f;
 
         if (print_calc)
             printf("itof\t%f(%08X),\t%d(%08X)\n", frt.f, frt.i, rs, rs);
+    }
+    else if (op.opcode == "floor")
+    {
+        frs.f = cur_env.FPR[op.opland_bit[1]];
+        frt.f = floor(frs);
+        cur_env.FPR[op.opland_bit[0]] = frt.f;
+
+        if (print_calc)
+            printf("floor\t%f(%08X),\t%f(%08X)\n", frt.f, frt.i, frs.f, frs.i);
     }
     else if (op.opcode == "ret")
     {
