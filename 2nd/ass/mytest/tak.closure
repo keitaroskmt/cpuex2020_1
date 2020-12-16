@@ -1,0 +1,285 @@
+Prog 
+fundef 
+	name : 
+		(L (int_of_float_sub1.210): Float -> Int -> Int)
+	args : 
+		[(x.211 : Float), (n.212 : Int)]
+	formal_fv : 
+		[]
+	body : 
+		Let
+			(Td180.475 : Float)
+			Float 8388608.
+			IfLE
+				Td180.475
+				x.211
+				Let
+					(Td181.479 : Float)
+					Float 8388608.
+					Let
+						(Td182.476 : Float)
+						FSub
+							x.211
+							Td181.479
+						Let
+							(Ti183.478 : Int)
+							Int 1
+							Let
+								(Ti184.477 : Int)
+								Add
+									n.212
+									Ti183.478
+								AppDir
+									L (int_of_float_sub1.210)
+									[Td182.476, Ti184.477]
+				Var n.212
+	name : 
+		(L (int_of_float_sub2.213): Float -> Float)
+	args : 
+		[(x.214 : Float)]
+	formal_fv : 
+		[]
+	body : 
+		Let
+			(Td177.472 : Float)
+			Float 8388608.
+			IfLE
+				Td177.472
+				x.214
+				Let
+					(Td178.474 : Float)
+					Float 8388608.
+					Let
+						(Td179.473 : Float)
+						FSub
+							x.214
+							Td178.474
+						AppDir
+							L (int_of_float_sub2.213)
+							[Td179.473]
+				Var x.214
+	name : 
+		(L (int_of_float_sub3.215): Int -> Int -> Int)
+	args : 
+		[(m.216 : Int), (acm.217 : Int)]
+	formal_fv : 
+		[]
+	body : 
+		Let
+			(Ti172.467 : Int)
+			Int 0
+			IfEq
+				m.216
+				Ti172.467
+				Var acm.217
+				Let
+					(Ti173.471 : Int)
+					Int 1
+					Let
+						(Ti174.468 : Int)
+						Sub
+							m.216
+							Ti173.471
+						Let
+							(Ti175.470 : Int)
+							Int 8388608
+							Let
+								(Ti176.469 : Int)
+								Add
+									Ti175.470
+									acm.217
+								AppDir
+									L (int_of_float_sub3.215)
+									[Ti174.468, Ti176.469]
+	name : 
+		(L (int_of_float.218): Float -> Int)
+	args : 
+		[(x.219 : Float)]
+	formal_fv : 
+		[]
+	body : 
+		Let
+			(Td155.466 : Float)
+			Float 0.
+			Let
+				(flag.447 : Bool)
+				IfLE
+					Td155.466
+					x.219
+					Int 1
+					Int 0
+				Let
+					(x_abs.448 : Float)
+					FAbs
+						x.219
+					Let
+						(Td156.451 : Float)
+						Float 8388608.
+						Let
+							(res.449 : Int)
+							IfLE
+								Td156.451
+								x_abs.448
+								Let
+									(Td157.464 : Float)
+									AppDir
+										L (int_of_float_sub2.213)
+										[x_abs.448]
+									Let
+										(Td158.465 : Float)
+										Float 8388608.
+										Let
+											(Td159.463 : Float)
+											FAdd
+												Td157.464
+												Td158.465
+											Let
+												(Ti160.461 : Int)
+												Ftoi
+													Td159.463
+												Let
+													(Ti161.462 : Int)
+													Int 1258291200
+													Let
+														(Ti162.456 : Int)
+														Sub
+															Ti160.461
+															Ti161.462
+														Let
+															(Ti163.460 : Int)
+															Int 0
+															Let
+																(Ti164.458 : Int)
+																AppDir
+																	L (int_of_float_sub1.210)
+																	[x_abs.448, Ti163.460]
+																Let
+																	(Ti165.459 : Int)
+																	Int 0
+																	Let
+																		(Ti166.457 : Int)
+																		AppDir
+																			L (int_of_float_sub3.215)
+																			[Ti164.458, Ti165.459]
+																		Add
+																			Ti162.456
+																			Ti166.457
+								Let
+									(Td167.455 : Float)
+									Float 8388608.
+									Let
+										(Td168.454 : Float)
+										FAdd
+											x_abs.448
+											Td167.455
+										Let
+											(Ti169.452 : Int)
+											Ftoi
+												Td168.454
+											Let
+												(Ti170.453 : Int)
+												Int 1258291200
+												Sub
+													Ti169.452
+													Ti170.453
+							Let
+								(Ti171.450 : Int)
+								Int 0
+								IfEq
+									flag.447
+									Ti171.450
+									Neg
+										res.449
+									Var res.449
+	name : 
+		(L (tak.246): Float -> Float -> Float -> Float)
+	args : 
+		[(x.247 : Float), (y.248 : Float), (z.249 : Float)]
+	formal_fv : 
+		[]
+	body : 
+		IfLE
+			x.247
+			y.248
+			Var z.249
+			Let
+				(Td13.271 : Float)
+				Float 1.
+				Let
+					(Td14.270 : Float)
+					FSub
+						x.247
+						Td13.271
+					Let
+						(Td15.263 : Float)
+						AppDir
+							L (tak.246)
+							[Td14.270, y.248, z.249]
+						Let
+							(Td16.269 : Float)
+							Float 1.
+							Let
+								(Td17.268 : Float)
+								FSub
+									y.248
+									Td16.269
+								Let
+									(Td18.264 : Float)
+									AppDir
+										L (tak.246)
+										[Td17.268, z.249, x.247]
+									Let
+										(Td19.267 : Float)
+										Float 1.
+										Let
+											(Td20.266 : Float)
+											FSub
+												z.249
+												Td19.267
+											Let
+												(Td21.265 : Float)
+												AppDir
+													L (tak.246)
+													[Td20.266, x.247, y.248]
+												AppDir
+													L (tak.246)
+													[Td15.263, Td18.264, Td21.265]
+body 
+	Let
+		(Td2.255 : Float)
+		Float 1000000.
+		Let
+			(Td4.257 : Float)
+			Float 30.
+			Let
+				(Td6.258 : Float)
+				Float 20.
+				Let
+					(Td8.259 : Float)
+					Float 10.
+					Let
+						(Td9.256 : Float)
+						AppDir
+							L (tak.246)
+							[Td4.257, Td6.258, Td8.259]
+						Let
+							(Td10.254 : Float)
+							FMul
+								Td2.255
+								Td9.256
+							Let
+								(Ti11.253 : Int)
+								AppDir
+									L (int_of_float.218)
+									[Td10.254]
+								Let
+									(Tu1.251 : ())
+									AppDir
+										L (min_caml_print_int)
+										[Ti11.253]
+									Let
+										(Ti12.252 : Int)
+										Int 10
+										AppDir
+											L (min_caml_print_char)
+											[Ti12.252]

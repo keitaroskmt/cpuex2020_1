@@ -18,10 +18,10 @@ int main(int argc, char *argv[]) {
     }
 
     string s = argv[optind];
-    Parser parser((s+".s").c_str());
+    Parser parser(s + ".s");
     parser.total_num = parser.parse_file();
 
-    Writer writer((s+".out").c_str(), &parser);
+    Writer writer(s + ".out", &parser);
 
     if (debug_flag) {
         writer.debug();

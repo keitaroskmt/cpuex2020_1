@@ -18,6 +18,7 @@ in
 let rec fsqr x = x *. x
 in
 
+(*
 (* int -> float 中身同じbitを itofでハードウェア実装 *)
 (* float -> int 中身同じbitを ftoiでハードウェア実装 *)
 
@@ -93,6 +94,7 @@ let rec floor x =
         if flag then res else fneg res in
     if res_ > x then res_ -. 1.0 else res_
 in
+*)
 
 let rec kernel_sin x =
     let x2 = x *. x in
