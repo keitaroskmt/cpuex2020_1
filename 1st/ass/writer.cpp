@@ -10,7 +10,7 @@ bool isnum(string s) {
     return true;
 }
 
-Writer::Writer(const char *fname, Parser *p) {
+Writer::Writer(string fname, Parser *p) {
     file_name = fname;
     parser = p;
     current_num = 0;
@@ -158,6 +158,7 @@ unsigned int Writer::encode(vector<string> &v) {
             rs = reg_name.at(v[3]);
             // 相対アドレス
             imm = parser->label_map.at(v[4]) - (current_num + 1);
+            assert(0 <= imm && imm <= 65535);
 
         } else if (v[1] == "bne") {
             op = 0x5;
@@ -165,6 +166,7 @@ unsigned int Writer::encode(vector<string> &v) {
             rs = reg_name.at(v[3]);
             // 相対アドレス
             imm = parser->label_map.at(v[4]) - (current_num + 1);
+            assert(0 <= imm && imm <= 65535);
 
         } else if (v[1] == "addi") {
             // プログラム全体の評価値 (適当にnopとしておく)
@@ -179,7 +181,8 @@ unsigned int Writer::encode(vector<string> &v) {
             if (isnum(v[4])) { // 即値のとき
                 imm = stoi(v[4]);
             } else {
-                imm = parser->label_map.at(v[4]) * 4;
+                imm = parser->label_map.at(v[4]);
+                assert(0 <= imm && imm <= 65535);
             }
 
         } else if (v[1] == "slti") {
@@ -339,7 +342,7 @@ unsigned int Writer::encode(vector<string> &v) {
             // 相対アドレス
             imm = parser->label_map.at(v[4]) - (current_num + 1);
 
-        } else if (v[1] == "bne") {
+        } else if (v[1] == "fbne") {
             op = 0x35;
             rt = freg_name.at(v[2]);
             rs = freg_name.at(v[3]);
@@ -368,6 +371,11 @@ unsigned int Writer::encode(vector<string> &v) {
             op = 0x39;
             rt = freg_name.at(v[2]);
             rs = reg_name.at(v[3]);
+            imm = 0x0;
+        } else if (v[1] == "floor") {
+            op = 0x3a;
+            rt = freg_name.at(v[2]);
+            rs = freg_name.at(v[3]);
             imm = 0x0;
         }
 
