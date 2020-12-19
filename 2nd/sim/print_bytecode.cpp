@@ -34,6 +34,21 @@ int print_bytecode(op_info op)
                   << std::bitset<5>(rt) << " " << std::bitset<5>(rd) << " "
                   << std::bitset<5>(0) << " " << std::bitset<6>(funct) << std::endl;
     }
+    else if (op.opcode == "sll" || op.opcode == "srl")
+    {
+        rt = op.opland_bit[1] & 0b11111;
+        rd = op.opland_bit[0] & 0b11111;
+        imm = op.opland_bit[2] & 0b11111;
+
+        if (op.opcode == "sll")
+            shamt = 0b000010;
+        else if (op.opcode == "srl")
+            shamt = 0b000011;
+
+        std::cout << std::bitset<6>(shamt) << " " << std::bitset<5>(0) << " "
+                  << std::bitset<5>(rt) << " " << std::bitset<5>(rd) << " "
+                  << std::bitset<5>(imm) << " " << std::bitset<6>(0) << std::endl;
+    }
     else if (op.opcode == "jr" || op.opcode == "jalr")
     {
         rs = op.opland_bit[0] & 0b11111;
@@ -96,13 +111,13 @@ int print_bytecode(op_info op)
         else if (op.opcode == "andi")
             shamt = 0b000010;
         else if (op.opcode == "ori")
-            shamt = 0b000011;
-        else if (op.opcode == "lui")
             shamt = 0b000100;
-        else if (op.opcode == "lw")
+        else if (op.opcode == "lui")
             shamt = 0b000101;
-        else if (op.opcode == "sw")
+        else if (op.opcode == "lw")
             shamt = 0b000110;
+        else if (op.opcode == "sw")
+            shamt = 0b000111;
         else if (op.opcode == "fbeq")
             shamt = 0b100111;
         else if (op.opcode == "fbne")
@@ -110,9 +125,9 @@ int print_bytecode(op_info op)
         else if (op.opcode == "fblt")
             shamt = 0b101001;
         else if (op.opcode == "flw")
-            shamt = 0b010011;
-        else if (op.opcode == "fsw")
             shamt = 0b010100;
+        else if (op.opcode == "fsw")
+            shamt = 0b010101;
 
         std::cout << std::bitset<6>(shamt) << " " << std::bitset<5>(rs) << " "
                   << std::bitset<5>(rt) << " " << std::bitset<16>(imm) << std::endl;
@@ -122,11 +137,11 @@ int print_bytecode(op_info op)
         rt = op.opland_bit[0] & 0b11111;
 
         if (op.opcode == "in")
-            shamt = 0b000111;
-        else if (op.opcode == "fin")
             shamt = 0b001000;
-        else if (op.opcode == "out")
+        else if (op.opcode == "fin")
             shamt = 0b001001;
+        else if (op.opcode == "out")
+            shamt = 0b001010;
 
         std::cout << std::bitset<6>(shamt) << " " << std::bitset<5>(0) << " "
                   << std::bitset<5>(rt) << " " << std::bitset<16>(0) << std::endl;
@@ -150,35 +165,37 @@ int print_bytecode(op_info op)
             rd = op.opland_bit[0] & 0b11111;
 
         if (op.opcode == "fadd")
-            shamt = 0b001010;
-        else if (op.opcode == "fsub")
             shamt = 0b001011;
-        else if (op.opcode == "fmul")
+        else if (op.opcode == "fsub")
             shamt = 0b001100;
-        else if (op.opcode == "fdiv")
+        else if (op.opcode == "fmul")
             shamt = 0b001101;
-        else if (op.opcode == "fneg")
+        else if (op.opcode == "fdiv")
             shamt = 0b001110;
-        else if (op.opcode == "fabs")
+        else if (op.opcode == "fneg")
             shamt = 0b001111;
-        else if (op.opcode == "fsqrt")
+        else if (op.opcode == "fabs")
             shamt = 0b010000;
-        else if (op.opcode == "fmov")
+        else if (op.opcode == "fsqrt")
             shamt = 0b010001;
+        else if (op.opcode == "fmov")
+            shamt = 0b010011;
 
         std::cout << std::bitset<6>(shamt) << " " << std::bitset<5>(rs) << " "
                   << std::bitset<5>(rt) << " " << std::bitset<5>(rd) << " "
                   << std::bitset<11>(0) << std::endl;
     }
-    else if (op.opcode == "ftoi" || op.opcode == "itof")
+    else if (op.opcode == "ftoi" || op.opcode == "itof" || op.opcode == "floor")
     {
         rs = op.opland_bit[1] & 0b11111;
         rt = op.opland_bit[0] & 0b11111;
 
         if (op.opcode == "ftoi")
-            shamt = 0b010101;
-        else if (op.opcode == "itof")
             shamt = 0b010110;
+        else if (op.opcode == "itof")
+            shamt = 0b010111;
+        else if (op.opcode == "floor")
+            shamt = 0b011000;
 
         std::cout << std::bitset<6>(shamt) << " " << std::bitset<5>(rs) << " "
                   << std::bitset<5>(rt) << " " << std::bitset<16>(0) << std::endl;

@@ -7,7 +7,7 @@
 #include "file_io.h"
 #include "sim.h"
 
-std::vector<unsigned char> in_bytes;
+std::vector<unsigned int> in_bytes;
 std::vector<unsigned char> out_bytes;
 
 int read_file(std::string infile_name)
@@ -35,10 +35,7 @@ int read_file(std::string infile_name)
             else
                 temp.f = stof(token);
 
-            in_bytes.push_back(temp.regBit.c0);
-            in_bytes.push_back(temp.regBit.c1);
-            in_bytes.push_back(temp.regBit.c2);
-            in_bytes.push_back(temp.regBit.c3);
+            in_bytes.push_back(temp.i);
         }
     }
     return 0;

@@ -156,7 +156,7 @@ int main(int argc, char *argv[])
     cur_opnum = 0;
     cur_in = 0;
 
-    data_load("data/main.data");
+    data_load("data/main_data.mem");
 
     // step実行
     while (cur_opnum < end)
@@ -219,8 +219,8 @@ int exec_step(bool print_process, bool print_calc, bool print_bc, bool label_cou
         if (exec_op(ops[cur_opnum], print_calc, use_fpu))
             return 1;
 
-        if (print_bc || print_process || print_calc)
-            printf("\n");
+        // if (print_bc || print_process || print_calc)
+        //     printf("\n");
         cur_env.PC++;
     }
     else if (ops[cur_opnum].type == 1)

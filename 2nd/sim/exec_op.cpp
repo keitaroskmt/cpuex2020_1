@@ -82,27 +82,23 @@ int exec_op(op_info op, bool print_calc, bool use_fpu)
     }
     else if (op.opcode == "sll")
     {
-        printf("this inst is no longer suppoted\n");
-        return 1;
-        // rt = cur_env.GPR[op.opland_bit[1]];
-        // imm = op.opland_bit[2];
-        // rd = rt << imm;
-        // cur_env.GPR[op.opland_bit[0]] = rd;
+        rt = cur_env.GPR[op.opland_bit[1]];
+        imm = op.opland_bit[2];
+        rd = rt << imm;
+        cur_env.GPR[op.opland_bit[0]] = rd;
 
-        // if (print_calc)
-        //     printf("sll\t%d(%08X),\t%d(%08X),\t%d(%08X)\n", rd, rd, rt, rt, imm, imm);
+        if (print_calc)
+            printf("sll\t%d(%08X),\t%d(%08X),\t%d(%08X)\n", rd, rd, rt, rt, imm, imm);
     }
     else if (op.opcode == "srl")
     {
-        printf("this inst is no longer suppoted\n");
-        return 1;
-        // rt = cur_env.GPR[op.opland_bit[1]];
-        // imm = op.opland_bit[2];
-        // rd = rt >> imm;
-        // cur_env.GPR[op.opland_bit[0]] = rd;
+        rt = cur_env.GPR[op.opland_bit[1]];
+        imm = op.opland_bit[2];
+        rd = rt >> imm;
+        cur_env.GPR[op.opland_bit[0]] = rd;
 
-        // if (print_calc)
-        //     printf("srl\t%d(%08X),\t%d(%08X),\t%d(%08X)\n", rd, rd, rt, rt, imm, imm);
+        if (print_calc)
+            printf("srl\t%d(%08X),\t%d(%08X),\t%d(%08X)\n", rd, rd, rt, rt, imm, imm);
     }
     else if (op.opcode == "bgt")
     {
@@ -129,7 +125,7 @@ int exec_op(op_info op, bool print_calc, bool use_fpu)
     else if (op.opcode == "blti")
     {
         rs = cur_env.GPR[op.opland_bit[0]];
-        imm = op.opland_bit[2];
+        imm = op.opland_bit[1];
         if (rs < imm)
             cur_opnum = posbc2pos[op.opland_bit[2]] - 2;
 
@@ -201,7 +197,7 @@ int exec_op(op_info op, bool print_calc, bool use_fpu)
     else if (op.opcode == "beqi")
     {
         rs = cur_env.GPR[op.opland_bit[0]];
-        imm = op.opland_bit[2];
+        imm = op.opland_bit[1];
         if (rs == imm)
             cur_opnum = posbc2pos[op.opland_bit[2]] - 2;
 
@@ -245,13 +241,15 @@ int exec_op(op_info op, bool print_calc, bool use_fpu)
     }
     else if (op.opcode == "andi")
     {
-        rs = cur_env.GPR[op.opland_bit[1]];
-        imm = op.opland_bit[2];
-        rd = rs & imm;
-        cur_env.GPR[op.opland_bit[0]] = rd;
+        printf("this inst is no longer suppoted\n");
+        return 1;
+        // rs = cur_env.GPR[op.opland_bit[1]];
+        // imm = op.opland_bit[2];
+        // rd = rs & imm;
+        // cur_env.GPR[op.opland_bit[0]] = rd;
 
-        if (print_calc)
-            printf("andi\t%d(%08X),\t%d(%08X),\t%d(%08X)\n", rd, rd, rs, rs, imm, imm);
+        // if (print_calc)
+        //     printf("andi\t%d(%08X),\t%d(%08X),\t%d(%08X)\n", rd, rd, rs, rs, imm, imm);
     }
     else if (op.opcode == "ori")
     {

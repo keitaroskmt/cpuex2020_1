@@ -19,5 +19,5 @@ int read_file(std::string infile_name);
 int write_file(std::string outfile_name, bool mandelbrot);
 int data_load(std::string datafile_name);
 
-extern std::vector<unsigned char> in_bytes;
+extern std::vector<unsigned int> in_bytes;
 extern std::vector<unsigned char> out_bytes;
