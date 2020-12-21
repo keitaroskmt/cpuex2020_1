@@ -9,3 +9,4 @@ fib/sim/sim
 2nd/fpu
 2nd/compiler_sim/sim
 2nd/core_sim/sim
+2nd/core_sim_multi/sim
