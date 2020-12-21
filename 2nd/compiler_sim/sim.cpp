@@ -32,10 +32,10 @@ int exec_step(bool print_process, bool print_calc, bool print_bytecode, bool lab
 
 int main(int argc, char *argv[])
 {
-    clock_t start_time = clock();
+    // clock_t start_time = clock();
     int opt;
-    bool is_step = false;
-    bool is_stat = true;
+    // bool is_step = false;
+    // bool is_stat = true;
     bool print_process = false;
     bool print_calc = false;
     bool print_bc = false;
@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
     bool label_count = false;
     bool is_in = false;
     bool is_out = false;
-    bool debug_mode = false;
+    // bool debug_mode = false;
     bool use_fpu = false;
     std::string n = "fib";
     std::string infile = "sin.txt";
@@ -53,21 +53,21 @@ int main(int argc, char *argv[])
     {
         switch (opt)
         {
-        case 's':
-            is_step = true;
-            break;
+            // case 's':
+            //     is_step = true;
+            //     break;
 
-        case 'c':
-            print_calc = true;
-            break;
+            // case 'c':
+            //     print_calc = true;
+            //     break;
 
-        case 'b':
-            print_bc = true;
-            break;
+            // case 'b':
+            //     print_bc = true;
+            //     break;
 
-        case 'p':
-            print_process = true;
-            break;
+            // case 'p':
+            //     print_process = true;
+            //     break;
 
         case 'n':
             n = optarg;
@@ -83,21 +83,21 @@ int main(int argc, char *argv[])
             outfile = optarg;
             break;
 
-        case 'm':
-            mandelbrot = true;
-            break;
+            // case 'm':
+            //     mandelbrot = true;
+            //     break;
 
-        case 'd':
-            debug_mode = true;
-            break;
+            // case 'd':
+            //     debug_mode = true;
+            //     break;
 
-        case 'l':
-            label_count = true;
-            break;
+            // case 'l':
+            //     label_count = true;
+            //     break;
 
-        case 'f':
-            use_fpu = true;
-            break;
+            // case 'f':
+            //     use_fpu = true;
+            //     break;
 
         default:
             printf("Usage: %s [-s] [-b] [-c] [-p] [-n arg] [-i arg] [-o arg]\n", argv[0]);
@@ -111,9 +111,9 @@ int main(int argc, char *argv[])
     int end;
     int errno;
     int line = 0;
-    int loop = 0;
-    int max_sp = 0;
-    int max_hp = 0;
+    // int loop = 0;
+    // int max_sp = 0;
+    // int max_hp = 0;
     char buf[256];
 
     cur_env.PC = 0;
@@ -142,8 +142,8 @@ int main(int argc, char *argv[])
 
     fclose(fp);
 
-    if (use_fpu)
-        ftable_init();
+    // if (use_fpu)
+    ftable_init();
 
     // sldファイルの読み込み
     if (is_in)
@@ -161,46 +161,46 @@ int main(int argc, char *argv[])
     // step実行
     while (cur_opnum < end)
     {
-        if (is_step && loop == 0)
-            // コマンド受付 & 実行
-            if (exec_cmd(&loop, &is_stat, &print_bc, &print_calc, &print_process))
-                return 0;
+        // if (is_step && loop == 0)
+        //     // コマンド受付 & 実行
+        //     if (exec_cmd(&loop, &is_stat, &print_bc, &print_calc, &print_process))
+        //         return 0;
 
         if (exec_step(print_process, print_calc, print_bc, label_count, use_fpu))
             break;
 
-        if (ops[cur_opnum].type == 0)
-        {
-            if (debug_mode)
-            {
-                if (cur_env.PC && cur_env.PC % 1000000000 == 0)
-                    std::cout << cur_env.PC / 1000000000 << "G..." << std::flush;
-                if (cur_env.GPR[29] > max_sp)
-                    max_sp = cur_env.GPR[29];
-                if (cur_env.GPR[28] > max_hp)
-                    max_hp = cur_env.GPR[28];
-            }
-            loop--;
-        }
+        // if (ops[cur_opnum].type == 0)
+        // {
+        //     if (debug_mode)
+        //     {
+        //         if (cur_env.PC && cur_env.PC % 1000000000 == 0)
+        //             std::cout << cur_env.PC / 1000000000 << "G..." << std::flush;
+        //         if (cur_env.GPR[29] > max_sp)
+        //             max_sp = cur_env.GPR[29];
+        //         if (cur_env.GPR[28] > max_hp)
+        //             max_hp = cur_env.GPR[28];
+        //     }
+        //     loop--;
+        // }
     }
 
-    printf("register state\n");
-    print_state();
+    // printf("register state\n");
+    // print_state();
     printf("v0: %d\n", cur_env.GPR[reg_name.at("%v0")]);
     printf("f0: %f\n", cur_env.FPR[reg_name.at("%f0") - 32]);
-    if (is_stat)
-        print_stats();
-    if (label_count)
-        print_label_stats();
+    // if (is_stat)
+    //     print_stats();
+    // if (label_count)
+    //     print_label_stats();
 
     if (is_out)
         write_file("io/out/" + outfile, mandelbrot);
 
-    if (debug_mode)
-    {
-        print_time(start_time);
-        printf("max sp: %d\nmax hp %d\n", max_sp, max_hp);
-    }
+    // if (debug_mode)
+    // {
+    //     print_time(start_time);
+    //     printf("max sp: %d\nmax hp %d\n", max_sp, max_hp);
+    // }
 
     return 0;
 }
@@ -210,11 +210,11 @@ int exec_step(bool print_process, bool print_calc, bool print_bc, bool label_cou
 {
     if (ops[cur_opnum].type == 0)
     {
-        if (print_process)
-            printf("%llu\t%d\t%s\t%s\t%s\t%s\t%d\n", cur_env.PC, ops[cur_opnum].op_idx, ops[cur_opnum].opcode.c_str(), ops[cur_opnum].opland[0].c_str(), ops[cur_opnum].opland[1].c_str(), ops[cur_opnum].opland[2].c_str(), ops[cur_opnum].offset);
+        // if (print_process)
+        //     printf("%llu\t%d\t%s\t%s\t%s\t%s\t%d\n", cur_env.PC, ops[cur_opnum].op_idx, ops[cur_opnum].opcode.c_str(), ops[cur_opnum].opland[0].c_str(), ops[cur_opnum].opland[1].c_str(), ops[cur_opnum].opland[2].c_str(), ops[cur_opnum].offset);
 
-        if (print_bc)
-            print_bytecode(ops[cur_opnum]);
+        // if (print_bc)
+        //     print_bytecode(ops[cur_opnum]);
 
         if (exec_op(ops[cur_opnum], print_calc, use_fpu))
             return 1;
@@ -223,14 +223,14 @@ int exec_step(bool print_process, bool print_calc, bool print_bc, bool label_cou
         //     printf("\n");
         cur_env.PC++;
     }
-    else if (ops[cur_opnum].type == 1)
-    {
-        std::string label = ops[cur_opnum].label;
-        if (print_process)
-            printf("%s:\n", label.c_str());
-        if (label_count)
-            label_counter[label]++;
-    }
+    // else if (ops[cur_opnum].type == 1)
+    // {
+    //     std::string label = ops[cur_opnum].label;
+    //     if (print_process)
+    //         printf("%s:\n", label.c_str());
+    //     if (label_count)
+    //         label_counter[label]++;
+    // }
     cur_opnum++;
     return 0;
 }
