@@ -48,6 +48,7 @@ int main(int argc, char *argv[])
     std::string n = "fib";
     std::string infile = "sin.txt";
     std::string outfile = "out.txt";
+    std::string datafile = "data/";
 
     while ((opt = getopt(argc, argv, "sbcpn:i:o:mdlf")) != -1)
     {
@@ -156,7 +157,8 @@ int main(int argc, char *argv[])
     cur_opnum = 0;
     cur_in = 0;
 
-    data_load("data/main_data.mem");
+    datafile = datafile + n + "_data.mem";
+    data_load(datafile);
 
     // step実行
     while (cur_opnum < end)

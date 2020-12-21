@@ -31,7 +31,7 @@ int load_ops(FILE *fp)
         else if (regex_match(s1, results, std::regex("^\t?#.+?\n?$")))
             continue;
         // %g0を含む行の読み飛ばし
-        else if (s1 == "\taddi\t%g0, %zero, 0\n")
+        else if (regex_match(s1, results, std::regex("^.*?%g0.*?\n$")))
             continue;
         // ex. add  $a0, $a0, $a1
         else if (regex_match(s1, results, std::regex("^\t(.+?)\t(.+?), (.+?), (.+?)\n?$")))
