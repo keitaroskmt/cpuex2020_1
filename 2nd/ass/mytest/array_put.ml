@@ -9,4 +9,4 @@ let v2 = Array.make 3 1.00 in
 v2.(0) <- 4.56;
 v2.(1) <- 4.56;
 v2.(2) <- 4.56;
-print_float (inprod v1 v2 2)
+(inprod v1 v2 2)

@@ -243,7 +243,9 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprime) *)
       (* x = y then e1 <=> x != y then e2 *)
       (match y' with
       | V(y) -> g'_tail_if oc x y e1 e2 "beq" "bne"
-      | C(i) -> g'_tail_if_imm oc x i e2 e1 "bnei" "beqi")
+      | C(i) -> if -128 <= i && i <= 127 then g'_tail_if_imm oc x i e2 e1 "bnei" "beqi"
+                else (addi oc reg_at reg_zero i;
+                        g'_tail_if oc x reg_at e1 e2 "beq" "bne"))
   | Tail, IfLE(x, y', e1, e2) ->
       (* x <= y then e1 <=> x > y then e2 <=> y < x then e2 *)
       (match y' with
@@ -254,7 +256,9 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprime) *)
        (* x >= y then e1 <=> x < y then e2 *)
       (match y' with
       | V(y) -> g'_tail_if oc x y e1 e2 "bgt" "blt"
-      | C(i) -> g'_tail_if_imm oc x i e1 e2 "bgti" "blti")
+      | C(i) -> if -128 <= i && i <= 127 then g'_tail_if_imm oc x i e1 e2 "bgti" "blti"
+                else (addi oc reg_at reg_zero i;
+                        g'_tail_if oc x reg_at e1 e2 "bgt" "blt"))
   | Tail, IfFEq(x, y, e1, e2) ->
       (* x = y then e1 <=> x != y then e2 *)
         g'_tail_if oc x y e1 e2 "fbeq" "fbne"
@@ -265,7 +269,9 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprime) *)
       (* x = y then e1 <=> x != y then e2 *)
       (match y' with
       | V(y) -> g'_non_tail_if oc (NonTail(z)) x y e1 e2 "beq" "bne"
-      | C(i) -> g'_non_tail_if_imm oc (NonTail(z)) x i e2 e1 "bnei" "beqi")
+      | C(i) -> if -128 <= i && i <= 127 then g'_non_tail_if_imm oc (NonTail(z)) x i e2 e1 "bnei" "beqi"
+                else (addi oc reg_at reg_zero i;
+                        g'_non_tail_if oc (NonTail(z)) x reg_at e1 e2 "beq" "bne"))
   | NonTail(z), IfLE(x, y', e1, e2) ->
       (* x <= y then e1 <=> x > y then e2 <=> y < x then e2 *)
       (match y' with
@@ -276,7 +282,9 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprime) *)
        (* x >= y then e1 <=> x < y then e2 *)
       (match y' with
       | V(y) -> g'_non_tail_if oc (NonTail(z)) x y e1 e2 "bgt" "blt"
-      | C(i) -> g'_non_tail_if_imm oc (NonTail(z)) x i e1 e2 "bgti" "blti")
+      | C(i) -> if -128 <= i && i <= 127 then g'_non_tail_if_imm oc (NonTail(z)) x i e1 e2 "bgti" "blti"
+                else (addi oc reg_at reg_zero i;
+                        g'_non_tail_if oc (NonTail(z)) x reg_at e1 e2 "bgt" "blt"))
   | NonTail(z), IfFEq(x, y, e1, e2) ->
       (* x = y then e1 <=> x != y then e2 *)
         g'_non_tail_if oc (NonTail(z)) x y e1 e2 "fbeq" "fbne"

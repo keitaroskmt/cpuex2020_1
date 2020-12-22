@@ -143,27 +143,37 @@ unsigned int Writer::encode(vector<string> &v) {
     // opcode 31-26, rs 25-21, rt 20-16, imm 15-0
     else if (v[0] == "I") {
         unsigned int op, rs, rt, imm;
+        int signed_imm;
         
         if (v[1] == "beq") {
             op = 0x24;
             rs = reg_name.at(v[2]);
             rt = reg_name.at(v[3]);
             // 相対アドレス
-            imm = parser->label_map.at(v[4]) - (current_num + 1);
+            signed_imm = parser->label_map.at(v[4]) - (current_num + 1);
+
+            assert(-32768 <= signed_imm && signed_imm <= 32767);
+            imm = signed_imm;
 
         } else if (v[1] == "bne") {
             op = 0x25;
             rs = reg_name.at(v[2]);
             rt = reg_name.at(v[3]);
             // 相対アドレス
-            imm = parser->label_map.at(v[4]) - (current_num + 1);
+            signed_imm = parser->label_map.at(v[4]) - (current_num + 1);
+
+            assert(-32768 <= signed_imm && signed_imm <= 32767);
+            imm = signed_imm;
 
         } else if (v[1] == "blt") {
             op = 0x26;
             rs = reg_name.at(v[2]);
             rt = reg_name.at(v[3]);
             // 相対アドレス
-            imm = parser->label_map.at(v[4]) - (current_num + 1);
+            signed_imm = parser->label_map.at(v[4]) - (current_num + 1);
+
+            assert(-32768 <= signed_imm && signed_imm <= 32767);
+            imm = signed_imm;
 
         } else if (v[1] == "addi") {
             // プログラム全体の評価値 (適当にnopとしておく)
@@ -176,11 +186,13 @@ unsigned int Writer::encode(vector<string> &v) {
             rs = reg_name.at(v[3]);
 
             if (isnum(v[4])) { // 即値のとき
-                imm = stoi(v[4]);
+                signed_imm = stoi(v[4]);
             } else {
-                imm = parser->label_map.at(v[4]);
-                assert(imm <= 32767);
+                signed_imm = parser->label_map.at(v[4]);
             }
+
+            assert(-32768 <= signed_imm && signed_imm <= 32767);
+            imm = signed_imm;
 
         } else if (v[1] == "ori") {
             op = 0x4;
@@ -197,14 +209,20 @@ unsigned int Writer::encode(vector<string> &v) {
         } else if (v[1] == "lw") {
             op = 0x6;
             rt = reg_name.at(v[2]);
-            imm = stoi(v[3]);
+            signed_imm = stoi(v[3]);
             rs = reg_name.at(v[4]);
+
+            assert(-32768 <= signed_imm && signed_imm <= 32767);
+            imm = signed_imm;
 
         } else if (v[1] == "sw") {
             op = 0x7;
             rt = reg_name.at(v[2]);
-            imm = stoi(v[3]);
+            signed_imm = stoi(v[3]);
             rs = reg_name.at(v[4]);
+
+            assert(-32768 <= signed_imm && signed_imm <= 32767);
+            imm = signed_imm;
 
         } else if (v[1] == "in") {
             op = 0x8;
@@ -225,6 +243,7 @@ unsigned int Writer::encode(vector<string> &v) {
             imm = 0x0;
 
         }
+
         op &= 0b111111;
         rs &= 0b11111;
         rt &= 0b11111;
@@ -236,23 +255,28 @@ unsigned int Writer::encode(vector<string> &v) {
     // opcode 31-26, rs 25-21, c2 20-13, c1 12-0
     else if (v[0] == "II") {
         unsigned int op, rs, c1, c2;
+        int signed_c1, signed_c2;
 
         if (v[1] == "beqi") {
             op = 0x30;
             rs = reg_name.at(v[2]);
-            c2 = stoi(v[3]);
+            signed_c2 = stoi(v[3]);
 
             // 相対アドレス
-            c1 = parser->label_map.at(v[4]) - (current_num + 1);
+            signed_c1 = parser->label_map.at(v[4]) - (current_num + 1);
 
         } else if (v[1] == "blti") {
             op = 0x38;
             rs = reg_name.at(v[2]);
-            c2 = stoi(v[3]);
+            signed_c2 = stoi(v[3]);
 
             // 相対アドレス
-            c1 = parser->label_map.at(v[4]) - (current_num + 1);
+            signed_c1 = parser->label_map.at(v[4]) - (current_num + 1);
         }
+        assert(-128 <= signed_c2 && signed_c2 <= 127);
+        assert(-4096 <= signed_c1 && signed_c1 <= 4095);
+        c1 = signed_c1;
+        c2 = signed_c2;
 
         op &= 0b111111;
         rs &= 0b11111;
@@ -268,6 +292,11 @@ unsigned int Writer::encode(vector<string> &v) {
         unsigned int op, rs, rt, rd, shamt, funct;
 
         if (v[1] == "fadd") {
+            // プログラム全体の評価値 (適当にnopとしておく)
+            if (v[2] == "%g0") {
+                return 0;
+            }
+
             op = 0xb;
             rd = freg_name.at(v[2]);
             rs = freg_name.at(v[3]);
@@ -347,58 +376,61 @@ unsigned int Writer::encode(vector<string> &v) {
     // opcode 31-26, rs 25-21, rt 20-16, imm 15-0
     else if (v[0] == "FI") {
         unsigned int op, rs, rt, imm;
+        int signed_imm;
 
         if (v[1] == "fbeq") {
             op = 0x27;
             rs = freg_name.at(v[2]);
             rt = freg_name.at(v[3]);
             // 相対アドレス
-            imm = parser->label_map.at(v[4]) - (current_num + 1);
+            signed_imm = parser->label_map.at(v[4]) - (current_num + 1);
 
         } else if (v[1] == "fbne") {
             op = 0x28;
             rs = freg_name.at(v[2]);
             rt = freg_name.at(v[3]);
             // 相対アドレス
-            imm = parser->label_map.at(v[4]) - (current_num + 1);
+            signed_imm = parser->label_map.at(v[4]) - (current_num + 1);
 
         } else if (v[1] == "fblt") {
             op = 0x29;
             rs = freg_name.at(v[2]);
             rt = freg_name.at(v[3]);
             // 相対アドレス
-            imm = parser->label_map.at(v[4]) - (current_num + 1);
+            signed_imm = parser->label_map.at(v[4]) - (current_num + 1);
 
         } else if (v[1] == "flw") {
             op = 0x14;
             rt = freg_name.at(v[2]);
-            imm = stoi(v[3]);
+            signed_imm = stoi(v[3]);
             rs = reg_name.at(v[4]);
 
         } else if (v[1] == "fsw") {
             op = 0x15;
             rt = freg_name.at(v[2]);
-            imm = stoi(v[3]);
+            signed_imm = stoi(v[3]);
             rs = reg_name.at(v[4]);
 
         } else if (v[1] == "ftoi") {
             op = 0x16;
             rt = reg_name.at(v[2]);
             rs = freg_name.at(v[3]);
-            imm = 0x0;
+            signed_imm = 0x0;
 
         } else if (v[1] == "itof") {
             op = 0x17;
             rt = freg_name.at(v[2]);
             rs = reg_name.at(v[3]);
-            imm = 0x0;
+            signed_imm = 0x0;
 
         } else if (v[1] == "floor") {
             op = 0x18;
             rt = freg_name.at(v[2]);
             rs = freg_name.at(v[3]);
-            imm = 0x0;
+            signed_imm = 0x0;
         }
+        assert(-32768 <= signed_imm && signed_imm <= 32767);
+        imm = signed_imm;
 
         op &= 0b111111;
         rs &= 0b11111;

@@ -18,11 +18,37 @@ min_caml_print_char:
 min_caml_read_int:
 	addi	%v0, %zero, 0
 	in	%v0
+	addi	%v1, %zero, 0
+	in	%v1
+	sll	%v1, %v1, 8
+	or	%v0, %v0, %v1
+	addi	%v1, %zero, 0
+	in	%v1
+	sll	%v1, %v1, 16
+	or	%v0, %v0, %v1
+	addi	%v1, %zero, 0
+	in	%v1
+	sll	%v1, %v1, 24
+	or	%v0, %v0, %v1
 	jr	%ra
 # min_caml_read_float
 min_caml_read_float:
-	fmov	%f0, %fzero
-	fin	%f0
+	addi	%v0, %zero, 0
+	in	%v0
+	addi	%v1, %zero, 0
+	in	%v1
+	sll	%v1, %v1, 8
+	or	%v0, %v0, %v1
+	addi	%v1, %zero, 0
+	in	%v1
+	sll	%v1, %v1, 16
+	or	%v0, %v0, %v1
+	addi	%v1, %zero, 0
+	in	%v1
+	sll	%v1, %v1, 24
+	or	%v0, %v0, %v1
+	sw	%v0, 0(%hp)
+	flw	%f0, 0(%hp)
 	jr	%ra
 #  min_caml_create_array
 min_caml_create_array:
@@ -74,7 +100,7 @@ create_float_extarray_cont:
 	j	create_float_extarray_loop
 # ------------ body ---------------------------
 inprod.32:
-	blti	%a0, 0, bgti_else.76
+	blti	%a0, 0, bgti_else.130
 	add	%at, %v0, %a0
 	flw	%f0, 0(%at)
 	add	%at, %v1, %a0
@@ -82,15 +108,57 @@ inprod.32:
 	fmul	%f0, %f0, %f1
 	addi	%a0, %a0, -1
 	fsw	%f0, 0(%sp)
-	sw	%ra, 1(%sp)
-	addi	%sp, %sp, 2
+	blti	%a0, 0, bgti_else.131
+	add	%at, %v0, %a0
+	flw	%f1, 0(%at)
+	add	%at, %v1, %a0
+	flw	%f2, 0(%at)
+	fmul	%f1, %f1, %f2
+	addi	%a0, %a0, -1
+	fsw	%f1, 1(%sp)
+	blti	%a0, 0, bgti_else.133
+	add	%at, %v0, %a0
+	flw	%f2, 0(%at)
+	add	%at, %v1, %a0
+	flw	%f3, 0(%at)
+	fmul	%f2, %f2, %f3
+	addi	%a0, %a0, -1
+	fsw	%f2, 2(%sp)
+	blti	%a0, 0, bgti_else.135
+	add	%at, %v0, %a0
+	flw	%f3, 0(%at)
+	add	%at, %v1, %a0
+	flw	%f4, 0(%at)
+	fmul	%f3, %f3, %f4
+	addi	%a0, %a0, -1
+	fsw	%f3, 3(%sp)
+	sw	%ra, 4(%sp)
+	addi	%sp, %sp, 5
 	jal	inprod.32
-	addi	%sp, %sp, -2
-	lw	%ra, 1(%sp)
+	addi	%sp, %sp, -5
+	lw	%ra, 4(%sp)
+	flw	%f1, 3(%sp)
+	fadd	%f0, %f1, %f0
+	j	bgti_cont.136
+bgti_else.135:
+	flw	%f0, 3(%zero)
+bgti_cont.136:
+	flw	%f1, 2(%sp)
+	fadd	%f0, %f1, %f0
+	j	bgti_cont.134
+bgti_else.133:
+	flw	%f0, 3(%zero)
+bgti_cont.134:
+	flw	%f1, 1(%sp)
+	fadd	%f0, %f1, %f0
+	j	bgti_cont.132
+bgti_else.131:
+	flw	%f0, 3(%zero)
+bgti_cont.132:
 	flw	%f1, 0(%sp)
 	fadd	%f0, %f1, %f0
 	jr	%ra
-bgti_else.76:
+bgti_else.130:
 	flw	%f0, 3(%zero)
 	jr	%ra
 .global	min_caml_start
@@ -124,16 +192,34 @@ min_caml_start:
 	fsw	%f0, 1(%v1)
 	flw	%f0, 0(%zero)
 	fsw	%f0, 2(%v1)
-	addi	%a0, %zero, 2
 	lw	%v0, 0(%sp)
-	sw	%ra, 1(%sp)
-	addi	%sp, %sp, 2
+	flw	%f0, 2(%v0)
+	flw	%f1, 2(%v1)
+	fmul	%f0, %f0, %f1
+	flw	%f1, 1(%v0)
+	flw	%f2, 1(%v1)
+	fmul	%f1, %f1, %f2
+	flw	%f2, 0(%v0)
+	flw	%f3, 0(%v1)
+	fmul	%f2, %f2, %f3
+	addi	%a0, %zero, -1
+	fsw	%f0, 1(%sp)
+	fsw	%f1, 2(%sp)
+	fsw	%f2, 3(%sp)
+	sw	%ra, 4(%sp)
+	addi	%sp, %sp, 5
 	jal	inprod.32
-	addi	%sp, %sp, -2
-	lw	%ra, 1(%sp)
-	sw	%ra, 1(%sp)
-	addi	%sp, %sp, 2
+	addi	%sp, %sp, -5
+	lw	%ra, 4(%sp)
+	flw	%f1, 3(%sp)
+	fadd	%f0, %f1, %f0
+	flw	%f1, 2(%sp)
+	fadd	%f0, %f1, %f0
+	flw	%f1, 1(%sp)
+	fadd	%f0, %f1, %f0
+	sw	%ra, 4(%sp)
+	addi	%sp, %sp, 5
 	jal	min_caml_print_float
-	addi	%sp, %sp, -2
-	lw	%ra, 1(%sp)
+	addi	%sp, %sp, -5
+	lw	%ra, 4(%sp)
 	ret
