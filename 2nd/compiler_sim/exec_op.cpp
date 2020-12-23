@@ -17,50 +17,50 @@ int exec_op(op_info op, bool print_calc, bool use_fpu)
     fi frs, frt, frd;
     if (op.opcode == "add")
     {
-        rs = cur_env.GPR[op.opland_bit[1]];
-        rt = cur_env.GPR[op.opland_bit[2]];
+        rs = cur_env.REG[op.opland_bit[1]].i;
+        rt = cur_env.REG[op.opland_bit[2]].i;
         rd = rs + rt;
-        cur_env.GPR[op.opland_bit[0]] = rd;
+        cur_env.REG[op.opland_bit[0]].i = rd;
 
         // if (print_calc)
         //     printf("add\t%d(%08X),\t%d(%08X),\t%d(%08X)\n", rd, rd, rs, rs, rt, rt);
     }
     else if (op.opcode == "sub")
     {
-        rs = cur_env.GPR[op.opland_bit[1]];
-        rt = cur_env.GPR[op.opland_bit[2]];
+        rs = cur_env.REG[op.opland_bit[1]].i;
+        rt = cur_env.REG[op.opland_bit[2]].i;
         rd = rs - rt;
-        cur_env.GPR[op.opland_bit[0]] = rd;
+        cur_env.REG[op.opland_bit[0]].i = rd;
 
         // if (print_calc)
         //     printf("sub\t%d(%08X),\t%d(%08X),\t%d(%08X)\n", rd, rd, rs, rs, rt, rt);
     }
     else if (op.opcode == "and")
     {
-        rs = cur_env.GPR[op.opland_bit[1]];
-        rt = cur_env.GPR[op.opland_bit[2]];
+        rs = cur_env.REG[op.opland_bit[1]].i;
+        rt = cur_env.REG[op.opland_bit[2]].i;
         rd = rs & rt;
-        cur_env.GPR[op.opland_bit[0]] = rd;
+        cur_env.REG[op.opland_bit[0]].i = rd;
 
         // if (print_calc)
         //     printf("and\t%d(%08X),\t%d(%08X),\t%d(%08X)\n", rd, rd, rs, rs, rt, rt);
     }
     else if (op.opcode == "or")
     {
-        rs = cur_env.GPR[op.opland_bit[1]];
-        rt = cur_env.GPR[op.opland_bit[2]];
+        rs = cur_env.REG[op.opland_bit[1]].i;
+        rt = cur_env.REG[op.opland_bit[2]].i;
         rd = rs | rt;
-        cur_env.GPR[op.opland_bit[0]] = rd;
+        cur_env.REG[op.opland_bit[0]].i = rd;
 
         // if (print_calc)
         //     printf("or\t%d(%08X),\t%d(%08X),\t%d(%08X)\n", rd, rd, rs, rs, rt, rt);
     }
     else if (op.opcode == "nor")
     {
-        rs = cur_env.GPR[op.opland_bit[1]];
-        rt = cur_env.GPR[op.opland_bit[2]];
+        rs = cur_env.REG[op.opland_bit[1]].i;
+        rt = cur_env.REG[op.opland_bit[2]].i;
         rd = ~(rs | rt);
-        cur_env.GPR[op.opland_bit[0]] = rd;
+        cur_env.REG[op.opland_bit[0]].i = rd;
 
         // if (print_calc)
         //     printf("nor\t%d(%08X),\t%d(%08X),\t%d(%08X)\n", rd, rd, rs, rs, rt, rt);
@@ -82,20 +82,20 @@ int exec_op(op_info op, bool print_calc, bool use_fpu)
     }
     else if (op.opcode == "sll")
     {
-        rt = cur_env.GPR[op.opland_bit[1]];
+        rt = cur_env.REG[op.opland_bit[1]].i;
         imm = op.opland_bit[2];
         rd = rt << imm;
-        cur_env.GPR[op.opland_bit[0]] = rd;
+        cur_env.REG[op.opland_bit[0]].i = rd;
 
         // if (print_calc)
         //     printf("sll\t%d(%08X),\t%d(%08X),\t%d(%08X)\n", rd, rd, rt, rt, imm, imm);
     }
     else if (op.opcode == "srl")
     {
-        rt = cur_env.GPR[op.opland_bit[1]];
+        rt = cur_env.REG[op.opland_bit[1]].i;
         imm = op.opland_bit[2];
         rd = rt >> imm;
-        cur_env.GPR[op.opland_bit[0]] = rd;
+        cur_env.REG[op.opland_bit[0]].i = rd;
 
         // if (print_calc)
         //     printf("srl\t%d(%08X),\t%d(%08X),\t%d(%08X)\n", rd, rd, rt, rt, imm, imm);
@@ -114,8 +114,8 @@ int exec_op(op_info op, bool print_calc, bool use_fpu)
     }
     else if (op.opcode == "blt")
     {
-        rs = cur_env.GPR[op.opland_bit[0]];
-        rt = cur_env.GPR[op.opland_bit[1]];
+        rs = cur_env.REG[op.opland_bit[0]].i;
+        rt = cur_env.REG[op.opland_bit[1]].i;
         if (rs < rt)
             cur_opnum = posbc2pos[op.opland_bit[2]] - 2;
 
@@ -124,7 +124,7 @@ int exec_op(op_info op, bool print_calc, bool use_fpu)
     }
     else if (op.opcode == "blti")
     {
-        rs = cur_env.GPR[op.opland_bit[0]];
+        rs = cur_env.REG[op.opland_bit[0]].i;
         imm = op.opland_bit[1];
         if (rs < imm)
             cur_opnum = posbc2pos[op.opland_bit[2]] - 2;
@@ -134,7 +134,7 @@ int exec_op(op_info op, bool print_calc, bool use_fpu)
     }
     else if (op.opcode == "jr")
     {
-        rs = cur_env.GPR[op.opland_bit[0]];
+        rs = cur_env.REG[op.opland_bit[0]].i;
         if (ops[posbc2pos[rs] - 1].type == 1)
             cur_opnum = posbc2pos[rs] - 2;
         else
@@ -152,8 +152,8 @@ int exec_op(op_info op, bool print_calc, bool use_fpu)
     }
     else if (op.opcode == "fmov")
     {
-        frs.f = cur_env.FPR[op.opland_bit[1]];
-        cur_env.FPR[op.opland_bit[0]] = frs.f;
+        frs = cur_env.REG[op.opland_bit[1]];
+        cur_env.REG[op.opland_bit[0]] = frs;
         // if (print_calc)
         //     printf("fmov\t%f(%08X),\t%f(%08X)\n", frs.f, frs.i, frs.f, frs.i);
     }
@@ -166,7 +166,7 @@ int exec_op(op_info op, bool print_calc, bool use_fpu)
     }
     else if (op.opcode == "jal")
     {
-        cur_env.GPR[31] = op.op_idx + 1;
+        cur_env.REG[31].i = op.op_idx + 1;
         cur_opnum = posbc2pos[op.opland_bit[0]] - 2;
 
         // if (print_calc)
@@ -174,8 +174,8 @@ int exec_op(op_info op, bool print_calc, bool use_fpu)
     }
     else if (op.opcode == "jalr")
     {
-        rs = cur_env.GPR[op.opland_bit[0]];
-        cur_env.GPR[31] = op.op_idx + 1;
+        rs = cur_env.REG[op.opland_bit[0]].i;
+        cur_env.REG[31].i = op.op_idx + 1;
         if (ops[posbc2pos[rs] - 1].type == 1)
             cur_opnum = posbc2pos[rs] - 2;
         else
@@ -186,8 +186,8 @@ int exec_op(op_info op, bool print_calc, bool use_fpu)
     }
     else if (op.opcode == "beq")
     {
-        rs = cur_env.GPR[op.opland_bit[0]];
-        rt = cur_env.GPR[op.opland_bit[1]];
+        rs = cur_env.REG[op.opland_bit[0]].i;
+        rt = cur_env.REG[op.opland_bit[1]].i;
         if (rs == rt)
             cur_opnum = posbc2pos[op.opland_bit[2]] - 2;
 
@@ -196,7 +196,7 @@ int exec_op(op_info op, bool print_calc, bool use_fpu)
     }
     else if (op.opcode == "beqi")
     {
-        rs = cur_env.GPR[op.opland_bit[0]];
+        rs = cur_env.REG[op.opland_bit[0]].i;
         imm = op.opland_bit[1];
         if (rs == imm)
             cur_opnum = posbc2pos[op.opland_bit[2]] - 2;
@@ -206,8 +206,8 @@ int exec_op(op_info op, bool print_calc, bool use_fpu)
     }
     else if (op.opcode == "bne")
     {
-        rs = cur_env.GPR[op.opland_bit[0]];
-        rt = cur_env.GPR[op.opland_bit[1]];
+        rs = cur_env.REG[op.opland_bit[0]].i;
+        rt = cur_env.REG[op.opland_bit[1]].i;
         if (rs != rt)
             cur_opnum = posbc2pos[op.opland_bit[2]] - 2;
 
@@ -216,10 +216,10 @@ int exec_op(op_info op, bool print_calc, bool use_fpu)
     }
     else if (op.opcode == "addi")
     {
-        rs = cur_env.GPR[op.opland_bit[1]];
+        rs = cur_env.REG[op.opland_bit[1]].i;
         imm = op.opland_bit[2];
         rd = rs + imm;
-        cur_env.GPR[op.opland_bit[0]] = rd;
+        cur_env.REG[op.opland_bit[0]].i = rd;
 
         // if (print_calc)
         //     printf("addi\t%d(%08X),\t%d(%08X),\t%d(%08X)\n", rd, rd, rs, rs, imm, imm);
@@ -253,10 +253,10 @@ int exec_op(op_info op, bool print_calc, bool use_fpu)
     }
     else if (op.opcode == "ori")
     {
-        rs = cur_env.GPR[op.opland_bit[1]];
+        rs = cur_env.REG[op.opland_bit[1]].i;
         imm = op.opland_bit[2];
         rd = rs | imm;
-        cur_env.GPR[op.opland_bit[0]] = rd;
+        cur_env.REG[op.opland_bit[0]].i = rd;
 
         // if (print_calc)
         //     printf("ori\t%d(%08X),\t%d(%08X),\t%d(%08X)\n", rd, rd, rs, rs, imm, imm);
@@ -265,26 +265,26 @@ int exec_op(op_info op, bool print_calc, bool use_fpu)
     {
         imm = op.opland_bit[1];
         rd = imm << 16;
-        cur_env.GPR[op.opland_bit[0]] = rd;
+        cur_env.REG[op.opland_bit[0]].i = rd;
 
         // if (print_calc)
         //     printf("lui\t%d(%08X),\t%d(%08X)\n", rd, rd, imm, imm);
     }
     else if (op.opcode == "lw")
     {
-        rs = cur_env.GPR[op.opland_bit[1]];
+        rs = cur_env.REG[op.opland_bit[1]].i;
         sp = rs + op.offset;
         rd = stack[sp].first;
-        cur_env.GPR[op.opland_bit[0]] = rd;
+        cur_env.REG[op.opland_bit[0]].i = rd;
 
         // if (print_calc)
         //     printf("lw\t%d(%08X),\tstack[%d(%08X)(%d(%08X)) = %d(%08X)]\n", rd, rd, op.offset, op.offset, rs, rs, sp, sp);
     }
     else if (op.opcode == "sw")
     {
-        rt = cur_env.GPR[op.opland_bit[1]];
+        rt = cur_env.REG[op.opland_bit[1]].i;
         sp = rt + op.offset;
-        rs = cur_env.GPR[op.opland_bit[0]];
+        rs = cur_env.REG[op.opland_bit[0]].i;
         stack[sp].first = rs;
         stack[sp].second = cur_env.PC;
 
@@ -298,11 +298,11 @@ int exec_op(op_info op, bool print_calc, bool use_fpu)
             printf("too many in inst\n");
             return 1;
         }
-        rt = cur_env.GPR[op.opland_bit[0]];
+        rt = cur_env.REG[op.opland_bit[0]].i;
         rt = rt & 0xFFFFFF00;
         rs = in_bytes[cur_in] & 0xFF;
         rd = rt + rs;
-        cur_env.GPR[op.opland_bit[0]] = rd;
+        cur_env.REG[op.opland_bit[0]].i = rd;
         cur_in++;
 
         // if (print_calc)
@@ -315,11 +315,11 @@ int exec_op(op_info op, bool print_calc, bool use_fpu)
             printf("too many in inst\n");
             return 1;
         }
-        frt.f = cur_env.FPR[op.opland_bit[0]];
+        frt = cur_env.REG[op.opland_bit[0]];
         frt.i = frt.i & 0xFFFFFF00;
         frs.i = in_bytes[cur_in] & 0xFF;
         frd.i = frt.i + frs.i;
-        cur_env.FPR[op.opland_bit[0]] = frd.f;
+        cur_env.REG[op.opland_bit[0]] = frd;
         cur_in++;
 
         // if (print_calc)
@@ -327,7 +327,7 @@ int exec_op(op_info op, bool print_calc, bool use_fpu)
     }
     else if (op.opcode == "out")
     {
-        rt = cur_env.GPR[op.opland_bit[0]];
+        rt = cur_env.REG[op.opland_bit[0]].i;
         temp = rt & 0xFF;
         out_bytes.push_back(temp);
 
@@ -336,85 +336,85 @@ int exec_op(op_info op, bool print_calc, bool use_fpu)
     }
     else if (op.opcode == "fadd")
     {
-        frs.f = cur_env.FPR[op.opland_bit[1]];
-        frt.f = cur_env.FPR[op.opland_bit[2]];
+        frs = cur_env.REG[op.opland_bit[1]];
+        frt = cur_env.REG[op.opland_bit[2]];
         // if (use_fpu)
         frd.f = fadd(frs, frt);
         // else
         // frd.f = frs.f + frt.f;
-        cur_env.FPR[op.opland_bit[0]] = frd.f;
+        cur_env.REG[op.opland_bit[0]] = frd;
 
         // if (print_calc)
         //     printf("fadd\t%f(%08X),\t%f(%08X),\t%f(%08X)\n", frd.f, frd.i, frs.f, frs.i, frt.f, frt.i);
     }
     else if (op.opcode == "fsub")
     {
-        frs.f = cur_env.FPR[op.opland_bit[1]];
-        frt.f = cur_env.FPR[op.opland_bit[2]];
+        frs = cur_env.REG[op.opland_bit[1]];
+        frt = cur_env.REG[op.opland_bit[2]];
         // if (use_fpu)
         frd.f = fsub(frs, frt);
         // else
         // frd.f = frs.f - frt.f;
-        cur_env.FPR[op.opland_bit[0]] = frd.f;
+        cur_env.REG[op.opland_bit[0]] = frd;
 
         // if (print_calc)
         //     printf("fsub\t%f(%08X),\t%f(%08X),\t%f(%08X)\n", frd.f, frd.i, frs.f, frs.i, frt.f, frt.i);
     }
     else if (op.opcode == "fmul")
     {
-        frs.f = cur_env.FPR[op.opland_bit[1]];
-        frt.f = cur_env.FPR[op.opland_bit[2]];
+        frs = cur_env.REG[op.opland_bit[1]];
+        frt = cur_env.REG[op.opland_bit[2]];
         // if (use_fpu)
         frd.f = fmul(frs, frt);
         // else
         // frd.f = frs.f * frt.f;
-        cur_env.FPR[op.opland_bit[0]] = frd.f;
+        cur_env.REG[op.opland_bit[0]] = frd;
 
         // if (print_calc)
         //     printf("fmul\t%f(%08X),\t%f(%08X),\t%f(%08X)\n", frd.f, frd.i, frs.f, frs.i, frt.f, frt.i);
     }
     else if (op.opcode == "fdiv")
     {
-        frs.f = cur_env.FPR[op.opland_bit[1]];
-        frt.f = cur_env.FPR[op.opland_bit[2]];
+        frs = cur_env.REG[op.opland_bit[1]];
+        frt = cur_env.REG[op.opland_bit[2]];
         // if (use_fpu)
         frd.f = fdiv(frs, frt);
         // else
         // frd.f = frs.f / frt.f;
-        cur_env.FPR[op.opland_bit[0]] = frd.f;
+        cur_env.REG[op.opland_bit[0]] = frd;
 
         // if (print_calc)
         //     printf("fdiv\t%f(%08X),\t%f(%08X),\t%f(%08X)\n", frd.f, frd.i, frs.f, frs.i, frt.f, frt.i);
     }
     else if (op.opcode == "fneg")
     {
-        frt.f = cur_env.FPR[op.opland_bit[1]];
+        frt = cur_env.REG[op.opland_bit[1]];
         frd.f = -frt.f;
-        cur_env.FPR[op.opland_bit[0]] = frd.f;
+        cur_env.REG[op.opland_bit[0]] = frd;
 
         // if (print_calc)
         //     printf("fneg\t%f(%08X),\t%f(%08X)\n", frd.f, frd.i, frt.f, frt.i);
     }
     else if (op.opcode == "fabs")
     {
-        frt.f = cur_env.FPR[op.opland_bit[1]];
+        frt = cur_env.REG[op.opland_bit[1]];
         if (frt.f < 0)
             frd.f = -frt.f;
         else
             frd.f = frt.f;
-        cur_env.FPR[op.opland_bit[0]] = frd.f;
+        cur_env.REG[op.opland_bit[0]] = frd;
 
         // if (print_calc)
         //     printf("fabs\t%f(%08X),\t%f(%08X)\n", frd.f, frd.i, frt.f, frt.i);
     }
     else if (op.opcode == "fsqrt")
     {
-        frt.f = cur_env.FPR[op.opland_bit[1]];
+        frt = cur_env.REG[op.opland_bit[1]];
         // if (use_fpu)
         frd.f = fsqrt(frt);
         // else
         //     frd.f = sqrtf(frt.f);
-        cur_env.FPR[op.opland_bit[0]] = frd.f;
+        cur_env.REG[op.opland_bit[0]] = frd;
 
         // if (print_calc)
         //     printf("fsqrt\t%f(%08X),\t%f(%08X)\n", frd.f, frd.i, frt.f, frt.i);
@@ -436,8 +436,8 @@ int exec_op(op_info op, bool print_calc, bool use_fpu)
     }
     else if (op.opcode == "fbeq")
     {
-        frs.f = cur_env.FPR[op.opland_bit[0]];
-        frt.f = cur_env.FPR[op.opland_bit[1]];
+        frs = cur_env.REG[op.opland_bit[0]];
+        frt = cur_env.REG[op.opland_bit[1]];
         if (frs.f == frt.f)
             cur_opnum = posbc2pos[op.opland_bit[2]] - 2;
 
@@ -446,8 +446,8 @@ int exec_op(op_info op, bool print_calc, bool use_fpu)
     }
     else if (op.opcode == "fbne")
     {
-        frs.f = cur_env.FPR[op.opland_bit[0]];
-        frt.f = cur_env.FPR[op.opland_bit[1]];
+        frs = cur_env.REG[op.opland_bit[0]];
+        frt = cur_env.REG[op.opland_bit[1]];
         if (frs.f != frt.f)
             cur_opnum = posbc2pos[op.opland_bit[2]] - 2;
 
@@ -456,8 +456,8 @@ int exec_op(op_info op, bool print_calc, bool use_fpu)
     }
     else if (op.opcode == "fblt")
     {
-        frs.f = cur_env.FPR[op.opland_bit[0]];
-        frt.f = cur_env.FPR[op.opland_bit[1]];
+        frs = cur_env.REG[op.opland_bit[0]];
+        frt = cur_env.REG[op.opland_bit[1]];
         if (frs.f < frt.f)
             cur_opnum = posbc2pos[op.opland_bit[2]] - 2;
 
@@ -478,19 +478,19 @@ int exec_op(op_info op, bool print_calc, bool use_fpu)
     }
     else if (op.opcode == "flw")
     {
-        rs = cur_env.GPR[op.opland_bit[1]];
+        rs = cur_env.REG[op.opland_bit[1]].i;
         sp = rs + op.offset;
         frd.i = stack[sp].first;
-        cur_env.FPR[op.opland_bit[0]] = frd.f;
+        cur_env.REG[op.opland_bit[0]] = frd;
 
         // if (print_calc)
         //     printf("lw\t%f(%08X),\tstack[%d(%08X)(%d(%08X)) = %d(%08X)]\n", frd.f, frd.i, op.offset, op.offset, rs, rs, sp, sp);
     }
     else if (op.opcode == "fsw")
     {
-        rt = cur_env.GPR[op.opland_bit[1]];
+        rt = cur_env.REG[op.opland_bit[1]].i;
         sp = rt + op.offset;
-        frs.f = cur_env.FPR[op.opland_bit[0]];
+        frs = cur_env.REG[op.opland_bit[0]];
         stack[sp].first = frs.i;
         stack[sp].second = cur_env.PC;
 
@@ -499,27 +499,27 @@ int exec_op(op_info op, bool print_calc, bool use_fpu)
     }
     else if (op.opcode == "ftoi")
     {
-        frs.f = cur_env.FPR[op.opland_bit[1]];
+        frs = cur_env.REG[op.opland_bit[1]];
         rt = ftoi(frs);
-        cur_env.GPR[op.opland_bit[0]] = rt;
+        cur_env.REG[op.opland_bit[0]].i = rt;
 
         // if (print_calc)
         //     printf("ftoi\t%d(%08X),\t%f(%08X)\n", rt, rt, frs.f, frs.i);
     }
     else if (op.opcode == "itof")
     {
-        rs = cur_env.GPR[op.opland_bit[1]];
+        rs = cur_env.REG[op.opland_bit[1]].i;
         frt.f = itof(rs);
-        cur_env.FPR[op.opland_bit[0]] = frt.f;
+        cur_env.REG[op.opland_bit[0]] = frt;
 
         // if (print_calc)
         //     printf("itof\t%f(%08X),\t%d(%08X)\n", frt.f, frt.i, rs, rs);
     }
     else if (op.opcode == "floor")
     {
-        frs.f = cur_env.FPR[op.opland_bit[1]];
+        frs = cur_env.REG[op.opland_bit[1]];
         frt.f = floor(frs);
-        cur_env.FPR[op.opland_bit[0]] = frt.f;
+        cur_env.REG[op.opland_bit[0]] = frt;
 
         // if (print_calc)
         //     printf("floor\t%f(%08X),\t%f(%08X)\n", frt.f, frt.i, frs.f, frs.i);

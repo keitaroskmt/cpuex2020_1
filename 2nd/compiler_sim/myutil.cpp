@@ -10,20 +10,16 @@
 // レジスタの状態を出力する
 void print_state()
 {
-    fi fpr[32];
-    for (int i = 0; i < 32; i++)
-        fpr[i].f = cur_env.FPR[i];
-
     printf("PC: %llu\nGPR\n", cur_env.PC);
     for (int i = 0; i < 32; i += 4)
     {
-        printf("%d-%d\t%d\t%d\t%d\t%d\n", i, i + 3, cur_env.GPR[i], cur_env.GPR[i + 1], cur_env.GPR[i + 2], cur_env.GPR[i + 3]);
+        printf("%d-%d\t%d\t%d\t%d\t%d\n", i, i + 3, cur_env.REG[i].i, cur_env.REG[i + 1].i, cur_env.REG[i + 2].i, cur_env.REG[i + 3].i);
     }
     printf("\nFPR FPCC: %s\n", cur_env.FPCC);
-    for (int i = 0; i < 32; i += 4)
+    for (int i = 32; i < 64; i += 4)
     {
-        printf("%d-%d\treal\t%f\t%f\t%f\t%f\n", i, i + 3, fpr[i].f, fpr[i + 1].f, fpr[i + 2].f, fpr[i + 3].f);
-        printf("\thex\t%08X\t%08X\t%08X\t%08X\n", fpr[i].i, fpr[i + 1].i, fpr[i + 2].i, fpr[i + 3].i);
+        printf("%d-%d\treal\t%f\t%f\t%f\t%f\n", i, i + 3, cur_env.REG[i].f, cur_env.REG[i + 1].f, cur_env.REG[i + 2].f, cur_env.REG[i + 3].f);
+        printf("\thex\t%08X\t%08X\t%08X\t%08X\n", cur_env.REG[i].i, cur_env.REG[i + 1].i, cur_env.REG[i + 2].i, cur_env.REG[i + 3].i);
     }
     printf("\n");
     return;
@@ -57,7 +53,7 @@ void print_time(clock_t start_time)
 {
     clock_t end_time = clock();
     const double time = static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC * 1000.0;
-    printf("time %.1lf[s]\n", time / 1000);
+    fprintf(stderr, "time %.1lf[s]\n", time / 1000);
 }
 
 // step実行時のコマンド取得
@@ -155,7 +151,8 @@ const std::map<std::string, int> reg_name = {
     {"%f28", 60},
     {"%f29", 61},
     {"%f30", 62},
-    {"%fzero", 63}};
+    {"%fzero", 63},
+    {"%g0", 64}};
 
 // 命令の実行数を保持する
 std::map<std::string, long long int> op_counter = {
