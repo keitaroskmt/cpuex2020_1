@@ -1,9 +1,0 @@
-Prog 
-fundef 
-body 
-	Let
-		(Ti4.7 : Int)
-		Int 10
-		AppDir
-			L (min_caml_print_int)
-			[Ti4.7]

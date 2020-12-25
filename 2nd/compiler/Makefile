@@ -1,7 +1,4 @@
 # Sumii's Makefile for Min-Caml (for GNU Make)
-# 
-# ack.mlなどのテストプログラムをtest/に用意してmake do_testを実行すると、
-# min-camlとocamlでコンパイル・実行した結果を自動で比較します。
 
 RESULT = min-caml
 NCSUFFIX = .opt
@@ -17,15 +14,6 @@ $(RESULT): debug-code top
 ##   .mliがコンパイルされてしまうので、両方ともdefault:の右辺に入れると
 ##   再make時に（.mliが変更されているので）.mlも再コンパイルされる
 clean:: nobackup
-
-# ↓もし実装を改造したら、それに合わせて変える
-# SOURCES = float.c type.ml id.ml m.ml s.ml \
-# syntax.ml parser.mly lexer.mll typing.mli typing.ml kNormal.mli kNormal.ml \
-# alpha.mli alpha.ml beta.mli beta.ml assoc.mli assoc.ml \
-# inline.mli inline.ml constFold.mli constFold.ml elim.mli elim.ml \
-# closure.mli closure.ml asm.mli asm.ml virtual.mli virtual.ml \
-# simm.mli simm.ml regAlloc.mli regAlloc.ml emit.mli emit.ml \
-# main.mli main_io.ml
 
 SOURCES = float.c type.ml id.ml m.ml s.ml \
 typing.mli typing.ml syntax.ml parser.mly lexer.mll kNormal.mli kNormal.ml \
@@ -45,17 +33,17 @@ output.ml main.mli main.ml
 # inprod inprod-rec inprod-loop matmul matmul-flat \
 # manyargs tmp
 
-TESTS = fib float_fib adder array_make array_put sin cos mandelbrot
+TESTS = fib float_fib adder array_make array_put sin cos
 
-do_test: $(TESTS:%=mytest/%.s)
+do_test: $(TESTS:%=../compiler_sim/assembly/%.s)
 
-.PRECIOUS: mytest/%.s
+.PRECIOUS: ../compiler_sim/assembly/%.s
 TRASH = $(TESTS:%=mytest/%.s) $(TESTS:%=mytest/%) $(TESTS:%=mytest/%.res) $(TESTS:%=mytest/%.ans) $(TESTS:%=mytest/%.cmp) \
 	$(TESTS:%=mytest/%.iter) $(TESTS:%=mytest/%.closure) $(TESTS:%=mytest/%.cse) $(TESTS:%=test/%.alpha) \
 	$(TESTS:%=mytest/%.knormal) $(TESTS:%=mytest/%.synt) $(TESTS:%=mytest/%.data)
 
-mytest/%.s: $(RESULT) mytest/%.ml
-	./$(RESULT) mytest/$*
+../compiler_sim/assembly/%.s: $(RESULT) ../compiler_sim/testcase/%.ml
+	./$(RESULT) ../compiler_sim/testcase/$*
 
 # do_test: $(TESTS:%=test/%.cmp)
 #
@@ -74,24 +62,5 @@ mytest/%.s: $(RESULT) mytest/%.ml
 # 	ocaml $< > $@
 # test/%.cmp: test/%.res test/%.ans
 # 	diff $^ > $@
-
-min-caml.html: main.mli ../ass/mytest/main_io.ml id.ml m.ml s.ml \
-		syntax.ml type.ml parser.mly lexer.mll typing.mli typing.ml kNormal.mli kNormal.ml \
-		alpha.mli alpha.ml beta.mli beta.ml assoc.mli assoc.ml \
-		inline.mli inline.ml constFold.mli constFold.ml elim.mli elim.ml \
-		closure.mli closure.ml asm.mli asm.ml virtual.mli virtual.ml \
-		simm.mli simm.ml regAlloc.mli regAlloc.ml emit.mli emit.ml
-	./to_sparc
-	caml2html -o min-caml.html $^
-	sed 's/.*<\/title>/MinCaml Source Code<\/title>/g' < min-caml.html > min-caml.tmp.html
-	mv min-caml.tmp.html min-caml.html
-	sed 's/charset=iso-8859-1/charset=euc-jp/g' < min-caml.html > min-caml.tmp.html
-	mv min-caml.tmp.html min-caml.html
-	ocaml str.cma anchor.ml < min-caml.html > min-caml.tmp.html
-	mv min-caml.tmp.html min-caml.html
-
-release: min-caml.html
-	rm -fr tmp ; mkdir tmp ; cd tmp ; cvs -d:ext:sumii@min-caml.cvs.sf.net://cvsroot/min-caml export -Dtomorrow min-caml ; tar cvzf ../min-caml.tar.gz min-caml ; cd .. ; rm -fr tmp
-	cp Makefile stub.c SPARC/libmincaml.S min-caml.html min-caml.tar.gz ../htdocs/
 
 include OCamlMakefile
