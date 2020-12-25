@@ -1,11 +1,15 @@
 #pragma once
 
+typedef union
+{
+    float f;
+    int i;
+} fi;
 // レジスタなどのコアの内部環境の保持
 typedef struct
 {
     unsigned long long int PC;
-    int GPR[32];
-    float FPR[32];
+    fi REG[65];
     char FPCC[9];
     unsigned int *DAT;
     int PJ;
@@ -25,12 +29,6 @@ typedef struct
     std::string label;
     std::string other;
 } op_info;
-
-typedef union
-{
-    float f;
-    int i;
-} fi;
 
 extern int cur_opnum, cur_in;
 extern std::vector<op_info> ops;

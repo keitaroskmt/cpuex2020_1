@@ -32,7 +32,7 @@ int exec_step(bool print_process, bool print_calc, bool print_bytecode, bool lab
 
 int main(int argc, char *argv[])
 {
-    // clock_t start_time = clock();
+    clock_t start_time = clock();
     int opt;
     // bool is_step = false;
     // bool is_stat = true;
@@ -188,8 +188,9 @@ int main(int argc, char *argv[])
 
     // printf("register state\n");
     // print_state();
-    printf("v0: %d\n", cur_env.GPR[reg_name.at("%v0")]);
-    printf("f0: %f\n", cur_env.FPR[reg_name.at("%f0") - 32]);
+    printf("%d\n", cur_env.REG[reg_name.at("%g0")].i);
+    printf("%f\n", cur_env.REG[reg_name.at("%g0")].f);
+    fprintf(stderr, "%llu\n", cur_env.PC);
     // if (is_stat)
     //     print_stats();
     // if (label_count)
@@ -200,7 +201,7 @@ int main(int argc, char *argv[])
 
     // if (debug_mode)
     // {
-    //     print_time(start_time);
+    print_time(start_time);
     //     printf("max sp: %d\nmax hp %d\n", max_sp, max_hp);
     // }
 
