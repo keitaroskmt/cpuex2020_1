@@ -28,7 +28,7 @@ module multicycle_cpu
      (*mark_debug = "true"*)wire [31:0] pc_wire;
      (*mark_debug = "true"*)wire [5:0] opcode;
      (*mark_debug = "true"*)wire [5:0] funct;
-     wire         UBusy;
+     //wire         UBusy;
      wire         IorD;
      wire         MemWrite;
      wire         IRWrite;
@@ -171,13 +171,13 @@ module multicycle_cpu
      assign regdst = (RegDst == 2'b00 ? {RegConcat[0],inst[20:16]} :(RegDst == 2'b01 ? {RegConcat[0],inst[15:11]} : 5'b11111));
      assign mem_to_reg = (MemtoReg == 2'b00 ? alu_out : (MemtoReg == 2'b01 ? data : (MemtoReg == 2'b10 ? pc : Indata )));
 
-     multi_control_unit mcu(opcode,funct,clk,rstn,UBusy,Rx_ready,IorD,MemWrite,IRWrite,PCWrite,Branch,ToggleEqual,PCSrc,ALUControl,FPUControl,ALUorFPU,ALUSrcB,ALUSrcA,AndiOri,RegWrite,RegDst,MemtoReg,ShiftD,Shift,BorL,RegConcat,Out,Tx_start,state);
+     multi_control_unit mcu(opcode,funct,clk,rstn,Rx_ready,IorD,MemWrite,IRWrite,PCWrite,Branch,ToggleEqual,PCSrc,ALUControl,FPUControl,ALUorFPU,ALUSrcB,ALUSrcA,AndiOri,RegWrite,RegDst,MemtoReg,ShiftD,Shift,BorL,RegConcat,Out,Tx_start,state);
      rams_dp_wf rf1(clk,RegWrite,regdst,mem_to_reg,op1,output_rf1);
      rams_dp_wf rf2(clk,RegWrite,regdst,mem_to_reg,op2,output_rf2);
 
      assign Indata = rdata_reg;
 
-     uart_tx ut(sdata[7:0],Tx_start,UBusy,txd,clk,rstn);
+     uart_tx_top utt(clk,rstn,Tx_start,sdata[7:0],txd) //,UBusy);
      uart_rx ur(rdata,Rx_ready,ferr,rxd,clk,rstn);
 
      //execute stage
