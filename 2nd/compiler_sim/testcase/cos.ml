@@ -191,7 +191,7 @@ in
 let rec rad x =
     x *. 0.017453293
 in
-let v1 = rad (read_float ()) in
+let v1 = rad 10.0 in
 let cos_v1 = cos v1
 in
 cos_v1

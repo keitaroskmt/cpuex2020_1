@@ -13587,8 +13587,8 @@ min_caml_start:
 	sw	%v0, 0(%k1)
 	lw	%v0, 4(%sp)
 	sw	%v0, 1(%k1)
-	addi	%v0, %zero, 64
-	addi	%v1, %zero, 64
+	addi	%v0, %zero, 2
+	addi	%v1, %zero, 2
 	sw	%ra, 6(%sp)
 	addi	%sp, %sp, 7
 	lw	%at, 0(%k1)

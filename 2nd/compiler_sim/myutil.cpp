@@ -53,7 +53,7 @@ void print_time(clock_t start_time)
 {
     clock_t end_time = clock();
     const double time = static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC * 1000.0;
-    fprintf(stderr, "time %.1lf[s]\n", time / 1000);
+    fprintf(stderr, "\tTime: %.1lf[s]\n", time / 1000);
 }
 
 // step実行時のコマンド取得

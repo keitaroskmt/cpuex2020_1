@@ -1,3 +1,314 @@
+(**************** グローバル変数の宣言 ****************)
+
+(* オブジェクトの個数 *)
+let n_objects = create_array 1 0 in
+
+(* オブジェクトのデータを入れるベクトル（最大60個）*)
+let objects = 
+  let dummy = create_array 0 0.0 in
+  create_array 60 (0, 0, 0, 0, dummy, dummy, false, dummy, dummy, dummy, dummy) in
+
+(* Screen の中心座標 *)
+let screen = create_array 3 0.0 in
+(* 視点の座標 *)
+let viewpoint = create_array 3 0.0 in
+(* 光源方向ベクトル (単位ベクトル) *)
+let light = create_array 3 0.0 in
+(* 鏡面ハイライト強度 (標準=255) *)
+let beam = create_array 1 255.0 in
+(* AND ネットワークを保持 *)
+let and_net = create_array 50 (create_array 1 (-1)) in
+(* OR ネットワークを保持 *)
+let or_net = create_array 1 (create_array 1 (and_net.(0))) in
+
+(* 以下、交差判定ルーチンの返り値格納用 *)
+(* solver の交点 の t の値 *)
+let solver_dist = create_array 1 0.0 in
+(* 交点の直方体表面での方向 *)
+let intsec_rectside = create_array 1 0 in
+(* 発見した交点の最小の t *)
+let tmin = create_array 1 (1000000000.0) in
+(* 交点の座標 *)
+let intersection_point = create_array 3 0.0 in
+(* 衝突したオブジェクト番号 *)
+let intersected_object_id = create_array 1 0 in
+(* 法線ベクトル *)
+let nvector = create_array 3 0.0 in
+(* 交点の色 *)
+let texture_color = create_array 3 0.0 in
+
+(* 計算中の間接受光強度を保持 *)
+let diffuse_ray = create_array 3 0.0 in
+(* スクリーン上の点の明るさ *)
+let rgb = create_array 3 0.0 in
+
+(* 画像サイズ *)
+let image_size = create_array 2 0 in
+(* 画像の中心 = 画像サイズの半分 *)
+let image_center = create_array 2 0 in
+(* 3次元上のピクセル間隔 *)
+let scan_pitch = create_array 1 0.0 in
+
+(* judge_intersectionに与える光線始点 *)
+let startp = create_array 3 0.0 in
+(* judge_intersection_fastに与える光線始点 *)
+let startp_fast = create_array 3 0.0 in
+
+(* 画面上のx,y,z軸の3次元空間上の方向 *)
+let screenx_dir = create_array 3 0.0 in
+let screeny_dir = create_array 3 0.0 in
+let screenz_dir = create_array 3 0.0 in
+
+(* 直接光追跡で使う光方向ベクトル *)
+let ptrace_dirvec  = create_array 3 0.0 in
+
+(* 間接光サンプリングに使う方向ベクトル *)
+let dirvecs =
+  let dummyf = create_array 0 0.0 in
+  let dummyff = create_array 0 dummyf in
+  let dummy_vs = create_array 0 (dummyf, dummyff) in
+  create_array 5 dummy_vs in
+
+(* 光源光の前処理済み方向ベクトル *)
+let light_dirvec =
+  let dummyf2 = create_array 0 0.0 in
+  let v3 = create_array 3 0.0 in
+  let consts = create_array 60 dummyf2 in
+  (v3, consts) in
+
+(* 鏡平面の反射情報 *)
+let reflections =
+  let dummyf3 = create_array 0 0.0 in
+  let dummyff3 = create_array 0 dummyf3 in
+  let dummydv = (dummyf3, dummyff3) in
+  create_array 180 (0, dummydv, 0.0) in
+
+(* reflectionsの有効な要素数 *) 
+
+let n_reflections = create_array 1 0 in
+let rec fequal e1 e2 = (e1 = e2)
+in
+let rec fless e1 e2 = e1 < e2
+in
+
+let rec fispos x = x > 0.0
+in
+let rec fisneg x = x < 0.0
+in
+let rec fiszero x = (x = 0.0)
+in
+
+let rec xor x y = if x then not y else y
+in
+
+let rec fhalf x = x *. 0.5
+in
+let rec fsqr x = x *. x
+in
+
+(*
+(* int -> float 中身同じbitを itofでハードウェア実装 *)
+(* float -> int 中身同じbitを ftoiでハードウェア実装 *)
+
+(* 8388608.0で割ったときの商 *)
+let rec int_of_float_sub1 x n =
+    if x < 8388608.0 then n
+    else int_of_float_sub1 (x -. 8388608.0) (n+1)
+in
+
+(* 8388608.0で割ったときのあまり *)
+let rec int_of_float_sub2 x =
+    if x < 8388608.0 then x
+    else int_of_float_sub2 (x -. 8388608.0)
+in
+
+(* 8388608をm回たす *)
+let rec int_of_float_sub3 m acm =
+    if m = 0 then acm
+    else int_of_float_sub3 (m-1) (8388608 + acm)
+in
+
+let rec int_of_float x =
+    let flag = x >= 0.0 in
+    let x_abs = fabs x in
+    let res =
+    (
+    if x_abs < 8388608.0 then ftoi (x_abs +. 8388608.0) - 1258291200
+    else
+        ftoi (int_of_float_sub2 x_abs +. 8388608.0) - 1258291200
+        + int_of_float_sub3 (int_of_float_sub1 x_abs 0) 0
+    ) in
+    if flag then res else -res
+in
+
+
+(* 8388608で割ったときの商 *)
+let rec float_of_int_sub1 x n =
+    if x < 8388608 then n
+    else float_of_int_sub1 (x - 8388608) (n+1)
+in
+
+(* 8388608で割ったときのあまり *)
+let rec float_of_int_sub2 x =
+    if x < 8388608 then x
+    else float_of_int_sub2 (x - 8388608)
+in
+
+(* 8388608.0をm回たす *)
+let rec float_of_int_sub3 m acm =
+    if m = 0 then acm
+    else float_of_int_sub3 (m-1) (8388608.0 +. acm)
+in
+
+let rec float_of_int x =
+    let flag = x > 0 in
+    let x_abs = if x < 0 then -x else x in
+    let res =
+    (
+    if x_abs < 8388608 then itof (x_abs + 1258291200) -. 8388608.0
+    else
+        itof (float_of_int_sub2 x_abs + 1258291200) -. 8388608.0
+        +. float_of_int_sub3 (float_of_int_sub1 x_abs 0) 0.0
+    ) in
+    if flag then res else fneg res
+in
+
+let rec floor x =
+    let flag = x >= 0.0 in
+    let x_abs = fabs x in
+    let res =
+        if x_abs >= 8388608.0 then x_abs else float_of_int (int_of_float x_abs) in
+    let res_ =
+        if flag then res else fneg res in
+    if res_ > x then res_ -. 1.0 else res_
+in
+*)
+
+let rec kernel_sin x =
+    let x2 = x *. x in
+    let x4 = x2 *. x2 in
+    x
+    -. 0.16666668 *. x *. x2
+    +. 0.008332824 *. x *. x4
+    -. 0.00019587841 *. x *. x2 *. x4
+in
+
+let rec kernel_cos x =
+    let x2 = x *. x in
+    let x4 = x2 *. x2 in
+    1.0
+    -. 0.5 *. x2
+    +. 0.04166368 *. x4
+    -. 0.0013695068 *. x2 *. x4
+in
+
+let rec kernel_atan x =
+    let x2 = x *. x in
+    let x4 = x2 *. x2 in
+    let x8 = x4 *. x4 in
+    x
+    -. 0.3333333 *. x *. x2
+    +. 0.2 *. x *. x4
+    -. 0.142857142 *. x *. x2 *. x4
+    +. 0.111111104 *. x *. x8
+    -. 0.08976446 *. x *. x2 *. x8
+    +. 0.060035485 *. x *. x4 *. x8
+in
+
+let rec reduction_2pi x =
+    let pi = 3.14159265358979 in
+    let pi2 = 2.0 *. pi in
+    let rec f s t = (* while (x >= p) *)
+        if s < t then t else f s (2.0 *. t) in
+    let p = f x pi2 in
+    let rec g s t = (* while (x >= pi2) *)
+        if s < pi2 then s else
+        if s >= t then g (s -. t) (t /. 2.0) else g s (t /. 2.0) in
+    g x p
+in
+
+(* tenuki
+let rec reduction_2pi x =
+    let pi = 3.14159265358979 in
+    let pi2 = 2.0 *. pi in
+    let d = floor (x /. pi2) in
+    x -. d *. pi2
+in
+*)
+
+let rec cos x =
+    let pi = 3.14159265358979 in
+    let flag = true in
+    let x = reduction_2pi (fabs x) in
+    (* if (x >= pi) *)
+    let flag = if x >= pi then not flag else flag in
+    let x = if x >= pi then x -. pi else x in
+    (* if (x >= pi / 2) *)
+    let flag = if x >= pi /. 2.0 then not flag else flag in
+    let x = if x >= pi /. 2.0 then pi -. x else x in
+    let res = if x <= (pi /. 4.0) then kernel_cos x else kernel_sin (pi /. 2.0 -. x) in
+    if flag then res else fneg res
+in
+
+let rec sin x =
+    let pi = 3.14159265358979 in
+    let flag = x >= 0.0 in
+    let x = reduction_2pi (fabs x) in
+    (* if (x >= pi) *)
+    let flag = if x >= pi then not flag else flag in
+    let x = if x >= pi then x -. pi else x in
+    (* if (x >= pi / 2 *)
+    let x = if x >= pi /. 2.0 then pi -. x else x in
+    let res = if x <= (pi /. 4.0) then kernel_sin x else kernel_cos (pi /. 2.0 -. x) in
+    if flag then res else fneg res
+in
+
+let rec atan x =
+    let pi = 3.14159265358979 in
+    let flag = x >= 0.0 in
+    let x_abs = fabs x in
+    if x_abs < 0.4375 then kernel_atan x
+    else (
+        let res =
+        if x_abs < 2.4375 then pi /. 4.0 +. kernel_atan ((x_abs -. 1.0) /. (x_abs +. 1.0))
+        else pi /. 2.0 -. kernel_atan (1.0 /. x_abs) in
+        if flag then res else fneg res
+    )
+in
+
+(* 10で割った商 *)
+let rec print_int_sub1 x n =
+    if x < 10 then n else print_int_sub1 (x - 10) (n + 1)
+in
+
+(* 10で割ったあまり *)
+let rec print_int_sub2 x =
+    if x < 10 then x else print_int_sub2 (x - 10)
+in
+
+let rec print_int x =
+    let d1 = print_int_sub1 x 0 in
+    let r1 = print_int_sub2 x in
+    if d1 > 0 then
+    (
+        let d2 = print_int_sub1 d1 0 in
+        let r2 = print_int_sub2 d1 in
+        if d2 > 0 then
+        (
+            let r3 = print_int_sub2 d2 in
+            print_char (48 + r3);
+            print_char (48 + r2);
+            print_char (48 + r1)
+        )
+        else (
+            print_char (48 + r2);
+            print_char (48 + r1)
+        )
+    )
+    else (
+        print_char (48 + r1)
+    )
+in
 (****************************************************************)
 (*                                                              *)
 (* Ray Tracing Program for (Mini) Objective Caml                *)
@@ -2305,6 +2616,6 @@ let rec rt size_x size_y =
 )
 in
 
-let _ = rt 64 64
+let _ = rt 32 32
 
 in 0

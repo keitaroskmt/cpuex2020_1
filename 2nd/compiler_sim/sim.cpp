@@ -188,9 +188,10 @@ int main(int argc, char *argv[])
 
     // printf("register state\n");
     // print_state();
-    printf("%d\n", cur_env.REG[reg_name.at("%g0")].i);
-    printf("%f\n", cur_env.REG[reg_name.at("%g0")].f);
-    fprintf(stderr, "%llu\n", cur_env.PC);
+    printf("i: %d\n", cur_env.REG[reg_name.at("%g0")].i);
+    printf("f: %f\n", cur_env.REG[reg_name.at("%g0")].f);
+    fprintf(stderr, "%s\n", n.c_str());
+    fprintf(stderr, "\tInstruction Number: %llu\n", cur_env.PC);
     // if (is_stat)
     //     print_stats();
     // if (label_count)
