@@ -18,11 +18,37 @@ min_caml_print_char:
 min_caml_read_int:
 	addi	%v0, %zero, 0
 	in	%v0
+	addi	%v1, %zero, 0
+	in	%v1
+	sll	%v1, %v1, 8
+	or	%v0, %v0, %v1
+	addi	%v1, %zero, 0
+	in	%v1
+	sll	%v1, %v1, 16
+	or	%v0, %v0, %v1
+	addi	%v1, %zero, 0
+	in	%v1
+	sll	%v1, %v1, 24
+	or	%v0, %v0, %v1
 	jr	%ra
 # min_caml_read_float
 min_caml_read_float:
-	fmov	%f0, %fzero
-	fin	%f0
+	addi	%v0, %zero, 0
+	in	%v0
+	addi	%v1, %zero, 0
+	in	%v1
+	sll	%v1, %v1, 8
+	or	%v0, %v0, %v1
+	addi	%v1, %zero, 0
+	in	%v1
+	sll	%v1, %v1, 16
+	or	%v0, %v0, %v1
+	addi	%v1, %zero, 0
+	in	%v1
+	sll	%v1, %v1, 24
+	or	%v0, %v0, %v1
+	sw	%v0, 0(%hp)
+	flw	%f0, 0(%hp)
 	jr	%ra
 #  min_caml_create_array
 min_caml_create_array:

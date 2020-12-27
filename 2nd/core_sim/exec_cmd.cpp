@@ -57,7 +57,7 @@ int exec_cmd(int *loop, bool *is_stat, bool *print_bc, bool *print_calc, bool *p
         {
             offset = stoi(cmd_re[1].str());
             reg = cmd_re[2].str();
-            sp = cur_env.GPR[reg_name.at(reg)] + offset;
+            sp = cur_env.REG[reg_name.at(reg)].i + offset;
             j = stoi(cmd_re[3].str());
 
             for (int i = sp - j; i <= sp + j; i++)
@@ -68,7 +68,7 @@ int exec_cmd(int *loop, bool *is_stat, bool *print_bc, bool *print_calc, bool *p
         {
             offset = stoi(cmd_re[1].str());
             reg = cmd_re[2].str();
-            sp = cur_env.GPR[reg_name.at(reg)] + offset;
+            sp = cur_env.REG[reg_name.at(reg)].i + offset;
             base = cmd_re[4].str();
             if (base == "hex" || base == "16")
                 subst.i = stoi(cmd_re[3].str(), nullptr, 16);
@@ -87,7 +87,7 @@ int exec_cmd(int *loop, bool *is_stat, bool *print_bc, bool *print_calc, bool *p
                 subst.i = stoi(cmd_re[2].str(), nullptr, 16);
             else
                 subst.i = stoi(cmd_re[2].str());
-            cur_env.GPR[reg_name.at(reg)] = subst.i;
+            cur_env.REG[reg_name.at(reg)].i = subst.i;
         }
         // レジスタ代入 浮動小数
         else if (regex_match(cmd, cmd_re, std::regex("^regfin (.+?) ([0-9A-Fa-f\\.]+)\\s?(.*?)\n?$")))
@@ -98,7 +98,7 @@ int exec_cmd(int *loop, bool *is_stat, bool *print_bc, bool *print_calc, bool *p
                 subst.i = stoi(cmd_re[2].str(), nullptr, 16);
             else
                 subst.f = stof(cmd_re[2].str());
-            cur_env.FPR[reg_name.at(reg) - 32] = subst.f;
+            cur_env.REG[reg_name.at(reg)].f = subst.f;
         }
         else if (cmd == "pr\n")
             print_state();
@@ -120,6 +120,11 @@ int exec_cmd(int *loop, bool *is_stat, bool *print_bc, bool *print_calc, bool *p
             *print_process = true;
         else if (cmd == "endpp\n")
             *print_process = false;
+        else if (cmd == "ppr\n")
+        {
+            for (int i = 0; i < 6; i++)
+                std::cout << i << "\t" << pipe_reg[i].op.opcode << std::endl;
+        }
         else if (cmd == "pi\n")
         {
             for (int i = 0; i < in_bytes.size(); i++)

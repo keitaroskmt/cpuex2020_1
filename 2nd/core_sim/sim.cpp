@@ -20,15 +20,21 @@
 #include "print_bytecode.h"
 #include "ftable.h"
 #include "fpu.h"
+#include "reg_fetch.h"
+#include "pipeline.h"
 
-int cur_opnum, cur_in;
+const pipereg_info NOP{0};
+int cur_opnum, cur_in, stall;
+bool flash;
 std::vector<op_info> ops;
+std::vector<pipereg_info> pipe_reg(6);
 core_env cur_env;
 std::map<std::string, int> label_pos, label_pos_bc;
 std::map<std::string, long long int> label_counter;
 std::map<int, int> posbc2pos, pos2posbc;
 std::vector<std::pair<int, unsigned long long int>> stack(1000000, std::make_pair(0, 0));
 int exec_step(bool print_process, bool print_calc, bool print_bytecode, bool label_count, bool use_fpu);
+int exec_clock(bool print_process, bool print_calc, bool print_bc, bool label_count, bool use_fpu);
 
 int main(int argc, char *argv[])
 {
@@ -48,6 +54,7 @@ int main(int argc, char *argv[])
     std::string n = "fib";
     std::string infile = "sin.txt";
     std::string outfile = "out.txt";
+    std::string datafile = "data/";
 
     while ((opt = getopt(argc, argv, "sbcpn:i:o:mdlf")) != -1)
     {
@@ -117,6 +124,7 @@ int main(int argc, char *argv[])
     char buf[256];
 
     cur_env.PC = 0;
+    cur_env.clk = 0;
     // 事前に行数取得
     file_name = "assembly/" + n + ".s";
     if ((fp = fopen(file_name.c_str(), "r")) == NULL)
@@ -155,39 +163,41 @@ int main(int argc, char *argv[])
 
     cur_opnum = 0;
     cur_in = 0;
+    flash = false;
 
-    data_load("data/main_data.mem");
+    datafile = datafile + n + "_data.mem";
+    data_load(datafile);
 
     // step実行
-    while (cur_opnum < end)
+    while (pipe_reg[5].op.opcode != "ret")
     {
         if (is_step && loop == 0)
             // コマンド受付 & 実行
             if (exec_cmd(&loop, &is_stat, &print_bc, &print_calc, &print_process))
                 return 0;
 
-        if (exec_step(print_process, print_calc, print_bc, label_count, use_fpu))
+        if (exec_clock(print_process, print_calc, print_bc, label_count, use_fpu))
             break;
 
-        if (ops[cur_opnum].type == 0)
+        if (debug_mode)
         {
-            if (debug_mode)
-            {
-                if (cur_env.PC && cur_env.PC % 1000000000 == 0)
-                    std::cout << cur_env.PC / 1000000000 << "G..." << std::flush;
-                if (cur_env.GPR[29] > max_sp)
-                    max_sp = cur_env.GPR[29];
-                if (cur_env.GPR[28] > max_hp)
-                    max_hp = cur_env.GPR[28];
-            }
-            loop--;
+            if (cur_env.clk && cur_env.clk % 1000000000 == 0)
+                std::cout << cur_env.clk / 1000000000 << "G..." << std::flush;
+            if (cur_env.REG[29].i > max_sp)
+                max_sp = cur_env.REG[29].i;
+            if (cur_env.REG[28].i > max_hp)
+                max_hp = cur_env.REG[28].i;
         }
+
+        loop--;
+        // for (int i = 0; i < 6; i++)
+        //     std::cout << i << "\t" << pipe_reg[i].op.opcode << std::endl;
     }
 
     printf("register state\n");
     print_state();
-    printf("v0: %d\n", cur_env.GPR[reg_name.at("%v0")]);
-    printf("f0: %f\n", cur_env.FPR[reg_name.at("%f0") - 32]);
+    printf("v0: %d\n", cur_env.REG[reg_name.at("%v0")].i);
+    printf("f0: %f\n", cur_env.REG[reg_name.at("%f0")].f);
     if (is_stat)
         print_stats();
     if (label_count)
@@ -205,32 +215,16 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-// 1step実行する 命令なら実行し、その他なら読み飛ばす
-int exec_step(bool print_process, bool print_calc, bool print_bc, bool label_count, bool use_fpu)
+int exec_clock(bool print_process, bool print_calc, bool print_bc, bool label_count, bool use_fpu)
 {
-    if (ops[cur_opnum].type == 0)
-    {
-        if (print_process)
-            printf("%llu\t%d\t%s\t%s\t%s\t%s\t%d\n", cur_env.PC, ops[cur_opnum].op_idx, ops[cur_opnum].opcode.c_str(), ops[cur_opnum].opland[0].c_str(), ops[cur_opnum].opland[1].c_str(), ops[cur_opnum].opland[2].c_str(), ops[cur_opnum].offset);
-
-        if (print_bc)
-            print_bytecode(ops[cur_opnum]);
-
-        if (exec_op(ops[cur_opnum], print_calc, use_fpu))
-            return 1;
-
-        // if (print_bc || print_process || print_calc)
-        //     printf("\n");
-        cur_env.PC++;
-    }
-    else if (ops[cur_opnum].type == 1)
-    {
-        std::string label = ops[cur_opnum].label;
-        if (print_process)
-            printf("%s:\n", label.c_str());
-        if (label_count)
-            label_counter[label]++;
-    }
-    cur_opnum++;
+    inst_terminate(print_process, print_calc, print_bc);
+    write_back();
+    memory_acc();
+    exec_op(use_fpu);
+    reg_fetch();
+    inst_fetch(label_count);
+    if (stall > 0)
+        stall--;
+    cur_env.clk++;
     return 0;
 }

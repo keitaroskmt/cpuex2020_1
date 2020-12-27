@@ -35,7 +35,10 @@ int read_file(std::string infile_name)
             else
                 temp.f = stof(token);
 
-            in_bytes.push_back(temp.i);
+            in_bytes.push_back(temp.regBit.c0);
+            in_bytes.push_back(temp.regBit.c1);
+            in_bytes.push_back(temp.regBit.c2);
+            in_bytes.push_back(temp.regBit.c3);
         }
     }
     return 0;

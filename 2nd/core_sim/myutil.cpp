@@ -10,20 +10,16 @@
 // レジスタの状態を出力する
 void print_state()
 {
-    fi fpr[32];
-    for (int i = 0; i < 32; i++)
-        fpr[i].f = cur_env.FPR[i];
-
-    printf("PC: %llu\nGPR\n", cur_env.PC);
+    printf("clk: %llu\ttotal inst: %llu\nGPR\n", cur_env.clk, cur_env.PC);
     for (int i = 0; i < 32; i += 4)
     {
-        printf("%d-%d\t%d\t%d\t%d\t%d\n", i, i + 3, cur_env.GPR[i], cur_env.GPR[i + 1], cur_env.GPR[i + 2], cur_env.GPR[i + 3]);
+        printf("%d-%d\t%d\t%d\t%d\t%d\n", i, i + 3, cur_env.REG[i].i, cur_env.REG[i + 1].i, cur_env.REG[i + 2].i, cur_env.REG[i + 3].i);
     }
     printf("\nFPR FPCC: %s\n", cur_env.FPCC);
-    for (int i = 0; i < 32; i += 4)
+    for (int i = 32; i < 64; i += 4)
     {
-        printf("%d-%d\treal\t%f\t%f\t%f\t%f\n", i, i + 3, fpr[i].f, fpr[i + 1].f, fpr[i + 2].f, fpr[i + 3].f);
-        printf("\thex\t%08X\t%08X\t%08X\t%08X\n", fpr[i].i, fpr[i + 1].i, fpr[i + 2].i, fpr[i + 3].i);
+        printf("%d-%d\treal\t%f\t%f\t%f\t%f\n", i, i + 3, cur_env.REG[i].f, cur_env.REG[i + 1].f, cur_env.REG[i + 2].f, cur_env.REG[i + 3].f);
+        printf("\thex\t%08X\t%08X\t%08X\t%08X\n", cur_env.REG[i].i, cur_env.REG[i + 1].i, cur_env.REG[i + 2].i, cur_env.REG[i + 3].i);
     }
     printf("\n");
     return;
@@ -164,25 +160,25 @@ std::map<std::string, long long int> op_counter = {
     {"and", 0},
     {"or", 0},
     {"nor", 0},
-    {"slt", 0},
     {"sll", 0},
     {"srl", 0},
-    {"bgt", 0},
+    {"blt", 0},
+    {"blti", 0},
     {"jr", 0},
-    {"move", 0},
     {"j", 0},
     {"jal", 0},
     {"jalr", 0},
     {"beq", 0},
+    {"beqi", 0},
     {"bne", 0},
     {"addi", 0},
     {"slti", 0},
-    {"andi", 0},
     {"ori", 0},
     {"lui", 0},
     {"lw", 0},
     {"sw", 0},
     {"in", 0},
+    {"fin", 0},
     {"out", 0},
     {"fadd", 0},
     {"fsub", 0},
