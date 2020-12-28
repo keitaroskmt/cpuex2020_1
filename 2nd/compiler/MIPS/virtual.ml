@@ -149,9 +149,40 @@ let rec g env = function (* 式の仮想マシンコード生成 (caml2html: virtual_g) *)
               store))
     with Not_found -> failwith "Tuple"
     )
+  | Closure.ExtTuple(xs, addr) ->
+    (
+    try
+      let y = Id.genid "t" in
+      let (offset, store) =
+        expand
+          (List.map (fun x -> (x, try M.find x env with Not_found -> Type.Int)) xs)
+          (0, Ans(Mov(y)))
+          (fun x offset store -> seq(StF(x, y, C(offset)), store))
+          (fun x _ offset store -> seq(St(x, y, C(offset)), store)) in
+      Let((y, Type.Tuple(List.map (fun x -> try M.find x env with Not_found -> Type.Int) xs)), Set(addr), store)
+    with Not_found -> failwith "ExtTuple"
+    )
   | Closure.LetTuple(xts, y, e2) ->
-      let s = Closure.fv e2 in
-      let (offset, load) =
+    (
+    try
+        let (addr, _) = List.assoc y !FixAddress.global_address in
+        let addrid = Id.genid "v" in
+        let s = Closure.fv e2 in
+        let (offset, load) =
+        expand
+          xts
+          (0, g (M.add_list xts env) e2)
+          (fun x offset load ->
+            if not (S.mem x s) then load else (* [XX] a little ad hoc optimization *)
+            fletd(x, LdF(addrid, C(offset)), load))
+          (fun x t offset load ->
+            if not (S.mem x s) then load else (* [XX] a little ad hoc optimization *)
+            Let((x, t), Ld(addrid, C(offset)), load)) in
+        Let((addrid, Type.Int), Set(addr), load)
+    with
+    | Not_found ->
+        let s = Closure.fv e2 in
+        let (offset, load) =
         expand
           xts
           (0, g (M.add_list xts env) e2)
@@ -161,7 +192,8 @@ let rec g env = function (* 式の仮想マシンコード生成 (caml2html: virtual_g) *)
           (fun x t offset load ->
             if not (S.mem x s) then load else (* [XX] a little ad hoc optimization *)
             Let((x, t), Ld(y, C(offset)), load)) in
-      load
+        load
+    )
   | Closure.Get(x, y) -> (* 配列の読み出し (caml2html: virtual_get) *)
         (
         try

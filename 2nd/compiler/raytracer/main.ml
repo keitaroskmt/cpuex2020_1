@@ -69,6 +69,7 @@ let dirvecs =
   let dummy_vs = create_array 0 (dummyf, dummyff) in
   create_array 5 dummy_vs in
 
+(* closure! *)
 (* 光源光の前処理済み方向ベクトル *)
 let light_dirvec =
   let dummyf2 = create_array 0 0.0 in

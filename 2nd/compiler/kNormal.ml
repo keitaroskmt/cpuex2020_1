@@ -21,6 +21,7 @@ type t = (* K正規化後の式 (caml2html: knormal_t) *)
   | LetRec of fundef * t
   | App of Id.t * Id.t list
   | Tuple of Id.t list
+  | ExtTuple of (Id.t list * int)
   | LetTuple of (Id.t * Type.t) list * Id.t * t
   | Get of Id.t * Id.t
   | Put of Id.t * Id.t * Id.t
@@ -39,7 +40,7 @@ let rec fv = function (* 式に出現する（自由な）変数 (caml2html: knormal_fv) *)
       let zs = S.diff (fv e1) (S.of_list (List.map fst yts)) in
       S.diff (S.union zs (fv e2)) (S.singleton x)
   | App(x, ys) -> S.of_list (x :: ys)
-  | Tuple(xs) | ExtFunApp(_, xs) -> S.of_list xs
+  | Tuple(xs) | ExtTuple(xs, _) | ExtFunApp(_, xs) -> S.of_list xs
   | Put(x, y, z) -> S.of_list [x; y; z]
   | LetTuple(xs, y, e) -> S.add y (S.diff (fv e) (S.of_list (List.map fst xs)))
 
@@ -301,6 +302,13 @@ let knormal_debug oc l =
             (Printf.fprintf oc "Tuple\n";
              print_tab (level+1);
              print_id_list e1;
+             Printf.fprintf oc "\n")
+        | ExtTuple (e1, e2) ->
+            (Printf.fprintf oc "ExtTuple\n";
+             print_tab (level+1);
+             print_id_list e1;
+             print_tab (level+1);
+             print_int e2;
              Printf.fprintf oc "\n")
         | LetTuple (e1, e2, e3) ->
             (Printf.fprintf oc "LetTuple\n";

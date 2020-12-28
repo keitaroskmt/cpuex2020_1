@@ -71,6 +71,18 @@ let rec preprocess_data dc i =
     if i = 0 then () else
        (Printf.fprintf dc "%s\n" (to_bits 0l 0);
         preprocess_data dc (i-1))
+        (*
+    (
+        try
+           (let d = List.assoc (i-1) !FixAddress.global_data in
+            Printf.fprintf dc "%s\n" (to_bits d 0);
+            preprocess_data dc (i-1))
+        with
+            | Not_found ->
+               (Printf.fprintf dc "%s\n" (to_bits 0l 0);
+                preprocess_data dc (i-1))
+    )
+    *)
 
 let rec load_float_imm dc data acc =
     match data with
