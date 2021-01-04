@@ -10,3 +10,5 @@ fib/sim/sim
 2nd/sim/compiler_sim/sim
 2nd/sim/core_sim/sim
 2nd/sim/core_sim_multi/sim
+test.s
+test_data.mem
