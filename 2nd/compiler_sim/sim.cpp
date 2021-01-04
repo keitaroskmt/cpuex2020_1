@@ -190,6 +190,8 @@ int main(int argc, char *argv[])
     // print_state();
     printf("i: %d\n", cur_env.REG[reg_name.at("%g0")].i);
     printf("f: %f\n", cur_env.REG[reg_name.at("%g0")].f);
+    fprintf(stderr, "v0: %d\n", cur_env.REG[reg_name.at("%v0")].i);
+    fprintf(stderr, "f0: %f\n", cur_env.REG[reg_name.at("%f0")].f);
     fprintf(stderr, "%s\n", n.c_str());
     fprintf(stderr, "\tInstruction Number: %llu\n", cur_env.PC);
     // if (is_stat)

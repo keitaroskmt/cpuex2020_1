@@ -191,7 +191,7 @@ in
 let rec rad x =
     x *. 0.017453293
 in
-let v1 = rad (read_float ()) in
-let sin_v1 = sin v1
-in
-print_float sin_v1
+let sin_v1 = sin (rad 10.0) in
+let sin_v2 = sin (rad 10.0) in
+let sin_v3 = sin (rad 10.0) in
+sin_v1 +. sin_v2 +. sin_v3

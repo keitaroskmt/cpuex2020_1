@@ -9,6 +9,7 @@ answer="answer_${1}.ppm"
 mv ../compiler_sim/testcase/*.s ../compiler_sim/assembly/
 mv ../compiler_sim/testcase/*.mem ../compiler_sim/data/
 
+echo "Simulation has started!"
 cd ../compiler_sim
 ./sim -n $file -i sld/contest.sld -o $target
 

@@ -21,6 +21,9 @@ do
   then
     file=${f##*/}
     printf "OK! %s\n" ${file%.res}
+  else
+    file=${f##*/}
+    printf "NG! %s\n" ${file%.res}
   fi
 done
 
