@@ -81,6 +81,8 @@ int reg_fetch()
 
     if (inst.op.comp || inst.op.j || inst.op.jr)
     {
+        flash = true;
+        stall++;
         // フォワーディング処理
         if (inst.fw1)
             inst.s1 = pipe_reg[inst.fw1].d;
@@ -125,6 +127,11 @@ int reg_fetch()
         {
             if (inst.s1.i == inst.s2.i)
                 cur_opnum = posbc2pos[inst.op.opland_bit[2]] - 1;
+            else
+            {
+                flash = false;
+                stall--;
+            }
 
             ss << "beq\t" << std::dec << inst.s1.i << "(" << std::setw(8) << std::hex << inst.s1.i << "),\t";
             ss << std::dec << inst.s2.i << "(" << std::setw(8) << std::hex << inst.s2.i << "),\t";
@@ -135,6 +142,11 @@ int reg_fetch()
         {
             if (inst.s1.i != inst.s2.i)
                 cur_opnum = posbc2pos[inst.op.opland_bit[2]] - 1;
+            else
+            {
+                flash = false;
+                stall--;
+            }
 
             ss << "bne\t" << std::dec << inst.s1.i << "(" << std::setw(8) << std::hex << inst.s1.i << "),\t";
             ss << std::dec << inst.s2.i << "(" << std::setw(8) << std::hex << inst.s2.i << "),\t";
@@ -145,6 +157,11 @@ int reg_fetch()
         {
             if (inst.s1.i < inst.s2.i)
                 cur_opnum = posbc2pos[inst.op.opland_bit[2]] - 1;
+            else
+            {
+                flash = false;
+                stall--;
+            }
 
             ss << "blt\t" << std::dec << inst.s1.i << "(" << std::setw(8) << std::hex << inst.s1.i << "),\t";
             ss << std::dec << inst.s2.i << "(" << std::setw(8) << std::hex << inst.s2.i << "),\t";
@@ -155,6 +172,11 @@ int reg_fetch()
         {
             if (inst.s1.f == inst.s2.f)
                 cur_opnum = posbc2pos[inst.op.opland_bit[2]] - 1;
+            else
+            {
+                flash = false;
+                stall--;
+            }
 
             ss << "fbeq\t" << inst.s1.f << "(" << std::setw(8) << std::hex << inst.s1.i << "),\t";
             ss << inst.s2.f << "(" << std::setw(8) << std::hex << inst.s2.i << "),\t";
@@ -165,6 +187,11 @@ int reg_fetch()
         {
             if (inst.s1.f != inst.s2.f)
                 cur_opnum = posbc2pos[inst.op.opland_bit[2]] - 1;
+            else
+            {
+                flash = false;
+                stall--;
+            }
 
             ss << "fbne\t" << inst.s1.f << "(" << std::setw(8) << std::hex << inst.s1.i << "),\t";
             ss << inst.s2.f << "(" << std::setw(8) << std::hex << inst.s2.i << "),\t";
@@ -175,6 +202,11 @@ int reg_fetch()
         {
             if (inst.s1.f < inst.s2.f)
                 cur_opnum = posbc2pos[inst.op.opland_bit[2]] - 1;
+            else
+            {
+                flash = false;
+                stall--;
+            }
 
             ss << "fblt\t" << inst.s1.f << "(" << std::setw(8) << std::hex << inst.s1.i << "),\t";
             ss << inst.s2.f << "(" << std::setw(8) << std::hex << inst.s2.i << "),\t";
@@ -185,6 +217,11 @@ int reg_fetch()
         {
             if (inst.s1.i == inst.imm)
                 cur_opnum = posbc2pos[inst.op.opland_bit[2]] - 1;
+            else
+            {
+                flash = false;
+                stall--;
+            }
 
             ss << "beqi\t" << std::dec << inst.s1.i << "(" << std::setw(8) << std::hex << inst.s1.i << "),\t";
             ss << std::dec << inst.imm << "(" << std::setw(8) << std::hex << inst.imm << "),\t";
@@ -195,14 +232,17 @@ int reg_fetch()
         {
             if (inst.s1.i < inst.imm)
                 cur_opnum = posbc2pos[inst.op.opland_bit[2]] - 1;
+            else
+            {
+                flash = false;
+                stall--;
+            }
 
             ss << "blti\t" << std::dec << inst.s1.i << "(" << std::setw(8) << std::hex << inst.s1.i << "),\t";
             ss << std::dec << inst.imm << "(" << std::setw(8) << std::hex << inst.imm << "),\t";
             ss << inst.op.opland[2] << "\n";
             inst.calc = ss.str();
         }
-        stall++;
-        flash = true;
     }
     pipe_reg[1] = inst;
     return 0;
