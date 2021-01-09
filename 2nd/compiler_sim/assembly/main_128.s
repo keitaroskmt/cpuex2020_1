@@ -5,7 +5,7 @@
 	lui	%sp, 1
 	ori	%sp, %sp, 64464
 	lui	%hp, 0
-	ori	%hp, %hp, 498
+	ori	%hp, %hp, 483
 # ------------ Text Section -------------------
 .section	".text"
 	j	min_caml_start
@@ -99,1598 +99,611 @@ create_float_extarray_cont:
 	addi	%v1, %v1, 1
 	j	create_float_extarray_loop
 # ------------ body ---------------------------
-kernel_atan.2612:
+kernel_atan.2607:
 	fmul	%f1, %f0, %f0
 	fmul	%f2, %f1, %f1
 	fmul	%f3, %f2, %f2
-	flw	%f4, 497(%zero)
+	flw	%f4, 482(%zero)
 	fmul	%f4, %f4, %f0
 	fmul	%f4, %f4, %f1
 	fsub	%f4, %f0, %f4
-	flw	%f5, 496(%zero)
+	flw	%f5, 481(%zero)
 	fmul	%f5, %f5, %f0
 	fmul	%f5, %f5, %f2
 	fadd	%f4, %f4, %f5
-	flw	%f5, 495(%zero)
+	flw	%f5, 480(%zero)
 	fmul	%f5, %f5, %f0
 	fmul	%f5, %f5, %f1
 	fmul	%f5, %f5, %f2
 	fsub	%f4, %f4, %f5
-	flw	%f5, 494(%zero)
+	flw	%f5, 479(%zero)
 	fmul	%f5, %f5, %f0
 	fmul	%f5, %f5, %f3
 	fadd	%f4, %f4, %f5
-	flw	%f5, 493(%zero)
+	flw	%f5, 478(%zero)
 	fmul	%f5, %f5, %f0
 	fmul	%f1, %f5, %f1
 	fmul	%f1, %f1, %f3
 	fsub	%f1, %f4, %f1
-	flw	%f4, 492(%zero)
+	flw	%f4, 477(%zero)
 	fmul	%f0, %f4, %f0
 	fmul	%f0, %f0, %f2
 	fmul	%f0, %f0, %f3
 	fadd	%f0, %f1, %f0
 	jr	%ra
-f.6155.10191:
-	fblt	%f0, %f1, fbgt_else.18900
-	flw	%f2, 491(%zero)
-	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.18901
-	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.18902
-	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.18903
-	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.18904
-	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.18905
-	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.18906
-	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.18907
-	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.18908
-	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.18909
-	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.18910
-	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.18911
-	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.18912
-	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.18913
-	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.18914
-	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.18915
-	fmul	%f1, %f2, %f1
-	j	f.6155.10191
-fbgt_else.18915:
-	fmov	%f0, %f1
-	jr	%ra
-fbgt_else.18914:
-	fmov	%f0, %f1
-	jr	%ra
-fbgt_else.18913:
-	fmov	%f0, %f1
-	jr	%ra
-fbgt_else.18912:
-	fmov	%f0, %f1
-	jr	%ra
-fbgt_else.18911:
-	fmov	%f0, %f1
-	jr	%ra
-fbgt_else.18910:
-	fmov	%f0, %f1
-	jr	%ra
-fbgt_else.18909:
-	fmov	%f0, %f1
-	jr	%ra
-fbgt_else.18908:
-	fmov	%f0, %f1
-	jr	%ra
-fbgt_else.18907:
-	fmov	%f0, %f1
-	jr	%ra
-fbgt_else.18906:
-	fmov	%f0, %f1
-	jr	%ra
-fbgt_else.18905:
-	fmov	%f0, %f1
-	jr	%ra
-fbgt_else.18904:
-	fmov	%f0, %f1
-	jr	%ra
-fbgt_else.18903:
-	fmov	%f0, %f1
-	jr	%ra
-fbgt_else.18902:
-	fmov	%f0, %f1
-	jr	%ra
-fbgt_else.18901:
-	fmov	%f0, %f1
-	jr	%ra
-fbgt_else.18900:
-	fmov	%f0, %f1
-	jr	%ra
-g.6159.10195:
-	flw	%f2, 1(%k1)
-	fblt	%f0, %f2, fbgt_else.18916
-	fblt	%f0, %f1, fbgt_else.18917
-	fsub	%f0, %f0, %f1
-	flw	%f3, 491(%zero)
-	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.18918
-	fblt	%f0, %f1, fbgt_else.18919
-	fsub	%f0, %f0, %f1
-	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.18920
-	fblt	%f0, %f1, fbgt_else.18921
-	fsub	%f0, %f0, %f1
-	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.18922
-	fblt	%f0, %f1, fbgt_else.18923
-	fsub	%f0, %f0, %f1
-	fdiv	%f1, %f1, %f3
-	lw	%at, 0(%k1)
-	jr	%at
-fbgt_else.18923:
-	fdiv	%f1, %f1, %f3
-	lw	%at, 0(%k1)
-	jr	%at
-fbgt_else.18922:
-	jr	%ra
-fbgt_else.18921:
-	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.18924
-	fblt	%f0, %f1, fbgt_else.18925
-	fsub	%f0, %f0, %f1
-	fdiv	%f1, %f1, %f3
-	lw	%at, 0(%k1)
-	jr	%at
-fbgt_else.18925:
-	fdiv	%f1, %f1, %f3
-	lw	%at, 0(%k1)
-	jr	%at
-fbgt_else.18924:
-	jr	%ra
-fbgt_else.18920:
-	jr	%ra
-fbgt_else.18919:
-	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.18926
-	fblt	%f0, %f1, fbgt_else.18927
-	fsub	%f0, %f0, %f1
-	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.18928
-	fblt	%f0, %f1, fbgt_else.18929
-	fsub	%f0, %f0, %f1
-	fdiv	%f1, %f1, %f3
-	lw	%at, 0(%k1)
-	jr	%at
-fbgt_else.18929:
-	fdiv	%f1, %f1, %f3
-	lw	%at, 0(%k1)
-	jr	%at
-fbgt_else.18928:
-	jr	%ra
-fbgt_else.18927:
-	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.18930
-	fblt	%f0, %f1, fbgt_else.18931
-	fsub	%f0, %f0, %f1
-	fdiv	%f1, %f1, %f3
-	lw	%at, 0(%k1)
-	jr	%at
-fbgt_else.18931:
-	fdiv	%f1, %f1, %f3
-	lw	%at, 0(%k1)
-	jr	%at
-fbgt_else.18930:
-	jr	%ra
-fbgt_else.18926:
-	jr	%ra
-fbgt_else.18918:
-	jr	%ra
-fbgt_else.18917:
-	flw	%f3, 491(%zero)
-	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.18932
-	fblt	%f0, %f1, fbgt_else.18933
-	fsub	%f0, %f0, %f1
-	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.18934
-	fblt	%f0, %f1, fbgt_else.18935
-	fsub	%f0, %f0, %f1
-	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.18936
-	fblt	%f0, %f1, fbgt_else.18937
-	fsub	%f0, %f0, %f1
-	fdiv	%f1, %f1, %f3
-	lw	%at, 0(%k1)
-	jr	%at
-fbgt_else.18937:
-	fdiv	%f1, %f1, %f3
-	lw	%at, 0(%k1)
-	jr	%at
-fbgt_else.18936:
-	jr	%ra
-fbgt_else.18935:
-	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.18938
-	fblt	%f0, %f1, fbgt_else.18939
-	fsub	%f0, %f0, %f1
-	fdiv	%f1, %f1, %f3
-	lw	%at, 0(%k1)
-	jr	%at
-fbgt_else.18939:
-	fdiv	%f1, %f1, %f3
-	lw	%at, 0(%k1)
-	jr	%at
-fbgt_else.18938:
-	jr	%ra
-fbgt_else.18934:
-	jr	%ra
-fbgt_else.18933:
-	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.18940
-	fblt	%f0, %f1, fbgt_else.18941
-	fsub	%f0, %f0, %f1
-	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.18942
-	fblt	%f0, %f1, fbgt_else.18943
-	fsub	%f0, %f0, %f1
-	fdiv	%f1, %f1, %f3
-	lw	%at, 0(%k1)
-	jr	%at
-fbgt_else.18943:
-	fdiv	%f1, %f1, %f3
-	lw	%at, 0(%k1)
-	jr	%at
-fbgt_else.18942:
-	jr	%ra
-fbgt_else.18941:
-	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.18944
-	fblt	%f0, %f1, fbgt_else.18945
-	fsub	%f0, %f0, %f1
-	fdiv	%f1, %f1, %f3
-	lw	%at, 0(%k1)
-	jr	%at
-fbgt_else.18945:
-	fdiv	%f1, %f1, %f3
-	lw	%at, 0(%k1)
-	jr	%at
-fbgt_else.18944:
-	jr	%ra
-fbgt_else.18940:
-	jr	%ra
-fbgt_else.18932:
-	jr	%ra
-fbgt_else.18916:
-	jr	%ra
-cos.2616:
-	flw	%f1, 490(%zero)
+cos.2611:
+	flw	%f1, 476(%zero)
 	fabs	%f0, %f0
-	flw	%f2, 489(%zero)
-	fsw	%f1, 0(%sp)
-	fsw	%f0, 1(%sp)
-	fsw	%f2, 2(%sp)
-	fblt	%f0, %f2, fbgt_else.18946
-	flw	%f3, 488(%zero)
-	fblt	%f0, %f3, fbgt_else.18948
-	flw	%f3, 487(%zero)
-	fblt	%f0, %f3, fbgt_else.18950
-	flw	%f3, 486(%zero)
-	fblt	%f0, %f3, fbgt_else.18952
-	flw	%f3, 485(%zero)
-	fblt	%f0, %f3, fbgt_else.18954
-	flw	%f3, 484(%zero)
-	fblt	%f0, %f3, fbgt_else.18956
-	flw	%f3, 483(%zero)
-	fblt	%f0, %f3, fbgt_else.18958
-	flw	%f3, 482(%zero)
-	fblt	%f0, %f3, fbgt_else.18960
-	flw	%f3, 481(%zero)
-	fblt	%f0, %f3, fbgt_else.18962
-	flw	%f3, 480(%zero)
-	fblt	%f0, %f3, fbgt_else.18964
-	flw	%f3, 479(%zero)
-	fblt	%f0, %f3, fbgt_else.18966
-	flw	%f3, 478(%zero)
-	fblt	%f0, %f3, fbgt_else.18968
-	flw	%f3, 477(%zero)
-	fblt	%f0, %f3, fbgt_else.18970
-	flw	%f3, 476(%zero)
-	fblt	%f0, %f3, fbgt_else.18972
-	flw	%f3, 475(%zero)
-	fblt	%f0, %f3, fbgt_else.18974
-	flw	%f3, 474(%zero)
-	fmov	%f1, %f3
-	sw	%ra, 3(%sp)
-	addi	%sp, %sp, 4
-	jal	f.6155.10191
-	addi	%sp, %sp, -4
-	lw	%ra, 3(%sp)
-	j	fbgt_cont.18975
-fbgt_else.18974:
-	fmov	%f0, %f3
-fbgt_cont.18975:
-	j	fbgt_cont.18973
-fbgt_else.18972:
-	fmov	%f0, %f3
-fbgt_cont.18973:
-	j	fbgt_cont.18971
-fbgt_else.18970:
-	fmov	%f0, %f3
-fbgt_cont.18971:
-	j	fbgt_cont.18969
-fbgt_else.18968:
-	fmov	%f0, %f3
-fbgt_cont.18969:
-	j	fbgt_cont.18967
-fbgt_else.18966:
-	fmov	%f0, %f3
-fbgt_cont.18967:
-	j	fbgt_cont.18965
-fbgt_else.18964:
-	fmov	%f0, %f3
-fbgt_cont.18965:
-	j	fbgt_cont.18963
-fbgt_else.18962:
-	fmov	%f0, %f3
-fbgt_cont.18963:
-	j	fbgt_cont.18961
-fbgt_else.18960:
-	fmov	%f0, %f3
-fbgt_cont.18961:
-	j	fbgt_cont.18959
-fbgt_else.18958:
-	fmov	%f0, %f3
-fbgt_cont.18959:
-	j	fbgt_cont.18957
-fbgt_else.18956:
-	fmov	%f0, %f3
-fbgt_cont.18957:
-	j	fbgt_cont.18955
-fbgt_else.18954:
-	fmov	%f0, %f3
-fbgt_cont.18955:
-	j	fbgt_cont.18953
-fbgt_else.18952:
-	fmov	%f0, %f3
-fbgt_cont.18953:
-	j	fbgt_cont.18951
-fbgt_else.18950:
-	fmov	%f0, %f3
-fbgt_cont.18951:
-	j	fbgt_cont.18949
-fbgt_else.18948:
-	fmov	%f0, %f3
-fbgt_cont.18949:
-	j	fbgt_cont.18947
-fbgt_else.18946:
-	fmov	%f0, %f2
-fbgt_cont.18947:
-	add	%k1, %zero, %hp
-	addi	%hp, %hp, 2
-	addi	%v0, %zero, g.6159.10195
-	sw	%v0, 0(%k1)
-	flw	%f1, 2(%sp)
-	fsw	%f1, 1(%k1)
-	flw	%f2, 1(%sp)
-	fblt	%f2, %f1, fbgt_else.18976
-	fblt	%f2, %f0, fbgt_else.18978
-	fsub	%f2, %f2, %f0
-	flw	%f3, 491(%zero)
-	fdiv	%f0, %f0, %f3
-	fblt	%f2, %f1, fbgt_else.18980
-	fblt	%f2, %f0, fbgt_else.18982
-	fsub	%f2, %f2, %f0
-	fdiv	%f0, %f0, %f3
-	fblt	%f2, %f1, fbgt_else.18984
-	fblt	%f2, %f0, fbgt_else.18986
-	fsub	%f1, %f2, %f0
-	fdiv	%f0, %f0, %f3
-	fmov	%f29, %f1
-	fmov	%f1, %f0
-	fmov	%f0, %f29
-	sw	%ra, 3(%sp)
-	addi	%sp, %sp, 4
-	lw	%at, 0(%k1)
-	jalr	%at
-	addi	%sp, %sp, -4
-	lw	%ra, 3(%sp)
-	j	fbgt_cont.18987
-fbgt_else.18986:
-	fdiv	%f1, %f0, %f3
-	fmov	%f0, %f2
-	sw	%ra, 3(%sp)
-	addi	%sp, %sp, 4
-	lw	%at, 0(%k1)
-	jalr	%at
-	addi	%sp, %sp, -4
-	lw	%ra, 3(%sp)
-fbgt_cont.18987:
-	j	fbgt_cont.18985
-fbgt_else.18984:
-	fmov	%f0, %f2
-fbgt_cont.18985:
-	j	fbgt_cont.18983
-fbgt_else.18982:
-	fdiv	%f0, %f0, %f3
-	fblt	%f2, %f1, fbgt_else.18988
-	fblt	%f2, %f0, fbgt_else.18990
-	fsub	%f1, %f2, %f0
-	fdiv	%f0, %f0, %f3
-	fmov	%f29, %f1
-	fmov	%f1, %f0
-	fmov	%f0, %f29
-	sw	%ra, 3(%sp)
-	addi	%sp, %sp, 4
-	lw	%at, 0(%k1)
-	jalr	%at
-	addi	%sp, %sp, -4
-	lw	%ra, 3(%sp)
-	j	fbgt_cont.18991
-fbgt_else.18990:
-	fdiv	%f1, %f0, %f3
-	fmov	%f0, %f2
-	sw	%ra, 3(%sp)
-	addi	%sp, %sp, 4
-	lw	%at, 0(%k1)
-	jalr	%at
-	addi	%sp, %sp, -4
-	lw	%ra, 3(%sp)
-fbgt_cont.18991:
-	j	fbgt_cont.18989
-fbgt_else.18988:
-	fmov	%f0, %f2
-fbgt_cont.18989:
-fbgt_cont.18983:
-	j	fbgt_cont.18981
-fbgt_else.18980:
-	fmov	%f0, %f2
-fbgt_cont.18981:
-	j	fbgt_cont.18979
-fbgt_else.18978:
-	flw	%f3, 491(%zero)
-	fdiv	%f0, %f0, %f3
-	fblt	%f2, %f1, fbgt_else.18992
-	fblt	%f2, %f0, fbgt_else.18994
-	fsub	%f2, %f2, %f0
-	fdiv	%f0, %f0, %f3
-	fblt	%f2, %f1, fbgt_else.18996
-	fblt	%f2, %f0, fbgt_else.18998
-	fsub	%f1, %f2, %f0
-	fdiv	%f0, %f0, %f3
-	fmov	%f29, %f1
-	fmov	%f1, %f0
-	fmov	%f0, %f29
-	sw	%ra, 3(%sp)
-	addi	%sp, %sp, 4
-	lw	%at, 0(%k1)
-	jalr	%at
-	addi	%sp, %sp, -4
-	lw	%ra, 3(%sp)
-	j	fbgt_cont.18999
-fbgt_else.18998:
-	fdiv	%f1, %f0, %f3
-	fmov	%f0, %f2
-	sw	%ra, 3(%sp)
-	addi	%sp, %sp, 4
-	lw	%at, 0(%k1)
-	jalr	%at
-	addi	%sp, %sp, -4
-	lw	%ra, 3(%sp)
-fbgt_cont.18999:
-	j	fbgt_cont.18997
-fbgt_else.18996:
-	fmov	%f0, %f2
-fbgt_cont.18997:
-	j	fbgt_cont.18995
-fbgt_else.18994:
-	fdiv	%f0, %f0, %f3
-	fblt	%f2, %f1, fbgt_else.19000
-	fblt	%f2, %f0, fbgt_else.19002
-	fsub	%f1, %f2, %f0
-	fdiv	%f0, %f0, %f3
-	fmov	%f29, %f1
-	fmov	%f1, %f0
-	fmov	%f0, %f29
-	sw	%ra, 3(%sp)
-	addi	%sp, %sp, 4
-	lw	%at, 0(%k1)
-	jalr	%at
-	addi	%sp, %sp, -4
-	lw	%ra, 3(%sp)
-	j	fbgt_cont.19003
-fbgt_else.19002:
-	fdiv	%f1, %f0, %f3
-	fmov	%f0, %f2
-	sw	%ra, 3(%sp)
-	addi	%sp, %sp, 4
-	lw	%at, 0(%k1)
-	jalr	%at
-	addi	%sp, %sp, -4
-	lw	%ra, 3(%sp)
-fbgt_cont.19003:
-	j	fbgt_cont.19001
-fbgt_else.19000:
-	fmov	%f0, %f2
-fbgt_cont.19001:
-fbgt_cont.18995:
-	j	fbgt_cont.18993
-fbgt_else.18992:
-	fmov	%f0, %f2
-fbgt_cont.18993:
-fbgt_cont.18979:
-	j	fbgt_cont.18977
-fbgt_else.18976:
-	fmov	%f0, %f2
-fbgt_cont.18977:
-	flw	%f1, 0(%sp)
-	fblt	%f0, %f1, fbgt_else.19004
+	flw	%f2, 475(%zero)
+	fdiv	%f3, %f0, %f2
+	floor	%f3, %f3
+	fmul	%f2, %f3, %f2
+	fsub	%f0, %f0, %f2
+	fblt	%f0, %f1, fbgt_else.18472
 	addi	%v0, %zero, 0
-	j	fbgt_cont.19005
-fbgt_else.19004:
+	j	fbgt_cont.18473
+fbgt_else.18472:
 	addi	%v0, %zero, 1
-fbgt_cont.19005:
-	fblt	%f0, %f1, fbgt_else.19006
+fbgt_cont.18473:
+	fblt	%f0, %f1, fbgt_else.18474
 	fsub	%f0, %f0, %f1
-	j	fbgt_cont.19007
-fbgt_else.19006:
-fbgt_cont.19007:
-	flw	%f2, 473(%zero)
-	fblt	%f0, %f2, fbgt_else.19008
-	beqi	%v0, 0, bnei_else.19010
+	j	fbgt_cont.18475
+fbgt_else.18474:
+fbgt_cont.18475:
+	flw	%f2, 474(%zero)
+	fblt	%f0, %f2, fbgt_else.18476
+	beqi	%v0, 0, bnei_else.18478
 	addi	%v0, %zero, 0
-	j	bnei_cont.19011
-bnei_else.19010:
+	j	bnei_cont.18479
+bnei_else.18478:
 	addi	%v0, %zero, 1
-bnei_cont.19011:
-	j	fbgt_cont.19009
-fbgt_else.19008:
-fbgt_cont.19009:
-	fblt	%f0, %f2, fbgt_else.19012
+bnei_cont.18479:
+	j	fbgt_cont.18477
+fbgt_else.18476:
+fbgt_cont.18477:
+	fblt	%f0, %f2, fbgt_else.18480
 	fsub	%f0, %f1, %f0
-	j	fbgt_cont.19013
-fbgt_else.19012:
-fbgt_cont.19013:
-	flw	%f1, 472(%zero)
-	fblt	%f1, %f0, fbgt_else.19014
+	j	fbgt_cont.18481
+fbgt_else.18480:
+fbgt_cont.18481:
+	flw	%f1, 473(%zero)
+	fblt	%f1, %f0, fbgt_else.18482
 	fmul	%f0, %f0, %f0
 	fmul	%f1, %f0, %f0
-	flw	%f2, 468(%zero)
-	flw	%f3, 467(%zero)
+	flw	%f2, 469(%zero)
+	flw	%f3, 468(%zero)
 	fmul	%f3, %f3, %f0
 	fsub	%f2, %f2, %f3
-	flw	%f3, 466(%zero)
+	flw	%f3, 467(%zero)
 	fmul	%f3, %f3, %f1
 	fadd	%f2, %f2, %f3
-	flw	%f3, 465(%zero)
+	flw	%f3, 466(%zero)
 	fmul	%f0, %f3, %f0
 	fmul	%f0, %f0, %f1
 	fsub	%f0, %f2, %f0
-	j	fbgt_cont.19015
-fbgt_else.19014:
+	j	fbgt_cont.18483
+fbgt_else.18482:
 	fsub	%f0, %f2, %f0
 	fmul	%f1, %f0, %f0
 	fmul	%f2, %f1, %f1
-	flw	%f3, 471(%zero)
+	flw	%f3, 472(%zero)
 	fmul	%f3, %f3, %f0
 	fmul	%f3, %f3, %f1
 	fsub	%f3, %f0, %f3
-	flw	%f4, 470(%zero)
+	flw	%f4, 471(%zero)
 	fmul	%f4, %f4, %f0
 	fmul	%f4, %f4, %f2
 	fadd	%f3, %f3, %f4
-	flw	%f4, 469(%zero)
+	flw	%f4, 470(%zero)
 	fmul	%f0, %f4, %f0
 	fmul	%f0, %f0, %f1
 	fmul	%f0, %f0, %f2
 	fsub	%f0, %f3, %f0
-fbgt_cont.19015:
-	beqi	%v0, 0, bnei_else.19016
+fbgt_cont.18483:
+	beqi	%v0, 0, bnei_else.18484
 	jr	%ra
-bnei_else.19016:
+bnei_else.18484:
 	fneg	%f0, %f0
 	jr	%ra
-f.6155.10148:
-	fblt	%f0, %f1, fbgt_else.19017
-	flw	%f2, 491(%zero)
-	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.19018
-	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.19019
-	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.19020
-	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.19021
-	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.19022
-	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.19023
-	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.19024
-	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.19025
-	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.19026
-	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.19027
-	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.19028
-	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.19029
-	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.19030
-	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.19031
-	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.19032
-	fmul	%f1, %f2, %f1
-	j	f.6155.10148
-fbgt_else.19032:
-	fmov	%f0, %f1
-	jr	%ra
-fbgt_else.19031:
-	fmov	%f0, %f1
-	jr	%ra
-fbgt_else.19030:
-	fmov	%f0, %f1
-	jr	%ra
-fbgt_else.19029:
-	fmov	%f0, %f1
-	jr	%ra
-fbgt_else.19028:
-	fmov	%f0, %f1
-	jr	%ra
-fbgt_else.19027:
-	fmov	%f0, %f1
-	jr	%ra
-fbgt_else.19026:
-	fmov	%f0, %f1
-	jr	%ra
-fbgt_else.19025:
-	fmov	%f0, %f1
-	jr	%ra
-fbgt_else.19024:
-	fmov	%f0, %f1
-	jr	%ra
-fbgt_else.19023:
-	fmov	%f0, %f1
-	jr	%ra
-fbgt_else.19022:
-	fmov	%f0, %f1
-	jr	%ra
-fbgt_else.19021:
-	fmov	%f0, %f1
-	jr	%ra
-fbgt_else.19020:
-	fmov	%f0, %f1
-	jr	%ra
-fbgt_else.19019:
-	fmov	%f0, %f1
-	jr	%ra
-fbgt_else.19018:
-	fmov	%f0, %f1
-	jr	%ra
-fbgt_else.19017:
-	fmov	%f0, %f1
-	jr	%ra
-g.6159.10152:
-	flw	%f2, 1(%k1)
-	fblt	%f0, %f2, fbgt_else.19033
-	fblt	%f0, %f1, fbgt_else.19034
-	fsub	%f0, %f0, %f1
-	flw	%f3, 491(%zero)
-	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.19035
-	fblt	%f0, %f1, fbgt_else.19036
-	fsub	%f0, %f0, %f1
-	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.19037
-	fblt	%f0, %f1, fbgt_else.19038
-	fsub	%f0, %f0, %f1
-	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.19039
-	fblt	%f0, %f1, fbgt_else.19040
-	fsub	%f0, %f0, %f1
-	fdiv	%f1, %f1, %f3
-	lw	%at, 0(%k1)
-	jr	%at
-fbgt_else.19040:
-	fdiv	%f1, %f1, %f3
-	lw	%at, 0(%k1)
-	jr	%at
-fbgt_else.19039:
-	jr	%ra
-fbgt_else.19038:
-	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.19041
-	fblt	%f0, %f1, fbgt_else.19042
-	fsub	%f0, %f0, %f1
-	fdiv	%f1, %f1, %f3
-	lw	%at, 0(%k1)
-	jr	%at
-fbgt_else.19042:
-	fdiv	%f1, %f1, %f3
-	lw	%at, 0(%k1)
-	jr	%at
-fbgt_else.19041:
-	jr	%ra
-fbgt_else.19037:
-	jr	%ra
-fbgt_else.19036:
-	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.19043
-	fblt	%f0, %f1, fbgt_else.19044
-	fsub	%f0, %f0, %f1
-	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.19045
-	fblt	%f0, %f1, fbgt_else.19046
-	fsub	%f0, %f0, %f1
-	fdiv	%f1, %f1, %f3
-	lw	%at, 0(%k1)
-	jr	%at
-fbgt_else.19046:
-	fdiv	%f1, %f1, %f3
-	lw	%at, 0(%k1)
-	jr	%at
-fbgt_else.19045:
-	jr	%ra
-fbgt_else.19044:
-	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.19047
-	fblt	%f0, %f1, fbgt_else.19048
-	fsub	%f0, %f0, %f1
-	fdiv	%f1, %f1, %f3
-	lw	%at, 0(%k1)
-	jr	%at
-fbgt_else.19048:
-	fdiv	%f1, %f1, %f3
-	lw	%at, 0(%k1)
-	jr	%at
-fbgt_else.19047:
-	jr	%ra
-fbgt_else.19043:
-	jr	%ra
-fbgt_else.19035:
-	jr	%ra
-fbgt_else.19034:
-	flw	%f3, 491(%zero)
-	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.19049
-	fblt	%f0, %f1, fbgt_else.19050
-	fsub	%f0, %f0, %f1
-	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.19051
-	fblt	%f0, %f1, fbgt_else.19052
-	fsub	%f0, %f0, %f1
-	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.19053
-	fblt	%f0, %f1, fbgt_else.19054
-	fsub	%f0, %f0, %f1
-	fdiv	%f1, %f1, %f3
-	lw	%at, 0(%k1)
-	jr	%at
-fbgt_else.19054:
-	fdiv	%f1, %f1, %f3
-	lw	%at, 0(%k1)
-	jr	%at
-fbgt_else.19053:
-	jr	%ra
-fbgt_else.19052:
-	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.19055
-	fblt	%f0, %f1, fbgt_else.19056
-	fsub	%f0, %f0, %f1
-	fdiv	%f1, %f1, %f3
-	lw	%at, 0(%k1)
-	jr	%at
-fbgt_else.19056:
-	fdiv	%f1, %f1, %f3
-	lw	%at, 0(%k1)
-	jr	%at
-fbgt_else.19055:
-	jr	%ra
-fbgt_else.19051:
-	jr	%ra
-fbgt_else.19050:
-	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.19057
-	fblt	%f0, %f1, fbgt_else.19058
-	fsub	%f0, %f0, %f1
-	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.19059
-	fblt	%f0, %f1, fbgt_else.19060
-	fsub	%f0, %f0, %f1
-	fdiv	%f1, %f1, %f3
-	lw	%at, 0(%k1)
-	jr	%at
-fbgt_else.19060:
-	fdiv	%f1, %f1, %f3
-	lw	%at, 0(%k1)
-	jr	%at
-fbgt_else.19059:
-	jr	%ra
-fbgt_else.19058:
-	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.19061
-	fblt	%f0, %f1, fbgt_else.19062
-	fsub	%f0, %f0, %f1
-	fdiv	%f1, %f1, %f3
-	lw	%at, 0(%k1)
-	jr	%at
-fbgt_else.19062:
-	fdiv	%f1, %f1, %f3
-	lw	%at, 0(%k1)
-	jr	%at
-fbgt_else.19061:
-	jr	%ra
-fbgt_else.19057:
-	jr	%ra
-fbgt_else.19049:
-	jr	%ra
-fbgt_else.19033:
-	jr	%ra
-sin.2618:
-	flw	%f1, 490(%zero)
-	flw	%f2, 464(%zero)
-	fblt	%f0, %f2, fbgt_else.19063
+sin.2613:
+	flw	%f1, 476(%zero)
+	flw	%f2, 465(%zero)
+	fblt	%f0, %f2, fbgt_else.18485
 	addi	%v0, %zero, 1
-	j	fbgt_cont.19064
-fbgt_else.19063:
+	j	fbgt_cont.18486
+fbgt_else.18485:
 	addi	%v0, %zero, 0
-fbgt_cont.19064:
+fbgt_cont.18486:
 	fabs	%f0, %f0
-	flw	%f2, 489(%zero)
-	sw	%v0, 0(%sp)
-	fsw	%f1, 1(%sp)
-	fsw	%f0, 2(%sp)
-	fsw	%f2, 3(%sp)
-	fblt	%f0, %f2, fbgt_else.19065
-	flw	%f3, 488(%zero)
-	fblt	%f0, %f3, fbgt_else.19067
-	flw	%f3, 487(%zero)
-	fblt	%f0, %f3, fbgt_else.19069
-	flw	%f3, 486(%zero)
-	fblt	%f0, %f3, fbgt_else.19071
-	flw	%f3, 485(%zero)
-	fblt	%f0, %f3, fbgt_else.19073
-	flw	%f3, 484(%zero)
-	fblt	%f0, %f3, fbgt_else.19075
-	flw	%f3, 483(%zero)
-	fblt	%f0, %f3, fbgt_else.19077
-	flw	%f3, 482(%zero)
-	fblt	%f0, %f3, fbgt_else.19079
-	flw	%f3, 481(%zero)
-	fblt	%f0, %f3, fbgt_else.19081
-	flw	%f3, 480(%zero)
-	fblt	%f0, %f3, fbgt_else.19083
-	flw	%f3, 479(%zero)
-	fblt	%f0, %f3, fbgt_else.19085
-	flw	%f3, 478(%zero)
-	fblt	%f0, %f3, fbgt_else.19087
-	flw	%f3, 477(%zero)
-	fblt	%f0, %f3, fbgt_else.19089
-	flw	%f3, 476(%zero)
-	fblt	%f0, %f3, fbgt_else.19091
-	flw	%f3, 475(%zero)
-	fblt	%f0, %f3, fbgt_else.19093
-	flw	%f3, 474(%zero)
-	fmov	%f1, %f3
-	sw	%ra, 4(%sp)
-	addi	%sp, %sp, 5
-	jal	f.6155.10148
-	addi	%sp, %sp, -5
-	lw	%ra, 4(%sp)
-	j	fbgt_cont.19094
-fbgt_else.19093:
-	fmov	%f0, %f3
-fbgt_cont.19094:
-	j	fbgt_cont.19092
-fbgt_else.19091:
-	fmov	%f0, %f3
-fbgt_cont.19092:
-	j	fbgt_cont.19090
-fbgt_else.19089:
-	fmov	%f0, %f3
-fbgt_cont.19090:
-	j	fbgt_cont.19088
-fbgt_else.19087:
-	fmov	%f0, %f3
-fbgt_cont.19088:
-	j	fbgt_cont.19086
-fbgt_else.19085:
-	fmov	%f0, %f3
-fbgt_cont.19086:
-	j	fbgt_cont.19084
-fbgt_else.19083:
-	fmov	%f0, %f3
-fbgt_cont.19084:
-	j	fbgt_cont.19082
-fbgt_else.19081:
-	fmov	%f0, %f3
-fbgt_cont.19082:
-	j	fbgt_cont.19080
-fbgt_else.19079:
-	fmov	%f0, %f3
-fbgt_cont.19080:
-	j	fbgt_cont.19078
-fbgt_else.19077:
-	fmov	%f0, %f3
-fbgt_cont.19078:
-	j	fbgt_cont.19076
-fbgt_else.19075:
-	fmov	%f0, %f3
-fbgt_cont.19076:
-	j	fbgt_cont.19074
-fbgt_else.19073:
-	fmov	%f0, %f3
-fbgt_cont.19074:
-	j	fbgt_cont.19072
-fbgt_else.19071:
-	fmov	%f0, %f3
-fbgt_cont.19072:
-	j	fbgt_cont.19070
-fbgt_else.19069:
-	fmov	%f0, %f3
-fbgt_cont.19070:
-	j	fbgt_cont.19068
-fbgt_else.19067:
-	fmov	%f0, %f3
-fbgt_cont.19068:
-	j	fbgt_cont.19066
-fbgt_else.19065:
-	fmov	%f0, %f2
-fbgt_cont.19066:
-	add	%k1, %zero, %hp
-	addi	%hp, %hp, 2
-	addi	%v0, %zero, g.6159.10152
-	sw	%v0, 0(%k1)
-	flw	%f1, 3(%sp)
-	fsw	%f1, 1(%k1)
-	flw	%f2, 2(%sp)
-	fblt	%f2, %f1, fbgt_else.19095
-	fblt	%f2, %f0, fbgt_else.19097
-	fsub	%f2, %f2, %f0
-	flw	%f3, 491(%zero)
-	fdiv	%f0, %f0, %f3
-	fblt	%f2, %f1, fbgt_else.19099
-	fblt	%f2, %f0, fbgt_else.19101
-	fsub	%f2, %f2, %f0
-	fdiv	%f0, %f0, %f3
-	fblt	%f2, %f1, fbgt_else.19103
-	fblt	%f2, %f0, fbgt_else.19105
-	fsub	%f1, %f2, %f0
-	fdiv	%f0, %f0, %f3
-	fmov	%f29, %f1
-	fmov	%f1, %f0
-	fmov	%f0, %f29
-	sw	%ra, 4(%sp)
-	addi	%sp, %sp, 5
-	lw	%at, 0(%k1)
-	jalr	%at
-	addi	%sp, %sp, -5
-	lw	%ra, 4(%sp)
-	j	fbgt_cont.19106
-fbgt_else.19105:
-	fdiv	%f1, %f0, %f3
-	fmov	%f0, %f2
-	sw	%ra, 4(%sp)
-	addi	%sp, %sp, 5
-	lw	%at, 0(%k1)
-	jalr	%at
-	addi	%sp, %sp, -5
-	lw	%ra, 4(%sp)
-fbgt_cont.19106:
-	j	fbgt_cont.19104
-fbgt_else.19103:
-	fmov	%f0, %f2
-fbgt_cont.19104:
-	j	fbgt_cont.19102
-fbgt_else.19101:
-	fdiv	%f0, %f0, %f3
-	fblt	%f2, %f1, fbgt_else.19107
-	fblt	%f2, %f0, fbgt_else.19109
-	fsub	%f1, %f2, %f0
-	fdiv	%f0, %f0, %f3
-	fmov	%f29, %f1
-	fmov	%f1, %f0
-	fmov	%f0, %f29
-	sw	%ra, 4(%sp)
-	addi	%sp, %sp, 5
-	lw	%at, 0(%k1)
-	jalr	%at
-	addi	%sp, %sp, -5
-	lw	%ra, 4(%sp)
-	j	fbgt_cont.19110
-fbgt_else.19109:
-	fdiv	%f1, %f0, %f3
-	fmov	%f0, %f2
-	sw	%ra, 4(%sp)
-	addi	%sp, %sp, 5
-	lw	%at, 0(%k1)
-	jalr	%at
-	addi	%sp, %sp, -5
-	lw	%ra, 4(%sp)
-fbgt_cont.19110:
-	j	fbgt_cont.19108
-fbgt_else.19107:
-	fmov	%f0, %f2
-fbgt_cont.19108:
-fbgt_cont.19102:
-	j	fbgt_cont.19100
-fbgt_else.19099:
-	fmov	%f0, %f2
-fbgt_cont.19100:
-	j	fbgt_cont.19098
-fbgt_else.19097:
-	flw	%f3, 491(%zero)
-	fdiv	%f0, %f0, %f3
-	fblt	%f2, %f1, fbgt_else.19111
-	fblt	%f2, %f0, fbgt_else.19113
-	fsub	%f2, %f2, %f0
-	fdiv	%f0, %f0, %f3
-	fblt	%f2, %f1, fbgt_else.19115
-	fblt	%f2, %f0, fbgt_else.19117
-	fsub	%f1, %f2, %f0
-	fdiv	%f0, %f0, %f3
-	fmov	%f29, %f1
-	fmov	%f1, %f0
-	fmov	%f0, %f29
-	sw	%ra, 4(%sp)
-	addi	%sp, %sp, 5
-	lw	%at, 0(%k1)
-	jalr	%at
-	addi	%sp, %sp, -5
-	lw	%ra, 4(%sp)
-	j	fbgt_cont.19118
-fbgt_else.19117:
-	fdiv	%f1, %f0, %f3
-	fmov	%f0, %f2
-	sw	%ra, 4(%sp)
-	addi	%sp, %sp, 5
-	lw	%at, 0(%k1)
-	jalr	%at
-	addi	%sp, %sp, -5
-	lw	%ra, 4(%sp)
-fbgt_cont.19118:
-	j	fbgt_cont.19116
-fbgt_else.19115:
-	fmov	%f0, %f2
-fbgt_cont.19116:
-	j	fbgt_cont.19114
-fbgt_else.19113:
-	fdiv	%f0, %f0, %f3
-	fblt	%f2, %f1, fbgt_else.19119
-	fblt	%f2, %f0, fbgt_else.19121
-	fsub	%f1, %f2, %f0
-	fdiv	%f0, %f0, %f3
-	fmov	%f29, %f1
-	fmov	%f1, %f0
-	fmov	%f0, %f29
-	sw	%ra, 4(%sp)
-	addi	%sp, %sp, 5
-	lw	%at, 0(%k1)
-	jalr	%at
-	addi	%sp, %sp, -5
-	lw	%ra, 4(%sp)
-	j	fbgt_cont.19122
-fbgt_else.19121:
-	fdiv	%f1, %f0, %f3
-	fmov	%f0, %f2
-	sw	%ra, 4(%sp)
-	addi	%sp, %sp, 5
-	lw	%at, 0(%k1)
-	jalr	%at
-	addi	%sp, %sp, -5
-	lw	%ra, 4(%sp)
-fbgt_cont.19122:
-	j	fbgt_cont.19120
-fbgt_else.19119:
-	fmov	%f0, %f2
-fbgt_cont.19120:
-fbgt_cont.19114:
-	j	fbgt_cont.19112
-fbgt_else.19111:
-	fmov	%f0, %f2
-fbgt_cont.19112:
-fbgt_cont.19098:
-	j	fbgt_cont.19096
-fbgt_else.19095:
-	fmov	%f0, %f2
-fbgt_cont.19096:
-	flw	%f1, 1(%sp)
-	fblt	%f0, %f1, fbgt_else.19123
-	lw	%v0, 0(%sp)
-	beqi	%v0, 0, bnei_else.19125
+	flw	%f2, 475(%zero)
+	fdiv	%f3, %f0, %f2
+	floor	%f3, %f3
+	fmul	%f2, %f3, %f2
+	fsub	%f0, %f0, %f2
+	fblt	%f0, %f1, fbgt_else.18487
+	beqi	%v0, 0, bnei_else.18489
 	addi	%v0, %zero, 0
-	j	bnei_cont.19126
-bnei_else.19125:
+	j	bnei_cont.18490
+bnei_else.18489:
 	addi	%v0, %zero, 1
-bnei_cont.19126:
-	j	fbgt_cont.19124
-fbgt_else.19123:
-	lw	%v0, 0(%sp)
-fbgt_cont.19124:
-	fblt	%f0, %f1, fbgt_else.19127
+bnei_cont.18490:
+	j	fbgt_cont.18488
+fbgt_else.18487:
+fbgt_cont.18488:
+	fblt	%f0, %f1, fbgt_else.18491
 	fsub	%f0, %f0, %f1
-	j	fbgt_cont.19128
-fbgt_else.19127:
-fbgt_cont.19128:
-	flw	%f2, 473(%zero)
-	fblt	%f0, %f2, fbgt_else.19129
+	j	fbgt_cont.18492
+fbgt_else.18491:
+fbgt_cont.18492:
+	flw	%f2, 474(%zero)
+	fblt	%f0, %f2, fbgt_else.18493
 	fsub	%f0, %f1, %f0
-	j	fbgt_cont.19130
-fbgt_else.19129:
-fbgt_cont.19130:
-	flw	%f1, 472(%zero)
-	fblt	%f1, %f0, fbgt_else.19131
+	j	fbgt_cont.18494
+fbgt_else.18493:
+fbgt_cont.18494:
+	flw	%f1, 473(%zero)
+	fblt	%f1, %f0, fbgt_else.18495
 	fmul	%f1, %f0, %f0
 	fmul	%f2, %f1, %f1
-	flw	%f3, 471(%zero)
+	flw	%f3, 472(%zero)
 	fmul	%f3, %f3, %f0
 	fmul	%f3, %f3, %f1
 	fsub	%f3, %f0, %f3
-	flw	%f4, 470(%zero)
+	flw	%f4, 471(%zero)
 	fmul	%f4, %f4, %f0
 	fmul	%f4, %f4, %f2
 	fadd	%f3, %f3, %f4
-	flw	%f4, 469(%zero)
+	flw	%f4, 470(%zero)
 	fmul	%f0, %f4, %f0
 	fmul	%f0, %f0, %f1
 	fmul	%f0, %f0, %f2
 	fsub	%f0, %f3, %f0
-	j	fbgt_cont.19132
-fbgt_else.19131:
+	j	fbgt_cont.18496
+fbgt_else.18495:
 	fsub	%f0, %f2, %f0
 	fmul	%f0, %f0, %f0
 	fmul	%f1, %f0, %f0
-	flw	%f2, 468(%zero)
-	flw	%f3, 467(%zero)
+	flw	%f2, 469(%zero)
+	flw	%f3, 468(%zero)
 	fmul	%f3, %f3, %f0
 	fsub	%f2, %f2, %f3
-	flw	%f3, 466(%zero)
+	flw	%f3, 467(%zero)
 	fmul	%f3, %f3, %f1
 	fadd	%f2, %f2, %f3
-	flw	%f3, 465(%zero)
+	flw	%f3, 466(%zero)
 	fmul	%f0, %f3, %f0
 	fmul	%f0, %f0, %f1
 	fsub	%f0, %f2, %f0
-fbgt_cont.19132:
-	beqi	%v0, 0, bnei_else.19133
+fbgt_cont.18496:
+	beqi	%v0, 0, bnei_else.18497
 	jr	%ra
-bnei_else.19133:
+bnei_else.18497:
 	fneg	%f0, %f0
 	jr	%ra
-print_int_sub1.2622:
-	blti	%v0, 10, bgti_else.19134
+print_int_sub1.2617:
+	blti	%v0, 10, bgti_else.18498
 	addi	%v0, %v0, -10
 	addi	%v1, %v1, 1
-	blti	%v0, 10, bgti_else.19135
+	blti	%v0, 10, bgti_else.18499
 	addi	%v0, %v0, -10
 	addi	%v1, %v1, 1
-	blti	%v0, 10, bgti_else.19136
+	blti	%v0, 10, bgti_else.18500
 	addi	%v0, %v0, -10
 	addi	%v1, %v1, 1
-	blti	%v0, 10, bgti_else.19137
+	blti	%v0, 10, bgti_else.18501
 	addi	%v0, %v0, -10
 	addi	%v1, %v1, 1
-	blti	%v0, 10, bgti_else.19138
+	blti	%v0, 10, bgti_else.18502
 	addi	%v0, %v0, -10
 	addi	%v1, %v1, 1
-	blti	%v0, 10, bgti_else.19139
+	blti	%v0, 10, bgti_else.18503
 	addi	%v0, %v0, -10
 	addi	%v1, %v1, 1
-	blti	%v0, 10, bgti_else.19140
+	blti	%v0, 10, bgti_else.18504
 	addi	%v0, %v0, -10
 	addi	%v1, %v1, 1
-	blti	%v0, 10, bgti_else.19141
+	blti	%v0, 10, bgti_else.18505
 	addi	%v0, %v0, -10
 	addi	%v1, %v1, 1
-	j	print_int_sub1.2622
-bgti_else.19141:
+	j	print_int_sub1.2617
+bgti_else.18505:
 	add	%v0, %zero, %v1
 	jr	%ra
-bgti_else.19140:
+bgti_else.18504:
 	add	%v0, %zero, %v1
 	jr	%ra
-bgti_else.19139:
+bgti_else.18503:
 	add	%v0, %zero, %v1
 	jr	%ra
-bgti_else.19138:
+bgti_else.18502:
 	add	%v0, %zero, %v1
 	jr	%ra
-bgti_else.19137:
+bgti_else.18501:
 	add	%v0, %zero, %v1
 	jr	%ra
-bgti_else.19136:
+bgti_else.18500:
 	add	%v0, %zero, %v1
 	jr	%ra
-bgti_else.19135:
+bgti_else.18499:
 	add	%v0, %zero, %v1
 	jr	%ra
-bgti_else.19134:
+bgti_else.18498:
 	add	%v0, %zero, %v1
 	jr	%ra
-print_int_sub2.2625:
-	blti	%v0, 10, bgti_else.19142
+print_int_sub2.2620:
+	blti	%v0, 10, bgti_else.18506
 	addi	%v0, %v0, -10
-	blti	%v0, 10, bgti_else.19143
+	blti	%v0, 10, bgti_else.18507
 	addi	%v0, %v0, -10
-	blti	%v0, 10, bgti_else.19144
+	blti	%v0, 10, bgti_else.18508
 	addi	%v0, %v0, -10
-	blti	%v0, 10, bgti_else.19145
+	blti	%v0, 10, bgti_else.18509
 	addi	%v0, %v0, -10
-	blti	%v0, 10, bgti_else.19146
+	blti	%v0, 10, bgti_else.18510
 	addi	%v0, %v0, -10
-	blti	%v0, 10, bgti_else.19147
+	blti	%v0, 10, bgti_else.18511
 	addi	%v0, %v0, -10
-	blti	%v0, 10, bgti_else.19148
+	blti	%v0, 10, bgti_else.18512
 	addi	%v0, %v0, -10
-	blti	%v0, 10, bgti_else.19149
+	blti	%v0, 10, bgti_else.18513
 	addi	%v0, %v0, -10
-	blti	%v0, 10, bgti_else.19150
+	blti	%v0, 10, bgti_else.18514
 	addi	%v0, %v0, -10
-	blti	%v0, 10, bgti_else.19151
+	blti	%v0, 10, bgti_else.18515
 	addi	%v0, %v0, -10
-	blti	%v0, 10, bgti_else.19152
+	blti	%v0, 10, bgti_else.18516
 	addi	%v0, %v0, -10
-	blti	%v0, 10, bgti_else.19153
+	blti	%v0, 10, bgti_else.18517
 	addi	%v0, %v0, -10
-	blti	%v0, 10, bgti_else.19154
+	blti	%v0, 10, bgti_else.18518
 	addi	%v0, %v0, -10
-	blti	%v0, 10, bgti_else.19155
+	blti	%v0, 10, bgti_else.18519
 	addi	%v0, %v0, -10
-	blti	%v0, 10, bgti_else.19156
+	blti	%v0, 10, bgti_else.18520
 	addi	%v0, %v0, -10
-	blti	%v0, 10, bgti_else.19157
+	blti	%v0, 10, bgti_else.18521
 	addi	%v0, %v0, -10
-	j	print_int_sub2.2625
-bgti_else.19157:
+	j	print_int_sub2.2620
+bgti_else.18521:
 	jr	%ra
-bgti_else.19156:
+bgti_else.18520:
 	jr	%ra
-bgti_else.19155:
+bgti_else.18519:
 	jr	%ra
-bgti_else.19154:
+bgti_else.18518:
 	jr	%ra
-bgti_else.19153:
+bgti_else.18517:
 	jr	%ra
-bgti_else.19152:
+bgti_else.18516:
 	jr	%ra
-bgti_else.19151:
+bgti_else.18515:
 	jr	%ra
-bgti_else.19150:
+bgti_else.18514:
 	jr	%ra
-bgti_else.19149:
+bgti_else.18513:
 	jr	%ra
-bgti_else.19148:
+bgti_else.18512:
 	jr	%ra
-bgti_else.19147:
+bgti_else.18511:
 	jr	%ra
-bgti_else.19146:
+bgti_else.18510:
 	jr	%ra
-bgti_else.19145:
+bgti_else.18509:
 	jr	%ra
-bgti_else.19144:
+bgti_else.18508:
 	jr	%ra
-bgti_else.19143:
+bgti_else.18507:
 	jr	%ra
-bgti_else.19142:
+bgti_else.18506:
 	jr	%ra
-print_int.2627:
+print_int.2622:
 	sw	%v0, 0(%sp)
-	blti	%v0, 10, bgti_else.19158
+	blti	%v0, 10, bgti_else.18522
 	addi	%v1, %v0, -10
-	blti	%v1, 10, bgti_else.19160
+	blti	%v1, 10, bgti_else.18524
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19162
+	blti	%v1, 10, bgti_else.18526
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19164
+	blti	%v1, 10, bgti_else.18528
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19166
+	blti	%v1, 10, bgti_else.18530
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19168
+	blti	%v1, 10, bgti_else.18532
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19170
+	blti	%v1, 10, bgti_else.18534
 	addi	%v1, %v1, -10
 	addi	%a0, %zero, 7
 	addi	%v0, %v1, 0
 	addi	%v1, %a0, 0
 	sw	%ra, 1(%sp)
 	addi	%sp, %sp, 2
-	jal	print_int_sub1.2622
+	jal	print_int_sub1.2617
 	addi	%sp, %sp, -2
 	lw	%ra, 1(%sp)
-	j	bgti_cont.19171
-bgti_else.19170:
+	j	bgti_cont.18535
+bgti_else.18534:
 	addi	%v0, %zero, 6
-bgti_cont.19171:
-	j	bgti_cont.19169
-bgti_else.19168:
+bgti_cont.18535:
+	j	bgti_cont.18533
+bgti_else.18532:
 	addi	%v0, %zero, 5
-bgti_cont.19169:
-	j	bgti_cont.19167
-bgti_else.19166:
+bgti_cont.18533:
+	j	bgti_cont.18531
+bgti_else.18530:
 	addi	%v0, %zero, 4
-bgti_cont.19167:
-	j	bgti_cont.19165
-bgti_else.19164:
+bgti_cont.18531:
+	j	bgti_cont.18529
+bgti_else.18528:
 	addi	%v0, %zero, 3
-bgti_cont.19165:
-	j	bgti_cont.19163
-bgti_else.19162:
+bgti_cont.18529:
+	j	bgti_cont.18527
+bgti_else.18526:
 	addi	%v0, %zero, 2
-bgti_cont.19163:
-	j	bgti_cont.19161
-bgti_else.19160:
+bgti_cont.18527:
+	j	bgti_cont.18525
+bgti_else.18524:
 	addi	%v0, %zero, 1
-bgti_cont.19161:
-	j	bgti_cont.19159
-bgti_else.19158:
+bgti_cont.18525:
+	j	bgti_cont.18523
+bgti_else.18522:
 	addi	%v0, %zero, 0
-bgti_cont.19159:
+bgti_cont.18523:
 	lw	%v1, 0(%sp)
 	sw	%v0, 1(%sp)
-	blti	%v1, 10, bgti_else.19172
+	blti	%v1, 10, bgti_else.18536
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19174
+	blti	%v1, 10, bgti_else.18538
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19176
+	blti	%v1, 10, bgti_else.18540
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19178
+	blti	%v1, 10, bgti_else.18542
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19180
+	blti	%v1, 10, bgti_else.18544
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19182
+	blti	%v1, 10, bgti_else.18546
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19184
+	blti	%v1, 10, bgti_else.18548
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19186
+	blti	%v1, 10, bgti_else.18550
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19188
+	blti	%v1, 10, bgti_else.18552
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19190
+	blti	%v1, 10, bgti_else.18554
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19192
+	blti	%v1, 10, bgti_else.18556
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19194
+	blti	%v1, 10, bgti_else.18558
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19196
+	blti	%v1, 10, bgti_else.18560
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19198
+	blti	%v1, 10, bgti_else.18562
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19200
+	blti	%v1, 10, bgti_else.18564
 	addi	%v1, %v1, -10
 	addi	%v0, %v1, 0
 	sw	%ra, 2(%sp)
 	addi	%sp, %sp, 3
-	jal	print_int_sub2.2625
+	jal	print_int_sub2.2620
 	addi	%sp, %sp, -3
 	lw	%ra, 2(%sp)
-	j	bgti_cont.19201
-bgti_else.19200:
+	j	bgti_cont.18565
+bgti_else.18564:
 	add	%v0, %zero, %v1
-bgti_cont.19201:
-	j	bgti_cont.19199
-bgti_else.19198:
+bgti_cont.18565:
+	j	bgti_cont.18563
+bgti_else.18562:
 	add	%v0, %zero, %v1
-bgti_cont.19199:
-	j	bgti_cont.19197
-bgti_else.19196:
+bgti_cont.18563:
+	j	bgti_cont.18561
+bgti_else.18560:
 	add	%v0, %zero, %v1
-bgti_cont.19197:
-	j	bgti_cont.19195
-bgti_else.19194:
+bgti_cont.18561:
+	j	bgti_cont.18559
+bgti_else.18558:
 	add	%v0, %zero, %v1
-bgti_cont.19195:
-	j	bgti_cont.19193
-bgti_else.19192:
+bgti_cont.18559:
+	j	bgti_cont.18557
+bgti_else.18556:
 	add	%v0, %zero, %v1
-bgti_cont.19193:
-	j	bgti_cont.19191
-bgti_else.19190:
+bgti_cont.18557:
+	j	bgti_cont.18555
+bgti_else.18554:
 	add	%v0, %zero, %v1
-bgti_cont.19191:
-	j	bgti_cont.19189
-bgti_else.19188:
+bgti_cont.18555:
+	j	bgti_cont.18553
+bgti_else.18552:
 	add	%v0, %zero, %v1
-bgti_cont.19189:
-	j	bgti_cont.19187
-bgti_else.19186:
+bgti_cont.18553:
+	j	bgti_cont.18551
+bgti_else.18550:
 	add	%v0, %zero, %v1
-bgti_cont.19187:
-	j	bgti_cont.19185
-bgti_else.19184:
+bgti_cont.18551:
+	j	bgti_cont.18549
+bgti_else.18548:
 	add	%v0, %zero, %v1
-bgti_cont.19185:
-	j	bgti_cont.19183
-bgti_else.19182:
+bgti_cont.18549:
+	j	bgti_cont.18547
+bgti_else.18546:
 	add	%v0, %zero, %v1
-bgti_cont.19183:
-	j	bgti_cont.19181
-bgti_else.19180:
+bgti_cont.18547:
+	j	bgti_cont.18545
+bgti_else.18544:
 	add	%v0, %zero, %v1
-bgti_cont.19181:
-	j	bgti_cont.19179
-bgti_else.19178:
+bgti_cont.18545:
+	j	bgti_cont.18543
+bgti_else.18542:
 	add	%v0, %zero, %v1
-bgti_cont.19179:
-	j	bgti_cont.19177
-bgti_else.19176:
+bgti_cont.18543:
+	j	bgti_cont.18541
+bgti_else.18540:
 	add	%v0, %zero, %v1
-bgti_cont.19177:
-	j	bgti_cont.19175
-bgti_else.19174:
+bgti_cont.18541:
+	j	bgti_cont.18539
+bgti_else.18538:
 	add	%v0, %zero, %v1
-bgti_cont.19175:
-	j	bgti_cont.19173
-bgti_else.19172:
+bgti_cont.18539:
+	j	bgti_cont.18537
+bgti_else.18536:
 	add	%v0, %zero, %v1
-bgti_cont.19173:
+bgti_cont.18537:
 	lw	%v1, 1(%sp)
 	addi	%at, %zero, 0
-	blt	%at, %v1, bgt_else.19202
+	blt	%at, %v1, bgt_else.18566
 	addi	%v0, %v0, 48
 	j	min_caml_print_char
-bgt_else.19202:
+bgt_else.18566:
 	sw	%v0, 2(%sp)
-	blti	%v1, 10, bgti_else.19203
+	blti	%v1, 10, bgti_else.18567
 	addi	%a0, %v1, -10
-	blti	%a0, 10, bgti_else.19205
+	blti	%a0, 10, bgti_else.18569
 	addi	%a0, %a0, -10
-	blti	%a0, 10, bgti_else.19207
+	blti	%a0, 10, bgti_else.18571
 	addi	%a0, %a0, -10
-	blti	%a0, 10, bgti_else.19209
+	blti	%a0, 10, bgti_else.18573
 	addi	%a0, %a0, -10
-	blti	%a0, 10, bgti_else.19211
+	blti	%a0, 10, bgti_else.18575
 	addi	%a0, %a0, -10
-	blti	%a0, 10, bgti_else.19213
+	blti	%a0, 10, bgti_else.18577
 	addi	%a0, %a0, -10
-	blti	%a0, 10, bgti_else.19215
+	blti	%a0, 10, bgti_else.18579
 	addi	%a0, %a0, -10
 	addi	%a1, %zero, 7
 	addi	%v1, %a1, 0
 	addi	%v0, %a0, 0
 	sw	%ra, 3(%sp)
 	addi	%sp, %sp, 4
-	jal	print_int_sub1.2622
+	jal	print_int_sub1.2617
 	addi	%sp, %sp, -4
 	lw	%ra, 3(%sp)
-	j	bgti_cont.19216
-bgti_else.19215:
+	j	bgti_cont.18580
+bgti_else.18579:
 	addi	%v0, %zero, 6
-bgti_cont.19216:
-	j	bgti_cont.19214
-bgti_else.19213:
+bgti_cont.18580:
+	j	bgti_cont.18578
+bgti_else.18577:
 	addi	%v0, %zero, 5
-bgti_cont.19214:
-	j	bgti_cont.19212
-bgti_else.19211:
+bgti_cont.18578:
+	j	bgti_cont.18576
+bgti_else.18575:
 	addi	%v0, %zero, 4
-bgti_cont.19212:
-	j	bgti_cont.19210
-bgti_else.19209:
+bgti_cont.18576:
+	j	bgti_cont.18574
+bgti_else.18573:
 	addi	%v0, %zero, 3
-bgti_cont.19210:
-	j	bgti_cont.19208
-bgti_else.19207:
+bgti_cont.18574:
+	j	bgti_cont.18572
+bgti_else.18571:
 	addi	%v0, %zero, 2
-bgti_cont.19208:
-	j	bgti_cont.19206
-bgti_else.19205:
+bgti_cont.18572:
+	j	bgti_cont.18570
+bgti_else.18569:
 	addi	%v0, %zero, 1
-bgti_cont.19206:
-	j	bgti_cont.19204
-bgti_else.19203:
+bgti_cont.18570:
+	j	bgti_cont.18568
+bgti_else.18567:
 	addi	%v0, %zero, 0
-bgti_cont.19204:
+bgti_cont.18568:
 	lw	%v1, 1(%sp)
 	sw	%v0, 3(%sp)
-	blti	%v1, 10, bgti_else.19217
+	blti	%v1, 10, bgti_else.18581
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19219
+	blti	%v1, 10, bgti_else.18583
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19221
+	blti	%v1, 10, bgti_else.18585
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19223
+	blti	%v1, 10, bgti_else.18587
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19225
+	blti	%v1, 10, bgti_else.18589
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19227
+	blti	%v1, 10, bgti_else.18591
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19229
+	blti	%v1, 10, bgti_else.18593
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19231
+	blti	%v1, 10, bgti_else.18595
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19233
+	blti	%v1, 10, bgti_else.18597
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19235
+	blti	%v1, 10, bgti_else.18599
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19237
+	blti	%v1, 10, bgti_else.18601
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19239
+	blti	%v1, 10, bgti_else.18603
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19241
+	blti	%v1, 10, bgti_else.18605
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19243
+	blti	%v1, 10, bgti_else.18607
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19245
+	blti	%v1, 10, bgti_else.18609
 	addi	%v1, %v1, -10
 	addi	%v0, %v1, 0
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	print_int_sub2.2625
+	jal	print_int_sub2.2620
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
-	j	bgti_cont.19246
-bgti_else.19245:
+	j	bgti_cont.18610
+bgti_else.18609:
 	add	%v0, %zero, %v1
-bgti_cont.19246:
-	j	bgti_cont.19244
-bgti_else.19243:
+bgti_cont.18610:
+	j	bgti_cont.18608
+bgti_else.18607:
 	add	%v0, %zero, %v1
-bgti_cont.19244:
-	j	bgti_cont.19242
-bgti_else.19241:
+bgti_cont.18608:
+	j	bgti_cont.18606
+bgti_else.18605:
 	add	%v0, %zero, %v1
-bgti_cont.19242:
-	j	bgti_cont.19240
-bgti_else.19239:
+bgti_cont.18606:
+	j	bgti_cont.18604
+bgti_else.18603:
 	add	%v0, %zero, %v1
-bgti_cont.19240:
-	j	bgti_cont.19238
-bgti_else.19237:
+bgti_cont.18604:
+	j	bgti_cont.18602
+bgti_else.18601:
 	add	%v0, %zero, %v1
-bgti_cont.19238:
-	j	bgti_cont.19236
-bgti_else.19235:
+bgti_cont.18602:
+	j	bgti_cont.18600
+bgti_else.18599:
 	add	%v0, %zero, %v1
-bgti_cont.19236:
-	j	bgti_cont.19234
-bgti_else.19233:
+bgti_cont.18600:
+	j	bgti_cont.18598
+bgti_else.18597:
 	add	%v0, %zero, %v1
-bgti_cont.19234:
-	j	bgti_cont.19232
-bgti_else.19231:
+bgti_cont.18598:
+	j	bgti_cont.18596
+bgti_else.18595:
 	add	%v0, %zero, %v1
-bgti_cont.19232:
-	j	bgti_cont.19230
-bgti_else.19229:
+bgti_cont.18596:
+	j	bgti_cont.18594
+bgti_else.18593:
 	add	%v0, %zero, %v1
-bgti_cont.19230:
-	j	bgti_cont.19228
-bgti_else.19227:
+bgti_cont.18594:
+	j	bgti_cont.18592
+bgti_else.18591:
 	add	%v0, %zero, %v1
-bgti_cont.19228:
-	j	bgti_cont.19226
-bgti_else.19225:
+bgti_cont.18592:
+	j	bgti_cont.18590
+bgti_else.18589:
 	add	%v0, %zero, %v1
-bgti_cont.19226:
-	j	bgti_cont.19224
-bgti_else.19223:
+bgti_cont.18590:
+	j	bgti_cont.18588
+bgti_else.18587:
 	add	%v0, %zero, %v1
-bgti_cont.19224:
-	j	bgti_cont.19222
-bgti_else.19221:
+bgti_cont.18588:
+	j	bgti_cont.18586
+bgti_else.18585:
 	add	%v0, %zero, %v1
-bgti_cont.19222:
-	j	bgti_cont.19220
-bgti_else.19219:
+bgti_cont.18586:
+	j	bgti_cont.18584
+bgti_else.18583:
 	add	%v0, %zero, %v1
-bgti_cont.19220:
-	j	bgti_cont.19218
-bgti_else.19217:
+bgti_cont.18584:
+	j	bgti_cont.18582
+bgti_else.18581:
 	add	%v0, %zero, %v1
-bgti_cont.19218:
+bgti_cont.18582:
 	lw	%v1, 3(%sp)
 	addi	%at, %zero, 0
-	blt	%at, %v1, bgt_else.19247
+	blt	%at, %v1, bgt_else.18611
 	addi	%v0, %v0, 48
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
@@ -1700,104 +713,104 @@ bgti_cont.19218:
 	lw	%v0, 2(%sp)
 	addi	%v0, %v0, 48
 	j	min_caml_print_char
-bgt_else.19247:
+bgt_else.18611:
 	sw	%v0, 4(%sp)
-	blti	%v1, 10, bgti_else.19248
+	blti	%v1, 10, bgti_else.18612
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19250
+	blti	%v1, 10, bgti_else.18614
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19252
+	blti	%v1, 10, bgti_else.18616
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19254
+	blti	%v1, 10, bgti_else.18618
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19256
+	blti	%v1, 10, bgti_else.18620
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19258
+	blti	%v1, 10, bgti_else.18622
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19260
+	blti	%v1, 10, bgti_else.18624
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19262
+	blti	%v1, 10, bgti_else.18626
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19264
+	blti	%v1, 10, bgti_else.18628
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19266
+	blti	%v1, 10, bgti_else.18630
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19268
+	blti	%v1, 10, bgti_else.18632
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19270
+	blti	%v1, 10, bgti_else.18634
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19272
+	blti	%v1, 10, bgti_else.18636
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19274
+	blti	%v1, 10, bgti_else.18638
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.19276
+	blti	%v1, 10, bgti_else.18640
 	addi	%v1, %v1, -10
 	addi	%v0, %v1, 0
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	print_int_sub2.2625
+	jal	print_int_sub2.2620
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
-	j	bgti_cont.19277
-bgti_else.19276:
+	j	bgti_cont.18641
+bgti_else.18640:
 	add	%v0, %zero, %v1
-bgti_cont.19277:
-	j	bgti_cont.19275
-bgti_else.19274:
+bgti_cont.18641:
+	j	bgti_cont.18639
+bgti_else.18638:
 	add	%v0, %zero, %v1
-bgti_cont.19275:
-	j	bgti_cont.19273
-bgti_else.19272:
+bgti_cont.18639:
+	j	bgti_cont.18637
+bgti_else.18636:
 	add	%v0, %zero, %v1
-bgti_cont.19273:
-	j	bgti_cont.19271
-bgti_else.19270:
+bgti_cont.18637:
+	j	bgti_cont.18635
+bgti_else.18634:
 	add	%v0, %zero, %v1
-bgti_cont.19271:
-	j	bgti_cont.19269
-bgti_else.19268:
+bgti_cont.18635:
+	j	bgti_cont.18633
+bgti_else.18632:
 	add	%v0, %zero, %v1
-bgti_cont.19269:
-	j	bgti_cont.19267
-bgti_else.19266:
+bgti_cont.18633:
+	j	bgti_cont.18631
+bgti_else.18630:
 	add	%v0, %zero, %v1
-bgti_cont.19267:
-	j	bgti_cont.19265
-bgti_else.19264:
+bgti_cont.18631:
+	j	bgti_cont.18629
+bgti_else.18628:
 	add	%v0, %zero, %v1
-bgti_cont.19265:
-	j	bgti_cont.19263
-bgti_else.19262:
+bgti_cont.18629:
+	j	bgti_cont.18627
+bgti_else.18626:
 	add	%v0, %zero, %v1
-bgti_cont.19263:
-	j	bgti_cont.19261
-bgti_else.19260:
+bgti_cont.18627:
+	j	bgti_cont.18625
+bgti_else.18624:
 	add	%v0, %zero, %v1
-bgti_cont.19261:
-	j	bgti_cont.19259
-bgti_else.19258:
+bgti_cont.18625:
+	j	bgti_cont.18623
+bgti_else.18622:
 	add	%v0, %zero, %v1
-bgti_cont.19259:
-	j	bgti_cont.19257
-bgti_else.19256:
+bgti_cont.18623:
+	j	bgti_cont.18621
+bgti_else.18620:
 	add	%v0, %zero, %v1
-bgti_cont.19257:
-	j	bgti_cont.19255
-bgti_else.19254:
+bgti_cont.18621:
+	j	bgti_cont.18619
+bgti_else.18618:
 	add	%v0, %zero, %v1
-bgti_cont.19255:
-	j	bgti_cont.19253
-bgti_else.19252:
+bgti_cont.18619:
+	j	bgti_cont.18617
+bgti_else.18616:
 	add	%v0, %zero, %v1
-bgti_cont.19253:
-	j	bgti_cont.19251
-bgti_else.19250:
+bgti_cont.18617:
+	j	bgti_cont.18615
+bgti_else.18614:
 	add	%v0, %zero, %v1
-bgti_cont.19251:
-	j	bgti_cont.19249
-bgti_else.19248:
+bgti_cont.18615:
+	j	bgti_cont.18613
+bgti_else.18612:
 	add	%v0, %zero, %v1
-bgti_cont.19249:
+bgti_cont.18613:
 	addi	%v0, %v0, 48
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
@@ -1814,7 +827,7 @@ bgti_cont.19249:
 	lw	%v0, 2(%sp)
 	addi	%v0, %v0, 48
 	j	min_caml_print_char
-vecunit_sgn.2655:
+vecunit_sgn.2650:
 	flw	%f0, 0(%v0)
 	fmul	%f1, %f0, %f0
 	flw	%f2, 1(%v0)
@@ -1824,26 +837,26 @@ vecunit_sgn.2655:
 	fmul	%f4, %f3, %f3
 	fadd	%f1, %f1, %f4
 	fsqrt	%f1, %f1
-	flw	%f4, 464(%zero)
-	fbne	%f1, %f4, fbeq_else.19278
+	flw	%f4, 465(%zero)
+	fbne	%f1, %f4, fbeq_else.18642
 	addi	%a0, %zero, 1
-	j	fbeq_cont.19279
-fbeq_else.19278:
+	j	fbeq_cont.18643
+fbeq_else.18642:
 	addi	%a0, %zero, 0
-fbeq_cont.19279:
-	beqi	%a0, 0, bnei_else.19280
-	flw	%f1, 468(%zero)
-	j	bnei_cont.19281
-bnei_else.19280:
-	beqi	%v1, 0, bnei_else.19282
-	flw	%f4, 463(%zero)
+fbeq_cont.18643:
+	beqi	%a0, 0, bnei_else.18644
+	flw	%f1, 469(%zero)
+	j	bnei_cont.18645
+bnei_else.18644:
+	beqi	%v1, 0, bnei_else.18646
+	flw	%f4, 464(%zero)
 	fdiv	%f1, %f4, %f1
-	j	bnei_cont.19283
-bnei_else.19282:
-	flw	%f4, 468(%zero)
+	j	bnei_cont.18647
+bnei_else.18646:
+	flw	%f4, 469(%zero)
 	fdiv	%f1, %f4, %f1
-bnei_cont.19283:
-bnei_cont.19281:
+bnei_cont.18647:
+bnei_cont.18645:
 	fmul	%f0, %f0, %f1
 	fsw	%f0, 0(%v0)
 	fmul	%f0, %f2, %f1
@@ -1851,7 +864,7 @@ bnei_cont.19281:
 	fmul	%f0, %f3, %f1
 	fsw	%f0, 2(%v0)
 	jr	%ra
-read_screen_settings.2756:
+read_screen_settings.2751:
 	sw	%ra, 0(%sp)
 	addi	%sp, %sp, 1
 	jal	min_caml_read_float
@@ -1878,13 +891,13 @@ read_screen_settings.2756:
 	jal	min_caml_read_float
 	addi	%sp, %sp, -1
 	lw	%ra, 0(%sp)
-	flw	%f1, 462(%zero)
+	flw	%f1, 463(%zero)
 	fmul	%f0, %f0, %f1
 	fsw	%f1, 0(%sp)
 	fsw	%f0, 1(%sp)
 	sw	%ra, 2(%sp)
 	addi	%sp, %sp, 3
-	jal	cos.2616
+	jal	cos.2611
 	addi	%sp, %sp, -3
 	lw	%ra, 2(%sp)
 	flw	%f1, 1(%sp)
@@ -1892,7 +905,7 @@ read_screen_settings.2756:
 	fmov	%f0, %f1
 	sw	%ra, 3(%sp)
 	addi	%sp, %sp, 4
-	jal	sin.2618
+	jal	sin.2613
 	addi	%sp, %sp, -4
 	lw	%ra, 3(%sp)
 	fsw	%f0, 3(%sp)
@@ -1906,7 +919,7 @@ read_screen_settings.2756:
 	fsw	%f0, 4(%sp)
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	cos.2616
+	jal	cos.2611
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
 	flw	%f1, 4(%sp)
@@ -1914,16 +927,16 @@ read_screen_settings.2756:
 	fmov	%f0, %f1
 	sw	%ra, 6(%sp)
 	addi	%sp, %sp, 7
-	jal	sin.2618
+	jal	sin.2613
 	addi	%sp, %sp, -7
 	lw	%ra, 6(%sp)
 	flw	%f1, 2(%sp)
 	fmul	%f2, %f1, %f0
-	flw	%f3, 461(%zero)
+	flw	%f3, 462(%zero)
 	fmul	%f2, %f2, %f3
 	addi	%v0, %zero, 171
 	fsw	%f2, 0(%v0)
-	flw	%f2, 460(%zero)
+	flw	%f2, 461(%zero)
 	flw	%f4, 3(%sp)
 	fmul	%f2, %f4, %f2
 	addi	%v0, %zero, 171
@@ -1935,7 +948,7 @@ read_screen_settings.2756:
 	fsw	%f3, 2(%v0)
 	addi	%v0, %zero, 165
 	fsw	%f2, 0(%v0)
-	flw	%f3, 464(%zero)
+	flw	%f3, 465(%zero)
 	addi	%v0, %zero, 165
 	fsw	%f3, 1(%v0)
 	fneg	%f3, %f0
@@ -1974,14 +987,14 @@ read_screen_settings.2756:
 	addi	%v0, %zero, 75
 	fsw	%f0, 2(%v0)
 	jr	%ra
-rotate_quadratic_matrix.2760:
+rotate_quadratic_matrix.2755:
 	flw	%f0, 0(%v1)
 	sw	%v0, 0(%sp)
 	sw	%v1, 1(%sp)
 	fsw	%f0, 2(%sp)
 	sw	%ra, 3(%sp)
 	addi	%sp, %sp, 4
-	jal	cos.2616
+	jal	cos.2611
 	addi	%sp, %sp, -4
 	lw	%ra, 3(%sp)
 	flw	%f1, 2(%sp)
@@ -1989,7 +1002,7 @@ rotate_quadratic_matrix.2760:
 	fmov	%f0, %f1
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	sin.2618
+	jal	sin.2613
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
 	lw	%v0, 1(%sp)
@@ -1999,7 +1012,7 @@ rotate_quadratic_matrix.2760:
 	fmov	%f0, %f1
 	sw	%ra, 6(%sp)
 	addi	%sp, %sp, 7
-	jal	cos.2616
+	jal	cos.2611
 	addi	%sp, %sp, -7
 	lw	%ra, 6(%sp)
 	flw	%f1, 5(%sp)
@@ -2007,7 +1020,7 @@ rotate_quadratic_matrix.2760:
 	fmov	%f0, %f1
 	sw	%ra, 7(%sp)
 	addi	%sp, %sp, 8
-	jal	sin.2618
+	jal	sin.2613
 	addi	%sp, %sp, -8
 	lw	%ra, 7(%sp)
 	lw	%v0, 1(%sp)
@@ -2017,7 +1030,7 @@ rotate_quadratic_matrix.2760:
 	fmov	%f0, %f1
 	sw	%ra, 9(%sp)
 	addi	%sp, %sp, 10
-	jal	cos.2616
+	jal	cos.2611
 	addi	%sp, %sp, -10
 	lw	%ra, 9(%sp)
 	flw	%f1, 8(%sp)
@@ -2025,7 +1038,7 @@ rotate_quadratic_matrix.2760:
 	fmov	%f0, %f1
 	sw	%ra, 10(%sp)
 	addi	%sp, %sp, 11
-	jal	sin.2618
+	jal	sin.2613
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
 	flw	%f1, 9(%sp)
@@ -2083,7 +1096,7 @@ rotate_quadratic_matrix.2760:
 	fmul	%f13, %f9, %f13
 	fadd	%f12, %f12, %f13
 	fsw	%f12, 2(%v0)
-	flw	%f12, 491(%zero)
+	flw	%f12, 460(%zero)
 	fmul	%f13, %f5, %f7
 	fmul	%f13, %f13, %f10
 	fmul	%f14, %f8, %f6
@@ -2113,14 +1126,14 @@ rotate_quadratic_matrix.2760:
 	fmul	%f0, %f12, %f0
 	fsw	%f0, 2(%v0)
 	jr	%ra
-read_nth_object.2763:
+read_nth_object.2758:
 	sw	%v0, 0(%sp)
 	sw	%ra, 1(%sp)
 	addi	%sp, %sp, 2
 	jal	min_caml_read_int
 	addi	%sp, %sp, -2
 	lw	%ra, 1(%sp)
-	beqi	%v0, -1, bnei_else.19287
+	beqi	%v0, -1, bnei_else.18651
 	sw	%v0, 1(%sp)
 	sw	%ra, 2(%sp)
 	addi	%sp, %sp, 3
@@ -2140,7 +1153,7 @@ read_nth_object.2763:
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
 	addi	%v1, %zero, 3
-	flw	%f0, 464(%zero)
+	flw	%f0, 465(%zero)
 	sw	%v0, 4(%sp)
 	fsw	%f0, 5(%sp)
 	sw	%v1, 6(%sp)
@@ -2210,12 +1223,12 @@ read_nth_object.2763:
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
 	flw	%f1, 5(%sp)
-	fblt	%f0, %f1, fbgt_else.19288
+	fblt	%f0, %f1, fbgt_else.18652
 	addi	%v0, %zero, 0
-	j	fbgt_cont.19289
-fbgt_else.19288:
+	j	fbgt_cont.18653
+fbgt_else.18652:
 	addi	%v0, %zero, 1
-fbgt_cont.19289:
+fbgt_cont.18653:
 	lw	%v1, 8(%sp)
 	sw	%v0, 10(%sp)
 	addi	%v0, %v1, 0
@@ -2279,14 +1292,14 @@ fbgt_cont.19289:
 	addi	%sp, %sp, -14
 	lw	%ra, 13(%sp)
 	lw	%v1, 4(%sp)
-	beqi	%v1, 0, bnei_else.19290
+	beqi	%v1, 0, bnei_else.18654
 	sw	%v0, 13(%sp)
 	sw	%ra, 14(%sp)
 	addi	%sp, %sp, 15
 	jal	min_caml_read_float
 	addi	%sp, %sp, -15
 	lw	%ra, 14(%sp)
-	flw	%f1, 462(%zero)
+	flw	%f1, 463(%zero)
 	fmul	%f0, %f0, %f1
 	lw	%v0, 13(%sp)
 	fsw	%f0, 0(%v0)
@@ -2309,16 +1322,16 @@ fbgt_cont.19289:
 	fmul	%f0, %f0, %f1
 	lw	%v0, 13(%sp)
 	fsw	%f0, 2(%v0)
-	j	bnei_cont.19291
-bnei_else.19290:
-bnei_cont.19291:
+	j	bnei_cont.18655
+bnei_else.18654:
+bnei_cont.18655:
 	lw	%v1, 2(%sp)
-	beqi	%v1, 2, bnei_else.19292
+	beqi	%v1, 2, bnei_else.18656
 	lw	%a0, 10(%sp)
-	j	bnei_cont.19293
-bnei_else.19292:
+	j	bnei_cont.18657
+bnei_else.18656:
 	addi	%a0, %zero, 1
-bnei_cont.19293:
+bnei_cont.18657:
 	addi	%a1, %zero, 4
 	flw	%f0, 5(%sp)
 	sw	%a0, 15(%sp)
@@ -2356,297 +1369,297 @@ bnei_cont.19293:
 	lw	%t0, 0(%sp)
 	add	%at, %a3, %t0
 	sw	%v1, 0(%at)
-	beqi	%a2, 3, bnei_else.19294
-	beqi	%a2, 2, bnei_else.19296
-	j	bnei_cont.19297
-bnei_else.19296:
+	beqi	%a2, 3, bnei_else.18658
+	beqi	%a2, 2, bnei_else.18660
+	j	bnei_cont.18661
+bnei_else.18660:
 	lw	%v1, 10(%sp)
-	beqi	%v1, 0, bnei_else.19298
+	beqi	%v1, 0, bnei_else.18662
 	addi	%v1, %zero, 0
-	j	bnei_cont.19299
-bnei_else.19298:
+	j	bnei_cont.18663
+bnei_else.18662:
 	addi	%v1, %zero, 1
-bnei_cont.19299:
+bnei_cont.18663:
 	addi	%v0, %a0, 0
 	sw	%ra, 16(%sp)
 	addi	%sp, %sp, 17
-	jal	vecunit_sgn.2655
+	jal	vecunit_sgn.2650
 	addi	%sp, %sp, -17
 	lw	%ra, 16(%sp)
-bnei_cont.19297:
-	j	bnei_cont.19295
-bnei_else.19294:
+bnei_cont.18661:
+	j	bnei_cont.18659
+bnei_else.18658:
 	flw	%f0, 0(%a0)
 	flw	%f1, 5(%sp)
-	fbne	%f0, %f1, fbeq_else.19300
+	fbne	%f0, %f1, fbeq_else.18664
 	addi	%v1, %zero, 1
-	j	fbeq_cont.19301
-fbeq_else.19300:
+	j	fbeq_cont.18665
+fbeq_else.18664:
 	addi	%v1, %zero, 0
-fbeq_cont.19301:
-	beqi	%v1, 0, bnei_else.19302
+fbeq_cont.18665:
+	beqi	%v1, 0, bnei_else.18666
 	fmov	%f0, %f1
-	j	bnei_cont.19303
-bnei_else.19302:
-	fbne	%f0, %f1, fbeq_else.19304
+	j	bnei_cont.18667
+bnei_else.18666:
+	fbne	%f0, %f1, fbeq_else.18668
 	addi	%v1, %zero, 1
-	j	fbeq_cont.19305
-fbeq_else.19304:
+	j	fbeq_cont.18669
+fbeq_else.18668:
 	addi	%v1, %zero, 0
-fbeq_cont.19305:
-	beqi	%v1, 0, bnei_else.19306
+fbeq_cont.18669:
+	beqi	%v1, 0, bnei_else.18670
 	fmov	%f2, %f1
-	j	bnei_cont.19307
-bnei_else.19306:
-	fblt	%f1, %f0, fbgt_else.19308
+	j	bnei_cont.18671
+bnei_else.18670:
+	fblt	%f1, %f0, fbgt_else.18672
 	addi	%v1, %zero, 0
-	j	fbgt_cont.19309
-fbgt_else.19308:
+	j	fbgt_cont.18673
+fbgt_else.18672:
 	addi	%v1, %zero, 1
-fbgt_cont.19309:
-	beqi	%v1, 0, bnei_else.19310
-	flw	%f2, 468(%zero)
-	j	bnei_cont.19311
-bnei_else.19310:
-	flw	%f2, 463(%zero)
-bnei_cont.19311:
-bnei_cont.19307:
+fbgt_cont.18673:
+	beqi	%v1, 0, bnei_else.18674
+	flw	%f2, 469(%zero)
+	j	bnei_cont.18675
+bnei_else.18674:
+	flw	%f2, 464(%zero)
+bnei_cont.18675:
+bnei_cont.18671:
 	fmul	%f0, %f0, %f0
 	fdiv	%f0, %f2, %f0
-bnei_cont.19303:
+bnei_cont.18667:
 	fsw	%f0, 0(%a0)
 	flw	%f0, 1(%a0)
-	fbne	%f0, %f1, fbeq_else.19312
+	fbne	%f0, %f1, fbeq_else.18676
 	addi	%v1, %zero, 1
-	j	fbeq_cont.19313
-fbeq_else.19312:
+	j	fbeq_cont.18677
+fbeq_else.18676:
 	addi	%v1, %zero, 0
-fbeq_cont.19313:
-	beqi	%v1, 0, bnei_else.19314
+fbeq_cont.18677:
+	beqi	%v1, 0, bnei_else.18678
 	fmov	%f0, %f1
-	j	bnei_cont.19315
-bnei_else.19314:
-	fbne	%f0, %f1, fbeq_else.19316
+	j	bnei_cont.18679
+bnei_else.18678:
+	fbne	%f0, %f1, fbeq_else.18680
 	addi	%v1, %zero, 1
-	j	fbeq_cont.19317
-fbeq_else.19316:
+	j	fbeq_cont.18681
+fbeq_else.18680:
 	addi	%v1, %zero, 0
-fbeq_cont.19317:
-	beqi	%v1, 0, bnei_else.19318
+fbeq_cont.18681:
+	beqi	%v1, 0, bnei_else.18682
 	fmov	%f2, %f1
-	j	bnei_cont.19319
-bnei_else.19318:
-	fblt	%f1, %f0, fbgt_else.19320
+	j	bnei_cont.18683
+bnei_else.18682:
+	fblt	%f1, %f0, fbgt_else.18684
 	addi	%v1, %zero, 0
-	j	fbgt_cont.19321
-fbgt_else.19320:
+	j	fbgt_cont.18685
+fbgt_else.18684:
 	addi	%v1, %zero, 1
-fbgt_cont.19321:
-	beqi	%v1, 0, bnei_else.19322
-	flw	%f2, 468(%zero)
-	j	bnei_cont.19323
-bnei_else.19322:
-	flw	%f2, 463(%zero)
-bnei_cont.19323:
-bnei_cont.19319:
+fbgt_cont.18685:
+	beqi	%v1, 0, bnei_else.18686
+	flw	%f2, 469(%zero)
+	j	bnei_cont.18687
+bnei_else.18686:
+	flw	%f2, 464(%zero)
+bnei_cont.18687:
+bnei_cont.18683:
 	fmul	%f0, %f0, %f0
 	fdiv	%f0, %f2, %f0
-bnei_cont.19315:
+bnei_cont.18679:
 	fsw	%f0, 1(%a0)
 	flw	%f0, 2(%a0)
-	fbne	%f0, %f1, fbeq_else.19324
+	fbne	%f0, %f1, fbeq_else.18688
 	addi	%v1, %zero, 1
-	j	fbeq_cont.19325
-fbeq_else.19324:
+	j	fbeq_cont.18689
+fbeq_else.18688:
 	addi	%v1, %zero, 0
-fbeq_cont.19325:
-	beqi	%v1, 0, bnei_else.19326
+fbeq_cont.18689:
+	beqi	%v1, 0, bnei_else.18690
 	fmov	%f0, %f1
-	j	bnei_cont.19327
-bnei_else.19326:
-	fbne	%f0, %f1, fbeq_else.19328
+	j	bnei_cont.18691
+bnei_else.18690:
+	fbne	%f0, %f1, fbeq_else.18692
 	addi	%v1, %zero, 1
-	j	fbeq_cont.19329
-fbeq_else.19328:
+	j	fbeq_cont.18693
+fbeq_else.18692:
 	addi	%v1, %zero, 0
-fbeq_cont.19329:
-	beqi	%v1, 0, bnei_else.19330
-	j	bnei_cont.19331
-bnei_else.19330:
-	fblt	%f1, %f0, fbgt_else.19332
+fbeq_cont.18693:
+	beqi	%v1, 0, bnei_else.18694
+	j	bnei_cont.18695
+bnei_else.18694:
+	fblt	%f1, %f0, fbgt_else.18696
 	addi	%v1, %zero, 0
-	j	fbgt_cont.19333
-fbgt_else.19332:
+	j	fbgt_cont.18697
+fbgt_else.18696:
 	addi	%v1, %zero, 1
-fbgt_cont.19333:
-	beqi	%v1, 0, bnei_else.19334
-	flw	%f1, 468(%zero)
-	j	bnei_cont.19335
-bnei_else.19334:
-	flw	%f1, 463(%zero)
-bnei_cont.19335:
-bnei_cont.19331:
+fbgt_cont.18697:
+	beqi	%v1, 0, bnei_else.18698
+	flw	%f1, 469(%zero)
+	j	bnei_cont.18699
+bnei_else.18698:
+	flw	%f1, 464(%zero)
+bnei_cont.18699:
+bnei_cont.18695:
 	fmul	%f0, %f0, %f0
 	fdiv	%f0, %f1, %f0
-bnei_cont.19327:
+bnei_cont.18691:
 	fsw	%f0, 2(%a0)
-bnei_cont.19295:
+bnei_cont.18659:
 	lw	%v0, 4(%sp)
-	beqi	%v0, 0, bnei_else.19336
+	beqi	%v0, 0, bnei_else.18700
 	lw	%v0, 7(%sp)
 	lw	%v1, 13(%sp)
 	sw	%ra, 16(%sp)
 	addi	%sp, %sp, 17
-	jal	rotate_quadratic_matrix.2760
+	jal	rotate_quadratic_matrix.2755
 	addi	%sp, %sp, -17
 	lw	%ra, 16(%sp)
-	j	bnei_cont.19337
-bnei_else.19336:
-bnei_cont.19337:
+	j	bnei_cont.18701
+bnei_else.18700:
+bnei_cont.18701:
 	addi	%v0, %zero, 1
 	jr	%ra
-bnei_else.19287:
+bnei_else.18651:
 	addi	%v0, %zero, 0
 	jr	%ra
-read_object.2765:
-	blti	%v0, 60, bgti_else.19338
+read_object.2760:
+	blti	%v0, 60, bgti_else.18702
 	jr	%ra
-bgti_else.19338:
+bgti_else.18702:
 	sw	%v0, 0(%sp)
 	sw	%ra, 1(%sp)
 	addi	%sp, %sp, 2
-	jal	read_nth_object.2763
+	jal	read_nth_object.2758
 	addi	%sp, %sp, -2
 	lw	%ra, 1(%sp)
-	beqi	%v0, 0, bnei_else.19340
+	beqi	%v0, 0, bnei_else.18704
 	lw	%v0, 0(%sp)
 	addi	%v0, %v0, 1
-	blti	%v0, 60, bgti_else.19341
+	blti	%v0, 60, bgti_else.18705
 	jr	%ra
-bgti_else.19341:
+bgti_else.18705:
 	sw	%v0, 1(%sp)
 	sw	%ra, 2(%sp)
 	addi	%sp, %sp, 3
-	jal	read_nth_object.2763
+	jal	read_nth_object.2758
 	addi	%sp, %sp, -3
 	lw	%ra, 2(%sp)
-	beqi	%v0, 0, bnei_else.19343
+	beqi	%v0, 0, bnei_else.18707
 	lw	%v0, 1(%sp)
 	addi	%v0, %v0, 1
-	blti	%v0, 60, bgti_else.19344
+	blti	%v0, 60, bgti_else.18708
 	jr	%ra
-bgti_else.19344:
+bgti_else.18708:
 	sw	%v0, 2(%sp)
 	sw	%ra, 3(%sp)
 	addi	%sp, %sp, 4
-	jal	read_nth_object.2763
+	jal	read_nth_object.2758
 	addi	%sp, %sp, -4
 	lw	%ra, 3(%sp)
-	beqi	%v0, 0, bnei_else.19346
+	beqi	%v0, 0, bnei_else.18710
 	lw	%v0, 2(%sp)
 	addi	%v0, %v0, 1
-	blti	%v0, 60, bgti_else.19347
+	blti	%v0, 60, bgti_else.18711
 	jr	%ra
-bgti_else.19347:
+bgti_else.18711:
 	sw	%v0, 3(%sp)
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	read_nth_object.2763
+	jal	read_nth_object.2758
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
-	beqi	%v0, 0, bnei_else.19349
+	beqi	%v0, 0, bnei_else.18713
 	lw	%v0, 3(%sp)
 	addi	%v0, %v0, 1
-	blti	%v0, 60, bgti_else.19350
+	blti	%v0, 60, bgti_else.18714
 	jr	%ra
-bgti_else.19350:
+bgti_else.18714:
 	sw	%v0, 4(%sp)
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	read_nth_object.2763
+	jal	read_nth_object.2758
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
-	beqi	%v0, 0, bnei_else.19352
+	beqi	%v0, 0, bnei_else.18716
 	lw	%v0, 4(%sp)
 	addi	%v0, %v0, 1
-	blti	%v0, 60, bgti_else.19353
+	blti	%v0, 60, bgti_else.18717
 	jr	%ra
-bgti_else.19353:
+bgti_else.18717:
 	sw	%v0, 5(%sp)
 	sw	%ra, 6(%sp)
 	addi	%sp, %sp, 7
-	jal	read_nth_object.2763
+	jal	read_nth_object.2758
 	addi	%sp, %sp, -7
 	lw	%ra, 6(%sp)
-	beqi	%v0, 0, bnei_else.19355
+	beqi	%v0, 0, bnei_else.18719
 	lw	%v0, 5(%sp)
 	addi	%v0, %v0, 1
-	blti	%v0, 60, bgti_else.19356
+	blti	%v0, 60, bgti_else.18720
 	jr	%ra
-bgti_else.19356:
+bgti_else.18720:
 	sw	%v0, 6(%sp)
 	sw	%ra, 7(%sp)
 	addi	%sp, %sp, 8
-	jal	read_nth_object.2763
+	jal	read_nth_object.2758
 	addi	%sp, %sp, -8
 	lw	%ra, 7(%sp)
-	beqi	%v0, 0, bnei_else.19358
+	beqi	%v0, 0, bnei_else.18722
 	lw	%v0, 6(%sp)
 	addi	%v0, %v0, 1
-	blti	%v0, 60, bgti_else.19359
+	blti	%v0, 60, bgti_else.18723
 	jr	%ra
-bgti_else.19359:
+bgti_else.18723:
 	sw	%v0, 7(%sp)
 	sw	%ra, 8(%sp)
 	addi	%sp, %sp, 9
-	jal	read_nth_object.2763
+	jal	read_nth_object.2758
 	addi	%sp, %sp, -9
 	lw	%ra, 8(%sp)
-	beqi	%v0, 0, bnei_else.19361
+	beqi	%v0, 0, bnei_else.18725
 	lw	%v0, 7(%sp)
 	addi	%v0, %v0, 1
-	j	read_object.2765
-bnei_else.19361:
+	j	read_object.2760
+bnei_else.18725:
 	addi	%v0, %zero, 0
 	lw	%v1, 7(%sp)
 	sw	%v1, 0(%v0)
 	jr	%ra
-bnei_else.19358:
+bnei_else.18722:
 	addi	%v0, %zero, 0
 	lw	%v1, 6(%sp)
 	sw	%v1, 0(%v0)
 	jr	%ra
-bnei_else.19355:
+bnei_else.18719:
 	addi	%v0, %zero, 0
 	lw	%v1, 5(%sp)
 	sw	%v1, 0(%v0)
 	jr	%ra
-bnei_else.19352:
+bnei_else.18716:
 	addi	%v0, %zero, 0
 	lw	%v1, 4(%sp)
 	sw	%v1, 0(%v0)
 	jr	%ra
-bnei_else.19349:
+bnei_else.18713:
 	addi	%v0, %zero, 0
 	lw	%v1, 3(%sp)
 	sw	%v1, 0(%v0)
 	jr	%ra
-bnei_else.19346:
+bnei_else.18710:
 	addi	%v0, %zero, 0
 	lw	%v1, 2(%sp)
 	sw	%v1, 0(%v0)
 	jr	%ra
-bnei_else.19343:
+bnei_else.18707:
 	addi	%v0, %zero, 0
 	lw	%v1, 1(%sp)
 	sw	%v1, 0(%v0)
 	jr	%ra
-bnei_else.19340:
+bnei_else.18704:
 	addi	%v0, %zero, 0
 	lw	%v1, 0(%sp)
 	sw	%v1, 0(%v0)
 	jr	%ra
-read_net_item.2769:
+read_net_item.2764:
 	sw	%v0, 0(%sp)
 	sw	%ra, 1(%sp)
 	addi	%sp, %sp, 2
@@ -2654,7 +1667,7 @@ read_net_item.2769:
 	addi	%sp, %sp, -2
 	lw	%ra, 1(%sp)
 	addi	%v1, %zero, -1
-	beqi	%v0, -1, bnei_else.19370
+	beqi	%v0, -1, bnei_else.18734
 	lw	%a0, 0(%sp)
 	addi	%a1, %a0, 1
 	sw	%v0, 1(%sp)
@@ -2665,7 +1678,7 @@ read_net_item.2769:
 	jal	min_caml_read_int
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
-	beqi	%v0, -1, bnei_else.19371
+	beqi	%v0, -1, bnei_else.18735
 	lw	%v1, 3(%sp)
 	addi	%a0, %v1, 1
 	sw	%v0, 4(%sp)
@@ -2675,7 +1688,7 @@ read_net_item.2769:
 	jal	min_caml_read_int
 	addi	%sp, %sp, -7
 	lw	%ra, 6(%sp)
-	beqi	%v0, -1, bnei_else.19373
+	beqi	%v0, -1, bnei_else.18737
 	lw	%v1, 5(%sp)
 	addi	%a0, %v1, 1
 	sw	%v0, 6(%sp)
@@ -2685,22 +1698,22 @@ read_net_item.2769:
 	jal	min_caml_read_int
 	addi	%sp, %sp, -9
 	lw	%ra, 8(%sp)
-	beqi	%v0, -1, bnei_else.19375
+	beqi	%v0, -1, bnei_else.18739
 	lw	%v1, 7(%sp)
 	addi	%a0, %v1, 1
 	sw	%v0, 8(%sp)
 	addi	%v0, %a0, 0
 	sw	%ra, 9(%sp)
 	addi	%sp, %sp, 10
-	jal	read_net_item.2769
+	jal	read_net_item.2764
 	addi	%sp, %sp, -10
 	lw	%ra, 9(%sp)
 	lw	%v1, 7(%sp)
 	lw	%a0, 8(%sp)
 	add	%at, %v0, %v1
 	sw	%a0, 0(%at)
-	j	bnei_cont.19376
-bnei_else.19375:
+	j	bnei_cont.18740
+bnei_else.18739:
 	lw	%v0, 7(%sp)
 	addi	%v0, %v0, 1
 	lw	%v1, 2(%sp)
@@ -2709,13 +1722,13 @@ bnei_else.19375:
 	jal	min_caml_create_array
 	addi	%sp, %sp, -10
 	lw	%ra, 9(%sp)
-bnei_cont.19376:
+bnei_cont.18740:
 	lw	%v1, 5(%sp)
 	lw	%a0, 6(%sp)
 	add	%at, %v0, %v1
 	sw	%a0, 0(%at)
-	j	bnei_cont.19374
-bnei_else.19373:
+	j	bnei_cont.18738
+bnei_else.18737:
 	lw	%v0, 5(%sp)
 	addi	%v0, %v0, 1
 	lw	%v1, 2(%sp)
@@ -2724,13 +1737,13 @@ bnei_else.19373:
 	jal	min_caml_create_array
 	addi	%sp, %sp, -10
 	lw	%ra, 9(%sp)
-bnei_cont.19374:
+bnei_cont.18738:
 	lw	%v1, 3(%sp)
 	lw	%a0, 4(%sp)
 	add	%at, %v0, %v1
 	sw	%a0, 0(%at)
-	j	bnei_cont.19372
-bnei_else.19371:
+	j	bnei_cont.18736
+bnei_else.18735:
 	lw	%v0, 3(%sp)
 	addi	%v0, %v0, 1
 	lw	%v1, 2(%sp)
@@ -2739,17 +1752,17 @@ bnei_else.19371:
 	jal	min_caml_create_array
 	addi	%sp, %sp, -10
 	lw	%ra, 9(%sp)
-bnei_cont.19372:
+bnei_cont.18736:
 	lw	%v1, 0(%sp)
 	lw	%a0, 1(%sp)
 	add	%at, %v0, %v1
 	sw	%a0, 0(%at)
 	jr	%ra
-bnei_else.19370:
+bnei_else.18734:
 	lw	%v0, 0(%sp)
 	addi	%v0, %v0, 1
 	j	min_caml_create_array
-read_or_network.2771:
+read_or_network.2766:
 	sw	%v0, 0(%sp)
 	sw	%ra, 1(%sp)
 	addi	%sp, %sp, 2
@@ -2758,33 +1771,33 @@ read_or_network.2771:
 	lw	%ra, 1(%sp)
 	addi	%v1, %zero, -1
 	sw	%v1, 1(%sp)
-	beqi	%v0, -1, bnei_else.19377
+	beqi	%v0, -1, bnei_else.18741
 	sw	%v0, 2(%sp)
 	sw	%ra, 3(%sp)
 	addi	%sp, %sp, 4
 	jal	min_caml_read_int
 	addi	%sp, %sp, -4
 	lw	%ra, 3(%sp)
-	beqi	%v0, -1, bnei_else.19379
+	beqi	%v0, -1, bnei_else.18743
 	sw	%v0, 3(%sp)
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
 	jal	min_caml_read_int
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
-	beqi	%v0, -1, bnei_else.19381
+	beqi	%v0, -1, bnei_else.18745
 	addi	%v1, %zero, 3
 	sw	%v0, 4(%sp)
 	addi	%v0, %v1, 0
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	read_net_item.2769
+	jal	read_net_item.2764
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
 	lw	%v1, 4(%sp)
 	sw	%v1, 2(%v0)
-	j	bnei_cont.19382
-bnei_else.19381:
+	j	bnei_cont.18746
+bnei_else.18745:
 	addi	%v0, %zero, 3
 	lw	%v1, 1(%sp)
 	sw	%ra, 5(%sp)
@@ -2792,11 +1805,11 @@ bnei_else.19381:
 	jal	min_caml_create_array
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
-bnei_cont.19382:
+bnei_cont.18746:
 	lw	%v1, 3(%sp)
 	sw	%v1, 1(%v0)
-	j	bnei_cont.19380
-bnei_else.19379:
+	j	bnei_cont.18744
+bnei_else.18743:
 	addi	%v0, %zero, 2
 	lw	%v1, 1(%sp)
 	sw	%ra, 5(%sp)
@@ -2804,12 +1817,12 @@ bnei_else.19379:
 	jal	min_caml_create_array
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
-bnei_cont.19380:
+bnei_cont.18744:
 	lw	%v1, 2(%sp)
 	sw	%v1, 0(%v0)
 	add	%v1, %zero, %v0
-	j	bnei_cont.19378
-bnei_else.19377:
+	j	bnei_cont.18742
+bnei_else.18741:
 	addi	%v0, %zero, 1
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
@@ -2817,9 +1830,9 @@ bnei_else.19377:
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
 	addi	%v1, %v0, 0
-bnei_cont.19378:
+bnei_cont.18742:
 	lw	%v0, 0(%v1)
-	beqi	%v0, -1, bnei_else.19383
+	beqi	%v0, -1, bnei_else.18747
 	addi	%v0, %zero, 1
 	lw	%a0, 0(%sp)
 	addi	%a1, %a0, 1
@@ -2831,26 +1844,26 @@ bnei_cont.19378:
 	jal	min_caml_read_int
 	addi	%sp, %sp, -9
 	lw	%ra, 8(%sp)
-	beqi	%v0, -1, bnei_else.19384
+	beqi	%v0, -1, bnei_else.18748
 	sw	%v0, 8(%sp)
 	sw	%ra, 9(%sp)
 	addi	%sp, %sp, 10
 	jal	min_caml_read_int
 	addi	%sp, %sp, -10
 	lw	%ra, 9(%sp)
-	beqi	%v0, -1, bnei_else.19386
+	beqi	%v0, -1, bnei_else.18750
 	addi	%v1, %zero, 2
 	sw	%v0, 9(%sp)
 	addi	%v0, %v1, 0
 	sw	%ra, 10(%sp)
 	addi	%sp, %sp, 11
-	jal	read_net_item.2769
+	jal	read_net_item.2764
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
 	lw	%v1, 9(%sp)
 	sw	%v1, 1(%v0)
-	j	bnei_cont.19387
-bnei_else.19386:
+	j	bnei_cont.18751
+bnei_else.18750:
 	addi	%v0, %zero, 2
 	lw	%v1, 1(%sp)
 	sw	%ra, 10(%sp)
@@ -2858,12 +1871,12 @@ bnei_else.19386:
 	jal	min_caml_create_array
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
-bnei_cont.19387:
+bnei_cont.18751:
 	lw	%v1, 8(%sp)
 	sw	%v1, 0(%v0)
 	add	%v1, %zero, %v0
-	j	bnei_cont.19385
-bnei_else.19384:
+	j	bnei_cont.18749
+bnei_else.18748:
 	lw	%v0, 7(%sp)
 	lw	%v1, 1(%sp)
 	sw	%ra, 10(%sp)
@@ -2872,24 +1885,24 @@ bnei_else.19384:
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
 	addi	%v1, %v0, 0
-bnei_cont.19385:
+bnei_cont.18749:
 	lw	%v0, 0(%v1)
-	beqi	%v0, -1, bnei_else.19388
+	beqi	%v0, -1, bnei_else.18752
 	lw	%v0, 6(%sp)
 	addi	%a0, %v0, 1
 	sw	%v1, 10(%sp)
 	addi	%v0, %a0, 0
 	sw	%ra, 11(%sp)
 	addi	%sp, %sp, 12
-	jal	read_or_network.2771
+	jal	read_or_network.2766
 	addi	%sp, %sp, -12
 	lw	%ra, 11(%sp)
 	lw	%v1, 6(%sp)
 	lw	%a0, 10(%sp)
 	add	%at, %v0, %v1
 	sw	%a0, 0(%at)
-	j	bnei_cont.19389
-bnei_else.19388:
+	j	bnei_cont.18753
+bnei_else.18752:
 	lw	%v0, 6(%sp)
 	addi	%v0, %v0, 1
 	sw	%ra, 11(%sp)
@@ -2897,17 +1910,17 @@ bnei_else.19388:
 	jal	min_caml_create_array
 	addi	%sp, %sp, -12
 	lw	%ra, 11(%sp)
-bnei_cont.19389:
+bnei_cont.18753:
 	lw	%v1, 0(%sp)
 	lw	%a0, 5(%sp)
 	add	%at, %v0, %v1
 	sw	%a0, 0(%at)
 	jr	%ra
-bnei_else.19383:
+bnei_else.18747:
 	lw	%v0, 0(%sp)
 	addi	%v0, %v0, 1
 	j	min_caml_create_array
-read_and_network.2773:
+read_and_network.2768:
 	addi	%v1, %zero, 0
 	sw	%v1, 0(%sp)
 	sw	%v0, 1(%sp)
@@ -2918,33 +1931,33 @@ read_and_network.2773:
 	lw	%ra, 2(%sp)
 	addi	%v1, %zero, -1
 	sw	%v1, 2(%sp)
-	beqi	%v0, -1, bnei_else.19390
+	beqi	%v0, -1, bnei_else.18754
 	sw	%v0, 3(%sp)
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
 	jal	min_caml_read_int
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
-	beqi	%v0, -1, bnei_else.19392
+	beqi	%v0, -1, bnei_else.18756
 	sw	%v0, 4(%sp)
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
 	jal	min_caml_read_int
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
-	beqi	%v0, -1, bnei_else.19394
+	beqi	%v0, -1, bnei_else.18758
 	addi	%v1, %zero, 3
 	sw	%v0, 5(%sp)
 	addi	%v0, %v1, 0
 	sw	%ra, 6(%sp)
 	addi	%sp, %sp, 7
-	jal	read_net_item.2769
+	jal	read_net_item.2764
 	addi	%sp, %sp, -7
 	lw	%ra, 6(%sp)
 	lw	%v1, 5(%sp)
 	sw	%v1, 2(%v0)
-	j	bnei_cont.19395
-bnei_else.19394:
+	j	bnei_cont.18759
+bnei_else.18758:
 	addi	%v0, %zero, 3
 	lw	%v1, 2(%sp)
 	sw	%ra, 6(%sp)
@@ -2952,11 +1965,11 @@ bnei_else.19394:
 	jal	min_caml_create_array
 	addi	%sp, %sp, -7
 	lw	%ra, 6(%sp)
-bnei_cont.19395:
+bnei_cont.18759:
 	lw	%v1, 4(%sp)
 	sw	%v1, 1(%v0)
-	j	bnei_cont.19393
-bnei_else.19392:
+	j	bnei_cont.18757
+bnei_else.18756:
 	addi	%v0, %zero, 2
 	lw	%v1, 2(%sp)
 	sw	%ra, 6(%sp)
@@ -2964,20 +1977,20 @@ bnei_else.19392:
 	jal	min_caml_create_array
 	addi	%sp, %sp, -7
 	lw	%ra, 6(%sp)
-bnei_cont.19393:
+bnei_cont.18757:
 	lw	%v1, 3(%sp)
 	sw	%v1, 0(%v0)
-	j	bnei_cont.19391
-bnei_else.19390:
+	j	bnei_cont.18755
+bnei_else.18754:
 	addi	%v0, %zero, 1
 	sw	%ra, 6(%sp)
 	addi	%sp, %sp, 7
 	jal	min_caml_create_array
 	addi	%sp, %sp, -7
 	lw	%ra, 6(%sp)
-bnei_cont.19391:
+bnei_cont.18755:
 	lw	%v1, 0(%v0)
-	beqi	%v1, -1, bnei_else.19396
+	beqi	%v1, -1, bnei_else.18760
 	addi	%v1, %zero, 83
 	lw	%a0, 1(%sp)
 	add	%at, %v1, %a0
@@ -2991,26 +2004,26 @@ bnei_cont.19391:
 	jal	min_caml_read_int
 	addi	%sp, %sp, -9
 	lw	%ra, 8(%sp)
-	beqi	%v0, -1, bnei_else.19397
+	beqi	%v0, -1, bnei_else.18761
 	sw	%v0, 8(%sp)
 	sw	%ra, 9(%sp)
 	addi	%sp, %sp, 10
 	jal	min_caml_read_int
 	addi	%sp, %sp, -10
 	lw	%ra, 9(%sp)
-	beqi	%v0, -1, bnei_else.19399
+	beqi	%v0, -1, bnei_else.18763
 	addi	%v1, %zero, 2
 	sw	%v0, 9(%sp)
 	addi	%v0, %v1, 0
 	sw	%ra, 10(%sp)
 	addi	%sp, %sp, 11
-	jal	read_net_item.2769
+	jal	read_net_item.2764
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
 	lw	%v1, 9(%sp)
 	sw	%v1, 1(%v0)
-	j	bnei_cont.19400
-bnei_else.19399:
+	j	bnei_cont.18764
+bnei_else.18763:
 	addi	%v0, %zero, 2
 	lw	%v1, 2(%sp)
 	sw	%ra, 10(%sp)
@@ -3018,11 +2031,11 @@ bnei_else.19399:
 	jal	min_caml_create_array
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
-bnei_cont.19400:
+bnei_cont.18764:
 	lw	%v1, 8(%sp)
 	sw	%v1, 0(%v0)
-	j	bnei_cont.19398
-bnei_else.19397:
+	j	bnei_cont.18762
+bnei_else.18761:
 	lw	%v0, 7(%sp)
 	lw	%v1, 2(%sp)
 	sw	%ra, 10(%sp)
@@ -3030,9 +2043,9 @@ bnei_else.19397:
 	jal	min_caml_create_array
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
-bnei_cont.19398:
+bnei_cont.18762:
 	lw	%v1, 0(%v0)
-	beqi	%v1, -1, bnei_else.19401
+	beqi	%v1, -1, bnei_else.18765
 	addi	%v1, %zero, 83
 	lw	%a0, 6(%sp)
 	add	%at, %v1, %a0
@@ -3044,19 +2057,19 @@ bnei_cont.19398:
 	jal	min_caml_read_int
 	addi	%sp, %sp, -12
 	lw	%ra, 11(%sp)
-	beqi	%v0, -1, bnei_else.19402
+	beqi	%v0, -1, bnei_else.18766
 	lw	%v1, 7(%sp)
 	sw	%v0, 11(%sp)
 	addi	%v0, %v1, 0
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 13
-	jal	read_net_item.2769
+	jal	read_net_item.2764
 	addi	%sp, %sp, -13
 	lw	%ra, 12(%sp)
 	lw	%v1, 11(%sp)
 	sw	%v1, 0(%v0)
-	j	bnei_cont.19403
-bnei_else.19402:
+	j	bnei_cont.18767
+bnei_else.18766:
 	lw	%v0, 7(%sp)
 	lw	%v1, 2(%sp)
 	sw	%ra, 12(%sp)
@@ -3064,9 +2077,9 @@ bnei_else.19402:
 	jal	min_caml_create_array
 	addi	%sp, %sp, -13
 	lw	%ra, 12(%sp)
-bnei_cont.19403:
+bnei_cont.18767:
 	lw	%v1, 0(%v0)
-	beqi	%v1, -1, bnei_else.19404
+	beqi	%v1, -1, bnei_else.18768
 	addi	%v1, %zero, 83
 	lw	%a0, 10(%sp)
 	add	%at, %v1, %a0
@@ -3077,65 +2090,65 @@ bnei_cont.19403:
 	addi	%v0, %v1, 0
 	sw	%ra, 13(%sp)
 	addi	%sp, %sp, 14
-	jal	read_net_item.2769
+	jal	read_net_item.2764
 	addi	%sp, %sp, -14
 	lw	%ra, 13(%sp)
 	lw	%v1, 0(%v0)
-	beqi	%v1, -1, bnei_else.19405
+	beqi	%v1, -1, bnei_else.18769
 	addi	%v1, %zero, 83
 	lw	%a0, 12(%sp)
 	add	%at, %v1, %a0
 	sw	%v0, 0(%at)
 	addi	%v0, %a0, 1
-	j	read_and_network.2773
-bnei_else.19405:
+	j	read_and_network.2768
+bnei_else.18769:
 	jr	%ra
-bnei_else.19404:
+bnei_else.18768:
 	jr	%ra
-bnei_else.19401:
+bnei_else.18765:
 	jr	%ra
-bnei_else.19396:
+bnei_else.18760:
 	jr	%ra
-solver_rect_surface.2777:
+solver_rect_surface.2772:
 	add	%at, %v1, %a0
 	flw	%f3, 0(%at)
-	flw	%f4, 464(%zero)
-	fbne	%f3, %f4, fbeq_else.19410
+	flw	%f4, 465(%zero)
+	fbne	%f3, %f4, fbeq_else.18774
 	addi	%a3, %zero, 1
-	j	fbeq_cont.19411
-fbeq_else.19410:
+	j	fbeq_cont.18775
+fbeq_else.18774:
 	addi	%a3, %zero, 0
-fbeq_cont.19411:
-	beqi	%a3, 0, bnei_else.19412
+fbeq_cont.18775:
+	beqi	%a3, 0, bnei_else.18776
 	addi	%v0, %zero, 0
 	jr	%ra
-bnei_else.19412:
+bnei_else.18776:
 	lw	%a3, 4(%v0)
 	lw	%v0, 6(%v0)
-	fblt	%f3, %f4, fbgt_else.19413
+	fblt	%f3, %f4, fbgt_else.18777
 	addi	%t0, %zero, 0
-	j	fbgt_cont.19414
-fbgt_else.19413:
+	j	fbgt_cont.18778
+fbgt_else.18777:
 	addi	%t0, %zero, 1
-fbgt_cont.19414:
-	beqi	%v0, 0, bnei_else.19415
-	beqi	%t0, 0, bnei_else.19417
+fbgt_cont.18778:
+	beqi	%v0, 0, bnei_else.18779
+	beqi	%t0, 0, bnei_else.18781
 	addi	%v0, %zero, 0
-	j	bnei_cont.19418
-bnei_else.19417:
+	j	bnei_cont.18782
+bnei_else.18781:
 	addi	%v0, %zero, 1
-bnei_cont.19418:
-	j	bnei_cont.19416
-bnei_else.19415:
+bnei_cont.18782:
+	j	bnei_cont.18780
+bnei_else.18779:
 	add	%v0, %zero, %t0
-bnei_cont.19416:
+bnei_cont.18780:
 	add	%at, %a3, %a0
 	flw	%f4, 0(%at)
-	beqi	%v0, 0, bnei_else.19419
-	j	bnei_cont.19420
-bnei_else.19419:
+	beqi	%v0, 0, bnei_else.18783
+	j	bnei_cont.18784
+bnei_else.18783:
 	fneg	%f4, %f4
-bnei_cont.19420:
+bnei_cont.18784:
 	fsub	%f0, %f4, %f0
 	fdiv	%f0, %f0, %f3
 	add	%at, %v1, %a1
@@ -3145,13 +2158,13 @@ bnei_cont.19420:
 	fabs	%f1, %f1
 	add	%at, %a3, %a1
 	flw	%f3, 0(%at)
-	fblt	%f1, %f3, fbgt_else.19421
+	fblt	%f1, %f3, fbgt_else.18785
 	addi	%v0, %zero, 0
-	j	fbgt_cont.19422
-fbgt_else.19421:
+	j	fbgt_cont.18786
+fbgt_else.18785:
 	addi	%v0, %zero, 1
-fbgt_cont.19422:
-	beqi	%v0, 0, bnei_else.19423
+fbgt_cont.18786:
+	beqi	%v0, 0, bnei_else.18787
 	add	%at, %v1, %a2
 	flw	%f1, 0(%at)
 	fmul	%f1, %f0, %f1
@@ -3159,24 +2172,24 @@ fbgt_cont.19422:
 	fabs	%f1, %f1
 	add	%at, %a3, %a2
 	flw	%f2, 0(%at)
-	fblt	%f1, %f2, fbgt_else.19424
+	fblt	%f1, %f2, fbgt_else.18788
 	addi	%v0, %zero, 0
-	j	fbgt_cont.19425
-fbgt_else.19424:
+	j	fbgt_cont.18789
+fbgt_else.18788:
 	addi	%v0, %zero, 1
-fbgt_cont.19425:
-	beqi	%v0, 0, bnei_else.19426
+fbgt_cont.18789:
+	beqi	%v0, 0, bnei_else.18790
 	addi	%v0, %zero, 135
 	fsw	%f0, 0(%v0)
 	addi	%v0, %zero, 1
 	jr	%ra
-bnei_else.19426:
+bnei_else.18790:
 	addi	%v0, %zero, 0
 	jr	%ra
-bnei_else.19423:
+bnei_else.18787:
 	addi	%v0, %zero, 0
 	jr	%ra
-solver_surface.2792:
+solver_surface.2787:
 	lw	%v0, 4(%v0)
 	flw	%f3, 0(%v1)
 	flw	%f4, 0(%v0)
@@ -3189,14 +2202,14 @@ solver_surface.2792:
 	flw	%f7, 2(%v0)
 	fmul	%f5, %f5, %f7
 	fadd	%f3, %f3, %f5
-	flw	%f5, 464(%zero)
-	fblt	%f5, %f3, fbgt_else.19427
+	flw	%f5, 465(%zero)
+	fblt	%f5, %f3, fbgt_else.18791
 	addi	%v0, %zero, 0
-	j	fbgt_cont.19428
-fbgt_else.19427:
+	j	fbgt_cont.18792
+fbgt_else.18791:
 	addi	%v0, %zero, 1
-fbgt_cont.19428:
-	beqi	%v0, 0, bnei_else.19429
+fbgt_cont.18792:
+	beqi	%v0, 0, bnei_else.18793
 	fmul	%f0, %f4, %f0
 	fmul	%f1, %f6, %f1
 	fadd	%f0, %f0, %f1
@@ -3208,10 +2221,10 @@ fbgt_cont.19428:
 	fsw	%f0, 0(%v0)
 	addi	%v0, %zero, 1
 	jr	%ra
-bnei_else.19429:
+bnei_else.18793:
 	addi	%v0, %zero, 0
 	jr	%ra
-quadratic.2798:
+quadratic.2793:
 	fmul	%f3, %f0, %f0
 	lw	%v1, 4(%v0)
 	flw	%f4, 0(%v1)
@@ -3227,7 +2240,7 @@ quadratic.2798:
 	fmul	%f4, %f4, %f5
 	fadd	%f3, %f3, %f4
 	lw	%v1, 3(%v0)
-	beqi	%v1, 0, bnei_else.19430
+	beqi	%v1, 0, bnei_else.18794
 	fmul	%f4, %f1, %f2
 	lw	%v1, 9(%v0)
 	flw	%f5, 0(%v1)
@@ -3244,10 +2257,10 @@ quadratic.2798:
 	fmul	%f0, %f0, %f1
 	fadd	%f0, %f2, %f0
 	jr	%ra
-bnei_else.19430:
+bnei_else.18794:
 	fmov	%f0, %f3
 	jr	%ra
-bilinear.2803:
+bilinear.2798:
 	fmul	%f6, %f0, %f3
 	lw	%v1, 4(%v0)
 	flw	%f7, 0(%v1)
@@ -3263,7 +2276,7 @@ bilinear.2803:
 	fmul	%f7, %f7, %f8
 	fadd	%f6, %f6, %f7
 	lw	%v1, 3(%v0)
-	beqi	%v1, 0, bnei_else.19431
+	beqi	%v1, 0, bnei_else.18795
 	fmul	%f7, %f2, %f4
 	fmul	%f8, %f1, %f5
 	fadd	%f7, %f7, %f8
@@ -3284,14 +2297,14 @@ bilinear.2803:
 	flw	%f1, 2(%v0)
 	fmul	%f0, %f0, %f1
 	fadd	%f0, %f2, %f0
-	flw	%f1, 467(%zero)
+	flw	%f1, 468(%zero)
 	fmul	%f0, %f0, %f1
 	fadd	%f0, %f6, %f0
 	jr	%ra
-bnei_else.19431:
+bnei_else.18795:
 	fmov	%f0, %f6
 	jr	%ra
-solver_second.2811:
+solver_second.2806:
 	flw	%f3, 0(%v1)
 	flw	%f4, 1(%v1)
 	flw	%f5, 2(%v1)
@@ -3307,20 +2320,20 @@ solver_second.2811:
 	fmov	%f0, %f3
 	sw	%ra, 7(%sp)
 	addi	%sp, %sp, 8
-	jal	quadratic.2798
+	jal	quadratic.2793
 	addi	%sp, %sp, -8
 	lw	%ra, 7(%sp)
-	flw	%f1, 464(%zero)
-	fbne	%f0, %f1, fbeq_else.19432
+	flw	%f1, 465(%zero)
+	fbne	%f0, %f1, fbeq_else.18796
 	addi	%v0, %zero, 1
-	j	fbeq_cont.19433
-fbeq_else.19432:
+	j	fbeq_cont.18797
+fbeq_else.18796:
 	addi	%v0, %zero, 0
-fbeq_cont.19433:
-	beqi	%v0, 0, bnei_else.19434
+fbeq_cont.18797:
+	beqi	%v0, 0, bnei_else.18798
 	addi	%v0, %zero, 0
 	jr	%ra
-bnei_else.19434:
+bnei_else.18798:
 	flw	%f2, 5(%sp)
 	flw	%f3, 4(%sp)
 	flw	%f4, 3(%sp)
@@ -3338,7 +2351,7 @@ bnei_else.19434:
 	fmov	%f4, %f6
 	sw	%ra, 9(%sp)
 	addi	%sp, %sp, 10
-	jal	bilinear.2803
+	jal	bilinear.2798
 	addi	%sp, %sp, -10
 	lw	%ra, 9(%sp)
 	flw	%f1, 2(%sp)
@@ -3351,47 +2364,47 @@ bnei_else.19434:
 	fmov	%f2, %f3
 	sw	%ra, 10(%sp)
 	addi	%sp, %sp, 11
-	jal	quadratic.2798
+	jal	quadratic.2793
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
 	lw	%v0, 6(%sp)
 	lw	%v1, 1(%v0)
-	beqi	%v1, 3, bnei_else.19435
-	j	bnei_cont.19436
-bnei_else.19435:
-	flw	%f1, 468(%zero)
+	beqi	%v1, 3, bnei_else.18799
+	j	bnei_cont.18800
+bnei_else.18799:
+	flw	%f1, 469(%zero)
 	fsub	%f0, %f0, %f1
-bnei_cont.19436:
+bnei_cont.18800:
 	flw	%f1, 9(%sp)
 	fmul	%f2, %f1, %f1
 	flw	%f3, 8(%sp)
 	fmul	%f0, %f3, %f0
 	fsub	%f0, %f2, %f0
 	flw	%f2, 7(%sp)
-	fblt	%f2, %f0, fbgt_else.19437
+	fblt	%f2, %f0, fbgt_else.18801
 	addi	%v1, %zero, 0
-	j	fbgt_cont.19438
-fbgt_else.19437:
+	j	fbgt_cont.18802
+fbgt_else.18801:
 	addi	%v1, %zero, 1
-fbgt_cont.19438:
-	beqi	%v1, 0, bnei_else.19439
+fbgt_cont.18802:
+	beqi	%v1, 0, bnei_else.18803
 	fsqrt	%f0, %f0
 	lw	%v0, 6(%v0)
-	beqi	%v0, 0, bnei_else.19440
-	j	bnei_cont.19441
-bnei_else.19440:
+	beqi	%v0, 0, bnei_else.18804
+	j	bnei_cont.18805
+bnei_else.18804:
 	fneg	%f0, %f0
-bnei_cont.19441:
+bnei_cont.18805:
 	fsub	%f0, %f0, %f1
 	fdiv	%f0, %f0, %f3
 	addi	%v0, %zero, 135
 	fsw	%f0, 0(%v0)
 	addi	%v0, %zero, 1
 	jr	%ra
-bnei_else.19439:
+bnei_else.18803:
 	addi	%v0, %zero, 0
 	jr	%ra
-solver.2817:
+solver.2812:
 	addi	%a1, %zero, 12
 	add	%at, %a1, %v0
 	lw	%v0, 0(%at)
@@ -3411,10 +2424,10 @@ solver.2817:
 	flw	%f3, 2(%a0)
 	fsub	%f2, %f2, %f3
 	lw	%a0, 1(%v0)
-	beqi	%a0, 1, bnei_else.19442
-	beqi	%a0, 2, bnei_else.19443
-	j	solver_second.2811
-bnei_else.19443:
+	beqi	%a0, 1, bnei_else.18806
+	beqi	%a0, 2, bnei_else.18807
+	j	solver_second.2806
+bnei_else.18807:
 	lw	%v0, 4(%v0)
 	flw	%f3, 0(%v1)
 	flw	%f4, 0(%v0)
@@ -3427,14 +2440,14 @@ bnei_else.19443:
 	flw	%f7, 2(%v0)
 	fmul	%f5, %f5, %f7
 	fadd	%f3, %f3, %f5
-	flw	%f5, 464(%zero)
-	fblt	%f5, %f3, fbgt_else.19444
+	flw	%f5, 465(%zero)
+	fblt	%f5, %f3, fbgt_else.18808
 	addi	%v0, %zero, 0
-	j	fbgt_cont.19445
-fbgt_else.19444:
+	j	fbgt_cont.18809
+fbgt_else.18808:
 	addi	%v0, %zero, 1
-fbgt_cont.19445:
-	beqi	%v0, 0, bnei_else.19446
+fbgt_cont.18809:
+	beqi	%v0, 0, bnei_else.18810
 	fmul	%f0, %f4, %f0
 	fmul	%f1, %f6, %f1
 	fadd	%f0, %f0, %f1
@@ -3446,10 +2459,10 @@ fbgt_cont.19445:
 	fsw	%f0, 0(%v0)
 	addi	%v0, %zero, 1
 	jr	%ra
-bnei_else.19446:
+bnei_else.18810:
 	addi	%v0, %zero, 0
 	jr	%ra
-bnei_else.19442:
+bnei_else.18806:
 	fsw	%f0, 0(%sp)
 	fsw	%f2, 1(%sp)
 	fsw	%f1, 2(%sp)
@@ -3463,13 +2476,13 @@ bnei_else.19442:
 	addi	%a2, %a3, 0
 	sw	%ra, 8(%sp)
 	addi	%sp, %sp, 9
-	jal	solver_rect_surface.2777
+	jal	solver_rect_surface.2772
 	addi	%sp, %sp, -9
 	lw	%ra, 8(%sp)
-	beqi	%v0, 0, bnei_else.19447
+	beqi	%v0, 0, bnei_else.18811
 	addi	%v0, %zero, 1
 	jr	%ra
-bnei_else.19447:
+bnei_else.18811:
 	flw	%f0, 2(%sp)
 	flw	%f1, 1(%sp)
 	flw	%f2, 0(%sp)
@@ -3480,13 +2493,13 @@ bnei_else.19447:
 	lw	%a2, 3(%sp)
 	sw	%ra, 8(%sp)
 	addi	%sp, %sp, 9
-	jal	solver_rect_surface.2777
+	jal	solver_rect_surface.2772
 	addi	%sp, %sp, -9
 	lw	%ra, 8(%sp)
-	beqi	%v0, 0, bnei_else.19448
+	beqi	%v0, 0, bnei_else.18812
 	addi	%v0, %zero, 2
 	jr	%ra
-bnei_else.19448:
+bnei_else.18812:
 	flw	%f0, 1(%sp)
 	flw	%f1, 0(%sp)
 	flw	%f2, 2(%sp)
@@ -3497,16 +2510,16 @@ bnei_else.19448:
 	lw	%a2, 5(%sp)
 	sw	%ra, 8(%sp)
 	addi	%sp, %sp, 9
-	jal	solver_rect_surface.2777
+	jal	solver_rect_surface.2772
 	addi	%sp, %sp, -9
 	lw	%ra, 8(%sp)
-	beqi	%v0, 0, bnei_else.19449
+	beqi	%v0, 0, bnei_else.18813
 	addi	%v0, %zero, 3
 	jr	%ra
-bnei_else.19449:
+bnei_else.18813:
 	addi	%v0, %zero, 0
 	jr	%ra
-solver_rect_fast.2821:
+solver_rect_fast.2816:
 	flw	%f3, 0(%a0)
 	fsub	%f3, %f3, %f0
 	flw	%f4, 1(%a0)
@@ -3517,53 +2530,53 @@ solver_rect_fast.2821:
 	fabs	%f6, %f6
 	lw	%a1, 4(%v0)
 	flw	%f7, 1(%a1)
-	fblt	%f6, %f7, fbgt_else.19450
+	fblt	%f6, %f7, fbgt_else.18814
 	addi	%a1, %zero, 0
-	j	fbgt_cont.19451
-fbgt_else.19450:
+	j	fbgt_cont.18815
+fbgt_else.18814:
 	addi	%a1, %zero, 1
-fbgt_cont.19451:
-	beqi	%a1, 0, bnei_else.19452
+fbgt_cont.18815:
+	beqi	%a1, 0, bnei_else.18816
 	flw	%f6, 2(%v1)
 	fmul	%f6, %f3, %f6
 	fadd	%f6, %f6, %f2
 	fabs	%f6, %f6
 	lw	%a1, 4(%v0)
 	flw	%f7, 2(%a1)
-	fblt	%f6, %f7, fbgt_else.19454
+	fblt	%f6, %f7, fbgt_else.18818
 	addi	%a1, %zero, 0
-	j	fbgt_cont.19455
-fbgt_else.19454:
+	j	fbgt_cont.18819
+fbgt_else.18818:
 	addi	%a1, %zero, 1
-fbgt_cont.19455:
-	beqi	%a1, 0, bnei_else.19456
-	flw	%f6, 464(%zero)
-	fbne	%f4, %f6, fbeq_else.19458
+fbgt_cont.18819:
+	beqi	%a1, 0, bnei_else.18820
+	flw	%f6, 465(%zero)
+	fbne	%f4, %f6, fbeq_else.18822
 	addi	%a1, %zero, 1
-	j	fbeq_cont.19459
-fbeq_else.19458:
+	j	fbeq_cont.18823
+fbeq_else.18822:
 	addi	%a1, %zero, 0
-fbeq_cont.19459:
-	beqi	%a1, 0, bnei_else.19460
+fbeq_cont.18823:
+	beqi	%a1, 0, bnei_else.18824
 	addi	%a1, %zero, 0
-	j	bnei_cont.19461
-bnei_else.19460:
+	j	bnei_cont.18825
+bnei_else.18824:
 	addi	%a1, %zero, 1
-bnei_cont.19461:
-	j	bnei_cont.19457
-bnei_else.19456:
+bnei_cont.18825:
+	j	bnei_cont.18821
+bnei_else.18820:
 	addi	%a1, %zero, 0
-bnei_cont.19457:
-	j	bnei_cont.19453
-bnei_else.19452:
+bnei_cont.18821:
+	j	bnei_cont.18817
+bnei_else.18816:
 	addi	%a1, %zero, 0
-bnei_cont.19453:
-	beqi	%a1, 0, bnei_else.19462
+bnei_cont.18817:
+	beqi	%a1, 0, bnei_else.18826
 	addi	%v0, %zero, 135
 	fsw	%f3, 0(%v0)
 	addi	%v0, %zero, 1
 	jr	%ra
-bnei_else.19462:
+bnei_else.18826:
 	flw	%f3, 2(%a0)
 	fsub	%f3, %f3, %f1
 	flw	%f4, 3(%a0)
@@ -3574,53 +2587,53 @@ bnei_else.19462:
 	fabs	%f7, %f7
 	lw	%a1, 4(%v0)
 	flw	%f8, 0(%a1)
-	fblt	%f7, %f8, fbgt_else.19463
+	fblt	%f7, %f8, fbgt_else.18827
 	addi	%a1, %zero, 0
-	j	fbgt_cont.19464
-fbgt_else.19463:
+	j	fbgt_cont.18828
+fbgt_else.18827:
 	addi	%a1, %zero, 1
-fbgt_cont.19464:
-	beqi	%a1, 0, bnei_else.19465
+fbgt_cont.18828:
+	beqi	%a1, 0, bnei_else.18829
 	flw	%f7, 2(%v1)
 	fmul	%f7, %f3, %f7
 	fadd	%f7, %f7, %f2
 	fabs	%f7, %f7
 	lw	%v1, 4(%v0)
 	flw	%f8, 2(%v1)
-	fblt	%f7, %f8, fbgt_else.19467
+	fblt	%f7, %f8, fbgt_else.18831
 	addi	%v1, %zero, 0
-	j	fbgt_cont.19468
-fbgt_else.19467:
+	j	fbgt_cont.18832
+fbgt_else.18831:
 	addi	%v1, %zero, 1
-fbgt_cont.19468:
-	beqi	%v1, 0, bnei_else.19469
-	flw	%f7, 464(%zero)
-	fbne	%f4, %f7, fbeq_else.19471
+fbgt_cont.18832:
+	beqi	%v1, 0, bnei_else.18833
+	flw	%f7, 465(%zero)
+	fbne	%f4, %f7, fbeq_else.18835
 	addi	%v1, %zero, 1
-	j	fbeq_cont.19472
-fbeq_else.19471:
+	j	fbeq_cont.18836
+fbeq_else.18835:
 	addi	%v1, %zero, 0
-fbeq_cont.19472:
-	beqi	%v1, 0, bnei_else.19473
+fbeq_cont.18836:
+	beqi	%v1, 0, bnei_else.18837
 	addi	%v1, %zero, 0
-	j	bnei_cont.19474
-bnei_else.19473:
+	j	bnei_cont.18838
+bnei_else.18837:
 	addi	%v1, %zero, 1
-bnei_cont.19474:
-	j	bnei_cont.19470
-bnei_else.19469:
+bnei_cont.18838:
+	j	bnei_cont.18834
+bnei_else.18833:
 	addi	%v1, %zero, 0
-bnei_cont.19470:
-	j	bnei_cont.19466
-bnei_else.19465:
+bnei_cont.18834:
+	j	bnei_cont.18830
+bnei_else.18829:
 	addi	%v1, %zero, 0
-bnei_cont.19466:
-	beqi	%v1, 0, bnei_else.19475
+bnei_cont.18830:
+	beqi	%v1, 0, bnei_else.18839
 	addi	%v0, %zero, 135
 	fsw	%f3, 0(%v0)
 	addi	%v0, %zero, 2
 	jr	%ra
-bnei_else.19475:
+bnei_else.18839:
 	flw	%f3, 4(%a0)
 	fsub	%f2, %f3, %f2
 	flw	%f3, 5(%a0)
@@ -3630,67 +2643,67 @@ bnei_else.19475:
 	fabs	%f0, %f0
 	lw	%v1, 4(%v0)
 	flw	%f4, 0(%v1)
-	fblt	%f0, %f4, fbgt_else.19476
+	fblt	%f0, %f4, fbgt_else.18840
 	addi	%v1, %zero, 0
-	j	fbgt_cont.19477
-fbgt_else.19476:
+	j	fbgt_cont.18841
+fbgt_else.18840:
 	addi	%v1, %zero, 1
-fbgt_cont.19477:
-	beqi	%v1, 0, bnei_else.19478
+fbgt_cont.18841:
+	beqi	%v1, 0, bnei_else.18842
 	fmul	%f0, %f2, %f5
 	fadd	%f0, %f0, %f1
 	fabs	%f0, %f0
 	lw	%v0, 4(%v0)
 	flw	%f1, 1(%v0)
-	fblt	%f0, %f1, fbgt_else.19480
+	fblt	%f0, %f1, fbgt_else.18844
 	addi	%v0, %zero, 0
-	j	fbgt_cont.19481
-fbgt_else.19480:
+	j	fbgt_cont.18845
+fbgt_else.18844:
 	addi	%v0, %zero, 1
-fbgt_cont.19481:
-	beqi	%v0, 0, bnei_else.19482
-	flw	%f0, 464(%zero)
-	fbne	%f3, %f0, fbeq_else.19484
+fbgt_cont.18845:
+	beqi	%v0, 0, bnei_else.18846
+	flw	%f0, 465(%zero)
+	fbne	%f3, %f0, fbeq_else.18848
 	addi	%v0, %zero, 1
-	j	fbeq_cont.19485
-fbeq_else.19484:
+	j	fbeq_cont.18849
+fbeq_else.18848:
 	addi	%v0, %zero, 0
-fbeq_cont.19485:
-	beqi	%v0, 0, bnei_else.19486
+fbeq_cont.18849:
+	beqi	%v0, 0, bnei_else.18850
 	addi	%v0, %zero, 0
-	j	bnei_cont.19487
-bnei_else.19486:
+	j	bnei_cont.18851
+bnei_else.18850:
 	addi	%v0, %zero, 1
-bnei_cont.19487:
-	j	bnei_cont.19483
-bnei_else.19482:
+bnei_cont.18851:
+	j	bnei_cont.18847
+bnei_else.18846:
 	addi	%v0, %zero, 0
-bnei_cont.19483:
-	j	bnei_cont.19479
-bnei_else.19478:
+bnei_cont.18847:
+	j	bnei_cont.18843
+bnei_else.18842:
 	addi	%v0, %zero, 0
-bnei_cont.19479:
-	beqi	%v0, 0, bnei_else.19488
+bnei_cont.18843:
+	beqi	%v0, 0, bnei_else.18852
 	addi	%v0, %zero, 135
 	fsw	%f2, 0(%v0)
 	addi	%v0, %zero, 3
 	jr	%ra
-bnei_else.19488:
+bnei_else.18852:
 	addi	%v0, %zero, 0
 	jr	%ra
-solver_second_fast.2834:
+solver_second_fast.2829:
 	flw	%f3, 0(%v1)
-	flw	%f4, 464(%zero)
-	fbne	%f3, %f4, fbeq_else.19489
+	flw	%f4, 465(%zero)
+	fbne	%f3, %f4, fbeq_else.18853
 	addi	%a0, %zero, 1
-	j	fbeq_cont.19490
-fbeq_else.19489:
+	j	fbeq_cont.18854
+fbeq_else.18853:
 	addi	%a0, %zero, 0
-fbeq_cont.19490:
-	beqi	%a0, 0, bnei_else.19491
+fbeq_cont.18854:
+	beqi	%a0, 0, bnei_else.18855
 	addi	%v0, %zero, 0
 	jr	%ra
-bnei_else.19491:
+bnei_else.18855:
 	flw	%f5, 1(%v1)
 	fmul	%f5, %f5, %f0
 	flw	%f6, 2(%v1)
@@ -3706,32 +2719,32 @@ bnei_else.19491:
 	sw	%v0, 4(%sp)
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	quadratic.2798
+	jal	quadratic.2793
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
 	lw	%v0, 4(%sp)
 	lw	%v1, 1(%v0)
-	beqi	%v1, 3, bnei_else.19492
-	j	bnei_cont.19493
-bnei_else.19492:
-	flw	%f1, 468(%zero)
+	beqi	%v1, 3, bnei_else.18856
+	j	bnei_cont.18857
+bnei_else.18856:
+	flw	%f1, 469(%zero)
 	fsub	%f0, %f0, %f1
-bnei_cont.19493:
+bnei_cont.18857:
 	flw	%f1, 3(%sp)
 	fmul	%f2, %f1, %f1
 	flw	%f3, 2(%sp)
 	fmul	%f0, %f3, %f0
 	fsub	%f0, %f2, %f0
 	flw	%f2, 1(%sp)
-	fblt	%f2, %f0, fbgt_else.19494
+	fblt	%f2, %f0, fbgt_else.18858
 	addi	%v1, %zero, 0
-	j	fbgt_cont.19495
-fbgt_else.19494:
+	j	fbgt_cont.18859
+fbgt_else.18858:
 	addi	%v1, %zero, 1
-fbgt_cont.19495:
-	beqi	%v1, 0, bnei_else.19496
+fbgt_cont.18859:
+	beqi	%v1, 0, bnei_else.18860
 	lw	%v0, 6(%v0)
-	beqi	%v0, 0, bnei_else.19497
+	beqi	%v0, 0, bnei_else.18861
 	fsqrt	%f0, %f0
 	fadd	%f0, %f1, %f0
 	lw	%v0, 0(%sp)
@@ -3739,8 +2752,8 @@ fbgt_cont.19495:
 	fmul	%f0, %f0, %f1
 	addi	%v0, %zero, 135
 	fsw	%f0, 0(%v0)
-	j	bnei_cont.19498
-bnei_else.19497:
+	j	bnei_cont.18862
+bnei_else.18861:
 	fsqrt	%f0, %f0
 	fsub	%f0, %f1, %f0
 	lw	%v0, 0(%sp)
@@ -3748,25 +2761,25 @@ bnei_else.19497:
 	fmul	%f0, %f0, %f1
 	addi	%v0, %zero, 135
 	fsw	%f0, 0(%v0)
-bnei_cont.19498:
+bnei_cont.18862:
 	addi	%v0, %zero, 1
 	jr	%ra
-bnei_else.19496:
+bnei_else.18860:
 	addi	%v0, %zero, 0
 	jr	%ra
-solver_second_fast2.2851:
+solver_second_fast2.2846:
 	flw	%f3, 0(%v1)
-	flw	%f4, 464(%zero)
-	fbne	%f3, %f4, fbeq_else.19499
+	flw	%f4, 465(%zero)
+	fbne	%f3, %f4, fbeq_else.18863
 	addi	%a1, %zero, 1
-	j	fbeq_cont.19500
-fbeq_else.19499:
+	j	fbeq_cont.18864
+fbeq_else.18863:
 	addi	%a1, %zero, 0
-fbeq_cont.19500:
-	beqi	%a1, 0, bnei_else.19501
+fbeq_cont.18864:
+	beqi	%a1, 0, bnei_else.18865
 	addi	%v0, %zero, 0
 	jr	%ra
-bnei_else.19501:
+bnei_else.18865:
 	flw	%f5, 1(%v1)
 	fmul	%f0, %f5, %f0
 	flw	%f5, 2(%v1)
@@ -3779,38 +2792,38 @@ bnei_else.19501:
 	fmul	%f2, %f0, %f0
 	fmul	%f1, %f3, %f1
 	fsub	%f1, %f2, %f1
-	fblt	%f4, %f1, fbgt_else.19502
+	fblt	%f4, %f1, fbgt_else.18866
 	addi	%a0, %zero, 0
-	j	fbgt_cont.19503
-fbgt_else.19502:
+	j	fbgt_cont.18867
+fbgt_else.18866:
 	addi	%a0, %zero, 1
-fbgt_cont.19503:
-	beqi	%a0, 0, bnei_else.19504
+fbgt_cont.18867:
+	beqi	%a0, 0, bnei_else.18868
 	lw	%v0, 6(%v0)
-	beqi	%v0, 0, bnei_else.19505
+	beqi	%v0, 0, bnei_else.18869
 	fsqrt	%f1, %f1
 	fadd	%f0, %f0, %f1
 	flw	%f1, 4(%v1)
 	fmul	%f0, %f0, %f1
 	addi	%v0, %zero, 135
 	fsw	%f0, 0(%v0)
-	j	bnei_cont.19506
-bnei_else.19505:
+	j	bnei_cont.18870
+bnei_else.18869:
 	fsqrt	%f1, %f1
 	fsub	%f0, %f0, %f1
 	flw	%f1, 4(%v1)
 	fmul	%f0, %f0, %f1
 	addi	%v0, %zero, 135
 	fsw	%f0, 0(%v0)
-bnei_cont.19506:
+bnei_cont.18870:
 	addi	%v0, %zero, 1
 	jr	%ra
-bnei_else.19504:
+bnei_else.18868:
 	addi	%v0, %zero, 0
 	jr	%ra
-setup_rect_table.2861:
+setup_rect_table.2856:
 	addi	%a0, %zero, 6
-	flw	%f0, 464(%zero)
+	flw	%f0, 465(%zero)
 	sw	%v1, 0(%sp)
 	fsw	%f0, 1(%sp)
 	sw	%v0, 2(%sp)
@@ -3823,135 +2836,135 @@ setup_rect_table.2861:
 	lw	%v1, 2(%sp)
 	flw	%f0, 0(%v1)
 	flw	%f1, 1(%sp)
-	fbne	%f0, %f1, fbeq_else.19507
+	fbne	%f0, %f1, fbeq_else.18871
 	addi	%a0, %zero, 1
-	j	fbeq_cont.19508
-fbeq_else.19507:
+	j	fbeq_cont.18872
+fbeq_else.18871:
 	addi	%a0, %zero, 0
-fbeq_cont.19508:
-	beqi	%a0, 0, bnei_else.19509
+fbeq_cont.18872:
+	beqi	%a0, 0, bnei_else.18873
 	fsw	%f1, 1(%v0)
-	j	bnei_cont.19510
-bnei_else.19509:
+	j	bnei_cont.18874
+bnei_else.18873:
 	lw	%a0, 0(%sp)
 	lw	%a1, 6(%a0)
-	fblt	%f0, %f1, fbgt_else.19511
+	fblt	%f0, %f1, fbgt_else.18875
 	addi	%a2, %zero, 0
-	j	fbgt_cont.19512
-fbgt_else.19511:
+	j	fbgt_cont.18876
+fbgt_else.18875:
 	addi	%a2, %zero, 1
-fbgt_cont.19512:
-	beqi	%a1, 0, bnei_else.19513
-	beqi	%a2, 0, bnei_else.19515
+fbgt_cont.18876:
+	beqi	%a1, 0, bnei_else.18877
+	beqi	%a2, 0, bnei_else.18879
 	addi	%a1, %zero, 0
-	j	bnei_cont.19516
-bnei_else.19515:
+	j	bnei_cont.18880
+bnei_else.18879:
 	addi	%a1, %zero, 1
-bnei_cont.19516:
-	j	bnei_cont.19514
-bnei_else.19513:
+bnei_cont.18880:
+	j	bnei_cont.18878
+bnei_else.18877:
 	add	%a1, %zero, %a2
-bnei_cont.19514:
+bnei_cont.18878:
 	lw	%a2, 4(%a0)
 	flw	%f2, 0(%a2)
-	beqi	%a1, 0, bnei_else.19517
-	j	bnei_cont.19518
-bnei_else.19517:
+	beqi	%a1, 0, bnei_else.18881
+	j	bnei_cont.18882
+bnei_else.18881:
 	fneg	%f2, %f2
-bnei_cont.19518:
+bnei_cont.18882:
 	fsw	%f2, 0(%v0)
-	flw	%f2, 468(%zero)
+	flw	%f2, 469(%zero)
 	fdiv	%f0, %f2, %f0
 	fsw	%f0, 1(%v0)
-bnei_cont.19510:
+bnei_cont.18874:
 	flw	%f0, 1(%v1)
-	fbne	%f0, %f1, fbeq_else.19519
+	fbne	%f0, %f1, fbeq_else.18883
 	addi	%a0, %zero, 1
-	j	fbeq_cont.19520
-fbeq_else.19519:
+	j	fbeq_cont.18884
+fbeq_else.18883:
 	addi	%a0, %zero, 0
-fbeq_cont.19520:
-	beqi	%a0, 0, bnei_else.19521
+fbeq_cont.18884:
+	beqi	%a0, 0, bnei_else.18885
 	fsw	%f1, 3(%v0)
-	j	bnei_cont.19522
-bnei_else.19521:
+	j	bnei_cont.18886
+bnei_else.18885:
 	lw	%a0, 0(%sp)
 	lw	%a1, 6(%a0)
-	fblt	%f0, %f1, fbgt_else.19523
+	fblt	%f0, %f1, fbgt_else.18887
 	addi	%a2, %zero, 0
-	j	fbgt_cont.19524
-fbgt_else.19523:
+	j	fbgt_cont.18888
+fbgt_else.18887:
 	addi	%a2, %zero, 1
-fbgt_cont.19524:
-	beqi	%a1, 0, bnei_else.19525
-	beqi	%a2, 0, bnei_else.19527
+fbgt_cont.18888:
+	beqi	%a1, 0, bnei_else.18889
+	beqi	%a2, 0, bnei_else.18891
 	addi	%a1, %zero, 0
-	j	bnei_cont.19528
-bnei_else.19527:
+	j	bnei_cont.18892
+bnei_else.18891:
 	addi	%a1, %zero, 1
-bnei_cont.19528:
-	j	bnei_cont.19526
-bnei_else.19525:
+bnei_cont.18892:
+	j	bnei_cont.18890
+bnei_else.18889:
 	add	%a1, %zero, %a2
-bnei_cont.19526:
+bnei_cont.18890:
 	lw	%a2, 4(%a0)
 	flw	%f2, 1(%a2)
-	beqi	%a1, 0, bnei_else.19529
-	j	bnei_cont.19530
-bnei_else.19529:
+	beqi	%a1, 0, bnei_else.18893
+	j	bnei_cont.18894
+bnei_else.18893:
 	fneg	%f2, %f2
-bnei_cont.19530:
+bnei_cont.18894:
 	fsw	%f2, 2(%v0)
-	flw	%f2, 468(%zero)
+	flw	%f2, 469(%zero)
 	fdiv	%f0, %f2, %f0
 	fsw	%f0, 3(%v0)
-bnei_cont.19522:
+bnei_cont.18886:
 	flw	%f0, 2(%v1)
-	fbne	%f0, %f1, fbeq_else.19531
+	fbne	%f0, %f1, fbeq_else.18895
 	addi	%v1, %zero, 1
-	j	fbeq_cont.19532
-fbeq_else.19531:
+	j	fbeq_cont.18896
+fbeq_else.18895:
 	addi	%v1, %zero, 0
-fbeq_cont.19532:
-	beqi	%v1, 0, bnei_else.19533
+fbeq_cont.18896:
+	beqi	%v1, 0, bnei_else.18897
 	fsw	%f1, 5(%v0)
-	j	bnei_cont.19534
-bnei_else.19533:
+	j	bnei_cont.18898
+bnei_else.18897:
 	lw	%v1, 0(%sp)
 	lw	%a0, 6(%v1)
-	fblt	%f0, %f1, fbgt_else.19535
+	fblt	%f0, %f1, fbgt_else.18899
 	addi	%a1, %zero, 0
-	j	fbgt_cont.19536
-fbgt_else.19535:
+	j	fbgt_cont.18900
+fbgt_else.18899:
 	addi	%a1, %zero, 1
-fbgt_cont.19536:
-	beqi	%a0, 0, bnei_else.19537
-	beqi	%a1, 0, bnei_else.19539
+fbgt_cont.18900:
+	beqi	%a0, 0, bnei_else.18901
+	beqi	%a1, 0, bnei_else.18903
 	addi	%a0, %zero, 0
-	j	bnei_cont.19540
-bnei_else.19539:
+	j	bnei_cont.18904
+bnei_else.18903:
 	addi	%a0, %zero, 1
-bnei_cont.19540:
-	j	bnei_cont.19538
-bnei_else.19537:
+bnei_cont.18904:
+	j	bnei_cont.18902
+bnei_else.18901:
 	add	%a0, %zero, %a1
-bnei_cont.19538:
+bnei_cont.18902:
 	lw	%v1, 4(%v1)
 	flw	%f1, 2(%v1)
-	beqi	%a0, 0, bnei_else.19541
-	j	bnei_cont.19542
-bnei_else.19541:
+	beqi	%a0, 0, bnei_else.18905
+	j	bnei_cont.18906
+bnei_else.18905:
 	fneg	%f1, %f1
-bnei_cont.19542:
+bnei_cont.18906:
 	fsw	%f1, 4(%v0)
-	flw	%f1, 468(%zero)
+	flw	%f1, 469(%zero)
 	fdiv	%f0, %f1, %f0
 	fsw	%f0, 5(%v0)
-bnei_cont.19534:
+bnei_cont.18898:
 	jr	%ra
-setup_surface_table.2864:
+setup_surface_table.2859:
 	addi	%a0, %zero, 4
-	flw	%f0, 464(%zero)
+	flw	%f0, 465(%zero)
 	fsw	%f0, 0(%sp)
 	sw	%v1, 1(%sp)
 	sw	%v0, 2(%sp)
@@ -3978,14 +2991,14 @@ setup_surface_table.2864:
 	fmul	%f1, %f1, %f2
 	fadd	%f0, %f0, %f1
 	flw	%f1, 0(%sp)
-	fblt	%f1, %f0, fbgt_else.19543
+	fblt	%f1, %f0, fbgt_else.18907
 	addi	%v1, %zero, 0
-	j	fbgt_cont.19544
-fbgt_else.19543:
+	j	fbgt_cont.18908
+fbgt_else.18907:
 	addi	%v1, %zero, 1
-fbgt_cont.19544:
-	beqi	%v1, 0, bnei_else.19545
-	flw	%f1, 463(%zero)
+fbgt_cont.18908:
+	beqi	%v1, 0, bnei_else.18909
+	flw	%f1, 464(%zero)
 	fdiv	%f1, %f1, %f0
 	fsw	%f1, 0(%v0)
 	lw	%v1, 4(%a0)
@@ -4003,14 +3016,14 @@ fbgt_cont.19544:
 	fdiv	%f0, %f1, %f0
 	fneg	%f0, %f0
 	fsw	%f0, 3(%v0)
-	j	bnei_cont.19546
-bnei_else.19545:
+	j	bnei_cont.18910
+bnei_else.18909:
 	fsw	%f1, 0(%v0)
-bnei_cont.19546:
+bnei_cont.18910:
 	jr	%ra
-setup_second_table.2867:
+setup_second_table.2862:
 	addi	%a0, %zero, 5
-	flw	%f0, 464(%zero)
+	flw	%f0, 465(%zero)
 	fsw	%f0, 0(%sp)
 	sw	%v1, 1(%sp)
 	sw	%v0, 2(%sp)
@@ -4032,7 +3045,7 @@ setup_second_table.2867:
 	addi	%v0, %v1, 0
 	sw	%ra, 7(%sp)
 	addi	%sp, %sp, 8
-	jal	quadratic.2798
+	jal	quadratic.2793
 	addi	%sp, %sp, -8
 	lw	%ra, 7(%sp)
 	lw	%v0, 1(%sp)
@@ -4054,7 +3067,7 @@ setup_second_table.2867:
 	lw	%v1, 3(%sp)
 	fsw	%f0, 0(%v1)
 	lw	%a0, 3(%v0)
-	beqi	%a0, 0, bnei_else.19547
+	beqi	%a0, 0, bnei_else.18911
 	lw	%a0, 9(%v0)
 	flw	%f7, 1(%a0)
 	fmul	%f7, %f6, %f7
@@ -4062,7 +3075,7 @@ setup_second_table.2867:
 	flw	%f8, 2(%a0)
 	fmul	%f8, %f4, %f8
 	fadd	%f7, %f7, %f8
-	flw	%f8, 467(%zero)
+	flw	%f8, 468(%zero)
 	fmul	%f7, %f7, %f8
 	fsub	%f1, %f1, %f7
 	fsw	%f1, 1(%v1)
@@ -4086,30 +3099,30 @@ setup_second_table.2867:
 	fmul	%f1, %f1, %f8
 	fsub	%f1, %f5, %f1
 	fsw	%f1, 3(%v1)
-	j	bnei_cont.19548
-bnei_else.19547:
+	j	bnei_cont.18912
+bnei_else.18911:
 	fsw	%f1, 1(%v1)
 	fsw	%f3, 2(%v1)
 	fsw	%f5, 3(%v1)
-bnei_cont.19548:
+bnei_cont.18912:
 	flw	%f1, 0(%sp)
-	fbne	%f0, %f1, fbeq_else.19549
+	fbne	%f0, %f1, fbeq_else.18913
 	addi	%v0, %zero, 1
-	j	fbeq_cont.19550
-fbeq_else.19549:
+	j	fbeq_cont.18914
+fbeq_else.18913:
 	addi	%v0, %zero, 0
-fbeq_cont.19550:
-	beqi	%v0, 0, bnei_else.19551
-	j	bnei_cont.19552
-bnei_else.19551:
-	flw	%f1, 468(%zero)
+fbeq_cont.18914:
+	beqi	%v0, 0, bnei_else.18915
+	j	bnei_cont.18916
+bnei_else.18915:
+	flw	%f1, 469(%zero)
 	fdiv	%f0, %f1, %f0
 	fsw	%f0, 4(%v1)
-bnei_cont.19552:
+bnei_cont.18916:
 	add	%v0, %zero, %v1
 	jr	%ra
-iter_setup_dirvec_constants.2870:
-	blti	%v1, 0, bgti_else.19553
+iter_setup_dirvec_constants.2865:
+	blti	%v1, 0, bgti_else.18917
 	addi	%a0, %zero, 12
 	add	%at, %a0, %v1
 	lw	%a0, 0(%at)
@@ -4117,55 +3130,55 @@ iter_setup_dirvec_constants.2870:
 	lw	%a2, 0(%v0)
 	lw	%a3, 1(%a0)
 	sw	%v0, 0(%sp)
-	beqi	%a3, 1, bnei_else.19554
-	beqi	%a3, 2, bnei_else.19556
+	beqi	%a3, 1, bnei_else.18918
+	beqi	%a3, 2, bnei_else.18920
 	sw	%v1, 1(%sp)
 	sw	%a1, 2(%sp)
 	addi	%v1, %a0, 0
 	addi	%v0, %a2, 0
 	sw	%ra, 3(%sp)
 	addi	%sp, %sp, 4
-	jal	setup_second_table.2867
+	jal	setup_second_table.2862
 	addi	%sp, %sp, -4
 	lw	%ra, 3(%sp)
 	lw	%v1, 1(%sp)
 	lw	%a0, 2(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-	j	bnei_cont.19557
-bnei_else.19556:
+	j	bnei_cont.18921
+bnei_else.18920:
 	sw	%v1, 1(%sp)
 	sw	%a1, 2(%sp)
 	addi	%v1, %a0, 0
 	addi	%v0, %a2, 0
 	sw	%ra, 3(%sp)
 	addi	%sp, %sp, 4
-	jal	setup_surface_table.2864
+	jal	setup_surface_table.2859
 	addi	%sp, %sp, -4
 	lw	%ra, 3(%sp)
 	lw	%v1, 1(%sp)
 	lw	%a0, 2(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-bnei_cont.19557:
-	j	bnei_cont.19555
-bnei_else.19554:
+bnei_cont.18921:
+	j	bnei_cont.18919
+bnei_else.18918:
 	sw	%v1, 1(%sp)
 	sw	%a1, 2(%sp)
 	addi	%v1, %a0, 0
 	addi	%v0, %a2, 0
 	sw	%ra, 3(%sp)
 	addi	%sp, %sp, 4
-	jal	setup_rect_table.2861
+	jal	setup_rect_table.2856
 	addi	%sp, %sp, -4
 	lw	%ra, 3(%sp)
 	lw	%v1, 1(%sp)
 	lw	%a0, 2(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-bnei_cont.19555:
+bnei_cont.18919:
 	addi	%v0, %v1, -1
-	blti	%v0, 0, bgti_else.19558
+	blti	%v0, 0, bgti_else.18922
 	addi	%v1, %zero, 12
 	add	%at, %v1, %v0
 	lw	%v1, 0(%at)
@@ -4173,59 +3186,59 @@ bnei_cont.19555:
 	lw	%a1, 1(%a0)
 	lw	%a2, 0(%a0)
 	lw	%a3, 1(%v1)
-	beqi	%a3, 1, bnei_else.19559
-	beqi	%a3, 2, bnei_else.19561
+	beqi	%a3, 1, bnei_else.18923
+	beqi	%a3, 2, bnei_else.18925
 	sw	%v0, 3(%sp)
 	sw	%a1, 4(%sp)
 	addi	%v0, %a2, 0
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	setup_second_table.2867
+	jal	setup_second_table.2862
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
 	lw	%v1, 3(%sp)
 	lw	%a0, 4(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-	j	bnei_cont.19562
-bnei_else.19561:
+	j	bnei_cont.18926
+bnei_else.18925:
 	sw	%v0, 3(%sp)
 	sw	%a1, 4(%sp)
 	addi	%v0, %a2, 0
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	setup_surface_table.2864
+	jal	setup_surface_table.2859
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
 	lw	%v1, 3(%sp)
 	lw	%a0, 4(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-bnei_cont.19562:
-	j	bnei_cont.19560
-bnei_else.19559:
+bnei_cont.18926:
+	j	bnei_cont.18924
+bnei_else.18923:
 	sw	%v0, 3(%sp)
 	sw	%a1, 4(%sp)
 	addi	%v0, %a2, 0
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	setup_rect_table.2861
+	jal	setup_rect_table.2856
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
 	lw	%v1, 3(%sp)
 	lw	%a0, 4(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-bnei_cont.19560:
+bnei_cont.18924:
 	addi	%v1, %v1, -1
 	lw	%v0, 0(%sp)
-	j	iter_setup_dirvec_constants.2870
-bgti_else.19558:
+	j	iter_setup_dirvec_constants.2865
+bgti_else.18922:
 	jr	%ra
-bgti_else.19553:
+bgti_else.18917:
 	jr	%ra
-setup_startp_constants.2875:
-	blti	%v1, 0, bgti_else.19565
+setup_startp_constants.2870:
+	blti	%v1, 0, bgti_else.18929
 	addi	%a0, %zero, 12
 	add	%at, %a0, %v1
 	lw	%a0, 0(%at)
@@ -4248,11 +3261,11 @@ setup_startp_constants.2875:
 	fsw	%f0, 2(%a1)
 	sw	%v0, 0(%sp)
 	sw	%v1, 1(%sp)
-	beqi	%a2, 2, bnei_else.19566
+	beqi	%a2, 2, bnei_else.18930
 	addi	%at, %zero, 2
-	blt	%at, %a2, bgt_else.19568
-	j	bgt_cont.19569
-bgt_else.19568:
+	blt	%at, %a2, bgt_else.18932
+	j	bgt_cont.18933
+bgt_else.18932:
 	flw	%f0, 0(%a1)
 	flw	%f1, 1(%a1)
 	flw	%f2, 2(%a1)
@@ -4261,21 +3274,21 @@ bgt_else.19568:
 	addi	%v0, %a0, 0
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	quadratic.2798
+	jal	quadratic.2793
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
 	lw	%v0, 3(%sp)
-	beqi	%v0, 3, bnei_else.19570
-	j	bnei_cont.19571
-bnei_else.19570:
-	flw	%f1, 468(%zero)
+	beqi	%v0, 3, bnei_else.18934
+	j	bnei_cont.18935
+bnei_else.18934:
+	flw	%f1, 469(%zero)
 	fsub	%f0, %f0, %f1
-bnei_cont.19571:
+bnei_cont.18935:
 	lw	%v0, 2(%sp)
 	fsw	%f0, 3(%v0)
-bgt_cont.19569:
-	j	bnei_cont.19567
-bnei_else.19566:
+bgt_cont.18933:
+	j	bnei_cont.18931
+bnei_else.18930:
 	lw	%a0, 4(%a0)
 	flw	%f0, 0(%a1)
 	flw	%f1, 1(%a1)
@@ -4289,14 +3302,14 @@ bnei_else.19566:
 	fmul	%f1, %f1, %f2
 	fadd	%f0, %f0, %f1
 	fsw	%f0, 3(%a1)
-bnei_cont.19567:
+bnei_cont.18931:
 	lw	%v0, 1(%sp)
 	addi	%v1, %v0, -1
 	lw	%v0, 0(%sp)
-	j	setup_startp_constants.2875
-bgti_else.19565:
+	j	setup_startp_constants.2870
+bgti_else.18929:
 	jr	%ra
-is_outside.2895:
+is_outside.2890:
 	lw	%v1, 5(%v0)
 	flw	%f3, 0(%v1)
 	fsub	%f0, %f0, %f3
@@ -4307,48 +3320,48 @@ is_outside.2895:
 	flw	%f3, 2(%v1)
 	fsub	%f2, %f2, %f3
 	lw	%v1, 1(%v0)
-	beqi	%v1, 1, bnei_else.19573
-	beqi	%v1, 2, bnei_else.19574
+	beqi	%v1, 1, bnei_else.18937
+	beqi	%v1, 2, bnei_else.18938
 	sw	%v0, 0(%sp)
 	sw	%ra, 1(%sp)
 	addi	%sp, %sp, 2
-	jal	quadratic.2798
+	jal	quadratic.2793
 	addi	%sp, %sp, -2
 	lw	%ra, 1(%sp)
 	lw	%v0, 0(%sp)
 	lw	%v1, 1(%v0)
-	beqi	%v1, 3, bnei_else.19575
-	j	bnei_cont.19576
-bnei_else.19575:
-	flw	%f1, 468(%zero)
+	beqi	%v1, 3, bnei_else.18939
+	j	bnei_cont.18940
+bnei_else.18939:
+	flw	%f1, 469(%zero)
 	fsub	%f0, %f0, %f1
-bnei_cont.19576:
+bnei_cont.18940:
 	lw	%v0, 6(%v0)
-	flw	%f1, 464(%zero)
-	fblt	%f0, %f1, fbgt_else.19577
+	flw	%f1, 465(%zero)
+	fblt	%f0, %f1, fbgt_else.18941
 	addi	%v1, %zero, 0
-	j	fbgt_cont.19578
-fbgt_else.19577:
+	j	fbgt_cont.18942
+fbgt_else.18941:
 	addi	%v1, %zero, 1
-fbgt_cont.19578:
-	beqi	%v0, 0, bnei_else.19579
-	beqi	%v1, 0, bnei_else.19581
+fbgt_cont.18942:
+	beqi	%v0, 0, bnei_else.18943
+	beqi	%v1, 0, bnei_else.18945
 	addi	%v0, %zero, 0
-	j	bnei_cont.19582
-bnei_else.19581:
+	j	bnei_cont.18946
+bnei_else.18945:
 	addi	%v0, %zero, 1
-bnei_cont.19582:
-	j	bnei_cont.19580
-bnei_else.19579:
+bnei_cont.18946:
+	j	bnei_cont.18944
+bnei_else.18943:
 	add	%v0, %zero, %v1
-bnei_cont.19580:
-	beqi	%v0, 0, bnei_else.19583
+bnei_cont.18944:
+	beqi	%v0, 0, bnei_else.18947
 	addi	%v0, %zero, 0
 	jr	%ra
-bnei_else.19583:
+bnei_else.18947:
 	addi	%v0, %zero, 1
 	jr	%ra
-bnei_else.19574:
+bnei_else.18938:
 	lw	%v1, 4(%v0)
 	flw	%f3, 0(%v1)
 	fmul	%f0, %f3, %f0
@@ -4359,83 +3372,83 @@ bnei_else.19574:
 	fmul	%f1, %f1, %f2
 	fadd	%f0, %f0, %f1
 	lw	%v0, 6(%v0)
-	flw	%f1, 464(%zero)
-	fblt	%f0, %f1, fbgt_else.19584
+	flw	%f1, 465(%zero)
+	fblt	%f0, %f1, fbgt_else.18948
 	addi	%v1, %zero, 0
-	j	fbgt_cont.19585
-fbgt_else.19584:
+	j	fbgt_cont.18949
+fbgt_else.18948:
 	addi	%v1, %zero, 1
-fbgt_cont.19585:
-	beqi	%v0, 0, bnei_else.19586
-	beqi	%v1, 0, bnei_else.19588
+fbgt_cont.18949:
+	beqi	%v0, 0, bnei_else.18950
+	beqi	%v1, 0, bnei_else.18952
 	addi	%v0, %zero, 0
-	j	bnei_cont.19589
-bnei_else.19588:
+	j	bnei_cont.18953
+bnei_else.18952:
 	addi	%v0, %zero, 1
-bnei_cont.19589:
-	j	bnei_cont.19587
-bnei_else.19586:
+bnei_cont.18953:
+	j	bnei_cont.18951
+bnei_else.18950:
 	add	%v0, %zero, %v1
-bnei_cont.19587:
-	beqi	%v0, 0, bnei_else.19590
+bnei_cont.18951:
+	beqi	%v0, 0, bnei_else.18954
 	addi	%v0, %zero, 0
 	jr	%ra
-bnei_else.19590:
+bnei_else.18954:
 	addi	%v0, %zero, 1
 	jr	%ra
-bnei_else.19573:
+bnei_else.18937:
 	fabs	%f0, %f0
 	lw	%v1, 4(%v0)
 	flw	%f3, 0(%v1)
-	fblt	%f0, %f3, fbgt_else.19591
+	fblt	%f0, %f3, fbgt_else.18955
 	addi	%v1, %zero, 0
-	j	fbgt_cont.19592
-fbgt_else.19591:
+	j	fbgt_cont.18956
+fbgt_else.18955:
 	addi	%v1, %zero, 1
-fbgt_cont.19592:
-	beqi	%v1, 0, bnei_else.19593
+fbgt_cont.18956:
+	beqi	%v1, 0, bnei_else.18957
 	fabs	%f0, %f1
 	lw	%v1, 4(%v0)
 	flw	%f1, 1(%v1)
-	fblt	%f0, %f1, fbgt_else.19595
+	fblt	%f0, %f1, fbgt_else.18959
 	addi	%v1, %zero, 0
-	j	fbgt_cont.19596
-fbgt_else.19595:
+	j	fbgt_cont.18960
+fbgt_else.18959:
 	addi	%v1, %zero, 1
-fbgt_cont.19596:
-	beqi	%v1, 0, bnei_else.19597
+fbgt_cont.18960:
+	beqi	%v1, 0, bnei_else.18961
 	fabs	%f0, %f2
 	lw	%v1, 4(%v0)
 	flw	%f1, 2(%v1)
-	fblt	%f0, %f1, fbgt_else.19599
+	fblt	%f0, %f1, fbgt_else.18963
 	addi	%v1, %zero, 0
-	j	fbgt_cont.19600
-fbgt_else.19599:
+	j	fbgt_cont.18964
+fbgt_else.18963:
 	addi	%v1, %zero, 1
-fbgt_cont.19600:
-	j	bnei_cont.19598
-bnei_else.19597:
+fbgt_cont.18964:
+	j	bnei_cont.18962
+bnei_else.18961:
 	addi	%v1, %zero, 0
-bnei_cont.19598:
-	j	bnei_cont.19594
-bnei_else.19593:
+bnei_cont.18962:
+	j	bnei_cont.18958
+bnei_else.18957:
 	addi	%v1, %zero, 0
-bnei_cont.19594:
-	beqi	%v1, 0, bnei_else.19601
+bnei_cont.18958:
+	beqi	%v1, 0, bnei_else.18965
 	lw	%v0, 6(%v0)
 	jr	%ra
-bnei_else.19601:
+bnei_else.18965:
 	lw	%v0, 6(%v0)
-	beqi	%v0, 0, bnei_else.19602
+	beqi	%v0, 0, bnei_else.18966
 	addi	%v0, %zero, 0
 	jr	%ra
-bnei_else.19602:
+bnei_else.18966:
 	addi	%v0, %zero, 1
 	jr	%ra
-check_all_inside.2900:
+check_all_inside.2895:
 	add	%at, %v1, %v0
 	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.19603
+	beqi	%a0, -1, bnei_else.18967
 	addi	%a1, %zero, 12
 	add	%at, %a1, %a0
 	lw	%a0, 0(%at)
@@ -4454,8 +3467,8 @@ check_all_inside.2900:
 	fsw	%f0, 2(%sp)
 	sw	%v1, 3(%sp)
 	sw	%v0, 4(%sp)
-	beqi	%a1, 1, bnei_else.19604
-	beqi	%a1, 2, bnei_else.19606
+	beqi	%a1, 1, bnei_else.18968
+	beqi	%a1, 2, bnei_else.18970
 	sw	%a0, 5(%sp)
 	addi	%v0, %a0, 0
 	fmov	%f2, %f5
@@ -4463,44 +3476,44 @@ check_all_inside.2900:
 	fmov	%f0, %f3
 	sw	%ra, 6(%sp)
 	addi	%sp, %sp, 7
-	jal	quadratic.2798
+	jal	quadratic.2793
 	addi	%sp, %sp, -7
 	lw	%ra, 6(%sp)
 	lw	%v0, 5(%sp)
 	lw	%v1, 1(%v0)
-	beqi	%v1, 3, bnei_else.19608
-	j	bnei_cont.19609
-bnei_else.19608:
-	flw	%f1, 468(%zero)
+	beqi	%v1, 3, bnei_else.18972
+	j	bnei_cont.18973
+bnei_else.18972:
+	flw	%f1, 469(%zero)
 	fsub	%f0, %f0, %f1
-bnei_cont.19609:
+bnei_cont.18973:
 	lw	%v0, 6(%v0)
-	flw	%f1, 464(%zero)
-	fblt	%f0, %f1, fbgt_else.19610
+	flw	%f1, 465(%zero)
+	fblt	%f0, %f1, fbgt_else.18974
 	addi	%v1, %zero, 0
-	j	fbgt_cont.19611
-fbgt_else.19610:
+	j	fbgt_cont.18975
+fbgt_else.18974:
 	addi	%v1, %zero, 1
-fbgt_cont.19611:
-	beqi	%v0, 0, bnei_else.19612
-	beqi	%v1, 0, bnei_else.19614
+fbgt_cont.18975:
+	beqi	%v0, 0, bnei_else.18976
+	beqi	%v1, 0, bnei_else.18978
 	addi	%v0, %zero, 0
-	j	bnei_cont.19615
-bnei_else.19614:
+	j	bnei_cont.18979
+bnei_else.18978:
 	addi	%v0, %zero, 1
-bnei_cont.19615:
-	j	bnei_cont.19613
-bnei_else.19612:
+bnei_cont.18979:
+	j	bnei_cont.18977
+bnei_else.18976:
 	add	%v0, %zero, %v1
-bnei_cont.19613:
-	beqi	%v0, 0, bnei_else.19616
+bnei_cont.18977:
+	beqi	%v0, 0, bnei_else.18980
 	addi	%v0, %zero, 0
-	j	bnei_cont.19617
-bnei_else.19616:
+	j	bnei_cont.18981
+bnei_else.18980:
 	addi	%v0, %zero, 1
-bnei_cont.19617:
-	j	bnei_cont.19607
-bnei_else.19606:
+bnei_cont.18981:
+	j	bnei_cont.18971
+bnei_else.18970:
 	lw	%a1, 4(%a0)
 	flw	%f6, 0(%a1)
 	fmul	%f3, %f6, %f3
@@ -4511,94 +3524,94 @@ bnei_else.19606:
 	fmul	%f4, %f4, %f5
 	fadd	%f3, %f3, %f4
 	lw	%a0, 6(%a0)
-	flw	%f4, 464(%zero)
-	fblt	%f3, %f4, fbgt_else.19618
+	flw	%f4, 465(%zero)
+	fblt	%f3, %f4, fbgt_else.18982
 	addi	%a1, %zero, 0
-	j	fbgt_cont.19619
-fbgt_else.19618:
+	j	fbgt_cont.18983
+fbgt_else.18982:
 	addi	%a1, %zero, 1
-fbgt_cont.19619:
-	beqi	%a0, 0, bnei_else.19620
-	beqi	%a1, 0, bnei_else.19622
+fbgt_cont.18983:
+	beqi	%a0, 0, bnei_else.18984
+	beqi	%a1, 0, bnei_else.18986
 	addi	%a0, %zero, 0
-	j	bnei_cont.19623
-bnei_else.19622:
+	j	bnei_cont.18987
+bnei_else.18986:
 	addi	%a0, %zero, 1
-bnei_cont.19623:
-	j	bnei_cont.19621
-bnei_else.19620:
+bnei_cont.18987:
+	j	bnei_cont.18985
+bnei_else.18984:
 	add	%a0, %zero, %a1
-bnei_cont.19621:
-	beqi	%a0, 0, bnei_else.19624
+bnei_cont.18985:
+	beqi	%a0, 0, bnei_else.18988
 	addi	%v0, %zero, 0
-	j	bnei_cont.19625
-bnei_else.19624:
+	j	bnei_cont.18989
+bnei_else.18988:
 	addi	%v0, %zero, 1
-bnei_cont.19625:
-bnei_cont.19607:
-	j	bnei_cont.19605
-bnei_else.19604:
+bnei_cont.18989:
+bnei_cont.18971:
+	j	bnei_cont.18969
+bnei_else.18968:
 	fabs	%f3, %f3
 	lw	%a1, 4(%a0)
 	flw	%f6, 0(%a1)
-	fblt	%f3, %f6, fbgt_else.19626
+	fblt	%f3, %f6, fbgt_else.18990
 	addi	%a1, %zero, 0
-	j	fbgt_cont.19627
-fbgt_else.19626:
+	j	fbgt_cont.18991
+fbgt_else.18990:
 	addi	%a1, %zero, 1
-fbgt_cont.19627:
-	beqi	%a1, 0, bnei_else.19628
+fbgt_cont.18991:
+	beqi	%a1, 0, bnei_else.18992
 	fabs	%f3, %f4
 	lw	%a1, 4(%a0)
 	flw	%f4, 1(%a1)
-	fblt	%f3, %f4, fbgt_else.19630
+	fblt	%f3, %f4, fbgt_else.18994
 	addi	%a1, %zero, 0
-	j	fbgt_cont.19631
-fbgt_else.19630:
+	j	fbgt_cont.18995
+fbgt_else.18994:
 	addi	%a1, %zero, 1
-fbgt_cont.19631:
-	beqi	%a1, 0, bnei_else.19632
+fbgt_cont.18995:
+	beqi	%a1, 0, bnei_else.18996
 	fabs	%f3, %f5
 	lw	%a1, 4(%a0)
 	flw	%f4, 2(%a1)
-	fblt	%f3, %f4, fbgt_else.19634
+	fblt	%f3, %f4, fbgt_else.18998
 	addi	%a1, %zero, 0
-	j	fbgt_cont.19635
-fbgt_else.19634:
+	j	fbgt_cont.18999
+fbgt_else.18998:
 	addi	%a1, %zero, 1
-fbgt_cont.19635:
-	j	bnei_cont.19633
-bnei_else.19632:
+fbgt_cont.18999:
+	j	bnei_cont.18997
+bnei_else.18996:
 	addi	%a1, %zero, 0
-bnei_cont.19633:
-	j	bnei_cont.19629
-bnei_else.19628:
+bnei_cont.18997:
+	j	bnei_cont.18993
+bnei_else.18992:
 	addi	%a1, %zero, 0
-bnei_cont.19629:
-	beqi	%a1, 0, bnei_else.19636
+bnei_cont.18993:
+	beqi	%a1, 0, bnei_else.19000
 	lw	%a0, 6(%a0)
 	add	%v0, %zero, %a0
-	j	bnei_cont.19637
-bnei_else.19636:
+	j	bnei_cont.19001
+bnei_else.19000:
 	lw	%a0, 6(%a0)
-	beqi	%a0, 0, bnei_else.19638
+	beqi	%a0, 0, bnei_else.19002
 	addi	%v0, %zero, 0
-	j	bnei_cont.19639
-bnei_else.19638:
+	j	bnei_cont.19003
+bnei_else.19002:
 	addi	%v0, %zero, 1
-bnei_cont.19639:
-bnei_cont.19637:
-bnei_cont.19605:
-	beqi	%v0, 0, bnei_else.19640
+bnei_cont.19003:
+bnei_cont.19001:
+bnei_cont.18969:
+	beqi	%v0, 0, bnei_else.19004
 	addi	%v0, %zero, 0
 	jr	%ra
-bnei_else.19640:
+bnei_else.19004:
 	lw	%v0, 4(%sp)
 	addi	%v0, %v0, 1
 	lw	%v1, 3(%sp)
 	add	%at, %v1, %v0
 	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.19641
+	beqi	%a0, -1, bnei_else.19005
 	addi	%a1, %zero, 12
 	add	%at, %a1, %a0
 	lw	%a0, 0(%at)
@@ -4609,30 +3622,30 @@ bnei_else.19640:
 	addi	%v0, %a0, 0
 	sw	%ra, 7(%sp)
 	addi	%sp, %sp, 8
-	jal	is_outside.2895
+	jal	is_outside.2890
 	addi	%sp, %sp, -8
 	lw	%ra, 7(%sp)
-	beqi	%v0, 0, bnei_else.19642
+	beqi	%v0, 0, bnei_else.19006
 	addi	%v0, %zero, 0
 	jr	%ra
-bnei_else.19642:
+bnei_else.19006:
 	lw	%v0, 6(%sp)
 	addi	%v0, %v0, 1
 	flw	%f0, 2(%sp)
 	flw	%f1, 1(%sp)
 	flw	%f2, 0(%sp)
 	lw	%v1, 3(%sp)
-	j	check_all_inside.2900
-bnei_else.19641:
+	j	check_all_inside.2895
+bnei_else.19005:
 	addi	%v0, %zero, 1
 	jr	%ra
-bnei_else.19603:
+bnei_else.18967:
 	addi	%v0, %zero, 1
 	jr	%ra
-shadow_check_and_group.2906:
+shadow_check_and_group.2901:
 	add	%at, %v1, %v0
 	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.19643
+	beqi	%a0, -1, bnei_else.19007
 	addi	%a1, %zero, 12
 	add	%at, %a1, %a0
 	lw	%a1, 0(%at)
@@ -4663,8 +3676,8 @@ shadow_check_and_group.2906:
 	sw	%v1, 4(%sp)
 	sw	%v0, 5(%sp)
 	sw	%a1, 6(%sp)
-	beqi	%a3, 1, bnei_else.19644
-	beqi	%a3, 2, bnei_else.19646
+	beqi	%a3, 1, bnei_else.19008
+	beqi	%a3, 2, bnei_else.19010
 	addi	%v1, %a0, 0
 	addi	%v0, %a1, 0
 	fmov	%f2, %f5
@@ -4672,20 +3685,20 @@ shadow_check_and_group.2906:
 	fmov	%f1, %f3
 	sw	%ra, 7(%sp)
 	addi	%sp, %sp, 8
-	jal	solver_second_fast.2834
+	jal	solver_second_fast.2829
 	addi	%sp, %sp, -8
 	lw	%ra, 7(%sp)
-	j	bnei_cont.19647
-bnei_else.19646:
+	j	bnei_cont.19011
+bnei_else.19010:
 	flw	%f6, 0(%a0)
-	flw	%f7, 464(%zero)
-	fblt	%f6, %f7, fbgt_else.19648
+	flw	%f7, 465(%zero)
+	fblt	%f6, %f7, fbgt_else.19012
 	addi	%a3, %zero, 0
-	j	fbgt_cont.19649
-fbgt_else.19648:
+	j	fbgt_cont.19013
+fbgt_else.19012:
 	addi	%a3, %zero, 1
-fbgt_cont.19649:
-	beqi	%a3, 0, bnei_else.19650
+fbgt_cont.19013:
+	beqi	%a3, 0, bnei_else.19014
 	flw	%f6, 1(%a0)
 	fmul	%f1, %f6, %f1
 	flw	%f6, 2(%a0)
@@ -4697,13 +3710,13 @@ fbgt_cont.19649:
 	addi	%a0, %zero, 135
 	fsw	%f1, 0(%a0)
 	addi	%v0, %zero, 1
-	j	bnei_cont.19651
-bnei_else.19650:
+	j	bnei_cont.19015
+bnei_else.19014:
 	addi	%v0, %zero, 0
-bnei_cont.19651:
-bnei_cont.19647:
-	j	bnei_cont.19645
-bnei_else.19644:
+bnei_cont.19015:
+bnei_cont.19011:
+	j	bnei_cont.19009
+bnei_else.19008:
 	addi	%a3, %zero, 184
 	addi	%v1, %a3, 0
 	addi	%v0, %a1, 0
@@ -4712,25 +3725,25 @@ bnei_else.19644:
 	fmov	%f1, %f3
 	sw	%ra, 7(%sp)
 	addi	%sp, %sp, 8
-	jal	solver_rect_fast.2821
+	jal	solver_rect_fast.2816
 	addi	%sp, %sp, -8
 	lw	%ra, 7(%sp)
-bnei_cont.19645:
+bnei_cont.19009:
 	addi	%v1, %zero, 135
 	flw	%f0, 0(%v1)
-	beqi	%v0, 0, bnei_else.19652
+	beqi	%v0, 0, bnei_else.19016
 	flw	%f1, 459(%zero)
-	fblt	%f0, %f1, fbgt_else.19654
+	fblt	%f0, %f1, fbgt_else.19018
 	addi	%v0, %zero, 0
-	j	fbgt_cont.19655
-fbgt_else.19654:
+	j	fbgt_cont.19019
+fbgt_else.19018:
 	addi	%v0, %zero, 1
-fbgt_cont.19655:
-	j	bnei_cont.19653
-bnei_else.19652:
+fbgt_cont.19019:
+	j	bnei_cont.19017
+bnei_else.19016:
 	addi	%v0, %zero, 0
-bnei_cont.19653:
-	beqi	%v0, 0, bnei_else.19656
+bnei_cont.19017:
+	beqi	%v0, 0, bnei_else.19020
 	flw	%f1, 458(%zero)
 	fadd	%f0, %f0, %f1
 	addi	%v0, %zero, 78
@@ -4750,7 +3763,7 @@ bnei_cont.19653:
 	fadd	%f0, %f0, %f3
 	lw	%v1, 4(%sp)
 	lw	%v0, 0(%v1)
-	beqi	%v0, -1, bnei_else.19657
+	beqi	%v0, -1, bnei_else.19021
 	addi	%a0, %zero, 12
 	add	%at, %a0, %v0
 	lw	%v0, 0(%at)
@@ -4763,13 +3776,13 @@ bnei_cont.19653:
 	fmov	%f1, %f29
 	sw	%ra, 10(%sp)
 	addi	%sp, %sp, 11
-	jal	is_outside.2895
+	jal	is_outside.2890
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
-	beqi	%v0, 0, bnei_else.19659
+	beqi	%v0, 0, bnei_else.19023
 	addi	%v0, %zero, 0
-	j	bnei_cont.19660
-bnei_else.19659:
+	j	bnei_cont.19024
+bnei_else.19023:
 	flw	%f0, 9(%sp)
 	flw	%f1, 8(%sp)
 	flw	%f2, 7(%sp)
@@ -4777,40 +3790,40 @@ bnei_else.19659:
 	lw	%v1, 4(%sp)
 	sw	%ra, 10(%sp)
 	addi	%sp, %sp, 11
-	jal	check_all_inside.2900
+	jal	check_all_inside.2895
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
-bnei_cont.19660:
-	j	bnei_cont.19658
-bnei_else.19657:
+bnei_cont.19024:
+	j	bnei_cont.19022
+bnei_else.19021:
 	addi	%v0, %zero, 1
-bnei_cont.19658:
-	beqi	%v0, 0, bnei_else.19661
+bnei_cont.19022:
+	beqi	%v0, 0, bnei_else.19025
 	addi	%v0, %zero, 1
 	jr	%ra
-bnei_else.19661:
+bnei_else.19025:
 	lw	%v0, 5(%sp)
 	addi	%v0, %v0, 1
 	lw	%v1, 4(%sp)
-	j	shadow_check_and_group.2906
-bnei_else.19656:
+	j	shadow_check_and_group.2901
+bnei_else.19020:
 	lw	%v0, 6(%sp)
 	lw	%v0, 6(%v0)
-	beqi	%v0, 0, bnei_else.19662
+	beqi	%v0, 0, bnei_else.19026
 	lw	%v0, 5(%sp)
 	addi	%v0, %v0, 1
 	lw	%v1, 4(%sp)
-	j	shadow_check_and_group.2906
-bnei_else.19662:
+	j	shadow_check_and_group.2901
+bnei_else.19026:
 	addi	%v0, %zero, 0
 	jr	%ra
-bnei_else.19643:
+bnei_else.19007:
 	addi	%v0, %zero, 0
 	jr	%ra
-shadow_check_one_or_group.2909:
+shadow_check_one_or_group.2904:
 	add	%at, %v1, %v0
 	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.19663
+	beqi	%a0, -1, bnei_else.19027
 	addi	%a1, %zero, 83
 	add	%at, %a1, %a0
 	lw	%a0, 0(%at)
@@ -4822,19 +3835,19 @@ shadow_check_one_or_group.2909:
 	addi	%v0, %a1, 0
 	sw	%ra, 3(%sp)
 	addi	%sp, %sp, 4
-	jal	shadow_check_and_group.2906
+	jal	shadow_check_and_group.2901
 	addi	%sp, %sp, -4
 	lw	%ra, 3(%sp)
-	beqi	%v0, 0, bnei_else.19664
+	beqi	%v0, 0, bnei_else.19028
 	addi	%v0, %zero, 1
 	jr	%ra
-bnei_else.19664:
+bnei_else.19028:
 	lw	%v0, 2(%sp)
 	addi	%v0, %v0, 1
 	lw	%v1, 1(%sp)
 	add	%at, %v1, %v0
 	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.19665
+	beqi	%a0, -1, bnei_else.19029
 	addi	%a1, %zero, 83
 	add	%at, %a1, %a0
 	lw	%a0, 0(%at)
@@ -4844,19 +3857,19 @@ bnei_else.19664:
 	addi	%v0, %a1, 0
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	shadow_check_and_group.2906
+	jal	shadow_check_and_group.2901
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
-	beqi	%v0, 0, bnei_else.19666
+	beqi	%v0, 0, bnei_else.19030
 	addi	%v0, %zero, 1
 	jr	%ra
-bnei_else.19666:
+bnei_else.19030:
 	lw	%v0, 3(%sp)
 	addi	%v0, %v0, 1
 	lw	%v1, 1(%sp)
 	add	%at, %v1, %v0
 	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.19667
+	beqi	%a0, -1, bnei_else.19031
 	addi	%a1, %zero, 83
 	add	%at, %a1, %a0
 	lw	%a0, 0(%at)
@@ -4866,19 +3879,19 @@ bnei_else.19666:
 	addi	%v0, %a1, 0
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	shadow_check_and_group.2906
+	jal	shadow_check_and_group.2901
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
-	beqi	%v0, 0, bnei_else.19668
+	beqi	%v0, 0, bnei_else.19032
 	addi	%v0, %zero, 1
 	jr	%ra
-bnei_else.19668:
+bnei_else.19032:
 	lw	%v0, 4(%sp)
 	addi	%v0, %v0, 1
 	lw	%v1, 1(%sp)
 	add	%at, %v1, %v0
 	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.19669
+	beqi	%a0, -1, bnei_else.19033
 	addi	%a1, %zero, 83
 	add	%at, %a1, %a0
 	lw	%a0, 0(%at)
@@ -4888,40 +3901,40 @@ bnei_else.19668:
 	addi	%v0, %a1, 0
 	sw	%ra, 6(%sp)
 	addi	%sp, %sp, 7
-	jal	shadow_check_and_group.2906
+	jal	shadow_check_and_group.2901
 	addi	%sp, %sp, -7
 	lw	%ra, 6(%sp)
-	beqi	%v0, 0, bnei_else.19670
+	beqi	%v0, 0, bnei_else.19034
 	addi	%v0, %zero, 1
 	jr	%ra
-bnei_else.19670:
+bnei_else.19034:
 	lw	%v0, 5(%sp)
 	addi	%v0, %v0, 1
 	lw	%v1, 1(%sp)
-	j	shadow_check_one_or_group.2909
-bnei_else.19669:
+	j	shadow_check_one_or_group.2904
+bnei_else.19033:
 	addi	%v0, %zero, 0
 	jr	%ra
-bnei_else.19667:
+bnei_else.19031:
 	addi	%v0, %zero, 0
 	jr	%ra
-bnei_else.19665:
+bnei_else.19029:
 	addi	%v0, %zero, 0
 	jr	%ra
-bnei_else.19663:
+bnei_else.19027:
 	addi	%v0, %zero, 0
 	jr	%ra
-shadow_check_one_or_matrix.2912:
+shadow_check_one_or_matrix.2907:
 	add	%at, %v1, %v0
 	lw	%a0, 0(%at)
 	addi	%a1, %zero, 0
 	lw	%a2, 0(%a0)
-	beqi	%a2, -1, bnei_else.19671
+	beqi	%a2, -1, bnei_else.19035
 	sw	%a1, 0(%sp)
 	sw	%a0, 1(%sp)
 	sw	%v1, 2(%sp)
 	sw	%v0, 3(%sp)
-	beqi	%a2, 99, bnei_else.19672
+	beqi	%a2, 99, bnei_else.19036
 	addi	%a3, %zero, 12
 	add	%at, %a3, %a2
 	lw	%a3, 0(%at)
@@ -4944,26 +3957,26 @@ shadow_check_one_or_matrix.2912:
 	add	%at, %t0, %a2
 	lw	%a2, 0(%at)
 	lw	%t0, 1(%a3)
-	beqi	%t0, 1, bnei_else.19674
-	beqi	%t0, 2, bnei_else.19676
+	beqi	%t0, 1, bnei_else.19038
+	beqi	%t0, 2, bnei_else.19040
 	addi	%v1, %a2, 0
 	addi	%v0, %a3, 0
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	solver_second_fast.2834
+	jal	solver_second_fast.2829
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
-	j	bnei_cont.19677
-bnei_else.19676:
+	j	bnei_cont.19041
+bnei_else.19040:
 	flw	%f3, 0(%a2)
-	flw	%f4, 464(%zero)
-	fblt	%f3, %f4, fbgt_else.19678
+	flw	%f4, 465(%zero)
+	fblt	%f3, %f4, fbgt_else.19042
 	addi	%a3, %zero, 0
-	j	fbgt_cont.19679
-fbgt_else.19678:
+	j	fbgt_cont.19043
+fbgt_else.19042:
 	addi	%a3, %zero, 1
-fbgt_cont.19679:
-	beqi	%a3, 0, bnei_else.19680
+fbgt_cont.19043:
+	beqi	%a3, 0, bnei_else.19044
 	flw	%f3, 1(%a2)
 	fmul	%f0, %f3, %f0
 	flw	%f3, 2(%a2)
@@ -4975,37 +3988,37 @@ fbgt_cont.19679:
 	addi	%a2, %zero, 135
 	fsw	%f0, 0(%a2)
 	addi	%v0, %zero, 1
-	j	bnei_cont.19681
-bnei_else.19680:
+	j	bnei_cont.19045
+bnei_else.19044:
 	addi	%v0, %zero, 0
-bnei_cont.19681:
-bnei_cont.19677:
-	j	bnei_cont.19675
-bnei_else.19674:
+bnei_cont.19045:
+bnei_cont.19041:
+	j	bnei_cont.19039
+bnei_else.19038:
 	addi	%t0, %zero, 184
 	addi	%a0, %a2, 0
 	addi	%v1, %t0, 0
 	addi	%v0, %a3, 0
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	solver_rect_fast.2821
+	jal	solver_rect_fast.2816
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
-bnei_cont.19675:
-	beqi	%v0, 0, bnei_else.19682
+bnei_cont.19039:
+	beqi	%v0, 0, bnei_else.19046
 	addi	%v0, %zero, 135
 	flw	%f0, 0(%v0)
 	flw	%f1, 457(%zero)
-	fblt	%f0, %f1, fbgt_else.19684
+	fblt	%f0, %f1, fbgt_else.19048
 	addi	%v0, %zero, 0
-	j	fbgt_cont.19685
-fbgt_else.19684:
+	j	fbgt_cont.19049
+fbgt_else.19048:
 	addi	%v0, %zero, 1
-fbgt_cont.19685:
-	beqi	%v0, 0, bnei_else.19686
+fbgt_cont.19049:
+	beqi	%v0, 0, bnei_else.19050
 	lw	%v0, 1(%sp)
 	lw	%v1, 1(%v0)
-	beqi	%v1, -1, bnei_else.19688
+	beqi	%v1, -1, bnei_else.19052
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -5013,16 +4026,16 @@ fbgt_cont.19685:
 	addi	%v0, %a0, 0
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	shadow_check_and_group.2906
+	jal	shadow_check_and_group.2901
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
-	beqi	%v0, 0, bnei_else.19690
+	beqi	%v0, 0, bnei_else.19054
 	addi	%v0, %zero, 1
-	j	bnei_cont.19691
-bnei_else.19690:
+	j	bnei_cont.19055
+bnei_else.19054:
 	lw	%v0, 1(%sp)
 	lw	%v1, 2(%v0)
-	beqi	%v1, -1, bnei_else.19692
+	beqi	%v1, -1, bnei_else.19056
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -5030,16 +4043,16 @@ bnei_else.19690:
 	addi	%v0, %a0, 0
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	shadow_check_and_group.2906
+	jal	shadow_check_and_group.2901
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
-	beqi	%v0, 0, bnei_else.19694
+	beqi	%v0, 0, bnei_else.19058
 	addi	%v0, %zero, 1
-	j	bnei_cont.19695
-bnei_else.19694:
+	j	bnei_cont.19059
+bnei_else.19058:
 	lw	%v0, 1(%sp)
 	lw	%v1, 3(%v0)
-	beqi	%v1, -1, bnei_else.19696
+	beqi	%v1, -1, bnei_else.19060
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -5047,57 +4060,57 @@ bnei_else.19694:
 	addi	%v0, %a0, 0
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	shadow_check_and_group.2906
+	jal	shadow_check_and_group.2901
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
-	beqi	%v0, 0, bnei_else.19698
+	beqi	%v0, 0, bnei_else.19062
 	addi	%v0, %zero, 1
-	j	bnei_cont.19699
-bnei_else.19698:
+	j	bnei_cont.19063
+bnei_else.19062:
 	addi	%v0, %zero, 4
 	lw	%v1, 1(%sp)
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	shadow_check_one_or_group.2909
+	jal	shadow_check_one_or_group.2904
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
-bnei_cont.19699:
-	j	bnei_cont.19697
-bnei_else.19696:
+bnei_cont.19063:
+	j	bnei_cont.19061
+bnei_else.19060:
 	addi	%v0, %zero, 0
-bnei_cont.19697:
-bnei_cont.19695:
-	j	bnei_cont.19693
-bnei_else.19692:
+bnei_cont.19061:
+bnei_cont.19059:
+	j	bnei_cont.19057
+bnei_else.19056:
 	addi	%v0, %zero, 0
-bnei_cont.19693:
-bnei_cont.19691:
-	j	bnei_cont.19689
-bnei_else.19688:
+bnei_cont.19057:
+bnei_cont.19055:
+	j	bnei_cont.19053
+bnei_else.19052:
 	addi	%v0, %zero, 0
-bnei_cont.19689:
-	beqi	%v0, 0, bnei_else.19700
+bnei_cont.19053:
+	beqi	%v0, 0, bnei_else.19064
 	addi	%v0, %zero, 1
-	j	bnei_cont.19701
-bnei_else.19700:
+	j	bnei_cont.19065
+bnei_else.19064:
 	addi	%v0, %zero, 0
-bnei_cont.19701:
-	j	bnei_cont.19687
-bnei_else.19686:
+bnei_cont.19065:
+	j	bnei_cont.19051
+bnei_else.19050:
 	addi	%v0, %zero, 0
-bnei_cont.19687:
-	j	bnei_cont.19683
-bnei_else.19682:
+bnei_cont.19051:
+	j	bnei_cont.19047
+bnei_else.19046:
 	addi	%v0, %zero, 0
-bnei_cont.19683:
-	j	bnei_cont.19673
-bnei_else.19672:
+bnei_cont.19047:
+	j	bnei_cont.19037
+bnei_else.19036:
 	addi	%v0, %zero, 1
-bnei_cont.19673:
-	beqi	%v0, 0, bnei_else.19702
+bnei_cont.19037:
+	beqi	%v0, 0, bnei_else.19066
 	lw	%v0, 1(%sp)
 	lw	%v1, 1(%v0)
-	beqi	%v1, -1, bnei_else.19703
+	beqi	%v1, -1, bnei_else.19067
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -5105,16 +4118,16 @@ bnei_cont.19673:
 	addi	%v0, %a0, 0
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	shadow_check_and_group.2906
+	jal	shadow_check_and_group.2901
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
-	beqi	%v0, 0, bnei_else.19705
+	beqi	%v0, 0, bnei_else.19069
 	addi	%v0, %zero, 1
-	j	bnei_cont.19706
-bnei_else.19705:
+	j	bnei_cont.19070
+bnei_else.19069:
 	lw	%v0, 1(%sp)
 	lw	%v1, 2(%v0)
-	beqi	%v1, -1, bnei_else.19707
+	beqi	%v1, -1, bnei_else.19071
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -5122,16 +4135,16 @@ bnei_else.19705:
 	addi	%v0, %a0, 0
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	shadow_check_and_group.2906
+	jal	shadow_check_and_group.2901
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
-	beqi	%v0, 0, bnei_else.19709
+	beqi	%v0, 0, bnei_else.19073
 	addi	%v0, %zero, 1
-	j	bnei_cont.19710
-bnei_else.19709:
+	j	bnei_cont.19074
+bnei_else.19073:
 	lw	%v0, 1(%sp)
 	lw	%v1, 3(%v0)
-	beqi	%v1, -1, bnei_else.19711
+	beqi	%v1, -1, bnei_else.19075
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -5139,55 +4152,55 @@ bnei_else.19709:
 	addi	%v0, %a0, 0
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	shadow_check_and_group.2906
+	jal	shadow_check_and_group.2901
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
-	beqi	%v0, 0, bnei_else.19713
+	beqi	%v0, 0, bnei_else.19077
 	addi	%v0, %zero, 1
-	j	bnei_cont.19714
-bnei_else.19713:
+	j	bnei_cont.19078
+bnei_else.19077:
 	addi	%v0, %zero, 4
 	lw	%v1, 1(%sp)
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	shadow_check_one_or_group.2909
+	jal	shadow_check_one_or_group.2904
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
-bnei_cont.19714:
-	j	bnei_cont.19712
-bnei_else.19711:
+bnei_cont.19078:
+	j	bnei_cont.19076
+bnei_else.19075:
 	addi	%v0, %zero, 0
-bnei_cont.19712:
-bnei_cont.19710:
-	j	bnei_cont.19708
-bnei_else.19707:
+bnei_cont.19076:
+bnei_cont.19074:
+	j	bnei_cont.19072
+bnei_else.19071:
 	addi	%v0, %zero, 0
-bnei_cont.19708:
-bnei_cont.19706:
-	j	bnei_cont.19704
-bnei_else.19703:
+bnei_cont.19072:
+bnei_cont.19070:
+	j	bnei_cont.19068
+bnei_else.19067:
 	addi	%v0, %zero, 0
-bnei_cont.19704:
-	beqi	%v0, 0, bnei_else.19715
+bnei_cont.19068:
+	beqi	%v0, 0, bnei_else.19079
 	addi	%v0, %zero, 1
 	jr	%ra
-bnei_else.19715:
+bnei_else.19079:
 	lw	%v0, 3(%sp)
 	addi	%v0, %v0, 1
 	lw	%v1, 2(%sp)
-	j	shadow_check_one_or_matrix.2912
-bnei_else.19702:
+	j	shadow_check_one_or_matrix.2907
+bnei_else.19066:
 	lw	%v0, 3(%sp)
 	addi	%v0, %v0, 1
 	lw	%v1, 2(%sp)
-	j	shadow_check_one_or_matrix.2912
-bnei_else.19671:
+	j	shadow_check_one_or_matrix.2907
+bnei_else.19035:
 	addi	%v0, %zero, 0
 	jr	%ra
-solve_each_element.2915:
+solve_each_element.2910:
 	add	%at, %v1, %v0
 	lw	%a1, 0(%at)
-	beqi	%a1, -1, bnei_else.19716
+	beqi	%a1, -1, bnei_else.19080
 	addi	%a2, %zero, 12
 	add	%at, %a2, %a1
 	lw	%a2, 0(%at)
@@ -5219,8 +4232,8 @@ solve_each_element.2915:
 	sw	%v1, 6(%sp)
 	sw	%v0, 7(%sp)
 	sw	%a2, 8(%sp)
-	beqi	%t2, 1, bnei_else.19717
-	beqi	%t2, 2, bnei_else.19719
+	beqi	%t2, 1, bnei_else.19081
+	beqi	%t2, 2, bnei_else.19083
 	addi	%v1, %a0, 0
 	addi	%v0, %a2, 0
 	fmov	%f2, %f5
@@ -5228,11 +4241,11 @@ solve_each_element.2915:
 	fmov	%f1, %f3
 	sw	%ra, 9(%sp)
 	addi	%sp, %sp, 10
-	jal	solver_second.2811
+	jal	solver_second.2806
 	addi	%sp, %sp, -10
 	lw	%ra, 9(%sp)
-	j	bnei_cont.19720
-bnei_else.19719:
+	j	bnei_cont.19084
+bnei_else.19083:
 	addi	%v1, %a0, 0
 	addi	%v0, %a2, 0
 	fmov	%f2, %f5
@@ -5240,12 +4253,12 @@ bnei_else.19719:
 	fmov	%f1, %f3
 	sw	%ra, 9(%sp)
 	addi	%sp, %sp, 10
-	jal	solver_surface.2792
+	jal	solver_surface.2787
 	addi	%sp, %sp, -10
 	lw	%ra, 9(%sp)
-bnei_cont.19720:
-	j	bnei_cont.19718
-bnei_else.19717:
+bnei_cont.19084:
+	j	bnei_cont.19082
+bnei_else.19081:
 	fsw	%f1, 9(%sp)
 	fsw	%f5, 10(%sp)
 	fsw	%f3, 11(%sp)
@@ -5261,13 +4274,13 @@ bnei_else.19717:
 	fmov	%f1, %f3
 	sw	%ra, 14(%sp)
 	addi	%sp, %sp, 15
-	jal	solver_rect_surface.2777
+	jal	solver_rect_surface.2772
 	addi	%sp, %sp, -15
 	lw	%ra, 14(%sp)
-	beqi	%v0, 0, bnei_else.19721
+	beqi	%v0, 0, bnei_else.19085
 	addi	%v0, %zero, 1
-	j	bnei_cont.19722
-bnei_else.19721:
+	j	bnei_cont.19086
+bnei_else.19085:
 	flw	%f0, 11(%sp)
 	flw	%f1, 10(%sp)
 	flw	%f2, 9(%sp)
@@ -5278,13 +4291,13 @@ bnei_else.19721:
 	lw	%a2, 12(%sp)
 	sw	%ra, 14(%sp)
 	addi	%sp, %sp, 15
-	jal	solver_rect_surface.2777
+	jal	solver_rect_surface.2772
 	addi	%sp, %sp, -15
 	lw	%ra, 14(%sp)
-	beqi	%v0, 0, bnei_else.19723
+	beqi	%v0, 0, bnei_else.19087
 	addi	%v0, %zero, 2
-	j	bnei_cont.19724
-bnei_else.19723:
+	j	bnei_cont.19088
+bnei_else.19087:
 	flw	%f0, 10(%sp)
 	flw	%f1, 9(%sp)
 	flw	%f2, 11(%sp)
@@ -5295,38 +4308,38 @@ bnei_else.19723:
 	lw	%a2, 1(%sp)
 	sw	%ra, 14(%sp)
 	addi	%sp, %sp, 15
-	jal	solver_rect_surface.2777
+	jal	solver_rect_surface.2772
 	addi	%sp, %sp, -15
 	lw	%ra, 14(%sp)
-	beqi	%v0, 0, bnei_else.19725
+	beqi	%v0, 0, bnei_else.19089
 	addi	%v0, %zero, 3
-	j	bnei_cont.19726
-bnei_else.19725:
+	j	bnei_cont.19090
+bnei_else.19089:
 	addi	%v0, %zero, 0
-bnei_cont.19726:
-bnei_cont.19724:
-bnei_cont.19722:
-bnei_cont.19718:
-	beqi	%v0, 0, bnei_else.19727
+bnei_cont.19090:
+bnei_cont.19088:
+bnei_cont.19086:
+bnei_cont.19082:
+	beqi	%v0, 0, bnei_else.19091
 	addi	%v1, %zero, 135
 	flw	%f0, 0(%v1)
-	flw	%f1, 464(%zero)
-	fblt	%f1, %f0, fbgt_else.19728
+	flw	%f1, 465(%zero)
+	fblt	%f1, %f0, fbgt_else.19092
 	addi	%v1, %zero, 0
-	j	fbgt_cont.19729
-fbgt_else.19728:
+	j	fbgt_cont.19093
+fbgt_else.19092:
 	addi	%v1, %zero, 1
-fbgt_cont.19729:
-	beqi	%v1, 0, bnei_else.19730
+fbgt_cont.19093:
+	beqi	%v1, 0, bnei_else.19094
 	addi	%v1, %zero, 137
 	flw	%f1, 0(%v1)
-	fblt	%f0, %f1, fbgt_else.19732
+	fblt	%f0, %f1, fbgt_else.19096
 	addi	%v1, %zero, 0
-	j	fbgt_cont.19733
-fbgt_else.19732:
+	j	fbgt_cont.19097
+fbgt_else.19096:
 	addi	%v1, %zero, 1
-fbgt_cont.19733:
-	beqi	%v1, 0, bnei_else.19734
+fbgt_cont.19097:
+	beqi	%v1, 0, bnei_else.19098
 	flw	%f1, 458(%zero)
 	fadd	%f0, %f0, %f1
 	lw	%a0, 5(%sp)
@@ -5349,7 +4362,7 @@ fbgt_cont.19733:
 	fsw	%f2, 16(%sp)
 	fsw	%f1, 17(%sp)
 	fsw	%f0, 18(%sp)
-	beqi	%a1, -1, bnei_else.19736
+	beqi	%a1, -1, bnei_else.19100
 	addi	%a2, %zero, 12
 	add	%at, %a2, %a1
 	lw	%a1, 0(%at)
@@ -5359,13 +4372,13 @@ fbgt_cont.19733:
 	fmov	%f2, %f3
 	sw	%ra, 19(%sp)
 	addi	%sp, %sp, 20
-	jal	is_outside.2895
+	jal	is_outside.2890
 	addi	%sp, %sp, -20
 	lw	%ra, 19(%sp)
-	beqi	%v0, 0, bnei_else.19738
+	beqi	%v0, 0, bnei_else.19102
 	addi	%v0, %zero, 0
-	j	bnei_cont.19739
-bnei_else.19738:
+	j	bnei_cont.19103
+bnei_else.19102:
 	flw	%f0, 17(%sp)
 	flw	%f1, 16(%sp)
 	flw	%f2, 15(%sp)
@@ -5373,15 +4386,15 @@ bnei_else.19738:
 	lw	%v1, 6(%sp)
 	sw	%ra, 19(%sp)
 	addi	%sp, %sp, 20
-	jal	check_all_inside.2900
+	jal	check_all_inside.2895
 	addi	%sp, %sp, -20
 	lw	%ra, 19(%sp)
-bnei_cont.19739:
-	j	bnei_cont.19737
-bnei_else.19736:
+bnei_cont.19103:
+	j	bnei_cont.19101
+bnei_else.19100:
 	addi	%v0, %zero, 1
-bnei_cont.19737:
-	beqi	%v0, 0, bnei_else.19740
+bnei_cont.19101:
+	beqi	%v0, 0, bnei_else.19104
 	addi	%v0, %zero, 137
 	flw	%f0, 18(%sp)
 	fsw	%f0, 0(%v0)
@@ -5400,37 +4413,37 @@ bnei_cont.19737:
 	addi	%v0, %zero, 136
 	lw	%v1, 14(%sp)
 	sw	%v1, 0(%v0)
-	j	bnei_cont.19741
-bnei_else.19740:
-bnei_cont.19741:
-	j	bnei_cont.19735
-bnei_else.19734:
-bnei_cont.19735:
-	j	bnei_cont.19731
-bnei_else.19730:
-bnei_cont.19731:
+	j	bnei_cont.19105
+bnei_else.19104:
+bnei_cont.19105:
+	j	bnei_cont.19099
+bnei_else.19098:
+bnei_cont.19099:
+	j	bnei_cont.19095
+bnei_else.19094:
+bnei_cont.19095:
 	lw	%v0, 7(%sp)
 	addi	%v0, %v0, 1
 	lw	%v1, 6(%sp)
 	lw	%a0, 5(%sp)
-	j	solve_each_element.2915
-bnei_else.19727:
+	j	solve_each_element.2910
+bnei_else.19091:
 	lw	%v0, 8(%sp)
 	lw	%v0, 6(%v0)
-	beqi	%v0, 0, bnei_else.19742
+	beqi	%v0, 0, bnei_else.19106
 	lw	%v0, 7(%sp)
 	addi	%v0, %v0, 1
 	lw	%v1, 6(%sp)
 	lw	%a0, 5(%sp)
-	j	solve_each_element.2915
-bnei_else.19742:
+	j	solve_each_element.2910
+bnei_else.19106:
 	jr	%ra
-bnei_else.19716:
+bnei_else.19080:
 	jr	%ra
-solve_one_or_network.2919:
+solve_one_or_network.2914:
 	add	%at, %v1, %v0
 	lw	%a1, 0(%at)
-	beqi	%a1, -1, bnei_else.19745
+	beqi	%a1, -1, bnei_else.19109
 	addi	%a2, %zero, 83
 	add	%at, %a2, %a1
 	lw	%a1, 0(%at)
@@ -5443,7 +4456,7 @@ solve_one_or_network.2919:
 	addi	%v0, %a2, 0
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	solve_each_element.2915
+	jal	solve_each_element.2910
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
 	lw	%v0, 3(%sp)
@@ -5451,7 +4464,7 @@ solve_one_or_network.2919:
 	lw	%v1, 2(%sp)
 	add	%at, %v1, %v0
 	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.19746
+	beqi	%a0, -1, bnei_else.19110
 	addi	%a1, %zero, 83
 	add	%at, %a1, %a0
 	lw	%a0, 0(%at)
@@ -5463,7 +4476,7 @@ solve_one_or_network.2919:
 	addi	%a0, %a2, 0
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	solve_each_element.2915
+	jal	solve_each_element.2910
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
 	lw	%v0, 4(%sp)
@@ -5471,7 +4484,7 @@ solve_one_or_network.2919:
 	lw	%v1, 2(%sp)
 	add	%at, %v1, %v0
 	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.19747
+	beqi	%a0, -1, bnei_else.19111
 	addi	%a1, %zero, 83
 	add	%at, %a1, %a0
 	lw	%a0, 0(%at)
@@ -5483,7 +4496,7 @@ solve_one_or_network.2919:
 	addi	%a0, %a2, 0
 	sw	%ra, 6(%sp)
 	addi	%sp, %sp, 7
-	jal	solve_each_element.2915
+	jal	solve_each_element.2910
 	addi	%sp, %sp, -7
 	lw	%ra, 6(%sp)
 	lw	%v0, 5(%sp)
@@ -5491,7 +4504,7 @@ solve_one_or_network.2919:
 	lw	%v1, 2(%sp)
 	add	%at, %v1, %v0
 	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.19748
+	beqi	%a0, -1, bnei_else.19112
 	addi	%a1, %zero, 83
 	add	%at, %a1, %a0
 	lw	%a0, 0(%at)
@@ -5503,7 +4516,7 @@ solve_one_or_network.2919:
 	addi	%a0, %a2, 0
 	sw	%ra, 7(%sp)
 	addi	%sp, %sp, 8
-	jal	solve_each_element.2915
+	jal	solve_each_element.2910
 	addi	%sp, %sp, -8
 	lw	%ra, 7(%sp)
 	lw	%v0, 6(%sp)
@@ -5511,7 +4524,7 @@ solve_one_or_network.2919:
 	lw	%v1, 2(%sp)
 	add	%at, %v1, %v0
 	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.19749
+	beqi	%a0, -1, bnei_else.19113
 	addi	%a1, %zero, 83
 	add	%at, %a1, %a0
 	lw	%a0, 0(%at)
@@ -5523,7 +4536,7 @@ solve_one_or_network.2919:
 	addi	%a0, %a2, 0
 	sw	%ra, 8(%sp)
 	addi	%sp, %sp, 9
-	jal	solve_each_element.2915
+	jal	solve_each_element.2910
 	addi	%sp, %sp, -9
 	lw	%ra, 8(%sp)
 	lw	%v0, 7(%sp)
@@ -5531,7 +4544,7 @@ solve_one_or_network.2919:
 	lw	%v1, 2(%sp)
 	add	%at, %v1, %v0
 	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.19750
+	beqi	%a0, -1, bnei_else.19114
 	addi	%a1, %zero, 83
 	add	%at, %a1, %a0
 	lw	%a0, 0(%at)
@@ -5543,7 +4556,7 @@ solve_one_or_network.2919:
 	addi	%a0, %a2, 0
 	sw	%ra, 9(%sp)
 	addi	%sp, %sp, 10
-	jal	solve_each_element.2915
+	jal	solve_each_element.2910
 	addi	%sp, %sp, -10
 	lw	%ra, 9(%sp)
 	lw	%v0, 8(%sp)
@@ -5551,7 +4564,7 @@ solve_one_or_network.2919:
 	lw	%v1, 2(%sp)
 	add	%at, %v1, %v0
 	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.19751
+	beqi	%a0, -1, bnei_else.19115
 	addi	%a1, %zero, 83
 	add	%at, %a1, %a0
 	lw	%a0, 0(%at)
@@ -5563,7 +4576,7 @@ solve_one_or_network.2919:
 	addi	%a0, %a2, 0
 	sw	%ra, 10(%sp)
 	addi	%sp, %sp, 11
-	jal	solve_each_element.2915
+	jal	solve_each_element.2910
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
 	lw	%v0, 9(%sp)
@@ -5571,7 +4584,7 @@ solve_one_or_network.2919:
 	lw	%v1, 2(%sp)
 	add	%at, %v1, %v0
 	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.19752
+	beqi	%a0, -1, bnei_else.19116
 	addi	%a1, %zero, 83
 	add	%at, %a1, %a0
 	lw	%a0, 0(%at)
@@ -5583,41 +4596,41 @@ solve_one_or_network.2919:
 	addi	%a0, %a2, 0
 	sw	%ra, 11(%sp)
 	addi	%sp, %sp, 12
-	jal	solve_each_element.2915
+	jal	solve_each_element.2910
 	addi	%sp, %sp, -12
 	lw	%ra, 11(%sp)
 	lw	%v0, 10(%sp)
 	addi	%v0, %v0, 1
 	lw	%v1, 2(%sp)
 	lw	%a0, 0(%sp)
-	j	solve_one_or_network.2919
-bnei_else.19752:
+	j	solve_one_or_network.2914
+bnei_else.19116:
 	jr	%ra
-bnei_else.19751:
+bnei_else.19115:
 	jr	%ra
-bnei_else.19750:
+bnei_else.19114:
 	jr	%ra
-bnei_else.19749:
+bnei_else.19113:
 	jr	%ra
-bnei_else.19748:
+bnei_else.19112:
 	jr	%ra
-bnei_else.19747:
+bnei_else.19111:
 	jr	%ra
-bnei_else.19746:
+bnei_else.19110:
 	jr	%ra
-bnei_else.19745:
+bnei_else.19109:
 	jr	%ra
-trace_or_matrix.2923:
+trace_or_matrix.2918:
 	add	%at, %v1, %v0
 	lw	%a1, 0(%at)
 	addi	%a2, %zero, 0
 	lw	%a3, 0(%a1)
-	beqi	%a3, -1, bnei_else.19761
+	beqi	%a3, -1, bnei_else.19125
 	sw	%a0, 0(%sp)
 	sw	%a2, 1(%sp)
 	sw	%v1, 2(%sp)
 	sw	%v0, 3(%sp)
-	beqi	%a3, 99, bnei_else.19762
+	beqi	%a3, 99, bnei_else.19126
 	addi	%t0, %zero, 12
 	add	%at, %t0, %a3
 	lw	%a3, 0(%at)
@@ -5640,27 +4653,27 @@ trace_or_matrix.2923:
 	fsub	%f2, %f2, %f3
 	lw	%t2, 1(%a3)
 	sw	%a1, 4(%sp)
-	beqi	%t2, 1, bnei_else.19764
-	beqi	%t2, 2, bnei_else.19766
+	beqi	%t2, 1, bnei_else.19128
+	beqi	%t2, 2, bnei_else.19130
 	addi	%v1, %a0, 0
 	addi	%v0, %a3, 0
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	solver_second.2811
+	jal	solver_second.2806
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
-	j	bnei_cont.19767
-bnei_else.19766:
+	j	bnei_cont.19131
+bnei_else.19130:
 	addi	%v1, %a0, 0
 	addi	%v0, %a3, 0
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	solver_surface.2792
+	jal	solver_surface.2787
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
-bnei_cont.19767:
-	j	bnei_cont.19765
-bnei_else.19764:
+bnei_cont.19131:
+	j	bnei_cont.19129
+bnei_else.19128:
 	fsw	%f0, 5(%sp)
 	fsw	%f2, 6(%sp)
 	fsw	%f1, 7(%sp)
@@ -5674,13 +4687,13 @@ bnei_else.19764:
 	addi	%a2, %t1, 0
 	sw	%ra, 11(%sp)
 	addi	%sp, %sp, 12
-	jal	solver_rect_surface.2777
+	jal	solver_rect_surface.2772
 	addi	%sp, %sp, -12
 	lw	%ra, 11(%sp)
-	beqi	%v0, 0, bnei_else.19768
+	beqi	%v0, 0, bnei_else.19132
 	addi	%v0, %zero, 1
-	j	bnei_cont.19769
-bnei_else.19768:
+	j	bnei_cont.19133
+bnei_else.19132:
 	flw	%f0, 7(%sp)
 	flw	%f1, 6(%sp)
 	flw	%f2, 5(%sp)
@@ -5691,13 +4704,13 @@ bnei_else.19768:
 	lw	%a2, 1(%sp)
 	sw	%ra, 11(%sp)
 	addi	%sp, %sp, 12
-	jal	solver_rect_surface.2777
+	jal	solver_rect_surface.2772
 	addi	%sp, %sp, -12
 	lw	%ra, 11(%sp)
-	beqi	%v0, 0, bnei_else.19770
+	beqi	%v0, 0, bnei_else.19134
 	addi	%v0, %zero, 2
-	j	bnei_cont.19771
-bnei_else.19770:
+	j	bnei_cont.19135
+bnei_else.19134:
 	flw	%f0, 6(%sp)
 	flw	%f1, 5(%sp)
 	flw	%f2, 7(%sp)
@@ -5708,33 +4721,33 @@ bnei_else.19770:
 	lw	%a2, 9(%sp)
 	sw	%ra, 11(%sp)
 	addi	%sp, %sp, 12
-	jal	solver_rect_surface.2777
+	jal	solver_rect_surface.2772
 	addi	%sp, %sp, -12
 	lw	%ra, 11(%sp)
-	beqi	%v0, 0, bnei_else.19772
+	beqi	%v0, 0, bnei_else.19136
 	addi	%v0, %zero, 3
-	j	bnei_cont.19773
-bnei_else.19772:
+	j	bnei_cont.19137
+bnei_else.19136:
 	addi	%v0, %zero, 0
-bnei_cont.19773:
-bnei_cont.19771:
-bnei_cont.19769:
-bnei_cont.19765:
-	beqi	%v0, 0, bnei_else.19774
+bnei_cont.19137:
+bnei_cont.19135:
+bnei_cont.19133:
+bnei_cont.19129:
+	beqi	%v0, 0, bnei_else.19138
 	addi	%v0, %zero, 135
 	flw	%f0, 0(%v0)
 	addi	%v0, %zero, 137
 	flw	%f1, 0(%v0)
-	fblt	%f0, %f1, fbgt_else.19776
+	fblt	%f0, %f1, fbgt_else.19140
 	addi	%v0, %zero, 0
-	j	fbgt_cont.19777
-fbgt_else.19776:
+	j	fbgt_cont.19141
+fbgt_else.19140:
 	addi	%v0, %zero, 1
-fbgt_cont.19777:
-	beqi	%v0, 0, bnei_else.19778
+fbgt_cont.19141:
+	beqi	%v0, 0, bnei_else.19142
 	lw	%v0, 4(%sp)
 	lw	%v1, 1(%v0)
-	beqi	%v1, -1, bnei_else.19780
+	beqi	%v1, -1, bnei_else.19144
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -5744,12 +4757,12 @@ fbgt_cont.19777:
 	addi	%a0, %a1, 0
 	sw	%ra, 11(%sp)
 	addi	%sp, %sp, 12
-	jal	solve_each_element.2915
+	jal	solve_each_element.2910
 	addi	%sp, %sp, -12
 	lw	%ra, 11(%sp)
 	lw	%v0, 4(%sp)
 	lw	%v1, 2(%v0)
-	beqi	%v1, -1, bnei_else.19782
+	beqi	%v1, -1, bnei_else.19146
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -5759,12 +4772,12 @@ fbgt_cont.19777:
 	addi	%a0, %a1, 0
 	sw	%ra, 11(%sp)
 	addi	%sp, %sp, 12
-	jal	solve_each_element.2915
+	jal	solve_each_element.2910
 	addi	%sp, %sp, -12
 	lw	%ra, 11(%sp)
 	lw	%v0, 4(%sp)
 	lw	%v1, 3(%v0)
-	beqi	%v1, -1, bnei_else.19784
+	beqi	%v1, -1, bnei_else.19148
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -5774,12 +4787,12 @@ fbgt_cont.19777:
 	addi	%a0, %a1, 0
 	sw	%ra, 11(%sp)
 	addi	%sp, %sp, 12
-	jal	solve_each_element.2915
+	jal	solve_each_element.2910
 	addi	%sp, %sp, -12
 	lw	%ra, 11(%sp)
 	lw	%v0, 4(%sp)
 	lw	%v1, 4(%v0)
-	beqi	%v1, -1, bnei_else.19786
+	beqi	%v1, -1, bnei_else.19150
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -5789,12 +4802,12 @@ fbgt_cont.19777:
 	addi	%a0, %a1, 0
 	sw	%ra, 11(%sp)
 	addi	%sp, %sp, 12
-	jal	solve_each_element.2915
+	jal	solve_each_element.2910
 	addi	%sp, %sp, -12
 	lw	%ra, 11(%sp)
 	lw	%v0, 4(%sp)
 	lw	%v1, 5(%v0)
-	beqi	%v1, -1, bnei_else.19788
+	beqi	%v1, -1, bnei_else.19152
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -5804,12 +4817,12 @@ fbgt_cont.19777:
 	addi	%a0, %a1, 0
 	sw	%ra, 11(%sp)
 	addi	%sp, %sp, 12
-	jal	solve_each_element.2915
+	jal	solve_each_element.2910
 	addi	%sp, %sp, -12
 	lw	%ra, 11(%sp)
 	lw	%v0, 4(%sp)
 	lw	%v1, 6(%v0)
-	beqi	%v1, -1, bnei_else.19790
+	beqi	%v1, -1, bnei_else.19154
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -5819,12 +4832,12 @@ fbgt_cont.19777:
 	addi	%a0, %a1, 0
 	sw	%ra, 11(%sp)
 	addi	%sp, %sp, 12
-	jal	solve_each_element.2915
+	jal	solve_each_element.2910
 	addi	%sp, %sp, -12
 	lw	%ra, 11(%sp)
 	lw	%v0, 4(%sp)
 	lw	%v1, 7(%v0)
-	beqi	%v1, -1, bnei_else.19792
+	beqi	%v1, -1, bnei_else.19156
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -5834,7 +4847,7 @@ fbgt_cont.19777:
 	addi	%a0, %a1, 0
 	sw	%ra, 11(%sp)
 	addi	%sp, %sp, 12
-	jal	solve_each_element.2915
+	jal	solve_each_element.2910
 	addi	%sp, %sp, -12
 	lw	%ra, 11(%sp)
 	addi	%v0, %zero, 8
@@ -5842,40 +4855,40 @@ fbgt_cont.19777:
 	lw	%a0, 0(%sp)
 	sw	%ra, 11(%sp)
 	addi	%sp, %sp, 12
-	jal	solve_one_or_network.2919
+	jal	solve_one_or_network.2914
 	addi	%sp, %sp, -12
 	lw	%ra, 11(%sp)
-	j	bnei_cont.19793
-bnei_else.19792:
-bnei_cont.19793:
-	j	bnei_cont.19791
-bnei_else.19790:
-bnei_cont.19791:
-	j	bnei_cont.19789
-bnei_else.19788:
-bnei_cont.19789:
-	j	bnei_cont.19787
-bnei_else.19786:
-bnei_cont.19787:
-	j	bnei_cont.19785
-bnei_else.19784:
-bnei_cont.19785:
-	j	bnei_cont.19783
-bnei_else.19782:
-bnei_cont.19783:
-	j	bnei_cont.19781
-bnei_else.19780:
-bnei_cont.19781:
-	j	bnei_cont.19779
-bnei_else.19778:
-bnei_cont.19779:
-	j	bnei_cont.19775
-bnei_else.19774:
-bnei_cont.19775:
-	j	bnei_cont.19763
-bnei_else.19762:
+	j	bnei_cont.19157
+bnei_else.19156:
+bnei_cont.19157:
+	j	bnei_cont.19155
+bnei_else.19154:
+bnei_cont.19155:
+	j	bnei_cont.19153
+bnei_else.19152:
+bnei_cont.19153:
+	j	bnei_cont.19151
+bnei_else.19150:
+bnei_cont.19151:
+	j	bnei_cont.19149
+bnei_else.19148:
+bnei_cont.19149:
+	j	bnei_cont.19147
+bnei_else.19146:
+bnei_cont.19147:
+	j	bnei_cont.19145
+bnei_else.19144:
+bnei_cont.19145:
+	j	bnei_cont.19143
+bnei_else.19142:
+bnei_cont.19143:
+	j	bnei_cont.19139
+bnei_else.19138:
+bnei_cont.19139:
+	j	bnei_cont.19127
+bnei_else.19126:
 	lw	%a3, 1(%a1)
-	beqi	%a3, -1, bnei_else.19794
+	beqi	%a3, -1, bnei_else.19158
 	addi	%t0, %zero, 83
 	add	%at, %t0, %a3
 	lw	%a3, 0(%at)
@@ -5884,12 +4897,12 @@ bnei_else.19762:
 	addi	%v0, %a2, 0
 	sw	%ra, 11(%sp)
 	addi	%sp, %sp, 12
-	jal	solve_each_element.2915
+	jal	solve_each_element.2910
 	addi	%sp, %sp, -12
 	lw	%ra, 11(%sp)
 	lw	%v0, 4(%sp)
 	lw	%v1, 2(%v0)
-	beqi	%v1, -1, bnei_else.19796
+	beqi	%v1, -1, bnei_else.19160
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -5899,12 +4912,12 @@ bnei_else.19762:
 	addi	%a0, %a1, 0
 	sw	%ra, 11(%sp)
 	addi	%sp, %sp, 12
-	jal	solve_each_element.2915
+	jal	solve_each_element.2910
 	addi	%sp, %sp, -12
 	lw	%ra, 11(%sp)
 	lw	%v0, 4(%sp)
 	lw	%v1, 3(%v0)
-	beqi	%v1, -1, bnei_else.19798
+	beqi	%v1, -1, bnei_else.19162
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -5914,12 +4927,12 @@ bnei_else.19762:
 	addi	%a0, %a1, 0
 	sw	%ra, 11(%sp)
 	addi	%sp, %sp, 12
-	jal	solve_each_element.2915
+	jal	solve_each_element.2910
 	addi	%sp, %sp, -12
 	lw	%ra, 11(%sp)
 	lw	%v0, 4(%sp)
 	lw	%v1, 4(%v0)
-	beqi	%v1, -1, bnei_else.19800
+	beqi	%v1, -1, bnei_else.19164
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -5929,12 +4942,12 @@ bnei_else.19762:
 	addi	%a0, %a1, 0
 	sw	%ra, 11(%sp)
 	addi	%sp, %sp, 12
-	jal	solve_each_element.2915
+	jal	solve_each_element.2910
 	addi	%sp, %sp, -12
 	lw	%ra, 11(%sp)
 	lw	%v0, 4(%sp)
 	lw	%v1, 5(%v0)
-	beqi	%v1, -1, bnei_else.19802
+	beqi	%v1, -1, bnei_else.19166
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -5944,12 +4957,12 @@ bnei_else.19762:
 	addi	%a0, %a1, 0
 	sw	%ra, 11(%sp)
 	addi	%sp, %sp, 12
-	jal	solve_each_element.2915
+	jal	solve_each_element.2910
 	addi	%sp, %sp, -12
 	lw	%ra, 11(%sp)
 	lw	%v0, 4(%sp)
 	lw	%v1, 6(%v0)
-	beqi	%v1, -1, bnei_else.19804
+	beqi	%v1, -1, bnei_else.19168
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -5959,12 +4972,12 @@ bnei_else.19762:
 	addi	%a0, %a1, 0
 	sw	%ra, 11(%sp)
 	addi	%sp, %sp, 12
-	jal	solve_each_element.2915
+	jal	solve_each_element.2910
 	addi	%sp, %sp, -12
 	lw	%ra, 11(%sp)
 	lw	%v0, 4(%sp)
 	lw	%v1, 7(%v0)
-	beqi	%v1, -1, bnei_else.19806
+	beqi	%v1, -1, bnei_else.19170
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -5974,7 +4987,7 @@ bnei_else.19762:
 	addi	%a0, %a1, 0
 	sw	%ra, 11(%sp)
 	addi	%sp, %sp, 12
-	jal	solve_each_element.2915
+	jal	solve_each_element.2910
 	addi	%sp, %sp, -12
 	lw	%ra, 11(%sp)
 	addi	%v0, %zero, 8
@@ -5982,40 +4995,40 @@ bnei_else.19762:
 	lw	%a0, 0(%sp)
 	sw	%ra, 11(%sp)
 	addi	%sp, %sp, 12
-	jal	solve_one_or_network.2919
+	jal	solve_one_or_network.2914
 	addi	%sp, %sp, -12
 	lw	%ra, 11(%sp)
-	j	bnei_cont.19807
-bnei_else.19806:
-bnei_cont.19807:
-	j	bnei_cont.19805
-bnei_else.19804:
-bnei_cont.19805:
-	j	bnei_cont.19803
-bnei_else.19802:
-bnei_cont.19803:
-	j	bnei_cont.19801
-bnei_else.19800:
-bnei_cont.19801:
-	j	bnei_cont.19799
-bnei_else.19798:
-bnei_cont.19799:
-	j	bnei_cont.19797
-bnei_else.19796:
-bnei_cont.19797:
-	j	bnei_cont.19795
-bnei_else.19794:
-bnei_cont.19795:
-bnei_cont.19763:
+	j	bnei_cont.19171
+bnei_else.19170:
+bnei_cont.19171:
+	j	bnei_cont.19169
+bnei_else.19168:
+bnei_cont.19169:
+	j	bnei_cont.19167
+bnei_else.19166:
+bnei_cont.19167:
+	j	bnei_cont.19165
+bnei_else.19164:
+bnei_cont.19165:
+	j	bnei_cont.19163
+bnei_else.19162:
+bnei_cont.19163:
+	j	bnei_cont.19161
+bnei_else.19160:
+bnei_cont.19161:
+	j	bnei_cont.19159
+bnei_else.19158:
+bnei_cont.19159:
+bnei_cont.19127:
 	lw	%v0, 3(%sp)
 	addi	%v0, %v0, 1
 	lw	%v1, 2(%sp)
 	add	%at, %v1, %v0
 	lw	%a0, 0(%at)
 	lw	%a1, 0(%a0)
-	beqi	%a1, -1, bnei_else.19808
+	beqi	%a1, -1, bnei_else.19172
 	sw	%v0, 11(%sp)
-	beqi	%a1, 99, bnei_else.19809
+	beqi	%a1, 99, bnei_else.19173
 	addi	%a2, %zero, 159
 	lw	%a3, 0(%sp)
 	sw	%a0, 12(%sp)
@@ -6024,24 +5037,24 @@ bnei_cont.19763:
 	addi	%v0, %a1, 0
 	sw	%ra, 13(%sp)
 	addi	%sp, %sp, 14
-	jal	solver.2817
+	jal	solver.2812
 	addi	%sp, %sp, -14
 	lw	%ra, 13(%sp)
-	beqi	%v0, 0, bnei_else.19811
+	beqi	%v0, 0, bnei_else.19175
 	addi	%v0, %zero, 135
 	flw	%f0, 0(%v0)
 	addi	%v0, %zero, 137
 	flw	%f1, 0(%v0)
-	fblt	%f0, %f1, fbgt_else.19813
+	fblt	%f0, %f1, fbgt_else.19177
 	addi	%v0, %zero, 0
-	j	fbgt_cont.19814
-fbgt_else.19813:
+	j	fbgt_cont.19178
+fbgt_else.19177:
 	addi	%v0, %zero, 1
-fbgt_cont.19814:
-	beqi	%v0, 0, bnei_else.19815
+fbgt_cont.19178:
+	beqi	%v0, 0, bnei_else.19179
 	lw	%v0, 12(%sp)
 	lw	%v1, 1(%v0)
-	beqi	%v1, -1, bnei_else.19817
+	beqi	%v1, -1, bnei_else.19181
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -6051,12 +5064,12 @@ fbgt_cont.19814:
 	addi	%a0, %a1, 0
 	sw	%ra, 13(%sp)
 	addi	%sp, %sp, 14
-	jal	solve_each_element.2915
+	jal	solve_each_element.2910
 	addi	%sp, %sp, -14
 	lw	%ra, 13(%sp)
 	lw	%v0, 12(%sp)
 	lw	%v1, 2(%v0)
-	beqi	%v1, -1, bnei_else.19819
+	beqi	%v1, -1, bnei_else.19183
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -6066,12 +5079,12 @@ fbgt_cont.19814:
 	addi	%a0, %a1, 0
 	sw	%ra, 13(%sp)
 	addi	%sp, %sp, 14
-	jal	solve_each_element.2915
+	jal	solve_each_element.2910
 	addi	%sp, %sp, -14
 	lw	%ra, 13(%sp)
 	lw	%v0, 12(%sp)
 	lw	%v1, 3(%v0)
-	beqi	%v1, -1, bnei_else.19821
+	beqi	%v1, -1, bnei_else.19185
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -6081,12 +5094,12 @@ fbgt_cont.19814:
 	addi	%a0, %a1, 0
 	sw	%ra, 13(%sp)
 	addi	%sp, %sp, 14
-	jal	solve_each_element.2915
+	jal	solve_each_element.2910
 	addi	%sp, %sp, -14
 	lw	%ra, 13(%sp)
 	lw	%v0, 12(%sp)
 	lw	%v1, 4(%v0)
-	beqi	%v1, -1, bnei_else.19823
+	beqi	%v1, -1, bnei_else.19187
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -6096,12 +5109,12 @@ fbgt_cont.19814:
 	addi	%a0, %a1, 0
 	sw	%ra, 13(%sp)
 	addi	%sp, %sp, 14
-	jal	solve_each_element.2915
+	jal	solve_each_element.2910
 	addi	%sp, %sp, -14
 	lw	%ra, 13(%sp)
 	lw	%v0, 12(%sp)
 	lw	%v1, 5(%v0)
-	beqi	%v1, -1, bnei_else.19825
+	beqi	%v1, -1, bnei_else.19189
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -6111,12 +5124,12 @@ fbgt_cont.19814:
 	addi	%a0, %a1, 0
 	sw	%ra, 13(%sp)
 	addi	%sp, %sp, 14
-	jal	solve_each_element.2915
+	jal	solve_each_element.2910
 	addi	%sp, %sp, -14
 	lw	%ra, 13(%sp)
 	lw	%v0, 12(%sp)
 	lw	%v1, 6(%v0)
-	beqi	%v1, -1, bnei_else.19827
+	beqi	%v1, -1, bnei_else.19191
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -6126,7 +5139,7 @@ fbgt_cont.19814:
 	addi	%a0, %a1, 0
 	sw	%ra, 13(%sp)
 	addi	%sp, %sp, 14
-	jal	solve_each_element.2915
+	jal	solve_each_element.2910
 	addi	%sp, %sp, -14
 	lw	%ra, 13(%sp)
 	addi	%v0, %zero, 7
@@ -6134,37 +5147,37 @@ fbgt_cont.19814:
 	lw	%a0, 0(%sp)
 	sw	%ra, 13(%sp)
 	addi	%sp, %sp, 14
-	jal	solve_one_or_network.2919
+	jal	solve_one_or_network.2914
 	addi	%sp, %sp, -14
 	lw	%ra, 13(%sp)
-	j	bnei_cont.19828
-bnei_else.19827:
-bnei_cont.19828:
-	j	bnei_cont.19826
-bnei_else.19825:
-bnei_cont.19826:
-	j	bnei_cont.19824
-bnei_else.19823:
-bnei_cont.19824:
-	j	bnei_cont.19822
-bnei_else.19821:
-bnei_cont.19822:
-	j	bnei_cont.19820
-bnei_else.19819:
-bnei_cont.19820:
-	j	bnei_cont.19818
-bnei_else.19817:
-bnei_cont.19818:
-	j	bnei_cont.19816
-bnei_else.19815:
-bnei_cont.19816:
-	j	bnei_cont.19812
-bnei_else.19811:
-bnei_cont.19812:
-	j	bnei_cont.19810
-bnei_else.19809:
+	j	bnei_cont.19192
+bnei_else.19191:
+bnei_cont.19192:
+	j	bnei_cont.19190
+bnei_else.19189:
+bnei_cont.19190:
+	j	bnei_cont.19188
+bnei_else.19187:
+bnei_cont.19188:
+	j	bnei_cont.19186
+bnei_else.19185:
+bnei_cont.19186:
+	j	bnei_cont.19184
+bnei_else.19183:
+bnei_cont.19184:
+	j	bnei_cont.19182
+bnei_else.19181:
+bnei_cont.19182:
+	j	bnei_cont.19180
+bnei_else.19179:
+bnei_cont.19180:
+	j	bnei_cont.19176
+bnei_else.19175:
+bnei_cont.19176:
+	j	bnei_cont.19174
+bnei_else.19173:
 	lw	%a1, 1(%a0)
-	beqi	%a1, -1, bnei_else.19829
+	beqi	%a1, -1, bnei_else.19193
 	addi	%a2, %zero, 83
 	add	%at, %a2, %a1
 	lw	%a1, 0(%at)
@@ -6176,12 +5189,12 @@ bnei_else.19809:
 	addi	%v0, %a2, 0
 	sw	%ra, 13(%sp)
 	addi	%sp, %sp, 14
-	jal	solve_each_element.2915
+	jal	solve_each_element.2910
 	addi	%sp, %sp, -14
 	lw	%ra, 13(%sp)
 	lw	%v0, 12(%sp)
 	lw	%v1, 2(%v0)
-	beqi	%v1, -1, bnei_else.19831
+	beqi	%v1, -1, bnei_else.19195
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -6191,12 +5204,12 @@ bnei_else.19809:
 	addi	%a0, %a1, 0
 	sw	%ra, 13(%sp)
 	addi	%sp, %sp, 14
-	jal	solve_each_element.2915
+	jal	solve_each_element.2910
 	addi	%sp, %sp, -14
 	lw	%ra, 13(%sp)
 	lw	%v0, 12(%sp)
 	lw	%v1, 3(%v0)
-	beqi	%v1, -1, bnei_else.19833
+	beqi	%v1, -1, bnei_else.19197
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -6206,12 +5219,12 @@ bnei_else.19809:
 	addi	%a0, %a1, 0
 	sw	%ra, 13(%sp)
 	addi	%sp, %sp, 14
-	jal	solve_each_element.2915
+	jal	solve_each_element.2910
 	addi	%sp, %sp, -14
 	lw	%ra, 13(%sp)
 	lw	%v0, 12(%sp)
 	lw	%v1, 4(%v0)
-	beqi	%v1, -1, bnei_else.19835
+	beqi	%v1, -1, bnei_else.19199
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -6221,12 +5234,12 @@ bnei_else.19809:
 	addi	%a0, %a1, 0
 	sw	%ra, 13(%sp)
 	addi	%sp, %sp, 14
-	jal	solve_each_element.2915
+	jal	solve_each_element.2910
 	addi	%sp, %sp, -14
 	lw	%ra, 13(%sp)
 	lw	%v0, 12(%sp)
 	lw	%v1, 5(%v0)
-	beqi	%v1, -1, bnei_else.19837
+	beqi	%v1, -1, bnei_else.19201
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -6236,12 +5249,12 @@ bnei_else.19809:
 	addi	%a0, %a1, 0
 	sw	%ra, 13(%sp)
 	addi	%sp, %sp, 14
-	jal	solve_each_element.2915
+	jal	solve_each_element.2910
 	addi	%sp, %sp, -14
 	lw	%ra, 13(%sp)
 	lw	%v0, 12(%sp)
 	lw	%v1, 6(%v0)
-	beqi	%v1, -1, bnei_else.19839
+	beqi	%v1, -1, bnei_else.19203
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -6251,7 +5264,7 @@ bnei_else.19809:
 	addi	%a0, %a1, 0
 	sw	%ra, 13(%sp)
 	addi	%sp, %sp, 14
-	jal	solve_each_element.2915
+	jal	solve_each_element.2910
 	addi	%sp, %sp, -14
 	lw	%ra, 13(%sp)
 	addi	%v0, %zero, 7
@@ -6259,42 +5272,42 @@ bnei_else.19809:
 	lw	%a0, 0(%sp)
 	sw	%ra, 13(%sp)
 	addi	%sp, %sp, 14
-	jal	solve_one_or_network.2919
+	jal	solve_one_or_network.2914
 	addi	%sp, %sp, -14
 	lw	%ra, 13(%sp)
-	j	bnei_cont.19840
-bnei_else.19839:
-bnei_cont.19840:
-	j	bnei_cont.19838
-bnei_else.19837:
-bnei_cont.19838:
-	j	bnei_cont.19836
-bnei_else.19835:
-bnei_cont.19836:
-	j	bnei_cont.19834
-bnei_else.19833:
-bnei_cont.19834:
-	j	bnei_cont.19832
-bnei_else.19831:
-bnei_cont.19832:
-	j	bnei_cont.19830
-bnei_else.19829:
-bnei_cont.19830:
-bnei_cont.19810:
+	j	bnei_cont.19204
+bnei_else.19203:
+bnei_cont.19204:
+	j	bnei_cont.19202
+bnei_else.19201:
+bnei_cont.19202:
+	j	bnei_cont.19200
+bnei_else.19199:
+bnei_cont.19200:
+	j	bnei_cont.19198
+bnei_else.19197:
+bnei_cont.19198:
+	j	bnei_cont.19196
+bnei_else.19195:
+bnei_cont.19196:
+	j	bnei_cont.19194
+bnei_else.19193:
+bnei_cont.19194:
+bnei_cont.19174:
 	lw	%v0, 11(%sp)
 	addi	%v0, %v0, 1
 	lw	%v1, 2(%sp)
 	lw	%a0, 0(%sp)
-	j	trace_or_matrix.2923
-bnei_else.19808:
+	j	trace_or_matrix.2918
+bnei_else.19172:
 	jr	%ra
-bnei_else.19761:
+bnei_else.19125:
 	jr	%ra
-solve_each_element_fast.2929:
+solve_each_element_fast.2924:
 	lw	%a1, 0(%a0)
 	add	%at, %v1, %v0
 	lw	%a2, 0(%at)
-	beqi	%a2, -1, bnei_else.19843
+	beqi	%a2, -1, bnei_else.19207
 	addi	%a3, %zero, 12
 	add	%at, %a3, %a2
 	lw	%a3, 0(%at)
@@ -6314,69 +5327,69 @@ solve_each_element_fast.2929:
 	sw	%v1, 4(%sp)
 	sw	%v0, 5(%sp)
 	sw	%a3, 6(%sp)
-	beqi	%t3, 1, bnei_else.19844
-	beqi	%t3, 2, bnei_else.19846
+	beqi	%t3, 1, bnei_else.19208
+	beqi	%t3, 2, bnei_else.19210
 	addi	%a0, %t0, 0
 	addi	%v1, %t2, 0
 	addi	%v0, %a3, 0
 	sw	%ra, 7(%sp)
 	addi	%sp, %sp, 8
-	jal	solver_second_fast2.2851
+	jal	solver_second_fast2.2846
 	addi	%sp, %sp, -8
 	lw	%ra, 7(%sp)
-	j	bnei_cont.19847
-bnei_else.19846:
+	j	bnei_cont.19211
+bnei_else.19210:
 	flw	%f0, 0(%t2)
-	flw	%f1, 464(%zero)
-	fblt	%f0, %f1, fbgt_else.19848
+	flw	%f1, 465(%zero)
+	fblt	%f0, %f1, fbgt_else.19212
 	addi	%t2, %zero, 0
-	j	fbgt_cont.19849
-fbgt_else.19848:
+	j	fbgt_cont.19213
+fbgt_else.19212:
 	addi	%t2, %zero, 1
-fbgt_cont.19849:
-	beqi	%t2, 0, bnei_else.19850
+fbgt_cont.19213:
+	beqi	%t2, 0, bnei_else.19214
 	flw	%f1, 3(%t0)
 	fmul	%f0, %f0, %f1
 	addi	%t0, %zero, 135
 	fsw	%f0, 0(%t0)
 	addi	%v0, %zero, 1
-	j	bnei_cont.19851
-bnei_else.19850:
+	j	bnei_cont.19215
+bnei_else.19214:
 	addi	%v0, %zero, 0
-bnei_cont.19851:
-bnei_cont.19847:
-	j	bnei_cont.19845
-bnei_else.19844:
+bnei_cont.19215:
+bnei_cont.19211:
+	j	bnei_cont.19209
+bnei_else.19208:
 	lw	%t0, 0(%a0)
 	addi	%a0, %t2, 0
 	addi	%v1, %t0, 0
 	addi	%v0, %a3, 0
 	sw	%ra, 7(%sp)
 	addi	%sp, %sp, 8
-	jal	solver_rect_fast.2821
+	jal	solver_rect_fast.2816
 	addi	%sp, %sp, -8
 	lw	%ra, 7(%sp)
-bnei_cont.19845:
-	beqi	%v0, 0, bnei_else.19852
+bnei_cont.19209:
+	beqi	%v0, 0, bnei_else.19216
 	addi	%v1, %zero, 135
 	flw	%f0, 0(%v1)
-	flw	%f1, 464(%zero)
-	fblt	%f1, %f0, fbgt_else.19853
+	flw	%f1, 465(%zero)
+	fblt	%f1, %f0, fbgt_else.19217
 	addi	%v1, %zero, 0
-	j	fbgt_cont.19854
-fbgt_else.19853:
+	j	fbgt_cont.19218
+fbgt_else.19217:
 	addi	%v1, %zero, 1
-fbgt_cont.19854:
-	beqi	%v1, 0, bnei_else.19855
+fbgt_cont.19218:
+	beqi	%v1, 0, bnei_else.19219
 	addi	%v1, %zero, 137
 	flw	%f1, 0(%v1)
-	fblt	%f0, %f1, fbgt_else.19857
+	fblt	%f0, %f1, fbgt_else.19221
 	addi	%v1, %zero, 0
-	j	fbgt_cont.19858
-fbgt_else.19857:
+	j	fbgt_cont.19222
+fbgt_else.19221:
 	addi	%v1, %zero, 1
-fbgt_cont.19858:
-	beqi	%v1, 0, bnei_else.19859
+fbgt_cont.19222:
+	beqi	%v1, 0, bnei_else.19223
 	flw	%f1, 458(%zero)
 	fadd	%f0, %f0, %f1
 	lw	%v1, 2(%sp)
@@ -6402,7 +5415,7 @@ fbgt_cont.19858:
 	fsw	%f2, 9(%sp)
 	fsw	%f1, 10(%sp)
 	fsw	%f0, 11(%sp)
-	beqi	%a0, -1, bnei_else.19861
+	beqi	%a0, -1, bnei_else.19225
 	addi	%a1, %zero, 12
 	add	%at, %a1, %a0
 	lw	%a0, 0(%at)
@@ -6412,13 +5425,13 @@ fbgt_cont.19858:
 	fmov	%f2, %f3
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 13
-	jal	is_outside.2895
+	jal	is_outside.2890
 	addi	%sp, %sp, -13
 	lw	%ra, 12(%sp)
-	beqi	%v0, 0, bnei_else.19863
+	beqi	%v0, 0, bnei_else.19227
 	addi	%v0, %zero, 0
-	j	bnei_cont.19864
-bnei_else.19863:
+	j	bnei_cont.19228
+bnei_else.19227:
 	flw	%f0, 10(%sp)
 	flw	%f1, 9(%sp)
 	flw	%f2, 8(%sp)
@@ -6426,15 +5439,15 @@ bnei_else.19863:
 	lw	%v1, 4(%sp)
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 13
-	jal	check_all_inside.2900
+	jal	check_all_inside.2895
 	addi	%sp, %sp, -13
 	lw	%ra, 12(%sp)
-bnei_cont.19864:
-	j	bnei_cont.19862
-bnei_else.19861:
+bnei_cont.19228:
+	j	bnei_cont.19226
+bnei_else.19225:
 	addi	%v0, %zero, 1
-bnei_cont.19862:
-	beqi	%v0, 0, bnei_else.19865
+bnei_cont.19226:
+	beqi	%v0, 0, bnei_else.19229
 	addi	%v0, %zero, 137
 	flw	%f0, 11(%sp)
 	fsw	%f0, 0(%v0)
@@ -6453,37 +5466,37 @@ bnei_cont.19862:
 	addi	%v0, %zero, 136
 	lw	%v1, 7(%sp)
 	sw	%v1, 0(%v0)
-	j	bnei_cont.19866
-bnei_else.19865:
-bnei_cont.19866:
-	j	bnei_cont.19860
-bnei_else.19859:
-bnei_cont.19860:
-	j	bnei_cont.19856
-bnei_else.19855:
-bnei_cont.19856:
+	j	bnei_cont.19230
+bnei_else.19229:
+bnei_cont.19230:
+	j	bnei_cont.19224
+bnei_else.19223:
+bnei_cont.19224:
+	j	bnei_cont.19220
+bnei_else.19219:
+bnei_cont.19220:
 	lw	%v0, 5(%sp)
 	addi	%v0, %v0, 1
 	lw	%v1, 4(%sp)
 	lw	%a0, 3(%sp)
-	j	solve_each_element_fast.2929
-bnei_else.19852:
+	j	solve_each_element_fast.2924
+bnei_else.19216:
 	lw	%v0, 6(%sp)
 	lw	%v0, 6(%v0)
-	beqi	%v0, 0, bnei_else.19867
+	beqi	%v0, 0, bnei_else.19231
 	lw	%v0, 5(%sp)
 	addi	%v0, %v0, 1
 	lw	%v1, 4(%sp)
 	lw	%a0, 3(%sp)
-	j	solve_each_element_fast.2929
-bnei_else.19867:
+	j	solve_each_element_fast.2924
+bnei_else.19231:
 	jr	%ra
-bnei_else.19843:
+bnei_else.19207:
 	jr	%ra
-solve_one_or_network_fast.2933:
+solve_one_or_network_fast.2928:
 	add	%at, %v1, %v0
 	lw	%a1, 0(%at)
-	beqi	%a1, -1, bnei_else.19870
+	beqi	%a1, -1, bnei_else.19234
 	addi	%a2, %zero, 83
 	add	%at, %a2, %a1
 	lw	%a1, 0(%at)
@@ -6496,7 +5509,7 @@ solve_one_or_network_fast.2933:
 	addi	%v0, %a2, 0
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
 	lw	%v0, 3(%sp)
@@ -6504,7 +5517,7 @@ solve_one_or_network_fast.2933:
 	lw	%v1, 2(%sp)
 	add	%at, %v1, %v0
 	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.19871
+	beqi	%a0, -1, bnei_else.19235
 	addi	%a1, %zero, 83
 	add	%at, %a1, %a0
 	lw	%a0, 0(%at)
@@ -6516,7 +5529,7 @@ solve_one_or_network_fast.2933:
 	addi	%a0, %a2, 0
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
 	lw	%v0, 4(%sp)
@@ -6524,7 +5537,7 @@ solve_one_or_network_fast.2933:
 	lw	%v1, 2(%sp)
 	add	%at, %v1, %v0
 	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.19872
+	beqi	%a0, -1, bnei_else.19236
 	addi	%a1, %zero, 83
 	add	%at, %a1, %a0
 	lw	%a0, 0(%at)
@@ -6536,7 +5549,7 @@ solve_one_or_network_fast.2933:
 	addi	%a0, %a2, 0
 	sw	%ra, 6(%sp)
 	addi	%sp, %sp, 7
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -7
 	lw	%ra, 6(%sp)
 	lw	%v0, 5(%sp)
@@ -6544,7 +5557,7 @@ solve_one_or_network_fast.2933:
 	lw	%v1, 2(%sp)
 	add	%at, %v1, %v0
 	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.19873
+	beqi	%a0, -1, bnei_else.19237
 	addi	%a1, %zero, 83
 	add	%at, %a1, %a0
 	lw	%a0, 0(%at)
@@ -6556,7 +5569,7 @@ solve_one_or_network_fast.2933:
 	addi	%a0, %a2, 0
 	sw	%ra, 7(%sp)
 	addi	%sp, %sp, 8
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -8
 	lw	%ra, 7(%sp)
 	lw	%v0, 6(%sp)
@@ -6564,7 +5577,7 @@ solve_one_or_network_fast.2933:
 	lw	%v1, 2(%sp)
 	add	%at, %v1, %v0
 	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.19874
+	beqi	%a0, -1, bnei_else.19238
 	addi	%a1, %zero, 83
 	add	%at, %a1, %a0
 	lw	%a0, 0(%at)
@@ -6576,7 +5589,7 @@ solve_one_or_network_fast.2933:
 	addi	%a0, %a2, 0
 	sw	%ra, 8(%sp)
 	addi	%sp, %sp, 9
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -9
 	lw	%ra, 8(%sp)
 	lw	%v0, 7(%sp)
@@ -6584,7 +5597,7 @@ solve_one_or_network_fast.2933:
 	lw	%v1, 2(%sp)
 	add	%at, %v1, %v0
 	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.19875
+	beqi	%a0, -1, bnei_else.19239
 	addi	%a1, %zero, 83
 	add	%at, %a1, %a0
 	lw	%a0, 0(%at)
@@ -6596,7 +5609,7 @@ solve_one_or_network_fast.2933:
 	addi	%a0, %a2, 0
 	sw	%ra, 9(%sp)
 	addi	%sp, %sp, 10
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -10
 	lw	%ra, 9(%sp)
 	lw	%v0, 8(%sp)
@@ -6604,7 +5617,7 @@ solve_one_or_network_fast.2933:
 	lw	%v1, 2(%sp)
 	add	%at, %v1, %v0
 	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.19876
+	beqi	%a0, -1, bnei_else.19240
 	addi	%a1, %zero, 83
 	add	%at, %a1, %a0
 	lw	%a0, 0(%at)
@@ -6616,7 +5629,7 @@ solve_one_or_network_fast.2933:
 	addi	%a0, %a2, 0
 	sw	%ra, 10(%sp)
 	addi	%sp, %sp, 11
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
 	lw	%v0, 9(%sp)
@@ -6624,7 +5637,7 @@ solve_one_or_network_fast.2933:
 	lw	%v1, 2(%sp)
 	add	%at, %v1, %v0
 	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.19877
+	beqi	%a0, -1, bnei_else.19241
 	addi	%a1, %zero, 83
 	add	%at, %a1, %a0
 	lw	%a0, 0(%at)
@@ -6636,41 +5649,41 @@ solve_one_or_network_fast.2933:
 	addi	%a0, %a2, 0
 	sw	%ra, 11(%sp)
 	addi	%sp, %sp, 12
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -12
 	lw	%ra, 11(%sp)
 	lw	%v0, 10(%sp)
 	addi	%v0, %v0, 1
 	lw	%v1, 2(%sp)
 	lw	%a0, 0(%sp)
-	j	solve_one_or_network_fast.2933
-bnei_else.19877:
+	j	solve_one_or_network_fast.2928
+bnei_else.19241:
 	jr	%ra
-bnei_else.19876:
+bnei_else.19240:
 	jr	%ra
-bnei_else.19875:
+bnei_else.19239:
 	jr	%ra
-bnei_else.19874:
+bnei_else.19238:
 	jr	%ra
-bnei_else.19873:
+bnei_else.19237:
 	jr	%ra
-bnei_else.19872:
+bnei_else.19236:
 	jr	%ra
-bnei_else.19871:
+bnei_else.19235:
 	jr	%ra
-bnei_else.19870:
+bnei_else.19234:
 	jr	%ra
-trace_or_matrix_fast.2937:
+trace_or_matrix_fast.2932:
 	add	%at, %v1, %v0
 	lw	%a1, 0(%at)
 	addi	%a2, %zero, 0
 	lw	%a3, 0(%a1)
-	beqi	%a3, -1, bnei_else.19886
+	beqi	%a3, -1, bnei_else.19250
 	sw	%a0, 0(%sp)
 	sw	%a2, 1(%sp)
 	sw	%v1, 2(%sp)
 	sw	%v0, 3(%sp)
-	beqi	%a3, 99, bnei_else.19887
+	beqi	%a3, 99, bnei_else.19251
 	addi	%t0, %zero, 12
 	add	%at, %t0, %a3
 	lw	%t0, 0(%at)
@@ -6683,64 +5696,64 @@ trace_or_matrix_fast.2937:
 	lw	%a3, 0(%at)
 	lw	%t2, 1(%t0)
 	sw	%a1, 4(%sp)
-	beqi	%t2, 1, bnei_else.19889
-	beqi	%t2, 2, bnei_else.19891
+	beqi	%t2, 1, bnei_else.19253
+	beqi	%t2, 2, bnei_else.19255
 	addi	%a0, %t1, 0
 	addi	%v1, %a3, 0
 	addi	%v0, %t0, 0
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	solver_second_fast2.2851
+	jal	solver_second_fast2.2846
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
-	j	bnei_cont.19892
-bnei_else.19891:
+	j	bnei_cont.19256
+bnei_else.19255:
 	flw	%f0, 0(%a3)
-	flw	%f1, 464(%zero)
-	fblt	%f0, %f1, fbgt_else.19893
+	flw	%f1, 465(%zero)
+	fblt	%f0, %f1, fbgt_else.19257
 	addi	%a3, %zero, 0
-	j	fbgt_cont.19894
-fbgt_else.19893:
+	j	fbgt_cont.19258
+fbgt_else.19257:
 	addi	%a3, %zero, 1
-fbgt_cont.19894:
-	beqi	%a3, 0, bnei_else.19895
+fbgt_cont.19258:
+	beqi	%a3, 0, bnei_else.19259
 	flw	%f1, 3(%t1)
 	fmul	%f0, %f0, %f1
 	addi	%a3, %zero, 135
 	fsw	%f0, 0(%a3)
 	addi	%v0, %zero, 1
-	j	bnei_cont.19896
-bnei_else.19895:
+	j	bnei_cont.19260
+bnei_else.19259:
 	addi	%v0, %zero, 0
-bnei_cont.19896:
-bnei_cont.19892:
-	j	bnei_cont.19890
-bnei_else.19889:
+bnei_cont.19260:
+bnei_cont.19256:
+	j	bnei_cont.19254
+bnei_else.19253:
 	lw	%t1, 0(%a0)
 	addi	%a0, %a3, 0
 	addi	%v1, %t1, 0
 	addi	%v0, %t0, 0
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	solver_rect_fast.2821
+	jal	solver_rect_fast.2816
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
-bnei_cont.19890:
-	beqi	%v0, 0, bnei_else.19897
+bnei_cont.19254:
+	beqi	%v0, 0, bnei_else.19261
 	addi	%v0, %zero, 135
 	flw	%f0, 0(%v0)
 	addi	%v0, %zero, 137
 	flw	%f1, 0(%v0)
-	fblt	%f0, %f1, fbgt_else.19899
+	fblt	%f0, %f1, fbgt_else.19263
 	addi	%v0, %zero, 0
-	j	fbgt_cont.19900
-fbgt_else.19899:
+	j	fbgt_cont.19264
+fbgt_else.19263:
 	addi	%v0, %zero, 1
-fbgt_cont.19900:
-	beqi	%v0, 0, bnei_else.19901
+fbgt_cont.19264:
+	beqi	%v0, 0, bnei_else.19265
 	lw	%v0, 4(%sp)
 	lw	%v1, 1(%v0)
-	beqi	%v1, -1, bnei_else.19903
+	beqi	%v1, -1, bnei_else.19267
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -6750,12 +5763,12 @@ fbgt_cont.19900:
 	addi	%a0, %a1, 0
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
 	lw	%v0, 4(%sp)
 	lw	%v1, 2(%v0)
-	beqi	%v1, -1, bnei_else.19905
+	beqi	%v1, -1, bnei_else.19269
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -6765,12 +5778,12 @@ fbgt_cont.19900:
 	addi	%a0, %a1, 0
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
 	lw	%v0, 4(%sp)
 	lw	%v1, 3(%v0)
-	beqi	%v1, -1, bnei_else.19907
+	beqi	%v1, -1, bnei_else.19271
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -6780,12 +5793,12 @@ fbgt_cont.19900:
 	addi	%a0, %a1, 0
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
 	lw	%v0, 4(%sp)
 	lw	%v1, 4(%v0)
-	beqi	%v1, -1, bnei_else.19909
+	beqi	%v1, -1, bnei_else.19273
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -6795,12 +5808,12 @@ fbgt_cont.19900:
 	addi	%a0, %a1, 0
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
 	lw	%v0, 4(%sp)
 	lw	%v1, 5(%v0)
-	beqi	%v1, -1, bnei_else.19911
+	beqi	%v1, -1, bnei_else.19275
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -6810,12 +5823,12 @@ fbgt_cont.19900:
 	addi	%a0, %a1, 0
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
 	lw	%v0, 4(%sp)
 	lw	%v1, 6(%v0)
-	beqi	%v1, -1, bnei_else.19913
+	beqi	%v1, -1, bnei_else.19277
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -6825,12 +5838,12 @@ fbgt_cont.19900:
 	addi	%a0, %a1, 0
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
 	lw	%v0, 4(%sp)
 	lw	%v1, 7(%v0)
-	beqi	%v1, -1, bnei_else.19915
+	beqi	%v1, -1, bnei_else.19279
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -6840,7 +5853,7 @@ fbgt_cont.19900:
 	addi	%a0, %a1, 0
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
 	addi	%v0, %zero, 8
@@ -6848,40 +5861,40 @@ fbgt_cont.19900:
 	lw	%a0, 0(%sp)
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	solve_one_or_network_fast.2933
+	jal	solve_one_or_network_fast.2928
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
-	j	bnei_cont.19916
-bnei_else.19915:
-bnei_cont.19916:
-	j	bnei_cont.19914
-bnei_else.19913:
-bnei_cont.19914:
-	j	bnei_cont.19912
-bnei_else.19911:
-bnei_cont.19912:
-	j	bnei_cont.19910
-bnei_else.19909:
-bnei_cont.19910:
-	j	bnei_cont.19908
-bnei_else.19907:
-bnei_cont.19908:
-	j	bnei_cont.19906
-bnei_else.19905:
-bnei_cont.19906:
-	j	bnei_cont.19904
-bnei_else.19903:
-bnei_cont.19904:
-	j	bnei_cont.19902
-bnei_else.19901:
-bnei_cont.19902:
-	j	bnei_cont.19898
-bnei_else.19897:
-bnei_cont.19898:
-	j	bnei_cont.19888
-bnei_else.19887:
+	j	bnei_cont.19280
+bnei_else.19279:
+bnei_cont.19280:
+	j	bnei_cont.19278
+bnei_else.19277:
+bnei_cont.19278:
+	j	bnei_cont.19276
+bnei_else.19275:
+bnei_cont.19276:
+	j	bnei_cont.19274
+bnei_else.19273:
+bnei_cont.19274:
+	j	bnei_cont.19272
+bnei_else.19271:
+bnei_cont.19272:
+	j	bnei_cont.19270
+bnei_else.19269:
+bnei_cont.19270:
+	j	bnei_cont.19268
+bnei_else.19267:
+bnei_cont.19268:
+	j	bnei_cont.19266
+bnei_else.19265:
+bnei_cont.19266:
+	j	bnei_cont.19262
+bnei_else.19261:
+bnei_cont.19262:
+	j	bnei_cont.19252
+bnei_else.19251:
 	lw	%a3, 1(%a1)
-	beqi	%a3, -1, bnei_else.19917
+	beqi	%a3, -1, bnei_else.19281
 	addi	%t0, %zero, 83
 	add	%at, %t0, %a3
 	lw	%a3, 0(%at)
@@ -6890,12 +5903,12 @@ bnei_else.19887:
 	addi	%v0, %a2, 0
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
 	lw	%v0, 4(%sp)
 	lw	%v1, 2(%v0)
-	beqi	%v1, -1, bnei_else.19919
+	beqi	%v1, -1, bnei_else.19283
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -6905,12 +5918,12 @@ bnei_else.19887:
 	addi	%a0, %a1, 0
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
 	lw	%v0, 4(%sp)
 	lw	%v1, 3(%v0)
-	beqi	%v1, -1, bnei_else.19921
+	beqi	%v1, -1, bnei_else.19285
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -6920,12 +5933,12 @@ bnei_else.19887:
 	addi	%a0, %a1, 0
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
 	lw	%v0, 4(%sp)
 	lw	%v1, 4(%v0)
-	beqi	%v1, -1, bnei_else.19923
+	beqi	%v1, -1, bnei_else.19287
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -6935,12 +5948,12 @@ bnei_else.19887:
 	addi	%a0, %a1, 0
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
 	lw	%v0, 4(%sp)
 	lw	%v1, 5(%v0)
-	beqi	%v1, -1, bnei_else.19925
+	beqi	%v1, -1, bnei_else.19289
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -6950,12 +5963,12 @@ bnei_else.19887:
 	addi	%a0, %a1, 0
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
 	lw	%v0, 4(%sp)
 	lw	%v1, 6(%v0)
-	beqi	%v1, -1, bnei_else.19927
+	beqi	%v1, -1, bnei_else.19291
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -6965,12 +5978,12 @@ bnei_else.19887:
 	addi	%a0, %a1, 0
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
 	lw	%v0, 4(%sp)
 	lw	%v1, 7(%v0)
-	beqi	%v1, -1, bnei_else.19929
+	beqi	%v1, -1, bnei_else.19293
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -6980,7 +5993,7 @@ bnei_else.19887:
 	addi	%a0, %a1, 0
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
 	addi	%v0, %zero, 8
@@ -6988,40 +6001,40 @@ bnei_else.19887:
 	lw	%a0, 0(%sp)
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	solve_one_or_network_fast.2933
+	jal	solve_one_or_network_fast.2928
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
-	j	bnei_cont.19930
-bnei_else.19929:
-bnei_cont.19930:
-	j	bnei_cont.19928
-bnei_else.19927:
-bnei_cont.19928:
-	j	bnei_cont.19926
-bnei_else.19925:
-bnei_cont.19926:
-	j	bnei_cont.19924
-bnei_else.19923:
-bnei_cont.19924:
-	j	bnei_cont.19922
-bnei_else.19921:
-bnei_cont.19922:
-	j	bnei_cont.19920
-bnei_else.19919:
-bnei_cont.19920:
-	j	bnei_cont.19918
-bnei_else.19917:
-bnei_cont.19918:
-bnei_cont.19888:
+	j	bnei_cont.19294
+bnei_else.19293:
+bnei_cont.19294:
+	j	bnei_cont.19292
+bnei_else.19291:
+bnei_cont.19292:
+	j	bnei_cont.19290
+bnei_else.19289:
+bnei_cont.19290:
+	j	bnei_cont.19288
+bnei_else.19287:
+bnei_cont.19288:
+	j	bnei_cont.19286
+bnei_else.19285:
+bnei_cont.19286:
+	j	bnei_cont.19284
+bnei_else.19283:
+bnei_cont.19284:
+	j	bnei_cont.19282
+bnei_else.19281:
+bnei_cont.19282:
+bnei_cont.19252:
 	lw	%v0, 3(%sp)
 	addi	%v0, %v0, 1
 	lw	%v1, 2(%sp)
 	add	%at, %v1, %v0
 	lw	%a0, 0(%at)
 	lw	%a1, 0(%a0)
-	beqi	%a1, -1, bnei_else.19931
+	beqi	%a1, -1, bnei_else.19295
 	sw	%v0, 5(%sp)
-	beqi	%a1, 99, bnei_else.19932
+	beqi	%a1, 99, bnei_else.19296
 	addi	%a2, %zero, 12
 	add	%at, %a2, %a1
 	lw	%a2, 0(%at)
@@ -7035,64 +6048,64 @@ bnei_cont.19888:
 	lw	%a1, 0(%at)
 	lw	%t1, 1(%a2)
 	sw	%a0, 6(%sp)
-	beqi	%t1, 1, bnei_else.19934
-	beqi	%t1, 2, bnei_else.19936
+	beqi	%t1, 1, bnei_else.19298
+	beqi	%t1, 2, bnei_else.19300
 	addi	%a0, %a3, 0
 	addi	%v1, %a1, 0
 	addi	%v0, %a2, 0
 	sw	%ra, 7(%sp)
 	addi	%sp, %sp, 8
-	jal	solver_second_fast2.2851
+	jal	solver_second_fast2.2846
 	addi	%sp, %sp, -8
 	lw	%ra, 7(%sp)
-	j	bnei_cont.19937
-bnei_else.19936:
+	j	bnei_cont.19301
+bnei_else.19300:
 	flw	%f0, 0(%a1)
-	flw	%f1, 464(%zero)
-	fblt	%f0, %f1, fbgt_else.19938
+	flw	%f1, 465(%zero)
+	fblt	%f0, %f1, fbgt_else.19302
 	addi	%a1, %zero, 0
-	j	fbgt_cont.19939
-fbgt_else.19938:
+	j	fbgt_cont.19303
+fbgt_else.19302:
 	addi	%a1, %zero, 1
-fbgt_cont.19939:
-	beqi	%a1, 0, bnei_else.19940
+fbgt_cont.19303:
+	beqi	%a1, 0, bnei_else.19304
 	flw	%f1, 3(%a3)
 	fmul	%f0, %f0, %f1
 	addi	%a1, %zero, 135
 	fsw	%f0, 0(%a1)
 	addi	%v0, %zero, 1
-	j	bnei_cont.19941
-bnei_else.19940:
+	j	bnei_cont.19305
+bnei_else.19304:
 	addi	%v0, %zero, 0
-bnei_cont.19941:
-bnei_cont.19937:
-	j	bnei_cont.19935
-bnei_else.19934:
+bnei_cont.19305:
+bnei_cont.19301:
+	j	bnei_cont.19299
+bnei_else.19298:
 	lw	%a3, 0(%t0)
 	addi	%a0, %a1, 0
 	addi	%v1, %a3, 0
 	addi	%v0, %a2, 0
 	sw	%ra, 7(%sp)
 	addi	%sp, %sp, 8
-	jal	solver_rect_fast.2821
+	jal	solver_rect_fast.2816
 	addi	%sp, %sp, -8
 	lw	%ra, 7(%sp)
-bnei_cont.19935:
-	beqi	%v0, 0, bnei_else.19942
+bnei_cont.19299:
+	beqi	%v0, 0, bnei_else.19306
 	addi	%v0, %zero, 135
 	flw	%f0, 0(%v0)
 	addi	%v0, %zero, 137
 	flw	%f1, 0(%v0)
-	fblt	%f0, %f1, fbgt_else.19944
+	fblt	%f0, %f1, fbgt_else.19308
 	addi	%v0, %zero, 0
-	j	fbgt_cont.19945
-fbgt_else.19944:
+	j	fbgt_cont.19309
+fbgt_else.19308:
 	addi	%v0, %zero, 1
-fbgt_cont.19945:
-	beqi	%v0, 0, bnei_else.19946
+fbgt_cont.19309:
+	beqi	%v0, 0, bnei_else.19310
 	lw	%v0, 6(%sp)
 	lw	%v1, 1(%v0)
-	beqi	%v1, -1, bnei_else.19948
+	beqi	%v1, -1, bnei_else.19312
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -7102,12 +6115,12 @@ fbgt_cont.19945:
 	addi	%a0, %a1, 0
 	sw	%ra, 7(%sp)
 	addi	%sp, %sp, 8
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -8
 	lw	%ra, 7(%sp)
 	lw	%v0, 6(%sp)
 	lw	%v1, 2(%v0)
-	beqi	%v1, -1, bnei_else.19950
+	beqi	%v1, -1, bnei_else.19314
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -7117,12 +6130,12 @@ fbgt_cont.19945:
 	addi	%a0, %a1, 0
 	sw	%ra, 7(%sp)
 	addi	%sp, %sp, 8
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -8
 	lw	%ra, 7(%sp)
 	lw	%v0, 6(%sp)
 	lw	%v1, 3(%v0)
-	beqi	%v1, -1, bnei_else.19952
+	beqi	%v1, -1, bnei_else.19316
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -7132,12 +6145,12 @@ fbgt_cont.19945:
 	addi	%a0, %a1, 0
 	sw	%ra, 7(%sp)
 	addi	%sp, %sp, 8
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -8
 	lw	%ra, 7(%sp)
 	lw	%v0, 6(%sp)
 	lw	%v1, 4(%v0)
-	beqi	%v1, -1, bnei_else.19954
+	beqi	%v1, -1, bnei_else.19318
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -7147,12 +6160,12 @@ fbgt_cont.19945:
 	addi	%a0, %a1, 0
 	sw	%ra, 7(%sp)
 	addi	%sp, %sp, 8
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -8
 	lw	%ra, 7(%sp)
 	lw	%v0, 6(%sp)
 	lw	%v1, 5(%v0)
-	beqi	%v1, -1, bnei_else.19956
+	beqi	%v1, -1, bnei_else.19320
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -7162,12 +6175,12 @@ fbgt_cont.19945:
 	addi	%a0, %a1, 0
 	sw	%ra, 7(%sp)
 	addi	%sp, %sp, 8
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -8
 	lw	%ra, 7(%sp)
 	lw	%v0, 6(%sp)
 	lw	%v1, 6(%v0)
-	beqi	%v1, -1, bnei_else.19958
+	beqi	%v1, -1, bnei_else.19322
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -7177,7 +6190,7 @@ fbgt_cont.19945:
 	addi	%a0, %a1, 0
 	sw	%ra, 7(%sp)
 	addi	%sp, %sp, 8
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -8
 	lw	%ra, 7(%sp)
 	addi	%v0, %zero, 7
@@ -7185,37 +6198,37 @@ fbgt_cont.19945:
 	lw	%a0, 0(%sp)
 	sw	%ra, 7(%sp)
 	addi	%sp, %sp, 8
-	jal	solve_one_or_network_fast.2933
+	jal	solve_one_or_network_fast.2928
 	addi	%sp, %sp, -8
 	lw	%ra, 7(%sp)
-	j	bnei_cont.19959
-bnei_else.19958:
-bnei_cont.19959:
-	j	bnei_cont.19957
-bnei_else.19956:
-bnei_cont.19957:
-	j	bnei_cont.19955
-bnei_else.19954:
-bnei_cont.19955:
-	j	bnei_cont.19953
-bnei_else.19952:
-bnei_cont.19953:
-	j	bnei_cont.19951
-bnei_else.19950:
-bnei_cont.19951:
-	j	bnei_cont.19949
-bnei_else.19948:
-bnei_cont.19949:
-	j	bnei_cont.19947
-bnei_else.19946:
-bnei_cont.19947:
-	j	bnei_cont.19943
-bnei_else.19942:
-bnei_cont.19943:
-	j	bnei_cont.19933
-bnei_else.19932:
+	j	bnei_cont.19323
+bnei_else.19322:
+bnei_cont.19323:
+	j	bnei_cont.19321
+bnei_else.19320:
+bnei_cont.19321:
+	j	bnei_cont.19319
+bnei_else.19318:
+bnei_cont.19319:
+	j	bnei_cont.19317
+bnei_else.19316:
+bnei_cont.19317:
+	j	bnei_cont.19315
+bnei_else.19314:
+bnei_cont.19315:
+	j	bnei_cont.19313
+bnei_else.19312:
+bnei_cont.19313:
+	j	bnei_cont.19311
+bnei_else.19310:
+bnei_cont.19311:
+	j	bnei_cont.19307
+bnei_else.19306:
+bnei_cont.19307:
+	j	bnei_cont.19297
+bnei_else.19296:
 	lw	%a1, 1(%a0)
-	beqi	%a1, -1, bnei_else.19960
+	beqi	%a1, -1, bnei_else.19324
 	addi	%a2, %zero, 83
 	add	%at, %a2, %a1
 	lw	%a1, 0(%at)
@@ -7227,12 +6240,12 @@ bnei_else.19932:
 	addi	%v0, %a2, 0
 	sw	%ra, 7(%sp)
 	addi	%sp, %sp, 8
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -8
 	lw	%ra, 7(%sp)
 	lw	%v0, 6(%sp)
 	lw	%v1, 2(%v0)
-	beqi	%v1, -1, bnei_else.19962
+	beqi	%v1, -1, bnei_else.19326
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -7242,12 +6255,12 @@ bnei_else.19932:
 	addi	%a0, %a1, 0
 	sw	%ra, 7(%sp)
 	addi	%sp, %sp, 8
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -8
 	lw	%ra, 7(%sp)
 	lw	%v0, 6(%sp)
 	lw	%v1, 3(%v0)
-	beqi	%v1, -1, bnei_else.19964
+	beqi	%v1, -1, bnei_else.19328
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -7257,12 +6270,12 @@ bnei_else.19932:
 	addi	%a0, %a1, 0
 	sw	%ra, 7(%sp)
 	addi	%sp, %sp, 8
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -8
 	lw	%ra, 7(%sp)
 	lw	%v0, 6(%sp)
 	lw	%v1, 4(%v0)
-	beqi	%v1, -1, bnei_else.19966
+	beqi	%v1, -1, bnei_else.19330
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -7272,12 +6285,12 @@ bnei_else.19932:
 	addi	%a0, %a1, 0
 	sw	%ra, 7(%sp)
 	addi	%sp, %sp, 8
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -8
 	lw	%ra, 7(%sp)
 	lw	%v0, 6(%sp)
 	lw	%v1, 5(%v0)
-	beqi	%v1, -1, bnei_else.19968
+	beqi	%v1, -1, bnei_else.19332
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -7287,12 +6300,12 @@ bnei_else.19932:
 	addi	%a0, %a1, 0
 	sw	%ra, 7(%sp)
 	addi	%sp, %sp, 8
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -8
 	lw	%ra, 7(%sp)
 	lw	%v0, 6(%sp)
 	lw	%v1, 6(%v0)
-	beqi	%v1, -1, bnei_else.19970
+	beqi	%v1, -1, bnei_else.19334
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -7302,7 +6315,7 @@ bnei_else.19932:
 	addi	%a0, %a1, 0
 	sw	%ra, 7(%sp)
 	addi	%sp, %sp, 8
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -8
 	lw	%ra, 7(%sp)
 	addi	%v0, %zero, 7
@@ -7310,38 +6323,38 @@ bnei_else.19932:
 	lw	%a0, 0(%sp)
 	sw	%ra, 7(%sp)
 	addi	%sp, %sp, 8
-	jal	solve_one_or_network_fast.2933
+	jal	solve_one_or_network_fast.2928
 	addi	%sp, %sp, -8
 	lw	%ra, 7(%sp)
-	j	bnei_cont.19971
-bnei_else.19970:
-bnei_cont.19971:
-	j	bnei_cont.19969
-bnei_else.19968:
-bnei_cont.19969:
-	j	bnei_cont.19967
-bnei_else.19966:
-bnei_cont.19967:
-	j	bnei_cont.19965
-bnei_else.19964:
-bnei_cont.19965:
-	j	bnei_cont.19963
-bnei_else.19962:
-bnei_cont.19963:
-	j	bnei_cont.19961
-bnei_else.19960:
-bnei_cont.19961:
-bnei_cont.19933:
+	j	bnei_cont.19335
+bnei_else.19334:
+bnei_cont.19335:
+	j	bnei_cont.19333
+bnei_else.19332:
+bnei_cont.19333:
+	j	bnei_cont.19331
+bnei_else.19330:
+bnei_cont.19331:
+	j	bnei_cont.19329
+bnei_else.19328:
+bnei_cont.19329:
+	j	bnei_cont.19327
+bnei_else.19326:
+bnei_cont.19327:
+	j	bnei_cont.19325
+bnei_else.19324:
+bnei_cont.19325:
+bnei_cont.19297:
 	lw	%v0, 5(%sp)
 	addi	%v0, %v0, 1
 	lw	%v1, 2(%sp)
 	lw	%a0, 0(%sp)
-	j	trace_or_matrix_fast.2937
-bnei_else.19931:
+	j	trace_or_matrix_fast.2932
+bnei_else.19295:
 	jr	%ra
-bnei_else.19886:
+bnei_else.19250:
 	jr	%ra
-judge_intersection_fast.2941:
+judge_intersection_fast.2936:
 	addi	%v1, %zero, 0
 	flw	%f0, 456(%zero)
 	addi	%a0, %zero, 137
@@ -7350,10 +6363,10 @@ judge_intersection_fast.2941:
 	lw	%a0, 0(%a0)
 	lw	%a1, 0(%a0)
 	lw	%a2, 0(%a1)
-	beqi	%a2, -1, bnei_else.19974
+	beqi	%a2, -1, bnei_else.19338
 	sw	%v0, 0(%sp)
 	sw	%a0, 1(%sp)
-	beqi	%a2, 99, bnei_else.19976
+	beqi	%a2, 99, bnei_else.19340
 	addi	%a3, %zero, 12
 	add	%at, %a3, %a2
 	lw	%a3, 0(%at)
@@ -7367,64 +6380,64 @@ judge_intersection_fast.2941:
 	lw	%t1, 1(%a3)
 	sw	%v1, 2(%sp)
 	sw	%a1, 3(%sp)
-	beqi	%t1, 1, bnei_else.19978
-	beqi	%t1, 2, bnei_else.19980
+	beqi	%t1, 1, bnei_else.19342
+	beqi	%t1, 2, bnei_else.19344
 	addi	%a0, %t0, 0
 	addi	%v1, %a2, 0
 	addi	%v0, %a3, 0
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	solver_second_fast2.2851
+	jal	solver_second_fast2.2846
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
-	j	bnei_cont.19981
-bnei_else.19980:
+	j	bnei_cont.19345
+bnei_else.19344:
 	flw	%f0, 0(%a2)
-	flw	%f1, 464(%zero)
-	fblt	%f0, %f1, fbgt_else.19982
+	flw	%f1, 465(%zero)
+	fblt	%f0, %f1, fbgt_else.19346
 	addi	%a2, %zero, 0
-	j	fbgt_cont.19983
-fbgt_else.19982:
+	j	fbgt_cont.19347
+fbgt_else.19346:
 	addi	%a2, %zero, 1
-fbgt_cont.19983:
-	beqi	%a2, 0, bnei_else.19984
+fbgt_cont.19347:
+	beqi	%a2, 0, bnei_else.19348
 	flw	%f1, 3(%t0)
 	fmul	%f0, %f0, %f1
 	addi	%a2, %zero, 135
 	fsw	%f0, 0(%a2)
 	addi	%v0, %zero, 1
-	j	bnei_cont.19985
-bnei_else.19984:
+	j	bnei_cont.19349
+bnei_else.19348:
 	addi	%v0, %zero, 0
-bnei_cont.19985:
-bnei_cont.19981:
-	j	bnei_cont.19979
-bnei_else.19978:
+bnei_cont.19349:
+bnei_cont.19345:
+	j	bnei_cont.19343
+bnei_else.19342:
 	lw	%t0, 0(%v0)
 	addi	%a0, %a2, 0
 	addi	%v1, %t0, 0
 	addi	%v0, %a3, 0
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	solver_rect_fast.2821
+	jal	solver_rect_fast.2816
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
-bnei_cont.19979:
-	beqi	%v0, 0, bnei_else.19986
+bnei_cont.19343:
+	beqi	%v0, 0, bnei_else.19350
 	addi	%v0, %zero, 135
 	flw	%f0, 0(%v0)
 	addi	%v0, %zero, 137
 	flw	%f1, 0(%v0)
-	fblt	%f0, %f1, fbgt_else.19988
+	fblt	%f0, %f1, fbgt_else.19352
 	addi	%v0, %zero, 0
-	j	fbgt_cont.19989
-fbgt_else.19988:
+	j	fbgt_cont.19353
+fbgt_else.19352:
 	addi	%v0, %zero, 1
-fbgt_cont.19989:
-	beqi	%v0, 0, bnei_else.19990
+fbgt_cont.19353:
+	beqi	%v0, 0, bnei_else.19354
 	lw	%v0, 3(%sp)
 	lw	%v1, 1(%v0)
-	beqi	%v1, -1, bnei_else.19992
+	beqi	%v1, -1, bnei_else.19356
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -7434,12 +6447,12 @@ fbgt_cont.19989:
 	addi	%a0, %a1, 0
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
 	lw	%v0, 3(%sp)
 	lw	%v1, 2(%v0)
-	beqi	%v1, -1, bnei_else.19994
+	beqi	%v1, -1, bnei_else.19358
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -7449,12 +6462,12 @@ fbgt_cont.19989:
 	addi	%a0, %a1, 0
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
 	lw	%v0, 3(%sp)
 	lw	%v1, 3(%v0)
-	beqi	%v1, -1, bnei_else.19996
+	beqi	%v1, -1, bnei_else.19360
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -7464,12 +6477,12 @@ fbgt_cont.19989:
 	addi	%a0, %a1, 0
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
 	lw	%v0, 3(%sp)
 	lw	%v1, 4(%v0)
-	beqi	%v1, -1, bnei_else.19998
+	beqi	%v1, -1, bnei_else.19362
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -7479,12 +6492,12 @@ fbgt_cont.19989:
 	addi	%a0, %a1, 0
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
 	lw	%v0, 3(%sp)
 	lw	%v1, 5(%v0)
-	beqi	%v1, -1, bnei_else.20000
+	beqi	%v1, -1, bnei_else.19364
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -7494,12 +6507,12 @@ fbgt_cont.19989:
 	addi	%a0, %a1, 0
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
 	lw	%v0, 3(%sp)
 	lw	%v1, 6(%v0)
-	beqi	%v1, -1, bnei_else.20002
+	beqi	%v1, -1, bnei_else.19366
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -7509,7 +6522,7 @@ fbgt_cont.19989:
 	addi	%a0, %a1, 0
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
 	addi	%v0, %zero, 7
@@ -7517,37 +6530,37 @@ fbgt_cont.19989:
 	lw	%a0, 0(%sp)
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	solve_one_or_network_fast.2933
+	jal	solve_one_or_network_fast.2928
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
-	j	bnei_cont.20003
-bnei_else.20002:
-bnei_cont.20003:
-	j	bnei_cont.20001
-bnei_else.20000:
-bnei_cont.20001:
-	j	bnei_cont.19999
-bnei_else.19998:
-bnei_cont.19999:
-	j	bnei_cont.19997
-bnei_else.19996:
-bnei_cont.19997:
-	j	bnei_cont.19995
-bnei_else.19994:
-bnei_cont.19995:
-	j	bnei_cont.19993
-bnei_else.19992:
-bnei_cont.19993:
-	j	bnei_cont.19991
-bnei_else.19990:
-bnei_cont.19991:
-	j	bnei_cont.19987
-bnei_else.19986:
-bnei_cont.19987:
-	j	bnei_cont.19977
-bnei_else.19976:
+	j	bnei_cont.19367
+bnei_else.19366:
+bnei_cont.19367:
+	j	bnei_cont.19365
+bnei_else.19364:
+bnei_cont.19365:
+	j	bnei_cont.19363
+bnei_else.19362:
+bnei_cont.19363:
+	j	bnei_cont.19361
+bnei_else.19360:
+bnei_cont.19361:
+	j	bnei_cont.19359
+bnei_else.19358:
+bnei_cont.19359:
+	j	bnei_cont.19357
+bnei_else.19356:
+bnei_cont.19357:
+	j	bnei_cont.19355
+bnei_else.19354:
+bnei_cont.19355:
+	j	bnei_cont.19351
+bnei_else.19350:
+bnei_cont.19351:
+	j	bnei_cont.19341
+bnei_else.19340:
 	lw	%a2, 1(%a1)
-	beqi	%a2, -1, bnei_else.20004
+	beqi	%a2, -1, bnei_else.19368
 	addi	%a3, %zero, 83
 	add	%at, %a3, %a2
 	lw	%a2, 0(%at)
@@ -7558,12 +6571,12 @@ bnei_else.19976:
 	addi	%v1, %a2, 0
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
 	lw	%v0, 3(%sp)
 	lw	%v1, 2(%v0)
-	beqi	%v1, -1, bnei_else.20006
+	beqi	%v1, -1, bnei_else.19370
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -7573,12 +6586,12 @@ bnei_else.19976:
 	addi	%a0, %a1, 0
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
 	lw	%v0, 3(%sp)
 	lw	%v1, 3(%v0)
-	beqi	%v1, -1, bnei_else.20008
+	beqi	%v1, -1, bnei_else.19372
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -7588,12 +6601,12 @@ bnei_else.19976:
 	addi	%a0, %a1, 0
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
 	lw	%v0, 3(%sp)
 	lw	%v1, 4(%v0)
-	beqi	%v1, -1, bnei_else.20010
+	beqi	%v1, -1, bnei_else.19374
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -7603,12 +6616,12 @@ bnei_else.19976:
 	addi	%a0, %a1, 0
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
 	lw	%v0, 3(%sp)
 	lw	%v1, 5(%v0)
-	beqi	%v1, -1, bnei_else.20012
+	beqi	%v1, -1, bnei_else.19376
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -7618,12 +6631,12 @@ bnei_else.19976:
 	addi	%a0, %a1, 0
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
 	lw	%v0, 3(%sp)
 	lw	%v1, 6(%v0)
-	beqi	%v1, -1, bnei_else.20014
+	beqi	%v1, -1, bnei_else.19378
 	addi	%a0, %zero, 83
 	add	%at, %a0, %v1
 	lw	%v1, 0(%at)
@@ -7633,7 +6646,7 @@ bnei_else.19976:
 	addi	%a0, %a1, 0
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	solve_each_element_fast.2929
+	jal	solve_each_element_fast.2924
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
 	addi	%v0, %zero, 7
@@ -7641,60 +6654,60 @@ bnei_else.19976:
 	lw	%a0, 0(%sp)
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	solve_one_or_network_fast.2933
+	jal	solve_one_or_network_fast.2928
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
-	j	bnei_cont.20015
-bnei_else.20014:
-bnei_cont.20015:
-	j	bnei_cont.20013
-bnei_else.20012:
-bnei_cont.20013:
-	j	bnei_cont.20011
-bnei_else.20010:
-bnei_cont.20011:
-	j	bnei_cont.20009
-bnei_else.20008:
-bnei_cont.20009:
-	j	bnei_cont.20007
-bnei_else.20006:
-bnei_cont.20007:
-	j	bnei_cont.20005
-bnei_else.20004:
-bnei_cont.20005:
-bnei_cont.19977:
+	j	bnei_cont.19379
+bnei_else.19378:
+bnei_cont.19379:
+	j	bnei_cont.19377
+bnei_else.19376:
+bnei_cont.19377:
+	j	bnei_cont.19375
+bnei_else.19374:
+bnei_cont.19375:
+	j	bnei_cont.19373
+bnei_else.19372:
+bnei_cont.19373:
+	j	bnei_cont.19371
+bnei_else.19370:
+bnei_cont.19371:
+	j	bnei_cont.19369
+bnei_else.19368:
+bnei_cont.19369:
+bnei_cont.19341:
 	addi	%v0, %zero, 1
 	lw	%v1, 1(%sp)
 	lw	%a0, 0(%sp)
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	trace_or_matrix_fast.2937
+	jal	trace_or_matrix_fast.2932
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
-	j	bnei_cont.19975
-bnei_else.19974:
-bnei_cont.19975:
+	j	bnei_cont.19339
+bnei_else.19338:
+bnei_cont.19339:
 	addi	%v0, %zero, 137
 	flw	%f0, 0(%v0)
 	flw	%f1, 457(%zero)
-	fblt	%f1, %f0, fbgt_else.20016
+	fblt	%f1, %f0, fbgt_else.19380
 	addi	%v0, %zero, 0
-	j	fbgt_cont.20017
-fbgt_else.20016:
+	j	fbgt_cont.19381
+fbgt_else.19380:
 	addi	%v0, %zero, 1
-fbgt_cont.20017:
-	beqi	%v0, 0, bnei_else.20018
+fbgt_cont.19381:
+	beqi	%v0, 0, bnei_else.19382
 	flw	%f1, 455(%zero)
-	fblt	%f0, %f1, fbgt_else.20019
+	fblt	%f0, %f1, fbgt_else.19383
 	addi	%v0, %zero, 0
 	jr	%ra
-fbgt_else.20019:
+fbgt_else.19383:
 	addi	%v0, %zero, 1
 	jr	%ra
-bnei_else.20018:
+bnei_else.19382:
 	addi	%v0, %zero, 0
 	jr	%ra
-get_nvector_second.2947:
+get_nvector_second.2942:
 	addi	%v1, %zero, 138
 	flw	%f0, 0(%v1)
 	lw	%v1, 5(%v0)
@@ -7720,7 +6733,7 @@ get_nvector_second.2947:
 	flw	%f5, 2(%v1)
 	fmul	%f5, %f2, %f5
 	lw	%v1, 3(%v0)
-	beqi	%v1, 0, bnei_else.20020
+	beqi	%v1, 0, bnei_else.19384
 	lw	%v1, 9(%v0)
 	flw	%f6, 2(%v1)
 	fmul	%f6, %f1, %f6
@@ -7728,7 +6741,7 @@ get_nvector_second.2947:
 	flw	%f7, 1(%v1)
 	fmul	%f7, %f2, %f7
 	fadd	%f6, %f6, %f7
-	flw	%f7, 467(%zero)
+	flw	%f7, 468(%zero)
 	fmul	%f6, %f6, %f7
 	fadd	%f3, %f3, %f6
 	addi	%v1, %zero, 142
@@ -7755,19 +6768,19 @@ get_nvector_second.2947:
 	fadd	%f0, %f5, %f0
 	addi	%v1, %zero, 142
 	fsw	%f0, 2(%v1)
-	j	bnei_cont.20021
-bnei_else.20020:
+	j	bnei_cont.19385
+bnei_else.19384:
 	addi	%v1, %zero, 142
 	fsw	%f3, 0(%v1)
 	addi	%v1, %zero, 142
 	fsw	%f4, 1(%v1)
 	addi	%v1, %zero, 142
 	fsw	%f5, 2(%v1)
-bnei_cont.20021:
+bnei_cont.19385:
 	lw	%v1, 6(%v0)
 	addi	%v0, %zero, 142
-	j	vecunit_sgn.2655
-utexture.2952:
+	j	vecunit_sgn.2650
+utexture.2947:
 	lw	%a0, 0(%v0)
 	lw	%a1, 8(%v0)
 	flw	%f0, 0(%a1)
@@ -7781,12 +6794,12 @@ utexture.2952:
 	flw	%f0, 2(%a1)
 	addi	%a1, %zero, 145
 	fsw	%f0, 2(%a1)
-	beqi	%a0, 1, bnei_else.20022
-	beqi	%a0, 2, bnei_else.20023
-	beqi	%a0, 3, bnei_else.20024
-	beqi	%a0, 4, bnei_else.20025
+	beqi	%a0, 1, bnei_else.19386
+	beqi	%a0, 2, bnei_else.19387
+	beqi	%a0, 3, bnei_else.19388
+	beqi	%a0, 4, bnei_else.19389
 	jr	%ra
-bnei_else.20025:
+bnei_else.19389:
 	flw	%f0, 0(%v1)
 	lw	%a0, 5(%v0)
 	flw	%f1, 0(%a0)
@@ -7808,51 +6821,51 @@ bnei_else.20025:
 	fadd	%f2, %f2, %f3
 	fabs	%f3, %f0
 	flw	%f4, 454(%zero)
-	fblt	%f3, %f4, fbgt_else.20027
+	fblt	%f3, %f4, fbgt_else.19391
 	addi	%a0, %zero, 0
-	j	fbgt_cont.20028
-fbgt_else.20027:
+	j	fbgt_cont.19392
+fbgt_else.19391:
 	addi	%a0, %zero, 1
-fbgt_cont.20028:
+fbgt_cont.19392:
 	fsw	%f4, 0(%sp)
 	fsw	%f2, 1(%sp)
 	sw	%v0, 2(%sp)
 	sw	%v1, 3(%sp)
-	beqi	%a0, 0, bnei_else.20029
+	beqi	%a0, 0, bnei_else.19393
 	flw	%f0, 453(%zero)
-	j	bnei_cont.20030
-bnei_else.20029:
+	j	bnei_cont.19394
+bnei_else.19393:
 	fdiv	%f0, %f1, %f0
 	fabs	%f0, %f0
-	flw	%f1, 464(%zero)
-	fblt	%f0, %f1, fbgt_else.20031
+	flw	%f1, 465(%zero)
+	fblt	%f0, %f1, fbgt_else.19395
 	addi	%a0, %zero, 1
-	j	fbgt_cont.20032
-fbgt_else.20031:
+	j	fbgt_cont.19396
+fbgt_else.19395:
 	addi	%a0, %zero, 0
-fbgt_cont.20032:
+fbgt_cont.19396:
 	fabs	%f1, %f0
 	flw	%f3, 452(%zero)
-	fblt	%f1, %f3, fbgt_else.20033
+	fblt	%f1, %f3, fbgt_else.19397
 	flw	%f0, 451(%zero)
 	sw	%a0, 4(%sp)
-	fblt	%f1, %f0, fbgt_else.20035
-	flw	%f0, 473(%zero)
-	flw	%f3, 468(%zero)
+	fblt	%f1, %f0, fbgt_else.19399
+	flw	%f0, 474(%zero)
+	flw	%f3, 469(%zero)
 	fdiv	%f1, %f3, %f1
 	fsw	%f0, 5(%sp)
 	fmov	%f0, %f1
 	sw	%ra, 6(%sp)
 	addi	%sp, %sp, 7
-	jal	kernel_atan.2612
+	jal	kernel_atan.2607
 	addi	%sp, %sp, -7
 	lw	%ra, 6(%sp)
 	flw	%f1, 5(%sp)
 	fsub	%f0, %f1, %f0
-	j	fbgt_cont.20036
-fbgt_else.20035:
-	flw	%f0, 472(%zero)
-	flw	%f3, 468(%zero)
+	j	fbgt_cont.19400
+fbgt_else.19399:
+	flw	%f0, 473(%zero)
+	flw	%f3, 469(%zero)
 	fsub	%f5, %f1, %f3
 	fadd	%f1, %f1, %f3
 	fdiv	%f1, %f5, %f1
@@ -7860,31 +6873,31 @@ fbgt_else.20035:
 	fmov	%f0, %f1
 	sw	%ra, 7(%sp)
 	addi	%sp, %sp, 8
-	jal	kernel_atan.2612
+	jal	kernel_atan.2607
 	addi	%sp, %sp, -8
 	lw	%ra, 7(%sp)
 	flw	%f1, 6(%sp)
 	fadd	%f0, %f1, %f0
-fbgt_cont.20036:
+fbgt_cont.19400:
 	lw	%v0, 4(%sp)
-	beqi	%v0, 0, bnei_else.20037
-	j	bnei_cont.20038
-bnei_else.20037:
+	beqi	%v0, 0, bnei_else.19401
+	j	bnei_cont.19402
+bnei_else.19401:
 	fneg	%f0, %f0
-bnei_cont.20038:
-	j	fbgt_cont.20034
-fbgt_else.20033:
+bnei_cont.19402:
+	j	fbgt_cont.19398
+fbgt_else.19397:
 	sw	%ra, 7(%sp)
 	addi	%sp, %sp, 8
-	jal	kernel_atan.2612
+	jal	kernel_atan.2607
 	addi	%sp, %sp, -8
 	lw	%ra, 7(%sp)
-fbgt_cont.20034:
+fbgt_cont.19398:
 	flw	%f1, 450(%zero)
 	fmul	%f0, %f0, %f1
 	flw	%f1, 449(%zero)
 	fdiv	%f0, %f0, %f1
-bnei_cont.20030:
+bnei_cont.19394:
 	floor	%f1, %f0
 	fsub	%f0, %f0, %f1
 	lw	%v0, 3(%sp)
@@ -7900,48 +6913,48 @@ bnei_cont.20030:
 	flw	%f2, 1(%sp)
 	fabs	%f3, %f2
 	flw	%f4, 0(%sp)
-	fblt	%f3, %f4, fbgt_else.20039
+	fblt	%f3, %f4, fbgt_else.19403
 	addi	%v0, %zero, 0
-	j	fbgt_cont.20040
-fbgt_else.20039:
+	j	fbgt_cont.19404
+fbgt_else.19403:
 	addi	%v0, %zero, 1
-fbgt_cont.20040:
+fbgt_cont.19404:
 	fsw	%f0, 7(%sp)
-	beqi	%v0, 0, bnei_else.20041
+	beqi	%v0, 0, bnei_else.19405
 	flw	%f0, 453(%zero)
-	j	bnei_cont.20042
-bnei_else.20041:
+	j	bnei_cont.19406
+bnei_else.19405:
 	fdiv	%f1, %f1, %f2
 	fabs	%f1, %f1
-	flw	%f2, 464(%zero)
-	fblt	%f1, %f2, fbgt_else.20043
+	flw	%f2, 465(%zero)
+	fblt	%f1, %f2, fbgt_else.19407
 	addi	%v0, %zero, 1
-	j	fbgt_cont.20044
-fbgt_else.20043:
+	j	fbgt_cont.19408
+fbgt_else.19407:
 	addi	%v0, %zero, 0
-fbgt_cont.20044:
+fbgt_cont.19408:
 	fabs	%f2, %f1
 	flw	%f3, 452(%zero)
-	fblt	%f2, %f3, fbgt_else.20045
+	fblt	%f2, %f3, fbgt_else.19409
 	flw	%f1, 451(%zero)
 	sw	%v0, 8(%sp)
-	fblt	%f2, %f1, fbgt_else.20047
-	flw	%f1, 473(%zero)
-	flw	%f3, 468(%zero)
+	fblt	%f2, %f1, fbgt_else.19411
+	flw	%f1, 474(%zero)
+	flw	%f3, 469(%zero)
 	fdiv	%f2, %f3, %f2
 	fsw	%f1, 9(%sp)
 	fmov	%f0, %f2
 	sw	%ra, 10(%sp)
 	addi	%sp, %sp, 11
-	jal	kernel_atan.2612
+	jal	kernel_atan.2607
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
 	flw	%f1, 9(%sp)
 	fsub	%f0, %f1, %f0
-	j	fbgt_cont.20048
-fbgt_else.20047:
-	flw	%f1, 472(%zero)
-	flw	%f3, 468(%zero)
+	j	fbgt_cont.19412
+fbgt_else.19411:
+	flw	%f1, 473(%zero)
+	flw	%f3, 469(%zero)
 	fsub	%f4, %f2, %f3
 	fadd	%f2, %f2, %f3
 	fdiv	%f2, %f4, %f2
@@ -7949,36 +6962,36 @@ fbgt_else.20047:
 	fmov	%f0, %f2
 	sw	%ra, 11(%sp)
 	addi	%sp, %sp, 12
-	jal	kernel_atan.2612
+	jal	kernel_atan.2607
 	addi	%sp, %sp, -12
 	lw	%ra, 11(%sp)
 	flw	%f1, 10(%sp)
 	fadd	%f0, %f1, %f0
-fbgt_cont.20048:
+fbgt_cont.19412:
 	lw	%v0, 8(%sp)
-	beqi	%v0, 0, bnei_else.20049
-	j	bnei_cont.20050
-bnei_else.20049:
+	beqi	%v0, 0, bnei_else.19413
+	j	bnei_cont.19414
+bnei_else.19413:
 	fneg	%f0, %f0
-bnei_cont.20050:
-	j	fbgt_cont.20046
-fbgt_else.20045:
+bnei_cont.19414:
+	j	fbgt_cont.19410
+fbgt_else.19409:
 	fmov	%f0, %f1
 	sw	%ra, 11(%sp)
 	addi	%sp, %sp, 12
-	jal	kernel_atan.2612
+	jal	kernel_atan.2607
 	addi	%sp, %sp, -12
 	lw	%ra, 11(%sp)
-fbgt_cont.20046:
+fbgt_cont.19410:
 	flw	%f1, 450(%zero)
 	fmul	%f0, %f0, %f1
 	flw	%f1, 449(%zero)
 	fdiv	%f0, %f0, %f1
-bnei_cont.20042:
+bnei_cont.19406:
 	floor	%f1, %f0
 	fsub	%f0, %f0, %f1
 	flw	%f1, 448(%zero)
-	flw	%f2, 467(%zero)
+	flw	%f2, 468(%zero)
 	flw	%f3, 7(%sp)
 	fsub	%f3, %f2, %f3
 	fmul	%f3, %f3, %f3
@@ -7986,18 +6999,18 @@ bnei_cont.20042:
 	fsub	%f0, %f2, %f0
 	fmul	%f0, %f0, %f0
 	fsub	%f0, %f1, %f0
-	flw	%f1, 464(%zero)
-	fblt	%f0, %f1, fbgt_else.20051
+	flw	%f1, 465(%zero)
+	fblt	%f0, %f1, fbgt_else.19415
 	addi	%v0, %zero, 0
-	j	fbgt_cont.20052
-fbgt_else.20051:
+	j	fbgt_cont.19416
+fbgt_else.19415:
 	addi	%v0, %zero, 1
-fbgt_cont.20052:
-	beqi	%v0, 0, bnei_else.20053
+fbgt_cont.19416:
+	beqi	%v0, 0, bnei_else.19417
 	fmov	%f0, %f1
-	j	bnei_cont.20054
-bnei_else.20053:
-bnei_cont.20054:
+	j	bnei_cont.19418
+bnei_else.19417:
+bnei_cont.19418:
 	flw	%f1, 447(%zero)
 	fmul	%f0, %f1, %f0
 	flw	%f1, 446(%zero)
@@ -8005,7 +7018,7 @@ bnei_cont.20054:
 	addi	%v0, %zero, 145
 	fsw	%f0, 2(%v0)
 	jr	%ra
-bnei_else.20024:
+bnei_else.19388:
 	flw	%f0, 0(%v1)
 	lw	%a0, 5(%v0)
 	flw	%f1, 0(%a0)
@@ -8026,7 +7039,7 @@ bnei_else.20024:
 	fmul	%f0, %f0, %f1
 	sw	%ra, 11(%sp)
 	addi	%sp, %sp, 12
-	jal	cos.2616
+	jal	cos.2611
 	addi	%sp, %sp, -12
 	lw	%ra, 11(%sp)
 	fmul	%f0, %f0, %f0
@@ -8034,19 +7047,19 @@ bnei_else.20024:
 	fmul	%f2, %f0, %f1
 	addi	%v0, %zero, 145
 	fsw	%f2, 1(%v0)
-	flw	%f2, 468(%zero)
+	flw	%f2, 469(%zero)
 	fsub	%f0, %f2, %f0
 	fmul	%f0, %f0, %f1
 	addi	%v0, %zero, 145
 	fsw	%f0, 2(%v0)
 	jr	%ra
-bnei_else.20023:
+bnei_else.19387:
 	flw	%f0, 1(%v1)
 	flw	%f1, 444(%zero)
 	fmul	%f0, %f0, %f1
 	sw	%ra, 11(%sp)
 	addi	%sp, %sp, 12
-	jal	sin.2618
+	jal	sin.2613
 	addi	%sp, %sp, -12
 	lw	%ra, 11(%sp)
 	fmul	%f0, %f0, %f0
@@ -8054,13 +7067,13 @@ bnei_else.20023:
 	fmul	%f2, %f1, %f0
 	addi	%v0, %zero, 145
 	fsw	%f2, 0(%v0)
-	flw	%f2, 468(%zero)
+	flw	%f2, 469(%zero)
 	fsub	%f0, %f2, %f0
 	fmul	%f0, %f1, %f0
 	addi	%v0, %zero, 145
 	fsw	%f0, 1(%v0)
 	jr	%ra
-bnei_else.20022:
+bnei_else.19386:
 	flw	%f0, 0(%v1)
 	lw	%a0, 5(%v0)
 	flw	%f1, 0(%a0)
@@ -8072,12 +7085,12 @@ bnei_else.20022:
 	fmul	%f2, %f2, %f3
 	fsub	%f0, %f0, %f2
 	flw	%f2, 445(%zero)
-	fblt	%f0, %f2, fbgt_else.20058
+	fblt	%f0, %f2, fbgt_else.19422
 	addi	%a0, %zero, 0
-	j	fbgt_cont.20059
-fbgt_else.20058:
+	j	fbgt_cont.19423
+fbgt_else.19422:
 	addi	%a0, %zero, 1
-fbgt_cont.20059:
+fbgt_cont.19423:
 	flw	%f0, 2(%v1)
 	lw	%v0, 5(%v0)
 	flw	%f4, 2(%v0)
@@ -8086,34 +7099,34 @@ fbgt_cont.20059:
 	floor	%f1, %f1
 	fmul	%f1, %f1, %f3
 	fsub	%f0, %f0, %f1
-	fblt	%f0, %f2, fbgt_else.20060
+	fblt	%f0, %f2, fbgt_else.19424
 	addi	%v0, %zero, 0
-	j	fbgt_cont.20061
-fbgt_else.20060:
+	j	fbgt_cont.19425
+fbgt_else.19424:
 	addi	%v0, %zero, 1
-fbgt_cont.20061:
-	beqi	%a0, 0, bnei_else.20062
-	beqi	%v0, 0, bnei_else.20064
+fbgt_cont.19425:
+	beqi	%a0, 0, bnei_else.19426
+	beqi	%v0, 0, bnei_else.19428
 	flw	%f0, 447(%zero)
-	j	bnei_cont.20065
-bnei_else.20064:
-	flw	%f0, 464(%zero)
-bnei_cont.20065:
-	j	bnei_cont.20063
-bnei_else.20062:
-	beqi	%v0, 0, bnei_else.20066
-	flw	%f0, 464(%zero)
-	j	bnei_cont.20067
-bnei_else.20066:
+	j	bnei_cont.19429
+bnei_else.19428:
+	flw	%f0, 465(%zero)
+bnei_cont.19429:
+	j	bnei_cont.19427
+bnei_else.19426:
+	beqi	%v0, 0, bnei_else.19430
+	flw	%f0, 465(%zero)
+	j	bnei_cont.19431
+bnei_else.19430:
 	flw	%f0, 447(%zero)
-bnei_cont.20067:
-bnei_cont.20063:
+bnei_cont.19431:
+bnei_cont.19427:
 	addi	%v0, %zero, 145
 	fsw	%f0, 1(%v0)
 	jr	%ra
-trace_reflections.2959:
+trace_reflections.2954:
 	addi	%a0, %zero, 0
-	blti	%v0, 0, bgti_else.20069
+	blti	%v0, 0, bgti_else.19433
 	addi	%a1, %zero, 254
 	add	%at, %a1, %v0
 	lw	%a1, 0(%at)
@@ -8136,31 +7149,31 @@ trace_reflections.2959:
 	addi	%a0, %a2, 0
 	sw	%ra, 8(%sp)
 	addi	%sp, %sp, 9
-	jal	trace_or_matrix_fast.2937
+	jal	trace_or_matrix_fast.2932
 	addi	%sp, %sp, -9
 	lw	%ra, 8(%sp)
 	addi	%v0, %zero, 137
 	flw	%f0, 0(%v0)
 	flw	%f1, 457(%zero)
-	fblt	%f1, %f0, fbgt_else.20070
+	fblt	%f1, %f0, fbgt_else.19434
 	addi	%v0, %zero, 0
-	j	fbgt_cont.20071
-fbgt_else.20070:
+	j	fbgt_cont.19435
+fbgt_else.19434:
 	addi	%v0, %zero, 1
-fbgt_cont.20071:
-	beqi	%v0, 0, bnei_else.20072
+fbgt_cont.19435:
+	beqi	%v0, 0, bnei_else.19436
 	flw	%f1, 455(%zero)
-	fblt	%f0, %f1, fbgt_else.20074
+	fblt	%f0, %f1, fbgt_else.19438
 	addi	%v0, %zero, 0
-	j	fbgt_cont.20075
-fbgt_else.20074:
+	j	fbgt_cont.19439
+fbgt_else.19438:
 	addi	%v0, %zero, 1
-fbgt_cont.20075:
-	j	bnei_cont.20073
-bnei_else.20072:
+fbgt_cont.19439:
+	j	bnei_cont.19437
+bnei_else.19436:
 	addi	%v0, %zero, 0
-bnei_cont.20073:
-	beqi	%v0, 0, bnei_else.20076
+bnei_cont.19437:
+	beqi	%v0, 0, bnei_else.19440
 	addi	%v0, %zero, 141
 	lw	%v0, 0(%v0)
 	sll	%v0, %v0, 2
@@ -8169,18 +7182,18 @@ bnei_cont.20073:
 	add	%v0, %v0, %v1
 	lw	%v1, 7(%sp)
 	lw	%a0, 0(%v1)
-	bne	%v0, %a0, beq_else.20078
+	bne	%v0, %a0, beq_else.19442
 	lw	%v0, 6(%sp)
 	lw	%a0, 5(%sp)
 	addi	%v1, %a0, 0
 	sw	%ra, 8(%sp)
 	addi	%sp, %sp, 9
-	jal	shadow_check_one_or_matrix.2912
+	jal	shadow_check_one_or_matrix.2907
 	addi	%sp, %sp, -9
 	lw	%ra, 8(%sp)
-	beqi	%v0, 0, bnei_else.20080
-	j	bnei_cont.20081
-bnei_else.20080:
+	beqi	%v0, 0, bnei_else.19444
+	j	bnei_cont.19445
+bnei_else.19444:
 	lw	%v0, 4(%sp)
 	lw	%v1, 0(%v0)
 	addi	%a0, %zero, 142
@@ -8216,14 +7229,14 @@ bnei_else.20080:
 	fmul	%f4, %f4, %f5
 	fadd	%f3, %f3, %f4
 	fmul	%f1, %f1, %f3
-	flw	%f3, 464(%zero)
-	fblt	%f3, %f0, fbgt_else.20082
+	flw	%f3, 465(%zero)
+	fblt	%f3, %f0, fbgt_else.19446
 	addi	%v0, %zero, 0
-	j	fbgt_cont.20083
-fbgt_else.20082:
+	j	fbgt_cont.19447
+fbgt_else.19446:
 	addi	%v0, %zero, 1
-fbgt_cont.20083:
-	beqi	%v0, 0, bnei_else.20084
+fbgt_cont.19447:
+	beqi	%v0, 0, bnei_else.19448
 	addi	%v0, %zero, 151
 	flw	%f4, 0(%v0)
 	addi	%v0, %zero, 145
@@ -8248,16 +7261,16 @@ fbgt_cont.20083:
 	fadd	%f0, %f4, %f0
 	addi	%v0, %zero, 151
 	fsw	%f0, 2(%v0)
-	j	bnei_cont.20085
-bnei_else.20084:
-bnei_cont.20085:
-	fblt	%f3, %f1, fbgt_else.20086
+	j	bnei_cont.19449
+bnei_else.19448:
+bnei_cont.19449:
+	fblt	%f3, %f1, fbgt_else.19450
 	addi	%v0, %zero, 0
-	j	fbgt_cont.20087
-fbgt_else.20086:
+	j	fbgt_cont.19451
+fbgt_else.19450:
 	addi	%v0, %zero, 1
-fbgt_cont.20087:
-	beqi	%v0, 0, bnei_else.20088
+fbgt_cont.19451:
+	beqi	%v0, 0, bnei_else.19452
 	fmul	%f0, %f1, %f1
 	fmul	%f0, %f0, %f0
 	flw	%f1, 1(%sp)
@@ -8277,27 +7290,27 @@ fbgt_cont.20087:
 	fadd	%f0, %f3, %f0
 	addi	%v0, %zero, 151
 	fsw	%f0, 2(%v0)
-	j	bnei_cont.20089
-bnei_else.20088:
-bnei_cont.20089:
-bnei_cont.20081:
-	j	beq_cont.20079
-beq_else.20078:
-beq_cont.20079:
-	j	bnei_cont.20077
-bnei_else.20076:
-bnei_cont.20077:
+	j	bnei_cont.19453
+bnei_else.19452:
+bnei_cont.19453:
+bnei_cont.19445:
+	j	beq_cont.19443
+beq_else.19442:
+beq_cont.19443:
+	j	bnei_cont.19441
+bnei_else.19440:
+bnei_cont.19441:
 	lw	%v0, 0(%sp)
 	addi	%v0, %v0, -1
 	flw	%f0, 3(%sp)
 	flw	%f1, 1(%sp)
 	lw	%v1, 2(%sp)
-	j	trace_reflections.2959
-bgti_else.20069:
+	j	trace_reflections.2954
+bgti_else.19433:
 	jr	%ra
-trace_ray.2964:
+trace_ray.2959:
 	addi	%at, %zero, 4
-	blt	%at, %v0, bgt_else.20091
+	blt	%at, %v0, bgt_else.19455
 	lw	%a1, 2(%a0)
 	addi	%a2, %zero, 0
 	flw	%f2, 456(%zero)
@@ -8318,31 +7331,31 @@ trace_ray.2964:
 	addi	%v1, %a3, 0
 	sw	%ra, 8(%sp)
 	addi	%sp, %sp, 9
-	jal	trace_or_matrix.2923
+	jal	trace_or_matrix.2918
 	addi	%sp, %sp, -9
 	lw	%ra, 8(%sp)
 	addi	%v0, %zero, 137
 	flw	%f0, 0(%v0)
 	flw	%f1, 457(%zero)
-	fblt	%f1, %f0, fbgt_else.20092
+	fblt	%f1, %f0, fbgt_else.19456
 	addi	%v0, %zero, 0
-	j	fbgt_cont.20093
-fbgt_else.20092:
+	j	fbgt_cont.19457
+fbgt_else.19456:
 	addi	%v0, %zero, 1
-fbgt_cont.20093:
-	beqi	%v0, 0, bnei_else.20094
+fbgt_cont.19457:
+	beqi	%v0, 0, bnei_else.19458
 	flw	%f1, 455(%zero)
-	fblt	%f0, %f1, fbgt_else.20096
+	fblt	%f0, %f1, fbgt_else.19460
 	addi	%v0, %zero, 0
-	j	fbgt_cont.20097
-fbgt_else.20096:
+	j	fbgt_cont.19461
+fbgt_else.19460:
 	addi	%v0, %zero, 1
-fbgt_cont.20097:
-	j	bnei_cont.20095
-bnei_else.20094:
+fbgt_cont.19461:
+	j	bnei_cont.19459
+bnei_else.19458:
 	addi	%v0, %zero, 0
-bnei_cont.20095:
-	beqi	%v0, 0, bnei_else.20098
+bnei_cont.19459:
+	beqi	%v0, 0, bnei_else.19462
 	addi	%v0, %zero, 141
 	lw	%v0, 0(%v0)
 	addi	%v1, %zero, 12
@@ -8361,16 +7374,16 @@ bnei_cont.20095:
 	sw	%a2, 11(%sp)
 	sw	%v0, 12(%sp)
 	sw	%v1, 13(%sp)
-	beqi	%a1, 1, bnei_else.20099
-	beqi	%a1, 2, bnei_else.20101
+	beqi	%a1, 1, bnei_else.19463
+	beqi	%a1, 2, bnei_else.19465
 	addi	%v0, %v1, 0
 	sw	%ra, 14(%sp)
 	addi	%sp, %sp, 15
-	jal	get_nvector_second.2947
+	jal	get_nvector_second.2942
 	addi	%sp, %sp, -15
 	lw	%ra, 14(%sp)
-	j	bnei_cont.20102
-bnei_else.20101:
+	j	bnei_cont.19466
+bnei_else.19465:
 	lw	%a1, 4(%v1)
 	flw	%f3, 0(%a1)
 	fneg	%f3, %f3
@@ -8386,12 +7399,12 @@ bnei_else.20101:
 	fneg	%f3, %f3
 	addi	%a1, %zero, 142
 	fsw	%f3, 2(%a1)
-bnei_cont.20102:
-	j	bnei_cont.20100
-bnei_else.20099:
+bnei_cont.19466:
+	j	bnei_cont.19464
+bnei_else.19463:
 	addi	%a1, %zero, 136
 	lw	%a1, 0(%a1)
-	flw	%f3, 464(%zero)
+	flw	%f3, 465(%zero)
 	addi	%a3, %zero, 142
 	fsw	%f3, 0(%a3)
 	addi	%a3, %zero, 142
@@ -8402,33 +7415,33 @@ bnei_else.20099:
 	lw	%a3, 5(%sp)
 	add	%at, %a3, %a1
 	flw	%f4, 0(%at)
-	fbne	%f4, %f3, fbeq_else.20103
+	fbne	%f4, %f3, fbeq_else.19467
 	addi	%t0, %zero, 1
-	j	fbeq_cont.20104
-fbeq_else.20103:
+	j	fbeq_cont.19468
+fbeq_else.19467:
 	addi	%t0, %zero, 0
-fbeq_cont.20104:
-	beqi	%t0, 0, bnei_else.20105
-	j	bnei_cont.20106
-bnei_else.20105:
-	fblt	%f3, %f4, fbgt_else.20107
+fbeq_cont.19468:
+	beqi	%t0, 0, bnei_else.19469
+	j	bnei_cont.19470
+bnei_else.19469:
+	fblt	%f3, %f4, fbgt_else.19471
 	addi	%t0, %zero, 0
-	j	fbgt_cont.20108
-fbgt_else.20107:
+	j	fbgt_cont.19472
+fbgt_else.19471:
 	addi	%t0, %zero, 1
-fbgt_cont.20108:
-	beqi	%t0, 0, bnei_else.20109
-	flw	%f3, 468(%zero)
-	j	bnei_cont.20110
-bnei_else.20109:
-	flw	%f3, 463(%zero)
-bnei_cont.20110:
-bnei_cont.20106:
+fbgt_cont.19472:
+	beqi	%t0, 0, bnei_else.19473
+	flw	%f3, 469(%zero)
+	j	bnei_cont.19474
+bnei_else.19473:
+	flw	%f3, 464(%zero)
+bnei_cont.19474:
+bnei_cont.19470:
 	fneg	%f3, %f3
 	addi	%t0, %zero, 142
 	add	%at, %t0, %a1
 	fsw	%f3, 0(%at)
-bnei_cont.20100:
+bnei_cont.19464:
 	addi	%v0, %zero, 138
 	flw	%f0, 0(%v0)
 	addi	%v0, %zero, 159
@@ -8448,7 +7461,7 @@ bnei_cont.20100:
 	fsw	%f0, 16(%sp)
 	sw	%ra, 17(%sp)
 	addi	%sp, %sp, 18
-	jal	utexture.2952
+	jal	utexture.2947
 	addi	%sp, %sp, -18
 	lw	%ra, 17(%sp)
 	lw	%v0, 12(%sp)
@@ -8474,19 +7487,19 @@ bnei_cont.20100:
 	lw	%a2, 13(%sp)
 	lw	%a3, 7(%a2)
 	flw	%f3, 0(%a3)
-	flw	%f4, 467(%zero)
-	fblt	%f3, %f4, fbgt_else.20111
+	flw	%f4, 468(%zero)
+	fblt	%f3, %f4, fbgt_else.19475
 	addi	%a3, %zero, 0
-	j	fbgt_cont.20112
-fbgt_else.20111:
+	j	fbgt_cont.19476
+fbgt_else.19475:
 	addi	%a3, %zero, 1
-fbgt_cont.20112:
-	beqi	%a3, 0, bnei_else.20113
+fbgt_cont.19476:
+	beqi	%a3, 0, bnei_else.19477
 	lw	%a3, 2(%sp)
 	add	%at, %a1, %v1
 	sw	%a3, 0(%at)
-	j	bnei_cont.20114
-bnei_else.20113:
+	j	bnei_cont.19478
+bnei_else.19477:
 	lw	%a3, 11(%sp)
 	add	%at, %a1, %v1
 	sw	%a3, 0(%at)
@@ -8526,7 +7539,7 @@ bnei_else.20113:
 	addi	%a3, %zero, 142
 	flw	%f3, 2(%a3)
 	fsw	%f3, 2(%a1)
-bnei_cont.20114:
+bnei_cont.19478:
 	flw	%f3, 440(%zero)
 	lw	%a1, 5(%sp)
 	flw	%f4, 0(%a1)
@@ -8567,12 +7580,12 @@ bnei_cont.20114:
 	addi	%v0, %a3, 0
 	sw	%ra, 21(%sp)
 	addi	%sp, %sp, 22
-	jal	shadow_check_one_or_matrix.2912
+	jal	shadow_check_one_or_matrix.2907
 	addi	%sp, %sp, -22
 	lw	%ra, 21(%sp)
-	beqi	%v0, 0, bnei_else.20115
-	j	bnei_cont.20116
-bnei_else.20115:
+	beqi	%v0, 0, bnei_else.19479
+	j	bnei_cont.19480
+bnei_else.19479:
 	addi	%v0, %zero, 78
 	flw	%f0, 0(%v0)
 	flw	%f1, 20(%sp)
@@ -8600,14 +7613,14 @@ bnei_else.20115:
 	fmul	%f2, %f2, %f3
 	fadd	%f0, %f0, %f2
 	fneg	%f0, %f0
-	flw	%f2, 464(%zero)
-	fblt	%f2, %f1, fbgt_else.20117
+	flw	%f2, 465(%zero)
+	fblt	%f2, %f1, fbgt_else.19481
 	addi	%v1, %zero, 0
-	j	fbgt_cont.20118
-fbgt_else.20117:
+	j	fbgt_cont.19482
+fbgt_else.19481:
 	addi	%v1, %zero, 1
-fbgt_cont.20118:
-	beqi	%v1, 0, bnei_else.20119
+fbgt_cont.19482:
+	beqi	%v1, 0, bnei_else.19483
 	addi	%v1, %zero, 151
 	flw	%f3, 0(%v1)
 	addi	%v1, %zero, 145
@@ -8632,16 +7645,16 @@ fbgt_cont.20118:
 	fadd	%f1, %f3, %f1
 	addi	%v1, %zero, 151
 	fsw	%f1, 2(%v1)
-	j	bnei_cont.20120
-bnei_else.20119:
-bnei_cont.20120:
-	fblt	%f2, %f0, fbgt_else.20121
+	j	bnei_cont.19484
+bnei_else.19483:
+bnei_cont.19484:
+	fblt	%f2, %f0, fbgt_else.19485
 	addi	%v1, %zero, 0
-	j	fbgt_cont.20122
-fbgt_else.20121:
+	j	fbgt_cont.19486
+fbgt_else.19485:
 	addi	%v1, %zero, 1
-fbgt_cont.20122:
-	beqi	%v1, 0, bnei_else.20123
+fbgt_cont.19486:
+	beqi	%v1, 0, bnei_else.19487
 	fmul	%f0, %f0, %f0
 	fmul	%f0, %f0, %f0
 	flw	%f1, 17(%sp)
@@ -8661,10 +7674,10 @@ fbgt_cont.20122:
 	fadd	%f0, %f2, %f0
 	addi	%v1, %zero, 151
 	fsw	%f0, 2(%v1)
-	j	bnei_cont.20124
-bnei_else.20123:
-bnei_cont.20124:
-bnei_cont.20116:
+	j	bnei_cont.19488
+bnei_else.19487:
+bnei_cont.19488:
+bnei_cont.19480:
 	addi	%v0, %zero, 162
 	flw	%f0, 16(%sp)
 	fsw	%f0, 0(%v0)
@@ -8680,7 +7693,7 @@ bnei_cont.20116:
 	addi	%v0, %zero, 138
 	sw	%ra, 21(%sp)
 	addi	%sp, %sp, 22
-	jal	setup_startp_constants.2875
+	jal	setup_startp_constants.2870
 	addi	%sp, %sp, -22
 	lw	%ra, 21(%sp)
 	addi	%v0, %zero, 434
@@ -8691,33 +7704,33 @@ bnei_cont.20116:
 	lw	%v1, 5(%sp)
 	sw	%ra, 21(%sp)
 	addi	%sp, %sp, 22
-	jal	trace_reflections.2959
+	jal	trace_reflections.2954
 	addi	%sp, %sp, -22
 	lw	%ra, 21(%sp)
 	flw	%f0, 439(%zero)
 	flw	%f1, 4(%sp)
-	fblt	%f0, %f1, fbgt_else.20125
+	fblt	%f0, %f1, fbgt_else.19489
 	addi	%v0, %zero, 0
-	j	fbgt_cont.20126
-fbgt_else.20125:
+	j	fbgt_cont.19490
+fbgt_else.19489:
 	addi	%v0, %zero, 1
-fbgt_cont.20126:
-	beqi	%v0, 0, bnei_else.20127
+fbgt_cont.19490:
+	beqi	%v0, 0, bnei_else.19491
 	lw	%v0, 6(%sp)
-	blti	%v0, 4, bgti_else.20128
-	j	bgti_cont.20129
-bgti_else.20128:
+	blti	%v0, 4, bgti_else.19492
+	j	bgti_cont.19493
+bgti_else.19492:
 	addi	%v1, %v0, 1
 	addi	%a0, %zero, -1
 	lw	%a1, 7(%sp)
 	add	%at, %a1, %v1
 	sw	%a0, 0(%at)
-bgti_cont.20129:
+bgti_cont.19493:
 	lw	%v1, 9(%sp)
-	beqi	%v1, 2, bnei_else.20130
+	beqi	%v1, 2, bnei_else.19494
 	jr	%ra
-bnei_else.20130:
-	flw	%f0, 468(%zero)
+bnei_else.19494:
+	flw	%f0, 469(%zero)
 	lw	%v1, 13(%sp)
 	lw	%v1, 7(%v1)
 	flw	%f2, 0(%v1)
@@ -8729,16 +7742,16 @@ bnei_else.20130:
 	fadd	%f1, %f2, %f1
 	lw	%v1, 5(%sp)
 	lw	%a0, 3(%sp)
-	j	trace_ray.2964
-bnei_else.20127:
+	j	trace_ray.2959
+bnei_else.19491:
 	jr	%ra
-bnei_else.20098:
+bnei_else.19462:
 	addi	%v0, %zero, -1
 	lw	%v1, 6(%sp)
 	lw	%a0, 7(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-	beqi	%v1, 0, bnei_else.20133
+	beqi	%v1, 0, bnei_else.19497
 	lw	%v0, 5(%sp)
 	flw	%f0, 0(%v0)
 	addi	%v1, %zero, 78
@@ -8755,14 +7768,14 @@ bnei_else.20098:
 	fmul	%f1, %f1, %f2
 	fadd	%f0, %f0, %f1
 	fneg	%f0, %f0
-	flw	%f1, 464(%zero)
-	fblt	%f1, %f0, fbgt_else.20134
+	flw	%f1, 465(%zero)
+	fblt	%f1, %f0, fbgt_else.19498
 	addi	%v0, %zero, 0
-	j	fbgt_cont.20135
-fbgt_else.20134:
+	j	fbgt_cont.19499
+fbgt_else.19498:
 	addi	%v0, %zero, 1
-fbgt_cont.20135:
-	beqi	%v0, 0, bnei_else.20136
+fbgt_cont.19499:
+	beqi	%v0, 0, bnei_else.19500
 	fmul	%f1, %f0, %f0
 	fmul	%f0, %f1, %f0
 	flw	%f1, 4(%sp)
@@ -8786,13 +7799,13 @@ fbgt_cont.20135:
 	addi	%v0, %zero, 151
 	fsw	%f0, 2(%v0)
 	jr	%ra
-bnei_else.20136:
+bnei_else.19500:
 	jr	%ra
-bnei_else.20133:
+bnei_else.19497:
 	jr	%ra
-bgt_else.20091:
+bgt_else.19455:
 	jr	%ra
-trace_diffuse_ray.2970:
+trace_diffuse_ray.2965:
 	addi	%v1, %zero, 0
 	flw	%f1, 456(%zero)
 	addi	%a0, %zero, 137
@@ -8809,31 +7822,31 @@ trace_diffuse_ray.2970:
 	addi	%v1, %k0, 0
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	trace_or_matrix_fast.2937
+	jal	trace_or_matrix_fast.2932
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
 	addi	%v0, %zero, 137
 	flw	%f0, 0(%v0)
 	flw	%f1, 457(%zero)
-	fblt	%f1, %f0, fbgt_else.20141
+	fblt	%f1, %f0, fbgt_else.19505
 	addi	%v0, %zero, 0
-	j	fbgt_cont.20142
-fbgt_else.20141:
+	j	fbgt_cont.19506
+fbgt_else.19505:
 	addi	%v0, %zero, 1
-fbgt_cont.20142:
-	beqi	%v0, 0, bnei_else.20143
+fbgt_cont.19506:
+	beqi	%v0, 0, bnei_else.19507
 	flw	%f1, 455(%zero)
-	fblt	%f0, %f1, fbgt_else.20145
+	fblt	%f0, %f1, fbgt_else.19509
 	addi	%v0, %zero, 0
-	j	fbgt_cont.20146
-fbgt_else.20145:
+	j	fbgt_cont.19510
+fbgt_else.19509:
 	addi	%v0, %zero, 1
-fbgt_cont.20146:
-	j	bnei_cont.20144
-bnei_else.20143:
+fbgt_cont.19510:
+	j	bnei_cont.19508
+bnei_else.19507:
 	addi	%v0, %zero, 0
-bnei_cont.20144:
-	beqi	%v0, 0, bnei_else.20147
+bnei_cont.19508:
+	beqi	%v0, 0, bnei_else.19511
 	addi	%v0, %zero, 141
 	lw	%v0, 0(%v0)
 	addi	%v1, %zero, 12
@@ -8843,15 +7856,15 @@ bnei_cont.20144:
 	lw	%v1, 0(%v1)
 	lw	%a0, 1(%v0)
 	sw	%v0, 4(%sp)
-	beqi	%a0, 1, bnei_else.20148
-	beqi	%a0, 2, bnei_else.20150
+	beqi	%a0, 1, bnei_else.19512
+	beqi	%a0, 2, bnei_else.19514
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	get_nvector_second.2947
+	jal	get_nvector_second.2942
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
-	j	bnei_cont.20151
-bnei_else.20150:
+	j	bnei_cont.19515
+bnei_else.19514:
 	lw	%v1, 4(%v0)
 	flw	%f0, 0(%v1)
 	fneg	%f0, %f0
@@ -8867,12 +7880,12 @@ bnei_else.20150:
 	fneg	%f0, %f0
 	addi	%v1, %zero, 142
 	fsw	%f0, 2(%v1)
-bnei_cont.20151:
-	j	bnei_cont.20149
-bnei_else.20148:
+bnei_cont.19515:
+	j	bnei_cont.19513
+bnei_else.19512:
 	addi	%a0, %zero, 136
 	lw	%a0, 0(%a0)
-	flw	%f0, 464(%zero)
+	flw	%f0, 465(%zero)
 	addi	%a1, %zero, 142
 	fsw	%f0, 0(%a1)
 	addi	%a1, %zero, 142
@@ -8882,50 +7895,50 @@ bnei_else.20148:
 	addi	%a0, %a0, -1
 	add	%at, %v1, %a0
 	flw	%f1, 0(%at)
-	fbne	%f1, %f0, fbeq_else.20152
+	fbne	%f1, %f0, fbeq_else.19516
 	addi	%v1, %zero, 1
-	j	fbeq_cont.20153
-fbeq_else.20152:
+	j	fbeq_cont.19517
+fbeq_else.19516:
 	addi	%v1, %zero, 0
-fbeq_cont.20153:
-	beqi	%v1, 0, bnei_else.20154
-	j	bnei_cont.20155
-bnei_else.20154:
-	fblt	%f0, %f1, fbgt_else.20156
+fbeq_cont.19517:
+	beqi	%v1, 0, bnei_else.19518
+	j	bnei_cont.19519
+bnei_else.19518:
+	fblt	%f0, %f1, fbgt_else.19520
 	addi	%v1, %zero, 0
-	j	fbgt_cont.20157
-fbgt_else.20156:
+	j	fbgt_cont.19521
+fbgt_else.19520:
 	addi	%v1, %zero, 1
-fbgt_cont.20157:
-	beqi	%v1, 0, bnei_else.20158
-	flw	%f0, 468(%zero)
-	j	bnei_cont.20159
-bnei_else.20158:
-	flw	%f0, 463(%zero)
-bnei_cont.20159:
-bnei_cont.20155:
+fbgt_cont.19521:
+	beqi	%v1, 0, bnei_else.19522
+	flw	%f0, 469(%zero)
+	j	bnei_cont.19523
+bnei_else.19522:
+	flw	%f0, 464(%zero)
+bnei_cont.19523:
+bnei_cont.19519:
 	fneg	%f0, %f0
 	addi	%v1, %zero, 142
 	add	%at, %v1, %a0
 	fsw	%f0, 0(%at)
-bnei_cont.20149:
+bnei_cont.19513:
 	addi	%v1, %zero, 138
 	lw	%v0, 4(%sp)
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	utexture.2952
+	jal	utexture.2947
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
 	lw	%v0, 2(%sp)
 	lw	%v1, 1(%sp)
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	shadow_check_one_or_matrix.2912
+	jal	shadow_check_one_or_matrix.2907
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
-	beqi	%v0, 0, bnei_else.20160
+	beqi	%v0, 0, bnei_else.19524
 	jr	%ra
-bnei_else.20160:
+bnei_else.19524:
 	addi	%v0, %zero, 142
 	flw	%f0, 0(%v0)
 	addi	%v0, %zero, 78
@@ -8944,18 +7957,18 @@ bnei_else.20160:
 	fmul	%f1, %f1, %f2
 	fadd	%f0, %f0, %f1
 	fneg	%f0, %f0
-	flw	%f1, 464(%zero)
-	fblt	%f1, %f0, fbgt_else.20162
+	flw	%f1, 465(%zero)
+	fblt	%f1, %f0, fbgt_else.19526
 	addi	%v0, %zero, 0
-	j	fbgt_cont.20163
-fbgt_else.20162:
+	j	fbgt_cont.19527
+fbgt_else.19526:
 	addi	%v0, %zero, 1
-fbgt_cont.20163:
-	beqi	%v0, 0, bnei_else.20164
-	j	bnei_cont.20165
-bnei_else.20164:
+fbgt_cont.19527:
+	beqi	%v0, 0, bnei_else.19528
+	j	bnei_cont.19529
+bnei_else.19528:
 	fmov	%f0, %f1
-bnei_cont.20165:
+bnei_cont.19529:
 	flw	%f1, 0(%sp)
 	fmul	%f0, %f1, %f0
 	lw	%v0, 4(%sp)
@@ -8987,11 +8000,11 @@ bnei_cont.20165:
 	addi	%v0, %zero, 148
 	fsw	%f0, 2(%v0)
 	jr	%ra
-bnei_else.20147:
+bnei_else.19511:
 	jr	%ra
-iter_trace_diffuse_rays.2973:
+iter_trace_diffuse_rays.2968:
 	addi	%a2, %zero, 0
-	blti	%a1, 0, bgti_else.20168
+	blti	%a1, 0, bgti_else.19532
 	add	%at, %v0, %a1
 	lw	%a3, 0(%at)
 	lw	%t0, 0(%a3)
@@ -9006,13 +8019,13 @@ iter_trace_diffuse_rays.2973:
 	flw	%f4, 2(%v1)
 	fmul	%f2, %f2, %f4
 	fadd	%f0, %f0, %f2
-	flw	%f2, 464(%zero)
-	fblt	%f0, %f2, fbgt_else.20169
+	flw	%f2, 465(%zero)
+	fblt	%f0, %f2, fbgt_else.19533
 	addi	%t0, %zero, 0
-	j	fbgt_cont.20170
-fbgt_else.20169:
+	j	fbgt_cont.19534
+fbgt_else.19533:
 	addi	%t0, %zero, 1
-fbgt_cont.20170:
+fbgt_cont.19534:
 	sw	%a0, 0(%sp)
 	sw	%v1, 1(%sp)
 	fsw	%f2, 2(%sp)
@@ -9021,7 +8034,7 @@ fbgt_cont.20170:
 	fsw	%f1, 5(%sp)
 	sw	%v0, 6(%sp)
 	sw	%a1, 7(%sp)
-	beqi	%t0, 0, bnei_else.20171
+	beqi	%t0, 0, bnei_else.19535
 	addi	%a3, %a1, 1
 	add	%at, %v0, %a3
 	lw	%a3, 0(%at)
@@ -9033,10 +8046,10 @@ fbgt_cont.20170:
 	addi	%v0, %a3, 0
 	sw	%ra, 11(%sp)
 	addi	%sp, %sp, 12
-	jal	judge_intersection_fast.2941
+	jal	judge_intersection_fast.2936
 	addi	%sp, %sp, -12
 	lw	%ra, 11(%sp)
-	beqi	%v0, 0, bnei_else.20173
+	beqi	%v0, 0, bnei_else.19537
 	addi	%v0, %zero, 141
 	lw	%v0, 0(%v0)
 	addi	%v1, %zero, 12
@@ -9046,15 +8059,15 @@ fbgt_cont.20170:
 	lw	%v1, 0(%v1)
 	lw	%a0, 1(%v0)
 	sw	%v0, 11(%sp)
-	beqi	%a0, 1, bnei_else.20175
-	beqi	%a0, 2, bnei_else.20177
+	beqi	%a0, 1, bnei_else.19539
+	beqi	%a0, 2, bnei_else.19541
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 13
-	jal	get_nvector_second.2947
+	jal	get_nvector_second.2942
 	addi	%sp, %sp, -13
 	lw	%ra, 12(%sp)
-	j	bnei_cont.20178
-bnei_else.20177:
+	j	bnei_cont.19542
+bnei_else.19541:
 	lw	%v1, 4(%v0)
 	flw	%f0, 0(%v1)
 	fneg	%f0, %f0
@@ -9070,9 +8083,9 @@ bnei_else.20177:
 	fneg	%f0, %f0
 	addi	%v1, %zero, 142
 	fsw	%f0, 2(%v1)
-bnei_cont.20178:
-	j	bnei_cont.20176
-bnei_else.20175:
+bnei_cont.19542:
+	j	bnei_cont.19540
+bnei_else.19539:
 	addi	%a0, %zero, 136
 	lw	%a0, 0(%a0)
 	addi	%a1, %zero, 142
@@ -9085,39 +8098,39 @@ bnei_else.20175:
 	addi	%a0, %a0, -1
 	add	%at, %v1, %a0
 	flw	%f1, 0(%at)
-	fbne	%f1, %f0, fbeq_else.20179
+	fbne	%f1, %f0, fbeq_else.19543
 	addi	%v1, %zero, 1
-	j	fbeq_cont.20180
-fbeq_else.20179:
+	j	fbeq_cont.19544
+fbeq_else.19543:
 	addi	%v1, %zero, 0
-fbeq_cont.20180:
-	beqi	%v1, 0, bnei_else.20181
+fbeq_cont.19544:
+	beqi	%v1, 0, bnei_else.19545
 	fmov	%f1, %f0
-	j	bnei_cont.20182
-bnei_else.20181:
-	fblt	%f0, %f1, fbgt_else.20183
+	j	bnei_cont.19546
+bnei_else.19545:
+	fblt	%f0, %f1, fbgt_else.19547
 	addi	%v1, %zero, 0
-	j	fbgt_cont.20184
-fbgt_else.20183:
+	j	fbgt_cont.19548
+fbgt_else.19547:
 	addi	%v1, %zero, 1
-fbgt_cont.20184:
-	beqi	%v1, 0, bnei_else.20185
-	flw	%f1, 468(%zero)
-	j	bnei_cont.20186
-bnei_else.20185:
-	flw	%f1, 463(%zero)
-bnei_cont.20186:
-bnei_cont.20182:
+fbgt_cont.19548:
+	beqi	%v1, 0, bnei_else.19549
+	flw	%f1, 469(%zero)
+	j	bnei_cont.19550
+bnei_else.19549:
+	flw	%f1, 464(%zero)
+bnei_cont.19550:
+bnei_cont.19546:
 	fneg	%f1, %f1
 	addi	%v1, %zero, 142
 	add	%at, %v1, %a0
 	fsw	%f1, 0(%at)
-bnei_cont.20176:
+bnei_cont.19540:
 	addi	%v1, %zero, 138
 	lw	%v0, 11(%sp)
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 13
-	jal	utexture.2952
+	jal	utexture.2947
 	addi	%sp, %sp, -13
 	lw	%ra, 12(%sp)
 	addi	%v0, %zero, 134
@@ -9125,12 +8138,12 @@ bnei_cont.20176:
 	lw	%v0, 9(%sp)
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 13
-	jal	shadow_check_one_or_matrix.2912
+	jal	shadow_check_one_or_matrix.2907
 	addi	%sp, %sp, -13
 	lw	%ra, 12(%sp)
-	beqi	%v0, 0, bnei_else.20187
-	j	bnei_cont.20188
-bnei_else.20187:
+	beqi	%v0, 0, bnei_else.19551
+	j	bnei_cont.19552
+bnei_else.19551:
 	addi	%v0, %zero, 142
 	flw	%f0, 0(%v0)
 	addi	%v0, %zero, 78
@@ -9150,17 +8163,17 @@ bnei_else.20187:
 	fadd	%f0, %f0, %f1
 	fneg	%f0, %f0
 	flw	%f1, 2(%sp)
-	fblt	%f1, %f0, fbgt_else.20189
+	fblt	%f1, %f0, fbgt_else.19553
 	addi	%v0, %zero, 0
-	j	fbgt_cont.20190
-fbgt_else.20189:
+	j	fbgt_cont.19554
+fbgt_else.19553:
 	addi	%v0, %zero, 1
-fbgt_cont.20190:
-	beqi	%v0, 0, bnei_else.20191
-	j	bnei_cont.20192
-bnei_else.20191:
+fbgt_cont.19554:
+	beqi	%v0, 0, bnei_else.19555
+	j	bnei_cont.19556
+bnei_else.19555:
 	fmov	%f0, %f1
-bnei_cont.20192:
+bnei_cont.19556:
 	flw	%f2, 8(%sp)
 	fmul	%f0, %f2, %f0
 	lw	%v0, 11(%sp)
@@ -9191,12 +8204,12 @@ bnei_cont.20192:
 	fadd	%f0, %f2, %f0
 	addi	%v0, %zero, 148
 	fsw	%f0, 2(%v0)
-bnei_cont.20188:
-	j	bnei_cont.20174
-bnei_else.20173:
-bnei_cont.20174:
-	j	bnei_cont.20172
-bnei_else.20171:
+bnei_cont.19552:
+	j	bnei_cont.19538
+bnei_else.19537:
+bnei_cont.19538:
+	j	bnei_cont.19536
+bnei_else.19535:
 	flw	%f5, 437(%zero)
 	fdiv	%f0, %f0, %f5
 	fsw	%f0, 12(%sp)
@@ -9205,10 +8218,10 @@ bnei_else.20171:
 	addi	%v0, %a3, 0
 	sw	%ra, 14(%sp)
 	addi	%sp, %sp, 15
-	jal	judge_intersection_fast.2941
+	jal	judge_intersection_fast.2936
 	addi	%sp, %sp, -15
 	lw	%ra, 14(%sp)
-	beqi	%v0, 0, bnei_else.20193
+	beqi	%v0, 0, bnei_else.19557
 	addi	%v0, %zero, 141
 	lw	%v0, 0(%v0)
 	addi	%v1, %zero, 12
@@ -9218,15 +8231,15 @@ bnei_else.20171:
 	lw	%v1, 0(%v1)
 	lw	%a0, 1(%v0)
 	sw	%v0, 14(%sp)
-	beqi	%a0, 1, bnei_else.20195
-	beqi	%a0, 2, bnei_else.20197
+	beqi	%a0, 1, bnei_else.19559
+	beqi	%a0, 2, bnei_else.19561
 	sw	%ra, 15(%sp)
 	addi	%sp, %sp, 16
-	jal	get_nvector_second.2947
+	jal	get_nvector_second.2942
 	addi	%sp, %sp, -16
 	lw	%ra, 15(%sp)
-	j	bnei_cont.20198
-bnei_else.20197:
+	j	bnei_cont.19562
+bnei_else.19561:
 	lw	%v1, 4(%v0)
 	flw	%f0, 0(%v1)
 	fneg	%f0, %f0
@@ -9242,9 +8255,9 @@ bnei_else.20197:
 	fneg	%f0, %f0
 	addi	%v1, %zero, 142
 	fsw	%f0, 2(%v1)
-bnei_cont.20198:
-	j	bnei_cont.20196
-bnei_else.20195:
+bnei_cont.19562:
+	j	bnei_cont.19560
+bnei_else.19559:
 	addi	%a0, %zero, 136
 	lw	%a0, 0(%a0)
 	addi	%a1, %zero, 142
@@ -9257,39 +8270,39 @@ bnei_else.20195:
 	addi	%a0, %a0, -1
 	add	%at, %v1, %a0
 	flw	%f1, 0(%at)
-	fbne	%f1, %f0, fbeq_else.20199
+	fbne	%f1, %f0, fbeq_else.19563
 	addi	%v1, %zero, 1
-	j	fbeq_cont.20200
-fbeq_else.20199:
+	j	fbeq_cont.19564
+fbeq_else.19563:
 	addi	%v1, %zero, 0
-fbeq_cont.20200:
-	beqi	%v1, 0, bnei_else.20201
+fbeq_cont.19564:
+	beqi	%v1, 0, bnei_else.19565
 	fmov	%f1, %f0
-	j	bnei_cont.20202
-bnei_else.20201:
-	fblt	%f0, %f1, fbgt_else.20203
+	j	bnei_cont.19566
+bnei_else.19565:
+	fblt	%f0, %f1, fbgt_else.19567
 	addi	%v1, %zero, 0
-	j	fbgt_cont.20204
-fbgt_else.20203:
+	j	fbgt_cont.19568
+fbgt_else.19567:
 	addi	%v1, %zero, 1
-fbgt_cont.20204:
-	beqi	%v1, 0, bnei_else.20205
-	flw	%f1, 468(%zero)
-	j	bnei_cont.20206
-bnei_else.20205:
-	flw	%f1, 463(%zero)
-bnei_cont.20206:
-bnei_cont.20202:
+fbgt_cont.19568:
+	beqi	%v1, 0, bnei_else.19569
+	flw	%f1, 469(%zero)
+	j	bnei_cont.19570
+bnei_else.19569:
+	flw	%f1, 464(%zero)
+bnei_cont.19570:
+bnei_cont.19566:
 	fneg	%f1, %f1
 	addi	%v1, %zero, 142
 	add	%at, %v1, %a0
 	fsw	%f1, 0(%at)
-bnei_cont.20196:
+bnei_cont.19560:
 	addi	%v1, %zero, 138
 	lw	%v0, 14(%sp)
 	sw	%ra, 15(%sp)
 	addi	%sp, %sp, 16
-	jal	utexture.2952
+	jal	utexture.2947
 	addi	%sp, %sp, -16
 	lw	%ra, 15(%sp)
 	addi	%v0, %zero, 134
@@ -9297,12 +8310,12 @@ bnei_cont.20196:
 	lw	%v0, 9(%sp)
 	sw	%ra, 15(%sp)
 	addi	%sp, %sp, 16
-	jal	shadow_check_one_or_matrix.2912
+	jal	shadow_check_one_or_matrix.2907
 	addi	%sp, %sp, -16
 	lw	%ra, 15(%sp)
-	beqi	%v0, 0, bnei_else.20207
-	j	bnei_cont.20208
-bnei_else.20207:
+	beqi	%v0, 0, bnei_else.19571
+	j	bnei_cont.19572
+bnei_else.19571:
 	addi	%v0, %zero, 142
 	flw	%f0, 0(%v0)
 	addi	%v0, %zero, 78
@@ -9322,17 +8335,17 @@ bnei_else.20207:
 	fadd	%f0, %f0, %f1
 	fneg	%f0, %f0
 	flw	%f1, 2(%sp)
-	fblt	%f1, %f0, fbgt_else.20209
+	fblt	%f1, %f0, fbgt_else.19573
 	addi	%v0, %zero, 0
-	j	fbgt_cont.20210
-fbgt_else.20209:
+	j	fbgt_cont.19574
+fbgt_else.19573:
 	addi	%v0, %zero, 1
-fbgt_cont.20210:
-	beqi	%v0, 0, bnei_else.20211
-	j	bnei_cont.20212
-bnei_else.20211:
+fbgt_cont.19574:
+	beqi	%v0, 0, bnei_else.19575
+	j	bnei_cont.19576
+bnei_else.19575:
 	fmov	%f0, %f1
-bnei_cont.20212:
+bnei_cont.19576:
 	flw	%f2, 12(%sp)
 	fmul	%f0, %f2, %f0
 	lw	%v0, 14(%sp)
@@ -9363,14 +8376,14 @@ bnei_cont.20212:
 	fadd	%f0, %f2, %f0
 	addi	%v0, %zero, 148
 	fsw	%f0, 2(%v0)
-bnei_cont.20208:
-	j	bnei_cont.20194
-bnei_else.20193:
-bnei_cont.20194:
-bnei_cont.20172:
+bnei_cont.19572:
+	j	bnei_cont.19558
+bnei_else.19557:
+bnei_cont.19558:
+bnei_cont.19536:
 	lw	%v0, 7(%sp)
 	addi	%v0, %v0, -2
-	blti	%v0, 0, bgti_else.20213
+	blti	%v0, 0, bgti_else.19577
 	lw	%v1, 6(%sp)
 	add	%at, %v1, %v0
 	lw	%a0, 0(%at)
@@ -9387,14 +8400,14 @@ bnei_cont.20172:
 	fmul	%f1, %f1, %f2
 	fadd	%f0, %f0, %f1
 	flw	%f1, 2(%sp)
-	fblt	%f0, %f1, fbgt_else.20214
+	fblt	%f0, %f1, fbgt_else.19578
 	addi	%a1, %zero, 0
-	j	fbgt_cont.20215
-fbgt_else.20214:
+	j	fbgt_cont.19579
+fbgt_else.19578:
 	addi	%a1, %zero, 1
-fbgt_cont.20215:
+fbgt_cont.19579:
 	sw	%v0, 15(%sp)
-	beqi	%a1, 0, bnei_else.20216
+	beqi	%a1, 0, bnei_else.19580
 	addi	%a0, %v0, 1
 	add	%at, %v1, %a0
 	lw	%a0, 0(%at)
@@ -9403,35 +8416,35 @@ fbgt_cont.20215:
 	addi	%v0, %a0, 0
 	sw	%ra, 16(%sp)
 	addi	%sp, %sp, 17
-	jal	trace_diffuse_ray.2970
+	jal	trace_diffuse_ray.2965
 	addi	%sp, %sp, -17
 	lw	%ra, 16(%sp)
-	j	bnei_cont.20217
-bnei_else.20216:
+	j	bnei_cont.19581
+bnei_else.19580:
 	flw	%f1, 437(%zero)
 	fdiv	%f0, %f0, %f1
 	addi	%v0, %a0, 0
 	sw	%ra, 16(%sp)
 	addi	%sp, %sp, 17
-	jal	trace_diffuse_ray.2970
+	jal	trace_diffuse_ray.2965
 	addi	%sp, %sp, -17
 	lw	%ra, 16(%sp)
-bnei_cont.20217:
+bnei_cont.19581:
 	lw	%v0, 15(%sp)
 	addi	%a1, %v0, -2
 	lw	%v0, 6(%sp)
 	lw	%v1, 1(%sp)
 	lw	%a0, 0(%sp)
-	j	iter_trace_diffuse_rays.2973
-bgti_else.20213:
+	j	iter_trace_diffuse_rays.2968
+bgti_else.19577:
 	jr	%ra
-bgti_else.20168:
+bgti_else.19532:
 	jr	%ra
-trace_diffuse_ray_80percent.2982:
+trace_diffuse_ray_80percent.2977:
 	sw	%v1, 0(%sp)
 	sw	%a0, 1(%sp)
 	sw	%v0, 2(%sp)
-	beqi	%v0, 0, bnei_else.20220
+	beqi	%v0, 0, bnei_else.19584
 	addi	%a1, %zero, 179
 	lw	%a1, 0(%a1)
 	flw	%f0, 0(%a0)
@@ -9451,7 +8464,7 @@ trace_diffuse_ray_80percent.2982:
 	addi	%v0, %a0, 0
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	setup_startp_constants.2875
+	jal	setup_startp_constants.2870
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
 	addi	%a1, %zero, 118
@@ -9460,14 +8473,14 @@ trace_diffuse_ray_80percent.2982:
 	lw	%a0, 1(%sp)
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	iter_trace_diffuse_rays.2973
+	jal	iter_trace_diffuse_rays.2968
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
-	j	bnei_cont.20221
-bnei_else.20220:
-bnei_cont.20221:
+	j	bnei_cont.19585
+bnei_else.19584:
+bnei_cont.19585:
 	lw	%v0, 2(%sp)
-	beqi	%v0, 1, bnei_else.20222
+	beqi	%v0, 1, bnei_else.19586
 	addi	%v1, %zero, 179
 	lw	%v1, 1(%v1)
 	lw	%a0, 1(%sp)
@@ -9488,7 +8501,7 @@ bnei_cont.20221:
 	addi	%v0, %a0, 0
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	setup_startp_constants.2875
+	jal	setup_startp_constants.2870
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
 	addi	%a1, %zero, 118
@@ -9497,14 +8510,14 @@ bnei_cont.20221:
 	lw	%a0, 1(%sp)
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	iter_trace_diffuse_rays.2973
+	jal	iter_trace_diffuse_rays.2968
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
-	j	bnei_cont.20223
-bnei_else.20222:
-bnei_cont.20223:
+	j	bnei_cont.19587
+bnei_else.19586:
+bnei_cont.19587:
 	lw	%v0, 2(%sp)
-	beqi	%v0, 2, bnei_else.20224
+	beqi	%v0, 2, bnei_else.19588
 	addi	%v1, %zero, 179
 	lw	%v1, 2(%v1)
 	lw	%a0, 1(%sp)
@@ -9525,7 +8538,7 @@ bnei_cont.20223:
 	addi	%v0, %a0, 0
 	sw	%ra, 6(%sp)
 	addi	%sp, %sp, 7
-	jal	setup_startp_constants.2875
+	jal	setup_startp_constants.2870
 	addi	%sp, %sp, -7
 	lw	%ra, 6(%sp)
 	addi	%a1, %zero, 118
@@ -9534,14 +8547,14 @@ bnei_cont.20223:
 	lw	%a0, 1(%sp)
 	sw	%ra, 6(%sp)
 	addi	%sp, %sp, 7
-	jal	iter_trace_diffuse_rays.2973
+	jal	iter_trace_diffuse_rays.2968
 	addi	%sp, %sp, -7
 	lw	%ra, 6(%sp)
-	j	bnei_cont.20225
-bnei_else.20224:
-bnei_cont.20225:
+	j	bnei_cont.19589
+bnei_else.19588:
+bnei_cont.19589:
 	lw	%v0, 2(%sp)
-	beqi	%v0, 3, bnei_else.20226
+	beqi	%v0, 3, bnei_else.19590
 	addi	%v1, %zero, 179
 	lw	%v1, 3(%v1)
 	lw	%a0, 1(%sp)
@@ -9562,7 +8575,7 @@ bnei_cont.20225:
 	addi	%v0, %a0, 0
 	sw	%ra, 7(%sp)
 	addi	%sp, %sp, 8
-	jal	setup_startp_constants.2875
+	jal	setup_startp_constants.2870
 	addi	%sp, %sp, -8
 	lw	%ra, 7(%sp)
 	addi	%a1, %zero, 118
@@ -9571,14 +8584,14 @@ bnei_cont.20225:
 	lw	%a0, 1(%sp)
 	sw	%ra, 7(%sp)
 	addi	%sp, %sp, 8
-	jal	iter_trace_diffuse_rays.2973
+	jal	iter_trace_diffuse_rays.2968
 	addi	%sp, %sp, -8
 	lw	%ra, 7(%sp)
-	j	bnei_cont.20227
-bnei_else.20226:
-bnei_cont.20227:
+	j	bnei_cont.19591
+bnei_else.19590:
+bnei_cont.19591:
 	lw	%v0, 2(%sp)
-	beqi	%v0, 4, bnei_else.20228
+	beqi	%v0, 4, bnei_else.19592
 	addi	%v0, %zero, 179
 	lw	%v0, 4(%v0)
 	lw	%v1, 1(%sp)
@@ -9599,17 +8612,17 @@ bnei_cont.20227:
 	addi	%v1, %a0, 0
 	sw	%ra, 8(%sp)
 	addi	%sp, %sp, 9
-	jal	setup_startp_constants.2875
+	jal	setup_startp_constants.2870
 	addi	%sp, %sp, -9
 	lw	%ra, 8(%sp)
 	addi	%a1, %zero, 118
 	lw	%v0, 7(%sp)
 	lw	%v1, 0(%sp)
 	lw	%a0, 1(%sp)
-	j	iter_trace_diffuse_rays.2973
-bnei_else.20228:
+	j	iter_trace_diffuse_rays.2968
+bnei_else.19592:
 	jr	%ra
-calc_diffuse_using_1point.2986:
+calc_diffuse_using_1point.2981:
 	lw	%a0, 5(%v0)
 	lw	%a1, 7(%v0)
 	lw	%a2, 1(%v0)
@@ -9636,7 +8649,7 @@ calc_diffuse_using_1point.2986:
 	sw	%a0, 2(%sp)
 	sw	%a1, 3(%sp)
 	sw	%v0, 4(%sp)
-	beqi	%v0, 0, bnei_else.20230
+	beqi	%v0, 0, bnei_else.19594
 	addi	%a2, %zero, 179
 	lw	%a2, 0(%a2)
 	flw	%f0, 0(%a1)
@@ -9656,7 +8669,7 @@ calc_diffuse_using_1point.2986:
 	addi	%v0, %a1, 0
 	sw	%ra, 6(%sp)
 	addi	%sp, %sp, 7
-	jal	setup_startp_constants.2875
+	jal	setup_startp_constants.2870
 	addi	%sp, %sp, -7
 	lw	%ra, 6(%sp)
 	lw	%v0, 5(%sp)
@@ -9674,48 +8687,48 @@ calc_diffuse_using_1point.2986:
 	flw	%f2, 2(%a1)
 	fmul	%f1, %f1, %f2
 	fadd	%f0, %f0, %f1
-	flw	%f1, 464(%zero)
-	fblt	%f0, %f1, fbgt_else.20232
+	flw	%f1, 465(%zero)
+	fblt	%f0, %f1, fbgt_else.19596
 	addi	%a0, %zero, 0
-	j	fbgt_cont.20233
-fbgt_else.20232:
+	j	fbgt_cont.19597
+fbgt_else.19596:
 	addi	%a0, %zero, 1
-fbgt_cont.20233:
-	beqi	%a0, 0, bnei_else.20234
+fbgt_cont.19597:
+	beqi	%a0, 0, bnei_else.19598
 	lw	%v1, 119(%v0)
 	flw	%f1, 438(%zero)
 	fdiv	%f0, %f0, %f1
 	addi	%v0, %v1, 0
 	sw	%ra, 6(%sp)
 	addi	%sp, %sp, 7
-	jal	trace_diffuse_ray.2970
+	jal	trace_diffuse_ray.2965
 	addi	%sp, %sp, -7
 	lw	%ra, 6(%sp)
-	j	bnei_cont.20235
-bnei_else.20234:
+	j	bnei_cont.19599
+bnei_else.19598:
 	flw	%f1, 437(%zero)
 	fdiv	%f0, %f0, %f1
 	addi	%v0, %v1, 0
 	sw	%ra, 6(%sp)
 	addi	%sp, %sp, 7
-	jal	trace_diffuse_ray.2970
+	jal	trace_diffuse_ray.2965
 	addi	%sp, %sp, -7
 	lw	%ra, 6(%sp)
-bnei_cont.20235:
+bnei_cont.19599:
 	addi	%a1, %zero, 116
 	lw	%v0, 5(%sp)
 	lw	%v1, 2(%sp)
 	lw	%a0, 3(%sp)
 	sw	%ra, 6(%sp)
 	addi	%sp, %sp, 7
-	jal	iter_trace_diffuse_rays.2973
+	jal	iter_trace_diffuse_rays.2968
 	addi	%sp, %sp, -7
 	lw	%ra, 6(%sp)
-	j	bnei_cont.20231
-bnei_else.20230:
-bnei_cont.20231:
+	j	bnei_cont.19595
+bnei_else.19594:
+bnei_cont.19595:
 	lw	%v0, 4(%sp)
-	beqi	%v0, 1, bnei_else.20236
+	beqi	%v0, 1, bnei_else.19600
 	addi	%v1, %zero, 179
 	lw	%v1, 1(%v1)
 	lw	%a0, 3(%sp)
@@ -9736,7 +8749,7 @@ bnei_cont.20231:
 	addi	%v0, %a0, 0
 	sw	%ra, 7(%sp)
 	addi	%sp, %sp, 8
-	jal	setup_startp_constants.2875
+	jal	setup_startp_constants.2870
 	addi	%sp, %sp, -8
 	lw	%ra, 7(%sp)
 	lw	%v0, 6(%sp)
@@ -9754,48 +8767,48 @@ bnei_cont.20231:
 	flw	%f2, 2(%a1)
 	fmul	%f1, %f1, %f2
 	fadd	%f0, %f0, %f1
-	flw	%f1, 464(%zero)
-	fblt	%f0, %f1, fbgt_else.20238
+	flw	%f1, 465(%zero)
+	fblt	%f0, %f1, fbgt_else.19602
 	addi	%a0, %zero, 0
-	j	fbgt_cont.20239
-fbgt_else.20238:
+	j	fbgt_cont.19603
+fbgt_else.19602:
 	addi	%a0, %zero, 1
-fbgt_cont.20239:
-	beqi	%a0, 0, bnei_else.20240
+fbgt_cont.19603:
+	beqi	%a0, 0, bnei_else.19604
 	lw	%v1, 119(%v0)
 	flw	%f1, 438(%zero)
 	fdiv	%f0, %f0, %f1
 	addi	%v0, %v1, 0
 	sw	%ra, 7(%sp)
 	addi	%sp, %sp, 8
-	jal	trace_diffuse_ray.2970
+	jal	trace_diffuse_ray.2965
 	addi	%sp, %sp, -8
 	lw	%ra, 7(%sp)
-	j	bnei_cont.20241
-bnei_else.20240:
+	j	bnei_cont.19605
+bnei_else.19604:
 	flw	%f1, 437(%zero)
 	fdiv	%f0, %f0, %f1
 	addi	%v0, %v1, 0
 	sw	%ra, 7(%sp)
 	addi	%sp, %sp, 8
-	jal	trace_diffuse_ray.2970
+	jal	trace_diffuse_ray.2965
 	addi	%sp, %sp, -8
 	lw	%ra, 7(%sp)
-bnei_cont.20241:
+bnei_cont.19605:
 	addi	%a1, %zero, 116
 	lw	%v0, 6(%sp)
 	lw	%v1, 2(%sp)
 	lw	%a0, 3(%sp)
 	sw	%ra, 7(%sp)
 	addi	%sp, %sp, 8
-	jal	iter_trace_diffuse_rays.2973
+	jal	iter_trace_diffuse_rays.2968
 	addi	%sp, %sp, -8
 	lw	%ra, 7(%sp)
-	j	bnei_cont.20237
-bnei_else.20236:
-bnei_cont.20237:
+	j	bnei_cont.19601
+bnei_else.19600:
+bnei_cont.19601:
 	lw	%v0, 4(%sp)
-	beqi	%v0, 2, bnei_else.20242
+	beqi	%v0, 2, bnei_else.19606
 	addi	%v1, %zero, 179
 	lw	%v1, 2(%v1)
 	lw	%a0, 3(%sp)
@@ -9816,7 +8829,7 @@ bnei_cont.20237:
 	addi	%v0, %a0, 0
 	sw	%ra, 8(%sp)
 	addi	%sp, %sp, 9
-	jal	setup_startp_constants.2875
+	jal	setup_startp_constants.2870
 	addi	%sp, %sp, -9
 	lw	%ra, 8(%sp)
 	lw	%v0, 7(%sp)
@@ -9834,48 +8847,48 @@ bnei_cont.20237:
 	flw	%f2, 2(%a1)
 	fmul	%f1, %f1, %f2
 	fadd	%f0, %f0, %f1
-	flw	%f1, 464(%zero)
-	fblt	%f0, %f1, fbgt_else.20244
+	flw	%f1, 465(%zero)
+	fblt	%f0, %f1, fbgt_else.19608
 	addi	%a0, %zero, 0
-	j	fbgt_cont.20245
-fbgt_else.20244:
+	j	fbgt_cont.19609
+fbgt_else.19608:
 	addi	%a0, %zero, 1
-fbgt_cont.20245:
-	beqi	%a0, 0, bnei_else.20246
+fbgt_cont.19609:
+	beqi	%a0, 0, bnei_else.19610
 	lw	%v1, 119(%v0)
 	flw	%f1, 438(%zero)
 	fdiv	%f0, %f0, %f1
 	addi	%v0, %v1, 0
 	sw	%ra, 8(%sp)
 	addi	%sp, %sp, 9
-	jal	trace_diffuse_ray.2970
+	jal	trace_diffuse_ray.2965
 	addi	%sp, %sp, -9
 	lw	%ra, 8(%sp)
-	j	bnei_cont.20247
-bnei_else.20246:
+	j	bnei_cont.19611
+bnei_else.19610:
 	flw	%f1, 437(%zero)
 	fdiv	%f0, %f0, %f1
 	addi	%v0, %v1, 0
 	sw	%ra, 8(%sp)
 	addi	%sp, %sp, 9
-	jal	trace_diffuse_ray.2970
+	jal	trace_diffuse_ray.2965
 	addi	%sp, %sp, -9
 	lw	%ra, 8(%sp)
-bnei_cont.20247:
+bnei_cont.19611:
 	addi	%a1, %zero, 116
 	lw	%v0, 7(%sp)
 	lw	%v1, 2(%sp)
 	lw	%a0, 3(%sp)
 	sw	%ra, 8(%sp)
 	addi	%sp, %sp, 9
-	jal	iter_trace_diffuse_rays.2973
+	jal	iter_trace_diffuse_rays.2968
 	addi	%sp, %sp, -9
 	lw	%ra, 8(%sp)
-	j	bnei_cont.20243
-bnei_else.20242:
-bnei_cont.20243:
+	j	bnei_cont.19607
+bnei_else.19606:
+bnei_cont.19607:
 	lw	%v0, 4(%sp)
-	beqi	%v0, 3, bnei_else.20248
+	beqi	%v0, 3, bnei_else.19612
 	addi	%v1, %zero, 179
 	lw	%v1, 3(%v1)
 	lw	%a0, 3(%sp)
@@ -9896,7 +8909,7 @@ bnei_cont.20243:
 	addi	%v0, %a0, 0
 	sw	%ra, 9(%sp)
 	addi	%sp, %sp, 10
-	jal	setup_startp_constants.2875
+	jal	setup_startp_constants.2870
 	addi	%sp, %sp, -10
 	lw	%ra, 9(%sp)
 	lw	%v0, 8(%sp)
@@ -9914,48 +8927,48 @@ bnei_cont.20243:
 	flw	%f2, 2(%a1)
 	fmul	%f1, %f1, %f2
 	fadd	%f0, %f0, %f1
-	flw	%f1, 464(%zero)
-	fblt	%f0, %f1, fbgt_else.20250
+	flw	%f1, 465(%zero)
+	fblt	%f0, %f1, fbgt_else.19614
 	addi	%a0, %zero, 0
-	j	fbgt_cont.20251
-fbgt_else.20250:
+	j	fbgt_cont.19615
+fbgt_else.19614:
 	addi	%a0, %zero, 1
-fbgt_cont.20251:
-	beqi	%a0, 0, bnei_else.20252
+fbgt_cont.19615:
+	beqi	%a0, 0, bnei_else.19616
 	lw	%v1, 119(%v0)
 	flw	%f1, 438(%zero)
 	fdiv	%f0, %f0, %f1
 	addi	%v0, %v1, 0
 	sw	%ra, 9(%sp)
 	addi	%sp, %sp, 10
-	jal	trace_diffuse_ray.2970
+	jal	trace_diffuse_ray.2965
 	addi	%sp, %sp, -10
 	lw	%ra, 9(%sp)
-	j	bnei_cont.20253
-bnei_else.20252:
+	j	bnei_cont.19617
+bnei_else.19616:
 	flw	%f1, 437(%zero)
 	fdiv	%f0, %f0, %f1
 	addi	%v0, %v1, 0
 	sw	%ra, 9(%sp)
 	addi	%sp, %sp, 10
-	jal	trace_diffuse_ray.2970
+	jal	trace_diffuse_ray.2965
 	addi	%sp, %sp, -10
 	lw	%ra, 9(%sp)
-bnei_cont.20253:
+bnei_cont.19617:
 	addi	%a1, %zero, 116
 	lw	%v0, 8(%sp)
 	lw	%v1, 2(%sp)
 	lw	%a0, 3(%sp)
 	sw	%ra, 9(%sp)
 	addi	%sp, %sp, 10
-	jal	iter_trace_diffuse_rays.2973
+	jal	iter_trace_diffuse_rays.2968
 	addi	%sp, %sp, -10
 	lw	%ra, 9(%sp)
-	j	bnei_cont.20249
-bnei_else.20248:
-bnei_cont.20249:
+	j	bnei_cont.19613
+bnei_else.19612:
+bnei_cont.19613:
 	lw	%v0, 4(%sp)
-	beqi	%v0, 4, bnei_else.20254
+	beqi	%v0, 4, bnei_else.19618
 	addi	%v0, %zero, 179
 	lw	%v0, 4(%v0)
 	lw	%v1, 3(%sp)
@@ -9976,7 +8989,7 @@ bnei_cont.20249:
 	addi	%v1, %a0, 0
 	sw	%ra, 10(%sp)
 	addi	%sp, %sp, 11
-	jal	setup_startp_constants.2875
+	jal	setup_startp_constants.2870
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
 	lw	%v0, 9(%sp)
@@ -9994,46 +9007,46 @@ bnei_cont.20249:
 	flw	%f2, 2(%a1)
 	fmul	%f1, %f1, %f2
 	fadd	%f0, %f0, %f1
-	flw	%f1, 464(%zero)
-	fblt	%f0, %f1, fbgt_else.20256
+	flw	%f1, 465(%zero)
+	fblt	%f0, %f1, fbgt_else.19620
 	addi	%a0, %zero, 0
-	j	fbgt_cont.20257
-fbgt_else.20256:
+	j	fbgt_cont.19621
+fbgt_else.19620:
 	addi	%a0, %zero, 1
-fbgt_cont.20257:
-	beqi	%a0, 0, bnei_else.20258
+fbgt_cont.19621:
+	beqi	%a0, 0, bnei_else.19622
 	lw	%v1, 119(%v0)
 	flw	%f1, 438(%zero)
 	fdiv	%f0, %f0, %f1
 	addi	%v0, %v1, 0
 	sw	%ra, 10(%sp)
 	addi	%sp, %sp, 11
-	jal	trace_diffuse_ray.2970
+	jal	trace_diffuse_ray.2965
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
-	j	bnei_cont.20259
-bnei_else.20258:
+	j	bnei_cont.19623
+bnei_else.19622:
 	flw	%f1, 437(%zero)
 	fdiv	%f0, %f0, %f1
 	addi	%v0, %v1, 0
 	sw	%ra, 10(%sp)
 	addi	%sp, %sp, 11
-	jal	trace_diffuse_ray.2970
+	jal	trace_diffuse_ray.2965
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
-bnei_cont.20259:
+bnei_cont.19623:
 	addi	%a1, %zero, 116
 	lw	%v0, 9(%sp)
 	lw	%v1, 2(%sp)
 	lw	%a0, 3(%sp)
 	sw	%ra, 10(%sp)
 	addi	%sp, %sp, 11
-	jal	iter_trace_diffuse_rays.2973
+	jal	iter_trace_diffuse_rays.2968
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
-	j	bnei_cont.20255
-bnei_else.20254:
-bnei_cont.20255:
+	j	bnei_cont.19619
+bnei_else.19618:
+bnei_cont.19619:
 	lw	%v0, 0(%sp)
 	lw	%v1, 1(%sp)
 	add	%at, %v1, %v0
@@ -10066,7 +9079,7 @@ bnei_cont.20255:
 	addi	%v0, %zero, 151
 	fsw	%f0, 2(%v0)
 	jr	%ra
-calc_diffuse_using_5points.2989:
+calc_diffuse_using_5points.2984:
 	add	%at, %v1, %v0
 	lw	%v1, 0(%at)
 	lw	%v1, 5(%v1)
@@ -10206,19 +9219,19 @@ calc_diffuse_using_5points.2989:
 	addi	%v0, %zero, 151
 	fsw	%f0, 2(%v0)
 	jr	%ra
-do_without_neighbors.2995:
+do_without_neighbors.2990:
 	addi	%at, %zero, 4
-	blt	%at, %v1, bgt_else.20262
+	blt	%at, %v1, bgt_else.19626
 	lw	%a0, 2(%v0)
 	add	%at, %a0, %v1
 	lw	%a0, 0(%at)
-	blti	%a0, 0, bgti_else.20263
+	blti	%a0, 0, bgti_else.19627
 	lw	%a0, 3(%v0)
 	add	%at, %a0, %v1
 	lw	%a0, 0(%at)
 	sw	%v0, 0(%sp)
 	sw	%v1, 1(%sp)
-	beqi	%a0, 0, bnei_else.20264
+	beqi	%a0, 0, bnei_else.19628
 	lw	%a0, 5(%v0)
 	lw	%a1, 7(%v0)
 	lw	%a2, 1(%v0)
@@ -10246,7 +9259,7 @@ do_without_neighbors.2995:
 	addi	%a0, %a2, 0
 	sw	%ra, 3(%sp)
 	addi	%sp, %sp, 4
-	jal	trace_diffuse_ray_80percent.2982
+	jal	trace_diffuse_ray_80percent.2977
 	addi	%sp, %sp, -4
 	lw	%ra, 3(%sp)
 	lw	%v0, 1(%sp)
@@ -10280,52 +9293,52 @@ do_without_neighbors.2995:
 	fadd	%f0, %f0, %f1
 	addi	%v1, %zero, 151
 	fsw	%f0, 2(%v1)
-	j	bnei_cont.20265
-bnei_else.20264:
-bnei_cont.20265:
+	j	bnei_cont.19629
+bnei_else.19628:
+bnei_cont.19629:
 	lw	%v0, 1(%sp)
 	addi	%v1, %v0, 1
 	addi	%at, %zero, 4
-	blt	%at, %v1, bgt_else.20266
+	blt	%at, %v1, bgt_else.19630
 	lw	%v0, 0(%sp)
 	lw	%a0, 2(%v0)
 	add	%at, %a0, %v1
 	lw	%a0, 0(%at)
-	blti	%a0, 0, bgti_else.20267
+	blti	%a0, 0, bgti_else.19631
 	lw	%a0, 3(%v0)
 	add	%at, %a0, %v1
 	lw	%a0, 0(%at)
 	sw	%v1, 3(%sp)
-	beqi	%a0, 0, bnei_else.20268
+	beqi	%a0, 0, bnei_else.19632
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	calc_diffuse_using_1point.2986
+	jal	calc_diffuse_using_1point.2981
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
-	j	bnei_cont.20269
-bnei_else.20268:
-bnei_cont.20269:
+	j	bnei_cont.19633
+bnei_else.19632:
+bnei_cont.19633:
 	lw	%v0, 3(%sp)
 	addi	%v1, %v0, 1
 	lw	%v0, 0(%sp)
-	j	do_without_neighbors.2995
-bgti_else.20267:
+	j	do_without_neighbors.2990
+bgti_else.19631:
 	jr	%ra
-bgt_else.20266:
+bgt_else.19630:
 	jr	%ra
-bgti_else.20263:
+bgti_else.19627:
 	jr	%ra
-bgt_else.20262:
+bgt_else.19626:
 	jr	%ra
-try_exploit_neighbors.3011:
+try_exploit_neighbors.3006:
 	add	%at, %a1, %v0
 	lw	%t0, 0(%at)
 	addi	%at, %zero, 4
-	blt	%at, %a3, bgt_else.20274
+	blt	%at, %a3, bgt_else.19638
 	lw	%t1, 2(%t0)
 	add	%at, %t1, %a3
 	lw	%t1, 0(%at)
-	blti	%t1, 0, bgti_else.20275
+	blti	%t1, 0, bgti_else.19639
 	lw	%t1, 2(%t0)
 	add	%at, %t1, %a3
 	lw	%t1, 0(%at)
@@ -10334,45 +9347,45 @@ try_exploit_neighbors.3011:
 	lw	%t3, 2(%t2)
 	add	%at, %t3, %a3
 	lw	%t3, 0(%at)
-	bne	%t3, %t1, beq_else.20276
+	bne	%t3, %t1, beq_else.19640
 	add	%at, %a2, %v0
 	lw	%t3, 0(%at)
 	lw	%t3, 2(%t3)
 	add	%at, %t3, %a3
 	lw	%t3, 0(%at)
-	bne	%t3, %t1, beq_else.20278
+	bne	%t3, %t1, beq_else.19642
 	addi	%t3, %v0, -1
 	add	%at, %a1, %t3
 	lw	%t3, 0(%at)
 	lw	%t3, 2(%t3)
 	add	%at, %t3, %a3
 	lw	%t3, 0(%at)
-	bne	%t3, %t1, beq_else.20280
+	bne	%t3, %t1, beq_else.19644
 	addi	%t3, %v0, 1
 	add	%at, %a1, %t3
 	lw	%t3, 0(%at)
 	lw	%t3, 2(%t3)
 	add	%at, %t3, %a3
 	lw	%t3, 0(%at)
-	bne	%t3, %t1, beq_else.20282
+	bne	%t3, %t1, beq_else.19646
 	addi	%t1, %zero, 1
-	j	beq_cont.20283
-beq_else.20282:
+	j	beq_cont.19647
+beq_else.19646:
 	addi	%t1, %zero, 0
-beq_cont.20283:
-	j	beq_cont.20281
-beq_else.20280:
+beq_cont.19647:
+	j	beq_cont.19645
+beq_else.19644:
 	addi	%t1, %zero, 0
-beq_cont.20281:
-	j	beq_cont.20279
-beq_else.20278:
+beq_cont.19645:
+	j	beq_cont.19643
+beq_else.19642:
 	addi	%t1, %zero, 0
-beq_cont.20279:
-	j	beq_cont.20277
-beq_else.20276:
+beq_cont.19643:
+	j	beq_cont.19641
+beq_else.19640:
 	addi	%t1, %zero, 0
-beq_cont.20277:
-	beqi	%t1, 0, bnei_else.20284
+beq_cont.19641:
+	beqi	%t1, 0, bnei_else.19648
 	lw	%t1, 3(%t0)
 	add	%at, %t1, %a3
 	lw	%t1, 0(%at)
@@ -10384,28 +9397,28 @@ beq_cont.20277:
 	sw	%t2, 5(%sp)
 	sw	%t0, 6(%sp)
 	sw	%a3, 7(%sp)
-	beqi	%t1, 0, bnei_else.20285
+	beqi	%t1, 0, bnei_else.19649
 	addi	%v1, %a0, 0
 	addi	%a0, %a1, 0
 	addi	%a1, %a2, 0
 	addi	%a2, %a3, 0
 	sw	%ra, 8(%sp)
 	addi	%sp, %sp, 9
-	jal	calc_diffuse_using_5points.2989
+	jal	calc_diffuse_using_5points.2984
 	addi	%sp, %sp, -9
 	lw	%ra, 8(%sp)
-	j	bnei_cont.20286
-bnei_else.20285:
-bnei_cont.20286:
+	j	bnei_cont.19650
+bnei_else.19649:
+bnei_cont.19650:
 	lw	%v0, 7(%sp)
 	addi	%v1, %v0, 1
 	addi	%at, %zero, 4
-	blt	%at, %v1, bgt_else.20287
+	blt	%at, %v1, bgt_else.19651
 	lw	%v0, 6(%sp)
 	lw	%a0, 2(%v0)
 	add	%at, %a0, %v1
 	lw	%a0, 0(%at)
-	blti	%a0, 0, bgti_else.20288
+	blti	%a0, 0, bgti_else.19652
 	lw	%a0, 2(%v0)
 	add	%at, %a0, %v1
 	lw	%a0, 0(%at)
@@ -10413,7 +9426,7 @@ bnei_cont.20286:
 	lw	%a1, 2(%a1)
 	add	%at, %a1, %v1
 	lw	%a1, 0(%at)
-	bne	%a1, %a0, beq_else.20289
+	bne	%a1, %a0, beq_else.19653
 	lw	%a1, 3(%sp)
 	lw	%a2, 4(%sp)
 	add	%at, %a2, %a1
@@ -10421,7 +9434,7 @@ bnei_cont.20286:
 	lw	%a3, 2(%a3)
 	add	%at, %a3, %v1
 	lw	%a3, 0(%at)
-	bne	%a3, %a0, beq_else.20291
+	bne	%a3, %a0, beq_else.19655
 	addi	%a3, %a1, -1
 	lw	%t0, 2(%sp)
 	add	%at, %t0, %a3
@@ -10429,37 +9442,37 @@ bnei_cont.20286:
 	lw	%a3, 2(%a3)
 	add	%at, %a3, %v1
 	lw	%a3, 0(%at)
-	bne	%a3, %a0, beq_else.20293
+	bne	%a3, %a0, beq_else.19657
 	addi	%a3, %a1, 1
 	add	%at, %t0, %a3
 	lw	%a3, 0(%at)
 	lw	%a3, 2(%a3)
 	add	%at, %a3, %v1
 	lw	%a3, 0(%at)
-	bne	%a3, %a0, beq_else.20295
+	bne	%a3, %a0, beq_else.19659
 	addi	%a0, %zero, 1
-	j	beq_cont.20296
-beq_else.20295:
+	j	beq_cont.19660
+beq_else.19659:
 	addi	%a0, %zero, 0
-beq_cont.20296:
-	j	beq_cont.20294
-beq_else.20293:
+beq_cont.19660:
+	j	beq_cont.19658
+beq_else.19657:
 	addi	%a0, %zero, 0
-beq_cont.20294:
-	j	beq_cont.20292
-beq_else.20291:
+beq_cont.19658:
+	j	beq_cont.19656
+beq_else.19655:
 	addi	%a0, %zero, 0
-beq_cont.20292:
-	j	beq_cont.20290
-beq_else.20289:
+beq_cont.19656:
+	j	beq_cont.19654
+beq_else.19653:
 	addi	%a0, %zero, 0
-beq_cont.20290:
-	beqi	%a0, 0, bnei_else.20297
+beq_cont.19654:
+	beqi	%a0, 0, bnei_else.19661
 	lw	%v0, 3(%v0)
 	add	%at, %v0, %v1
 	lw	%v0, 0(%at)
 	sw	%v1, 8(%sp)
-	beqi	%v0, 0, bnei_else.20298
+	beqi	%v0, 0, bnei_else.19662
 	lw	%v0, 3(%sp)
 	lw	%a0, 1(%sp)
 	lw	%a1, 2(%sp)
@@ -10471,12 +9484,12 @@ beq_cont.20290:
 	addi	%a1, %k0, 0
 	sw	%ra, 9(%sp)
 	addi	%sp, %sp, 10
-	jal	calc_diffuse_using_5points.2989
+	jal	calc_diffuse_using_5points.2984
 	addi	%sp, %sp, -10
 	lw	%ra, 9(%sp)
-	j	bnei_cont.20299
-bnei_else.20298:
-bnei_cont.20299:
+	j	bnei_cont.19663
+bnei_else.19662:
+bnei_cont.19663:
 	lw	%v0, 8(%sp)
 	addi	%a3, %v0, 1
 	lw	%v0, 3(%sp)
@@ -10484,344 +9497,344 @@ bnei_cont.20299:
 	lw	%a0, 1(%sp)
 	lw	%a1, 2(%sp)
 	lw	%a2, 4(%sp)
-	j	try_exploit_neighbors.3011
-bnei_else.20297:
-	j	do_without_neighbors.2995
-bgti_else.20288:
+	j	try_exploit_neighbors.3006
+bnei_else.19661:
+	j	do_without_neighbors.2990
+bgti_else.19652:
 	jr	%ra
-bgt_else.20287:
+bgt_else.19651:
 	jr	%ra
-bnei_else.20284:
+bnei_else.19648:
 	addi	%at, %zero, 4
-	blt	%at, %a3, bgt_else.20302
+	blt	%at, %a3, bgt_else.19666
 	lw	%v0, 2(%t0)
 	add	%at, %v0, %a3
 	lw	%v0, 0(%at)
-	blti	%v0, 0, bgti_else.20303
+	blti	%v0, 0, bgti_else.19667
 	lw	%v0, 3(%t0)
 	add	%at, %v0, %a3
 	lw	%v0, 0(%at)
 	sw	%t0, 6(%sp)
 	sw	%a3, 7(%sp)
-	beqi	%v0, 0, bnei_else.20304
+	beqi	%v0, 0, bnei_else.19668
 	addi	%v1, %a3, 0
 	addi	%v0, %t0, 0
 	sw	%ra, 9(%sp)
 	addi	%sp, %sp, 10
-	jal	calc_diffuse_using_1point.2986
+	jal	calc_diffuse_using_1point.2981
 	addi	%sp, %sp, -10
 	lw	%ra, 9(%sp)
-	j	bnei_cont.20305
-bnei_else.20304:
-bnei_cont.20305:
+	j	bnei_cont.19669
+bnei_else.19668:
+bnei_cont.19669:
 	lw	%v0, 7(%sp)
 	addi	%v1, %v0, 1
 	lw	%v0, 6(%sp)
-	j	do_without_neighbors.2995
-bgti_else.20303:
+	j	do_without_neighbors.2990
+bgti_else.19667:
 	jr	%ra
-bgt_else.20302:
+bgt_else.19666:
 	jr	%ra
-bgti_else.20275:
+bgti_else.19639:
 	jr	%ra
-bgt_else.20274:
+bgt_else.19638:
 	jr	%ra
-write_rgb_element.3020:
+write_rgb_element.3015:
 	ftoi	%v0, %f0
 	addi	%at, %zero, 255
-	blt	%at, %v0, bgt_else.20310
-	blti	%v0, 0, bgti_else.20312
-	j	bgti_cont.20313
-bgti_else.20312:
+	blt	%at, %v0, bgt_else.19674
+	blti	%v0, 0, bgti_else.19676
+	j	bgti_cont.19677
+bgti_else.19676:
 	addi	%v0, %zero, 0
-bgti_cont.20313:
-	j	bgt_cont.20311
-bgt_else.20310:
+bgti_cont.19677:
+	j	bgt_cont.19675
+bgt_else.19674:
 	addi	%v0, %zero, 255
-bgt_cont.20311:
+bgt_cont.19675:
 	sw	%v0, 0(%sp)
-	blti	%v0, 10, bgti_else.20314
+	blti	%v0, 10, bgti_else.19678
 	addi	%v1, %v0, -10
-	blti	%v1, 10, bgti_else.20316
+	blti	%v1, 10, bgti_else.19680
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20318
+	blti	%v1, 10, bgti_else.19682
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20320
+	blti	%v1, 10, bgti_else.19684
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20322
+	blti	%v1, 10, bgti_else.19686
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20324
+	blti	%v1, 10, bgti_else.19688
 	addi	%v1, %v1, -10
 	addi	%a0, %zero, 6
 	addi	%v0, %v1, 0
 	addi	%v1, %a0, 0
 	sw	%ra, 1(%sp)
 	addi	%sp, %sp, 2
-	jal	print_int_sub1.2622
+	jal	print_int_sub1.2617
 	addi	%sp, %sp, -2
 	lw	%ra, 1(%sp)
-	j	bgti_cont.20325
-bgti_else.20324:
+	j	bgti_cont.19689
+bgti_else.19688:
 	addi	%v0, %zero, 5
-bgti_cont.20325:
-	j	bgti_cont.20323
-bgti_else.20322:
+bgti_cont.19689:
+	j	bgti_cont.19687
+bgti_else.19686:
 	addi	%v0, %zero, 4
-bgti_cont.20323:
-	j	bgti_cont.20321
-bgti_else.20320:
+bgti_cont.19687:
+	j	bgti_cont.19685
+bgti_else.19684:
 	addi	%v0, %zero, 3
-bgti_cont.20321:
-	j	bgti_cont.20319
-bgti_else.20318:
+bgti_cont.19685:
+	j	bgti_cont.19683
+bgti_else.19682:
 	addi	%v0, %zero, 2
-bgti_cont.20319:
-	j	bgti_cont.20317
-bgti_else.20316:
+bgti_cont.19683:
+	j	bgti_cont.19681
+bgti_else.19680:
 	addi	%v0, %zero, 1
-bgti_cont.20317:
-	j	bgti_cont.20315
-bgti_else.20314:
+bgti_cont.19681:
+	j	bgti_cont.19679
+bgti_else.19678:
 	addi	%v0, %zero, 0
-bgti_cont.20315:
+bgti_cont.19679:
 	lw	%v1, 0(%sp)
 	sw	%v0, 1(%sp)
-	blti	%v1, 10, bgti_else.20326
+	blti	%v1, 10, bgti_else.19690
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20328
+	blti	%v1, 10, bgti_else.19692
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20330
+	blti	%v1, 10, bgti_else.19694
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20332
+	blti	%v1, 10, bgti_else.19696
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20334
+	blti	%v1, 10, bgti_else.19698
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20336
+	blti	%v1, 10, bgti_else.19700
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20338
+	blti	%v1, 10, bgti_else.19702
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20340
+	blti	%v1, 10, bgti_else.19704
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20342
+	blti	%v1, 10, bgti_else.19706
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20344
+	blti	%v1, 10, bgti_else.19708
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20346
+	blti	%v1, 10, bgti_else.19710
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20348
+	blti	%v1, 10, bgti_else.19712
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20350
+	blti	%v1, 10, bgti_else.19714
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20352
+	blti	%v1, 10, bgti_else.19716
 	addi	%v1, %v1, -10
 	addi	%v0, %v1, 0
 	sw	%ra, 2(%sp)
 	addi	%sp, %sp, 3
-	jal	print_int_sub2.2625
+	jal	print_int_sub2.2620
 	addi	%sp, %sp, -3
 	lw	%ra, 2(%sp)
-	j	bgti_cont.20353
-bgti_else.20352:
+	j	bgti_cont.19717
+bgti_else.19716:
 	add	%v0, %zero, %v1
-bgti_cont.20353:
-	j	bgti_cont.20351
-bgti_else.20350:
+bgti_cont.19717:
+	j	bgti_cont.19715
+bgti_else.19714:
 	add	%v0, %zero, %v1
-bgti_cont.20351:
-	j	bgti_cont.20349
-bgti_else.20348:
+bgti_cont.19715:
+	j	bgti_cont.19713
+bgti_else.19712:
 	add	%v0, %zero, %v1
-bgti_cont.20349:
-	j	bgti_cont.20347
-bgti_else.20346:
+bgti_cont.19713:
+	j	bgti_cont.19711
+bgti_else.19710:
 	add	%v0, %zero, %v1
-bgti_cont.20347:
-	j	bgti_cont.20345
-bgti_else.20344:
+bgti_cont.19711:
+	j	bgti_cont.19709
+bgti_else.19708:
 	add	%v0, %zero, %v1
-bgti_cont.20345:
-	j	bgti_cont.20343
-bgti_else.20342:
+bgti_cont.19709:
+	j	bgti_cont.19707
+bgti_else.19706:
 	add	%v0, %zero, %v1
-bgti_cont.20343:
-	j	bgti_cont.20341
-bgti_else.20340:
+bgti_cont.19707:
+	j	bgti_cont.19705
+bgti_else.19704:
 	add	%v0, %zero, %v1
-bgti_cont.20341:
-	j	bgti_cont.20339
-bgti_else.20338:
+bgti_cont.19705:
+	j	bgti_cont.19703
+bgti_else.19702:
 	add	%v0, %zero, %v1
-bgti_cont.20339:
-	j	bgti_cont.20337
-bgti_else.20336:
+bgti_cont.19703:
+	j	bgti_cont.19701
+bgti_else.19700:
 	add	%v0, %zero, %v1
-bgti_cont.20337:
-	j	bgti_cont.20335
-bgti_else.20334:
+bgti_cont.19701:
+	j	bgti_cont.19699
+bgti_else.19698:
 	add	%v0, %zero, %v1
-bgti_cont.20335:
-	j	bgti_cont.20333
-bgti_else.20332:
+bgti_cont.19699:
+	j	bgti_cont.19697
+bgti_else.19696:
 	add	%v0, %zero, %v1
-bgti_cont.20333:
-	j	bgti_cont.20331
-bgti_else.20330:
+bgti_cont.19697:
+	j	bgti_cont.19695
+bgti_else.19694:
 	add	%v0, %zero, %v1
-bgti_cont.20331:
-	j	bgti_cont.20329
-bgti_else.20328:
+bgti_cont.19695:
+	j	bgti_cont.19693
+bgti_else.19692:
 	add	%v0, %zero, %v1
-bgti_cont.20329:
-	j	bgti_cont.20327
-bgti_else.20326:
+bgti_cont.19693:
+	j	bgti_cont.19691
+bgti_else.19690:
 	add	%v0, %zero, %v1
-bgti_cont.20327:
+bgti_cont.19691:
 	lw	%v1, 1(%sp)
 	addi	%at, %zero, 0
-	blt	%at, %v1, bgt_else.20354
+	blt	%at, %v1, bgt_else.19718
 	addi	%v0, %v0, 48
 	j	min_caml_print_char
-bgt_else.20354:
+bgt_else.19718:
 	sw	%v0, 2(%sp)
-	blti	%v1, 10, bgti_else.20355
+	blti	%v1, 10, bgti_else.19719
 	addi	%a0, %v1, -10
-	blti	%a0, 10, bgti_else.20357
+	blti	%a0, 10, bgti_else.19721
 	addi	%a0, %a0, -10
-	blti	%a0, 10, bgti_else.20359
+	blti	%a0, 10, bgti_else.19723
 	addi	%a0, %a0, -10
-	blti	%a0, 10, bgti_else.20361
+	blti	%a0, 10, bgti_else.19725
 	addi	%a0, %a0, -10
-	blti	%a0, 10, bgti_else.20363
+	blti	%a0, 10, bgti_else.19727
 	addi	%a0, %a0, -10
-	blti	%a0, 10, bgti_else.20365
+	blti	%a0, 10, bgti_else.19729
 	addi	%a0, %a0, -10
 	addi	%a1, %zero, 6
 	addi	%v1, %a1, 0
 	addi	%v0, %a0, 0
 	sw	%ra, 3(%sp)
 	addi	%sp, %sp, 4
-	jal	print_int_sub1.2622
+	jal	print_int_sub1.2617
 	addi	%sp, %sp, -4
 	lw	%ra, 3(%sp)
-	j	bgti_cont.20366
-bgti_else.20365:
+	j	bgti_cont.19730
+bgti_else.19729:
 	addi	%v0, %zero, 5
-bgti_cont.20366:
-	j	bgti_cont.20364
-bgti_else.20363:
+bgti_cont.19730:
+	j	bgti_cont.19728
+bgti_else.19727:
 	addi	%v0, %zero, 4
-bgti_cont.20364:
-	j	bgti_cont.20362
-bgti_else.20361:
+bgti_cont.19728:
+	j	bgti_cont.19726
+bgti_else.19725:
 	addi	%v0, %zero, 3
-bgti_cont.20362:
-	j	bgti_cont.20360
-bgti_else.20359:
+bgti_cont.19726:
+	j	bgti_cont.19724
+bgti_else.19723:
 	addi	%v0, %zero, 2
-bgti_cont.20360:
-	j	bgti_cont.20358
-bgti_else.20357:
+bgti_cont.19724:
+	j	bgti_cont.19722
+bgti_else.19721:
 	addi	%v0, %zero, 1
-bgti_cont.20358:
-	j	bgti_cont.20356
-bgti_else.20355:
+bgti_cont.19722:
+	j	bgti_cont.19720
+bgti_else.19719:
 	addi	%v0, %zero, 0
-bgti_cont.20356:
+bgti_cont.19720:
 	lw	%v1, 1(%sp)
 	sw	%v0, 3(%sp)
-	blti	%v1, 10, bgti_else.20367
+	blti	%v1, 10, bgti_else.19731
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20369
+	blti	%v1, 10, bgti_else.19733
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20371
+	blti	%v1, 10, bgti_else.19735
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20373
+	blti	%v1, 10, bgti_else.19737
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20375
+	blti	%v1, 10, bgti_else.19739
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20377
+	blti	%v1, 10, bgti_else.19741
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20379
+	blti	%v1, 10, bgti_else.19743
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20381
+	blti	%v1, 10, bgti_else.19745
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20383
+	blti	%v1, 10, bgti_else.19747
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20385
+	blti	%v1, 10, bgti_else.19749
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20387
+	blti	%v1, 10, bgti_else.19751
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20389
+	blti	%v1, 10, bgti_else.19753
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20391
+	blti	%v1, 10, bgti_else.19755
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20393
+	blti	%v1, 10, bgti_else.19757
 	addi	%v1, %v1, -10
 	addi	%v0, %v1, 0
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	print_int_sub2.2625
+	jal	print_int_sub2.2620
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
-	j	bgti_cont.20394
-bgti_else.20393:
+	j	bgti_cont.19758
+bgti_else.19757:
 	add	%v0, %zero, %v1
-bgti_cont.20394:
-	j	bgti_cont.20392
-bgti_else.20391:
+bgti_cont.19758:
+	j	bgti_cont.19756
+bgti_else.19755:
 	add	%v0, %zero, %v1
-bgti_cont.20392:
-	j	bgti_cont.20390
-bgti_else.20389:
+bgti_cont.19756:
+	j	bgti_cont.19754
+bgti_else.19753:
 	add	%v0, %zero, %v1
-bgti_cont.20390:
-	j	bgti_cont.20388
-bgti_else.20387:
+bgti_cont.19754:
+	j	bgti_cont.19752
+bgti_else.19751:
 	add	%v0, %zero, %v1
-bgti_cont.20388:
-	j	bgti_cont.20386
-bgti_else.20385:
+bgti_cont.19752:
+	j	bgti_cont.19750
+bgti_else.19749:
 	add	%v0, %zero, %v1
-bgti_cont.20386:
-	j	bgti_cont.20384
-bgti_else.20383:
+bgti_cont.19750:
+	j	bgti_cont.19748
+bgti_else.19747:
 	add	%v0, %zero, %v1
-bgti_cont.20384:
-	j	bgti_cont.20382
-bgti_else.20381:
+bgti_cont.19748:
+	j	bgti_cont.19746
+bgti_else.19745:
 	add	%v0, %zero, %v1
-bgti_cont.20382:
-	j	bgti_cont.20380
-bgti_else.20379:
+bgti_cont.19746:
+	j	bgti_cont.19744
+bgti_else.19743:
 	add	%v0, %zero, %v1
-bgti_cont.20380:
-	j	bgti_cont.20378
-bgti_else.20377:
+bgti_cont.19744:
+	j	bgti_cont.19742
+bgti_else.19741:
 	add	%v0, %zero, %v1
-bgti_cont.20378:
-	j	bgti_cont.20376
-bgti_else.20375:
+bgti_cont.19742:
+	j	bgti_cont.19740
+bgti_else.19739:
 	add	%v0, %zero, %v1
-bgti_cont.20376:
-	j	bgti_cont.20374
-bgti_else.20373:
+bgti_cont.19740:
+	j	bgti_cont.19738
+bgti_else.19737:
 	add	%v0, %zero, %v1
-bgti_cont.20374:
-	j	bgti_cont.20372
-bgti_else.20371:
+bgti_cont.19738:
+	j	bgti_cont.19736
+bgti_else.19735:
 	add	%v0, %zero, %v1
-bgti_cont.20372:
-	j	bgti_cont.20370
-bgti_else.20369:
+bgti_cont.19736:
+	j	bgti_cont.19734
+bgti_else.19733:
 	add	%v0, %zero, %v1
-bgti_cont.20370:
-	j	bgti_cont.20368
-bgti_else.20367:
+bgti_cont.19734:
+	j	bgti_cont.19732
+bgti_else.19731:
 	add	%v0, %zero, %v1
-bgti_cont.20368:
+bgti_cont.19732:
 	lw	%v1, 3(%sp)
 	addi	%at, %zero, 0
-	blt	%at, %v1, bgt_else.20395
+	blt	%at, %v1, bgt_else.19759
 	addi	%v0, %v0, 48
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
@@ -10831,98 +9844,98 @@ bgti_cont.20368:
 	lw	%v0, 2(%sp)
 	addi	%v0, %v0, 48
 	j	min_caml_print_char
-bgt_else.20395:
+bgt_else.19759:
 	sw	%v0, 4(%sp)
-	blti	%v1, 10, bgti_else.20396
+	blti	%v1, 10, bgti_else.19760
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20398
+	blti	%v1, 10, bgti_else.19762
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20400
+	blti	%v1, 10, bgti_else.19764
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20402
+	blti	%v1, 10, bgti_else.19766
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20404
+	blti	%v1, 10, bgti_else.19768
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20406
+	blti	%v1, 10, bgti_else.19770
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20408
+	blti	%v1, 10, bgti_else.19772
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20410
+	blti	%v1, 10, bgti_else.19774
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20412
+	blti	%v1, 10, bgti_else.19776
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20414
+	blti	%v1, 10, bgti_else.19778
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20416
+	blti	%v1, 10, bgti_else.19780
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20418
+	blti	%v1, 10, bgti_else.19782
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20420
+	blti	%v1, 10, bgti_else.19784
 	addi	%v1, %v1, -10
-	blti	%v1, 10, bgti_else.20422
+	blti	%v1, 10, bgti_else.19786
 	addi	%v1, %v1, -10
 	addi	%v0, %v1, 0
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	print_int_sub2.2625
+	jal	print_int_sub2.2620
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
-	j	bgti_cont.20423
-bgti_else.20422:
+	j	bgti_cont.19787
+bgti_else.19786:
 	add	%v0, %zero, %v1
-bgti_cont.20423:
-	j	bgti_cont.20421
-bgti_else.20420:
+bgti_cont.19787:
+	j	bgti_cont.19785
+bgti_else.19784:
 	add	%v0, %zero, %v1
-bgti_cont.20421:
-	j	bgti_cont.20419
-bgti_else.20418:
+bgti_cont.19785:
+	j	bgti_cont.19783
+bgti_else.19782:
 	add	%v0, %zero, %v1
-bgti_cont.20419:
-	j	bgti_cont.20417
-bgti_else.20416:
+bgti_cont.19783:
+	j	bgti_cont.19781
+bgti_else.19780:
 	add	%v0, %zero, %v1
-bgti_cont.20417:
-	j	bgti_cont.20415
-bgti_else.20414:
+bgti_cont.19781:
+	j	bgti_cont.19779
+bgti_else.19778:
 	add	%v0, %zero, %v1
-bgti_cont.20415:
-	j	bgti_cont.20413
-bgti_else.20412:
+bgti_cont.19779:
+	j	bgti_cont.19777
+bgti_else.19776:
 	add	%v0, %zero, %v1
-bgti_cont.20413:
-	j	bgti_cont.20411
-bgti_else.20410:
+bgti_cont.19777:
+	j	bgti_cont.19775
+bgti_else.19774:
 	add	%v0, %zero, %v1
-bgti_cont.20411:
-	j	bgti_cont.20409
-bgti_else.20408:
+bgti_cont.19775:
+	j	bgti_cont.19773
+bgti_else.19772:
 	add	%v0, %zero, %v1
-bgti_cont.20409:
-	j	bgti_cont.20407
-bgti_else.20406:
+bgti_cont.19773:
+	j	bgti_cont.19771
+bgti_else.19770:
 	add	%v0, %zero, %v1
-bgti_cont.20407:
-	j	bgti_cont.20405
-bgti_else.20404:
+bgti_cont.19771:
+	j	bgti_cont.19769
+bgti_else.19768:
 	add	%v0, %zero, %v1
-bgti_cont.20405:
-	j	bgti_cont.20403
-bgti_else.20402:
+bgti_cont.19769:
+	j	bgti_cont.19767
+bgti_else.19766:
 	add	%v0, %zero, %v1
-bgti_cont.20403:
-	j	bgti_cont.20401
-bgti_else.20400:
+bgti_cont.19767:
+	j	bgti_cont.19765
+bgti_else.19764:
 	add	%v0, %zero, %v1
-bgti_cont.20401:
-	j	bgti_cont.20399
-bgti_else.20398:
+bgti_cont.19765:
+	j	bgti_cont.19763
+bgti_else.19762:
 	add	%v0, %zero, %v1
-bgti_cont.20399:
-	j	bgti_cont.20397
-bgti_else.20396:
+bgti_cont.19763:
+	j	bgti_cont.19761
+bgti_else.19760:
 	add	%v0, %zero, %v1
-bgti_cont.20397:
+bgti_cont.19761:
 	addi	%v0, %v0, 48
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
@@ -10939,24 +9952,24 @@ bgti_cont.20397:
 	lw	%v0, 2(%sp)
 	addi	%v0, %v0, 48
 	j	min_caml_print_char
-write_rgb.3022:
+write_rgb.3017:
 	addi	%v0, %zero, 151
 	flw	%f0, 0(%v0)
 	ftoi	%v0, %f0
 	addi	%at, %zero, 255
-	blt	%at, %v0, bgt_else.20424
-	blti	%v0, 0, bgti_else.20426
-	j	bgti_cont.20427
-bgti_else.20426:
+	blt	%at, %v0, bgt_else.19788
+	blti	%v0, 0, bgti_else.19790
+	j	bgti_cont.19791
+bgti_else.19790:
 	addi	%v0, %zero, 0
-bgti_cont.20427:
-	j	bgt_cont.20425
-bgt_else.20424:
+bgti_cont.19791:
+	j	bgt_cont.19789
+bgt_else.19788:
 	addi	%v0, %zero, 255
-bgt_cont.20425:
+bgt_cont.19789:
 	sw	%ra, 0(%sp)
 	addi	%sp, %sp, 1
-	jal	print_int.2627
+	jal	print_int.2622
 	addi	%sp, %sp, -1
 	lw	%ra, 0(%sp)
 	addi	%v0, %zero, 32
@@ -10970,19 +9983,19 @@ bgt_cont.20425:
 	flw	%f0, 1(%v0)
 	ftoi	%v0, %f0
 	addi	%at, %zero, 255
-	blt	%at, %v0, bgt_else.20428
-	blti	%v0, 0, bgti_else.20430
-	j	bgti_cont.20431
-bgti_else.20430:
+	blt	%at, %v0, bgt_else.19792
+	blti	%v0, 0, bgti_else.19794
+	j	bgti_cont.19795
+bgti_else.19794:
 	addi	%v0, %zero, 0
-bgti_cont.20431:
-	j	bgt_cont.20429
-bgt_else.20428:
+bgti_cont.19795:
+	j	bgt_cont.19793
+bgt_else.19792:
 	addi	%v0, %zero, 255
-bgt_cont.20429:
+bgt_cont.19793:
 	sw	%ra, 1(%sp)
 	addi	%sp, %sp, 2
-	jal	print_int.2627
+	jal	print_int.2622
 	addi	%sp, %sp, -2
 	lw	%ra, 1(%sp)
 	lw	%v0, 0(%sp)
@@ -10995,38 +10008,38 @@ bgt_cont.20429:
 	flw	%f0, 2(%v0)
 	ftoi	%v0, %f0
 	addi	%at, %zero, 255
-	blt	%at, %v0, bgt_else.20432
-	blti	%v0, 0, bgti_else.20434
-	j	bgti_cont.20435
-bgti_else.20434:
+	blt	%at, %v0, bgt_else.19796
+	blti	%v0, 0, bgti_else.19798
+	j	bgti_cont.19799
+bgti_else.19798:
 	addi	%v0, %zero, 0
-bgti_cont.20435:
-	j	bgt_cont.20433
-bgt_else.20432:
+bgti_cont.19799:
+	j	bgt_cont.19797
+bgt_else.19796:
 	addi	%v0, %zero, 255
-bgt_cont.20433:
+bgt_cont.19797:
 	sw	%ra, 1(%sp)
 	addi	%sp, %sp, 2
-	jal	print_int.2627
+	jal	print_int.2622
 	addi	%sp, %sp, -2
 	lw	%ra, 1(%sp)
 	addi	%v0, %zero, 10
 	j	min_caml_print_char
-pretrace_diffuse_rays.3024:
+pretrace_diffuse_rays.3019:
 	addi	%at, %zero, 4
-	blt	%at, %v1, bgt_else.20436
+	blt	%at, %v1, bgt_else.19800
 	lw	%a0, 2(%v0)
 	add	%at, %a0, %v1
 	lw	%a0, 0(%at)
-	blti	%a0, 0, bgti_else.20437
+	blti	%a0, 0, bgti_else.19801
 	lw	%a0, 3(%v0)
 	add	%at, %a0, %v1
 	lw	%a0, 0(%at)
 	sw	%v1, 0(%sp)
-	beqi	%a0, 0, bnei_else.20438
+	beqi	%a0, 0, bnei_else.19802
 	lw	%a0, 6(%v0)
 	lw	%a0, 0(%a0)
-	flw	%f0, 464(%zero)
+	flw	%f0, 465(%zero)
 	addi	%a1, %zero, 148
 	fsw	%f0, 0(%a1)
 	addi	%a1, %zero, 148
@@ -11062,7 +10075,7 @@ pretrace_diffuse_rays.3024:
 	addi	%v0, %a2, 0
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	setup_startp_constants.2875
+	jal	setup_startp_constants.2870
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
 	addi	%a1, %zero, 118
@@ -11071,7 +10084,7 @@ pretrace_diffuse_rays.3024:
 	lw	%a0, 2(%sp)
 	sw	%ra, 5(%sp)
 	addi	%sp, %sp, 6
-	jal	iter_trace_diffuse_rays.2973
+	jal	iter_trace_diffuse_rays.2968
 	addi	%sp, %sp, -6
 	lw	%ra, 5(%sp)
 	lw	%v0, 1(%sp)
@@ -11088,25 +10101,25 @@ pretrace_diffuse_rays.3024:
 	addi	%a1, %zero, 148
 	flw	%f0, 2(%a1)
 	fsw	%f0, 2(%v1)
-	j	bnei_cont.20439
-bnei_else.20438:
-bnei_cont.20439:
+	j	bnei_cont.19803
+bnei_else.19802:
+bnei_cont.19803:
 	lw	%v1, 0(%sp)
 	addi	%v1, %v1, 1
 	addi	%at, %zero, 4
-	blt	%at, %v1, bgt_else.20440
+	blt	%at, %v1, bgt_else.19804
 	lw	%a0, 2(%v0)
 	add	%at, %a0, %v1
 	lw	%a0, 0(%at)
-	blti	%a0, 0, bgti_else.20441
+	blti	%a0, 0, bgti_else.19805
 	lw	%a0, 3(%v0)
 	add	%at, %a0, %v1
 	lw	%a0, 0(%at)
 	sw	%v1, 5(%sp)
-	beqi	%a0, 0, bnei_else.20442
+	beqi	%a0, 0, bnei_else.19806
 	lw	%a0, 6(%v0)
 	lw	%a0, 0(%a0)
-	flw	%f0, 464(%zero)
+	flw	%f0, 465(%zero)
 	addi	%a1, %zero, 148
 	fsw	%f0, 0(%a1)
 	addi	%a1, %zero, 148
@@ -11143,7 +10156,7 @@ bnei_cont.20439:
 	addi	%v0, %a2, 0
 	sw	%ra, 10(%sp)
 	addi	%sp, %sp, 11
-	jal	setup_startp_constants.2875
+	jal	setup_startp_constants.2870
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
 	lw	%v0, 9(%sp)
@@ -11162,40 +10175,40 @@ bnei_cont.20439:
 	fmul	%f1, %f1, %f2
 	fadd	%f0, %f0, %f1
 	flw	%f1, 7(%sp)
-	fblt	%f0, %f1, fbgt_else.20444
+	fblt	%f0, %f1, fbgt_else.19808
 	addi	%a0, %zero, 0
-	j	fbgt_cont.20445
-fbgt_else.20444:
+	j	fbgt_cont.19809
+fbgt_else.19808:
 	addi	%a0, %zero, 1
-fbgt_cont.20445:
-	beqi	%a0, 0, bnei_else.20446
+fbgt_cont.19809:
+	beqi	%a0, 0, bnei_else.19810
 	lw	%v1, 119(%v0)
 	flw	%f1, 438(%zero)
 	fdiv	%f0, %f0, %f1
 	addi	%v0, %v1, 0
 	sw	%ra, 10(%sp)
 	addi	%sp, %sp, 11
-	jal	trace_diffuse_ray.2970
+	jal	trace_diffuse_ray.2965
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
-	j	bnei_cont.20447
-bnei_else.20446:
+	j	bnei_cont.19811
+bnei_else.19810:
 	flw	%f1, 437(%zero)
 	fdiv	%f0, %f0, %f1
 	addi	%v0, %v1, 0
 	sw	%ra, 10(%sp)
 	addi	%sp, %sp, 11
-	jal	trace_diffuse_ray.2970
+	jal	trace_diffuse_ray.2965
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
-bnei_cont.20447:
+bnei_cont.19811:
 	addi	%a1, %zero, 116
 	lw	%v0, 9(%sp)
 	lw	%v1, 8(%sp)
 	lw	%a0, 6(%sp)
 	sw	%ra, 10(%sp)
 	addi	%sp, %sp, 11
-	jal	iter_trace_diffuse_rays.2973
+	jal	iter_trace_diffuse_rays.2968
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
 	lw	%v0, 1(%sp)
@@ -11212,23 +10225,23 @@ bnei_cont.20447:
 	addi	%a1, %zero, 148
 	flw	%f0, 2(%a1)
 	fsw	%f0, 2(%v1)
-	j	bnei_cont.20443
-bnei_else.20442:
-bnei_cont.20443:
+	j	bnei_cont.19807
+bnei_else.19806:
+bnei_cont.19807:
 	lw	%v1, 5(%sp)
 	addi	%v1, %v1, 1
-	j	pretrace_diffuse_rays.3024
-bgti_else.20441:
+	j	pretrace_diffuse_rays.3019
+bgti_else.19805:
 	jr	%ra
-bgt_else.20440:
+bgt_else.19804:
 	jr	%ra
-bgti_else.20437:
+bgti_else.19801:
 	jr	%ra
-bgt_else.20436:
+bgt_else.19800:
 	jr	%ra
-pretrace_pixels.3027:
+pretrace_pixels.3022:
 	addi	%a1, %zero, 0
-	blti	%v1, 0, bgti_else.20452
+	blti	%v1, 0, bgti_else.19816
 	addi	%a2, %zero, 158
 	flw	%f3, 0(%a2)
 	addi	%a2, %zero, 156
@@ -11268,10 +10281,10 @@ pretrace_pixels.3027:
 	addi	%v0, %a3, 0
 	sw	%ra, 8(%sp)
 	addi	%sp, %sp, 9
-	jal	vecunit_sgn.2655
+	jal	vecunit_sgn.2650
 	addi	%sp, %sp, -9
 	lw	%ra, 8(%sp)
-	flw	%f1, 464(%zero)
+	flw	%f1, 465(%zero)
 	addi	%v0, %zero, 151
 	fsw	%f1, 0(%v0)
 	addi	%v0, %zero, 151
@@ -11290,7 +10303,7 @@ pretrace_pixels.3027:
 	flw	%f0, 2(%v0)
 	addi	%v0, %zero, 159
 	fsw	%f0, 2(%v0)
-	flw	%f0, 468(%zero)
+	flw	%f0, 469(%zero)
 	lw	%v0, 6(%sp)
 	lw	%v1, 7(%sp)
 	add	%at, %v1, %v0
@@ -11303,7 +10316,7 @@ pretrace_pixels.3027:
 	addi	%v0, %a2, 0
 	sw	%ra, 10(%sp)
 	addi	%sp, %sp, 11
-	jal	trace_ray.2964
+	jal	trace_ray.2959
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
 	lw	%v0, 9(%sp)
@@ -11322,10 +10335,10 @@ pretrace_pixels.3027:
 	sw	%a0, 0(%v1)
 	lw	%v1, 2(%v0)
 	lw	%v1, 0(%v1)
-	blti	%v1, 0, bgti_else.20453
+	blti	%v1, 0, bgti_else.19817
 	lw	%v1, 3(%v0)
 	lw	%v1, 0(%v1)
-	beqi	%v1, 0, bnei_else.20455
+	beqi	%v1, 0, bnei_else.19819
 	lw	%v1, 6(%v0)
 	lw	%v1, 0(%v1)
 	addi	%a1, %zero, 148
@@ -11361,7 +10374,7 @@ pretrace_pixels.3027:
 	addi	%v0, %a2, 0
 	sw	%ra, 13(%sp)
 	addi	%sp, %sp, 14
-	jal	setup_startp_constants.2875
+	jal	setup_startp_constants.2870
 	addi	%sp, %sp, -14
 	lw	%ra, 13(%sp)
 	lw	%v0, 12(%sp)
@@ -11380,40 +10393,40 @@ pretrace_pixels.3027:
 	fmul	%f1, %f1, %f2
 	fadd	%f0, %f0, %f1
 	flw	%f1, 8(%sp)
-	fblt	%f0, %f1, fbgt_else.20457
+	fblt	%f0, %f1, fbgt_else.19821
 	addi	%a0, %zero, 0
-	j	fbgt_cont.20458
-fbgt_else.20457:
+	j	fbgt_cont.19822
+fbgt_else.19821:
 	addi	%a0, %zero, 1
-fbgt_cont.20458:
-	beqi	%a0, 0, bnei_else.20459
+fbgt_cont.19822:
+	beqi	%a0, 0, bnei_else.19823
 	lw	%v1, 119(%v0)
 	flw	%f1, 438(%zero)
 	fdiv	%f0, %f0, %f1
 	addi	%v0, %v1, 0
 	sw	%ra, 13(%sp)
 	addi	%sp, %sp, 14
-	jal	trace_diffuse_ray.2970
+	jal	trace_diffuse_ray.2965
 	addi	%sp, %sp, -14
 	lw	%ra, 13(%sp)
-	j	bnei_cont.20460
-bnei_else.20459:
+	j	bnei_cont.19824
+bnei_else.19823:
 	flw	%f1, 437(%zero)
 	fdiv	%f0, %f0, %f1
 	addi	%v0, %v1, 0
 	sw	%ra, 13(%sp)
 	addi	%sp, %sp, 14
-	jal	trace_diffuse_ray.2970
+	jal	trace_diffuse_ray.2965
 	addi	%sp, %sp, -14
 	lw	%ra, 13(%sp)
-bnei_cont.20460:
+bnei_cont.19824:
 	addi	%a1, %zero, 116
 	lw	%v0, 12(%sp)
 	lw	%v1, 11(%sp)
 	lw	%a0, 10(%sp)
 	sw	%ra, 13(%sp)
 	addi	%sp, %sp, 14
-	jal	iter_trace_diffuse_rays.2973
+	jal	iter_trace_diffuse_rays.2968
 	addi	%sp, %sp, -14
 	lw	%ra, 13(%sp)
 	lw	%v0, 9(%sp)
@@ -11428,42 +10441,42 @@ bnei_cont.20460:
 	addi	%a0, %zero, 148
 	flw	%f0, 2(%a0)
 	fsw	%f0, 2(%v1)
-	j	bnei_cont.20456
-bnei_else.20455:
-bnei_cont.20456:
+	j	bnei_cont.19820
+bnei_else.19819:
+bnei_cont.19820:
 	lw	%v1, 3(%sp)
 	sw	%ra, 13(%sp)
 	addi	%sp, %sp, 14
-	jal	pretrace_diffuse_rays.3024
+	jal	pretrace_diffuse_rays.3019
 	addi	%sp, %sp, -14
 	lw	%ra, 13(%sp)
-	j	bgti_cont.20454
-bgti_else.20453:
-bgti_cont.20454:
+	j	bgti_cont.19818
+bgti_else.19817:
+bgti_cont.19818:
 	lw	%v0, 6(%sp)
 	addi	%v1, %v0, -1
 	lw	%v0, 4(%sp)
 	addi	%v0, %v0, 1
-	blti	%v0, 5, bgti_else.20461
+	blti	%v0, 5, bgti_else.19825
 	addi	%a0, %v0, -5
-	j	bgti_cont.20462
-bgti_else.20461:
+	j	bgti_cont.19826
+bgti_else.19825:
 	add	%a0, %zero, %v0
-bgti_cont.20462:
+bgti_cont.19826:
 	flw	%f0, 2(%sp)
 	flw	%f1, 1(%sp)
 	flw	%f2, 0(%sp)
 	lw	%v0, 7(%sp)
-	j	pretrace_pixels.3027
-bgti_else.20452:
+	j	pretrace_pixels.3022
+bgti_else.19816:
 	jr	%ra
-scan_pixel.3038:
+scan_pixel.3033:
 	addi	%a3, %zero, 0
 	addi	%t0, %zero, 154
 	lw	%t0, 0(%t0)
-	blt	%v0, %t0, bgt_else.20464
+	blt	%v0, %t0, bgt_else.19828
 	jr	%ra
-bgt_else.20464:
+bgt_else.19828:
 	add	%at, %a1, %v0
 	lw	%t1, 0(%at)
 	lw	%t2, 0(%t1)
@@ -11480,30 +10493,30 @@ bgt_else.20464:
 	addi	%t2, %zero, 154
 	lw	%t2, 1(%t2)
 	addi	%t4, %v1, 1
-	blt	%t4, %t2, bgt_else.20466
+	blt	%t4, %t2, bgt_else.19830
 	addi	%t5, %zero, 0
-	j	bgt_cont.20467
-bgt_else.20466:
+	j	bgt_cont.19831
+bgt_else.19830:
 	addi	%at, %zero, 0
-	blt	%at, %v1, bgt_else.20468
+	blt	%at, %v1, bgt_else.19832
 	addi	%t5, %zero, 0
-	j	bgt_cont.20469
-bgt_else.20468:
+	j	bgt_cont.19833
+bgt_else.19832:
 	addi	%t5, %v0, 1
-	blt	%t5, %t0, bgt_else.20470
+	blt	%t5, %t0, bgt_else.19834
 	addi	%t5, %zero, 0
-	j	bgt_cont.20471
-bgt_else.20470:
+	j	bgt_cont.19835
+bgt_else.19834:
 	addi	%at, %zero, 0
-	blt	%at, %v0, bgt_else.20472
+	blt	%at, %v0, bgt_else.19836
 	addi	%t5, %zero, 0
-	j	bgt_cont.20473
-bgt_else.20472:
+	j	bgt_cont.19837
+bgt_else.19836:
 	addi	%t5, %zero, 1
-bgt_cont.20473:
-bgt_cont.20471:
-bgt_cont.20469:
-bgt_cont.20467:
+bgt_cont.19837:
+bgt_cont.19835:
+bgt_cont.19833:
+bgt_cont.19831:
 	sw	%a2, 0(%sp)
 	sw	%a0, 1(%sp)
 	sw	%a3, 2(%sp)
@@ -11513,68 +10526,68 @@ bgt_cont.20467:
 	sw	%a1, 6(%sp)
 	sw	%t0, 7(%sp)
 	sw	%v0, 8(%sp)
-	beqi	%t5, 0, bnei_else.20474
+	beqi	%t5, 0, bnei_else.19838
 	lw	%t5, 2(%t1)
 	lw	%t5, 0(%t5)
-	blti	%t5, 0, bgti_else.20476
+	blti	%t5, 0, bgti_else.19840
 	lw	%t5, 2(%t1)
 	lw	%t5, 0(%t5)
 	add	%at, %a0, %v0
 	lw	%t6, 0(%at)
 	lw	%t6, 2(%t6)
 	lw	%t6, 0(%t6)
-	bne	%t6, %t5, beq_else.20478
+	bne	%t6, %t5, beq_else.19842
 	add	%at, %a2, %v0
 	lw	%t6, 0(%at)
 	lw	%t6, 2(%t6)
 	lw	%t6, 0(%t6)
-	bne	%t6, %t5, beq_else.20480
+	bne	%t6, %t5, beq_else.19844
 	addi	%t6, %v0, -1
 	add	%at, %a1, %t6
 	lw	%t6, 0(%at)
 	lw	%t6, 2(%t6)
 	lw	%t6, 0(%t6)
-	bne	%t6, %t5, beq_else.20482
+	bne	%t6, %t5, beq_else.19846
 	addi	%t6, %v0, 1
 	add	%at, %a1, %t6
 	lw	%t6, 0(%at)
 	lw	%t6, 2(%t6)
 	lw	%t6, 0(%t6)
-	bne	%t6, %t5, beq_else.20484
+	bne	%t6, %t5, beq_else.19848
 	addi	%t5, %zero, 1
-	j	beq_cont.20485
-beq_else.20484:
+	j	beq_cont.19849
+beq_else.19848:
 	addi	%t5, %zero, 0
-beq_cont.20485:
-	j	beq_cont.20483
-beq_else.20482:
+beq_cont.19849:
+	j	beq_cont.19847
+beq_else.19846:
 	addi	%t5, %zero, 0
-beq_cont.20483:
-	j	beq_cont.20481
-beq_else.20480:
+beq_cont.19847:
+	j	beq_cont.19845
+beq_else.19844:
 	addi	%t5, %zero, 0
-beq_cont.20481:
-	j	beq_cont.20479
-beq_else.20478:
+beq_cont.19845:
+	j	beq_cont.19843
+beq_else.19842:
 	addi	%t5, %zero, 0
-beq_cont.20479:
-	beqi	%t5, 0, bnei_else.20486
+beq_cont.19843:
+	beqi	%t5, 0, bnei_else.19850
 	lw	%t1, 3(%t1)
 	lw	%t1, 0(%t1)
 	sw	%t3, 9(%sp)
-	beqi	%t1, 0, bnei_else.20488
+	beqi	%t1, 0, bnei_else.19852
 	addi	%v1, %a0, 0
 	addi	%a0, %a1, 0
 	addi	%a1, %a2, 0
 	addi	%a2, %a3, 0
 	sw	%ra, 10(%sp)
 	addi	%sp, %sp, 11
-	jal	calc_diffuse_using_5points.2989
+	jal	calc_diffuse_using_5points.2984
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
-	j	bnei_cont.20489
-bnei_else.20488:
-bnei_cont.20489:
+	j	bnei_cont.19853
+bnei_else.19852:
+bnei_cont.19853:
 	lw	%v0, 8(%sp)
 	lw	%v1, 3(%sp)
 	lw	%a0, 1(%sp)
@@ -11583,58 +10596,58 @@ bnei_cont.20489:
 	lw	%a3, 9(%sp)
 	sw	%ra, 10(%sp)
 	addi	%sp, %sp, 11
-	jal	try_exploit_neighbors.3011
+	jal	try_exploit_neighbors.3006
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
-	j	bnei_cont.20487
-bnei_else.20486:
+	j	bnei_cont.19851
+bnei_else.19850:
 	addi	%v1, %a3, 0
 	addi	%v0, %t1, 0
 	sw	%ra, 10(%sp)
 	addi	%sp, %sp, 11
-	jal	do_without_neighbors.2995
+	jal	do_without_neighbors.2990
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
-bnei_cont.20487:
-	j	bgti_cont.20477
-bgti_else.20476:
-bgti_cont.20477:
-	j	bnei_cont.20475
-bnei_else.20474:
+bnei_cont.19851:
+	j	bgti_cont.19841
+bgti_else.19840:
+bgti_cont.19841:
+	j	bnei_cont.19839
+bnei_else.19838:
 	lw	%t5, 2(%t1)
 	lw	%t5, 0(%t5)
-	blti	%t5, 0, bgti_else.20490
+	blti	%t5, 0, bgti_else.19854
 	lw	%t5, 3(%t1)
 	lw	%t5, 0(%t5)
 	sw	%t3, 9(%sp)
 	sw	%t1, 10(%sp)
-	beqi	%t5, 0, bnei_else.20492
+	beqi	%t5, 0, bnei_else.19856
 	addi	%v1, %a3, 0
 	addi	%v0, %t1, 0
 	sw	%ra, 11(%sp)
 	addi	%sp, %sp, 12
-	jal	calc_diffuse_using_1point.2986
+	jal	calc_diffuse_using_1point.2981
 	addi	%sp, %sp, -12
 	lw	%ra, 11(%sp)
-	j	bnei_cont.20493
-bnei_else.20492:
-bnei_cont.20493:
+	j	bnei_cont.19857
+bnei_else.19856:
+bnei_cont.19857:
 	lw	%v0, 10(%sp)
 	lw	%v1, 9(%sp)
 	sw	%ra, 11(%sp)
 	addi	%sp, %sp, 12
-	jal	do_without_neighbors.2995
+	jal	do_without_neighbors.2990
 	addi	%sp, %sp, -12
 	lw	%ra, 11(%sp)
-	j	bgti_cont.20491
-bgti_else.20490:
-bgti_cont.20491:
-bnei_cont.20475:
+	j	bgti_cont.19855
+bgti_else.19854:
+bgti_cont.19855:
+bnei_cont.19839:
 	addi	%v0, %zero, 151
 	flw	%f0, 0(%v0)
 	sw	%ra, 11(%sp)
 	addi	%sp, %sp, 12
-	jal	write_rgb_element.3020
+	jal	write_rgb_element.3015
 	addi	%sp, %sp, -12
 	lw	%ra, 11(%sp)
 	addi	%v0, %zero, 32
@@ -11648,7 +10661,7 @@ bnei_cont.20475:
 	flw	%f0, 1(%v0)
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 13
-	jal	write_rgb_element.3020
+	jal	write_rgb_element.3015
 	addi	%sp, %sp, -13
 	lw	%ra, 12(%sp)
 	lw	%v0, 11(%sp)
@@ -11661,7 +10674,7 @@ bnei_cont.20475:
 	flw	%f0, 2(%v0)
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 13
-	jal	write_rgb_element.3020
+	jal	write_rgb_element.3015
 	addi	%sp, %sp, -13
 	lw	%ra, 12(%sp)
 	addi	%v0, %zero, 10
@@ -11673,9 +10686,9 @@ bnei_cont.20475:
 	lw	%v0, 8(%sp)
 	addi	%v0, %v0, 1
 	lw	%v1, 7(%sp)
-	blt	%v0, %v1, bgt_else.20494
+	blt	%v0, %v1, bgt_else.19858
 	jr	%ra
-bgt_else.20494:
+bgt_else.19858:
 	lw	%a1, 6(%sp)
 	add	%at, %a1, %v0
 	lw	%a0, 0(%at)
@@ -11691,55 +10704,55 @@ bgt_else.20494:
 	fsw	%f0, 2(%a2)
 	lw	%a2, 4(%sp)
 	lw	%a3, 5(%sp)
-	blt	%a2, %a3, bgt_else.20496
+	blt	%a2, %a3, bgt_else.19860
 	addi	%v1, %zero, 0
-	j	bgt_cont.20497
-bgt_else.20496:
+	j	bgt_cont.19861
+bgt_else.19860:
 	lw	%a2, 3(%sp)
 	addi	%at, %zero, 0
-	blt	%at, %a2, bgt_else.20498
+	blt	%at, %a2, bgt_else.19862
 	addi	%v1, %zero, 0
-	j	bgt_cont.20499
-bgt_else.20498:
+	j	bgt_cont.19863
+bgt_else.19862:
 	addi	%a3, %v0, 1
-	blt	%a3, %v1, bgt_else.20500
+	blt	%a3, %v1, bgt_else.19864
 	addi	%v1, %zero, 0
-	j	bgt_cont.20501
-bgt_else.20500:
+	j	bgt_cont.19865
+bgt_else.19864:
 	addi	%at, %zero, 0
-	blt	%at, %v0, bgt_else.20502
+	blt	%at, %v0, bgt_else.19866
 	addi	%v1, %zero, 0
-	j	bgt_cont.20503
-bgt_else.20502:
+	j	bgt_cont.19867
+bgt_else.19866:
 	addi	%v1, %zero, 1
-bgt_cont.20503:
-bgt_cont.20501:
-bgt_cont.20499:
-bgt_cont.20497:
+bgt_cont.19867:
+bgt_cont.19865:
+bgt_cont.19863:
+bgt_cont.19861:
 	sw	%v0, 12(%sp)
-	beqi	%v1, 0, bnei_else.20504
+	beqi	%v1, 0, bnei_else.19868
 	lw	%v1, 3(%sp)
 	lw	%a0, 1(%sp)
 	lw	%a2, 0(%sp)
 	lw	%a3, 2(%sp)
 	sw	%ra, 13(%sp)
 	addi	%sp, %sp, 14
-	jal	try_exploit_neighbors.3011
+	jal	try_exploit_neighbors.3006
 	addi	%sp, %sp, -14
 	lw	%ra, 13(%sp)
-	j	bnei_cont.20505
-bnei_else.20504:
+	j	bnei_cont.19869
+bnei_else.19868:
 	lw	%v1, 2(%sp)
 	addi	%v0, %a0, 0
 	sw	%ra, 13(%sp)
 	addi	%sp, %sp, 14
-	jal	do_without_neighbors.2995
+	jal	do_without_neighbors.2990
 	addi	%sp, %sp, -14
 	lw	%ra, 13(%sp)
-bnei_cont.20505:
+bnei_cont.19869:
 	sw	%ra, 13(%sp)
 	addi	%sp, %sp, 14
-	jal	write_rgb.3022
+	jal	write_rgb.3017
 	addi	%sp, %sp, -14
 	lw	%ra, 13(%sp)
 	lw	%v0, 12(%sp)
@@ -11748,14 +10761,14 @@ bnei_cont.20505:
 	lw	%a0, 1(%sp)
 	lw	%a1, 6(%sp)
 	lw	%a2, 0(%sp)
-	j	scan_pixel.3038
-scan_line.3044:
+	j	scan_pixel.3033
+scan_line.3039:
 	addi	%a3, %zero, 1
 	addi	%t0, %zero, 154
 	lw	%t0, 1(%t0)
-	blt	%v0, %t0, bgt_else.20506
+	blt	%v0, %t0, bgt_else.19870
 	jr	%ra
-bgt_else.20506:
+bgt_else.19870:
 	addi	%t1, %t0, -1
 	sw	%t1, 0(%sp)
 	sw	%a2, 1(%sp)
@@ -11765,9 +10778,9 @@ bgt_else.20506:
 	sw	%t0, 5(%sp)
 	sw	%v0, 6(%sp)
 	sw	%a0, 7(%sp)
-	blt	%v0, %t1, bgt_else.20508
-	j	bgt_cont.20509
-bgt_else.20508:
+	blt	%v0, %t1, bgt_else.19872
+	j	bgt_cont.19873
+bgt_else.19872:
 	addi	%t2, %v0, 1
 	addi	%t3, %zero, 158
 	flw	%f0, 0(%t3)
@@ -11806,19 +10819,19 @@ bgt_else.20508:
 	fmov	%f1, %f29
 	sw	%ra, 8(%sp)
 	addi	%sp, %sp, 9
-	jal	pretrace_pixels.3027
+	jal	pretrace_pixels.3022
 	addi	%sp, %sp, -9
 	lw	%ra, 8(%sp)
-bgt_cont.20509:
+bgt_cont.19873:
 	addi	%v1, %zero, 0
 	addi	%v0, %zero, 154
 	lw	%v0, 0(%v0)
 	sw	%v1, 8(%sp)
 	sw	%v0, 9(%sp)
 	addi	%at, %zero, 0
-	blt	%at, %v0, bgt_else.20510
-	j	bgt_cont.20511
-bgt_else.20510:
+	blt	%at, %v0, bgt_else.19874
+	j	bgt_cont.19875
+bgt_else.19874:
 	lw	%a1, 7(%sp)
 	lw	%a0, 0(%a1)
 	lw	%a2, 0(%a0)
@@ -11834,25 +10847,25 @@ bgt_else.20510:
 	lw	%a2, 6(%sp)
 	addi	%a3, %a2, 1
 	lw	%t0, 5(%sp)
-	blt	%a3, %t0, bgt_else.20512
+	blt	%a3, %t0, bgt_else.19876
 	addi	%a3, %zero, 0
-	j	bgt_cont.20513
-bgt_else.20512:
+	j	bgt_cont.19877
+bgt_else.19876:
 	addi	%at, %zero, 0
-	blt	%at, %a2, bgt_else.20514
+	blt	%at, %a2, bgt_else.19878
 	addi	%a3, %zero, 0
-	j	bgt_cont.20515
-bgt_else.20514:
+	j	bgt_cont.19879
+bgt_else.19878:
 	addi	%at, %zero, 1
-	blt	%at, %v0, bgt_else.20516
+	blt	%at, %v0, bgt_else.19880
 	addi	%a3, %zero, 0
-	j	bgt_cont.20517
-bgt_else.20516:
+	j	bgt_cont.19881
+bgt_else.19880:
 	addi	%a3, %zero, 0
-bgt_cont.20517:
-bgt_cont.20515:
-bgt_cont.20513:
-	beqi	%a3, 0, bnei_else.20518
+bgt_cont.19881:
+bgt_cont.19879:
+bgt_cont.19877:
+	beqi	%a3, 0, bnei_else.19882
 	lw	%a0, 4(%sp)
 	lw	%a3, 3(%sp)
 	addi	%v0, %v1, 0
@@ -11862,21 +10875,21 @@ bgt_cont.20513:
 	addi	%a2, %k0, 0
 	sw	%ra, 10(%sp)
 	addi	%sp, %sp, 11
-	jal	try_exploit_neighbors.3011
+	jal	try_exploit_neighbors.3006
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
-	j	bnei_cont.20519
-bnei_else.20518:
+	j	bnei_cont.19883
+bnei_else.19882:
 	addi	%v0, %a0, 0
 	sw	%ra, 10(%sp)
 	addi	%sp, %sp, 11
-	jal	do_without_neighbors.2995
+	jal	do_without_neighbors.2990
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
-bnei_cont.20519:
+bnei_cont.19883:
 	sw	%ra, 10(%sp)
 	addi	%sp, %sp, 11
-	jal	write_rgb.3022
+	jal	write_rgb.3017
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
 	lw	%v0, 2(%sp)
@@ -11886,30 +10899,30 @@ bnei_cont.20519:
 	lw	%a2, 3(%sp)
 	sw	%ra, 10(%sp)
 	addi	%sp, %sp, 11
-	jal	scan_pixel.3038
+	jal	scan_pixel.3033
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
-bgt_cont.20511:
+bgt_cont.19875:
 	lw	%v0, 6(%sp)
 	addi	%v1, %v0, 1
 	lw	%v0, 1(%sp)
 	addi	%v0, %v0, 2
-	blti	%v0, 5, bgti_else.20520
+	blti	%v0, 5, bgti_else.19884
 	addi	%a0, %v0, -5
-	j	bgti_cont.20521
-bgti_else.20520:
+	j	bgti_cont.19885
+bgti_else.19884:
 	add	%a0, %zero, %v0
-bgti_cont.20521:
+bgti_cont.19885:
 	lw	%v0, 5(%sp)
-	blt	%v1, %v0, bgt_else.20522
+	blt	%v1, %v0, bgt_else.19886
 	jr	%ra
-bgt_else.20522:
+bgt_else.19886:
 	lw	%v0, 0(%sp)
 	sw	%a0, 10(%sp)
 	sw	%v1, 11(%sp)
-	blt	%v1, %v0, bgt_else.20524
-	j	bgt_cont.20525
-bgt_else.20524:
+	blt	%v1, %v0, bgt_else.19888
+	j	bgt_cont.19889
+bgt_else.19888:
 	addi	%v0, %v1, 1
 	addi	%a1, %zero, 158
 	flw	%f0, 0(%a1)
@@ -11947,10 +10960,10 @@ bgt_else.20524:
 	fmov	%f1, %f29
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 13
-	jal	pretrace_pixels.3027
+	jal	pretrace_pixels.3022
 	addi	%sp, %sp, -13
 	lw	%ra, 12(%sp)
-bgt_cont.20525:
+bgt_cont.19889:
 	lw	%v0, 8(%sp)
 	lw	%v1, 11(%sp)
 	lw	%a0, 7(%sp)
@@ -11958,26 +10971,26 @@ bgt_cont.20525:
 	lw	%a2, 4(%sp)
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 13
-	jal	scan_pixel.3038
+	jal	scan_pixel.3033
 	addi	%sp, %sp, -13
 	lw	%ra, 12(%sp)
 	lw	%v0, 11(%sp)
 	addi	%v0, %v0, 1
 	lw	%v1, 10(%sp)
 	addi	%v1, %v1, 2
-	blti	%v1, 5, bgti_else.20526
+	blti	%v1, 5, bgti_else.19890
 	addi	%a2, %v1, -5
-	j	bgti_cont.20527
-bgti_else.20526:
+	j	bgti_cont.19891
+bgti_else.19890:
 	add	%a2, %zero, %v1
-bgti_cont.20527:
+bgti_cont.19891:
 	lw	%v1, 3(%sp)
 	lw	%a0, 4(%sp)
 	lw	%a1, 7(%sp)
-	j	scan_line.3044
-create_pixel.3052:
+	j	scan_line.3039
+create_pixel.3047:
 	addi	%v0, %zero, 3
-	flw	%f0, 464(%zero)
+	flw	%f0, 465(%zero)
 	fsw	%f0, 0(%sp)
 	sw	%v0, 1(%sp)
 	sw	%ra, 2(%sp)
@@ -12248,11 +11261,11 @@ create_pixel.3052:
 	lw	%v1, 2(%sp)
 	sw	%v1, 0(%v0)
 	jr	%ra
-init_line_elements.3054:
+init_line_elements.3049:
 	addi	%a0, %zero, 0
-	blti	%v1, 0, bgti_else.20528
+	blti	%v1, 0, bgti_else.19892
 	addi	%a1, %zero, 3
-	flw	%f0, 464(%zero)
+	flw	%f0, 465(%zero)
 	sw	%v1, 0(%sp)
 	sw	%v0, 1(%sp)
 	sw	%a0, 2(%sp)
@@ -12529,11 +11542,11 @@ init_line_elements.3054:
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
 	addi	%v0, %v1, -1
-	blti	%v0, 0, bgti_else.20529
+	blti	%v0, 0, bgti_else.19893
 	sw	%v0, 15(%sp)
 	sw	%ra, 16(%sp)
 	addi	%sp, %sp, 17
-	jal	create_pixel.3052
+	jal	create_pixel.3047
 	addi	%sp, %sp, -17
 	lw	%ra, 16(%sp)
 	lw	%v1, 15(%sp)
@@ -12541,7 +11554,7 @@ init_line_elements.3054:
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
 	addi	%v0, %v1, -1
-	blti	%v0, 0, bgti_else.20530
+	blti	%v0, 0, bgti_else.19894
 	flw	%f0, 3(%sp)
 	lw	%v1, 4(%sp)
 	sw	%v0, 16(%sp)
@@ -12813,11 +11826,11 @@ init_line_elements.3054:
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
 	addi	%v0, %v1, -1
-	blti	%v0, 0, bgti_else.20531
+	blti	%v0, 0, bgti_else.19895
 	sw	%v0, 25(%sp)
 	sw	%ra, 26(%sp)
 	addi	%sp, %sp, 27
-	jal	create_pixel.3052
+	jal	create_pixel.3047
 	addi	%sp, %sp, -27
 	lw	%ra, 26(%sp)
 	lw	%v1, 25(%sp)
@@ -12826,24 +11839,24 @@ init_line_elements.3054:
 	sw	%v0, 0(%at)
 	addi	%v1, %v1, -1
 	addi	%v0, %a0, 0
-	j	init_line_elements.3054
-bgti_else.20531:
+	j	init_line_elements.3049
+bgti_else.19895:
 	add	%v0, %zero, %a0
 	jr	%ra
-bgti_else.20530:
+bgti_else.19894:
 	add	%v0, %zero, %a0
 	jr	%ra
-bgti_else.20529:
+bgti_else.19893:
 	add	%v0, %zero, %a0
 	jr	%ra
-bgti_else.20528:
+bgti_else.19892:
 	jr	%ra
-calc_dirvec.3064:
-	blti	%v0, 5, bgti_else.20532
+calc_dirvec.3059:
+	blti	%v0, 5, bgti_else.19896
 	fmul	%f2, %f0, %f0
 	fmul	%f3, %f1, %f1
 	fadd	%f2, %f2, %f3
-	flw	%f3, 468(%zero)
+	flw	%f3, 469(%zero)
 	fadd	%f2, %f2, %f3
 	fsqrt	%f2, %f2
 	fdiv	%f0, %f0, %f2
@@ -12903,20 +11916,20 @@ calc_dirvec.3064:
 	fsw	%f0, 1(%v0)
 	fsw	%f1, 2(%v0)
 	jr	%ra
-bgti_else.20532:
+bgti_else.19896:
 	fmul	%f0, %f1, %f1
 	flw	%f1, 439(%zero)
 	fadd	%f0, %f0, %f1
 	fsqrt	%f0, %f0
-	flw	%f4, 468(%zero)
+	flw	%f4, 469(%zero)
 	fdiv	%f5, %f4, %f0
-	flw	%f6, 464(%zero)
-	fblt	%f5, %f6, fbgt_else.20534
+	flw	%f6, 465(%zero)
+	fblt	%f5, %f6, fbgt_else.19898
 	addi	%a1, %zero, 1
-	j	fbgt_cont.20535
-fbgt_else.20534:
+	j	fbgt_cont.19899
+fbgt_else.19898:
 	addi	%a1, %zero, 0
-fbgt_cont.20535:
+fbgt_cont.19899:
 	fabs	%f7, %f5
 	flw	%f8, 452(%zero)
 	sw	%a0, 0(%sp)
@@ -12929,24 +11942,24 @@ fbgt_cont.20535:
 	sw	%v0, 7(%sp)
 	fsw	%f0, 8(%sp)
 	fsw	%f2, 9(%sp)
-	fblt	%f7, %f8, fbgt_else.20536
+	fblt	%f7, %f8, fbgt_else.19900
 	flw	%f5, 451(%zero)
 	sw	%a1, 10(%sp)
-	fblt	%f7, %f5, fbgt_else.20538
-	flw	%f5, 473(%zero)
+	fblt	%f7, %f5, fbgt_else.19902
+	flw	%f5, 474(%zero)
 	fdiv	%f7, %f4, %f7
 	fsw	%f5, 11(%sp)
 	fmov	%f0, %f7
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 13
-	jal	kernel_atan.2612
+	jal	kernel_atan.2607
 	addi	%sp, %sp, -13
 	lw	%ra, 12(%sp)
 	flw	%f1, 11(%sp)
 	fsub	%f0, %f1, %f0
-	j	fbgt_cont.20539
-fbgt_else.20538:
-	flw	%f5, 472(%zero)
+	j	fbgt_cont.19903
+fbgt_else.19902:
+	flw	%f5, 473(%zero)
 	fsub	%f9, %f7, %f4
 	fadd	%f7, %f7, %f4
 	fdiv	%f7, %f9, %f7
@@ -12954,33 +11967,33 @@ fbgt_else.20538:
 	fmov	%f0, %f7
 	sw	%ra, 13(%sp)
 	addi	%sp, %sp, 14
-	jal	kernel_atan.2612
+	jal	kernel_atan.2607
 	addi	%sp, %sp, -14
 	lw	%ra, 13(%sp)
 	flw	%f1, 12(%sp)
 	fadd	%f0, %f1, %f0
-fbgt_cont.20539:
+fbgt_cont.19903:
 	lw	%v0, 10(%sp)
-	beqi	%v0, 0, bnei_else.20540
-	j	bnei_cont.20541
-bnei_else.20540:
+	beqi	%v0, 0, bnei_else.19904
+	j	bnei_cont.19905
+bnei_else.19904:
 	fneg	%f0, %f0
-bnei_cont.20541:
-	j	fbgt_cont.20537
-fbgt_else.20536:
+bnei_cont.19905:
+	j	fbgt_cont.19901
+fbgt_else.19900:
 	fmov	%f0, %f5
 	sw	%ra, 13(%sp)
 	addi	%sp, %sp, 14
-	jal	kernel_atan.2612
+	jal	kernel_atan.2607
 	addi	%sp, %sp, -14
 	lw	%ra, 13(%sp)
-fbgt_cont.20537:
+fbgt_cont.19901:
 	flw	%f1, 9(%sp)
 	fmul	%f0, %f0, %f1
 	fsw	%f0, 13(%sp)
 	sw	%ra, 14(%sp)
 	addi	%sp, %sp, 15
-	jal	sin.2618
+	jal	sin.2613
 	addi	%sp, %sp, -15
 	lw	%ra, 14(%sp)
 	flw	%f1, 13(%sp)
@@ -12988,7 +12001,7 @@ fbgt_cont.20537:
 	fmov	%f0, %f1
 	sw	%ra, 15(%sp)
 	addi	%sp, %sp, 16
-	jal	cos.2616
+	jal	cos.2611
 	addi	%sp, %sp, -16
 	lw	%ra, 15(%sp)
 	flw	%f1, 14(%sp)
@@ -13004,35 +12017,35 @@ fbgt_cont.20537:
 	flw	%f2, 5(%sp)
 	fdiv	%f3, %f2, %f1
 	flw	%f4, 4(%sp)
-	fblt	%f3, %f4, fbgt_else.20542
+	fblt	%f3, %f4, fbgt_else.19906
 	addi	%v1, %zero, 1
-	j	fbgt_cont.20543
-fbgt_else.20542:
+	j	fbgt_cont.19907
+fbgt_else.19906:
 	addi	%v1, %zero, 0
-fbgt_cont.20543:
+fbgt_cont.19907:
 	fabs	%f4, %f3
 	flw	%f5, 3(%sp)
 	fsw	%f0, 15(%sp)
 	sw	%v0, 16(%sp)
 	fsw	%f1, 17(%sp)
-	fblt	%f4, %f5, fbgt_else.20544
+	fblt	%f4, %f5, fbgt_else.19908
 	flw	%f3, 451(%zero)
 	sw	%v1, 18(%sp)
-	fblt	%f4, %f3, fbgt_else.20546
-	flw	%f3, 473(%zero)
+	fblt	%f4, %f3, fbgt_else.19910
+	flw	%f3, 474(%zero)
 	fdiv	%f2, %f2, %f4
 	fsw	%f3, 19(%sp)
 	fmov	%f0, %f2
 	sw	%ra, 20(%sp)
 	addi	%sp, %sp, 21
-	jal	kernel_atan.2612
+	jal	kernel_atan.2607
 	addi	%sp, %sp, -21
 	lw	%ra, 20(%sp)
 	flw	%f1, 19(%sp)
 	fsub	%f0, %f1, %f0
-	j	fbgt_cont.20547
-fbgt_else.20546:
-	flw	%f3, 472(%zero)
+	j	fbgt_cont.19911
+fbgt_else.19910:
+	flw	%f3, 473(%zero)
 	fsub	%f5, %f4, %f2
 	fadd	%f2, %f4, %f2
 	fdiv	%f2, %f5, %f2
@@ -13040,33 +12053,33 @@ fbgt_else.20546:
 	fmov	%f0, %f2
 	sw	%ra, 21(%sp)
 	addi	%sp, %sp, 22
-	jal	kernel_atan.2612
+	jal	kernel_atan.2607
 	addi	%sp, %sp, -22
 	lw	%ra, 21(%sp)
 	flw	%f1, 20(%sp)
 	fadd	%f0, %f1, %f0
-fbgt_cont.20547:
+fbgt_cont.19911:
 	lw	%v0, 18(%sp)
-	beqi	%v0, 0, bnei_else.20548
-	j	bnei_cont.20549
-bnei_else.20548:
+	beqi	%v0, 0, bnei_else.19912
+	j	bnei_cont.19913
+bnei_else.19912:
 	fneg	%f0, %f0
-bnei_cont.20549:
-	j	fbgt_cont.20545
-fbgt_else.20544:
+bnei_cont.19913:
+	j	fbgt_cont.19909
+fbgt_else.19908:
 	fmov	%f0, %f3
 	sw	%ra, 21(%sp)
 	addi	%sp, %sp, 22
-	jal	kernel_atan.2612
+	jal	kernel_atan.2607
 	addi	%sp, %sp, -22
 	lw	%ra, 21(%sp)
-fbgt_cont.20545:
+fbgt_cont.19909:
 	flw	%f1, 2(%sp)
 	fmul	%f0, %f0, %f1
 	fsw	%f0, 21(%sp)
 	sw	%ra, 22(%sp)
 	addi	%sp, %sp, 23
-	jal	sin.2618
+	jal	sin.2613
 	addi	%sp, %sp, -23
 	lw	%ra, 22(%sp)
 	flw	%f1, 21(%sp)
@@ -13074,7 +12087,7 @@ fbgt_cont.20545:
 	fmov	%f0, %f1
 	sw	%ra, 23(%sp)
 	addi	%sp, %sp, 24
-	jal	cos.2616
+	jal	cos.2611
 	addi	%sp, %sp, -24
 	lw	%ra, 23(%sp)
 	flw	%f1, 22(%sp)
@@ -13087,16 +12100,16 @@ fbgt_cont.20545:
 	lw	%v0, 16(%sp)
 	lw	%v1, 1(%sp)
 	lw	%a0, 0(%sp)
-	j	calc_dirvec.3064
-calc_dirvecs.3072:
+	j	calc_dirvec.3059
+calc_dirvecs.3067:
 	addi	%a1, %zero, 0
-	blti	%v0, 0, bgti_else.20550
+	blti	%v0, 0, bgti_else.19914
 	itof	%f1, %v0
-	flw	%f2, 496(%zero)
+	flw	%f2, 481(%zero)
 	fmul	%f1, %f1, %f2
 	flw	%f3, 436(%zero)
 	fsub	%f1, %f1, %f3
-	flw	%f4, 464(%zero)
+	flw	%f4, 465(%zero)
 	fsw	%f3, 0(%sp)
 	fsw	%f0, 1(%sp)
 	fsw	%f4, 2(%sp)
@@ -13112,7 +12125,7 @@ calc_dirvecs.3072:
 	fmov	%f0, %f4
 	sw	%ra, 8(%sp)
 	addi	%sp, %sp, 9
-	jal	calc_dirvec.3064
+	jal	calc_dirvec.3059
 	addi	%sp, %sp, -9
 	lw	%ra, 8(%sp)
 	lw	%v0, 7(%sp)
@@ -13137,19 +12150,19 @@ calc_dirvecs.3072:
 	fmov	%f3, %f4
 	sw	%ra, 10(%sp)
 	addi	%sp, %sp, 11
-	jal	calc_dirvec.3064
+	jal	calc_dirvec.3059
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
 	lw	%v0, 7(%sp)
 	addi	%v0, %v0, -1
 	lw	%v1, 3(%sp)
 	addi	%v1, %v1, 1
-	blti	%v1, 5, bgti_else.20551
+	blti	%v1, 5, bgti_else.19915
 	addi	%v1, %v1, -5
-	j	bgti_cont.20552
-bgti_else.20551:
-bgti_cont.20552:
-	blti	%v0, 0, bgti_else.20553
+	j	bgti_cont.19916
+bgti_else.19915:
+bgti_cont.19916:
+	blti	%v0, 0, bgti_else.19917
 	itof	%f0, %v0
 	flw	%f1, 6(%sp)
 	fmul	%f0, %f0, %f1
@@ -13166,7 +12179,7 @@ bgti_cont.20552:
 	fmov	%f1, %f0
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 13
-	jal	calc_dirvec.3064
+	jal	calc_dirvec.3059
 	addi	%sp, %sp, -13
 	lw	%ra, 12(%sp)
 	lw	%v0, 11(%sp)
@@ -13186,30 +12199,30 @@ bgti_cont.20552:
 	fmov	%f1, %f0
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 13
-	jal	calc_dirvec.3064
+	jal	calc_dirvec.3059
 	addi	%sp, %sp, -13
 	lw	%ra, 12(%sp)
 	lw	%v0, 11(%sp)
 	addi	%v0, %v0, -1
 	lw	%v1, 10(%sp)
 	addi	%v1, %v1, 1
-	blti	%v1, 5, bgti_else.20554
+	blti	%v1, 5, bgti_else.19918
 	addi	%v1, %v1, -5
-	j	bgti_cont.20555
-bgti_else.20554:
-bgti_cont.20555:
+	j	bgti_cont.19919
+bgti_else.19918:
+bgti_cont.19919:
 	flw	%f0, 1(%sp)
 	lw	%a0, 5(%sp)
-	j	calc_dirvecs.3072
-bgti_else.20553:
+	j	calc_dirvecs.3067
+bgti_else.19917:
 	jr	%ra
-bgti_else.20550:
+bgti_else.19914:
 	jr	%ra
-calc_dirvec_rows.3077:
+calc_dirvec_rows.3072:
 	addi	%a1, %zero, 0
-	blti	%v0, 0, bgti_else.20558
+	blti	%v0, 0, bgti_else.19922
 	itof	%f0, %v0
-	flw	%f1, 496(%zero)
+	flw	%f1, 481(%zero)
 	fmul	%f0, %f0, %f1
 	flw	%f2, 436(%zero)
 	fsub	%f3, %f0, %f2
@@ -13217,7 +12230,7 @@ calc_dirvec_rows.3077:
 	itof	%f0, %a2
 	fmul	%f0, %f0, %f1
 	fsub	%f0, %f0, %f2
-	flw	%f4, 464(%zero)
+	flw	%f4, 465(%zero)
 	fsw	%f2, 0(%sp)
 	sw	%v0, 1(%sp)
 	fsw	%f3, 2(%sp)
@@ -13233,7 +12246,7 @@ calc_dirvec_rows.3077:
 	fmov	%f0, %f4
 	sw	%ra, 9(%sp)
 	addi	%sp, %sp, 10
-	jal	calc_dirvec.3064
+	jal	calc_dirvec.3059
 	addi	%sp, %sp, -10
 	lw	%ra, 9(%sp)
 	lw	%v0, 8(%sp)
@@ -13253,38 +12266,38 @@ calc_dirvec_rows.3077:
 	fmov	%f1, %f0
 	sw	%ra, 9(%sp)
 	addi	%sp, %sp, 10
-	jal	calc_dirvec.3064
+	jal	calc_dirvec.3059
 	addi	%sp, %sp, -10
 	lw	%ra, 9(%sp)
 	addi	%v0, %zero, 3
 	lw	%v1, 4(%sp)
 	addi	%a0, %v1, 1
-	blti	%a0, 5, bgti_else.20559
+	blti	%a0, 5, bgti_else.19923
 	addi	%a0, %a0, -5
-	j	bgti_cont.20560
-bgti_else.20559:
-bgti_cont.20560:
+	j	bgti_cont.19924
+bgti_else.19923:
+bgti_cont.19924:
 	flw	%f0, 2(%sp)
 	lw	%a1, 6(%sp)
 	addi	%v1, %a0, 0
 	addi	%a0, %a1, 0
 	sw	%ra, 9(%sp)
 	addi	%sp, %sp, 10
-	jal	calc_dirvecs.3072
+	jal	calc_dirvecs.3067
 	addi	%sp, %sp, -10
 	lw	%ra, 9(%sp)
 	lw	%v0, 1(%sp)
 	addi	%v0, %v0, -1
 	lw	%v1, 4(%sp)
 	addi	%v1, %v1, 2
-	blti	%v1, 5, bgti_else.20561
+	blti	%v1, 5, bgti_else.19925
 	addi	%v1, %v1, -5
-	j	bgti_cont.20562
-bgti_else.20561:
-bgti_cont.20562:
+	j	bgti_cont.19926
+bgti_else.19925:
+bgti_cont.19926:
 	lw	%a0, 6(%sp)
 	addi	%a0, %a0, 4
-	blti	%v0, 0, bgti_else.20563
+	blti	%v0, 0, bgti_else.19927
 	itof	%f0, %v0
 	flw	%f1, 7(%sp)
 	fmul	%f0, %f0, %f1
@@ -13297,29 +12310,29 @@ bgti_cont.20562:
 	addi	%v0, %a1, 0
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 13
-	jal	calc_dirvecs.3072
+	jal	calc_dirvecs.3067
 	addi	%sp, %sp, -13
 	lw	%ra, 12(%sp)
 	lw	%v0, 11(%sp)
 	addi	%v0, %v0, -1
 	lw	%v1, 10(%sp)
 	addi	%v1, %v1, 2
-	blti	%v1, 5, bgti_else.20564
+	blti	%v1, 5, bgti_else.19928
 	addi	%v1, %v1, -5
-	j	bgti_cont.20565
-bgti_else.20564:
-bgti_cont.20565:
+	j	bgti_cont.19929
+bgti_else.19928:
+bgti_cont.19929:
 	lw	%a0, 9(%sp)
 	addi	%a0, %a0, 4
-	j	calc_dirvec_rows.3077
-bgti_else.20563:
+	j	calc_dirvec_rows.3072
+bgti_else.19927:
 	jr	%ra
-bgti_else.20558:
+bgti_else.19922:
 	jr	%ra
-create_dirvec_elements.3083:
-	blti	%v1, 0, bgti_else.20568
+create_dirvec_elements.3078:
+	blti	%v1, 0, bgti_else.19932
 	addi	%a0, %zero, 3
-	flw	%f0, 464(%zero)
+	flw	%f0, 465(%zero)
 	fsw	%f0, 0(%sp)
 	sw	%a0, 1(%sp)
 	sw	%v1, 2(%sp)
@@ -13351,7 +12364,7 @@ create_dirvec_elements.3083:
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
 	addi	%v0, %v1, -1
-	blti	%v0, 0, bgti_else.20569
+	blti	%v0, 0, bgti_else.19933
 	flw	%f0, 0(%sp)
 	lw	%v1, 1(%sp)
 	sw	%v0, 6(%sp)
@@ -13380,7 +12393,7 @@ create_dirvec_elements.3083:
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
 	addi	%v0, %v1, -1
-	blti	%v0, 0, bgti_else.20570
+	blti	%v0, 0, bgti_else.19934
 	flw	%f0, 0(%sp)
 	lw	%v1, 1(%sp)
 	sw	%v0, 8(%sp)
@@ -13409,7 +12422,7 @@ create_dirvec_elements.3083:
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
 	addi	%v0, %v1, -1
-	blti	%v0, 0, bgti_else.20571
+	blti	%v0, 0, bgti_else.19935
 	flw	%f0, 0(%sp)
 	lw	%v1, 1(%sp)
 	sw	%v0, 10(%sp)
@@ -13439,20 +12452,20 @@ create_dirvec_elements.3083:
 	sw	%v0, 0(%at)
 	addi	%v1, %v1, -1
 	addi	%v0, %a0, 0
-	j	create_dirvec_elements.3083
-bgti_else.20571:
+	j	create_dirvec_elements.3078
+bgti_else.19935:
 	jr	%ra
-bgti_else.20570:
+bgti_else.19934:
 	jr	%ra
-bgti_else.20569:
+bgti_else.19933:
 	jr	%ra
-bgti_else.20568:
+bgti_else.19932:
 	jr	%ra
-create_dirvecs.3086:
-	blti	%v0, 0, bgti_else.20576
+create_dirvecs.3081:
+	blti	%v0, 0, bgti_else.19940
 	addi	%v1, %zero, 120
 	addi	%a0, %zero, 3
-	flw	%f0, 464(%zero)
+	flw	%f0, 465(%zero)
 	fsw	%f0, 0(%sp)
 	sw	%a0, 1(%sp)
 	sw	%v0, 2(%sp)
@@ -13571,12 +12584,12 @@ create_dirvecs.3086:
 	addi	%v0, %k0, 0
 	sw	%ra, 11(%sp)
 	addi	%sp, %sp, 12
-	jal	create_dirvec_elements.3083
+	jal	create_dirvec_elements.3078
 	addi	%sp, %sp, -12
 	lw	%ra, 11(%sp)
 	lw	%v0, 2(%sp)
 	addi	%v0, %v0, -1
-	blti	%v0, 0, bgti_else.20577
+	blti	%v0, 0, bgti_else.19941
 	flw	%f0, 0(%sp)
 	lw	%v1, 1(%sp)
 	sw	%v0, 11(%sp)
@@ -13666,18 +12679,18 @@ create_dirvecs.3086:
 	addi	%v0, %k0, 0
 	sw	%ra, 16(%sp)
 	addi	%sp, %sp, 17
-	jal	create_dirvec_elements.3083
+	jal	create_dirvec_elements.3078
 	addi	%sp, %sp, -17
 	lw	%ra, 16(%sp)
 	lw	%v0, 11(%sp)
 	addi	%v0, %v0, -1
-	j	create_dirvecs.3086
-bgti_else.20577:
+	j	create_dirvecs.3081
+bgti_else.19941:
 	jr	%ra
-bgti_else.20576:
+bgti_else.19940:
 	jr	%ra
-init_dirvec_constants.3088:
-	blti	%v1, 0, bgti_else.20580
+init_dirvec_constants.3083:
+	blti	%v1, 0, bgti_else.19944
 	add	%at, %v0, %v1
 	lw	%a0, 0(%at)
 	addi	%a1, %zero, 0
@@ -13690,18 +12703,18 @@ init_dirvec_constants.3088:
 	addi	%v0, %a0, 0
 	sw	%ra, 3(%sp)
 	addi	%sp, %sp, 4
-	jal	iter_setup_dirvec_constants.2870
+	jal	iter_setup_dirvec_constants.2865
 	addi	%sp, %sp, -4
 	lw	%ra, 3(%sp)
 	lw	%v0, 2(%sp)
 	addi	%v0, %v0, -1
-	blti	%v0, 0, bgti_else.20581
+	blti	%v0, 0, bgti_else.19945
 	lw	%v1, 1(%sp)
 	add	%at, %v1, %v0
 	lw	%a0, 0(%at)
 	lw	%a1, 0(%sp)
 	sw	%v0, 3(%sp)
-	blti	%a1, 0, bgti_else.20582
+	blti	%a1, 0, bgti_else.19946
 	addi	%a2, %zero, 12
 	add	%at, %a2, %a1
 	lw	%a2, 0(%at)
@@ -13709,65 +12722,65 @@ init_dirvec_constants.3088:
 	lw	%t0, 0(%a0)
 	lw	%t1, 1(%a2)
 	sw	%a0, 4(%sp)
-	beqi	%t1, 1, bnei_else.20584
-	beqi	%t1, 2, bnei_else.20586
+	beqi	%t1, 1, bnei_else.19948
+	beqi	%t1, 2, bnei_else.19950
 	sw	%a3, 5(%sp)
 	addi	%v1, %a2, 0
 	addi	%v0, %t0, 0
 	sw	%ra, 6(%sp)
 	addi	%sp, %sp, 7
-	jal	setup_second_table.2867
+	jal	setup_second_table.2862
 	addi	%sp, %sp, -7
 	lw	%ra, 6(%sp)
 	lw	%v1, 0(%sp)
 	lw	%a0, 5(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-	j	bnei_cont.20587
-bnei_else.20586:
+	j	bnei_cont.19951
+bnei_else.19950:
 	sw	%a3, 5(%sp)
 	addi	%v1, %a2, 0
 	addi	%v0, %t0, 0
 	sw	%ra, 6(%sp)
 	addi	%sp, %sp, 7
-	jal	setup_surface_table.2864
+	jal	setup_surface_table.2859
 	addi	%sp, %sp, -7
 	lw	%ra, 6(%sp)
 	lw	%v1, 0(%sp)
 	lw	%a0, 5(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-bnei_cont.20587:
-	j	bnei_cont.20585
-bnei_else.20584:
+bnei_cont.19951:
+	j	bnei_cont.19949
+bnei_else.19948:
 	sw	%a3, 5(%sp)
 	addi	%v1, %a2, 0
 	addi	%v0, %t0, 0
 	sw	%ra, 6(%sp)
 	addi	%sp, %sp, 7
-	jal	setup_rect_table.2861
+	jal	setup_rect_table.2856
 	addi	%sp, %sp, -7
 	lw	%ra, 6(%sp)
 	lw	%v1, 0(%sp)
 	lw	%a0, 5(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-bnei_cont.20585:
+bnei_cont.19949:
 	addi	%v0, %v1, -1
 	lw	%a0, 4(%sp)
 	addi	%v1, %v0, 0
 	addi	%v0, %a0, 0
 	sw	%ra, 6(%sp)
 	addi	%sp, %sp, 7
-	jal	iter_setup_dirvec_constants.2870
+	jal	iter_setup_dirvec_constants.2865
 	addi	%sp, %sp, -7
 	lw	%ra, 6(%sp)
-	j	bgti_cont.20583
-bgti_else.20582:
-bgti_cont.20583:
+	j	bgti_cont.19947
+bgti_else.19946:
+bgti_cont.19947:
 	lw	%v0, 3(%sp)
 	addi	%v0, %v0, -1
-	blti	%v0, 0, bgti_else.20588
+	blti	%v0, 0, bgti_else.19952
 	lw	%v1, 1(%sp)
 	add	%at, %v1, %v0
 	lw	%a0, 0(%at)
@@ -13777,18 +12790,18 @@ bgti_cont.20583:
 	addi	%v0, %a0, 0
 	sw	%ra, 7(%sp)
 	addi	%sp, %sp, 8
-	jal	iter_setup_dirvec_constants.2870
+	jal	iter_setup_dirvec_constants.2865
 	addi	%sp, %sp, -8
 	lw	%ra, 7(%sp)
 	lw	%v0, 6(%sp)
 	addi	%v0, %v0, -1
-	blti	%v0, 0, bgti_else.20589
+	blti	%v0, 0, bgti_else.19953
 	lw	%v1, 1(%sp)
 	add	%at, %v1, %v0
 	lw	%a0, 0(%at)
 	lw	%a1, 0(%sp)
 	sw	%v0, 7(%sp)
-	blti	%a1, 0, bgti_else.20590
+	blti	%a1, 0, bgti_else.19954
 	addi	%a2, %zero, 12
 	add	%at, %a2, %a1
 	lw	%a2, 0(%at)
@@ -13796,74 +12809,74 @@ bgti_cont.20583:
 	lw	%t0, 0(%a0)
 	lw	%t1, 1(%a2)
 	sw	%a0, 8(%sp)
-	beqi	%t1, 1, bnei_else.20592
-	beqi	%t1, 2, bnei_else.20594
+	beqi	%t1, 1, bnei_else.19956
+	beqi	%t1, 2, bnei_else.19958
 	sw	%a3, 9(%sp)
 	addi	%v1, %a2, 0
 	addi	%v0, %t0, 0
 	sw	%ra, 10(%sp)
 	addi	%sp, %sp, 11
-	jal	setup_second_table.2867
+	jal	setup_second_table.2862
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
 	lw	%v1, 0(%sp)
 	lw	%a0, 9(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-	j	bnei_cont.20595
-bnei_else.20594:
+	j	bnei_cont.19959
+bnei_else.19958:
 	sw	%a3, 9(%sp)
 	addi	%v1, %a2, 0
 	addi	%v0, %t0, 0
 	sw	%ra, 10(%sp)
 	addi	%sp, %sp, 11
-	jal	setup_surface_table.2864
+	jal	setup_surface_table.2859
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
 	lw	%v1, 0(%sp)
 	lw	%a0, 9(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-bnei_cont.20595:
-	j	bnei_cont.20593
-bnei_else.20592:
+bnei_cont.19959:
+	j	bnei_cont.19957
+bnei_else.19956:
 	sw	%a3, 9(%sp)
 	addi	%v1, %a2, 0
 	addi	%v0, %t0, 0
 	sw	%ra, 10(%sp)
 	addi	%sp, %sp, 11
-	jal	setup_rect_table.2861
+	jal	setup_rect_table.2856
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
 	lw	%v1, 0(%sp)
 	lw	%a0, 9(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-bnei_cont.20593:
+bnei_cont.19957:
 	addi	%v1, %v1, -1
 	lw	%v0, 8(%sp)
 	sw	%ra, 10(%sp)
 	addi	%sp, %sp, 11
-	jal	iter_setup_dirvec_constants.2870
+	jal	iter_setup_dirvec_constants.2865
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
-	j	bgti_cont.20591
-bgti_else.20590:
-bgti_cont.20591:
+	j	bgti_cont.19955
+bgti_else.19954:
+bgti_cont.19955:
 	lw	%v0, 7(%sp)
 	addi	%v1, %v0, -1
 	lw	%v0, 1(%sp)
-	j	init_dirvec_constants.3088
-bgti_else.20589:
+	j	init_dirvec_constants.3083
+bgti_else.19953:
 	jr	%ra
-bgti_else.20588:
+bgti_else.19952:
 	jr	%ra
-bgti_else.20581:
+bgti_else.19945:
 	jr	%ra
-bgti_else.20580:
+bgti_else.19944:
 	jr	%ra
-init_vecset_constants.3091:
-	blti	%v0, 0, bgti_else.20600
+init_vecset_constants.3086:
+	blti	%v0, 0, bgti_else.19964
 	addi	%v1, %zero, 179
 	add	%at, %v1, %v0
 	lw	%v1, 0(%at)
@@ -13876,7 +12889,7 @@ init_vecset_constants.3091:
 	sw	%v0, 1(%sp)
 	sw	%a2, 2(%sp)
 	sw	%v1, 3(%sp)
-	blti	%a2, 0, bgti_else.20601
+	blti	%a2, 0, bgti_else.19965
 	addi	%a3, %zero, 12
 	add	%at, %a3, %a2
 	lw	%a3, 0(%at)
@@ -13884,62 +12897,62 @@ init_vecset_constants.3091:
 	lw	%t1, 0(%a1)
 	lw	%t2, 1(%a3)
 	sw	%a1, 4(%sp)
-	beqi	%t2, 1, bnei_else.20603
-	beqi	%t2, 2, bnei_else.20605
+	beqi	%t2, 1, bnei_else.19967
+	beqi	%t2, 2, bnei_else.19969
 	sw	%t0, 5(%sp)
 	addi	%v1, %a3, 0
 	addi	%v0, %t1, 0
 	sw	%ra, 6(%sp)
 	addi	%sp, %sp, 7
-	jal	setup_second_table.2867
+	jal	setup_second_table.2862
 	addi	%sp, %sp, -7
 	lw	%ra, 6(%sp)
 	lw	%v1, 2(%sp)
 	lw	%a0, 5(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-	j	bnei_cont.20606
-bnei_else.20605:
+	j	bnei_cont.19970
+bnei_else.19969:
 	sw	%t0, 5(%sp)
 	addi	%v1, %a3, 0
 	addi	%v0, %t1, 0
 	sw	%ra, 6(%sp)
 	addi	%sp, %sp, 7
-	jal	setup_surface_table.2864
+	jal	setup_surface_table.2859
 	addi	%sp, %sp, -7
 	lw	%ra, 6(%sp)
 	lw	%v1, 2(%sp)
 	lw	%a0, 5(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-bnei_cont.20606:
-	j	bnei_cont.20604
-bnei_else.20603:
+bnei_cont.19970:
+	j	bnei_cont.19968
+bnei_else.19967:
 	sw	%t0, 5(%sp)
 	addi	%v1, %a3, 0
 	addi	%v0, %t1, 0
 	sw	%ra, 6(%sp)
 	addi	%sp, %sp, 7
-	jal	setup_rect_table.2861
+	jal	setup_rect_table.2856
 	addi	%sp, %sp, -7
 	lw	%ra, 6(%sp)
 	lw	%v1, 2(%sp)
 	lw	%a0, 5(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-bnei_cont.20604:
+bnei_cont.19968:
 	addi	%v0, %v1, -1
 	lw	%a0, 4(%sp)
 	addi	%v1, %v0, 0
 	addi	%v0, %a0, 0
 	sw	%ra, 6(%sp)
 	addi	%sp, %sp, 7
-	jal	iter_setup_dirvec_constants.2870
+	jal	iter_setup_dirvec_constants.2865
 	addi	%sp, %sp, -7
 	lw	%ra, 6(%sp)
-	j	bgti_cont.20602
-bgti_else.20601:
-bgti_cont.20602:
+	j	bgti_cont.19966
+bgti_else.19965:
+bgti_cont.19966:
 	addi	%v0, %zero, 118
 	lw	%v1, 3(%sp)
 	lw	%a0, 118(%v1)
@@ -13949,7 +12962,7 @@ bgti_cont.20602:
 	addi	%v0, %a0, 0
 	sw	%ra, 7(%sp)
 	addi	%sp, %sp, 8
-	jal	iter_setup_dirvec_constants.2870
+	jal	iter_setup_dirvec_constants.2865
 	addi	%sp, %sp, -8
 	lw	%ra, 7(%sp)
 	addi	%v0, %zero, 117
@@ -13957,7 +12970,7 @@ bgti_cont.20602:
 	lw	%a0, 117(%v1)
 	lw	%a1, 2(%sp)
 	sw	%v0, 7(%sp)
-	blti	%a1, 0, bgti_else.20607
+	blti	%a1, 0, bgti_else.19971
 	addi	%a2, %zero, 12
 	add	%at, %a2, %a1
 	lw	%a2, 0(%at)
@@ -13965,72 +12978,72 @@ bgti_cont.20602:
 	lw	%t0, 0(%a0)
 	lw	%t1, 1(%a2)
 	sw	%a0, 8(%sp)
-	beqi	%t1, 1, bnei_else.20609
-	beqi	%t1, 2, bnei_else.20611
+	beqi	%t1, 1, bnei_else.19973
+	beqi	%t1, 2, bnei_else.19975
 	sw	%a3, 9(%sp)
 	addi	%v1, %a2, 0
 	addi	%v0, %t0, 0
 	sw	%ra, 10(%sp)
 	addi	%sp, %sp, 11
-	jal	setup_second_table.2867
+	jal	setup_second_table.2862
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
 	lw	%v1, 2(%sp)
 	lw	%a0, 9(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-	j	bnei_cont.20612
-bnei_else.20611:
+	j	bnei_cont.19976
+bnei_else.19975:
 	sw	%a3, 9(%sp)
 	addi	%v1, %a2, 0
 	addi	%v0, %t0, 0
 	sw	%ra, 10(%sp)
 	addi	%sp, %sp, 11
-	jal	setup_surface_table.2864
+	jal	setup_surface_table.2859
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
 	lw	%v1, 2(%sp)
 	lw	%a0, 9(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-bnei_cont.20612:
-	j	bnei_cont.20610
-bnei_else.20609:
+bnei_cont.19976:
+	j	bnei_cont.19974
+bnei_else.19973:
 	sw	%a3, 9(%sp)
 	addi	%v1, %a2, 0
 	addi	%v0, %t0, 0
 	sw	%ra, 10(%sp)
 	addi	%sp, %sp, 11
-	jal	setup_rect_table.2861
+	jal	setup_rect_table.2856
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
 	lw	%v1, 2(%sp)
 	lw	%a0, 9(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-bnei_cont.20610:
+bnei_cont.19974:
 	addi	%v0, %v1, -1
 	lw	%a0, 8(%sp)
 	addi	%v1, %v0, 0
 	addi	%v0, %a0, 0
 	sw	%ra, 10(%sp)
 	addi	%sp, %sp, 11
-	jal	iter_setup_dirvec_constants.2870
+	jal	iter_setup_dirvec_constants.2865
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
-	j	bgti_cont.20608
-bgti_else.20607:
-bgti_cont.20608:
+	j	bgti_cont.19972
+bgti_else.19971:
+bgti_cont.19972:
 	addi	%v1, %zero, 116
 	lw	%v0, 3(%sp)
 	sw	%ra, 10(%sp)
 	addi	%sp, %sp, 11
-	jal	init_dirvec_constants.3088
+	jal	init_dirvec_constants.3083
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
 	lw	%v0, 1(%sp)
 	addi	%v0, %v0, -1
-	blti	%v0, 0, bgti_else.20613
+	blti	%v0, 0, bgti_else.19977
 	addi	%v1, %zero, 179
 	add	%at, %v1, %v0
 	lw	%v1, 0(%at)
@@ -14042,13 +13055,13 @@ bgti_cont.20608:
 	addi	%v0, %a0, 0
 	sw	%ra, 12(%sp)
 	addi	%sp, %sp, 13
-	jal	iter_setup_dirvec_constants.2870
+	jal	iter_setup_dirvec_constants.2865
 	addi	%sp, %sp, -13
 	lw	%ra, 12(%sp)
 	lw	%v0, 11(%sp)
 	lw	%v1, 118(%v0)
 	lw	%a0, 2(%sp)
-	blti	%a0, 0, bgti_else.20614
+	blti	%a0, 0, bgti_else.19978
 	addi	%a1, %zero, 12
 	add	%at, %a1, %a0
 	lw	%a1, 0(%at)
@@ -14056,72 +13069,72 @@ bgti_cont.20608:
 	lw	%a3, 0(%v1)
 	lw	%t0, 1(%a1)
 	sw	%v1, 12(%sp)
-	beqi	%t0, 1, bnei_else.20616
-	beqi	%t0, 2, bnei_else.20618
+	beqi	%t0, 1, bnei_else.19980
+	beqi	%t0, 2, bnei_else.19982
 	sw	%a2, 13(%sp)
 	addi	%v1, %a1, 0
 	addi	%v0, %a3, 0
 	sw	%ra, 14(%sp)
 	addi	%sp, %sp, 15
-	jal	setup_second_table.2867
+	jal	setup_second_table.2862
 	addi	%sp, %sp, -15
 	lw	%ra, 14(%sp)
 	lw	%v1, 2(%sp)
 	lw	%a0, 13(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-	j	bnei_cont.20619
-bnei_else.20618:
+	j	bnei_cont.19983
+bnei_else.19982:
 	sw	%a2, 13(%sp)
 	addi	%v1, %a1, 0
 	addi	%v0, %a3, 0
 	sw	%ra, 14(%sp)
 	addi	%sp, %sp, 15
-	jal	setup_surface_table.2864
+	jal	setup_surface_table.2859
 	addi	%sp, %sp, -15
 	lw	%ra, 14(%sp)
 	lw	%v1, 2(%sp)
 	lw	%a0, 13(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-bnei_cont.20619:
-	j	bnei_cont.20617
-bnei_else.20616:
+bnei_cont.19983:
+	j	bnei_cont.19981
+bnei_else.19980:
 	sw	%a2, 13(%sp)
 	addi	%v1, %a1, 0
 	addi	%v0, %a3, 0
 	sw	%ra, 14(%sp)
 	addi	%sp, %sp, 15
-	jal	setup_rect_table.2861
+	jal	setup_rect_table.2856
 	addi	%sp, %sp, -15
 	lw	%ra, 14(%sp)
 	lw	%v1, 2(%sp)
 	lw	%a0, 13(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-bnei_cont.20617:
+bnei_cont.19981:
 	addi	%v0, %v1, -1
 	lw	%a0, 12(%sp)
 	addi	%v1, %v0, 0
 	addi	%v0, %a0, 0
 	sw	%ra, 14(%sp)
 	addi	%sp, %sp, 15
-	jal	iter_setup_dirvec_constants.2870
+	jal	iter_setup_dirvec_constants.2865
 	addi	%sp, %sp, -15
 	lw	%ra, 14(%sp)
-	j	bgti_cont.20615
-bgti_else.20614:
-bgti_cont.20615:
+	j	bgti_cont.19979
+bgti_else.19978:
+bgti_cont.19979:
 	lw	%v0, 11(%sp)
 	lw	%v1, 7(%sp)
 	sw	%ra, 14(%sp)
 	addi	%sp, %sp, 15
-	jal	init_dirvec_constants.3088
+	jal	init_dirvec_constants.3083
 	addi	%sp, %sp, -15
 	lw	%ra, 14(%sp)
 	lw	%v0, 10(%sp)
 	addi	%v0, %v0, -1
-	blti	%v0, 0, bgti_else.20620
+	blti	%v0, 0, bgti_else.19984
 	addi	%v1, %zero, 179
 	add	%at, %v1, %v0
 	lw	%v1, 0(%at)
@@ -14129,7 +13142,7 @@ bgti_cont.20615:
 	lw	%a1, 2(%sp)
 	sw	%v0, 14(%sp)
 	sw	%v1, 15(%sp)
-	blti	%a1, 0, bgti_else.20621
+	blti	%a1, 0, bgti_else.19985
 	addi	%a2, %zero, 12
 	add	%at, %a2, %a1
 	lw	%a2, 0(%at)
@@ -14137,70 +13150,70 @@ bgti_cont.20615:
 	lw	%t0, 0(%a0)
 	lw	%t1, 1(%a2)
 	sw	%a0, 16(%sp)
-	beqi	%t1, 1, bnei_else.20623
-	beqi	%t1, 2, bnei_else.20625
+	beqi	%t1, 1, bnei_else.19987
+	beqi	%t1, 2, bnei_else.19989
 	sw	%a3, 17(%sp)
 	addi	%v1, %a2, 0
 	addi	%v0, %t0, 0
 	sw	%ra, 18(%sp)
 	addi	%sp, %sp, 19
-	jal	setup_second_table.2867
+	jal	setup_second_table.2862
 	addi	%sp, %sp, -19
 	lw	%ra, 18(%sp)
 	lw	%v1, 2(%sp)
 	lw	%a0, 17(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-	j	bnei_cont.20626
-bnei_else.20625:
+	j	bnei_cont.19990
+bnei_else.19989:
 	sw	%a3, 17(%sp)
 	addi	%v1, %a2, 0
 	addi	%v0, %t0, 0
 	sw	%ra, 18(%sp)
 	addi	%sp, %sp, 19
-	jal	setup_surface_table.2864
+	jal	setup_surface_table.2859
 	addi	%sp, %sp, -19
 	lw	%ra, 18(%sp)
 	lw	%v1, 2(%sp)
 	lw	%a0, 17(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-bnei_cont.20626:
-	j	bnei_cont.20624
-bnei_else.20623:
+bnei_cont.19990:
+	j	bnei_cont.19988
+bnei_else.19987:
 	sw	%a3, 17(%sp)
 	addi	%v1, %a2, 0
 	addi	%v0, %t0, 0
 	sw	%ra, 18(%sp)
 	addi	%sp, %sp, 19
-	jal	setup_rect_table.2861
+	jal	setup_rect_table.2856
 	addi	%sp, %sp, -19
 	lw	%ra, 18(%sp)
 	lw	%v1, 2(%sp)
 	lw	%a0, 17(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-bnei_cont.20624:
+bnei_cont.19988:
 	addi	%v1, %v1, -1
 	lw	%v0, 16(%sp)
 	sw	%ra, 18(%sp)
 	addi	%sp, %sp, 19
-	jal	iter_setup_dirvec_constants.2870
+	jal	iter_setup_dirvec_constants.2865
 	addi	%sp, %sp, -19
 	lw	%ra, 18(%sp)
-	j	bgti_cont.20622
-bgti_else.20621:
-bgti_cont.20622:
+	j	bgti_cont.19986
+bgti_else.19985:
+bgti_cont.19986:
 	lw	%v0, 15(%sp)
 	lw	%v1, 6(%sp)
 	sw	%ra, 18(%sp)
 	addi	%sp, %sp, 19
-	jal	init_dirvec_constants.3088
+	jal	init_dirvec_constants.3083
 	addi	%sp, %sp, -19
 	lw	%ra, 18(%sp)
 	lw	%v0, 14(%sp)
 	addi	%v0, %v0, -1
-	blti	%v0, 0, bgti_else.20627
+	blti	%v0, 0, bgti_else.19991
 	addi	%v1, %zero, 179
 	add	%at, %v1, %v0
 	lw	%v1, 0(%at)
@@ -14210,25 +13223,25 @@ bgti_cont.20622:
 	addi	%v1, %a0, 0
 	sw	%ra, 19(%sp)
 	addi	%sp, %sp, 20
-	jal	init_dirvec_constants.3088
+	jal	init_dirvec_constants.3083
 	addi	%sp, %sp, -20
 	lw	%ra, 19(%sp)
 	lw	%v0, 18(%sp)
 	addi	%v0, %v0, -1
-	j	init_vecset_constants.3091
-bgti_else.20627:
+	j	init_vecset_constants.3086
+bgti_else.19991:
 	jr	%ra
-bgti_else.20620:
+bgti_else.19984:
 	jr	%ra
-bgti_else.20613:
+bgti_else.19977:
 	jr	%ra
-bgti_else.20600:
+bgti_else.19964:
 	jr	%ra
-setup_rect_reflection.3102:
+setup_rect_reflection.3097:
 	sll	%v0, %v0, 2
 	addi	%a0, %zero, 434
 	lw	%a0, 0(%a0)
-	flw	%f0, 468(%zero)
+	flw	%f0, 469(%zero)
 	lw	%v1, 7(%v1)
 	flw	%f1, 0(%v1)
 	fsub	%f0, %f0, %f1
@@ -14243,7 +13256,7 @@ setup_rect_reflection.3102:
 	fneg	%f6, %f5
 	addi	%v1, %v0, 1
 	addi	%a1, %zero, 3
-	flw	%f7, 464(%zero)
+	flw	%f7, 465(%zero)
 	fsw	%f5, 0(%sp)
 	fsw	%f3, 1(%sp)
 	fsw	%f2, 2(%sp)
@@ -14288,67 +13301,67 @@ setup_rect_reflection.3102:
 	addi	%a2, %a1, -1
 	sw	%a2, 14(%sp)
 	sw	%v1, 15(%sp)
-	blti	%a2, 0, bgti_else.20632
+	blti	%a2, 0, bgti_else.19996
 	addi	%a3, %zero, 12
 	add	%at, %a3, %a2
 	lw	%a3, 0(%at)
 	lw	%t0, 1(%a3)
-	beqi	%t0, 1, bnei_else.20634
-	beqi	%t0, 2, bnei_else.20636
+	beqi	%t0, 1, bnei_else.19998
+	beqi	%t0, 2, bnei_else.20000
 	sw	%v0, 16(%sp)
 	addi	%v1, %a3, 0
 	addi	%v0, %a0, 0
 	sw	%ra, 17(%sp)
 	addi	%sp, %sp, 18
-	jal	setup_second_table.2867
+	jal	setup_second_table.2862
 	addi	%sp, %sp, -18
 	lw	%ra, 17(%sp)
 	lw	%v1, 14(%sp)
 	lw	%a0, 16(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-	j	bnei_cont.20637
-bnei_else.20636:
+	j	bnei_cont.20001
+bnei_else.20000:
 	sw	%v0, 16(%sp)
 	addi	%v1, %a3, 0
 	addi	%v0, %a0, 0
 	sw	%ra, 17(%sp)
 	addi	%sp, %sp, 18
-	jal	setup_surface_table.2864
+	jal	setup_surface_table.2859
 	addi	%sp, %sp, -18
 	lw	%ra, 17(%sp)
 	lw	%v1, 14(%sp)
 	lw	%a0, 16(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-bnei_cont.20637:
-	j	bnei_cont.20635
-bnei_else.20634:
+bnei_cont.20001:
+	j	bnei_cont.19999
+bnei_else.19998:
 	sw	%v0, 16(%sp)
 	addi	%v1, %a3, 0
 	addi	%v0, %a0, 0
 	sw	%ra, 17(%sp)
 	addi	%sp, %sp, 18
-	jal	setup_rect_table.2861
+	jal	setup_rect_table.2856
 	addi	%sp, %sp, -18
 	lw	%ra, 17(%sp)
 	lw	%v1, 14(%sp)
 	lw	%a0, 16(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-bnei_cont.20635:
+bnei_cont.19999:
 	addi	%v0, %v1, -1
 	lw	%a0, 15(%sp)
 	addi	%v1, %v0, 0
 	addi	%v0, %a0, 0
 	sw	%ra, 17(%sp)
 	addi	%sp, %sp, 18
-	jal	iter_setup_dirvec_constants.2870
+	jal	iter_setup_dirvec_constants.2865
 	addi	%sp, %sp, -18
 	lw	%ra, 17(%sp)
-	j	bgti_cont.20633
-bgti_else.20632:
-bgti_cont.20633:
+	j	bgti_cont.19997
+bgti_else.19996:
+bgti_cont.19997:
 	add	%v0, %zero, %hp
 	addi	%hp, %hp, 3
 	flw	%f0, 8(%sp)
@@ -14396,67 +13409,67 @@ bgti_cont.20633:
 	fsw	%f1, 2(%a0)
 	lw	%a1, 14(%sp)
 	sw	%v1, 20(%sp)
-	blti	%a1, 0, bgti_else.20638
+	blti	%a1, 0, bgti_else.20002
 	addi	%a2, %zero, 12
 	add	%at, %a2, %a1
 	lw	%a2, 0(%at)
 	lw	%a3, 1(%a2)
-	beqi	%a3, 1, bnei_else.20640
-	beqi	%a3, 2, bnei_else.20642
+	beqi	%a3, 1, bnei_else.20004
+	beqi	%a3, 2, bnei_else.20006
 	sw	%v0, 21(%sp)
 	addi	%v1, %a2, 0
 	addi	%v0, %a0, 0
 	sw	%ra, 22(%sp)
 	addi	%sp, %sp, 23
-	jal	setup_second_table.2867
+	jal	setup_second_table.2862
 	addi	%sp, %sp, -23
 	lw	%ra, 22(%sp)
 	lw	%v1, 14(%sp)
 	lw	%a0, 21(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-	j	bnei_cont.20643
-bnei_else.20642:
+	j	bnei_cont.20007
+bnei_else.20006:
 	sw	%v0, 21(%sp)
 	addi	%v1, %a2, 0
 	addi	%v0, %a0, 0
 	sw	%ra, 22(%sp)
 	addi	%sp, %sp, 23
-	jal	setup_surface_table.2864
+	jal	setup_surface_table.2859
 	addi	%sp, %sp, -23
 	lw	%ra, 22(%sp)
 	lw	%v1, 14(%sp)
 	lw	%a0, 21(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-bnei_cont.20643:
-	j	bnei_cont.20641
-bnei_else.20640:
+bnei_cont.20007:
+	j	bnei_cont.20005
+bnei_else.20004:
 	sw	%v0, 21(%sp)
 	addi	%v1, %a2, 0
 	addi	%v0, %a0, 0
 	sw	%ra, 22(%sp)
 	addi	%sp, %sp, 23
-	jal	setup_rect_table.2861
+	jal	setup_rect_table.2856
 	addi	%sp, %sp, -23
 	lw	%ra, 22(%sp)
 	lw	%v1, 14(%sp)
 	lw	%a0, 21(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-bnei_cont.20641:
+bnei_cont.20005:
 	addi	%v0, %v1, -1
 	lw	%a0, 20(%sp)
 	addi	%v1, %v0, 0
 	addi	%v0, %a0, 0
 	sw	%ra, 22(%sp)
 	addi	%sp, %sp, 23
-	jal	iter_setup_dirvec_constants.2870
+	jal	iter_setup_dirvec_constants.2865
 	addi	%sp, %sp, -23
 	lw	%ra, 22(%sp)
-	j	bgti_cont.20639
-bgti_else.20638:
-bgti_cont.20639:
+	j	bgti_cont.20003
+bgti_else.20002:
+bgti_cont.20003:
 	add	%v0, %zero, %hp
 	addi	%hp, %hp, 3
 	flw	%f0, 8(%sp)
@@ -14505,65 +13518,65 @@ bgti_cont.20639:
 	fsw	%f0, 2(%a0)
 	lw	%a1, 14(%sp)
 	sw	%v1, 25(%sp)
-	blti	%a1, 0, bgti_else.20644
+	blti	%a1, 0, bgti_else.20008
 	addi	%a2, %zero, 12
 	add	%at, %a2, %a1
 	lw	%a2, 0(%at)
 	lw	%a3, 1(%a2)
-	beqi	%a3, 1, bnei_else.20646
-	beqi	%a3, 2, bnei_else.20648
+	beqi	%a3, 1, bnei_else.20010
+	beqi	%a3, 2, bnei_else.20012
 	sw	%v0, 26(%sp)
 	addi	%v1, %a2, 0
 	addi	%v0, %a0, 0
 	sw	%ra, 27(%sp)
 	addi	%sp, %sp, 28
-	jal	setup_second_table.2867
+	jal	setup_second_table.2862
 	addi	%sp, %sp, -28
 	lw	%ra, 27(%sp)
 	lw	%v1, 14(%sp)
 	lw	%a0, 26(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-	j	bnei_cont.20649
-bnei_else.20648:
+	j	bnei_cont.20013
+bnei_else.20012:
 	sw	%v0, 26(%sp)
 	addi	%v1, %a2, 0
 	addi	%v0, %a0, 0
 	sw	%ra, 27(%sp)
 	addi	%sp, %sp, 28
-	jal	setup_surface_table.2864
+	jal	setup_surface_table.2859
 	addi	%sp, %sp, -28
 	lw	%ra, 27(%sp)
 	lw	%v1, 14(%sp)
 	lw	%a0, 26(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-bnei_cont.20649:
-	j	bnei_cont.20647
-bnei_else.20646:
+bnei_cont.20013:
+	j	bnei_cont.20011
+bnei_else.20010:
 	sw	%v0, 26(%sp)
 	addi	%v1, %a2, 0
 	addi	%v0, %a0, 0
 	sw	%ra, 27(%sp)
 	addi	%sp, %sp, 28
-	jal	setup_rect_table.2861
+	jal	setup_rect_table.2856
 	addi	%sp, %sp, -28
 	lw	%ra, 27(%sp)
 	lw	%v1, 14(%sp)
 	lw	%a0, 26(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-bnei_cont.20647:
+bnei_cont.20011:
 	addi	%v1, %v1, -1
 	lw	%v0, 25(%sp)
 	sw	%ra, 27(%sp)
 	addi	%sp, %sp, 28
-	jal	iter_setup_dirvec_constants.2870
+	jal	iter_setup_dirvec_constants.2865
 	addi	%sp, %sp, -28
 	lw	%ra, 27(%sp)
-	j	bgti_cont.20645
-bgti_else.20644:
-bgti_cont.20645:
+	j	bgti_cont.20009
+bgti_else.20008:
+bgti_cont.20009:
 	add	%v0, %zero, %hp
 	addi	%hp, %hp, 3
 	flw	%f0, 8(%sp)
@@ -14581,12 +13594,12 @@ bgti_cont.20645:
 	addi	%v1, %zero, 434
 	sw	%v0, 0(%v1)
 	jr	%ra
-setup_surface_reflection.3105:
+setup_surface_reflection.3100:
 	sll	%v0, %v0, 2
 	addi	%v0, %v0, 1
 	addi	%a0, %zero, 434
 	lw	%a0, 0(%a0)
-	flw	%f0, 468(%zero)
+	flw	%f0, 469(%zero)
 	lw	%a1, 7(%v1)
 	flw	%f1, 0(%a1)
 	fsub	%f0, %f0, %f1
@@ -14605,7 +13618,7 @@ setup_surface_reflection.3105:
 	flw	%f5, 2(%a1)
 	fmul	%f5, %f4, %f5
 	fadd	%f2, %f2, %f5
-	flw	%f5, 491(%zero)
+	flw	%f5, 460(%zero)
 	lw	%a1, 4(%v1)
 	flw	%f6, 0(%a1)
 	fmul	%f6, %f5, %f6
@@ -14622,7 +13635,7 @@ setup_surface_reflection.3105:
 	fmul	%f2, %f5, %f2
 	fsub	%f2, %f2, %f4
 	addi	%v1, %zero, 3
-	flw	%f4, 464(%zero)
+	flw	%f4, 465(%zero)
 	sw	%a0, 0(%sp)
 	sw	%v0, 1(%sp)
 	fsw	%f0, 2(%sp)
@@ -14660,68 +13673,68 @@ setup_surface_reflection.3105:
 	lw	%a1, 6(%sp)
 	addi	%a1, %a1, -1
 	sw	%v1, 8(%sp)
-	blti	%a1, 0, bgti_else.20651
+	blti	%a1, 0, bgti_else.20015
 	addi	%a2, %zero, 12
 	add	%at, %a2, %a1
 	lw	%a2, 0(%at)
 	lw	%a3, 1(%a2)
-	beqi	%a3, 1, bnei_else.20653
-	beqi	%a3, 2, bnei_else.20655
+	beqi	%a3, 1, bnei_else.20017
+	beqi	%a3, 2, bnei_else.20019
 	sw	%a1, 9(%sp)
 	sw	%v0, 10(%sp)
 	addi	%v1, %a2, 0
 	addi	%v0, %a0, 0
 	sw	%ra, 11(%sp)
 	addi	%sp, %sp, 12
-	jal	setup_second_table.2867
+	jal	setup_second_table.2862
 	addi	%sp, %sp, -12
 	lw	%ra, 11(%sp)
 	lw	%v1, 9(%sp)
 	lw	%a0, 10(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-	j	bnei_cont.20656
-bnei_else.20655:
+	j	bnei_cont.20020
+bnei_else.20019:
 	sw	%a1, 9(%sp)
 	sw	%v0, 10(%sp)
 	addi	%v1, %a2, 0
 	addi	%v0, %a0, 0
 	sw	%ra, 11(%sp)
 	addi	%sp, %sp, 12
-	jal	setup_surface_table.2864
+	jal	setup_surface_table.2859
 	addi	%sp, %sp, -12
 	lw	%ra, 11(%sp)
 	lw	%v1, 9(%sp)
 	lw	%a0, 10(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-bnei_cont.20656:
-	j	bnei_cont.20654
-bnei_else.20653:
+bnei_cont.20020:
+	j	bnei_cont.20018
+bnei_else.20017:
 	sw	%a1, 9(%sp)
 	sw	%v0, 10(%sp)
 	addi	%v1, %a2, 0
 	addi	%v0, %a0, 0
 	sw	%ra, 11(%sp)
 	addi	%sp, %sp, 12
-	jal	setup_rect_table.2861
+	jal	setup_rect_table.2856
 	addi	%sp, %sp, -12
 	lw	%ra, 11(%sp)
 	lw	%v1, 9(%sp)
 	lw	%a0, 10(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-bnei_cont.20654:
+bnei_cont.20018:
 	addi	%v1, %v1, -1
 	lw	%v0, 8(%sp)
 	sw	%ra, 11(%sp)
 	addi	%sp, %sp, 12
-	jal	iter_setup_dirvec_constants.2870
+	jal	iter_setup_dirvec_constants.2865
 	addi	%sp, %sp, -12
 	lw	%ra, 11(%sp)
-	j	bgti_cont.20652
-bgti_else.20651:
-bgti_cont.20652:
+	j	bgti_cont.20016
+bgti_else.20015:
+bgti_cont.20016:
 	add	%v0, %zero, %hp
 	addi	%hp, %hp, 3
 	flw	%f0, 2(%sp)
@@ -14738,7 +13751,7 @@ bgti_cont.20652:
 	addi	%v1, %zero, 434
 	sw	%v0, 0(%v1)
 	jr	%ra
-rt.3110:
+rt.3105:
 	addi	%a0, %zero, 0
 	addi	%a1, %zero, 154
 	sw	%v0, 0(%a1)
@@ -14765,7 +13778,7 @@ rt.3110:
 	sw	%v0, 3(%sp)
 	sw	%ra, 4(%sp)
 	addi	%sp, %sp, 5
-	jal	create_pixel.3052
+	jal	create_pixel.3047
 	addi	%sp, %sp, -5
 	lw	%ra, 4(%sp)
 	addi	%v1, %v0, 0
@@ -14778,9 +13791,9 @@ rt.3110:
 	lw	%v1, 3(%sp)
 	addi	%a0, %v1, -2
 	sw	%a0, 4(%sp)
-	blti	%a0, 0, bgti_else.20658
+	blti	%a0, 0, bgti_else.20022
 	addi	%a1, %zero, 3
-	flw	%f0, 464(%zero)
+	flw	%f0, 465(%zero)
 	sw	%v0, 5(%sp)
 	fsw	%f0, 6(%sp)
 	sw	%a1, 7(%sp)
@@ -15053,11 +14066,11 @@ rt.3110:
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
 	addi	%v0, %v1, -1
-	blti	%v0, 0, bgti_else.20660
+	blti	%v0, 0, bgti_else.20024
 	sw	%v0, 17(%sp)
 	sw	%ra, 18(%sp)
 	addi	%sp, %sp, 19
-	jal	create_pixel.3052
+	jal	create_pixel.3047
 	addi	%sp, %sp, -19
 	lw	%ra, 18(%sp)
 	lw	%v1, 17(%sp)
@@ -15068,20 +14081,20 @@ rt.3110:
 	addi	%v0, %a0, 0
 	sw	%ra, 18(%sp)
 	addi	%sp, %sp, 19
-	jal	init_line_elements.3054
+	jal	init_line_elements.3049
 	addi	%sp, %sp, -19
 	lw	%ra, 18(%sp)
-	j	bgti_cont.20661
-bgti_else.20660:
+	j	bgti_cont.20025
+bgti_else.20024:
 	add	%v0, %zero, %a0
-bgti_cont.20661:
-	j	bgti_cont.20659
-bgti_else.20658:
-bgti_cont.20659:
+bgti_cont.20025:
+	j	bgti_cont.20023
+bgti_else.20022:
+bgti_cont.20023:
 	sw	%v0, 18(%sp)
 	sw	%ra, 19(%sp)
 	addi	%sp, %sp, 20
-	jal	create_pixel.3052
+	jal	create_pixel.3047
 	addi	%sp, %sp, -20
 	lw	%ra, 19(%sp)
 	addi	%v1, %v0, 0
@@ -15092,9 +14105,9 @@ bgti_cont.20659:
 	addi	%sp, %sp, -20
 	lw	%ra, 19(%sp)
 	lw	%v1, 4(%sp)
-	blti	%v1, 0, bgti_else.20662
+	blti	%v1, 0, bgti_else.20026
 	addi	%a0, %zero, 3
-	flw	%f0, 464(%zero)
+	flw	%f0, 465(%zero)
 	sw	%v0, 19(%sp)
 	fsw	%f0, 20(%sp)
 	sw	%a0, 21(%sp)
@@ -15367,11 +14380,11 @@ bgti_cont.20659:
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
 	addi	%v0, %v1, -1
-	blti	%v0, 0, bgti_else.20664
+	blti	%v0, 0, bgti_else.20028
 	sw	%v0, 31(%sp)
 	sw	%ra, 32(%sp)
 	addi	%sp, %sp, 33
-	jal	create_pixel.3052
+	jal	create_pixel.3047
 	addi	%sp, %sp, -33
 	lw	%ra, 32(%sp)
 	lw	%v1, 31(%sp)
@@ -15382,20 +14395,20 @@ bgti_cont.20659:
 	addi	%v0, %a0, 0
 	sw	%ra, 32(%sp)
 	addi	%sp, %sp, 33
-	jal	init_line_elements.3054
+	jal	init_line_elements.3049
 	addi	%sp, %sp, -33
 	lw	%ra, 32(%sp)
-	j	bgti_cont.20665
-bgti_else.20664:
+	j	bgti_cont.20029
+bgti_else.20028:
 	add	%v0, %zero, %a0
-bgti_cont.20665:
-	j	bgti_cont.20663
-bgti_else.20662:
-bgti_cont.20663:
+bgti_cont.20029:
+	j	bgti_cont.20027
+bgti_else.20026:
+bgti_cont.20027:
 	sw	%v0, 32(%sp)
 	sw	%ra, 33(%sp)
 	addi	%sp, %sp, 34
-	jal	create_pixel.3052
+	jal	create_pixel.3047
 	addi	%sp, %sp, -34
 	lw	%ra, 33(%sp)
 	addi	%v1, %v0, 0
@@ -15406,9 +14419,9 @@ bgti_cont.20663:
 	addi	%sp, %sp, -34
 	lw	%ra, 33(%sp)
 	lw	%v1, 4(%sp)
-	blti	%v1, 0, bgti_else.20666
+	blti	%v1, 0, bgti_else.20030
 	addi	%a0, %zero, 3
-	flw	%f0, 464(%zero)
+	flw	%f0, 465(%zero)
 	sw	%v0, 33(%sp)
 	fsw	%f0, 34(%sp)
 	sw	%a0, 35(%sp)
@@ -15681,11 +14694,11 @@ bgti_cont.20663:
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
 	addi	%v0, %v1, -1
-	blti	%v0, 0, bgti_else.20668
+	blti	%v0, 0, bgti_else.20032
 	sw	%v0, 45(%sp)
 	sw	%ra, 46(%sp)
 	addi	%sp, %sp, 47
-	jal	create_pixel.3052
+	jal	create_pixel.3047
 	addi	%sp, %sp, -47
 	lw	%ra, 46(%sp)
 	lw	%v1, 45(%sp)
@@ -15696,20 +14709,20 @@ bgti_cont.20663:
 	addi	%v0, %a0, 0
 	sw	%ra, 46(%sp)
 	addi	%sp, %sp, 47
-	jal	init_line_elements.3054
+	jal	init_line_elements.3049
 	addi	%sp, %sp, -47
 	lw	%ra, 46(%sp)
-	j	bgti_cont.20669
-bgti_else.20668:
+	j	bgti_cont.20033
+bgti_else.20032:
 	add	%v0, %zero, %a0
-bgti_cont.20669:
-	j	bgti_cont.20667
-bgti_else.20666:
-bgti_cont.20667:
+bgti_cont.20033:
+	j	bgti_cont.20031
+bgti_else.20030:
+bgti_cont.20031:
 	sw	%v0, 46(%sp)
 	sw	%ra, 47(%sp)
 	addi	%sp, %sp, 48
-	jal	read_screen_settings.2756
+	jal	read_screen_settings.2751
 	addi	%sp, %sp, -48
 	lw	%ra, 47(%sp)
 	sw	%ra, 47(%sp)
@@ -15722,13 +14735,13 @@ bgti_cont.20667:
 	jal	min_caml_read_float
 	addi	%sp, %sp, -48
 	lw	%ra, 47(%sp)
-	flw	%f1, 462(%zero)
+	flw	%f1, 463(%zero)
 	fmul	%f0, %f0, %f1
 	fsw	%f0, 47(%sp)
 	fsw	%f1, 48(%sp)
 	sw	%ra, 49(%sp)
 	addi	%sp, %sp, 50
-	jal	sin.2618
+	jal	sin.2613
 	addi	%sp, %sp, -50
 	lw	%ra, 49(%sp)
 	fneg	%f0, %f0
@@ -15746,7 +14759,7 @@ bgti_cont.20667:
 	fmov	%f0, %f1
 	sw	%ra, 50(%sp)
 	addi	%sp, %sp, 51
-	jal	cos.2616
+	jal	cos.2611
 	addi	%sp, %sp, -51
 	lw	%ra, 50(%sp)
 	flw	%f1, 49(%sp)
@@ -15754,7 +14767,7 @@ bgti_cont.20667:
 	fmov	%f0, %f1
 	sw	%ra, 51(%sp)
 	addi	%sp, %sp, 52
-	jal	sin.2618
+	jal	sin.2613
 	addi	%sp, %sp, -52
 	lw	%ra, 51(%sp)
 	flw	%f1, 50(%sp)
@@ -15764,7 +14777,7 @@ bgti_cont.20667:
 	flw	%f0, 49(%sp)
 	sw	%ra, 51(%sp)
 	addi	%sp, %sp, 52
-	jal	cos.2616
+	jal	cos.2611
 	addi	%sp, %sp, -52
 	lw	%ra, 51(%sp)
 	flw	%f1, 50(%sp)
@@ -15781,132 +14794,132 @@ bgti_cont.20667:
 	lw	%v0, 2(%sp)
 	sw	%ra, 51(%sp)
 	addi	%sp, %sp, 52
-	jal	read_nth_object.2763
+	jal	read_nth_object.2758
 	addi	%sp, %sp, -52
 	lw	%ra, 51(%sp)
-	beqi	%v0, 0, bnei_else.20670
+	beqi	%v0, 0, bnei_else.20034
 	lw	%v0, 1(%sp)
 	sw	%ra, 51(%sp)
 	addi	%sp, %sp, 52
-	jal	read_nth_object.2763
+	jal	read_nth_object.2758
 	addi	%sp, %sp, -52
 	lw	%ra, 51(%sp)
-	beqi	%v0, 0, bnei_else.20672
+	beqi	%v0, 0, bnei_else.20036
 	lw	%v0, 0(%sp)
 	sw	%ra, 51(%sp)
 	addi	%sp, %sp, 52
-	jal	read_nth_object.2763
+	jal	read_nth_object.2758
 	addi	%sp, %sp, -52
 	lw	%ra, 51(%sp)
-	beqi	%v0, 0, bnei_else.20674
+	beqi	%v0, 0, bnei_else.20038
 	addi	%v0, %zero, 3
 	sw	%v0, 51(%sp)
 	sw	%ra, 52(%sp)
 	addi	%sp, %sp, 53
-	jal	read_nth_object.2763
+	jal	read_nth_object.2758
 	addi	%sp, %sp, -53
 	lw	%ra, 52(%sp)
-	beqi	%v0, 0, bnei_else.20676
+	beqi	%v0, 0, bnei_else.20040
 	addi	%v0, %zero, 4
 	sw	%v0, 52(%sp)
 	sw	%ra, 53(%sp)
 	addi	%sp, %sp, 54
-	jal	read_nth_object.2763
+	jal	read_nth_object.2758
 	addi	%sp, %sp, -54
 	lw	%ra, 53(%sp)
-	beqi	%v0, 0, bnei_else.20678
+	beqi	%v0, 0, bnei_else.20042
 	addi	%v0, %zero, 5
 	sw	%ra, 53(%sp)
 	addi	%sp, %sp, 54
-	jal	read_object.2765
+	jal	read_object.2760
 	addi	%sp, %sp, -54
 	lw	%ra, 53(%sp)
-	j	bnei_cont.20679
-bnei_else.20678:
+	j	bnei_cont.20043
+bnei_else.20042:
 	addi	%v0, %zero, 0
 	lw	%v1, 52(%sp)
 	sw	%v1, 0(%v0)
-bnei_cont.20679:
-	j	bnei_cont.20677
-bnei_else.20676:
+bnei_cont.20043:
+	j	bnei_cont.20041
+bnei_else.20040:
 	addi	%v0, %zero, 0
 	lw	%v1, 51(%sp)
 	sw	%v1, 0(%v0)
-bnei_cont.20677:
-	j	bnei_cont.20675
-bnei_else.20674:
+bnei_cont.20041:
+	j	bnei_cont.20039
+bnei_else.20038:
 	addi	%v0, %zero, 0
 	lw	%v1, 0(%sp)
 	sw	%v1, 0(%v0)
-bnei_cont.20675:
-	j	bnei_cont.20673
-bnei_else.20672:
+bnei_cont.20039:
+	j	bnei_cont.20037
+bnei_else.20036:
 	addi	%v0, %zero, 0
 	lw	%v1, 1(%sp)
 	sw	%v1, 0(%v0)
-bnei_cont.20673:
-	j	bnei_cont.20671
-bnei_else.20670:
+bnei_cont.20037:
+	j	bnei_cont.20035
+bnei_else.20034:
 	addi	%v0, %zero, 0
 	lw	%v1, 2(%sp)
 	sw	%v1, 0(%v0)
-bnei_cont.20671:
+bnei_cont.20035:
 	sw	%ra, 53(%sp)
 	addi	%sp, %sp, 54
 	jal	min_caml_read_int
 	addi	%sp, %sp, -54
 	lw	%ra, 53(%sp)
 	addi	%v1, %zero, -1
-	beqi	%v0, -1, bnei_else.20680
+	beqi	%v0, -1, bnei_else.20044
 	lw	%v1, 1(%sp)
 	sw	%v0, 53(%sp)
 	addi	%v0, %v1, 0
 	sw	%ra, 54(%sp)
 	addi	%sp, %sp, 55
-	jal	read_net_item.2769
+	jal	read_net_item.2764
 	addi	%sp, %sp, -55
 	lw	%ra, 54(%sp)
 	lw	%v1, 53(%sp)
 	sw	%v1, 0(%v0)
-	j	bnei_cont.20681
-bnei_else.20680:
+	j	bnei_cont.20045
+bnei_else.20044:
 	lw	%v0, 1(%sp)
 	sw	%ra, 54(%sp)
 	addi	%sp, %sp, 55
 	jal	min_caml_create_array
 	addi	%sp, %sp, -55
 	lw	%ra, 54(%sp)
-bnei_cont.20681:
+bnei_cont.20045:
 	lw	%v1, 0(%v0)
-	beqi	%v1, -1, bnei_else.20682
+	beqi	%v1, -1, bnei_else.20046
 	addi	%v1, %zero, 83
 	sw	%v0, 0(%v1)
 	lw	%v0, 2(%sp)
 	sw	%ra, 54(%sp)
 	addi	%sp, %sp, 55
-	jal	read_net_item.2769
+	jal	read_net_item.2764
 	addi	%sp, %sp, -55
 	lw	%ra, 54(%sp)
 	lw	%v1, 0(%v0)
-	beqi	%v1, -1, bnei_else.20684
+	beqi	%v1, -1, bnei_else.20048
 	addi	%v1, %zero, 83
 	sw	%v0, 1(%v1)
 	lw	%v0, 0(%sp)
 	sw	%ra, 54(%sp)
 	addi	%sp, %sp, 55
-	jal	read_and_network.2773
+	jal	read_and_network.2768
 	addi	%sp, %sp, -55
 	lw	%ra, 54(%sp)
-	j	bnei_cont.20685
-bnei_else.20684:
-bnei_cont.20685:
-	j	bnei_cont.20683
-bnei_else.20682:
-bnei_cont.20683:
+	j	bnei_cont.20049
+bnei_else.20048:
+bnei_cont.20049:
+	j	bnei_cont.20047
+bnei_else.20046:
+bnei_cont.20047:
 	lw	%v0, 2(%sp)
 	sw	%ra, 54(%sp)
 	addi	%sp, %sp, 55
-	jal	read_or_network.2771
+	jal	read_or_network.2766
 	addi	%sp, %sp, -55
 	lw	%ra, 54(%sp)
 	addi	%v1, %zero, 134
@@ -15933,7 +14946,7 @@ bnei_cont.20683:
 	lw	%v0, 3(%sp)
 	sw	%ra, 55(%sp)
 	addi	%sp, %sp, 56
-	jal	print_int.2627
+	jal	print_int.2622
 	addi	%sp, %sp, -56
 	lw	%ra, 55(%sp)
 	addi	%v0, %zero, 32
@@ -15948,7 +14961,7 @@ bnei_cont.20683:
 	sw	%v0, 56(%sp)
 	sw	%ra, 57(%sp)
 	addi	%sp, %sp, 58
-	jal	print_int.2627
+	jal	print_int.2622
 	addi	%sp, %sp, -58
 	lw	%ra, 57(%sp)
 	lw	%v0, 55(%sp)
@@ -15960,7 +14973,7 @@ bnei_cont.20683:
 	addi	%v0, %zero, 255
 	sw	%ra, 57(%sp)
 	addi	%sp, %sp, 58
-	jal	print_int.2627
+	jal	print_int.2622
 	addi	%sp, %sp, -58
 	lw	%ra, 57(%sp)
 	lw	%v0, 54(%sp)
@@ -15973,7 +14986,7 @@ bnei_cont.20683:
 	sw	%v0, 57(%sp)
 	sw	%ra, 58(%sp)
 	addi	%sp, %sp, 59
-	jal	create_dirvecs.3086
+	jal	create_dirvecs.3081
 	addi	%sp, %sp, -59
 	lw	%ra, 58(%sp)
 	addi	%v0, %zero, 9
@@ -15981,7 +14994,7 @@ bnei_cont.20683:
 	addi	%a0, %v1, 0
 	sw	%ra, 58(%sp)
 	addi	%sp, %sp, 59
-	jal	calc_dirvec_rows.3077
+	jal	calc_dirvec_rows.3072
 	addi	%sp, %sp, -59
 	lw	%ra, 58(%sp)
 	addi	%v0, %zero, 179
@@ -15994,7 +15007,7 @@ bnei_cont.20683:
 	sw	%a1, 58(%sp)
 	sw	%v1, 59(%sp)
 	sw	%v0, 60(%sp)
-	blti	%a1, 0, bgti_else.20686
+	blti	%a1, 0, bgti_else.20050
 	addi	%a2, %zero, 12
 	add	%at, %a2, %a1
 	lw	%a2, 0(%at)
@@ -16002,67 +15015,67 @@ bnei_cont.20683:
 	lw	%t0, 0(%a0)
 	lw	%t1, 1(%a2)
 	sw	%a0, 61(%sp)
-	beqi	%t1, 1, bnei_else.20688
-	beqi	%t1, 2, bnei_else.20690
+	beqi	%t1, 1, bnei_else.20052
+	beqi	%t1, 2, bnei_else.20054
 	sw	%a3, 62(%sp)
 	addi	%v1, %a2, 0
 	addi	%v0, %t0, 0
 	sw	%ra, 63(%sp)
 	addi	%sp, %sp, 64
-	jal	setup_second_table.2867
+	jal	setup_second_table.2862
 	addi	%sp, %sp, -64
 	lw	%ra, 63(%sp)
 	lw	%v1, 58(%sp)
 	lw	%a0, 62(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-	j	bnei_cont.20691
-bnei_else.20690:
+	j	bnei_cont.20055
+bnei_else.20054:
 	sw	%a3, 62(%sp)
 	addi	%v1, %a2, 0
 	addi	%v0, %t0, 0
 	sw	%ra, 63(%sp)
 	addi	%sp, %sp, 64
-	jal	setup_surface_table.2864
+	jal	setup_surface_table.2859
 	addi	%sp, %sp, -64
 	lw	%ra, 63(%sp)
 	lw	%v1, 58(%sp)
 	lw	%a0, 62(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-bnei_cont.20691:
-	j	bnei_cont.20689
-bnei_else.20688:
+bnei_cont.20055:
+	j	bnei_cont.20053
+bnei_else.20052:
 	sw	%a3, 62(%sp)
 	addi	%v1, %a2, 0
 	addi	%v0, %t0, 0
 	sw	%ra, 63(%sp)
 	addi	%sp, %sp, 64
-	jal	setup_rect_table.2861
+	jal	setup_rect_table.2856
 	addi	%sp, %sp, -64
 	lw	%ra, 63(%sp)
 	lw	%v1, 58(%sp)
 	lw	%a0, 62(%sp)
 	add	%at, %a0, %v1
 	sw	%v0, 0(%at)
-bnei_cont.20689:
+bnei_cont.20053:
 	addi	%v0, %v1, -1
 	lw	%a0, 61(%sp)
 	addi	%v1, %v0, 0
 	addi	%v0, %a0, 0
 	sw	%ra, 63(%sp)
 	addi	%sp, %sp, 64
-	jal	iter_setup_dirvec_constants.2870
+	jal	iter_setup_dirvec_constants.2865
 	addi	%sp, %sp, -64
 	lw	%ra, 63(%sp)
-	j	bgti_cont.20687
-bgti_else.20686:
-bgti_cont.20687:
+	j	bgti_cont.20051
+bgti_else.20050:
+bgti_cont.20051:
 	addi	%v1, %zero, 118
 	lw	%v0, 60(%sp)
 	sw	%ra, 63(%sp)
 	addi	%sp, %sp, 64
-	jal	init_dirvec_constants.3088
+	jal	init_dirvec_constants.3083
 	addi	%sp, %sp, -64
 	lw	%ra, 63(%sp)
 	addi	%v0, %zero, 179
@@ -16070,13 +15083,13 @@ bgti_cont.20687:
 	lw	%v1, 59(%sp)
 	sw	%ra, 63(%sp)
 	addi	%sp, %sp, 64
-	jal	init_dirvec_constants.3088
+	jal	init_dirvec_constants.3083
 	addi	%sp, %sp, -64
 	lw	%ra, 63(%sp)
 	lw	%v0, 0(%sp)
 	sw	%ra, 63(%sp)
 	addi	%sp, %sp, 64
-	jal	init_vecset_constants.3091
+	jal	init_vecset_constants.3086
 	addi	%sp, %sp, -64
 	lw	%ra, 63(%sp)
 	addi	%v0, %zero, 78
@@ -16095,54 +15108,54 @@ bgti_cont.20687:
 	lw	%v1, 58(%sp)
 	sw	%ra, 63(%sp)
 	addi	%sp, %sp, 64
-	jal	iter_setup_dirvec_constants.2870
+	jal	iter_setup_dirvec_constants.2865
 	addi	%sp, %sp, -64
 	lw	%ra, 63(%sp)
 	lw	%v0, 58(%sp)
-	blti	%v0, 0, bgti_else.20692
+	blti	%v0, 0, bgti_else.20056
 	addi	%v1, %zero, 12
 	add	%at, %v1, %v0
 	lw	%v1, 0(%at)
 	lw	%a0, 2(%v1)
-	beqi	%a0, 2, bnei_else.20694
-	j	bnei_cont.20695
-bnei_else.20694:
+	beqi	%a0, 2, bnei_else.20058
+	j	bnei_cont.20059
+bnei_else.20058:
 	lw	%a0, 7(%v1)
 	flw	%f0, 0(%a0)
-	flw	%f1, 468(%zero)
-	fblt	%f0, %f1, fbgt_else.20696
+	flw	%f1, 469(%zero)
+	fblt	%f0, %f1, fbgt_else.20060
 	addi	%a0, %zero, 0
-	j	fbgt_cont.20697
-fbgt_else.20696:
+	j	fbgt_cont.20061
+fbgt_else.20060:
 	addi	%a0, %zero, 1
-fbgt_cont.20697:
-	beqi	%a0, 0, bnei_else.20698
+fbgt_cont.20061:
+	beqi	%a0, 0, bnei_else.20062
 	lw	%a0, 1(%v1)
-	beqi	%a0, 1, bnei_else.20700
-	beqi	%a0, 2, bnei_else.20702
-	j	bnei_cont.20703
-bnei_else.20702:
+	beqi	%a0, 1, bnei_else.20064
+	beqi	%a0, 2, bnei_else.20066
+	j	bnei_cont.20067
+bnei_else.20066:
 	sw	%ra, 63(%sp)
 	addi	%sp, %sp, 64
-	jal	setup_surface_reflection.3105
+	jal	setup_surface_reflection.3100
 	addi	%sp, %sp, -64
 	lw	%ra, 63(%sp)
-bnei_cont.20703:
-	j	bnei_cont.20701
-bnei_else.20700:
+bnei_cont.20067:
+	j	bnei_cont.20065
+bnei_else.20064:
 	sw	%ra, 63(%sp)
 	addi	%sp, %sp, 64
-	jal	setup_rect_reflection.3102
+	jal	setup_rect_reflection.3097
 	addi	%sp, %sp, -64
 	lw	%ra, 63(%sp)
-bnei_cont.20701:
-	j	bnei_cont.20699
-bnei_else.20698:
-bnei_cont.20699:
-bnei_cont.20695:
-	j	bgti_cont.20693
-bgti_else.20692:
-bgti_cont.20693:
+bnei_cont.20065:
+	j	bnei_cont.20063
+bnei_else.20062:
+bnei_cont.20063:
+bnei_cont.20059:
+	j	bgti_cont.20057
+bgti_else.20056:
+bgti_cont.20057:
 	addi	%v0, %zero, 158
 	flw	%f0, 0(%v0)
 	addi	%v0, %zero, 156
@@ -16187,19 +15200,19 @@ bgti_cont.20693:
 	fmov	%f1, %f6
 	sw	%ra, 72(%sp)
 	addi	%sp, %sp, 73
-	jal	pretrace_pixels.3027
+	jal	pretrace_pixels.3022
 	addi	%sp, %sp, -73
 	lw	%ra, 72(%sp)
 	lw	%v0, 56(%sp)
 	addi	%at, %zero, 0
-	blt	%at, %v0, bgt_else.20704
+	blt	%at, %v0, bgt_else.20068
 	jr	%ra
-bgt_else.20704:
+bgt_else.20068:
 	addi	%v0, %v0, -1
 	addi	%at, %zero, 0
-	blt	%at, %v0, bgt_else.20706
-	j	bgt_cont.20707
-bgt_else.20706:
+	blt	%at, %v0, bgt_else.20070
+	j	bgt_cont.20071
+bgt_else.20070:
 	lw	%v0, 71(%sp)
 	lw	%v1, 1(%sp)
 	sub	%v0, %v1, %v0
@@ -16229,10 +15242,10 @@ bgt_else.20706:
 	fmov	%f1, %f29
 	sw	%ra, 72(%sp)
 	addi	%sp, %sp, 73
-	jal	pretrace_pixels.3027
+	jal	pretrace_pixels.3022
 	addi	%sp, %sp, -73
 	lw	%ra, 72(%sp)
-bgt_cont.20707:
+bgt_cont.20071:
 	lw	%v0, 2(%sp)
 	lw	%a0, 18(%sp)
 	lw	%a1, 32(%sp)
@@ -16240,7 +15253,7 @@ bgt_cont.20707:
 	addi	%v1, %v0, 0
 	sw	%ra, 72(%sp)
 	addi	%sp, %sp, 73
-	jal	scan_pixel.3038
+	jal	scan_pixel.3033
 	addi	%sp, %sp, -73
 	lw	%ra, 72(%sp)
 	lw	%v0, 1(%sp)
@@ -16248,7 +15261,7 @@ bgt_cont.20707:
 	lw	%a0, 46(%sp)
 	lw	%a1, 18(%sp)
 	lw	%a2, 57(%sp)
-	j	scan_line.3044
+	j	scan_line.3039
 .global	min_caml_start
 min_caml_start:
 	addi	%v0, %zero, 1
@@ -16261,7 +15274,7 @@ min_caml_start:
 	jal	min_caml_create_extarray
 	addi	%sp, %sp, -3
 	lw	%ra, 2(%sp)
-	flw	%f0, 464(%zero)
+	flw	%f0, 465(%zero)
 	addi	%v1, %zero, 1
 	lw	%v0, 1(%sp)
 	fsw	%f0, 2(%sp)
@@ -16631,7 +15644,7 @@ min_caml_start:
 	addi	%v1, %v0, 0
 	sw	%ra, 10(%sp)
 	addi	%sp, %sp, 11
-	jal	rt.3110
+	jal	rt.3105
 	addi	%sp, %sp, -11
 	lw	%ra, 10(%sp)
 	addi	%g0, %zero, 0

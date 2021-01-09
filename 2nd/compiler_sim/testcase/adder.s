@@ -1,3 +1,15 @@
+.section	".rodata"
+.align	8
+# ------------ Initialize float table ---------
+# ------------ Initialize register ------------
+	lui	%sp, 1
+	ori	%sp, %sp, 64464
+	lui	%hp, 0
+	ori	%hp, %hp, 0
+# ------------ Text Section -------------------
+.section	".text"
+	j	min_caml_start
+# ------------ libmincaml.S -------------------
 # min_caml_print_char
 min_caml_print_char:
 	out	%v0
@@ -86,3 +98,8 @@ create_float_extarray_cont:
 	addi	%a0, %a0, -1
 	addi	%v1, %v1, 1
 	j	create_float_extarray_loop
+# ------------ body ---------------------------
+.global	min_caml_start
+min_caml_start:
+	addi	%g0, %zero, 10
+	ret

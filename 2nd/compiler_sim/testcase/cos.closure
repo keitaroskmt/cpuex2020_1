@@ -1,0 +1,342 @@
+Prog 
+fundef 
+	name : 
+		(L (kernel_sin.213): Float -> Float)
+	args : 
+		[(x.214 : Float)]
+	formal_fv : 
+		[]
+	body : 
+		Let
+			(x2.351 : Float)
+			FMul
+				x.214
+				x.214
+			Let
+				(x4.352 : Float)
+				FMul
+					x2.351
+					x2.351
+				Let
+					(Td88.364 : Float)
+					Float 0.16666668
+					Let
+						(Td89.363 : Float)
+						FMul
+							Td88.364
+							x.214
+						Let
+							(Td90.362 : Float)
+							FMul
+								Td89.363
+								x2.351
+							Let
+								(Td91.358 : Float)
+								FSub
+									x.214
+									Td90.362
+								Let
+									(Td92.361 : Float)
+									Float 0.008332824
+									Let
+										(Td93.360 : Float)
+										FMul
+											Td92.361
+											x.214
+										Let
+											(Td94.359 : Float)
+											FMul
+												Td93.360
+												x4.352
+											Let
+												(Td95.353 : Float)
+												FAdd
+													Td91.358
+													Td94.359
+												Let
+													(Td96.357 : Float)
+													Float 0.00019587841
+													Let
+														(Td97.356 : Float)
+														FMul
+															Td96.357
+															x.214
+														Let
+															(Td98.355 : Float)
+															FMul
+																Td97.356
+																x2.351
+															Let
+																(Td99.354 : Float)
+																FMul
+																	Td98.355
+																	x4.352
+																FSub
+																	Td95.353
+																	Td99.354
+	name : 
+		(L (kernel_cos.215): Float -> Float)
+	args : 
+		[(x.216 : Float)]
+	formal_fv : 
+		[]
+	body : 
+		Let
+			(x2.339 : Float)
+			FMul
+				x.216
+				x.216
+			Let
+				(x4.340 : Float)
+				FMul
+					x2.339
+					x2.339
+				Let
+					(Td78.348 : Float)
+					Float 1.
+					Let
+						(Td79.350 : Float)
+						Float 0.5
+						Let
+							(Td80.349 : Float)
+							FMul
+								Td79.350
+								x2.339
+							Let
+								(Td81.345 : Float)
+								FSub
+									Td78.348
+									Td80.349
+								Let
+									(Td82.347 : Float)
+									Float 0.04166368
+									Let
+										(Td83.346 : Float)
+										FMul
+											Td82.347
+											x4.340
+										Let
+											(Td84.341 : Float)
+											FAdd
+												Td81.345
+												Td83.346
+											Let
+												(Td85.344 : Float)
+												Float 0.0013695068
+												Let
+													(Td86.343 : Float)
+													FMul
+														Td85.344
+														x2.339
+													Let
+														(Td87.342 : Float)
+														FMul
+															Td86.343
+															x4.340
+														FSub
+															Td84.341
+															Td87.342
+	name : 
+		(L (f.295): Float -> Float -> Float)
+	args : 
+		[(s.296 : Float), (t.297 : Float)]
+	formal_fv : 
+		[]
+	body : 
+		IfLE
+			t.297
+			s.296
+			Let
+				(Td50.308 : Float)
+				Float 2.
+				Let
+					(Td51.307 : Float)
+					FMul
+						Td50.308
+						t.297
+					AppDir
+						L (f.295)
+						[s.296, Td51.307]
+			Var t.297
+	name : 
+		(L (g.299): Float -> Float -> Float)
+	args : 
+		[(s.300 : Float), (t.301 : Float)]
+	formal_fv : 
+		[(pi2.294 : Float)]
+	body : 
+		IfLE
+			pi2.294
+			s.300
+			IfLE
+				t.301
+				s.300
+				Let
+					(Td45.304 : Float)
+					FSub
+						s.300
+						t.301
+					Let
+						(Td46.306 : Float)
+						Float 2.
+						Let
+							(Td47.305 : Float)
+							FDiv
+								t.301
+								Td46.306
+							AppCls
+								g.299
+								[Td45.304, Td47.305]
+				Let
+					(Td48.303 : Float)
+					Float 2.
+					Let
+						(Td49.302 : Float)
+						FDiv
+							t.301
+							Td48.303
+						AppCls
+							g.299
+							[s.300, Td49.302]
+			Var s.300
+	name : 
+		(L (reduction_2pi.219): Float -> Float)
+	args : 
+		[(x.220 : Float)]
+	formal_fv : 
+		[]
+	body : 
+		Let
+			(pi2.294 : Float)
+			Float 6.28318530718
+			Let
+				(p.298 : Float)
+				AppDir
+					L (f.295)
+					[x.220, pi2.294]
+				MakeCls
+					(g.299 : Float -> Float -> Float)
+					entry: 
+						L (g.299)
+					actual_fv: 
+						[pi2.294]
+					AppCls
+						g.299
+						[x.220, p.298]
+	name : 
+		(L (cos.221): Float -> Float)
+	args : 
+		[(x.222 : Float)]
+	formal_fv : 
+		[]
+	body : 
+		Let
+			(pi.272 : Float)
+			Float 3.14159265359
+			Let
+				(Td31.292 : Float)
+				FAbs
+					x.222
+				Let
+					(x.274 : Float)
+					AppDir
+						L (reduction_2pi.219)
+						[Td31.292]
+					Let
+						(flag.275 : Bool)
+						IfLE
+							pi.272
+							x.274
+							Int 0
+							Int 1
+						Let
+							(x.276 : Float)
+							IfLE
+								pi.272
+								x.274
+								FSub
+									x.274
+									pi.272
+								Var x.274
+							Let
+								(Td34.288 : Float)
+								Float 1.57079632679
+								Let
+									(flag.277 : Bool)
+									IfLE
+										Td34.288
+										x.276
+										Let
+											(Ti35.289 : Int)
+											Int 0
+											IfEq
+												flag.275
+												Ti35.289
+												Int 1
+												Int 0
+										Var flag.275
+									Let
+										(x.278 : Float)
+										IfLE
+											Td34.288
+											x.276
+											FSub
+												pi.272
+												x.276
+											Var x.276
+										Let
+											(Td39.281 : Float)
+											Float 0.785398163397
+											Let
+												(res.279 : Float)
+												IfLE
+													x.278
+													Td39.281
+													AppDir
+														L (kernel_cos.215)
+														[x.278]
+													Let
+														(Td42.282 : Float)
+														FSub
+															Td34.288
+															x.278
+														AppDir
+															L (kernel_sin.213)
+															[Td42.282]
+												Let
+													(Ti43.280 : Int)
+													Int 0
+													IfEq
+														flag.277
+														Ti43.280
+														FNeg
+															res.279
+														Var res.279
+	name : 
+		(L (rad.227): Float -> Float)
+	args : 
+		[(x.228 : Float)]
+	formal_fv : 
+		[]
+	body : 
+		Let
+			(Td2.232 : Float)
+			Float 0.017453293
+			FMul
+				x.228
+				Td2.232
+body 
+	Let
+		(Td1.231 : Float)
+		Float 10.
+		Let
+			(v1.229 : Float)
+			AppDir
+				L (rad.227)
+				[Td1.231]
+			Let
+				(cos_v1.230 : Float)
+				AppDir
+					L (cos.221)
+					[v1.229]
+				Var cos_v1.230

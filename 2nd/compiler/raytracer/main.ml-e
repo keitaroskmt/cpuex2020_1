@@ -137,6 +137,7 @@ let rec kernel_atan x =
     +. 0.060035485 *. x *. x4 *. x8
 in
 
+(*
 let rec reduction_2pi x =
     let pi = 3.14159265358979 in
     let pi2 = 2.0 *. pi in
@@ -148,15 +149,14 @@ let rec reduction_2pi x =
         if s >= t then g (s -. t) (t /. 2.0) else g s (t /. 2.0) in
     g x p
 in
+*)
 
-(*
 let rec reduction_2pi x =
     let pi = 3.14159265358979 in
     let pi2 = 2.0 *. pi in
     let d = floor (x /. pi2) in
     x -. d *. pi2
 in
-*)
 
 let rec cos x =
     let pi = 3.14159265358979 in
@@ -2538,6 +2538,6 @@ let rec rt size_x size_y =
 )
 in
 
-let _ = rt 128 128
+let _ = rt 64 64
 
 in 0

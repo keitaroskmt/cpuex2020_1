@@ -1,0 +1,41 @@
+Prog 
+fundef 
+	name : 
+		(L (adder.9): Int -> Int)
+	args : 
+		[(y.10 : Int)]
+	formal_fv : 
+		[(x.5 : Int)]
+	body : 
+		Add
+			x.5
+			y.10
+	name : 
+		(L (make_adder.4): Int -> Int -> Int)
+	args : 
+		[(x.5 : Int)]
+	formal_fv : 
+		[]
+	body : 
+		MakeCls
+			(adder.9 : Int -> Int)
+			entry: 
+				L (adder.9)
+			actual_fv: 
+				[x.5]
+			Var adder.9
+body 
+	Let
+		(Ti1.8 : Int)
+		Int 3
+		Let
+			(Tf2.6 : Int -> Int)
+			AppDir
+				L (make_adder.4)
+				[Ti1.8]
+			Let
+				(Ti3.7 : Int)
+				Int 7
+				AppCls
+					Tf2.6
+					[Ti3.7]

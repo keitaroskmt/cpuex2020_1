@@ -5,6 +5,7 @@ NCSUFFIX = .opt
 CC = gcc
 CFLAGS = -g -O2 -Wall
 OCAMLLDFLAGS=-warn-error -31
+PACKS = extlib
 
 default: debug-code top $(RESULT) do_test
 $(RESULT): debug-code top
