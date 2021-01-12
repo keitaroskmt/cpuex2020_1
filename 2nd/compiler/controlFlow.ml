@@ -43,8 +43,8 @@ let instrs_to_graph instrs =
         mk_edges node succ;
         ({
             control = control;
-            def = Graph.Table.add node dst def;
-            use = Graph.Table add node src use;
+            def = Graph.Table.add node (List.sort Pervasives.compare dst) def;
+            use = Graph.Table add node (List.sort src) use;
             ismove = Graph.Table add node false ismove
         }, node :: nodes)
     | Assem.LABEL {lab} :: rest ->
@@ -63,8 +63,8 @@ let instrs_to_graph instrs =
         mk_edges node [List.hd nodes];
         ({
             control = control;
-            def = Graph.Table add node dst def;
-            use = Graph.Table add node src use;
+            def = Graph.Table add node (List.sort dst) def;
+            use = Graph.Table add node (List.sort src) use;
             ismove = Graph.Table add node true ismove
         }, node :: nodes) in
 
