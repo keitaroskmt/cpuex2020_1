@@ -7,10 +7,15 @@ module hazard_unit(
     input wire          Rx_ready,
     input wire          InD,
     input wire          BranchD,
+    input wire          BiD,
+    input wire          BranchE,
+    input wire          BiE,
     input wire [5:0]    RsD,
     input wire [5:0]    RtD,
     input wire [5:0]    RsE,
     input wire [5:0]    RtE,
+    input wire [5:0]    RsM,
+    input wire [5:0]    RtM,
     input wire [5:0]    WriteRegE,
     input wire [5:0]    WriteRegM,
     input wire [5:0]    WriteRegW,
@@ -26,12 +31,16 @@ module hazard_unit(
     output wire         StallF,
     output wire         StallD,
     output wire         StallE,
+    output wire         Hazard_existenceD,
+    output wire         Hazard_existenceE,
     output wire [1:0]   ForwardAD,
     output wire [1:0]   ForwardBD,
     output wire         FlushE,
     output wire         FlushM,
     output wire [1:0]   ForwardAE,
-    output wire [1:0]   ForwardBE
+    output wire [1:0]   ForwardBE,
+    output wire         ForwardAM,
+    output wire         ForwardBM
 );
 
 wire lwstall;
@@ -42,12 +51,15 @@ wire floatstall;
 wire install;
 
 
-assign StallF = lwstall || branchstall || jrstall || floatstall || install;
-assign StallD = lwstall || branchstall || jrstall || floatstall || install;
+assign StallF = lwstall || jrstall || floatstall || install;
+assign StallD = lwstall || jrstall || floatstall || install;
 assign StallE = floatstall;
 assign FlushM = floatstall;
-assign FlushE = lwstall || branchstall || jrstall || install; //|| jrforward;
+assign FlushE = lwstall || jrstall || install; //|| jrforward;
 
+assign ForwardAM = ((RsM != 0) && (RsM == WriteRegW) && (RegWriteW == 1'b1)) ? 1'b1 : 1'b0;
+
+assign ForwardBM = ((RtM != 0) && (RtM == WriteRegW) && (RegWriteW == 1'b1)) ? 1'b1 : 1'b0;
 
 assign ForwardAE = //((RsE != 4'b0) && (RsE == WriteRegW) && (RegWriteW == 1'b1) && LeavelinkW) ? 2'b11 :
                         //ExSt:addi %ra, %ra, 4 WBSt: jal Label
@@ -72,23 +84,30 @@ assign ForwardBD = ((RtD != 0) && (RtD == WriteRegM) && RegWriteM ) ? 2'b01 : 2'
                         //((LeavelinkM && (RtD == 5'd31) && RegWriteM) ? 2'b10 : 2'b00);
 
 
-assign branchstall = ((BranchD == 1'b1)&& (RegWriteE == 1'b1) && ((WriteRegE == RsD) || (WriteRegE == RtD)))
-                        //DeSt:beq %a0, %a1, Label ExSt:add %a0, %a0, %a1
-                    || ((BranchD == 1'b1) && (MemtoRegM == 1'b1) && ((WriteRegM == RsD) || (WriteRegM == RtD)));
-                        //DeSt:beq %a0, %a1, Label MASt:lw %a1, 4(sp)         　If lw is in MA stage the value will be written back in reg file in the next stage <-Write First premised. Using BRAM it will be more complexed.
+//assign branchstall = ((BranchD == 1'b1)&& (RegWriteE == 1'b1) && ((WriteRegE == RsD) || (WriteRegE == RtD)))
+                        ////DeSt:beq %a0, %a1, Label ExSt:add %a0, %a0, %a1
+                    //|| ((BranchD == 1'b1) && (MemtoRegM == 1'b1) && ((WriteRegM == RsD) || (WriteRegM == RtD)));
+                        ////DeSt:beq %a0, %a1, Label MASt:lw %a1, 4(sp)         �?If lw is in MA stage the value will be written back in reg file in the next stage <-Write First premised. Using BRAM it will be more complexed.
 
-assign lwstall = (((RsD == RtE) || (RtD == RtE)) && MemtoRegE);
+assign lwstall = (((RsD == RtE) || (RtD == RtE)) && MemtoRegE && !BranchD); //when a branch-type instruction is in the decode stage, it will be treated by "Hazard_existence" -> not necessary to be treated here by "lwstall"
                         //DeSt:add %a0, %a0, %a1 ExSt:lw %a0, 0(%sp)  using the register right after lw <- Improvement required using BRAM
 
 assign jrstall = (((RsD == WriteRegE) && (RegWriteE == 1'b1) && (RegtoPCD == 1'b1))
                     //DeSt:jr %ra ExSt:addi %ra, %ra, 1
                  || ((RegtoPCD == 1'b1) && (RsD == WriteRegM) && (MemtoRegM == 1'b1)))
-                    //DeSt:jr %ra MASt:lw %a1, 4(sp)   If lw is in MA stage the value will be written back in reg file in the next stage <-Write First premised.<-Write First premised. Using BRAM it will be more complicated.
+                    //DeSt:jr %ra MASt:lw %ra, 4(sp)   If lw is in MA stage the value will be written back in reg file in the next stage <-Write First premised.<-Write First premised. Using BRAM it will be more complicated.
                     ? 1'b1
                     : 1'b0;
 
+assign Hazard_existenceD = BranchD && BiD && ((RegWriteE && (WriteRegE == RsD)) || (MemtoRegM && (WriteRegM == RsD))) ? 1'b1 //branch immidiate type instruction
+                            : (BranchD && !BiD && ((RegWriteE && (WriteRegE == RsD || WriteRegE == RtD)) || (MemtoRegM && (WriteRegM == RsD || WriteRegM == RtD))) ? 1'b1
+                            : 1'b0);
+
+assign Hazard_existenceE = BranchE && BiE && (MemtoRegM && (WriteRegM == RsE)) ? 1'b1 //branch immidiate type instruction
+                            : (BranchE && !BiE && (MemtoRegM && (WriteRegM == RsE || WriteRegM == RtE)) ? 1'b1
+                            : 1'b0);
 //assign jrforward = ((RsD == WriteRegM) && (RegWriteM  == 1'b1)&& (RegtoPCD == 1'b1)) ? 1'b1 : 1'b0;
-                   //DeSt:jr %ra MASt:addi %ra, %ra, 1 　古い値を用いたjr命令(ALUではEx)の結果が%raレジスタに書き込まれるので%raをまた使おうとするとバグる -> jrがR形式でないので解決
+                   //DeSt:jr %ra MASt:addi %ra, %ra, 1 �?古�?値を用�?たjr命令(ALUではEx)の結果�?%raレジスタに書き込まれるので%raをまた使おうとするとバグ�? -> jrがR形式でな�?ので解決
 
 
 wire [4:0] fstallN; //wait for "fstallN" clocks
