@@ -1,5 +1,45 @@
 open Output
 
+let limit = ref 1000
+
+let rec iter n e = (* 最適化処理をくりかえす (caml2html: main_iter) *)
+  Format.eprintf "iteration %d@." n;
+  if n = 0 then e else
+  let e' = Elim.f (ConstFold.f (Inline.f (Assoc.f (Beta.f (Cse.f e))))) in
+  if e = e' then e else
+  iter (n - 1) e'
+
+let lexbuf (outchan, datachan) l = (* バッファをコンパイルしてチャンネルへ出力する (caml2html: main_lexbuf) *)
+  Id.counter := 0;
+  Typing.extenv := M.empty;
+  Emit.f (outchan, datachan)
+    (RegAllocbyColor.f
+       (Simm.f
+          (Virtual.f
+             (Closure.f
+              (FixAddress.f
+                (iter !limit
+                   (Alpha.f
+                      (KNormal.f
+                         (Typing.f
+                            (Parser.exp Lexer.token l))))))))))
+  (* 
+  Emit.f (outchan, datachan)
+    (RegAlloc.f
+       (Simm.f
+          (Virtual.f
+             (Closure.f
+              (FixAddress.f
+                (iter !limit
+                   (Alpha.f
+                      (KNormal.f
+                         (Typing.f
+                            (Parser.exp Lexer.token l))))))))))
+                            *)
+
+let string s = lexbuf (stdout, stdout) (Lexing.from_string s) (* 文字列をコンパイルして標準出力に表示する (caml2html: main_string) *)
+
+
 let file f = (* ファイルをコンパイルしてファイルに出力する (caml2html: main_file) *)
  (let inchan = open_in (f ^ ".ml") in
   let outchan = open_out (f ^ ".s") in

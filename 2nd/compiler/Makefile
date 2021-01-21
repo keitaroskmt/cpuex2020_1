@@ -23,7 +23,10 @@ cse.mli cse.ml \
 inline.mli inline.ml constFold.mli constFold.ml elim.mli elim.ml \
 fixAddress.mli fixAddress.ml \
 closure.mli closure.ml asm.mli asm.ml virtual.mli virtual.ml \
-simm.mli simm.ml regAlloc.mli regAlloc.ml emit.mli emit.ml \
+simm.mli simm.ml regAlloc.mli regAlloc.ml \
+assem.ml toAssem.ml graph.mli graph.ml controlFlow.mli controFlow.ml \
+liveness.mli liveness.ml color.mli color.ml regAllocbyColor.mli regAllocbyColor.ml \
+emit.mli emit.ml \
 output.ml main.mli main.ml
 
 # ↓テストプログラムが増えたら、これも増やす

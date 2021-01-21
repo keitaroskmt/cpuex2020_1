@@ -1,7 +1,7 @@
 type flowgraph = {
   control: Graph.graph;
-  def: Id.t list Graph.Table.t;
-  use: Id.t list Graph.Table.t;
+  def: (Id.t * Type.t) list Graph.Table.t;
+  use: (Id.t * Type.t) list Graph.Table.t;
   ismove: bool Graph.Table.t
 }
 
@@ -12,13 +12,15 @@ let instrs_to_graph instrs =
 
     (* ラベルとnodeの対応 *)
     let label_map =
-        List.fold_left (fun env instr -> 
-        (match instr with
-        | Assem.LABEL(Id.l(x)) -> M.add x (Graph.new_node control) env
-        | _ -> env)) M.empty instrs in
+        List.fold_left 
+            (fun env instr -> 
+                (match instr with
+                | Assem.LABEL(Id.l(x)) -> M.add x (Graph.new_node control) env
+                | _ -> env))
+             M.empty instrs in
     let label_node Id.l(x) = 
         try 
-            M.find x env
+            M.find x label_map
         with 
         | Not_found -> failwith "label error occured in controlFlow" in
 
@@ -43,8 +45,8 @@ let instrs_to_graph instrs =
         mk_edges node succ;
         ({
             control = control;
-            def = Graph.Table.add node (List.sort Pervasives.compare dst) def;
-            use = Graph.Table add node (List.sort src) use;
+            def = Graph.Table.add node dst def;
+            use = Graph.Table add node src use;
             ismove = Graph.Table add node false ismove
         }, node :: nodes)
     | Assem.LABEL {lab} :: rest ->
@@ -63,8 +65,8 @@ let instrs_to_graph instrs =
         mk_edges node [List.hd nodes];
         ({
             control = control;
-            def = Graph.Table add node (List.sort dst) def;
-            use = Graph.Table add node (List.sort src) use;
+            def = Graph.Table add node dst def;
+            use = Graph.Table add node src use;
             ismove = Graph.Table add node true ismove
         }, node :: nodes) in
 
@@ -88,7 +90,7 @@ let rec controlFlow_debug oc ({control; def; use; ismove} as flowgraph, flownode
 and print_list oc l = 
     match l with 
     | [] -> Printf.fprintf oc "\n";
-    | x :: rest -> Printf.fprintf oc "%s " x; print_list oc rest
+    | (x, t) :: rest -> Printf.fprintf oc "%s " x; print_list oc rest
 
 
 

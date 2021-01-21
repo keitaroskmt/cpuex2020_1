@@ -1,382 +1,329 @@
 open Asm
 open Assem
 
-external get : float -> int32 = "get"
-let stackset = ref M.empty (* すでにSaveされた変数の集合 (caml2html: emit_stackset) *)
-let stackmap = ref [] (* Saveされた変数の、スタックにおける位置 (caml2html: emit_stackmap) *)
 
-let inst_int_list = ref []
-let inst_float_list = ref []
-
-let emit_int inst = inst_int_list := inst :: !inst_int_list 
-let emit_float inst = inst_float_list := inst :: !inst_float_list 
+let inst_list = ref []
+let emit inst = 
+    inst_list := inst :: !inst_list
 
 
-let pp_id_or_imm = function
-  | V(x) -> x
-  | C(i) -> string_of_int i
-
-type dest = Tail | NonTail of Id.t 
+type dest = Tail | NonTail of (Id.t, Type.t)
 let rec g = function 
   | dest, Ans(exp) -> g' (dest, exp)
   | dest, Let((x, t), exp, e) ->
-      g' (NonTail(x), exp);
+      g' (NonTail((x, t)), exp);
       g (dest, e) 
 
 and g' = function 
   | NonTail(_), Nop -> ()
-  | NonTail(x), Set(i) | NonTail(x), SerL(Id.L(y)) ->
-        emit_int (OPER {
-          dst = [x];
+  | NonTail(xt), Set(i) | NonTail(xt), SerL(Id.L(y)) | NonTail(xt), SetF(Id.L(y)) ->
+        emit (OPER {
+          dst = [xt];
           src = [];
           jump = None
         })
-  | NonTail(x), SetF(Id.L(y)) ->
-        emit_float (OPER {
-          dst = [x];
-          src = [];
+  | NonTail((x, t)), Mov(y) when x = y -> ()
+  | NonTail(xt), Mov(y) ->
+        emit (MOVE {
+          dst = [xt];
+          src = [(y, Type.Int)]
+        })
+  | NonTail(xt), Neg(y) ->
+        emit (OPER {
+          dst = [xt];
+          src = [(y, Type.Int)];
           jump = None
         })
-  | NonTail(x), Mov(y) when x = y -> ()
-  | NonTail(x), Mov(y) ->
-        emit_int (MOVE {
-          dst = [x];
-          src = [y]
-        })
-  | NonTail(x), Neg(y) ->
-        emit_int (OPER {
-          dst = [x];
-          src = [y];
-          jump = None
-        })
-  | NonTail(x), Add(y, z') | NonTail(x), Sub(y, z') | NonTail(x), SLL(y, z') | NonTail(x), Ld(y, z') ->
+  | NonTail(xt), Add(y, z') | NonTail(xt), Sub(y, z') | NonTail(xt), SLL(y, z') | NonTail(xt), Ld(y, z') ->
        (match z' with
-        | V(z) -> emit_int(OPER {
-                    dst = [x];
-                    src = [y; z];
+        | V(z) -> emit (OPER {
+                    dst = [xt];
+                    src = [(y, Type.Int); (z, Type.Int)];
                     jump = None
                   })
-        | C(i) -> emit_int(OPER {
-                    dst = [x];
-                    src = [y];
+        | C(i) -> emit (OPER {
+                    dst = [xt];
+                    src = [(y, Type.Int)];
                     jump = None
                   }))
-  | NonTail(x), Mul(y, z') | NonTail(x), Div(y, z') ->
+  | NonTail(xt), Mul(y, z') | NonTail(xt), Div(y, z') ->
        (match z' with
         | V(z) -> failwith "Mul or Div Error"
-        | C(i) -> emit_int(OPER {
-                    dst = [x];
-                    src = [y];
+        | C(i) -> emit (OPER {
+                    dst = [xt];
+                    src = [(y, Type.Int)];
                     jump = None
                   }))
   | NonTail(_), St(x, y, z') ->
        (match z' with
-       | V(z) -> emit_int(OPER {
+       | V(z) -> emit (OPER {
                     dst = [];
-                    src = [x; y; z];
+                    src = [(x, Type.Int); (y, Type.Int); (z, Type.Int)];
                     jump = None
                   })
-       | C(i) -> emit_int(OPER {
+       | C(i) -> emit (OPER {
                     dst = [];
-                    src = [x; y];
+                    src = [(x, Type.Int); (y, Type.Int)];
                     jump = None
                   }))
-  | NonTail(x), FMovD(y) when x = y -> ()
-  | NonTail(x), FMovD(y) ->
-        emit_float (MOVE {
-          dst = [x];
-          src = [y];
+  | NonTail((x, t)), FMovD(y) when x = y -> ()
+  | NonTail(xt), FMovD(y) ->
+        emit (MOVE {
+          dst = [xt];
+          src = [(y, Type.Float)];
         })
-  | NonTail(x), FNegD(y) | NonTail(x), FAbs(y) | NonTail(x), FSqr(y) | NonTail(x), Floor(y) ->
-        emit_float(OPER {
-          dst = [x];
-          src = [y];
+  | NonTail(xt), FNegD(y) | NonTail(xt), FAbs(y) | NonTail(xt), FSqr(y) | NonTail(xt), Floor(y) ->
+        emit (OPER {
+          dst = [xt];
+          src = [(y, Type.Float)];
           jump = None
         })
-  | NonTail(x), FAddD(y, z) | NonTail(x), FSubD(y, z) | NonTail(x), FMulD(y, z) | NonTail(x), FDivD(y, z) ->
-        emit_float(OPER {
-          dst = [x];
-          src = [y; z];
+  | NonTail(xt), FAddD(y, z) | NonTail(xt), FSubD(y, z) | NonTail(xt), FMulD(y, z) | NonTail(xt), FDivD(y, z) ->
+        emit (OPER {
+          dst = [xt];
+          src = [(y, Type.Float); (z, Type.Float)];
           jump = None
         })
-  | NonTail(x), Ftoi(y) ->
-        (emit_int(OPER {
-          dst = [x];
-          src = [];
+  | NonTail(xt), Ftoi(y) ->
+        (emit (OPER {
+          dst = [xt];
+          src = [(y, Type.Float)];
           jump = None
         });
-        emit_float(OPER {
-          dst = [];
-          src = [y];
-          jump = None
-        }))
-  | NonTail(x), Itof(y) ->
-        (emit_int(OPER {
-          dst = [];
-          src = [y];
+  | NonTail(xt), Itof(y) ->
+        (emit (OPER {
+          dst = [xt];
+          src = [(y, Type.Int)];
           jump = None
         });
-        emit_float(OPER {
-          dst = [x];
-          src = [];
-          jump = None
-        }))
-  | NonTail(x), LdF(y, z') ->
+  | NonTail(xt), LdF(y, z') ->
        (match z' with
-        | V(z) -> (emit_int(OPER {
-                    dst = [];
-                    src = [y; z];
+        | V(z) -> (emit (OPER {
+                    dst = [xt];
+                    src = [(y, Type.Int); (z, Type.Int)];
                     jump = None
                   });
-                  emit_float(OPER {
-                    dst = [x];
-                    src = [];
-                    jump = None
-                  }))
-        | C(i) -> (emit_int(OPER {
-                    dst = [];
-                    src = [y];
+        | C(i) -> (emit (OPER {
+                    dst = [xt];
+                    src = [(y, Type.Int)];
                     jump = None
                   }));
-                  emit_float(OPER {
-                    dst = [x];
-                    src = [];
-                    jump = None
-                  }))
   | NonTail(_), StF(x, y, z') ->
        (match z' with
-       | V(z) -> (emit_int(OPER {
+       | V(z) -> (emit (OPER {
                     dst = [];
-                    src = [y; z];
+                    src = [(x, Type.Float); (y, Type.Int); (z, Type.Int)];
                     jump = None
                   });
-                  emit_float(OPER {
+       | C(i) -> (emit (OPER {
                     dst = [];
-                    src = [x];
-                    jump = None
-                  }))
-       | C(i) -> (emit_int(OPER {
-                    dst = [];
-                    src = [y];
+                    src = [(x, Type.Float); (y, Type.Int)];
                     jump = None
                   });
-                  emit_float(OPER {
-                    dst = [];
-                    src = [x];
-                    jump = None
-                  })))
   | NonTail(_), Comment(s) -> ()
 
   (* 使わない *)
   | NonTail(_), Save(x, y) ->
       failwith("Save error in toAssem.ml")
   (* 使わない *)
-  | NonTail(x), Restore(y) ->
+  | NonTail(xt), Restore(y) ->
       failwith("Restore error in toAssem.ml")
 
 
-      (* TODO: reg_raのjump先について考えること *)
+      (* reg_raのjump先について考えること -> 関数ごとに考えるので不要 *)
   | Tail, (Nop | St _ | StF _ | Comment _ | Save _ as exp) ->
-      g' oc (NonTail(Id.gentmp Type.Unit), exp);
+      g' oc (NonTail((Id.gentmp Type.Unit, Type.Unit)), exp);
   | Tail, (Set _ | SetL _ | Mov _ | Neg _ | Add _ | Sub _ | Mul _ | Div _ | Ftoi _ | SLL _ | Ld _ as exp) ->
-      g' oc (NonTail(regs.(0)), exp);
+      g' oc (NonTail((regs.(0), Type.Int)), exp);
   | Tail, (SetF _ | FMovD _ | FNegD _ | FAbs _ | FSqr _ | Itof _ | Floor _ | FAddD _ | FSubD _ | FMulD _ | FDivD _ | LdF _ as exp) ->
-      g' oc (NonTail(fregs.(0)), exp);
+      g' oc (NonTail((fregs.(0), Type.Float)), exp);
   | Tail, (Restore(x) as exp) ->
       failwith("Restore error in toAssem.ml")
   | Tail, IfEq(x, y', e1, e2) | Tail, IfLE(x, y', e1, e2) | Tail, IfGE(x, y', e1, e2) ->
       let b_else = Id.genid ("else") in
+      let b_then = Id.genid ("then") in
       (match y' with
-      | V(y) -> emit_int(OPER {
+      | V(y) -> emit (OPER {
         dst = [];
-        src = [x; y];
-        jump = [Some(b_else)]
+        src = [(x, Type.Int); (y, Type.Int)];
+        jump = Some [b_then; b_else]
       }) 
-      | C(i) -> emit_int)
-and g'_tail_if o1 o2 e1 e2 b bn =
-    let b_else = Id.genid (b ^ "_else") in
-    Printf.fprintf oc "\t%s\t%s, %s, %s\n" bn o1 o2 b_else;
-    g (Tail, e1);
-    emit_int(LABEL {lab = Id.l(b_else)});
-    emit_float(LABEL {lab = Id.l(b_else)});
-    g (Tail, e2)
-and g'_tail_if_imm oc o1 o2 e1 e2 b bn =
-    let b_else = Id.genid (b ^ "_else") in
-    Printf.fprintf oc "\t%s\t%s, %d, %s\n" bn o1 o2 b_else;
-    let stackset_back = !stackset in
-    g oc (Tail, e1);
-    Printf.fprintf oc "%s:\n" b_else;
-    stackset := stackset_back;
-    g oc (Tail, e2)
-      (* x = y then e1 <=> x != y then e2 *)
-      (match y' with
-      | V(y) -> g'_tail_if oc x y e1 e2 "beq" "bne"
-      | C(i) -> if -128 <= i && i <= 127 then g'_tail_if_imm oc x i e2 e1 "bnei" "beqi"
-                else (addi oc reg_at reg_zero i;
-                        g'_tail_if oc x reg_at e1 e2 "beq" "bne"))
-  | Tail, IfLE(x, y', e1, e2) ->
-      (* x <= y then e1 <=> x > y then e2 <=> y < x then e2 *)
-      (match y' with
-      | V(y) -> g'_tail_if oc y x e1 e2 "bgt" "blt"
-      | C(i) -> addi oc reg_at reg_zero i;
-                g'_tail_if oc reg_at x e1 e2 "bgt" "blt")
-  | Tail, IfGE(x, y', e1, e2) ->
-       (* x >= y then e1 <=> x < y then e2 *)
-      (match y' with
-      | V(y) -> g'_tail_if oc x y e1 e2 "bgt" "blt"
-      | C(i) -> if -128 <= i && i <= 127 then g'_tail_if_imm oc x i e1 e2 "bgti" "blti"
-                else (addi oc reg_at reg_zero i;
-                        g'_tail_if oc x reg_at e1 e2 "bgt" "blt"))
-  | Tail, IfFEq(x, y, e1, e2) ->
-      (* x = y then e1 <=> x != y then e2 *)
-        g'_tail_if oc x y e1 e2 "fbeq" "fbne"
-  | Tail, IfFLE(x, y, e1, e2) ->
-      (* x <= y then e1 <=> x > y then e2 <=> y < x then e2 *)
-        g'_tail_if oc y x e1 e2 "fbgt" "fblt"
-  | NonTail(z), IfEq(x, y', e1, e2) ->
-      (* x = y then e1 <=> x != y then e2 *)
-      (match y' with
-      | V(y) -> g'_non_tail_if oc (NonTail(z)) x y e1 e2 "beq" "bne"
-      | C(i) -> if -128 <= i && i <= 127 then g'_non_tail_if_imm oc (NonTail(z)) x i e2 e1 "bnei" "beqi"
-                else (addi oc reg_at reg_zero i;
-                        g'_non_tail_if oc (NonTail(z)) x reg_at e1 e2 "beq" "bne"))
-  | NonTail(z), IfLE(x, y', e1, e2) ->
-      (* x <= y then e1 <=> x > y then e2 <=> y < x then e2 *)
-      (match y' with
-      | V(y) -> g'_non_tail_if oc (NonTail(z)) y x e1 e2 "bgt" "blt"
-      | C(i) -> addi oc reg_at reg_zero i;
-                g'_non_tail_if oc (NonTail(z)) reg_at x e1 e2 "bgt" "blt")
- | NonTail(z), IfGE(x, y', e1, e2) ->
-       (* x >= y then e1 <=> x < y then e2 *)
-      (match y' with
-      | V(y) -> g'_non_tail_if oc (NonTail(z)) x y e1 e2 "bgt" "blt"
-      | C(i) -> if -128 <= i && i <= 127 then g'_non_tail_if_imm oc (NonTail(z)) x i e1 e2 "bgti" "blti"
-                else (addi oc reg_at reg_zero i;
-                        g'_non_tail_if oc (NonTail(z)) x reg_at e1 e2 "bgt" "blt"))
-  | NonTail(z), IfFEq(x, y, e1, e2) ->
-      (* x = y then e1 <=> x != y then e2 *)
-        g'_non_tail_if oc (NonTail(z)) x y e1 e2 "fbeq" "fbne"
-  | NonTail(z), IfFLE(x, y, e1, e2) ->
-      (* x <= y then e1 <=> x > y then e2 <=> y < x then e2 *)
-        g'_non_tail_if oc (NonTail(z)) y x e1 e2 "fbgt" "fblt"
+      | C(i) -> emit (OPER {
+        dst = [];
+        src = [(x, Type.Int)];
+        jump = Some [b_then; b_else]
+      }));
+      emit (LABEL {
+          lab = Id.l(b_then)
+      });
+      g (Tail, e1);
+      emit (LABEL {
+          lab = Id.l(b_else)
+      })
+      g (Tail, e2)
 
-  (* 関数呼び出しの仮想命令の実装 (caml2html: emit_call) *)
+  | Tail, IfFEq(x, y, e1, e2) | Tail, IfFLE(x, y, e1, e2) ->
+      let b_else = Id.genid ("else") in
+      let b_then = Id.genid ("then") in
+        emit (OPER {
+        dst = [];
+        src = [(x, Type.Float); (y, Type.Float)];
+        jump = Some [b_then; b_else]
+        };
+        emit (LABEL {
+            lab = Id.l(b_then)
+        });
+        g (Tail, e1);
+        emit (LABEL {
+            lab = Id.l(b_else)
+        })
+        g (Tail, e2)
+
+  | NonTail(zt), IfEq(x, y', e1, e2) | NonTail(zt), IfLE(x, y', e1, e2) | NonTail(zt), IFGE(x, y', e1, e2) ->
+      let b_else = Id.genid ("else") in
+      let b_then = Id.genid ("then") in
+      let b_cont = Id.genid ("cont") in
+      (match y' with
+      | V(y) -> emit (OPER {
+        dst = [];
+        src = [(x, Type.Int); (y, Type.Int)];
+        jump = Some [b_then; b_else]
+      }) 
+      | C(i) -> emit (OPER {
+        dst = [];
+        src = [(x, Type.Int)];
+        jump = Some [b_then; b_else]
+      }));
+      emit (LABEL {
+          lab = Id.l(b_then)
+      });
+      g (NonTail(zt), e1);
+      emit (OPER {
+          dst = [];
+          src = [];
+          jump = Some [b_cont];
+      });
+      emit (LABEL {
+          lab = Id.l(b_else)
+      });
+      g (NonTail(zt), e2);
+      emit (LABEL {
+          lab = Id.l(b_cont)
+      })
+
+  | NonTail(zt), IfFEq(x, y, e1, e2) | NonTail(zt), IfFLE(x, y, e1, e2) ->
+      let b_else = Id.genid ("else") in
+      let b_then = Id.genid ("then") in
+      let b_cont = Id.genid ("cont") in
+      emit (OPER {
+          dst = [];
+          src = [(x, Type.Float); (y, Type.Float)];
+          jump = Some [b_then; b_else]
+      });
+      emit (LABEL {
+          lab = Id.l(b_then)
+      });
+      g (NonTail(zt), e1);
+      emit (OPER {
+          dst = [];
+          src = [];
+          jump = Some [b_cont];
+      });
+      emit (LABEL {
+          lab = Id.l(b_else)
+      });
+      g (NonTail(zt), e2);
+      emit (LABEL {
+          lab = Id.l(b_cont)
+      })
+
+      (* TODO: reg_clの扱い *)
   | Tail, CallCls(x, ys, zs) -> (* 末尾呼び出し (caml2html: emit_tailcall) *)
-      g'_args oc [(x, reg_cl)] ys zs;
-      Printf.fprintf oc "\tlw\t%s, 0(%s)\n" reg_at reg_cl;
-      Printf.fprintf oc "\tjr\t%s\n" reg_at;
+      emit (OPER {
+          dst = calldefs;
+          src = g'_args [(x, reg_cl)] ys zs;
+          jump = None
+      })
   | Tail, CallDir(Id.L(x), ys, zs) -> (* 末尾呼び出し *)
-      g'_args oc [] ys zs;
-      Printf.fprintf oc "\tj\t%s\n" x;
-  | NonTail(a), CallCls(x, ys, zs) ->
-      g'_args oc [(x, reg_cl)] ys zs;
-      let ss = stacksize () in
-      Printf.fprintf oc "\tsw\t%s, %d(%s)\n" reg_ra (ss - 1) reg_sp;
-      addi oc reg_sp reg_sp ss;
-      Printf.fprintf oc "\tlw\t%s, 0(%s)\n" reg_at reg_cl;
-      Printf.fprintf oc "\tjalr\t%s\n" reg_at;
-      addi oc reg_sp reg_sp (-ss);
-      Printf.fprintf oc "\tlw\t%s, %d(%s)\n" reg_ra (ss - 1) reg_sp;
-      if List.mem a allregs && a <> regs.(0) then
-        Printf.fprintf oc "\taddi\t%s, %s, 0\n" a regs.(0)
-      else if List.mem a allfregs && a <> fregs.(0) then
-        Printf.fprintf oc "\tfmov\t%s, %s\n" a fregs.(0)
-  | NonTail(a), CallDir(Id.L(x), ys, zs) ->
-      g'_args oc [] ys zs;
-      let ss = stacksize () in
-      Printf.fprintf oc "\tsw\t%s, %d(%s)\n" reg_ra (ss - 1) reg_sp;
-      addi oc reg_sp reg_sp ss;
-      Printf.fprintf oc "\tjal\t%s\n" x;
-      addi oc reg_sp reg_sp (-ss);
-      Printf.fprintf oc "\tlw\t%s, %d(%s)\n" reg_ra (ss - 1) reg_sp;
-      if List.mem a allregs && a <> regs.(0) then
-        Printf.fprintf oc "\taddi\t%s, %s, 0\n" a regs.(0)
-      else if List.mem a allfregs && a <> fregs.(0) then
-        Printf.fprintf oc "\tfmov\t%s, %s\n" a fregs.(0)
+      emit (OPER {
+          dst = calldefs;
+          src = g'_args [] ys zs;
+          jump = None
+      })
+  | NonTail((a, t)), CallCls(x, ys, zs) ->
+      emit (OPER {
+          dst = calldefs;
+          src = g'_args [(x, reg_cl)] ys zs;
+          jump = None
+      });
+      (match t with 
+      | Type.Int -> emit (MOVE {
+                        dst = [(a, t)];
+                        src = [(regs.(0), Type.Int)]
+                    })
+      | Type.Float -> emit (MOVE{
+                        dst = [(a, t)];
+                        src = [(fregs.(0), Type.Float)]
+                    })
+      | _ -> ())
+  | NonTail((a, t)), CallDir(Id.L(x), ys, zs) ->
+      emit (OPER {
+          dst = calldefs;
+          src = g'_args [] ys zs;
+          jump = None
+      });
+      (match t with 
+      | Type.Int -> emit (MOVE{
+                        dst = [(a, t)];
+                        src = [(regs.(0), Type.Int)]
+                    })
+      | Type.Float -> emit (MOVE{
+                        dst = [(a, t)];
+                        src = [(fregs.(0), Type.Float)]
+                    })
+      | _ -> ())
 
-(* TODO: falseの場合の分岐について考えること *)
-and g'_tail_if o1 o2 e1 e2 b bn =
-    let b_else = Id.genid (b ^ "_else") in
-    Printf.fprintf oc "\t%s\t%s, %s, %s\n" bn o1 o2 b_else;
-    g (Tail, e1);
-    emit_int(LABEL {lab = Id.l(b_else)});
-    emit_float(LABEL {lab = Id.l(b_else)});
-    g (Tail, e2)
-and g'_tail_if_imm oc o1 o2 e1 e2 b bn =
-    let b_else = Id.genid (b ^ "_else") in
-    Printf.fprintf oc "\t%s\t%s, %d, %s\n" bn o1 o2 b_else;
-    let stackset_back = !stackset in
-    g oc (Tail, e1);
-    Printf.fprintf oc "%s:\n" b_else;
-    stackset := stackset_back;
-    g oc (Tail, e2)
-and g'_non_tail_if oc dest o1 o2 e1 e2 b bn =
-    let b_else = Id.genid (b ^ "_else") in
-    let b_cont = Id.genid (b ^ "_cont") in
-    Printf.fprintf oc "\t%s\t%s, %s, %s\n" bn o1 o2 b_else;
-    let stackset_back = !stackset in
-    g oc (dest, e1);
-    let stackset1 = !stackset in
-    Printf.fprintf oc "\tj\t%s\n" b_cont;
-    Printf.fprintf oc "%s:\n" b_else;
-    stackset := stackset_back;
-    g oc (dest, e2);
-    Printf.fprintf oc "%s:\n" b_cont;
-    let stackset2 = !stackset in
-    stackset := M.filter (fun x _ -> M.mem x stackset1) stackset2
-and g'_non_tail_if_imm oc dest o1 o2 e1 e2 b bn =
-    let b_else = Id.genid (b ^ "_else") in
-    let b_cont = Id.genid (b ^ "_cont") in
-    Printf.fprintf oc "\t%s\t%s, %d, %s\n" bn o1 o2 b_else;
-    let stackset_back = !stackset in
-    g oc (dest, e1);
-    let stackset1 = !stackset in
-    Printf.fprintf oc "\tj\t%s\n" b_cont;
-    Printf.fprintf oc "%s:\n" b_else;
-    stackset := stackset_back;
-    g oc (dest, e2);
-    Printf.fprintf oc "%s:\n" b_cont;
-    let stackset2 = !stackset in
-    stackset := M.filter (fun x _ -> M.mem x stackset1) stackset2
 
 and g'_args oc x_reg_cl ys zs =
     let (i, yrs) =
       List.fold_left
         (fun (i, yrs) y -> (i + 1, (y, regs.(i)) :: yrs))
         (0, x_reg_cl)
-        ys in
+      ys in
     List.iter
-      (fun (y, r) -> Printf.fprintf oc "\taddi\t%s, %s, 0\n" r y)
-      (shuffle reg_sw yrs);
+        (fun (y, r) -> 
+            emit (MOVE {
+                dst = [(r, Type.Int)];
+                src = [(y, Type.Int)]
+            }))
+    yrs;
     let (d, zfrs) =
       List.fold_left
         (fun (d, zfrs) z -> (d + 1, (z, fregs.(d)) :: zfrs))
         (0, [])
-        zs in
+      zs in
     List.iter
-      (fun (z, fr) -> Printf.fprintf oc "\tfmov\t%s, %s\n" fr z)
-      (shuffle reg_fsw zfrs)
+        (fun (z, fr) ->
+            emit (MOVE {
+                dst = [(fr, Type.Float)];
+                src = [(z, Type.Float)]
+            }))
+    zfrs;
+    let cl = if x_reg_cl <> [] then [(reg_cl, Type.Int)] else [] in
+    cl @ List.map (fun (y, r) -> (r, Type.Int)) yrs @ List.map (fun (z, fr) -> (fr, Type.Float)) zfrs
+
+
 
 let h { name = Id.L(x); args = _; fargs = _; body = e; ret = _ } =
-    emit_int(LABEL {lab = Id.L(x)});
-    emit_float(LABEL {lab = Id.L(x)});
-    stackset := M.empty;
-    stackmap := [];
-    g oc (Tail, e)
+    inst_list := [];
+    emit (LABEL {lab = Id.L(x)});
+    g (Tail, e);
+    !inst_list
 
-let f (Prog(data, fundefs, e)) =
-    let float_hp = load_float_imm data 0 in
-    float_table := data;
-    load_imm oc reg_sp (Int32.of_int sp_init);
-    load_imm oc reg_hp (Int32.of_int (!FixAddress.hp_init + float_hp));
-    emit(J(Id.l("min_caml_start")))
-    List.iter (fun fundef -> h oc fundef) fundefs;
-    (* Printf.fprintf oc ".global\tmin_caml_start\n"; *)
-    emit(Lable(Id.l("min_caml_start")))
-    stackset := M.empty;
-    stackmap := [];
-    g oc (NonTail("%g0"), e);
-    Printf.fprintf oc "\tret\n";
+let f e =
+    inst_list := [];
+    g (NonTail(("%g0", Type.Unit)), e);
+    !inst_list
 
 
   (* 

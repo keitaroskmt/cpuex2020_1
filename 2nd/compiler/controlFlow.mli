@@ -1,7 +1,7 @@
 type flowgraph = {
   control: Graph.graph;
-  def: Id.t list Graph.Table.t;
-  use: Id.t list Graph.Table.t;
+  def: (Id.t * Type.t) list Graph.Table.t;
+  use: (Id.t * Type.t) list Graph.Table.t;
   ismove: bool Graph.Table.t
 }
 

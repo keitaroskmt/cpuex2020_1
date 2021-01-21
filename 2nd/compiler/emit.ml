@@ -59,7 +59,7 @@ let load_imm oc dest v =
     Printf.fprintf oc "\taddi\t%s, %s, 16\n" reg_at reg_zero;
     Printf.fprintf oc "\tsll\t%s, %s, %s\n" dest dest reg_at;
     Printf.fprintf oc "\tori\t%s, %s, %ld\n" dest dest lower
-    *)
+   *)
 
 let rec to_bits x i =
     if i = 32 then "" else
