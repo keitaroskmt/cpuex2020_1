@@ -71,6 +71,12 @@ val is_reg : Id.t -> bool
 val fv : t -> Id.t list
 val concat : t -> Id.t * Type.t -> t -> t
 
+val registers : Id.t list
+val fregisters : Id.t list
+
+val reg_map : Id.t M.t
+val calldefs : (Id.t * Type.t) list
+
 (*
 val align : int -> int
 *)

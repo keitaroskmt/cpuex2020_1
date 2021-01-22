@@ -16,11 +16,11 @@ let nodes g =
     f 0
 
 let succ (g, i) = 
-    let {succ, _} = DynArray.get g i in
+    let {succ; _} = DynArray.get g i in
     List.map (augment g) succ
 
 let pred (g, i) = 
-    let {pred, _} = DynArray.get g i in
+    let {pred; _} = DynArray.get g i in
     List.map (augment g) pred
 
 let adj gi = pred gi @ succ gi
@@ -29,7 +29,7 @@ let new_graph () = DynArray.create ()
 
 let new_node g = 
     let i = DynArray.length g in
-    DynArray.add g empty_node; (g i)
+    DynArray.add g empty_node; (g, i)
 
 exception GraphEdge
 let diddle_edge change (g, i) (g', j) =  (* g = g' *)

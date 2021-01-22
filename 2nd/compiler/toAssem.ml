@@ -7,7 +7,7 @@ let emit inst =
     inst_list := inst :: !inst_list
 
 
-type dest = Tail | NonTail of (Id.t, Type.t)
+type dest = Tail | NonTail of (Id.t * Type.t)
 let rec g = function 
   | dest, Ans(exp) -> g' (dest, exp)
   | dest, Let((x, t), exp, e) ->
@@ -16,7 +16,7 @@ let rec g = function
 
 and g' = function 
   | NonTail(_), Nop -> ()
-  | NonTail(xt), Set(i) | NonTail(xt), SerL(Id.L(y)) | NonTail(xt), SetF(Id.L(y)) ->
+  | NonTail(xt), Set(_) | NonTail(xt), SetL(_) | NonTail(xt), SetF(_) ->
         emit (OPER {
           dst = [xt];
           src = [];
@@ -85,60 +85,62 @@ and g' = function
           jump = None
         })
   | NonTail(xt), Ftoi(y) ->
-        (emit (OPER {
+        emit (OPER {
           dst = [xt];
           src = [(y, Type.Float)];
           jump = None
         });
   | NonTail(xt), Itof(y) ->
-        (emit (OPER {
+        emit (OPER {
           dst = [xt];
           src = [(y, Type.Int)];
           jump = None
         });
   | NonTail(xt), LdF(y, z') ->
        (match z' with
-        | V(z) -> (emit (OPER {
+        | V(z) -> emit (OPER {
                     dst = [xt];
                     src = [(y, Type.Int); (z, Type.Int)];
                     jump = None
-                  });
-        | C(i) -> (emit (OPER {
+                  })
+        | C(i) -> emit (OPER {
                     dst = [xt];
                     src = [(y, Type.Int)];
                     jump = None
-                  }));
+                  }))
   | NonTail(_), StF(x, y, z') ->
        (match z' with
-       | V(z) -> (emit (OPER {
+       | V(z) -> emit (OPER {
                     dst = [];
                     src = [(x, Type.Float); (y, Type.Int); (z, Type.Int)];
                     jump = None
-                  });
-       | C(i) -> (emit (OPER {
+                  })
+       | C(i) -> emit (OPER {
                     dst = [];
                     src = [(x, Type.Float); (y, Type.Int)];
                     jump = None
-                  });
+                  }))
   | NonTail(_), Comment(s) -> ()
 
-  (* 使わない *)
-  | NonTail(_), Save(x, y) ->
-      failwith("Save error in toAssem.ml")
-  (* 使わない *)
-  | NonTail(xt), Restore(y) ->
-      failwith("Restore error in toAssem.ml")
+  (* ? *)
+  | NonTail(_), Save(x, y) -> ()
+  (* ? *)
+  | NonTail(xt), Restore(y) -> emit (OPER {
+                                    dst = [xt];
+                                    src = [];
+                                    jump = None
+                                })
 
 
       (* reg_raのjump先について考えること -> 関数ごとに考えるので不要 *)
   | Tail, (Nop | St _ | StF _ | Comment _ | Save _ as exp) ->
-      g' oc (NonTail((Id.gentmp Type.Unit, Type.Unit)), exp);
+      g' (NonTail((Id.gentmp Type.Unit, Type.Unit)), exp);
   | Tail, (Set _ | SetL _ | Mov _ | Neg _ | Add _ | Sub _ | Mul _ | Div _ | Ftoi _ | SLL _ | Ld _ as exp) ->
-      g' oc (NonTail((regs.(0), Type.Int)), exp);
+      g' (NonTail((regs.(0), Type.Int)), exp);
   | Tail, (SetF _ | FMovD _ | FNegD _ | FAbs _ | FSqr _ | Itof _ | Floor _ | FAddD _ | FSubD _ | FMulD _ | FDivD _ | LdF _ as exp) ->
-      g' oc (NonTail((fregs.(0), Type.Float)), exp);
+      g' (NonTail((fregs.(0), Type.Float)), exp);
   | Tail, (Restore(x) as exp) ->
-      failwith("Restore error in toAssem.ml")
+      ()  
   | Tail, IfEq(x, y', e1, e2) | Tail, IfLE(x, y', e1, e2) | Tail, IfGE(x, y', e1, e2) ->
       let b_else = Id.genid ("else") in
       let b_then = Id.genid ("then") in
@@ -146,20 +148,20 @@ and g' = function
       | V(y) -> emit (OPER {
         dst = [];
         src = [(x, Type.Int); (y, Type.Int)];
-        jump = Some [b_then; b_else]
+        jump = Some [Id.L(b_then); Id.L(b_else)]
       }) 
       | C(i) -> emit (OPER {
         dst = [];
         src = [(x, Type.Int)];
-        jump = Some [b_then; b_else]
+        jump = Some [Id.L(b_then); Id.L(b_else)]
       }));
       emit (LABEL {
-          lab = Id.l(b_then)
+          lab = Id.L(b_then)
       });
       g (Tail, e1);
       emit (LABEL {
-          lab = Id.l(b_else)
-      })
+          lab = Id.L(b_else)
+      });
       g (Tail, e2)
 
   | Tail, IfFEq(x, y, e1, e2) | Tail, IfFLE(x, y, e1, e2) ->
@@ -168,18 +170,18 @@ and g' = function
         emit (OPER {
         dst = [];
         src = [(x, Type.Float); (y, Type.Float)];
-        jump = Some [b_then; b_else]
-        };
+        jump = Some [Id.L(b_then); Id.L(b_else)]
+        });
         emit (LABEL {
-            lab = Id.l(b_then)
+            lab = Id.L(b_then)
         });
         g (Tail, e1);
         emit (LABEL {
-            lab = Id.l(b_else)
-        })
+            lab = Id.L(b_else)
+        });
         g (Tail, e2)
 
-  | NonTail(zt), IfEq(x, y', e1, e2) | NonTail(zt), IfLE(x, y', e1, e2) | NonTail(zt), IFGE(x, y', e1, e2) ->
+  | NonTail(zt), IfEq(x, y', e1, e2) | NonTail(zt), IfLE(x, y', e1, e2) | NonTail(zt), IfGE(x, y', e1, e2) ->
       let b_else = Id.genid ("else") in
       let b_then = Id.genid ("then") in
       let b_cont = Id.genid ("cont") in
@@ -187,28 +189,28 @@ and g' = function
       | V(y) -> emit (OPER {
         dst = [];
         src = [(x, Type.Int); (y, Type.Int)];
-        jump = Some [b_then; b_else]
+        jump = Some [Id.L(b_then); Id.L(b_else)]
       }) 
       | C(i) -> emit (OPER {
         dst = [];
         src = [(x, Type.Int)];
-        jump = Some [b_then; b_else]
+        jump = Some [Id.L(b_then); Id.L(b_else)]
       }));
       emit (LABEL {
-          lab = Id.l(b_then)
+          lab = Id.L(b_then)
       });
       g (NonTail(zt), e1);
       emit (OPER {
           dst = [];
           src = [];
-          jump = Some [b_cont];
+          jump = Some [Id.L(b_cont)];
       });
       emit (LABEL {
-          lab = Id.l(b_else)
+          lab = Id.L(b_else)
       });
       g (NonTail(zt), e2);
       emit (LABEL {
-          lab = Id.l(b_cont)
+          lab = Id.L(b_cont)
       })
 
   | NonTail(zt), IfFEq(x, y, e1, e2) | NonTail(zt), IfFLE(x, y, e1, e2) ->
@@ -218,23 +220,23 @@ and g' = function
       emit (OPER {
           dst = [];
           src = [(x, Type.Float); (y, Type.Float)];
-          jump = Some [b_then; b_else]
+          jump = Some [Id.L(b_then); Id.L(b_else)]
       });
       emit (LABEL {
-          lab = Id.l(b_then)
+          lab = Id.L(b_then)
       });
       g (NonTail(zt), e1);
       emit (OPER {
           dst = [];
           src = [];
-          jump = Some [b_cont];
+          jump = Some [Id.L(b_cont)];
       });
       emit (LABEL {
-          lab = Id.l(b_else)
+          lab = Id.L(b_else)
       });
       g (NonTail(zt), e2);
       emit (LABEL {
-          lab = Id.l(b_cont)
+          lab = Id.L(b_cont)
       })
 
       (* TODO: reg_clの扱い *)
@@ -284,7 +286,7 @@ and g' = function
       | _ -> ())
 
 
-and g'_args oc x_reg_cl ys zs =
+and g'_args x_reg_cl ys zs =
     let (i, yrs) =
       List.fold_left
         (fun (i, yrs) y -> (i + 1, (y, regs.(i)) :: yrs))

@@ -5,14 +5,9 @@ type igraph = {
     moves: (Graph.node * Graph.node) list
     }
 
-module Iset = Set.Make(
-    struct
-        type t = Id.t * Type.t 
-        let compare = compare
-    end
-)
+module Lset: Set.S with type elt = Id.t * Type.t
 
-type liveset = Iset.t * (Id.t * Type.t) list 
+type liveset = Lset.t * (Id.t * Type.t) list 
 type livemap = liveset Graph.Table.t
 
 val liveness: ControlFlow.flowgraph -> livemap

@@ -14,4 +14,4 @@ val mk_edge: node -> node -> unit
 val rm_edge: node -> node -> unit
 module Table: Map.S with type key = node
 
-val nodename: node -> unit
+val nodename: node -> string

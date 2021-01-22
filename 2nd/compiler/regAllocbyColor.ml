@@ -3,17 +3,23 @@ open Asm
 
   (* envはspilledと新たに作った変数の対応 *)
 let rec rewrite e spilled env = 
-    | Ans(exp) -> Ans(rewrite_exp exp spilled env)
+    match e with
+    | Ans(exp) -> rewrite_exp exp spilled env
     | Let((x, t) as xt, exp, e) ->
-        let env' = 
-            if M.mem x env then env 
-            else 
-                let new_x = Id.gentmp t in M.add x new_x env in
-        let exp' = rewrite_exp exp spilled env' in
-        let e' = rewrite e spilled env' in
-        (* (new_x, t)でok? *)
-        (* レジスタ割り当て決定後, Save(M.find x regenv, x)とする *)
-        seq(Save(x, x), concat exp' (new_x, t) e')
+        if List.mem x spilled then
+            let env' = 
+                if M.mem x env then env 
+                else 
+                    let new_x = Id.gentmp t in M.add x new_x env in
+            let exp' = rewrite_exp exp spilled env' in
+            let e' = rewrite e spilled env' in
+            (* (new_x, t)でok? *)
+            (* レジスタ割り当て決定後, Save(M.find x regenv, x)とする *)
+            seq(Save(x, x), concat exp' (M.find x env, t) e')
+        else
+            let exp' = rewrite_exp exp spilled env in
+            let e' = rewrite e spilled env in
+            concat exp' xt e'
 
 and rewrite_tmp x t spilled env k =
     if List.mem x spilled then
@@ -24,9 +30,9 @@ and rewrite_tmp x t spilled env k =
 and rewrite_tmp' x' t spilled env k =
     match x' with
     | V(x) -> if List.mem x spilled then
-                Let((M.find x env, t), Restore(x), k (M.find x env))
+                Let((M.find x env, t), Restore(x), k (V(M.find x env)))
               else
-                k x
+                k (V(x))
     | c -> k c
 
 and rewrite_exp e spilled env = 
@@ -104,62 +110,62 @@ and rewrite_exp e spilled env =
             (fun s -> rewrite_tmp y Type.Int spilled env
                 (fun t -> rewrite_tmp' z' Type.Int spilled env
                     (fun u -> Ans(StF(s, t, u)))))
-    | IfEq(x, y', e1, e2) as exp -> 
+    | IfEq(x, y', e1, e2) -> 
         let e1' = rewrite e1 spilled env in
         let e2' = rewrite e2 spilled env in
         rewrite_tmp x Type.Int spilled env
             (fun s -> rewrite_tmp' y' Type.Int spilled env
-                (fun t -> IfEq(s, t, e1', e2')))
-    | IfLE(x, y', e1, e2) as exp -> 
+                (fun t -> Ans(IfEq(s, t, e1', e2'))))
+    | IfLE(x, y', e1, e2) -> 
         let e1' = rewrite e1 spilled env in
         let e2' = rewrite e2 spilled env in
         rewrite_tmp x Type.Int spilled env
             (fun s -> rewrite_tmp' y' Type.Int spilled env
-                (fun t -> IfLE(s, t, e1', e2')))
-    | IfGE(x, y', e1, e2) as exp -> 
+                (fun t -> Ans(IfLE(s, t, e1', e2'))))
+    | IfGE(x, y', e1, e2) -> 
         let e1' = rewrite e1 spilled env in
         let e2' = rewrite e2 spilled env in
         rewrite_tmp x Type.Int spilled env
             (fun s -> rewrite_tmp' y' Type.Int spilled env
-                (fun t -> IfGE(s, t, e1', e2')))
-    | IfFEq(x, y, e1, e2) as exp -> 
+                (fun t -> Ans(IfGE(s, t, e1', e2'))))
+    | IfFEq(x, y, e1, e2) -> 
         let e1' = rewrite e1 spilled env in
         let e2' = rewrite e2 spilled env in
         rewrite_tmp x Type.Float spilled env
             (fun s -> rewrite_tmp y Type.Float spilled env
-                (fun t -> IfFEq(s, t, e1', e2')))
-    | IfFLE(x, y, e1, e2) as exp -> 
+                (fun t -> Ans(IfFEq(s, t, e1', e2'))))
+    | IfFLE(x, y, e1, e2) -> 
         let e1' = rewrite e1 spilled env in
         let e2' = rewrite e2 spilled env in
         rewrite_tmp x Type.Float spilled env
             (fun s -> rewrite_tmp y Type.Float spilled env
-                (fun t -> IfFLE(s, t, e1', e2')))
+                (fun t -> Ans(IfFLE(s, t, e1', e2'))))
     | CallCls(x, ys, zs) as exp ->
     (* とりあえず *)
         if (List.mem x spilled || List.for_all (fun y -> List.mem y spilled) ys || 
         List.for_all (fun z -> List.mem z spilled) zs) then
             failwith "CallCls in rewrite" 
         else
-            exp
+            Ans(exp)
     | CallDir(Id.L(x), ys, zs) as exp ->
     (* とりあえず *)
         if (List.for_all (fun y -> List.mem y spilled) ys || 
         List.for_all (fun z -> List.mem z spilled) zs) then
             failwith "CallDir in rewrite" 
         else
-            exp
-    | Save(x, y) -> Save(x, y)
-    | Reprece(x) -> Reprace(x)
+            Ans(exp)
+    | Save(x, y) -> Ans(Save(x, y))
 
 
 
 let rec g e env = 
     match e with
     | Ans(exp) -> Ans(g' exp env)
-    | Let((x, t) as xt, exp, e) ->
+    | Let((x, t), exp, e) ->
         Let((M.find x env, t), g' exp env, g e env)
 
 and g' e env = 
+    match e with
     | Nop | Set _ | SetF _ | SetL _ | Comment _ | Restore _ as exp -> exp
     | Mov(x) -> Mov(M.find x env)
     | Neg(x) -> Neg(M.find x env)
@@ -190,7 +196,7 @@ and g' e env =
     | St(x, y, z') -> 
         (match z' with
         | V(z) -> St(M.find x env, M.find y env, V(M.find z env))
-        | c -> St(M.find x env, M.find y env, c)
+        | c -> St(M.find x env, M.find y env, c))
     | FMovD(x) -> FMovD(M.find x env)
     | FNegD(x) -> FNegD(M.find x env)
     | FAddD(x, y) -> FAddD(M.find x env, M.find y env)
@@ -209,7 +215,7 @@ and g' e env =
     | StF(x, y, z') -> 
         (match z' with
         | V(z) -> StF(M.find x env, M.find y env, V(M.find z env))
-        | c -> StF(M.find x env, M.find y env, c)
+        | c -> StF(M.find x env, M.find y env, c))
     | IfEq(x, y', e1, e2) ->
         let e1' = g e1 env in
         let e2' = g e2 env in
@@ -248,8 +254,8 @@ and g' e env =
 let alloc e = 
     let rec loop e = 
         let instrs = ToAssem.f e in
-        let ({control; def; use; ismove} as flowgraph, flownodes) = ControlFlow.instrs_to_graph instrs in
-        let ({graph; id2node; node2id; moves} as igraph, liveouts) = Liveness.interference_graph flowgraph in
+        let (ControlFlow.{control; def; use; ismove} as flowgraph, flownodes) = ControlFlow.instrs_to_graph instrs in
+        let (Liveness.{graph; id2node; node2id; moves} as igraph, liveouts) = Liveness.interference_graph flowgraph in
 
         (* TODO: 一度spillしたものは再びspillしない処理が必要? *)
         let spill_cost = 
@@ -288,12 +294,12 @@ let h ({ name = Id.L(x); args = ys; fargs = zs; body = e; ret = t }) =
     let (_, arg_regs) = 
         List.fold_left
             (fun (i, arg_regs) _ ->
-                (i+1, regs.(i)))
+                (i+1, regs.(i) :: arg_regs))
         (0, []) ys in
     let (_, farg_regs) = 
         List.fold_left
             (fun (i, farg_regs) _ ->
-                (i+1, fregs.(i)))
+                (i+1, fregs.(i) :: farg_regs))
         (0, []) zs in
 
   let e' = alloc e in

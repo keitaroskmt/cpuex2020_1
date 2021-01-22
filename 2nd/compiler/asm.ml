@@ -133,7 +133,7 @@ let reg_map =
         (fun env reg -> M.add reg reg env) nenv fregisters
 
 let calldefs = 
-    [reg_ra; "%v0"; "%f0"] (* TODO: 引数とcallersaveを加える *)
+    [(reg_ra, Type.Int); ("%v0", Type.Int); ("%f0", Type.Float)] (* TODO: 引数とcallersaveを加える *)
         
 
 (*

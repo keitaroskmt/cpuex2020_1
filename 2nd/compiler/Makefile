@@ -9,11 +9,11 @@ PACKS = extlib
 
 default: debug-code top $(RESULT) do_test
 $(RESULT): debug-code top
-## [¼«Ê¬¡Ê½»°æ¡ËÍÑ¤ÎÃí]
-## ¡¦OCamlMakefile¤ä¸Å¤¤GNU Make¤Î¥Ð¥°(?)¤Ç¾å¤Î¤è¤¦¤ÊÄêµÁ¤¬É¬Í×(??)
-## ¡¦OCamlMakefile¤Ç¤Ïdebug-code¤Ènative-code¤Î¤½¤ì¤¾¤ì¤Ç
-##   .mli¤¬¥³¥ó¥Ñ¥¤¥ë¤µ¤ì¤Æ¤·¤Þ¤¦¤Î¤Ç¡¢Î¾Êý¤È¤âdefault:¤Î±¦ÊÕ¤ËÆþ¤ì¤ë¤È
-##   ºÆmake»þ¤Ë¡Ê.mli¤¬ÊÑ¹¹¤µ¤ì¤Æ¤¤¤ë¤Î¤Ç¡Ë.ml¤âºÆ¥³¥ó¥Ñ¥¤¥ë¤µ¤ì¤ë
+## [??Ê¬?Ê½??????Ñ¤???]
+## ??OCamlMakefile???Å¤?GNU Make?Î¥Ð¥?(?)?Ç¾??Î¤è¤¦?????Á¤?É¬??(??)
+## ??OCamlMakefile?Ç¤?debug-code??native-code?Î¤??ì¤¾????
+##   .mli???????Ñ¥??ë¤µ???Æ¤??Þ¤??Î¤Ç¡?Î¾???È¤?default:?Î±??Õ¤?????????
+##   ??make???Ë¡?.mli???Ñ¹??????Æ¤????Î¤Ç¡?.ml???Æ¥????Ñ¥??ë¤µ????
 clean:: nobackup
 
 SOURCES = float.c type.ml id.ml m.ml s.ml \
@@ -24,12 +24,12 @@ inline.mli inline.ml constFold.mli constFold.ml elim.mli elim.ml \
 fixAddress.mli fixAddress.ml \
 closure.mli closure.ml asm.mli asm.ml virtual.mli virtual.ml \
 simm.mli simm.ml regAlloc.mli regAlloc.ml \
-assem.ml toAssem.ml graph.mli graph.ml controlFlow.mli controFlow.ml \
+assem.ml toAssem.ml graph.mli graph.ml controlFlow.mli controlFlow.ml \
 liveness.mli liveness.ml color.mli color.ml regAllocbyColor.mli regAllocbyColor.ml \
 emit.mli emit.ml \
 output.ml main.mli main.ml
 
-# ¢­¥Æ¥¹¥È¥×¥í¥°¥é¥à¤¬Áý¤¨¤¿¤é¡¢¤³¤ì¤âÁý¤ä¤¹
+# ???Æ¥??È¥×¥í¥°???à¤¬?ý¤¨¤¿¤é¡¢?????????ä¤¹
 # TESTS = print sum-tail gcd sum fib ack even-odd \
 # adder funcomp cls-rec cls-bug cls-bug2 cls-reg-bug \
 # shuffle spill spill2 spill3 join-stack join-stack2 join-stack3 \
@@ -37,34 +37,26 @@ output.ml main.mli main.ml
 # inprod inprod-rec inprod-loop matmul matmul-flat \
 # manyargs tmp
 
-TESTS = fib float_fib adder array_make array_put sin cos
+TESTS = fib
+do_test: $(TESTS:%=mytest/%.s)
 
-do_test: $(TESTS:%=../compiler_sim/assembly/%.s)
+.PRECIOUS: mytest/%.s
+TRASH = $(TESTS:%=mytest/%.s) $(TESTS:%=mytest/%) $(TESTS:%=mytest/%.res) $(TESTS:%=mytest/%.ans) $(TESTS:%=mytest/%.cmp) $(TESTS:%=mytest/%.iter) $(TESTS:%=mytest/%.closure) $(TESTS:%=mytest/%.cse) $(TESTS:%=test/%.alpha) $(TESTS:%=mytest/%.knormal) $(TESTS:%=mytest/%.synt) $(TESTS:%=mytest/%.data)
 
-.PRECIOUS: ../compiler_sim/assembly/%.s
-TRASH = $(TESTS:%=mytest/%.s) $(TESTS:%=mytest/%) $(TESTS:%=mytest/%.res) $(TESTS:%=mytest/%.ans) $(TESTS:%=mytest/%.cmp) \
-	$(TESTS:%=mytest/%.iter) $(TESTS:%=mytest/%.closure) $(TESTS:%=mytest/%.cse) $(TESTS:%=test/%.alpha) \
-	$(TESTS:%=mytest/%.knormal) $(TESTS:%=mytest/%.synt) $(TESTS:%=mytest/%.data)
+mytest/%.s: $(RESULT) mytest/%.ml
+	./$(RESULT) mytest/$*
 
-../compiler_sim/assembly/%.s: $(RESULT) ../compiler_sim/testcase/%.ml
-	./$(RESULT) ../compiler_sim/testcase/$*
+#  TESTS = fib float_fib adder array_make array_put sin cos
+#  
+#  do_test: $(TESTS:%=../compiler_sim/assembly/%.s)
+#  
+#  .PRECIOUS: ../compiler_sim/assembly/%.s
+#  TRASH = $(TESTS:%=mytest/%.s) $(TESTS:%=mytest/%) $(TESTS:%=mytest/%.res) $(TESTS:%=mytest/%.ans) $(TESTS:%=mytest/%.cmp) \
+# 	$(TESTS:%=mytest/%.iter) $(TESTS:%=mytest/%.closure) $(TESTS:%=mytest/%.cse) $(TESTS:%=test/%.alpha) \
+# 	$(TESTS:%=mytest/%.knormal) $(TESTS:%=mytest/%.synt) $(TESTS:%=mytest/%.data)
+#  
+#  ../compiler_sim/assembly/%.s: $(RESULT) ../compiler_sim/testcase/%.ml
+# 	./$(RESULT) ../compiler_sim/testcase/$*
 
-# do_test: $(TESTS:%=test/%.cmp)
-#
-# .PRECIOUS: test/%.s test/% test/%.res test/%.ans test/%.cmp
-# TRASH = $(TESTS:%=test/%.s) $(TESTS:%=test/%) $(TESTS:%=test/%.res) $(TESTS:%=test/%.ans) $(TESTS:%=test/%.cmp) \
-# 	$(TESTS:%=test/%.iter) $(TESTS:%=test/%.closure) $(TESTS:%=test/%.cse) $(TESTS:%=test/%.alpha) \
-# 	$(TESTS:%=test/%.knormal) $(TESTS:%=test/%.synt)
-#
-# test/%.s: $(RESULT) test/%.ml
-# 	./$(RESULT) test/$*
-# test/%: test/%.s libmincaml.S stub.c
-# 	$(CC) $(CFLAGS) -m32 $^ -lm -o $@
-# test/%.res: test/%
-# 	$< > $@
-# test/%.ans: test/%.ml
-# 	ocaml $< > $@
-# test/%.cmp: test/%.res test/%.ans
-# 	diff $^ > $@
 
 include OCamlMakefile

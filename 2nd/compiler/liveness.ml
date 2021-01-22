@@ -5,14 +5,21 @@ type igraph = {
     moves: (Graph.node * Graph.node) list
     }
 
-module Iset = Set.Make(
+module Lset = Set.Make(
     struct
         type t = Id.t * Type.t 
         let compare = compare
     end
 )
 
-type liveset = Iset.t * (Id.t * Type.t) list 
+module Lmap = Map.Make(
+    struct
+        type t = Id.t * Type.t 
+        let compare = compare
+    end
+)
+
+type liveset = Lset.t * (Id.t * Type.t) list 
 type livemap = liveset Graph.Table.t
 
 
@@ -28,7 +35,7 @@ let rec sub l1 l2 =
     | x :: rest -> if List.mem x l2 then sub rest l2 else x :: (sub rest l2)
 
 
-let liveness ({control; def; use; ismove} as flowgraph) =
+let liveness (ControlFlow.{control; def; use; ismove} as flowgraph) =
     let nodes = Graph.nodes control in
     let emptyenv = List.fold_left 
         (fun env node -> Graph.Table.add node [] env) Graph.Table.empty nodes in
@@ -43,14 +50,14 @@ let liveness ({control; def; use; ismove} as flowgraph) =
                     (fun liveout succ ->
                         union liveout (Graph.Table.find succ inenv)) liveout (Graph.succ node) in
                 (* 集合が一致したか判定するためにリストがソート済である必要あり *)
-                let inenv' = Graph.Table.add node (List.sort livein') inenv in
-                let outenv' = Graph.Table.add node (List.sort liveout') outenv in (inenv', outenv')) 
+                let inenv' = Graph.Table.add node (List.sort compare livein') inenv in
+                let outenv' = Graph.Table.add node (List.sort compare liveout') outenv in (inenv', outenv')) 
                 (*
                 let inenv' = Graph.Table.add node (List.sort livein') inenv in
                 let outenv' = Graph.Table.add node (List.sort liveout') outenv in (inenv', outenv')) 
                 *)
             (inenv, outenv) nodes in
-        if List.forall 
+        if List.for_all 
             (fun node -> 
                 Graph.Table.find node inenv = Graph.Table.find node inenv' &&
                 Graph.Table.find node outenv = Graph.Table.find node outenv') 
@@ -63,25 +70,25 @@ let liveness ({control; def; use; ismove} as flowgraph) =
     List.fold_left
         (fun livemap node ->
             let livelist = Graph.Table.find node outenv in
-            let liveset = List.fold_left (fun set t -> Iset.add t set) Iset.empty livelist in
+            let liveset = List.fold_left (fun set t -> Lset.add t set) Lset.empty livelist in
             Graph.Table.add node (liveset, livelist) livemap)
     Graph.Table.empty nodes
 
 
-let interference_graph ({control; def; use; ismove} as flowgraph) = 
+let interference_graph (ControlFlow.{control; def; use; ismove} as flowgraph) = 
     let livemap = liveness flowgraph in
     (* ここから浮動小数点の対応を考える *)
     let igraph = Graph.new_graph () in
 
     let add_inode (id2node, node2id) (x, t) = 
-        if M.mem (x, t) id2node then 
+        if Lmap.mem (x, t) id2node then 
             (id2node, node2id) 
         else 
             let inode = Graph.new_node igraph in
-            let id2node' = M.add (x, t) inode id2node in
+            let id2node' = Lmap.add (x, t) inode id2node in
             let node2id' = Graph.Table.add inode (x, t) node2id in
             (id2node', node2id') in
-    let add_iedge n1 n2 = 
+    let add_iedge node2id n1 n2 = 
         let (x, t) = Graph.Table.find n1 node2id in
         let (y, t') = Graph.Table.find n2 node2id in
         (* IntとFloatでは干渉しない *)
@@ -91,7 +98,7 @@ let interference_graph ({control; def; use; ismove} as flowgraph) =
     let rec make_igraph id2node node2id moves = function
     | [] -> {
         graph = igraph;
-        id2node = (fun t -> M.find t id2node);
+        id2node = (fun v -> Lmap.find v id2node);
         node2id = (fun node -> Graph.Table.find node node2id);
         moves = List.rev moves
     }
@@ -104,26 +111,26 @@ let interference_graph ({control; def; use; ismove} as flowgraph) =
         let (id2node', node2id') = List.fold_left add_inode (id2node, node2id) (def @ use @ livelist) in
         let moves' = 
             if ismove then 
-                let u = M.find (List.hd def) id2node' in
-                let v = M.find (List.hd use) id2node' in
+                let u = Lmap.find (List.hd def) id2node' in
+                let v = Lmap.find (List.hd use) id2node' in
                     (u, v) :: moves
             else
                 moves in
         let target = 
-            if ismove && Iset.mem (List.hd use) liveset then
+            if ismove && Lset.mem (List.hd use) liveset then
                 List.filter (fun n -> n <> List.hd use) livelist
             else
                 livelist in
         List.iter 
             (fun v ->
-                let node = M.find v id2node in
-                let target_node = List.map (fun w -> M.find w id2node) target in
-                List.iter (add_iedge node) target_node)
+                let node = Lmap.find v id2node in
+                let target_node = List.map (fun w -> Lmap.find w id2node) target in
+                List.iter (add_iedge node2id node) target_node)
             def;
         make_igraph id2node' node2id' moves' rest in
     
     let nodes = Graph.nodes control in
-    let igraph = make_igraph  M.empty Graph.Table.empty [] nodes in
+    let igraph = make_igraph  Lmap.empty Graph.Table.empty [] nodes in
     (igraph, fun node -> snd (Graph.Table.find node livemap))
         
 
@@ -141,14 +148,14 @@ let rec igraph_debug oc ({graph; id2node; node2id; moves}) =
     Printf.fprintf oc "Interferece graph\n";
     List.iter
         (fun node ->
-            let (x, t) = Graph.Table.find node node2id in
+            let (x, t) = node2id node in
             Printf.fprintf oc "node: %s\n" x;
             Printf.fprintf oc "\tsucc:";
             List.iter (fun (x, t) -> Printf.fprintf oc "%s, " x) 
-                (List.map (fun v -> Graph.Table.find v node2id) (succ node));
+                (List.map (fun v -> node2id v) (Graph.succ node));
             Printf.fprintf oc "\tpred:";
             List.iter (fun (x, t) -> Printf.fprintf oc "%s, " x) 
-                (List.map (fun v -> Graph.Table.find v node2id) (pred node));
+                (List.map (fun v -> node2id v) (Graph.pred node));
         ) 
     (Graph.nodes graph)
 
