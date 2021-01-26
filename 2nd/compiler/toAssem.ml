@@ -325,7 +325,7 @@ let h { name = Id.L(x); args = _; fargs = _; body = e; ret = _ } =
 let f e =
     inst_list := [];
     g (NonTail(("%g0", Type.Unit)), e);
-    !inst_list
+    List.rev !inst_list
 
 
   (* 

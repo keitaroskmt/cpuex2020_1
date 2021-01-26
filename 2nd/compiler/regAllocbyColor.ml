@@ -254,6 +254,8 @@ and g' e env =
 let alloc e = 
     let rec loop e = 
         let instrs = ToAssem.f e in
+        Assem.assem_debug stdout instrs;
+
         let (ControlFlow.{control; def; use; ismove} as flowgraph, flownodes) = ControlFlow.instrs_to_graph instrs in
         let (Liveness.{graph; id2node; node2id; moves} as igraph, liveouts) = Liveness.interference_graph flowgraph in
 
@@ -307,8 +309,9 @@ let h ({ name = Id.L(x); args = ys; fargs = zs; body = e; ret = t }) =
 
 
 let f (Prog(data, fundefs, e)) = 
-  Format.eprintf "register allocation: may take some time (up to a few minutes, depending on the size of functions)@.";
-  let fundefs' = List.map h fundefs in
-  let e' = alloc e in 
-  Prog(data, fundefs', e')
+    asm_debug stdout (Prog(data, fundefs, e));
+    Format.eprintf "register allocation: may take some time (up to a few minutes, depending on the size of functions)@.";
+    let fundefs' = List.map h fundefs in
+    let e' = alloc e in 
+    Prog(data, fundefs', e')
 

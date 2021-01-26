@@ -80,3 +80,5 @@ val calldefs : (Id.t * Type.t) list
 (*
 val align : int -> int
 *)
+
+val asm_debug: out_channel -> prog -> unit

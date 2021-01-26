@@ -160,3 +160,177 @@ let reg_fat = "%f30" (* for assembler *)
 let reg_fzero = "%fzero"
 let is_reg x = (x.[0] = '%')
 *)
+
+(* for debug *)
+let asm_debug oc l =
+    let rec print_tab level =
+        if level = 0 then ()
+        else (Printf.fprintf oc "\t"; print_tab (level-1))
+    
+    and print_list l = 
+        let rec print_list_sub = function
+        | [] -> Printf.fprintf oc "]"
+        | x :: rest -> (Printf.fprintf oc "%s, " x; print_list_sub rest) in
+        Printf.fprintf oc "[";
+        print_list_sub l
+
+    and print_t e level = 
+        (
+        print_tab level;
+        match e with
+        | Ans(exp) ->
+            Printf.fprintf oc "Ans\n";
+            print_exp exp (level + 1)
+        | Let((x, t), exp, e) ->
+            Printf.fprintf oc "Let %s " x;
+            Type.print_type oc t;
+            Printf.fprintf oc "\n";
+            print_exp exp (level + 1);
+            print_tab (level + 1);
+            Printf.fprintf oc "in\n";
+            print_t e (level + 1)
+        )
+
+    and print_exp e level = 
+        (
+        print_tab level;
+        match e with
+        | Nop ->
+            Printf.fprintf oc "Nop\n"
+        | Set(i) ->
+            Printf.fprintf oc "Set %d\n" i
+        | SetF(Id.L(x)) ->
+            Printf.fprintf oc "SetF %s\n" x
+        | SetL(Id.L(x)) ->
+            Printf.fprintf oc "SetL %s\n" x
+        | Mov(x) ->
+            Printf.fprintf oc "Mov %s\n" x
+        | Neg(x) ->
+            Printf.fprintf oc "Neg %s\n" x
+        | Add(x, y') ->
+            (match y' with
+            | V(y) -> Printf.fprintf oc "Add %s %s\n" x y
+            | C(i) -> Printf.fprintf oc "Add %s %d\n" x i)
+        | Sub(x, y') ->
+            (match y' with
+            | V(y) -> Printf.fprintf oc "Sub %s %s\n" x y
+            | C(i) -> Printf.fprintf oc "Sub %s %d\n" x i)
+        | Mul(x, y') ->
+            (match y' with
+            | V(y) -> Printf.fprintf oc "Mul %s %s\n" x y
+            | C(i) -> Printf.fprintf oc "Mul %s %d\n" x i)
+        | Div(x, y') ->
+            (match y' with
+            | V(y) -> Printf.fprintf oc "Div %s %s\n" x y
+            | C(i) -> Printf.fprintf oc "Div %s %d\n" x i)
+        | SLL(x, y') ->
+            (match y' with
+            | V(y) -> Printf.fprintf oc "SLL %s %s\n" x y
+            | C(i) -> Printf.fprintf oc "SLL %s %d\n" x i)
+        | Ld(x, y') ->
+            (match y' with
+            | V(y) -> Printf.fprintf oc "Ld %s %s\n" x y
+            | C(i) -> Printf.fprintf oc "Ld %s %d\n" x i)
+        | St(x, y, z') ->
+            (match z' with
+            | V(z) -> Printf.fprintf oc "St %s %s %s\n" x y z 
+            | C(i) -> Printf.fprintf oc "St %s %s %d\n" x y i)
+        | FMovD(x) ->
+            Printf.fprintf oc "FMovD %s\n" x
+        | FNegD(x) ->
+            Printf.fprintf oc "FNegD %s\n" x
+        | FAddD(x, y) ->
+            Printf.fprintf oc "FAddD %s %s\n" x y
+        | FSubD(x, y) ->
+            Printf.fprintf oc "FSubD %s %s\n" x y
+        | FMulD(x, y) ->
+            Printf.fprintf oc "FMulD %s %s\n" x y
+        | FDivD(x, y) ->
+            Printf.fprintf oc "FDivD %s %s\n" x y
+        | FAbs(x) ->
+            Printf.fprintf oc "FAbs %s\n" x
+        | FSqr(x) ->
+            Printf.fprintf oc "FSqr %s\n" x
+        | Ftoi(x) ->
+            Printf.fprintf oc "Ftoi %s\n" x
+        | Itof(x) ->
+            Printf.fprintf oc "Itof %s\n" x
+        | Floor(x) ->
+            Printf.fprintf oc "Floor %s\n" x
+        | LdF(x, y') ->
+            (match y' with
+            | V(y) -> Printf.fprintf oc "LdF %s %s\n" x y
+            | C(i) -> Printf.fprintf oc "LdF %s %d\n" x i)
+        | StF(x, y, z') ->
+            (match z' with
+            | V(z) -> Printf.fprintf oc "StF %s %s %s\n" x y z 
+            | C(i) -> Printf.fprintf oc "StF %s %s %d\n" x y i)
+        | Comment(s) ->
+            Printf.fprintf oc "Comment: %s\n" s
+        | IfEq(x, y', e1, e2) ->
+            (match y' with
+            | V(y) -> Printf.fprintf oc "IfEq %s %s\n" x y
+            | C(i) -> Printf.fprintf oc "IFEq %s %d\n" x i);
+            print_t e1 (level+1);
+            print_t e2 (level+1)
+        | IfLE(x, y', e1, e2) ->
+            (match y' with
+            | V(y) -> Printf.fprintf oc "IfLE %s %s\n" x y
+            | C(i) -> Printf.fprintf oc "IfLE %s %d\n" x i);
+            print_t e1 (level+1);
+            print_t e2 (level+1)
+        | IfGE(x, y', e1, e2) ->
+            (match y' with
+            | V(y) -> Printf.fprintf oc "IfGE %s %s\n" x y
+            | C(i) -> Printf.fprintf oc "IfGE %s %d\n" x i);
+            print_t e1 (level+1);
+            print_t e2 (level+1)
+        | IfFEq(x, y, e1, e2) ->
+            Printf.fprintf oc "IfFEq %s %s\n" x y;
+            print_t e1 (level+1);
+            print_t e2 (level+1)
+        | IfFLE(x, y, e1, e2) ->
+            Printf.fprintf oc "IfFLE %s %s\n" x y;
+            print_t e1 (level+1);
+            print_t e2 (level+1)
+        | CallCls(x, args, fargs) ->
+            Printf.fprintf oc "CallCls %s\n" x;
+            print_tab (level+1);
+            Printf.fprintf oc "args: ";
+            print_list args;
+            Printf.fprintf oc "\n";
+            print_tab (level+1);
+            Printf.fprintf oc "fargs: ";
+            print_list fargs;
+            Printf.fprintf oc "\n"
+        | CallDir(Id.L(x), args, fargs) ->
+            Printf.fprintf oc "CallDir %s\n" x;
+            print_tab (level+1);
+            Printf.fprintf oc "args: ";
+            print_list args;
+            Printf.fprintf oc "\n";
+            print_tab (level+1);
+            Printf.fprintf oc "fargs: ";
+            print_list fargs;
+            Printf.fprintf oc "\n"
+        | Save(x, y) ->
+            Printf.fprintf oc "Save %s %s\n" x y
+        | Restore(x) ->
+            Printf.fprintf oc "Restore %s\n" x
+        )
+
+    and print_h ({name = Id.L(x); args = ys; fargs = zs; body = e; ret = _}) =
+        Printf.fprintf oc "name : %s\n" x;
+        Printf.fprintf oc "args: ";
+        print_list ys;
+        Printf.fprintf oc "\n";
+        Printf.fprintf oc "fargs: ";
+        print_list zs;
+        Printf.fprintf oc "\n";
+        print_t e 0
+
+    and print_f (Prog(data, fundefs, e)) =
+        List.map print_h fundefs;
+        print_t e 0
+
+    in print_f l
