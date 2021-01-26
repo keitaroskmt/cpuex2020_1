@@ -32,6 +32,11 @@ let instrs_to_graph instrs =
     M.iter (fun l -> fun x -> Printf.fprintf stdout "key: %s, value: %s\n" l (Graph.nodename x)) label_map;
     *)
 
+    let rec remove_unit = function
+        | [] -> []
+        | (x, t) :: rest ->
+            if t = Type.Unit then remove_unit rest else (x, t) :: remove_unit rest in
+
     let rec to_graph instrs = 
 
     match instrs with
@@ -52,8 +57,8 @@ let instrs_to_graph instrs =
         make_edges node succ;
         ({
             control = control;
-            def = Graph.Table.add node dst def;
-            use = Graph.Table.add node src use;
+            def = Graph.Table.add node (remove_unit dst) def;
+            use = Graph.Table.add node (remove_unit src) use;
             ismove = Graph.Table.add node false ismove
         }, node :: nodes)
     | Assem.LABEL {lab} :: rest ->
@@ -72,8 +77,8 @@ let instrs_to_graph instrs =
         make_edges node (try [List.hd nodes] with Failure(hd) -> []);
         ({
             control = control;
-            def = Graph.Table.add node dst def;
-            use = Graph.Table.add node src use;
+            def = Graph.Table.add node (remove_unit dst) def;
+            use = Graph.Table.add node (remove_unit src) use;
             ismove = Graph.Table.add node true ismove
         }, node :: nodes) in
 
