@@ -27,7 +27,14 @@ let instrs_to_graph instrs =
     let make_edges node succ =
         List.iter (Graph.mk_edge node) succ in
 
-    let rec to_graph = function
+    (* for debug *)
+    (* 
+    M.iter (fun l -> fun x -> Printf.fprintf stdout "key: %s, value: %s\n" l (Graph.nodename x)) label_map;
+    *)
+
+    let rec to_graph instrs = 
+
+    match instrs with
     | [] -> ({
             control = control;
             def = Graph.Table.empty;
@@ -39,7 +46,7 @@ let instrs_to_graph instrs =
         let ({control; def; use; ismove}, nodes) = to_graph rest in
         let succ = 
             (match jump with
-            | None -> [List.hd nodes]
+            | None -> (try [List.hd nodes] with Failure(hd) -> [])
             | Some(v) -> List.map label_node v 
             ) in
         make_edges node succ;
@@ -51,8 +58,8 @@ let instrs_to_graph instrs =
         }, node :: nodes)
     | Assem.LABEL {lab} :: rest ->
         let node = label_node lab in
-        let({control; def; use; ismove}, nodes) = to_graph rest in
-        make_edges node [List.hd nodes];
+        let ({control; def; use; ismove}, nodes) = to_graph rest in
+        make_edges node (try [List.hd nodes] with Failure(hd) -> []);
         ({
             control = control;
             def = Graph.Table.add node [] def;
@@ -61,8 +68,8 @@ let instrs_to_graph instrs =
         }, node :: nodes)
     | Assem.MOVE {dst; src} :: rest -> 
         let node = Graph.new_node control in
-        let({control; def; use; ismove}, nodes) = to_graph rest in
-        make_edges node [List.hd nodes];
+        let ({control; def; use; ismove}, nodes) = to_graph rest in
+        make_edges node (try [List.hd nodes] with Failure(hd) -> []);
         ({
             control = control;
             def = Graph.Table.add node dst def;
@@ -70,27 +77,66 @@ let instrs_to_graph instrs =
             ismove = Graph.Table.add node true ismove
         }, node :: nodes) in
 
-    to_graph instrs
+    let ret = to_graph instrs in
+
+    (* for debug *)
+    (* 
+     Graph.graph_debug stdout control; 
+     List.iter (fun x -> Printf.fprintf stdout "%s\n" (Graph.nodename x)) (snd ret);
+     *)
+
+     ret
 
 
 (* for debug *)
-let rec controlFlow_debug oc ({control; def; use; ismove}, flownodes) = 
-    match flownodes with
-    | [] -> ()
-    | node :: rest -> 
-    (
-        Printf.fprintf oc "%s\n" (Graph.nodename node);
-        Printf.fprintf oc "def: ";
-        print_list oc (Graph.Table.find node def);
-        Printf.fprintf oc "use: ";
-        print_list oc (Graph.Table.find node use);
-        let s = if (Graph.Table.find node ismove) then "true" else "false" in
-        Printf.fprintf oc "ismove: %s\n" s;
-    )
-and print_list oc l = 
-    match l with 
-    | [] -> Printf.fprintf oc "\n";
-    | (x, t) :: rest -> Printf.fprintf oc "%s " x; print_list oc rest
+let controlFlow_debug oc ({control; def; use; ismove}, flownodes) = 
+    let rec print_nodes = function
+        | [] -> ()
+        | node :: rest -> 
+        (
+            Printf.fprintf oc "Node %s\n" (Graph.nodename node);
+            Printf.fprintf oc "\tdef: ";
+            print_list oc (Graph.Table.find node def);
+            Printf.fprintf oc "\tuse: ";
+            print_list oc (Graph.Table.find node use);
+            let s = if (Graph.Table.find node ismove) then "true" else "false" in
+            Printf.fprintf oc "\tismove: %s\n" s;
+
+            Printf.fprintf oc "\tsucc: ";
+            print_node_list (Graph.succ node);
+            Printf.fprintf oc "\tpred: ";
+            print_node_list (Graph.pred node);
+            print_nodes rest
+        )
+
+    and print_list oc l = 
+        let rec print_list_sub l = 
+        match l with 
+        | [] -> Printf.fprintf oc "]\n";
+        | (x, t) :: rest ->
+        (
+            Printf.fprintf oc "(%s, " x;
+            Type.print_type oc t;
+            Printf.fprintf oc "), ";
+            print_list_sub rest
+        )
+        in
+        Printf.fprintf oc "[";
+        print_list_sub l
+
+    and print_node_list l = 
+        let rec print_list_sub l = 
+        match l with
+        | [] -> Printf.fprintf oc "]\n"
+        | x :: rest -> (Printf.fprintf oc "%s, " (Graph.nodename x); print_list_sub rest)
+        in 
+        Printf.fprintf oc "[";
+        print_list_sub l
+
+    in
+
+    print_nodes flownodes
+
 
 
 

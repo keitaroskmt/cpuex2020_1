@@ -254,9 +254,13 @@ and g' e env =
 let alloc e = 
     let rec loop e = 
         let instrs = ToAssem.f e in
+        (* for debug *)
         Assem.assem_debug stdout instrs;
 
         let (ControlFlow.{control; def; use; ismove} as flowgraph, flownodes) = ControlFlow.instrs_to_graph instrs in
+        (* for debug*)
+        ControlFlow.controlFlow_debug stdout (flowgraph, flownodes);
+
         let (Liveness.{graph; id2node; node2id; moves} as igraph, liveouts) = Liveness.interference_graph flowgraph in
 
         (* TODO: 一度spillしたものは再びspillしない処理が必要? *)

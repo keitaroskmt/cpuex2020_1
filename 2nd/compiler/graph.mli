@@ -15,3 +15,5 @@ val rm_edge: node -> node -> unit
 module Table: Map.S with type key = node
 
 val nodename: node -> string
+
+val graph_debug: out_channel -> graph -> unit

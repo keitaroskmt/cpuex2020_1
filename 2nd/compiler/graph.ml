@@ -47,7 +47,7 @@ let mk_edge = diddle_edge (fun s t -> s :: t)
 let rm_edge = diddle_edge delete
 
 let nodename (g, i) = 
-    "node: " ^ string_of_int i
+    string_of_int i
   
 module Table =
   Map.Make
@@ -55,3 +55,41 @@ module Table =
       type t = node
       let compare (_, i) (_, j) = compare i j 
     end)
+
+(* for debug *)
+let graph_debug oc g = 
+    let rec print_node {succ; pred} i = 
+        Printf.fprintf oc "Node %d\n" i;
+        Printf.fprintf oc "\tsucc: ";
+        print_list succ;
+        Printf.fprintf oc "\tpred: ";
+        print_list pred
+
+    and print_list l = 
+        let rec print_list_sub l = 
+        match l with
+        | [] -> Printf.fprintf oc "]\n"
+        | x :: rest -> (Printf.fprintf oc "%d, " x; print_list_sub rest)
+        in 
+        Printf.fprintf oc "[";
+        print_list_sub l
+    in
+
+    let _ = DynArray.fold_left (fun i n -> print_node n i; i+1) 0 g 
+    in ()
+
+(* 
+テストコード (インタプリタで動くことを確認)
+
+let g = new_graph () in
+le n1 = new_node g in
+le n2 = new_node g in
+le n3 = new_node g in
+
+graph_debug stdout g;
+
+mk_edge n1 n2;
+mk_edge n2 n3;
+
+graph_debug stdout g;
+*)
