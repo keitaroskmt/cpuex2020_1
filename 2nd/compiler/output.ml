@@ -3,6 +3,7 @@ let limit = ref 1000
 let rec iter n e = (* 最適化処理をくりかえす (caml2html: main_iter) *)
   Format.eprintf "iteration %d@." n;
   if n = 0 then e else
+  (* TODO: adder.mlの定数畳み込みなしバージョンでNot_found errorが出たので確認すること *)
   let e' = Elim.f (ConstFold.f (Inline.f (Assoc.f (Beta.f (Cse.f e))))) in
   if e = e' then e else
   iter (n - 1) e'

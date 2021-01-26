@@ -71,5 +71,4 @@ let assem_debug oc l =
   - mini-tigerにおけるproc_entry_exit3の部分は, emit.mlのCallCls, CallDirの部分に相当
   - TODO: codegen内のmunch_argsの処理
   - TODO: proc_entry_exit2の処理
-  - TODO: %g0の処理
   *)

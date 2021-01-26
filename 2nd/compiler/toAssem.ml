@@ -286,6 +286,7 @@ and g' = function
       | _ -> ())
 
 
+(* 呼び出し側から見た引数s処理　*)
 and g'_args x_reg_cl ys zs =
     let (i, yrs) =
       List.fold_left
@@ -315,12 +316,45 @@ and g'_args x_reg_cl ys zs =
     cl @ List.map (fun (y, r) -> (r, Type.Int)) yrs @ List.map (fun (z, fr) -> (fr, Type.Float)) zfrs
 
 
+(* 関数内部から見た引数処理　*)
+let h_args x ys zs = 
+    emit (MOVE {
+        dst = [(x, Type.Int)];
+        src = [(reg_cl, Type.Int)]
+    });
 
-let h { name = Id.L(x); args = _; fargs = _; body = e; ret = _ } =
+    let (i, yrs) =
+      List.fold_left
+        (fun (i, yrs) y -> (i + 1, (y, regs.(i)) :: yrs))
+        (0, [])
+      ys in
+    List.iter
+        (fun (y, r) -> 
+            emit (MOVE {
+                dst = [(y, Type.Int)];
+                src = [(r, Type.Int)]
+            }))
+    yrs;
+    let (d, zfrs) =
+      List.fold_left
+        (fun (d, zfrs) z -> (d + 1, (z, fregs.(d)) :: zfrs))
+        (0, [])
+      zs in
+    List.iter
+        (fun (z, fr) ->
+            emit (MOVE {
+                dst = [(z, Type.Float)];
+                src = [(fr, Type.Float)]
+            }))
+    zfrs
+
+
+let h { name = Id.L(x); args = ys; fargs = zs; body = e; ret = t } =
     inst_list := [];
     emit (LABEL {lab = Id.L(x)});
+    h_args x ys zs;
     g (Tail, e);
-    !inst_list
+    List.rev !inst_list
 
 let f e =
     inst_list := [];

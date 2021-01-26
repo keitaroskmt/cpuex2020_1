@@ -250,10 +250,14 @@ and g' e env =
         Save(M.find x env, y)
 
 
+type fundefort = Fun of fundef | T of t
 
 let alloc e = 
     let rec loop e = 
-        let instrs = ToAssem.f e in
+        let instrs = 
+            match e with
+            | Fun(fundef) -> ToAssem.h fundef
+            | T(t) -> ToAssem.f t in
         (* for debug *)
         Assem.assem_debug stdout instrs;
 
@@ -283,20 +287,35 @@ let alloc e =
                 let (x, t) = node2id inode in
                 let (use, def) = M.find x usedef in use + def) in
 
+    (* TODO: eの型合わせ *)
         (* temp_map, registersをAsm内で定義 *)
         let (allocation, spilled) = Color.color igraph spill_cost reg_map (registers, fregisters) in
         (
         if spilled = [] then
-            g e allocation
+            let et = 
+                (match e with
+                | Fun({ name = _; args = _; fargs = _; body = x; ret = _ }) -> x
+                | T(x) -> x) in
+            g et allocation
         else
-            let e' = rewrite e spilled M.empty in
+            let et = 
+                (match e with
+                | Fun({ name = _; args = _; fargs = _; body = x; ret = _ }) -> x
+                | T(x) -> x) in
+            let et' = rewrite et spilled M.empty in
+            let e' = 
+                (match e with
+                | Fun({ name = n; args = ys; fargs = zs; body = _; ret = t }) -> 
+                    Fun({ name = n; args = ys; fargs = zs; body = et'; ret = t})
+                | T(_) -> 
+                    T(et')) in
             loop e' 
         ) in
     loop e
     
 
 
-let h ({ name = Id.L(x); args = ys; fargs = zs; body = e; ret = t }) = 
+let h ({ name = Id.L(x); args = ys; fargs = zs; body = e; ret = t } as fundef) = 
     let (_, arg_regs) = 
         List.fold_left
             (fun (i, arg_regs) _ ->
@@ -308,7 +327,7 @@ let h ({ name = Id.L(x); args = ys; fargs = zs; body = e; ret = t }) =
                 (i+1, fregs.(i) :: farg_regs))
         (0, []) zs in
 
-  let e' = alloc e in
+    let e' = alloc (Fun(fundef)) in
     { name = Id.L(x); args = arg_regs; fargs = farg_regs; body = e'; ret = t }
 
 
@@ -316,6 +335,6 @@ let f (Prog(data, fundefs, e)) =
     asm_debug stdout (Prog(data, fundefs, e));
     Format.eprintf "register allocation: may take some time (up to a few minutes, depending on the size of functions)@.";
     let fundefs' = List.map h fundefs in
-    let e' = alloc e in 
+    let e' = alloc (T(e)) in 
     Prog(data, fundefs', e')
 

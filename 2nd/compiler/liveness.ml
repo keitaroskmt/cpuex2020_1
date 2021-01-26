@@ -23,20 +23,18 @@ type liveset = Lset.t * (Id.t * Type.t) list
 type livemap = liveset Graph.Table.t
 
 
-let union l1 l2 = 
-    let rec union_sub = function
-    | [] -> [] 
-    | x :: rest -> if List.mem x l2 then union_sub rest else x :: (union_sub rest) in
-    List.merge compare (union_sub l1) l2
-
 let rec sub l1 l2 = 
     match l1 with
     | [] -> []
     | x :: rest -> if List.mem x l2 then sub rest l2 else x :: (sub rest l2)
 
+let union l1 l2 = 
+    List.merge compare (sub l1 l2) l2
+
 
 let liveness (ControlFlow.{control; def; use; ismove} as flowgraph) =
     let nodes = Graph.nodes control in
+    (* List.iter (fun x -> Printf.fprintf stdout "%s\n" (Graph.nodename x)) nodes; *)
     let emptyenv = List.fold_left 
         (fun env node -> Graph.Table.add node [] env) Graph.Table.empty nodes in
     let rec loop inenv outenv = 
@@ -52,10 +50,6 @@ let liveness (ControlFlow.{control; def; use; ismove} as flowgraph) =
                 (* 集合が一致したか判定するためにリストがソート済である必要あり *)
                 let inenv' = Graph.Table.add node (List.sort compare livein') inenv in
                 let outenv' = Graph.Table.add node (List.sort compare liveout') outenv in (inenv', outenv')) 
-                (*
-                let inenv' = Graph.Table.add node (List.sort livein') inenv in
-                let outenv' = Graph.Table.add node (List.sort liveout') outenv in (inenv', outenv')) 
-                *)
             (inenv, outenv) nodes in
         if List.for_all 
             (fun node -> 
@@ -75,8 +69,11 @@ let liveness (ControlFlow.{control; def; use; ismove} as flowgraph) =
     Graph.Table.empty nodes
 
 
-let interference_graph (ControlFlow.{control; def; use; ismove} as flowgraph) = 
+let rec interference_graph (ControlFlow.{control; def; use; ismove} as flowgraph) = 
     let livemap = liveness flowgraph in
+    (* for debug *)
+    livemap_debug stdout livemap;
+
     (* ここから浮動小数点の対応を考える *)
     let igraph = Graph.new_graph () in
 
@@ -135,14 +132,33 @@ let interference_graph (ControlFlow.{control; def; use; ismove} as flowgraph) =
         
 
 (* for debug *)
-let rec livemap_debug oc livemap = 
-    Printf.fprintf oc "Livemap\n";
+and livemap_debug oc livemap = 
+    Printf.fprintf oc "Livemap ---------------\n";
     Graph.Table.iter
-        (fun node (_, livelist) -> 
-            Printf.fprintf oc "%s: \n" (Graph.nodename node);
-            List.iter (fun (x, t) -> Printf.fprintf oc "%s, " x) livelist;
+        (fun node (liveset, livelist) -> 
+            Printf.fprintf oc "Node %s\n" (Graph.nodename node);
+            Printf.fprintf oc "\tlivelist: ";
+            print_list oc livelist;
+            Printf.fprintf oc "\tliveset: ";
+            Lset.iter (fun (x, t) -> 
+                Printf.fprintf oc "(%s, " x; Type.print_type stdout t; Printf.fprintf oc ") ") liveset;
             Printf.fprintf oc "\n")
     livemap
+
+    and print_list oc l = 
+        let rec print_list_sub l = 
+        match l with 
+        | [] -> Printf.fprintf oc "]\n";
+        | (x, t) :: rest ->
+        (
+            Printf.fprintf oc "(%s, " x;
+            Type.print_type oc t;
+            Printf.fprintf oc "), ";
+            print_list_sub rest
+        )
+        in
+        Printf.fprintf oc "[";
+        print_list_sub l
 
 let rec igraph_debug oc ({graph; id2node; node2id; moves}) =
     Printf.fprintf oc "Interferece graph\n";
