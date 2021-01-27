@@ -517,6 +517,10 @@ let color Liveness.{graph; id2node; node2id; moves} spill_cost allocation (regis
                     | _ -> allocation)
         allocation (!colored_nodes @ !coalesced_nodes) in
     let spilled = List.map (fun cnode -> fst (node2id cnode.node)) !spilled_nodes in
+
+    (* for debug *)
+    Printf.fprintf stdout "allocation -----\n";
+    M.iter (fun x color -> Printf.fprintf stdout "%s <- %s\n" x color) allocation';
         (allocation', spilled)
 
 

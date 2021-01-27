@@ -348,18 +348,24 @@ let h_args x ys zs =
             }))
     zfrs
 
+let add_exit l = 
+    l @ [(OPER {
+        dst = [];
+        src = specialregs @ calleesaves;
+        jump = None
+    })]
 
 let h { name = Id.L(x); args = ys; fargs = zs; body = e; ret = t } =
     inst_list := [];
     emit (LABEL {lab = Id.L(x)});
     h_args x ys zs;
     g (Tail, e);
-    List.rev !inst_list
+    add_exit (List.rev !inst_list)
 
 let f e =
     inst_list := [];
     g (NonTail(("%g0", Type.Unit)), e);
-    List.rev !inst_list
+    add_exit (List.rev !inst_list)
 
 
   (* 

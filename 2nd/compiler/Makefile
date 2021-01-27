@@ -46,17 +46,17 @@ TRASH = $(TESTS:%=mytest/%.s) $(TESTS:%=mytest/%) $(TESTS:%=mytest/%.res) $(TEST
 mytest/%.s: $(RESULT) mytest/%.ml
 	./$(RESULT) mytest/$*
 
-#  TESTS = fib float_fib adder array_make array_put sin cos
-#  
-#  do_test: $(TESTS:%=../compiler_sim/assembly/%.s)
-#  
-#  .PRECIOUS: ../compiler_sim/assembly/%.s
-#  TRASH = $(TESTS:%=mytest/%.s) $(TESTS:%=mytest/%) $(TESTS:%=mytest/%.res) $(TESTS:%=mytest/%.ans) $(TESTS:%=mytest/%.cmp) \
-# 	$(TESTS:%=mytest/%.iter) $(TESTS:%=mytest/%.closure) $(TESTS:%=mytest/%.cse) $(TESTS:%=test/%.alpha) \
-# 	$(TESTS:%=mytest/%.knormal) $(TESTS:%=mytest/%.synt) $(TESTS:%=mytest/%.data)
-#  
-#  ../compiler_sim/assembly/%.s: $(RESULT) ../compiler_sim/testcase/%.ml
-# 	./$(RESULT) ../compiler_sim/testcase/$*
+#TESTS = fib float_fib adder array_make array_put sin cos
+#
+#do_test: $(TESTS:%=../compiler_sim/assembly/%.s)
+#
+#.PRECIOUS: ../compiler_sim/assembly/%.s
+#TRASH = $(TESTS:%=mytest/%.s) $(TESTS:%=mytest/%) $(TESTS:%=mytest/%.res) $(TESTS:%=mytest/%.ans) $(TESTS:%=mytest/%.cmp) \
+#$(TESTS:%=mytest/%.iter) $(TESTS:%=mytest/%.closure) $(TESTS:%=mytest/%.cse) $(TESTS:%=test/%.alpha) \
+#$(TESTS:%=mytest/%.knormal) $(TESTS:%=mytest/%.synt) $(TESTS:%=mytest/%.data)
+#
+#../compiler_sim/assembly/%.s: $(RESULT) ../compiler_sim/testcase/%.ml
+#	./$(RESULT) ../compiler_sim/testcase/$*
 
 
 include OCamlMakefile

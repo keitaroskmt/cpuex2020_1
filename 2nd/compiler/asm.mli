@@ -75,6 +75,12 @@ val registers : Id.t list
 val fregisters : Id.t list
 
 val reg_map : Id.t M.t
+
+
+val specialregs : (Id.t * Type.t) list
+val argregs : (Id.t * Type.t) list
+val calleesaves : (Id.t * Type.t) list
+val callersaves : (Id.t * Type.t) list
 val calldefs : (Id.t * Type.t) list
 
 (*
