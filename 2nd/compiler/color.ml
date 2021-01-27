@@ -47,17 +47,6 @@ let union l1 l2 =
 (* registers: レジスタのlist *)
 let color Liveness.{graph; id2node; node2id; moves} spill_cost allocation (registers, fregisters) = 
     (* 関数本体は一番下へ *)
-    let counter = ref 0 in
-    let add_node node set_name =
-        let cnode = {node = node; n = !counter; nset = set_name} in
-        counter := !counter + 1;
-        cnode in
-
-    let add_move dst src set_name = 
-        let move = {dst = dst; src = src; mset = set_name} in
-        move in
-
-    
     let n = List.length (Graph.nodes graph) in
     let k = List.length registers in(* register size *)
 
@@ -88,9 +77,106 @@ let color Liveness.{graph; id2node; node2id; moves} spill_cost allocation (regis
     let alias = Array.make n None in
     let color = Array.make n None in
 
+    (* debug *)
+    let node_print oc {node; n; nset} = 
+        let (x, t) = node2id node in
+        let s = 
+            match nset with
+            | Precolored -> "precolored"
+            | Initial -> "Initial"
+            | Simplify -> "Simplify"
+            | Freeze -> "Freeze"
+            | Spill -> "Spill"
+            | Spilled -> "Spilled"
+            | Coalesced -> "Coalesced"
+            | Colored -> "Colored"
+            | Stack -> "Stack" in
+        Printf.fprintf oc "Node %s (%d): %s\n" x n s in
+
+    let move_print oc {dst; src; mset} =
+        let s = 
+            match mset with
+            | Coalesced -> "Coalesced"
+            | Constrained -> "Constrained"
+            | Frozen -> "Frozen"
+            | Worklist -> "Worklist"
+            | Active -> "Active" in
+        Printf.fprintf oc "set: %s\n" s;
+        Printf.fprintf oc "dst: ";
+        node_print oc dst;
+        Printf.fprintf oc "src: ";
+        node_print oc src in
+
+
+    let color_print oc =
+        Printf.fprintf oc "Color Debug --------------------\n";
+        Printf.fprintf oc "-Node Sets\n";
+        Printf.fprintf oc "precolored ---\n";
+        List.iter (fun x -> node_print oc x) !precolored;
+        Printf.fprintf oc "initial ---\n";
+        List.iter (fun x -> node_print oc x) !initial;
+        Printf.fprintf oc "simplify_worklist ---\n";
+        List.iter (fun x -> node_print oc x) !simplify_worklist;
+        Printf.fprintf oc "freeze_worklist ---\n";
+        List.iter (fun x -> node_print oc x) !freeze_worklist;
+        Printf.fprintf oc "spill_worklist ---\n";
+        List.iter (fun x -> node_print oc x) !spill_worklist;
+        Printf.fprintf oc "spilled_nodes ---\n";
+        List.iter (fun x -> node_print oc x) !spilled_nodes;
+        Printf.fprintf oc "coalesced_nodes ---\n";
+        List.iter (fun x -> node_print oc x) !coalesced_nodes;
+        Printf.fprintf oc "colored_nodes ---\n";
+        List.iter (fun x -> node_print oc x) !colored_nodes;
+        Printf.fprintf oc "select_stack ---\n";
+        List.iter (fun x -> node_print oc x) !select_stack;
+
+        Printf.fprintf oc "-Move Sets\n";
+        Printf.fprintf oc "coalesced_moves ---\n";
+        List.iter (fun x -> move_print oc x) !coalesced_moves;
+        Printf.fprintf oc "constrained_moves ---\n";
+        List.iter (fun x -> move_print oc x) !constrained_moves;
+        Printf.fprintf oc "frozen_moves ---\n";
+        List.iter (fun x -> move_print oc x) !frozen_moves;
+        Printf.fprintf oc "worklist_moves ---\n";
+        List.iter (fun x -> move_print oc x) !worklist_moves;
+        Printf.fprintf oc "active_moves ---\n";
+        List.iter (fun x -> move_print oc x) !active_moves; in
+
+    let counter = ref 0 in
+
+    let add_node node set_name =
+        let cnode = {node = node; n = !counter; nset = set_name} in
+        counter := !counter + 1;
+        (
+            match set_name with
+            | Precolored -> precolored := cnode :: !precolored
+            | Initial -> initial := cnode :: !initial
+            | Simplify -> simplify_worklist := cnode :: !simplify_worklist
+            | Freeze -> freeze_worklist := cnode :: !freeze_worklist
+            | Spill -> spill_worklist := cnode :: !spill_worklist
+            | Spilled -> spilled_nodes := cnode :: !spilled_nodes
+            | Coalesced -> coalesced_nodes := cnode :: !coalesced_nodes
+            | Colored -> colored_nodes := cnode :: !colored_nodes
+            | Stack -> select_stack := cnode :: !select_stack
+        );
+        cnode in
+
+    let add_move dst src set_name = 
+        let move = {dst = dst; src = src; mset = set_name} in
+        (
+            match set_name with
+            | Coalesced -> coalesced_moves := move :: !coalesced_moves
+            | Constrained -> constrained_moves := move :: !constrained_moves
+            | Frozen -> frozen_moves := move :: !frozen_moves
+            | Worklist -> worklist_moves := move :: !worklist_moves
+            | Active -> active_moves := move :: !active_moves
+        );
+        move in
+
+
     (* build *)
     let add_edge u v = 
-        if not adjset.(u.n).(v.n) && u <> v then
+        if not adjset.(u.n).(v.n) && u != v then
         (
             adjset.(u.n).(v.n) <- true;
             adjset.(v.n).(u.n) <- true;
@@ -117,14 +203,12 @@ let color Liveness.{graph; id2node; node2id; moves} spill_cost allocation (regis
                         if M.mem x allocation then
                         (
                             let cnode' = add_node inode Precolored in
-                            precolored := cnode' :: !precolored;
                             color.(cnode'.n) <- Some (M.find x allocation);
                             cnode'
                         )
                         else
                         (
                             let cnode' = add_node inode Initial in
-                            initial := cnode' :: !initial;
                             cnode'
                         ) in
                     Graph.Table.add inode cnode env)
@@ -194,7 +278,7 @@ let color Liveness.{graph; id2node; node2id; moves} spill_cost allocation (regis
                     (fun m -> 
                         if m.mset = Active then 
                         (
-                            active_moves := List.filter (fun x -> x <> m) !active_moves;
+                            active_moves := List.filter (fun x -> x != m) !active_moves;
                             m.mset <- Worklist;
                             worklist_moves := m :: !worklist_moves)
                     )
@@ -205,8 +289,9 @@ let color Liveness.{graph; id2node; node2id; moves} spill_cost allocation (regis
         let d = degree.(cnode.n) in
             degree.(cnode.n) <- degree.(cnode.n) - 1;
             if d = k then
+            (
                 enable_moves (cnode :: adjacent cnode);
-                spill_worklist := List.filter (fun x -> x <> cnode) !spill_worklist;
+                spill_worklist := List.filter (fun x -> x != cnode) !spill_worklist;
                 if move_related cnode then
                 (
                     cnode.nset <- Freeze;
@@ -216,14 +301,15 @@ let color Liveness.{graph; id2node; node2id; moves} spill_cost allocation (regis
                 (
                     cnode.nset <- Simplify;
                     simplify_worklist := cnode :: !simplify_worklist
-                ) in
+                )
+             ) in
 
     (* まとめてやるか一つずつやるか *)
     let simplify () = 
         List.iter 
             (fun cnode -> 
-                select_stack := cnode :: !select_stack;
                 cnode.nset <- Stack;
+                select_stack := cnode :: !select_stack;
                 List.iter decrement_degree (adjacent cnode))
         !simplify_worklist;
         simplify_worklist := [] in
@@ -232,14 +318,16 @@ let color Liveness.{graph; id2node; node2id; moves} spill_cost allocation (regis
     let add_worklist cnode =
         if cnode.nset <> Precolored && not (move_related cnode) && degree.(cnode.n) < k then
         (
-            freeze_worklist := List.filter (fun x -> x <> cnode) !freeze_worklist;
+            freeze_worklist := List.filter (fun x -> x != cnode) !freeze_worklist;
             cnode.nset <- Simplify;
             simplify_worklist := cnode :: !simplify_worklist
         ) in
 
+    (* George *)
     let ok (u: cnode) (v: cnode) = 
         degree.(u.n) < k || u.nset = Precolored || adjset.(u.n).(v.n) in
 
+    (* Briggs *)
     let conservative cnodes = 
         let d = 
             List.fold_left 
@@ -259,9 +347,9 @@ let color Liveness.{graph; id2node; node2id; moves} spill_cost allocation (regis
     let combine (u: cnode) (v: cnode) = 
         (
         if v.nset = Freeze then 
-            freeze_worklist := List.filter (fun x -> x <> v) !freeze_worklist
+            freeze_worklist := List.filter (fun x -> x != v) !freeze_worklist
         else
-            spill_worklist := List.filter (fun x -> x <> v) !spill_worklist
+            spill_worklist := List.filter (fun x -> x != v) !spill_worklist
         );
         v.nset <- Coalesced;
         coalesced_nodes := v :: !coalesced_nodes;
@@ -272,7 +360,7 @@ let color Liveness.{graph; id2node; node2id; moves} spill_cost allocation (regis
             (fun t -> add_edge t u; decrement_degree t) (adjacent v);
         if degree.(u.n) >= k && u.nset = Freeze then
         (
-            freeze_worklist := List.filter (fun x -> x <> u) !freeze_worklist;
+            freeze_worklist := List.filter (fun x -> x != u) !freeze_worklist;
             u.nset <- Spill;
             spill_worklist := u :: !spill_worklist
         ) in
@@ -286,7 +374,7 @@ let color Liveness.{graph; id2node; node2id; moves} spill_cost allocation (regis
         let y = get_alias dst in
         let (u, v) = if y.nset = Precolored then (y, x) else (x, y) in
         worklist_moves := rest;
-        if u = v then 
+        if u == v then 
         (
             m.mset <- Coalesced;
             coalesced_moves := m :: !coalesced_moves;
@@ -299,7 +387,12 @@ let color Liveness.{graph; id2node; node2id; moves} spill_cost allocation (regis
             add_worklist u;
             add_worklist v;
         )
-        else if (u.nset = Precolored && List.for_all (fun t -> ok t u) (adjacent u)) ||
+        (*
+         coalesceの戦略については, p.232参照 
+         PrecoloredなノードがあればGeorge, それ以外ではBriggsの手法を用いる.
+         (Precoloredなノードはadjlistにないから)
+        *)
+        else if (u.nset = Precolored && List.for_all (fun t -> ok t u) (adjacent v)) ||
                  (u.nset <> Precolored && conservative (union (adjacent u) (adjacent v))) then
         (
             m.mset <- Coalesced;
@@ -319,12 +412,12 @@ let color Liveness.{graph; id2node; node2id; moves} spill_cost allocation (regis
             (fun m ->
                 let v = if get_alias cnode = get_alias m.dst then 
                     get_alias m.src else get_alias m.dst in
-                active_moves := List.filter (fun x -> x <> m) !active_moves;
+                active_moves := List.filter (fun x -> x != m) !active_moves;
                 m.mset <- Frozen;
                 frozen_moves := m :: !frozen_moves;
                 if not (move_related v) && degree.(v.n) < k then
                 (
-                    freeze_worklist := List.filter (fun x -> x <> v) !freeze_worklist;
+                    freeze_worklist := List.filter (fun x -> x != v) !freeze_worklist;
                     v.nset <- Simplify;
                     simplify_worklist := v :: !simplify_worklist
                 ))
@@ -397,6 +490,9 @@ let color Liveness.{graph; id2node; node2id; moves} spill_cost allocation (regis
     build ();
     make_worklist ();
 
+    (* for debug *)
+    color_print stdout;
+
     let rec loop () =
         (
         if !simplify_worklist <> [] then simplify ()
@@ -404,6 +500,8 @@ let color Liveness.{graph; id2node; node2id; moves} spill_cost allocation (regis
         else if !freeze_worklist <> [] then freeze ()
         else if !spill_worklist <> [] then select_spill ()
         );
+        (* for debug *)
+        color_print stdout;
         if !simplify_worklist <> [] || !worklist_moves <> [] ||
             !freeze_worklist <> [] || !spill_worklist <> [] then loop () in
 

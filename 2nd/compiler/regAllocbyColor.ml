@@ -289,6 +289,9 @@ let alloc e =
                 let (x, t) = node2id inode in
                 let (use, def) = M.find x usedef in use + def) in
 
+        (* for debug *)
+        List.iter (fun node -> Printf.fprintf stdout "%s: %d\n" (fst (node2id node)) (spill_cost node)) (Graph.nodes graph);
+
     (* TODO: eの型合わせ *)
         (* temp_map, registersをAsm内で定義 *)
         let (allocation, spilled) = Color.color igraph spill_cost reg_map (registers, fregisters) in
