@@ -266,6 +266,8 @@ let alloc e =
         ControlFlow.controlFlow_debug stdout (flowgraph, flownodes);
 
         let (Liveness.{graph; id2node; node2id; moves} as igraph, liveouts) = Liveness.interference_graph flowgraph in
+        (* for debug*)
+        Liveness.igraph_debug stdout igraph;
 
         (* TODO: 一度spillしたものは再びspillしない処理が必要? *)
         let spill_cost = 

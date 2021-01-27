@@ -120,9 +120,9 @@ let rec interference_graph (ControlFlow.{control; def; use; ismove} as flowgraph
                 livelist in
         List.iter 
             (fun v ->
-                let node = Lmap.find v id2node in
-                let target_node = List.map (fun w -> Lmap.find w id2node) target in
-                List.iter (add_iedge node2id node) target_node)
+                let node = Lmap.find v id2node' in
+                let target_node = List.map (fun w -> Lmap.find w id2node') target in
+                List.iter (add_iedge node2id' node) target_node)
             def;
         make_igraph id2node' node2id' moves' rest in
     
@@ -161,17 +161,19 @@ and livemap_debug oc livemap =
         print_list_sub l
 
 let rec igraph_debug oc ({graph; id2node; node2id; moves}) =
-    Printf.fprintf oc "Interferece graph\n";
+    Printf.fprintf oc "Interferece graph--------------\n";
     List.iter
         (fun node ->
             let (x, t) = node2id node in
-            Printf.fprintf oc "node: %s\n" x;
+            Printf.fprintf oc "Node %s\n" x;
             Printf.fprintf oc "\tsucc:";
             List.iter (fun (x, t) -> Printf.fprintf oc "%s, " x) 
                 (List.map (fun v -> node2id v) (Graph.succ node));
+            Printf.fprintf oc "\n";
             Printf.fprintf oc "\tpred:";
             List.iter (fun (x, t) -> Printf.fprintf oc "%s, " x) 
                 (List.map (fun v -> node2id v) (Graph.pred node));
+            Printf.fprintf oc "\n"
         ) 
     (Graph.nodes graph)
 
