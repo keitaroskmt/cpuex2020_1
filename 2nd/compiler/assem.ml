@@ -68,7 +68,7 @@ let assem_debug oc l =
   - 関数呼び出しの際の余計な引数のmoveはemit.mlにおいてshuffle関数で消える 
   - Color.mlで消えるmoveもemit.mlでx=yの場合で消える
 
+  - proc_entry_exit2の処理 -> toAssem.mlのadd_exitに相当
   - mini-tigerにおけるproc_entry_exit3の部分は, emit.mlのCallCls, CallDirの部分に相当
   - TODO: codegen内のmunch_argsの処理 -> 実際にmoveを挿入する必要あり？
-  - TODO: proc_entry_exit2の処理
   *)

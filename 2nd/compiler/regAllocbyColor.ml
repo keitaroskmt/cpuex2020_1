@@ -249,6 +249,43 @@ and g' e env =
     | Save(x, y) -> 
         Save(M.find x env, y)
 
+(* p.237 *)
+let move_calleesaves ({ name = n; args = ys; fargs = zs; body = e; ret = t } as fundef) = 
+    (* 移動先の仮変数との対応 *)
+    let env = 
+        List.fold_left
+            (fun env (x, t) ->
+                M.add x (Id.gentmp t) env)
+        M.empty ((reg_ra, Type.Int) :: calleesaves) in
+    
+    (* 先頭ではcalleesaves -> 仮変数 *)
+    let e' = 
+        List.fold_left
+            (fun cont (x, t) ->
+                (Let((M.find x env, t), Mov(x), cont)))
+        e ((reg_ra, Type.Int) :: calleesaves) in
+
+    (* 返り値を受け取って, 仮引数 -> calleesaves を挿入する関数 *)
+    let exit =  
+        (fun e ->
+            (List.fold_left
+                (fun cont (x, t) ->
+                    (Let((x, t), Mov(M.find x env), cont)))
+            e ((reg_ra, Type.Int) :: calleesaves))) in
+
+    (* e'の後ろにexitを挿入する関数 *)
+    let rec concat e exit = 
+        match e with
+        | Ans(IfEq(x, y, e1, e2)) -> Ans(IfEq(x, y, (concat e1 exit), (concat e2 exit)))
+        | Ans(IfLE(x, y, e1, e2)) -> Ans(IfLE(x, y, (concat e1 exit), (concat e2 exit)))
+        | Ans(IfGE(x, y, e1, e2)) -> Ans(IfGE(x, y, (concat e1 exit), (concat e2 exit)))
+        | Ans(IfFEq(x, y, e1, e2)) -> Ans(IfFEq(x, y, (concat e1 exit), (concat e2 exit)))
+        | Ans(IfFLE(x, y, e1, e2)) -> Ans(IfFLE(x, y, (concat e1 exit), (concat e2 exit)))
+        | Ans(exp) -> exit (Ans(exp))
+        | Let(xt, exp, e1) -> Let(xt, exp, (concat e1 exit)) in
+
+    { name = n; args = ys; fargs = zs; body = concat e' exit; ret = t }
+
 
 type fundefort = Fun of fundef | T of t
 
@@ -292,7 +329,6 @@ let alloc e =
         (* for debug *)
         List.iter (fun node -> Printf.fprintf stdout "%s: %d\n" (fst (node2id node)) (spill_cost node)) (Graph.nodes graph);
 
-    (* TODO: eの型合わせ *)
         (* temp_map, registersをAsm内で定義 *)
         let (allocation, spilled) = Color.color igraph spill_cost reg_map (registers, fregisters) in
         (
@@ -301,7 +337,7 @@ let alloc e =
                 (match e with
                 | Fun({ name = _; args = _; fargs = _; body = x; ret = _ }) -> x
                 | T(x) -> x) in
-            g et allocation
+            (g et allocation, allocation)
         else
             let et = 
                 (match e with
@@ -321,6 +357,7 @@ let alloc e =
 
 
 let h ({ name = Id.L(x); args = ys; fargs = zs; body = e; ret = t } as fundef) = 
+    (* 
     let (_, arg_regs) = 
         List.fold_left
             (fun (i, arg_regs) _ ->
@@ -331,8 +368,14 @@ let h ({ name = Id.L(x); args = ys; fargs = zs; body = e; ret = t } as fundef) =
             (fun (i, farg_regs) _ ->
                 (i+1, fregs.(i) :: farg_regs))
         (0, []) zs in
+    *)
+    let fundef' = move_calleesaves fundef in
 
-    let e' = alloc (Fun(fundef)) in
+    asm_debug stdout (Prog([], [fundef'], e));
+
+    let (e', allocation) = alloc (Fun(fundef')) in
+    let arg_regs = List.map (fun x -> M.find x allocation) ys in
+    let farg_regs = List.map (fun x -> M.find x allocation) zs in
     { name = Id.L(x); args = arg_regs; fargs = farg_regs; body = e'; ret = t }
 
 
@@ -340,6 +383,6 @@ let f (Prog(data, fundefs, e)) =
     asm_debug stdout (Prog(data, fundefs, e));
     Format.eprintf "register allocation: may take some time (up to a few minutes, depending on the size of functions)@.";
     let fundefs' = List.map h fundefs in
-    let e' = alloc (T(e)) in 
+    let (e', _) = alloc (T(e)) in 
     Prog(data, fundefs', e')
 

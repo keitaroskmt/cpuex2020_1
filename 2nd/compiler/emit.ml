@@ -401,8 +401,28 @@ and g'_args oc x_reg_cl ys zs =
     (fun (z, fr) -> Printf.fprintf oc "\tfmov\t%s, %s\n" fr z)
     (shuffle reg_fsw zfrs)
 
-let h oc { name = Id.L(x); args = _; fargs = _; body = e; ret = _ } =
+let h oc { name = Id.L(x); args = ys; fargs = zs; body = e; ret = _ } =
   Printf.fprintf oc "%s:\n" x;
+
+  (* regAllocbyColor.ml用 関数内部からも呼び出し側と同様の操作 *)
+  let (_, yrs) =
+    List.fold_left
+      (fun (i, yrs) y -> (i + 1, (regs.(i), y) :: yrs))
+      (0, [])
+      (* (0, [(reg_cl, x)])? *)
+      ys in
+  List.iter
+    (fun (y, r) -> Printf.fprintf oc "\taddi\t%s, %s, 0\n" r y)
+    (shuffle reg_sw yrs);
+  let (_, zfrs) =
+    List.fold_left
+      (fun (d, zfrs) z -> (d + 1, (fregs.(d), z) :: zfrs))
+      (0, [])
+      zs in
+  List.iter
+    (fun (z, fr) -> Printf.fprintf oc "\tfmov\t%s, %s\n" fr z)
+    (shuffle reg_fsw zfrs);
+
   stackset := M.empty;
   stackmap := [];
   g oc (Tail, e)

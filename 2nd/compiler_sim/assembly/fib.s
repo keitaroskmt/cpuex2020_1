@@ -100,25 +100,26 @@ create_float_extarray_cont:
 	j	create_float_extarray_loop
 # ------------ body ---------------------------
 fib.9:
+	addi	%a2, %v0, 0
 	addi	%at, %zero, 1
-	blt	%at, %a0, bgt_else.21
-	add	%v0, %zero, %a0
+	blt	%at, %a2, bgt_else.21
+	add	%v0, %zero, %a2
 	jr	%ra
 bgt_else.21:
-	addi	%v0, %a0, -1
+	addi	%v0, %a2, -1
 	sw	%ra, 0(%sp)
 	addi	%sp, %sp, 1
 	jal	fib.9
 	addi	%sp, %sp, -1
 	lw	%ra, 0(%sp)
-	addi	%a1, %v0, 0
-	addi	%v0, %a0, -2
+	addi	%a3, %v0, 0
+	addi	%v0, %a2, -2
 	sw	%ra, 0(%sp)
 	addi	%sp, %sp, 1
 	jal	fib.9
 	addi	%sp, %sp, -1
 	lw	%ra, 0(%sp)
-	add	%v0, %a1, %v0
+	add	%v0, %a3, %v0
 	jr	%ra
 .global	min_caml_start
 min_caml_start:
