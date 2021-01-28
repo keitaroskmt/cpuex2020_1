@@ -100,33 +100,34 @@ create_float_extarray_cont:
 	j	create_float_extarray_loop
 # ------------ body ---------------------------
 fib.9:
-	addi	%a2, %v0, 0
+	sw	%v0, 0(%sp)
+	sw	%ra, 1(%sp)
+	lw	%v0, 0(%sp)
 	addi	%at, %zero, 1
-	blt	%at, %a2, bgt_else.21
-	add	%v0, %zero, %a2
+	blt	%at, %v0, bgt_else.38
+	lw	%ra, 1(%sp)
+	lw	%v0, 0(%sp)
 	jr	%ra
-bgt_else.21:
-	addi	%v0, %a2, -1
-	sw	%ra, 0(%sp)
-	addi	%sp, %sp, 1
+bgt_else.38:
+	lw	%v0, 0(%sp)
+	addi	%v0, %v0, -1
+	addi	%sp, %sp, 2
 	jal	fib.9
-	addi	%sp, %sp, -1
-	lw	%ra, 0(%sp)
-	addi	%a3, %v0, 0
-	addi	%v0, %a2, -2
-	sw	%ra, 0(%sp)
-	addi	%sp, %sp, 1
+	addi	%sp, %sp, -2
+	sw	%v0, 2(%sp)
+	lw	%v0, 0(%sp)
+	addi	%v0, %v0, -2
+	addi	%sp, %sp, 3
 	jal	fib.9
-	addi	%sp, %sp, -1
-	lw	%ra, 0(%sp)
-	add	%v0, %a3, %v0
+	addi	%sp, %sp, -3
+	lw	%ra, 1(%sp)
+	lw	%a0, 2(%sp)
+	add	%v0, %a0, %v0
 	jr	%ra
 .global	min_caml_start
 min_caml_start:
 	addi	%v0, %zero, 20
-	sw	%ra, 0(%sp)
-	addi	%sp, %sp, 1
+	addi	%sp, %sp, 0
 	jal	fib.9
-	addi	%sp, %sp, -1
-	lw	%ra, 0(%sp)
+	addi	%sp, %sp, 0
 	ret

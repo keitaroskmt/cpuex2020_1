@@ -26,7 +26,7 @@ closure.mli closure.ml asm.mli asm.ml virtual.mli virtual.ml \
 simm.mli simm.ml regAlloc.mli regAlloc.ml \
 assem.ml toAssem.ml graph.mli graph.ml controlFlow.mli controlFlow.ml \
 liveness.mli liveness.ml color.mli color.ml regAllocbyColor.mli regAllocbyColor.ml \
-emit.mli emit.ml \
+emit.mli emit.ml emit_for_regAllocbyColor.mli emit_for_regAllocbyColor.ml \
 output.ml main.mli main.ml
 
 # ???Æ¥??È¥×¥í¥°???à¤¬?ý¤¨¤¿¤é¡¢?????????ä¤¹

@@ -100,34 +100,31 @@ create_float_extarray_cont:
 	j	create_float_extarray_loop
 # ------------ body ---------------------------
 float_fib.9:
-	fmov	%f10, %f0
+	fmov	%f0, %f10
+	sw	%ra, 0(%sp)
 	flw	%f1, 2(%zero)
-	fblt	%f1, %f10, fbgt_else.24
+	fblt	%f1, %f10, fbgt_else.37
+	lw	%ra, 0(%sp)
 	fmov	%f0, %f10
 	jr	%ra
-fbgt_else.24:
+fbgt_else.37:
 	fsub	%f0, %f10, %f1
-	sw	%ra, 0(%sp)
 	addi	%sp, %sp, 1
 	jal	float_fib.9
 	addi	%sp, %sp, -1
-	lw	%ra, 0(%sp)
-	fmov	%f11, %f0
+	fmov	%f1, %f0
 	flw	%f0, 1(%zero)
 	fsub	%f0, %f10, %f0
-	sw	%ra, 0(%sp)
 	addi	%sp, %sp, 1
 	jal	float_fib.9
 	addi	%sp, %sp, -1
 	lw	%ra, 0(%sp)
-	fadd	%f0, %f11, %f0
+	fadd	%f0, %f1, %f0
 	jr	%ra
 .global	min_caml_start
 min_caml_start:
 	flw	%f0, 0(%zero)
-	sw	%ra, 0(%sp)
-	addi	%sp, %sp, 1
+	addi	%sp, %sp, 0
 	jal	float_fib.9
-	addi	%sp, %sp, -1
-	lw	%ra, 0(%sp)
+	addi	%sp, %sp, 0
 	ret

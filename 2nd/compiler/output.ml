@@ -11,7 +11,7 @@ let rec iter n e = (* 最適化処理をくりかえす (caml2html: main_iter) *)
 let lexbuf (outchan, datachan) l = (* バッファをコンパイルしてチャンネルへ出力する (caml2html: main_lexbuf) *)
   Id.counter := 0;
   Typing.extenv := M.empty;
-  Emit.f (outchan, datachan)
+  Emit_for_regAllocbyColor.f (outchan, datachan)
     (RegAllocbyColor.f
        (Simm.f
           (Virtual.f

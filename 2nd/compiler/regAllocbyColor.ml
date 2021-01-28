@@ -2,155 +2,144 @@ open Asm
 
 
   (* envはspilledと新たに作った変数の対応 *)
-  (* SaveとRestoreは1対1対応するため, setでspilledに含まれ, かつRestore済のものを管理 *)
-let rec rewrite e spilled env set = 
+let rec rewrite e spilled env = 
     match e with
-    | Ans(exp) -> rewrite_exp exp spilled env set
+    | Ans(exp) -> rewrite_exp exp spilled env
     | Let((x, t) as xt, exp, e) ->
         if List.mem x spilled then
-            let exp' = rewrite_exp exp spilled env set in
-            let e' = rewrite e spilled env set in
+            let exp' = rewrite_exp exp spilled env in
+            let e' = rewrite e spilled env in
             (* レジスタ割り当て決定後, Save(M.find x regenv, x)とする *)
             (* seq(Save(x, x), concat exp' (M.find x env, t) e')*)
             concat exp' xt (seq(Save(x, x), e'))
         else
-            let exp' = rewrite_exp exp spilled env set in
-            let e' = rewrite e spilled env set in
+            let exp' = rewrite_exp exp spilled env in
+            let e' = rewrite e spilled env in
             concat exp' xt e'
 
-and rewrite_tmp x t spilled env set k =
-    if S.mem x set then
-        k (M.find x env) set
+and rewrite_tmp x t spilled env k =
+    if List.mem x spilled then
+        Let((M.find x env, t), Restore(x), k (M.find x env))
     else
-    (
-        if List.mem x spilled then
-            Let((M.find x env, t), Restore(x), k (M.find x env) (S.add x set))
-        else
-            k x set 
-    )
-    
-and rewrite_tmp' x' t spilled env set k =
-    match x' with
-    | V(x) ->  if S.mem x set then
-                    k (V(M.find x env)) set
-                else
-                (
-                    if List.mem x spilled then
-                        Let((M.find x env, t), Restore(x), k (V(M.find x env)) set)
-                    else
-                        k (V(x)) set
-                )
-    | c -> k c set
+        k x 
 
-and rewrite_exp e spilled env set = 
+and rewrite_tmp' x' t spilled env k =
+    match x' with
+    | V(x) ->   if List.mem x spilled then
+                    Let((M.find x env, t), Restore(x), k (V(M.find x env)))
+                else
+                    k (V(x))
+    | c -> k c
+
+and rewrite_exp e spilled env = 
     match e with
     | Nop | Set _ | SetF _ | SetL _ | Comment _ | Restore _ as exp -> Ans(exp)
     | Mov(x) ->
-        rewrite_tmp x Type.Int spilled env set (fun s _ -> Ans(Mov(s)))
+        rewrite_tmp x Type.Int spilled env (fun s -> Ans(Mov(s)))
     | Neg(x) -> 
-        rewrite_tmp x Type.Int spilled env set (fun s _ -> Ans(Neg(s)))
+        rewrite_tmp x Type.Int spilled env (fun s -> Ans(Neg(s)))
     | Add(x, y') -> 
-        rewrite_tmp x Type.Int spilled env set
-            (fun s _ -> rewrite_tmp' y' Type.Int spilled env set
-                (fun t _ -> Ans(Add(s, t))))
+        rewrite_tmp x Type.Int spilled env
+            (fun s -> rewrite_tmp' y' Type.Int spilled env
+                (fun t -> Ans(Add(s, t))))
     | Sub(x, y') -> 
-        rewrite_tmp x Type.Int spilled env set
-            (fun s _ -> rewrite_tmp' y' Type.Int spilled env set
-                (fun t _ -> Ans(Sub(s, t))))
+        rewrite_tmp x Type.Int spilled env
+            (fun s -> rewrite_tmp' y' Type.Int spilled env
+                (fun t -> Ans(Sub(s, t))))
     | Mul(x, y') -> 
-        rewrite_tmp x Type.Int spilled env set
-            (fun s _ -> rewrite_tmp' y' Type.Int spilled env set
-                (fun t _ -> Ans(Mul(s, t))))
+        rewrite_tmp x Type.Int spilled env
+            (fun s -> rewrite_tmp' y' Type.Int spilled env
+                (fun t -> Ans(Mul(s, t))))
     | Div(x, y') -> 
-        rewrite_tmp x Type.Int spilled env set
-            (fun s _ -> rewrite_tmp' y' Type.Int spilled env set
-                (fun t _ -> Ans(Div(s, t))))
+        rewrite_tmp x Type.Int spilled env
+            (fun s -> rewrite_tmp' y' Type.Int spilled env
+                (fun t -> Ans(Div(s, t))))
     | SLL(x, y') -> 
-        rewrite_tmp x Type.Int spilled env set
-            (fun s _ -> rewrite_tmp' y' Type.Int spilled env set
-                (fun t _ -> Ans(SLL(s, t))))
+        rewrite_tmp x Type.Int spilled env
+            (fun s -> rewrite_tmp' y' Type.Int spilled env
+                (fun t -> Ans(SLL(s, t))))
     | Ld(x, y') -> 
-        rewrite_tmp x Type.Int spilled env set
-            (fun s _ -> rewrite_tmp' y' Type.Int spilled env set
-                (fun t _ -> Ans(Ld(s, t))))
+        rewrite_tmp x Type.Int spilled env
+            (fun s -> rewrite_tmp' y' Type.Int spilled env
+                (fun t -> Ans(Ld(s, t))))
     | St(x, y, z') -> 
-        rewrite_tmp x Type.Int spilled env set
-            (fun s _ -> rewrite_tmp y Type.Int spilled env set
-                (fun t _ -> rewrite_tmp' z' Type.Int spilled env set
-                    (fun u _ -> Ans(St(s, t, u)))))
+        rewrite_tmp x Type.Int spilled env
+            (fun s -> rewrite_tmp y Type.Int spilled env
+                (fun t -> rewrite_tmp' z' Type.Int spilled env
+                    (fun u -> Ans(St(s, t, u)))))
     | FMovD(x) -> 
-        rewrite_tmp x Type.Float spilled env set (fun s _ -> Ans(FMovD(s)))
+        rewrite_tmp x Type.Float spilled env (fun s -> Ans(FMovD(s)))
     | FNegD(x) -> 
-        rewrite_tmp x Type.Float spilled env set (fun s _ -> Ans(FNegD(s)))
+        rewrite_tmp x Type.Float spilled env (fun s -> Ans(FNegD(s)))
     | FAddD(x, y) -> 
-        rewrite_tmp x Type.Float spilled env set
-            (fun s _ -> rewrite_tmp y Type.Float spilled env set
-                (fun t _ -> Ans(FAddD(s, t))))
+        rewrite_tmp x Type.Float spilled env
+            (fun s -> rewrite_tmp y Type.Float spilled env
+                (fun t -> Ans(FAddD(s, t))))
     | FSubD(x, y) -> 
-        rewrite_tmp x Type.Float spilled env set
-            (fun s _ -> rewrite_tmp y Type.Float spilled env set
-                (fun t _ -> Ans(FSubD(s, t))))
+        rewrite_tmp x Type.Float spilled env
+            (fun s -> rewrite_tmp y Type.Float spilled env
+                (fun t -> Ans(FSubD(s, t))))
     | FMulD(x, y) -> 
-        rewrite_tmp x Type.Float spilled env set
-            (fun s _ -> rewrite_tmp y Type.Float spilled env set
-                (fun t _ -> Ans(FMulD(s, t))))
+        rewrite_tmp x Type.Float spilled env
+            (fun s -> rewrite_tmp y Type.Float spilled env
+                (fun t -> Ans(FMulD(s, t))))
     | FDivD(x, y) ->
-        rewrite_tmp x Type.Float spilled env set
-            (fun s _ -> rewrite_tmp y Type.Float spilled env set
-                (fun t _ -> Ans(FDivD(s, t))))
+        rewrite_tmp x Type.Float spilled env
+            (fun s -> rewrite_tmp y Type.Float spilled env
+                (fun t -> Ans(FDivD(s, t))))
     | FAbs(x) -> 
-        rewrite_tmp x Type.Float spilled env set (fun s _ -> Ans(FAbs(s)))
+        rewrite_tmp x Type.Float spilled env (fun s -> Ans(FAbs(s)))
     | FSqr(x) -> 
-        rewrite_tmp x Type.Float spilled env set (fun s _ -> Ans(FSqr(s)))
+        rewrite_tmp x Type.Float spilled env (fun s -> Ans(FSqr(s)))
     | Ftoi(x) -> 
-        rewrite_tmp x Type.Float spilled env set (fun s _ -> Ans(Ftoi(s)))
+        rewrite_tmp x Type.Float spilled env (fun s -> Ans(Ftoi(s)))
     | Itof(x) -> 
-        rewrite_tmp x Type.Int spilled env set (fun s _ -> Ans(Itof(s)))
+        rewrite_tmp x Type.Int spilled env (fun s -> Ans(Itof(s)))
     | Floor(x) -> 
-        rewrite_tmp x Type.Float spilled env set (fun s _ -> Ans(Floor(s)))
+        rewrite_tmp x Type.Float spilled env (fun s -> Ans(Floor(s)))
     | LdF(x, y') -> 
-        rewrite_tmp x Type.Int spilled env set
-            (fun s _ -> rewrite_tmp' y' Type.Int spilled env set
-                (fun t _ -> Ans(LdF(s, t))))
+        rewrite_tmp x Type.Int spilled env
+            (fun s -> rewrite_tmp' y' Type.Int spilled env
+                (fun t -> Ans(LdF(s, t))))
     | StF(x, y, z') -> 
-        rewrite_tmp x Type.Float spilled env set
-            (fun s _ -> rewrite_tmp y Type.Int spilled env set
-                (fun t _ -> rewrite_tmp' z' Type.Int spilled env set
-                    (fun u _ -> Ans(StF(s, t, u)))))
+        rewrite_tmp x Type.Float spilled env
+            (fun s -> rewrite_tmp y Type.Int spilled env
+                (fun t -> rewrite_tmp' z' Type.Int spilled env
+                    (fun u -> Ans(StF(s, t, u)))))
     | IfEq(x, y', e1, e2) -> 
-        rewrite_tmp x Type.Int spilled env set
-            (fun s set -> rewrite_tmp' y' Type.Int spilled env set
-                (fun t set -> 
-                    let e1' = rewrite e1 spilled env set in
-                    let e2' = rewrite e2 spilled env set in
+        rewrite_tmp x Type.Int spilled env
+            (fun s -> rewrite_tmp' y' Type.Int spilled env
+                (fun t -> 
+                    let e1' = rewrite e1 spilled env in
+                    let e2' = rewrite e2 spilled env in
                     Ans(IfEq(s, t, e1', e2'))))
     | IfLE(x, y', e1, e2) -> 
-        rewrite_tmp x Type.Int spilled env set
-            (fun s set -> rewrite_tmp' y' Type.Int spilled env set
-                (fun t set -> 
-                    let e1' = rewrite e1 spilled env set in
-                    let e2' = rewrite e2 spilled env set in
+        rewrite_tmp x Type.Int spilled env
+            (fun s -> rewrite_tmp' y' Type.Int spilled env
+                (fun t -> 
+                    let e1' = rewrite e1 spilled env in
+                    let e2' = rewrite e2 spilled env in
                     Ans(IfLE(s, t, e1', e2'))))
     | IfGE(x, y', e1, e2) -> 
-        rewrite_tmp x Type.Int spilled env set
-            (fun s set -> rewrite_tmp' y' Type.Int spilled env set
-                (fun t set -> 
-                    let e1' = rewrite e1 spilled env set in
-                    let e2' = rewrite e2 spilled env set in
+        rewrite_tmp x Type.Int spilled env
+            (fun s -> rewrite_tmp' y' Type.Int spilled env
+                (fun t -> 
+                    let e1' = rewrite e1 spilled env in
+                    let e2' = rewrite e2 spilled env in
                     Ans(IfGE(s, t, e1', e2'))))
     | IfFEq(x, y, e1, e2) -> 
-        rewrite_tmp x Type.Float spilled env set
-            (fun s set -> rewrite_tmp y Type.Float spilled env set
-                (fun t set -> 
-                    let e1' = rewrite e1 spilled env set in
-                    let e2' = rewrite e2 spilled env set in
+        rewrite_tmp x Type.Float spilled env
+            (fun s -> rewrite_tmp y Type.Float spilled env
+                (fun t -> 
+                    let e1' = rewrite e1 spilled env in
+                    let e2' = rewrite e2 spilled env in
                     Ans(IfFEq(s, t, e1', e2'))))
     | IfFLE(x, y, e1, e2) -> 
-        rewrite_tmp x Type.Float spilled env set
-            (fun s set -> rewrite_tmp y Type.Float spilled env set
-                (fun t set -> 
-                    let e1' = rewrite e1 spilled env set in
-                    let e2' = rewrite e2 spilled env set in
+        rewrite_tmp x Type.Float spilled env
+            (fun s -> rewrite_tmp y Type.Float spilled env
+                (fun t -> 
+                    let e1' = rewrite e1 spilled env in
+                    let e2' = rewrite e2 spilled env in
                     Ans(IfFLE(s, t, e1', e2'))))
     | CallCls(x, ys, zs) as exp ->
         let x' = if List.mem x spilled then M.find x env else x in
@@ -160,25 +149,17 @@ and rewrite_exp e spilled env set =
 
         let exp' = List.fold_left
             (fun e x -> 
-                if S.mem x set then e
-                else 
-                (
-                    if List.mem x spilled then
-                        (Let((M.find x env, Type.Int), Restore(x), e))
-                    else
-                        e
-                ))
+                if List.mem x spilled then
+                    (Let((M.find x env, Type.Int), Restore(x), e))
+                else
+                    e)
         cont (x :: ys) in
         List.fold_left
             (fun e x -> 
-                if S.mem x set then e
+                if List.mem x spilled then
+                    (Let((M.find x env, Type.Float), Restore(x), e))
                 else
-                (
-                    if List.mem x spilled then
-                        (Let((M.find x env, Type.Float), Restore(x), e))
-                    else
-                        e
-                ))
+                    e)
         cont zs
 
     | CallDir(Id.L(x), ys, zs) as exp ->
@@ -188,31 +169,23 @@ and rewrite_exp e spilled env set =
 
         let exp' = List.fold_left
             (fun e x -> 
-                if S.mem x set then e
+                if List.mem x spilled then
+                    (Let((M.find x env, Type.Int), Restore(x), e))
                 else 
-                (
-                    if List.mem x spilled then
-                        (Let((M.find x env, Type.Int), Restore(x), e))
-                    else 
-                        e
-                ))
+                    e)
         cont ys in
         List.fold_left
             (fun e x -> 
-                if S.mem x set then e
-                else
-                (
                 if List.mem x spilled then
                     (Let((M.find x env, Type.Float), Restore(x), e))
                 else
-                    e
-                ))
+                    e)
         cont zs
 
     | Save(x, y) -> Ans(Save(x, y))
 
 
-
+(* 実際にレジスタ割り当てを行う *)
 let rec g e env = 
     match e with
     | Ans(exp) -> Ans(g' exp env)
@@ -376,7 +349,7 @@ let alloc e =
                     (fun env x -> M.add x (Id.genid x) env)
                 M.empty spilled in
             let new_temps = List.map (fun x -> M.find x env) spilled in
-            let et' = rewrite et spilled env S.empty in
+            let et' = rewrite et spilled env in
 
             (* for debug *)
             asm_debug stdout (Prog([], [], et'));

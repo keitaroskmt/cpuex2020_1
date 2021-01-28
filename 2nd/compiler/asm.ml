@@ -91,8 +91,10 @@ let regs = (* Array.init 16 (fun i -> Printf.sprintf "%%r%d" i) *)
      "%s0"; "%s1"; "%s2"; "%s3"; "%s4"; "%s5"; "%s6"; "%s7"; "%t8"; "%t9";
      "%k0"; "%k1"; (* "%fp"; *)|]
 let fregs = Array.init 30 (fun i -> Printf.sprintf "%%f%d" i)
+(* 
 let allregs = Array.to_list regs
 let allfregs = Array.to_list fregs
+*)
 (* int *)
 let reg_cl = regs.(Array.length regs - 1) (* closure address (caml2html: sparcasm_regcl) *)
 let reg_sw = regs.(Array.length regs - 2) (* temporary for swap *)
@@ -125,6 +127,9 @@ let fregisters =
    "%f8"; "%f9"; "%f10"; "%f11"; "%f12"; "%f13"; "%f14"; "%f15";
    "%f16"; "%f17"; "%f18"; "%f19"; "%f20"; "%f21"; "%f22"; "%f23";
    "%f24"; "%f25"; "%f26"; "%f27"; "%f28"; "%f29"; "%f30"; "%fzero"]
+
+let allregs = registers
+let allfregs = fregisters
 
 let reg_map = 
     let nenv = 
