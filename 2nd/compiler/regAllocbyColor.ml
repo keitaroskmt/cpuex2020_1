@@ -8,13 +8,8 @@ let rec rewrite e spilled env set =
     | Ans(exp) -> rewrite_exp exp spilled env set
     | Let((x, t) as xt, exp, e) ->
         if List.mem x spilled then
-            let env' = 
-                (if M.mem x env then env 
-                else 
-                    let new_x = Id.gentmp t in M.add x new_x env) in
-            let exp' = rewrite_exp exp spilled env' set in
-            let e' = rewrite e spilled env' set in
-            (* (new_x, t)でok? *)
+            let exp' = rewrite_exp exp spilled env set in
+            let e' = rewrite e spilled env set in
             (* レジスタ割り当て決定後, Save(M.find x regenv, x)とする *)
             (* seq(Save(x, x), concat exp' (M.find x env, t) e')*)
             concat exp' xt (seq(Save(x, x), e'))
@@ -317,7 +312,7 @@ and g' e env =
 type fundefort = Fun of fundef | T of t
 
 let alloc e = 
-    let rec loop e = 
+    let rec loop e rewrite_temps = 
         let instrs = 
             match e with
             | Fun(fundef) -> ToAssem.h fundef
@@ -333,7 +328,6 @@ let alloc e =
         (* for debug*)
         Liveness.igraph_debug stdout igraph;
 
-        (* TODO: 一度spillしたものは再びspillしない処理が必要? *)
         let spill_cost = 
             let usedef = 
                 List.fold_left 
@@ -351,7 +345,8 @@ let alloc e =
                 M.empty flownodes in
             (fun inode ->
                 let (x, t) = node2id inode in
-                let (use, def) = M.find x usedef in use + def) in
+                let (use, def) = M.find x usedef in
+                if List.mem x rewrite_temps then max_int else use + def) in
 
         (* for debug *)
         List.iter (fun node -> Printf.fprintf stdout "%s: %d\n" (fst (node2id node)) (spill_cost node)) (Graph.nodes graph);
@@ -375,7 +370,13 @@ let alloc e =
                 (match e with
                 | Fun({ name = _; args = _; fargs = _; body = x; ret = _ }) -> x
                 | T(x) -> x) in
-            let et' = rewrite et spilled M.empty S.empty in
+
+            (* spillした変数の移動先 *)
+            let env = List.fold_left
+                    (fun env x -> M.add x (Id.genid x) env)
+                M.empty spilled in
+            let new_temps = List.map (fun x -> M.find x env) spilled in
+            let et' = rewrite et spilled env S.empty in
 
             (* for debug *)
             asm_debug stdout (Prog([], [], et'));
@@ -387,9 +388,10 @@ let alloc e =
                     Fun({ name = n; args = ys; fargs = zs; body = et'; ret = t})
                 | T(_) -> 
                     T(et')) in
-            loop e' 
+
+            loop e' (new_temps @ rewrite_temps)
         ) in
-    loop e
+    loop e []
     
 
 (* p.237 *)

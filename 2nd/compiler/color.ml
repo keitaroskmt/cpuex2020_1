@@ -438,9 +438,9 @@ let color Liveness.{graph; id2node; node2id; moves} spill_cost allocation (regis
 
     let select_spill () = 
         let cost cnode = spill_cost cnode.node in
-        (* i >= j <=> cost v[i] >= cost v[j] *)
-        (* TODO: costの並びの確認 *)
-        match List.sort (fun u v -> cost v - cost u) !spill_worklist with
+        (* i <= j <=> cost v[i] <= cost v[j] *)
+        (* costが小さいほど, 次数は多いが出現回数は少ないのでspillするべき *)
+        match List.sort (fun u v -> cost u - cost v) !spill_worklist with
         | [] -> failwith "select_spill"
         | cnode :: rest -> 
         (
