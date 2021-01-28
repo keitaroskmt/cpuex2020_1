@@ -366,45 +366,47 @@ let color Liveness.{graph; id2node; node2id; moves} spill_cost allocation (regis
         ) in
 
     let coalesce () = 
-        match !worklist_moves with
-        | [] -> failwith "error in coalesce"
-        | ({dst; src; _} as m) :: rest ->
-        (
-        let x = get_alias src in
-        let y = get_alias dst in
-        let (u, v) = if y.nset = Precolored then (y, x) else (x, y) in
-        worklist_moves := rest;
-        if u == v then 
-        (
-            m.mset <- Coalesced;
-            coalesced_moves := m :: !coalesced_moves;
-            add_worklist u;
-        )
-        else if v.nset = Precolored || adjset.(u.n).(v.n) then
-        (
-            m.mset <- Constrained;
-            constrained_moves := m :: !constrained_moves;
-            add_worklist u;
-            add_worklist v;
-        )
-        (*
-         coalesceの戦略については, p.232参照 
-         PrecoloredなノードがあればGeorge, それ以外ではBriggsの手法を用いる.
-         (Precoloredなノードはadjlistにないから)
-        *)
-        else if (u.nset = Precolored && List.for_all (fun t -> ok t u) (adjacent v)) ||
-                 (u.nset <> Precolored && conservative (union (adjacent u) (adjacent v))) then
-        (
-            m.mset <- Coalesced;
-            coalesced_moves := m :: !coalesced_moves;
-            combine u v;
-            add_worklist u
-        )
-        else 
-        (
-            m.mset <- Active;
-            active_moves := m :: !active_moves
-        )) in
+        List.iter 
+        (fun ({dst; src; _} as m) -> 
+            (
+            let x = get_alias src in
+            let y = get_alias dst in
+            let (u, v) = if y.nset = Precolored then (y, x) else (x, y) in
+            (* worklist_moves := rest; *)
+            if u == v then 
+            (
+                m.mset <- Coalesced;
+                coalesced_moves := m :: !coalesced_moves;
+                add_worklist u;
+            )
+            else if v.nset = Precolored || adjset.(u.n).(v.n) then
+            (
+                m.mset <- Constrained;
+                constrained_moves := m :: !constrained_moves;
+                add_worklist u;
+                add_worklist v;
+            )
+            (*
+            coalesceの戦略については, p.232参照 
+            PrecoloredなノードがあればGeorge, それ以外ではBriggsの手法を用いる.
+            (Precoloredなノードはadjlistにないから)
+            *)
+            else if (u.nset = Precolored && List.for_all (fun t -> ok t u) (adjacent v)) ||
+                    (u.nset <> Precolored && conservative (union (adjacent u) (adjacent v))) then
+            (
+                m.mset <- Coalesced;
+                coalesced_moves := m :: !coalesced_moves;
+                combine u v;
+                add_worklist u
+            )
+            else 
+            (
+                m.mset <- Active;
+                active_moves := m :: !active_moves
+            ))
+            )
+        !worklist_moves;
+        worklist_moves := [] in
 
     (* freeze *)
     let freeze_moves cnode = 
@@ -467,6 +469,11 @@ let color Liveness.{graph; id2node; node2id; moves} spill_cost allocation (regis
                                 cset)
                     adjlist.(cnode.n)
                     (S.of_list (if t = Type.Int then registers else fregisters)) in
+
+                (* for debug 
+                Printf.fprintf stdout "Node %s: " x;
+                S.iter (fun x -> Printf.fprintf stdout "%s\n" x) ok_colors;
+                *)
                 if S.is_empty ok_colors then
                 (
                     cnode.nset <- Spilled;
@@ -519,7 +526,7 @@ let color Liveness.{graph; id2node; node2id; moves} spill_cost allocation (regis
     let spilled = List.map (fun cnode -> fst (node2id cnode.node)) !spilled_nodes in
 
     (* for debug *)
-    Printf.fprintf stdout "allocation -----\n";
+    Printf.fprintf stdout "allocation ----- (spilled %d nodes) \n" (List.length spilled);
     M.iter (fun x color -> Printf.fprintf stdout "%s <- %s\n" x color) allocation';
         (allocation', spilled)
 

@@ -135,9 +135,11 @@ let reg_map =
 
 let specialregs = [("%k1", Type.Int); ("%fp", Type.Int); ("%hp", Type.Int); ("%sp", Type.Int); ("%ra", Type.Int); ("%at", Type.Int); ("%zero", Type.Int); ("%fzero", Type.Float)] 
 
+(* 
 let iargregs = 
     let iargregs' = ["%v0"; "%v1"; "%a0"; "%a1"]
         in List.map (fun x -> (x, Type.Int)) iargregs'
+        *)
 
 (* 
 let fargregs = 
@@ -145,9 +147,11 @@ let fargregs =
         in List.map (fun x -> (x, Type.Float)) fargregs'
         *)
 
+(* 
 let icalleesaves = 
     let icalleesaves' = ["%a2"; "%a3"; "%t0"; "%t1"; "%t2"; "%t3"; "%t4"; "%t5"]
         in List.map (fun x -> (x, Type.Int)) icalleesaves'
+        *)
 
 (* 
 let fcalleesaves = 
@@ -155,50 +159,41 @@ let fcalleesaves =
         in List.map (fun x -> (x, Type.Float)) fcalleesaves'
         *)
 
+(* 
 let icallersaves = 
     let icallersaves' = ["%t6"; "%t7"; "%s0"; "%s1"; "%s2"; "%s3"; "%s4"; "%s5"; "%s6"; "%s7"; "%t8"; "%t9"; "%k0"]
         in List.map (fun x -> (x, Type.Int)) icallersaves'
+        *)
 
 (*
 let fcallersaves =
     let fcallersaves' = ["%f15"; "%f16"; "%f17"; "%f18"; "%f19"; "%f20"; "%f21"; "%f22"; "%f23"; "%f24"; "%f25"; "%f26"; "%f27"; "%f28"; "%f29"; "%f30"]
         in List.map (fun x -> (x, Type.Float)) fcallersaves'
         *)
+
+let iargregs = 
+    let iargregs' = ["%v0"; "%v1"; "%a0"; "%a1"]
+        in List.map (fun x -> (x, Type.Int)) iargregs'
+
+let icalleesaves = 
+    let icalleesaves' = ["%a2"; "%a3"; "%t0"; "%t1"; "%t2"; "%t3"; "%t4"; "%t5"]
+        in List.map (fun x -> (x, Type.Int)) icalleesaves'
+
+let icallersaves = 
+    let icallersaves' = ["%t6"; "%t7"; "%s0"; "%s1"; "%s2"; "%s3"; "%s4"; "%s5"; "%s6"; "%s7"; "%t8"; "%t9"; "%k0"]
+        in List.map (fun x -> (x, Type.Int)) icallersaves'
+
 let fargregs = []
 let fcalleesaves = []
 let fcallersaves = []
 
 let argregs = iargregs @ fargregs
-let calleesaves = icallersaves @ fcallersaves
+let calleesaves = icalleesaves @ fcalleesaves
 let callersaves = icallersaves @ fcallersaves
 
 let calldefs =  (reg_ra, Type.Int) :: callersaves @ argregs
         
 
-(*
-let registers = (* Array.init 16 (fun i -> Printf.sprintf "%%r%d" i) *)
-  [| "%v0"; "%v1"; "%a0"; "%a1";
-     "%a2"; "%a3"; "%t0"; "%t1"; "%t2"; "%t3"; "%t4"; "%t5"; "%t6"; "%t7";
-     "%s0"; "%s1"; "%s2"; "%s3"; "%s4"; "%s5"; "%s6"; "%s7"; "%t8"; "%t9";
-     "%k0"; "%k1"; (* "%fp"; *)|]
-let fregs = Array.init 30 (fun i -> Printf.sprintf "%%f%d" i)
-let allregs = Array.to_list regs
-let allfregs = Array.to_list fregs
-(* int *)
-let reg_cl = regs.(Array.length regs - 1) (* closure address (caml2html: sparcasm_regcl) *)
-let reg_sw = regs.(Array.length regs - 2) (* temporary for swap *)
-let reg_zero = "%zero" (* zero pointer *)
-let reg_sp = "%sp" (* stack pointer *)
-let reg_hp = "%hp" (* heap pointer (caml2html: sparcasm_reghp) *)
-let reg_gp = "%min_caml_gp"
-let reg_ra = "%ra" (* return address *)
-let reg_at = "%at" (* for assembler *)
-(* float *)
-let reg_fsw = fregs.(Array.length fregs - 1) (* temporary for swap *)
-let reg_fat = "%f30" (* for assembler *)
-let reg_fzero = "%fzero"
-let is_reg x = (x.[0] = '%')
-*)
 
 (* for debug *)
 let asm_debug oc l =

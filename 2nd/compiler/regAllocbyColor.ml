@@ -6,16 +6,18 @@ let rec rewrite e spilled env =
     match e with
     | Ans(exp) -> rewrite_exp exp spilled env
     | Let((x, t) as xt, exp, e) ->
+        Printf.fprintf stdout "%s\n" x;
         if List.mem x spilled then
             let env' = 
-                if M.mem x env then env 
+                (if M.mem x env then env 
                 else 
-                    let new_x = Id.gentmp t in M.add x new_x env in
+                    let new_x = Id.gentmp t in M.add x new_x env) in
             let exp' = rewrite_exp exp spilled env' in
             let e' = rewrite e spilled env' in
             (* (new_x, t)でok? *)
             (* レジスタ割り当て決定後, Save(M.find x regenv, x)とする *)
-            seq(Save(x, x), concat exp' (M.find x env, t) e')
+            (* seq(Save(x, x), concat exp' (M.find x env, t) e')*)
+            concat exp' xt (seq(Save(x, x), e'))
         else
             let exp' = rewrite_exp exp spilled env in
             let e' = rewrite e spilled env in
@@ -141,19 +143,46 @@ and rewrite_exp e spilled env =
             (fun s -> rewrite_tmp y Type.Float spilled env
                 (fun t -> Ans(IfFLE(s, t, e1', e2'))))
     | CallCls(x, ys, zs) as exp ->
-    (* とりあえず *)
-        if (List.mem x spilled || List.for_all (fun y -> List.mem y spilled) ys || 
-        List.for_all (fun z -> List.mem z spilled) zs) then
-            failwith "CallCls in rewrite" 
-        else
-            Ans(exp)
+        let x' = if List.mem x spilled then M.find x env else x in
+        let ys' = List.map (fun x -> if List.mem x spilled then M.find x env else x) ys in
+        let zs' = List.map (fun x -> if List.mem x spilled then M.find x env else x) zs in
+        let cont = Ans(CallCls(x', ys', zs')) in
+
+        let exp' = List.fold_left
+            (fun e x -> 
+                if List.mem x spilled then
+                    (Let((M.find x env, Type.Int), Restore(x), e))
+                else
+                    e)
+        cont (x :: ys) in
+        List.fold_left
+            (fun e x -> 
+                if List.mem x spilled then
+                    (Let((M.find x env, Type.Float), Restore(x), e))
+                else
+                    e)
+        cont zs
+
     | CallDir(Id.L(x), ys, zs) as exp ->
-    (* とりあえず *)
-        if (List.for_all (fun y -> List.mem y spilled) ys || 
-        List.for_all (fun z -> List.mem z spilled) zs) then
-            failwith "CallDir in rewrite" 
-        else
-            Ans(exp)
+        let ys' = List.map (fun x -> if List.mem x spilled then M.find x env else x) ys in
+        let zs' = List.map (fun x -> if List.mem x spilled then M.find x env else x) zs in
+        let cont = Ans(CallDir(Id.L(x), ys', zs')) in
+
+        let exp' = List.fold_left
+            (fun e x -> 
+                if List.mem x spilled then
+                    (Let((M.find x env, Type.Int), Restore(x), e))
+                else 
+                    e)
+        cont ys in
+        List.fold_left
+            (fun e x -> 
+                if List.mem x spilled then
+                    (Let((M.find x env, Type.Float), Restore(x), e))
+                else
+                    e)
+        cont zs
+
     | Save(x, y) -> Ans(Save(x, y))
 
 
@@ -162,7 +191,10 @@ let rec g e env =
     match e with
     | Ans(exp) -> Ans(g' exp env)
     | Let((x, t), exp, e) ->
-        Let((M.find x env, t), g' exp env, g e env)
+        if t = Type.Unit then 
+            Let((x, t), g' exp env, g e env)
+        else
+            Let((M.find x env, t), g' exp env, g e env)
 
 and g' e env = 
     match e with
@@ -249,42 +281,6 @@ and g' e env =
     | Save(x, y) -> 
         Save(M.find x env, y)
 
-(* p.237 *)
-let move_calleesaves ({ name = n; args = ys; fargs = zs; body = e; ret = t } as fundef) = 
-    (* 移動先の仮変数との対応 *)
-    let env = 
-        List.fold_left
-            (fun env (x, t) ->
-                M.add x (Id.gentmp t) env)
-        M.empty ((reg_ra, Type.Int) :: calleesaves) in
-    
-    (* 先頭ではcalleesaves -> 仮変数 *)
-    let e' = 
-        List.fold_left
-            (fun cont (x, t) ->
-                (Let((M.find x env, t), Mov(x), cont)))
-        e ((reg_ra, Type.Int) :: calleesaves) in
-
-    (* 返り値を受け取って, 仮引数 -> calleesaves を挿入する関数 *)
-    let exit =  
-        (fun e ->
-            (List.fold_left
-                (fun cont (x, t) ->
-                    (Let((x, t), Mov(M.find x env), cont)))
-            e ((reg_ra, Type.Int) :: calleesaves))) in
-
-    (* e'の後ろにexitを挿入する関数 *)
-    let rec concat e exit = 
-        match e with
-        | Ans(IfEq(x, y, e1, e2)) -> Ans(IfEq(x, y, (concat e1 exit), (concat e2 exit)))
-        | Ans(IfLE(x, y, e1, e2)) -> Ans(IfLE(x, y, (concat e1 exit), (concat e2 exit)))
-        | Ans(IfGE(x, y, e1, e2)) -> Ans(IfGE(x, y, (concat e1 exit), (concat e2 exit)))
-        | Ans(IfFEq(x, y, e1, e2)) -> Ans(IfFEq(x, y, (concat e1 exit), (concat e2 exit)))
-        | Ans(IfFLE(x, y, e1, e2)) -> Ans(IfFLE(x, y, (concat e1 exit), (concat e2 exit)))
-        | Ans(exp) -> exit (Ans(exp))
-        | Let(xt, exp, e1) -> Let(xt, exp, (concat e1 exit)) in
-
-    { name = n; args = ys; fargs = zs; body = concat e' exit; ret = t }
 
 
 type fundefort = Fun of fundef | T of t
@@ -333,11 +329,16 @@ let alloc e =
         let (allocation, spilled) = Color.color igraph spill_cost reg_map (registers, fregisters) in
         (
         if spilled = [] then
+        (
             let et = 
                 (match e with
                 | Fun({ name = _; args = _; fargs = _; body = x; ret = _ }) -> x
                 | T(x) -> x) in
+
+            (* for debug *)
+            asm_debug stdout (Prog([], [], et));
             (g et allocation, allocation)
+        )
         else
             let et = 
                 (match e with
@@ -355,6 +356,72 @@ let alloc e =
     loop e
     
 
+(* p.237 *)
+let move_calleesaves ({ name = n; args = ys; fargs = zs; body = e; ret = t } as fundef) = 
+    (* 移動先の仮変数との対応 *)
+    let env = 
+        List.fold_left
+            (fun env (x, t) ->
+                M.add x (Id.gentmp t) env)
+        M.empty ((reg_ra, Type.Int) :: calleesaves) in
+    
+    (* 先頭ではcalleesaves -> 仮変数 *)
+    let e' = 
+        List.fold_left
+            (fun cont (x, t) ->
+                (
+                    match t with
+                    | Type.Float -> (Let((M.find x env, t), FMovD(x), cont))
+                    | _ -> (Let((M.find x env, t), Mov(x), cont))
+                ))
+        e ((reg_ra, Type.Int) :: calleesaves) in
+
+    (* 返り値を受け取って, 仮引数 -> calleesaves を挿入する関数 *)
+    let exit =  
+        (fun e ->
+            (List.fold_left
+                (fun cont (x, t) ->
+                    (
+                        match t with
+                        | Type.Float -> (Let((x, t), FMovD(M.find x env), cont))
+                        | _ -> (Let((x, t), Mov(M.find x env), cont))
+                    ))
+            e ((reg_ra, Type.Int) :: calleesaves))) in
+
+    (* e'の後ろにexitを挿入する関数 *)
+    let rec concat e exit = 
+        match e with
+        | Ans(IfEq(x, y, e1, e2)) -> Ans(IfEq(x, y, (concat e1 exit), (concat e2 exit)))
+        | Ans(IfLE(x, y, e1, e2)) -> Ans(IfLE(x, y, (concat e1 exit), (concat e2 exit)))
+        | Ans(IfGE(x, y, e1, e2)) -> Ans(IfGE(x, y, (concat e1 exit), (concat e2 exit)))
+        | Ans(IfFEq(x, y, e1, e2)) -> Ans(IfFEq(x, y, (concat e1 exit), (concat e2 exit)))
+        | Ans(IfFLE(x, y, e1, e2)) -> Ans(IfFLE(x, y, (concat e1 exit), (concat e2 exit)))
+        | Ans(exp) -> exit (Ans(exp))
+        | Let(xt, exp, e1) -> Let(xt, exp, (concat e1 exit)) in
+    { name = n; args = ys; fargs = zs; body = concat e' exit; ret = t }
+
+
+let h_args ({ name = n; args = ys; fargs = zs; body = e; ret = t } as fundef) = 
+    let (_, yrs) =
+        List.fold_left
+            (fun (i, yrs) y -> (i + 1, (y, regs.(i)) :: yrs))
+            (0, []) ys in
+    let e =
+        List.fold_left
+            (fun e (y, r) ->
+                (Let((y, Type.Int), Mov(r), e)))
+        e yrs in
+    let (_, zfrs) =
+        List.fold_left
+            (fun (d, zfrs) z -> (d + 1, (fregs.(d), z) :: zfrs))
+            (0, []) zs in
+    let e =
+        List.fold_left
+            (fun e (d, fr) ->
+                (Let((d, Type.Float), FMovD(fr), e)))
+        e zfrs in
+    { name = n; args = ys; fargs = zs; body = e; ret = t }
+
 
 let h ({ name = Id.L(x); args = ys; fargs = zs; body = e; ret = t } as fundef) = 
     (* 
@@ -369,14 +436,12 @@ let h ({ name = Id.L(x); args = ys; fargs = zs; body = e; ret = t } as fundef) =
                 (i+1, fregs.(i) :: farg_regs))
         (0, []) zs in
     *)
-    let fundef' = move_calleesaves fundef in
+    let fundef' = h_args (move_calleesaves fundef) in
 
-    asm_debug stdout (Prog([], [fundef'], e));
-
-    let (e', allocation) = alloc (Fun(fundef')) in
+    let (e', allocation) = alloc (Fun(fundef')) in 
     let arg_regs = List.map (fun x -> M.find x allocation) ys in
     let farg_regs = List.map (fun x -> M.find x allocation) zs in
-    { name = Id.L(x); args = arg_regs; fargs = farg_regs; body = e'; ret = t }
+    { name = Id.L(x); args = ys; fargs = zs; body = e'; ret = t }
 
 
 let f (Prog(data, fundefs, e)) = 

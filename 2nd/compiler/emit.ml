@@ -404,6 +404,7 @@ and g'_args oc x_reg_cl ys zs =
 let h oc { name = Id.L(x); args = ys; fargs = zs; body = e; ret = _ } =
   Printf.fprintf oc "%s:\n" x;
 
+(* 
   (* regAllocbyColor.ml用 関数内部からも呼び出し側と同様の操作 *)
   let (_, yrs) =
     List.fold_left
@@ -422,12 +423,16 @@ let h oc { name = Id.L(x); args = ys; fargs = zs; body = e; ret = _ } =
   List.iter
     (fun (z, fr) -> Printf.fprintf oc "\tfmov\t%s, %s\n" fr z)
     (shuffle reg_fsw zfrs);
+    *)
 
   stackset := M.empty;
   stackmap := [];
   g oc (Tail, e)
 
 let f (oc, dc) (Prog(data, fundefs, e)) =
+  (* for debug *)
+  asm_debug stdout (Prog(data, fundefs, e));
+  
   Format.eprintf "generating assembly...@.";
   Printf.fprintf oc ".section\t\".rodata\"\n";
   Printf.fprintf oc ".align\t8\n";
