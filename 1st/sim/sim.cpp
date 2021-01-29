@@ -1,4 +1,3 @@
-// todo labelをその次の命令行に組み込む 高速化する
 #include <stdio.h>
 #include <string>
 #include <fcntl.h>
@@ -19,6 +18,8 @@
 #include "exec_cmd.h"
 #include "file_io.h"
 #include "print_bytecode.h"
+#include "ftable.h"
+#include "fpu.h"
 
 int cur_opnum, cur_in;
 std::vector<op_info> ops;
@@ -27,7 +28,7 @@ std::map<std::string, int> label_pos, label_pos_bc;
 std::map<std::string, long long int> label_counter;
 std::map<int, int> posbc2pos, pos2posbc;
 std::vector<std::pair<int, unsigned long long int>> stack(1000000, std::make_pair(0, 0));
-int exec_step(bool print_process, bool print_calc, bool print_bytecode, bool label_count);
+int exec_step(bool print_process, bool print_calc, bool print_bytecode, bool label_count, bool use_fpu);
 
 int main(int argc, char *argv[])
 {
@@ -43,11 +44,12 @@ int main(int argc, char *argv[])
     bool is_in = false;
     bool is_out = false;
     bool debug_mode = false;
+    bool use_fpu = false;
     std::string n = "fib";
     std::string infile = "sin.txt";
     std::string outfile = "out.txt";
 
-    while ((opt = getopt(argc, argv, "sbcpn:i:o:mdl")) != -1)
+    while ((opt = getopt(argc, argv, "sbcpn:i:o:mdlf")) != -1)
     {
         switch (opt)
         {
@@ -93,6 +95,10 @@ int main(int argc, char *argv[])
             label_count = true;
             break;
 
+        case 'f':
+            use_fpu = true;
+            break;
+
         default:
             printf("Usage: %s [-s] [-b] [-c] [-p] [-n arg] [-i arg] [-o arg]\n", argv[0]);
             break;
@@ -136,6 +142,9 @@ int main(int argc, char *argv[])
 
     fclose(fp);
 
+    if (use_fpu)
+        ftable_init();
+
     // sldファイルの読み込み
     if (is_in)
     {
@@ -147,6 +156,8 @@ int main(int argc, char *argv[])
     cur_opnum = 0;
     cur_in = 0;
 
+    data_load("data/main.data");
+
     // step実行
     while (cur_opnum < end)
     {
@@ -155,7 +166,7 @@ int main(int argc, char *argv[])
             if (exec_cmd(&loop, &is_stat, &print_bc, &print_calc, &print_process))
                 return 0;
 
-        if (exec_step(print_process, print_calc, print_bc, label_count))
+        if (exec_step(print_process, print_calc, print_bc, label_count, use_fpu))
             break;
 
         if (ops[cur_opnum].type == 0)
@@ -185,28 +196,27 @@ int main(int argc, char *argv[])
     if (is_out)
         write_file("io/out/" + outfile, mandelbrot);
 
-    clock_t end_time = clock();
-    const double time = static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC * 1000.0;
     if (debug_mode)
     {
-        printf("time %.1lf[s]\n", time / 1000);
+        print_time(start_time);
         printf("max sp: %d\nmax hp %d\n", max_sp, max_hp);
     }
+
     return 0;
 }
 
 // 1step実行する 命令なら実行し、その他なら読み飛ばす
-int exec_step(bool print_process, bool print_calc, bool print_bc, bool label_count)
+int exec_step(bool print_process, bool print_calc, bool print_bc, bool label_count, bool use_fpu)
 {
     if (ops[cur_opnum].type == 0)
     {
         if (print_process)
-            printf("%llu\t%d\t%s\t%s\t%s\t%s\t%d\n", cur_env.PC, 4 * ops[cur_opnum].op_idx, ops[cur_opnum].opcode.c_str(), ops[cur_opnum].opland[0].c_str(), ops[cur_opnum].opland[1].c_str(), ops[cur_opnum].opland[2].c_str(), ops[cur_opnum].offset);
+            printf("%llu\t%d\t%s\t%s\t%s\t%s\t%d\n", cur_env.PC, ops[cur_opnum].op_idx, ops[cur_opnum].opcode.c_str(), ops[cur_opnum].opland[0].c_str(), ops[cur_opnum].opland[1].c_str(), ops[cur_opnum].opland[2].c_str(), ops[cur_opnum].offset);
 
         if (print_bc)
             print_bytecode(ops[cur_opnum]);
 
-        if (exec_op(ops[cur_opnum], print_calc))
+        if (exec_op(ops[cur_opnum], print_calc, use_fpu))
             return 1;
 
         if (print_bc || print_process || print_calc)

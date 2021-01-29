@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="multi_cycle_fib_wrapper_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="multi_cycle_fib_wrapper" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="9237187777fs"></ZoomStartTime>
+      <ZoomEndTime time="9241102445fs"></ZoomEndTime>
+      <Cursor1Time time="9238349665fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="92"></NameColumnWidth>
+      <ValueColumnWidth column_width="72"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="53" />
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/rstn" type="logic">
+      <obj_property name="ElementShortName">rstn</obj_property>
+      <obj_property name="ObjectShortName">rstn</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/pc_wire" type="array">
+      <obj_property name="ElementShortName">pc_wire[31:0]</obj_property>
+      <obj_property name="ObjectShortName">pc_wire[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/led" type="array">
+      <obj_property name="ElementShortName">led[7:0]</obj_property>
+      <obj_property name="ObjectShortName">led[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/opcode" type="array">
+      <obj_property name="ElementShortName">opcode[5:0]</obj_property>
+      <obj_property name="ObjectShortName">opcode[5:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/funct" type="array">
+      <obj_property name="ElementShortName">funct[5:0]</obj_property>
+      <obj_property name="ObjectShortName">funct[5:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/IorD" type="logic">
+      <obj_property name="ElementShortName">IorD</obj_property>
+      <obj_property name="ObjectShortName">IorD</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/MemWrite" type="logic">
+      <obj_property name="ElementShortName">MemWrite</obj_property>
+      <obj_property name="ObjectShortName">MemWrite</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/IRWrite" type="logic">
+      <obj_property name="ElementShortName">IRWrite</obj_property>
+      <obj_property name="ObjectShortName">IRWrite</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/PCWrite" type="logic">
+      <obj_property name="ElementShortName">PCWrite</obj_property>
+      <obj_property name="ObjectShortName">PCWrite</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/Branch" type="logic">
+      <obj_property name="ElementShortName">Branch</obj_property>
+      <obj_property name="ObjectShortName">Branch</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/ToggleEqual" type="logic">
+      <obj_property name="ElementShortName">ToggleEqual</obj_property>
+      <obj_property name="ObjectShortName">ToggleEqual</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/PCSrc" type="array">
+      <obj_property name="ElementShortName">PCSrc[1:0]</obj_property>
+      <obj_property name="ObjectShortName">PCSrc[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/ALUControl" type="array">
+      <obj_property name="ElementShortName">ALUControl[2:0]</obj_property>
+      <obj_property name="ObjectShortName">ALUControl[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/ALUSrcB" type="array">
+      <obj_property name="ElementShortName">ALUSrcB[1:0]</obj_property>
+      <obj_property name="ObjectShortName">ALUSrcB[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/ALUSrcA" type="logic">
+      <obj_property name="ElementShortName">ALUSrcA</obj_property>
+      <obj_property name="ObjectShortName">ALUSrcA</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/RegWrite" type="logic">
+      <obj_property name="ElementShortName">RegWrite</obj_property>
+      <obj_property name="ObjectShortName">RegWrite</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/RegDst" type="array">
+      <obj_property name="ElementShortName">RegDst[1:0]</obj_property>
+      <obj_property name="ObjectShortName">RegDst[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/MemtoReg" type="array">
+      <obj_property name="ElementShortName">MemtoReg[1:0]</obj_property>
+      <obj_property name="ObjectShortName">MemtoReg[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/alu_srcA" type="array">
+      <obj_property name="ElementShortName">alu_srcA[31:0]</obj_property>
+      <obj_property name="ObjectShortName">alu_srcA[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/alu_srcB" type="array">
+      <obj_property name="ElementShortName">alu_srcB[31:0]</obj_property>
+      <obj_property name="ObjectShortName">alu_srcB[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/alu_result" type="array">
+      <obj_property name="ElementShortName">alu_result[31:0]</obj_property>
+      <obj_property name="ObjectShortName">alu_result[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/ShiftD" type="logic">
+      <obj_property name="ElementShortName">ShiftD</obj_property>
+      <obj_property name="ObjectShortName">ShiftD</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/Shift" type="logic">
+      <obj_property name="ElementShortName">Shift</obj_property>
+      <obj_property name="ObjectShortName">Shift</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/state" type="array">
+      <obj_property name="ElementShortName">state[4:0]</obj_property>
+      <obj_property name="ObjectShortName">state[4:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/adr" type="array">
+      <obj_property name="ElementShortName">adr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">adr[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/sr2_adr" type="array">
+      <obj_property name="ElementShortName">sr2_adr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">sr2_adr[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/rd" type="array">
+      <obj_property name="ElementShortName">rd[31:0]</obj_property>
+      <obj_property name="ObjectShortName">rd[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/inst" type="array">
+      <obj_property name="ElementShortName">inst[31:0]</obj_property>
+      <obj_property name="ObjectShortName">inst[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/data" type="array">
+      <obj_property name="ElementShortName">data[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/pc_" type="array">
+      <obj_property name="ElementShortName">pc_[31:0]</obj_property>
+      <obj_property name="ObjectShortName">pc_[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/op1" type="array">
+      <obj_property name="ElementShortName">op1[4:0]</obj_property>
+      <obj_property name="ObjectShortName">op1[4:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/op2" type="array">
+      <obj_property name="ElementShortName">op2[4:0]</obj_property>
+      <obj_property name="ObjectShortName">op2[4:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/regdst" type="array">
+      <obj_property name="ElementShortName">regdst[4:0]</obj_property>
+      <obj_property name="ObjectShortName">regdst[4:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/mem_to_reg" type="array">
+      <obj_property name="ElementShortName">mem_to_reg[31:0]</obj_property>
+      <obj_property name="ObjectShortName">mem_to_reg[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/output_rf1" type="array">
+      <obj_property name="ElementShortName">output_rf1[31:0]</obj_property>
+      <obj_property name="ObjectShortName">output_rf1[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/output_rf2" type="array">
+      <obj_property name="ElementShortName">output_rf2[31:0]</obj_property>
+      <obj_property name="ObjectShortName">output_rf2[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/output1" type="array">
+      <obj_property name="ElementShortName">output1[31:0]</obj_property>
+      <obj_property name="ObjectShortName">output1[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/output2" type="array">
+      <obj_property name="ElementShortName">output2[31:0]</obj_property>
+      <obj_property name="ObjectShortName">output2[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/shifted" type="array">
+      <obj_property name="ElementShortName">shifted[31:0]</obj_property>
+      <obj_property name="ObjectShortName">shifted[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/output2_or_shifted" type="array">
+      <obj_property name="ElementShortName">output2_or_shifted[31:0]</obj_property>
+      <obj_property name="ObjectShortName">output2_or_shifted[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/jump_address" type="array">
+      <obj_property name="ElementShortName">jump_address[27:0]</obj_property>
+      <obj_property name="ObjectShortName">jump_address[27:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/alu_out" type="array">
+      <obj_property name="ElementShortName">alu_out[31:0]</obj_property>
+      <obj_property name="ObjectShortName">alu_out[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/zero" type="logic">
+      <obj_property name="ElementShortName">zero</obj_property>
+      <obj_property name="ObjectShortName">zero</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/SignImm" type="array">
+      <obj_property name="ElementShortName">SignImm[31:0]</obj_property>
+      <obj_property name="ObjectShortName">SignImm[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/pcen" type="logic">
+      <obj_property name="ElementShortName">pcen</obj_property>
+      <obj_property name="ObjectShortName">pcen</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/pc" type="array">
+      <obj_property name="ElementShortName">pc[31:0]</obj_property>
+      <obj_property name="ObjectShortName">pc[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/inst_reg" type="array">
+      <obj_property name="ElementShortName">inst_reg[31:0]</obj_property>
+      <obj_property name="ObjectShortName">inst_reg[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/data_reg" type="array">
+      <obj_property name="ElementShortName">data_reg[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_reg[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/output_rf1_reg" type="array">
+      <obj_property name="ElementShortName">output_rf1_reg[31:0]</obj_property>
+      <obj_property name="ObjectShortName">output_rf1_reg[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/output_rf2_reg" type="array">
+      <obj_property name="ElementShortName">output_rf2_reg[31:0]</obj_property>
+      <obj_property name="ObjectShortName">output_rf2_reg[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/alu_out_reg" type="array">
+      <obj_property name="ElementShortName">alu_out_reg[31:0]</obj_property>
+      <obj_property name="ObjectShortName">alu_out_reg[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/multi_cycle_fib_wrapper/multi_cycle_fib_i/multicycle_cpu_0/inst/en" type="logic">
+      <obj_property name="ElementShortName">en</obj_property>
+      <obj_property name="ObjectShortName">en</obj_property>
+   </wvobject>
+</wave_config>
