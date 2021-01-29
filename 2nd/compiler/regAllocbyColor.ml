@@ -160,7 +160,7 @@ and rewrite_exp e spilled env =
                     (Let((M.find x env, Type.Float), Restore(x), e))
                 else
                     e)
-        cont zs
+        exp' zs
 
     | CallDir(Id.L(x), ys, zs) as exp ->
         let ys' = List.map (fun x -> if List.mem x spilled then M.find x env else x) ys in
@@ -180,7 +180,7 @@ and rewrite_exp e spilled env =
                     (Let((M.find x env, Type.Float), Restore(x), e))
                 else
                     e)
-        cont zs
+        exp' zs
 
     | Save(x, y) -> Ans(Save(x, y))
 
@@ -424,7 +424,7 @@ let h_args ({ name = n; args = ys; fargs = zs; body = e; ret = t } as fundef) =
         e yrs in
     let (_, zfrs) =
         List.fold_left
-            (fun (d, zfrs) z -> (d + 1, (fregs.(d), z) :: zfrs))
+            (fun (d, zfrs) z -> (d + 1, (z, fregs.(d)) :: zfrs))
             (0, []) zs in
     let e =
         List.fold_left
@@ -435,18 +435,7 @@ let h_args ({ name = n; args = ys; fargs = zs; body = e; ret = t } as fundef) =
 
 
 let h ({ name = Id.L(x); args = ys; fargs = zs; body = e; ret = t } as fundef) = 
-    (* 
-    let (_, arg_regs) = 
-        List.fold_left
-            (fun (i, arg_regs) _ ->
-                (i+1, regs.(i) :: arg_regs))
-        (0, []) ys in
-    let (_, farg_regs) = 
-        List.fold_left
-            (fun (i, farg_regs) _ ->
-                (i+1, fregs.(i) :: farg_regs))
-        (0, []) zs in
-    *)
+    Printf.fprintf stdout "Function: %s ----------------------------------------\n";
     let fundef' = h_args (move_calleesaves fundef) in
 
     let (e', allocation) = alloc (Fun(fundef')) in 

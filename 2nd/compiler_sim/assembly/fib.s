@@ -104,11 +104,11 @@ fib.9:
 	sw	%ra, 1(%sp)
 	lw	%v0, 0(%sp)
 	addi	%at, %zero, 1
-	blt	%at, %v0, bgt_else.38
+	blt	%at, %v0, bgt_else.49
 	lw	%ra, 1(%sp)
 	lw	%v0, 0(%sp)
 	jr	%ra
-bgt_else.38:
+bgt_else.49:
 	lw	%v0, 0(%sp)
 	addi	%v0, %v0, -1
 	addi	%sp, %sp, 2

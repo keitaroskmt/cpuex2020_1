@@ -23,9 +23,9 @@ and g' = function
           jump = None
         })
   | NonTail((x, t)), Mov(y) when x = y -> ()
-  | NonTail(xt), Mov(y) ->
+  | NonTail((x, t)), Mov(y) ->
         emit (MOVE {
-          dst = [xt];
+          dst = [(x, Type.Int)];
           src = [(y, Type.Int)]
         })
   | NonTail(xt), Neg(y) ->
@@ -67,9 +67,9 @@ and g' = function
                     jump = None
                   }))
   | NonTail((x, t)), FMovD(y) when x = y -> ()
-  | NonTail(xt), FMovD(y) ->
+  | NonTail((x, t)), FMovD(y) ->
         emit (MOVE {
-          dst = [xt];
+          dst = [(x, Type.Float)];
           src = [(y, Type.Float)];
         })
   | NonTail(xt), FNegD(y) | NonTail(xt), FAbs(y) | NonTail(xt), FSqr(y) | NonTail(xt), Floor(y) ->
@@ -252,6 +252,8 @@ and g' = function
           src = g'_args [] ys zs;
           jump = None
       })
+
+    (* Float以外の返り値はIntとしておく *)
   | NonTail((a, t)), CallCls(x, ys, zs) ->
       emit (OPER {
           dst = calldefs;
@@ -259,15 +261,15 @@ and g' = function
           jump = None
       });
       (match t with 
-      | Type.Int -> emit (MOVE {
-                        dst = [(a, t)];
-                        src = [(regs.(0), Type.Int)]
-                    })
+      | Type.Unit -> ()
       | Type.Float -> emit (MOVE{
                         dst = [(a, t)];
                         src = [(fregs.(0), Type.Float)]
                     })
-      | _ -> ())
+      | _ -> emit (MOVE {
+                        dst = [(a, Type.Int)];
+                        src = [(regs.(0), Type.Int)]
+                    }))
   | NonTail((a, t)), CallDir(Id.L(x), ys, zs) ->
       emit (OPER {
           dst = calldefs;
@@ -275,15 +277,15 @@ and g' = function
           jump = None
       });
       (match t with 
-      | Type.Int -> emit (MOVE{
-                        dst = [(a, t)];
-                        src = [(regs.(0), Type.Int)]
-                    })
+      | Type.Unit -> ()
       | Type.Float -> emit (MOVE{
                         dst = [(a, t)];
                         src = [(fregs.(0), Type.Float)]
                     })
-      | _ -> ())
+      | _ -> emit (MOVE{
+                        dst = [(a, Type.Int)];
+                        src = [(regs.(0), Type.Int)]
+                    }))
 
 
 (* 呼び出し側から見た引数s処理　*)

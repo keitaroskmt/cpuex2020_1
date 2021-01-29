@@ -304,15 +304,17 @@ let color Liveness.{graph; id2node; node2id; moves} spill_cost allocation (regis
                 )
              ) in
 
-    (* まとめてやるか一つずつやるか *)
+    (* List.iterでやる場合, decrement_degreeでsimplify_worklistが増えた場合反映されないバグ *)
     let simplify () = 
-        List.iter 
-            (fun cnode -> 
-                cnode.nset <- Stack;
-                select_stack := cnode :: !select_stack;
-                List.iter decrement_degree (adjacent cnode))
-        !simplify_worklist;
-        simplify_worklist := [] in
+        match !simplify_worklist with
+        | [] -> failwith "simplify"
+        | cnode :: rest ->
+        (
+            simplify_worklist := rest;
+            cnode.nset <- Stack;
+            select_stack := cnode :: !select_stack;
+            List.iter decrement_degree (adjacent cnode)
+        ) in
 
     (* coalesce *)
     let add_worklist cnode =
@@ -412,7 +414,7 @@ let color Liveness.{graph; id2node; node2id; moves} spill_cost allocation (regis
     let freeze_moves cnode = 
         List.iter 
             (fun m ->
-                let v = if get_alias cnode = get_alias m.dst then 
+                let v = if get_alias cnode == get_alias m.dst then 
                     get_alias m.src else get_alias m.dst in
                 active_moves := List.filter (fun x -> x != m) !active_moves;
                 m.mset <- Frozen;

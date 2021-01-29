@@ -101,20 +101,22 @@ create_float_extarray_cont:
 # ------------ body ---------------------------
 inprod.13:
 	sw	%ra, 0(%sp)
-	blti	%a0, 0, bgti_else.51
+	blti	%a0, 0, bgti_else.66
 	add	%at, %v0, %a0
-	flw	%f10, 0(%at)
-	add	%at, %v1, %a0
 	flw	%f1, 0(%at)
-	fmul	%f1, %f10, %f1
+	add	%at, %v1, %a0
+	flw	%f0, 0(%at)
+	fmul	%f0, %f1, %f0
+	fsw	%f0, 1(%sp)
 	addi	%a0, %a0, -1
-	addi	%sp, %sp, 1
+	addi	%sp, %sp, 2
 	jal	inprod.13
-	addi	%sp, %sp, -1
+	addi	%sp, %sp, -2
 	lw	%ra, 0(%sp)
+	flw	%f1, 1(%sp)
 	fadd	%f0, %f1, %f0
 	jr	%ra
-bgti_else.51:
+bgti_else.66:
 	lw	%ra, 0(%sp)
 	flw	%f0, 2(%zero)
 	jr	%ra
@@ -123,21 +125,20 @@ min_caml_start:
 	addi	%a0, %zero, 3
 	sw	%a0, 0(%sp)
 	flw	%f0, 1(%zero)
-	addi	%v0, %a2, 0
+	lw	%v0, 0(%sp)
 	addi	%sp, %sp, 1
 	jal	min_caml_create_float_array
 	addi	%sp, %sp, -1
-	addi	%a2, %v0, 0
+	sw	%v0, 1(%sp)
 	flw	%f0, 0(%zero)
-	addi	%v0, %a2, 0
-	addi	%sp, %sp, 1
+	lw	%v0, 0(%sp)
+	addi	%sp, %sp, 2
 	jal	min_caml_create_float_array
-	addi	%sp, %sp, -1
-	addi	%a2, %v0, 0
+	addi	%sp, %sp, -2
+	addi	%v1, %v0, 0
 	addi	%a0, %zero, 2
-	addi	%v1, %a2, 0
-	addi	%v0, %a2, 0
-	addi	%sp, %sp, 1
+	lw	%v0, 1(%sp)
+	addi	%sp, %sp, 2
 	jal	inprod.13
-	addi	%sp, %sp, -1
+	addi	%sp, %sp, -2
 	ret
