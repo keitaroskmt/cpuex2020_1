@@ -26,7 +26,7 @@ itof: 1clock 4.775ns
 - fdiv: 4clock 6.987ns(-0.836ns)
 - finv: 2clock 4.488ns(+0.260ns)
 - floor: 1clock 3.732ns(±0ns)
-- fsqrt: 1clock 5.013ns(±0ns)
+- fsqrt: 2clock 5.013ns(±0ns)
 - ftoi: 1clock 4.135ns(-0.203ns)
 - itof: 1clock 4.775ns(±0ns)
 
