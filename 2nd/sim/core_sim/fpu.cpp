@@ -21,26 +21,81 @@ typedef union
 
 float fadd(fi in1, fi in2)
 {
-    ieee x1, x2;
+    ieee x1, x2, y;
     x1.u = in1.i;
     x2.u = in2.i;
+
+    unsigned long long int e1a, e2a, m1a, m2a, e2ai, te, te2, te3, ce, tde, sel, ei, de, ms, mi, es, mye, esi, eyd, myd, se, eyf, myf, ey, my, sy;
+    unsigned long long int mie, mia;
+
     if (x1.b.e == 0)
-        in1.i = 0;
+    {
+        m1a = 0;
+        e1a = 1;
+    }
+    else
+    {
+        m1a = x1.b.m + (1 << 23);
+        e1a = x1.b.e;
+    }
+
     if (x2.b.e == 0)
-        in2.i = 0;
-    return in1.f + in2.f;
+    {
+        m2a = 0;
+        e2a = 1;
+    }
+    else
+    {
+        m2a = x2.b.m + (1 << 23);
+        e2a = x2.b.e;
+    }
+
+    e2ai = 255 - e2a;
+    te = e1a + e2ai;
+    ce = (te / 256) ? 0 : 1;
+    te2 = te + 1;
+    te3 = 511 - te;
+    tde = (ce == 0) ? te2 % (1 << 8) : te3 % (1 << 8);
+    de = (tde >= 31) ? 31 : tde % (1 << 5);
+    sel = (de == 0) ? ((m1a > m2a) ? 0 : 1) : ce;
+    ms = (sel == 0) ? m1a : m2a;
+    mi = (sel == 0) ? m2a : m1a;
+    es = (sel == 0) ? e1a : e2a;
+    ei = (sel == 0) ? e2a : e1a;
+    sy = (sel == 0) ? x1.b.s : x2.b.s;
+
+    mie = mi << 31;
+    mia = mie >> de;
+    mye = (x1.b.s == x2.b.s) ? (ms << 2) + (mia >> 29) : (ms << 2) - (mia >> 29);
+    esi = es + 1;
+    eyd = (mye / (1 << 26)) ? esi : es;
+    myd = (mye / (1 << 26)) ? ((esi == 255) ? (1 << 25) : (mye >> 1)) : mye;
+    se = 26;
+    for (int i = 25; i >= 0; i--)
+    {
+        if (myd / (1 << i))
+        {
+            se = 25 - i;
+            break;
+        }
+    }
+    eyf = eyd - se;
+    myf = (eyd > se) ? (myd << se) : (myd << ((eyd % (1 << 5)) - 1));
+    my = (myf % (1 << 25)) >> 2;
+    ey = (((myf % (1 << 26)) >> 2) == 0) ? 0
+         : (eyd > se)                    ? eyf % (1 << 8)
+                                         : 0;
+    y.b.s = sy;
+    y.b.e = ey;
+    y.b.m = my;
+
+    return y.f;
 }
 
 float fsub(fi in1, fi in2)
 {
-    ieee x1, x2;
-    x1.u = in1.i;
-    x2.u = in2.i;
-    if (x1.b.e == 0)
-        in1.i = 0;
-    if (x2.b.e == 0)
-        in2.i = 0;
-    return in1.f - in2.f;
+    in2.f = -in2.f;
+    return fadd(in1, in2);
 }
 
 float fmul(fi in1, fi in2)
@@ -79,37 +134,20 @@ float fmul(fi in1, fi in2)
         m = (m1am2a % (1ULL << 47)) >> 24;
         e_9 = ea + 1;
     }
-    else if (m1am2a / (1ULL << 46) == 1)
+    else
     {
         m = (m1am2a % (1ULL << 46)) >> 23;
         e_9 = ea;
     }
-    else if (m1am2a / (1ULL << 45) == 1)
-    {
-        m = (m1am2a % (1ULL << 45)) >> 22;
-        e_9 = ea - 1;
-    }
-    else if (m1am2a / (1ULL << 44) == 1)
-    {
-        m = (m1am2a % (1ULL << 44)) >> 21;
-        e_9 = ea - 2;
-    }
-    else
-    {
-        e_9 = 0;
-        m = 0;
-    }
+
     if (e_9 < 128)
         subnormal = true;
     else if (e_9 > 381)
         inf = true;
 
-    if (subnormal)
-        shift_e = 128 - e_9;
-    else
-        shift_e = 0;
+    shift_e = 128 - e_9;
 
-    if (x1.b.e == 0 || (x2.b.e == 0 && (x2.b.m >> 21) == 0))
+    if (x1.b.e == 0 || x2.b.e == 0)
         zero = true;
 
     shifted_m = ((m + (1 << 23)) >> shift_e) % (1 << 23);
@@ -205,6 +243,16 @@ float fsqrt(fi in)
 float fdiv(fi in1, fi in2)
 {
     fi mid;
+    ieee x1, x2;
+    x1.u = in1.i;
+    x2.u = in2.i;
+    if (x1.b.e > 120 && x2.b.e > 252)
+    {
+        x2.b.e -= 3;
+        x1.b.e -= 3;
+    }
+    in1.i = x1.u;
+    in2.i = x2.u;
     mid.f = finv(in2);
     return fmul(in1, mid);
 }
@@ -275,6 +323,9 @@ float floor(fi in)
     m2 = (x.b.s && x.b.e < 150 && x.b.m != m3) ? x.b.m + (1 << (150 - x.b.e)) : x.b.m;
     m1 = (x.b.e >= 150) ? m2 : (m2 >> (150 - x.b.e)) << (150 - x.b.e);
     e1 = x.b.e + 1;
-    y.u = (x.b.e >= 127 && x.b.s && (m2 / (1 << 23))) ? (x.b.s << 31) + (e1 << 23) : (x.b.e >= 127) ? (x.b.s << 31) + (x.b.e << 23) + m1 : (x.b.s && x.b.e > 0) ? (1 << 31) + (127 << 23) : 0;
+    y.u = (x.b.e >= 127 && x.b.s && (m2 / (1 << 23))) ? (x.b.s << 31) + (e1 << 23)
+          : (x.b.e >= 127)                            ? (x.b.s << 31) + (x.b.e << 23) + m1
+          : (x.b.s && x.b.e > 0)                      ? (1 << 31) + (127 << 23)
+                                                      : 0;
     return y.f;
 }
