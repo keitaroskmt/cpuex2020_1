@@ -60,7 +60,7 @@ module fsqrt_1st
     wire [13:0] d;
 
     assign c = val[35:13];
-    assign d = val[12:0] + 14'b10000000000000;
+    assign d = {1'b1, val[12:0]};
     assign a1 = m[13:0];
     assign a2 = a1 << 1;
     assign cor_n = (key < 10'd512) ? a2 * d : a1 * d;
