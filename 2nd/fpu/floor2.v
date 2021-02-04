@@ -2,11 +2,12 @@
 
 module floor
     ( input wire [31:0] x,
-      output wire [31:0] y,
+      output reg [31:0] y,
       input wire clk,
       input wire rstn
 );
 
+    wire [31:0] y_wire;
     wire s;
     wire [7:0] e;
     wire [22:0] m;
@@ -15,8 +16,11 @@ module floor
     assign e = x[30:23];
     assign m = x[22:0];
 
-    floor_1st u2(s, e, m, y);
+    floor_1st u2(s, e, m, y_wire);
 
+    always @(posedge clk) begin
+        y <= y_wire;
+    end
 
 endmodule
 

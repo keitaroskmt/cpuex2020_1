@@ -3,18 +3,22 @@
 module fsub
     ( input wire [31:0] x1,
       input wire [31:0] x2,
-      output wire [31:0] y,
+      output reg [31:0] y,
       output wire ovf,
       input wire clk,
       input wire rstn
 );
+    wire [31:0] y_wire;
     wire [31:0] x2_;
 
     assign ovf = 0;
     assign x2_ = {~x2[31], x2[30:0]};
 
-    fsub_1st u1(x1, x2_, y);
+    fsub_1st u1(x1, x2_, y_wire);
 
+    always @(posedge clk) begin
+        y <= y_wire;
+    end
 
 endmodule
 

@@ -3,7 +3,7 @@
 module fmul
     ( input wire [31:0] x1,
       input wire [31:0] x2,
-      output wire [31:0] y,
+      output reg [31:0] y,
       output wire ovf,
       input wire clk,
       input wire rstn
@@ -11,7 +11,13 @@ module fmul
 
     assign ovf = 0;
 
-    fmul_1st u1(x1, x2, y);
+    wire [31:0] y_wire;
+
+    fmul_1st u1(x1, x2, y_wire);
+
+    always @(posedge clk) begin
+        y <= y_wire;
+    end
 
 endmodule
 

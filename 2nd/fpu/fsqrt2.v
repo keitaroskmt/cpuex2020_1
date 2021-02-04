@@ -2,7 +2,7 @@
 
 module fsqrt
     ( input wire [31:0] x,
-      output wire [31:0] y,
+      output reg [31:0] y,
       input wire clk,
       input wire rstn
 );
@@ -12,6 +12,7 @@ module fsqrt
     wire [22:0] m;
     wire [35:0] val;
     wire [9:0] key;
+    wire [31:0] y_wire;
 
     reg reg_s;
     reg [7:0] reg_e;
@@ -26,13 +27,14 @@ module fsqrt
     assign key = x[23:14];
 
     fsqrt_table u1(key, val, clk, rstn);
-    fsqrt_1st u2(reg_s, reg_e, reg_m, reg_key, val, y);
+    fsqrt_1st u2(reg_s, reg_e, reg_m, reg_key, val, y_wire);
 
     always @(posedge clk) begin
         reg_s <= s;
         reg_e <= e;
         reg_m <= m;
         reg_key <= key;
+        y <= y_wire;
     end
 
 endmodule

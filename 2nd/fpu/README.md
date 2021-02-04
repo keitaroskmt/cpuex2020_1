@@ -21,14 +21,30 @@ itof: 1clock 4.775ns
 - fadd:
   - 1clock 6.798ns(-2.949ns)
   - 0clock 7.045ns
-- fsub: 1clock 6.798ns(-2.949ns)
-- fmul: 1clock 6.807ns(-0.915ns)
-- fdiv: 4clock 6.987ns(-0.836ns)
-- finv: 2clock 4.488ns(+0.260ns)
-- floor: 1clock 3.732ns(±0ns)
-- fsqrt: 2clock 5.013ns(±0ns)
-- ftoi: 1clock 4.135ns(-0.203ns)
-- itof: 1clock 4.775ns(±0ns)
+- fsub:
+  - 1clock 6.798ns(-2.949ns)
+  - 0clock 6.895ns
+- fmul:
+  - 1clock 6.807ns(-0.915ns)
+  - 0clock 6.675ns
+- fdiv:
+  - 4clock 6.987ns(-0.836ns)
+  - 2clock 6.876ns
+- finv:
+  - 2clock 4.488ns(+0.260ns)
+  - 1clock 4.513ns
+- floor:
+  - 1clock 3.732ns(±0ns)
+  - 0clock 3.629ns
+- fsqrt:
+  - 2clock 5.013ns(±0ns)
+  - 1clock 5.550ns
+- ftoi:
+  - 1clock 4.135ns(-0.203ns)
+  - 0clock 4.245ns
+- itof:
+  - 1clock 4.775ns(±0ns)
+  - 0clock 4.665ns
 
 ## 仕様
 

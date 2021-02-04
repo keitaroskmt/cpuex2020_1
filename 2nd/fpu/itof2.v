@@ -2,12 +2,18 @@
 
 module itof
     ( input wire [31:0] x,
-      output wire [31:0] y,
+      output reg [31:0] y,
       input wire clk,
       input wire rstn
 );
 
-    itof_1st u2(x, y);
+    wire [31:0] y_wire;
+
+    itof_1st u2(x, y_wire);
+
+    always @(posedge clk) begin
+        y <= y_wire;
+    end
 
 endmodule
 

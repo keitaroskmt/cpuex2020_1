@@ -3,20 +3,14 @@
 module fadd
     ( input wire [31:0] x1,
       input wire [31:0] x2,
-      output reg [31:0] y,
+      output wire [31:0] y,
       output wire ovf,
       input wire clk,
       input wire rstn
 );
-    wire [31:0] y_wire;
-    wire ovf_wire;
 
     assign ovf = 0;
-    fadd_1st u1(x1, x2, y_wire);
-
-    always @(posedge clk) begin
-        y <= y_wire;
-    end
+    fadd_1st u1(x1, x2, y);
 
 endmodule
 
