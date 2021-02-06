@@ -428,8 +428,6 @@ let h oc { name = Id.L(x); args = ys; fargs = zs; body = e; ret = _ } =
   g oc (Tail, e)
 
 let f (oc, dc) (Prog(data, fundefs, e)) =
-  (* for debug *)
-  asm_debug stdout (Prog(data, fundefs, e));
   
   Format.eprintf "generating assembly...@.";
   Printf.fprintf oc ".section\t\".rodata\"\n";

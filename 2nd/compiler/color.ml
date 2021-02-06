@@ -510,7 +510,7 @@ let color Liveness.{graph; id2node; node2id; moves} spill_cost allocation (regis
         else if !spill_worklist <> [] then select_spill ()
         );
         (* for debug *)
-        color_print stdout;
+        (*color_print stdout;*)
         if !simplify_worklist <> [] || !worklist_moves <> [] ||
             !freeze_worklist <> [] || !spill_worklist <> [] then loop () in
 

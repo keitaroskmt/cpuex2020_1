@@ -22,7 +22,8 @@ let lexbuf (outchan, datachan) l = (* バッファをコンパイルしてチャンネルへ出力す
                       (KNormal.f
                          (Typing.f
                             (Parser.exp Lexer.token l))))))))))
-  (* 
+
+(*
   Emit.f (outchan, datachan)
     (RegAlloc.f
        (Simm.f
