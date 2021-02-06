@@ -318,6 +318,7 @@ and g'_args x_reg_cl ys zs =
     cl @ List.map (fun (y, r) -> (r, Type.Int)) yrs @ List.map (fun (z, fr) -> (fr, Type.Float)) zfrs
 
 
+(*
 (* 関数内部から見た引数処理　*)
 let h_args x ys zs = 
     emit (MOVE {
@@ -349,6 +350,7 @@ let h_args x ys zs =
                 src = [(fr, Type.Float)]
             }))
     zfrs
+    *)
 
 let add_exit l = 
     l @ [(OPER {
@@ -360,7 +362,11 @@ let add_exit l =
 let h { name = Id.L(x); args = ys; fargs = zs; body = e; ret = t } =
     inst_list := [];
     emit (LABEL {lab = Id.L(x)});
-    h_args x ys zs;
+    emit (MOVE {
+        dst = [(x, Type.Int)];
+        src = [(reg_cl, Type.Int)]
+    });
+    (*h_args x ys zs;*)
     g (Tail, e);
     add_exit (List.rev !inst_list)
 

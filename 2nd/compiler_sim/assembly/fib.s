@@ -102,21 +102,17 @@ create_float_extarray_cont:
 fib.9:
 	sw	%v0, 0(%sp)
 	sw	%ra, 1(%sp)
-	lw	%v0, 0(%sp)
 	addi	%at, %zero, 1
-	blt	%at, %v0, bgt_else.49
-	lw	%ra, 1(%sp)
-	lw	%v0, 0(%sp)
+	blt	%at, %v0, bgt_else.47
 	jr	%ra
-bgt_else.49:
-	lw	%v0, 0(%sp)
+bgt_else.47:
 	addi	%v0, %v0, -1
 	addi	%sp, %sp, 2
 	jal	fib.9
 	addi	%sp, %sp, -2
 	sw	%v0, 2(%sp)
-	lw	%v0, 0(%sp)
-	addi	%v0, %v0, -2
+	lw	%a0, 0(%sp)
+	addi	%v0, %a0, -2
 	addi	%sp, %sp, 3
 	jal	fib.9
 	addi	%sp, %sp, -3

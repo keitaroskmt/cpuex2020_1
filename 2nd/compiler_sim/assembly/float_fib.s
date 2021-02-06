@@ -103,13 +103,9 @@ float_fib.9:
 	fsw	%f0, 0(%sp)
 	sw	%ra, 1(%sp)
 	flw	%f1, 2(%zero)
-	flw	%f0, 0(%sp)
-	fblt	%f1, %f0, fbgt_else.52
-	lw	%ra, 1(%sp)
-	flw	%f0, 0(%sp)
+	fblt	%f1, %f0, fbgt_else.50
 	jr	%ra
-fbgt_else.52:
-	flw	%f0, 0(%sp)
+fbgt_else.50:
 	fsub	%f0, %f0, %f1
 	addi	%sp, %sp, 2
 	jal	float_fib.9
