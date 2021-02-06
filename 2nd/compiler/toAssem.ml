@@ -144,6 +144,7 @@ and g' = function
   | Tail, IfEq(x, y', e1, e2) | Tail, IfLE(x, y', e1, e2) | Tail, IfGE(x, y', e1, e2) ->
       let b_else = Id.genid ("else") in
       let b_then = Id.genid ("then") in
+      let b_cont = Id.genid ("cont") in
       (match y' with
       | V(y) -> emit (OPER {
         dst = [];
@@ -159,14 +160,23 @@ and g' = function
           lab = Id.L(b_then)
       });
       g (Tail, e1);
+      emit (OPER {
+          dst = [];
+          src = [];
+          jump = Some [Id.L(b_cont)];
+      });
       emit (LABEL {
           lab = Id.L(b_else)
       });
-      g (Tail, e2)
+      g (Tail, e2);
+      emit (LABEL {
+          lab = Id.L(b_cont)
+      })
 
   | Tail, IfFEq(x, y, e1, e2) | Tail, IfFLE(x, y, e1, e2) ->
       let b_else = Id.genid ("else") in
       let b_then = Id.genid ("then") in
+      let b_cont = Id.genid ("cont") in
         emit (OPER {
         dst = [];
         src = [(x, Type.Float); (y, Type.Float)];
@@ -176,10 +186,18 @@ and g' = function
             lab = Id.L(b_then)
         });
         g (Tail, e1);
+      emit (OPER {
+          dst = [];
+          src = [];
+          jump = Some [Id.L(b_cont)];
+      });
         emit (LABEL {
             lab = Id.L(b_else)
         });
-        g (Tail, e2)
+        g (Tail, e2);
+      emit (LABEL {
+          lab = Id.L(b_cont)
+      })
 
   | NonTail(zt), IfEq(x, y', e1, e2) | NonTail(zt), IfLE(x, y', e1, e2) | NonTail(zt), IfGE(x, y', e1, e2) ->
       let b_else = Id.genid ("else") in
