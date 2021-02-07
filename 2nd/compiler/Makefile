@@ -47,7 +47,7 @@ output.ml main.mli main.ml
 #	./$(RESULT) mytest/$*
 
 #TESTS = fib float_fib adder array_make array_put sin cos
-TESTS = array_make
+TESTS = cos
 
 do_test: $(TESTS:%=../compiler_sim/assembly/%.s)
 

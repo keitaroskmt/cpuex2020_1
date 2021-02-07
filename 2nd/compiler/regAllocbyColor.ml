@@ -157,66 +157,81 @@ and rewrite_exp e spilled env set =
                     let e2' = rewrite e2 spilled env set in
                     (Ans(IfFLE(s, t, e1', e2')), env, set)))
     | CallCls(x, ys, zs) as exp ->
-        let x' = if List.mem x spilled then M.find x env else x in
-        let ys' = List.map (fun x -> if List.mem x spilled then M.find x env else x) ys in
-        let zs' = List.map (fun x -> if List.mem x spilled then M.find x env else x) zs in
-        (* 関数呼び出し以後は必ずrestore -> S.empty *)
-        let cont = (Ans(CallCls(x', ys', zs')), env, S.empty) in
+        let cont = 
+            (
+            (fun env ->
+                (
+                let x' = if List.mem x spilled then M.find x env else x in
+                let ys' = List.map (fun x -> if List.mem x spilled then M.find x env else x) ys in
+                let zs' = List.map (fun x -> if List.mem x spilled then M.find x env else x) zs in
+                Ans(CallCls(x', ys', zs'))
+                ))
+             , env, set) in
 
         let exp' = List.fold_left
-            (fun (e, env, set) x -> 
-                if S.mem x set then (e, env, set)
+            (fun (k, env, set) x -> 
+                if S.mem x set then (k, env, set)
                 else 
                 (
                     if List.mem x spilled then
                         let new_x = Id.gentmp Type.Int in
-                        ((Let((new_x, Type.Int), Restore(x), e)), (M.add x new_x env), set)
-                    else
-                        (e, env, set)
-                ))
-        cont (x :: ys) in
-        List.fold_left
-            (fun (e, env, set) x -> 
-                if S.mem x set then (e, env, set)
-                else
-                (
-                    if List.mem x spilled then
-                        let new_x = Id.gentmp Type.Float in
-                        ((Let((new_x, Type.Float), Restore(x), e)), (M.add x new_x env), set)
-                    else
-                        (e, env, set)
-                ))
-        exp' zs
-
-    | CallDir(Id.L(x), ys, zs) as exp ->
-        let ys' = List.map (fun x -> if List.mem x spilled then M.find x env else x) ys in
-        let zs' = List.map (fun x -> if List.mem x spilled then M.find x env else x) zs in
-        let cont = (Ans(CallDir(Id.L(x), ys', zs')), env, S.empty) in
-
-        let exp' = List.fold_left
-            (fun (e, env, set) x -> 
-                if S.mem x set then (e, env, set)
-                else 
-                (
-                    if List.mem x spilled then
-                        let new_x = Id.gentmp Type.Int in
-                        ((Let((new_x, Type.Int), Restore(x), e)), (M.add x new_x env), set)
+                        ((fun env -> (Let((new_x, Type.Int), Restore(x), k env))), (M.add x new_x env), set)
                     else 
-                        (e, env, set)
+                        (k, env, set)
                 ))
         cont ys in
-        List.fold_left
-            (fun (e, env, set) x -> 
-                if S.mem x set then (e, env, set)
-                else
+        let (k, env, set) = 
+            List.fold_left
+                (fun (k, env, set) x -> 
+                    if S.mem x set then (k, env, set)
+                    else
+                    (
+                    if List.mem x spilled then
+                        let new_x = Id.gentmp Type.Float in
+                        ((fun env -> (Let((new_x, Type.Float), Restore(x), k env))), (M.add x new_x env), set)
+                    else
+                        (k, env, set)
+                    ))
+            exp' zs in
+        (k env, env, S.empty)
+
+    | CallDir(Id.L(x), ys, zs) as exp ->
+        let cont = 
+            (
+            (fun env ->
                 (
-                if List.mem x spilled then
-                    let new_x = Id.gentmp Type.Float in
-                    ((Let((new_x, Type.Float), Restore(x), e)), (M.add x new_x env), set)
-                else
-                    (e, env, set)
+                let ys' = List.map (fun x -> if List.mem x spilled then M.find x env else x) ys in
+                let zs' = List.map (fun x -> if List.mem x spilled then M.find x env else x) zs in
+                Ans(CallDir(Id.L(x), ys', zs'))
                 ))
-        exp' zs
+             , env, set) in
+
+        let exp' = List.fold_left
+            (fun (k, env, set) x -> 
+                if S.mem x set then (k, env, set)
+                else 
+                (
+                    if List.mem x spilled then
+                        let new_x = Id.gentmp Type.Int in
+                        ((fun env -> (Let((new_x, Type.Int), Restore(x), k env))), (M.add x new_x env), set)
+                    else 
+                        (k, env, set)
+                ))
+        cont ys in
+        let (k, env, set) = 
+            List.fold_left
+                (fun (k, env, set) x -> 
+                    if S.mem x set then (k, env, set)
+                    else
+                    (
+                    if List.mem x spilled then
+                        let new_x = Id.gentmp Type.Float in
+                        ((fun env -> (Let((new_x, Type.Float), Restore(x), k env))), (M.add x new_x env), set)
+                    else
+                        (k, env, set)
+                    ))
+            exp' zs in
+        (k env, env, S.empty)
 
     | Save(x, y) -> (Ans(Save(x, y)), env, set)
 
