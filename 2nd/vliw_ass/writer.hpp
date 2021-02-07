@@ -13,6 +13,7 @@ class Writer {
         string file_name;
 
         unsigned int encode(vector<string> &);
+        void print_bit(unsigned int);
 };
 
 

@@ -25,7 +25,13 @@ void Writer::assemble() {
 
     for (auto v : parser->code_map) {
         current_num = v.first;
-        f << static_cast<bitset<32>>(encode(v.second)) << endl;
+
+        // 1blockのサイズは4
+        assert(v.second.size() == 4);
+        f << static_cast<bitset<32>>(encode(v.second[0]));
+        f << static_cast<bitset<32>>(encode(v.second[1]));
+        f << static_cast<bitset<32>>(encode(v.second[2]));
+        f << static_cast<bitset<32>>(encode(v.second[3])) << endl;
     }
 
     f.close();
@@ -472,19 +478,27 @@ void Writer::debug() {
                 cout << w.first << endl;
             }
         }
-        cout << "L." << v.first << " ";
-        for (auto x : v.second) {
-            cout << x << " ";
-        }
-        cout << endl;
+        cout << "L." << v.first << endl;
+        assert(v.second.size() == 4);
+        for (auto w : v.second) {
+            cout << "\t";
+            for (auto x : w) {
+                cout << x << " ";
+            }
+            cout << endl;
 
-        current_num = v.first;
-        unsigned int bit = encode(v.second);
-        for (int i = 31; i >= 0; --i) {
-            if (bit & (1<<i)) cout << 1;
-            else cout << 0;
-            if (i == 26 || i == 21 || i == 16 || i == 11 || i == 6) cout << " ";
+            cout << "\t";
+            current_num = v.first;
+            print_bit(encode(v.second[0]));
         }
-        cout << endl;
     }
+}
+
+void Writer::print_bit(unsigned int bit) {
+    for (int i = 31; i >= 0; --i) {
+        if (bit & (1<<i)) cout << 1;
+        else cout << 0;
+        if (i == 26 || i == 21 || i == 16 || i == 11 || i == 6) cout << " ";
+    }
+    cout << endl;
 }

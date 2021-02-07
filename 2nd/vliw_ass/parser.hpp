@@ -5,6 +5,7 @@
 #include <map>
 #include <fstream>
 #include <string>
+#include <vector>
 #include <cassert>
 using namespace std;
 
@@ -12,21 +13,17 @@ class Parser {
     public:
         Parser(string);
         int parse_file();
-        // void preprocess_file(fstream &);
 
         void print_label();
-        void print_code();
 
         int total_num;
 
-        // vector<string> preprocess_buffer;
-        // vector<string> buffer_tmp;
         map<string, int> label_map;
-        map<int, vector<string>> code_map;
+        map<int, vector<vector<string>>> code_map;
     protected:
         string file_name;
-        int data_num;
         int current_num;
+        int current_pos;
 
         void parse_code(string);
 
