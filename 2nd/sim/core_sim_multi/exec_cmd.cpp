@@ -9,7 +9,7 @@
 #include "myutil.h"
 #include "file_io.h"
 
-int exec_cmd(int *loop, bool *is_stat, bool *print_bc, bool *print_calc, bool *print_process)
+int exec_cmd(int *loop, bool *is_stat, bool *print_bc, bool *print_calc, bool *print_process, bool *vliw)
 {
     std::string cmd;
     std::string base;
@@ -23,11 +23,15 @@ int exec_cmd(int *loop, bool *is_stat, bool *print_bc, bool *print_calc, bool *p
         if (cmd == "s\n")
         {
             *loop = 1;
+            if (*vliw)
+                *loop = 4;
             break;
         }
         else if (regex_match(cmd, cmd_re, std::regex("^(\\d+)s\n$")))
         {
             *loop = stoi(cmd_re[1].str());
+            if (*vliw)
+                *loop *= 4;
             break;
         }
         // stack表示 絶対アドレス指定

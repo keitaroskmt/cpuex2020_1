@@ -484,7 +484,7 @@ int exec_op(op_info op, bool print_calc, bool use_fpu)
         cur_env.FPR[op.opland_bit[0]] = frd.f;
 
         if (print_calc)
-            printf("lw\t%f(%08X),\tstack[%d(%08X)(%d(%08X)) = %d(%08X)]\n", frd.f, frd.i, op.offset, op.offset, rs, rs, sp, sp);
+            printf("flw\t%f(%08X),\tstack[%d(%08X)(%d(%08X)) = %d(%08X)]\n", frd.f, frd.i, op.offset, op.offset, rs, rs, sp, sp);
     }
     else if (op.opcode == "fsw")
     {
@@ -495,7 +495,7 @@ int exec_op(op_info op, bool print_calc, bool use_fpu)
         stack[sp].second = cur_env.PC;
 
         if (print_calc)
-            printf("sw\t%f(%08X),\tstack[%d(%08X)(%d(%08X)) = %d(%08X)]\n", frs.f, frs.i, op.offset, op.offset, rt, rt, sp, sp);
+            printf("fsw\t%f(%08X),\tstack[%d(%08X)(%d(%08X)) = %d(%08X)]\n", frs.f, frs.i, op.offset, op.offset, rt, rt, sp, sp);
     }
     else if (op.opcode == "ftoi")
     {

@@ -45,12 +45,13 @@ int main(int argc, char *argv[])
     bool is_out = false;
     bool debug_mode = false;
     bool use_fpu = false;
+    bool vliw = false;
     std::string n = "fib";
     std::string infile = "sin.txt";
     std::string outfile = "out.txt";
     std::string datafile = "data/";
 
-    while ((opt = getopt(argc, argv, "sbcpn:i:o:mdlf")) != -1)
+    while ((opt = getopt(argc, argv, "sbcpn:i:o:mdlfv")) != -1)
     {
         switch (opt)
         {
@@ -100,6 +101,10 @@ int main(int argc, char *argv[])
             use_fpu = true;
             break;
 
+        case 'v':
+            vliw = true;
+            break;
+
         default:
             printf("Usage: %s [-s] [-b] [-c] [-p] [-n arg] [-i arg] [-o arg]\n", argv[0]);
             break;
@@ -115,6 +120,7 @@ int main(int argc, char *argv[])
     int loop = 0;
     int max_sp = 0;
     int max_hp = 0;
+    int loop_unit = (vliw) ? 4 : 1;
     char buf[256];
 
     cur_env.PC = 0;
@@ -165,11 +171,17 @@ int main(int argc, char *argv[])
     {
         if (is_step && loop == 0)
             // コマンド受付 & 実行
-            if (exec_cmd(&loop, &is_stat, &print_bc, &print_calc, &print_process))
+            if (exec_cmd(&loop, &is_stat, &print_bc, &print_calc, &print_process, &vliw))
                 return 0;
+
+        if ((print_bc || print_process || print_calc) && (loop % loop_unit == 0) && vliw)
+            printf("%lld\n", cur_env.PC / 4);
 
         if (exec_step(print_process, print_calc, print_bc, label_count, use_fpu))
             break;
+
+        if ((print_bc || print_process || print_calc) && (loop - 1) % loop_unit == 0)
+            printf("\n");
 
         if (ops[cur_opnum].type == 0)
         {
@@ -221,8 +233,6 @@ int exec_step(bool print_process, bool print_calc, bool print_bc, bool label_cou
         if (exec_op(ops[cur_opnum], print_calc, use_fpu))
             return 1;
 
-        if (print_bc || print_process || print_calc)
-            printf("\n");
         cur_env.PC++;
     }
     else if (ops[cur_opnum].type == 1)
