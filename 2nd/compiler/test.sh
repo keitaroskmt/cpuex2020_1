@@ -11,8 +11,8 @@ make
 #./sim -n adder | head -n 1 > ./answer/adder.res
 #./sim -n array_make | tail -n 1 > ./answer/array_make.res
 #./sim -n array_put | tail -n 1 > ./answer/array_put.res
-#./sim -n sin | tail -n 1 > ./answer/sin.res
-./sim -n cos | tail -n 1 > ./answer/cos.res
+./sim -n sin | tail -n 1 > ./answer/sin.res
+#./sim -n cos | tail -n 1 > ./answer/cos.res
 
 for f in ./answer/*.res
 do

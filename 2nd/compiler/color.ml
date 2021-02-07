@@ -91,7 +91,12 @@ let color Liveness.{graph; id2node; node2id; moves} spill_cost allocation (regis
             | Coalesced -> "Coalesced"
             | Colored -> "Colored"
             | Stack -> "Stack" in
-        Printf.fprintf oc "Node %s (%d): %s\n" x n s in
+        Printf.fprintf oc "Node %s (%d): %s" x n s;
+        (
+        match alias.(n) with
+        | None -> Printf.fprintf oc " (alias -> None)\n"
+        | Some({node; n; nset}) -> Printf.fprintf oc " (alias -> %s)\n" (fst (node2id node))
+        ) in
 
     let move_print oc {dst; src; mset} =
         let s = 
@@ -367,14 +372,16 @@ let color Liveness.{graph; id2node; node2id; moves} spill_cost allocation (regis
             spill_worklist := u :: !spill_worklist
         ) in
 
+    (* 一度にやると, combine -> decrement_degree -> enable_moves -> worklist追加でバグる *)
     let coalesce () = 
-        List.iter 
-        (fun ({dst; src; _} as m) -> 
+        match !worklist_moves with
+        | [] -> failwith "coalesce"
+        | ({dst; src; _} as m) :: rest ->
             (
+            worklist_moves := rest;
             let x = get_alias src in
             let y = get_alias dst in
             let (u, v) = if y.nset = Precolored then (y, x) else (x, y) in
-            (* worklist_moves := rest; *)
             if u == v then 
             (
                 m.mset <- Coalesced;
@@ -405,10 +412,8 @@ let color Liveness.{graph; id2node; node2id; moves} spill_cost allocation (regis
             (
                 m.mset <- Active;
                 active_moves := m :: !active_moves
-            ))
             )
-        !worklist_moves;
-        worklist_moves := [] in
+            ) in
 
     (* freeze *)
     let freeze_moves cnode = 
@@ -502,6 +507,7 @@ let color Liveness.{graph; id2node; node2id; moves} spill_cost allocation (regis
     (* for debug *)
     color_print stdout;
 
+    let count = ref 0 in
     let rec loop () =
         (
         if !simplify_worklist <> [] then simplify ()
@@ -510,7 +516,8 @@ let color Liveness.{graph; id2node; node2id; moves} spill_cost allocation (regis
         else if !spill_worklist <> [] then select_spill ()
         );
         (* for debug *)
-        (*color_print stdout;*)
+        (if (!count mod 5) = 0 then color_print stdout);
+        count := !count + 1;
         if !simplify_worklist <> [] || !worklist_moves <> [] ||
             !freeze_worklist <> [] || !spill_worklist <> [] then loop () in
 

@@ -181,15 +181,6 @@ reduction_2pi.219:
 	lw	%at, 0(%k1)
 	jr	%at
 sin.223:
-	fmov	%f10, %f0
-	fmov	%f11, %f0
-	fmov	%f12, %f0
-	fmov	%f13, %f0
-	fmov	%f14, %f0
-	fmov	%f15, %f0
-	fmov	%f7, %f0
-	fmov	%f8, %f0
-	fmov	%f9, %f0
 	fsw	%f6, 0(%sp)
 	sw	%a0, 1(%sp)
 	sw	%ra, 2(%sp)
@@ -199,7 +190,6 @@ sin.223:
 	addi	%t0, %zero, 1
 	j	fbgt_cont.661
 fbgt_else.660:
-	addi	%t0, %zero, 0
 fbgt_cont.661:
 	fabs	%f0, %f0
 	addi	%sp, %sp, 3
@@ -207,7 +197,6 @@ fbgt_cont.661:
 	addi	%sp, %sp, -3
 	fblt	%f0, %f6, fbgt_else.662
 	beqi	%t0, 0, bnei_else.664
-	addi	%t0, %zero, 0
 	j	bnei_cont.665
 bnei_else.664:
 	addi	%t0, %zero, 1
@@ -239,29 +228,11 @@ fbgt_else.670:
 	addi	%sp, %sp, -3
 fbgt_cont.671:
 	beqi	%t0, 0, bnei_else.672
-	fmov	%f0, %f10
-	fmov	%f0, %f11
-	fmov	%f0, %f12
-	fmov	%f0, %f13
-	fmov	%f0, %f14
-	fmov	%f0, %f15
-	fmov	%f0, %f7
-	fmov	%f0, %f8
-	fmov	%f0, %f9
 	flw	%f6, 0(%sp)
 	lw	%a0, 1(%sp)
 	lw	%ra, 2(%sp)
 	jr	%ra
 bnei_else.672:
-	fmov	%f0, %f10
-	fmov	%f0, %f11
-	fmov	%f0, %f12
-	fmov	%f0, %f13
-	fmov	%f0, %f14
-	fmov	%f0, %f15
-	fmov	%f0, %f7
-	fmov	%f0, %f8
-	fmov	%f0, %f9
 	flw	%f6, 0(%sp)
 	lw	%a0, 1(%sp)
 	lw	%ra, 2(%sp)
@@ -274,11 +245,7 @@ rad.227:
 .global	min_caml_start
 min_caml_start:
 	flw	%f0, 0(%zero)
-	addi	%sp, %sp, 0
 	jal	rad.227
-	addi	%sp, %sp, 0
-	addi	%sp, %sp, 0
 	jal	sin.223
-	addi	%sp, %sp, 0
 	fmov	%g0, %f0
 	ret
