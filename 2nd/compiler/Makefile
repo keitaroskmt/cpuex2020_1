@@ -24,7 +24,7 @@ inline.mli inline.ml constFold.mli constFold.ml elim.mli elim.ml \
 fixAddress.mli fixAddress.ml \
 closure.mli closure.ml asm.mli asm.ml virtual.mli virtual.ml \
 simm.mli simm.ml regAlloc.mli regAlloc.ml \
-constFoldAsm.mli constFoldAsm.ml \
+constFoldAsm.mli constFoldAsm.ml elimAsm.mli elimAsm.ml \
 assem.ml toAssem.ml graph.mli graph.ml controlFlow.mli controlFlow.ml \
 liveness.mli liveness.ml color.mli color.ml regAllocbyColor.mli regAllocbyColor.ml \
 emit.mli emit.ml emit_for_regAllocbyColor.mli emit_for_regAllocbyColor.ml \
