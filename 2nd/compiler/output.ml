@@ -3,10 +3,21 @@ let limit = ref 1000
 let rec iter n e = (* 最適化処理をくりかえす (caml2html: main_iter) *)
   Format.eprintf "iteration %d@." n;
   if n = 0 then e else
-  (* TODO: adder.mlの定数畳み込みなしバージョンでNot_found errorが出たので確認すること *)
   let e' = Elim.f (ConstFold.f (Inline.f (Assoc.f (Beta.f (Cse.f e))))) in
   if e = e' then e else
   iter (n - 1) e'
+
+let rec iter_asm n e = 
+  Format.eprintf "iteration %d@." n;
+  if n = 0 then e else
+  (*
+  let e' = ElimAsm.f (ConstFoldAsm.f e)) in
+  let e' = (ConstFoldAsm.f e) in 
+  let e' = e in
+  *)
+  let e' = (ConstFoldAsm.f e) in 
+  if e = e' then e else
+  iter_asm (n - 1) e'
 
 let lexbuf (outchan, datachan) l = (* バッファをコンパイルしてチャンネルへ出力する (caml2html: main_lexbuf) *)
 (*
@@ -27,15 +38,16 @@ let lexbuf (outchan, datachan) l = (* バッファをコンパイルしてチャンネルへ出力す
 
   Emit.f (outchan, datachan)
     (RegAlloc.f
-       (Simm.f
-          (Virtual.f
-             (Closure.f
-              (FixAddress.f
-                (iter !limit
-                   (Alpha.f
-                      (KNormal.f
-                         (Typing.f
-                            (Parser.exp Lexer.token l))))))))))
+    (iter_asm !limit
+        (Simm.f
+            (Virtual.f
+                (Closure.f
+                (FixAddress.f
+                    (iter !limit
+                    (Alpha.f
+                        (KNormal.f
+                            (Typing.f
+                                (Parser.exp Lexer.token l)))))))))))
 
 let syntax_check f =
     let inchan = open_in (f ^ ".ml") in
