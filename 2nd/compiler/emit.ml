@@ -3,6 +3,7 @@ open Asm
 (* external gethi : float -> int32 = "gethi" *)
 (* external getlo : float -> int32 = "getlo" *)
 external get : float -> int32 = "get"
+let cls_count = ref 0
 
 let float_table = ref []
 
@@ -306,6 +307,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprime) *)
 
   (* 関数呼び出しの仮想命令の実装 (caml2html: emit_call) *)
   | Tail, CallCls(x, ys, zs) -> (* 末尾呼び出し (caml2html: emit_tailcall) *)
+      cls_count := !cls_count + 1;
       g'_args oc [(x, reg_cl)] ys zs;
       Printf.fprintf oc "\tlw\t%s, 0(%s)\n" reg_at reg_cl;
       Printf.fprintf oc "\tjr\t%s\n" reg_at;
@@ -313,6 +315,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprime) *)
       g'_args oc [] ys zs;
       Printf.fprintf oc "\tj\t%s\n" x;
   | NonTail(a), CallCls(x, ys, zs) ->
+      cls_count := !cls_count + 1;
       g'_args oc [(x, reg_cl)] ys zs;
       let ss = stacksize () in
       Printf.fprintf oc "\tsw\t%s, %d(%s)\n" reg_ra (ss - 1) reg_sp;
@@ -435,6 +438,7 @@ let h oc { name = Id.L(x); args = ys; fargs = zs; body = e; ret = _ } =
   g oc (Tail, e)
 
 let f (oc, dc) (Prog(data, fundefs, e)) =
+  cls_count := 0;
 (*
   (* for debug *)
   asm_debug stdout (Prog(data, fundefs, e));
@@ -475,3 +479,4 @@ let f (oc, dc) (Prog(data, fundefs, e)) =
 
   Printf.fprintf stdout "len ys: %d \n" (!len_ys);
   Printf.fprintf stdout "len zs: %d \n" (!len_zs);
+  Printf.fprintf stdout "Closure num: %d\n" (!cls_count);
