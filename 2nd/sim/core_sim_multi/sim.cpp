@@ -175,7 +175,7 @@ int main(int argc, char *argv[])
                 return 0;
 
         if ((print_bc || print_process || print_calc) && (loop % loop_unit == 0) && vliw)
-            printf("%lld\n", cur_env.PC / 4);
+            printf("%lld\t%d\n", cur_env.PC / 4, ops[cur_opnum].op_idx / 4);
 
         if (exec_step(print_process, print_calc, print_bc, label_count, use_fpu))
             break;
