@@ -99,28 +99,7 @@ create_float_extarray_cont:
 	addi	%v1, %v1, 1
 	j	create_float_extarray_loop
 # ------------ body ---------------------------
-adder.9:
-	lw	%a0, 1(%k1)
-	add	%v0, %a0, %v0
-	jr	%ra
-make_adder.4:
-	add	%a0, %zero, %v0
-	add	%v0, %zero, %hp
-	addi	%hp, %hp, 2
-	addi	%a1, %zero, adder.9
-	sw	%a1, 0(%v0)
-	sw	%a0, 1(%v0)
-	jr	%ra
 .global	min_caml_start
 min_caml_start:
-	addi	%v0, %zero, 3
-	addi	%sp, %sp, 0
-	jal	make_adder.4
-	addi	%sp, %sp, 0
-	addi	%k1, %v0, 0
-	addi	%v0, %zero, 7
-	addi	%sp, %sp, 0
-	lw	%at, 0(%k1)
-	jalr	%at
-	addi	%sp, %sp, 0
+	addi	%g0, %zero, 10
 	ret

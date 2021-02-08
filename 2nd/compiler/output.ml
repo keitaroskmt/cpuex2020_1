@@ -9,6 +9,7 @@ let rec iter n e = (* 最適化処理をくりかえす (caml2html: main_iter) *)
   iter (n - 1) e'
 
 let lexbuf (outchan, datachan) l = (* バッファをコンパイルしてチャンネルへ出力する (caml2html: main_lexbuf) *)
+(*
   Id.counter := 0;
   Typing.extenv := M.empty;
   Emit_for_regAllocbyColor.f (outchan, datachan)
@@ -22,8 +23,8 @@ let lexbuf (outchan, datachan) l = (* バッファをコンパイルしてチャンネルへ出力す
                       (KNormal.f
                          (Typing.f
                             (Parser.exp Lexer.token l))))))))))
+                            *)
 
-(*
   Emit.f (outchan, datachan)
     (RegAlloc.f
        (Simm.f
@@ -35,7 +36,6 @@ let lexbuf (outchan, datachan) l = (* バッファをコンパイルしてチャンネルへ出力す
                       (KNormal.f
                          (Typing.f
                             (Parser.exp Lexer.token l))))))))))
-                            *)
 
 let syntax_check f =
     let inchan = open_in (f ^ ".ml") in

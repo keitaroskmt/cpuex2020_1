@@ -22,13 +22,14 @@ let rec has_sideEffect fenv e =
             let body = M.find x fenv in
             has_sideEffect (M.remove x fenv) body
         with
-        | Not_found -> true (* 再帰関数の対応 すでにcheckしたのでokとする *)
+        | Not_found -> false (* 再帰関数の対応 すでにcheckしたのでokとする *)
         )
     | LetTuple(xts, y, e) -> has_sideEffect fenv e
-    | Put(x, y, z) -> false
-    | ExtFunApp(x, xs) -> false
-    | _ -> true
+    | Put(x, y, z) -> true
+    | ExtFunApp(x, xs) -> true
+    | _ -> false
 
+(* fenv: 関数名とbodyとの対応. 関数適用において副作用を持つかの判定で必要. *)
 (* env: (KNormal.t, Id.t) M -> fenv: (Id.t, KNormal.t) M -> KNormal.t -> KNormal.t *)
 let rec g env fenv e =
     if Cenv.mem e env then

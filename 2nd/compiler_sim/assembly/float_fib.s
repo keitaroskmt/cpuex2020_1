@@ -100,250 +100,353 @@ create_float_extarray_cont:
 	j	create_float_extarray_loop
 # ------------ body ---------------------------
 float_fib.9:
-	fsw	%f0, 0(%sp)
-	fsw	%f11, 1(%sp)
-	fsw	%f10, 2(%sp)
-	fsw	%f8, 3(%sp)
-	fsw	%f7, 4(%sp)
-	fmov	%f1, %f6
-	fsw	%f1, 5(%sp)
-	sw	%ra, 6(%sp)
-	flw	%f6, 5(%zero)
-	fblt	%f6, %f0, fbgt_else.289
-	fmov	%f6, %f1
+	flw	%f1, 5(%zero)
+	fblt	%f1, %f0, fbgt_else.362
 	jr	%ra
-fbgt_else.289:
-	fsub	%f10, %f0, %f6
-	fblt	%f6, %f10, fbgt_else.290
-	j	fbgt_cont.291
-fbgt_else.290:
-	fsub	%f11, %f10, %f6
-	fblt	%f6, %f11, fbgt_else.292
-	j	fbgt_cont.293
-fbgt_else.292:
-	fsub	%f7, %f11, %f6
-	fblt	%f6, %f7, fbgt_else.294
-	j	fbgt_cont.295
-fbgt_else.294:
-	fsub	%f0, %f7, %f6
+fbgt_else.362:
+	fsub	%f2, %f0, %f1
+	fsw	%f1, 0(%sp)
+	fsw	%f0, 1(%sp)
+	fblt	%f1, %f2, fbgt_else.363
+	fmov	%f0, %f2
+	j	fbgt_cont.364
+fbgt_else.363:
+	fsub	%f3, %f2, %f1
+	fsw	%f2, 2(%sp)
+	fblt	%f1, %f3, fbgt_else.365
+	fmov	%f0, %f3
+	j	fbgt_cont.366
+fbgt_else.365:
+	fsub	%f4, %f3, %f1
+	fsw	%f3, 3(%sp)
+	fblt	%f1, %f4, fbgt_else.367
+	fmov	%f0, %f4
+	j	fbgt_cont.368
+fbgt_else.367:
+	fsub	%f5, %f4, %f1
+	fsw	%f4, 4(%sp)
+	fmov	%f0, %f5
+	sw	%ra, 5(%sp)
+	addi	%sp, %sp, 6
+	jal	float_fib.9
+	addi	%sp, %sp, -6
+	lw	%ra, 5(%sp)
+	flw	%f1, 4(%zero)
+	flw	%f2, 4(%sp)
+	fsub	%f1, %f2, %f1
+	fsw	%f0, 5(%sp)
+	fmov	%f0, %f1
+	sw	%ra, 6(%sp)
 	addi	%sp, %sp, 7
 	jal	float_fib.9
 	addi	%sp, %sp, -7
-	fmov	%f8, %f0
-	flw	%f0, 4(%zero)
-	fsub	%f0, %f7, %f0
-	addi	%sp, %sp, 7
-	jal	float_fib.9
-	addi	%sp, %sp, -7
-	fadd	%f7, %f8, %f0
-fbgt_cont.295:
-	flw	%f8, 4(%zero)
-	fsub	%f11, %f11, %f8
-	fblt	%f6, %f11, fbgt_else.296
-	j	fbgt_cont.297
-fbgt_else.296:
-	fsub	%f0, %f11, %f6
-	addi	%sp, %sp, 7
-	jal	float_fib.9
-	addi	%sp, %sp, -7
-	fsw	%f0, 7(%sp)
-	fsub	%f0, %f11, %f8
-	addi	%sp, %sp, 8
-	jal	float_fib.9
-	addi	%sp, %sp, -8
-	flw	%f1, 7(%sp)
-	fadd	%f11, %f1, %f0
-fbgt_cont.297:
-	fadd	%f11, %f7, %f11
-fbgt_cont.293:
-	flw	%f7, 4(%zero)
-	fsub	%f10, %f10, %f7
-	fblt	%f6, %f10, fbgt_else.298
-	j	fbgt_cont.299
-fbgt_else.298:
-	fsub	%f8, %f10, %f6
-	fblt	%f6, %f8, fbgt_else.300
-	j	fbgt_cont.301
-fbgt_else.300:
-	fsub	%f0, %f8, %f6
-	addi	%sp, %sp, 8
-	jal	float_fib.9
-	addi	%sp, %sp, -8
-	fsw	%f0, 8(%sp)
-	fsub	%f0, %f8, %f7
-	addi	%sp, %sp, 9
-	jal	float_fib.9
-	addi	%sp, %sp, -9
-	flw	%f1, 8(%sp)
-	fadd	%f8, %f1, %f0
-fbgt_cont.301:
-	fsub	%f10, %f10, %f7
-	fblt	%f6, %f10, fbgt_else.302
-	j	fbgt_cont.303
-fbgt_else.302:
-	fsub	%f0, %f10, %f6
-	addi	%sp, %sp, 9
-	jal	float_fib.9
-	addi	%sp, %sp, -9
-	fsw	%f0, 9(%sp)
-	fsub	%f0, %f10, %f7
+	lw	%ra, 6(%sp)
+	flw	%f1, 5(%sp)
+	fadd	%f0, %f1, %f0
+fbgt_cont.368:
+	flw	%f1, 4(%zero)
+	flw	%f2, 3(%sp)
+	fsub	%f2, %f2, %f1
+	flw	%f3, 0(%sp)
+	fsw	%f0, 6(%sp)
+	fblt	%f3, %f2, fbgt_else.369
+	fmov	%f0, %f2
+	j	fbgt_cont.370
+fbgt_else.369:
+	fsub	%f4, %f2, %f3
+	fsw	%f1, 7(%sp)
+	fsw	%f2, 8(%sp)
+	fmov	%f0, %f4
+	sw	%ra, 9(%sp)
 	addi	%sp, %sp, 10
 	jal	float_fib.9
 	addi	%sp, %sp, -10
-	flw	%f1, 9(%sp)
-	fadd	%f10, %f1, %f0
-fbgt_cont.303:
-	fadd	%f10, %f8, %f10
-fbgt_cont.299:
-	fadd	%f10, %f11, %f10
-fbgt_cont.291:
-	fsw	%f10, 10(%sp)
-	flw	%f7, 4(%zero)
-	flw	%f0, 0(%sp)
-	fsub	%f10, %f0, %f7
-	fblt	%f6, %f10, fbgt_else.304
-	fmov	%f0, %f10
-	j	fbgt_cont.305
-fbgt_else.304:
-	fsub	%f11, %f10, %f6
-	fblt	%f6, %f11, fbgt_else.306
-	j	fbgt_cont.307
-fbgt_else.306:
-	fsub	%f8, %f11, %f6
-	fblt	%f6, %f8, fbgt_else.308
-	j	fbgt_cont.309
-fbgt_else.308:
-	fsub	%f0, %f8, %f6
+	lw	%ra, 9(%sp)
+	flw	%f1, 7(%sp)
+	flw	%f2, 8(%sp)
+	fsub	%f1, %f2, %f1
+	fsw	%f0, 9(%sp)
+	fmov	%f0, %f1
+	sw	%ra, 10(%sp)
 	addi	%sp, %sp, 11
 	jal	float_fib.9
 	addi	%sp, %sp, -11
-	fsw	%f0, 11(%sp)
-	fsub	%f0, %f8, %f7
-	addi	%sp, %sp, 12
+	lw	%ra, 10(%sp)
+	flw	%f1, 9(%sp)
+	fadd	%f0, %f1, %f0
+fbgt_cont.370:
+	flw	%f1, 6(%sp)
+	fadd	%f0, %f1, %f0
+fbgt_cont.366:
+	flw	%f1, 4(%zero)
+	flw	%f2, 2(%sp)
+	fsub	%f2, %f2, %f1
+	flw	%f3, 0(%sp)
+	fsw	%f0, 10(%sp)
+	fblt	%f3, %f2, fbgt_else.371
+	fmov	%f0, %f2
+	j	fbgt_cont.372
+fbgt_else.371:
+	fsub	%f4, %f2, %f3
+	fsw	%f1, 11(%sp)
+	fsw	%f2, 12(%sp)
+	fblt	%f3, %f4, fbgt_else.373
+	fmov	%f0, %f4
+	j	fbgt_cont.374
+fbgt_else.373:
+	fsub	%f5, %f4, %f3
+	fsw	%f4, 13(%sp)
+	fmov	%f0, %f5
+	sw	%ra, 14(%sp)
+	addi	%sp, %sp, 15
 	jal	float_fib.9
-	addi	%sp, %sp, -12
+	addi	%sp, %sp, -15
+	lw	%ra, 14(%sp)
 	flw	%f1, 11(%sp)
-	fadd	%f8, %f1, %f0
-fbgt_cont.309:
-	fsub	%f11, %f11, %f7
-	fblt	%f6, %f11, fbgt_else.310
-	j	fbgt_cont.311
-fbgt_else.310:
-	fsub	%f0, %f11, %f6
-	addi	%sp, %sp, 12
+	flw	%f2, 13(%sp)
+	fsub	%f2, %f2, %f1
+	fsw	%f0, 14(%sp)
+	fmov	%f0, %f2
+	sw	%ra, 15(%sp)
+	addi	%sp, %sp, 16
 	jal	float_fib.9
-	addi	%sp, %sp, -12
-	fsw	%f0, 12(%sp)
-	fsub	%f0, %f11, %f7
-	addi	%sp, %sp, 13
+	addi	%sp, %sp, -16
+	lw	%ra, 15(%sp)
+	flw	%f1, 14(%sp)
+	fadd	%f0, %f1, %f0
+fbgt_cont.374:
+	flw	%f1, 11(%sp)
+	flw	%f2, 12(%sp)
+	fsub	%f2, %f2, %f1
+	flw	%f3, 0(%sp)
+	fsw	%f0, 15(%sp)
+	fblt	%f3, %f2, fbgt_else.375
+	fmov	%f0, %f2
+	j	fbgt_cont.376
+fbgt_else.375:
+	fsub	%f4, %f2, %f3
+	fsw	%f2, 16(%sp)
+	fmov	%f0, %f4
+	sw	%ra, 17(%sp)
+	addi	%sp, %sp, 18
 	jal	float_fib.9
-	addi	%sp, %sp, -13
-	flw	%f1, 12(%sp)
-	fadd	%f11, %f1, %f0
-fbgt_cont.311:
-	fadd	%f11, %f8, %f11
-fbgt_cont.307:
-	fsub	%f10, %f10, %f7
-	fblt	%f6, %f10, fbgt_else.312
-	j	fbgt_cont.313
-fbgt_else.312:
-	fsub	%f8, %f10, %f6
-	fblt	%f6, %f8, fbgt_else.314
-	j	fbgt_cont.315
-fbgt_else.314:
-	fsub	%f0, %f8, %f6
-	addi	%sp, %sp, 13
+	addi	%sp, %sp, -18
+	lw	%ra, 17(%sp)
+	flw	%f1, 11(%sp)
+	flw	%f2, 16(%sp)
+	fsub	%f1, %f2, %f1
+	fsw	%f0, 17(%sp)
+	fmov	%f0, %f1
+	sw	%ra, 18(%sp)
+	addi	%sp, %sp, 19
 	jal	float_fib.9
-	addi	%sp, %sp, -13
-	fsw	%f0, 13(%sp)
-	fsub	%f0, %f8, %f7
-	addi	%sp, %sp, 14
-	jal	float_fib.9
-	addi	%sp, %sp, -14
-	flw	%f1, 13(%sp)
-	fadd	%f8, %f1, %f0
-fbgt_cont.315:
-	fsub	%f10, %f10, %f7
-	fblt	%f6, %f10, fbgt_else.316
-	j	fbgt_cont.317
-fbgt_else.316:
-	fsub	%f0, %f10, %f6
-	addi	%sp, %sp, 14
-	jal	float_fib.9
-	addi	%sp, %sp, -14
-	fmov	%f6, %f0
-	fsub	%f0, %f10, %f7
-	addi	%sp, %sp, 14
-	jal	float_fib.9
-	addi	%sp, %sp, -14
-	fadd	%f10, %f6, %f0
-fbgt_cont.317:
-	fadd	%f10, %f8, %f10
-fbgt_cont.313:
-	fadd	%f0, %f11, %f10
-fbgt_cont.305:
-	flw	%f11, 1(%sp)
-	flw	%f10, 2(%sp)
-	flw	%f8, 3(%sp)
-	flw	%f7, 4(%sp)
-	flw	%f6, 5(%sp)
-	lw	%ra, 6(%sp)
+	addi	%sp, %sp, -19
+	lw	%ra, 18(%sp)
+	flw	%f1, 17(%sp)
+	fadd	%f0, %f1, %f0
+fbgt_cont.376:
+	flw	%f1, 15(%sp)
+	fadd	%f0, %f1, %f0
+fbgt_cont.372:
 	flw	%f1, 10(%sp)
+	fadd	%f0, %f1, %f0
+fbgt_cont.364:
+	flw	%f1, 4(%zero)
+	flw	%f2, 1(%sp)
+	fsub	%f2, %f2, %f1
+	flw	%f3, 0(%sp)
+	fsw	%f0, 18(%sp)
+	fblt	%f3, %f2, fbgt_else.377
+	fmov	%f0, %f2
+	j	fbgt_cont.378
+fbgt_else.377:
+	fsub	%f4, %f2, %f3
+	fsw	%f1, 19(%sp)
+	fsw	%f2, 20(%sp)
+	fblt	%f3, %f4, fbgt_else.379
+	fmov	%f0, %f4
+	j	fbgt_cont.380
+fbgt_else.379:
+	fsub	%f5, %f4, %f3
+	fsw	%f4, 21(%sp)
+	fblt	%f3, %f5, fbgt_else.381
+	fmov	%f0, %f5
+	j	fbgt_cont.382
+fbgt_else.381:
+	fsub	%f6, %f5, %f3
+	fsw	%f5, 22(%sp)
+	fmov	%f0, %f6
+	sw	%ra, 23(%sp)
+	addi	%sp, %sp, 24
+	jal	float_fib.9
+	addi	%sp, %sp, -24
+	lw	%ra, 23(%sp)
+	flw	%f1, 19(%sp)
+	flw	%f2, 22(%sp)
+	fsub	%f2, %f2, %f1
+	fsw	%f0, 23(%sp)
+	fmov	%f0, %f2
+	sw	%ra, 24(%sp)
+	addi	%sp, %sp, 25
+	jal	float_fib.9
+	addi	%sp, %sp, -25
+	lw	%ra, 24(%sp)
+	flw	%f1, 23(%sp)
+	fadd	%f0, %f1, %f0
+fbgt_cont.382:
+	flw	%f1, 19(%sp)
+	flw	%f2, 21(%sp)
+	fsub	%f2, %f2, %f1
+	flw	%f3, 0(%sp)
+	fsw	%f0, 24(%sp)
+	fblt	%f3, %f2, fbgt_else.383
+	fmov	%f0, %f2
+	j	fbgt_cont.384
+fbgt_else.383:
+	fsub	%f4, %f2, %f3
+	fsw	%f2, 25(%sp)
+	fmov	%f0, %f4
+	sw	%ra, 26(%sp)
+	addi	%sp, %sp, 27
+	jal	float_fib.9
+	addi	%sp, %sp, -27
+	lw	%ra, 26(%sp)
+	flw	%f1, 19(%sp)
+	flw	%f2, 25(%sp)
+	fsub	%f2, %f2, %f1
+	fsw	%f0, 26(%sp)
+	fmov	%f0, %f2
+	sw	%ra, 27(%sp)
+	addi	%sp, %sp, 28
+	jal	float_fib.9
+	addi	%sp, %sp, -28
+	lw	%ra, 27(%sp)
+	flw	%f1, 26(%sp)
+	fadd	%f0, %f1, %f0
+fbgt_cont.384:
+	flw	%f1, 24(%sp)
+	fadd	%f0, %f1, %f0
+fbgt_cont.380:
+	flw	%f1, 19(%sp)
+	flw	%f2, 20(%sp)
+	fsub	%f2, %f2, %f1
+	flw	%f3, 0(%sp)
+	fsw	%f0, 27(%sp)
+	fblt	%f3, %f2, fbgt_else.385
+	fmov	%f0, %f2
+	j	fbgt_cont.386
+fbgt_else.385:
+	fsub	%f4, %f2, %f3
+	fsw	%f2, 28(%sp)
+	fblt	%f3, %f4, fbgt_else.387
+	fmov	%f0, %f4
+	j	fbgt_cont.388
+fbgt_else.387:
+	fsub	%f5, %f4, %f3
+	fsw	%f4, 29(%sp)
+	fmov	%f0, %f5
+	sw	%ra, 30(%sp)
+	addi	%sp, %sp, 31
+	jal	float_fib.9
+	addi	%sp, %sp, -31
+	lw	%ra, 30(%sp)
+	flw	%f1, 19(%sp)
+	flw	%f2, 29(%sp)
+	fsub	%f2, %f2, %f1
+	fsw	%f0, 30(%sp)
+	fmov	%f0, %f2
+	sw	%ra, 31(%sp)
+	addi	%sp, %sp, 32
+	jal	float_fib.9
+	addi	%sp, %sp, -32
+	lw	%ra, 31(%sp)
+	flw	%f1, 30(%sp)
+	fadd	%f0, %f1, %f0
+fbgt_cont.388:
+	flw	%f1, 19(%sp)
+	flw	%f2, 28(%sp)
+	fsub	%f2, %f2, %f1
+	flw	%f3, 0(%sp)
+	fsw	%f0, 31(%sp)
+	fblt	%f3, %f2, fbgt_else.389
+	fmov	%f0, %f2
+	j	fbgt_cont.390
+fbgt_else.389:
+	fsub	%f3, %f2, %f3
+	fsw	%f2, 32(%sp)
+	fmov	%f0, %f3
+	sw	%ra, 33(%sp)
+	addi	%sp, %sp, 34
+	jal	float_fib.9
+	addi	%sp, %sp, -34
+	lw	%ra, 33(%sp)
+	flw	%f1, 19(%sp)
+	flw	%f2, 32(%sp)
+	fsub	%f1, %f2, %f1
+	fsw	%f0, 33(%sp)
+	fmov	%f0, %f1
+	sw	%ra, 34(%sp)
+	addi	%sp, %sp, 35
+	jal	float_fib.9
+	addi	%sp, %sp, -35
+	lw	%ra, 34(%sp)
+	flw	%f1, 33(%sp)
+	fadd	%f0, %f1, %f0
+fbgt_cont.390:
+	flw	%f1, 31(%sp)
+	fadd	%f0, %f1, %f0
+fbgt_cont.386:
+	flw	%f1, 27(%sp)
+	fadd	%f0, %f1, %f0
+fbgt_cont.378:
+	flw	%f1, 18(%sp)
 	fadd	%f0, %f1, %f0
 	jr	%ra
 .global	min_caml_start
 min_caml_start:
 	flw	%f0, 3(%zero)
+	sw	%ra, 0(%sp)
+	addi	%sp, %sp, 1
 	jal	float_fib.9
+	addi	%sp, %sp, -1
+	lw	%ra, 0(%sp)
+	flw	%f1, 2(%zero)
 	fsw	%f0, 0(%sp)
-	flw	%f0, 2(%zero)
-	fsw	%f0, 1(%sp)
+	fmov	%f0, %f1
+	sw	%ra, 1(%sp)
 	addi	%sp, %sp, 2
 	jal	float_fib.9
 	addi	%sp, %sp, -2
+	lw	%ra, 1(%sp)
 	flw	%f1, 0(%sp)
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 2(%sp)
-	flw	%f0, 1(%sp)
-	addi	%sp, %sp, 3
-	jal	float_fib.9
-	addi	%sp, %sp, -3
-	fsw	%f0, 3(%sp)
-	flw	%f0, 1(%zero)
-	fsw	%f0, 4(%sp)
-	addi	%sp, %sp, 5
-	jal	float_fib.9
-	addi	%sp, %sp, -5
-	flw	%f1, 3(%sp)
 	fadd	%f1, %f1, %f0
-	flw	%f0, 2(%sp)
-	fadd	%f0, %f0, %f1
-	fsw	%f0, 5(%sp)
-	flw	%f0, 1(%sp)
-	addi	%sp, %sp, 6
+	flw	%f2, 1(%zero)
+	fsw	%f1, 1(%sp)
+	fsw	%f0, 2(%sp)
+	fmov	%f0, %f2
+	sw	%ra, 3(%sp)
+	addi	%sp, %sp, 4
 	jal	float_fib.9
-	addi	%sp, %sp, -6
-	fsw	%f0, 6(%sp)
-	flw	%f0, 4(%sp)
+	addi	%sp, %sp, -4
+	lw	%ra, 3(%sp)
+	flw	%f1, 2(%sp)
+	fadd	%f1, %f1, %f0
+	flw	%f2, 1(%sp)
+	fadd	%f2, %f2, %f1
+	flw	%f3, 0(%zero)
+	fsw	%f2, 3(%sp)
+	fsw	%f1, 4(%sp)
+	fsw	%f0, 5(%sp)
+	fmov	%f0, %f3
+	sw	%ra, 6(%sp)
 	addi	%sp, %sp, 7
 	jal	float_fib.9
 	addi	%sp, %sp, -7
-	flw	%f1, 6(%sp)
+	lw	%ra, 6(%sp)
+	flw	%f1, 5(%sp)
 	fadd	%f0, %f1, %f0
-	fsw	%f0, 7(%sp)
-	flw	%f0, 4(%sp)
-	addi	%sp, %sp, 8
-	jal	float_fib.9
-	addi	%sp, %sp, -8
-	fsw	%f0, 8(%sp)
-	flw	%f0, 0(%zero)
-	addi	%sp, %sp, 9
-	jal	float_fib.9
-	addi	%sp, %sp, -9
-	flw	%f1, 8(%sp)
-	fadd	%f1, %f1, %f0
-	flw	%f0, 7(%sp)
-	fadd	%f1, %f0, %f1
-	flw	%f0, 5(%sp)
-	fadd	%g0, %f0, %f1
+	flw	%f1, 4(%sp)
+	fadd	%f0, %f1, %f0
+	flw	%f1, 3(%sp)
+	fadd	%g0, %f1, %f0
 	ret
