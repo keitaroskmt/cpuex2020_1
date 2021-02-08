@@ -45,7 +45,7 @@ let union l1 l2 =
 
 (* allocation: key Id.t value Id.tのmap *)
 (* registers: レジスタのlist *)
-let color Liveness.{graph; id2node; node2id; moves} spill_cost allocation (registers, fregisters) = 
+let color Liveness.{graph; id2node; node2id; moves} spill_cost allocation (registers, fregisters) debug = 
     (* 関数本体は一番下へ *)
     let n = List.length (Graph.nodes graph) in
     let k = List.length registers in(* register size *)
@@ -209,6 +209,7 @@ let color Liveness.{graph; id2node; node2id; moves} spill_cost allocation (regis
                         (
                             let cnode' = add_node inode Precolored in
                             color.(cnode'.n) <- Some (M.find x allocation);
+                            degree.(cnode'.n) <- max_int;
                             cnode'
                         )
                         else
@@ -505,7 +506,7 @@ let color Liveness.{graph; id2node; node2id; moves} spill_cost allocation (regis
     make_worklist ();
 
     (* for debug *)
-    color_print stdout;
+    if debug then color_print stdout;
 
     let count = ref 0 in
     let rec loop () =
@@ -516,7 +517,7 @@ let color Liveness.{graph; id2node; node2id; moves} spill_cost allocation (regis
         else if !spill_worklist <> [] then select_spill ()
         );
         (* for debug *)
-        (if (!count mod 5) = 0 then color_print stdout);
+        if debug then (if (!count mod 10) = 0 then color_print stdout);
         count := !count + 1;
         if !simplify_worklist <> [] || !worklist_moves <> [] ||
             !freeze_worklist <> [] || !spill_worklist <> [] then loop () in
@@ -535,8 +536,11 @@ let color Liveness.{graph; id2node; node2id; moves} spill_cost allocation (regis
     let spilled = List.map (fun cnode -> fst (node2id cnode.node)) !spilled_nodes in
 
     (* for debug *)
-    Printf.fprintf stdout "allocation ----- (spilled %d nodes) \n" (List.length spilled);
-    M.iter (fun x color -> Printf.fprintf stdout "%s <- %s\n" x color) allocation';
+    if debug then
+    (
+        Printf.fprintf stdout "allocation ----- (spilled %d nodes) \n" (List.length spilled);
+        M.iter (fun x color -> Printf.fprintf stdout "%s <- %s\n" x color) allocation'
+    );
         (allocation', spilled)
 
 

@@ -16,7 +16,14 @@ let rec g = function
 
 and g' = function 
   | NonTail(_), Nop -> ()
-  | NonTail(xt), Set(_) | NonTail(xt), SetL(_) | NonTail(xt), SetF(_) ->
+  (* 型をintにしておかないと例えばFloat list型などありうる. このとき, livenessなどでノードの一致判定で同じ変数でも型が違うとバグる *)
+  | NonTail((x, t)), Set(_) | NonTail((x, t)), SetL(_) ->
+        emit (OPER {
+          dst = [(x, Type.Int)];
+          src = [];
+          jump = None
+        })
+  | NonTail(xt), SetF(_) ->
         emit (OPER {
           dst = [xt];
           src = [];

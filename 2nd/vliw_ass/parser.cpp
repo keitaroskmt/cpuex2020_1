@@ -53,29 +53,36 @@ void Parser::parse_code(string line) {
     }
     else {
         // 命令列 
+        vector<string> v;
         // op 3つ
         if (regex_match(line, res, regex("^\t(.+?)\t(.+?), (.+?), (.+?)\n?$"))) {
-            code_map[current_num].push_back({inst_format.at(res[1].str()), res[1].str(), res[2].str(), res[3].str(), res[4].str()});
+            v = {inst_format.at(res[1].str()), res[1].str(), res[2].str(), res[3].str(), res[4].str()};
+            code_map[current_num].emplace_back(v);
         }
         // lw, sw
         else if (regex_match(line, res, regex("^\t(.+?)\t(.+?), (\\d+)\\((.+?)\\)\n?$"))) {
-            code_map[current_num].push_back({inst_format.at(res[1].str()), res[1].str(), res[2].str(), res[3].str(), res[4].str()});
+            v = {inst_format.at(res[1].str()), res[1].str(), res[2].str(), res[3].str(), res[4].str()};
+            code_map[current_num].emplace_back(v);
         }
         // op 2つ
         else if (regex_match(line, res, regex("^\t(.+?)\t(.+?), (.+?)\n?$"))) {
-            code_map[current_num].push_back({inst_format.at(res[1].str()), res[1].str(), res[2].str(), res[3].str()});
+            v = {inst_format.at(res[1].str()), res[1].str(), res[2].str(), res[3].str()};
+            code_map[current_num].emplace_back(v);
         }
         // op 1つ
         else if (regex_match(line, res, regex("^\t(.+?)\t(.+?)\n?$"))) {
-            code_map[current_num].push_back({inst_format.at(res[1].str()), res[1].str(), res[2].str()});
+            v = {inst_format.at(res[1].str()), res[1].str(), res[2].str()};
+            code_map[current_num].emplace_back(v);
         }
         // ret
         else if (regex_match(line, res, regex("\tret\n?$"))) {
-            code_map[current_num].push_back({"ret"});
+            v = {"ret"};
+            code_map[current_num].emplace_back(v);
         }
         // nop
         else if (regex_match(line, res, regex("\tnop\n?$"))) {
-            code_map[current_num].push_back({"nop"});
+            v = {"nop"};
+            code_map[current_num].emplace_back(v);
         }
         // error
         else {

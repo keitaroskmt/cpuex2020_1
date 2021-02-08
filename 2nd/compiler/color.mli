@@ -1,1 +1,1 @@
-val color: Liveness.igraph -> (Graph.node -> int) -> Id.t M.t -> (Id.t list * Id.t list) -> (Id.t M.t * Id.t list)
+val color: Liveness.igraph -> (Graph.node -> int) -> Id.t M.t -> (Id.t list * Id.t list) -> bool -> (Id.t M.t * Id.t list)

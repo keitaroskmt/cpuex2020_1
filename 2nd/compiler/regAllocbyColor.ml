@@ -2,6 +2,7 @@ open Asm
 
   (* envはspilledと新たに作った変数の対応 *)
   (* restoreは関数呼び出しの間の区間で1回のみに制限 -> setで管理 *)
+  (* TODO: 浮動小数テーブルにあるものは, saveする必要ない *)
 let rec rewrite e spilled env set = 
     match e with
     | Ans(exp) -> 
@@ -127,35 +128,35 @@ and rewrite_exp e spilled env set =
                 (fun t env set -> 
                     let e1' = rewrite e1 spilled env set in
                     let e2' = rewrite e2 spilled env set in
-                    (Ans(IfEq(s, t, e1', e2')), env, set)))
+                    (Ans(IfEq(s, t, e1', e2')), env, S.empty)))
     | IfLE(x, y', e1, e2) -> 
         rewrite_tmp x Type.Int spilled env set
             (fun s env set -> rewrite_tmp' y' Type.Int spilled env set
                 (fun t env set -> 
                     let e1' = rewrite e1 spilled env set in
                     let e2' = rewrite e2 spilled env set in
-                    (Ans(IfLE(s, t, e1', e2')), env, set)))
+                    (Ans(IfLE(s, t, e1', e2')), env, S.empty)))
     | IfGE(x, y', e1, e2) -> 
         rewrite_tmp x Type.Int spilled env set
             (fun s env set -> rewrite_tmp' y' Type.Int spilled env set
                 (fun t env set -> 
                     let e1' = rewrite e1 spilled env set in
                     let e2' = rewrite e2 spilled env set in
-                    (Ans(IfGE(s, t, e1', e2')), env, set)))
+                    (Ans(IfGE(s, t, e1', e2')), env, S.empty)))
     | IfFEq(x, y, e1, e2) -> 
         rewrite_tmp x Type.Float spilled env set
             (fun s env set -> rewrite_tmp y Type.Float spilled env set
                 (fun t env set -> 
                     let e1' = rewrite e1 spilled env set in
                     let e2' = rewrite e2 spilled env set in
-                    (Ans(IfFEq(s, t, e1', e2')), env, set)))
+                    (Ans(IfFEq(s, t, e1', e2')), env, S.empty)))
     | IfFLE(x, y, e1, e2) -> 
         rewrite_tmp x Type.Float spilled env set
             (fun s env set -> rewrite_tmp y Type.Float spilled env set
                 (fun t env set -> 
                     let e1' = rewrite e1 spilled env set in
                     let e2' = rewrite e2 spilled env set in
-                    (Ans(IfFLE(s, t, e1', e2')), env, set)))
+                    (Ans(IfFLE(s, t, e1', e2')), env, S.empty)))
     | CallCls(x, ys, zs) as exp ->
         let cont = 
             (
@@ -367,27 +368,27 @@ and g' e env =
 
 type fundefort = Fun of fundef | T of t
 
-let alloc e_origin = 
+let alloc e_origin debug = 
     let et_origin = 
         (match e_origin with
         | Fun({ name = _; args = _; fargs = _; body = x; ret = _ }) -> x
         | T(x) -> x) in
 
-    let rec loop e = 
+    let rec loop e spilled_temps = 
         let instrs = 
             match e with
             | Fun(fundef) -> ToAssem.h fundef
             | T(t) -> ToAssem.f t in
         (* for debug *)
-        Assem.assem_debug stdout instrs;
+        if debug then Assem.assem_debug stdout instrs;
 
         let (ControlFlow.{control; def; use; ismove} as flowgraph, flownodes) = ControlFlow.instrs_to_graph instrs in
         (* for debug*)
-        ControlFlow.controlFlow_debug stdout (flowgraph, flownodes);
+        if debug then ControlFlow.controlFlow_debug stdout (flowgraph, flownodes);
 
-        let (Liveness.{graph; id2node; node2id; moves} as igraph, liveouts) = Liveness.interference_graph flowgraph in
+        let (Liveness.{graph; id2node; node2id; moves} as igraph, liveouts) = Liveness.interference_graph flowgraph debug in
         (* for debug*)
-        Liveness.igraph_debug stdout igraph;
+        if debug then Liveness.igraph_debug stdout igraph;
 
         (* 差集合から新たに*)
         let et = 
@@ -395,6 +396,7 @@ let alloc e_origin =
             | Fun({ name = _; args = _; fargs = _; body = x; ret = _ }) -> x
             | T(x) -> x) in
         let rewrite_temps = S.elements (S.diff (var_count et) (var_count et_origin)) in
+        let rewrite_temps = spilled_temps @ rewrite_temps in
 
         let spill_cost = 
             let usedef = 
@@ -417,10 +419,10 @@ let alloc e_origin =
                 if List.mem x rewrite_temps then max_int else use + def) in
 
         (* for debug *)
-        List.iter (fun node -> Printf.fprintf stdout "%s: %d\n" (fst (node2id node)) (spill_cost node)) (Graph.nodes graph);
+        if debug then List.iter (fun node -> Printf.fprintf stdout "%s: %d\n" (fst (node2id node)) (spill_cost node)) (Graph.nodes graph);
 
         (* temp_map, registersをAsm内で定義 *)
-        let (allocation, spilled) = Color.color igraph spill_cost reg_map (registers, fregisters) in
+        let (allocation, spilled) = Color.color igraph spill_cost reg_map (registers, fregisters) debug in
         (
         if spilled = [] then
         (
@@ -430,7 +432,7 @@ let alloc e_origin =
                 | T(x) -> x) in
 
             (* for debug *)
-            asm_debug stdout (Prog([], [], et));
+            if debug then asm_debug stdout (Prog([], [], et));
             (g et allocation, allocation)
         )
         else
@@ -442,8 +444,12 @@ let alloc e_origin =
             let et' = rewrite et spilled M.empty S.empty in
 
             (* for debug *)
-            asm_debug stdout (Prog([], [], et'));
-            List.iter (fun x -> Printf.fprintf stdout "spilled!!!!! %s\n" x) spilled;
+            if debug then (
+                asm_debug stdout (Prog([], [], et'));
+                List.iter (fun x -> Printf.fprintf stdout "spilled!!!!! %s\n" x) spilled
+            ) else (
+                asm_debug stdout (Prog([], [], et'));
+            );
 
             let e' = 
                 (match e with
@@ -452,9 +458,9 @@ let alloc e_origin =
                 | T(_) -> 
                     T(et')) in
 
-            loop e'
+            loop e' (spilled @ spilled_temps)
         ) in
-    loop e_origin 
+    loop e_origin []
     
 
 (* p.237 *)
@@ -524,20 +530,23 @@ let h_args ({ name = n; args = ys; fargs = zs; body = e; ret = t } as fundef) =
     { name = n; args = ys; fargs = zs; body = e; ret = t }
 
 
-let h ({ name = Id.L(x); args = ys; fargs = zs; body = e; ret = t } as fundef) = 
-    Printf.fprintf stdout "Function: %s ----------------------------------------\n";
+let h debug ({ name = Id.L(x); args = ys; fargs = zs; body = e; ret = t } as fundef) = 
+    Printf.fprintf stdout "--- Function: %s ----------------------- \n" x;
     let fundef' = h_args (move_calleesaves fundef) in
 
-    let (e', allocation) = alloc (Fun(fundef')) in 
+    let (e', allocation) = alloc (Fun(fundef')) debug in 
     let arg_regs = List.map (fun x -> M.find x allocation) ys in
     let farg_regs = List.map (fun x -> M.find x allocation) zs in
     { name = Id.L(x); args = ys; fargs = zs; body = e'; ret = t }
 
 
 let f (Prog(data, fundefs, e)) = 
-    asm_debug stdout (Prog(data, fundefs, e));
+    (* 種々のprintをするか *)
+    let debug = false in
+
+    if debug then asm_debug stdout (Prog(data, fundefs, e));
     Format.eprintf "register allocation: may take some time (up to a few minutes, depending on the size of functions)@.";
-    let fundefs' = List.map h fundefs in
-    let (e', _) = alloc (T(e)) in 
+    let fundefs' = List.map (h debug) fundefs in
+    let (e', _) = alloc (T(e)) debug  in 
     Prog(data, fundefs', e')
 

@@ -69,10 +69,10 @@ let liveness (ControlFlow.{control; def; use; ismove} as flowgraph) =
     Graph.Table.empty nodes
 
 
-let rec interference_graph (ControlFlow.{control; def; use; ismove} as flowgraph) = 
+let rec interference_graph (ControlFlow.{control; def; use; ismove} as flowgraph) debug = 
     let livemap = liveness flowgraph in
     (* for debug *)
-    livemap_debug stdout livemap;
+    if debug then livemap_debug stdout livemap;
 
     (* ここから浮動小数点の対応を考える *)
     let igraph = Graph.new_graph () in

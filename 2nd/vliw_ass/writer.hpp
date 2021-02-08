@@ -9,6 +9,7 @@ class Writer {
 
     protected:
         int current_num;
+        unsigned int nop;
         Parser *parser;
         string file_name;
 

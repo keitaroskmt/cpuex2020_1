@@ -14,6 +14,7 @@ Writer::Writer(string fname, Parser *p) {
     file_name = fname;
     parser = p;
     current_num = 0;
+    nop = 0b01111100000000000000000000000000;
 }
 
 void Writer::assemble() {
@@ -184,7 +185,7 @@ unsigned int Writer::encode(vector<string> &v) {
         } else if (v[1] == "addi") {
             // プログラム全体の評価値 (適当にnopとしておく)
             if (v[2] == "%g0") {
-                return 0;
+                return nop;
             }
 
             op = 0x1;
@@ -300,7 +301,7 @@ unsigned int Writer::encode(vector<string> &v) {
         if (v[1] == "fadd") {
             // プログラム全体の評価値 (適当にnopとしておく)
             if (v[2] == "%g0") {
-                return 0;
+                return nop;
             }
 
             op = 0xb;
@@ -452,9 +453,8 @@ unsigned int Writer::encode(vector<string> &v) {
         return 0;
     }
 
-    // nop 0うめ
     else if (v[0] == "nop") {
-        return 0;
+        return nop;
     }
 
     else {
@@ -489,7 +489,7 @@ void Writer::debug() {
 
             cout << "\t";
             current_num = v.first;
-            print_bit(encode(v.second[0]));
+            print_bit(encode(w));
         }
     }
 }

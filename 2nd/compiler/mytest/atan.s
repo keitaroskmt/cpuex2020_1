@@ -5,7 +5,7 @@
 	lui	%sp, 1
 	ori	%sp, %sp, 64464
 	lui	%hp, 0
-	ori	%hp, %hp, 0
+	ori	%hp, %hp, 14
 # ------------ Text Section -------------------
 .section	".text"
 	j	min_caml_start
@@ -99,29 +99,116 @@ create_float_extarray_cont:
 	addi	%v1, %v1, 1
 	j	create_float_extarray_loop
 # ------------ body ---------------------------
-fib.9:
-	sw	%v0, 0(%sp)
-	sw	%ra, 1(%sp)
-	addi	%at, %zero, 1
-	blt	%at, %v0, bgt_else.49
+kernel_atan.223:
+	fmul	%f19, %f0, %f0
+	fmul	%f18, %f19, %f19
+	fmul	%f17, %f18, %f18
+	flw	%f1, 13(%zero)
+	fmul	%f1, %f1, %f0
+	fmul	%f1, %f1, %f19
+	fsub	%f16, %f0, %f1
+	flw	%f1, 12(%zero)
+	fmul	%f1, %f1, %f0
+	fmul	%f1, %f1, %f18
+	fadd	%f16, %f16, %f1
+	flw	%f1, 11(%zero)
+	fmul	%f1, %f1, %f0
+	fmul	%f1, %f1, %f19
+	fmul	%f1, %f1, %f18
+	fsub	%f16, %f16, %f1
+	flw	%f1, 10(%zero)
+	fmul	%f1, %f1, %f0
+	fmul	%f1, %f1, %f17
+	fadd	%f16, %f16, %f1
+	flw	%f1, 9(%zero)
+	fmul	%f1, %f1, %f0
+	fmul	%f1, %f1, %f19
+	fmul	%f1, %f1, %f17
+	fsub	%f16, %f16, %f1
+	flw	%f1, 8(%zero)
+	fmul	%f0, %f1, %f0
+	fmul	%f0, %f0, %f18
+	fmul	%f0, %f0, %f17
+	fadd	%f0, %f16, %f0
 	jr	%ra
-bgt_else.49:
-	addi	%v0, %v0, -1
+atan.231:
+	sw	%ra, 0(%sp)
+	flw	%f1, 7(%zero)
+	fblt	%f0, %f1, fbgt_else.567
+	addi	%f0, %zero, 1
+	j	fbgt_cont.568
+fbgt_else.567:
+fbgt_cont.568:
+	fabs	%f16, %f0
+	flw	%f1, 6(%zero)
+	fblt	%f16, %f1, fbgt_else.569
+	flw	%f0, 5(%zero)
+	fblt	%f16, %f0, fbgt_else.570
+	flw	%f0, 2(%zero)
+	fsw	%f0, 1(%sp)
+	flw	%f0, 3(%zero)
+	fdiv	%f0, %f0, %f16
 	addi	%sp, %sp, 2
-	jal	fib.9
+	jal	kernel_atan.223
 	addi	%sp, %sp, -2
-	sw	%v0, 2(%sp)
-	lw	%a0, 0(%sp)
-	addi	%v0, %a0, -2
+	flw	%f1, 1(%sp)
+	fsub	%f0, %f1, %f0
+	j	fbgt_cont.571
+fbgt_else.570:
+	flw	%f0, 4(%zero)
+	fsw	%f0, 2(%sp)
+	flw	%f0, 3(%zero)
+	fsub	%f1, %f16, %f0
+	fadd	%f0, %f16, %f0
+	fdiv	%f0, %f1, %f0
 	addi	%sp, %sp, 3
-	jal	fib.9
+	jal	kernel_atan.223
 	addi	%sp, %sp, -3
-	lw	%ra, 1(%sp)
-	lw	%a0, 2(%sp)
-	add	%v0, %a0, %v0
+	flw	%f1, 2(%sp)
+	fadd	%f0, %f1, %f0
+fbgt_cont.571:
+	beqi	%f0, 0, bnei_else.572
+	lw	%ra, 0(%sp)
+	jr	%ra
+bnei_else.572:
+	lw	%ra, 0(%sp)
+	fneg	%f0, %f0
+	jr	%ra
+fbgt_else.569:
+	lw	%ra, 0(%sp)
+	j	kernel_atan.223
+rad.233:
+	flw	%f1, 1(%zero)
+	fmul	%f0, %f0, %f1
 	jr	%ra
 .global	min_caml_start
 min_caml_start:
-	addi	%v0, %zero, 20
-	jal	fib.9
+	flw	%f0, 0(%zero)
+	fsw	%f0, 0(%sp)
+	addi	%sp, %sp, 1
+	jal	rad.233
+	addi	%sp, %sp, -1
+	addi	%sp, %sp, 1
+	jal	atan.231
+	addi	%sp, %sp, -1
+	fsw	%f0, 1(%sp)
+	flw	%f0, 0(%sp)
+	addi	%sp, %sp, 2
+	jal	rad.233
+	addi	%sp, %sp, -2
+	addi	%sp, %sp, 2
+	jal	atan.231
+	addi	%sp, %sp, -2
+	fsw	%f0, 2(%sp)
+	flw	%f0, 0(%sp)
+	addi	%sp, %sp, 3
+	jal	rad.233
+	addi	%sp, %sp, -3
+	addi	%sp, %sp, 3
+	jal	atan.231
+	addi	%sp, %sp, -3
+	flw	%f16, 1(%sp)
+	flw	%f1, 2(%sp)
+	fadd	%f1, %f16, %f1
+	fadd	%g0, %f1, %f0
 	ret
