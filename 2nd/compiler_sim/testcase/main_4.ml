@@ -142,7 +142,7 @@ let rec reduction_2pi_sub1 s t =  (* while (x >= p) *)
 
 let rec reduction_2pi_sub2 s t pi2 = (* while (x >= pi2) *)
     if s < pi2 then s else  
-    if s >= t then reduction_2pi_sub2 (s -. t) (t /. 2.0) else reduction_2pi_sub2 s (t /. 2.0) in
+    if s >= t then reduction_2pi_sub2 (s -. t) (t /. 2.0) pi2 else reduction_2pi_sub2 s (t /. 2.0) pi2 in
 
 let rec reduction_2pi x =
     let pi = 3.14159265358979 in

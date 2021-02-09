@@ -15,7 +15,7 @@ let rec iter_asm n e =
   let e' = (ConstFoldAsm.f e) in 
   let e' = e in
   *)
-  let e' = ElimAsm.f (ConstFoldAsm.f e) in
+  let e' = Peephole.f (ElimAsm.f (ConstFoldAsm.f e)) in
   if e = e' then e else
   iter_asm (n - 1) e'
 
