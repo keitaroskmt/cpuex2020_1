@@ -11,6 +11,7 @@ let rec iter_asm n e =
   Format.eprintf "iteration %d@." n;
   if n = 0 then e else
   (*
+  let e' = Peephole.f (ElimAsm.f (ConstFoldAsm.f e)) in
   let e' = ElimAsm.f (ConstFoldAsm.f e) in
   let e' = (ConstFoldAsm.f e) in 
   let e' = e in

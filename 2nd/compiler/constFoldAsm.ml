@@ -61,12 +61,12 @@ and g' env = function
     | Ld(x, y') when M.mem x env ->
         Printf.fprintf stdout "constfoldasm Ld\n";
         (match y' with
-        | V(y) -> if M.mem y env then Ld(reg_zero, C((findi x env) + (findi y env))) else Ld(x, y')
+        | V(y) -> if M.mem y env then Ld(reg_zero, C((findi x env) + (findi y env))) else Ld(y, C(findi x env))
         | C(i) -> Ld(reg_zero, C((findi x env) + i)))
     | St(x, y, z') when M.mem y env ->
         Printf.fprintf stdout "constfoldasm St\n";
         (match z' with
-        | V(z) -> if M.mem z env then St(x, reg_zero, C((findi y env) + (findi z env))) else St(x, y, z')
+        | V(z) -> if M.mem z env then St(x, reg_zero, C((findi y env) + (findi z env))) else St(x, z, C(findi y env))
         | C(i) -> St(x, reg_zero, C((findi y env) + i)))
     | FNegD(x) when M.mem x env -> 
         Printf.fprintf stdout "constfoldasm FNegD\n";
@@ -103,21 +103,15 @@ and g' env = function
         let f = sqrt (findf x env) in
         let l = add_label f in
         SetF(l)
-    | Ftoi(x) when M.mem x env -> Set(int_of_float (findf x env))
-    | Itof(x) when M.mem x env -> 
-        Printf.fprintf stdout "constfoldasm Itof\n";
-        let f = float_of_int (findi x env) in
-        let l = add_label f in
-        SetF(l)
     | LdF(x, y') when M.mem x env ->
         Printf.fprintf stdout "constfoldasm LdF\n";
         (match y' with
-        | V(y) -> if M.mem y env then LdF(reg_zero, C((findi x env) + (findi y env))) else LdF(x, y')
+        | V(y) -> if M.mem y env then LdF(reg_zero, C((findi x env) + (findi y env))) else LdF(y, C(findi x env))
         | C(i) -> LdF(reg_zero, C((findi x env) + i)))
     | StF(x, y, z') when M.mem y env ->
         Printf.fprintf stdout "constfoldasm StF\n";
         (match z' with
-        | V(z) -> if M.mem z env then StF(x, reg_zero, C((findi y env) + (findi z env))) else StF(x, y, z')
+        | V(z) -> if M.mem z env then StF(x, reg_zero, C((findi y env) + (findi z env))) else StF(x, z, C(findi y env))
         | C(i) -> StF(x, reg_zero, C((findi y env) + i)))
     | IfEq(x, V(y), e1, e2) when M.mem x env && M.mem y env ->
         Printf.fprintf stdout "constfoldasm IfEq\n";
@@ -177,7 +171,7 @@ and g' env = function
             IfEq(reg_zero, C(0), (g env e2), Ans(Nop))
     | IfFLE(x, y, e1, e2) -> 
         IfFLE(x, y, g env e1, g env e2)
-    (* floorは仕様が違う *)
+    (* ftoi, itof, floorは仕様が違う *)
     | e -> e
 
 

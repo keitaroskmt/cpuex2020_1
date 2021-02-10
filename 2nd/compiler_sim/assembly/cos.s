@@ -99,579 +99,325 @@ create_float_extarray_cont:
 	addi	%v1, %v1, 1
 	j	create_float_extarray_loop
 # ------------ body ---------------------------
-f.295.520:
-	fblt	%f0, %f1, fbgt_else.814
+f.295.771:
+	fblt	%f0, %f1, fbgt_else.1002
 	flw	%f2, 27(%zero)
 	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.815
+	fblt	%f0, %f1, fbgt_else.1003
 	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.816
+	fblt	%f0, %f1, fbgt_else.1004
 	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.817
+	fblt	%f0, %f1, fbgt_else.1005
 	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.818
+	fblt	%f0, %f1, fbgt_else.1006
 	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.819
+	fblt	%f0, %f1, fbgt_else.1007
 	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.820
+	fblt	%f0, %f1, fbgt_else.1008
 	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.821
+	fblt	%f0, %f1, fbgt_else.1009
 	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.822
+	fblt	%f0, %f1, fbgt_else.1010
 	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.823
+	fblt	%f0, %f1, fbgt_else.1011
 	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.824
+	fblt	%f0, %f1, fbgt_else.1012
 	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.825
+	fblt	%f0, %f1, fbgt_else.1013
 	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.826
+	fblt	%f0, %f1, fbgt_else.1014
 	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.827
+	fblt	%f0, %f1, fbgt_else.1015
 	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.828
+	fblt	%f0, %f1, fbgt_else.1016
 	fmul	%f1, %f2, %f1
-	fblt	%f0, %f1, fbgt_else.829
+	fblt	%f0, %f1, fbgt_else.1017
 	fmul	%f1, %f2, %f1
-	j	f.295.520
-fbgt_else.829:
+	j	f.295.771
+fbgt_else.1017:
 	fmov	%f0, %f1
 	jr	%ra
-fbgt_else.828:
+fbgt_else.1016:
 	fmov	%f0, %f1
 	jr	%ra
-fbgt_else.827:
+fbgt_else.1015:
 	fmov	%f0, %f1
 	jr	%ra
-fbgt_else.826:
+fbgt_else.1014:
 	fmov	%f0, %f1
 	jr	%ra
-fbgt_else.825:
+fbgt_else.1013:
 	fmov	%f0, %f1
 	jr	%ra
-fbgt_else.824:
+fbgt_else.1012:
 	fmov	%f0, %f1
 	jr	%ra
-fbgt_else.823:
+fbgt_else.1011:
 	fmov	%f0, %f1
 	jr	%ra
-fbgt_else.822:
+fbgt_else.1010:
 	fmov	%f0, %f1
 	jr	%ra
-fbgt_else.821:
+fbgt_else.1009:
 	fmov	%f0, %f1
 	jr	%ra
-fbgt_else.820:
+fbgt_else.1008:
 	fmov	%f0, %f1
 	jr	%ra
-fbgt_else.819:
+fbgt_else.1007:
 	fmov	%f0, %f1
 	jr	%ra
-fbgt_else.818:
+fbgt_else.1006:
 	fmov	%f0, %f1
 	jr	%ra
-fbgt_else.817:
+fbgt_else.1005:
 	fmov	%f0, %f1
 	jr	%ra
-fbgt_else.816:
+fbgt_else.1004:
 	fmov	%f0, %f1
 	jr	%ra
-fbgt_else.815:
+fbgt_else.1003:
 	fmov	%f0, %f1
 	jr	%ra
-fbgt_else.814:
+fbgt_else.1002:
 	fmov	%f0, %f1
 	jr	%ra
-g.299.524:
+g.299.775:
 	flw	%f2, 1(%k1)
-	fblt	%f0, %f2, fbgt_else.830
-	fblt	%f0, %f1, fbgt_else.831
+	fblt	%f0, %f2, fbgt_else.1018
+	fblt	%f0, %f1, fbgt_else.1019
 	fsub	%f0, %f0, %f1
 	flw	%f3, 27(%zero)
 	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.832
-	fblt	%f0, %f1, fbgt_else.833
+	fblt	%f0, %f2, fbgt_else.1020
+	fblt	%f0, %f1, fbgt_else.1021
 	fsub	%f0, %f0, %f1
 	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.834
-	fblt	%f0, %f1, fbgt_else.835
+	fblt	%f0, %f2, fbgt_else.1022
+	fblt	%f0, %f1, fbgt_else.1023
 	fsub	%f0, %f0, %f1
 	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.836
-	fblt	%f0, %f1, fbgt_else.837
-	fsub	%f0, %f0, %f1
-	fdiv	%f1, %f1, %f3
-	lw	%at, 0(%k1)
-	jr	%at
-fbgt_else.837:
-	fdiv	%f1, %f1, %f3
-	lw	%at, 0(%k1)
-	jr	%at
-fbgt_else.836:
-	jr	%ra
-fbgt_else.835:
-	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.838
-	fblt	%f0, %f1, fbgt_else.839
+	fblt	%f0, %f2, fbgt_else.1024
+	fblt	%f0, %f1, fbgt_else.1025
 	fsub	%f0, %f0, %f1
 	fdiv	%f1, %f1, %f3
 	lw	%at, 0(%k1)
 	jr	%at
-fbgt_else.839:
+fbgt_else.1025:
 	fdiv	%f1, %f1, %f3
 	lw	%at, 0(%k1)
 	jr	%at
-fbgt_else.838:
+fbgt_else.1024:
 	jr	%ra
-fbgt_else.834:
-	jr	%ra
-fbgt_else.833:
+fbgt_else.1023:
 	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.840
-	fblt	%f0, %f1, fbgt_else.841
-	fsub	%f0, %f0, %f1
-	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.842
-	fblt	%f0, %f1, fbgt_else.843
+	fblt	%f0, %f2, fbgt_else.1026
+	fblt	%f0, %f1, fbgt_else.1027
 	fsub	%f0, %f0, %f1
 	fdiv	%f1, %f1, %f3
 	lw	%at, 0(%k1)
 	jr	%at
-fbgt_else.843:
+fbgt_else.1027:
 	fdiv	%f1, %f1, %f3
 	lw	%at, 0(%k1)
 	jr	%at
-fbgt_else.842:
+fbgt_else.1026:
 	jr	%ra
-fbgt_else.841:
+fbgt_else.1022:
+	jr	%ra
+fbgt_else.1021:
 	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.844
-	fblt	%f0, %f1, fbgt_else.845
+	fblt	%f0, %f2, fbgt_else.1028
+	fblt	%f0, %f1, fbgt_else.1029
+	fsub	%f0, %f0, %f1
+	fdiv	%f1, %f1, %f3
+	fblt	%f0, %f2, fbgt_else.1030
+	fblt	%f0, %f1, fbgt_else.1031
 	fsub	%f0, %f0, %f1
 	fdiv	%f1, %f1, %f3
 	lw	%at, 0(%k1)
 	jr	%at
-fbgt_else.845:
+fbgt_else.1031:
 	fdiv	%f1, %f1, %f3
 	lw	%at, 0(%k1)
 	jr	%at
-fbgt_else.844:
+fbgt_else.1030:
 	jr	%ra
-fbgt_else.840:
+fbgt_else.1029:
+	fdiv	%f1, %f1, %f3
+	fblt	%f0, %f2, fbgt_else.1032
+	fblt	%f0, %f1, fbgt_else.1033
+	fsub	%f0, %f0, %f1
+	fdiv	%f1, %f1, %f3
+	lw	%at, 0(%k1)
+	jr	%at
+fbgt_else.1033:
+	fdiv	%f1, %f1, %f3
+	lw	%at, 0(%k1)
+	jr	%at
+fbgt_else.1032:
 	jr	%ra
-fbgt_else.832:
+fbgt_else.1028:
 	jr	%ra
-fbgt_else.831:
+fbgt_else.1020:
+	jr	%ra
+fbgt_else.1019:
 	flw	%f3, 27(%zero)
 	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.846
-	fblt	%f0, %f1, fbgt_else.847
+	fblt	%f0, %f2, fbgt_else.1034
+	fblt	%f0, %f1, fbgt_else.1035
 	fsub	%f0, %f0, %f1
 	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.848
-	fblt	%f0, %f1, fbgt_else.849
+	fblt	%f0, %f2, fbgt_else.1036
+	fblt	%f0, %f1, fbgt_else.1037
 	fsub	%f0, %f0, %f1
 	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.850
-	fblt	%f0, %f1, fbgt_else.851
-	fsub	%f0, %f0, %f1
-	fdiv	%f1, %f1, %f3
-	lw	%at, 0(%k1)
-	jr	%at
-fbgt_else.851:
-	fdiv	%f1, %f1, %f3
-	lw	%at, 0(%k1)
-	jr	%at
-fbgt_else.850:
-	jr	%ra
-fbgt_else.849:
-	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.852
-	fblt	%f0, %f1, fbgt_else.853
+	fblt	%f0, %f2, fbgt_else.1038
+	fblt	%f0, %f1, fbgt_else.1039
 	fsub	%f0, %f0, %f1
 	fdiv	%f1, %f1, %f3
 	lw	%at, 0(%k1)
 	jr	%at
-fbgt_else.853:
+fbgt_else.1039:
 	fdiv	%f1, %f1, %f3
 	lw	%at, 0(%k1)
 	jr	%at
-fbgt_else.852:
+fbgt_else.1038:
 	jr	%ra
-fbgt_else.848:
-	jr	%ra
-fbgt_else.847:
+fbgt_else.1037:
 	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.854
-	fblt	%f0, %f1, fbgt_else.855
-	fsub	%f0, %f0, %f1
-	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.856
-	fblt	%f0, %f1, fbgt_else.857
+	fblt	%f0, %f2, fbgt_else.1040
+	fblt	%f0, %f1, fbgt_else.1041
 	fsub	%f0, %f0, %f1
 	fdiv	%f1, %f1, %f3
 	lw	%at, 0(%k1)
 	jr	%at
-fbgt_else.857:
+fbgt_else.1041:
 	fdiv	%f1, %f1, %f3
 	lw	%at, 0(%k1)
 	jr	%at
-fbgt_else.856:
+fbgt_else.1040:
 	jr	%ra
-fbgt_else.855:
+fbgt_else.1036:
+	jr	%ra
+fbgt_else.1035:
 	fdiv	%f1, %f1, %f3
-	fblt	%f0, %f2, fbgt_else.858
-	fblt	%f0, %f1, fbgt_else.859
+	fblt	%f0, %f2, fbgt_else.1042
+	fblt	%f0, %f1, fbgt_else.1043
+	fsub	%f0, %f0, %f1
+	fdiv	%f1, %f1, %f3
+	fblt	%f0, %f2, fbgt_else.1044
+	fblt	%f0, %f1, fbgt_else.1045
 	fsub	%f0, %f0, %f1
 	fdiv	%f1, %f1, %f3
 	lw	%at, 0(%k1)
 	jr	%at
-fbgt_else.859:
+fbgt_else.1045:
 	fdiv	%f1, %f1, %f3
 	lw	%at, 0(%k1)
 	jr	%at
-fbgt_else.858:
+fbgt_else.1044:
 	jr	%ra
-fbgt_else.854:
+fbgt_else.1043:
+	fdiv	%f1, %f1, %f3
+	fblt	%f0, %f2, fbgt_else.1046
+	fblt	%f0, %f1, fbgt_else.1047
+	fsub	%f0, %f0, %f1
+	fdiv	%f1, %f1, %f3
+	lw	%at, 0(%k1)
+	jr	%at
+fbgt_else.1047:
+	fdiv	%f1, %f1, %f3
+	lw	%at, 0(%k1)
+	jr	%at
+fbgt_else.1046:
 	jr	%ra
-fbgt_else.846:
+fbgt_else.1042:
 	jr	%ra
-fbgt_else.830:
+fbgt_else.1034:
 	jr	%ra
-cos.221:
+fbgt_else.1018:
+	jr	%ra
+.global	min_caml_start
+min_caml_start:
+	flw	%f0, 25(%zero)
 	flw	%f1, 26(%zero)
-	fabs	%f0, %f0
-	flw	%f2, 25(%zero)
-	fsw	%f1, 0(%sp)
-	fsw	%f0, 1(%sp)
-	fsw	%f2, 2(%sp)
-	fblt	%f0, %f2, fbgt_else.860
-	flw	%f3, 24(%zero)
-	fblt	%f0, %f3, fbgt_else.862
-	flw	%f3, 23(%zero)
-	fblt	%f0, %f3, fbgt_else.864
-	flw	%f3, 22(%zero)
-	fblt	%f0, %f3, fbgt_else.866
-	flw	%f3, 21(%zero)
-	fblt	%f0, %f3, fbgt_else.868
-	flw	%f3, 20(%zero)
-	fblt	%f0, %f3, fbgt_else.870
-	flw	%f3, 19(%zero)
-	fblt	%f0, %f3, fbgt_else.872
-	flw	%f3, 18(%zero)
-	fblt	%f0, %f3, fbgt_else.874
-	flw	%f3, 17(%zero)
-	fblt	%f0, %f3, fbgt_else.876
-	flw	%f3, 16(%zero)
-	fblt	%f0, %f3, fbgt_else.878
-	flw	%f3, 15(%zero)
-	fblt	%f0, %f3, fbgt_else.880
-	flw	%f3, 14(%zero)
-	fblt	%f0, %f3, fbgt_else.882
-	flw	%f3, 13(%zero)
-	fblt	%f0, %f3, fbgt_else.884
-	flw	%f3, 12(%zero)
-	fblt	%f0, %f3, fbgt_else.886
-	flw	%f3, 11(%zero)
-	fblt	%f0, %f3, fbgt_else.888
-	flw	%f3, 10(%zero)
-	fmov	%f1, %f3
-	sw	%ra, 3(%sp)
-	addi	%sp, %sp, 4
-	jal	f.295.520
-	addi	%sp, %sp, -4
-	lw	%ra, 3(%sp)
-	j	fbgt_cont.889
-fbgt_else.888:
-	fmov	%f0, %f3
-fbgt_cont.889:
-	j	fbgt_cont.887
-fbgt_else.886:
-	fmov	%f0, %f3
-fbgt_cont.887:
-	j	fbgt_cont.885
-fbgt_else.884:
-	fmov	%f0, %f3
-fbgt_cont.885:
-	j	fbgt_cont.883
-fbgt_else.882:
-	fmov	%f0, %f3
-fbgt_cont.883:
-	j	fbgt_cont.881
-fbgt_else.880:
-	fmov	%f0, %f3
-fbgt_cont.881:
-	j	fbgt_cont.879
-fbgt_else.878:
-	fmov	%f0, %f3
-fbgt_cont.879:
-	j	fbgt_cont.877
-fbgt_else.876:
-	fmov	%f0, %f3
-fbgt_cont.877:
-	j	fbgt_cont.875
-fbgt_else.874:
-	fmov	%f0, %f3
-fbgt_cont.875:
-	j	fbgt_cont.873
-fbgt_else.872:
-	fmov	%f0, %f3
-fbgt_cont.873:
-	j	fbgt_cont.871
-fbgt_else.870:
-	fmov	%f0, %f3
-fbgt_cont.871:
-	j	fbgt_cont.869
-fbgt_else.868:
-	fmov	%f0, %f3
-fbgt_cont.869:
-	j	fbgt_cont.867
-fbgt_else.866:
-	fmov	%f0, %f3
-fbgt_cont.867:
-	j	fbgt_cont.865
-fbgt_else.864:
-	fmov	%f0, %f3
-fbgt_cont.865:
-	j	fbgt_cont.863
-fbgt_else.862:
-	fmov	%f0, %f3
-fbgt_cont.863:
-	j	fbgt_cont.861
-fbgt_else.860:
-	fmov	%f0, %f2
-fbgt_cont.861:
-	add	%k1, %zero, %hp
+	flw	%f2, 24(%zero)
+	add	%v0, %zero, %hp
 	addi	%hp, %hp, 2
-	addi	%v0, %zero, g.299.524
-	sw	%v0, 0(%k1)
-	flw	%f1, 2(%sp)
-	fsw	%f1, 1(%k1)
-	flw	%f2, 1(%sp)
-	fblt	%f2, %f1, fbgt_else.890
-	fblt	%f2, %f0, fbgt_else.892
-	fsub	%f2, %f2, %f0
-	flw	%f3, 27(%zero)
-	fdiv	%f0, %f0, %f3
-	fblt	%f2, %f1, fbgt_else.894
-	fblt	%f2, %f0, fbgt_else.896
-	fsub	%f2, %f2, %f0
-	fdiv	%f0, %f0, %f3
-	fblt	%f2, %f1, fbgt_else.898
-	fblt	%f2, %f0, fbgt_else.900
-	fsub	%f1, %f2, %f0
-	fdiv	%f0, %f0, %f3
-	fmov	%f29, %f1
-	fmov	%f1, %f0
-	fmov	%f0, %f29
-	sw	%ra, 3(%sp)
-	addi	%sp, %sp, 4
-	lw	%at, 0(%k1)
-	jalr	%at
-	addi	%sp, %sp, -4
-	lw	%ra, 3(%sp)
-	j	fbgt_cont.901
-fbgt_else.900:
-	fdiv	%f1, %f0, %f3
-	fmov	%f0, %f2
-	sw	%ra, 3(%sp)
-	addi	%sp, %sp, 4
-	lw	%at, 0(%k1)
-	jalr	%at
-	addi	%sp, %sp, -4
-	lw	%ra, 3(%sp)
-fbgt_cont.901:
-	j	fbgt_cont.899
-fbgt_else.898:
-	fmov	%f0, %f2
-fbgt_cont.899:
-	j	fbgt_cont.897
-fbgt_else.896:
-	fdiv	%f0, %f0, %f3
-	fblt	%f2, %f1, fbgt_else.902
-	fblt	%f2, %f0, fbgt_else.904
-	fsub	%f1, %f2, %f0
-	fdiv	%f0, %f0, %f3
-	fmov	%f29, %f1
-	fmov	%f1, %f0
-	fmov	%f0, %f29
-	sw	%ra, 3(%sp)
-	addi	%sp, %sp, 4
-	lw	%at, 0(%k1)
-	jalr	%at
-	addi	%sp, %sp, -4
-	lw	%ra, 3(%sp)
-	j	fbgt_cont.905
-fbgt_else.904:
-	fdiv	%f1, %f0, %f3
-	fmov	%f0, %f2
-	sw	%ra, 3(%sp)
-	addi	%sp, %sp, 4
-	lw	%at, 0(%k1)
-	jalr	%at
-	addi	%sp, %sp, -4
-	lw	%ra, 3(%sp)
-fbgt_cont.905:
-	j	fbgt_cont.903
-fbgt_else.902:
-	fmov	%f0, %f2
-fbgt_cont.903:
-fbgt_cont.897:
-	j	fbgt_cont.895
-fbgt_else.894:
-	fmov	%f0, %f2
-fbgt_cont.895:
-	j	fbgt_cont.893
-fbgt_else.892:
-	flw	%f3, 27(%zero)
-	fdiv	%f0, %f0, %f3
-	fblt	%f2, %f1, fbgt_else.906
-	fblt	%f2, %f0, fbgt_else.908
-	fsub	%f2, %f2, %f0
-	fdiv	%f0, %f0, %f3
-	fblt	%f2, %f1, fbgt_else.910
-	fblt	%f2, %f0, fbgt_else.912
-	fsub	%f1, %f2, %f0
-	fdiv	%f0, %f0, %f3
-	fmov	%f29, %f1
-	fmov	%f1, %f0
-	fmov	%f0, %f29
-	sw	%ra, 3(%sp)
-	addi	%sp, %sp, 4
-	lw	%at, 0(%k1)
-	jalr	%at
-	addi	%sp, %sp, -4
-	lw	%ra, 3(%sp)
-	j	fbgt_cont.913
-fbgt_else.912:
-	fdiv	%f1, %f0, %f3
-	fmov	%f0, %f2
-	sw	%ra, 3(%sp)
-	addi	%sp, %sp, 4
-	lw	%at, 0(%k1)
-	jalr	%at
-	addi	%sp, %sp, -4
-	lw	%ra, 3(%sp)
-fbgt_cont.913:
-	j	fbgt_cont.911
-fbgt_else.910:
-	fmov	%f0, %f2
-fbgt_cont.911:
-	j	fbgt_cont.909
-fbgt_else.908:
-	fdiv	%f0, %f0, %f3
-	fblt	%f2, %f1, fbgt_else.914
-	fblt	%f2, %f0, fbgt_else.916
-	fsub	%f1, %f2, %f0
-	fdiv	%f0, %f0, %f3
-	fmov	%f29, %f1
-	fmov	%f1, %f0
-	fmov	%f0, %f29
-	sw	%ra, 3(%sp)
-	addi	%sp, %sp, 4
-	lw	%at, 0(%k1)
-	jalr	%at
-	addi	%sp, %sp, -4
-	lw	%ra, 3(%sp)
-	j	fbgt_cont.917
-fbgt_else.916:
-	fdiv	%f1, %f0, %f3
-	fmov	%f0, %f2
-	sw	%ra, 3(%sp)
-	addi	%sp, %sp, 4
-	lw	%at, 0(%k1)
-	jalr	%at
-	addi	%sp, %sp, -4
-	lw	%ra, 3(%sp)
-fbgt_cont.917:
-	j	fbgt_cont.915
-fbgt_else.914:
-	fmov	%f0, %f2
-fbgt_cont.915:
-fbgt_cont.909:
-	j	fbgt_cont.907
-fbgt_else.906:
-	fmov	%f0, %f2
-fbgt_cont.907:
-fbgt_cont.893:
-	j	fbgt_cont.891
-fbgt_else.890:
-	fmov	%f0, %f2
-fbgt_cont.891:
-	flw	%f1, 0(%sp)
-	fblt	%f0, %f1, fbgt_else.918
+	addi	%v1, %zero, g.299.775
+	sw	%v1, 0(%v0)
+	fsw	%f2, 1(%v0)
+	beqi	%zero, 0, bnei_else.1048
+	j	bnei_cont.1049
+bnei_else.1048:
+bnei_cont.1049:
+	fblt	%f1, %f0, fbgt_else.1050
 	addi	%v0, %zero, 0
-	j	fbgt_cont.919
-fbgt_else.918:
+	j	fbgt_cont.1051
+fbgt_else.1050:
 	addi	%v0, %zero, 1
-fbgt_cont.919:
-	fblt	%f0, %f1, fbgt_else.920
+fbgt_cont.1051:
+	fblt	%f1, %f0, fbgt_else.1052
+	fsub	%f1, %f1, %f0
+	j	fbgt_cont.1053
+fbgt_else.1052:
+fbgt_cont.1053:
+	flw	%f2, 8(%zero)
+	fblt	%f1, %f2, fbgt_else.1054
+	beqi	%v0, 0, bnei_else.1056
+	addi	%v0, %zero, 0
+	j	bnei_cont.1057
+bnei_else.1056:
+	addi	%v0, %zero, 1
+bnei_cont.1057:
+	j	fbgt_cont.1055
+fbgt_else.1054:
+fbgt_cont.1055:
+	fblt	%f1, %f2, fbgt_else.1058
 	fsub	%f0, %f0, %f1
-	j	fbgt_cont.921
-fbgt_else.920:
-fbgt_cont.921:
-	flw	%f2, 9(%zero)
-	fblt	%f0, %f2, fbgt_else.922
-	beqi	%v0, 0, bnei_else.924
-	addi	%v0, %zero, 0
-	j	bnei_cont.925
-bnei_else.924:
-	addi	%v0, %zero, 1
-bnei_cont.925:
-	j	fbgt_cont.923
-fbgt_else.922:
-fbgt_cont.923:
-	fblt	%f0, %f2, fbgt_else.926
-	fsub	%f0, %f1, %f0
-	j	fbgt_cont.927
-fbgt_else.926:
-fbgt_cont.927:
-	flw	%f1, 8(%zero)
-	fblt	%f1, %f0, fbgt_else.928
+	j	fbgt_cont.1059
+fbgt_else.1058:
+	fmov	%f0, %f1
+fbgt_cont.1059:
+	flw	%f1, 7(%zero)
+	fblt	%f1, %f0, fbgt_else.1060
 	fmul	%f0, %f0, %f0
 	fmul	%f1, %f0, %f0
-	flw	%f2, 4(%zero)
-	flw	%f3, 3(%zero)
+	flw	%f2, 3(%zero)
+	flw	%f3, 2(%zero)
 	fmul	%f3, %f3, %f0
 	fsub	%f2, %f2, %f3
-	flw	%f3, 2(%zero)
+	flw	%f3, 1(%zero)
 	fmul	%f3, %f3, %f1
 	fadd	%f2, %f2, %f3
-	flw	%f3, 1(%zero)
+	flw	%f3, 0(%zero)
 	fmul	%f0, %f3, %f0
 	fmul	%f0, %f0, %f1
 	fsub	%f0, %f2, %f0
-	j	fbgt_cont.929
-fbgt_else.928:
+	j	fbgt_cont.1061
+fbgt_else.1060:
 	fsub	%f0, %f2, %f0
 	fmul	%f1, %f0, %f0
 	fmul	%f2, %f1, %f1
-	flw	%f3, 7(%zero)
+	flw	%f3, 6(%zero)
 	fmul	%f3, %f3, %f0
 	fmul	%f3, %f3, %f1
 	fsub	%f3, %f0, %f3
-	flw	%f4, 6(%zero)
+	flw	%f4, 5(%zero)
 	fmul	%f4, %f4, %f0
 	fmul	%f4, %f4, %f2
 	fadd	%f3, %f3, %f4
-	flw	%f4, 5(%zero)
+	flw	%f4, 4(%zero)
 	fmul	%f0, %f4, %f0
 	fmul	%f0, %f0, %f1
 	fmul	%f0, %f0, %f2
 	fsub	%f0, %f3, %f0
-fbgt_cont.929:
-	beqi	%v0, 0, bnei_else.930
-	jr	%ra
-bnei_else.930:
+fbgt_cont.1061:
+	beqi	%v0, 0, bnei_else.1062
+	j	bnei_cont.1063
+bnei_else.1062:
 	fneg	%f0, %f0
-	jr	%ra
-.global	min_caml_start
-min_caml_start:
-	flw	%f0, 0(%zero)
-	sw	%ra, 0(%sp)
-	addi	%sp, %sp, 1
-	jal	cos.221
-	addi	%sp, %sp, -1
-	lw	%ra, 0(%sp)
+bnei_cont.1063:
 	fmov	%g0, %f0
 	ret
