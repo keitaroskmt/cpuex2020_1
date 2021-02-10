@@ -16,7 +16,9 @@ int exec_op(op_info op, bool print_calc, bool use_fpu)
     unsigned char temp;
     fi frs, frt, frd;
 
-    if (op.opcode == "addi")
+    if (op.opcode == "nop")
+        ;
+    else if (op.opcode == "addi")
     {
         rs = cur_env.REG[op.opland_bit[1]].i;
         imm = op.opland_bit[2];
@@ -528,10 +530,6 @@ int exec_op(op_info op, bool print_calc, bool use_fpu)
 
     //     if (print_calc)
     //         printf("fbgt\t%f(%08X),\t%f(%08X),\t%s\n", frs.f, frs.i, frt.f, frt.i, op.opland[2].c_str());
-    // }
-    // else if (op.opcode == "nop")
-    // {
-    //     ;
     // }
     // 例外処理
     else
