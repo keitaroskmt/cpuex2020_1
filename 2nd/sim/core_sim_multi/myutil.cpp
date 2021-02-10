@@ -8,8 +8,9 @@
 #include "sim.h"
 
 // レジスタの状態を出力する
-void print_state()
+void print_state(bool vliw)
 {
+    int loop_unit = (vliw) ? 4 : 1;
     fi fpr[32];
     for (int i = 0; i < 32; i++)
         fpr[i].f = cur_env.FPR[i];
@@ -17,7 +18,10 @@ void print_state()
     printf("PC: %llu\nGPR\n", cur_env.PC);
     for (int i = 0; i < 32; i += 4)
     {
-        printf("%d-%d\t%d\t%d\t%d\t%d\n", i, i + 3, cur_env.GPR[i], cur_env.GPR[i + 1], cur_env.GPR[i + 2], cur_env.GPR[i + 3]);
+        if (i == 28)
+            printf("%d-%d\t%d\t%d\t%d\t%d\n", i, i + 3, cur_env.GPR[i], cur_env.GPR[i + 1], cur_env.GPR[i + 2], cur_env.GPR[i + 3] / loop_unit);
+        else
+            printf("%d-%d\t%d\t%d\t%d\t%d\n", i, i + 3, cur_env.GPR[i], cur_env.GPR[i + 1], cur_env.GPR[i + 2], cur_env.GPR[i + 3]);
     }
     printf("\nFPR FPCC: %s\n", cur_env.FPCC);
     for (int i = 0; i < 32; i += 4)

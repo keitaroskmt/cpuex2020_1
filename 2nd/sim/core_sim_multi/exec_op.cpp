@@ -10,8 +10,9 @@
 #include "fpu.h"
 
 // 1命令実行する
-int exec_op(op_info op, bool print_calc, bool use_fpu)
+int exec_op(op_info op, bool print_calc, bool use_fpu, bool vliw)
 {
+    int loop_unit = (vliw) ? 4 : 1;
     int rs, rt, rd, imm, sp;
     unsigned char temp;
     fi frs, frt, frd;
@@ -141,7 +142,7 @@ int exec_op(op_info op, bool print_calc, bool use_fpu)
             cur_opnum = posbc2pos[rs] - 1;
 
         if (print_calc)
-            printf("jr\t%d(%08X)\n", rs, rs);
+            printf("jr\t%d(%08X)\n", rs / loop_unit, rs / loop_unit);
     }
     else if (op.opcode == "move")
     {
@@ -162,7 +163,7 @@ int exec_op(op_info op, bool print_calc, bool use_fpu)
         cur_opnum = posbc2pos[op.opland_bit[0]] - 2;
 
         if (print_calc)
-            printf("j\t%d(%08X)\n", op.opland_bit[0], op.opland_bit[0]);
+            printf("j\t%d(%08X)\n", op.opland_bit[0] / loop_unit, op.opland_bit[0] / loop_unit);
     }
     else if (op.opcode == "jal")
     {
@@ -170,7 +171,7 @@ int exec_op(op_info op, bool print_calc, bool use_fpu)
         cur_opnum = posbc2pos[op.opland_bit[0]] - 2;
 
         if (print_calc)
-            printf("jal\t%d(%08X)\t%%ra = %d(%08X)\n", op.opland_bit[0], op.opland_bit[0], op.op_idx + 1, op.op_idx + 1);
+            printf("jal\t%d(%08X)\t%%ra = %d(%08X)\n", op.opland_bit[0] / loop_unit, op.opland_bit[0] / loop_unit, op.op_idx / loop_unit + 1, op.op_idx / loop_unit + 1);
     }
     else if (op.opcode == "jalr")
     {
@@ -182,7 +183,7 @@ int exec_op(op_info op, bool print_calc, bool use_fpu)
             cur_opnum = posbc2pos[rs] - 1;
 
         if (print_calc)
-            printf("jalr\t%d(%08X)\t%%ra = %d(%08X)\n", rs, rs, op.op_idx + 1, op.op_idx + 1);
+            printf("jalr\t%d(%08X)\t%%ra = %d(%08X)\n", rs / loop_unit, rs / loop_unit, op.op_idx / loop_unit + 1, op.op_idx / loop_unit + 1);
     }
     else if (op.opcode == "beq")
     {

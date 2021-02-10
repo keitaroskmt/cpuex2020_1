@@ -8,9 +8,10 @@
 #include "sim.h"
 #include "myutil.h"
 
-int print_bytecode(op_info op)
+int print_bytecode(op_info op, bool vliw)
 {
     // レジスタの中身ではなくレジスタ番号の話
+    int loop_unit = (vliw) ? 4 : 1;
     unsigned int rs, rt, rd, imm, imm_, funct = 0, shamt = 0;
 
     if (op.opcode == "add" || op.opcode == "sub" || op.opcode == "and" || op.opcode == "or" || op.opcode == "nor")
@@ -51,8 +52,8 @@ int print_bytecode(op_info op)
     }
     else if (op.opcode == "jr" || op.opcode == "jalr")
     {
-        rs = op.opland_bit[0] & 0b11111;
-        rd = op.opland_bit[0] & 0b11111;
+        rs = op.opland_bit[0] / loop_unit & 0b11111;
+        rd = op.opland_bit[0] / loop_unit & 0b11111;
         if (op.opcode == "jr")
         {
             shamt = 0b100010;
@@ -70,7 +71,7 @@ int print_bytecode(op_info op)
     }
     else if (op.opcode == "j" || op.opcode == "jal")
     {
-        imm = (label_pos_bc[op.opland[0]]) & 0x3ffffff;
+        imm = (label_pos_bc[op.opland[0]] / loop_unit) & 0x3ffffff;
         if (op.opcode == "j")
             shamt = 0b100000;
         else if (op.opcode == "jal")
@@ -95,7 +96,7 @@ int print_bytecode(op_info op)
         else
         {
             if (op.opcode == "bne" || op.opcode == "fbne" || op.opcode == "blt" || op.opcode == "fblt")
-                imm = ((label_pos_bc[op.opland[2]]) & 0xffff) - op.op_idx - 1;
+                imm = ((label_pos_bc[op.opland[2]] / loop_unit) & 0xffff) - op.op_idx / loop_unit - 1;
             else
                 imm = (label_pos_bc[op.opland[2]]) & 0xffff;
         }
@@ -204,7 +205,7 @@ int print_bytecode(op_info op)
     {
         rs = op.opland_bit[0] & 0b11111;
         imm = op.opland_bit[1] & 0xff;
-        imm_ = op.opland_bit[2] & 0x1fff;
+        imm_ = op.opland_bit[2] / loop_unit & 0x1fff;
 
         if (op.opcode == "beqi")
             shamt = 0b110000;

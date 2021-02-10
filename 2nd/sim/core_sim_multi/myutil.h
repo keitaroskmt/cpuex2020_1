@@ -1,6 +1,6 @@
 #pragma once
 
-void print_state();
+void print_state(bool vliw);
 void print_stats();
 void print_label_stats();
 void print_time(clock_t start_time);

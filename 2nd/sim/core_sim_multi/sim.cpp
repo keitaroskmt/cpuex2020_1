@@ -28,7 +28,7 @@ std::map<std::string, int> label_pos, label_pos_bc;
 std::map<std::string, long long int> label_counter;
 std::map<int, int> posbc2pos, pos2posbc;
 std::vector<std::pair<int, unsigned long long int>> stack(1000000, std::make_pair(0, 0));
-int exec_step(bool print_process, bool print_calc, bool print_bytecode, bool label_count, bool use_fpu);
+int exec_step(bool print_process, bool print_calc, bool print_bytecode, bool label_count, bool use_fpu, bool vliw);
 
 int main(int argc, char *argv[])
 {
@@ -177,7 +177,7 @@ int main(int argc, char *argv[])
         if ((print_bc || print_process || print_calc) && (loop % loop_unit == 0) && vliw)
             printf("%lld\t%d\n", cur_env.PC / 4, ops[cur_opnum].op_idx / 4);
 
-        if (exec_step(print_process, print_calc, print_bc, label_count, use_fpu))
+        if (exec_step(print_process, print_calc, print_bc, label_count, use_fpu, vliw))
             break;
 
         if ((print_bc || print_process || print_calc) && (loop - 1) % loop_unit == 0)
@@ -199,7 +199,7 @@ int main(int argc, char *argv[])
     }
 
     printf("register state\n");
-    print_state();
+    print_state(vliw);
     printf("v0: %d\n", cur_env.GPR[reg_name.at("%v0")]);
     printf("f0: %f\n", cur_env.FPR[reg_name.at("%f0") - 32]);
     if (is_stat)
@@ -220,7 +220,7 @@ int main(int argc, char *argv[])
 }
 
 // 1step実行する 命令なら実行し、その他なら読み飛ばす
-int exec_step(bool print_process, bool print_calc, bool print_bc, bool label_count, bool use_fpu)
+int exec_step(bool print_process, bool print_calc, bool print_bc, bool label_count, bool use_fpu, bool vliw)
 {
     if (ops[cur_opnum].type == 0)
     {
@@ -228,9 +228,9 @@ int exec_step(bool print_process, bool print_calc, bool print_bc, bool label_cou
             printf("%llu\t%d\t%s\t%s\t%s\t%s\t%d\n", cur_env.PC, ops[cur_opnum].op_idx, ops[cur_opnum].opcode.c_str(), ops[cur_opnum].opland[0].c_str(), ops[cur_opnum].opland[1].c_str(), ops[cur_opnum].opland[2].c_str(), ops[cur_opnum].offset);
 
         if (print_bc)
-            print_bytecode(ops[cur_opnum]);
+            print_bytecode(ops[cur_opnum], vliw);
 
-        if (exec_op(ops[cur_opnum], print_calc, use_fpu))
+        if (exec_op(ops[cur_opnum], print_calc, use_fpu, vliw))
             return 1;
 
         cur_env.PC++;
