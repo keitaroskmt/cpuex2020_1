@@ -6,7 +6,7 @@ type flowgraph = {
 }
 
 
-(* Assem.t list -> flowgraph * Graph.node list*)
+(* Block.t list -> flowgraph * Graph.node list*)
 let instrs_to_graph instrs = 
     let control = Graph.new_graph () in
 
@@ -15,7 +15,7 @@ let instrs_to_graph instrs =
         List.fold_left 
             (fun env instr -> 
                 (match instr with
-                | Assem.LABEL {lab = Id.L(x)} -> M.add x (Graph.new_node control) env
+                | Block.LABEL {lab = Id.L(x)} -> M.add x (Graph.new_node control) env
                 | _ -> env))
              M.empty instrs in
     let label_node (Id.L(x)) = 
@@ -46,7 +46,7 @@ let instrs_to_graph instrs =
             use = Graph.Table.empty;
             ismove = Graph.Table.empty
             }, [])
-    | Assem.OPER {dst; src; jump} :: rest -> 
+    | Block.OPER {dst; src; jump} :: rest -> 
         let node = Graph.new_node control in
         let ({control; def; use; ismove}, nodes) = to_graph rest in
         let succ = 
@@ -61,7 +61,7 @@ let instrs_to_graph instrs =
             use = Graph.Table.add node (remove_unit src) use;
             ismove = Graph.Table.add node false ismove
         }, node :: nodes)
-    | Assem.LABEL {lab} :: rest ->
+    | Block.LABEL {lab} :: rest ->
         let node = label_node lab in
         let ({control; def; use; ismove}, nodes) = to_graph rest in
         make_edges node (try [List.hd nodes] with Failure(hd) -> []);
@@ -71,7 +71,7 @@ let instrs_to_graph instrs =
             use = Graph.Table.add node [] use;
             ismove = Graph.Table.add node false ismove
         }, node :: nodes)
-    | Assem.MOVE {dst; src} :: rest -> 
+    | Block.MOVE {dst; src} :: rest -> 
         let node = Graph.new_node control in
         let ({control; def; use; ismove}, nodes) = to_graph rest in
         make_edges node (try [List.hd nodes] with Failure(hd) -> []);

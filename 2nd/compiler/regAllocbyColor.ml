@@ -377,10 +377,10 @@ let alloc e_origin debug =
     let rec loop e spilled_temps = 
         let instrs = 
             match e with
-            | Fun(fundef) -> ToAssem.h fundef
-            | T(t) -> ToAssem.f t in
+            | Fun(fundef) -> ToBlock.h fundef
+            | T(t) -> ToBlock.f t in
         (* for debug *)
-        if debug then Assem.assem_debug stdout instrs;
+        if debug then Block.block_debug stdout instrs;
 
         let (ControlFlow.{control; def; use; ismove} as flowgraph, flownodes) = ControlFlow.instrs_to_graph instrs in
         (* for debug*)

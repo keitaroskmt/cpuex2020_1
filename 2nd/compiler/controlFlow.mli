@@ -5,6 +5,6 @@ type flowgraph = {
   ismove: bool Graph.Table.t
 }
 
-val instrs_to_graph: Assem.t list -> (flowgraph * Graph.node list)
+val instrs_to_graph: Block.t list -> (flowgraph * Graph.node list)
 
 val controlFlow_debug: out_channel -> (flowgraph * Graph.node list) -> unit

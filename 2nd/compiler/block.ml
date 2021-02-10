@@ -12,7 +12,7 @@ type t =
     src: (Id.t * Type.t) list;
   }
 
-let assem_debug oc l = 
+let block_debug oc l = 
     let rec print_t = function
     | OPER {dst; src; jump} ->
         Printf.fprintf oc "OPER\n";

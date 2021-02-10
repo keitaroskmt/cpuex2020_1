@@ -1,5 +1,5 @@
 open Asm
-open Assem
+open Block
 
 
 let inst_list = ref []
@@ -407,6 +407,6 @@ let f e =
                     |-> regAllocbyColor.ml -> emit.ml
 
     関数ごとに, Id.tからregisterへのmapとstackの状態を
-    toAssem.ml -> liveness.ml -> Interference.ml -> Color.ml
+    toBlock.ml -> liveness.ml -> Interference.ml -> Color.ml
     の一連の流れで得る
   *)
