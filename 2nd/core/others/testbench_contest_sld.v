@@ -74,7 +74,7 @@ module send_contest_sld#(CLK_PER_HALF_BIT = 435) ( // 115200bits/s
          count <= 0;
       end else begin
          rst_ctr <= 0;
-         if (status==s_Start && counter2==32'd20000)begin
+         if (status==s_Start && counter2==32'd500000)begin
             txbuf <= rd;
             status <= s_start_bit;
             rst_ctr <= 1;
@@ -93,7 +93,7 @@ module send_contest_sld#(CLK_PER_HALF_BIT = 435) ( // 115200bits/s
                ra <= ra + 1;
                tx_start <= 1'b0;
                count <= count + 1;
-            end else if( counter2 == 32'd1000) begin
+            end else if( counter2 == 32'd100000) begin
                tx_start <= 1'b1;
             end
          end else if (status == s_stop_bit) begin

@@ -14,16 +14,17 @@ module branch_predictor
 
 reg [9:0] global_hisory;
 
-wire [9:0] index;
+//wire [9:0] index;
+wire [14:0] index;
 
 reg [9:0] gh1;
 reg [9:0] gh2;
 reg [9:0] gh3;
 reg [9:0] gh4;
-reg [14:0] pc1;
-reg [14:0] pc2;
-reg [14:0] pc3;
-reg [14:0] pc4;
+reg [9:0] pc1;
+reg [9:0] pc2;
+reg [9:0] pc3;
+reg [9:0] pc4;
 reg bp1;
 reg bp2;
 reg bp3;
@@ -39,7 +40,8 @@ initial begin
     $readmemb("bp_init.mem",RAM,0,1023);
 end
 
-assign index = global_hisory ^ pc[9:0];
+//assign index = global_hisory ^ pc[9:0];
+assign index =  pc[9:0];
 assign branch_prediction = (RAM[index] == 2'b10 || RAM[index] == 2'b11) ? 1'b1 : 1'b0;
 
 assign counter1 = RAM[gh1];
@@ -57,7 +59,7 @@ always @(posedge clk) begin
         global_hisory <= 0;
     end else begin
         gh1 <= index;
-        pc1 <= pc[14:0];
+        pc1 <= pc[9:0];
         bp1 <= branch_prediction;
         gh2 <= gh1;
         pc2 <= pc1;
@@ -68,25 +70,25 @@ always @(posedge clk) begin
         gh4 <= gh3;
         pc4 <= pc3;
         bp4 <= bp3;
-        if (branch && (pc4 == branched_pc_plus[14:0]-1)) begin
+        if (branch && (pc4 == branched_pc_plus[9:0]-1)) begin
             if(bp4)begin
                 RAM[gh4] <= counter4 - 1;
             end else begin
                 RAM[gh4] <= counter4 + 1;
             end
-        end else if (branch && pc3 == branched_pc_plus[14:0]-1)begin
+        end else if (branch && pc3 == branched_pc_plus[9:0]-1)begin
             if(bp3)begin
                 RAM[gh3] <= counter3 - 1;
             end else begin
                 RAM[gh3] <= counter3 + 1;
             end
-        end else if (branch && pc2 == branched_pc_plus[14:0]-1)begin
+        end else if (branch && pc2 == branched_pc_plus[9:0]-1)begin
             if(bp2)begin
                 RAM[gh2] <= counter2 - 1;
             end else begin
                 RAM[gh2] <= counter2 + 1;
             end
-        end else if (branch && pc1 == branched_pc_plus[14:0]-1)begin
+        end else if (branch && pc1 == branched_pc_plus[9:0]-1)begin
             if(bp1)begin
                 RAM[gh1] <= counter1 - 1;
             end else begin

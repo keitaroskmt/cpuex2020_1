@@ -87,7 +87,7 @@ assign ForwardBD = ((RtD != 0) && (RtD == WriteRegM) && RegWriteM ) ? 2'b01 : 2'
 //assign branchstall = ((BranchD == 1'b1)&& (RegWriteE == 1'b1) && ((WriteRegE == RsD) || (WriteRegE == RtD)))
                         ////DeSt:beq %a0, %a1, Label ExSt:add %a0, %a0, %a1
                     //|| ((BranchD == 1'b1) && (MemtoRegM == 1'b1) && ((WriteRegM == RsD) || (WriteRegM == RtD)));
-                        ////DeSt:beq %a0, %a1, Label MASt:lw %a1, 4(sp)         �?If lw is in MA stage the value will be written back in reg file in the next stage <-Write First premised. Using BRAM it will be more complexed.
+                        ////DeSt:beq %a0, %a1, Label MASt:lw %a1, 4(sp)         ?��?If lw is in MA stage the value will be written back in reg file in the next stage <-Write First premised. Using BRAM it will be more complexed.
 
 assign lwstall = (((RsD == RtE) || (RtD == RtE)) && MemtoRegE && !BranchD); //when a branch-type instruction is in the decode stage, it will be treated by "Hazard_existence" -> not necessary to be treated here by "lwstall"
                         //DeSt:add %a0, %a0, %a1 ExSt:lw %a0, 0(%sp)  using the register right after lw <- Improvement required using BRAM
@@ -107,7 +107,7 @@ assign Hazard_existenceE = BranchE && BiE && (MemtoRegM && (WriteRegM == RsE)) ?
                             : (BranchE && !BiE && (MemtoRegM && (WriteRegM == RsE || WriteRegM == RtE)) ? 1'b1
                             : 1'b0);
 //assign jrforward = ((RsD == WriteRegM) && (RegWriteM  == 1'b1)&& (RegtoPCD == 1'b1)) ? 1'b1 : 1'b0;
-                   //DeSt:jr %ra MASt:addi %ra, %ra, 1 �?古�?値を用�?たjr命令(ALUではEx)の結果�?%raレジスタに書き込まれるので%raをまた使おうとするとバグ�? -> jrがR形式でな�?ので解決
+                   //DeSt:jr %ra MASt:addi %ra, %ra, 1 ?��?古?��?値を用?��?たjr命令(ALUではEx)の結果?��?%raレジスタに書き込まれるので%raをまた使おうとするとバグ?��? -> jrがR形式でな?��?ので解決
 
 
 wire [4:0] fstallN; //wait for "fstallN" clocks
@@ -126,17 +126,17 @@ end
 
 assign floatstall = (counter == fstallN) ? 1'b0 : 1'b1; //wait until counter reaches fstallN
 
-assign fstallN = (FPUControlE == 5'b00001) ? 5'd3 //fadd
-                        :((FPUControlE == 5'b00011) ? 5'd3 //fsub
-                        :((FPUControlE == 5'b00101) ? 5'd2 //fmul
-                        :((FPUControlE == 5'b00111) ? 5'd5 //fdiv
+assign fstallN = (FPUControlE == 5'b00001) ? 5'd0 //fadd
+                        :((FPUControlE == 5'b00011) ? 5'd0 //fsub
+                        :((FPUControlE == 5'b00101) ? 5'd0 //fmul
+                        :((FPUControlE == 5'b00111) ? 5'd2 //fdiv
                         :((FPUControlE == 5'b01001) ? 5'd0 //fneg
                         :((FPUControlE == 5'b01011) ? 5'd0 //fabs
-                        :((FPUControlE == 5'b01101) ? 5'd2 //fsqrt
+                        :((FPUControlE == 5'b01101) ? 5'd1 //fsqrt
                         :((FPUControlE == 5'b01111) ? 5'd0 //fmov
-                        :((FPUControlE == 5'b10001) ? 5'd1 //ftoi
-                        :((FPUControlE == 5'b10011) ? 5'd1 //itof
-                        :((FPUControlE == 5'b10101) ? 5'd1 //floor
+                        :((FPUControlE == 5'b10001) ? 5'd0 //ftoi
+                        :((FPUControlE == 5'b10011) ? 5'd0 //itof
+                        :((FPUControlE == 5'b10101) ? 5'd0 //floor
                         : 5'd0))))))))));
 
 

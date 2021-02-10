@@ -39,7 +39,7 @@ always @(posedge clk) begin
           we <= 1'b1;
           data_reg <= data;
           wa <= counter_core;
-          if(counter_core == 17'd49999)begin
+          if(counter_core == 18'd199999)begin
             counter_core <= 0;
           end else begin
             counter_core <= counter_core + 1;
@@ -51,7 +51,7 @@ always @(posedge clk) begin
           state <= s_start;
           sdata_reg <= sdata;
           tx_start <= 1'b1;
-          if(counter_uart == 17'd49999)begin
+          if(counter_uart == 18'd199999)begin
             counter_uart <= 0;
           end else begin
             counter_uart <= counter_uart + 1;

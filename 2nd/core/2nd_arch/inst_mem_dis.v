@@ -9,7 +9,7 @@ output [31:0] rd;
 //initial for (i=0; i<64; i=i+1) RAM[i] = 0;
 
 initial begin
-    $readmemb("main1.mem",RAM,0,15000);
+    $readmemb("main.mem",RAM,0,15000);
 end
 
 //reg [31:0] rd_reg;
