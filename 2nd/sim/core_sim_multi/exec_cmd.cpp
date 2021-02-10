@@ -17,6 +17,7 @@ int exec_cmd(int *loop, bool *is_stat, bool *print_bc, bool *print_calc, bool *p
     std::string reg;
     int sp, j, offset;
     fi subst;
+    int loop_unit = (*vliw) ? 4 : 1;
     while (true)
     {
         cmd = get_line(100);
@@ -41,7 +42,7 @@ int exec_cmd(int *loop, bool *is_stat, bool *print_bc, bool *print_calc, bool *p
             j = stoi(cmd_re[2].str());
 
             for (int i = sp - j; i <= sp + j; i++)
-                printf("stack[%d] = (hex) %08X\t(dec) %d\tPC = %llu\n", i, stack[i].first, stack[i].first, stack[i].second);
+                printf("stack[%d] = (hex) %08X\t(dec) %d\tPC = %llu\n", i, stack[i].first, stack[i].first, stack[i].second / loop_unit);
         }
         // stack代入 絶対アドレス指定
         else if (regex_match(cmd, cmd_re, std::regex("^stackin (\\d+) ([0-9A-Fa-f.]+)\\s?(.*?)\n?$")))
@@ -65,7 +66,7 @@ int exec_cmd(int *loop, bool *is_stat, bool *print_bc, bool *print_calc, bool *p
             j = stoi(cmd_re[3].str());
 
             for (int i = sp - j; i <= sp + j; i++)
-                printf("stack[%d] = (hex) %08X\t(dec) %d\tPC = %llu\n", i, stack[i].first, stack[i].first, stack[i].second);
+                printf("stack[%d] = (hex) %08X\t(dec) %d\tPC = %llu\n", i, stack[i].first, stack[i].first, stack[i].second / loop_unit);
         }
         // stack代入 相対アドレス指定
         else if (regex_match(cmd, cmd_re, std::regex("^stackin (-?\\d+)\\((.+?)\\) ([0-9A-Fa-f]+)\\s?(.*?)\n?$")))
