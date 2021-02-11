@@ -51,15 +51,19 @@
 - fadd:
   - 0clock 7.045ns
   - 1clock 3.990ns
+  - 2clock 3.712ns
 - fsub:
   - 0clock 6.895ns
   - 1clock 4.121ns
+  - 2clock 3.888ns
 - fmul:
   - 0clock 6.675ns
   - 1clock 4.249ns
+  - 2clock 3.699ns
 - fdiv:
   - 2clock(fmul 0clk, finv 1clk) 6.876ns
   - 3clock(fmul 1clk, finv 1clk) 4.377ns
+  - 5clock(fmul 2clk, finv 2clk) 3.527ns
 - finv:
   - 1clock 4.513ns
   - 2clock 2.820ns
