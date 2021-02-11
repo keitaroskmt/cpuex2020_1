@@ -1,6 +1,6 @@
 `default_nettype none
 
-module fadd
+module fsub
     ( input wire [31:0] x1,
       input wire [31:0] x2,
       output wire [31:0] y,
@@ -27,8 +27,8 @@ module fadd
     assign ovf = 0;
     assign x2_ = {~x2[31], x2[30:0]};
 
-    fadd_1st u1(x1, x2_, mia, s1, s2, ms, es, sy);
-    fadd_2nd u2(mia_reg, s1_reg, s2_reg, ms_reg, es_reg, sy_reg, y);
+    fsub_1st u1(x1, x2_, mia, s1, s2, ms, es, sy);
+    fsub_2nd u2(mia_reg, s1_reg, s2_reg, ms_reg, es_reg, sy_reg, y);
 
     always @(posedge clk) begin
         mia_reg <= mia;
@@ -41,7 +41,7 @@ module fadd
 
 endmodule
 
-module fadd_1st
+module fsub_1st
 (
     input wire [31:0] x1,
     input wire [31:0] x2,
@@ -107,7 +107,7 @@ module fadd_1st
 endmodule
 
 
-module fadd_2nd
+module fsub_2nd
 (
     input wire [55:0] mia,
     input wire s1,
