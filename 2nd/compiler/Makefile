@@ -28,6 +28,7 @@ constFoldAsm.mli constFoldAsm.ml elimAsm.mli elimAsm.ml peephole.mli peephole.ml
 block.ml toBlock.ml graph.mli graph.ml controlFlow.mli controlFlow.ml \
 liveness.mli liveness.ml color.mli color.ml regAllocbyColor.mli regAllocbyColor.ml \
 emit.mli emit.ml emit_for_regAllocbyColor.mli emit_for_regAllocbyColor.ml \
+assem.ml toAssem.mli toAssem.ml emitAssem.mli emitAssem.ml \
 output.ml main.mli main.ml
 
 # ???Æ¥??È¥×¥í¥°???à¤¬?ý¤¨¤¿¤é¡¢?????????ä¤¹

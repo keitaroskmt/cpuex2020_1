@@ -37,18 +37,19 @@ let lexbuf (outchan, datachan) l = (* バッファをコンパイルしてチャンネルへ出力す
                             (Parser.exp Lexer.token l))))))))))
                             *)
 
-  Emit.f (outchan, datachan)
-    (RegAlloc.f
-    (iter_asm !limit
-        (Simm.f
-            (Virtual.f
-                (Closure.f
-                (FixAddress.f
-                    (iter !limit
-                    (Alpha.f
-                        (KNormal.f
-                            (Typing.f
-                                (Parser.exp Lexer.token l)))))))))))
+  EmitAssem.f outchan
+    (ToAssem.f datachan
+        (RegAlloc.f
+            (iter_asm !limit
+                (Simm.f
+                    (Virtual.f
+                        (Closure.f
+                            (FixAddress.f
+                                (iter !limit
+                                    (Alpha.f
+                                        (KNormal.f
+                                            (Typing.f
+                                                (Parser.exp Lexer.token l))))))))))))
 
 let syntax_check f =
     let inchan = open_in (f ^ ".ml") in
