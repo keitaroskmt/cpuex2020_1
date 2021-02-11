@@ -367,7 +367,7 @@ fbgt_cont.1053:
 	fblt	%f1, %f2, fbgt_else.1054
 	beqi	%v0, 0, bnei_else.1056
 	addi	%v0, %zero, 0
-	j	bnei_cont.1057
+	j	fbgt_cont.1055
 bnei_else.1056:
 	addi	%v0, %zero, 1
 bnei_cont.1057:

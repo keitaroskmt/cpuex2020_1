@@ -4,7 +4,8 @@ let g oc = function
     | Nop -> ()
     | Add(x, y, z) -> Printf.fprintf oc "\tadd\t%s, %s, %s\n" x y z
     | Addi(x, y, i) -> Printf.fprintf oc "\taddi\t%s, %s, %d\n" x y i
-    | Movl(x, y) -> Printf.fprintf oc "\taddi\t%s, %s, %s\n" x Asm.reg_zero y
+    (* ラベルyの行数が大きすぎる場合addiからはみ出る (raytracerではでないはず)*)
+    | Movl(x, l) -> Printf.fprintf oc "\taddi\t%s, %s, %s\n" x Asm.reg_zero l
     | Sub(x, y, z) -> Printf.fprintf oc "\tsub\t%s, %s, %s\n" x y z
     | And(x, y, z) -> Printf.fprintf oc "\tand\t%s, %s, %s\n" x y z
     | Or(x, y, z) -> Printf.fprintf oc "\tor\t%s, %s, %s\n" x y z
