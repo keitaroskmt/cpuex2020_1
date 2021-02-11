@@ -17,6 +17,7 @@ and fv' = function
         S.add x (S.union (fv e1) (fv e2))
     | IfFEq(x, y, e1, e2) | IfFLE(x, y, e1, e2) ->
         S.add x (S.add y (S.union (fv e1) (fv e2)))
+    | Slt(x, y) | FSlt(x, y) -> S.of_list [x; y]
     | CallCls(x, ys, zs) -> S.add x (S.union (S.of_list ys) (S.of_list zs))
     | CallDir(_, ys, zs) -> S.union (S.of_list ys) (S.of_list zs) 
     | Save(x, y) -> S.of_list [x; y]

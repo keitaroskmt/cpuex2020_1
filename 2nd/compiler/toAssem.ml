@@ -192,6 +192,10 @@ and g' = function
        | C(i) -> emit (FSw(x, i, y)))
   | NonTail(_), Comment(s) ->
         emit (Comment(s))
+  | NonTail(x), Slt(y, z) -> 
+        emit (Slt(x, y, z))
+  | NonTail(x), FSlt(y, z) -> 
+        emit (FSlt(x, y, z))
 
   (* ÂàÈò¤Î²¾ÁÛÌ¿Îá¤Î¼ÂÁõ (caml2html: emit_save) *)
   | NonTail(_), Save(x, y) when List.mem x allregs && not (M.mem y !stackset) ->
@@ -213,7 +217,7 @@ and g' = function
   | Tail, (Nop | St _ | StF _ | Comment _ | Save _ as exp) ->
         g' (NonTail(Id.gentmp Type.Unit), exp);
         emit (Jr(reg_ra))
-  | Tail, (Set _ | SetL _ | Mov _ | Neg _ | Add _ | Sub _ | Mul _ | Div _ | Ftoi _ | SLL _ | Ld _ as exp) ->
+  | Tail, (Set _ | SetL _ | Mov _ | Neg _ | Add _ | Sub _ | Mul _ | Div _ | Ftoi _ | SLL _ | Ld _ | Slt _ | FSlt _ as exp) ->
         g' (NonTail(regs.(0)), exp);
         emit (Jr(reg_ra))
   | Tail, (SetF _ | FMovD _ | FNegD _ | FAbs _ | FSqr _ | Itof _ | Floor _ | FAddD _ | FSubD _ | FMulD _ | FDivD _ | LdF _ as exp) ->

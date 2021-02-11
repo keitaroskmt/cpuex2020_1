@@ -37,6 +37,8 @@ let lexbuf (outchan, datachan) l = (* バッファをコンパイルしてチャンネルへ出力す
                             (Parser.exp Lexer.token l))))))))))
                             *)
 
+  Id.counter := 0;
+  Typing.extenv := M.empty;
   EmitAssem.f outchan
     (ElimJump.f 
         (ToAssem.f datachan

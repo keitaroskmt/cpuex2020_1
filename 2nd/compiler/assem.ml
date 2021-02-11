@@ -48,6 +48,8 @@ type t =
     | FBeq of Id.t * Id.t * string
     | FBne of Id.t * Id.t * string
     | FBlt of Id.t * Id.t * string
+    | Slt of Id.t * Id.t * Id.t
+    | FSlt of Id.t * Id.t * Id.t
 
     | Label of string
     | Comment of string

@@ -129,6 +129,18 @@ and g' = function
                   }))
   | NonTail(_), Comment(s) -> ()
 
+  | NonTail(xt), Slt(y, z) -> 
+      emit (OPER {
+        dst = [xt];
+        src = [(y, Type.Int); (z, Type.Int)];
+        jump = None
+      })
+  | NonTail(xt), FSlt(y, z) -> 
+      emit (OPER {
+        dst = [xt];
+        src = [(y, Type.Float); (z, Type.Float)];
+        jump = None
+      })
   (* ? *)
   | NonTail(_), Save(x, y) -> ()
   (* ? *)
@@ -142,7 +154,7 @@ and g' = function
       (* reg_raのjump先について考えること -> 関数ごとに考えるので不要 *)
   | Tail, (Nop | St _ | StF _ | Comment _ | Save _ as exp) ->
       g' (NonTail((Id.gentmp Type.Unit, Type.Unit)), exp);
-  | Tail, (Set _ | SetL _ | Mov _ | Neg _ | Add _ | Sub _ | Mul _ | Div _ | Ftoi _ | SLL _ | Ld _ as exp) ->
+  | Tail, (Set _ | SetL _ | Mov _ | Neg _ | Add _ | Sub _ | Mul _ | Div _ | Ftoi _ | SLL _ | Ld _ | Slt _ | FSlt _  as exp) ->
       g' (NonTail((regs.(0), Type.Int)), exp);
   | Tail, (SetF _ | FMovD _ | FNegD _ | FAbs _ | FSqr _ | Itof _ | Floor _ | FAddD _ | FSubD _ | FMulD _ | FDivD _ | LdF _ as exp) ->
       g' (NonTail((fregs.(0), Type.Float)), exp);

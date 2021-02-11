@@ -171,6 +171,12 @@ and g' env = function
             IfEq(reg_zero, C(0), (g env e2), Ans(Nop))
     | IfFLE(x, y, e1, e2) -> 
         IfFLE(x, y, g env e1, g env e2)
+    | Slt(x, y) when M.mem x env && M.mem y env ->
+        Printf.fprintf stdout "constfoldasm Slt\n";
+        if (findi x env) < (findi y env) then Set(1) else Set(0)
+    | FSlt(x, y) when M.mem x env && M.mem y env ->
+        Printf.fprintf stdout "constfoldasm FSlt\n";
+        if (findf x env) < (findf y env) then Set(1) else Set(0)
     (* ftoi, itof, floorは仕様が違う *)
     | e -> e
 

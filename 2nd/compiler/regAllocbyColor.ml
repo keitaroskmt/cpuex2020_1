@@ -122,6 +122,14 @@ and rewrite_exp e spilled env set =
             (fun s env set -> rewrite_tmp y Type.Int spilled env set
                 (fun t env set -> rewrite_tmp' z' Type.Int spilled env set
                     (fun u env set -> (Ans(StF(s, t, u)), env, set))))
+    | Slt(x, y) -> 
+        rewrite_tmp x Type.Int spilled env set
+            (fun s env set -> rewrite_tmp y Type.Int spilled env set
+                (fun t env set -> (Ans(Slt(s, t)), env, set)))
+    | FSlt(x, y) -> 
+        rewrite_tmp x Type.Float spilled env set
+            (fun s env set -> rewrite_tmp y Type.Float spilled env set
+                (fun t env set -> (Ans(FSlt(s, t)), env, set)))
     | IfEq(x, y', e1, e2) -> 
         rewrite_tmp x Type.Int spilled env set
             (fun s env set -> rewrite_tmp' y' Type.Int spilled env set
@@ -255,7 +263,7 @@ and var_count' e =
         | V(z) -> S.add x (S.add y (S.add z S.empty))
         | _ -> S.add x (S.add y S.empty))
     | FMovD(x) | FNegD(x) | FAbs(x) | FSqr(x) | Ftoi(x) | Itof(x) | Floor(x) -> S.add x S.empty
-    | FAddD(x, y) | FSubD(x, y) | FMulD(x, y) | FDivD(x, y) -> S.add x (S.add y S.empty)
+    | FAddD(x, y) | FSubD(x, y) | FMulD(x, y) | FDivD(x, y) | Slt(x, y) | FSlt(x, y) -> S.add x (S.add y S.empty)
     | IfEq(x, y', e1, e2) | IfLE(x, y', e1, e2) | IfGE(x, y', e1, e2) ->
         (match y' with
         | V(y) -> S.add x (S.add y (S.union (var_count e1) (var_count e2)))
@@ -331,6 +339,8 @@ and g' e env =
         (match z' with
         | V(z) -> StF(M.find x env, M.find y env, V(M.find z env))
         | c -> StF(M.find x env, M.find y env, c))
+    | Slt(x, y) -> Slt(M.find x env, M.find y env)
+    | FSlt(x, y) -> FSlt(M.find x env, M.find y env)
     | IfEq(x, y', e1, e2) ->
         let e1' = g e1 env in
         let e2' = g e2 env in

@@ -38,6 +38,8 @@ and exp = (* 一つ一つの命令に対応する式 (caml2html: sparcasm_exp) *)
   | IfGE of Id.t * id_or_imm * t * t (* 左右対称ではないので必要 *)
   | IfFEq of Id.t * Id.t * t * t
   | IfFLE of Id.t * Id.t * t * t
+  | Slt of Id.t * Id.t
+  | FSlt of Id.t * Id.t
   (* closure address, integer arguments, and float arguments *)
   | CallCls of Id.t * Id.t list * Id.t list
   | CallDir of Id.l * Id.t list * Id.t list
@@ -67,6 +69,7 @@ let rec fv_exp = function
   | FAddD(x, y) | FSubD(x, y) | FMulD(x, y) | FDivD(x, y) -> [x; y]
   | IfEq(x, y', e1, e2) | IfLE(x, y', e1, e2) | IfGE(x, y', e1, e2) -> x :: fv_id_or_imm y' @ remove_and_uniq S.empty (fv e1 @ fv e2) (* uniq here just for efficiency *)
   | IfFEq(x, y, e1, e2) | IfFLE(x, y, e1, e2) -> x :: y :: remove_and_uniq S.empty (fv e1 @ fv e2) (* uniq here just for efficiency *)
+  | Slt(x, y) | FSlt(x, y) -> [x; y]
   | CallCls(x, ys, zs) -> x :: ys @ zs
   | CallDir(_, ys, zs) -> ys @ zs
 and fv = function
@@ -306,6 +309,10 @@ let asm_debug oc l =
             Printf.fprintf oc "IfFLE %s %s\n" x y;
             print_t e1 (level+1);
             print_t e2 (level+1)
+        | Slt(x, y) ->
+            Printf.fprintf oc "Slt %s %s\n" x y
+        | FSlt(x, y) ->
+            Printf.fprintf oc "FSlt %s %s\n" x y
         | CallCls(x, args, fargs) ->
             Printf.fprintf oc "CallCls %s\n" x;
             print_tab (level+1);

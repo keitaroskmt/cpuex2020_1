@@ -52,6 +52,9 @@ let g oc = function
     | FBne(x, y, l) -> Printf.fprintf oc "\tfbne\t%s, %s, %s\n" x y l
     | FBlt(x, y, l) -> Printf.fprintf oc "\tfblt\t%s, %s, %s\n" x y l
 
+    | Slt(x, y, z) -> Printf.fprintf oc "\tslt\t%s, %s, %s\n" x y z
+    | FSlt(x, y, z) -> Printf.fprintf oc "\tfslt\t%s, %s, %s\n" x y z
+
     | Label(l) -> Printf.fprintf oc "%s:\n" l
     | Comment(s) -> Printf.fprintf oc "%s" s
     | LibmincamlStart -> 
