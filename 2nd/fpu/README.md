@@ -6,15 +6,15 @@
 
 ## 最適化前(total delay in 200MHz)
 
-fadd: 1clock 9.747ns
-fsub: 1clock 9.747ns
-fmul: 1clock 7.722ns
-fdiv: 4clock 7.823ns
-finv: 2clock 4.228ns
-floor: 1clock 3.732ns
-fsqrt: 2clock 5.013ns
-ftoi: 1clock 4.338ns
-itof: 1clock 4.775ns
+- fadd: 1clock 9.747ns
+- fsub: 1clock 9.747ns
+- fmul: 1clock 7.722ns
+- fdiv: 4clock 7.823ns
+- finv: 2clock 4.228ns
+- floor: 1clock 3.732ns
+- fsqrt: 2clock 5.013ns
+- ftoi: 1clock 4.338ns
+- itof: 1clock 4.775ns
 
 ## 最適化後(total delay)
 
@@ -46,8 +46,37 @@ itof: 1clock 4.775ns
   - 1clock 4.775ns(±0ns)
   - 0clock 4.665ns
 
-## 仕様
+## クロック分割後
 
-入力が非正規化数の場合は捨ててよい
-出力が非正規化数の場合はそのまま出す
-fabs, fneg, fmove: 組み合わせ
+- fadd:
+  - 0clock 7.045ns
+  - 1clock 3.990ns
+- fsub:
+  - 0clock 6.895ns
+  - 1clock 4.121ns
+- fmul:
+  - 0clock 6.675ns
+  - 1clock 4.249ns
+- fdiv:
+  - 2clock(fmul 0clk, finv 1clk) 6.876ns
+  - 3clock(fmul 1clk, finv 1clk) 4.377ns
+- finv:
+  - 1clock 4.513ns
+  - 2clock 2.820ns
+- floor:
+  - 0clock 3.629ns
+  - 1clock 2.955ns
+- fsqrt:
+  - 1clock 5.550ns
+  - 2clock 3.177ns
+- ftoi:
+  - 0clock 4.245ns
+  - 1clock 2.830ns
+- itof:
+  - 0clock 4.665ns
+  - 1clock 2.938ns
+
+## その他
+
+- fabs, fneg, fmove: 0clock
+  - 確実に早いので測定していない
