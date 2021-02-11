@@ -443,21 +443,26 @@ int exec_op(op_info op, bool print_calc, bool use_fpu)
         // if (print_calc)
         //     printf("fbeq\t%f(%08X),\t%f(%08X),\t%s\n", frs.f, frs.i, frt.f, frt.i, op.opland[2].c_str());
     }
-    // else if (op.opcode == "slt")
-    // {
-    //     printf("this inst is no longer suppoted\n");
-    //     return 1;
-    //     rs = cur_env.GPR[op.opland_bit[1]];
-    //     rt = cur_env.GPR[op.opland_bit[2]];
-    //     if (rs < rt)
-    //         rd = 1;
-    //     else
-    //         rd = 0;
-    //     cur_env.GPR[op.opland_bit[0]] = rd;
+    else if (op.opcode == "slt")
+    {
+        rs = cur_env.REG[op.opland_bit[1]].i;
+        rt = cur_env.REG[op.opland_bit[2]].i;
+        rd = (rs < rt) ? 1 : 0;
+        cur_env.REG[op.opland_bit[0]].i = rd;
 
-    //     if (print_calc)
-    //         printf("slt\t%d(%08X),\t%d(%08X),\t%d(%08X)\n", rd, rd, rs, rs, rt, rt);
-    // }
+        // if (print_calc)
+        //     printf("slt\t%d(%08X),\t%d(%08X),\t%d(%08X)\n", rd, rd, rs, rs, rt, rt);
+    }
+    else if (op.opcode == "fslt")
+    {
+        frs = cur_env.REG[op.opland_bit[1]];
+        frt = cur_env.REG[op.opland_bit[2]];
+        rd = (frs.f < frt.f) ? 1 : 0;
+        cur_env.REG[op.opland_bit[0]].i = rd;
+
+        // if (print_calc)
+        //     printf("fslt\t%d(%08X),\t%f(%08X),\t%f(%08X)\n", rd, rd, frs.f, frs.i, frt.f, frt.i);
+    }
     // else if (op.opcode == "bgt")
     // {
     //     printf("this inst is no longer suppoted\n");
