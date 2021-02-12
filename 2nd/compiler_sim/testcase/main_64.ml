@@ -106,84 +106,6 @@ in
 let rec fsqr x = x *. x
 in
 
-(*
-(* int -> float 中身同じbitを itofでハードウェア実装 *)
-(* float -> int 中身同じbitを ftoiでハードウェア実装 *)
-
-(* 8388608.0で割ったときの商 *)
-let rec int_of_float_sub1 x n =
-    if x < 8388608.0 then n
-    else int_of_float_sub1 (x -. 8388608.0) (n+1)
-in
-
-(* 8388608.0で割ったときのあまり *)
-let rec int_of_float_sub2 x =
-    if x < 8388608.0 then x
-    else int_of_float_sub2 (x -. 8388608.0)
-in
-
-(* 8388608をm回たす *)
-let rec int_of_float_sub3 m acm =
-    if m = 0 then acm
-    else int_of_float_sub3 (m-1) (8388608 + acm)
-in
-
-let rec int_of_float x =
-    let flag = x >= 0.0 in
-    let x_abs = fabs x in
-    let res =
-    (
-    if x_abs < 8388608.0 then ftoi (x_abs +. 8388608.0) - 1258291200
-    else
-        ftoi (int_of_float_sub2 x_abs +. 8388608.0) - 1258291200
-        + int_of_float_sub3 (int_of_float_sub1 x_abs 0) 0
-    ) in
-    if flag then res else -res
-in
-
-
-(* 8388608で割ったときの商 *)
-let rec float_of_int_sub1 x n =
-    if x < 8388608 then n
-    else float_of_int_sub1 (x - 8388608) (n+1)
-in
-
-(* 8388608で割ったときのあまり *)
-let rec float_of_int_sub2 x =
-    if x < 8388608 then x
-    else float_of_int_sub2 (x - 8388608)
-in
-
-(* 8388608.0をm回たす *)
-let rec float_of_int_sub3 m acm =
-    if m = 0 then acm
-    else float_of_int_sub3 (m-1) (8388608.0 +. acm)
-in
-
-let rec float_of_int x =
-    let flag = x > 0 in
-    let x_abs = if x < 0 then -x else x in
-    let res =
-    (
-    if x_abs < 8388608 then itof (x_abs + 1258291200) -. 8388608.0
-    else
-        itof (float_of_int_sub2 x_abs + 1258291200) -. 8388608.0
-        +. float_of_int_sub3 (float_of_int_sub1 x_abs 0) 0.0
-    ) in
-    if flag then res else fneg res
-in
-
-let rec floor x =
-    let flag = x >= 0.0 in
-    let x_abs = fabs x in
-    let res =
-        if x_abs >= 8388608.0 then x_abs else float_of_int (int_of_float x_abs) in
-    let res_ =
-        if flag then res else fneg res in
-    if res_ > x then res_ -. 1.0 else res_
-in
-*)
-
 let rec kernel_sin x =
     let x2 = x *. x in
     let x4 = x2 *. x2 in
@@ -215,19 +137,21 @@ let rec kernel_atan x =
     +. 0.060035485 *. x *. x4 *. x8
 in
 
+let rec reduction_2pi_sub1 s t =  (* while (x >= p) *)
+    if s < t then t else reduction_2pi_sub1 s (2.0 *. t) in
+
+let rec reduction_2pi_sub2 s t pi2 = (* while (x >= pi2) *)
+    if s < pi2 then s else  
+    if s >= t then reduction_2pi_sub2 (s -. t) (t /. 2.0) pi2 else reduction_2pi_sub2 s (t /. 2.0) pi2 in
+
 let rec reduction_2pi x =
     let pi = 3.14159265358979 in
     let pi2 = 2.0 *. pi in
-    let rec f s t = (* while (x >= p) *)
-        if s < t then t else f s (2.0 *. t) in
-    let p = f x pi2 in
-    let rec g s t = (* while (x >= pi2) *)
-        if s < pi2 then s else
-        if s >= t then g (s -. t) (t /. 2.0) else g s (t /. 2.0) in
-    g x p
+    let p = reduction_2pi_sub1 x pi2 in
+    reduction_2pi_sub2 x p pi2
 in
 
-(* tenuki
+(*
 let rec reduction_2pi x =
     let pi = 3.14159265358979 in
     let pi2 = 2.0 *. pi in

@@ -104,9 +104,6 @@ let rec load_float_imm dc data acc =
     *)
 
 let addi oc r1 r2 i =
-    if i = 0 then ()
-    else
-    (
     if -32768 <= i && i <= 32767 then
         Printf.fprintf oc "\taddi\t%s, %s, %d\n" r1 r2 i
     else
@@ -117,7 +114,6 @@ let addi oc r1 r2 i =
         Printf.fprintf oc "\tori\t%s, %s, %d\n" reg_at reg_at lower;
         Printf.fprintf oc "\tadd\t%s, %s, %s\n" r1 r2 reg_at
         )
-    )
 
 
 type dest = Tail | NonTail of Id.t (* 末尾かどうかを表すデータ型 (caml2html: emit_dest) *)

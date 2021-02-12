@@ -17,47 +17,48 @@ let rec g = function
 and g' = function 
   | NonTail(_), Nop -> ()
   (* 型をintにしておかないと例えばFloat list型などありうる. このとき, livenessなどでノードの一致判定で同じ変数でも型が違うとバグる *)
-  | NonTail((x, t)), Set(_) | NonTail((x, t)), SetL(_) ->
+  | NonTail((x, _)), Set(_) | NonTail((x, _)), SetL(_) ->
         emit (OPER {
           dst = [(x, Type.Int)];
           src = [];
           jump = None
         })
-  | NonTail(xt), SetF(_) ->
+  | NonTail((x, _)), SetF(_) ->
         emit (OPER {
-          dst = [xt];
+          dst = [(x, Type.Float)];
           src = [];
           jump = None
         })
-  | NonTail((x, t)), Mov(y) when x = y -> ()
-  | NonTail((x, t)), Mov(y) ->
+  | NonTail((x, _)), Mov(y) when x = y -> ()
+  | NonTail((x, _)), Mov(y) ->
         emit (MOVE {
           dst = [(x, Type.Int)];
           src = [(y, Type.Int)]
         })
-  | NonTail(xt), Neg(y) ->
+  | NonTail((x, _)), Neg(y) ->
         emit (OPER {
-          dst = [xt];
+          dst = [(x, Type.Int)];
           src = [(y, Type.Int)];
           jump = None
         })
-  | NonTail(xt), Add(y, z') | NonTail(xt), Sub(y, z') | NonTail(xt), SLL(y, z') | NonTail(xt), Ld(y, z') ->
+  (* Ld先の型がintではなく, listのとき (多重配列) バグるので明示的にintにしておく *)
+  | NonTail((x, _)), Add(y, z') | NonTail((x, _)), Sub(y, z') | NonTail((x, _)), SLL(y, z') | NonTail((x, _)), Ld(y, z') ->
        (match z' with
         | V(z) -> emit (OPER {
-                    dst = [xt];
+                    dst = [(x, Type.Int)];
                     src = [(y, Type.Int); (z, Type.Int)];
                     jump = None
                   })
         | C(i) -> emit (OPER {
-                    dst = [xt];
+                    dst = [(x, Type.Int)];
                     src = [(y, Type.Int)];
                     jump = None
                   }))
-  | NonTail(xt), Mul(y, z') | NonTail(xt), Div(y, z') ->
+  | NonTail((x, _)), Mul(y, z') | NonTail((x, _)), Div(y, z') ->
        (match z' with
         | V(z) -> failwith "Mul or Div Error"
         | C(i) -> emit (OPER {
-                    dst = [xt];
+                    dst = [(x, Type.Int)];
                     src = [(y, Type.Int)];
                     jump = None
                   }))
@@ -73,45 +74,45 @@ and g' = function
                     src = [(x, Type.Int); (y, Type.Int)];
                     jump = None
                   }))
-  | NonTail((x, t)), FMovD(y) when x = y -> ()
-  | NonTail((x, t)), FMovD(y) ->
+  | NonTail((x, _)), FMovD(y) when x = y -> ()
+  | NonTail((x, _)), FMovD(y) ->
         emit (MOVE {
           dst = [(x, Type.Float)];
           src = [(y, Type.Float)];
         })
-  | NonTail(xt), FNegD(y) | NonTail(xt), FAbs(y) | NonTail(xt), FSqr(y) | NonTail(xt), Floor(y) ->
+  | NonTail((x, _)), FNegD(y) | NonTail((x, _)), FAbs(y) | NonTail((x, _)), FSqr(y) | NonTail((x, _)), Floor(y) ->
         emit (OPER {
-          dst = [xt];
+          dst = [(x, Type.Float)];
           src = [(y, Type.Float)];
           jump = None
         })
-  | NonTail(xt), FAddD(y, z) | NonTail(xt), FSubD(y, z) | NonTail(xt), FMulD(y, z) | NonTail(xt), FDivD(y, z) ->
+  | NonTail((x, _)), FAddD(y, z) | NonTail((x, _)), FSubD(y, z) | NonTail((x, _)), FMulD(y, z) | NonTail((x, _)), FDivD(y, z) ->
         emit (OPER {
-          dst = [xt];
+          dst = [(x, Type.Float)];
           src = [(y, Type.Float); (z, Type.Float)];
           jump = None
         })
-  | NonTail(xt), Ftoi(y) ->
+  | NonTail((x, _)), Ftoi(y) ->
         emit (OPER {
-          dst = [xt];
+          dst = [(x, Type.Int)];
           src = [(y, Type.Float)];
           jump = None
         });
-  | NonTail(xt), Itof(y) ->
+  | NonTail((x, _)), Itof(y) ->
         emit (OPER {
-          dst = [xt];
+          dst = [(x, Type.Float)];
           src = [(y, Type.Int)];
           jump = None
         });
-  | NonTail(xt), LdF(y, z') ->
+  | NonTail((x, t)), LdF(y, z') ->
        (match z' with
         | V(z) -> emit (OPER {
-                    dst = [xt];
+                    dst = [(x, Type.Float)];
                     src = [(y, Type.Int); (z, Type.Int)];
                     jump = None
                   })
         | C(i) -> emit (OPER {
-                    dst = [xt];
+                    dst = [(x, Type.Float)];
                     src = [(y, Type.Int)];
                     jump = None
                   }))
@@ -129,15 +130,15 @@ and g' = function
                   }))
   | NonTail(_), Comment(s) -> ()
 
-  | NonTail(xt), Slt(y, z) -> 
+  | NonTail((x, _)), Slt(y, z) -> 
       emit (OPER {
-        dst = [xt];
+        dst = [(x, Type.Int)];
         src = [(y, Type.Int); (z, Type.Int)];
         jump = None
       })
-  | NonTail(xt), FSlt(y, z) -> 
+  | NonTail((x, _)), FSlt(y, z) -> 
       emit (OPER {
-        dst = [xt];
+        dst = [(x, Type.Int)];
         src = [(y, Type.Float); (z, Type.Float)];
         jump = None
       })

@@ -281,7 +281,7 @@ unsigned int Writer::encode(vector<string> &v) {
             signed_c1 = parser->label_map.at(v[4]) - (current_num + 1);
         }
         assert(-128 <= signed_c2 && signed_c2 <= 127);
-        assert(-4096 <= signed_c1 && signed_c1 <= 4095);
+        assert(0 <= signed_c1 && signed_c1 <= 8191);
         c1 = signed_c1;
         c2 = signed_c2;
 
