@@ -274,16 +274,20 @@ module vliw_arch
     wire [31:0] alu_resultM3;
     wire [31:0] srcbM3;
     wire [5:0] writeRegM3;
+    wire [31:0] read_dataM3;
     reg RegWriteMW3;
     reg [5:0] writeRegMW3;
+    reg [31:0] read_dataMW3;
     //4th inst
     wire RegWriteM4;
     wire MemWriteM4;
     wire [31:0] alu_resultM4;
     wire [31:0] srcbM4;
     wire [5:0] writeRegM4;
+    wire [31:0] read_dataM4;
     reg RegWriteMW4;
     reg [5:0] writeRegMW4;
+    reg [31:0] read_dataMW4;
     //WA
     //3rd inst
     wire RegWriteW3;
@@ -357,11 +361,13 @@ module vliw_arch
                             : 31'b0));
 
     inst_mem_dis_vliw instmemv(clk,pcF,instrF);
-    branch_predictor bp(clk,rstn,branch_type,pc,branched_pc_plus,branchD1||branchE1||branchM1,branch_prediction);
+    reg branch_prediction;
+    //branch_predictor bp(clk,rstn,branch_type,pc,branched_pc_plus,branchD1||branchE1||branchM1,branch_prediction);
     branch_unitF buF(instrF[31:26],branch_prediction,branch_type,Branch_predictedF);
 
     always @(posedge clk) begin
         if(~rstn)begin
+            branch_prediction <= 1'b1;
             pc <= 0;
             {Branch_predictedFD,pc_plusFD} <= 0;
             instrFD <= {6'b011111,26'd0,6'b011111,26'd0,6'b011111,26'd0,6'b011111,26'd0};
@@ -490,7 +496,7 @@ module vliw_arch
     //3rd instruction
     assign {RegWriteE3,MemWriteE3} = {RegWriteDE3,MemWriteDE3};
     assign {rsE3,rtE3,srcaE3,srcbE3,ImmE3} = {rsDE3,rtDE3,srcaDE3,srcbDE3,ImmDE3};
-    assign forwardedaE3 = (ForwardaE3 == 4'b000) ? srcaE3
+    assign forwardedaE3 = (ForwardaE3 == 4'b0000) ? srcaE3
                         :((ForwardaE3 == 4'b0001) ? write_backM1
                         :((ForwardaE3 == 4'b0010) ? write_backM2
                         :((ForwardaE3 == 4'b0011) ? read_dataW3
@@ -499,7 +505,7 @@ module vliw_arch
                         :((ForwardaE3 == 4'b1001) ? write_backKept2
                         :((ForwardaE3 == 4'b0101) ? read_dataKept3
                         : read_dataKept4)))))));
-    assign forwardedbE3 = (ForwardbE3 == 4'b000) ? srcbE3
+    assign forwardedbE3 = (ForwardbE3 == 4'b0000) ? srcbE3
                         :((ForwardbE3 == 4'b0001) ? write_backM1
                         :((ForwardbE3 == 4'b0010) ? write_backM2
                         :((ForwardbE3 == 4'b0011) ? read_dataW3
@@ -513,7 +519,7 @@ module vliw_arch
     ////4th instruction
     assign {RegWriteE4,MemWriteE4} = {RegWriteDE4,MemWriteDE4};
     assign {rsE4,rtE4,srcaE4,srcbE4,ImmE4} = {rsDE4,rtDE4,srcaDE4,srcbDE4,ImmDE4};
-    assign forwardedaE4 = (ForwardaE4 == 4'b000) ? srcaE4
+    assign forwardedaE4 = (ForwardaE4 == 4'b0000) ? srcaE4
                         :((ForwardaE4 == 4'b0001) ? write_backM1
                         :((ForwardaE4 == 4'b0010) ? write_backM2
                         :((ForwardaE4 == 4'b0011) ? read_dataW3
@@ -522,7 +528,7 @@ module vliw_arch
                         :((ForwardaE4 == 4'b1001) ? write_backKept2
                         :((ForwardaE4 == 4'b0101) ? read_dataKept3
                         : read_dataKept4)))))));
-    assign forwardedbE4 = (ForwardbE4 == 4'b000) ? srcbE4
+    assign forwardedbE4 = (ForwardbE4 == 4'b0000) ? srcbE4
                         :((ForwardbE4 == 4'b0001) ? write_backM1
                         :((ForwardbE4 == 4'b0010) ? write_backM2
                         :((ForwardbE4 == 4'b0011) ? read_dataW3
@@ -585,7 +591,7 @@ module vliw_arch
     reg en;
 
     //data_mem_bl_vliw dmb(clk,en,MemWriteM3,alu_resultM3,srcbM3,read_dataW3);
-    data_mem_wrap dmw(clk,rstn,MemWriteM3,alu_resultM3,srcbM3,read_dataW3,MemWriteM4,alu_resultM4,srcbM4,read_dataW4);
+    data_mem_wrap dmw(clk,rstn,MemWriteE3,alu_resultE3,forwardedbE3,read_dataM3,MemWriteE4,alu_resultE4,forwardedbE4,read_dataM4);
 
     always @(posedge clk) begin
         if(~rstn)begin
@@ -616,17 +622,21 @@ module vliw_arch
                 RegWriteKeep4 <= RegWriteW4;
             end else if(StallE)begin
             end
+            read_dataMW3 <= read_dataM3;
             RegWriteMW3 <= RegWriteM3;
             writeRegMW3 <= writeRegM3;
+            read_dataMW4 <= read_dataM4;
             RegWriteMW4 <= RegWriteM4;
             writeRegMW4 <= writeRegM4;
         end
     end
 
     //3rd instruction
+    assign read_dataW3 = read_dataMW3;
     assign RegWriteW3 = RegWriteMW3;
     assign writeRegW3 = writeRegMW3;
     ////4th instruction
+    assign read_dataW4 = read_dataMW4;
     assign RegWriteW4 = RegWriteMW4;
     assign writeRegW4 = writeRegMW4;
 

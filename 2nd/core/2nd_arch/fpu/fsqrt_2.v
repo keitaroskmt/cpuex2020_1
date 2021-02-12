@@ -2,7 +2,7 @@
 
 module fsqrt
     ( input wire [31:0] x,
-      output reg [31:0] y,
+      output wire [31:0] y,
       input wire clk,
       input wire rstn
 );
@@ -12,14 +12,19 @@ module fsqrt
     wire [22:0] m;
     wire [35:0] val;
     wire [9:0] key;
-    wire [31:0] y_wire;
 
-    reg reg_s;
-    reg [7:0] reg_e;
-    reg [22:0] reg_m;
-    reg [22:0] reg_c;
-    reg [12:0] reg_d;
-    reg [9:0] reg_key;
+    wire [22:0] c;
+    wire [29:0] cor_n;
+
+    reg s_reg;
+    reg s_reg2;
+    reg [7:0] e_reg;
+    reg [7:0] e_reg2;
+    reg [22:0] m_reg;
+    reg [29:0] cor_n_reg;
+    reg [22:0] c_reg;
+    reg [9:0] key_reg;
+    reg [35:0] val_reg;
 
     assign s = x[31];
     assign e = x[30:23];
@@ -27,43 +32,56 @@ module fsqrt
     assign key = x[23:14];
 
     fsqrt_table u1(key, val, clk, rstn);
-    fsqrt_1st u2(reg_s, reg_e, reg_m, reg_key, val, y_wire);
+    fsqrt_1st u2(m_reg, key_reg, val, c, cor_n);
+    fsqrt_2nd u3(s_reg2, e_reg2, c_reg, cor_n_reg, y);
 
     always @(posedge clk) begin
-        reg_s <= s;
-        reg_e <= e;
-        reg_m <= m;
-        reg_key <= key;
-        y <= y_wire;
+        s_reg <= s;
+        s_reg2 <= s_reg;
+        e_reg <= e;
+        e_reg2 <= e_reg;
+        m_reg <= m;
+        key_reg <= key;
+        val_reg <= val;
+        c_reg <= c;
+        cor_n_reg <= cor_n;
     end
 
 endmodule
 
 
 module fsqrt_1st
-    (input wire s,
-     input wire [7:0] e,
-     input wire [22:0] m,
+    (input wire [22:0] m,
      input wire [9:0] key,
      input wire [35:0] val,
-     output wire [31:0] y);
+     output wire [22:0] c,
+     output wire [29:0] cor_n);
 
+    wire [13:0] d;
     wire [13:0] a1;
     wire [14:0] a2;
-    wire [29:0] cor_n;
-    wire [14:0] cor;
-    wire [22:0] ans_m;
-    wire [22:0] m1;
-    wire [8:0] e0;
-    wire [7:0] ans_e;
-    wire [22:0] c;
-    wire [13:0] d;
 
     assign c = val[35:13];
     assign d = {1'b1, val[12:0]};
     assign a1 = m[13:0];
     assign a2 = a1 << 1;
     assign cor_n = (key < 10'd512) ? a2 * d : a1 * d;
+
+endmodule
+
+module fsqrt_2nd
+    (input wire s,
+     input wire [7:0] e,
+     input wire [22:0] c,
+     input wire [29:0] cor_n,
+     output wire [31:0] y);
+
+    wire [22:0] ans_m;
+    wire [22:0] m1;
+    wire [8:0] e0;
+    wire [7:0] ans_e;
+    wire [14:0] cor;
+
     assign cor = cor_n >> 15;
     assign e0 = e + 8'd127;
     assign ans_e = e0[8:1];
@@ -72,6 +90,7 @@ module fsqrt_1st
     assign y = (e == 0) ? {s, 8'b0, ans_m} : {s, ans_e, ans_m};
 
 endmodule
+
 
 
 module fsqrt_table

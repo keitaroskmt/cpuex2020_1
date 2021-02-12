@@ -3,20 +3,46 @@
 module fmul
     ( input wire [31:0] x1,
       input wire [31:0] x2,
-      output reg [31:0] y,
+      output wire [31:0] y,
       output wire ovf,
       input wire clk,
       input wire rstn
 );
+    wire [23:0] m1ahm2ah;
+    wire [23:0] m1ahm2al;
+    wire [23:0] m1alm2ah;
+    wire [23:0] m1alm2al;
+    wire [8:0] e1a;
+    wire [8:0] e2a;
+    wire [7:0] e1;
+    wire [7:0] e2;
+    wire s;
+
+    reg [23:0] m1ahm2ah_reg;
+    reg [23:0] m1ahm2al_reg;
+    reg [23:0] m1alm2ah_reg;
+    reg [23:0] m1alm2al_reg;
+    reg [8:0] e1a_reg;
+    reg [8:0] e2a_reg;
+    reg [7:0] e1_reg;
+    reg [7:0] e2_reg;
+    reg s_reg;
 
     assign ovf = 0;
 
-    wire [31:0] y_wire;
-
-    fmul_1st u1(x1, x2, y_wire);
+    fmul_1st u1(x1, x2, m1ahm2ah, m1ahm2al, m1alm2ah, m1alm2al, e1a, e2a, e1, e2, s);
+    fmul_2nd u2(m1ahm2ah_reg, m1ahm2al_reg, m1alm2ah_reg, m1alm2al_reg, e1a_reg, e2a_reg, e1_reg, e2_reg, s_reg, y);
 
     always @(posedge clk) begin
-        y <= y_wire;
+        m1ahm2ah_reg <= m1ahm2ah;
+        m1ahm2al_reg <= m1ahm2al;
+        m1alm2ah_reg <= m1alm2ah;
+        m1alm2al_reg <= m1alm2al;
+        e1a_reg <= e1a;
+        e2a_reg <= e2a;
+        e1_reg <= e1;
+        e2_reg <= e2;
+        s_reg <= s;
     end
 
 endmodule
@@ -25,39 +51,27 @@ module fmul_1st
 (
     input wire [31:0] x1,
     input wire [31:0] x2,
-    output wire [31:0] y
+    output wire [23:0] m1ahm2ah,
+    output wire [23:0] m1ahm2al,
+    output wire [23:0] m1alm2ah,
+    output wire [23:0] m1alm2al,
+    output wire [8:0] e1a,
+    output wire [8:0] e2a,
+    output wire [7:0] e1,
+    output wire [7:0] e2,
+    output wire s
 );
-    wire [8:0] e1a;
-    wire [8:0] e2a;
     wire [23:0] m1a;
     wire [23:0] m2a;
     wire [11:0] m1a_h;
     wire [11:0] m1a_l;
     wire [11:0] m2a_h;
     wire [11:0] m2a_l;
-    wire [23:0] m1ahm2ah;
-    wire [23:0] m1ahm2al;
-    wire [23:0] m1alm2ah;
-    wire [23:0] m1alm2al;
 
     wire s1;
     wire s2;
-    wire [7:0] e1;
-    wire [7:0] e2;
     wire [22:0] m1;
     wire [22:0] m2;
-    wire s;
-    wire [8:0] ea;
-    wire [47:0] m1am2a;
-
-    wire inf;
-    wire [22:0] m;
-    wire [7:0] e;
-    wire [7:0] shift_e;
-    wire zero;
-    wire subnormal;
-    wire [23:0] subnormal_m;
-    wire [22:0] shifted_m;
 
     // x1が正規化数なのは仮定して良い
     // x2は非正規化数の場合があるその場合、23bit目か22bit目のどちらかが必ず立っている
@@ -84,6 +98,34 @@ module fmul_1st
     assign m1ahm2al = m1a_h * m2a_l;
     assign m1alm2ah = m1a_l * m2a_h;
     assign m1alm2al = m1a_l * m2a_l;
+
+endmodule
+
+
+module fmul_2nd
+(
+    input wire [23:0] m1ahm2ah,
+    input wire [23:0] m1ahm2al,
+    input wire [23:0] m1alm2ah,
+    input wire [23:0] m1alm2al,
+    input wire [8:0] e1a,
+    input wire [8:0] e2a,
+    input wire [7:0] e1,
+    input wire [7:0] e2,
+    input wire s,
+    output wire [31:0] y
+);
+    wire [47:0] m1am2a;
+    wire [8:0] ea;
+
+    wire inf;
+    wire [22:0] m;
+    wire [7:0] e;
+    wire [7:0] shift_e;
+    wire zero;
+    wire subnormal;
+    wire [23:0] subnormal_m;
+    wire [22:0] shifted_m;
 
     assign m1am2a = (m1ahm2ah << 24) + (m1ahm2al << 12) + (m1alm2ah << 12) + m1alm2al;
 

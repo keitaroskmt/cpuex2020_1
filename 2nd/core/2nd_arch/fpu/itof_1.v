@@ -2,17 +2,25 @@
 
 module itof
     ( input wire [31:0] x,
-      output reg [31:0] y,
+      output wire [31:0] y,
       input wire clk,
       input wire rstn
 );
+    wire s;
+    wire [30:0] ux;
+    wire [4:0] k;
 
-    wire [31:0] y_wire;
+    reg s_reg;
+    reg [30:0] ux_reg;
+    reg [4:0] k_reg;
 
-    itof_1st u2(x, y_wire);
+    itof_1st u1(x, s, ux, k);
+    itof_2nd u2(s_reg, ux_reg, k_reg, y);
 
     always @(posedge clk) begin
-        y <= y_wire;
+        s_reg <= s;
+        ux_reg <= ux;
+        k_reg <= k;
     end
 
 endmodule
@@ -20,15 +28,10 @@ endmodule
 
 module itof_1st
     (input wire [31:0] x,
-     output wire [31:0] y);
+     output wire s,
+     output wire [30:0] ux,
+     output wire [4:0] k);
 
-    wire [4:0] k;
-    wire [30:0] ux;
-    wire [31:0] m1;
-    wire [31:0] m2;
-    wire [22:0] m;
-    wire [7:0] e;
-    wire s;
 
     assign s = x[31];
     assign ux = (s) ? ~(x[30:0] - 1) : x[30:0];
@@ -64,6 +67,19 @@ module itof_1st
                 (ux[2])  ? 5'd2 :
                 (ux[1])  ? 5'd1 :
                 (ux[0])  ? 5'd0 : 5'd31;
+endmodule
+
+
+module itof_2nd
+    (input wire s,
+     input wire [30:0] ux,
+     input wire [4:0] k,
+     output wire [31:0] y);
+
+    wire [31:0] m1;
+    wire [31:0] m2;
+    wire [22:0] m;
+    wire [7:0] e;
 
     assign m1 = (k <= 23) ? {ux, 1'b0} << (23 - k) : {ux, 1'b0} >> (k - 23);
     assign m2 = m1 + 1;
@@ -71,7 +87,5 @@ module itof_1st
     assign e = 127 + k;
     assign y = (k == 31) ? 32'b0 : {s,e,m};
 endmodule
-
-
 
 `default_nettype wire
