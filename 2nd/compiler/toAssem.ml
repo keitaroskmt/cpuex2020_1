@@ -3,8 +3,12 @@ open Assem
 external get : float -> int32 = "get"
 
 let assem_list = ref []
-let emit inst = 
-    assem_list := inst :: !assem_list
+let emit inst = assem_list := inst :: !assem_list
+let assem_list_all = ref []
+let emit_all list = assem_list_all := list @ !assem_list_all
+
+(* bycolor=false regAlloc.ml, bycolor=true regAllocbyColor.ml *)
+let bycolor = ref false
 
 let cls_count = ref 0
 let float_table = ref []
@@ -23,7 +27,7 @@ let locate x =
     | y :: zs -> List.map succ (loc zs) in
   loc !stackmap
 let offset x = if (locate x) = [] then (Printf.fprintf stdout ("%s\n") x; failwith "err") else List.hd (locate x)
-let stacksize () = List.length !stackmap + 1
+let stacksize () = if !bycolor then List.length !stackmap else List.length !stackmap + 1
 
 let pp_id_or_imm = function
   | V(x) -> x
@@ -296,12 +300,24 @@ and g' = function
         cls_count := !cls_count + 1;
         g'_args [(x, reg_cl)] ys zs;
         let ss = stacksize () in
-        emit (Sw(reg_ra, (ss - 1), reg_sp));
-        addi reg_sp reg_sp ss;
-        emit (Lw(reg_at, 0, reg_cl));
-        emit (Jalr(reg_at));
-        addi reg_sp reg_sp (-ss);
-        emit (Lw(reg_ra, (ss - 1), reg_sp));
+        (
+        if !bycolor then
+        (
+            addi reg_sp reg_sp ss;
+            emit (Lw(reg_at, 0, reg_cl));
+            emit (Jalr(reg_at));
+            addi reg_sp reg_sp (-ss);
+        )
+        else
+        (
+            emit (Sw(reg_ra, (ss - 1), reg_sp));
+            addi reg_sp reg_sp ss;
+            emit (Lw(reg_at, 0, reg_cl));
+            emit (Jalr(reg_at));
+            addi reg_sp reg_sp (-ss);
+            emit (Lw(reg_ra, (ss - 1), reg_sp))
+        )
+        );
         if List.mem a allregs && a <> regs.(0) then
             emit (Addi(a, regs.(0), 0))
         else if List.mem a allfregs && a <> fregs.(0) then
@@ -309,11 +325,22 @@ and g' = function
   | NonTail(a), CallDir(Id.L(x), ys, zs) ->
         g'_args [] ys zs;
         let ss = stacksize () in
-        emit (Sw(reg_ra, (ss - 1), reg_sp));
-        addi reg_sp reg_sp ss;
-        emit (Jal(x));
-        addi reg_sp reg_sp (-ss);
-        emit (Lw(reg_ra, (ss - 1), reg_sp));
+        (
+        if !bycolor then
+        (
+            addi reg_sp reg_sp ss;
+            emit (Jal(x));
+            addi reg_sp reg_sp (-ss);
+        )
+        else
+        (
+            emit (Sw(reg_ra, (ss - 1), reg_sp));
+            addi reg_sp reg_sp ss;
+            emit (Jal(x));
+            addi reg_sp reg_sp (-ss);
+            emit (Lw(reg_ra, (ss - 1), reg_sp))
+        )
+        );
         if List.mem a allregs && a <> regs.(0) then
             emit (Addi(a, regs.(0), 0))
         else if List.mem a allfregs && a <> fregs.(0) then
@@ -401,18 +428,25 @@ and g'_args x_reg_cl ys zs =
 let len_ys = ref 0
 let len_zs = ref 0
 
-let h { name = Id.L(x); args = ys; fargs = zs; body = e; ret = _ } =
+let h option fundef =
+  let { name = Id.L(x); args = ys; fargs = zs; body = e; ret = _ } = if option then RegAllocbyColor.h fundef else RegAlloc.h fundef in
+
   if List.length ys > !len_ys then len_ys := List.length ys;
   if List.length zs > !len_zs then len_zs := List.length zs;
   emit (Label(x));
   stackset := M.empty;
   stackmap := [];
-  g (Tail, e)
+  let ret = g (Tail, e) in
+  emit_all !assem_list;
+  ret
 
-let f dc (Prog(data, fundefs, e)) =
+(* calldefs.mlのためにtoAssem.mlとregAllocbyColor.mlをまとめる *)
+let f dc option (Prog(data, fundefs, e)) =
+  bycolor := option;
 (* データセクションに関してはこの段階で出力 *)
   cls_count := 0;
-  Format.eprintf "toAssem...@.";
+  Format.eprintf "register allocation and toAssem: may take some time (up to a few minutes, depending on the size of functions)@.";
+
   emit (Comment(".section\t\".rodata\"\n"));
   emit (Comment(".align\t8\n"));
   emit (Comment("# ------------ Initialize float table ---------\n"));
@@ -429,16 +463,19 @@ let f dc (Prog(data, fundefs, e)) =
   emit (Comment("# ------------ libmincaml.S -------------------\n"));
   emit (LibmincamlStart);
   emit (Comment("# ------------ body ---------------------------\n"));
-  List.iter (fun fundef -> h fundef) fundefs;
+  List.iter (fun fundef -> h option fundef) fundefs;
   emit (Comment(".global\tmin_caml_start\n"));
   emit (Label("min_caml_start"));
+ 
+  let e' = if option then RegAllocbyColor.f e else RegAlloc.f e in
   stackset := M.empty;
   stackmap := [];
-  g (NonTail("%g0"), e);
+  g (NonTail("%g0"), e');
   emit (Ret);
 
   Printf.fprintf stdout "len ys: %d \n" (!len_ys);
   Printf.fprintf stdout "len zs: %d \n" (!len_zs);
   Printf.fprintf stdout "Closure num: %d\n" (!cls_count);
 
-  List.rev !assem_list
+  emit_all !assem_list
+  List.rev !assem_list_all

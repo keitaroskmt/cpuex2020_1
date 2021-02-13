@@ -1,5 +1,8 @@
 open Asm
 
+(* 種々のprintをするか *)
+let debug = ref false
+
   (* envはspilledと新たに作った変数の対応 *)
   (* restoreは関数呼び出しの間の区間で1回のみに制限 -> setで管理 *)
   (* TODO: 浮動小数テーブルにあるものは, saveする必要ない *)
@@ -378,7 +381,7 @@ and g' e env =
 
 type fundefort = Fun of fundef | T of t
 
-let alloc e_origin debug = 
+let alloc e_origin = 
     let et_origin = 
         (match e_origin with
         | Fun({ name = _; args = _; fargs = _; body = x; ret = _ }) -> x
@@ -390,15 +393,15 @@ let alloc e_origin debug =
             | Fun(fundef) -> ToBlock.h fundef
             | T(t) -> ToBlock.f t in
         (* for debug *)
-        if debug then Block.block_debug stdout instrs;
+        if !debug then Block.block_debug stdout instrs;
 
         let (ControlFlow.{control; def; use; ismove} as flowgraph, flownodes) = ControlFlow.instrs_to_graph instrs in
         (* for debug*)
-        if debug then ControlFlow.controlFlow_debug stdout (flowgraph, flownodes);
+        if !debug then ControlFlow.controlFlow_debug stdout (flowgraph, flownodes);
 
-        let (Liveness.{graph; id2node; node2id; moves} as igraph, liveouts) = Liveness.interference_graph flowgraph debug in
+        let (Liveness.{graph; id2node; node2id; moves} as igraph, liveouts) = Liveness.interference_graph flowgraph !debug in
         (* for debug*)
-        if debug then Liveness.igraph_debug stdout igraph;
+        if !debug then Liveness.igraph_debug stdout igraph;
 
         (* 差集合から新たに*)
         let et = 
@@ -429,10 +432,10 @@ let alloc e_origin debug =
                 if List.mem x rewrite_temps then max_int else use + def) in
 
         (* for debug *)
-        if debug then List.iter (fun node -> Printf.fprintf stdout "%s: %d\n" (fst (node2id node)) (spill_cost node)) (Graph.nodes graph);
+        if !debug then List.iter (fun node -> Printf.fprintf stdout "%s: %d\n" (fst (node2id node)) (spill_cost node)) (Graph.nodes graph);
 
         (* temp_map, registersをAsm内で定義 *)
-        let (allocation, spilled) = Color.color igraph spill_cost reg_map (registers, fregisters) debug in
+        let (allocation, spilled) = Color.color igraph spill_cost reg_map (registers, fregisters) !debug in
         (
         if spilled = [] then
         (
@@ -442,7 +445,7 @@ let alloc e_origin debug =
                 | T(x) -> x) in
 
             (* for debug *)
-            if debug then asm_debug stdout (Prog([], [], et));
+            if !debug then asm_debug stdout (Prog([], [], et));
             (g et allocation, allocation)
         )
         else
@@ -454,7 +457,7 @@ let alloc e_origin debug =
             let et' = rewrite et spilled M.empty S.empty in
 
             (* for debug *)
-            if debug then (
+            if !debug then (
                 asm_debug stdout (Prog([], [], et'));
                 List.iter (fun x -> Printf.fprintf stdout "spilled!!!!! %s\n" x) spilled
             ) else (
@@ -540,23 +543,18 @@ let h_args ({ name = n; args = ys; fargs = zs; body = e; ret = t } as fundef) =
     { name = n; args = ys; fargs = zs; body = e; ret = t }
 
 
-let h debug ({ name = Id.L(x); args = ys; fargs = zs; body = e; ret = t } as fundef) = 
+let h ({ name = Id.L(x); args = ys; fargs = zs; body = e; ret = t } as fundef) = 
     Printf.fprintf stdout "--- Function: %s ----------------------- \n" x;
     let fundef' = h_args (move_calleesaves fundef) in
 
-    let (e', allocation) = alloc (Fun(fundef')) debug in 
+    let (e', allocation) = alloc (Fun(fundef')) in 
     let arg_regs = List.map (fun x -> M.find x allocation) ys in
     let farg_regs = List.map (fun x -> M.find x allocation) zs in
     { name = Id.L(x); args = ys; fargs = zs; body = e'; ret = t }
 
 
-let f (Prog(data, fundefs, e)) = 
-    (* 種々のprintをするか *)
-    let debug = false in
-
-    if debug then asm_debug stdout (Prog(data, fundefs, e));
-    Format.eprintf "register allocation: may take some time (up to a few minutes, depending on the size of functions)@.";
-    let fundefs' = List.map (h debug) fundefs in
-    let (e', _) = alloc (T(e)) debug  in 
-    Prog(data, fundefs', e')
+let f e = 
+    if !debug then asm_debug stdout (Prog([], [], e));
+    let (e', _) = alloc (T(e)) in 
+    e'
 

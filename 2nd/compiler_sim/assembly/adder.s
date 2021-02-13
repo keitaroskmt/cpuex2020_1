@@ -64,14 +64,14 @@ create_array_cont:
 	j	create_array_loop
 #  min_caml_create_float_array
 min_caml_create_float_array:
-	addi	%a0, %v0, 0
+	addi	%v1, %v0, 0
 	addi	%v0, %hp, 0
 create_float_array_loop:
-	bne	%a0, %zero, create_float_array_cont
+	bne	%v1, %zero, create_float_array_cont
 	jr	%ra
 create_float_array_cont:
 	fsw	%f0, 0(%hp)
-	addi	%a0, %a0, -1
+	addi	%v1, %v1, -1
 	addi	%hp, %hp, 1
 	j	create_float_array_loop
 #  min_caml_create_extarray
@@ -99,7 +99,28 @@ create_float_extarray_cont:
 	addi	%v1, %v1, 1
 	j	create_float_extarray_loop
 # ------------ body ---------------------------
+adder.9:
+	lw	%a0, 1(%k1)
+	add	%v0, %a0, %v0
+	jr	%ra
+make_adder.4:
+	add	%a0, %zero, %v0
+	add	%v0, %zero, %hp
+	addi	%hp, %hp, 2
+	addi	%a1, %zero, adder.9
+	sw	%a1, 0(%v0)
+	sw	%a0, 1(%v0)
+	jr	%ra
 .global	min_caml_start
 min_caml_start:
-	addi	%g0, %zero, 10
+	addi	%v0, %zero, 3
+	addi	%sp, %sp, 0
+	jal	make_adder.4
+	addi	%sp, %sp, 0
+	addi	%k1, %v0, 0
+	addi	%v0, %zero, 7
+	addi	%sp, %sp, 0
+	lw	%at, 0(%k1)
+	jalr	%at
+	addi	%sp, %sp, 0
 	ret

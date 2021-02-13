@@ -24,39 +24,9 @@ let lexbuf (outchan, datachan) l = (* バッファをコンパイルしてチャンネルへ出力す
 (*
   Id.counter := 0;
   Typing.extenv := M.empty;
-  Emit_for_regAllocbyColor.f (outchan, datachan)
-    (RegAllocbyColor.f
-       (Simm.f
-          (Virtual.f
-             (Closure.f
-              (FixAddress.f
-                (iter !limit
-                   (Alpha.f
-                      (KNormal.f
-                         (Typing.f
-                            (Parser.exp Lexer.token l))))))))))
-                            *)
-(*
-  Id.counter := 0;
-  Typing.extenv := M.empty;
-  Emit.f (outchan, datachan)
-    (RegAlloc.f
-       (Simm.f
-          (Virtual.f
-             (Closure.f
-              (FixAddress.f
-                (iter !limit
-                   (Alpha.f
-                      (KNormal.f
-                         (Typing.f
-                            (Parser.exp Lexer.token l))))))))))
-                            *)
-
-  Typing.extenv := M.empty;
   EmitAssem.f outchan
     (ElimJump.f 
-        (ToAssem.f datachan
-            (RegAlloc.f
+        (ToAssem.f datachan true (* RegAllocbyColorをまとめる *)
                 (iter_asm !limit
                     (Simm.f
                         (Virtual.f
@@ -66,7 +36,24 @@ let lexbuf (outchan, datachan) l = (* バッファをコンパイルしてチャンネルへ出力す
                                         (Alpha.f
                                             (KNormal.f
                                                 (Typing.f
-                                                    (Parser.exp Lexer.token l)))))))))))))
+                                                    (Parser.exp Lexer.token l))))))))))))
+                                                    *)
+
+  Id.counter := 0;
+  Typing.extenv := M.empty;
+  EmitAssem.f outchan
+    (ElimJump.f 
+        (ToAssem.f datachan false (* RegAllocをまとめる *)
+                (iter_asm !limit
+                    (Simm.f
+                        (Virtual.f
+                            (Closure.f
+                                (FixAddress.f
+                                    (iter !limit
+                                        (Alpha.f
+                                            (KNormal.f
+                                                (Typing.f
+                                                    (Parser.exp Lexer.token l))))))))))))
 
 let syntax_check f =
     let inchan = open_in (f ^ ".ml") in

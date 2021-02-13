@@ -8,8 +8,8 @@ let rec_threshold = ref 50
 let threshold = ref 0 (* Mainで-inlineオプションによりセットされる *)
 let rec_threshold = ref 0
 *)
-let threshold = ref 1000 (* Mainで-inlineオプションによりセットされる *)
-let rec_threshold = ref 50
+let threshold = ref 0 (* Mainで-inlineオプションによりセットされる *)
+let rec_threshold = ref 0
 
 let rec size = function
   | IfEq(_, _, e1, e2) | IfLE(_, _, e1, e2)

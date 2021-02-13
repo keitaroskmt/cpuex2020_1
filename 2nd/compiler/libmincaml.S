@@ -52,14 +52,14 @@ create_array_cont:
 	j	create_array_loop
 #  min_caml_create_float_array
 min_caml_create_float_array:
-	addi	%a0, %v0, 0
+	addi	%v1, %v0, 0
 	addi	%v0, %hp, 0
 create_float_array_loop:
-	bne	%a0, %zero, create_float_array_cont
+	bne	%v1, %zero, create_float_array_cont
 	jr	%ra
 create_float_array_cont:
 	fsw	%f0, 0(%hp)
-	addi	%a0, %a0, -1
+	addi	%v1, %v1, -1
 	addi	%hp, %hp, 1
 	j	create_float_array_loop
 #  min_caml_create_extarray

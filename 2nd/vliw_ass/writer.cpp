@@ -160,6 +160,7 @@ unsigned int Writer::encode(vector<string> &v) {
             signed_imm = parser->label_map.at(v[4]) - (current_num + 1);
 
             assert(-32768 <= signed_imm && signed_imm <= 32767);
+            assert(0 <= signed_imm && signed_imm <= 8191);
             imm = signed_imm;
 
         } else if (v[1] == "bne") {
@@ -170,6 +171,7 @@ unsigned int Writer::encode(vector<string> &v) {
             signed_imm = parser->label_map.at(v[4]) - (current_num + 1);
 
             assert(-32768 <= signed_imm && signed_imm <= 32767);
+            assert(0 <= signed_imm && signed_imm <= 8191);
             imm = signed_imm;
 
         } else if (v[1] == "blt") {
@@ -180,6 +182,7 @@ unsigned int Writer::encode(vector<string> &v) {
             signed_imm = parser->label_map.at(v[4]) - (current_num + 1);
 
             assert(-32768 <= signed_imm && signed_imm <= 32767);
+            assert(0 <= signed_imm && signed_imm <= 8191);
             imm = signed_imm;
 
         } else if (v[1] == "addi") {
@@ -391,6 +394,7 @@ unsigned int Writer::encode(vector<string> &v) {
             rt = freg_name.at(v[3]);
             // 相対アドレス
             signed_imm = parser->label_map.at(v[4]) - (current_num + 1);
+            assert(0 <= signed_imm && signed_imm <= 8191);
 
         } else if (v[1] == "fbne") {
             op = 0x28;
@@ -398,6 +402,7 @@ unsigned int Writer::encode(vector<string> &v) {
             rt = freg_name.at(v[3]);
             // 相対アドレス
             signed_imm = parser->label_map.at(v[4]) - (current_num + 1);
+            assert(0 <= signed_imm && signed_imm <= 8191);
 
         } else if (v[1] == "fblt") {
             op = 0x29;
@@ -405,6 +410,7 @@ unsigned int Writer::encode(vector<string> &v) {
             rt = freg_name.at(v[3]);
             // 相対アドレス
             signed_imm = parser->label_map.at(v[4]) - (current_num + 1);
+            assert(0 <= signed_imm && signed_imm <= 8191);
 
         } else if (v[1] == "flw") {
             op = 0x14;
