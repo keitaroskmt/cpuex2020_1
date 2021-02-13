@@ -5,7 +5,9 @@ external get : float -> int32 = "get"
 let assem_list = ref []
 let emit inst = assem_list := inst :: !assem_list
 let assem_list_all = ref []
-let emit_all list = assem_list_all := list @ !assem_list_all
+let emit_all () = 
+      assem_list_all := !assem_list @ !assem_list_all;
+      assem_list := []
 
 (* bycolor=false regAlloc.ml, bycolor=true regAllocbyColor.ml *)
 let bycolor = ref false
@@ -81,6 +83,7 @@ let rec load_float_imm dc data acc =
             load_float_imm dc rest (acc + 1)
 
 let addi r1 r2 i =
+    if r1 = r2 && i = 0 then (); 
     if -32768 <= i && i <= 32767 then
         emit (Addi(r1, r2, i))
     else
@@ -437,7 +440,10 @@ let h option fundef =
   stackset := M.empty;
   stackmap := [];
   let ret = g (Tail, e) in
-  emit_all !assem_list;
+
+  (* 使用するレジスタのうちcalldefsに含まれるものを管理 *)
+  Calldefs.f x !assem_list;
+  emit_all ();
   ret
 
 (* calldefs.mlのためにtoAssem.mlとregAllocbyColor.mlをまとめる *)
@@ -445,6 +451,7 @@ let f dc option (Prog(data, fundefs, e)) =
   bycolor := option;
 (* データセクションに関してはこの段階で出力 *)
   cls_count := 0;
+  Calldefs.init ();
   Format.eprintf "register allocation and toAssem: may take some time (up to a few minutes, depending on the size of functions)@.";
 
   emit (Comment(".section\t\".rodata\"\n"));
@@ -477,5 +484,5 @@ let f dc option (Prog(data, fundefs, e)) =
   Printf.fprintf stdout "len zs: %d \n" (!len_zs);
   Printf.fprintf stdout "Closure num: %d\n" (!cls_count);
 
-  emit_all !assem_list
+  emit_all ();
   List.rev !assem_list_all

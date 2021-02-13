@@ -121,22 +121,22 @@ bgti_else.62:
 	jr	%ra
 .global	min_caml_start
 min_caml_start:
-	addi	%v0, %zero, 3
-	sw	%v0, 0(%sp)
+	addi	%a0, %zero, 3
 	flw	%f0, 1(%zero)
-	addi	%sp, %sp, 1
+	addi	%v0, %a0, 0
+	addi	%sp, %sp, 0
 	jal	min_caml_create_float_array
-	addi	%sp, %sp, -1
-	sw	%v0, 1(%sp)
+	addi	%sp, %sp, 0
+	addi	%a1, %v0, 0
 	flw	%f0, 0(%zero)
-	lw	%v0, 0(%sp)
-	addi	%sp, %sp, 2
+	addi	%v0, %a0, 0
+	addi	%sp, %sp, 0
 	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
+	addi	%sp, %sp, 0
 	addi	%v1, %v0, 0
 	addi	%a0, %zero, 2
-	lw	%v0, 1(%sp)
-	addi	%sp, %sp, 2
+	addi	%v0, %a1, 0
+	addi	%sp, %sp, 0
 	jal	inprod.13
-	addi	%sp, %sp, -2
+	addi	%sp, %sp, 0
 	ret

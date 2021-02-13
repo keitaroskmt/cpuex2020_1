@@ -121,33 +121,31 @@ bgti_else.99:
 	jr	%ra
 .global	min_caml_start
 min_caml_start:
-	addi	%v0, %zero, 3
-	sw	%v0, 0(%sp)
-	flw	%f0, 2(%zero)
-	fsw	%f0, 1(%sp)
-	addi	%sp, %sp, 2
+	addi	%a1, %zero, 3
+	flw	%f1, 2(%zero)
+	addi	%v0, %a1, 0
+	fmov	%f0, %f1
+	addi	%sp, %sp, 0
 	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	sw	%v0, 2(%sp)
+	addi	%sp, %sp, 0
+	addi	%a2, %v0, 0
 	flw	%f0, 1(%zero)
-	fsw	%f0, 0(%v0)
-	fsw	%f0, 1(%v0)
+	fsw	%f0, 0(%a2)
+	fsw	%f0, 1(%a2)
 	addi	%a0, %zero, 2
-	sw	%a0, 3(%sp)
-	fsw	%f0, 2(%v0)
-	flw	%f0, 1(%sp)
-	lw	%v0, 0(%sp)
-	addi	%sp, %sp, 4
+	fsw	%f0, 2(%a2)
+	addi	%v0, %a1, 0
+	fmov	%f0, %f1
+	addi	%sp, %sp, 0
 	jal	min_caml_create_float_array
-	addi	%sp, %sp, -4
+	addi	%sp, %sp, 0
 	addi	%v1, %v0, 0
 	flw	%f0, 0(%zero)
 	fsw	%f0, 0(%v1)
 	fsw	%f0, 1(%v1)
 	fsw	%f0, 2(%v1)
-	lw	%a0, 3(%sp)
-	lw	%v0, 2(%sp)
-	addi	%sp, %sp, 4
+	addi	%v0, %a2, 0
+	addi	%sp, %sp, 0
 	jal	inprod.31
-	addi	%sp, %sp, -4
+	addi	%sp, %sp, 0
 	ret

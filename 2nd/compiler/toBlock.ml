@@ -277,7 +277,6 @@ and g' = function
           lab = Id.L(b_cont)
       })
 
-      (* TODO: reg_clの扱い *)
   | Tail, CallCls(x, ys, zs) -> (* 末尾呼び出し (caml2html: emit_tailcall) *)
       emit (OPER {
           dst = calldefs;
@@ -286,7 +285,11 @@ and g' = function
       })
   | Tail, CallDir(Id.L(x), ys, zs) -> (* 末尾呼び出し *)
       emit (OPER {
-          dst = calldefs;
+          dst = 
+          (if Hashtbl.mem Calldefs.use_regs x then 
+                Calldefs.Regset.elements (Hashtbl.find Calldefs.use_regs x)
+            else (* 再帰関数 *)
+                calldefs);
           src = g'_args [] ys zs;
           jump = None
       })
@@ -310,7 +313,11 @@ and g' = function
                     }))
   | NonTail((a, t)), CallDir(Id.L(x), ys, zs) ->
       emit (OPER {
-          dst = calldefs;
+          dst = 
+          (if Hashtbl.mem Calldefs.use_regs x then 
+                Calldefs.Regset.elements (Hashtbl.find Calldefs.use_regs x)
+            else (* 再帰関数 *)
+                calldefs);
           src = g'_args [] ys zs;
           jump = None
       });
