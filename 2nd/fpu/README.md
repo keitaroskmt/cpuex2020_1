@@ -64,13 +64,24 @@
   - 2clock(fmul 0clk, finv 1clk) 6.876ns
   - 3clock(fmul 1clk, finv 1clk) 4.377ns
   - 5clock(fmul 2clk, finv 2clk) 3.527ns
+- fdiv (with finv(BRAM)):
+  - 2clock(fmul 0clk, finv(BRAM) 1clk) 7.131ns
+  - 3clock(fmul 1clk, finv(BRAM) 1clk) 6.284ns
+  - 4clock(fmul 1clk, finv(BRAM) 2clk) 4.326ns
+  - 5clock(fmul 2clk, finv(BRAM) 2clk) 3.907ns
 - finv:
   - 1clock 4.513ns
   - 2clock 2.820ns
+- finv(BRAM):
+  - 1clock 6.116ns
+  - 2clock 3.960ns
 - floor:
   - 0clock 3.629ns
   - 1clock 2.955ns
 - fsqrt:
+  - 1clock 5.550ns
+  - 2clock 3.177ns
+- fsqrt(BRAM):
   - 1clock 5.550ns
   - 2clock 3.177ns
 - ftoi:
