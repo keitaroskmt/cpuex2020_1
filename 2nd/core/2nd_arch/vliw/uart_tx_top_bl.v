@@ -1,7 +1,7 @@
-
 module uart_tx_top_bl (
     input wire clk,
     input wire rstn,
+    input wire In,
     input wire Tx_start,
     input wire [7:0] data,
     output wire txd
@@ -20,6 +20,7 @@ reg [19:0] wa;
 reg en;
 reg [1:0] state1;
 reg [1:0] state2;
+reg In_first;
 
 localparam s_idle = 0;
 localparam s_wait = 1;
@@ -42,7 +43,10 @@ always @(posedge clk) begin
       state1 <= s_idle;
       state2 <= s_idle;
     end else begin
-        if(state1 == s_idle)begin
+        if (In && In_first == 1'b0) begin
+            counter_core <= 1'b1;
+            In_first <= 1'b1;
+        end else if(state1 == s_idle)begin
             if(Tx_start)begin
             we <= 1'b1;
             data_reg <= data;

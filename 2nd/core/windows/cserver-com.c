@@ -614,7 +614,7 @@ int main(int argc, char* argv[])
   load_sld_file(as.sld_filename, as.sld_big_endian);
 
   /* wait for a 0xaa byte */
-  //*wait_for_0xaa();
+  wait_for_0xaa();
 
   /* send the SLD data */
   send_sld_data();

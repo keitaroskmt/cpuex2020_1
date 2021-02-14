@@ -21,7 +21,7 @@ module vliw_arch
     wire [31:0] next_pc;
     wire branch_type;
     wire [31:0] branched_pc_plus;
-    wire branch_prediction;
+    //wire branch_prediction;
 //IF
     wire [31:0] pcF;
     wire [31:0] pc_plusF;
@@ -592,6 +592,8 @@ module vliw_arch
 
     //data_mem_bl_vliw dmb(clk,en,MemWriteM3,alu_resultM3,srcbM3,read_dataW3);
     data_mem_wrap dmw(clk,rstn,MemWriteE3,alu_resultE3,forwardedbE3,read_dataM3,MemWriteE4,alu_resultE4,forwardedbE4,read_dataM4);
+    //data_mem_dual_write datamem_dw(clk,clk,en,en,MemWriteM3,MemWriteM4,alu_resultE3,alu_resultE4,forwardedbE3,forwardedbE4,read_dataM3,read_dataM4);
+
 
     always @(posedge clk) begin
         if(~rstn)begin
@@ -657,7 +659,7 @@ module vliw_arch
 
     wire ferr;
     uart_rx ur(rdataD1,Rx_ready,ferr,rxd,clk,rstn);
-    uart_tx_top_bl utt(clk,rstn,OutE1,selectedbE1[7:0],txd);
+    uart_tx_top_bl utt(clk,rstn,ALUSrcD1[2],OutE1,selectedbE1[7:0],txd); // ALUSrcD1 = InD1
 
     hazard_unit_vliw huv(clk,rstn,Rx_ready,ALUSrcD1[2],BranchD1,BiD1,BranchE1,BiE1,{RegConcatD1[2],instrD[25:21]},{RegConcatD1[1],instrD[20:16]},{RegConcatD2[2],instrD[57:53]},{RegConcatD2[1],instrD[52:48]},{RegConcatD3[2],instrD[89:85]},{RegConcatD3[1],instrD[84:80]},{RegConcatD4[2],instrD[121:117]},{RegConcatD4[1],instrD[116:112]},rsE1,rtE1,writeRegE1,rsE2,rtE2,writeRegE2,rsE3,rtE3,rsE4,rtE4,rsM1,rtM1,writeRegM1,writeRegM2,writeRegM3,writeRegM4,writeRegW3,writeRegW4,writeRegKept1,writeRegKept2,writeRegKept3,writeRegKept4,RegWriteE1,RegWriteE2,RegWriteE3,RegWriteE4,RegWriteM1,RegWriteM2,RegWriteM3,RegWriteM4,RegWriteW3,RegWriteW4,RegWriteKept1,RegWriteKept2,RegWriteKept3,RegWriteKept4,RegtoPCD1,FPUControlE1,FPUControlE2,StallF,StallD,StallE,Hazard_existenceD1,Hazard_existenceE1,FlushE,FlushM,ForwardaE1,ForwardbE1,ForwardaE2,ForwardbE2,ForwardaE3,ForwardbE3,ForwardaE4,ForwardbE4,ForwardaM1,ForwardbM1,Read_data_keep);
 

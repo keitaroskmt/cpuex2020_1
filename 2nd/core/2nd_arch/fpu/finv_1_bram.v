@@ -6,6 +6,15 @@ module finv
       input wire clk,
       input wire rstn
 );
+    wire en;
+    wire we;
+    wire rst;
+    wire [35:0] din;
+
+    assign en = 1;
+    assign we = 0;
+    assign rst = 0;
+    assign din = 0;
 
     wire s;
     wire [7:0] e;
@@ -13,59 +22,48 @@ module finv
     wire [35:0] val;
     wire [9:0] key;
 
-    wire [22:0] c;
-    wire [9:0] a0;
-    wire subnormal;
-    wire [25:0] cor_n;
-
-    reg s_reg;
-    reg s_reg2;
-    reg [7:0] e_reg;
-    reg [7:0] e_reg2;
-    reg [22:0] m_reg;
-    reg [22:0] m_reg2;
-
-    reg [22:0] c_reg;
-    reg [9:0] a0_reg;
-    reg subnormal_reg;
-    reg [25:0] cor_n_reg;
+    reg reg_s;
+    reg [7:0] reg_e;
+    reg [22:0] reg_m;
+    reg [22:0] reg_c;
+    reg [12:0] reg_d;
 
     assign s = x[31];
     assign e = x[30:23];
     assign m = x[22:0];
     assign key = m[22:13];
 
-    finv_table u1(key, val, clk, rstn);
-    finv_1st u2(e_reg, m_reg, val, c, a0, subnormal, cor_n);
-    finv_2nd u3(s_reg2, e_reg2, m_reg2, c_reg, a0_reg, subnormal_reg, cor_n_reg, y);
+    finv_table u1(clk, en, we, rst, key, din, val);
+    finv_1st u2(reg_s, reg_e, reg_m, val, y);
 
     always @(posedge clk) begin
-        s_reg <= s;
-        s_reg2 <= s_reg;
-        e_reg <= e;
-        e_reg2 <= e_reg;
-        m_reg <= m;
-        m_reg2 <= m_reg;
-        c_reg <= c;
-        a0_reg <= a0;
-        cor_n_reg <= cor_n;
-        subnormal_reg <= subnormal;
+        reg_s <= s;
+        reg_e <= e;
+        reg_m <= m;
     end
 
 endmodule
 
 
 module finv_1st
-    (input wire [7:0] e,
+    (input wire s,
+     input wire [7:0] e,
      input wire [22:0] m,
      input wire [35:0] val,
-     output wire [22:0] c,
-     output wire [9:0] a0,
-     output wire subnormal,
-     output wire [25:0] cor_n);
+     output wire [31:0] y);
 
+    wire [9:0] a0;
     wire [12:0] a1;
+    wire [25:0] cor_n;
+    wire [13:0] cor;
+    wire [22:0] m1;
+    wire [23:0] m2;
+    wire [22:0] shifted_m;
+    wire [7:0] e1;
+    wire [7:0] e2;
+    wire [22:0] c;
     wire [12:0] d;
+    wire subnormal;
 
     assign c = val[35:13];
     assign d = val[12:0];
@@ -74,26 +72,6 @@ module finv_1st
     assign subnormal = (e == 8'd253 && m > 0) ? 1 :
                        (e > 8'd253) ? 1 : 0;
     assign cor_n = a1 * d;
-
-endmodule
-
-module finv_2nd
-    (input wire s,
-     input wire [7:0] e,
-     input wire [22:0] m,
-     input wire [22:0] c,
-     input wire [9:0] a0,
-     input wire subnormal,
-     input wire [25:0] cor_n,
-     output wire [31:0] y);
-
-    wire [13:0] cor;
-    wire [22:0] m1;
-    wire [23:0] m2;
-    wire [22:0] shifted_m;
-    wire [7:0] e1;
-    wire [7:0] e2;
-
     assign cor = (a0 < 10'd424) ? (cor_n >> 12) : (cor_n >> 13);
     assign e1 = 8'd253 - e;
     assign e2 = e - 8'd253;
@@ -107,16 +85,17 @@ endmodule
 
 
 module finv_table
-    (input wire [9:0] addr,
-     output reg [35:0] dout,
-     input wire clk,
-     input wire rstn
+(
+    input wire clk,
+    input wire en,
+    input wire we,
+    input wire rst,
+    input wire [9:0] addr,
+    input wire [35:0] di,
+    output reg [35:0] dout
 );
-
     reg [35:0] finv_table [1023:0];
-
-initial
-    begin
+    initial begin
         finv_table[1023] = 36'h002003002;
         finv_table[1022] = 36'h00400F006;
         finv_table[1021] = 36'h00602300A;
@@ -1143,10 +1122,14 @@ initial
         finv_table[0] = 36'hFFFFFBFF8;
     end
 
-    always @(posedge clk) begin
-        dout <= finv_table[addr];
+   always @(posedge clk) begin
+        if (en) begin
+            if (we)
+                finv_table[addr] <= di;
+            if (rst)
+                dout <= 0;
+            else
+                dout <= finv_table[addr];
+        end
     end
-
 endmodule
-
-`default_nettype wire
