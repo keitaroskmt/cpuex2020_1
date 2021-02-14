@@ -163,9 +163,7 @@ reduction_2pi.219:
 	flw	%f18, 5(%zero)
 	fmov	%f1, %f18
 	fmov	%f0, %f17
-	addi	%sp, %sp, 0
 	jal	f.295
-	addi	%sp, %sp, 0
 	fmov	%f1, %f0
 	add	%k1, %zero, %hp
 	addi	%hp, %hp, 2
@@ -180,9 +178,7 @@ cos.221:
 	add	%a2, %zero, %ra
 	flw	%f19, 4(%zero)
 	fabs	%f0, %f0
-	addi	%sp, %sp, 0
 	jal	reduction_2pi.219
-	addi	%sp, %sp, 0
 	fblt	%f0, %f19, fbgt_else.605
 	addi	%a0, %zero, 0
 	j	fbgt_cont.606
@@ -212,15 +208,11 @@ fbgt_else.613:
 fbgt_cont.614:
 	flw	%f1, 2(%zero)
 	fblt	%f1, %f0, fbgt_else.615
-	addi	%sp, %sp, 0
 	jal	kernel_cos.215
-	addi	%sp, %sp, 0
 	j	fbgt_cont.616
 fbgt_else.615:
 	fsub	%f0, %f16, %f0
-	addi	%sp, %sp, 0
 	jal	kernel_sin.213
-	addi	%sp, %sp, 0
 fbgt_cont.616:
 	beqi	%a0, 0, bnei_else.617
 	add	%ra, %zero, %a2
@@ -236,11 +228,7 @@ rad.227:
 .global	min_caml_start
 min_caml_start:
 	flw	%f0, 0(%zero)
-	addi	%sp, %sp, 0
 	jal	rad.227
-	addi	%sp, %sp, 0
-	addi	%sp, %sp, 0
 	jal	cos.221
-	addi	%sp, %sp, 0
 	fmov	%g0, %f0
 	ret

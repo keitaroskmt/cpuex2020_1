@@ -123,7 +123,5 @@ bgt_else.49:
 .global	min_caml_start
 min_caml_start:
 	addi	%v0, %zero, 20
-	addi	%sp, %sp, 0
 	jal	fib.9
-	addi	%sp, %sp, 0
 	ret

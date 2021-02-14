@@ -114,13 +114,9 @@ make_adder.4:
 .global	min_caml_start
 min_caml_start:
 	addi	%v0, %zero, 3
-	addi	%sp, %sp, 0
 	jal	make_adder.4
-	addi	%sp, %sp, 0
 	addi	%k1, %v0, 0
 	addi	%v0, %zero, 7
-	addi	%sp, %sp, 0
 	lw	%at, 0(%k1)
 	jalr	%at
-	addi	%sp, %sp, 0
 	ret

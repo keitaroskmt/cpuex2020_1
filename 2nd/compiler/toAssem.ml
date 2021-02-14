@@ -83,17 +83,20 @@ let rec load_float_imm dc data acc =
             load_float_imm dc rest (acc + 1)
 
 let addi r1 r2 i =
-    if r1 = r2 && i = 0 then (); 
-    if -32768 <= i && i <= 32767 then
-        emit (Addi(r1, r2, i))
-    else
-       (
-        let upper = i asr 16 in
-        let lower = i land 0xffff in
-        emit (Lui(reg_at, upper));
-        emit (Ori(reg_at, reg_at, lower));
-        emit (Add(r1, r2, reg_at))
-        )
+    if r1 = r2 && i = 0 then ()
+    else 
+    (
+      if -32768 <= i && i <= 32767 then
+            emit (Addi(r1, r2, i))
+      else
+            (
+            let upper = i asr 16 in
+            let lower = i land 0xffff in
+            emit (Lui(reg_at, upper));
+            emit (Ori(reg_at, reg_at, lower));
+            emit (Add(r1, r2, reg_at))
+            )
+    )
 
 
 type dest = Tail | NonTail of Id.t 

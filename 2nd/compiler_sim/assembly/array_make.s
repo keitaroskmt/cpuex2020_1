@@ -124,19 +124,13 @@ min_caml_start:
 	addi	%a0, %zero, 3
 	flw	%f0, 1(%zero)
 	addi	%v0, %a0, 0
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_array
-	addi	%sp, %sp, 0
 	addi	%a1, %v0, 0
 	flw	%f0, 0(%zero)
 	addi	%v0, %a0, 0
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_array
-	addi	%sp, %sp, 0
 	addi	%v1, %v0, 0
 	addi	%a0, %zero, 2
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	inprod.13
-	addi	%sp, %sp, 0
 	ret

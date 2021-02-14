@@ -124,7 +124,5 @@ fbgt_else.52:
 .global	min_caml_start
 min_caml_start:
 	flw	%f0, 0(%zero)
-	addi	%sp, %sp, 0
 	jal	float_fib.9
-	addi	%sp, %sp, 0
 	ret

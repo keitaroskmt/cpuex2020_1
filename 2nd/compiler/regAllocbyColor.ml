@@ -3,9 +3,12 @@ open Asm
 (* 種々のprintをするか *)
 let debug = ref false
 
+(* setですぐ分かるものはsaveする必要はない *)
+(* 引数に加えるのが面倒なのでこれで管理 *)
+let set_restore = Hashtbl.create 1000
+
   (* envはspilledと新たに作った変数の対応 *)
   (* restoreは関数呼び出しの間の区間で1回のみに制限 -> setで管理 *)
-  (* TODO: 浮動小数テーブルにあるものは, saveする必要ない *)
 let rec rewrite e spilled env set = 
     match e with
     | Ans(exp) -> 
@@ -13,10 +16,27 @@ let rec rewrite e spilled env set =
     | Let((x, t) as xt, exp, e) ->
         if List.mem x spilled then
             let (exp', env', set') = rewrite_exp exp spilled env set in
-            (* save以降もそのレジスタは使用可能 *)
-            let e' = rewrite e spilled (M.add x x env') (S.add x set') in
-            (* レジスタ割り当て決定後, Save(M.find x regenv, x)とする *)
-            concat exp' xt (seq(Save(x, x), e'))
+
+            (match exp' with
+            | Ans(Set(_)) | Ans(SetF(_)) -> 
+            (
+                (if Hashtbl.mem set_restore x then
+                    Hashtbl.replace set_restore x exp'
+                else
+                    Hashtbl.add set_restore x exp');
+
+                (* save以降もそのレジスタは使用可能 *)
+                let e' = rewrite e spilled (M.add x x env') (S.add x set') in
+                (* 簡単に復元できるのでsaveする必要なし*)
+                concat exp' xt e'
+            )
+            | _ -> 
+            (
+                (* save以降もそのレジスタは使用可能 *)
+                let e' = rewrite e spilled (M.add x x env') (S.add x set') in
+                (* レジスタ割り当て決定後, Save(M.find x regenv, x)とする *)
+                concat exp' xt (seq(Save(x, x), e'))
+            ))
         else
             let (exp', env', set') = rewrite_exp exp spilled env set in
             let e' = rewrite e spilled env' set' in
@@ -30,7 +50,16 @@ and rewrite_tmp x t spilled env set k =
         if List.mem x spilled then
             let new_x = Id.gentmp t in
             let (exp, env, set) = k new_x (M.add x new_x env) (S.add x set) in
+            (
+            if Hashtbl.mem set_restore x then
+                let exp = Hashtbl.find set_restore x in
+                match exp with
+                | Ans(Set(i)) -> (Let((new_x, t), Set(i), exp), env, set)
+                | Ans(SetF(l)) -> (Let((new_x, t), SetF(l), exp), env, set)
+                | _ -> failwith "rewrite_tmp"
+            else
                 (Let((new_x, t), Restore(x), exp), env, set)
+            )
         else
             k x env set 
     )
@@ -44,7 +73,16 @@ and rewrite_tmp' x' t spilled env set k =
                     if List.mem x spilled then
                         let new_x = Id.gentmp t in
                         let (exp, env, set) = k (V(new_x)) (M.add x new_x env) (S.add x set) in
+                        (
+                        if Hashtbl.mem set_restore x then
+                            let exp = Hashtbl.find set_restore x in
+                            match exp with
+                            | Ans(Set(i)) -> (Let((new_x, t), Set(i), exp), env, set)
+                            | Ans(SetF(l)) -> (Let((new_x, t), SetF(l), exp), env, set)
+                            | _ -> failwith "rewrite_tmp"
+                        else
                             (Let((new_x, t), Restore(x), exp), env, set)
+                        )
                     else
                         k (V(x)) env set
                 )
@@ -187,6 +225,12 @@ and rewrite_exp e spilled env set =
                 (
                     if List.mem x spilled then
                         let new_x = Id.gentmp Type.Int in
+                        if Hashtbl.mem set_restore x then
+                            let exp = Hashtbl.find set_restore x in
+                            match exp with
+                            | Ans(Set(i)) -> ((fun env -> (Let((new_x, Type.Int), Set(i), k env))), (M.add x new_x env), set)
+                            | _ -> failwith "rewrite_exp: call_cls"
+                        else
                         ((fun env -> (Let((new_x, Type.Int), Restore(x), k env))), (M.add x new_x env), set)
                     else 
                         (k, env, set)
@@ -200,6 +244,12 @@ and rewrite_exp e spilled env set =
                     (
                     if List.mem x spilled then
                         let new_x = Id.gentmp Type.Float in
+                        if Hashtbl.mem set_restore x then
+                            let exp = Hashtbl.find set_restore x in
+                            match exp with
+                            | Ans(SetF(l)) -> ((fun env -> (Let((new_x, Type.Int), SetF(l), k env))), (M.add x new_x env), set)
+                            | _ -> failwith "rewrite_exp: call_cls"
+                        else
                         ((fun env -> (Let((new_x, Type.Float), Restore(x), k env))), (M.add x new_x env), set)
                     else
                         (k, env, set)
@@ -225,6 +275,12 @@ and rewrite_exp e spilled env set =
                 (
                     if List.mem x spilled then
                         let new_x = Id.gentmp Type.Int in
+                        if Hashtbl.mem set_restore x then
+                            let exp = Hashtbl.find set_restore x in
+                            match exp with
+                            | Ans(Set(i)) -> ((fun env -> (Let((new_x, Type.Int), Set(i), k env))), (M.add x new_x env), set)
+                            | _ -> failwith "rewrite_exp: call_dir"
+                        else
                         ((fun env -> (Let((new_x, Type.Int), Restore(x), k env))), (M.add x new_x env), set)
                     else 
                         (k, env, set)
@@ -238,6 +294,12 @@ and rewrite_exp e spilled env set =
                     (
                     if List.mem x spilled then
                         let new_x = Id.gentmp Type.Float in
+                        if Hashtbl.mem set_restore x then
+                            let exp = Hashtbl.find set_restore x in
+                            match exp with
+                            | Ans(SetF(l)) -> ((fun env -> (Let((new_x, Type.Int), SetF(l), k env))), (M.add x new_x env), set)
+                            | _ -> failwith "rewrite_exp: call_dir"
+                        else
                         ((fun env -> (Let((new_x, Type.Float), Restore(x), k env))), (M.add x new_x env), set)
                     else
                         (k, env, set)
@@ -454,6 +516,7 @@ let alloc e_origin =
                 | Fun({ name = _; args = _; fargs = _; body = x; ret = _ }) -> x
                 | T(x) -> x) in
 
+            Hashtbl.clear set_restore;
             let et' = rewrite et spilled M.empty S.empty in
 
             (* for debug *)

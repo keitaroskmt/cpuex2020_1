@@ -242,9 +242,7 @@ reduction_2pi.2621:
 	flw	%f2, 467(%zero)
 	fmov	%f1, %f2
 	fmov	%f0, %f17
-	addi	%sp, %sp, 0
 	jal	reduction_2pi_sub1.2614
-	addi	%sp, %sp, 0
 	fmov	%f1, %f0
 	add	%ra, %zero, %a0
 	fmov	%f0, %f17
@@ -253,9 +251,7 @@ cos.2623:
 	add	%a1, %zero, %ra
 	flw	%f18, 466(%zero)
 	fabs	%f0, %f0
-	addi	%sp, %sp, 0
 	jal	reduction_2pi.2621
-	addi	%sp, %sp, 0
 	fblt	%f0, %f18, fbgt_else.7036
 	addi	%a0, %zero, 0
 	j	fbgt_cont.7037
@@ -285,15 +281,11 @@ fbgt_else.7044:
 fbgt_cont.7045:
 	flw	%f1, 464(%zero)
 	fblt	%f1, %f0, fbgt_else.7046
-	addi	%sp, %sp, 0
 	jal	kernel_cos.2610
-	addi	%sp, %sp, 0
 	j	fbgt_cont.7047
 fbgt_else.7046:
 	fsub	%f0, %f16, %f0
-	addi	%sp, %sp, 0
 	jal	kernel_sin.2608
-	addi	%sp, %sp, 0
 fbgt_cont.7047:
 	beqi	%a0, 0, bnei_else.7048
 	add	%ra, %zero, %a1
@@ -313,9 +305,7 @@ fbgt_else.7088:
 	addi	%a2, %zero, 0
 fbgt_cont.7089:
 	fabs	%f0, %f0
-	addi	%sp, %sp, 0
 	jal	reduction_2pi.2621
-	addi	%sp, %sp, 0
 	fblt	%f0, %f18, fbgt_else.7090
 	beqi	%a2, 0, bnei_else.7092
 	addi	%a2, %zero, 0
@@ -339,15 +329,11 @@ fbgt_else.7096:
 fbgt_cont.7097:
 	flw	%f1, 464(%zero)
 	fblt	%f1, %f0, fbgt_else.7098
-	addi	%sp, %sp, 0
 	jal	kernel_sin.2608
-	addi	%sp, %sp, 0
 	j	fbgt_cont.7099
 fbgt_else.7098:
 	fsub	%f0, %f16, %f0
-	addi	%sp, %sp, 0
 	jal	kernel_cos.2610
-	addi	%sp, %sp, 0
 fbgt_cont.7099:
 	beqi	%a2, 0, bnei_else.7100
 	add	%ra, %zero, %a1
@@ -373,9 +359,7 @@ fbgt_cont.7132:
 	flw	%f2, 465(%zero)
 	flw	%f0, 477(%zero)
 	fdiv	%f0, %f0, %f16
-	addi	%sp, %sp, 0
 	jal	kernel_atan.2612
-	addi	%sp, %sp, 0
 	fsub	%f0, %f2, %f0
 	j	fbgt_cont.7135
 fbgt_else.7134:
@@ -384,9 +368,7 @@ fbgt_else.7134:
 	fsub	%f1, %f16, %f0
 	fadd	%f0, %f16, %f0
 	fdiv	%f0, %f1, %f0
-	addi	%sp, %sp, 0
 	jal	kernel_atan.2612
-	addi	%sp, %sp, 0
 	fadd	%f0, %f2, %f0
 fbgt_cont.7135:
 	beqi	%a1, 0, bnei_else.7136
@@ -421,14 +403,10 @@ print_int.2634:
 	addi	%a3, %zero, 0
 	addi	%v1, %a3, 0
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	print_int_sub1.2629
-	addi	%sp, %sp, 0
 	addi	%k0, %v0, 0
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	print_int_sub2.2632
-	addi	%sp, %sp, 0
 	addi	%a1, %v0, 0
 	blt	%zero, %k0, bgt_else.7205
 	addi	%v0, %a1, 48
@@ -437,52 +415,36 @@ print_int.2634:
 bgt_else.7205:
 	addi	%v1, %a3, 0
 	addi	%v0, %k0, 0
-	addi	%sp, %sp, 0
 	jal	print_int_sub1.2629
-	addi	%sp, %sp, 0
 	addi	%a0, %v0, 0
 	addi	%v0, %k0, 0
-	addi	%sp, %sp, 0
 	jal	print_int_sub2.2632
-	addi	%sp, %sp, 0
 	addi	%a3, %v0, 0
 	blt	%zero, %a0, bgt_else.7206
 	addi	%v0, %a3, 48
-	addi	%sp, %sp, 0
 	jal	min_caml_print_char
-	addi	%sp, %sp, 0
 	addi	%v0, %a1, 48
 	add	%ra, %zero, %a2
 	j	min_caml_print_char
 bgt_else.7206:
 	addi	%v0, %a0, 0
-	addi	%sp, %sp, 0
 	jal	print_int_sub2.2632
-	addi	%sp, %sp, 0
 	addi	%v0, %v0, 48
-	addi	%sp, %sp, 0
 	jal	min_caml_print_char
-	addi	%sp, %sp, 0
 	addi	%v0, %a3, 48
-	addi	%sp, %sp, 0
 	jal	min_caml_print_char
-	addi	%sp, %sp, 0
 	addi	%v0, %a1, 48
 	add	%ra, %zero, %a2
 	j	min_caml_print_char
 sgn.2636:
 	add	%a0, %zero, %ra
-	addi	%sp, %sp, 0
 	jal	fiszero.2599
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.7231
 	add	%ra, %zero, %a0
 	flw	%f0, 482(%zero)
 	jr	%ra
 bnei_else.7231:
-	addi	%sp, %sp, 0
 	jal	fispos.2595
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.7232
 	add	%ra, %zero, %a0
 	flw	%f0, 477(%zero)
@@ -530,26 +492,18 @@ vecunit_sgn.2662:
 	add	%a1, %zero, %ra
 	flw	%f16, 0(%a0)
 	fmov	%f0, %f16
-	addi	%sp, %sp, 0
 	jal	fsqr.2606
-	addi	%sp, %sp, 0
 	fmov	%f1, %f0
 	flw	%f17, 1(%a0)
 	fmov	%f0, %f17
-	addi	%sp, %sp, 0
 	jal	fsqr.2606
-	addi	%sp, %sp, 0
 	fadd	%f1, %f1, %f0
 	flw	%f18, 2(%a0)
 	fmov	%f0, %f18
-	addi	%sp, %sp, 0
 	jal	fsqr.2606
-	addi	%sp, %sp, 0
 	fadd	%f0, %f1, %f0
 	fsqrt	%f0, %f0
-	addi	%sp, %sp, 0
 	jal	fiszero.2599
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.7380
 	flw	%f1, 477(%zero)
 	j	bnei_cont.7381
@@ -783,51 +737,29 @@ rad.2761:
 	jr	%ra
 read_screen_settings.2763:
 	add	%a3, %zero, %ra
-	addi	%sp, %sp, 0
 	jal	min_caml_read_float
-	addi	%sp, %sp, 0
 	fsw	%f0, 72(%zero)
-	addi	%sp, %sp, 0
 	jal	min_caml_read_float
-	addi	%sp, %sp, 0
 	fsw	%f0, 73(%zero)
-	addi	%sp, %sp, 0
 	jal	min_caml_read_float
-	addi	%sp, %sp, 0
 	fsw	%f0, 74(%zero)
-	addi	%sp, %sp, 0
 	jal	min_caml_read_float
-	addi	%sp, %sp, 0
-	addi	%sp, %sp, 0
 	jal	rad.2761
-	addi	%sp, %sp, 0
 	fmov	%f19, %f0
 	fmov	%f0, %f19
-	addi	%sp, %sp, 0
 	jal	cos.2623
-	addi	%sp, %sp, 0
 	fmov	%f20, %f0
 	fmov	%f0, %f19
-	addi	%sp, %sp, 0
 	jal	sin.2625
-	addi	%sp, %sp, 0
 	fmov	%f19, %f0
-	addi	%sp, %sp, 0
 	jal	min_caml_read_float
-	addi	%sp, %sp, 0
-	addi	%sp, %sp, 0
 	jal	rad.2761
-	addi	%sp, %sp, 0
 	fmov	%f21, %f0
 	fmov	%f0, %f21
-	addi	%sp, %sp, 0
 	jal	cos.2623
-	addi	%sp, %sp, 0
 	fmov	%f22, %f0
 	fmov	%f0, %f21
-	addi	%sp, %sp, 0
 	jal	sin.2625
-	addi	%sp, %sp, 0
 	fmul	%f1, %f20, %f0
 	flw	%f16, 459(%zero)
 	fmul	%f1, %f1, %f16
@@ -867,49 +799,29 @@ read_screen_settings.2763:
 	jr	%ra
 read_light.2765:
 	add	%a3, %zero, %ra
-	addi	%sp, %sp, 0
 	jal	min_caml_read_int
-	addi	%sp, %sp, 0
-	addi	%sp, %sp, 0
 	jal	min_caml_read_float
-	addi	%sp, %sp, 0
-	addi	%sp, %sp, 0
 	jal	rad.2761
-	addi	%sp, %sp, 0
 	fmov	%f19, %f0
 	fmov	%f0, %f19
-	addi	%sp, %sp, 0
 	jal	sin.2625
-	addi	%sp, %sp, 0
 	fneg	%f0, %f0
 	fsw	%f0, 79(%zero)
-	addi	%sp, %sp, 0
 	jal	min_caml_read_float
-	addi	%sp, %sp, 0
-	addi	%sp, %sp, 0
 	jal	rad.2761
-	addi	%sp, %sp, 0
 	fmov	%f20, %f0
 	fmov	%f0, %f19
-	addi	%sp, %sp, 0
 	jal	cos.2623
-	addi	%sp, %sp, 0
 	fmov	%f19, %f0
 	fmov	%f0, %f20
-	addi	%sp, %sp, 0
 	jal	sin.2625
-	addi	%sp, %sp, 0
 	fmul	%f0, %f19, %f0
 	fsw	%f0, 78(%zero)
 	fmov	%f0, %f20
-	addi	%sp, %sp, 0
 	jal	cos.2623
-	addi	%sp, %sp, 0
 	fmul	%f0, %f19, %f0
 	fsw	%f0, 80(%zero)
-	addi	%sp, %sp, 0
 	jal	min_caml_read_float
-	addi	%sp, %sp, 0
 	add	%ra, %zero, %a3
 	fsw	%f0, 81(%zero)
 	jr	%ra
@@ -917,36 +829,24 @@ rotate_quadratic_matrix.2767:
 	add	%a3, %zero, %ra
 	flw	%f19, 0(%v1)
 	fmov	%f0, %f19
-	addi	%sp, %sp, 0
 	jal	cos.2623
-	addi	%sp, %sp, 0
 	fmov	%f20, %f0
 	fmov	%f0, %f19
-	addi	%sp, %sp, 0
 	jal	sin.2625
-	addi	%sp, %sp, 0
 	fmov	%f19, %f0
 	flw	%f21, 1(%v1)
 	fmov	%f0, %f21
-	addi	%sp, %sp, 0
 	jal	cos.2623
-	addi	%sp, %sp, 0
 	fmov	%f22, %f0
 	fmov	%f0, %f21
-	addi	%sp, %sp, 0
 	jal	sin.2625
-	addi	%sp, %sp, 0
 	fmov	%f21, %f0
 	flw	%f23, 2(%v1)
 	fmov	%f0, %f23
-	addi	%sp, %sp, 0
 	jal	cos.2623
-	addi	%sp, %sp, 0
 	fmov	%f24, %f0
 	fmov	%f0, %f23
-	addi	%sp, %sp, 0
 	jal	sin.2625
-	addi	%sp, %sp, 0
 	fmul	%f1, %f22, %f24
 	fmul	%f2, %f19, %f21
 	fmul	%f17, %f2, %f24
@@ -970,56 +870,38 @@ rotate_quadratic_matrix.2767:
 	flw	%f22, 1(%v0)
 	flw	%f25, 2(%v0)
 	fmov	%f0, %f1
-	addi	%sp, %sp, 0
 	jal	fsqr.2606
-	addi	%sp, %sp, 0
 	fmul	%f26, %f21, %f0
 	fmov	%f0, %f16
-	addi	%sp, %sp, 0
 	jal	fsqr.2606
-	addi	%sp, %sp, 0
 	fmul	%f0, %f22, %f0
 	fadd	%f26, %f26, %f0
 	fmov	%f0, %f17
-	addi	%sp, %sp, 0
 	jal	fsqr.2606
-	addi	%sp, %sp, 0
 	fmul	%f0, %f25, %f0
 	fadd	%f0, %f26, %f0
 	fsw	%f0, 0(%v0)
 	fmov	%f0, %f18
-	addi	%sp, %sp, 0
 	jal	fsqr.2606
-	addi	%sp, %sp, 0
 	fmul	%f26, %f21, %f0
 	fmov	%f0, %f2
-	addi	%sp, %sp, 0
 	jal	fsqr.2606
-	addi	%sp, %sp, 0
 	fmul	%f0, %f22, %f0
 	fadd	%f26, %f26, %f0
 	fmov	%f0, %f19
-	addi	%sp, %sp, 0
 	jal	fsqr.2606
-	addi	%sp, %sp, 0
 	fmul	%f0, %f25, %f0
 	fadd	%f0, %f26, %f0
 	fsw	%f0, 1(%v0)
 	fmov	%f0, %f23
-	addi	%sp, %sp, 0
 	jal	fsqr.2606
-	addi	%sp, %sp, 0
 	fmul	%f26, %f21, %f0
 	fmov	%f0, %f24
-	addi	%sp, %sp, 0
 	jal	fsqr.2606
-	addi	%sp, %sp, 0
 	fmul	%f0, %f22, %f0
 	fadd	%f26, %f26, %f0
 	fmov	%f0, %f20
-	addi	%sp, %sp, 0
 	jal	fsqr.2606
-	addi	%sp, %sp, 0
 	fmul	%f0, %f25, %f0
 	fadd	%f0, %f26, %f0
 	fsw	%f0, 2(%v0)
@@ -1056,128 +938,72 @@ rotate_quadratic_matrix.2767:
 read_nth_object.2770:
 	add	%a0, %zero, %v0
 	add	%k0, %zero, %ra
-	addi	%sp, %sp, 0
 	jal	min_caml_read_int
-	addi	%sp, %sp, 0
 	addi	%a1, %v0, 0
 	beqi	%a1, -1, bnei_else.8259
-	addi	%sp, %sp, 0
 	jal	min_caml_read_int
-	addi	%sp, %sp, 0
 	addi	%a2, %v0, 0
-	addi	%sp, %sp, 0
 	jal	min_caml_read_int
-	addi	%sp, %sp, 0
 	addi	%a3, %v0, 0
-	addi	%sp, %sp, 0
 	jal	min_caml_read_int
-	addi	%sp, %sp, 0
 	addi	%s0, %v0, 0
 	addi	%s1, %zero, 3
 	flw	%f16, 482(%zero)
 	addi	%v0, %s1, 0
 	fmov	%f0, %f16
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_array
-	addi	%sp, %sp, 0
 	addi	%s2, %v0, 0
-	addi	%sp, %sp, 0
 	jal	min_caml_read_float
-	addi	%sp, %sp, 0
 	fsw	%f0, 0(%s2)
-	addi	%sp, %sp, 0
 	jal	min_caml_read_float
-	addi	%sp, %sp, 0
 	fsw	%f0, 1(%s2)
 	addi	%s5, %zero, 2
-	addi	%sp, %sp, 0
 	jal	min_caml_read_float
-	addi	%sp, %sp, 0
 	fsw	%f0, 2(%s2)
 	addi	%v0, %s1, 0
 	fmov	%f0, %f16
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_array
-	addi	%sp, %sp, 0
 	addi	%s3, %v0, 0
-	addi	%sp, %sp, 0
 	jal	min_caml_read_float
-	addi	%sp, %sp, 0
 	fsw	%f0, 0(%s3)
-	addi	%sp, %sp, 0
 	jal	min_caml_read_float
-	addi	%sp, %sp, 0
 	fsw	%f0, 1(%s3)
-	addi	%sp, %sp, 0
 	jal	min_caml_read_float
-	addi	%sp, %sp, 0
 	fsw	%f0, 2(%s3)
-	addi	%sp, %sp, 0
 	jal	min_caml_read_float
-	addi	%sp, %sp, 0
-	addi	%sp, %sp, 0
 	jal	fisneg.2597
-	addi	%sp, %sp, 0
 	addi	%s4, %v0, 0
 	addi	%v0, %s5, 0
 	fmov	%f0, %f16
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_array
-	addi	%sp, %sp, 0
 	addi	%s5, %v0, 0
-	addi	%sp, %sp, 0
 	jal	min_caml_read_float
-	addi	%sp, %sp, 0
 	fsw	%f0, 0(%s5)
-	addi	%sp, %sp, 0
 	jal	min_caml_read_float
-	addi	%sp, %sp, 0
 	fsw	%f0, 1(%s5)
 	addi	%v0, %s1, 0
 	fmov	%f0, %f16
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_array
-	addi	%sp, %sp, 0
 	addi	%s6, %v0, 0
-	addi	%sp, %sp, 0
 	jal	min_caml_read_float
-	addi	%sp, %sp, 0
 	fsw	%f0, 0(%s6)
-	addi	%sp, %sp, 0
 	jal	min_caml_read_float
-	addi	%sp, %sp, 0
 	fsw	%f0, 1(%s6)
-	addi	%sp, %sp, 0
 	jal	min_caml_read_float
-	addi	%sp, %sp, 0
 	fsw	%f0, 2(%s6)
 	addi	%v0, %s1, 0
 	fmov	%f0, %f16
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_array
-	addi	%sp, %sp, 0
 	addi	%s1, %v0, 0
 	beqi	%s0, 0, bnei_else.8260
-	addi	%sp, %sp, 0
 	jal	min_caml_read_float
-	addi	%sp, %sp, 0
-	addi	%sp, %sp, 0
 	jal	rad.2761
-	addi	%sp, %sp, 0
 	fsw	%f0, 0(%s1)
-	addi	%sp, %sp, 0
 	jal	min_caml_read_float
-	addi	%sp, %sp, 0
-	addi	%sp, %sp, 0
 	jal	rad.2761
-	addi	%sp, %sp, 0
 	fsw	%f0, 1(%s1)
-	addi	%sp, %sp, 0
 	jal	min_caml_read_float
-	addi	%sp, %sp, 0
-	addi	%sp, %sp, 0
 	jal	rad.2761
-	addi	%sp, %sp, 0
 	fsw	%f0, 2(%s1)
 	j	bnei_cont.8261
 bnei_else.8260:
@@ -1190,9 +1016,7 @@ bnei_else.8262:
 bnei_cont.8263:
 	addi	%v0, %zero, 4
 	fmov	%f0, %f16
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_array
-	addi	%sp, %sp, 0
 	add	%ra, %zero, %hp
 	addi	%hp, %hp, 11
 	sw	%v0, 10(%ra)
@@ -1218,71 +1042,51 @@ bnei_else.8268:
 	addi	%v1, %zero, 1
 bnei_cont.8269:
 	addi	%v0, %s2, 0
-	addi	%sp, %sp, 0
 	jal	vecunit_sgn.2662
-	addi	%sp, %sp, 0
 bnei_cont.8267:
 	j	bnei_cont.8265
 bnei_else.8264:
 	flw	%f17, 0(%s2)
 	fmov	%f0, %f17
-	addi	%sp, %sp, 0
 	jal	fiszero.2599
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8270
 	fmov	%f0, %f16
 	j	bnei_cont.8271
 bnei_else.8270:
 	fmov	%f0, %f17
-	addi	%sp, %sp, 0
 	jal	sgn.2636
-	addi	%sp, %sp, 0
 	fmov	%f1, %f0
 	fmov	%f0, %f17
-	addi	%sp, %sp, 0
 	jal	fsqr.2606
-	addi	%sp, %sp, 0
 	fdiv	%f0, %f1, %f0
 bnei_cont.8271:
 	fsw	%f0, 0(%s2)
 	flw	%f17, 1(%s2)
 	fmov	%f0, %f17
-	addi	%sp, %sp, 0
 	jal	fiszero.2599
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8272
 	fmov	%f0, %f16
 	j	bnei_cont.8273
 bnei_else.8272:
 	fmov	%f0, %f17
-	addi	%sp, %sp, 0
 	jal	sgn.2636
-	addi	%sp, %sp, 0
 	fmov	%f1, %f0
 	fmov	%f0, %f17
-	addi	%sp, %sp, 0
 	jal	fsqr.2606
-	addi	%sp, %sp, 0
 	fdiv	%f0, %f1, %f0
 bnei_cont.8273:
 	fsw	%f0, 1(%s2)
 	flw	%f17, 2(%s2)
 	fmov	%f0, %f17
-	addi	%sp, %sp, 0
 	jal	fiszero.2599
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8274
 	j	bnei_cont.8275
 bnei_else.8274:
 	fmov	%f0, %f17
-	addi	%sp, %sp, 0
 	jal	sgn.2636
-	addi	%sp, %sp, 0
 	fmov	%f1, %f0
 	fmov	%f0, %f17
-	addi	%sp, %sp, 0
 	jal	fsqr.2606
-	addi	%sp, %sp, 0
 	fdiv	%f16, %f1, %f0
 bnei_cont.8275:
 	fsw	%f16, 2(%s2)
@@ -1290,9 +1094,7 @@ bnei_cont.8265:
 	beqi	%s0, 0, bnei_else.8276
 	addi	%v1, %s1, 0
 	addi	%v0, %s2, 0
-	addi	%sp, %sp, 0
 	jal	rotate_quadratic_matrix.2767
-	addi	%sp, %sp, 0
 	j	bnei_cont.8277
 bnei_else.8276:
 bnei_cont.8277:
@@ -1311,9 +1113,7 @@ read_object.2772:
 	jr	%ra
 bgti_else.8304:
 	addi	%v0, %t7, 0
-	addi	%sp, %sp, 0
 	jal	read_nth_object.2770
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8306
 	addi	%v0, %t7, 1
 	add	%ra, %zero, %t8
@@ -1383,9 +1183,7 @@ read_and_network.2780:
 	add	%a1, %zero, %v0
 	add	%a2, %zero, %ra
 	addi	%v0, %zero, 0
-	addi	%sp, %sp, 0
 	jal	read_net_item.2776
-	addi	%sp, %sp, 0
 	lw	%a0, 0(%v0)
 	beqi	%a0, -1, bnei_else.8417
 	sw	%v0, 83(%a1)
@@ -1397,24 +1195,14 @@ bnei_else.8417:
 	jr	%ra
 read_parameter.2782:
 	add	%t9, %zero, %ra
-	addi	%sp, %sp, 0
 	jal	read_screen_settings.2763
-	addi	%sp, %sp, 0
-	addi	%sp, %sp, 0
 	jal	read_light.2765
-	addi	%sp, %sp, 0
-	addi	%sp, %sp, 0
 	jal	read_all_object.2774
-	addi	%sp, %sp, 0
 	addi	%a3, %zero, 0
 	addi	%v0, %a3, 0
-	addi	%sp, %sp, 0
 	jal	read_and_network.2780
-	addi	%sp, %sp, 0
 	addi	%v0, %a3, 0
-	addi	%sp, %sp, 0
 	jal	read_or_network.2778
-	addi	%sp, %sp, 0
 	add	%ra, %zero, %t9
 	sw	%v0, 134(%zero)
 	jr	%ra
@@ -1428,38 +1216,26 @@ solver_rect_surface.2784:
 	add	%at, %k0, %s0
 	flw	%f18, 0(%at)
 	fmov	%f0, %f18
-	addi	%sp, %sp, 0
 	jal	fiszero.2599
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8466
 	add	%ra, %zero, %s1
 	addi	%v0, %zero, 0
 	jr	%ra
 bnei_else.8466:
 	addi	%v0, %a3, 0
-	addi	%sp, %sp, 0
 	jal	o_param_abc.2706
-	addi	%sp, %sp, 0
 	addi	%s2, %v0, 0
 	addi	%v0, %a3, 0
-	addi	%sp, %sp, 0
 	jal	o_isinvert.2696
-	addi	%sp, %sp, 0
 	addi	%a0, %v0, 0
 	fmov	%f0, %f18
-	addi	%sp, %sp, 0
 	jal	fisneg.2597
-	addi	%sp, %sp, 0
 	addi	%v1, %v0, 0
 	addi	%v0, %a0, 0
-	addi	%sp, %sp, 0
 	jal	xor.2601
-	addi	%sp, %sp, 0
 	add	%at, %s2, %s0
 	flw	%f0, 0(%at)
-	addi	%sp, %sp, 0
 	jal	fneg_cond.2638
-	addi	%sp, %sp, 0
 	fsub	%f0, %f0, %f16
 	fdiv	%f16, %f0, %f18
 	add	%at, %k0, %a1
@@ -1469,9 +1245,7 @@ bnei_else.8466:
 	fabs	%f0, %f0
 	add	%at, %s2, %a1
 	flw	%f1, 0(%at)
-	addi	%sp, %sp, 0
 	jal	fless.2592
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8467
 	add	%at, %k0, %a2
 	flw	%f0, 0(%at)
@@ -1480,9 +1254,7 @@ bnei_else.8466:
 	fabs	%f0, %f0
 	add	%at, %s2, %a2
 	flw	%f1, 0(%at)
-	addi	%sp, %sp, 0
 	jal	fless.2592
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8468
 	fsw	%f16, 135(%zero)
 	add	%ra, %zero, %s1
@@ -1514,9 +1286,7 @@ solver_rect.2793:
 	fmov	%f2, %f21
 	fmov	%f1, %f20
 	fmov	%f0, %f19
-	addi	%sp, %sp, 0
 	jal	solver_rect_surface.2784
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8496
 	add	%ra, %zero, %s5
 	addi	%v0, %zero, 1
@@ -1530,9 +1300,7 @@ bnei_else.8496:
 	fmov	%f2, %f19
 	fmov	%f1, %f21
 	fmov	%f0, %f20
-	addi	%sp, %sp, 0
 	jal	solver_rect_surface.2784
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8497
 	add	%ra, %zero, %s5
 	addi	%v0, %zero, 2
@@ -1546,9 +1314,7 @@ bnei_else.8497:
 	fmov	%f2, %f20
 	fmov	%f1, %f19
 	fmov	%f0, %f21
-	addi	%sp, %sp, 0
 	jal	solver_rect_surface.2784
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8498
 	add	%ra, %zero, %s5
 	addi	%v0, %zero, 3
@@ -1562,26 +1328,18 @@ solver_surface.2799:
 	fmov	%f18, %f1
 	add	%a0, %zero, %v1
 	add	%a1, %zero, %ra
-	addi	%sp, %sp, 0
 	jal	o_param_abc.2706
-	addi	%sp, %sp, 0
 	addi	%v1, %v0, 0
 	addi	%v0, %a0, 0
-	addi	%sp, %sp, 0
 	jal	veciprod.2665
-	addi	%sp, %sp, 0
 	fmov	%f19, %f0
 	fmov	%f0, %f19
-	addi	%sp, %sp, 0
 	jal	fispos.2595
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8520
 	addi	%v0, %v1, 0
 	fmov	%f1, %f18
 	fmov	%f0, %f17
-	addi	%sp, %sp, 0
 	jal	veciprod2.2668
-	addi	%sp, %sp, 0
 	fneg	%f0, %f0
 	fdiv	%f0, %f0, %f19
 	fsw	%f0, 135(%zero)
@@ -1597,61 +1355,41 @@ quadratic.2805:
 	add	%a1, %zero, %v0
 	add	%a2, %zero, %ra
 	fmov	%f0, %f16
-	addi	%sp, %sp, 0
 	jal	fsqr.2606
-	addi	%sp, %sp, 0
 	fmov	%f17, %f0
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_a.2700
-	addi	%sp, %sp, 0
 	fmul	%f18, %f17, %f0
 	fmov	%f0, %f1
-	addi	%sp, %sp, 0
 	jal	fsqr.2606
-	addi	%sp, %sp, 0
 	fmov	%f17, %f0
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_b.2702
-	addi	%sp, %sp, 0
 	fmul	%f0, %f17, %f0
 	fadd	%f18, %f18, %f0
 	fmov	%f0, %f2
-	addi	%sp, %sp, 0
 	jal	fsqr.2606
-	addi	%sp, %sp, 0
 	fmov	%f17, %f0
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_c.2704
-	addi	%sp, %sp, 0
 	fmul	%f0, %f17, %f0
 	fadd	%f17, %f18, %f0
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_isrot.2698
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8542
 	fmul	%f18, %f1, %f2
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_r1.2724
-	addi	%sp, %sp, 0
 	fmul	%f0, %f18, %f0
 	fadd	%f18, %f17, %f0
 	fmul	%f17, %f2, %f16
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_r2.2726
-	addi	%sp, %sp, 0
 	fmul	%f0, %f17, %f0
 	fadd	%f17, %f18, %f0
 	fmul	%f1, %f16, %f1
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_r3.2728
-	addi	%sp, %sp, 0
 	fmul	%f0, %f1, %f0
 	add	%ra, %zero, %a2
 	fadd	%f0, %f17, %f0
@@ -1666,58 +1404,42 @@ bilinear.2810:
 	add	%a2, %zero, %ra
 	fmul	%f17, %f16, %f3
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_a.2700
-	addi	%sp, %sp, 0
 	fmul	%f18, %f17, %f0
 	fmul	%f17, %f1, %f4
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_b.2702
-	addi	%sp, %sp, 0
 	fmul	%f0, %f17, %f0
 	fadd	%f18, %f18, %f0
 	fmul	%f17, %f2, %f5
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_c.2704
-	addi	%sp, %sp, 0
 	fmul	%f0, %f17, %f0
 	fadd	%f17, %f18, %f0
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_isrot.2698
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8564
 	fmul	%f18, %f2, %f4
 	fmul	%f0, %f1, %f5
 	fadd	%f18, %f18, %f0
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_r1.2724
-	addi	%sp, %sp, 0
 	fmul	%f19, %f18, %f0
 	fmul	%f18, %f16, %f5
 	fmul	%f0, %f2, %f3
 	fadd	%f18, %f18, %f0
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_r2.2726
-	addi	%sp, %sp, 0
 	fmul	%f0, %f18, %f0
 	fadd	%f18, %f19, %f0
 	fmul	%f16, %f16, %f4
 	fmul	%f0, %f1, %f3
 	fadd	%f1, %f16, %f0
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_r3.2728
-	addi	%sp, %sp, 0
 	fmul	%f0, %f1, %f0
 	fadd	%f0, %f18, %f0
-	addi	%sp, %sp, 0
 	jal	fhalf.2604
-	addi	%sp, %sp, 0
 	add	%ra, %zero, %a2
 	fadd	%f0, %f17, %f0
 	jr	%ra
@@ -1737,14 +1459,10 @@ solver_second.2818:
 	addi	%v0, %a3, 0
 	fmov	%f1, %f19
 	fmov	%f0, %f20
-	addi	%sp, %sp, 0
 	jal	quadratic.2805
-	addi	%sp, %sp, 0
 	fmov	%f21, %f0
 	fmov	%f0, %f21
-	addi	%sp, %sp, 0
 	jal	fiszero.2599
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8595
 	add	%ra, %zero, %k0
 	addi	%v0, %zero, 0
@@ -1753,22 +1471,16 @@ bnei_else.8595:
 	addi	%v0, %a3, 0
 	fmov	%f1, %f19
 	fmov	%f0, %f20
-	addi	%sp, %sp, 0
 	jal	bilinear.2810
-	addi	%sp, %sp, 0
 	fmov	%f19, %f0
 	addi	%v0, %a3, 0
 	fmov	%f2, %f5
 	fmov	%f1, %f4
 	fmov	%f0, %f3
-	addi	%sp, %sp, 0
 	jal	quadratic.2805
-	addi	%sp, %sp, 0
 	fmov	%f1, %f0
 	addi	%v0, %a3, 0
-	addi	%sp, %sp, 0
 	jal	o_form.2692
-	addi	%sp, %sp, 0
 	beqi	%v0, 3, bnei_else.8596
 	j	bnei_cont.8597
 bnei_else.8596:
@@ -1776,20 +1488,14 @@ bnei_else.8596:
 	fsub	%f1, %f1, %f0
 bnei_cont.8597:
 	fmov	%f0, %f19
-	addi	%sp, %sp, 0
 	jal	fsqr.2606
-	addi	%sp, %sp, 0
 	fmul	%f1, %f21, %f1
 	fsub	%f0, %f0, %f1
-	addi	%sp, %sp, 0
 	jal	fispos.2595
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8598
 	fsqrt	%f0, %f0
 	addi	%v0, %a3, 0
-	addi	%sp, %sp, 0
 	jal	o_isinvert.2696
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8599
 	j	bnei_cont.8600
 bnei_else.8599:
@@ -1811,26 +1517,18 @@ solver.2824:
 	lw	%a3, 12(%v0)
 	flw	%f1, 0(%a1)
 	addi	%v0, %a3, 0
-	addi	%sp, %sp, 0
 	jal	o_param_x.2708
-	addi	%sp, %sp, 0
 	fsub	%f16, %f1, %f0
 	flw	%f1, 1(%a1)
 	addi	%v0, %a3, 0
-	addi	%sp, %sp, 0
 	jal	o_param_y.2710
-	addi	%sp, %sp, 0
 	fsub	%f1, %f1, %f0
 	flw	%f17, 2(%a1)
 	addi	%v0, %a3, 0
-	addi	%sp, %sp, 0
 	jal	o_param_z.2712
-	addi	%sp, %sp, 0
 	fsub	%f2, %f17, %f0
 	addi	%v0, %a3, 0
-	addi	%sp, %sp, 0
 	jal	o_form.2692
-	addi	%sp, %sp, 0
 	beqi	%v0, 1, bnei_else.8625
 	beqi	%v0, 2, bnei_else.8626
 	add	%ra, %zero, %a2
@@ -1862,34 +1560,24 @@ solver_rect_fast.2828:
 	fadd	%f0, %f0, %f17
 	fabs	%f19, %f0
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_b.2702
-	addi	%sp, %sp, 0
 	fmov	%f18, %f0
 	fmov	%f1, %f18
 	fmov	%f0, %f19
-	addi	%sp, %sp, 0
 	jal	fless.2592
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8681
 	flw	%f0, 2(%v1)
 	fmul	%f0, %f21, %f0
 	fadd	%f0, %f0, %f2
 	fabs	%f19, %f0
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_c.2704
-	addi	%sp, %sp, 0
 	fmov	%f1, %f0
 	fmov	%f0, %f19
-	addi	%sp, %sp, 0
 	jal	fless.2592
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8683
 	fmov	%f0, %f20
-	addi	%sp, %sp, 0
 	jal	fiszero.2599
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8685
 	addi	%a0, %zero, 0
 	j	bnei_cont.8682
@@ -1919,34 +1607,24 @@ bnei_else.8687:
 	fadd	%f0, %f0, %f16
 	fabs	%f20, %f0
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_a.2700
-	addi	%sp, %sp, 0
 	fmov	%f19, %f0
 	fmov	%f1, %f19
 	fmov	%f0, %f20
-	addi	%sp, %sp, 0
 	jal	fless.2592
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8688
 	flw	%f0, 2(%v1)
 	fmul	%f0, %f24, %f0
 	fadd	%f0, %f0, %f2
 	fabs	%f20, %f0
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_c.2704
-	addi	%sp, %sp, 0
 	fmov	%f1, %f0
 	fmov	%f0, %f20
-	addi	%sp, %sp, 0
 	jal	fless.2592
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8690
 	fmov	%f0, %f21
-	addi	%sp, %sp, 0
 	jal	fiszero.2599
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8692
 	addi	%a0, %zero, 0
 	j	bnei_cont.8689
@@ -1975,22 +1653,16 @@ bnei_else.8694:
 	fadd	%f0, %f0, %f16
 	fabs	%f0, %f0
 	fmov	%f1, %f19
-	addi	%sp, %sp, 0
 	jal	fless.2592
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8695
 	fmul	%f0, %f20, %f22
 	fadd	%f0, %f0, %f17
 	fabs	%f0, %f0
 	fmov	%f1, %f18
-	addi	%sp, %sp, 0
 	jal	fless.2592
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8697
 	fmov	%f0, %f2
-	addi	%sp, %sp, 0
 	jal	fiszero.2599
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8699
 	addi	%a0, %zero, 0
 	j	bnei_cont.8696
@@ -2019,9 +1691,7 @@ solver_surface_fast.2835:
 	fmov	%f17, %f1
 	add	%a0, %zero, %ra
 	flw	%f0, 0(%v1)
-	addi	%sp, %sp, 0
 	jal	fisneg.2597
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8723
 	flw	%f0, 1(%v1)
 	fmul	%f1, %f0, %f16
@@ -2046,9 +1716,7 @@ solver_second_fast.2841:
 	add	%k0, %zero, %ra
 	flw	%f19, 0(%v1)
 	fmov	%f0, %f19
-	addi	%sp, %sp, 0
 	jal	fiszero.2599
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8754
 	add	%ra, %zero, %k0
 	addi	%v0, %zero, 0
@@ -2065,14 +1733,10 @@ bnei_else.8754:
 	addi	%v0, %a3, 0
 	fmov	%f1, %f17
 	fmov	%f0, %f16
-	addi	%sp, %sp, 0
 	jal	quadratic.2805
-	addi	%sp, %sp, 0
 	fmov	%f1, %f0
 	addi	%v0, %a3, 0
-	addi	%sp, %sp, 0
 	jal	o_form.2692
-	addi	%sp, %sp, 0
 	beqi	%v0, 3, bnei_else.8755
 	j	bnei_cont.8756
 bnei_else.8755:
@@ -2080,19 +1744,13 @@ bnei_else.8755:
 	fsub	%f1, %f1, %f0
 bnei_cont.8756:
 	fmov	%f0, %f20
-	addi	%sp, %sp, 0
 	jal	fsqr.2606
-	addi	%sp, %sp, 0
 	fmul	%f1, %f19, %f1
 	fsub	%f0, %f0, %f1
-	addi	%sp, %sp, 0
 	jal	fispos.2595
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8757
 	addi	%v0, %a3, 0
-	addi	%sp, %sp, 0
 	jal	o_isinvert.2696
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8758
 	fsqrt	%f0, %f0
 	fadd	%f1, %f20, %f0
@@ -2122,32 +1780,22 @@ solver_fast.2847:
 	lw	%s0, 12(%a1)
 	flw	%f1, 0(%a3)
 	addi	%v0, %s0, 0
-	addi	%sp, %sp, 0
 	jal	o_param_x.2708
-	addi	%sp, %sp, 0
 	fsub	%f16, %f1, %f0
 	flw	%f1, 1(%a3)
 	addi	%v0, %s0, 0
-	addi	%sp, %sp, 0
 	jal	o_param_y.2710
-	addi	%sp, %sp, 0
 	fsub	%f1, %f1, %f0
 	flw	%f17, 2(%a3)
 	addi	%v0, %s0, 0
-	addi	%sp, %sp, 0
 	jal	o_param_z.2712
-	addi	%sp, %sp, 0
 	fsub	%f2, %f17, %f0
 	addi	%v0, %a2, 0
-	addi	%sp, %sp, 0
 	jal	d_const.2753
-	addi	%sp, %sp, 0
 	add	%at, %v0, %a1
 	lw	%v1, 0(%at)
 	addi	%v0, %s0, 0
-	addi	%sp, %sp, 0
 	jal	o_form.2692
-	addi	%sp, %sp, 0
 	beqi	%v0, 1, bnei_else.8784
 	beqi	%v0, 2, bnei_else.8785
 	add	%ra, %zero, %k0
@@ -2161,9 +1809,7 @@ bnei_else.8785:
 	j	solver_surface_fast.2835
 bnei_else.8784:
 	addi	%v0, %a2, 0
-	addi	%sp, %sp, 0
 	jal	d_vec.2751
-	addi	%sp, %sp, 0
 	add	%ra, %zero, %k0
 	addi	%a0, %v1, 0
 	addi	%v1, %v0, 0
@@ -2173,9 +1819,7 @@ bnei_else.8784:
 solver_surface_fast2.2851:
 	add	%a1, %zero, %ra
 	flw	%f0, 0(%v1)
-	addi	%sp, %sp, 0
 	jal	fisneg.2597
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8807
 	flw	%f1, 3(%a0)
 	fmul	%f0, %f0, %f1
@@ -2194,9 +1838,7 @@ solver_second_fast2.2858:
 	add	%a2, %zero, %ra
 	flw	%f18, 0(%v1)
 	fmov	%f0, %f18
-	addi	%sp, %sp, 0
 	jal	fiszero.2599
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8835
 	add	%ra, %zero, %a2
 	addi	%v0, %zero, 0
@@ -2212,19 +1854,13 @@ bnei_else.8835:
 	fadd	%f16, %f1, %f0
 	flw	%f1, 3(%a0)
 	fmov	%f0, %f16
-	addi	%sp, %sp, 0
 	jal	fsqr.2606
-	addi	%sp, %sp, 0
 	fmul	%f1, %f18, %f1
 	fsub	%f0, %f0, %f1
-	addi	%sp, %sp, 0
 	jal	fispos.2595
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8836
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_isinvert.2696
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8837
 	fsqrt	%f0, %f0
 	fadd	%f1, %f16, %f0
@@ -2252,23 +1888,17 @@ solver_fast2.2865:
 	add	%a3, %zero, %ra
 	lw	%k0, 12(%a1)
 	addi	%v0, %k0, 0
-	addi	%sp, %sp, 0
 	jal	o_param_ctbl.2730
-	addi	%sp, %sp, 0
 	addi	%a0, %v0, 0
 	flw	%f0, 0(%a0)
 	flw	%f1, 1(%a0)
 	flw	%f2, 2(%a0)
 	addi	%v0, %a2, 0
-	addi	%sp, %sp, 0
 	jal	d_const.2753
-	addi	%sp, %sp, 0
 	add	%at, %v0, %a1
 	lw	%v1, 0(%at)
 	addi	%v0, %k0, 0
-	addi	%sp, %sp, 0
 	jal	o_form.2692
-	addi	%sp, %sp, 0
 	beqi	%v0, 1, bnei_else.8863
 	beqi	%v0, 2, bnei_else.8864
 	add	%ra, %zero, %a3
@@ -2280,9 +1910,7 @@ bnei_else.8864:
 	j	solver_surface_fast2.2851
 bnei_else.8863:
 	addi	%v0, %a2, 0
-	addi	%sp, %sp, 0
 	jal	d_vec.2751
-	addi	%sp, %sp, 0
 	add	%ra, %zero, %a3
 	addi	%a0, %v1, 0
 	addi	%v1, %v0, 0
@@ -2295,42 +1923,28 @@ setup_rect_table.2868:
 	addi	%v0, %zero, 6
 	flw	%f16, 482(%zero)
 	fmov	%f0, %f16
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_array
-	addi	%sp, %sp, 0
 	addi	%k0, %v0, 0
 	flw	%f17, 0(%a1)
 	fmov	%f0, %f17
-	addi	%sp, %sp, 0
 	jal	fiszero.2599
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8892
 	fsw	%f16, 1(%k0)
 	j	bnei_cont.8893
 bnei_else.8892:
 	addi	%v0, %a2, 0
-	addi	%sp, %sp, 0
 	jal	o_isinvert.2696
-	addi	%sp, %sp, 0
 	addi	%a0, %v0, 0
 	fmov	%f0, %f17
-	addi	%sp, %sp, 0
 	jal	fisneg.2597
-	addi	%sp, %sp, 0
 	addi	%v1, %v0, 0
 	addi	%v0, %a0, 0
-	addi	%sp, %sp, 0
 	jal	xor.2601
-	addi	%sp, %sp, 0
 	addi	%s0, %v0, 0
 	addi	%v0, %a2, 0
-	addi	%sp, %sp, 0
 	jal	o_param_a.2700
-	addi	%sp, %sp, 0
 	addi	%v0, %s0, 0
-	addi	%sp, %sp, 0
 	jal	fneg_cond.2638
-	addi	%sp, %sp, 0
 	fsw	%f0, 0(%k0)
 	flw	%f0, 477(%zero)
 	fdiv	%f0, %f0, %f17
@@ -2338,36 +1952,24 @@ bnei_else.8892:
 bnei_cont.8893:
 	flw	%f17, 1(%a1)
 	fmov	%f0, %f17
-	addi	%sp, %sp, 0
 	jal	fiszero.2599
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8894
 	fsw	%f16, 3(%k0)
 	j	bnei_cont.8895
 bnei_else.8894:
 	addi	%v0, %a2, 0
-	addi	%sp, %sp, 0
 	jal	o_isinvert.2696
-	addi	%sp, %sp, 0
 	addi	%a0, %v0, 0
 	fmov	%f0, %f17
-	addi	%sp, %sp, 0
 	jal	fisneg.2597
-	addi	%sp, %sp, 0
 	addi	%v1, %v0, 0
 	addi	%v0, %a0, 0
-	addi	%sp, %sp, 0
 	jal	xor.2601
-	addi	%sp, %sp, 0
 	addi	%s0, %v0, 0
 	addi	%v0, %a2, 0
-	addi	%sp, %sp, 0
 	jal	o_param_b.2702
-	addi	%sp, %sp, 0
 	addi	%v0, %s0, 0
-	addi	%sp, %sp, 0
 	jal	fneg_cond.2638
-	addi	%sp, %sp, 0
 	fsw	%f0, 2(%k0)
 	flw	%f0, 477(%zero)
 	fdiv	%f0, %f0, %f17
@@ -2375,36 +1977,24 @@ bnei_else.8894:
 bnei_cont.8895:
 	flw	%f17, 2(%a1)
 	fmov	%f0, %f17
-	addi	%sp, %sp, 0
 	jal	fiszero.2599
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8896
 	fsw	%f16, 5(%k0)
 	j	bnei_cont.8897
 bnei_else.8896:
 	addi	%v0, %a2, 0
-	addi	%sp, %sp, 0
 	jal	o_isinvert.2696
-	addi	%sp, %sp, 0
 	addi	%a0, %v0, 0
 	fmov	%f0, %f17
-	addi	%sp, %sp, 0
 	jal	fisneg.2597
-	addi	%sp, %sp, 0
 	addi	%v1, %v0, 0
 	addi	%v0, %a0, 0
-	addi	%sp, %sp, 0
 	jal	xor.2601
-	addi	%sp, %sp, 0
 	addi	%a1, %v0, 0
 	addi	%v0, %a2, 0
-	addi	%sp, %sp, 0
 	jal	o_param_c.2704
-	addi	%sp, %sp, 0
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	fneg_cond.2638
-	addi	%sp, %sp, 0
 	fsw	%f0, 4(%k0)
 	flw	%f0, 477(%zero)
 	fdiv	%f0, %f0, %f17
@@ -2420,36 +2010,26 @@ setup_surface_table.2871:
 	addi	%v0, %zero, 4
 	flw	%f16, 482(%zero)
 	fmov	%f0, %f16
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_array
-	addi	%sp, %sp, 0
 	addi	%k0, %v0, 0
 	flw	%f1, 0(%a1)
 	addi	%v0, %a2, 0
-	addi	%sp, %sp, 0
 	jal	o_param_a.2700
-	addi	%sp, %sp, 0
 	fmov	%f17, %f0
 	fmul	%f19, %f1, %f17
 	flw	%f1, 1(%a1)
 	addi	%v0, %a2, 0
-	addi	%sp, %sp, 0
 	jal	o_param_b.2702
-	addi	%sp, %sp, 0
 	fmov	%f18, %f0
 	fmul	%f0, %f1, %f18
 	fadd	%f2, %f19, %f0
 	flw	%f1, 2(%a1)
 	addi	%v0, %a2, 0
-	addi	%sp, %sp, 0
 	jal	o_param_c.2704
-	addi	%sp, %sp, 0
 	fmov	%f19, %f0
 	fmul	%f0, %f1, %f19
 	fadd	%f0, %f2, %f0
-	addi	%sp, %sp, 0
 	jal	fispos.2595
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8919
 	flw	%f1, 461(%zero)
 	fdiv	%f1, %f1, %f0
@@ -2476,9 +2056,7 @@ setup_second_table.2874:
 	add	%k0, %zero, %ra
 	addi	%v0, %zero, 5
 	flw	%f0, 482(%zero)
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_array
-	addi	%sp, %sp, 0
 	addi	%s0, %v0, 0
 	flw	%f20, 0(%a0)
 	flw	%f19, 1(%a0)
@@ -2486,71 +2064,49 @@ setup_second_table.2874:
 	addi	%v0, %a3, 0
 	fmov	%f1, %f19
 	fmov	%f0, %f20
-	addi	%sp, %sp, 0
 	jal	quadratic.2805
-	addi	%sp, %sp, 0
 	fmov	%f16, %f0
 	addi	%v0, %a3, 0
-	addi	%sp, %sp, 0
 	jal	o_param_a.2700
-	addi	%sp, %sp, 0
 	fmul	%f0, %f20, %f0
 	fneg	%f21, %f0
 	addi	%v0, %a3, 0
-	addi	%sp, %sp, 0
 	jal	o_param_b.2702
-	addi	%sp, %sp, 0
 	fmul	%f0, %f19, %f0
 	fneg	%f23, %f0
 	addi	%v0, %a3, 0
-	addi	%sp, %sp, 0
 	jal	o_param_c.2704
-	addi	%sp, %sp, 0
 	fmul	%f0, %f2, %f0
 	fneg	%f22, %f0
 	fsw	%f16, 0(%s0)
 	addi	%v0, %a3, 0
-	addi	%sp, %sp, 0
 	jal	o_isrot.2698
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8945
 	addi	%v0, %a3, 0
-	addi	%sp, %sp, 0
 	jal	o_param_r2.2726
-	addi	%sp, %sp, 0
 	fmov	%f17, %f0
 	fmul	%f1, %f2, %f17
 	addi	%v0, %a3, 0
-	addi	%sp, %sp, 0
 	jal	o_param_r3.2728
-	addi	%sp, %sp, 0
 	fmov	%f18, %f0
 	fmul	%f0, %f19, %f18
 	fadd	%f0, %f1, %f0
-	addi	%sp, %sp, 0
 	jal	fhalf.2604
-	addi	%sp, %sp, 0
 	fsub	%f0, %f21, %f0
 	fsw	%f0, 1(%s0)
 	addi	%v0, %a3, 0
-	addi	%sp, %sp, 0
 	jal	o_param_r1.2724
-	addi	%sp, %sp, 0
 	fmov	%f21, %f0
 	fmul	%f1, %f2, %f21
 	fmul	%f0, %f20, %f18
 	fadd	%f0, %f1, %f0
-	addi	%sp, %sp, 0
 	jal	fhalf.2604
-	addi	%sp, %sp, 0
 	fsub	%f0, %f23, %f0
 	fsw	%f0, 2(%s0)
 	fmul	%f1, %f19, %f21
 	fmul	%f0, %f20, %f17
 	fadd	%f0, %f1, %f0
-	addi	%sp, %sp, 0
 	jal	fhalf.2604
-	addi	%sp, %sp, 0
 	fsub	%f0, %f22, %f0
 	fsw	%f0, 3(%s0)
 	j	bnei_cont.8946
@@ -2560,9 +2116,7 @@ bnei_else.8945:
 	fsw	%f22, 3(%s0)
 bnei_cont.8946:
 	fmov	%f0, %f16
-	addi	%sp, %sp, 0
 	jal	fiszero.2599
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.8947
 	j	bnei_cont.8948
 bnei_else.8947:
@@ -2580,42 +2134,30 @@ iter_setup_dirvec_constants.2877:
 	blti	%s2, 0, bgti_else.8977
 	lw	%v1, 12(%s2)
 	addi	%v0, %s1, 0
-	addi	%sp, %sp, 0
 	jal	d_const.2753
-	addi	%sp, %sp, 0
 	addi	%s4, %v0, 0
 	addi	%v0, %s1, 0
-	addi	%sp, %sp, 0
 	jal	d_vec.2751
-	addi	%sp, %sp, 0
 	addi	%a0, %v0, 0
 	addi	%v0, %v1, 0
-	addi	%sp, %sp, 0
 	jal	o_form.2692
-	addi	%sp, %sp, 0
 	beqi	%v0, 1, bnei_else.8978
 	beqi	%v0, 2, bnei_else.8980
 	addi	%v0, %a0, 0
-	addi	%sp, %sp, 0
 	jal	setup_second_table.2874
-	addi	%sp, %sp, 0
 	add	%at, %s4, %s2
 	sw	%v0, 0(%at)
 	j	bnei_cont.8979
 bnei_else.8980:
 	addi	%v0, %a0, 0
-	addi	%sp, %sp, 0
 	jal	setup_surface_table.2871
-	addi	%sp, %sp, 0
 	add	%at, %s4, %s2
 	sw	%v0, 0(%at)
 bnei_cont.8981:
 	j	bnei_cont.8979
 bnei_else.8978:
 	addi	%v0, %a0, 0
-	addi	%sp, %sp, 0
 	jal	setup_rect_table.2868
-	addi	%sp, %sp, 0
 	add	%at, %s4, %s2
 	sw	%v0, 0(%at)
 bnei_cont.8979:
@@ -2636,34 +2178,24 @@ setup_startp_constants.2882:
 	blti	%v1, 0, bgti_else.9032
 	lw	%a1, 12(%v1)
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_ctbl.2730
-	addi	%sp, %sp, 0
 	addi	%s0, %v0, 0
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_form.2692
-	addi	%sp, %sp, 0
 	addi	%s1, %v0, 0
 	flw	%f1, 0(%a3)
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_x.2708
-	addi	%sp, %sp, 0
 	fsub	%f0, %f1, %f0
 	fsw	%f0, 0(%s0)
 	flw	%f1, 1(%a3)
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_y.2710
-	addi	%sp, %sp, 0
 	fsub	%f0, %f1, %f0
 	fsw	%f0, 1(%s0)
 	flw	%f1, 2(%a3)
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_z.2712
-	addi	%sp, %sp, 0
 	fsub	%f0, %f1, %f0
 	fsw	%f0, 2(%s0)
 	beqi	%s1, 2, bnei_else.9033
@@ -2675,9 +2207,7 @@ bgt_else.9035:
 	flw	%f1, 1(%s0)
 	flw	%f2, 2(%s0)
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	quadratic.2805
-	addi	%sp, %sp, 0
 	beqi	%s1, 3, bnei_else.9037
 	j	bnei_cont.9038
 bnei_else.9037:
@@ -2689,15 +2219,11 @@ bgt_cont.9036:
 	j	bnei_cont.9034
 bnei_else.9033:
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_abc.2706
-	addi	%sp, %sp, 0
 	flw	%f0, 0(%s0)
 	flw	%f1, 1(%s0)
 	flw	%f2, 2(%s0)
-	addi	%sp, %sp, 0
 	jal	veciprod2.2668
-	addi	%sp, %sp, 0
 	fsw	%f0, 3(%s0)
 bnei_cont.9034:
 	addi	%v1, %v1, -1
@@ -2712,9 +2238,7 @@ setup_startp.2885:
 	add	%a1, %zero, %ra
 	addi	%v0, %zero, 162
 	addi	%v1, %a0, 0
-	addi	%sp, %sp, 0
 	jal	veccpy.2654
-	addi	%sp, %sp, 0
 	lw	%a2, 0(%zero)
 	addi	%v1, %a2, -1
 	add	%ra, %zero, %a1
@@ -2726,36 +2250,24 @@ is_rect_outside.2887:
 	add	%a2, %zero, %ra
 	fabs	%f17, %f0
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_a.2700
-	addi	%sp, %sp, 0
 	fmov	%f1, %f0
 	fmov	%f0, %f17
-	addi	%sp, %sp, 0
 	jal	fless.2592
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.9088
 	fabs	%f16, %f16
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_b.2702
-	addi	%sp, %sp, 0
 	fmov	%f1, %f0
 	fmov	%f0, %f16
-	addi	%sp, %sp, 0
 	jal	fless.2592
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.9090
 	fabs	%f16, %f2
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_c.2704
-	addi	%sp, %sp, 0
 	fmov	%f1, %f0
 	fmov	%f0, %f16
-	addi	%sp, %sp, 0
 	jal	fless.2592
-	addi	%sp, %sp, 0
 	j	bnei_cont.9089
 bnei_else.9090:
 	addi	%v0, %zero, 0
@@ -2770,9 +2282,7 @@ bnei_cont.9089:
 	j	o_isinvert.2696
 bnei_else.9092:
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_isinvert.2696
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.9093
 	add	%ra, %zero, %a2
 	addi	%v0, %zero, 0
@@ -2785,25 +2295,15 @@ is_plane_outside.2892:
 	add	%a0, %zero, %v0
 	add	%a1, %zero, %ra
 	addi	%v0, %a0, 0
-	addi	%sp, %sp, 0
 	jal	o_param_abc.2706
-	addi	%sp, %sp, 0
-	addi	%sp, %sp, 0
 	jal	veciprod2.2668
-	addi	%sp, %sp, 0
 	addi	%v0, %a0, 0
-	addi	%sp, %sp, 0
 	jal	o_isinvert.2696
-	addi	%sp, %sp, 0
 	addi	%a0, %v0, 0
-	addi	%sp, %sp, 0
 	jal	fisneg.2597
-	addi	%sp, %sp, 0
 	addi	%v1, %v0, 0
 	addi	%v0, %a0, 0
-	addi	%sp, %sp, 0
 	jal	xor.2601
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.9115
 	add	%ra, %zero, %a1
 	addi	%v0, %zero, 0
@@ -2816,13 +2316,9 @@ is_second_outside.2897:
 	add	%a3, %zero, %v0
 	add	%k0, %zero, %ra
 	addi	%v0, %a3, 0
-	addi	%sp, %sp, 0
 	jal	quadratic.2805
-	addi	%sp, %sp, 0
 	addi	%v0, %a3, 0
-	addi	%sp, %sp, 0
 	jal	o_form.2692
-	addi	%sp, %sp, 0
 	beqi	%v0, 3, bnei_else.9140
 	j	bnei_cont.9141
 bnei_else.9140:
@@ -2830,18 +2326,12 @@ bnei_else.9140:
 	fsub	%f0, %f0, %f1
 bnei_cont.9141:
 	addi	%v0, %a3, 0
-	addi	%sp, %sp, 0
 	jal	o_isinvert.2696
-	addi	%sp, %sp, 0
 	addi	%a0, %v0, 0
-	addi	%sp, %sp, 0
 	jal	fisneg.2597
-	addi	%sp, %sp, 0
 	addi	%v1, %v0, 0
 	addi	%v0, %a0, 0
-	addi	%sp, %sp, 0
 	jal	xor.2601
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.9142
 	add	%ra, %zero, %k0
 	addi	%v0, %zero, 0
@@ -2855,24 +2345,16 @@ is_outside.2902:
 	add	%a1, %zero, %v0
 	add	%a2, %zero, %ra
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_x.2708
-	addi	%sp, %sp, 0
 	fsub	%f16, %f16, %f0
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_y.2710
-	addi	%sp, %sp, 0
 	fsub	%f1, %f1, %f0
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_z.2712
-	addi	%sp, %sp, 0
 	fsub	%f2, %f2, %f0
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_form.2692
-	addi	%sp, %sp, 0
 	beqi	%v0, 1, bnei_else.9167
 	beqi	%v0, 2, bnei_else.9168
 	add	%ra, %zero, %a2
@@ -2903,9 +2385,7 @@ check_all_inside.2907:
 	fmov	%f2, %f21
 	fmov	%f1, %f20
 	fmov	%f0, %f19
-	addi	%sp, %sp, 0
 	jal	is_outside.2902
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.9194
 	add	%ra, %zero, %s2
 	addi	%v0, %zero, 0
@@ -2932,16 +2412,12 @@ shadow_check_and_group.2913:
 	addi	%a0, %zero, 138
 	addi	%v1, %zero, 247
 	addi	%v0, %s1, 0
-	addi	%sp, %sp, 0
 	jal	solver_fast.2847
-	addi	%sp, %sp, 0
 	addi	%a0, %zero, 0
 	flw	%f0, 135(%zero)
 	beqi	%v0, 0, bnei_else.9229
 	flw	%f1, 457(%zero)
-	addi	%sp, %sp, 0
 	jal	fless.2592
-	addi	%sp, %sp, 0
 	j	bnei_cont.9230
 bnei_else.9229:
 	addi	%v0, %zero, 0
@@ -2963,9 +2439,7 @@ bnei_cont.9230:
 	fadd	%f2, %f17, %f16
 	addi	%v1, %s4, 0
 	addi	%v0, %a0, 0
-	addi	%sp, %sp, 0
 	jal	check_all_inside.2907
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.9232
 	add	%ra, %zero, %s5
 	addi	%v0, %zero, 1
@@ -2977,9 +2451,7 @@ bnei_else.9232:
 	j	shadow_check_and_group.2913
 bnei_else.9231:
 	lw	%v0, 12(%s1)
-	addi	%sp, %sp, 0
 	jal	o_isinvert.2696
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.9233
 	addi	%v0, %s3, 1
 	add	%ra, %zero, %s5
@@ -3002,9 +2474,7 @@ shadow_check_one_or_group.2916:
 	beqi	%a0, -1, bnei_else.9258
 	lw	%v1, 83(%a0)
 	addi	%v0, %zero, 0
-	addi	%sp, %sp, 0
 	jal	shadow_check_and_group.2913
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.9259
 	add	%ra, %zero, %t7
 	addi	%v0, %zero, 1
@@ -3296,33 +2766,25 @@ solve_each_element_fast.2936:
 	add	%s5, %zero, %a0
 	add	%s6, %zero, %ra
 	addi	%v0, %s5, 0
-	addi	%sp, %sp, 0
 	jal	d_vec.2751
-	addi	%sp, %sp, 0
 	addi	%s0, %v0, 0
 	add	%at, %s4, %s3
 	lw	%s7, 0(%at)
 	beqi	%s7, -1, bnei_else.9582
 	addi	%v1, %s5, 0
 	addi	%v0, %s7, 0
-	addi	%sp, %sp, 0
 	jal	solver_fast2.2865
-	addi	%sp, %sp, 0
 	addi	%t7, %v0, 0
 	addi	%a0, %zero, 0
 	beqi	%t7, 0, bnei_else.9583
 	flw	%f16, 135(%zero)
 	flw	%f0, 482(%zero)
 	fmov	%f1, %f16
-	addi	%sp, %sp, 0
 	jal	fless.2592
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.9584
 	flw	%f1, 137(%zero)
 	fmov	%f0, %f16
-	addi	%sp, %sp, 0
 	jal	fless.2592
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.9586
 	flw	%f0, 456(%zero)
 	fadd	%f25, %f16, %f0
@@ -3343,18 +2805,14 @@ solve_each_element_fast.2936:
 	fmov	%f2, %f22
 	fmov	%f1, %f23
 	fmov	%f0, %f24
-	addi	%sp, %sp, 0
 	jal	check_all_inside.2907
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.9588
 	fsw	%f25, 137(%zero)
 	addi	%v0, %zero, 138
 	fmov	%f2, %f22
 	fmov	%f1, %f23
 	fmov	%f0, %f24
-	addi	%sp, %sp, 0
 	jal	vecset.2644
-	addi	%sp, %sp, 0
 	sw	%s7, 141(%zero)
 	sw	%t7, 136(%zero)
 	j	bnei_cont.9585
@@ -3373,9 +2831,7 @@ bnei_cont.9585:
 	j	solve_each_element_fast.2936
 bnei_else.9583:
 	lw	%v0, 12(%s7)
-	addi	%sp, %sp, 0
 	jal	o_isinvert.2696
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.9590
 	addi	%v0, %s3, 1
 	add	%ra, %zero, %s6
@@ -3489,34 +2945,24 @@ get_nvector_rect.2950:
 	add	%a1, %zero, %ra
 	lw	%a2, 136(%zero)
 	addi	%v0, %zero, 142
-	addi	%sp, %sp, 0
 	jal	vecbzero.2652
-	addi	%sp, %sp, 0
 	addi	%a2, %a2, -1
 	add	%at, %a0, %a2
 	flw	%f0, 0(%at)
-	addi	%sp, %sp, 0
 	jal	sgn.2636
-	addi	%sp, %sp, 0
 	fneg	%f0, %f0
 	add	%ra, %zero, %a1
 	fsw	%f0, 142(%a2)
 	jr	%ra
 get_nvector_plane.2952:
 	add	%a1, %zero, %ra
-	addi	%sp, %sp, 0
 	jal	o_param_a.2700
-	addi	%sp, %sp, 0
 	fneg	%f0, %f0
 	fsw	%f0, 142(%zero)
-	addi	%sp, %sp, 0
 	jal	o_param_b.2702
-	addi	%sp, %sp, 0
 	fneg	%f0, %f0
 	fsw	%f0, 143(%zero)
-	addi	%sp, %sp, 0
 	jal	o_param_c.2704
-	addi	%sp, %sp, 0
 	fneg	%f0, %f0
 	add	%ra, %zero, %a1
 	fsw	%f0, 144(%zero)
@@ -3526,79 +2972,53 @@ get_nvector_second.2954:
 	add	%a2, %zero, %ra
 	flw	%f1, 138(%zero)
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_x.2708
-	addi	%sp, %sp, 0
 	fsub	%f18, %f1, %f0
 	flw	%f1, 139(%zero)
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_y.2710
-	addi	%sp, %sp, 0
 	fsub	%f19, %f1, %f0
 	flw	%f1, 140(%zero)
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_z.2712
-	addi	%sp, %sp, 0
 	fsub	%f20, %f1, %f0
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_a.2700
-	addi	%sp, %sp, 0
 	fmul	%f22, %f18, %f0
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_b.2702
-	addi	%sp, %sp, 0
 	fmul	%f21, %f19, %f0
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_c.2704
-	addi	%sp, %sp, 0
 	fmul	%f2, %f20, %f0
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_isrot.2698
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.9775
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_r3.2728
-	addi	%sp, %sp, 0
 	fmov	%f16, %f0
 	fmul	%f1, %f19, %f16
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_r2.2726
-	addi	%sp, %sp, 0
 	fmov	%f17, %f0
 	fmul	%f0, %f20, %f17
 	fadd	%f0, %f1, %f0
-	addi	%sp, %sp, 0
 	jal	fhalf.2604
-	addi	%sp, %sp, 0
 	fadd	%f0, %f22, %f0
 	fsw	%f0, 142(%zero)
 	fmul	%f1, %f18, %f16
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_r1.2724
-	addi	%sp, %sp, 0
 	fmov	%f16, %f0
 	fmul	%f0, %f20, %f16
 	fadd	%f0, %f1, %f0
-	addi	%sp, %sp, 0
 	jal	fhalf.2604
-	addi	%sp, %sp, 0
 	fadd	%f0, %f21, %f0
 	fsw	%f0, 143(%zero)
 	fmul	%f1, %f18, %f17
 	fmul	%f0, %f19, %f16
 	fadd	%f0, %f1, %f0
-	addi	%sp, %sp, 0
 	jal	fhalf.2604
-	addi	%sp, %sp, 0
 	fadd	%f0, %f2, %f0
 	fsw	%f0, 144(%zero)
 	j	bnei_cont.9776
@@ -3608,9 +3028,7 @@ bnei_else.9775:
 	fsw	%f2, 144(%zero)
 bnei_cont.9776:
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_isinvert.2696
-	addi	%sp, %sp, 0
 	addi	%v1, %v0, 0
 	addi	%v0, %zero, 142
 	add	%ra, %zero, %a2
@@ -3619,9 +3037,7 @@ get_nvector.2956:
 	add	%a0, %zero, %v0
 	add	%a1, %zero, %ra
 	addi	%v0, %a0, 0
-	addi	%sp, %sp, 0
 	jal	o_form.2692
-	addi	%sp, %sp, 0
 	beqi	%v0, 1, bnei_else.9801
 	beqi	%v0, 2, bnei_else.9802
 	add	%ra, %zero, %a1
@@ -3639,24 +3055,16 @@ utexture.2959:
 	add	%a2, %zero, %v0
 	add	%a3, %zero, %ra
 	addi	%v0, %a2, 0
-	addi	%sp, %sp, 0
 	jal	o_texturetype.2690
-	addi	%sp, %sp, 0
 	addi	%a1, %v0, 0
 	addi	%v0, %a2, 0
-	addi	%sp, %sp, 0
 	jal	o_color_red.2718
-	addi	%sp, %sp, 0
 	fsw	%f0, 145(%zero)
 	addi	%v0, %a2, 0
-	addi	%sp, %sp, 0
 	jal	o_color_green.2720
-	addi	%sp, %sp, 0
 	fsw	%f0, 146(%zero)
 	addi	%v0, %a2, 0
-	addi	%sp, %sp, 0
 	jal	o_color_blue.2722
-	addi	%sp, %sp, 0
 	fsw	%f0, 147(%zero)
 	beqi	%a1, 1, bnei_else.9856
 	beqi	%a1, 2, bnei_else.9857
@@ -3667,53 +3075,37 @@ utexture.2959:
 bnei_else.9859:
 	flw	%f1, 0(%v1)
 	addi	%v0, %a2, 0
-	addi	%sp, %sp, 0
 	jal	o_param_x.2708
-	addi	%sp, %sp, 0
 	fsub	%f1, %f1, %f0
 	addi	%v0, %a2, 0
-	addi	%sp, %sp, 0
 	jal	o_param_a.2700
-	addi	%sp, %sp, 0
 	fsqrt	%f0, %f0
 	fmul	%f16, %f1, %f0
 	flw	%f1, 2(%v1)
 	addi	%v0, %a2, 0
-	addi	%sp, %sp, 0
 	jal	o_param_z.2712
-	addi	%sp, %sp, 0
 	fsub	%f1, %f1, %f0
 	addi	%v0, %a2, 0
-	addi	%sp, %sp, 0
 	jal	o_param_c.2704
-	addi	%sp, %sp, 0
 	fsqrt	%f0, %f0
 	fmul	%f17, %f1, %f0
 	fmov	%f0, %f16
-	addi	%sp, %sp, 0
 	jal	fsqr.2606
-	addi	%sp, %sp, 0
 	fmov	%f1, %f0
 	fmov	%f0, %f17
-	addi	%sp, %sp, 0
 	jal	fsqr.2606
-	addi	%sp, %sp, 0
 	fadd	%f22, %f1, %f0
 	fabs	%f0, %f16
 	flw	%f20, 452(%zero)
 	fmov	%f1, %f20
-	addi	%sp, %sp, 0
 	jal	fless.2592
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.9861
 	flw	%f1, 451(%zero)
 	j	bnei_cont.9862
 bnei_else.9861:
 	fdiv	%f0, %f17, %f16
 	fabs	%f0, %f0
-	addi	%sp, %sp, 0
 	jal	atan.2627
-	addi	%sp, %sp, 0
 	flw	%f1, 450(%zero)
 	fmul	%f1, %f0, %f1
 	flw	%f0, 449(%zero)
@@ -3723,30 +3115,22 @@ bnei_cont.9862:
 	fsub	%f21, %f1, %f0
 	flw	%f1, 1(%v1)
 	addi	%v0, %a2, 0
-	addi	%sp, %sp, 0
 	jal	o_param_y.2710
-	addi	%sp, %sp, 0
 	fsub	%f1, %f1, %f0
 	addi	%v0, %a2, 0
-	addi	%sp, %sp, 0
 	jal	o_param_b.2702
-	addi	%sp, %sp, 0
 	fsqrt	%f0, %f0
 	fmul	%f16, %f1, %f0
 	fabs	%f0, %f22
 	fmov	%f1, %f20
-	addi	%sp, %sp, 0
 	jal	fless.2592
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.9863
 	flw	%f1, 451(%zero)
 	j	bnei_cont.9864
 bnei_else.9863:
 	fdiv	%f0, %f16, %f22
 	fabs	%f0, %f0
-	addi	%sp, %sp, 0
 	jal	atan.2627
-	addi	%sp, %sp, 0
 	flw	%f1, 450(%zero)
 	fmul	%f1, %f0, %f1
 	flw	%f0, 449(%zero)
@@ -3757,18 +3141,12 @@ bnei_cont.9864:
 	flw	%f1, 448(%zero)
 	flw	%f16, 481(%zero)
 	fsub	%f0, %f16, %f21
-	addi	%sp, %sp, 0
 	jal	fsqr.2606
-	addi	%sp, %sp, 0
 	fsub	%f1, %f1, %f0
 	fsub	%f0, %f16, %f17
-	addi	%sp, %sp, 0
 	jal	fsqr.2606
-	addi	%sp, %sp, 0
 	fsub	%f0, %f1, %f0
-	addi	%sp, %sp, 0
 	jal	fisneg.2597
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.9865
 	flw	%f0, 482(%zero)
 	j	bnei_cont.9866
@@ -3784,25 +3162,17 @@ bnei_cont.9866:
 bnei_else.9858:
 	flw	%f1, 0(%v1)
 	addi	%v0, %a2, 0
-	addi	%sp, %sp, 0
 	jal	o_param_x.2708
-	addi	%sp, %sp, 0
 	fsub	%f1, %f1, %f0
 	flw	%f16, 2(%v1)
 	addi	%v0, %a2, 0
-	addi	%sp, %sp, 0
 	jal	o_param_z.2712
-	addi	%sp, %sp, 0
 	fsub	%f16, %f16, %f0
 	fmov	%f0, %f1
-	addi	%sp, %sp, 0
 	jal	fsqr.2606
-	addi	%sp, %sp, 0
 	fmov	%f1, %f0
 	fmov	%f0, %f16
-	addi	%sp, %sp, 0
 	jal	fsqr.2606
-	addi	%sp, %sp, 0
 	fadd	%f0, %f1, %f0
 	fsqrt	%f1, %f0
 	flw	%f0, 445(%zero)
@@ -3811,12 +3181,8 @@ bnei_else.9858:
 	fsub	%f1, %f1, %f0
 	flw	%f0, 449(%zero)
 	fmul	%f0, %f1, %f0
-	addi	%sp, %sp, 0
 	jal	cos.2623
-	addi	%sp, %sp, 0
-	addi	%sp, %sp, 0
 	jal	fsqr.2606
-	addi	%sp, %sp, 0
 	flw	%f16, 447(%zero)
 	fmul	%f1, %f0, %f16
 	fsw	%f1, 146(%zero)
@@ -3830,12 +3196,8 @@ bnei_else.9857:
 	flw	%f1, 1(%v1)
 	flw	%f0, 444(%zero)
 	fmul	%f0, %f1, %f0
-	addi	%sp, %sp, 0
 	jal	sin.2625
-	addi	%sp, %sp, 0
-	addi	%sp, %sp, 0
 	jal	fsqr.2606
-	addi	%sp, %sp, 0
 	flw	%f16, 447(%zero)
 	fmul	%f1, %f16, %f0
 	fsw	%f1, 145(%zero)
@@ -3848,9 +3210,7 @@ bnei_else.9857:
 bnei_else.9856:
 	flw	%f1, 0(%v1)
 	addi	%v0, %a2, 0
-	addi	%sp, %sp, 0
 	jal	o_param_x.2708
-	addi	%sp, %sp, 0
 	fsub	%f1, %f1, %f0
 	flw	%f18, 443(%zero)
 	fmul	%f0, %f1, %f18
@@ -3859,23 +3219,17 @@ bnei_else.9856:
 	fmul	%f0, %f0, %f17
 	fsub	%f0, %f1, %f0
 	flw	%f1, 445(%zero)
-	addi	%sp, %sp, 0
 	jal	fless.2592
-	addi	%sp, %sp, 0
 	addi	%a1, %v0, 0
 	flw	%f16, 2(%v1)
 	addi	%v0, %a2, 0
-	addi	%sp, %sp, 0
 	jal	o_param_z.2712
-	addi	%sp, %sp, 0
 	fsub	%f16, %f16, %f0
 	fmul	%f0, %f16, %f18
 	floor	%f0, %f0
 	fmul	%f0, %f0, %f17
 	fsub	%f0, %f16, %f0
-	addi	%sp, %sp, 0
 	jal	fless.2592
-	addi	%sp, %sp, 0
 	beqi	%a1, 0, bnei_else.9870
 	beqi	%v0, 0, bnei_else.9872
 	flw	%f0, 447(%zero)
@@ -3898,30 +3252,20 @@ bnei_cont.9871:
 add_light.2962:
 	fmov	%f17, %f1
 	add	%a0, %zero, %ra
-	addi	%sp, %sp, 0
 	jal	fispos.2595
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.9903
 	addi	%v1, %zero, 145
 	addi	%v0, %zero, 151
-	addi	%sp, %sp, 0
 	jal	vecaccum.2673
-	addi	%sp, %sp, 0
 	j	bnei_cont.9904
 bnei_else.9903:
 bnei_cont.9904:
 	fmov	%f0, %f17
-	addi	%sp, %sp, 0
 	jal	fispos.2595
-	addi	%sp, %sp, 0
 	beqi	%v0, 0, bnei_else.9905
 	fmov	%f0, %f17
-	addi	%sp, %sp, 0
 	jal	fsqr.2606
-	addi	%sp, %sp, 0
-	addi	%sp, %sp, 0
 	jal	fsqr.2606
-	addi	%sp, %sp, 0
 	fmul	%f1, %f0, %f2
 	flw	%f0, 151(%zero)
 	fadd	%f0, %f0, %f1
@@ -3946,70 +3290,69 @@ trace_reflections.2966:
 	sw	%t0, 3(%sp)
 	sw	%ra, 4(%sp)
 	addi	%a0, %zero, 0
-	sw	%a0, 5(%sp)
-	blti	%v0, 0, bgti_else.9965
+	blti	%v0, 0, bgti_else.9964
 	lw	%t0, 254(%v0)
 	addi	%v0, %t0, 0
-	addi	%sp, %sp, 6
+	addi	%sp, %sp, 5
 	jal	r_dvec.2757
-	addi	%sp, %sp, -6
+	addi	%sp, %sp, -5
 	addi	%t1, %v0, 0
 	addi	%v0, %t1, 0
-	addi	%sp, %sp, 6
+	addi	%sp, %sp, 5
 	jal	judge_intersection_fast.2948
-	addi	%sp, %sp, -6
-	beqi	%v0, 0, bnei_else.9966
+	addi	%sp, %sp, -5
+	beqi	%v0, 0, bnei_else.9965
 	lw	%a0, 141(%zero)
 	sll	%a1, %a0, 2
 	lw	%a0, 136(%zero)
 	add	%a0, %a1, %a0
 	addi	%v0, %t0, 0
-	addi	%sp, %sp, 6
+	addi	%sp, %sp, 5
 	jal	r_surface_id.2755
-	addi	%sp, %sp, -6
-	bne	%a0, %v0, beq_else.9968
+	addi	%sp, %sp, -5
+	bne	%a0, %v0, beq_else.9967
 	lw	%v1, 134(%zero)
-	lw	%v0, 5(%sp)
-	addi	%sp, %sp, 6
+	addi	%v0, %zero, 0
+	addi	%sp, %sp, 5
 	jal	shadow_check_one_or_matrix.2919
-	addi	%sp, %sp, -6
-	beqi	%v0, 0, bnei_else.9970
-	j	bnei_cont.9967
-bnei_else.9970:
+	addi	%sp, %sp, -5
+	beqi	%v0, 0, bnei_else.9969
+	j	bnei_cont.9966
+bnei_else.9969:
 	addi	%v0, %t1, 0
-	addi	%sp, %sp, 6
+	addi	%sp, %sp, 5
 	jal	d_vec.2751
-	addi	%sp, %sp, -6
+	addi	%sp, %sp, -5
 	addi	%v1, %v0, 0
 	addi	%v0, %zero, 142
-	addi	%sp, %sp, 6
+	addi	%sp, %sp, 5
 	jal	veciprod.2665
-	addi	%sp, %sp, -6
+	addi	%sp, %sp, -5
 	fmov	%f1, %f0
 	addi	%v0, %t0, 0
-	addi	%sp, %sp, 6
+	addi	%sp, %sp, 5
 	jal	r_bright.2759
-	addi	%sp, %sp, -6
+	addi	%sp, %sp, -5
 	fmov	%f17, %f0
 	fmul	%f0, %f17, %f26
 	fmul	%f18, %f0, %f1
 	lw	%v0, 1(%sp)
-	addi	%sp, %sp, 6
+	addi	%sp, %sp, 5
 	jal	veciprod.2665
-	addi	%sp, %sp, -6
+	addi	%sp, %sp, -5
 	fmul	%f1, %f17, %f0
 	fmov	%f2, %f27
 	fmov	%f0, %f18
-	addi	%sp, %sp, 6
+	addi	%sp, %sp, 5
 	jal	add_light.2962
-	addi	%sp, %sp, -6
-bnei_cont.9971:
-	j	bnei_cont.9967
-beq_else.9968:
-beq_cont.9969:
-	j	bnei_cont.9967
-bnei_else.9966:
-bnei_cont.9967:
+	addi	%sp, %sp, -5
+bnei_cont.9970:
+	j	bnei_cont.9966
+beq_else.9967:
+beq_cont.9968:
+	j	bnei_cont.9966
+bnei_else.9965:
+bnei_cont.9966:
 	lw	%a0, 0(%sp)
 	addi	%v0, %a0, -1
 	lw	%t1, 2(%sp)
@@ -4019,7 +3362,7 @@ bnei_cont.9967:
 	fmov	%f1, %f27
 	fmov	%f0, %f26
 	j	trace_reflections.2966
-bgti_else.9965:
+bgti_else.9964:
 	jr	%ra
 trace_ray.2971:
 	fmov	%f28, %f0
@@ -4031,7 +3374,7 @@ trace_ray.2971:
 	sw	%v0, 2(%sp)
 	sw	%ra, 3(%sp)
 	addi	%at, %zero, 4
-	blt	%at, %a1, bgt_else.10095
+	blt	%at, %a1, bgt_else.10094
 	addi	%sp, %sp, 4
 	jal	p_surface_ids.2736
 	addi	%sp, %sp, -4
@@ -4041,7 +3384,7 @@ trace_ray.2971:
 	jal	judge_intersection.2934
 	addi	%sp, %sp, -5
 	addi	%s0, %zero, 0
-	beqi	%v0, 0, bnei_else.10096
+	beqi	%v0, 0, bnei_else.10095
 	lw	%s1, 141(%zero)
 	lw	%k0, 12(%s1)
 	addi	%v0, %k0, 0
@@ -4098,12 +3441,12 @@ trace_ray.2971:
 	addi	%sp, %sp, 6
 	jal	fless.2592
 	addi	%sp, %sp, -6
-	beqi	%v0, 0, bnei_else.10097
+	beqi	%v0, 0, bnei_else.10096
 	lw	%a1, 0(%sp)
 	add	%at, %a0, %a1
 	sw	%s0, 0(%at)
-	j	bnei_cont.10098
-bnei_else.10097:
+	j	bnei_cont.10097
+bnei_else.10096:
 	addi	%a2, %zero, 1
 	lw	%a1, 0(%sp)
 	add	%at, %a0, %a1
@@ -4135,7 +3478,7 @@ bnei_else.10097:
 	addi	%sp, %sp, 6
 	jal	veccpy.2654
 	addi	%sp, %sp, -6
-bnei_cont.10098:
+bnei_cont.10097:
 	flw	%f17, 440(%zero)
 	addi	%v1, %zero, 142
 	lw	%v0, 1(%sp)
@@ -4158,9 +3501,9 @@ bnei_cont.10098:
 	addi	%sp, %sp, 6
 	jal	shadow_check_one_or_matrix.2919
 	addi	%sp, %sp, -6
-	beqi	%v0, 0, bnei_else.10099
-	j	bnei_cont.10100
-bnei_else.10099:
+	beqi	%v0, 0, bnei_else.10098
+	j	bnei_cont.10099
+bnei_else.10098:
 	addi	%v1, %zero, 78
 	addi	%v0, %zero, 142
 	addi	%sp, %sp, 6
@@ -4179,7 +3522,7 @@ bnei_else.10099:
 	addi	%sp, %sp, 6
 	jal	add_light.2962
 	addi	%sp, %sp, -6
-bnei_cont.10100:
+bnei_cont.10099:
 	addi	%v0, %zero, 138
 	addi	%sp, %sp, 6
 	jal	setup_startp.2885
@@ -4197,22 +3540,22 @@ bnei_cont.10100:
 	addi	%sp, %sp, 6
 	jal	fless.2592
 	addi	%sp, %sp, -6
-	beqi	%v0, 0, bnei_else.10101
+	beqi	%v0, 0, bnei_else.10100
 	lw	%a0, 0(%sp)
-	blti	%a0, 4, bgti_else.10102
-	j	bgti_cont.10103
-bgti_else.10102:
+	blti	%a0, 4, bgti_else.10101
+	j	bgti_cont.10102
+bgti_else.10101:
 	addi	%a2, %a0, 1
 	addi	%a1, %zero, -1
 	lw	%a0, 4(%sp)
 	add	%at, %a0, %a2
 	sw	%a1, 0(%at)
-bgti_cont.10103:
+bgti_cont.10102:
 	lw	%a0, 5(%sp)
-	beqi	%a0, 2, bnei_else.10104
+	beqi	%a0, 2, bnei_else.10103
 	lw	%ra, 3(%sp)
 	jr	%ra
-bnei_else.10104:
+bnei_else.10103:
 	flw	%f0, 477(%zero)
 	fsub	%f0, %f0, %f3
 	fmul	%f0, %f28, %f0
@@ -4224,16 +3567,16 @@ bnei_else.10104:
 	lw	%a0, 2(%sp)
 	lw	%v1, 1(%sp)
 	j	trace_ray.2971
-bnei_else.10101:
+bnei_else.10100:
 	lw	%ra, 3(%sp)
 	jr	%ra
-bnei_else.10096:
+bnei_else.10095:
 	addi	%a2, %zero, -1
 	lw	%a1, 4(%sp)
 	lw	%a0, 0(%sp)
 	add	%at, %a1, %a0
 	sw	%a2, 0(%at)
-	beqi	%a0, 0, bnei_else.10107
+	beqi	%a0, 0, bnei_else.10106
 	addi	%v1, %zero, 78
 	lw	%v0, 1(%sp)
 	addi	%sp, %sp, 6
@@ -4244,7 +3587,7 @@ bnei_else.10096:
 	addi	%sp, %sp, 6
 	jal	fispos.2595
 	addi	%sp, %sp, -6
-	beqi	%v0, 0, bnei_else.10108
+	beqi	%v0, 0, bnei_else.10107
 	fmov	%f0, %f16
 	addi	%sp, %sp, 6
 	jal	fsqr.2606
@@ -4264,13 +3607,13 @@ bnei_else.10096:
 	lw	%ra, 3(%sp)
 	fsw	%f0, 153(%zero)
 	jr	%ra
-bnei_else.10108:
-	lw	%ra, 3(%sp)
-	jr	%ra
 bnei_else.10107:
 	lw	%ra, 3(%sp)
 	jr	%ra
-bgt_else.10095:
+bnei_else.10106:
+	lw	%ra, 3(%sp)
+	jr	%ra
+bgt_else.10094:
 	jr	%ra
 trace_diffuse_ray.2977:
 	fmov	%f26, %f0
@@ -4281,7 +3624,7 @@ trace_diffuse_ray.2977:
 	jal	judge_intersection_fast.2948
 	addi	%sp, %sp, -3
 	addi	%k0, %zero, 0
-	beqi	%v0, 0, bnei_else.10163
+	beqi	%v0, 0, bnei_else.10162
 	lw	%a0, 141(%zero)
 	lw	%t0, 12(%a0)
 	lw	%v0, 0(%sp)
@@ -4303,11 +3646,11 @@ trace_diffuse_ray.2977:
 	addi	%sp, %sp, 3
 	jal	shadow_check_one_or_matrix.2919
 	addi	%sp, %sp, -3
-	beqi	%v0, 0, bnei_else.10164
+	beqi	%v0, 0, bnei_else.10163
 	lw	%t0, 1(%sp)
 	lw	%ra, 2(%sp)
 	jr	%ra
-bnei_else.10164:
+bnei_else.10163:
 	addi	%v1, %zero, 78
 	addi	%v0, %zero, 142
 	addi	%sp, %sp, 3
@@ -4317,11 +3660,11 @@ bnei_else.10164:
 	addi	%sp, %sp, 3
 	jal	fispos.2595
 	addi	%sp, %sp, -3
-	beqi	%v0, 0, bnei_else.10166
-	j	bnei_cont.10167
-bnei_else.10166:
+	beqi	%v0, 0, bnei_else.10165
+	j	bnei_cont.10166
+bnei_else.10165:
 	flw	%f0, 482(%zero)
-bnei_cont.10167:
+bnei_cont.10166:
 	fmul	%f1, %f26, %f0
 	addi	%v0, %t0, 0
 	addi	%sp, %sp, 3
@@ -4333,7 +3676,7 @@ bnei_cont.10167:
 	lw	%t0, 1(%sp)
 	lw	%ra, 2(%sp)
 	j	vecaccum.2673
-bnei_else.10163:
+bnei_else.10162:
 	lw	%t0, 1(%sp)
 	lw	%ra, 2(%sp)
 	jr	%ra
@@ -4343,7 +3686,7 @@ iter_trace_diffuse_rays.2980:
 	sw	%a0, 2(%sp)
 	sw	%a1, 3(%sp)
 	sw	%ra, 4(%sp)
-	blti	%a1, 0, bgti_else.10214
+	blti	%a1, 0, bgti_else.10213
 	add	%at, %v0, %a1
 	lw	%a0, 0(%at)
 	addi	%v0, %a0, 0
@@ -4357,7 +3700,7 @@ iter_trace_diffuse_rays.2980:
 	addi	%sp, %sp, 5
 	jal	fisneg.2597
 	addi	%sp, %sp, -5
-	beqi	%v0, 0, bnei_else.10215
+	beqi	%v0, 0, bnei_else.10214
 	lw	%a0, 3(%sp)
 	addi	%a1, %a0, 1
 	lw	%a0, 0(%sp)
@@ -4368,15 +3711,15 @@ iter_trace_diffuse_rays.2980:
 	addi	%sp, %sp, 5
 	jal	trace_diffuse_ray.2977
 	addi	%sp, %sp, -5
-	j	bnei_cont.10216
-bnei_else.10215:
+	j	bnei_cont.10215
+bnei_else.10214:
 	flw	%f1, 437(%zero)
 	fdiv	%f0, %f0, %f1
 	addi	%v0, %a0, 0
 	addi	%sp, %sp, 5
 	jal	trace_diffuse_ray.2977
 	addi	%sp, %sp, -5
-bnei_cont.10216:
+bnei_cont.10215:
 	lw	%a0, 3(%sp)
 	addi	%a1, %a0, -2
 	lw	%ra, 4(%sp)
@@ -4384,7 +3727,7 @@ bnei_cont.10216:
 	lw	%v1, 1(%sp)
 	lw	%v0, 0(%sp)
 	j	iter_trace_diffuse_rays.2980
-bgti_else.10214:
+bgti_else.10213:
 	jr	%ra
 trace_diffuse_rays.2985:
 	add	%s2, %zero, %v0
@@ -4392,9 +3735,7 @@ trace_diffuse_rays.2985:
 	add	%s4, %zero, %a0
 	add	%s5, %zero, %ra
 	addi	%v0, %s4, 0
-	addi	%sp, %sp, 0
 	jal	setup_startp.2885
-	addi	%sp, %sp, 0
 	addi	%a1, %zero, 118
 	add	%ra, %zero, %s5
 	addi	%a0, %s4, 0
@@ -4406,55 +3747,55 @@ trace_diffuse_ray_80percent.2989:
 	sw	%v1, 1(%sp)
 	sw	%a0, 2(%sp)
 	sw	%ra, 3(%sp)
-	beqi	%v0, 0, bnei_else.10304
+	beqi	%v0, 0, bnei_else.10303
 	lw	%v0, 179(%zero)
 	addi	%sp, %sp, 4
 	jal	trace_diffuse_rays.2985
 	addi	%sp, %sp, -4
-	j	bnei_cont.10305
-bnei_else.10304:
-bnei_cont.10305:
+	j	bnei_cont.10304
+bnei_else.10303:
+bnei_cont.10304:
 	lw	%a0, 0(%sp)
-	beqi	%a0, 1, bnei_else.10306
+	beqi	%a0, 1, bnei_else.10305
 	lw	%v0, 180(%zero)
 	lw	%a0, 2(%sp)
 	lw	%v1, 1(%sp)
 	addi	%sp, %sp, 4
 	jal	trace_diffuse_rays.2985
 	addi	%sp, %sp, -4
-	j	bnei_cont.10307
-bnei_else.10306:
-bnei_cont.10307:
+	j	bnei_cont.10306
+bnei_else.10305:
+bnei_cont.10306:
 	lw	%a0, 0(%sp)
-	beqi	%a0, 2, bnei_else.10308
+	beqi	%a0, 2, bnei_else.10307
 	lw	%v0, 181(%zero)
 	lw	%a0, 2(%sp)
 	lw	%v1, 1(%sp)
 	addi	%sp, %sp, 4
 	jal	trace_diffuse_rays.2985
 	addi	%sp, %sp, -4
-	j	bnei_cont.10309
-bnei_else.10308:
-bnei_cont.10309:
+	j	bnei_cont.10308
+bnei_else.10307:
+bnei_cont.10308:
 	lw	%a0, 0(%sp)
-	beqi	%a0, 3, bnei_else.10310
+	beqi	%a0, 3, bnei_else.10309
 	lw	%v0, 182(%zero)
 	lw	%a0, 2(%sp)
 	lw	%v1, 1(%sp)
 	addi	%sp, %sp, 4
 	jal	trace_diffuse_rays.2985
 	addi	%sp, %sp, -4
-	j	bnei_cont.10311
-bnei_else.10310:
-bnei_cont.10311:
+	j	bnei_cont.10310
+bnei_else.10309:
+bnei_cont.10310:
 	lw	%a0, 0(%sp)
-	beqi	%a0, 4, bnei_else.10312
+	beqi	%a0, 4, bnei_else.10311
 	lw	%v0, 183(%zero)
 	lw	%ra, 3(%sp)
 	lw	%a0, 2(%sp)
 	lw	%v1, 1(%sp)
 	j	trace_diffuse_rays.2985
-bnei_else.10312:
+bnei_else.10311:
 	lw	%ra, 3(%sp)
 	jr	%ra
 calc_diffuse_using_1point.2993:
@@ -4514,71 +3855,49 @@ calc_diffuse_using_5points.2996:
 	add	%k0, %zero, %ra
 	add	%at, %v1, %a3
 	lw	%v0, 0(%at)
-	addi	%sp, %sp, 0
 	jal	p_received_ray_20percent.2742
-	addi	%sp, %sp, 0
 	addi	%s0, %v0, 0
 	addi	%ra, %a3, -1
 	add	%at, %a0, %ra
 	lw	%v0, 0(%at)
-	addi	%sp, %sp, 0
 	jal	p_received_ray_20percent.2742
-	addi	%sp, %sp, 0
 	addi	%s1, %v0, 0
 	add	%at, %a0, %a3
 	lw	%s2, 0(%at)
 	addi	%v0, %s2, 0
-	addi	%sp, %sp, 0
 	jal	p_received_ray_20percent.2742
-	addi	%sp, %sp, 0
 	addi	%s3, %v0, 0
 	addi	%ra, %a3, 1
 	add	%at, %a0, %ra
 	lw	%v0, 0(%at)
-	addi	%sp, %sp, 0
 	jal	p_received_ray_20percent.2742
-	addi	%sp, %sp, 0
 	addi	%a0, %v0, 0
 	add	%at, %a1, %a3
 	lw	%v0, 0(%at)
-	addi	%sp, %sp, 0
 	jal	p_received_ray_20percent.2742
-	addi	%sp, %sp, 0
 	addi	%a1, %v0, 0
 	add	%at, %s0, %a2
 	lw	%v1, 0(%at)
 	addi	%v0, %zero, 148
-	addi	%sp, %sp, 0
 	jal	veccpy.2654
-	addi	%sp, %sp, 0
 	add	%at, %s1, %a2
 	lw	%v1, 0(%at)
 	addi	%v0, %zero, 148
-	addi	%sp, %sp, 0
 	jal	vecadd.2677
-	addi	%sp, %sp, 0
 	add	%at, %s3, %a2
 	lw	%v1, 0(%at)
 	addi	%v0, %zero, 148
-	addi	%sp, %sp, 0
 	jal	vecadd.2677
-	addi	%sp, %sp, 0
 	add	%at, %a0, %a2
 	lw	%v1, 0(%at)
 	addi	%v0, %zero, 148
-	addi	%sp, %sp, 0
 	jal	vecadd.2677
-	addi	%sp, %sp, 0
 	add	%at, %a1, %a2
 	lw	%v1, 0(%at)
 	addi	%v0, %zero, 148
-	addi	%sp, %sp, 0
 	jal	vecadd.2677
-	addi	%sp, %sp, 0
 	addi	%v0, %s2, 0
-	addi	%sp, %sp, 0
 	jal	p_energy.2740
-	addi	%sp, %sp, 0
 	add	%at, %v0, %a2
 	lw	%v1, 0(%at)
 	addi	%a0, %zero, 148
@@ -4590,14 +3909,14 @@ do_without_neighbors.3002:
 	sw	%v1, 1(%sp)
 	sw	%ra, 2(%sp)
 	addi	%at, %zero, 4
-	blt	%at, %v1, bgt_else.10409
+	blt	%at, %v1, bgt_else.10408
 	addi	%sp, %sp, 3
 	jal	p_surface_ids.2736
 	addi	%sp, %sp, -3
 	lw	%a0, 1(%sp)
 	add	%at, %v0, %a0
 	lw	%a0, 0(%at)
-	blti	%a0, 0, bgti_else.10410
+	blti	%a0, 0, bgti_else.10409
 	lw	%v0, 0(%sp)
 	addi	%sp, %sp, 3
 	jal	p_calc_diffuse.2738
@@ -4605,54 +3924,52 @@ do_without_neighbors.3002:
 	lw	%v1, 1(%sp)
 	add	%at, %v0, %v1
 	lw	%a0, 0(%at)
-	beqi	%a0, 0, bnei_else.10411
+	beqi	%a0, 0, bnei_else.10410
 	lw	%v0, 0(%sp)
 	addi	%sp, %sp, 3
 	jal	calc_diffuse_using_1point.2993
 	addi	%sp, %sp, -3
-	j	bnei_cont.10412
-bnei_else.10411:
-bnei_cont.10412:
+	j	bnei_cont.10411
+bnei_else.10410:
+bnei_cont.10411:
 	lw	%a0, 1(%sp)
 	addi	%v1, %a0, 1
 	lw	%ra, 2(%sp)
 	lw	%v0, 0(%sp)
 	j	do_without_neighbors.3002
-bgti_else.10410:
+bgti_else.10409:
 	lw	%ra, 2(%sp)
 	jr	%ra
-bgt_else.10409:
+bgt_else.10408:
 	jr	%ra
 neighbors_exist.3005:
 	lw	%a1, 155(%zero)
 	addi	%a0, %v1, 1
-	blt	%a0, %a1, bgt_else.10445
+	blt	%a0, %a1, bgt_else.10444
+	addi	%v0, %zero, 0
+	jr	%ra
+bgt_else.10444:
+	addi	%at, %zero, 0
+	blt	%at, %v1, bgt_else.10445
 	addi	%v0, %zero, 0
 	jr	%ra
 bgt_else.10445:
-	addi	%at, %zero, 0
-	blt	%at, %v1, bgt_else.10446
+	lw	%a1, 154(%zero)
+	addi	%a0, %v0, 1
+	blt	%a0, %a1, bgt_else.10446
 	addi	%v0, %zero, 0
 	jr	%ra
 bgt_else.10446:
-	lw	%a1, 154(%zero)
-	addi	%a0, %v0, 1
-	blt	%a0, %a1, bgt_else.10447
+	addi	%at, %zero, 0
+	blt	%at, %v0, bgt_else.10447
 	addi	%v0, %zero, 0
 	jr	%ra
 bgt_else.10447:
-	addi	%at, %zero, 0
-	blt	%at, %v0, bgt_else.10448
-	addi	%v0, %zero, 0
-	jr	%ra
-bgt_else.10448:
 	addi	%v0, %zero, 1
 	jr	%ra
 get_surface_id.3009:
 	add	%a0, %zero, %ra
-	addi	%sp, %sp, 0
 	jal	p_surface_ids.2736
-	addi	%sp, %sp, 0
 	add	%ra, %zero, %a0
 	add	%at, %v0, %v1
 	lw	%v0, 0(%at)
@@ -4665,42 +3982,28 @@ neighbors_are_available.3012:
 	add	%a2, %zero, %ra
 	add	%at, %s0, %a3
 	lw	%v0, 0(%at)
-	addi	%sp, %sp, 0
 	jal	get_surface_id.3009
-	addi	%sp, %sp, 0
 	addi	%s1, %v0, 0
 	add	%at, %k0, %a3
 	lw	%v0, 0(%at)
-	addi	%sp, %sp, 0
 	jal	get_surface_id.3009
-	addi	%sp, %sp, 0
-	bne	%v0, %s1, beq_else.10497
+	bne	%v0, %s1, beq_else.10496
 	add	%at, %a1, %a3
 	lw	%v0, 0(%at)
-	addi	%sp, %sp, 0
 	jal	get_surface_id.3009
-	addi	%sp, %sp, 0
-	bne	%v0, %s1, beq_else.10498
+	bne	%v0, %s1, beq_else.10497
 	addi	%a0, %a3, -1
 	add	%at, %s0, %a0
 	lw	%v0, 0(%at)
-	addi	%sp, %sp, 0
 	jal	get_surface_id.3009
-	addi	%sp, %sp, 0
-	bne	%v0, %s1, beq_else.10499
+	bne	%v0, %s1, beq_else.10498
 	addi	%a0, %a3, 1
 	add	%at, %s0, %a0
 	lw	%v0, 0(%at)
-	addi	%sp, %sp, 0
 	jal	get_surface_id.3009
-	addi	%sp, %sp, 0
-	bne	%v0, %s1, beq_else.10500
+	bne	%v0, %s1, beq_else.10499
 	add	%ra, %zero, %a2
 	addi	%v0, %zero, 1
-	jr	%ra
-beq_else.10500:
-	add	%ra, %zero, %a2
-	addi	%v0, %zero, 0
 	jr	%ra
 beq_else.10499:
 	add	%ra, %zero, %a2
@@ -4711,6 +4014,10 @@ beq_else.10498:
 	addi	%v0, %zero, 0
 	jr	%ra
 beq_else.10497:
+	add	%ra, %zero, %a2
+	addi	%v0, %zero, 0
+	jr	%ra
+beq_else.10496:
 	add	%ra, %zero, %a2
 	addi	%v0, %zero, 0
 	jr	%ra
@@ -4725,40 +4032,32 @@ try_exploit_neighbors.3018:
 	add	%at, %s7, %s4
 	lw	%s2, 0(%at)
 	addi	%at, %zero, 4
-	blt	%at, %t8, bgt_else.10533
+	blt	%at, %t8, bgt_else.10532
 	addi	%v1, %t8, 0
 	addi	%v0, %s2, 0
-	addi	%sp, %sp, 0
 	jal	get_surface_id.3009
-	addi	%sp, %sp, 0
-	blti	%v0, 0, bgti_else.10534
+	blti	%v0, 0, bgti_else.10533
 	addi	%a2, %t8, 0
 	addi	%a1, %t7, 0
 	addi	%a0, %s7, 0
 	addi	%v1, %s6, 0
 	addi	%v0, %s4, 0
-	addi	%sp, %sp, 0
 	jal	neighbors_are_available.3012
-	addi	%sp, %sp, 0
-	beqi	%v0, 0, bnei_else.10535
+	beqi	%v0, 0, bnei_else.10534
 	addi	%v0, %s2, 0
-	addi	%sp, %sp, 0
 	jal	p_calc_diffuse.2738
-	addi	%sp, %sp, 0
 	add	%at, %v0, %t8
 	lw	%a0, 0(%at)
-	beqi	%a0, 0, bnei_else.10536
+	beqi	%a0, 0, bnei_else.10535
 	addi	%a2, %t8, 0
 	addi	%a1, %t7, 0
 	addi	%a0, %s7, 0
 	addi	%v1, %s6, 0
 	addi	%v0, %s4, 0
-	addi	%sp, %sp, 0
 	jal	calc_diffuse_using_5points.2996
-	addi	%sp, %sp, 0
-	j	bnei_cont.10537
-bnei_else.10536:
-bnei_cont.10537:
+	j	bnei_cont.10536
+bnei_else.10535:
+bnei_cont.10536:
 	addi	%a3, %t8, 1
 	add	%ra, %zero, %t9
 	addi	%a2, %t7, 0
@@ -4767,93 +4066,67 @@ bnei_cont.10537:
 	addi	%v1, %s5, 0
 	addi	%v0, %s4, 0
 	j	try_exploit_neighbors.3018
-bnei_else.10535:
+bnei_else.10534:
 	add	%ra, %zero, %t9
 	addi	%v1, %t8, 0
 	addi	%v0, %s2, 0
 	j	do_without_neighbors.3002
-bgti_else.10534:
+bgti_else.10533:
 	add	%ra, %zero, %t9
 	jr	%ra
-bgt_else.10533:
+bgt_else.10532:
 	add	%ra, %zero, %t9
 	jr	%ra
 write_ppm_header.3025:
 	add	%s0, %zero, %ra
 	addi	%v0, %zero, 80
-	addi	%sp, %sp, 0
 	jal	min_caml_print_char
-	addi	%sp, %sp, 0
 	addi	%v0, %zero, 51
-	addi	%sp, %sp, 0
 	jal	min_caml_print_char
-	addi	%sp, %sp, 0
 	addi	%s1, %zero, 10
 	addi	%v0, %s1, 0
-	addi	%sp, %sp, 0
 	jal	min_caml_print_char
-	addi	%sp, %sp, 0
 	lw	%v0, 154(%zero)
-	addi	%sp, %sp, 0
 	jal	print_int.2634
-	addi	%sp, %sp, 0
 	addi	%s2, %zero, 32
 	addi	%v0, %s2, 0
-	addi	%sp, %sp, 0
 	jal	min_caml_print_char
-	addi	%sp, %sp, 0
 	lw	%v0, 155(%zero)
-	addi	%sp, %sp, 0
 	jal	print_int.2634
-	addi	%sp, %sp, 0
 	addi	%v0, %s2, 0
-	addi	%sp, %sp, 0
 	jal	min_caml_print_char
-	addi	%sp, %sp, 0
 	addi	%v0, %zero, 255
-	addi	%sp, %sp, 0
 	jal	print_int.2634
-	addi	%sp, %sp, 0
 	add	%ra, %zero, %s0
 	addi	%v0, %s1, 0
 	j	min_caml_print_char
 write_rgb_element.3027:
 	ftoi	%v0, %f0
 	addi	%at, %zero, 255
-	blt	%at, %v0, bgt_else.10582
-	blti	%v0, 0, bgti_else.10584
+	blt	%at, %v0, bgt_else.10581
+	blti	%v0, 0, bgti_else.10583
 	j	print_int.2634
-bgti_else.10584:
+bgti_else.10583:
 	addi	%v0, %zero, 0
-bgti_cont.10585:
+bgti_cont.10584:
 	j	print_int.2634
-bgt_else.10582:
+bgt_else.10581:
 	addi	%v0, %zero, 255
-bgt_cont.10583:
+bgt_cont.10582:
 	j	print_int.2634
 write_rgb.3029:
 	add	%s0, %zero, %ra
 	flw	%f0, 151(%zero)
-	addi	%sp, %sp, 0
 	jal	write_rgb_element.3027
-	addi	%sp, %sp, 0
 	addi	%s1, %zero, 32
 	addi	%v0, %s1, 0
-	addi	%sp, %sp, 0
 	jal	min_caml_print_char
-	addi	%sp, %sp, 0
 	flw	%f0, 152(%zero)
-	addi	%sp, %sp, 0
 	jal	write_rgb_element.3027
-	addi	%sp, %sp, 0
 	addi	%v0, %s1, 0
-	addi	%sp, %sp, 0
 	jal	min_caml_print_char
-	addi	%sp, %sp, 0
 	flw	%f0, 153(%zero)
-	addi	%sp, %sp, 0
 	jal	write_rgb_element.3027
-	addi	%sp, %sp, 0
 	addi	%v0, %zero, 10
 	add	%ra, %zero, %s0
 	j	min_caml_print_char
@@ -4862,11 +4135,11 @@ pretrace_diffuse_rays.3031:
 	sw	%v1, 1(%sp)
 	sw	%ra, 2(%sp)
 	addi	%at, %zero, 4
-	blt	%at, %v1, bgt_else.10659
+	blt	%at, %v1, bgt_else.10658
 	addi	%sp, %sp, 3
 	jal	get_surface_id.3009
 	addi	%sp, %sp, -3
-	blti	%v0, 0, bgti_else.10660
+	blti	%v0, 0, bgti_else.10659
 	lw	%v0, 0(%sp)
 	addi	%sp, %sp, 3
 	jal	p_calc_diffuse.2738
@@ -4874,7 +4147,7 @@ pretrace_diffuse_rays.3031:
 	lw	%a0, 1(%sp)
 	add	%at, %v0, %a0
 	lw	%a0, 0(%at)
-	beqi	%a0, 0, bnei_else.10661
+	beqi	%a0, 0, bnei_else.10660
 	lw	%v0, 0(%sp)
 	addi	%sp, %sp, 3
 	jal	p_group_id.2744
@@ -4914,18 +4187,18 @@ pretrace_diffuse_rays.3031:
 	addi	%sp, %sp, 3
 	jal	veccpy.2654
 	addi	%sp, %sp, -3
-	j	bnei_cont.10662
-bnei_else.10661:
-bnei_cont.10662:
+	j	bnei_cont.10661
+bnei_else.10660:
+bnei_cont.10661:
 	lw	%a0, 1(%sp)
 	addi	%v1, %a0, 1
 	lw	%ra, 2(%sp)
 	lw	%v0, 0(%sp)
 	j	pretrace_diffuse_rays.3031
-bgti_else.10660:
+bgti_else.10659:
 	lw	%ra, 2(%sp)
 	jr	%ra
-bgt_else.10659:
+bgt_else.10658:
 	jr	%ra
 pretrace_pixels.3034:
 	fsw	%f0, 0(%sp)
@@ -4939,7 +4212,7 @@ pretrace_pixels.3034:
 	sw	%a0, 6(%sp)
 	sw	%ra, 7(%sp)
 	addi	%t0, %zero, 0
-	blti	%v1, 0, bgti_else.10712
+	blti	%v1, 0, bgti_else.10710
 	flw	%f17, 158(%zero)
 	lw	%a0, 156(%zero)
 	sub	%a0, %v1, %a0
@@ -4950,7 +4223,6 @@ pretrace_pixels.3034:
 	fadd	%f0, %f16, %f0
 	fsw	%f0, 174(%zero)
 	addi	%a0, %zero, 1
-	sw	%a0, 8(%sp)
 	flw	%f0, 166(%zero)
 	fmul	%f0, %f17, %f0
 	fadd	%f0, %f0, %f1
@@ -4961,18 +4233,18 @@ pretrace_pixels.3034:
 	fsw	%f0, 176(%zero)
 	addi	%v0, %zero, 174
 	addi	%v1, %t0, 0
-	addi	%sp, %sp, 9
+	addi	%sp, %sp, 8
 	jal	vecunit_sgn.2662
-	addi	%sp, %sp, -9
+	addi	%sp, %sp, -8
 	addi	%v0, %zero, 151
-	addi	%sp, %sp, 9
+	addi	%sp, %sp, 8
 	jal	vecbzero.2652
-	addi	%sp, %sp, -9
+	addi	%sp, %sp, -8
 	addi	%v1, %zero, 75
 	addi	%v0, %zero, 159
-	addi	%sp, %sp, 9
+	addi	%sp, %sp, 8
 	jal	veccpy.2654
-	addi	%sp, %sp, -9
+	addi	%sp, %sp, -8
 	flw	%f0, 477(%zero)
 	lw	%a1, 2(%sp)
 	lw	%a0, 3(%sp)
@@ -4982,34 +4254,34 @@ pretrace_pixels.3034:
 	addi	%v1, %zero, 174
 	addi	%a0, %t1, 0
 	addi	%v0, %t0, 0
-	addi	%sp, %sp, 9
+	addi	%sp, %sp, 8
 	jal	trace_ray.2971
-	addi	%sp, %sp, -9
+	addi	%sp, %sp, -8
 	addi	%v0, %t1, 0
-	addi	%sp, %sp, 9
+	addi	%sp, %sp, 8
 	jal	p_rgb.2732
-	addi	%sp, %sp, -9
+	addi	%sp, %sp, -8
 	addi	%v1, %zero, 151
-	addi	%sp, %sp, 9
+	addi	%sp, %sp, 8
 	jal	veccpy.2654
-	addi	%sp, %sp, -9
+	addi	%sp, %sp, -8
 	lw	%v1, 4(%sp)
 	addi	%v0, %t1, 0
-	addi	%sp, %sp, 9
+	addi	%sp, %sp, 8
 	jal	p_set_group_id.2746
-	addi	%sp, %sp, -9
+	addi	%sp, %sp, -8
 	addi	%v1, %t0, 0
 	addi	%v0, %t1, 0
-	addi	%sp, %sp, 9
+	addi	%sp, %sp, 8
 	jal	pretrace_diffuse_rays.3031
-	addi	%sp, %sp, -9
+	addi	%sp, %sp, -8
 	lw	%a0, 3(%sp)
 	addi	%a1, %a0, -1
-	lw	%v1, 8(%sp)
+	addi	%v1, %zero, 1
 	lw	%v0, 4(%sp)
-	addi	%sp, %sp, 9
+	addi	%sp, %sp, 8
 	jal	add_mod5.2641
-	addi	%sp, %sp, -9
+	addi	%sp, %sp, -8
 	addi	%a0, %v0, 0
 	lw	%t1, 5(%sp)
 	lw	%t0, 6(%sp)
@@ -5020,7 +4292,7 @@ pretrace_pixels.3034:
 	addi	%v1, %a1, 0
 	fmov	%f2, %f30
 	j	pretrace_pixels.3034
-bgti_else.10712:
+bgti_else.10710:
 	add	%t0, %zero, %a0
 	jr	%ra
 pretrace_line.3041:
@@ -5053,9 +4325,9 @@ scan_pixel.3045:
 	sw	%ra, 5(%sp)
 	addi	%a3, %zero, 0
 	lw	%a0, 154(%zero)
-	blt	%v0, %a0, bgt_else.10784
+	blt	%v0, %a0, bgt_else.10782
 	jr	%ra
-bgt_else.10784:
+bgt_else.10782:
 	add	%at, %a1, %v0
 	lw	%a2, 0(%at)
 	addi	%v0, %a2, 0
@@ -5073,7 +4345,7 @@ bgt_else.10784:
 	addi	%sp, %sp, 6
 	jal	neighbors_exist.3005
 	addi	%sp, %sp, -6
-	beqi	%v0, 0, bnei_else.10786
+	beqi	%v0, 0, bnei_else.10784
 	lw	%a2, 4(%sp)
 	lw	%a1, 3(%sp)
 	lw	%a0, 2(%sp)
@@ -5082,14 +4354,14 @@ bgt_else.10784:
 	addi	%sp, %sp, 6
 	jal	try_exploit_neighbors.3018
 	addi	%sp, %sp, -6
-	j	bnei_cont.10787
-bnei_else.10786:
+	j	bnei_cont.10785
+bnei_else.10784:
 	addi	%v1, %a3, 0
 	addi	%v0, %a2, 0
 	addi	%sp, %sp, 6
 	jal	do_without_neighbors.3002
 	addi	%sp, %sp, -6
-bnei_cont.10787:
+bnei_cont.10785:
 	addi	%sp, %sp, 6
 	jal	write_rgb.3029
 	addi	%sp, %sp, -6
@@ -5112,18 +4384,18 @@ scan_line.3051:
 	sw	%a0, 4(%sp)
 	sw	%ra, 5(%sp)
 	lw	%a1, 155(%zero)
-	blt	%a3, %a1, bgt_else.10836
+	blt	%a3, %a1, bgt_else.10834
 	jr	%ra
-bgt_else.10836:
+bgt_else.10834:
 	addi	%a1, %a1, -1
-	blt	%a3, %a1, bgt_else.10838
-	j	bgt_cont.10839
-bgt_else.10838:
+	blt	%a3, %a1, bgt_else.10836
+	j	bgt_cont.10837
+bgt_else.10836:
 	addi	%v1, %a3, 1
 	addi	%sp, %sp, 6
 	jal	pretrace_line.3041
 	addi	%sp, %sp, -6
-bgt_cont.10839:
+bgt_cont.10837:
 	addi	%v0, %zero, 0
 	lw	%a2, 3(%sp)
 	lw	%a1, 2(%sp)
@@ -5152,38 +4424,26 @@ create_float5x3array.3057:
 	flw	%f1, 482(%zero)
 	addi	%v0, %a2, 0
 	fmov	%f0, %f1
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_array
-	addi	%sp, %sp, 0
 	addi	%v1, %v0, 0
 	addi	%v0, %zero, 5
-	addi	%sp, %sp, 0
 	jal	min_caml_create_array
-	addi	%sp, %sp, 0
 	addi	%a0, %v0, 0
 	addi	%v0, %a2, 0
 	fmov	%f0, %f1
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_array
-	addi	%sp, %sp, 0
 	sw	%v0, 1(%a0)
 	addi	%v0, %a2, 0
 	fmov	%f0, %f1
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_array
-	addi	%sp, %sp, 0
 	sw	%v0, 2(%a0)
 	addi	%v0, %a2, 0
 	fmov	%f0, %f1
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_array
-	addi	%sp, %sp, 0
 	sw	%v0, 3(%a0)
 	addi	%v0, %a2, 0
 	fmov	%f0, %f1
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_array
-	addi	%sp, %sp, 0
 	sw	%v0, 4(%a0)
 	add	%ra, %zero, %a1
 	add	%v0, %zero, %a0
@@ -5192,45 +4452,29 @@ create_pixel.3059:
 	add	%a3, %zero, %ra
 	addi	%v0, %zero, 3
 	flw	%f0, 482(%zero)
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_array
-	addi	%sp, %sp, 0
 	addi	%k0, %v0, 0
-	addi	%sp, %sp, 0
 	jal	create_float5x3array.3057
-	addi	%sp, %sp, 0
 	addi	%s0, %v0, 0
 	addi	%a1, %zero, 5
 	addi	%s1, %zero, 0
 	addi	%v1, %s1, 0
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	min_caml_create_array
-	addi	%sp, %sp, 0
 	addi	%s2, %v0, 0
 	addi	%v1, %s1, 0
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	min_caml_create_array
-	addi	%sp, %sp, 0
 	addi	%s3, %v0, 0
-	addi	%sp, %sp, 0
 	jal	create_float5x3array.3057
-	addi	%sp, %sp, 0
 	addi	%s4, %v0, 0
-	addi	%sp, %sp, 0
 	jal	create_float5x3array.3057
-	addi	%sp, %sp, 0
 	addi	%s5, %v0, 0
 	addi	%v0, %zero, 1
 	addi	%v1, %s1, 0
-	addi	%sp, %sp, 0
 	jal	min_caml_create_array
-	addi	%sp, %sp, 0
 	addi	%s1, %v0, 0
-	addi	%sp, %sp, 0
 	jal	create_float5x3array.3057
-	addi	%sp, %sp, 0
 	addi	%a0, %v0, 0
 	add	%v0, %zero, %hp
 	addi	%hp, %hp, 8
@@ -5248,31 +4492,25 @@ init_line_elements.3061:
 	add	%s6, %zero, %v0
 	add	%s7, %zero, %v1
 	add	%t7, %zero, %ra
-	blti	%s7, 0, bgti_else.10897
-	addi	%sp, %sp, 0
+	blti	%s7, 0, bgti_else.10895
 	jal	create_pixel.3059
-	addi	%sp, %sp, 0
 	add	%at, %s6, %s7
 	sw	%v0, 0(%at)
 	addi	%v1, %s7, -1
 	add	%ra, %zero, %t7
 	addi	%v0, %s6, 0
 	j	init_line_elements.3061
-bgti_else.10897:
+bgti_else.10895:
 	add	%ra, %zero, %t7
 	add	%v0, %zero, %s6
 	jr	%ra
 create_pixelline.3064:
 	add	%s6, %zero, %ra
 	lw	%s7, 154(%zero)
-	addi	%sp, %sp, 0
 	jal	create_pixel.3059
-	addi	%sp, %sp, 0
 	addi	%v1, %v0, 0
 	addi	%v0, %s7, 0
-	addi	%sp, %sp, 0
 	jal	min_caml_create_array
-	addi	%sp, %sp, 0
 	addi	%v1, %s7, -2
 	add	%ra, %zero, %s6
 	j	init_line_elements.3061
@@ -5280,14 +4518,10 @@ tan.3066:
 	fmov	%f19, %f0
 	add	%a3, %zero, %ra
 	fmov	%f0, %f19
-	addi	%sp, %sp, 0
 	jal	sin.2625
-	addi	%sp, %sp, 0
 	fmov	%f20, %f0
 	fmov	%f0, %f19
-	addi	%sp, %sp, 0
 	jal	cos.2623
-	addi	%sp, %sp, 0
 	add	%ra, %zero, %a3
 	fdiv	%f0, %f20, %f0
 	jr	%ra
@@ -5300,13 +4534,9 @@ adjust_position.3068:
 	fsqrt	%f21, %f0
 	flw	%f0, 477(%zero)
 	fdiv	%f0, %f0, %f21
-	addi	%sp, %sp, 0
 	jal	atan.2627
-	addi	%sp, %sp, 0
 	fmul	%f0, %f0, %f20
-	addi	%sp, %sp, 0
 	jal	tan.3066
-	addi	%sp, %sp, 0
 	add	%ra, %zero, %k0
 	fmul	%f0, %f0, %f21
 	jr	%ra
@@ -5316,16 +4546,12 @@ calc_dirvec.3071:
 	fmov	%f22, %f2
 	add	%s0, %zero, %a0
 	add	%s1, %zero, %ra
-	blti	%v0, 5, bgti_else.10973
+	blti	%v0, 5, bgti_else.10971
 	fmov	%f0, %f16
-	addi	%sp, %sp, 0
 	jal	fsqr.2606
-	addi	%sp, %sp, 0
 	fmov	%f1, %f0
 	fmov	%f0, %f17
-	addi	%sp, %sp, 0
 	jal	fsqr.2606
-	addi	%sp, %sp, 0
 	fadd	%f0, %f1, %f0
 	flw	%f1, 477(%zero)
 	fadd	%f0, %f0, %f1
@@ -5336,87 +4562,61 @@ calc_dirvec.3071:
 	lw	%a1, 179(%v1)
 	add	%at, %a1, %s0
 	lw	%v0, 0(%at)
-	addi	%sp, %sp, 0
 	jal	d_vec.2751
-	addi	%sp, %sp, 0
 	fmov	%f2, %f16
 	fmov	%f1, %f17
 	fmov	%f0, %f18
-	addi	%sp, %sp, 0
 	jal	vecset.2644
-	addi	%sp, %sp, 0
 	addi	%a0, %s0, 40
 	add	%at, %a1, %a0
 	lw	%v0, 0(%at)
-	addi	%sp, %sp, 0
 	jal	d_vec.2751
-	addi	%sp, %sp, 0
 	fneg	%f2, %f17
 	fmov	%f1, %f16
 	fmov	%f0, %f18
-	addi	%sp, %sp, 0
 	jal	vecset.2644
-	addi	%sp, %sp, 0
 	addi	%a0, %s0, 80
 	add	%at, %a1, %a0
 	lw	%v0, 0(%at)
-	addi	%sp, %sp, 0
 	jal	d_vec.2751
-	addi	%sp, %sp, 0
 	fneg	%f1, %f18
 	fneg	%f2, %f17
 	fmov	%f0, %f16
-	addi	%sp, %sp, 0
 	jal	vecset.2644
-	addi	%sp, %sp, 0
 	addi	%a0, %s0, 1
 	add	%at, %a1, %a0
 	lw	%v0, 0(%at)
-	addi	%sp, %sp, 0
 	jal	d_vec.2751
-	addi	%sp, %sp, 0
 	fneg	%f0, %f18
 	fneg	%f1, %f17
 	fneg	%f2, %f16
-	addi	%sp, %sp, 0
 	jal	vecset.2644
-	addi	%sp, %sp, 0
 	addi	%a0, %s0, 41
 	add	%at, %a1, %a0
 	lw	%v0, 0(%at)
-	addi	%sp, %sp, 0
 	jal	d_vec.2751
-	addi	%sp, %sp, 0
 	fneg	%f0, %f18
 	fneg	%f1, %f16
 	fmov	%f2, %f17
-	addi	%sp, %sp, 0
 	jal	vecset.2644
-	addi	%sp, %sp, 0
 	addi	%a0, %s0, 81
 	add	%at, %a1, %a0
 	lw	%v0, 0(%at)
-	addi	%sp, %sp, 0
 	jal	d_vec.2751
-	addi	%sp, %sp, 0
 	fneg	%f0, %f16
 	add	%ra, %zero, %s1
 	fmov	%f2, %f17
 	fmov	%f1, %f18
 	j	vecset.2644
-bgti_else.10973:
+bgti_else.10971:
 	fmov	%f1, %f22
 	fmov	%f0, %f17
-	addi	%sp, %sp, 0
 	jal	adjust_position.3068
-	addi	%sp, %sp, 0
 	fmov	%f23, %f0
 	addi	%v0, %v0, 1
 	fmov	%f1, %f3
 	fmov	%f0, %f23
-	addi	%sp, %sp, 0
 	jal	adjust_position.3068
-	addi	%sp, %sp, 0
 	fmov	%f1, %f0
 	add	%ra, %zero, %s1
 	addi	%a0, %s0, 0
@@ -5430,7 +4630,7 @@ calc_dirvecs.3079:
 	add	%s4, %zero, %a0
 	add	%s5, %zero, %ra
 	addi	%s6, %zero, 0
-	blti	%s2, 0, bgti_else.10996
+	blti	%s2, 0, bgti_else.10994
 	itof	%f0, %s2
 	flw	%f25, 473(%zero)
 	fmul	%f1, %f0, %f25
@@ -5442,9 +4642,7 @@ calc_dirvecs.3079:
 	addi	%v0, %s6, 0
 	fmov	%f1, %f24
 	fmov	%f0, %f24
-	addi	%sp, %sp, 0
 	jal	calc_dirvec.3071
-	addi	%sp, %sp, 0
 	itof	%f0, %s2
 	fmul	%f1, %f0, %f25
 	flw	%f0, 439(%zero)
@@ -5454,22 +4652,18 @@ calc_dirvecs.3079:
 	addi	%v0, %s6, 0
 	fmov	%f1, %f24
 	fmov	%f0, %f24
-	addi	%sp, %sp, 0
 	jal	calc_dirvec.3071
-	addi	%sp, %sp, 0
 	addi	%v1, %zero, 1
 	addi	%a1, %s2, -1
 	addi	%v0, %s3, 0
-	addi	%sp, %sp, 0
 	jal	add_mod5.2641
-	addi	%sp, %sp, 0
 	addi	%v1, %v0, 0
 	add	%ra, %zero, %s5
 	addi	%a0, %s4, 0
 	addi	%v0, %a1, 0
 	fmov	%f0, %f3
 	j	calc_dirvecs.3079
-bgti_else.10996:
+bgti_else.10994:
 	add	%ra, %zero, %s5
 	jr	%ra
 calc_dirvec_rows.3084:
@@ -5477,7 +4671,7 @@ calc_dirvec_rows.3084:
 	add	%t7, %zero, %v1
 	add	%t8, %zero, %a0
 	add	%t9, %zero, %ra
-	blti	%s7, 0, bgti_else.11020
+	blti	%s7, 0, bgti_else.11018
 	itof	%f1, %s7
 	flw	%f0, 473(%zero)
 	fmul	%f1, %f1, %f0
@@ -5486,36 +4680,28 @@ calc_dirvec_rows.3084:
 	addi	%v0, %zero, 4
 	addi	%a0, %t8, 0
 	addi	%v1, %t7, 0
-	addi	%sp, %sp, 0
 	jal	calc_dirvecs.3079
-	addi	%sp, %sp, 0
 	addi	%a1, %s7, -1
 	addi	%v1, %zero, 2
 	addi	%v0, %t7, 0
-	addi	%sp, %sp, 0
 	jal	add_mod5.2641
-	addi	%sp, %sp, 0
 	addi	%v1, %v0, 0
 	addi	%a0, %t8, 4
 	add	%ra, %zero, %t9
 	addi	%v0, %a1, 0
 	j	calc_dirvec_rows.3084
-bgti_else.11020:
+bgti_else.11018:
 	add	%ra, %zero, %t9
 	jr	%ra
 create_dirvec.3088:
 	add	%a1, %zero, %ra
 	addi	%v0, %zero, 3
 	flw	%f0, 482(%zero)
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_array
-	addi	%sp, %sp, 0
 	addi	%a2, %v0, 0
 	lw	%v0, 0(%zero)
 	addi	%v1, %a2, 0
-	addi	%sp, %sp, 0
 	jal	min_caml_create_array
-	addi	%sp, %sp, 0
 	addi	%a0, %v0, 0
 	add	%v0, %zero, %hp
 	addi	%hp, %hp, 2
@@ -5527,91 +4713,78 @@ create_dirvec_elements.3090:
 	add	%a3, %zero, %v0
 	add	%k0, %zero, %v1
 	add	%s0, %zero, %ra
-	blti	%k0, 0, bgti_else.11062
-	addi	%sp, %sp, 0
+	blti	%k0, 0, bgti_else.11060
 	jal	create_dirvec.3088
-	addi	%sp, %sp, 0
 	add	%at, %a3, %k0
 	sw	%v0, 0(%at)
 	addi	%v1, %k0, -1
 	add	%ra, %zero, %s0
 	addi	%v0, %a3, 0
 	j	create_dirvec_elements.3090
-bgti_else.11062:
+bgti_else.11060:
 	add	%ra, %zero, %s0
 	jr	%ra
 create_dirvecs.3093:
 	add	%s1, %zero, %v0
 	add	%s2, %zero, %ra
-	blti	%s1, 0, bgti_else.11086
+	blti	%s1, 0, bgti_else.11084
 	addi	%a3, %zero, 120
-	addi	%sp, %sp, 0
 	jal	create_dirvec.3088
-	addi	%sp, %sp, 0
 	addi	%v1, %v0, 0
 	addi	%v0, %a3, 0
-	addi	%sp, %sp, 0
 	jal	min_caml_create_array
-	addi	%sp, %sp, 0
 	sw	%v0, 179(%s1)
 	lw	%v0, 179(%s1)
 	addi	%v1, %zero, 118
-	addi	%sp, %sp, 0
 	jal	create_dirvec_elements.3090
-	addi	%sp, %sp, 0
 	addi	%v0, %s1, -1
 	add	%ra, %zero, %s2
 	j	create_dirvecs.3093
-bgti_else.11086:
+bgti_else.11084:
 	add	%ra, %zero, %s2
 	jr	%ra
 init_dirvec_constants.3095:
 	add	%s5, %zero, %v0
 	add	%s6, %zero, %v1
 	add	%s7, %zero, %ra
-	blti	%s6, 0, bgti_else.11110
+	blti	%s6, 0, bgti_else.11108
 	add	%at, %s5, %s6
 	lw	%v0, 0(%at)
-	addi	%sp, %sp, 0
 	jal	setup_dirvec_constants.2880
-	addi	%sp, %sp, 0
 	addi	%v1, %s6, -1
 	add	%ra, %zero, %s7
 	addi	%v0, %s5, 0
 	j	init_dirvec_constants.3095
-bgti_else.11110:
+bgti_else.11108:
 	add	%ra, %zero, %s7
 	jr	%ra
 init_vecset_constants.3098:
 	add	%t7, %zero, %v0
 	add	%t8, %zero, %ra
-	blti	%t7, 0, bgti_else.11134
+	blti	%t7, 0, bgti_else.11132
 	lw	%v0, 179(%t7)
 	addi	%v1, %zero, 119
-	addi	%sp, %sp, 0
 	jal	init_dirvec_constants.3095
-	addi	%sp, %sp, 0
 	addi	%v0, %t7, -1
 	add	%ra, %zero, %t8
 	j	init_vecset_constants.3098
-bgti_else.11134:
+bgti_else.11132:
 	add	%ra, %zero, %t8
 	jr	%ra
 init_dirvecs.3100:
 	sw	%ra, 0(%sp)
 	addi	%v0, %zero, 4
-	sw	%v0, 1(%sp)
-	addi	%sp, %sp, 2
+	addi	%sp, %sp, 1
 	jal	create_dirvecs.3093
-	addi	%sp, %sp, -2
+	addi	%sp, %sp, -1
 	addi	%v0, %zero, 9
 	addi	%v1, %zero, 0
 	addi	%a0, %v1, 0
-	addi	%sp, %sp, 2
+	addi	%sp, %sp, 1
 	jal	calc_dirvec_rows.3084
-	addi	%sp, %sp, -2
+	addi	%sp, %sp, -1
 	lw	%ra, 0(%sp)
-	lw	%v0, 1(%sp)
+	addi	%v0, %zero, 4
 	j	init_vecset_constants.3098
 add_reflection.3102:
 	fmov	%f24, %f0
@@ -5621,22 +4794,14 @@ add_reflection.3102:
 	add	%s5, %zero, %v0
 	add	%s6, %zero, %v1
 	add	%s7, %zero, %ra
-	addi	%sp, %sp, 0
 	jal	create_dirvec.3088
-	addi	%sp, %sp, 0
 	addi	%t7, %v0, 0
 	addi	%v0, %t7, 0
-	addi	%sp, %sp, 0
 	jal	d_vec.2751
-	addi	%sp, %sp, 0
 	fmov	%f0, %f16
-	addi	%sp, %sp, 0
 	jal	vecset.2644
-	addi	%sp, %sp, 0
 	addi	%v0, %t7, 0
-	addi	%sp, %sp, 0
 	jal	setup_dirvec_constants.2880
-	addi	%sp, %sp, 0
 	add	%a0, %zero, %hp
 	addi	%hp, %hp, 3
 	fsw	%f24, 2(%a0)
@@ -5700,41 +4865,29 @@ setup_surface_reflection.3112:
 	lw	%t9, 434(%zero)
 	flw	%f1, 477(%zero)
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_diffuse.2714
-	addi	%sp, %sp, 0
 	fsub	%f17, %f1, %f0
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_abc.2706
-	addi	%sp, %sp, 0
 	addi	%v1, %v0, 0
 	addi	%v0, %zero, 78
-	addi	%sp, %sp, 0
 	jal	veciprod.2665
-	addi	%sp, %sp, 0
 	fmov	%f16, %f0
 	flw	%f19, 468(%zero)
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_a.2700
-	addi	%sp, %sp, 0
 	fmul	%f0, %f19, %f0
 	fmul	%f1, %f0, %f16
 	flw	%f0, 78(%zero)
 	fsub	%f1, %f1, %f0
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_b.2702
-	addi	%sp, %sp, 0
 	fmul	%f0, %f19, %f0
 	fmul	%f18, %f0, %f16
 	flw	%f0, 79(%zero)
 	fsub	%f2, %f18, %f0
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 0
 	jal	o_param_c.2704
-	addi	%sp, %sp, 0
 	fmul	%f0, %f19, %f0
 	fmul	%f16, %f0, %f16
 	flw	%f0, 80(%zero)
@@ -5742,9 +4895,7 @@ setup_surface_reflection.3112:
 	addi	%v1, %a2, 0
 	addi	%v0, %t9, 0
 	fmov	%f0, %f17
-	addi	%sp, %sp, 0
 	jal	add_reflection.3102
-	addi	%sp, %sp, 0
 	addi	%a0, %t9, 1
 	add	%ra, %zero, %t8
 	sw	%a0, 434(%zero)
@@ -5752,55 +4903,45 @@ setup_surface_reflection.3112:
 setup_reflections.3115:
 	add	%a1, %zero, %v0
 	add	%a2, %zero, %ra
-	blti	%a1, 0, bgti_else.11258
+	blti	%a1, 0, bgti_else.11255
 	lw	%v1, 12(%a1)
 	addi	%v0, %v1, 0
-	addi	%sp, %sp, 0
 	jal	o_reflectiontype.2694
-	addi	%sp, %sp, 0
-	beqi	%v0, 2, bnei_else.11259
+	beqi	%v0, 2, bnei_else.11256
 	add	%ra, %zero, %a2
 	jr	%ra
-bnei_else.11259:
+bnei_else.11256:
 	addi	%v0, %v1, 0
-	addi	%sp, %sp, 0
 	jal	o_diffuse.2714
-	addi	%sp, %sp, 0
 	flw	%f1, 477(%zero)
-	addi	%sp, %sp, 0
 	jal	fless.2592
-	addi	%sp, %sp, 0
-	beqi	%v0, 0, bnei_else.11261
+	beqi	%v0, 0, bnei_else.11258
 	addi	%v0, %v1, 0
-	addi	%sp, %sp, 0
 	jal	o_form.2692
-	addi	%sp, %sp, 0
-	beqi	%v0, 1, bnei_else.11262
-	beqi	%v0, 2, bnei_else.11263
+	beqi	%v0, 1, bnei_else.11259
+	beqi	%v0, 2, bnei_else.11260
 	add	%ra, %zero, %a2
 	jr	%ra
-bnei_else.11263:
+bnei_else.11260:
 	add	%ra, %zero, %a2
 	addi	%v0, %a1, 0
 	j	setup_surface_reflection.3112
-bnei_else.11262:
+bnei_else.11259:
 	add	%ra, %zero, %a2
 	addi	%v0, %a1, 0
 	j	setup_rect_reflection.3109
-bnei_else.11261:
+bnei_else.11258:
 	add	%ra, %zero, %a2
 	jr	%ra
-bgti_else.11258:
+bgti_else.11255:
 	add	%ra, %zero, %a2
 	jr	%ra
 rt.3117:
 	sw	%ra, 0(%sp)
 	addi	%a0, %zero, 0
-	sw	%a0, 1(%sp)
 	sw	%v0, 154(%zero)
 	sw	%v1, 155(%zero)
 	addi	%a0, %zero, 2
-	sw	%a0, 2(%sp)
 	srl	%a0, %v0, 1
 	sw	%a0, 156(%zero)
 	srl	%a0, %v1, 1
@@ -5809,57 +4950,57 @@ rt.3117:
 	itof	%f0, %v0
 	fdiv	%f0, %f1, %f0
 	fsw	%f0, 158(%zero)
+	addi	%sp, %sp, 1
+	jal	create_pixelline.3064
+	addi	%sp, %sp, -1
+	sw	%v0, 1(%sp)
+	addi	%sp, %sp, 2
+	jal	create_pixelline.3064
+	addi	%sp, %sp, -2
+	sw	%v0, 2(%sp)
 	addi	%sp, %sp, 3
 	jal	create_pixelline.3064
 	addi	%sp, %sp, -3
 	sw	%v0, 3(%sp)
 	addi	%sp, %sp, 4
-	jal	create_pixelline.3064
-	addi	%sp, %sp, -4
-	sw	%v0, 4(%sp)
-	addi	%sp, %sp, 5
-	jal	create_pixelline.3064
-	addi	%sp, %sp, -5
-	sw	%v0, 5(%sp)
-	addi	%sp, %sp, 6
 	jal	read_parameter.2782
-	addi	%sp, %sp, -6
-	addi	%sp, %sp, 6
+	addi	%sp, %sp, -4
+	addi	%sp, %sp, 4
 	jal	write_ppm_header.3025
-	addi	%sp, %sp, -6
-	addi	%sp, %sp, 6
+	addi	%sp, %sp, -4
+	addi	%sp, %sp, 4
 	jal	init_dirvecs.3100
-	addi	%sp, %sp, -6
+	addi	%sp, %sp, -4
 	addi	%v0, %zero, 247
-	addi	%sp, %sp, 6
+	addi	%sp, %sp, 4
 	jal	d_vec.2751
-	addi	%sp, %sp, -6
+	addi	%sp, %sp, -4
 	addi	%v1, %zero, 78
-	addi	%sp, %sp, 6
+	addi	%sp, %sp, 4
 	jal	veccpy.2654
-	addi	%sp, %sp, -6
+	addi	%sp, %sp, -4
 	addi	%v0, %zero, 247
-	addi	%sp, %sp, 6
+	addi	%sp, %sp, 4
 	jal	setup_dirvec_constants.2880
-	addi	%sp, %sp, -6
+	addi	%sp, %sp, -4
 	lw	%a0, 0(%zero)
 	addi	%v0, %a0, -1
-	addi	%sp, %sp, 6
+	addi	%sp, %sp, 4
 	jal	setup_reflections.3115
-	addi	%sp, %sp, -6
-	lw	%v1, 1(%sp)
-	lw	%a0, 1(%sp)
-	lw	%v0, 4(%sp)
+	addi	%sp, %sp, -4
+	addi	%v1, %zero, 0
+	addi	%a0, %zero, 0
+	lw	%v0, 2(%sp)
 	addi	%a0, %v1, 0
-	addi	%sp, %sp, 6
+	addi	%sp, %sp, 4
 	jal	pretrace_line.3041
-	addi	%sp, %sp, -6
+	addi	%sp, %sp, -4
 	lw	%ra, 0(%sp)
-	lw	%a2, 2(%sp)
-	lw	%a1, 5(%sp)
-	lw	%a0, 4(%sp)
-	lw	%v1, 3(%sp)
-	lw	%v0, 1(%sp)
+	addi	%a2, %zero, 2
+	lw	%a1, 3(%sp)
+	lw	%a0, 2(%sp)
+	lw	%v1, 1(%sp)
+	addi	%v0, %zero, 0
 	j	scan_line.3051
 .global	min_caml_start
 min_caml_start:
@@ -5868,16 +5009,12 @@ min_caml_start:
 	addi	%a0, %zero, 0
 	addi	%v1, %a2, 0
 	addi	%v0, %a3, 0
-	addi	%sp, %sp, 0
 	jal	min_caml_create_extarray
-	addi	%sp, %sp, 0
 	flw	%f1, 482(%zero)
 	addi	%v1, %zero, 1
 	addi	%v0, %a2, 0
 	fmov	%f0, %f1
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_extarray
-	addi	%sp, %sp, 0
 	addi	%k0, %zero, 60
 	sw	%v0, 11(%zero)
 	sw	%v0, 10(%zero)
@@ -5893,229 +5030,157 @@ min_caml_start:
 	addi	%a0, %zero, 12
 	addi	%v1, %zero, 1
 	addi	%v0, %k0, 0
-	addi	%sp, %sp, 0
 	jal	min_caml_create_extarray
-	addi	%sp, %sp, 0
 	addi	%s0, %zero, 3
 	addi	%v1, %zero, 72
 	addi	%v0, %s0, 0
 	fmov	%f0, %f1
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_extarray
-	addi	%sp, %sp, 0
 	addi	%v1, %zero, 75
 	addi	%v0, %s0, 0
 	fmov	%f0, %f1
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_extarray
-	addi	%sp, %sp, 0
 	addi	%v1, %zero, 78
 	addi	%v0, %s0, 0
 	fmov	%f0, %f1
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_extarray
-	addi	%sp, %sp, 0
 	flw	%f0, 447(%zero)
 	addi	%v1, %zero, 81
 	addi	%v0, %a3, 0
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_extarray
-	addi	%sp, %sp, 0
 	addi	%s1, %zero, 50
 	addi	%v1, %zero, -1
 	addi	%a0, %zero, 82
 	addi	%v0, %a3, 0
-	addi	%sp, %sp, 0
 	jal	min_caml_create_extarray
-	addi	%sp, %sp, 0
 	addi	%a0, %zero, 83
 	addi	%v1, %zero, 82
 	addi	%v0, %s1, 0
-	addi	%sp, %sp, 0
 	jal	min_caml_create_extarray
-	addi	%sp, %sp, 0
 	lw	%v1, 83(%zero)
 	addi	%a0, %zero, 133
 	addi	%v0, %a3, 0
-	addi	%sp, %sp, 0
 	jal	min_caml_create_extarray
-	addi	%sp, %sp, 0
 	addi	%a0, %zero, 134
 	addi	%v1, %zero, 133
 	addi	%v0, %a3, 0
-	addi	%sp, %sp, 0
 	jal	min_caml_create_extarray
-	addi	%sp, %sp, 0
 	addi	%v1, %zero, 135
 	addi	%v0, %a3, 0
 	fmov	%f0, %f1
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_extarray
-	addi	%sp, %sp, 0
 	addi	%a0, %zero, 136
 	addi	%v1, %a2, 0
 	addi	%v0, %a3, 0
-	addi	%sp, %sp, 0
 	jal	min_caml_create_extarray
-	addi	%sp, %sp, 0
 	flw	%f0, 454(%zero)
 	addi	%v1, %zero, 137
 	addi	%v0, %a3, 0
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_extarray
-	addi	%sp, %sp, 0
 	addi	%v1, %zero, 138
 	addi	%v0, %s0, 0
 	fmov	%f0, %f1
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_extarray
-	addi	%sp, %sp, 0
 	addi	%a0, %zero, 141
 	addi	%v1, %a2, 0
 	addi	%v0, %a3, 0
-	addi	%sp, %sp, 0
 	jal	min_caml_create_extarray
-	addi	%sp, %sp, 0
 	addi	%v1, %zero, 142
 	addi	%v0, %s0, 0
 	fmov	%f0, %f1
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_extarray
-	addi	%sp, %sp, 0
 	addi	%v1, %zero, 145
 	addi	%v0, %s0, 0
 	fmov	%f0, %f1
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_extarray
-	addi	%sp, %sp, 0
 	addi	%v1, %zero, 148
 	addi	%v0, %s0, 0
 	fmov	%f0, %f1
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_extarray
-	addi	%sp, %sp, 0
 	addi	%v1, %zero, 151
 	addi	%v0, %s0, 0
 	fmov	%f0, %f1
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_extarray
-	addi	%sp, %sp, 0
 	addi	%s1, %zero, 2
 	addi	%a0, %zero, 154
 	addi	%v1, %a2, 0
 	addi	%v0, %s1, 0
-	addi	%sp, %sp, 0
 	jal	min_caml_create_extarray
-	addi	%sp, %sp, 0
 	addi	%a0, %zero, 156
 	addi	%v1, %a2, 0
 	addi	%v0, %s1, 0
-	addi	%sp, %sp, 0
 	jal	min_caml_create_extarray
-	addi	%sp, %sp, 0
 	addi	%v1, %zero, 158
 	addi	%v0, %a3, 0
 	fmov	%f0, %f1
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_extarray
-	addi	%sp, %sp, 0
 	addi	%v1, %zero, 159
 	addi	%v0, %s0, 0
 	fmov	%f0, %f1
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_extarray
-	addi	%sp, %sp, 0
 	addi	%v1, %zero, 162
 	addi	%v0, %s0, 0
 	fmov	%f0, %f1
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_extarray
-	addi	%sp, %sp, 0
 	addi	%v1, %zero, 165
 	addi	%v0, %s0, 0
 	fmov	%f0, %f1
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_extarray
-	addi	%sp, %sp, 0
 	addi	%v1, %zero, 168
 	addi	%v0, %s0, 0
 	fmov	%f0, %f1
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_extarray
-	addi	%sp, %sp, 0
 	addi	%v1, %zero, 171
 	addi	%v0, %s0, 0
 	fmov	%f0, %f1
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_extarray
-	addi	%sp, %sp, 0
 	addi	%v1, %zero, 174
 	addi	%v0, %s0, 0
 	fmov	%f0, %f1
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_extarray
-	addi	%sp, %sp, 0
 	addi	%v1, %zero, 177
 	addi	%v0, %a2, 0
 	fmov	%f0, %f1
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_extarray
-	addi	%sp, %sp, 0
 	addi	%s1, %v0, 0
 	addi	%a0, %zero, 177
 	addi	%v1, %zero, 177
 	addi	%v0, %a2, 0
-	addi	%sp, %sp, 0
 	jal	min_caml_create_extarray
-	addi	%sp, %sp, 0
 	sw	%v0, 178(%zero)
 	sw	%s1, 177(%zero)
 	addi	%a0, %zero, 179
 	addi	%v1, %zero, 177
 	addi	%v0, %a2, 0
-	addi	%sp, %sp, 0
 	jal	min_caml_create_extarray
-	addi	%sp, %sp, 0
 	addi	%v0, %zero, 5
 	addi	%a0, %zero, 179
 	addi	%v1, %zero, 179
-	addi	%sp, %sp, 0
 	jal	min_caml_create_extarray
-	addi	%sp, %sp, 0
 	addi	%v1, %zero, 184
 	addi	%v0, %a2, 0
 	fmov	%f0, %f1
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_extarray
-	addi	%sp, %sp, 0
 	addi	%v1, %zero, 184
 	addi	%v0, %s0, 0
 	fmov	%f0, %f1
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_extarray
-	addi	%sp, %sp, 0
 	addi	%s0, %v0, 0
 	addi	%a0, %zero, 187
 	addi	%v1, %zero, 184
 	addi	%v0, %k0, 0
-	addi	%sp, %sp, 0
 	jal	min_caml_create_extarray
-	addi	%sp, %sp, 0
 	sw	%v0, 248(%zero)
 	sw	%s0, 247(%zero)
 	addi	%v1, %zero, 249
 	addi	%v0, %a2, 0
 	fmov	%f0, %f1
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_extarray
-	addi	%sp, %sp, 0
 	addi	%k0, %v0, 0
 	addi	%a0, %zero, 249
 	addi	%v1, %zero, 249
 	addi	%v0, %a2, 0
-	addi	%sp, %sp, 0
 	jal	min_caml_create_extarray
-	addi	%sp, %sp, 0
 	addi	%a0, %zero, 249
 	sw	%v0, 250(%zero)
 	sw	%k0, 249(%zero)
@@ -6125,19 +5190,13 @@ min_caml_start:
 	sw	%a2, 251(%zero)
 	addi	%a0, %zero, 254
 	addi	%v1, %zero, 251
-	addi	%sp, %sp, 0
 	jal	min_caml_create_extarray
-	addi	%sp, %sp, 0
 	addi	%a0, %zero, 434
 	addi	%v1, %a2, 0
 	addi	%v0, %a3, 0
-	addi	%sp, %sp, 0
 	jal	min_caml_create_extarray
-	addi	%sp, %sp, 0
 	addi	%v0, %zero, 4
 	addi	%v1, %v0, 0
-	addi	%sp, %sp, 0
 	jal	rt.3117
-	addi	%sp, %sp, 0
 	addi	%g0, %zero, 0
 	ret

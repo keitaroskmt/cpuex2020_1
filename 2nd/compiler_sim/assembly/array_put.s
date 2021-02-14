@@ -125,9 +125,7 @@ min_caml_start:
 	flw	%f1, 2(%zero)
 	addi	%v0, %a1, 0
 	fmov	%f0, %f1
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_array
-	addi	%sp, %sp, 0
 	addi	%a2, %v0, 0
 	flw	%f0, 1(%zero)
 	fsw	%f0, 0(%a2)
@@ -136,16 +134,12 @@ min_caml_start:
 	fsw	%f0, 2(%a2)
 	addi	%v0, %a1, 0
 	fmov	%f0, %f1
-	addi	%sp, %sp, 0
 	jal	min_caml_create_float_array
-	addi	%sp, %sp, 0
 	addi	%v1, %v0, 0
 	flw	%f0, 0(%zero)
 	fsw	%f0, 0(%v1)
 	fsw	%f0, 1(%v1)
 	fsw	%f0, 2(%v1)
 	addi	%v0, %a2, 0
-	addi	%sp, %sp, 0
 	jal	inprod.31
-	addi	%sp, %sp, 0
 	ret

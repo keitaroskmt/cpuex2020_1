@@ -32,3 +32,6 @@ let f list =
             )
         [] list in
     List.rev list'
+
+    (* いらないラベルを消す *)
+    (* branch命令についても辿れるはず *)
