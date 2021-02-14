@@ -21,6 +21,7 @@ let rec iter_asm n e =
   iter_asm (n - 1) e'
 
 let lexbuf (outchan, datachan) l = (* バッファをコンパイルしてチャンネルへ出力する (caml2html: main_lexbuf) *)
+(*
   Id.counter := 0;
   Typing.extenv := M.empty;
   EmitAssem.f outchan
@@ -36,8 +37,8 @@ let lexbuf (outchan, datachan) l = (* バッファをコンパイルしてチャンネルへ出力す
                                             (KNormal.f
                                                 (Typing.f
                                                     (Parser.exp Lexer.token l))))))))))))
+                                                    *)
 
-(*
   Id.counter := 0;
   Typing.extenv := M.empty;
   EmitAssem.f outchan
@@ -53,7 +54,6 @@ let lexbuf (outchan, datachan) l = (* バッファをコンパイルしてチャンネルへ出力す
                                             (KNormal.f
                                                 (Typing.f
                                                     (Parser.exp Lexer.token l))))))))))))
-                                                    *)
 
 let syntax_check f =
     let inchan = open_in (f ^ ".ml") in

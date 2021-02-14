@@ -28,10 +28,15 @@ let f list =
             (fun ret inst -> 
                 (match inst with
                 | J(l) -> (J(pursue_jump l env) :: ret)
+                | Beq(x, y, l) -> (Beq(x, y, (pursue_jump l env)) :: ret)
+                | Beqi(x, y, l) -> (Beqi(x, y, (pursue_jump l env)) :: ret)
+                | Bne(x, y, l) -> (Bne(x, y, (pursue_jump l env)) :: ret)
+                | Blt(x, y, l) -> (Blt(x, y, (pursue_jump l env)) :: ret)
+                | Blti(x, y, l) -> (Blti(x, y, (pursue_jump l env)) :: ret)
+                | FBeq(x, y, l) -> (FBeq(x, y, (pursue_jump l env)) :: ret)
+                | FBne(x, y, l) -> (FBne(x, y, (pursue_jump l env)) :: ret)
+                | FBlt(x, y, l) -> (FBlt(x, y, (pursue_jump l env)) :: ret)
                 | _ -> inst :: ret)
             )
         [] list in
     List.rev list'
-
-    (* いらないラベルを消す *)
-    (* branch命令についても辿れるはず *)
