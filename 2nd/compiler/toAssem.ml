@@ -279,7 +279,6 @@ and g' = function
       (match y' with
       | V(y) -> g'_non_tail_if (NonTail(z)) y x e1 e2 "bgt" "blt"
       | C(i) -> 
-      (*
             if i = 0 then 
                   g'_non_tail_if (NonTail(z)) reg_zero x e1 e2 "bgt" "blt"
             else
@@ -289,10 +288,7 @@ and g' = function
             else
                   addi reg_at reg_zero i;
                   g'_non_tail_if (NonTail(z)) reg_at x e1 e2 "bgt" "blt"
-                  *)
-                  addi reg_at reg_zero i;
-                  g'_non_tail_if (NonTail(z)) reg_at x e1 e2 "bgt" "blt"
-            )
+            ))
 
  | NonTail(z), IfGE(x, y', e1, e2) ->
        (* x >= y then e1 <=> x < y then e2 *)
@@ -481,10 +477,13 @@ let f dc option (Prog(data, fundefs, e)) =
   emit (Comment("# ------------ Initialize register ------------\n"));
   load_imm reg_sp (Int32.of_int sp_init);
   load_imm reg_hp (Int32.of_int (!FixAddress.hp_init + float_hp));
-  (*
+
+  (* 定数レジスタの初期化 *)
   load_imm "%k1" (Int32.of_int 1);
-  load_imm "%f30" (get 1.0);
-  *)
+  load_imm reg_at (get 1.0);
+  emit (Sw(reg_at, 0, reg_hp));
+  emit (FLw("%f30", 0, reg_hp));
+
   emit (Comment("# ------------ Text Section -------------------\n"));
   emit (Comment(".section\t\".text\"\n"));
   emit (J("min_caml_start"));

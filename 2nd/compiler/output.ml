@@ -11,49 +11,50 @@ let rec iter_asm n e =
   Format.eprintf "iteration %d@." n;
   if n = 0 then e else
   (*
+  let e' = Constreg.f (Peephole.f (ElimAsm.f (ConstFoldAsm.f e))) in
   let e' = Peephole.f (ElimAsm.f (ConstFoldAsm.f e)) in
   let e' = ElimAsm.f (ConstFoldAsm.f e) in
   let e' = (ConstFoldAsm.f e) in 
   let e' = e in
   *)
-  let e' = Peephole.f (ElimAsm.f (ConstFoldAsm.f e)) in
+  let e' = Constreg.f (Peephole.f (ElimAsm.f (ConstFoldAsm.f e))) in
   if e = e' then e else
   iter_asm (n - 1) e'
 
 let lexbuf (outchan, datachan) l = (* バッファをコンパイルしてチャンネルへ出力する (caml2html: main_lexbuf) *)
-(*
   Id.counter := 0;
   Typing.extenv := M.empty;
   EmitAssem.f outchan
     (ElimJump.f 
         (ToAssem.f datachan true (* RegAllocbyColorをまとめる *)
-                (iter_asm !limit
-                    (Simm.f
-                        (Virtual.f
-                            (Closure.f
-                                (FixAddress.f
-                                    (iter !limit
-                                        (Alpha.f
-                                            (KNormal.f
-                                                (Typing.f
-                                                    (Parser.exp Lexer.token l))))))))))))
-                                                    *)
+            (iter_asm !limit
+                (Simm.f
+                    (Virtual.f
+                        (Closure.f
+                            (FixAddress.f
+                                (iter !limit
+                                    (Alpha.f
+                                        (KNormal.f
+                                            (Typing.f
+                                                (Parser.exp Lexer.token l))))))))))))
 
+(*
   Id.counter := 0;
   Typing.extenv := M.empty;
   EmitAssem.f outchan
     (ElimJump.f 
         (ToAssem.f datachan false (* RegAllocをまとめる *)
-                (iter_asm !limit
-                    (Simm.f
-                        (Virtual.f
-                            (Closure.f
-                                (FixAddress.f
-                                    (iter !limit
-                                        (Alpha.f
-                                            (KNormal.f
-                                                (Typing.f
-                                                    (Parser.exp Lexer.token l))))))))))))
+            (iter_asm !limit
+                (Simm.f
+                    (Virtual.f
+                        (Closure.f
+                            (FixAddress.f
+                                (iter !limit
+                                    (Alpha.f
+                                        (KNormal.f
+                                            (Typing.f
+                                                (Parser.exp Lexer.token l))))))))))))
+                                                    *)
 
 let syntax_check f =
     let inchan = open_in (f ^ ".ml") in
