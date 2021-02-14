@@ -1,19 +1,36 @@
 open Assem
 
+(* 
+bnei_else.7616ではなく, bnei_cont.7613にとびたい
+
+   beqi    %v0, 0, bnei_else.7616
+   ...
+   j   bnei_cont.7613
+bnei_else.7616:
+bnei_cont.7617:
+   j   bnei_cont.7613
+*)
+
+let rec next_inst list l env = 
+    match list with
+    | [] -> env
+    | _ -> 
+        let next = List.hd list in
+        (match next with
+        | J(s) -> M.add l s env
+        | Label(_) -> next_inst (List.tl list) l env
+        | _ -> env)
+
 let rec jump_label list env = 
     match list with
     | [] -> env
-    | inst :: [] -> env
     | inst :: rest -> 
         let env' = 
             (match inst with
-            | Label(l) -> 
-                let next = List.hd rest in
-                (match next with
-                | J(s) -> M.add l s env
-                | _ -> env)
+            | Label(l) -> next_inst rest l env
             | _ -> env) in
         jump_label rest env'
+
 
 let rec pursue_jump l env = 
     if M.mem l env then

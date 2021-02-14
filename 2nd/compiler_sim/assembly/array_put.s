@@ -3,7 +3,7 @@
 # ------------ Initialize float table ---------
 # ------------ Initialize register ------------
 	lui	%sp, 1
-	ori	%sp, %sp, 64464
+	ori	%sp, %sp, 44464
 	lui	%hp, 0
 	ori	%hp, %hp, 4
 # ------------ Text Section -------------------

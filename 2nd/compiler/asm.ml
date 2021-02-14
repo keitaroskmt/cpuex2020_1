@@ -117,7 +117,7 @@ let is_reg x = (x.[0] = '%')
 let hp_init = 60000
 let sp_init = 600000
 *)
-let sp_init = 130000
+let sp_init = 110000
 
 (* regAllocbyColor.mlÍÑ *)
 let registers = 

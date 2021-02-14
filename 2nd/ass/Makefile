@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -std=c++17 -Wall -lncurses
+CFLAGS = -Ofast -std=c++17 -Wall -lncurses
 
 main: main.cpp writer.cpp parser.cpp
 	$(CC) $(CFLAGS) -o $@ $+
