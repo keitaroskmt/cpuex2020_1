@@ -75128,7 +75128,7 @@ min_caml_start:
 	nop
 	nop
 	addi	%sp, %sp, -12
-	addi	%v0, %zero, 128
+	addi	%v0, %zero, 2
 
 	lw	%ra, 11(%sp)
 	sw	%v0, 154(%zero)
@@ -75142,7 +75142,7 @@ min_caml_start:
 
 	nop
 	nop
-	addi	%v1, %zero, 64
+	addi	%v1, %zero, 1
 	nop
 
 	sw	%v1, 156(%zero)

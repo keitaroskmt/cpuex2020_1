@@ -112,14 +112,35 @@ let rec atan x =
     )
 in
 
+(* ループ展開してみる *)
 (* 10で割った商 *)
 let rec print_int_sub1 x n =
-    if x < 10 then n else print_int_sub1 (x - 10) (n + 1)
+    if x < 10 then n else
+    (
+        if x < 20 then (n + 1) else
+        (
+            if x < 30 then (n + 2) else
+            (
+                if x < 40 then (n + 3) else
+                    print_int_sub1 (x - 40) (n + 4)
+            )
+        )
+    )
 in
 
 (* 10で割ったあまり *)
 let rec print_int_sub2 x =
-    if x < 10 then x else print_int_sub2 (x - 10)
+    if x < 10 then x else 
+    (
+        if x < 20 then x - 10 else
+        (
+            if x < 30 then x - 20 else
+            (
+                if x < 40 then x - 30 else
+                    print_int_sub2 (x - 40)
+            )
+        )
+    )
 in
 
 let rec print_int x =

@@ -141,7 +141,11 @@ let reg_map =
     List.fold_left
         (fun env reg -> M.add reg reg env) nenv fregisters
 
-let specialregs = [("%k1", Type.Int); ("%fp", Type.Int); ("%hp", Type.Int); ("%sp", Type.Int); ("%ra", Type.Int); ("%at", Type.Int); ("%zero", Type.Int); ("%fzero", Type.Float)] 
+(* 定数レジスタ 1, 1.0を新たに設ける *)
+(* クロージャがでない前提で, %k1を1, %f30を1.0に定める *)
+let reg_one = "%k1"
+let reg_fone = "%f30"
+let specialregs = [("%k1", Type.Int); ("%f30", Type.Float); ("%fp", Type.Int); ("%hp", Type.Int); ("%sp", Type.Int); ("%ra", Type.Int); ("%at", Type.Int); ("%zero", Type.Int); ("%fzero", Type.Float)] 
 
 (* raytracerでは, それぞれ引数上限 6つずつ *)
 let iargregs = 
@@ -165,7 +169,7 @@ let icallersaves =
         in List.map (fun x -> (x, Type.Int)) icallersaves'
 
 let fcallersaves =
-    let fcallersaves' = ["%f16"; "%f17"; "%f18"; "%f19"; "%f20"; "%f21"; "%f22"; "%f23"; "%f24"; "%f25"; "%f26"; "%f27"; "%f28"; "%f29"; "%f30"]
+    let fcallersaves' = ["%f16"; "%f17"; "%f18"; "%f19"; "%f20"; "%f21"; "%f22"; "%f23"; "%f24"; "%f25"; "%f26"; "%f27"; "%f28"; "%f29"]
         in List.map (fun x -> (x, Type.Float)) fcallersaves'
 
 

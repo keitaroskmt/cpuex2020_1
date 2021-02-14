@@ -8,7 +8,7 @@ let rec_threshold = ref 50
 let threshold = ref 0 (* Mainで-inlineオプションによりセットされる *)
 let rec_threshold = ref 0
 *)
-let threshold = ref 300 (* Mainで-inlineオプションによりセットされる *)
+let threshold = ref 100 (* Mainで-inlineオプションによりセットされる *)
 let rec_threshold = ref 50
 
 let rec size = function

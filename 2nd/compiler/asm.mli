@@ -79,6 +79,9 @@ val fregisters : Id.t list
 val reg_map : Id.t M.t
 
 
+val reg_one : Id.t
+val reg_fone : Id.t
+
 val specialregs : (Id.t * Type.t) list
 val argregs : (Id.t * Type.t) list
 val calleesaves : (Id.t * Type.t) list

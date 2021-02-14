@@ -50,8 +50,8 @@ output.ml main.mli main.ml
 #mytest/%.s: $(RESULT) mytest/%.ml
 #	./$(RESULT) mytest/$*
 
-TESTS = fib float_fib adder array_make array_put sin cos
-#TESTS = fib
+#TESTS = fib float_fib adder array_make array_put sin cos
+TESTS = fib
 
 do_test: $(TESTS:%=../compiler_sim/assembly/%.s)
 
