@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
     std::string outfile = "out.txt";
     std::string datafile = "data/";
 
-    while ((opt = getopt(argc, argv, "sbcpn:i:o:mdlfv")) != -1)
+    while ((opt = getopt(argc, argv, "sbcpn:i:o:mdlfva")) != -1)
     {
         switch (opt)
         {
@@ -103,6 +103,12 @@ int main(int argc, char *argv[])
 
         case 'v':
             vliw = true;
+            break;
+
+        case 'a':
+            vliw = true;
+            use_fpu = true;
+            is_step = true;
             break;
 
         default:

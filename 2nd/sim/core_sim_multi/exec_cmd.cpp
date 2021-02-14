@@ -125,6 +125,12 @@ int exec_cmd(int *loop, bool *is_stat, bool *print_bc, bool *print_calc, bool *p
             *print_process = true;
         else if (cmd == "endpp\n")
             *print_process = false;
+        else if (cmd == "pa\n")
+        {
+            *print_bc = true;
+            *print_calc = true;
+            *print_process = true;
+        }
         else if (cmd == "pi\n")
         {
             for (int i = 0; i < in_bytes.size(); i++)
