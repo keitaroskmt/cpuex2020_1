@@ -49,6 +49,7 @@ module finv
         c_reg <= c;
         a0_reg <= a0;
         cor_n_reg <= cor_n;
+        subnormal_reg <= subnormal;
     end
 
 endmodule
