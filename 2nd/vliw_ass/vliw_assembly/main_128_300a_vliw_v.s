@@ -26,11 +26,6 @@
 	flw	%f30, 0(%hp)
 	nop
 	nop
-	nop
-
-	nop
-	nop
-	nop
 	j	min_caml_start
 
 min_caml_print_char:
@@ -569,6 +564,11 @@ reduction_2pi_sub2.2629:
 	nop
 	nop
 	fdiv	%f1, %f1, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f0, %f2, fbgt_else.33307
 
 	nop
@@ -632,6 +632,11 @@ fbgt_else.33310:
 	nop
 	nop
 	fdiv	%f1, %f1, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f0, %f2, fbgt_else.33313
 
 	nop
@@ -671,6 +676,11 @@ fbgt_else.33308:
 	nop
 	nop
 	fdiv	%f1, %f1, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f0, %f2, fbgt_else.33315
 
 	nop
@@ -719,6 +729,11 @@ fbgt_else.33316:
 	nop
 	nop
 	fdiv	%f1, %f1, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f0, %f2, fbgt_else.33319
 
 	nop
@@ -769,6 +784,11 @@ fbgt_else.33306:
 	nop
 	nop
 	fdiv	%f1, %f1, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f0, %f2, fbgt_else.33321
 
 	nop
@@ -832,6 +852,11 @@ fbgt_else.33324:
 	nop
 	nop
 	fdiv	%f1, %f1, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f0, %f2, fbgt_else.33327
 
 	nop
@@ -871,6 +896,11 @@ fbgt_else.33322:
 	nop
 	nop
 	fdiv	%f1, %f1, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f0, %f2, fbgt_else.33329
 
 	nop
@@ -919,6 +949,11 @@ fbgt_else.33330:
 	nop
 	nop
 	fdiv	%f1, %f1, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f0, %f2, fbgt_else.33333
 
 	nop
@@ -4837,6 +4872,11 @@ fbgt_cont.34692:
 	nop
 	nop
 	addi	%s1, %v0, 0
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%s0, 0, bnei_else.34693
 
 	nop
@@ -4914,52 +4954,27 @@ bnei_cont.34696:
 	addi	%hp, %hp, 11
 
 	sw	%v0, 10(%ra)
-	nop
-	nop
-	nop
-
 	sw	%s1, 9(%ra)
-	nop
 	nop
 	nop
 
 	sw	%s6, 8(%ra)
-	nop
-	nop
-	nop
-
 	sw	%s5, 7(%ra)
-	nop
 	nop
 	nop
 
 	sw	%s7, 6(%ra)
-	nop
-	nop
-	nop
-
 	sw	%s3, 5(%ra)
-	nop
 	nop
 	nop
 
 	sw	%s2, 4(%ra)
-	nop
-	nop
-	nop
-
 	sw	%s0, 3(%ra)
-	nop
 	nop
 	nop
 
 	sw	%k0, 2(%ra)
-	nop
-	nop
-	nop
-
 	sw	%a3, 1(%ra)
-	nop
 	nop
 	nop
 
@@ -4969,6 +4984,11 @@ bnei_cont.34696:
 	nop
 
 	sw	%ra, 12(%a0)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	beqi	%a3, 3, bnei_else.34697
@@ -5088,12 +5108,7 @@ bnei_cont.34706:
 	fmul	%f0, %f16, %f0
 
 	fsw	%f1, 1(%s2)
-	nop
-	nop
-	nop
-
 	fsw	%f0, 2(%s2)
-	nop
 	nop
 	nop
 
@@ -8359,6 +8374,11 @@ fbgt_cont.35101:
 	nop
 	nop
 	addi	%s0, %v0, 0
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%k0, 0, bnei_else.35102
 
 	nop
@@ -8436,52 +8456,27 @@ bnei_cont.35105:
 	addi	%hp, %hp, 11
 
 	sw	%v0, 10(%ra)
-	nop
-	nop
-	nop
-
 	sw	%s0, 9(%ra)
-	nop
 	nop
 	nop
 
 	sw	%s5, 8(%ra)
-	nop
-	nop
-	nop
-
 	sw	%s4, 7(%ra)
-	nop
 	nop
 	nop
 
 	sw	%s6, 6(%ra)
-	nop
-	nop
-	nop
-
 	sw	%s2, 5(%ra)
-	nop
 	nop
 	nop
 
 	sw	%s1, 4(%ra)
-	nop
-	nop
-	nop
-
 	sw	%k0, 3(%ra)
-	nop
 	nop
 	nop
 
 	sw	%a3, 2(%ra)
-	nop
-	nop
-	nop
-
 	sw	%a1, 1(%ra)
-	nop
 	nop
 	nop
 
@@ -8491,6 +8486,11 @@ bnei_cont.35105:
 	nop
 
 	sw	%ra, 12(%a2)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	beqi	%a1, 3, bnei_else.35106
@@ -8610,12 +8610,7 @@ bnei_cont.35115:
 	fmul	%f0, %f16, %f0
 
 	fsw	%f1, 1(%s1)
-	nop
-	nop
-	nop
-
 	fsw	%f0, 2(%s1)
-	nop
 	nop
 	nop
 
@@ -9067,42 +9062,22 @@ bnei_else.35156:
 
 read_net_item.2788:
 	sw	%v0, 0(%sp)
-	nop
-	nop
-	nop
-
 	sw	%t6, 1(%sp)
-	nop
 	nop
 	nop
 
 	sw	%t5, 2(%sp)
-	nop
-	nop
-	nop
-
 	sw	%t4, 3(%sp)
-	nop
 	nop
 	nop
 
 	sw	%t3, 4(%sp)
-	nop
-	nop
-	nop
-
 	sw	%t2, 5(%sp)
-	nop
 	nop
 	nop
 
 	sw	%t1, 6(%sp)
-	nop
-	nop
-	nop
-
 	sw	%t0, 7(%sp)
-	nop
 	nop
 	nop
 
@@ -9124,6 +9099,11 @@ read_net_item.2788:
 	nop
 	nop
 	addi	%a0, %zero, -1
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%t0, -1, bnei_else.35232
 
 	lw	%a1, 0(%sp)
@@ -9196,12 +9176,12 @@ read_net_item.2788:
 	nop
 	jal	read_net_item.2788
 
-	nop
+	sw	%t6, 0(%at)
 	nop
 	addi	%sp, %sp, -9
 	add	%at, %v0, %t5
 
-	sw	%t6, 0(%at)
+	nop
 	nop
 	nop
 	j	bnei_cont.35238
@@ -9335,22 +9315,12 @@ bnei_else.35232:
 
 read_or_network.2790:
 	sw	%v0, 0(%sp)
-	nop
-	nop
-	nop
-
 	sw	%t1, 1(%sp)
-	nop
 	nop
 	nop
 
 	sw	%t0, 2(%sp)
-	nop
-	nop
-	nop
-
 	sw	%ra, 3(%sp)
-	nop
 	nop
 	nop
 
@@ -9367,6 +9337,11 @@ read_or_network.2790:
 	nop
 	nop
 	addi	%a3, %zero, -1
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a2, -1, bnei_else.35314
 
 	nop
@@ -9409,12 +9384,12 @@ read_or_network.2790:
 	nop
 	jal	read_net_item.2788
 
-	nop
+	sw	%s0, 2(%v1)
 	nop
 	addi	%sp, %sp, -4
 	addi	%v1, %v0, 0
 
-	sw	%s0, 2(%v1)
+	nop
 	nop
 	nop
 	j	bnei_cont.35319
@@ -9535,12 +9510,12 @@ bnei_cont.35315:
 	nop
 	jal	read_net_item.2788
 
-	nop
+	sw	%k0, 1(%t1)
 	nop
 	addi	%sp, %sp, -5
 	addi	%t1, %v0, 0
 
-	sw	%k0, 1(%t1)
+	nop
 	nop
 	nop
 	j	bnei_cont.35324
@@ -9604,12 +9579,12 @@ bnei_cont.35322:
 	nop
 	jal	read_or_network.2790
 
-	nop
+	sw	%t1, 0(%at)
 	nop
 	addi	%sp, %sp, -5
 	add	%at, %v0, %t0
 
-	sw	%t1, 0(%at)
+	nop
 	nop
 	nop
 	j	bnei_cont.35326
@@ -9998,6 +9973,11 @@ iter_setup_dirvec_constants.2889:
 	nop
 	nop
 	add	%a2, %zero, %ra
+	nop
+
+	nop
+	nop
+	nop
 	blti	%a1, 0, bgti_else.35581
 
 	lw	%k0, 12(%a1)
@@ -10068,6 +10048,11 @@ iter_setup_dirvec_constants.2889:
 	nop
 	nop
 	fadd	%f0, %f16, %f0
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a3, 0, bnei_else.35586
 
 	lw	%a3, 9(%k0)
@@ -10150,6 +10135,11 @@ bnei_cont.35587:
 	nop
 	nop
 	fneg	%f20, %f1
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a3, 0, bnei_else.35588
 
 	lw	%a3, 9(%k0)
@@ -10234,12 +10224,7 @@ bnei_cont.35587:
 
 bnei_else.35588:
 	fsw	%f17, 1(%v0)
-	nop
-	nop
-	nop
-
 	fsw	%f21, 2(%v0)
-	nop
 	nop
 	nop
 
@@ -10481,6 +10466,11 @@ bnei_else.35600:
 	lw	%ra, 6(%k0)
 	nop
 	nop
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f1, %fzero, fbgt_else.35602
 
 	nop
@@ -10530,6 +10520,11 @@ bnei_cont.35605:
 	nop
 
 	flw	%f0, 0(%ra)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	beqi	%a3, 0, bnei_else.35608
@@ -10593,6 +10588,11 @@ bnei_else.35612:
 	lw	%ra, 6(%k0)
 	nop
 	nop
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f1, %fzero, fbgt_else.35614
 
 	nop
@@ -10642,6 +10642,11 @@ bnei_cont.35617:
 	nop
 
 	flw	%f0, 1(%ra)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	beqi	%a3, 0, bnei_else.35620
@@ -10705,6 +10710,11 @@ bnei_else.35624:
 	lw	%ra, 6(%k0)
 	nop
 	nop
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f1, %fzero, fbgt_else.35626
 
 	nop
@@ -10754,6 +10764,11 @@ bnei_cont.35629:
 	nop
 
 	flw	%f0, 2(%k0)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	beqi	%a3, 0, bnei_else.35632
@@ -10870,6 +10885,11 @@ bnei_cont.35583:
 	nop
 	nop
 	fadd	%f0, %f16, %f0
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a1, 0, bnei_else.35639
 
 	lw	%a1, 9(%k0)
@@ -10952,6 +10972,11 @@ bnei_cont.35640:
 	nop
 	nop
 	fneg	%f17, %f1
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a1, 0, bnei_else.35641
 
 	lw	%a1, 9(%k0)
@@ -11066,12 +11091,7 @@ bnei_cont.35640:
 
 bnei_else.35641:
 	fsw	%f22, 1(%v0)
-	nop
-	nop
-	nop
-
 	fsw	%f20, 2(%v0)
-	nop
 	nop
 	nop
 
@@ -11328,6 +11348,11 @@ bnei_else.35653:
 	lw	%ra, 6(%k0)
 	nop
 	nop
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f1, %fzero, fbgt_else.35655
 
 	nop
@@ -11377,6 +11402,11 @@ bnei_cont.35658:
 	nop
 
 	flw	%f0, 0(%ra)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	beqi	%a1, 0, bnei_else.35661
@@ -11440,6 +11470,11 @@ bnei_else.35665:
 	lw	%ra, 6(%k0)
 	nop
 	nop
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f1, %fzero, fbgt_else.35667
 
 	nop
@@ -11489,6 +11524,11 @@ bnei_cont.35670:
 	nop
 
 	flw	%f0, 1(%ra)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	beqi	%a1, 0, bnei_else.35673
@@ -11552,6 +11592,11 @@ bnei_else.35677:
 	lw	%ra, 6(%k0)
 	nop
 	nop
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f1, %fzero, fbgt_else.35679
 
 	nop
@@ -11601,6 +11646,11 @@ bnei_cont.35682:
 	nop
 
 	flw	%f0, 2(%k0)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	beqi	%a1, 0, bnei_else.35685
@@ -11755,6 +11805,11 @@ setup_dirvec_constants.2892:
 	nop
 	nop
 	fadd	%f0, %f16, %f0
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a2, 0, bnei_else.35794
 
 	lw	%a2, 9(%k0)
@@ -11837,6 +11892,11 @@ bnei_cont.35795:
 	nop
 	nop
 	fneg	%f17, %f1
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a2, 0, bnei_else.35796
 
 	lw	%a2, 9(%k0)
@@ -11951,12 +12011,7 @@ bnei_cont.35795:
 
 bnei_else.35796:
 	fsw	%f22, 1(%v0)
-	nop
-	nop
-	nop
-
 	fsw	%f20, 2(%v0)
-	nop
 	nop
 	nop
 
@@ -12213,6 +12268,11 @@ bnei_else.35808:
 	lw	%ra, 6(%k0)
 	nop
 	nop
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f1, %fzero, fbgt_else.35810
 
 	nop
@@ -12262,6 +12322,11 @@ bnei_cont.35813:
 	nop
 
 	flw	%f0, 0(%ra)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	beqi	%a2, 0, bnei_else.35816
@@ -12325,6 +12390,11 @@ bnei_else.35820:
 	lw	%ra, 6(%k0)
 	nop
 	nop
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f1, %fzero, fbgt_else.35822
 
 	nop
@@ -12374,6 +12444,11 @@ bnei_cont.35825:
 	nop
 
 	flw	%f0, 1(%ra)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	beqi	%a2, 0, bnei_else.35828
@@ -12437,6 +12512,11 @@ bnei_else.35832:
 	lw	%ra, 6(%k0)
 	nop
 	nop
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f1, %fzero, fbgt_else.35834
 
 	nop
@@ -12486,6 +12566,11 @@ bnei_cont.35837:
 	nop
 
 	flw	%f0, 2(%k0)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	beqi	%a2, 0, bnei_else.35840
@@ -12599,6 +12684,11 @@ setup_startp_constants.2894:
 	fsw	%f0, 2(%a3)
 	nop
 	nop
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a1, 2, bnei_else.35878
 
 	nop
@@ -12655,6 +12745,11 @@ bgt_else.35880:
 	nop
 	nop
 	fadd	%f0, %f16, %f0
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 0, bnei_else.35882
 
 	lw	%a0, 9(%a2)
@@ -12829,6 +12924,11 @@ check_all_inside.2919:
 	nop
 	nop
 	fsub	%f21, %f2, %f16
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 1, bnei_else.36032
 
 	nop
@@ -12869,6 +12969,11 @@ check_all_inside.2919:
 	nop
 	nop
 	fadd	%f16, %f18, %f16
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 0, bnei_else.36036
 
 	lw	%a0, 9(%a1)
@@ -12936,6 +13041,11 @@ bnei_else.36038:
 
 bnei_cont.36039:
 	lw	%a1, 6(%a1)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	fblt	%f16, %fzero, fbgt_else.36040
@@ -13318,6 +13428,11 @@ bnei_else.36070:
 	nop
 	nop
 	fsub	%f21, %f2, %f16
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 1, bnei_else.36072
 
 	nop
@@ -13358,6 +13473,11 @@ bnei_else.36070:
 	nop
 	nop
 	fadd	%f16, %f18, %f16
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 0, bnei_else.36076
 
 	lw	%a0, 9(%a2)
@@ -13425,6 +13545,11 @@ bnei_else.36078:
 
 bnei_cont.36079:
 	lw	%a2, 6(%a2)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	fblt	%f16, %fzero, fbgt_else.36080
@@ -13835,6 +13960,11 @@ shadow_check_and_group.2925:
 	nop
 	nop
 	fsub	%f23, %f18, %f0
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 1, bnei_else.36307
 
 	nop
@@ -13928,6 +14058,11 @@ bnei_else.36313:
 	nop
 	nop
 	fadd	%f0, %f17, %f0
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 0, bnei_else.36315
 
 	lw	%a0, 9(%a1)
@@ -14689,6 +14824,11 @@ bnei_cont.36308:
 	flw	%f1, 135(%zero)
 	nop
 	nop
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 0, bnei_else.36371
 
 	flw	%f0, 467(%zero)
@@ -14758,6 +14898,11 @@ bnei_cont.36372:
 	nop
 	nop
 	fadd	%f2, %f16, %f18
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, -1, bnei_else.36376
 
 	lw	%a1, 12(%a0)
@@ -14788,6 +14933,11 @@ bnei_cont.36372:
 	nop
 	nop
 	fsub	%f21, %f2, %f16
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 1, bnei_else.36378
 
 	nop
@@ -14828,6 +14978,11 @@ bnei_cont.36372:
 	nop
 	nop
 	fadd	%f16, %f18, %f16
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 0, bnei_else.36382
 
 	lw	%a0, 9(%a1)
@@ -14895,6 +15050,11 @@ bnei_else.36384:
 
 bnei_cont.36385:
 	lw	%a1, 6(%a1)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	fblt	%f16, %fzero, fbgt_else.36386
@@ -15599,6 +15759,11 @@ shadow_check_one_or_matrix.2931:
 	nop
 	nop
 	fsub	%f20, %f1, %f0
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 1, bnei_else.36647
 
 	nop
@@ -15692,6 +15857,11 @@ bnei_else.36653:
 	nop
 	nop
 	fadd	%f0, %f16, %f0
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 0, bnei_else.36655
 
 	lw	%a0, 9(%a2)
@@ -16896,6 +17066,11 @@ solve_each_element.2934:
 	nop
 	nop
 	fsub	%f23, %f17, %f0
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 1, bnei_else.36991
 
 	nop
@@ -16941,6 +17116,11 @@ solve_each_element.2934:
 	nop
 	nop
 	fadd	%f0, %f1, %f0
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a2, 0, bnei_else.36995
 
 	lw	%a0, 9(%a1)
@@ -17041,6 +17221,11 @@ bnei_else.36999:
 	nop
 	nop
 	fadd	%f1, %f16, %f1
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a2, 0, bnei_else.37001
 
 	lw	%a0, 9(%a1)
@@ -17133,6 +17318,11 @@ bnei_cont.37002:
 	nop
 	nop
 	fadd	%f16, %f2, %f16
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a2, 0, bnei_else.37003
 
 	lw	%a0, 9(%a1)
@@ -17429,6 +17619,11 @@ bnei_else.37019:
 	lw	%ra, 4(%a1)
 	lw	%a2, 6(%a1)
 	nop
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f2, %fzero, fbgt_else.37021
 
 	nop
@@ -17473,6 +17668,11 @@ bnei_cont.37026:
 bnei_else.37023:
 bnei_cont.37024:
 	flw	%f0, 0(%ra)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	beqi	%a0, 0, bnei_else.37027
@@ -17655,6 +17855,11 @@ bnei_else.37041:
 	lw	%ra, 4(%a1)
 	lw	%a2, 6(%a1)
 	nop
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f16, %fzero, fbgt_else.37043
 
 	nop
@@ -17699,6 +17904,11 @@ bnei_cont.37048:
 bnei_else.37045:
 bnei_cont.37046:
 	flw	%f0, 1(%ra)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	beqi	%a0, 0, bnei_else.37049
@@ -17876,6 +18086,11 @@ bnei_else.37063:
 	lw	%ra, 4(%a1)
 	lw	%a2, 6(%a1)
 	nop
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f1, %fzero, fbgt_else.37065
 
 	nop
@@ -17920,6 +18135,11 @@ bnei_cont.37070:
 bnei_else.37067:
 bnei_cont.37068:
 	flw	%f0, 2(%ra)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	beqi	%a0, 0, bnei_else.37071
@@ -18157,6 +18377,11 @@ fbgt_cont.37089:
 	nop
 	nop
 	fadd	%f2, %f16, %f17
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, -1, bnei_else.37092
 
 	lw	%a1, 12(%a0)
@@ -18187,6 +18412,11 @@ fbgt_cont.37089:
 	nop
 	nop
 	fsub	%f21, %f2, %f16
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 1, bnei_else.37094
 
 	nop
@@ -18227,6 +18457,11 @@ fbgt_cont.37089:
 	nop
 	nop
 	fadd	%f16, %f18, %f16
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 0, bnei_else.37098
 
 	lw	%a0, 9(%a1)
@@ -18294,6 +18529,11 @@ bnei_else.37100:
 
 bnei_cont.37101:
 	lw	%a1, 6(%a1)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	fblt	%f16, %fzero, fbgt_else.37102
@@ -18652,32 +18892,17 @@ bnei_cont.37093:
 	beqi	%v0, 0, bnei_cont.37087
 
 	fsw	%f22, 137(%zero)
-	nop
-	nop
-	nop
-
 	fsw	%f0, 138(%zero)
-	nop
 	nop
 	nop
 
 	fsw	%f1, 139(%zero)
-	nop
-	nop
-	nop
-
 	fsw	%f2, 140(%zero)
-	nop
 	nop
 	nop
 
 	sw	%s1, 141(%zero)
-	nop
-	nop
-	nop
-
 	sw	%s2, 136(%zero)
-	nop
 	nop
 	j	bnei_cont.37087
 
@@ -19168,6 +19393,11 @@ trace_or_matrix.2942:
 	nop
 	nop
 	fsub	%f20, %f1, %f0
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 1, bnei_else.37612
 
 	nop
@@ -19213,6 +19443,11 @@ trace_or_matrix.2942:
 	nop
 	nop
 	fadd	%f0, %f1, %f0
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a2, 0, bnei_else.37616
 
 	lw	%a0, 9(%a1)
@@ -19313,6 +19548,11 @@ bnei_else.37620:
 	nop
 	nop
 	fadd	%f1, %f16, %f1
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a2, 0, bnei_else.37622
 
 	lw	%a0, 9(%a1)
@@ -19405,6 +19645,11 @@ bnei_cont.37623:
 	nop
 	nop
 	fadd	%f16, %f17, %f16
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a2, 0, bnei_else.37624
 
 	lw	%a0, 9(%a1)
@@ -19701,6 +19946,11 @@ bnei_else.37640:
 	lw	%a3, 4(%a1)
 	lw	%a2, 6(%a1)
 	nop
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f17, %fzero, fbgt_else.37642
 
 	nop
@@ -19745,6 +19995,11 @@ bnei_cont.37647:
 bnei_else.37644:
 bnei_cont.37645:
 	flw	%f0, 0(%a3)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	beqi	%a0, 0, bnei_else.37648
@@ -19927,6 +20182,11 @@ bnei_else.37662:
 	lw	%a3, 4(%a1)
 	lw	%a2, 6(%a1)
 	nop
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f16, %fzero, fbgt_else.37664
 
 	nop
@@ -19971,6 +20231,11 @@ bnei_cont.37669:
 bnei_else.37666:
 bnei_cont.37667:
 	flw	%f0, 1(%a3)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	beqi	%a0, 0, bnei_else.37670
@@ -20148,6 +20413,11 @@ bnei_else.37684:
 	lw	%a2, 4(%a1)
 	lw	%a1, 6(%a1)
 	nop
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f1, %fzero, fbgt_else.37686
 
 	nop
@@ -20192,6 +20462,11 @@ bnei_cont.37691:
 bnei_else.37688:
 bnei_cont.37689:
 	flw	%f0, 2(%a2)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	beqi	%a0, 0, bnei_else.37692
@@ -20856,6 +21131,11 @@ bnei_cont.37611:
 	nop
 	nop
 	fsub	%f20, %f1, %f0
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 1, bnei_else.37741
 
 	nop
@@ -20901,6 +21181,11 @@ bnei_cont.37611:
 	nop
 	nop
 	fadd	%f0, %f16, %f0
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 0, bnei_else.37745
 
 	lw	%a0, 9(%a1)
@@ -21006,6 +21291,11 @@ bnei_else.37749:
 	nop
 	nop
 	fadd	%f1, %f17, %f1
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 0, bnei_else.37751
 
 	lw	%a0, 9(%a1)
@@ -21103,6 +21393,11 @@ bnei_cont.37752:
 	nop
 	nop
 	fadd	%f16, %f18, %f16
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 0, bnei_else.37753
 
 	lw	%a0, 9(%a1)
@@ -21399,6 +21694,11 @@ bnei_else.37769:
 	lw	%a3, 4(%a1)
 	lw	%a2, 6(%a1)
 	nop
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f17, %fzero, fbgt_else.37771
 
 	nop
@@ -21443,6 +21743,11 @@ bnei_cont.37776:
 bnei_else.37773:
 bnei_cont.37774:
 	flw	%f0, 0(%a3)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	beqi	%a0, 0, bnei_else.37777
@@ -21625,6 +21930,11 @@ bnei_else.37791:
 	lw	%a3, 4(%a1)
 	lw	%a2, 6(%a1)
 	nop
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f16, %fzero, fbgt_else.37793
 
 	nop
@@ -21669,6 +21979,11 @@ bnei_cont.37798:
 bnei_else.37795:
 bnei_cont.37796:
 	flw	%f0, 1(%a3)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	beqi	%a0, 0, bnei_else.37799
@@ -21846,6 +22161,11 @@ bnei_else.37813:
 	lw	%a2, 4(%a1)
 	lw	%a1, 6(%a1)
 	nop
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f1, %fzero, fbgt_else.37815
 
 	nop
@@ -21890,6 +22210,11 @@ bnei_cont.37820:
 bnei_else.37817:
 bnei_cont.37818:
 	flw	%f0, 2(%a2)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	beqi	%a0, 0, bnei_else.37821
@@ -22512,6 +22837,11 @@ solve_each_element_fast.2948:
 
 	flw	%f17, 2(%s2)
 	lw	%ra, 0(%at)
+	nop
+	nop
+
+	nop
+	nop
 	nop
 	beqi	%a0, 1, bnei_else.38063
 
@@ -23352,6 +23682,11 @@ fbgt_cont.38129:
 	nop
 	nop
 	fadd	%f2, %f17, %f16
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, -1, bnei_else.38132
 
 	lw	%a1, 12(%a0)
@@ -23382,6 +23717,11 @@ fbgt_cont.38129:
 	nop
 	nop
 	fsub	%f21, %f2, %f16
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 1, bnei_else.38134
 
 	nop
@@ -23422,6 +23762,11 @@ fbgt_cont.38129:
 	nop
 	nop
 	fadd	%f16, %f18, %f16
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 0, bnei_else.38138
 
 	lw	%a0, 9(%a1)
@@ -23489,6 +23834,11 @@ bnei_else.38140:
 
 bnei_cont.38141:
 	lw	%a1, 6(%a1)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	fblt	%f16, %fzero, fbgt_else.38142
@@ -23847,32 +24197,17 @@ bnei_cont.38133:
 	beqi	%v0, 0, bnei_cont.38127
 
 	fsw	%f22, 137(%zero)
-	nop
-	nop
-	nop
-
 	fsw	%f0, 138(%zero)
-	nop
 	nop
 	nop
 
 	fsw	%f1, 139(%zero)
-	nop
-	nop
-	nop
-
 	fsw	%f2, 140(%zero)
-	nop
 	nop
 	nop
 
 	sw	%s1, 141(%zero)
-	nop
-	nop
-	nop
-
 	sw	%s2, 136(%zero)
-	nop
 	nop
 	j	bnei_cont.38127
 
@@ -24347,6 +24682,11 @@ trace_or_matrix_fast.2956:
 
 	flw	%f17, 2(%a3)
 	lw	%a2, 0(%at)
+	nop
+	nop
+
+	nop
+	nop
 	nop
 	beqi	%a0, 1, bnei_else.38556
 
@@ -25589,6 +25929,11 @@ bnei_cont.38555:
 	flw	%f18, 2(%a3)
 	lw	%a1, 0(%at)
 	nop
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 1, bnei_else.38653
 
 	nop
@@ -26792,6 +27137,11 @@ utexture.2971:
 	nop
 
 	fsw	%f0, 147(%zero)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	beqi	%a2, 1, bnei_else.38969
@@ -29163,31 +29513,21 @@ bnei_cont.39098:
 
 trace_reflections.2978:
 	sw	%v0, 0(%sp)
-	nop
+	sw	%v1, 1(%sp)
 	fmov	%f25, %f0
 	fmov	%f26, %f1
 
-	sw	%v1, 1(%sp)
-	nop
-	nop
-	nop
-
 	sw	%t2, 2(%sp)
-	nop
-	nop
-	nop
-
 	sw	%t1, 3(%sp)
-	nop
 	nop
 	nop
 
 	sw	%t0, 4(%sp)
-	nop
+	sw	%ra, 5(%sp)
 	nop
 	nop
 
-	sw	%ra, 5(%sp)
+	nop
 	nop
 	nop
 	blti	%v0, 0, bgti_else.39203
@@ -29311,6 +29651,11 @@ bnei_cont.39207:
 	nop
 	nop
 	addi	%sp, %sp, -6
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%v0, 0, bnei_else.39214
 
 	nop
@@ -29387,6 +29732,11 @@ bnei_else.39214:
 	nop
 	nop
 	fmul	%f16, %f18, %f0
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%fzero, %f17, fbgt_else.39216
 
 	nop
@@ -29585,31 +29935,21 @@ bgti_else.39203:
 
 trace_ray.2983:
 	fsw	%f1, 0(%sp)
-	nop
+	sw	%v0, 1(%sp)
 	fmov	%f3, %f0
 	add	%a1, %zero, %v1
 
-	sw	%v0, 1(%sp)
-	nop
+	sw	%a1, 2(%sp)
+	sw	%a0, 3(%sp)
 	addi	%at, %zero, 4
 	nop
 
-	sw	%a1, 2(%sp)
-	nop
-	nop
-	nop
-
-	sw	%a0, 3(%sp)
-	nop
-	nop
-	nop
-
 	sw	%t0, 4(%sp)
-	nop
+	sw	%ra, 5(%sp)
 	nop
 	nop
 
-	sw	%ra, 5(%sp)
+	nop
 	nop
 	nop
 	blt	%at, %v0, bgt_else.39477
@@ -29645,6 +29985,11 @@ trace_ray.2983:
 	nop
 
 	fsw	%f1, 8(%sp)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	fblt	%f0, %f1, fbgt_else.39478
@@ -29733,6 +30078,11 @@ bnei_cont.39481:
 	nop
 	nop
 	fmul	%f25, %f0, %f3
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 1, bnei_else.39485
 
 	nop
@@ -29783,6 +30133,11 @@ bnei_cont.39481:
 	nop
 	nop
 	fmul	%f16, %f20, %f0
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 0, bnei_else.39489
 
 	lw	%a0, 9(%t0)
@@ -29897,12 +30252,7 @@ bnei_cont.39481:
 
 bnei_else.39489:
 	fsw	%f21, 142(%zero)
-	nop
-	nop
-	nop
-
 	fsw	%f2, 143(%zero)
-	nop
 	nop
 	nop
 
@@ -30004,12 +30354,7 @@ bnei_cont.39494:
 	fmul	%f0, %f16, %f0
 
 	fsw	%f1, 143(%zero)
-	nop
-	nop
-	nop
-
 	fsw	%f0, 144(%zero)
-	nop
 	nop
 	j	bnei_cont.39486
 
@@ -30067,11 +30412,16 @@ bnei_else.39485:
 	nop
 
 	fsw	%fzero, 143(%zero)
-	lw	%a0, 2(%sp)
+	fsw	%fzero, 144(%zero)
 	addi	%a1, %a0, -1
 	nop
 
-	fsw	%fzero, 144(%zero)
+	lw	%a0, 2(%sp)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	add	%at, %a0, %a1
 	nop
@@ -30226,12 +30576,7 @@ bnei_cont.39486:
 	nop
 
 	fsw	%f26, 0(%a0)
-	nop
-	nop
-	nop
-
 	fsw	%f27, 1(%a0)
-	nop
 	nop
 	nop
 
@@ -30502,6 +30847,11 @@ bnei_cont.39508:
 	nop
 	nop
 	addi	%sp, %sp, -11
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%v0, 0, bnei_else.39509
 
 	nop
@@ -30568,6 +30918,11 @@ bnei_else.39509:
 	nop
 	nop
 	fneg	%f17, %f0
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%fzero, %f16, fbgt_else.39511
 
 	nop
@@ -30730,13 +31085,8 @@ bnei_else.39517:
 bnei_cont.39518:
 bnei_cont.39510:
 	fsw	%f26, 162(%zero)
-	nop
-	addi	%sp, %sp, 11
-	nop
-
 	fsw	%f27, 163(%zero)
-	nop
-	nop
+	addi	%sp, %sp, 11
 	nop
 
 	fsw	%f28, 164(%zero)
@@ -30899,6 +31249,11 @@ bnei_else.39484:
 	sw	%a2, 0(%at)
 	nop
 	nop
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 0, bnei_else.39527
 
 	lw	%a0, 2(%sp)
@@ -31058,12 +31413,17 @@ trace_diffuse_ray.2989:
 	add	%a0, %zero, %v0
 
 	sw	%a0, 0(%sp)
-	fsw	%f0, 137(%zero)
+	sw	%ra, 1(%sp)
 	nop
 	nop
 
-	sw	%ra, 1(%sp)
+	fsw	%f0, 137(%zero)
+	nop
+	nop
+	nop
+
 	lw	%v1, 134(%zero)
+	nop
 	addi	%v0, %zero, 0
 	nop
 
@@ -31211,6 +31571,11 @@ bnei_cont.39672:
 	nop
 	nop
 	fmul	%f16, %f20, %f0
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 0, bnei_else.39680
 
 	lw	%a0, 9(%s7)
@@ -31325,12 +31690,7 @@ bnei_cont.39672:
 
 bnei_else.39680:
 	fsw	%f21, 142(%zero)
-	nop
-	nop
-	nop
-
 	fsw	%f2, 143(%zero)
-	nop
 	nop
 	nop
 
@@ -31432,12 +31792,7 @@ bnei_cont.39685:
 	fmul	%f0, %f16, %f0
 
 	fsw	%f1, 143(%zero)
-	nop
-	nop
-	nop
-
 	fsw	%f0, 144(%zero)
-	nop
 	nop
 	j	bnei_cont.39677
 
@@ -31495,11 +31850,11 @@ bnei_else.39676:
 	nop
 
 	fsw	%fzero, 143(%zero)
-	nop
+	fsw	%fzero, 144(%zero)
 	addi	%a1, %a0, -1
 	nop
 
-	fsw	%fzero, 144(%zero)
+	nop
 	nop
 	add	%at, %a2, %a1
 	nop
@@ -31606,6 +31961,11 @@ bnei_cont.39677:
 	nop
 	nop
 	addi	%sp, %sp, -3
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%v0, 0, bnei_else.39696
 
 	lw	%ra, 1(%sp)
@@ -31771,36 +32131,26 @@ bnei_else.39675:
 
 iter_trace_diffuse_rays.2992:
 	sw	%v0, 0(%sp)
-	nop
-	nop
-	nop
-
 	sw	%v1, 1(%sp)
-	nop
 	nop
 	nop
 
 	sw	%a0, 2(%sp)
-	nop
-	nop
-	nop
-
 	sw	%a1, 3(%sp)
-	nop
 	nop
 	nop
 
 	sw	%t1, 4(%sp)
-	nop
-	nop
-	nop
-
 	sw	%t0, 5(%sp)
-	nop
 	nop
 	nop
 
 	sw	%ra, 6(%sp)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	blti	%a1, 0, bgti_else.40711
@@ -31929,6 +32279,11 @@ fbgt_cont.40713:
 
 	flw	%f18, 2(%a1)
 	lw	%a2, 0(%at)
+	nop
+	nop
+
+	nop
+	nop
 	nop
 	beqi	%a0, 1, bnei_else.40720
 
@@ -33127,6 +33482,11 @@ bnei_cont.40805:
 	nop
 	nop
 	fmul	%f17, %f22, %f0
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 0, bnei_else.40814
 
 	lw	%a0, 9(%s7)
@@ -33211,12 +33571,7 @@ bnei_cont.40805:
 
 bnei_else.40814:
 	fsw	%f23, 142(%zero)
-	nop
-	nop
-	nop
-
 	fsw	%f21, 143(%zero)
-	nop
 	nop
 	nop
 
@@ -33318,12 +33673,7 @@ bnei_cont.40819:
 	fmul	%f0, %f16, %f0
 
 	fsw	%f1, 143(%zero)
-	nop
-	nop
-	nop
-
 	fsw	%f0, 144(%zero)
-	nop
 	nop
 	j	bnei_cont.40811
 
@@ -33381,11 +33731,11 @@ bnei_else.40810:
 	nop
 
 	fsw	%fzero, 143(%zero)
-	nop
+	fsw	%fzero, 144(%zero)
 	addi	%a1, %a0, -1
 	nop
 
-	fsw	%fzero, 144(%zero)
+	nop
 	nop
 	add	%at, %a2, %a1
 	nop
@@ -33497,6 +33847,11 @@ bnei_cont.40811:
 	nop
 	nop
 	addi	%sp, %sp, -7
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%v0, 0, bnei_else.40830
 
 	nop
@@ -33715,6 +34070,11 @@ bnei_else.40714:
 
 	flw	%f18, 2(%a1)
 	lw	%a2, 0(%at)
+	nop
+	nop
+
+	nop
+	nop
 	nop
 	beqi	%a0, 1, bnei_else.40840
 
@@ -34913,6 +35273,11 @@ bnei_cont.40925:
 	nop
 	nop
 	fmul	%f17, %f22, %f0
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 0, bnei_else.40934
 
 	lw	%a0, 9(%s7)
@@ -34997,12 +35362,7 @@ bnei_cont.40925:
 
 bnei_else.40934:
 	fsw	%f23, 142(%zero)
-	nop
-	nop
-	nop
-
 	fsw	%f21, 143(%zero)
-	nop
 	nop
 	nop
 
@@ -35104,12 +35464,7 @@ bnei_cont.40939:
 	fmul	%f0, %f16, %f0
 
 	fsw	%f1, 143(%zero)
-	nop
-	nop
-	nop
-
 	fsw	%f0, 144(%zero)
-	nop
 	nop
 	j	bnei_cont.40931
 
@@ -35167,11 +35522,11 @@ bnei_else.40930:
 	nop
 
 	fsw	%fzero, 143(%zero)
-	nop
+	fsw	%fzero, 144(%zero)
 	addi	%a1, %a0, -1
 	nop
 
-	fsw	%fzero, 144(%zero)
+	nop
 	nop
 	add	%at, %a2, %a1
 	nop
@@ -35283,6 +35638,11 @@ bnei_cont.40931:
 	nop
 	nop
 	addi	%sp, %sp, -7
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%v0, 0, bnei_else.40950
 
 	nop
@@ -35690,6 +36050,11 @@ bnei_cont.40964:
 	nop
 	nop
 	fmul	%f16, %f20, %f0
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 0, bnei_else.40973
 
 	lw	%a0, 9(%s7)
@@ -35804,12 +36169,7 @@ bnei_cont.40964:
 
 bnei_else.40973:
 	fsw	%f21, 142(%zero)
-	nop
-	nop
-	nop
-
 	fsw	%f2, 143(%zero)
-	nop
 	nop
 	nop
 
@@ -35911,12 +36271,7 @@ bnei_cont.40978:
 	fmul	%f0, %f16, %f0
 
 	fsw	%f1, 143(%zero)
-	nop
-	nop
-	nop
-
 	fsw	%f0, 144(%zero)
-	nop
 	nop
 	j	bnei_cont.40970
 
@@ -35974,11 +36329,11 @@ bnei_else.40969:
 	nop
 
 	fsw	%fzero, 143(%zero)
-	nop
+	fsw	%fzero, 144(%zero)
 	addi	%a1, %a0, -1
 	nop
 
-	fsw	%fzero, 144(%zero)
+	nop
 	nop
 	add	%at, %a2, %a1
 	nop
@@ -36085,6 +36440,11 @@ bnei_cont.40970:
 	nop
 	nop
 	addi	%sp, %sp, -8
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%v0, 0, bnei_else.40989
 
 	nop
@@ -36410,6 +36770,11 @@ bnei_cont.40998:
 	nop
 	nop
 	fmul	%f16, %f20, %f0
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 0, bnei_else.41007
 
 	lw	%a0, 9(%s7)
@@ -36524,12 +36889,7 @@ bnei_cont.40998:
 
 bnei_else.41007:
 	fsw	%f21, 142(%zero)
-	nop
-	nop
-	nop
-
 	fsw	%f2, 143(%zero)
-	nop
 	nop
 	nop
 
@@ -36631,12 +36991,7 @@ bnei_cont.41012:
 	fmul	%f0, %f16, %f0
 
 	fsw	%f1, 143(%zero)
-	nop
-	nop
-	nop
-
 	fsw	%f0, 144(%zero)
-	nop
 	nop
 	j	bnei_cont.41004
 
@@ -36694,11 +37049,11 @@ bnei_else.41003:
 	nop
 
 	fsw	%fzero, 143(%zero)
-	nop
+	fsw	%fzero, 144(%zero)
 	addi	%a1, %a0, -1
 	nop
 
-	fsw	%fzero, 144(%zero)
+	nop
 	nop
 	add	%at, %a2, %a1
 	nop
@@ -36805,6 +37160,11 @@ bnei_cont.41004:
 	nop
 	nop
 	addi	%sp, %sp, -9
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%v0, 0, bnei_else.41023
 
 	nop
@@ -37000,38 +37360,38 @@ bgti_else.40711:
 
 trace_diffuse_rays.2997:
 	sw	%v0, 0(%sp)
-	nop
+	sw	%v1, 1(%sp)
 	add	%v0, %zero, %a0
 	nop
 
-	sw	%v1, 1(%sp)
-	flw	%f0, 0(%v0)
-	nop
-	nop
-
 	sw	%v0, 2(%sp)
-	fsw	%f0, 162(%zero)
-	nop
-	nop
-
 	sw	%t1, 3(%sp)
-	flw	%f0, 1(%v0)
 	nop
 	nop
 
 	sw	%t0, 4(%sp)
-	fsw	%f0, 163(%zero)
+	sw	%ra, 5(%sp)
 	nop
 	nop
 
-	sw	%ra, 5(%sp)
+	flw	%f0, 0(%v0)
+	nop
+	addi	%sp, %sp, 6
+	nop
+
+	fsw	%f0, 162(%zero)
+	flw	%f0, 1(%v0)
+	nop
+	nop
+
+	fsw	%f0, 163(%zero)
 	flw	%f0, 2(%v0)
 	nop
 	nop
 
 	fsw	%f0, 164(%zero)
 	nop
-	addi	%sp, %sp, 6
+	nop
 	nop
 
 	lw	%a0, 0(%zero)
@@ -37275,6 +37635,11 @@ bnei_cont.41287:
 	nop
 	nop
 	fmul	%f16, %f20, %f0
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 0, bnei_else.41296
 
 	lw	%a0, 9(%s7)
@@ -37389,12 +37754,7 @@ bnei_cont.41287:
 
 bnei_else.41296:
 	fsw	%f21, 142(%zero)
-	nop
-	nop
-	nop
-
 	fsw	%f2, 143(%zero)
-	nop
 	nop
 	nop
 
@@ -37496,12 +37856,7 @@ bnei_cont.41301:
 	fmul	%f0, %f16, %f0
 
 	fsw	%f1, 143(%zero)
-	nop
-	nop
-	nop
-
 	fsw	%f0, 144(%zero)
-	nop
 	nop
 	j	bnei_cont.41293
 
@@ -37559,11 +37914,11 @@ bnei_else.41292:
 	nop
 
 	fsw	%fzero, 143(%zero)
-	nop
+	fsw	%fzero, 144(%zero)
 	addi	%a1, %a0, -1
 	nop
 
-	fsw	%fzero, 144(%zero)
+	nop
 	nop
 	add	%at, %a2, %a1
 	nop
@@ -37675,6 +38030,11 @@ bnei_cont.41293:
 	nop
 	nop
 	addi	%sp, %sp, -6
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%v0, 0, bnei_else.41312
 
 	nop
@@ -37995,6 +38355,11 @@ bnei_cont.41321:
 	nop
 	nop
 	fmul	%f16, %f20, %f0
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 0, bnei_else.41330
 
 	lw	%a0, 9(%s7)
@@ -38109,12 +38474,7 @@ bnei_cont.41321:
 
 bnei_else.41330:
 	fsw	%f21, 142(%zero)
-	nop
-	nop
-	nop
-
 	fsw	%f2, 143(%zero)
-	nop
 	nop
 	nop
 
@@ -38216,12 +38576,7 @@ bnei_cont.41335:
 	fmul	%f0, %f16, %f0
 
 	fsw	%f1, 143(%zero)
-	nop
-	nop
-	nop
-
 	fsw	%f0, 144(%zero)
-	nop
 	nop
 	j	bnei_cont.41327
 
@@ -38279,11 +38634,11 @@ bnei_else.41326:
 	nop
 
 	fsw	%fzero, 143(%zero)
-	nop
+	fsw	%fzero, 144(%zero)
 	addi	%a1, %a0, -1
 	nop
 
-	fsw	%fzero, 144(%zero)
+	nop
 	nop
 	add	%at, %a2, %a1
 	nop
@@ -38395,6 +38750,11 @@ bnei_cont.41327:
 	nop
 	nop
 	addi	%sp, %sp, -6
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%v0, 0, bnei_else.41346
 
 	nop
@@ -38568,36 +38928,26 @@ bnei_cont.41283:
 
 do_without_neighbors.3014:
 	sw	%v0, 0(%sp)
-	nop
+	sw	%v1, 1(%sp)
 	addi	%at, %zero, 4
 	nop
 
-	sw	%v1, 1(%sp)
-	nop
-	nop
-	nop
-
 	sw	%t3, 2(%sp)
-	nop
-	nop
-	nop
-
 	sw	%t2, 3(%sp)
-	nop
 	nop
 	nop
 
 	sw	%t1, 4(%sp)
-	nop
-	nop
-	nop
-
 	sw	%t0, 5(%sp)
-	nop
 	nop
 	nop
 
 	sw	%ra, 6(%sp)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	blt	%at, %v1, bgt_else.41502
@@ -39427,16 +39777,21 @@ bgt_else.41502:
 
 try_exploit_neighbors.3030:
 	sw	%a3, 0(%sp)
-	nop
+	sw	%ra, 1(%sp)
 	add	%at, %a1, %v0
 	nop
 
-	sw	%ra, 1(%sp)
 	lw	%s0, 0(%at)
+	nop
 	addi	%at, %zero, 4
 	nop
 
 	sw	%s0, 2(%sp)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	blt	%at, %a3, bgt_else.41746
@@ -40666,16 +41021,16 @@ bnei_else.41756:
 	nop
 
 	sw	%a1, 4(%sp)
-	nop
-	nop
-	nop
-
 	sw	%v1, 5(%sp)
-	nop
 	nop
 	nop
 
 	sw	%a0, 6(%sp)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	beqi	%a1, 0, bnei_else.41778
@@ -40923,26 +41278,21 @@ bgt_else.41746:
 
 pretrace_diffuse_rays.3043:
 	sw	%v0, 0(%sp)
-	nop
+	sw	%v1, 1(%sp)
 	addi	%at, %zero, 4
 	nop
 
-	sw	%v1, 1(%sp)
-	nop
-	nop
-	nop
-
 	sw	%t1, 2(%sp)
-	nop
-	nop
-	nop
-
 	sw	%t0, 3(%sp)
-	nop
 	nop
 	nop
 
 	sw	%ra, 4(%sp)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	blt	%at, %v1, bgt_else.41893
@@ -41441,56 +41791,36 @@ bgt_else.41893:
 
 pretrace_pixels.3046:
 	fsw	%f0, 0(%sp)
-	nop
-	nop
-	nop
-
 	fsw	%f1, 1(%sp)
-	nop
 	nop
 	nop
 
 	fsw	%f2, 2(%sp)
-	nop
-	nop
-	nop
-
 	sw	%v0, 3(%sp)
-	nop
 	nop
 	nop
 
 	sw	%v1, 4(%sp)
-	nop
-	nop
-	nop
-
 	sw	%a0, 5(%sp)
-	nop
 	nop
 	nop
 
 	sw	%t3, 6(%sp)
-	nop
-	nop
-	nop
-
 	sw	%t2, 7(%sp)
-	nop
 	nop
 	nop
 
 	sw	%t1, 8(%sp)
-	nop
-	nop
-	nop
-
 	sw	%t0, 9(%sp)
-	nop
 	nop
 	nop
 
 	sw	%ra, 10(%sp)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	blti	%v1, 0, bgti_else.42002
@@ -41640,33 +41970,23 @@ bnei_cont.42006:
 	fmul	%f0, %f16, %f0
 
 	fsw	%f1, 175(%zero)
-	nop
+	fsw	%f0, 176(%zero)
 	add	%at, %a1, %a0
 	fmov	%f1, %fzero
 
-	fsw	%f0, 176(%zero)
-	lw	%t0, 0(%at)
-	nop
-	nop
-
 	fsw	%fzero, 151(%zero)
-	nop
-	addi	%a0, %t0, 0
-	nop
-
 	fsw	%fzero, 152(%zero)
-	nop
 	nop
 	nop
 
 	fsw	%fzero, 153(%zero)
-	nop
+	lw	%t0, 0(%at)
 	nop
 	nop
 
 	flw	%f0, 75(%zero)
 	nop
-	nop
+	addi	%a0, %t0, 0
 	nop
 
 	fsw	%f0, 159(%zero)
@@ -42027,56 +42347,36 @@ bgti_else.42002:
 
 scan_pixel.3057:
 	sw	%v0, 0(%sp)
-	nop
-	nop
-	nop
-
 	sw	%v1, 1(%sp)
-	nop
 	nop
 	nop
 
 	sw	%a0, 2(%sp)
-	lw	%t0, 154(%zero)
+	sw	%a1, 3(%sp)
 	add	%a0, %zero, %t0
 	nop
 
-	sw	%a1, 3(%sp)
-	nop
-	nop
-	nop
-
 	sw	%a2, 4(%sp)
-	nop
-	nop
-	nop
-
 	sw	%t4, 5(%sp)
-	nop
 	nop
 	nop
 
 	sw	%t3, 6(%sp)
-	nop
-	nop
-	nop
-
 	sw	%t2, 7(%sp)
-	nop
 	nop
 	nop
 
 	sw	%t1, 8(%sp)
-	nop
-	nop
-	nop
-
 	sw	%a0, 9(%sp)
-	nop
 	nop
 	nop
 
 	sw	%ra, 10(%sp)
+	lw	%t0, 154(%zero)
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	blt	%v0, %t0, bgt_else.44336
@@ -42128,11 +42428,11 @@ bgt_else.44336:
 	nop
 
 	sw	%a1, 11(%sp)
-	nop
+	sw	%a0, 12(%sp)
 	nop
 	nop
 
-	sw	%a0, 12(%sp)
+	nop
 	nop
 	nop
 	blt	%a0, %a1, bgt_else.44338
@@ -43102,6 +43402,11 @@ bgt_cont.44377:
 	nop
 	nop
 	addi	%t1, %zero, 10
+	nop
+
+	nop
+	nop
+	nop
 	blti	%a1, 10, bgti_else.44380
 
 	nop
@@ -50044,51 +50349,36 @@ scan_line.3063:
 	add	%v0, %zero, %a1
 
 	sw	%a3, 0(%sp)
-	lw	%t0, 155(%zero)
+	sw	%v1, 1(%sp)
 	add	%a1, %zero, %t0
 	nop
 
-	sw	%v1, 1(%sp)
-	nop
-	nop
-	nop
-
 	sw	%a0, 2(%sp)
-	nop
+	sw	%v0, 3(%sp)
 	add	%a0, %zero, %a2
 	nop
 
-	sw	%v0, 3(%sp)
-	nop
-	nop
-	nop
-
 	sw	%a0, 4(%sp)
-	nop
-	nop
-	nop
-
 	sw	%t3, 5(%sp)
-	nop
 	nop
 	nop
 
 	sw	%t2, 6(%sp)
-	nop
-	nop
-	nop
-
 	sw	%t1, 7(%sp)
-	nop
 	nop
 	nop
 
 	sw	%a1, 8(%sp)
+	sw	%ra, 9(%sp)
+	nop
+	nop
+
+	lw	%t0, 155(%zero)
 	nop
 	nop
 	nop
 
-	sw	%ra, 9(%sp)
+	nop
 	nop
 	nop
 	blt	%a3, %t0, bgt_else.46365
@@ -50105,6 +50395,11 @@ bgt_else.46365:
 	nop
 
 	sw	%a1, 10(%sp)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	blt	%a3, %a1, bgt_else.46367
@@ -50218,6 +50513,11 @@ bgt_else.46369:
 	nop
 
 	fsw	%f0, 153(%zero)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	blt	%a0, %t0, bgt_else.46371
@@ -50349,6 +50649,11 @@ bgt_cont.46382:
 	nop
 	nop
 	addi	%a3, %zero, 10
+	nop
+
+	nop
+	nop
+	nop
 	blti	%a1, 10, bgti_else.46385
 
 	nop
@@ -54238,6 +54543,11 @@ init_line_elements.3073:
 	nop
 	nop
 	add	%a3, %zero, %ra
+	nop
+
+	nop
+	nop
+	nop
 	blti	%a2, 0, bgti_else.46803
 
 	nop
@@ -54526,46 +54836,31 @@ init_line_elements.3073:
 	addi	%hp, %hp, 8
 
 	sw	%a0, 7(%ra)
-	nop
+	sw	%s7, 6(%ra)
 	add	%at, %a1, %a2
 	nop
 
-	sw	%s7, 6(%ra)
-	nop
-	nop
-	nop
-
 	sw	%s6, 5(%ra)
-	nop
-	nop
-	nop
-
 	sw	%s5, 4(%ra)
-	nop
 	nop
 	nop
 
 	sw	%s4, 3(%ra)
-	nop
+	sw	%s3, 2(%ra)
 	addi	%s4, %a2, -1
 	nop
 
-	sw	%s3, 2(%ra)
-	nop
-	nop
-	nop
-
 	sw	%s2, 1(%ra)
-	nop
-	nop
-	nop
-
 	sw	%s0, 0(%ra)
-	nop
 	nop
 	nop
 
 	sw	%ra, 0(%at)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	blti	%s4, 0, bgti_else.46804
@@ -54856,46 +55151,31 @@ init_line_elements.3073:
 	addi	%hp, %hp, 8
 
 	sw	%a0, 7(%ra)
-	nop
+	sw	%s7, 6(%ra)
 	add	%at, %a1, %s4
 	addi	%s4, %s4, -1
 
-	sw	%s7, 6(%ra)
-	nop
-	nop
-	nop
-
 	sw	%s6, 5(%ra)
-	nop
-	nop
-	nop
-
 	sw	%s5, 4(%ra)
-	nop
 	nop
 	nop
 
 	sw	%s3, 3(%ra)
-	nop
-	nop
-	nop
-
 	sw	%s2, 2(%ra)
-	nop
 	nop
 	nop
 
 	sw	%s0, 1(%ra)
-	nop
-	nop
-	nop
-
 	sw	%a2, 0(%ra)
-	nop
 	nop
 	nop
 
 	sw	%ra, 0(%at)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	blti	%s4, 0, bgti_else.46805
@@ -55186,46 +55466,31 @@ init_line_elements.3073:
 	addi	%hp, %hp, 8
 
 	sw	%a0, 7(%ra)
-	nop
+	sw	%s7, 6(%ra)
 	add	%at, %a1, %s4
 	addi	%s4, %s4, -1
 
-	sw	%s7, 6(%ra)
-	nop
-	nop
-	nop
-
 	sw	%s6, 5(%ra)
-	nop
-	nop
-	nop
-
 	sw	%s5, 4(%ra)
-	nop
 	nop
 	nop
 
 	sw	%s3, 3(%ra)
-	nop
-	nop
-	nop
-
 	sw	%s2, 2(%ra)
-	nop
 	nop
 	nop
 
 	sw	%s0, 1(%ra)
-	nop
-	nop
-	nop
-
 	sw	%a2, 0(%ra)
-	nop
 	nop
 	nop
 
 	sw	%ra, 0(%at)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	blti	%s4, 0, bgti_else.46806
@@ -55516,42 +55781,22 @@ init_line_elements.3073:
 	addi	%hp, %hp, 8
 
 	sw	%a0, 7(%k0)
-	nop
+	sw	%s7, 6(%k0)
 	add	%at, %a1, %s4
 	addi	%v1, %s4, -1
 
-	sw	%s7, 6(%k0)
-	nop
+	sw	%s6, 5(%k0)
+	sw	%s5, 4(%k0)
 	add	%ra, %zero, %a3
 	addi	%v0, %a1, 0
 
-	sw	%s6, 5(%k0)
-	nop
-	nop
-	nop
-
-	sw	%s5, 4(%k0)
-	nop
-	nop
-	nop
-
 	sw	%s3, 3(%k0)
-	nop
-	nop
-	nop
-
 	sw	%s2, 2(%k0)
-	nop
 	nop
 	nop
 
 	sw	%s0, 1(%k0)
-	nop
-	nop
-	nop
-
 	sw	%a2, 0(%k0)
-	nop
 	nop
 	nop
 
@@ -55641,19 +55886,14 @@ calc_dirvec.3083:
 	fdiv	%f17, %f1, %f16
 
 	fsw	%f19, 0(%a2)
-	nop
+	fsw	%f17, 1(%a2)
 	fdiv	%f18, %f30, %f16
 	fneg	%f0, %f17
 
-	fsw	%f17, 1(%a2)
+	fsw	%f18, 2(%a2)
 	nop
 	fneg	%f1, %f19
 	fneg	%f16, %f19
-
-	fsw	%f18, 2(%a2)
-	nop
-	nop
-	nop
 
 	nop
 	nop
@@ -55676,12 +55916,7 @@ calc_dirvec.3083:
 	nop
 
 	fsw	%f19, 0(%a2)
-	nop
-	nop
-	nop
-
 	fsw	%f18, 1(%a2)
-	nop
 	nop
 	nop
 
@@ -55711,12 +55946,7 @@ calc_dirvec.3083:
 	nop
 
 	fsw	%f18, 0(%a2)
-	nop
-	nop
-	nop
-
 	fsw	%f1, 1(%a2)
-	nop
 	fneg	%f1, %f17
 	nop
 
@@ -55746,12 +55976,7 @@ calc_dirvec.3083:
 	nop
 
 	fsw	%f16, 0(%a2)
-	nop
-	nop
-	nop
-
 	fsw	%f1, 1(%a2)
-	nop
 	fneg	%f1, %f19
 	nop
 
@@ -55781,22 +56006,17 @@ calc_dirvec.3083:
 	nop
 
 	fsw	%f1, 0(%a2)
-	lw	%a0, 0(%a0)
-	nop
-	nop
-
 	fsw	%f0, 1(%a2)
-	nop
 	fneg	%f0, %f18
 	nop
 
 	fsw	%f17, 2(%a2)
-	fsw	%f0, 0(%a0)
+	lw	%a0, 0(%a0)
 	nop
 	nop
 
+	fsw	%f0, 0(%a0)
 	fsw	%f19, 1(%a0)
-	nop
 	nop
 	nop
 
@@ -56471,6 +56691,11 @@ fbgt_cont.47250:
 	nop
 	nop
 	fdiv	%f0, %f0, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f18, %f2, fbgt_cont.47272
 
 	nop
@@ -56541,6 +56766,11 @@ fbgt_else.47277:
 	nop
 	nop
 	fdiv	%f1, %f0, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f18, %f2, fbgt_cont.47272
 
 	nop
@@ -56609,6 +56839,11 @@ fbgt_else.47273:
 	nop
 	nop
 	fdiv	%f0, %f0, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f18, %f2, fbgt_cont.47272
 
 	nop
@@ -56679,6 +56914,11 @@ fbgt_else.47289:
 	nop
 	nop
 	fdiv	%f1, %f0, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f18, %f2, fbgt_cont.47272
 
 	nop
@@ -57143,6 +57383,11 @@ fbgt_cont.47312:
 	nop
 	nop
 	fdiv	%f0, %f0, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f23, %f2, fbgt_cont.47334
 
 	nop
@@ -57213,6 +57458,11 @@ fbgt_else.47339:
 	nop
 	nop
 	fdiv	%f1, %f0, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f23, %f2, fbgt_cont.47334
 
 	nop
@@ -57281,6 +57531,11 @@ fbgt_else.47335:
 	nop
 	nop
 	fdiv	%f0, %f0, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f23, %f2, fbgt_cont.47334
 
 	nop
@@ -57351,6 +57606,11 @@ fbgt_else.47351:
 	nop
 	nop
 	fdiv	%f1, %f0, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f23, %f2, fbgt_cont.47334
 
 	nop
@@ -58277,6 +58537,11 @@ fbgt_cont.47386:
 	nop
 	nop
 	fdiv	%f0, %f0, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f19, %f2, fbgt_cont.47408
 
 	nop
@@ -58347,6 +58612,11 @@ fbgt_else.47413:
 	nop
 	nop
 	fdiv	%f1, %f0, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f19, %f2, fbgt_cont.47408
 
 	nop
@@ -58415,6 +58685,11 @@ fbgt_else.47409:
 	nop
 	nop
 	fdiv	%f0, %f0, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f19, %f2, fbgt_cont.47408
 
 	nop
@@ -58485,6 +58760,11 @@ fbgt_else.47425:
 	nop
 	nop
 	fdiv	%f1, %f0, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f19, %f2, fbgt_cont.47408
 
 	nop
@@ -58939,6 +59219,11 @@ fbgt_cont.47448:
 	nop
 	nop
 	fdiv	%f0, %f0, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f21, %f2, fbgt_cont.47470
 
 	nop
@@ -59009,6 +59294,11 @@ fbgt_else.47475:
 	nop
 	nop
 	fdiv	%f1, %f0, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f21, %f2, fbgt_cont.47470
 
 	nop
@@ -59077,6 +59367,11 @@ fbgt_else.47471:
 	nop
 	nop
 	fdiv	%f0, %f0, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f21, %f2, fbgt_cont.47470
 
 	nop
@@ -59147,6 +59442,11 @@ fbgt_else.47487:
 	nop
 	nop
 	fdiv	%f1, %f0, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f21, %f2, fbgt_cont.47470
 
 	nop
@@ -59708,6 +60008,11 @@ bgti_cont.47590:
 	nop
 	nop
 	addi	%s4, %s5, 4
+	nop
+
+	nop
+	nop
+	nop
 	blti	%t7, 0, bgti_else.47591
 
 	nop
@@ -59788,6 +60093,11 @@ create_dirvec_elements.3102:
 	nop
 	nop
 	add	%a3, %zero, %ra
+	nop
+
+	nop
+	nop
+	nop
 	blti	%a2, 0, bgti_else.47630
 
 	nop
@@ -59821,16 +60131,16 @@ create_dirvec_elements.3102:
 	addi	%hp, %hp, 2
 
 	sw	%v0, 1(%a0)
-	nop
-	add	%at, %a1, %a2
-	nop
-
 	sw	%s0, 0(%a0)
-	nop
+	add	%at, %a1, %a2
 	addi	%s0, %a2, -1
-	nop
 
 	sw	%a0, 0(%at)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	blti	%s0, 0, bgti_else.47631
@@ -59861,16 +60171,16 @@ create_dirvec_elements.3102:
 	addi	%hp, %hp, 2
 
 	sw	%v0, 1(%a0)
-	nop
+	sw	%a2, 0(%a0)
 	add	%at, %a1, %s0
 	addi	%s0, %s0, -1
 
-	sw	%a2, 0(%a0)
+	sw	%a0, 0(%at)
 	nop
 	nop
 	nop
 
-	sw	%a0, 0(%at)
+	nop
 	nop
 	nop
 	blti	%s0, 0, bgti_else.47632
@@ -59901,16 +60211,16 @@ create_dirvec_elements.3102:
 	addi	%hp, %hp, 2
 
 	sw	%v0, 1(%a0)
-	nop
+	sw	%a2, 0(%a0)
 	add	%at, %a1, %s0
 	addi	%s0, %s0, -1
 
-	sw	%a2, 0(%a0)
+	sw	%a0, 0(%at)
 	nop
 	nop
 	nop
 
-	sw	%a0, 0(%at)
+	nop
 	nop
 	nop
 	blti	%s0, 0, bgti_else.47633
@@ -59941,16 +60251,16 @@ create_dirvec_elements.3102:
 	addi	%hp, %hp, 2
 
 	sw	%v0, 1(%a0)
-	nop
+	sw	%a2, 0(%a0)
 	add	%at, %a1, %s0
 	addi	%v1, %s0, -1
 
-	sw	%a2, 0(%a0)
+	sw	%a0, 0(%at)
 	nop
 	add	%ra, %zero, %a3
 	addi	%v0, %a1, 0
 
-	sw	%a0, 0(%at)
+	nop
 	nop
 	nop
 	j	create_dirvec_elements.3102
@@ -60046,13 +60356,8 @@ create_dirvecs.3105:
 	addi	%hp, %hp, 2
 
 	sw	%v0, 1(%v1)
-	nop
-	addi	%v0, %s6, 0
-	nop
-
 	sw	%a1, 0(%v1)
-	nop
-	nop
+	addi	%v0, %s6, 0
 	jal	min_caml_create_array
 
 	sw	%v0, 179(%s2)
@@ -60081,14 +60386,9 @@ create_dirvecs.3105:
 	addi	%hp, %hp, 2
 
 	sw	%v0, 1(%a0)
-	nop
+	sw	%a1, 0(%a0)
 	addi	%v0, %s4, 0
 	fmov	%f0, %fzero
-
-	sw	%a1, 0(%a0)
-	nop
-	nop
-	nop
 
 	sw	%a0, 118(%a2)
 	nop
@@ -60111,18 +60411,13 @@ create_dirvecs.3105:
 	addi	%hp, %hp, 2
 
 	sw	%v0, 1(%a0)
-	nop
+	sw	%a1, 0(%a0)
 	addi	%s7, %zero, 116
 	addi	%v0, %s4, 0
 
-	sw	%a1, 0(%a0)
-	nop
-	fmov	%f0, %fzero
-	nop
-
 	sw	%a0, 117(%a2)
 	nop
-	nop
+	fmov	%f0, %fzero
 	jal	min_caml_create_float_array
 
 	nop
@@ -60141,13 +60436,8 @@ create_dirvecs.3105:
 	addi	%hp, %hp, 2
 
 	sw	%v0, 1(%a0)
-	nop
-	addi	%v1, %zero, 115
-	nop
-
 	sw	%a1, 0(%a0)
-	nop
-	nop
+	addi	%v1, %zero, 115
 	nop
 
 	sw	%a0, 116(%a2)
@@ -60196,13 +60486,8 @@ create_dirvecs.3105:
 	addi	%hp, %hp, 2
 
 	sw	%v0, 1(%v1)
-	nop
-	addi	%v0, %s6, 0
-	nop
-
 	sw	%a1, 0(%v1)
-	nop
-	nop
+	addi	%v0, %s6, 0
 	jal	min_caml_create_array
 
 	sw	%v0, 179(%s2)
@@ -60231,14 +60516,9 @@ create_dirvecs.3105:
 	addi	%hp, %hp, 2
 
 	sw	%v0, 1(%a0)
-	nop
+	sw	%a1, 0(%a0)
 	addi	%v0, %s4, 0
 	fmov	%f0, %fzero
-
-	sw	%a1, 0(%a0)
-	nop
-	nop
-	nop
 
 	sw	%a0, 118(%a2)
 	nop
@@ -60261,13 +60541,8 @@ create_dirvecs.3105:
 	addi	%hp, %hp, 2
 
 	sw	%v0, 1(%a0)
-	nop
-	addi	%v1, %s7, 0
-	nop
-
 	sw	%a1, 0(%a0)
-	nop
-	nop
+	addi	%v1, %s7, 0
 	nop
 
 	sw	%a0, 117(%a2)
@@ -60321,6 +60596,11 @@ init_dirvec_constants.3107:
 	nop
 	nop
 	add	%s4, %zero, %ra
+	nop
+
+	nop
+	nop
+	nop
 	blti	%s3, 0, bgti_else.47783
 
 	lw	%a0, 0(%zero)
@@ -60354,6 +60634,11 @@ init_dirvec_constants.3107:
 	nop
 
 	lw	%a1, 0(%at)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	blti	%s5, 0, bgti_else.47785
@@ -60426,6 +60711,11 @@ init_dirvec_constants.3107:
 	nop
 	nop
 	fadd	%f0, %f16, %f0
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 0, bnei_else.47791
 
 	lw	%a0, 9(%a2)
@@ -60508,6 +60798,11 @@ bnei_cont.47792:
 	nop
 	nop
 	fneg	%f17, %f1
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 0, bnei_else.47793
 
 	lw	%a0, 9(%a2)
@@ -60622,12 +60917,7 @@ bnei_cont.47792:
 
 bnei_else.47793:
 	fsw	%f22, 1(%v0)
-	nop
-	nop
-	nop
-
 	fsw	%f20, 2(%v0)
-	nop
 	nop
 	nop
 
@@ -60884,6 +61174,11 @@ bnei_else.47805:
 	lw	%ra, 6(%a2)
 	nop
 	nop
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f1, %fzero, fbgt_else.47807
 
 	nop
@@ -60933,6 +61228,11 @@ bnei_cont.47810:
 	nop
 
 	flw	%f0, 0(%ra)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	beqi	%a0, 0, bnei_else.47813
@@ -60996,6 +61296,11 @@ bnei_else.47817:
 	lw	%ra, 6(%a2)
 	nop
 	nop
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f1, %fzero, fbgt_else.47819
 
 	nop
@@ -61045,6 +61350,11 @@ bnei_cont.47822:
 	nop
 
 	flw	%f0, 1(%ra)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	beqi	%a0, 0, bnei_else.47825
@@ -61108,6 +61418,11 @@ bnei_else.47829:
 	lw	%k0, 6(%a2)
 	nop
 	nop
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f1, %fzero, fbgt_else.47831
 
 	nop
@@ -61157,6 +61472,11 @@ bnei_cont.47834:
 	nop
 
 	flw	%f0, 2(%a2)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	beqi	%a0, 0, bnei_else.47837
@@ -61405,6 +61725,11 @@ init_vecset_constants.3110:
 	nop
 	nop
 	fadd	%f0, %f16, %f0
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 0, bnei_else.48065
 
 	lw	%a0, 9(%a2)
@@ -61487,6 +61812,11 @@ bnei_cont.48066:
 	nop
 	nop
 	fneg	%f17, %f1
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 0, bnei_else.48067
 
 	lw	%a0, 9(%a2)
@@ -61601,12 +61931,7 @@ bnei_cont.48066:
 
 bnei_else.48067:
 	fsw	%f22, 1(%v0)
-	nop
-	nop
-	nop
-
 	fsw	%f20, 2(%v0)
-	nop
 	nop
 	nop
 
@@ -61863,6 +62188,11 @@ bnei_else.48079:
 	lw	%ra, 6(%a2)
 	nop
 	nop
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f1, %fzero, fbgt_else.48081
 
 	nop
@@ -61912,6 +62242,11 @@ bnei_cont.48084:
 	nop
 
 	flw	%f0, 0(%ra)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	beqi	%a0, 0, bnei_else.48087
@@ -61975,6 +62310,11 @@ bnei_else.48091:
 	lw	%ra, 6(%a2)
 	nop
 	nop
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f1, %fzero, fbgt_else.48093
 
 	nop
@@ -62024,6 +62364,11 @@ bnei_cont.48096:
 	nop
 
 	flw	%f0, 1(%ra)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	beqi	%a0, 0, bnei_else.48099
@@ -62087,6 +62432,11 @@ bnei_else.48103:
 	lw	%k0, 6(%a2)
 	nop
 	nop
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f1, %fzero, fbgt_else.48105
 
 	nop
@@ -62136,6 +62486,11 @@ bnei_cont.48108:
 	nop
 
 	flw	%f0, 2(%a2)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	beqi	%a0, 0, bnei_else.48111
@@ -62372,32 +62727,17 @@ min_caml_start:
 	jal	min_caml_create_float_extarray
 
 	sw	%v0, 11(%zero)
-	nop
+	sw	%v0, 10(%zero)
 	addi	%a2, %zero, 60
 	addi	%v1, %k1, 0
 
-	sw	%v0, 10(%zero)
-	nop
-	nop
-	nop
-
 	sw	%v0, 9(%zero)
-	nop
-	nop
-	nop
-
 	sw	%v0, 8(%zero)
-	nop
 	nop
 	nop
 
 	sw	%zero, 7(%zero)
-	nop
-	nop
-	nop
-
 	sw	%v0, 6(%zero)
-	nop
 	nop
 	nop
 
@@ -62722,12 +63062,7 @@ min_caml_start:
 	jal	min_caml_create_extarray
 
 	sw	%v0, 178(%zero)
-	nop
-	nop
-	nop
-
 	sw	%a3, 177(%zero)
-	nop
 	nop
 	nop
 
@@ -62787,13 +63122,8 @@ min_caml_start:
 	jal	min_caml_create_extarray
 
 	sw	%v0, 248(%zero)
-	nop
-	fmov	%f0, %fzero
-	nop
-
 	sw	%a3, 247(%zero)
-	nop
-	nop
+	fmov	%f0, %fzero
 	nop
 
 	nop
@@ -62822,23 +63152,13 @@ min_caml_start:
 	jal	min_caml_create_extarray
 
 	sw	%v0, 250(%zero)
-	nop
+	sw	%a2, 249(%zero)
 	addi	%a0, %zero, 249
 	nop
 
-	sw	%a2, 249(%zero)
-	nop
-	nop
-	nop
-
 	fsw	%fzero, 253(%zero)
-	nop
-	addi	%v0, %zero, 180
-	nop
-
 	sw	%a0, 252(%zero)
-	nop
-	nop
+	addi	%v0, %zero, 180
 	nop
 
 	sw	%zero, 251(%zero)
@@ -62872,13 +63192,8 @@ min_caml_start:
 	nop
 
 	sw	%a1, 154(%zero)
-	nop
-	itof	%f0, %a1
-	nop
-
 	sw	%a1, 155(%zero)
-	nop
-	nop
+	itof	%f0, %a1
 	nop
 
 	nop
@@ -62887,12 +63202,7 @@ min_caml_start:
 	nop
 
 	sw	%a0, 156(%zero)
-	nop
-	nop
-	nop
-
 	sw	%a0, 157(%zero)
-	nop
 	nop
 	nop
 
@@ -63337,43 +63647,28 @@ min_caml_start:
 	add	%v1, %zero, %hp
 
 	sw	%a0, 7(%v1)
-	lw	%v0, 0(%sp)
-	addi	%hp, %hp, 8
-	addi	%sp, %sp, 1
-
 	sw	%s2, 6(%v1)
-	nop
-	nop
+	addi	%hp, %hp, 8
 	nop
 
 	sw	%s1, 5(%v1)
-	nop
-	nop
-	nop
-
 	sw	%s0, 4(%v1)
-	nop
 	nop
 	nop
 
 	sw	%k0, 3(%v1)
-	nop
-	nop
-	nop
-
 	sw	%a3, 2(%v1)
-	nop
 	nop
 	nop
 
 	sw	%a2, 1(%v1)
-	nop
-	nop
-	nop
-
 	sw	%a1, 0(%v1)
 	nop
 	nop
+
+	lw	%v0, 0(%sp)
+	nop
+	addi	%sp, %sp, 1
 	jal	min_caml_create_array
 
 	nop
@@ -63817,42 +64112,22 @@ min_caml_start:
 	add	%ra, %zero, %hp
 
 	sw	%a0, 7(%ra)
-	nop
+	sw	%s3, 6(%ra)
 	addi	%hp, %hp, 8
 	add	%at, %a1, %t7
 
-	sw	%s3, 6(%ra)
-	nop
+	sw	%s2, 5(%ra)
+	sw	%s1, 4(%ra)
 	addi	%v1, %t7, -1
 	addi	%v0, %a1, 0
 
-	sw	%s2, 5(%ra)
-	nop
+	sw	%s0, 3(%ra)
+	sw	%k0, 2(%ra)
 	addi	%sp, %sp, 1
 	nop
 
-	sw	%s1, 4(%ra)
-	nop
-	nop
-	nop
-
-	sw	%s0, 3(%ra)
-	nop
-	nop
-	nop
-
-	sw	%k0, 2(%ra)
-	nop
-	nop
-	nop
-
 	sw	%a3, 1(%ra)
-	nop
-	nop
-	nop
-
 	sw	%a2, 0(%ra)
-	nop
 	nop
 	nop
 
@@ -64294,43 +64569,28 @@ bgti_cont.50474:
 	add	%v1, %zero, %hp
 
 	sw	%a0, 7(%v1)
-	lw	%v0, 0(%sp)
-	addi	%hp, %hp, 8
-	addi	%sp, %sp, 2
-
 	sw	%s2, 6(%v1)
-	nop
-	nop
+	addi	%hp, %hp, 8
 	nop
 
 	sw	%s1, 5(%v1)
-	nop
-	nop
-	nop
-
 	sw	%s0, 4(%v1)
-	nop
 	nop
 	nop
 
 	sw	%k0, 3(%v1)
-	nop
-	nop
-	nop
-
 	sw	%a3, 2(%v1)
-	nop
 	nop
 	nop
 
 	sw	%a2, 1(%v1)
-	nop
-	nop
-	nop
-
 	sw	%a1, 0(%v1)
 	nop
 	nop
+
+	lw	%v0, 0(%sp)
+	nop
+	addi	%sp, %sp, 2
 	jal	min_caml_create_array
 
 	nop
@@ -64764,42 +65024,22 @@ bgti_cont.50474:
 	add	%ra, %zero, %hp
 
 	sw	%a0, 7(%ra)
-	nop
+	sw	%s3, 6(%ra)
 	addi	%hp, %hp, 8
 	add	%at, %a1, %t7
 
-	sw	%s3, 6(%ra)
-	nop
+	sw	%s2, 5(%ra)
+	sw	%s1, 4(%ra)
 	addi	%v1, %t7, -1
 	addi	%v0, %a1, 0
 
-	sw	%s2, 5(%ra)
-	nop
+	sw	%s0, 3(%ra)
+	sw	%k0, 2(%ra)
 	addi	%sp, %sp, 2
 	nop
 
-	sw	%s1, 4(%ra)
-	nop
-	nop
-	nop
-
-	sw	%s0, 3(%ra)
-	nop
-	nop
-	nop
-
-	sw	%k0, 2(%ra)
-	nop
-	nop
-	nop
-
 	sw	%a3, 1(%ra)
-	nop
-	nop
-	nop
-
 	sw	%a2, 0(%ra)
-	nop
 	nop
 	nop
 
@@ -65241,43 +65481,28 @@ bgti_cont.50476:
 	add	%v1, %zero, %hp
 
 	sw	%a0, 7(%v1)
-	lw	%v0, 0(%sp)
-	addi	%hp, %hp, 8
-	addi	%sp, %sp, 3
-
 	sw	%s2, 6(%v1)
-	nop
-	nop
+	addi	%hp, %hp, 8
 	nop
 
 	sw	%s1, 5(%v1)
-	nop
-	nop
-	nop
-
 	sw	%s0, 4(%v1)
-	nop
 	nop
 	nop
 
 	sw	%k0, 3(%v1)
-	nop
-	nop
-	nop
-
 	sw	%a3, 2(%v1)
-	nop
 	nop
 	nop
 
 	sw	%a2, 1(%v1)
-	nop
-	nop
-	nop
-
 	sw	%a1, 0(%v1)
 	nop
 	nop
+
+	lw	%v0, 0(%sp)
+	nop
+	addi	%sp, %sp, 3
 	jal	min_caml_create_array
 
 	nop
@@ -65711,42 +65936,22 @@ bgti_cont.50476:
 	add	%ra, %zero, %hp
 
 	sw	%a0, 7(%ra)
-	nop
+	sw	%s3, 6(%ra)
 	addi	%hp, %hp, 8
 	add	%at, %a1, %t7
 
-	sw	%s3, 6(%ra)
-	nop
+	sw	%s2, 5(%ra)
+	sw	%s1, 4(%ra)
 	addi	%v1, %t7, -1
 	addi	%v0, %a1, 0
 
-	sw	%s2, 5(%ra)
-	nop
+	sw	%s0, 3(%ra)
+	sw	%k0, 2(%ra)
 	addi	%sp, %sp, 3
 	nop
 
-	sw	%s1, 4(%ra)
-	nop
-	nop
-	nop
-
-	sw	%s0, 3(%ra)
-	nop
-	nop
-	nop
-
-	sw	%k0, 2(%ra)
-	nop
-	nop
-	nop
-
 	sw	%a3, 1(%ra)
-	nop
-	nop
-	nop
-
 	sw	%a2, 0(%ra)
-	nop
 	nop
 	nop
 
@@ -66020,6 +66225,11 @@ fbgt_cont.50480:
 	nop
 	nop
 	fdiv	%f1, %f0, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f17, %f2, fbgt_cont.50500
 
 	nop
@@ -66085,6 +66295,11 @@ fbgt_else.50501:
 	nop
 	nop
 	fdiv	%f1, %f0, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f17, %f2, fbgt_cont.50500
 
 	nop
@@ -66563,6 +66778,11 @@ fbgt_cont.50528:
 	nop
 	nop
 	fdiv	%f1, %f0, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f20, %f2, fbgt_cont.50548
 
 	nop
@@ -66628,6 +66848,11 @@ fbgt_else.50549:
 	nop
 	nop
 	fdiv	%f1, %f0, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f20, %f2, fbgt_cont.50548
 
 	nop
@@ -67077,6 +67302,11 @@ fbgt_cont.50572:
 	nop
 	nop
 	fdiv	%f1, %f0, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f23, %f2, fbgt_cont.50592
 
 	nop
@@ -67142,6 +67372,11 @@ fbgt_else.50593:
 	nop
 	nop
 	fdiv	%f1, %f0, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f23, %f2, fbgt_cont.50592
 
 	nop
@@ -67610,6 +67845,11 @@ fbgt_cont.50620:
 	nop
 	nop
 	fdiv	%f1, %f0, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f24, %f2, fbgt_cont.50640
 
 	nop
@@ -67675,6 +67915,11 @@ fbgt_else.50641:
 	nop
 	nop
 	fdiv	%f1, %f0, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f24, %f2, fbgt_cont.50640
 
 	nop
@@ -67947,22 +68192,12 @@ bnei_cont.50662:
 	nop
 
 	fsw	%f1, 173(%zero)
-	nop
+	fsw	%f23, 165(%zero)
 	fneg	%f1, %f0
 	nop
 
-	fsw	%f23, 165(%zero)
-	nop
-	nop
-	nop
-
 	fsw	%fzero, 166(%zero)
-	nop
-	nop
-	nop
-
 	fsw	%f1, 167(%zero)
-	nop
 	fneg	%f1, %f20
 	nop
 
@@ -68271,6 +68506,11 @@ fbgt_cont.50666:
 	nop
 	nop
 	fdiv	%f1, %f0, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f17, %f2, fbgt_cont.50686
 
 	nop
@@ -68336,6 +68576,11 @@ fbgt_else.50687:
 	nop
 	nop
 	fdiv	%f1, %f0, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f17, %f2, fbgt_cont.50686
 
 	nop
@@ -68790,6 +69035,11 @@ fbgt_cont.50710:
 	nop
 	nop
 	fdiv	%f1, %f0, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f17, %f2, fbgt_cont.50730
 
 	nop
@@ -68855,6 +69105,11 @@ fbgt_else.50731:
 	nop
 	nop
 	fdiv	%f1, %f0, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f17, %f2, fbgt_cont.50730
 
 	nop
@@ -69323,6 +69578,11 @@ fbgt_cont.50758:
 	nop
 	nop
 	fdiv	%f1, %f0, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f20, %f2, fbgt_cont.50778
 
 	nop
@@ -69388,6 +69648,11 @@ fbgt_else.50779:
 	nop
 	nop
 	fdiv	%f1, %f0, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f20, %f2, fbgt_cont.50778
 
 	nop
@@ -69632,6 +69897,11 @@ bnei_cont.50800:
 	fsw	%f0, 78(%zero)
 	nop
 	nop
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f19, %f2, fbgt_else.50801
 
 	flw	%f0, 492(%zero)
@@ -69827,6 +70097,11 @@ fbgt_cont.50802:
 	nop
 	nop
 	fdiv	%f1, %f0, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f19, %f2, fbgt_cont.50822
 
 	nop
@@ -69892,6 +70167,11 @@ fbgt_else.50823:
 	nop
 	nop
 	fdiv	%f1, %f0, %f16
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f19, %f2, fbgt_cont.50822
 
 	nop
@@ -72997,17 +73277,17 @@ bgt_cont.51052:
 	addi	%sp, %sp, 8
 	jal	min_caml_create_array
 
-	nop
-	nop
+	sw	%v0, 1(%v1)
+	sw	%a1, 0(%v1)
 	addi	%sp, %sp, -8
 	add	%v1, %zero, %hp
 
-	sw	%v0, 1(%v1)
+	nop
 	nop
 	addi	%hp, %hp, 2
 	addi	%v0, %a2, 0
 
-	sw	%a1, 0(%v1)
+	nop
 	nop
 	addi	%sp, %sp, 8
 	jal	min_caml_create_array
@@ -73130,6 +73410,11 @@ bgt_cont.51052:
 	fsw	%f27, 186(%zero)
 	nop
 	nop
+	nop
+
+	nop
+	nop
+	nop
 	blti	%s2, 0, bgti_else.51119
 
 	lw	%a1, 12(%s2)
@@ -73200,6 +73485,11 @@ bgt_cont.51052:
 	nop
 	nop
 	fadd	%f0, %f16, %f0
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 0, bnei_else.51125
 
 	lw	%a0, 9(%a1)
@@ -73282,6 +73572,11 @@ bnei_cont.51126:
 	nop
 	nop
 	fneg	%f17, %f1
+	nop
+
+	nop
+	nop
+	nop
 	beqi	%a0, 0, bnei_else.51127
 
 	lw	%a0, 9(%a1)
@@ -73396,12 +73691,7 @@ bnei_cont.51126:
 
 bnei_else.51127:
 	fsw	%f22, 1(%v0)
-	nop
-	nop
-	nop
-
 	fsw	%f20, 2(%v0)
-	nop
 	nop
 	nop
 
@@ -73648,6 +73938,11 @@ bnei_else.51139:
 	lw	%a2, 6(%a1)
 	nop
 	nop
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f1, %fzero, fbgt_else.51141
 
 	nop
@@ -73697,6 +73992,11 @@ bnei_cont.51144:
 	nop
 
 	flw	%f0, 0(%a2)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	beqi	%a0, 0, bnei_else.51147
@@ -73760,6 +74060,11 @@ bnei_else.51151:
 	lw	%a2, 6(%a1)
 	nop
 	nop
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f1, %fzero, fbgt_else.51153
 
 	nop
@@ -73809,6 +74114,11 @@ bnei_cont.51156:
 	nop
 
 	flw	%f0, 1(%a2)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	beqi	%a0, 0, bnei_else.51159
@@ -73872,6 +74182,11 @@ bnei_else.51163:
 	lw	%a2, 6(%a1)
 	nop
 	nop
+	nop
+
+	nop
+	nop
+	nop
 	fblt	%f1, %fzero, fbgt_else.51165
 
 	nop
@@ -73921,6 +74236,11 @@ bnei_cont.51168:
 	nop
 
 	flw	%f0, 2(%a1)
+	nop
+	nop
+	nop
+
+	nop
 	nop
 	nop
 	beqi	%a0, 0, bnei_else.51171
@@ -74160,49 +74480,34 @@ bnei_else.51183:
 	nop
 	jal	min_caml_create_array
 
-	nop
-	nop
+	sw	%v0, 1(%s3)
+	sw	%a1, 0(%s3)
 	addi	%sp, %sp, -8
 	add	%s3, %zero, %hp
 
-	sw	%v0, 1(%s3)
-	nop
+	fsw	%f17, 0(%a1)
+	fsw	%f16, 1(%a1)
 	addi	%hp, %hp, 2
 	addi	%v1, %s2, 0
 
-	sw	%a1, 0(%s3)
-	fsw	%f17, 0(%a1)
-	addi	%sp, %sp, 8
-	nop
-
-	fsw	%f16, 1(%a1)
+	fsw	%f1, 2(%a1)
 	nop
 	addi	%v0, %s3, 0
-	nop
+	addi	%sp, %sp, 8
 
-	fsw	%f1, 2(%a1)
+	nop
 	nop
 	nop
 	jal	iter_setup_dirvec_constants.2889
 
-	nop
-	nop
+	fsw	%f28, 2(%a0)
+	sw	%s3, 1(%a0)
 	addi	%sp, %sp, -8
 	add	%a0, %zero, %hp
 
-	fsw	%f28, 2(%a0)
-	nop
-	addi	%hp, %hp, 3
-	nop
-
-	sw	%s3, 1(%a0)
-	nop
-	nop
-	nop
-
 	sw	%s4, 0(%a0)
 	nop
-	nop
+	addi	%hp, %hp, 3
 	nop
 
 	sw	%a0, 254(%s5)
@@ -74267,59 +74572,49 @@ bnei_else.51181:
 	nop
 	jal	min_caml_create_array
 
-	nop
-	nop
+	sw	%v0, 1(%s3)
+	sw	%a1, 0(%s3)
 	addi	%sp, %sp, -8
 	add	%s3, %zero, %hp
 
-	sw	%v0, 1(%s3)
-	nop
+	fsw	%f25, 0(%a1)
+	fsw	%f29, 1(%a1)
 	addi	%hp, %hp, 2
 	addi	%v1, %s2, 0
 
-	sw	%a1, 0(%s3)
-	fsw	%f25, 0(%a1)
-	addi	%sp, %sp, 8
-	nop
-
-	fsw	%f29, 1(%a1)
+	fsw	%f28, 2(%a1)
 	nop
 	addi	%v0, %s3, 0
-	nop
+	addi	%sp, %sp, 8
 
-	fsw	%f28, 2(%a1)
+	nop
 	nop
 	nop
 	jal	iter_setup_dirvec_constants.2889
 
-	nop
-	nop
+	fsw	%f4, 2(%a0)
+	sw	%s3, 1(%a0)
 	addi	%sp, %sp, -8
 	add	%a0, %zero, %hp
 
-	fsw	%f4, 2(%a0)
-	nop
-	addi	%hp, %hp, 3
-	addi	%v0, %zero, 3
-
-	sw	%s3, 1(%a0)
-	nop
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 8
-
 	sw	%s6, 0(%a0)
 	nop
+	addi	%hp, %hp, 3
 	addi	%s6, %s4, 2
-	nop
 
 	sw	%a0, 254(%s5)
 	nop
-	nop
-	nop
+	addi	%v0, %zero, 3
+	fmov	%f0, %fzero
 
 	nop
 	nop
 	addi	%s3, %s5, 1
+	addi	%sp, %sp, 8
+
+	nop
+	nop
+	nop
 	jal	min_caml_create_float_array
 
 	nop
@@ -74337,52 +74632,47 @@ bnei_else.51181:
 	nop
 	jal	min_caml_create_array
 
-	nop
-	nop
+	sw	%v0, 1(%s7)
+	sw	%a1, 0(%s7)
 	addi	%sp, %sp, -8
 	add	%s7, %zero, %hp
 
-	sw	%v0, 1(%s7)
-	nop
+	fsw	%f3, 0(%a1)
+	fsw	%f26, 1(%a1)
 	addi	%hp, %hp, 2
 	addi	%v1, %s2, 0
 
-	sw	%a1, 0(%s7)
-	fsw	%f3, 0(%a1)
-	addi	%sp, %sp, 8
-	nop
-
-	fsw	%f26, 1(%a1)
+	fsw	%f28, 2(%a1)
 	nop
 	addi	%v0, %s7, 0
-	nop
+	addi	%sp, %sp, 8
 
-	fsw	%f28, 2(%a1)
+	nop
 	nop
 	nop
 	jal	iter_setup_dirvec_constants.2889
 
-	nop
-	nop
+	fsw	%f4, 2(%a0)
+	sw	%s7, 1(%a0)
 	addi	%sp, %sp, -8
 	add	%a0, %zero, %hp
 
-	fsw	%f4, 2(%a0)
-	nop
-	addi	%hp, %hp, 3
-	addi	%s4, %s4, 3
-
-	sw	%s7, 1(%a0)
-	nop
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-
 	sw	%s6, 0(%a0)
 	nop
+	addi	%hp, %hp, 3
 	addi	%s6, %s5, 2
-	addi	%sp, %sp, 8
 
 	sw	%a0, 254(%s3)
+	nop
+	addi	%s4, %s4, 3
+	addi	%v0, %zero, 3
+
+	nop
+	nop
+	fmov	%f0, %fzero
+	addi	%sp, %sp, 8
+
+	nop
 	nop
 	nop
 	jal	min_caml_create_float_array
@@ -74402,49 +74692,34 @@ bnei_else.51181:
 	nop
 	jal	min_caml_create_array
 
-	nop
-	nop
+	sw	%v0, 1(%s3)
+	sw	%a1, 0(%s3)
 	addi	%sp, %sp, -8
 	add	%s3, %zero, %hp
 
-	sw	%v0, 1(%s3)
-	nop
+	fsw	%f3, 0(%a1)
+	fsw	%f29, 1(%a1)
 	addi	%hp, %hp, 2
 	addi	%v1, %s2, 0
 
-	sw	%a1, 0(%s3)
-	fsw	%f3, 0(%a1)
-	addi	%sp, %sp, 8
-	nop
-
-	fsw	%f29, 1(%a1)
+	fsw	%f27, 2(%a1)
 	nop
 	addi	%v0, %s3, 0
-	nop
+	addi	%sp, %sp, 8
 
-	fsw	%f27, 2(%a1)
+	nop
 	nop
 	nop
 	jal	iter_setup_dirvec_constants.2889
 
-	nop
-	nop
+	fsw	%f4, 2(%a0)
+	sw	%s3, 1(%a0)
 	addi	%sp, %sp, -8
 	add	%a0, %zero, %hp
 
-	fsw	%f4, 2(%a0)
-	nop
-	addi	%hp, %hp, 3
-	nop
-
-	sw	%s3, 1(%a0)
-	nop
-	nop
-	nop
-
 	sw	%s4, 0(%a0)
 	nop
-	nop
+	addi	%hp, %hp, 3
 	nop
 
 	sw	%a0, 254(%s6)

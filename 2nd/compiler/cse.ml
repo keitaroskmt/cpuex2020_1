@@ -70,4 +70,45 @@ let rec g env fenv e =
         | e1 -> e1
         )
 
-let f e = g Cenv.empty M.empty e
+let find x env = if M.mem x env then M.find x env else x
+
+(* LetTupleのための共通部分式削除 (無駄なloadを消したい) *)
+let rec g' env tenv = function 
+    | LetTuple(xts, y, e) -> 
+        if M.mem y tenv then
+            let env = List.fold_left2 
+                (fun env (x, t) (x', t') -> assert(t = t'); M.add x x' env) env xts (M.find y tenv) in
+                    Format.eprintf "cse %s@." y;
+                    g' env tenv e
+        else
+            LetTuple(xts, y, g' env (M.add y xts tenv) e)
+    (* あとは置き換える *)
+    | Neg(x) -> Neg(find x env)
+    | Add(x, y) -> Add(find x env, find y env)
+    | Sub(x, y) -> Sub(find x env, find y env)
+    | Mul(x, y) -> Mul(find x env, find y env)
+    | Div(x, y) -> Div(find x env, find y env)
+    | FNeg(x) -> FNeg(find x env)
+    | FAdd(x, y) -> FAdd(find x env, find y env)
+    | FSub(x, y) -> FSub(find x env, find y env)
+    | FMul(x, y) -> FMul(find x env, find y env)
+    | FDiv(x, y) -> FDiv(find x env, find y env)
+    | IfEq(x, y, e1, e2) -> IfEq(find x env, find y env, g' env tenv e1, g' env tenv e2)
+    | IfLE(x, y, e1, e2) -> IfLE(find x env, find y env, g' env tenv e1, g' env tenv e2)
+    | Let(xt, e1, e2) -> Let(xt, g' env tenv e1, g' env tenv e2)
+    | Var(x) -> Var(find x env)
+    | LetRec({ name = xt; args = yts; body = e1 }, e2) -> 
+        LetRec({ name = xt; args = yts; body = g' M.empty M.empty e1 }, g' env tenv e2)
+    | App(x, ys) -> App(find x env, List.map (fun x -> find x env) ys)
+    | Tuple(xs) -> Tuple(List.map (fun x -> find x env) xs)
+    | ExtTuple(xs, i) -> ExtTuple(List.map (fun x -> find x env) xs, i)
+    | Get(x, y) -> Get(find x env, find y env)
+    | Put(x, y, z) -> Put(find x env, find y env, find z env)
+    | ExtArray(x) -> ExtArray(find x env)
+    | ExtFunApp(x, ys) -> ExtFunApp(find x env, List.map (fun x -> find x env) ys)
+    | e -> e
+
+
+
+let f e = 
+    g' M.empty M.empty (g Cenv.empty M.empty e)

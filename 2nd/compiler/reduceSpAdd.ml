@@ -38,14 +38,14 @@ let rec g list flag i acm =
         | Beq(_) | Beqi(_) | Bne(_) | Blt(_) | Blti(_) | FBeq(_) | FBne(_) | FBlt(_) ->
             concat (inst :: acm);
             g rest false 0 []
-        | Add(x, y, z) | Sub(x, y, z) | And(x, y, z) | Or(x, y, z) | Nor(x, y, z) | Sll(x, y, V(z)) | Srl(x, y, V(z)) when x = reg_sp || y = reg_sp || z = reg_sp ->
+        | Add(x, y, z) | Sub(x, y, z) | And(x, y, z) | Or(x, y, z) | Nor(x, y, z) | Sll(x, y, V(z)) | Srl(x, y, V(z)) | Slt(x, y, z) when x = reg_sp || y = reg_sp || z = reg_sp ->
             concat (inst :: acm);
             g rest false 0 []
         | Addi(x, y, _) | Movl(x, y) | Ori(x, y, _) | Sll(x, y, _) | Srl(x, y, _) 
         | Lw(x, _, y) | Sw(x, _, y) when x = reg_sp || y = reg_sp -> 
             concat (inst :: acm);
             g rest false 0 []
-        | Ftoi(x, _) | Itof(_, x) | FLw(_, _, x) | FSw(_, _, x) | In(x) | Lui(x, _) when x = reg_sp -> 
+        | Ftoi(x, _) | Itof(_, x) | FLw(_, _, x) | FSw(_, _, x) | In(x) | Lui(x, _) | FSlt(x, _, _) when x = reg_sp -> 
             concat (inst :: acm);
             g rest false 0 []
         | _ ->
