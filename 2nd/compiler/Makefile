@@ -30,7 +30,7 @@ block.ml toBlock.ml graph.mli graph.ml controlFlow.mli controlFlow.ml \
 liveness.mli liveness.ml color.mli color.ml regAllocbyColor.mli regAllocbyColor.ml \
 emit.mli emit.ml emit_for_regAllocbyColor.mli emit_for_regAllocbyColor.ml \
 assem.ml toAssem.mli toAssem.ml \
-elimJump.mli elimJump.ml emitAssem.mli emitAssem.ml \
+elimJump.mli elimJump.ml reduceSpAdd.mli reduceSpAdd.ml emitAssem.mli emitAssem.ml \
 output.ml main.mli main.ml
 
 # ???Æ¥??È¥×¥í¥°???à¤¬?ý¤¨¤¿¤é¡¢?????????ä¤¹

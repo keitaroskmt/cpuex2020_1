@@ -61,49 +61,85 @@ min_caml_create_array:
 	addi	%a0, %v0, 0
 	addi	%v0, %hp, 0
 create_array_loop:
-	bne	%a0, %zero, create_array_cont
-	jr	%ra
-create_array_cont:
+	beqi	%a0, 0, create_array_exit
 	sw	%v1, 0(%hp)
-	addi	%a0, %a0, -1
 	addi	%hp, %hp, 1
+	beqi	%a0, 1, create_array_exit
+	sw	%v1, 0(%hp)
+	addi	%hp, %hp, 1
+	beqi	%a0, 2, create_array_exit
+	sw	%v1, 0(%hp)
+	addi	%hp, %hp, 1
+	beqi	%a0, 3, create_array_exit
+	sw	%v1, 0(%hp)
+	addi	%hp, %hp, 1
+	addi	%a0, %a0, -4
 	j	create_array_loop
+create_array_exit:
+	jr	%ra
 #  min_caml_create_float_array
 min_caml_create_float_array:
 	addi	%v1, %v0, 0
 	addi	%v0, %hp, 0
 create_float_array_loop:
-	bne	%v1, %zero, create_float_array_cont
-	jr	%ra
-create_float_array_cont:
+	beqi	%v1, 0, create_float_array_exit
 	fsw	%f0, 0(%hp)
-	addi	%v1, %v1, -1
 	addi	%hp, %hp, 1
+	beqi	%v1, 1, create_float_array_exit
+	fsw	%f0, 0(%hp)
+	addi	%hp, %hp, 1
+	beqi	%v1, 2, create_float_array_exit
+	fsw	%f0, 0(%hp)
+	addi	%hp, %hp, 1
+	beqi	%v1, 3, create_float_array_exit
+	fsw	%f0, 0(%hp)
+	addi	%hp, %hp, 1
+	addi	%v1, %v1, -4
 	j	create_float_array_loop
+create_float_array_exit:
+	jr	%ra
 #  min_caml_create_extarray
 min_caml_create_extarray:
 	addi	%a1, %v0, 0
 	addi	%v0, %a0, 0
 create_extarray_loop:
-	bne	%a1, %zero, create_extarray_cont
-	jr	%ra
-create_extarray_cont:
+	beqi	%a1, 0, create_extarray_exit
 	sw	%v1, 0(%a0)
-	addi	%a1, %a1, -1
 	addi	%a0, %a0, 1
+	beqi	%a1, 1, create_extarray_exit
+	sw	%v1, 0(%a0)
+	addi	%a0, %a0, 1
+	beqi	%a1, 2, create_extarray_exit
+	sw	%v1, 0(%a0)
+	addi	%a0, %a0, 1
+	beqi	%a1, 3, create_extarray_exit
+	sw	%v1, 0(%a0)
+	addi	%a0, %a0, 1
+	addi	%a1, %a1, -4
 	j	create_extarray_loop
+create_extarray_exit:
+	jr	%ra
 #  min_caml_create_float_extarray
 min_caml_create_float_extarray:
 	addi	%a0, %v0, 0
 	addi	%v0, %v1, 0
 create_float_extarray_loop:
-	bne	%a0, %zero, create_float_extarray_cont
-	jr	%ra
-create_float_extarray_cont:
+	beqi	%a0, 0, create_float_extarray_exit
 	fsw	%f0, 0(%v1)
-	addi	%a0, %a0, -1
 	addi	%v1, %v1, 1
+	beqi	%a0, 1, create_float_extarray_exit
+	fsw	%f0, 0(%v1)
+	addi	%v1, %v1, 1
+	beqi	%a0, 2, create_float_extarray_exit
+	fsw	%f0, 0(%v1)
+	addi	%v1, %v1, 1
+	beqi	%a0, 3, create_float_extarray_exit
+	fsw	%f0, 0(%v1)
+	addi	%v1, %v1, 1
+	addi	%a0, %a0, -4
 	j	create_float_extarray_loop
+create_float_extarray_exit:
+	jr	%ra
 # ------------ body ---------------------------
 fib.9:
 	sw	%v0, 0(%sp)

@@ -25,18 +25,19 @@ let lexbuf (outchan, datachan) l = (* バッファをコンパイルしてチャンネルへ出力す
   Id.counter := 0;
   Typing.extenv := M.empty;
   EmitAssem.f outchan
-    (ElimJump.f 
-        (ToAssem.f datachan true (* RegAllocbyColorをまとめる *)
-            (iter_asm !limit
-                (Simm.f
-                    (Virtual.f
-                        (Closure.f
-                            (FixAddress.f
-                                (iter !limit
-                                    (Alpha.f
-                                        (KNormal.f
-                                            (Typing.f
-                                                (Parser.exp Lexer.token l))))))))))))
+    (ReduceSpAdd.f 
+        (ElimJump.f 
+            (ToAssem.f datachan true (* RegAllocbyColorをまとめる *)
+                (iter_asm !limit
+                    (Simm.f
+                        (Virtual.f
+                            (Closure.f
+                                (FixAddress.f
+                                    (iter !limit
+                                        (Alpha.f
+                                            (KNormal.f
+                                                (Typing.f
+                                                    (Parser.exp Lexer.token l)))))))))))))
 
 (*
   Id.counter := 0;

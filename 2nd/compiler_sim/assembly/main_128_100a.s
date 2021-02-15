@@ -7156,9 +7156,11 @@ fbgt_cont.26987:
 	addi	%v0, %zero, 0
 	addi	%sp, %sp, 2
 	jal	solve_each_element.2934
+	addi	%sp, %sp, -2
 	addi	%v0, %zero, 8
 	addi	%a0, %t8, 0
 	addi	%v1, %s5, 0
+	addi	%sp, %sp, 2
 	jal	solve_one_or_network.2938
 	addi	%sp, %sp, -2
 	j	bnei_cont.26975
@@ -7245,9 +7247,11 @@ bnei_else.26974:
 	addi	%v0, %zero, 0
 	addi	%sp, %sp, 2
 	jal	solve_each_element.2934
+	addi	%sp, %sp, -2
 	addi	%v0, %zero, 8
 	addi	%a0, %t8, 0
 	addi	%v1, %s5, 0
+	addi	%sp, %sp, 2
 	jal	solve_one_or_network.2938
 	addi	%sp, %sp, -2
 	j	bnei_cont.27005
@@ -7342,9 +7346,11 @@ fbgt_cont.27024:
 	addi	%v0, %zero, 0
 	addi	%sp, %sp, 3
 	jal	solve_each_element.2934
+	addi	%sp, %sp, -3
 	addi	%v0, %zero, 7
 	addi	%a0, %t8, 0
 	addi	%v1, %s5, 0
+	addi	%sp, %sp, 3
 	jal	solve_one_or_network.2938
 	addi	%sp, %sp, -3
 	j	bnei_cont.27020
@@ -7420,9 +7426,11 @@ bnei_else.27019:
 	addi	%v0, %zero, 0
 	addi	%sp, %sp, 3
 	jal	solve_each_element.2934
+	addi	%sp, %sp, -3
 	addi	%v0, %zero, 7
 	addi	%a0, %t8, 0
 	addi	%v1, %s5, 0
+	addi	%sp, %sp, 3
 	jal	solve_one_or_network.2938
 	addi	%sp, %sp, -3
 	j	bnei_cont.27040
@@ -8055,9 +8063,11 @@ fbgt_cont.27657:
 	addi	%v0, %zero, 0
 	addi	%sp, %sp, 2
 	jal	solve_each_element_fast.2948
+	addi	%sp, %sp, -2
 	addi	%v0, %zero, 8
 	addi	%a0, %t8, 0
 	addi	%v1, %s5, 0
+	addi	%sp, %sp, 2
 	jal	solve_one_or_network_fast.2952
 	addi	%sp, %sp, -2
 	j	bnei_cont.27635
@@ -8144,9 +8154,11 @@ bnei_else.27634:
 	addi	%v0, %zero, 0
 	addi	%sp, %sp, 2
 	jal	solve_each_element_fast.2948
+	addi	%sp, %sp, -2
 	addi	%v0, %zero, 8
 	addi	%a0, %t8, 0
 	addi	%v1, %s5, 0
+	addi	%sp, %sp, 2
 	jal	solve_one_or_network_fast.2952
 	addi	%sp, %sp, -2
 	j	bnei_cont.27675
@@ -8240,9 +8252,11 @@ fbgt_cont.27694:
 	addi	%v0, %zero, 0
 	addi	%sp, %sp, 3
 	jal	solve_each_element_fast.2948
+	addi	%sp, %sp, -3
 	addi	%v0, %zero, 7
 	addi	%a0, %t8, 0
 	addi	%v1, %s5, 0
+	addi	%sp, %sp, 3
 	jal	solve_one_or_network_fast.2952
 	addi	%sp, %sp, -3
 	j	bnei_cont.27690
@@ -8318,9 +8332,11 @@ bnei_else.27689:
 	addi	%v0, %zero, 0
 	addi	%sp, %sp, 3
 	jal	solve_each_element_fast.2948
+	addi	%sp, %sp, -3
 	addi	%v0, %zero, 7
 	addi	%a0, %t8, 0
 	addi	%v1, %s5, 0
+	addi	%sp, %sp, 3
 	jal	solve_one_or_network_fast.2952
 	addi	%sp, %sp, -3
 	j	bnei_cont.27710
@@ -10009,9 +10025,11 @@ fbgt_cont.29083:
 	addi	%v0, %zero, 0
 	addi	%sp, %sp, 8
 	jal	solve_each_element_fast.2948
+	addi	%sp, %sp, -8
 	addi	%v0, %zero, 5
 	addi	%a0, %t0, 0
 	addi	%v1, %s5, 0
+	addi	%sp, %sp, 8
 	jal	solve_one_or_network_fast.2952
 	addi	%sp, %sp, -8
 	j	bnei_cont.29079
@@ -10065,9 +10083,11 @@ bnei_else.29078:
 	addi	%v0, %zero, 0
 	addi	%sp, %sp, 8
 	jal	solve_each_element_fast.2948
+	addi	%sp, %sp, -8
 	addi	%v0, %zero, 5
 	addi	%a0, %t0, 0
 	addi	%v1, %s5, 0
+	addi	%sp, %sp, 8
 	jal	solve_one_or_network_fast.2952
 	addi	%sp, %sp, -8
 	j	bnei_cont.29095
@@ -10177,8 +10197,10 @@ bnei_cont.29111:
 	addi	%v0, %t2, 0
 	addi	%sp, %sp, 8
 	jal	utexture.2971
+	addi	%sp, %sp, -8
 	addi	%v1, %t1, 0
 	addi	%v0, %zero, 0
+	addi	%sp, %sp, 8
 	jal	shadow_check_one_or_matrix.2931
 	addi	%sp, %sp, -8
 	beqi	%v0, 0, bnei_else.29122
@@ -10286,9 +10308,11 @@ fbgt_cont.29135:
 	addi	%v0, %zero, 0
 	addi	%sp, %sp, 8
 	jal	solve_each_element_fast.2948
+	addi	%sp, %sp, -8
 	addi	%v0, %zero, 5
 	addi	%a0, %t0, 0
 	addi	%v1, %s5, 0
+	addi	%sp, %sp, 8
 	jal	solve_one_or_network_fast.2952
 	addi	%sp, %sp, -8
 	j	bnei_cont.29131
@@ -10342,9 +10366,11 @@ bnei_else.29130:
 	addi	%v0, %zero, 0
 	addi	%sp, %sp, 8
 	jal	solve_each_element_fast.2948
+	addi	%sp, %sp, -8
 	addi	%v0, %zero, 5
 	addi	%a0, %t0, 0
 	addi	%v1, %s5, 0
+	addi	%sp, %sp, 8
 	jal	solve_one_or_network_fast.2952
 	addi	%sp, %sp, -8
 	j	bnei_cont.29147
@@ -10454,8 +10480,10 @@ bnei_cont.29163:
 	addi	%v0, %t2, 0
 	addi	%sp, %sp, 8
 	jal	utexture.2971
+	addi	%sp, %sp, -8
 	addi	%v1, %t1, 0
 	addi	%v0, %zero, 0
+	addi	%sp, %sp, 8
 	jal	shadow_check_one_or_matrix.2931
 	addi	%sp, %sp, -8
 	beqi	%v0, 0, bnei_else.29174
@@ -11061,10 +11089,12 @@ do_without_neighbors.3014:
 	addi	%v0, %t2, 0
 	addi	%sp, %sp, 7
 	jal	setup_startp_constants.2894
+	addi	%sp, %sp, -7
 	addi	%a1, %zero, 118
 	addi	%a0, %t2, 0
 	addi	%v1, %t0, 0
 	addi	%v0, %k0, 0
+	addi	%sp, %sp, 7
 	jal	iter_trace_diffuse_rays.2992
 	addi	%sp, %sp, -7
 	j	bnei_cont.29489
@@ -11083,10 +11113,12 @@ bnei_cont.29489:
 	addi	%v0, %t2, 0
 	addi	%sp, %sp, 7
 	jal	setup_startp_constants.2894
+	addi	%sp, %sp, -7
 	addi	%a1, %zero, 118
 	addi	%a0, %t2, 0
 	addi	%v1, %t0, 0
 	addi	%v0, %k0, 0
+	addi	%sp, %sp, 7
 	jal	iter_trace_diffuse_rays.2992
 	addi	%sp, %sp, -7
 	j	bnei_cont.29491
@@ -11105,10 +11137,12 @@ bnei_cont.29491:
 	addi	%v0, %t2, 0
 	addi	%sp, %sp, 7
 	jal	setup_startp_constants.2894
+	addi	%sp, %sp, -7
 	addi	%a1, %zero, 118
 	addi	%a0, %t2, 0
 	addi	%v1, %t0, 0
 	addi	%v0, %k0, 0
+	addi	%sp, %sp, 7
 	jal	iter_trace_diffuse_rays.2992
 	addi	%sp, %sp, -7
 	j	bnei_cont.29493
@@ -11127,10 +11161,12 @@ bnei_cont.29493:
 	addi	%v0, %t2, 0
 	addi	%sp, %sp, 7
 	jal	setup_startp_constants.2894
+	addi	%sp, %sp, -7
 	addi	%a1, %zero, 118
 	addi	%a0, %t2, 0
 	addi	%v1, %t0, 0
 	addi	%v0, %k0, 0
+	addi	%sp, %sp, 7
 	jal	iter_trace_diffuse_rays.2992
 	addi	%sp, %sp, -7
 	j	bnei_cont.29495
@@ -11149,10 +11185,12 @@ bnei_cont.29495:
 	addi	%v0, %t2, 0
 	addi	%sp, %sp, 7
 	jal	setup_startp_constants.2894
+	addi	%sp, %sp, -7
 	addi	%a1, %zero, 118
 	addi	%a0, %t2, 0
 	addi	%v1, %t0, 0
 	addi	%v0, %k0, 0
+	addi	%sp, %sp, 7
 	jal	iter_trace_diffuse_rays.2992
 	addi	%sp, %sp, -7
 	j	bnei_cont.29497
@@ -12841,10 +12879,12 @@ pretrace_diffuse_rays.3043:
 	addi	%v1, %a0, -1
 	addi	%sp, %sp, 5
 	jal	setup_startp_constants.2894
+	addi	%sp, %sp, -5
 	addi	%a1, %zero, 118
 	addi	%a0, %v0, 0
 	addi	%v1, %k0, 0
 	addi	%v0, %s0, 0
+	addi	%sp, %sp, 5
 	jal	iter_trace_diffuse_rays.2992
 	addi	%sp, %sp, -5
 	lw	%a0, 0(%sp)
@@ -13539,7 +13579,9 @@ bgti_cont.32386:
 	addi	%v0, %a2, 48
 	addi	%sp, %sp, 11
 	jal	min_caml_print_char
+	addi	%sp, %sp, -11
 	addi	%v0, %a1, 48
+	addi	%sp, %sp, 11
 	jal	min_caml_print_char
 	addi	%sp, %sp, -11
 	j	bgt_cont.32418
@@ -13631,9 +13673,13 @@ bgti_cont.32420:
 	addi	%v0, %a0, 48
 	addi	%sp, %sp, 11
 	jal	min_caml_print_char
+	addi	%sp, %sp, -11
 	addi	%v0, %a2, 48
+	addi	%sp, %sp, 11
 	jal	min_caml_print_char
+	addi	%sp, %sp, -11
 	addi	%v0, %a1, 48
+	addi	%sp, %sp, 11
 	jal	min_caml_print_char
 	addi	%sp, %sp, -11
 bgt_cont.32418:
@@ -13847,7 +13893,9 @@ bgti_cont.32490:
 	addi	%v0, %a2, 48
 	addi	%sp, %sp, 11
 	jal	min_caml_print_char
+	addi	%sp, %sp, -11
 	addi	%v0, %a1, 48
+	addi	%sp, %sp, 11
 	jal	min_caml_print_char
 	addi	%sp, %sp, -11
 	j	bgt_cont.32522
@@ -13939,9 +13987,13 @@ bgti_cont.32524:
 	addi	%v0, %a0, 48
 	addi	%sp, %sp, 11
 	jal	min_caml_print_char
+	addi	%sp, %sp, -11
 	addi	%v0, %a2, 48
+	addi	%sp, %sp, 11
 	jal	min_caml_print_char
+	addi	%sp, %sp, -11
 	addi	%v0, %a1, 48
+	addi	%sp, %sp, 11
 	jal	min_caml_print_char
 	addi	%sp, %sp, -11
 bgt_cont.32522:
@@ -14154,7 +14206,9 @@ bgti_cont.32594:
 	addi	%v0, %a2, 48
 	addi	%sp, %sp, 11
 	jal	min_caml_print_char
+	addi	%sp, %sp, -11
 	addi	%v0, %a1, 48
+	addi	%sp, %sp, 11
 	jal	min_caml_print_char
 	addi	%sp, %sp, -11
 	j	bgt_cont.32626
@@ -14246,9 +14300,13 @@ bgti_cont.32628:
 	addi	%v0, %a0, 48
 	addi	%sp, %sp, 11
 	jal	min_caml_print_char
+	addi	%sp, %sp, -11
 	addi	%v0, %a2, 48
+	addi	%sp, %sp, 11
 	jal	min_caml_print_char
+	addi	%sp, %sp, -11
 	addi	%v0, %a1, 48
+	addi	%sp, %sp, 11
 	jal	min_caml_print_char
 	addi	%sp, %sp, -11
 bgt_cont.32626:
@@ -14333,7 +14391,9 @@ bgt_else.32671:
 bgt_cont.32672:
 	addi	%sp, %sp, 11
 	jal	print_int.2646
+	addi	%sp, %sp, -11
 	addi	%v0, %t1, 0
+	addi	%sp, %sp, 11
 	jal	min_caml_print_char
 	addi	%sp, %sp, -11
 	flw	%f0, 152(%zero)
@@ -14351,7 +14411,9 @@ bgt_else.32675:
 bgt_cont.32676:
 	addi	%sp, %sp, 11
 	jal	print_int.2646
+	addi	%sp, %sp, -11
 	addi	%v0, %t1, 0
+	addi	%sp, %sp, 11
 	jal	min_caml_print_char
 	addi	%sp, %sp, -11
 	flw	%f0, 153(%zero)
@@ -14369,7 +14431,9 @@ bgt_else.32679:
 bgt_cont.32680:
 	addi	%sp, %sp, 11
 	jal	print_int.2646
+	addi	%sp, %sp, -11
 	addi	%v0, %zero, 10
+	addi	%sp, %sp, 11
 	jal	min_caml_print_char
 	addi	%sp, %sp, -11
 	addi	%v0, %t2, 1
@@ -14494,8 +14558,10 @@ bgt_else.32866:
 bgt_cont.32867:
 	addi	%sp, %sp, 11
 	jal	print_int.2646
+	addi	%sp, %sp, -11
 	addi	%k0, %zero, 32
 	addi	%v0, %k0, 0
+	addi	%sp, %sp, 11
 	jal	min_caml_print_char
 	addi	%sp, %sp, -11
 	flw	%f0, 152(%zero)
@@ -14513,7 +14579,9 @@ bgt_else.32870:
 bgt_cont.32871:
 	addi	%sp, %sp, 11
 	jal	print_int.2646
+	addi	%sp, %sp, -11
 	addi	%v0, %k0, 0
+	addi	%sp, %sp, 11
 	jal	min_caml_print_char
 	addi	%sp, %sp, -11
 	flw	%f0, 153(%zero)
@@ -14531,7 +14599,9 @@ bgt_else.32874:
 bgt_cont.32875:
 	addi	%sp, %sp, 11
 	jal	print_int.2646
+	addi	%sp, %sp, -11
 	addi	%v0, %zero, 10
+	addi	%sp, %sp, 11
 	jal	min_caml_print_char
 	addi	%sp, %sp, -11
 	lw	%a2, 3(%sp)
@@ -16117,6 +16187,7 @@ calc_dirvec_rows.3096:
 	fmov	%f0, %fzero
 	addi	%sp, %sp, 2
 	jal	calc_dirvec.3083
+	addi	%sp, %sp, -2
 	itof	%f0, %s7
 	fmul	%f1, %f0, %f4
 	flw	%f0, 439(%zero)
@@ -16126,6 +16197,7 @@ calc_dirvec_rows.3096:
 	addi	%v0, %zero, 0
 	fmov	%f1, %fzero
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 2
 	jal	calc_dirvec.3083
 	addi	%sp, %sp, -2
 	addi	%v0, %zero, 3
@@ -16733,11 +16805,14 @@ bnei_else.34048:
 	fmov	%f0, %fzero
 	addi	%sp, %sp, 1
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -1
 	addi	%a1, %v0, 0
 	lw	%s6, 0(%zero)
 	addi	%v1, %a1, 0
 	addi	%v0, %s6, 0
+	addi	%sp, %sp, 1
 	jal	min_caml_create_array
+	addi	%sp, %sp, -1
 	add	%t8, %zero, %hp
 	addi	%hp, %hp, 2
 	sw	%v0, 1(%t8)
@@ -16748,6 +16823,7 @@ bnei_else.34048:
 	addi	%t9, %s6, -1
 	addi	%v1, %t9, 0
 	addi	%v0, %t8, 0
+	addi	%sp, %sp, 1
 	jal	iter_setup_dirvec_constants.2889
 	addi	%sp, %sp, -1
 	add	%a0, %zero, %hp
@@ -16765,10 +16841,13 @@ bnei_else.34048:
 	fmov	%f0, %fzero
 	addi	%sp, %sp, 3
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -3
 	addi	%a1, %v0, 0
 	addi	%v1, %a1, 0
 	addi	%v0, %s6, 0
+	addi	%sp, %sp, 3
 	jal	min_caml_create_array
+	addi	%sp, %sp, -3
 	add	%t8, %zero, %hp
 	addi	%hp, %hp, 2
 	sw	%v0, 1(%t8)
@@ -16778,6 +16857,7 @@ bnei_else.34048:
 	fsw	%f23, 2(%a1)
 	addi	%v1, %t9, 0
 	addi	%v0, %t8, 0
+	addi	%sp, %sp, 3
 	jal	iter_setup_dirvec_constants.2889
 	addi	%sp, %sp, -3
 	add	%a0, %zero, %hp
@@ -16794,10 +16874,13 @@ bnei_else.34048:
 	fmov	%f0, %fzero
 	addi	%sp, %sp, 3
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -3
 	addi	%a1, %v0, 0
 	addi	%v1, %a1, 0
 	addi	%v0, %s6, 0
+	addi	%sp, %sp, 3
 	jal	min_caml_create_array
+	addi	%sp, %sp, -3
 	add	%s5, %zero, %hp
 	addi	%hp, %hp, 2
 	sw	%v0, 1(%s5)
@@ -16807,6 +16890,7 @@ bnei_else.34048:
 	fsw	%f24, 2(%a1)
 	addi	%v1, %t9, 0
 	addi	%v0, %s5, 0
+	addi	%sp, %sp, 3
 	jal	iter_setup_dirvec_constants.2889
 	addi	%sp, %sp, -3
 	add	%a0, %zero, %hp
@@ -17029,110 +17113,164 @@ min_caml_start:
 	fmov	%f0, %fzero
 	addi	%sp, %sp, 1
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -1
 	addi	%a1, %v0, 0
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 1
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -1
 	addi	%v1, %v0, 0
 	addi	%v0, %zero, 5
+	addi	%sp, %sp, 1
 	jal	min_caml_create_array
+	addi	%sp, %sp, -1
 	addi	%a2, %v0, 0
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 1
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -1
 	sw	%v0, 1(%a2)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 1
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -1
 	sw	%v0, 2(%a2)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 1
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -1
 	sw	%v0, 3(%a2)
 	addi	%a0, %zero, 4
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 1
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -1
 	sw	%v0, 4(%a2)
 	addi	%v0, %zero, 5
 	addi	%v1, %zero, 0
+	addi	%sp, %sp, 1
 	jal	min_caml_create_array
+	addi	%sp, %sp, -1
 	addi	%a3, %v0, 0
 	addi	%v0, %zero, 5
 	addi	%v1, %zero, 0
+	addi	%sp, %sp, 1
 	jal	min_caml_create_array
+	addi	%sp, %sp, -1
 	addi	%k0, %v0, 0
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 1
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -1
 	addi	%v1, %v0, 0
 	addi	%v0, %zero, 5
+	addi	%sp, %sp, 1
 	jal	min_caml_create_array
+	addi	%sp, %sp, -1
 	addi	%s0, %v0, 0
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 1
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -1
 	sw	%v0, 1(%s0)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 1
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -1
 	sw	%v0, 2(%s0)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 1
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -1
 	sw	%v0, 3(%s0)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 1
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -1
 	sw	%v0, 4(%s0)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 1
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -1
 	addi	%v1, %v0, 0
 	addi	%v0, %zero, 5
+	addi	%sp, %sp, 1
 	jal	min_caml_create_array
+	addi	%sp, %sp, -1
 	addi	%s1, %v0, 0
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 1
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -1
 	sw	%v0, 1(%s1)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 1
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -1
 	sw	%v0, 2(%s1)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 1
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -1
 	sw	%v0, 3(%s1)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 1
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -1
 	sw	%v0, 4(%s1)
 	addi	%v1, %zero, 0
 	addi	%v0, %k1, 0
+	addi	%sp, %sp, 1
 	jal	min_caml_create_array
+	addi	%sp, %sp, -1
 	addi	%s2, %v0, 0
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 1
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -1
 	addi	%v1, %v0, 0
 	addi	%v0, %zero, 5
+	addi	%sp, %sp, 1
 	jal	min_caml_create_array
+	addi	%sp, %sp, -1
 	addi	%a0, %v0, 0
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 1
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -1
 	sw	%v0, 1(%a0)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 1
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -1
 	sw	%v0, 2(%a0)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 1
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -1
 	sw	%v0, 3(%a0)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 1
 	jal	min_caml_create_float_array
 	addi	%sp, %sp, -1
 	sw	%v0, 4(%a0)
@@ -17175,109 +17313,163 @@ bgti_cont.34270:
 	fmov	%f0, %fzero
 	addi	%sp, %sp, 3
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -3
 	addi	%a1, %v0, 0
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 3
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -3
 	addi	%v1, %v0, 0
 	addi	%v0, %zero, 5
+	addi	%sp, %sp, 3
 	jal	min_caml_create_array
+	addi	%sp, %sp, -3
 	addi	%a2, %v0, 0
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 3
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -3
 	sw	%v0, 1(%a2)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 3
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -3
 	sw	%v0, 2(%a2)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 3
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -3
 	sw	%v0, 3(%a2)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 3
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -3
 	sw	%v0, 4(%a2)
 	addi	%v0, %zero, 5
 	addi	%v1, %zero, 0
+	addi	%sp, %sp, 3
 	jal	min_caml_create_array
+	addi	%sp, %sp, -3
 	addi	%a3, %v0, 0
 	addi	%v0, %zero, 5
 	addi	%v1, %zero, 0
+	addi	%sp, %sp, 3
 	jal	min_caml_create_array
+	addi	%sp, %sp, -3
 	addi	%k0, %v0, 0
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 3
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -3
 	addi	%v1, %v0, 0
 	addi	%v0, %zero, 5
+	addi	%sp, %sp, 3
 	jal	min_caml_create_array
+	addi	%sp, %sp, -3
 	addi	%s0, %v0, 0
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 3
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -3
 	sw	%v0, 1(%s0)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 3
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -3
 	sw	%v0, 2(%s0)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 3
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -3
 	sw	%v0, 3(%s0)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 3
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -3
 	sw	%v0, 4(%s0)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 3
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -3
 	addi	%v1, %v0, 0
 	addi	%v0, %zero, 5
+	addi	%sp, %sp, 3
 	jal	min_caml_create_array
+	addi	%sp, %sp, -3
 	addi	%s1, %v0, 0
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 3
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -3
 	sw	%v0, 1(%s1)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 3
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -3
 	sw	%v0, 2(%s1)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 3
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -3
 	sw	%v0, 3(%s1)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 3
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -3
 	sw	%v0, 4(%s1)
 	addi	%v1, %zero, 0
 	addi	%v0, %k1, 0
+	addi	%sp, %sp, 3
 	jal	min_caml_create_array
+	addi	%sp, %sp, -3
 	addi	%s2, %v0, 0
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 3
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -3
 	addi	%v1, %v0, 0
 	addi	%v0, %zero, 5
+	addi	%sp, %sp, 3
 	jal	min_caml_create_array
+	addi	%sp, %sp, -3
 	addi	%a0, %v0, 0
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 3
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -3
 	sw	%v0, 1(%a0)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 3
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -3
 	sw	%v0, 2(%a0)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 3
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -3
 	sw	%v0, 3(%a0)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 3
 	jal	min_caml_create_float_array
 	addi	%sp, %sp, -3
 	sw	%v0, 4(%a0)
@@ -17318,109 +17510,163 @@ bgti_cont.34272:
 	fmov	%f0, %fzero
 	addi	%sp, %sp, 4
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -4
 	addi	%a1, %v0, 0
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 4
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -4
 	addi	%v1, %v0, 0
 	addi	%v0, %zero, 5
+	addi	%sp, %sp, 4
 	jal	min_caml_create_array
+	addi	%sp, %sp, -4
 	addi	%a2, %v0, 0
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 4
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -4
 	sw	%v0, 1(%a2)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 4
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -4
 	sw	%v0, 2(%a2)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 4
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -4
 	sw	%v0, 3(%a2)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 4
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -4
 	sw	%v0, 4(%a2)
 	addi	%v0, %zero, 5
 	addi	%v1, %zero, 0
+	addi	%sp, %sp, 4
 	jal	min_caml_create_array
+	addi	%sp, %sp, -4
 	addi	%a3, %v0, 0
 	addi	%v0, %zero, 5
 	addi	%v1, %zero, 0
+	addi	%sp, %sp, 4
 	jal	min_caml_create_array
+	addi	%sp, %sp, -4
 	addi	%k0, %v0, 0
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 4
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -4
 	addi	%v1, %v0, 0
 	addi	%v0, %zero, 5
+	addi	%sp, %sp, 4
 	jal	min_caml_create_array
+	addi	%sp, %sp, -4
 	addi	%s0, %v0, 0
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 4
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -4
 	sw	%v0, 1(%s0)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 4
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -4
 	sw	%v0, 2(%s0)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 4
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -4
 	sw	%v0, 3(%s0)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 4
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -4
 	sw	%v0, 4(%s0)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 4
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -4
 	addi	%v1, %v0, 0
 	addi	%v0, %zero, 5
+	addi	%sp, %sp, 4
 	jal	min_caml_create_array
+	addi	%sp, %sp, -4
 	addi	%s1, %v0, 0
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 4
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -4
 	sw	%v0, 1(%s1)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 4
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -4
 	sw	%v0, 2(%s1)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 4
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -4
 	sw	%v0, 3(%s1)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 4
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -4
 	sw	%v0, 4(%s1)
 	addi	%v1, %zero, 0
 	addi	%v0, %k1, 0
+	addi	%sp, %sp, 4
 	jal	min_caml_create_array
+	addi	%sp, %sp, -4
 	addi	%s2, %v0, 0
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 4
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -4
 	addi	%v1, %v0, 0
 	addi	%v0, %zero, 5
+	addi	%sp, %sp, 4
 	jal	min_caml_create_array
+	addi	%sp, %sp, -4
 	addi	%a0, %v0, 0
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 4
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -4
 	sw	%v0, 1(%a0)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 4
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -4
 	sw	%v0, 2(%a0)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 4
 	jal	min_caml_create_float_array
+	addi	%sp, %sp, -4
 	sw	%v0, 3(%a0)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 4
 	jal	min_caml_create_float_array
 	addi	%sp, %sp, -4
 	sw	%v0, 4(%a0)
@@ -17459,30 +17705,48 @@ bgti_cont.34274:
 	sw	%s6, 4(%sp)
 	addi	%sp, %sp, 5
 	jal	read_screen_settings.2775
+	addi	%sp, %sp, -5
+	addi	%sp, %sp, 5
 	jal	min_caml_read_int
+	addi	%sp, %sp, -5
+	addi	%sp, %sp, 5
 	jal	min_caml_read_float
+	addi	%sp, %sp, -5
 	flw	%f20, 461(%zero)
 	fmul	%f19, %f0, %f20
 	fmov	%f0, %f19
+	addi	%sp, %sp, 5
 	jal	sin.2637
+	addi	%sp, %sp, -5
 	fneg	%f0, %f0
 	fsw	%f0, 79(%zero)
+	addi	%sp, %sp, 5
 	jal	min_caml_read_float
+	addi	%sp, %sp, -5
 	fmul	%f20, %f0, %f20
 	fmov	%f0, %f19
+	addi	%sp, %sp, 5
 	jal	cos.2635
+	addi	%sp, %sp, -5
 	fmov	%f19, %f0
 	fmov	%f0, %f20
+	addi	%sp, %sp, 5
 	jal	sin.2637
+	addi	%sp, %sp, -5
 	fmul	%f0, %f19, %f0
 	fsw	%f0, 78(%zero)
 	fmov	%f0, %f20
+	addi	%sp, %sp, 5
 	jal	cos.2635
+	addi	%sp, %sp, -5
 	fmul	%f0, %f19, %f0
 	fsw	%f0, 80(%zero)
+	addi	%sp, %sp, 5
 	jal	min_caml_read_float
+	addi	%sp, %sp, -5
 	fsw	%f0, 81(%zero)
 	addi	%v0, %zero, 0
+	addi	%sp, %sp, 5
 	jal	read_nth_object.2782
 	addi	%sp, %sp, -5
 	beqi	%v0, 0, bnei_else.34275
@@ -17560,9 +17824,11 @@ bnei_cont.34286:
 	sw	%v0, 134(%zero)
 	addi	%sp, %sp, 5
 	jal	write_ppm_header.3037
+	addi	%sp, %sp, -5
 	addi	%a2, %zero, 120
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 5
 	jal	min_caml_create_float_array
 	addi	%sp, %sp, -5
 	addi	%a1, %v0, 0
@@ -17571,19 +17837,26 @@ bnei_cont.34286:
 	addi	%v1, %a1, 0
 	addi	%sp, %sp, 6
 	jal	min_caml_create_array
+	addi	%sp, %sp, -6
 	add	%v1, %zero, %hp
 	addi	%hp, %hp, 2
 	sw	%v0, 1(%v1)
 	sw	%a1, 0(%v1)
 	addi	%v0, %a2, 0
+	addi	%sp, %sp, 6
 	jal	min_caml_create_array
+	addi	%sp, %sp, -6
 	sw	%v0, 183(%zero)
 	lw	%t8, 183(%zero)
 	addi	%v1, %zero, 118
 	addi	%v0, %t8, 0
+	addi	%sp, %sp, 6
 	jal	create_dirvec_elements.3102
+	addi	%sp, %sp, -6
 	addi	%v0, %zero, 3
+	addi	%sp, %sp, 6
 	jal	create_dirvecs.3105
+	addi	%sp, %sp, -6
 	addi	%a0, %zero, 9
 	itof	%f1, %a0
 	flw	%f0, 467(%zero)
@@ -17593,15 +17866,22 @@ bnei_cont.34286:
 	addi	%v0, %zero, 4
 	addi	%a0, %zero, 0
 	addi	%v1, %zero, 0
+	addi	%sp, %sp, 6
 	jal	calc_dirvecs.3091
+	addi	%sp, %sp, -6
 	addi	%v0, %zero, 8
 	addi	%a0, %zero, 4
 	addi	%v1, %zero, 2
+	addi	%sp, %sp, 6
 	jal	calc_dirvec_rows.3096
+	addi	%sp, %sp, -6
 	addi	%v1, %zero, 119
 	addi	%v0, %t8, 0
+	addi	%sp, %sp, 6
 	jal	init_dirvec_constants.3107
+	addi	%sp, %sp, -6
 	addi	%v0, %zero, 3
+	addi	%sp, %sp, 6
 	jal	init_vecset_constants.3110
 	addi	%sp, %sp, -6
 	flw	%f0, 78(%zero)
