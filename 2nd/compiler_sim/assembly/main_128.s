@@ -5,7 +5,7 @@
 	lui	%sp, 1
 	ori	%sp, %sp, 44464
 	lui	%hp, 0
-	ori	%hp, %hp, 496
+	ori	%hp, %hp, 497
 	lui	%k1, 0
 	ori	%k1, %k1, 1
 	lui	%at, 16256
@@ -61,584 +61,1721 @@ min_caml_create_array:
 	addi	%a0, %v0, 0
 	addi	%v0, %hp, 0
 create_array_loop:
-	bne	%a0, %zero, create_array_cont
-	jr	%ra
-create_array_cont:
+	beqi	%a0, 0, create_array_exit
 	sw	%v1, 0(%hp)
-	addi	%a0, %a0, -1
 	addi	%hp, %hp, 1
+	beqi	%a0, 1, create_array_exit
+	sw	%v1, 0(%hp)
+	addi	%hp, %hp, 1
+	beqi	%a0, 2, create_array_exit
+	sw	%v1, 0(%hp)
+	addi	%hp, %hp, 1
+	beqi	%a0, 3, create_array_exit
+	sw	%v1, 0(%hp)
+	addi	%hp, %hp, 1
+	addi	%a0, %a0, -4
 	j	create_array_loop
+create_array_exit:
+	jr	%ra
 #  min_caml_create_float_array
 min_caml_create_float_array:
 	addi	%v1, %v0, 0
 	addi	%v0, %hp, 0
 create_float_array_loop:
-	bne	%v1, %zero, create_float_array_cont
-	jr	%ra
-create_float_array_cont:
+	beqi	%v1, 0, create_float_array_exit
 	fsw	%f0, 0(%hp)
-	addi	%v1, %v1, -1
 	addi	%hp, %hp, 1
+	beqi	%v1, 1, create_float_array_exit
+	fsw	%f0, 0(%hp)
+	addi	%hp, %hp, 1
+	beqi	%v1, 2, create_float_array_exit
+	fsw	%f0, 0(%hp)
+	addi	%hp, %hp, 1
+	beqi	%v1, 3, create_float_array_exit
+	fsw	%f0, 0(%hp)
+	addi	%hp, %hp, 1
+	addi	%v1, %v1, -4
 	j	create_float_array_loop
+create_float_array_exit:
+	jr	%ra
 #  min_caml_create_extarray
 min_caml_create_extarray:
 	addi	%a1, %v0, 0
 	addi	%v0, %a0, 0
 create_extarray_loop:
-	bne	%a1, %zero, create_extarray_cont
-	jr	%ra
-create_extarray_cont:
+	beqi	%a1, 0, create_extarray_exit
 	sw	%v1, 0(%a0)
-	addi	%a1, %a1, -1
 	addi	%a0, %a0, 1
+	beqi	%a1, 1, create_extarray_exit
+	sw	%v1, 0(%a0)
+	addi	%a0, %a0, 1
+	beqi	%a1, 2, create_extarray_exit
+	sw	%v1, 0(%a0)
+	addi	%a0, %a0, 1
+	beqi	%a1, 3, create_extarray_exit
+	sw	%v1, 0(%a0)
+	addi	%a0, %a0, 1
+	addi	%a1, %a1, -4
 	j	create_extarray_loop
+create_extarray_exit:
+	jr	%ra
 #  min_caml_create_float_extarray
 min_caml_create_float_extarray:
 	addi	%a0, %v0, 0
 	addi	%v0, %v1, 0
 create_float_extarray_loop:
-	bne	%a0, %zero, create_float_extarray_cont
-	jr	%ra
-create_float_extarray_cont:
+	beqi	%a0, 0, create_float_extarray_exit
 	fsw	%f0, 0(%v1)
-	addi	%a0, %a0, -1
 	addi	%v1, %v1, 1
+	beqi	%a0, 1, create_float_extarray_exit
+	fsw	%f0, 0(%v1)
+	addi	%v1, %v1, 1
+	beqi	%a0, 2, create_float_extarray_exit
+	fsw	%f0, 0(%v1)
+	addi	%v1, %v1, 1
+	beqi	%a0, 3, create_float_extarray_exit
+	fsw	%f0, 0(%v1)
+	addi	%v1, %v1, 1
+	addi	%a0, %a0, -4
 	j	create_float_extarray_loop
+create_float_extarray_exit:
+	jr	%ra
 # ------------ body ---------------------------
 reduction_2pi_sub1.2626:
-	fmov	%f16, %f0
-	fmov	%f0, %f1
-	fblt	%f16, %f0, fbgt_else.33181
-	flw	%f1, 495(%zero)
-	fmul	%f0, %f1, %f0
-	fblt	%f16, %f0, fbgt_else.33182
-	fmul	%f0, %f1, %f0
-	fblt	%f16, %f0, fbgt_else.33183
-	fmul	%f0, %f1, %f0
-	fblt	%f16, %f0, fbgt_else.33184
-	fmul	%f0, %f1, %f0
-	fblt	%f16, %f0, fbgt_else.33185
-	fmul	%f0, %f1, %f0
-	fblt	%f16, %f0, fbgt_else.33186
-	fmul	%f0, %f1, %f0
-	fblt	%f16, %f0, fbgt_else.33187
-	fmul	%f0, %f1, %f0
-	fblt	%f16, %f0, fbgt_else.33188
-	fmul	%f0, %f1, %f0
-	fblt	%f16, %f0, fbgt_else.33189
-	fmul	%f0, %f1, %f0
-	fblt	%f16, %f0, fbgt_else.33190
-	fmul	%f0, %f1, %f0
-	fblt	%f16, %f0, fbgt_else.33191
-	fmul	%f0, %f1, %f0
-	fblt	%f16, %f0, fbgt_else.33192
-	fmul	%f0, %f1, %f0
-	fblt	%f16, %f0, fbgt_else.33193
-	fmul	%f0, %f1, %f0
-	fblt	%f16, %f0, fbgt_else.33194
-	fmul	%f0, %f1, %f0
-	fblt	%f16, %f0, fbgt_else.33195
-	fmul	%f0, %f1, %f0
-	fblt	%f16, %f0, fbgt_else.33196
-	fmul	%f1, %f1, %f0
-	fmov	%f0, %f16
+	fblt	%f0, %f1, fbgt_else.21857
+	flw	%f16, 496(%zero)
+	fmul	%f1, %f16, %f1
+	fblt	%f0, %f1, fbgt_else.21858
+	fmul	%f1, %f16, %f1
+	fblt	%f0, %f1, fbgt_else.21859
+	fmul	%f1, %f16, %f1
+	fblt	%f0, %f1, fbgt_else.21860
+	fmul	%f1, %f16, %f1
+	fblt	%f0, %f1, fbgt_else.21861
+	fmul	%f1, %f16, %f1
+	fblt	%f0, %f1, fbgt_else.21862
+	fmul	%f1, %f16, %f1
+	fblt	%f0, %f1, fbgt_else.21863
+	fmul	%f1, %f16, %f1
+	fblt	%f0, %f1, fbgt_else.21864
+	fmul	%f1, %f16, %f1
+	fblt	%f0, %f1, fbgt_else.21865
+	fmul	%f1, %f16, %f1
+	fblt	%f0, %f1, fbgt_else.21866
+	fmul	%f1, %f16, %f1
+	fblt	%f0, %f1, fbgt_else.21867
+	fmul	%f1, %f16, %f1
+	fblt	%f0, %f1, fbgt_else.21868
+	fmul	%f1, %f16, %f1
+	fblt	%f0, %f1, fbgt_else.21869
+	fmul	%f1, %f16, %f1
+	fblt	%f0, %f1, fbgt_else.21870
+	fmul	%f1, %f16, %f1
+	fblt	%f0, %f1, fbgt_else.21871
+	fmul	%f1, %f16, %f1
+	fblt	%f0, %f1, fbgt_else.21872
+	fmul	%f1, %f16, %f1
 	j	reduction_2pi_sub1.2626
-fbgt_else.33196:
+fbgt_else.21872:
+	fmov	%f0, %f1
 	jr	%ra
-fbgt_else.33195:
+fbgt_else.21871:
+	fmov	%f0, %f1
 	jr	%ra
-fbgt_else.33194:
+fbgt_else.21870:
+	fmov	%f0, %f1
 	jr	%ra
-fbgt_else.33193:
+fbgt_else.21869:
+	fmov	%f0, %f1
 	jr	%ra
-fbgt_else.33192:
+fbgt_else.21868:
+	fmov	%f0, %f1
 	jr	%ra
-fbgt_else.33191:
+fbgt_else.21867:
+	fmov	%f0, %f1
 	jr	%ra
-fbgt_else.33190:
+fbgt_else.21866:
+	fmov	%f0, %f1
 	jr	%ra
-fbgt_else.33189:
+fbgt_else.21865:
+	fmov	%f0, %f1
 	jr	%ra
-fbgt_else.33188:
+fbgt_else.21864:
+	fmov	%f0, %f1
 	jr	%ra
-fbgt_else.33187:
+fbgt_else.21863:
+	fmov	%f0, %f1
 	jr	%ra
-fbgt_else.33186:
+fbgt_else.21862:
+	fmov	%f0, %f1
 	jr	%ra
-fbgt_else.33185:
+fbgt_else.21861:
+	fmov	%f0, %f1
 	jr	%ra
-fbgt_else.33184:
+fbgt_else.21860:
+	fmov	%f0, %f1
 	jr	%ra
-fbgt_else.33183:
+fbgt_else.21859:
+	fmov	%f0, %f1
 	jr	%ra
-fbgt_else.33182:
+fbgt_else.21858:
+	fmov	%f0, %f1
 	jr	%ra
-fbgt_else.33181:
+fbgt_else.21857:
+	fmov	%f0, %f1
 	jr	%ra
 reduction_2pi_sub2.2629:
-	fblt	%f0, %f2, fbgt_else.33305
-	fblt	%f0, %f1, fbgt_else.33306
+	fblt	%f0, %f2, fbgt_else.21983
+	fblt	%f0, %f1, fbgt_else.21984
 	fsub	%f0, %f0, %f1
-	flw	%f16, 495(%zero)
+	flw	%f16, 496(%zero)
 	fdiv	%f1, %f1, %f16
-	fblt	%f0, %f2, fbgt_else.33307
-	fblt	%f0, %f1, fbgt_else.33308
-	fsub	%f0, %f0, %f1
-	fdiv	%f1, %f1, %f16
-	fblt	%f0, %f2, fbgt_else.33309
-	fblt	%f0, %f1, fbgt_else.33310
+	fblt	%f0, %f2, fbgt_else.21985
+	fblt	%f0, %f1, fbgt_else.21986
 	fsub	%f0, %f0, %f1
 	fdiv	%f1, %f1, %f16
-	fblt	%f0, %f2, fbgt_else.33311
-	fblt	%f0, %f1, fbgt_else.33312
+	fblt	%f0, %f2, fbgt_else.21987
+	fblt	%f0, %f1, fbgt_else.21988
+	fsub	%f0, %f0, %f1
+	fdiv	%f1, %f1, %f16
+	fblt	%f0, %f2, fbgt_else.21989
+	fblt	%f0, %f1, fbgt_else.21990
 	fsub	%f0, %f0, %f1
 	fdiv	%f1, %f1, %f16
 	j	reduction_2pi_sub2.2629
-fbgt_else.33312:
+fbgt_else.21990:
 	fdiv	%f1, %f1, %f16
 	j	reduction_2pi_sub2.2629
-fbgt_else.33311:
+fbgt_else.21989:
 	jr	%ra
-fbgt_else.33310:
+fbgt_else.21988:
 	fdiv	%f1, %f1, %f16
-	fblt	%f0, %f2, fbgt_else.33313
-	fblt	%f0, %f1, fbgt_else.33314
+	fblt	%f0, %f2, fbgt_else.21991
+	fblt	%f0, %f1, fbgt_else.21992
 	fsub	%f0, %f0, %f1
 	fdiv	%f1, %f1, %f16
 	j	reduction_2pi_sub2.2629
-fbgt_else.33314:
+fbgt_else.21992:
 	fdiv	%f1, %f1, %f16
 	j	reduction_2pi_sub2.2629
-fbgt_else.33313:
+fbgt_else.21991:
 	jr	%ra
-fbgt_else.33309:
+fbgt_else.21987:
 	jr	%ra
-fbgt_else.33308:
+fbgt_else.21986:
 	fdiv	%f1, %f1, %f16
-	fblt	%f0, %f2, fbgt_else.33315
-	fblt	%f0, %f1, fbgt_else.33316
+	fblt	%f0, %f2, fbgt_else.21993
+	fblt	%f0, %f1, fbgt_else.21994
 	fsub	%f0, %f0, %f1
 	fdiv	%f1, %f1, %f16
-	fblt	%f0, %f2, fbgt_else.33317
-	fblt	%f0, %f1, fbgt_else.33318
-	fsub	%f0, %f0, %f1
-	fdiv	%f1, %f1, %f16
-	j	reduction_2pi_sub2.2629
-fbgt_else.33318:
-	fdiv	%f1, %f1, %f16
-	j	reduction_2pi_sub2.2629
-fbgt_else.33317:
-	jr	%ra
-fbgt_else.33316:
-	fdiv	%f1, %f1, %f16
-	fblt	%f0, %f2, fbgt_else.33319
-	fblt	%f0, %f1, fbgt_else.33320
+	fblt	%f0, %f2, fbgt_else.21995
+	fblt	%f0, %f1, fbgt_else.21996
 	fsub	%f0, %f0, %f1
 	fdiv	%f1, %f1, %f16
 	j	reduction_2pi_sub2.2629
-fbgt_else.33320:
+fbgt_else.21996:
 	fdiv	%f1, %f1, %f16
 	j	reduction_2pi_sub2.2629
-fbgt_else.33319:
+fbgt_else.21995:
 	jr	%ra
-fbgt_else.33315:
-	jr	%ra
-fbgt_else.33307:
-	jr	%ra
-fbgt_else.33306:
-	flw	%f16, 495(%zero)
+fbgt_else.21994:
 	fdiv	%f1, %f1, %f16
-	fblt	%f0, %f2, fbgt_else.33321
-	fblt	%f0, %f1, fbgt_else.33322
-	fsub	%f0, %f0, %f1
-	fdiv	%f1, %f1, %f16
-	fblt	%f0, %f2, fbgt_else.33323
-	fblt	%f0, %f1, fbgt_else.33324
-	fsub	%f0, %f0, %f1
-	fdiv	%f1, %f1, %f16
-	fblt	%f0, %f2, fbgt_else.33325
-	fblt	%f0, %f1, fbgt_else.33326
+	fblt	%f0, %f2, fbgt_else.21997
+	fblt	%f0, %f1, fbgt_else.21998
 	fsub	%f0, %f0, %f1
 	fdiv	%f1, %f1, %f16
 	j	reduction_2pi_sub2.2629
-fbgt_else.33326:
+fbgt_else.21998:
 	fdiv	%f1, %f1, %f16
 	j	reduction_2pi_sub2.2629
-fbgt_else.33325:
+fbgt_else.21997:
 	jr	%ra
-fbgt_else.33324:
+fbgt_else.21993:
+	jr	%ra
+fbgt_else.21985:
+	jr	%ra
+fbgt_else.21984:
+	flw	%f16, 496(%zero)
 	fdiv	%f1, %f1, %f16
-	fblt	%f0, %f2, fbgt_else.33327
-	fblt	%f0, %f1, fbgt_else.33328
+	fblt	%f0, %f2, fbgt_else.21999
+	fblt	%f0, %f1, fbgt_else.22000
+	fsub	%f0, %f0, %f1
+	fdiv	%f1, %f1, %f16
+	fblt	%f0, %f2, fbgt_else.22001
+	fblt	%f0, %f1, fbgt_else.22002
+	fsub	%f0, %f0, %f1
+	fdiv	%f1, %f1, %f16
+	fblt	%f0, %f2, fbgt_else.22003
+	fblt	%f0, %f1, fbgt_else.22004
 	fsub	%f0, %f0, %f1
 	fdiv	%f1, %f1, %f16
 	j	reduction_2pi_sub2.2629
-fbgt_else.33328:
+fbgt_else.22004:
 	fdiv	%f1, %f1, %f16
 	j	reduction_2pi_sub2.2629
-fbgt_else.33327:
+fbgt_else.22003:
 	jr	%ra
-fbgt_else.33323:
-	jr	%ra
-fbgt_else.33322:
+fbgt_else.22002:
 	fdiv	%f1, %f1, %f16
-	fblt	%f0, %f2, fbgt_else.33329
-	fblt	%f0, %f1, fbgt_else.33330
-	fsub	%f0, %f0, %f1
-	fdiv	%f1, %f1, %f16
-	fblt	%f0, %f2, fbgt_else.33331
-	fblt	%f0, %f1, fbgt_else.33332
+	fblt	%f0, %f2, fbgt_else.22005
+	fblt	%f0, %f1, fbgt_else.22006
 	fsub	%f0, %f0, %f1
 	fdiv	%f1, %f1, %f16
 	j	reduction_2pi_sub2.2629
-fbgt_else.33332:
+fbgt_else.22006:
 	fdiv	%f1, %f1, %f16
 	j	reduction_2pi_sub2.2629
-fbgt_else.33331:
+fbgt_else.22005:
 	jr	%ra
-fbgt_else.33330:
+fbgt_else.22001:
+	jr	%ra
+fbgt_else.22000:
 	fdiv	%f1, %f1, %f16
-	fblt	%f0, %f2, fbgt_else.33333
-	fblt	%f0, %f1, fbgt_else.33334
+	fblt	%f0, %f2, fbgt_else.22007
+	fblt	%f0, %f1, fbgt_else.22008
+	fsub	%f0, %f0, %f1
+	fdiv	%f1, %f1, %f16
+	fblt	%f0, %f2, fbgt_else.22009
+	fblt	%f0, %f1, fbgt_else.22010
 	fsub	%f0, %f0, %f1
 	fdiv	%f1, %f1, %f16
 	j	reduction_2pi_sub2.2629
-fbgt_else.33334:
+fbgt_else.22010:
 	fdiv	%f1, %f1, %f16
 	j	reduction_2pi_sub2.2629
-fbgt_else.33333:
+fbgt_else.22009:
 	jr	%ra
-fbgt_else.33329:
+fbgt_else.22008:
+	fdiv	%f1, %f1, %f16
+	fblt	%f0, %f2, fbgt_else.22011
+	fblt	%f0, %f1, fbgt_else.22012
+	fsub	%f0, %f0, %f1
+	fdiv	%f1, %f1, %f16
+	j	reduction_2pi_sub2.2629
+fbgt_else.22012:
+	fdiv	%f1, %f1, %f16
+	j	reduction_2pi_sub2.2629
+fbgt_else.22011:
 	jr	%ra
-fbgt_else.33321:
+fbgt_else.22007:
 	jr	%ra
-fbgt_else.33305:
+fbgt_else.21999:
+	jr	%ra
+fbgt_else.21983:
+	jr	%ra
+cos.2635:
+	add	%a0, %zero, %ra
+	flw	%f18, 495(%zero)
+	fabs	%f17, %f0
+	flw	%f2, 494(%zero)
+	fblt	%f17, %f2, fbgt_else.22114
+	flw	%f0, 493(%zero)
+	fblt	%f17, %f0, fbgt_cont.22115
+	flw	%f0, 492(%zero)
+	fblt	%f17, %f0, fbgt_cont.22115
+	flw	%f0, 491(%zero)
+	fblt	%f17, %f0, fbgt_cont.22115
+	flw	%f0, 490(%zero)
+	fblt	%f17, %f0, fbgt_cont.22115
+	flw	%f0, 489(%zero)
+	fblt	%f17, %f0, fbgt_cont.22115
+	flw	%f0, 488(%zero)
+	fblt	%f17, %f0, fbgt_cont.22115
+	flw	%f0, 487(%zero)
+	fblt	%f17, %f0, fbgt_cont.22115
+	flw	%f0, 486(%zero)
+	fblt	%f17, %f0, fbgt_cont.22115
+	flw	%f0, 485(%zero)
+	fblt	%f17, %f0, fbgt_cont.22115
+	flw	%f0, 484(%zero)
+	fblt	%f17, %f0, fbgt_cont.22115
+	flw	%f0, 483(%zero)
+	fblt	%f17, %f0, fbgt_cont.22115
+	flw	%f0, 482(%zero)
+	fblt	%f17, %f0, fbgt_cont.22115
+	flw	%f0, 481(%zero)
+	fblt	%f17, %f0, fbgt_cont.22115
+	flw	%f1, 480(%zero)
+	fmov	%f0, %f17
+	jal	reduction_2pi_sub1.2626
+	j	fbgt_cont.22115
+fbgt_else.22140:
+fbgt_cont.22141:
+	j	fbgt_cont.22115
+fbgt_else.22138:
+fbgt_cont.22139:
+	j	fbgt_cont.22115
+fbgt_else.22136:
+fbgt_cont.22137:
+	j	fbgt_cont.22115
+fbgt_else.22134:
+fbgt_cont.22135:
+	j	fbgt_cont.22115
+fbgt_else.22132:
+fbgt_cont.22133:
+	j	fbgt_cont.22115
+fbgt_else.22130:
+fbgt_cont.22131:
+	j	fbgt_cont.22115
+fbgt_else.22128:
+fbgt_cont.22129:
+	j	fbgt_cont.22115
+fbgt_else.22126:
+fbgt_cont.22127:
+	j	fbgt_cont.22115
+fbgt_else.22124:
+fbgt_cont.22125:
+	j	fbgt_cont.22115
+fbgt_else.22122:
+fbgt_cont.22123:
+	j	fbgt_cont.22115
+fbgt_else.22120:
+fbgt_cont.22121:
+	j	fbgt_cont.22115
+fbgt_else.22118:
+fbgt_cont.22119:
+	j	fbgt_cont.22115
+fbgt_else.22116:
+fbgt_cont.22117:
+	j	fbgt_cont.22115
+fbgt_else.22114:
+	fmov	%f0, %f2
+fbgt_cont.22115:
+	fblt	%f17, %f2, fbgt_else.22142
+	fblt	%f17, %f0, fbgt_else.22144
+	fsub	%f17, %f17, %f0
+	flw	%f16, 496(%zero)
+	fdiv	%f1, %f0, %f16
+	fblt	%f17, %f2, fbgt_cont.22143
+	fblt	%f17, %f1, fbgt_else.22148
+	fsub	%f0, %f17, %f1
+	fdiv	%f1, %f1, %f16
+	jal	reduction_2pi_sub2.2629
+	fmov	%f17, %f0
+	j	fbgt_cont.22143
+fbgt_else.22148:
+	fdiv	%f1, %f1, %f16
+	fmov	%f0, %f17
+	jal	reduction_2pi_sub2.2629
+	fmov	%f17, %f0
+fbgt_cont.22149:
+	j	fbgt_cont.22143
+fbgt_else.22146:
+fbgt_cont.22147:
+	j	fbgt_cont.22143
+fbgt_else.22144:
+	flw	%f16, 496(%zero)
+	fdiv	%f1, %f0, %f16
+	fblt	%f17, %f2, fbgt_cont.22143
+	fblt	%f17, %f1, fbgt_else.22152
+	fsub	%f0, %f17, %f1
+	fdiv	%f1, %f1, %f16
+	jal	reduction_2pi_sub2.2629
+	fmov	%f17, %f0
+	j	fbgt_cont.22143
+fbgt_else.22152:
+	fdiv	%f1, %f1, %f16
+	fmov	%f0, %f17
+	jal	reduction_2pi_sub2.2629
+	fmov	%f17, %f0
+fbgt_cont.22153:
+	j	fbgt_cont.22143
+fbgt_else.22150:
+fbgt_cont.22151:
+fbgt_cont.22145:
+	j	fbgt_cont.22143
+fbgt_else.22142:
+fbgt_cont.22143:
+	fblt	%f17, %f18, fbgt_else.22154
+	add	%a1, %zero, %zero
+	j	fbgt_cont.22155
+fbgt_else.22154:
+	add	%a1, %zero, %k1
+fbgt_cont.22155:
+	fblt	%f17, %f18, fbgt_else.22156
+	fsub	%f17, %f17, %f18
+	j	fbgt_cont.22157
+fbgt_else.22156:
+fbgt_cont.22157:
+	flw	%f1, 479(%zero)
+	fblt	%f17, %f1, fbgt_else.22158
+	beqi	%a1, 0, bnei_else.22160
+	add	%a1, %zero, %zero
+	j	fbgt_cont.22159
+bnei_else.22160:
+	add	%a1, %zero, %k1
+bnei_cont.22161:
+	j	fbgt_cont.22159
+fbgt_else.22158:
+fbgt_cont.22159:
+	fblt	%f17, %f1, fbgt_else.22162
+	fsub	%f17, %f18, %f17
+	j	fbgt_cont.22163
+fbgt_else.22162:
+fbgt_cont.22163:
+	flw	%f0, 478(%zero)
+	fblt	%f0, %f17, fbgt_else.22164
+	fmul	%f17, %f17, %f17
+	fmul	%f16, %f17, %f17
+	flw	%f0, 473(%zero)
+	fmul	%f0, %f0, %f17
+	fsub	%f1, %f30, %f0
+	flw	%f0, 472(%zero)
+	fmul	%f0, %f0, %f16
+	fadd	%f1, %f1, %f0
+	flw	%f0, 471(%zero)
+	fmul	%f0, %f0, %f17
+	fmul	%f0, %f0, %f16
+	fsub	%f0, %f1, %f0
+	j	fbgt_cont.22165
+fbgt_else.22164:
+	fsub	%f18, %f1, %f17
+	fmul	%f17, %f18, %f18
+	fmul	%f16, %f17, %f17
+	flw	%f0, 477(%zero)
+	fmul	%f0, %f0, %f18
+	fmul	%f0, %f0, %f17
+	fsub	%f1, %f18, %f0
+	flw	%f0, 476(%zero)
+	fmul	%f0, %f0, %f18
+	fmul	%f0, %f0, %f16
+	fadd	%f1, %f1, %f0
+	flw	%f0, 475(%zero)
+	fmul	%f0, %f0, %f18
+	fmul	%f0, %f0, %f17
+	fmul	%f0, %f0, %f16
+	fsub	%f0, %f1, %f0
+fbgt_cont.22165:
+	beqi	%a1, 0, bnei_else.22166
+	add	%ra, %zero, %a0
+	jr	%ra
+bnei_else.22166:
+	add	%ra, %zero, %a0
+	fneg	%f0, %f0
+	jr	%ra
+sin.2637:
+	add	%a0, %zero, %ra
+	flw	%f18, 495(%zero)
+	fblt	%f0, %fzero, fbgt_else.22268
+	add	%a1, %zero, %k1
+	j	fbgt_cont.22269
+fbgt_else.22268:
+	add	%a1, %zero, %zero
+fbgt_cont.22269:
+	fabs	%f17, %f0
+	flw	%f2, 494(%zero)
+	fblt	%f17, %f2, fbgt_else.22270
+	flw	%f0, 493(%zero)
+	fblt	%f17, %f0, fbgt_cont.22271
+	flw	%f0, 492(%zero)
+	fblt	%f17, %f0, fbgt_cont.22271
+	flw	%f0, 491(%zero)
+	fblt	%f17, %f0, fbgt_cont.22271
+	flw	%f0, 490(%zero)
+	fblt	%f17, %f0, fbgt_cont.22271
+	flw	%f0, 489(%zero)
+	fblt	%f17, %f0, fbgt_cont.22271
+	flw	%f0, 488(%zero)
+	fblt	%f17, %f0, fbgt_cont.22271
+	flw	%f0, 487(%zero)
+	fblt	%f17, %f0, fbgt_cont.22271
+	flw	%f0, 486(%zero)
+	fblt	%f17, %f0, fbgt_cont.22271
+	flw	%f0, 485(%zero)
+	fblt	%f17, %f0, fbgt_cont.22271
+	flw	%f0, 484(%zero)
+	fblt	%f17, %f0, fbgt_cont.22271
+	flw	%f0, 483(%zero)
+	fblt	%f17, %f0, fbgt_cont.22271
+	flw	%f0, 482(%zero)
+	fblt	%f17, %f0, fbgt_cont.22271
+	flw	%f0, 481(%zero)
+	fblt	%f17, %f0, fbgt_cont.22271
+	flw	%f1, 480(%zero)
+	fmov	%f0, %f17
+	jal	reduction_2pi_sub1.2626
+	j	fbgt_cont.22271
+fbgt_else.22296:
+fbgt_cont.22297:
+	j	fbgt_cont.22271
+fbgt_else.22294:
+fbgt_cont.22295:
+	j	fbgt_cont.22271
+fbgt_else.22292:
+fbgt_cont.22293:
+	j	fbgt_cont.22271
+fbgt_else.22290:
+fbgt_cont.22291:
+	j	fbgt_cont.22271
+fbgt_else.22288:
+fbgt_cont.22289:
+	j	fbgt_cont.22271
+fbgt_else.22286:
+fbgt_cont.22287:
+	j	fbgt_cont.22271
+fbgt_else.22284:
+fbgt_cont.22285:
+	j	fbgt_cont.22271
+fbgt_else.22282:
+fbgt_cont.22283:
+	j	fbgt_cont.22271
+fbgt_else.22280:
+fbgt_cont.22281:
+	j	fbgt_cont.22271
+fbgt_else.22278:
+fbgt_cont.22279:
+	j	fbgt_cont.22271
+fbgt_else.22276:
+fbgt_cont.22277:
+	j	fbgt_cont.22271
+fbgt_else.22274:
+fbgt_cont.22275:
+	j	fbgt_cont.22271
+fbgt_else.22272:
+fbgt_cont.22273:
+	j	fbgt_cont.22271
+fbgt_else.22270:
+	fmov	%f0, %f2
+fbgt_cont.22271:
+	fblt	%f17, %f2, fbgt_else.22298
+	fblt	%f17, %f0, fbgt_else.22300
+	fsub	%f17, %f17, %f0
+	flw	%f16, 496(%zero)
+	fdiv	%f1, %f0, %f16
+	fblt	%f17, %f2, fbgt_cont.22299
+	fblt	%f17, %f1, fbgt_else.22304
+	fsub	%f0, %f17, %f1
+	fdiv	%f1, %f1, %f16
+	jal	reduction_2pi_sub2.2629
+	fmov	%f17, %f0
+	j	fbgt_cont.22299
+fbgt_else.22304:
+	fdiv	%f1, %f1, %f16
+	fmov	%f0, %f17
+	jal	reduction_2pi_sub2.2629
+	fmov	%f17, %f0
+fbgt_cont.22305:
+	j	fbgt_cont.22299
+fbgt_else.22302:
+fbgt_cont.22303:
+	j	fbgt_cont.22299
+fbgt_else.22300:
+	flw	%f16, 496(%zero)
+	fdiv	%f1, %f0, %f16
+	fblt	%f17, %f2, fbgt_cont.22299
+	fblt	%f17, %f1, fbgt_else.22308
+	fsub	%f0, %f17, %f1
+	fdiv	%f1, %f1, %f16
+	jal	reduction_2pi_sub2.2629
+	fmov	%f17, %f0
+	j	fbgt_cont.22299
+fbgt_else.22308:
+	fdiv	%f1, %f1, %f16
+	fmov	%f0, %f17
+	jal	reduction_2pi_sub2.2629
+	fmov	%f17, %f0
+fbgt_cont.22309:
+	j	fbgt_cont.22299
+fbgt_else.22306:
+fbgt_cont.22307:
+fbgt_cont.22301:
+	j	fbgt_cont.22299
+fbgt_else.22298:
+fbgt_cont.22299:
+	fblt	%f17, %f18, fbgt_else.22310
+	beqi	%a1, 0, bnei_else.22312
+	add	%a1, %zero, %zero
+	j	fbgt_cont.22311
+bnei_else.22312:
+	add	%a1, %zero, %k1
+bnei_cont.22313:
+	j	fbgt_cont.22311
+fbgt_else.22310:
+fbgt_cont.22311:
+	fblt	%f17, %f18, fbgt_else.22314
+	fsub	%f17, %f17, %f18
+	j	fbgt_cont.22315
+fbgt_else.22314:
+fbgt_cont.22315:
+	flw	%f1, 479(%zero)
+	fblt	%f17, %f1, fbgt_else.22316
+	fsub	%f17, %f18, %f17
+	j	fbgt_cont.22317
+fbgt_else.22316:
+fbgt_cont.22317:
+	flw	%f0, 478(%zero)
+	fblt	%f0, %f17, fbgt_else.22318
+	fmul	%f18, %f17, %f17
+	fmul	%f16, %f18, %f18
+	flw	%f0, 477(%zero)
+	fmul	%f0, %f0, %f17
+	fmul	%f0, %f0, %f18
+	fsub	%f1, %f17, %f0
+	flw	%f0, 476(%zero)
+	fmul	%f0, %f0, %f17
+	fmul	%f0, %f0, %f16
+	fadd	%f1, %f1, %f0
+	flw	%f0, 475(%zero)
+	fmul	%f0, %f0, %f17
+	fmul	%f0, %f0, %f18
+	fmul	%f0, %f0, %f16
+	fsub	%f0, %f1, %f0
+	j	fbgt_cont.22319
+fbgt_else.22318:
+	fsub	%f0, %f1, %f17
+	fmul	%f17, %f0, %f0
+	fmul	%f16, %f17, %f17
+	flw	%f0, 473(%zero)
+	fmul	%f0, %f0, %f17
+	fsub	%f1, %f30, %f0
+	flw	%f0, 472(%zero)
+	fmul	%f0, %f0, %f16
+	fadd	%f1, %f1, %f0
+	flw	%f0, 471(%zero)
+	fmul	%f0, %f0, %f17
+	fmul	%f0, %f0, %f16
+	fsub	%f0, %f1, %f0
+fbgt_cont.22319:
+	beqi	%a1, 0, bnei_else.22320
+	add	%ra, %zero, %a0
+	jr	%ra
+bnei_else.22320:
+	add	%ra, %zero, %a0
+	fneg	%f0, %f0
+	jr	%ra
+atan.2639:
+	fblt	%f0, %fzero, fbgt_else.22353
+	add	%a0, %zero, %k1
+	j	fbgt_cont.22354
+fbgt_else.22353:
+	add	%a0, %zero, %zero
+fbgt_cont.22354:
+	fabs	%f17, %f0
+	flw	%f1, 469(%zero)
+	fblt	%f17, %f1, fbgt_else.22355
+	flw	%f0, 462(%zero)
+	fblt	%f17, %f0, fbgt_else.22356
+	flw	%f16, 479(%zero)
+	fdiv	%f19, %f30, %f17
+	fmul	%f2, %f19, %f19
+	fmul	%f18, %f2, %f2
+	fmul	%f17, %f18, %f18
+	flw	%f0, 468(%zero)
+	fmul	%f0, %f0, %f19
+	fmul	%f0, %f0, %f2
+	fsub	%f1, %f19, %f0
+	flw	%f0, 467(%zero)
+	fmul	%f0, %f0, %f19
+	fmul	%f0, %f0, %f18
+	fadd	%f1, %f1, %f0
+	flw	%f0, 466(%zero)
+	fmul	%f0, %f0, %f19
+	fmul	%f0, %f0, %f2
+	fmul	%f0, %f0, %f18
+	fsub	%f1, %f1, %f0
+	flw	%f0, 465(%zero)
+	fmul	%f0, %f0, %f19
+	fmul	%f0, %f0, %f17
+	fadd	%f1, %f1, %f0
+	flw	%f0, 464(%zero)
+	fmul	%f0, %f0, %f19
+	fmul	%f0, %f0, %f2
+	fmul	%f0, %f0, %f17
+	fsub	%f1, %f1, %f0
+	flw	%f0, 463(%zero)
+	fmul	%f0, %f0, %f19
+	fmul	%f0, %f0, %f18
+	fmul	%f0, %f0, %f17
+	fadd	%f0, %f1, %f0
+	fsub	%f0, %f16, %f0
+	j	fbgt_cont.22357
+fbgt_else.22356:
+	flw	%f16, 478(%zero)
+	fsub	%f1, %f17, %f30
+	fadd	%f0, %f17, %f30
+	fdiv	%f19, %f1, %f0
+	fmul	%f2, %f19, %f19
+	fmul	%f18, %f2, %f2
+	fmul	%f17, %f18, %f18
+	flw	%f0, 468(%zero)
+	fmul	%f0, %f0, %f19
+	fmul	%f0, %f0, %f2
+	fsub	%f1, %f19, %f0
+	flw	%f0, 467(%zero)
+	fmul	%f0, %f0, %f19
+	fmul	%f0, %f0, %f18
+	fadd	%f1, %f1, %f0
+	flw	%f0, 466(%zero)
+	fmul	%f0, %f0, %f19
+	fmul	%f0, %f0, %f2
+	fmul	%f0, %f0, %f18
+	fsub	%f1, %f1, %f0
+	flw	%f0, 465(%zero)
+	fmul	%f0, %f0, %f19
+	fmul	%f0, %f0, %f17
+	fadd	%f1, %f1, %f0
+	flw	%f0, 464(%zero)
+	fmul	%f0, %f0, %f19
+	fmul	%f0, %f0, %f2
+	fmul	%f0, %f0, %f17
+	fsub	%f1, %f1, %f0
+	flw	%f0, 463(%zero)
+	fmul	%f0, %f0, %f19
+	fmul	%f0, %f0, %f18
+	fmul	%f0, %f0, %f17
+	fadd	%f0, %f1, %f0
+	fadd	%f0, %f16, %f0
+fbgt_cont.22357:
+	beqi	%a0, 0, bnei_else.22358
+	jr	%ra
+bnei_else.22358:
+	fneg	%f0, %f0
+	jr	%ra
+fbgt_else.22355:
+	fmul	%f19, %f0, %f0
+	fmul	%f18, %f19, %f19
+	fmul	%f17, %f18, %f18
+	flw	%f1, 468(%zero)
+	fmul	%f1, %f1, %f0
+	fmul	%f1, %f1, %f19
+	fsub	%f16, %f0, %f1
+	flw	%f1, 467(%zero)
+	fmul	%f1, %f1, %f0
+	fmul	%f1, %f1, %f18
+	fadd	%f16, %f16, %f1
+	flw	%f1, 466(%zero)
+	fmul	%f1, %f1, %f0
+	fmul	%f1, %f1, %f19
+	fmul	%f1, %f1, %f18
+	fsub	%f16, %f16, %f1
+	flw	%f1, 465(%zero)
+	fmul	%f1, %f1, %f0
+	fmul	%f1, %f1, %f17
+	fadd	%f16, %f16, %f1
+	flw	%f1, 464(%zero)
+	fmul	%f1, %f1, %f0
+	fmul	%f1, %f1, %f19
+	fmul	%f1, %f1, %f17
+	fsub	%f16, %f16, %f1
+	flw	%f1, 463(%zero)
+	fmul	%f0, %f1, %f0
+	fmul	%f0, %f0, %f18
+	fmul	%f0, %f0, %f17
+	fadd	%f0, %f16, %f0
 	jr	%ra
 print_int_sub1.2641:
 	add	%a0, %zero, %v0
 	add	%v0, %zero, %v1
-	blti	%a0, 10, bgti_else.33401
-	blti	%a0, 20, bgti_else.33402
-	blti	%a0, 30, bgti_else.33403
-	blti	%a0, 40, bgti_else.33404
+	blti	%a0, 10, bgti_else.22427
+	blti	%a0, 20, bgti_else.22428
+	blti	%a0, 30, bgti_else.22429
+	blti	%a0, 40, bgti_else.22430
 	addi	%a0, %a0, -40
 	addi	%v0, %v0, 4
-	blti	%a0, 10, bgti_else.33405
-	blti	%a0, 20, bgti_else.33406
-	blti	%a0, 30, bgti_else.33407
-	blti	%a0, 40, bgti_else.33408
+	blti	%a0, 10, bgti_else.22431
+	blti	%a0, 20, bgti_else.22432
+	blti	%a0, 30, bgti_else.22433
+	blti	%a0, 40, bgti_else.22434
 	addi	%a0, %a0, -40
 	addi	%v0, %v0, 4
-	blti	%a0, 10, bgti_else.33409
-	blti	%a0, 20, bgti_else.33410
-	blti	%a0, 30, bgti_else.33411
-	blti	%a0, 40, bgti_else.33412
+	blti	%a0, 10, bgti_else.22435
+	blti	%a0, 20, bgti_else.22436
+	blti	%a0, 30, bgti_else.22437
+	blti	%a0, 40, bgti_else.22438
 	addi	%a0, %a0, -40
 	addi	%v0, %v0, 4
-	blti	%a0, 10, bgti_else.33413
-	blti	%a0, 20, bgti_else.33414
-	blti	%a0, 30, bgti_else.33415
-	blti	%a0, 40, bgti_else.33416
+	blti	%a0, 10, bgti_else.22439
+	blti	%a0, 20, bgti_else.22440
+	blti	%a0, 30, bgti_else.22441
+	blti	%a0, 40, bgti_else.22442
 	addi	%a0, %a0, -40
 	addi	%v1, %v0, 4
 	addi	%v0, %a0, 0
 	j	print_int_sub1.2641
-bgti_else.33416:
+bgti_else.22442:
 	addi	%v0, %v0, 3
 	jr	%ra
-bgti_else.33415:
+bgti_else.22441:
 	addi	%v0, %v0, 2
 	jr	%ra
-bgti_else.33414:
+bgti_else.22440:
 	addi	%v0, %v0, 1
 	jr	%ra
-bgti_else.33413:
+bgti_else.22439:
 	jr	%ra
-bgti_else.33412:
+bgti_else.22438:
 	addi	%v0, %v0, 3
 	jr	%ra
-bgti_else.33411:
+bgti_else.22437:
 	addi	%v0, %v0, 2
 	jr	%ra
-bgti_else.33410:
+bgti_else.22436:
 	addi	%v0, %v0, 1
 	jr	%ra
-bgti_else.33409:
+bgti_else.22435:
 	jr	%ra
-bgti_else.33408:
+bgti_else.22434:
 	addi	%v0, %v0, 3
 	jr	%ra
-bgti_else.33407:
+bgti_else.22433:
 	addi	%v0, %v0, 2
 	jr	%ra
-bgti_else.33406:
+bgti_else.22432:
 	addi	%v0, %v0, 1
 	jr	%ra
-bgti_else.33405:
+bgti_else.22431:
 	jr	%ra
-bgti_else.33404:
+bgti_else.22430:
 	addi	%v0, %v0, 3
 	jr	%ra
-bgti_else.33403:
+bgti_else.22429:
 	addi	%v0, %v0, 2
 	jr	%ra
-bgti_else.33402:
+bgti_else.22428:
 	addi	%v0, %v0, 1
 	jr	%ra
-bgti_else.33401:
+bgti_else.22427:
 	jr	%ra
 print_int_sub2.2644:
-	blti	%v0, 10, bgti_else.33531
-	blti	%v0, 20, bgti_else.33532
-	blti	%v0, 30, bgti_else.33533
-	blti	%v0, 40, bgti_else.33534
+	blti	%v0, 10, bgti_else.22559
+	blti	%v0, 20, bgti_else.22560
+	blti	%v0, 30, bgti_else.22561
+	blti	%v0, 40, bgti_else.22562
 	addi	%v0, %v0, -40
-	blti	%v0, 10, bgti_else.33535
-	blti	%v0, 20, bgti_else.33536
-	blti	%v0, 30, bgti_else.33537
-	blti	%v0, 40, bgti_else.33538
+	blti	%v0, 10, bgti_else.22563
+	blti	%v0, 20, bgti_else.22564
+	blti	%v0, 30, bgti_else.22565
+	blti	%v0, 40, bgti_else.22566
 	addi	%v0, %v0, -40
-	blti	%v0, 10, bgti_else.33539
-	blti	%v0, 20, bgti_else.33540
-	blti	%v0, 30, bgti_else.33541
-	blti	%v0, 40, bgti_else.33542
+	blti	%v0, 10, bgti_else.22567
+	blti	%v0, 20, bgti_else.22568
+	blti	%v0, 30, bgti_else.22569
+	blti	%v0, 40, bgti_else.22570
 	addi	%v0, %v0, -40
-	blti	%v0, 10, bgti_else.33543
-	blti	%v0, 20, bgti_else.33544
-	blti	%v0, 30, bgti_else.33545
-	blti	%v0, 40, bgti_else.33546
+	blti	%v0, 10, bgti_else.22571
+	blti	%v0, 20, bgti_else.22572
+	blti	%v0, 30, bgti_else.22573
+	blti	%v0, 40, bgti_else.22574
 	addi	%v0, %v0, -40
-	blti	%v0, 10, bgti_else.33547
-	blti	%v0, 20, bgti_else.33548
-	blti	%v0, 30, bgti_else.33549
-	blti	%v0, 40, bgti_else.33550
+	blti	%v0, 10, bgti_else.22575
+	blti	%v0, 20, bgti_else.22576
+	blti	%v0, 30, bgti_else.22577
+	blti	%v0, 40, bgti_else.22578
 	addi	%v0, %v0, -40
-	blti	%v0, 10, bgti_else.33551
-	blti	%v0, 20, bgti_else.33552
-	blti	%v0, 30, bgti_else.33553
-	blti	%v0, 40, bgti_else.33554
+	blti	%v0, 10, bgti_else.22579
+	blti	%v0, 20, bgti_else.22580
+	blti	%v0, 30, bgti_else.22581
+	blti	%v0, 40, bgti_else.22582
 	addi	%v0, %v0, -40
-	blti	%v0, 10, bgti_else.33555
-	blti	%v0, 20, bgti_else.33556
-	blti	%v0, 30, bgti_else.33557
-	blti	%v0, 40, bgti_else.33558
+	blti	%v0, 10, bgti_else.22583
+	blti	%v0, 20, bgti_else.22584
+	blti	%v0, 30, bgti_else.22585
+	blti	%v0, 40, bgti_else.22586
 	addi	%v0, %v0, -40
-	blti	%v0, 10, bgti_else.33559
-	blti	%v0, 20, bgti_else.33560
-	blti	%v0, 30, bgti_else.33561
-	blti	%v0, 40, bgti_else.33562
+	blti	%v0, 10, bgti_else.22587
+	blti	%v0, 20, bgti_else.22588
+	blti	%v0, 30, bgti_else.22589
+	blti	%v0, 40, bgti_else.22590
 	addi	%v0, %v0, -40
 	j	print_int_sub2.2644
-bgti_else.33562:
+bgti_else.22590:
 	addi	%v0, %v0, -30
 	jr	%ra
-bgti_else.33561:
+bgti_else.22589:
 	addi	%v0, %v0, -20
 	jr	%ra
-bgti_else.33560:
+bgti_else.22588:
 	addi	%v0, %v0, -10
 	jr	%ra
-bgti_else.33559:
+bgti_else.22587:
 	jr	%ra
-bgti_else.33558:
+bgti_else.22586:
 	addi	%v0, %v0, -30
 	jr	%ra
-bgti_else.33557:
+bgti_else.22585:
 	addi	%v0, %v0, -20
 	jr	%ra
-bgti_else.33556:
+bgti_else.22584:
 	addi	%v0, %v0, -10
 	jr	%ra
-bgti_else.33555:
+bgti_else.22583:
 	jr	%ra
-bgti_else.33554:
+bgti_else.22582:
 	addi	%v0, %v0, -30
 	jr	%ra
-bgti_else.33553:
+bgti_else.22581:
 	addi	%v0, %v0, -20
 	jr	%ra
-bgti_else.33552:
+bgti_else.22580:
 	addi	%v0, %v0, -10
 	jr	%ra
-bgti_else.33551:
+bgti_else.22579:
 	jr	%ra
-bgti_else.33550:
+bgti_else.22578:
 	addi	%v0, %v0, -30
 	jr	%ra
-bgti_else.33549:
+bgti_else.22577:
 	addi	%v0, %v0, -20
 	jr	%ra
-bgti_else.33548:
+bgti_else.22576:
 	addi	%v0, %v0, -10
 	jr	%ra
-bgti_else.33547:
+bgti_else.22575:
 	jr	%ra
-bgti_else.33546:
+bgti_else.22574:
 	addi	%v0, %v0, -30
 	jr	%ra
-bgti_else.33545:
+bgti_else.22573:
 	addi	%v0, %v0, -20
 	jr	%ra
-bgti_else.33544:
+bgti_else.22572:
 	addi	%v0, %v0, -10
 	jr	%ra
-bgti_else.33543:
+bgti_else.22571:
 	jr	%ra
-bgti_else.33542:
+bgti_else.22570:
 	addi	%v0, %v0, -30
 	jr	%ra
-bgti_else.33541:
+bgti_else.22569:
 	addi	%v0, %v0, -20
 	jr	%ra
-bgti_else.33540:
+bgti_else.22568:
 	addi	%v0, %v0, -10
 	jr	%ra
-bgti_else.33539:
+bgti_else.22567:
 	jr	%ra
-bgti_else.33538:
+bgti_else.22566:
 	addi	%v0, %v0, -30
 	jr	%ra
-bgti_else.33537:
+bgti_else.22565:
 	addi	%v0, %v0, -20
 	jr	%ra
-bgti_else.33536:
+bgti_else.22564:
 	addi	%v0, %v0, -10
 	jr	%ra
-bgti_else.33535:
+bgti_else.22563:
 	jr	%ra
-bgti_else.33534:
+bgti_else.22562:
 	addi	%v0, %v0, -30
 	jr	%ra
-bgti_else.33533:
+bgti_else.22561:
 	addi	%v0, %v0, -20
 	jr	%ra
-bgti_else.33532:
+bgti_else.22560:
 	addi	%v0, %v0, -10
 	jr	%ra
-bgti_else.33531:
+bgti_else.22559:
 	jr	%ra
-rotate_quadratic_matrix.2779:
+print_int.2646:
+	add	%a1, %zero, %v0
+	add	%a2, %zero, %ra
+	blti	%a1, 10, bgti_else.22941
+	blti	%a1, 20, bgti_else.22943
+	blti	%a1, 30, bgti_else.22945
+	blti	%a1, 40, bgti_else.22947
+	addi	%a0, %a1, -40
+	blti	%a0, 10, bgti_else.22949
+	blti	%a0, 20, bgti_else.22951
+	blti	%a0, 30, bgti_else.22953
+	blti	%a0, 40, bgti_else.22955
+	addi	%a0, %a0, -40
+	blti	%a0, 10, bgti_else.22957
+	blti	%a0, 20, bgti_else.22959
+	blti	%a0, 30, bgti_else.22961
+	blti	%a0, 40, bgti_else.22963
+	addi	%v0, %a0, -40
+	addi	%v1, %zero, 12
+	jal	print_int_sub1.2641
+	addi	%a3, %v0, 0
+	j	bgti_cont.22942
+bgti_else.22963:
+	addi	%a3, %zero, 11
+bgti_cont.22964:
+	j	bgti_cont.22942
+bgti_else.22961:
+	addi	%a3, %zero, 10
+bgti_cont.22962:
+	j	bgti_cont.22942
+bgti_else.22959:
+	addi	%a3, %zero, 9
+bgti_cont.22960:
+	j	bgti_cont.22942
+bgti_else.22957:
+	addi	%a3, %zero, 8
+bgti_cont.22958:
+	j	bgti_cont.22942
+bgti_else.22955:
+	addi	%a3, %zero, 7
+bgti_cont.22956:
+	j	bgti_cont.22942
+bgti_else.22953:
+	addi	%a3, %zero, 6
+bgti_cont.22954:
+	j	bgti_cont.22942
+bgti_else.22951:
+	addi	%a3, %zero, 5
+bgti_cont.22952:
+	j	bgti_cont.22942
+bgti_else.22949:
+	addi	%a3, %zero, 4
+bgti_cont.22950:
+	j	bgti_cont.22942
+bgti_else.22947:
+	addi	%a3, %zero, 3
+bgti_cont.22948:
+	j	bgti_cont.22942
+bgti_else.22945:
+	addi	%a3, %zero, 2
+bgti_cont.22946:
+	j	bgti_cont.22942
+bgti_else.22943:
+	add	%a3, %zero, %k1
+bgti_cont.22944:
+	j	bgti_cont.22942
+bgti_else.22941:
+	add	%a3, %zero, %zero
+bgti_cont.22942:
+	blti	%a1, 10, bgti_else.22965
+	blti	%a1, 20, bgti_else.22967
+	blti	%a1, 30, bgti_else.22969
+	blti	%a1, 40, bgti_else.22971
+	addi	%a1, %a1, -40
+	blti	%a1, 10, bgti_cont.22966
+	blti	%a1, 20, bgti_else.22975
+	blti	%a1, 30, bgti_else.22977
+	blti	%a1, 40, bgti_else.22979
+	addi	%a1, %a1, -40
+	blti	%a1, 10, bgti_cont.22966
+	blti	%a1, 20, bgti_else.22983
+	blti	%a1, 30, bgti_else.22985
+	blti	%a1, 40, bgti_else.22987
+	addi	%a1, %a1, -40
+	blti	%a1, 10, bgti_cont.22966
+	blti	%a1, 20, bgti_else.22991
+	blti	%a1, 30, bgti_else.22993
+	blti	%a1, 40, bgti_else.22995
+	addi	%a1, %a1, -40
+	blti	%a1, 10, bgti_cont.22966
+	blti	%a1, 20, bgti_else.22999
+	blti	%a1, 30, bgti_else.23001
+	blti	%a1, 40, bgti_else.23003
+	addi	%a1, %a1, -40
+	blti	%a1, 10, bgti_cont.22966
+	blti	%a1, 20, bgti_else.23007
+	blti	%a1, 30, bgti_else.23009
+	blti	%a1, 40, bgti_else.23011
+	addi	%a1, %a1, -40
+	blti	%a1, 10, bgti_cont.22966
+	blti	%a1, 20, bgti_else.23015
+	blti	%a1, 30, bgti_else.23017
+	blti	%a1, 40, bgti_else.23019
+	addi	%v0, %a1, -40
+	jal	print_int_sub2.2644
+	addi	%a1, %v0, 0
+	j	bgti_cont.22966
+bgti_else.23019:
+	addi	%a1, %a1, -30
+bgti_cont.23020:
+	j	bgti_cont.22966
+bgti_else.23017:
+	addi	%a1, %a1, -20
+bgti_cont.23018:
+	j	bgti_cont.22966
+bgti_else.23015:
+	addi	%a1, %a1, -10
+bgti_cont.23016:
+	j	bgti_cont.22966
+bgti_else.23013:
+bgti_cont.23014:
+	j	bgti_cont.22966
+bgti_else.23011:
+	addi	%a1, %a1, -30
+bgti_cont.23012:
+	j	bgti_cont.22966
+bgti_else.23009:
+	addi	%a1, %a1, -20
+bgti_cont.23010:
+	j	bgti_cont.22966
+bgti_else.23007:
+	addi	%a1, %a1, -10
+bgti_cont.23008:
+	j	bgti_cont.22966
+bgti_else.23005:
+bgti_cont.23006:
+	j	bgti_cont.22966
+bgti_else.23003:
+	addi	%a1, %a1, -30
+bgti_cont.23004:
+	j	bgti_cont.22966
+bgti_else.23001:
+	addi	%a1, %a1, -20
+bgti_cont.23002:
+	j	bgti_cont.22966
+bgti_else.22999:
+	addi	%a1, %a1, -10
+bgti_cont.23000:
+	j	bgti_cont.22966
+bgti_else.22997:
+bgti_cont.22998:
+	j	bgti_cont.22966
+bgti_else.22995:
+	addi	%a1, %a1, -30
+bgti_cont.22996:
+	j	bgti_cont.22966
+bgti_else.22993:
+	addi	%a1, %a1, -20
+bgti_cont.22994:
+	j	bgti_cont.22966
+bgti_else.22991:
+	addi	%a1, %a1, -10
+bgti_cont.22992:
+	j	bgti_cont.22966
+bgti_else.22989:
+bgti_cont.22990:
+	j	bgti_cont.22966
+bgti_else.22987:
+	addi	%a1, %a1, -30
+bgti_cont.22988:
+	j	bgti_cont.22966
+bgti_else.22985:
+	addi	%a1, %a1, -20
+bgti_cont.22986:
+	j	bgti_cont.22966
+bgti_else.22983:
+	addi	%a1, %a1, -10
+bgti_cont.22984:
+	j	bgti_cont.22966
+bgti_else.22981:
+bgti_cont.22982:
+	j	bgti_cont.22966
+bgti_else.22979:
+	addi	%a1, %a1, -30
+bgti_cont.22980:
+	j	bgti_cont.22966
+bgti_else.22977:
+	addi	%a1, %a1, -20
+bgti_cont.22978:
+	j	bgti_cont.22966
+bgti_else.22975:
+	addi	%a1, %a1, -10
+bgti_cont.22976:
+	j	bgti_cont.22966
+bgti_else.22973:
+bgti_cont.22974:
+	j	bgti_cont.22966
+bgti_else.22971:
+	addi	%a1, %a1, -30
+bgti_cont.22972:
+	j	bgti_cont.22966
+bgti_else.22969:
+	addi	%a1, %a1, -20
+bgti_cont.22970:
+	j	bgti_cont.22966
+bgti_else.22967:
+	addi	%a1, %a1, -10
+bgti_cont.22968:
+	j	bgti_cont.22966
+bgti_else.22965:
+bgti_cont.22966:
+	blt	%zero, %a3, bgt_else.23021
+	addi	%v0, %a1, 48
+	add	%ra, %zero, %a2
+	j	min_caml_print_char
+bgt_else.23021:
+	blti	%a3, 10, bgti_else.23022
+	blti	%a3, 20, bgti_else.23024
+	blti	%a3, 30, bgti_else.23026
+	blti	%a3, 40, bgti_else.23028
+	addi	%a0, %a3, -40
+	blti	%a0, 10, bgti_else.23030
+	blti	%a0, 20, bgti_else.23032
+	blti	%a0, 30, bgti_else.23034
+	blti	%a0, 40, bgti_else.23036
+	addi	%a0, %a0, -40
+	blti	%a0, 10, bgti_else.23038
+	blti	%a0, 20, bgti_else.23040
+	blti	%a0, 30, bgti_else.23042
+	blti	%a0, 40, bgti_else.23044
+	addi	%v0, %a0, -40
+	addi	%v1, %zero, 12
+	jal	print_int_sub1.2641
+	addi	%a0, %v0, 0
+	j	bgti_cont.23023
+bgti_else.23044:
+	addi	%a0, %zero, 11
+bgti_cont.23045:
+	j	bgti_cont.23023
+bgti_else.23042:
+	addi	%a0, %zero, 10
+bgti_cont.23043:
+	j	bgti_cont.23023
+bgti_else.23040:
+	addi	%a0, %zero, 9
+bgti_cont.23041:
+	j	bgti_cont.23023
+bgti_else.23038:
+	addi	%a0, %zero, 8
+bgti_cont.23039:
+	j	bgti_cont.23023
+bgti_else.23036:
+	addi	%a0, %zero, 7
+bgti_cont.23037:
+	j	bgti_cont.23023
+bgti_else.23034:
+	addi	%a0, %zero, 6
+bgti_cont.23035:
+	j	bgti_cont.23023
+bgti_else.23032:
+	addi	%a0, %zero, 5
+bgti_cont.23033:
+	j	bgti_cont.23023
+bgti_else.23030:
+	addi	%a0, %zero, 4
+bgti_cont.23031:
+	j	bgti_cont.23023
+bgti_else.23028:
+	addi	%a0, %zero, 3
+bgti_cont.23029:
+	j	bgti_cont.23023
+bgti_else.23026:
+	addi	%a0, %zero, 2
+bgti_cont.23027:
+	j	bgti_cont.23023
+bgti_else.23024:
+	add	%a0, %zero, %k1
+bgti_cont.23025:
+	j	bgti_cont.23023
+bgti_else.23022:
+	add	%a0, %zero, %zero
+bgti_cont.23023:
+	blti	%a3, 10, bgti_else.23046
+	blti	%a3, 20, bgti_else.23048
+	blti	%a3, 30, bgti_else.23050
+	blti	%a3, 40, bgti_else.23052
+	addi	%a3, %a3, -40
+	blti	%a3, 10, bgti_cont.23047
+	blti	%a3, 20, bgti_else.23056
+	blti	%a3, 30, bgti_else.23058
+	blti	%a3, 40, bgti_else.23060
+	addi	%a3, %a3, -40
+	blti	%a3, 10, bgti_cont.23047
+	blti	%a3, 20, bgti_else.23064
+	blti	%a3, 30, bgti_else.23066
+	blti	%a3, 40, bgti_else.23068
+	addi	%a3, %a3, -40
+	blti	%a3, 10, bgti_cont.23047
+	blti	%a3, 20, bgti_else.23072
+	blti	%a3, 30, bgti_else.23074
+	blti	%a3, 40, bgti_else.23076
+	addi	%a3, %a3, -40
+	blti	%a3, 10, bgti_cont.23047
+	blti	%a3, 20, bgti_else.23080
+	blti	%a3, 30, bgti_else.23082
+	blti	%a3, 40, bgti_else.23084
+	addi	%a3, %a3, -40
+	blti	%a3, 10, bgti_cont.23047
+	blti	%a3, 20, bgti_else.23088
+	blti	%a3, 30, bgti_else.23090
+	blti	%a3, 40, bgti_else.23092
+	addi	%a3, %a3, -40
+	blti	%a3, 10, bgti_cont.23047
+	blti	%a3, 20, bgti_else.23096
+	blti	%a3, 30, bgti_else.23098
+	blti	%a3, 40, bgti_else.23100
+	addi	%v0, %a3, -40
+	jal	print_int_sub2.2644
+	addi	%a3, %v0, 0
+	j	bgti_cont.23047
+bgti_else.23100:
+	addi	%a3, %a3, -30
+bgti_cont.23101:
+	j	bgti_cont.23047
+bgti_else.23098:
+	addi	%a3, %a3, -20
+bgti_cont.23099:
+	j	bgti_cont.23047
+bgti_else.23096:
+	addi	%a3, %a3, -10
+bgti_cont.23097:
+	j	bgti_cont.23047
+bgti_else.23094:
+bgti_cont.23095:
+	j	bgti_cont.23047
+bgti_else.23092:
+	addi	%a3, %a3, -30
+bgti_cont.23093:
+	j	bgti_cont.23047
+bgti_else.23090:
+	addi	%a3, %a3, -20
+bgti_cont.23091:
+	j	bgti_cont.23047
+bgti_else.23088:
+	addi	%a3, %a3, -10
+bgti_cont.23089:
+	j	bgti_cont.23047
+bgti_else.23086:
+bgti_cont.23087:
+	j	bgti_cont.23047
+bgti_else.23084:
+	addi	%a3, %a3, -30
+bgti_cont.23085:
+	j	bgti_cont.23047
+bgti_else.23082:
+	addi	%a3, %a3, -20
+bgti_cont.23083:
+	j	bgti_cont.23047
+bgti_else.23080:
+	addi	%a3, %a3, -10
+bgti_cont.23081:
+	j	bgti_cont.23047
+bgti_else.23078:
+bgti_cont.23079:
+	j	bgti_cont.23047
+bgti_else.23076:
+	addi	%a3, %a3, -30
+bgti_cont.23077:
+	j	bgti_cont.23047
+bgti_else.23074:
+	addi	%a3, %a3, -20
+bgti_cont.23075:
+	j	bgti_cont.23047
+bgti_else.23072:
+	addi	%a3, %a3, -10
+bgti_cont.23073:
+	j	bgti_cont.23047
+bgti_else.23070:
+bgti_cont.23071:
+	j	bgti_cont.23047
+bgti_else.23068:
+	addi	%a3, %a3, -30
+bgti_cont.23069:
+	j	bgti_cont.23047
+bgti_else.23066:
+	addi	%a3, %a3, -20
+bgti_cont.23067:
+	j	bgti_cont.23047
+bgti_else.23064:
+	addi	%a3, %a3, -10
+bgti_cont.23065:
+	j	bgti_cont.23047
+bgti_else.23062:
+bgti_cont.23063:
+	j	bgti_cont.23047
+bgti_else.23060:
+	addi	%a3, %a3, -30
+bgti_cont.23061:
+	j	bgti_cont.23047
+bgti_else.23058:
+	addi	%a3, %a3, -20
+bgti_cont.23059:
+	j	bgti_cont.23047
+bgti_else.23056:
+	addi	%a3, %a3, -10
+bgti_cont.23057:
+	j	bgti_cont.23047
+bgti_else.23054:
+bgti_cont.23055:
+	j	bgti_cont.23047
+bgti_else.23052:
+	addi	%a3, %a3, -30
+bgti_cont.23053:
+	j	bgti_cont.23047
+bgti_else.23050:
+	addi	%a3, %a3, -20
+bgti_cont.23051:
+	j	bgti_cont.23047
+bgti_else.23048:
+	addi	%a3, %a3, -10
+bgti_cont.23049:
+	j	bgti_cont.23047
+bgti_else.23046:
+bgti_cont.23047:
+	blt	%zero, %a0, bgt_else.23102
+	addi	%v0, %a3, 48
+	jal	min_caml_print_char
+	addi	%v0, %a1, 48
+	add	%ra, %zero, %a2
+	j	min_caml_print_char
+bgt_else.23102:
+	blti	%a0, 10, bgti_else.23103
+	blti	%a0, 20, bgti_else.23105
+	blti	%a0, 30, bgti_else.23107
+	blti	%a0, 40, bgti_else.23109
+	addi	%a0, %a0, -40
+	blti	%a0, 10, bgti_cont.23104
+	blti	%a0, 20, bgti_else.23113
+	blti	%a0, 30, bgti_else.23115
+	blti	%a0, 40, bgti_else.23117
+	addi	%a0, %a0, -40
+	blti	%a0, 10, bgti_cont.23104
+	blti	%a0, 20, bgti_else.23121
+	blti	%a0, 30, bgti_else.23123
+	blti	%a0, 40, bgti_else.23125
+	addi	%a0, %a0, -40
+	blti	%a0, 10, bgti_cont.23104
+	blti	%a0, 20, bgti_else.23129
+	blti	%a0, 30, bgti_else.23131
+	blti	%a0, 40, bgti_else.23133
+	addi	%a0, %a0, -40
+	blti	%a0, 10, bgti_cont.23104
+	blti	%a0, 20, bgti_else.23137
+	blti	%a0, 30, bgti_else.23139
+	blti	%a0, 40, bgti_else.23141
+	addi	%a0, %a0, -40
+	blti	%a0, 10, bgti_cont.23104
+	blti	%a0, 20, bgti_else.23145
+	blti	%a0, 30, bgti_else.23147
+	blti	%a0, 40, bgti_else.23149
+	addi	%a0, %a0, -40
+	blti	%a0, 10, bgti_cont.23104
+	blti	%a0, 20, bgti_else.23153
+	blti	%a0, 30, bgti_else.23155
+	blti	%a0, 40, bgti_else.23157
+	addi	%v0, %a0, -40
+	jal	print_int_sub2.2644
+	addi	%a0, %v0, 0
+	j	bgti_cont.23104
+bgti_else.23157:
+	addi	%a0, %a0, -30
+bgti_cont.23158:
+	j	bgti_cont.23104
+bgti_else.23155:
+	addi	%a0, %a0, -20
+bgti_cont.23156:
+	j	bgti_cont.23104
+bgti_else.23153:
+	addi	%a0, %a0, -10
+bgti_cont.23154:
+	j	bgti_cont.23104
+bgti_else.23151:
+bgti_cont.23152:
+	j	bgti_cont.23104
+bgti_else.23149:
+	addi	%a0, %a0, -30
+bgti_cont.23150:
+	j	bgti_cont.23104
+bgti_else.23147:
+	addi	%a0, %a0, -20
+bgti_cont.23148:
+	j	bgti_cont.23104
+bgti_else.23145:
+	addi	%a0, %a0, -10
+bgti_cont.23146:
+	j	bgti_cont.23104
+bgti_else.23143:
+bgti_cont.23144:
+	j	bgti_cont.23104
+bgti_else.23141:
+	addi	%a0, %a0, -30
+bgti_cont.23142:
+	j	bgti_cont.23104
+bgti_else.23139:
+	addi	%a0, %a0, -20
+bgti_cont.23140:
+	j	bgti_cont.23104
+bgti_else.23137:
+	addi	%a0, %a0, -10
+bgti_cont.23138:
+	j	bgti_cont.23104
+bgti_else.23135:
+bgti_cont.23136:
+	j	bgti_cont.23104
+bgti_else.23133:
+	addi	%a0, %a0, -30
+bgti_cont.23134:
+	j	bgti_cont.23104
+bgti_else.23131:
+	addi	%a0, %a0, -20
+bgti_cont.23132:
+	j	bgti_cont.23104
+bgti_else.23129:
+	addi	%a0, %a0, -10
+bgti_cont.23130:
+	j	bgti_cont.23104
+bgti_else.23127:
+bgti_cont.23128:
+	j	bgti_cont.23104
+bgti_else.23125:
+	addi	%a0, %a0, -30
+bgti_cont.23126:
+	j	bgti_cont.23104
+bgti_else.23123:
+	addi	%a0, %a0, -20
+bgti_cont.23124:
+	j	bgti_cont.23104
+bgti_else.23121:
+	addi	%a0, %a0, -10
+bgti_cont.23122:
+	j	bgti_cont.23104
+bgti_else.23119:
+bgti_cont.23120:
+	j	bgti_cont.23104
+bgti_else.23117:
+	addi	%a0, %a0, -30
+bgti_cont.23118:
+	j	bgti_cont.23104
+bgti_else.23115:
+	addi	%a0, %a0, -20
+bgti_cont.23116:
+	j	bgti_cont.23104
+bgti_else.23113:
+	addi	%a0, %a0, -10
+bgti_cont.23114:
+	j	bgti_cont.23104
+bgti_else.23111:
+bgti_cont.23112:
+	j	bgti_cont.23104
+bgti_else.23109:
+	addi	%a0, %a0, -30
+bgti_cont.23110:
+	j	bgti_cont.23104
+bgti_else.23107:
+	addi	%a0, %a0, -20
+bgti_cont.23108:
+	j	bgti_cont.23104
+bgti_else.23105:
+	addi	%a0, %a0, -10
+bgti_cont.23106:
+	j	bgti_cont.23104
+bgti_else.23103:
+bgti_cont.23104:
+	addi	%v0, %a0, 48
+	jal	min_caml_print_char
+	addi	%v0, %a3, 48
+	jal	min_caml_print_char
+	addi	%v0, %a1, 48
+	add	%ra, %zero, %a2
+	j	min_caml_print_char
+read_screen_settings.2775:
 	add	%a0, %zero, %ra
-	flw	%f18, 0(%v1)
-	flw	%f19, 494(%zero)
-	fabs	%f17, %f18
-	flw	%f2, 493(%zero)
-	fblt	%f17, %f2, fbgt_else.33978
+	jal	min_caml_read_float
+	fsw	%f0, 72(%zero)
+	jal	min_caml_read_float
+	fsw	%f0, 73(%zero)
+	jal	min_caml_read_float
+	fsw	%f0, 74(%zero)
+	jal	min_caml_read_float
+	flw	%f19, 461(%zero)
+	fmul	%f20, %f0, %f19
+	flw	%f18, 495(%zero)
+	fabs	%f17, %f20
+	flw	%f2, 494(%zero)
+	fblt	%f17, %f2, fbgt_else.23444
+	flw	%f1, 493(%zero)
+	fblt	%f17, %f1, fbgt_cont.23445
 	flw	%f1, 492(%zero)
-	fblt	%f17, %f1, fbgt_cont.33979
+	fblt	%f17, %f1, fbgt_cont.23445
 	flw	%f1, 491(%zero)
-	fblt	%f17, %f1, fbgt_cont.33979
+	fblt	%f17, %f1, fbgt_cont.23445
 	flw	%f1, 490(%zero)
-	fblt	%f17, %f1, fbgt_cont.33979
+	fblt	%f17, %f1, fbgt_cont.23445
 	flw	%f1, 489(%zero)
-	fblt	%f17, %f1, fbgt_cont.33979
+	fblt	%f17, %f1, fbgt_cont.23445
 	flw	%f1, 488(%zero)
-	fblt	%f17, %f1, fbgt_cont.33979
+	fblt	%f17, %f1, fbgt_cont.23445
 	flw	%f1, 487(%zero)
-	fblt	%f17, %f1, fbgt_cont.33979
+	fblt	%f17, %f1, fbgt_cont.23445
 	flw	%f1, 486(%zero)
-	fblt	%f17, %f1, fbgt_cont.33979
+	fblt	%f17, %f1, fbgt_cont.23445
 	flw	%f1, 485(%zero)
-	fblt	%f17, %f1, fbgt_cont.33979
+	fblt	%f17, %f1, fbgt_cont.23445
 	flw	%f1, 484(%zero)
-	fblt	%f17, %f1, fbgt_cont.33979
+	fblt	%f17, %f1, fbgt_cont.23445
 	flw	%f1, 483(%zero)
-	fblt	%f17, %f1, fbgt_cont.33979
+	fblt	%f17, %f1, fbgt_cont.23445
 	flw	%f1, 482(%zero)
-	fblt	%f17, %f1, fbgt_cont.33979
+	fblt	%f17, %f1, fbgt_cont.23445
 	flw	%f1, 481(%zero)
-	fblt	%f17, %f1, fbgt_cont.33979
-	flw	%f1, 480(%zero)
 	fmov	%f0, %f17
 	jal	reduction_2pi_sub1.2626
 	fmov	%f1, %f0
-	j	fbgt_cont.33979
-fbgt_else.34002:
-fbgt_cont.34003:
-	j	fbgt_cont.33979
-fbgt_else.34000:
-fbgt_cont.34001:
-	j	fbgt_cont.33979
-fbgt_else.33998:
-fbgt_cont.33999:
-	j	fbgt_cont.33979
-fbgt_else.33996:
-fbgt_cont.33997:
-	j	fbgt_cont.33979
-fbgt_else.33994:
-fbgt_cont.33995:
-	j	fbgt_cont.33979
-fbgt_else.33992:
-fbgt_cont.33993:
-	j	fbgt_cont.33979
-fbgt_else.33990:
-fbgt_cont.33991:
-	j	fbgt_cont.33979
-fbgt_else.33988:
-fbgt_cont.33989:
-	j	fbgt_cont.33979
-fbgt_else.33986:
-fbgt_cont.33987:
-	j	fbgt_cont.33979
-fbgt_else.33984:
-fbgt_cont.33985:
-	j	fbgt_cont.33979
-fbgt_else.33982:
-fbgt_cont.33983:
-	j	fbgt_cont.33979
-fbgt_else.33980:
-fbgt_cont.33981:
-	j	fbgt_cont.33979
-fbgt_else.33978:
+	j	fbgt_cont.23445
+fbgt_else.23468:
+fbgt_cont.23469:
+	j	fbgt_cont.23445
+fbgt_else.23466:
+fbgt_cont.23467:
+	j	fbgt_cont.23445
+fbgt_else.23464:
+fbgt_cont.23465:
+	j	fbgt_cont.23445
+fbgt_else.23462:
+fbgt_cont.23463:
+	j	fbgt_cont.23445
+fbgt_else.23460:
+fbgt_cont.23461:
+	j	fbgt_cont.23445
+fbgt_else.23458:
+fbgt_cont.23459:
+	j	fbgt_cont.23445
+fbgt_else.23456:
+fbgt_cont.23457:
+	j	fbgt_cont.23445
+fbgt_else.23454:
+fbgt_cont.23455:
+	j	fbgt_cont.23445
+fbgt_else.23452:
+fbgt_cont.23453:
+	j	fbgt_cont.23445
+fbgt_else.23450:
+fbgt_cont.23451:
+	j	fbgt_cont.23445
+fbgt_else.23448:
+fbgt_cont.23449:
+	j	fbgt_cont.23445
+fbgt_else.23446:
+fbgt_cont.23447:
+	j	fbgt_cont.23445
+fbgt_else.23444:
 	fmov	%f1, %f2
-fbgt_cont.33979:
-	fblt	%f17, %f2, fbgt_else.34004
-	fblt	%f17, %f1, fbgt_else.34006
+fbgt_cont.23445:
+	fblt	%f17, %f2, fbgt_else.23470
+	fblt	%f17, %f1, fbgt_else.23472
 	fsub	%f0, %f17, %f1
-	flw	%f16, 495(%zero)
+	flw	%f16, 496(%zero)
 	fdiv	%f1, %f1, %f16
 	jal	reduction_2pi_sub2.2629
 	fmov	%f17, %f0
-	j	fbgt_cont.34005
-fbgt_else.34006:
-	flw	%f0, 495(%zero)
+	j	fbgt_cont.23471
+fbgt_else.23472:
+	flw	%f0, 496(%zero)
 	fdiv	%f1, %f1, %f0
 	fmov	%f0, %f17
 	jal	reduction_2pi_sub2.2629
 	fmov	%f17, %f0
-fbgt_cont.34007:
-	j	fbgt_cont.34005
-fbgt_else.34004:
-fbgt_cont.34005:
-	fblt	%f17, %f19, fbgt_else.34008
+fbgt_cont.23473:
+	j	fbgt_cont.23471
+fbgt_else.23470:
+fbgt_cont.23471:
+	fblt	%f17, %f18, fbgt_else.23474
 	add	%a1, %zero, %zero
-	j	fbgt_cont.34009
-fbgt_else.34008:
+	j	fbgt_cont.23475
+fbgt_else.23474:
 	add	%a1, %zero, %k1
-fbgt_cont.34009:
-	fblt	%f17, %f19, fbgt_else.34010
-	fsub	%f17, %f17, %f19
-	j	fbgt_cont.34011
-fbgt_else.34010:
-fbgt_cont.34011:
-	flw	%f20, 479(%zero)
-	fblt	%f17, %f20, fbgt_else.34012
-	beqi	%a1, 0, bnei_else.34014
+fbgt_cont.23475:
+	fblt	%f17, %f18, fbgt_else.23476
+	fsub	%f17, %f17, %f18
+	j	fbgt_cont.23477
+fbgt_else.23476:
+fbgt_cont.23477:
+	flw	%f21, 479(%zero)
+	fblt	%f17, %f21, fbgt_else.23478
+	beqi	%a1, 0, bnei_else.23480
 	add	%a1, %zero, %zero
-	j	fbgt_cont.34013
-bnei_else.34014:
+	j	fbgt_cont.23479
+bnei_else.23480:
 	add	%a1, %zero, %k1
-bnei_cont.34015:
-	j	fbgt_cont.34013
-fbgt_else.34012:
-fbgt_cont.34013:
-	fblt	%f17, %f20, fbgt_else.34016
-	fsub	%f17, %f19, %f17
-	j	fbgt_cont.34017
-fbgt_else.34016:
-fbgt_cont.34017:
-	flw	%f21, 478(%zero)
-	fblt	%f21, %f17, fbgt_else.34018
+bnei_cont.23481:
+	j	fbgt_cont.23479
+fbgt_else.23478:
+fbgt_cont.23479:
+	fblt	%f17, %f21, fbgt_else.23482
+	fsub	%f17, %f18, %f17
+	j	fbgt_cont.23483
+fbgt_else.23482:
+fbgt_cont.23483:
+	flw	%f22, 478(%zero)
+	fblt	%f22, %f17, fbgt_else.23484
 	fmul	%f17, %f17, %f17
 	fmul	%f16, %f17, %f17
 	flw	%f0, 473(%zero)
@@ -651,145 +1788,794 @@ fbgt_cont.34017:
 	fmul	%f0, %f0, %f17
 	fmul	%f0, %f0, %f16
 	fsub	%f17, %f1, %f0
-	j	fbgt_cont.34019
-fbgt_else.34018:
-	fsub	%f22, %f20, %f17
-	fmul	%f17, %f22, %f22
+	j	fbgt_cont.23485
+fbgt_else.23484:
+	fsub	%f23, %f21, %f17
+	fmul	%f17, %f23, %f23
 	fmul	%f16, %f17, %f17
 	flw	%f0, 477(%zero)
-	fmul	%f0, %f0, %f22
+	fmul	%f0, %f0, %f23
 	fmul	%f0, %f0, %f17
-	fsub	%f1, %f22, %f0
+	fsub	%f1, %f23, %f0
 	flw	%f0, 476(%zero)
-	fmul	%f0, %f0, %f22
+	fmul	%f0, %f0, %f23
 	fmul	%f0, %f0, %f16
 	fadd	%f1, %f1, %f0
 	flw	%f0, 475(%zero)
-	fmul	%f0, %f0, %f22
+	fmul	%f0, %f0, %f23
 	fmul	%f0, %f0, %f17
 	fmul	%f0, %f0, %f16
 	fsub	%f17, %f1, %f0
-fbgt_cont.34019:
-	beqi	%a1, 0, bnei_else.34020
-	j	bnei_cont.34021
-bnei_else.34020:
+fbgt_cont.23485:
+	beqi	%a1, 0, bnei_else.23486
+	j	bnei_cont.23487
+bnei_else.23486:
 	fneg	%f17, %f17
-bnei_cont.34021:
-	fblt	%f18, %fzero, fbgt_else.34022
+bnei_cont.23487:
+	fblt	%f20, %fzero, fbgt_else.23488
 	add	%a1, %zero, %k1
-	j	fbgt_cont.34023
-fbgt_else.34022:
+	j	fbgt_cont.23489
+fbgt_else.23488:
 	add	%a1, %zero, %zero
-fbgt_cont.34023:
-	fabs	%f18, %f18
-	fblt	%f18, %f2, fbgt_else.34024
+fbgt_cont.23489:
+	fabs	%f20, %f20
+	fblt	%f20, %f2, fbgt_else.23490
+	flw	%f1, 493(%zero)
+	fblt	%f20, %f1, fbgt_cont.23491
 	flw	%f1, 492(%zero)
-	fblt	%f18, %f1, fbgt_cont.34025
+	fblt	%f20, %f1, fbgt_cont.23491
 	flw	%f1, 491(%zero)
-	fblt	%f18, %f1, fbgt_cont.34025
+	fblt	%f20, %f1, fbgt_cont.23491
 	flw	%f1, 490(%zero)
-	fblt	%f18, %f1, fbgt_cont.34025
+	fblt	%f20, %f1, fbgt_cont.23491
 	flw	%f1, 489(%zero)
-	fblt	%f18, %f1, fbgt_cont.34025
+	fblt	%f20, %f1, fbgt_cont.23491
 	flw	%f1, 488(%zero)
-	fblt	%f18, %f1, fbgt_cont.34025
+	fblt	%f20, %f1, fbgt_cont.23491
 	flw	%f1, 487(%zero)
-	fblt	%f18, %f1, fbgt_cont.34025
+	fblt	%f20, %f1, fbgt_cont.23491
 	flw	%f1, 486(%zero)
-	fblt	%f18, %f1, fbgt_cont.34025
+	fblt	%f20, %f1, fbgt_cont.23491
 	flw	%f1, 485(%zero)
-	fblt	%f18, %f1, fbgt_cont.34025
+	fblt	%f20, %f1, fbgt_cont.23491
 	flw	%f1, 484(%zero)
-	fblt	%f18, %f1, fbgt_cont.34025
+	fblt	%f20, %f1, fbgt_cont.23491
 	flw	%f1, 483(%zero)
-	fblt	%f18, %f1, fbgt_cont.34025
+	fblt	%f20, %f1, fbgt_cont.23491
 	flw	%f1, 482(%zero)
-	fblt	%f18, %f1, fbgt_cont.34025
+	fblt	%f20, %f1, fbgt_cont.23491
 	flw	%f1, 481(%zero)
-	fblt	%f18, %f1, fbgt_cont.34025
-	flw	%f1, 480(%zero)
+	fmov	%f0, %f20
+	jal	reduction_2pi_sub1.2626
+	fmov	%f1, %f0
+	j	fbgt_cont.23491
+fbgt_else.23514:
+fbgt_cont.23515:
+	j	fbgt_cont.23491
+fbgt_else.23512:
+fbgt_cont.23513:
+	j	fbgt_cont.23491
+fbgt_else.23510:
+fbgt_cont.23511:
+	j	fbgt_cont.23491
+fbgt_else.23508:
+fbgt_cont.23509:
+	j	fbgt_cont.23491
+fbgt_else.23506:
+fbgt_cont.23507:
+	j	fbgt_cont.23491
+fbgt_else.23504:
+fbgt_cont.23505:
+	j	fbgt_cont.23491
+fbgt_else.23502:
+fbgt_cont.23503:
+	j	fbgt_cont.23491
+fbgt_else.23500:
+fbgt_cont.23501:
+	j	fbgt_cont.23491
+fbgt_else.23498:
+fbgt_cont.23499:
+	j	fbgt_cont.23491
+fbgt_else.23496:
+fbgt_cont.23497:
+	j	fbgt_cont.23491
+fbgt_else.23494:
+fbgt_cont.23495:
+	j	fbgt_cont.23491
+fbgt_else.23492:
+fbgt_cont.23493:
+	j	fbgt_cont.23491
+fbgt_else.23490:
+	fmov	%f1, %f2
+fbgt_cont.23491:
+	fblt	%f20, %f2, fbgt_else.23516
+	fblt	%f20, %f1, fbgt_else.23518
+	fsub	%f0, %f20, %f1
+	flw	%f16, 496(%zero)
+	fdiv	%f1, %f1, %f16
+	jal	reduction_2pi_sub2.2629
+	fmov	%f20, %f0
+	j	fbgt_cont.23517
+fbgt_else.23518:
+	flw	%f0, 496(%zero)
+	fdiv	%f1, %f1, %f0
+	fmov	%f0, %f20
+	jal	reduction_2pi_sub2.2629
+	fmov	%f20, %f0
+fbgt_cont.23519:
+	j	fbgt_cont.23517
+fbgt_else.23516:
+fbgt_cont.23517:
+	fblt	%f20, %f18, fbgt_else.23520
+	beqi	%a1, 0, bnei_else.23522
+	add	%a1, %zero, %zero
+	j	fbgt_cont.23521
+bnei_else.23522:
+	add	%a1, %zero, %k1
+bnei_cont.23523:
+	j	fbgt_cont.23521
+fbgt_else.23520:
+fbgt_cont.23521:
+	fblt	%f20, %f18, fbgt_else.23524
+	fsub	%f20, %f20, %f18
+	j	fbgt_cont.23525
+fbgt_else.23524:
+fbgt_cont.23525:
+	fblt	%f20, %f21, fbgt_else.23526
+	fsub	%f20, %f18, %f20
+	j	fbgt_cont.23527
+fbgt_else.23526:
+fbgt_cont.23527:
+	fblt	%f22, %f20, fbgt_else.23528
+	fmul	%f23, %f20, %f20
+	fmul	%f16, %f23, %f23
+	flw	%f0, 477(%zero)
+	fmul	%f0, %f0, %f20
+	fmul	%f0, %f0, %f23
+	fsub	%f1, %f20, %f0
+	flw	%f0, 476(%zero)
+	fmul	%f0, %f0, %f20
+	fmul	%f0, %f0, %f16
+	fadd	%f1, %f1, %f0
+	flw	%f0, 475(%zero)
+	fmul	%f0, %f0, %f20
+	fmul	%f0, %f0, %f23
+	fmul	%f0, %f0, %f16
+	fsub	%f20, %f1, %f0
+	j	fbgt_cont.23529
+fbgt_else.23528:
+	fsub	%f0, %f21, %f20
+	fmul	%f20, %f0, %f0
+	fmul	%f16, %f20, %f20
+	flw	%f0, 473(%zero)
+	fmul	%f0, %f0, %f20
+	fsub	%f1, %f30, %f0
+	flw	%f0, 472(%zero)
+	fmul	%f0, %f0, %f16
+	fadd	%f1, %f1, %f0
+	flw	%f0, 471(%zero)
+	fmul	%f0, %f0, %f20
+	fmul	%f0, %f0, %f16
+	fsub	%f20, %f1, %f0
+fbgt_cont.23529:
+	beqi	%a1, 0, bnei_else.23530
+	j	bnei_cont.23531
+bnei_else.23530:
+	fneg	%f20, %f20
+bnei_cont.23531:
+	jal	min_caml_read_float
+	fmul	%f23, %f0, %f19
+	fabs	%f19, %f23
+	fblt	%f19, %f2, fbgt_else.23532
+	flw	%f1, 493(%zero)
+	fblt	%f19, %f1, fbgt_cont.23533
+	flw	%f1, 492(%zero)
+	fblt	%f19, %f1, fbgt_cont.23533
+	flw	%f1, 491(%zero)
+	fblt	%f19, %f1, fbgt_cont.23533
+	flw	%f1, 490(%zero)
+	fblt	%f19, %f1, fbgt_cont.23533
+	flw	%f1, 489(%zero)
+	fblt	%f19, %f1, fbgt_cont.23533
+	flw	%f1, 488(%zero)
+	fblt	%f19, %f1, fbgt_cont.23533
+	flw	%f1, 487(%zero)
+	fblt	%f19, %f1, fbgt_cont.23533
+	flw	%f1, 486(%zero)
+	fblt	%f19, %f1, fbgt_cont.23533
+	flw	%f1, 485(%zero)
+	fblt	%f19, %f1, fbgt_cont.23533
+	flw	%f1, 484(%zero)
+	fblt	%f19, %f1, fbgt_cont.23533
+	flw	%f1, 483(%zero)
+	fblt	%f19, %f1, fbgt_cont.23533
+	flw	%f1, 482(%zero)
+	fblt	%f19, %f1, fbgt_cont.23533
+	flw	%f1, 481(%zero)
+	fmov	%f0, %f19
+	jal	reduction_2pi_sub1.2626
+	fmov	%f1, %f0
+	j	fbgt_cont.23533
+fbgt_else.23556:
+fbgt_cont.23557:
+	j	fbgt_cont.23533
+fbgt_else.23554:
+fbgt_cont.23555:
+	j	fbgt_cont.23533
+fbgt_else.23552:
+fbgt_cont.23553:
+	j	fbgt_cont.23533
+fbgt_else.23550:
+fbgt_cont.23551:
+	j	fbgt_cont.23533
+fbgt_else.23548:
+fbgt_cont.23549:
+	j	fbgt_cont.23533
+fbgt_else.23546:
+fbgt_cont.23547:
+	j	fbgt_cont.23533
+fbgt_else.23544:
+fbgt_cont.23545:
+	j	fbgt_cont.23533
+fbgt_else.23542:
+fbgt_cont.23543:
+	j	fbgt_cont.23533
+fbgt_else.23540:
+fbgt_cont.23541:
+	j	fbgt_cont.23533
+fbgt_else.23538:
+fbgt_cont.23539:
+	j	fbgt_cont.23533
+fbgt_else.23536:
+fbgt_cont.23537:
+	j	fbgt_cont.23533
+fbgt_else.23534:
+fbgt_cont.23535:
+	j	fbgt_cont.23533
+fbgt_else.23532:
+	fmov	%f1, %f2
+fbgt_cont.23533:
+	fblt	%f19, %f2, fbgt_else.23558
+	fblt	%f19, %f1, fbgt_else.23560
+	fsub	%f0, %f19, %f1
+	flw	%f16, 496(%zero)
+	fdiv	%f1, %f1, %f16
+	jal	reduction_2pi_sub2.2629
+	fmov	%f19, %f0
+	j	fbgt_cont.23559
+fbgt_else.23560:
+	flw	%f0, 496(%zero)
+	fdiv	%f1, %f1, %f0
+	fmov	%f0, %f19
+	jal	reduction_2pi_sub2.2629
+	fmov	%f19, %f0
+fbgt_cont.23561:
+	j	fbgt_cont.23559
+fbgt_else.23558:
+fbgt_cont.23559:
+	fblt	%f19, %f18, fbgt_else.23562
+	add	%a1, %zero, %zero
+	j	fbgt_cont.23563
+fbgt_else.23562:
+	add	%a1, %zero, %k1
+fbgt_cont.23563:
+	fblt	%f19, %f18, fbgt_else.23564
+	fsub	%f19, %f19, %f18
+	j	fbgt_cont.23565
+fbgt_else.23564:
+fbgt_cont.23565:
+	fblt	%f19, %f21, fbgt_else.23566
+	beqi	%a1, 0, bnei_else.23568
+	add	%a1, %zero, %zero
+	j	fbgt_cont.23567
+bnei_else.23568:
+	add	%a1, %zero, %k1
+bnei_cont.23569:
+	j	fbgt_cont.23567
+fbgt_else.23566:
+fbgt_cont.23567:
+	fblt	%f19, %f21, fbgt_else.23570
+	fsub	%f19, %f18, %f19
+	j	fbgt_cont.23571
+fbgt_else.23570:
+fbgt_cont.23571:
+	fblt	%f22, %f19, fbgt_else.23572
+	fmul	%f19, %f19, %f19
+	fmul	%f16, %f19, %f19
+	flw	%f0, 473(%zero)
+	fmul	%f0, %f0, %f19
+	fsub	%f1, %f30, %f0
+	flw	%f0, 472(%zero)
+	fmul	%f0, %f0, %f16
+	fadd	%f1, %f1, %f0
+	flw	%f0, 471(%zero)
+	fmul	%f0, %f0, %f19
+	fmul	%f0, %f0, %f16
+	fsub	%f19, %f1, %f0
+	j	fbgt_cont.23573
+fbgt_else.23572:
+	fsub	%f24, %f21, %f19
+	fmul	%f19, %f24, %f24
+	fmul	%f16, %f19, %f19
+	flw	%f0, 477(%zero)
+	fmul	%f0, %f0, %f24
+	fmul	%f0, %f0, %f19
+	fsub	%f1, %f24, %f0
+	flw	%f0, 476(%zero)
+	fmul	%f0, %f0, %f24
+	fmul	%f0, %f0, %f16
+	fadd	%f1, %f1, %f0
+	flw	%f0, 475(%zero)
+	fmul	%f0, %f0, %f24
+	fmul	%f0, %f0, %f19
+	fmul	%f0, %f0, %f16
+	fsub	%f19, %f1, %f0
+fbgt_cont.23573:
+	beqi	%a1, 0, bnei_else.23574
+	j	bnei_cont.23575
+bnei_else.23574:
+	fneg	%f19, %f19
+bnei_cont.23575:
+	fblt	%f23, %fzero, fbgt_else.23576
+	add	%a1, %zero, %k1
+	j	fbgt_cont.23577
+fbgt_else.23576:
+	add	%a1, %zero, %zero
+fbgt_cont.23577:
+	fabs	%f23, %f23
+	fblt	%f23, %f2, fbgt_else.23578
+	flw	%f1, 493(%zero)
+	fblt	%f23, %f1, fbgt_cont.23579
+	flw	%f1, 492(%zero)
+	fblt	%f23, %f1, fbgt_cont.23579
+	flw	%f1, 491(%zero)
+	fblt	%f23, %f1, fbgt_cont.23579
+	flw	%f1, 490(%zero)
+	fblt	%f23, %f1, fbgt_cont.23579
+	flw	%f1, 489(%zero)
+	fblt	%f23, %f1, fbgt_cont.23579
+	flw	%f1, 488(%zero)
+	fblt	%f23, %f1, fbgt_cont.23579
+	flw	%f1, 487(%zero)
+	fblt	%f23, %f1, fbgt_cont.23579
+	flw	%f1, 486(%zero)
+	fblt	%f23, %f1, fbgt_cont.23579
+	flw	%f1, 485(%zero)
+	fblt	%f23, %f1, fbgt_cont.23579
+	flw	%f1, 484(%zero)
+	fblt	%f23, %f1, fbgt_cont.23579
+	flw	%f1, 483(%zero)
+	fblt	%f23, %f1, fbgt_cont.23579
+	flw	%f1, 482(%zero)
+	fblt	%f23, %f1, fbgt_cont.23579
+	flw	%f1, 481(%zero)
+	fmov	%f0, %f23
+	jal	reduction_2pi_sub1.2626
+	fmov	%f1, %f0
+	j	fbgt_cont.23579
+fbgt_else.23602:
+fbgt_cont.23603:
+	j	fbgt_cont.23579
+fbgt_else.23600:
+fbgt_cont.23601:
+	j	fbgt_cont.23579
+fbgt_else.23598:
+fbgt_cont.23599:
+	j	fbgt_cont.23579
+fbgt_else.23596:
+fbgt_cont.23597:
+	j	fbgt_cont.23579
+fbgt_else.23594:
+fbgt_cont.23595:
+	j	fbgt_cont.23579
+fbgt_else.23592:
+fbgt_cont.23593:
+	j	fbgt_cont.23579
+fbgt_else.23590:
+fbgt_cont.23591:
+	j	fbgt_cont.23579
+fbgt_else.23588:
+fbgt_cont.23589:
+	j	fbgt_cont.23579
+fbgt_else.23586:
+fbgt_cont.23587:
+	j	fbgt_cont.23579
+fbgt_else.23584:
+fbgt_cont.23585:
+	j	fbgt_cont.23579
+fbgt_else.23582:
+fbgt_cont.23583:
+	j	fbgt_cont.23579
+fbgt_else.23580:
+fbgt_cont.23581:
+	j	fbgt_cont.23579
+fbgt_else.23578:
+	fmov	%f1, %f2
+fbgt_cont.23579:
+	fblt	%f23, %f2, fbgt_else.23604
+	fblt	%f23, %f1, fbgt_else.23606
+	fsub	%f0, %f23, %f1
+	flw	%f16, 496(%zero)
+	fdiv	%f1, %f1, %f16
+	jal	reduction_2pi_sub2.2629
+	fmov	%f23, %f0
+	j	fbgt_cont.23605
+fbgt_else.23606:
+	flw	%f0, 496(%zero)
+	fdiv	%f1, %f1, %f0
+	fmov	%f0, %f23
+	jal	reduction_2pi_sub2.2629
+	fmov	%f23, %f0
+fbgt_cont.23607:
+	j	fbgt_cont.23605
+fbgt_else.23604:
+fbgt_cont.23605:
+	fblt	%f23, %f18, fbgt_else.23608
+	beqi	%a1, 0, bnei_else.23610
+	add	%a1, %zero, %zero
+	j	fbgt_cont.23609
+bnei_else.23610:
+	add	%a1, %zero, %k1
+bnei_cont.23611:
+	j	fbgt_cont.23609
+fbgt_else.23608:
+fbgt_cont.23609:
+	fblt	%f23, %f18, fbgt_else.23612
+	fsub	%f23, %f23, %f18
+	j	fbgt_cont.23613
+fbgt_else.23612:
+fbgt_cont.23613:
+	fblt	%f23, %f21, fbgt_else.23614
+	fsub	%f23, %f18, %f23
+	j	fbgt_cont.23615
+fbgt_else.23614:
+fbgt_cont.23615:
+	fblt	%f22, %f23, fbgt_else.23616
+	fmul	%f18, %f23, %f23
+	fmul	%f16, %f18, %f18
+	flw	%f0, 477(%zero)
+	fmul	%f0, %f0, %f23
+	fmul	%f0, %f0, %f18
+	fsub	%f1, %f23, %f0
+	flw	%f0, 476(%zero)
+	fmul	%f0, %f0, %f23
+	fmul	%f0, %f0, %f16
+	fadd	%f1, %f1, %f0
+	flw	%f0, 475(%zero)
+	fmul	%f0, %f0, %f23
+	fmul	%f0, %f0, %f18
+	fmul	%f0, %f0, %f16
+	fsub	%f0, %f1, %f0
+	j	fbgt_cont.23617
+fbgt_else.23616:
+	fsub	%f0, %f21, %f23
+	fmul	%f18, %f0, %f0
+	fmul	%f16, %f18, %f18
+	flw	%f0, 473(%zero)
+	fmul	%f0, %f0, %f18
+	fsub	%f1, %f30, %f0
+	flw	%f0, 472(%zero)
+	fmul	%f0, %f0, %f16
+	fadd	%f1, %f1, %f0
+	flw	%f0, 471(%zero)
+	fmul	%f0, %f0, %f18
+	fmul	%f0, %f0, %f16
+	fsub	%f0, %f1, %f0
+fbgt_cont.23617:
+	beqi	%a1, 0, bnei_else.23618
+	j	bnei_cont.23619
+bnei_else.23618:
+	fneg	%f0, %f0
+bnei_cont.23619:
+	fmul	%f1, %f17, %f0
+	flw	%f16, 460(%zero)
+	fmul	%f1, %f1, %f16
+	fsw	%f1, 171(%zero)
+	flw	%f1, 459(%zero)
+	fmul	%f1, %f20, %f1
+	fsw	%f1, 172(%zero)
+	fmul	%f1, %f17, %f19
+	fmul	%f1, %f1, %f16
+	fsw	%f1, 173(%zero)
+	fsw	%f19, 165(%zero)
+	fsw	%fzero, 166(%zero)
+	fneg	%f1, %f0
+	fsw	%f1, 167(%zero)
+	fneg	%f1, %f20
+	fmul	%f0, %f1, %f0
+	fsw	%f0, 168(%zero)
+	fneg	%f0, %f17
+	fsw	%f0, 169(%zero)
+	fneg	%f0, %f20
+	fmul	%f0, %f0, %f19
+	fsw	%f0, 170(%zero)
+	flw	%f1, 72(%zero)
+	flw	%f0, 171(%zero)
+	fsub	%f0, %f1, %f0
+	fsw	%f0, 75(%zero)
+	flw	%f1, 73(%zero)
+	flw	%f0, 172(%zero)
+	fsub	%f0, %f1, %f0
+	fsw	%f0, 76(%zero)
+	flw	%f1, 74(%zero)
+	flw	%f0, 173(%zero)
+	fsub	%f0, %f1, %f0
+	add	%ra, %zero, %a0
+	fsw	%f0, 77(%zero)
+	jr	%ra
+rotate_quadratic_matrix.2779:
+	add	%a0, %zero, %ra
+	flw	%f18, 0(%v1)
+	flw	%f19, 495(%zero)
+	fabs	%f17, %f18
+	flw	%f2, 494(%zero)
+	fblt	%f17, %f2, fbgt_else.24038
+	flw	%f1, 493(%zero)
+	fblt	%f17, %f1, fbgt_cont.24039
+	flw	%f1, 492(%zero)
+	fblt	%f17, %f1, fbgt_cont.24039
+	flw	%f1, 491(%zero)
+	fblt	%f17, %f1, fbgt_cont.24039
+	flw	%f1, 490(%zero)
+	fblt	%f17, %f1, fbgt_cont.24039
+	flw	%f1, 489(%zero)
+	fblt	%f17, %f1, fbgt_cont.24039
+	flw	%f1, 488(%zero)
+	fblt	%f17, %f1, fbgt_cont.24039
+	flw	%f1, 487(%zero)
+	fblt	%f17, %f1, fbgt_cont.24039
+	flw	%f1, 486(%zero)
+	fblt	%f17, %f1, fbgt_cont.24039
+	flw	%f1, 485(%zero)
+	fblt	%f17, %f1, fbgt_cont.24039
+	flw	%f1, 484(%zero)
+	fblt	%f17, %f1, fbgt_cont.24039
+	flw	%f1, 483(%zero)
+	fblt	%f17, %f1, fbgt_cont.24039
+	flw	%f1, 482(%zero)
+	fblt	%f17, %f1, fbgt_cont.24039
+	flw	%f1, 481(%zero)
+	fmov	%f0, %f17
+	jal	reduction_2pi_sub1.2626
+	fmov	%f1, %f0
+	j	fbgt_cont.24039
+fbgt_else.24062:
+fbgt_cont.24063:
+	j	fbgt_cont.24039
+fbgt_else.24060:
+fbgt_cont.24061:
+	j	fbgt_cont.24039
+fbgt_else.24058:
+fbgt_cont.24059:
+	j	fbgt_cont.24039
+fbgt_else.24056:
+fbgt_cont.24057:
+	j	fbgt_cont.24039
+fbgt_else.24054:
+fbgt_cont.24055:
+	j	fbgt_cont.24039
+fbgt_else.24052:
+fbgt_cont.24053:
+	j	fbgt_cont.24039
+fbgt_else.24050:
+fbgt_cont.24051:
+	j	fbgt_cont.24039
+fbgt_else.24048:
+fbgt_cont.24049:
+	j	fbgt_cont.24039
+fbgt_else.24046:
+fbgt_cont.24047:
+	j	fbgt_cont.24039
+fbgt_else.24044:
+fbgt_cont.24045:
+	j	fbgt_cont.24039
+fbgt_else.24042:
+fbgt_cont.24043:
+	j	fbgt_cont.24039
+fbgt_else.24040:
+fbgt_cont.24041:
+	j	fbgt_cont.24039
+fbgt_else.24038:
+	fmov	%f1, %f2
+fbgt_cont.24039:
+	fblt	%f17, %f2, fbgt_else.24064
+	fblt	%f17, %f1, fbgt_else.24066
+	fsub	%f0, %f17, %f1
+	flw	%f16, 496(%zero)
+	fdiv	%f1, %f1, %f16
+	jal	reduction_2pi_sub2.2629
+	fmov	%f17, %f0
+	j	fbgt_cont.24065
+fbgt_else.24066:
+	flw	%f0, 496(%zero)
+	fdiv	%f1, %f1, %f0
+	fmov	%f0, %f17
+	jal	reduction_2pi_sub2.2629
+	fmov	%f17, %f0
+fbgt_cont.24067:
+	j	fbgt_cont.24065
+fbgt_else.24064:
+fbgt_cont.24065:
+	fblt	%f17, %f19, fbgt_else.24068
+	add	%a1, %zero, %zero
+	j	fbgt_cont.24069
+fbgt_else.24068:
+	add	%a1, %zero, %k1
+fbgt_cont.24069:
+	fblt	%f17, %f19, fbgt_else.24070
+	fsub	%f17, %f17, %f19
+	j	fbgt_cont.24071
+fbgt_else.24070:
+fbgt_cont.24071:
+	flw	%f20, 479(%zero)
+	fblt	%f17, %f20, fbgt_else.24072
+	beqi	%a1, 0, bnei_else.24074
+	add	%a1, %zero, %zero
+	j	fbgt_cont.24073
+bnei_else.24074:
+	add	%a1, %zero, %k1
+bnei_cont.24075:
+	j	fbgt_cont.24073
+fbgt_else.24072:
+fbgt_cont.24073:
+	fblt	%f17, %f20, fbgt_else.24076
+	fsub	%f17, %f19, %f17
+	j	fbgt_cont.24077
+fbgt_else.24076:
+fbgt_cont.24077:
+	flw	%f21, 478(%zero)
+	fblt	%f21, %f17, fbgt_else.24078
+	fmul	%f17, %f17, %f17
+	fmul	%f16, %f17, %f17
+	flw	%f0, 473(%zero)
+	fmul	%f0, %f0, %f17
+	fsub	%f1, %f30, %f0
+	flw	%f0, 472(%zero)
+	fmul	%f0, %f0, %f16
+	fadd	%f1, %f1, %f0
+	flw	%f0, 471(%zero)
+	fmul	%f0, %f0, %f17
+	fmul	%f0, %f0, %f16
+	fsub	%f17, %f1, %f0
+	j	fbgt_cont.24079
+fbgt_else.24078:
+	fsub	%f22, %f20, %f17
+	fmul	%f16, %f22, %f22
+	fmul	%f17, %f16, %f16
+	flw	%f0, 477(%zero)
+	fmul	%f0, %f0, %f22
+	fmul	%f0, %f0, %f16
+	fsub	%f1, %f22, %f0
+	flw	%f0, 476(%zero)
+	fmul	%f0, %f0, %f22
+	fmul	%f0, %f0, %f17
+	fadd	%f1, %f1, %f0
+	flw	%f0, 475(%zero)
+	fmul	%f0, %f0, %f22
+	fmul	%f0, %f0, %f16
+	fmul	%f0, %f0, %f17
+	fsub	%f17, %f1, %f0
+fbgt_cont.24079:
+	beqi	%a1, 0, bnei_else.24080
+	j	bnei_cont.24081
+bnei_else.24080:
+	fneg	%f17, %f17
+bnei_cont.24081:
+	fblt	%f18, %fzero, fbgt_else.24082
+	add	%a1, %zero, %k1
+	j	fbgt_cont.24083
+fbgt_else.24082:
+	add	%a1, %zero, %zero
+fbgt_cont.24083:
+	fabs	%f18, %f18
+	fblt	%f18, %f2, fbgt_else.24084
+	flw	%f1, 493(%zero)
+	fblt	%f18, %f1, fbgt_cont.24085
+	flw	%f1, 492(%zero)
+	fblt	%f18, %f1, fbgt_cont.24085
+	flw	%f1, 491(%zero)
+	fblt	%f18, %f1, fbgt_cont.24085
+	flw	%f1, 490(%zero)
+	fblt	%f18, %f1, fbgt_cont.24085
+	flw	%f1, 489(%zero)
+	fblt	%f18, %f1, fbgt_cont.24085
+	flw	%f1, 488(%zero)
+	fblt	%f18, %f1, fbgt_cont.24085
+	flw	%f1, 487(%zero)
+	fblt	%f18, %f1, fbgt_cont.24085
+	flw	%f1, 486(%zero)
+	fblt	%f18, %f1, fbgt_cont.24085
+	flw	%f1, 485(%zero)
+	fblt	%f18, %f1, fbgt_cont.24085
+	flw	%f1, 484(%zero)
+	fblt	%f18, %f1, fbgt_cont.24085
+	flw	%f1, 483(%zero)
+	fblt	%f18, %f1, fbgt_cont.24085
+	flw	%f1, 482(%zero)
+	fblt	%f18, %f1, fbgt_cont.24085
+	flw	%f1, 481(%zero)
 	fmov	%f0, %f18
 	jal	reduction_2pi_sub1.2626
 	fmov	%f1, %f0
-	j	fbgt_cont.34025
-fbgt_else.34048:
-fbgt_cont.34049:
-	j	fbgt_cont.34025
-fbgt_else.34046:
-fbgt_cont.34047:
-	j	fbgt_cont.34025
-fbgt_else.34044:
-fbgt_cont.34045:
-	j	fbgt_cont.34025
-fbgt_else.34042:
-fbgt_cont.34043:
-	j	fbgt_cont.34025
-fbgt_else.34040:
-fbgt_cont.34041:
-	j	fbgt_cont.34025
-fbgt_else.34038:
-fbgt_cont.34039:
-	j	fbgt_cont.34025
-fbgt_else.34036:
-fbgt_cont.34037:
-	j	fbgt_cont.34025
-fbgt_else.34034:
-fbgt_cont.34035:
-	j	fbgt_cont.34025
-fbgt_else.34032:
-fbgt_cont.34033:
-	j	fbgt_cont.34025
-fbgt_else.34030:
-fbgt_cont.34031:
-	j	fbgt_cont.34025
-fbgt_else.34028:
-fbgt_cont.34029:
-	j	fbgt_cont.34025
-fbgt_else.34026:
-fbgt_cont.34027:
-	j	fbgt_cont.34025
-fbgt_else.34024:
+	j	fbgt_cont.24085
+fbgt_else.24108:
+fbgt_cont.24109:
+	j	fbgt_cont.24085
+fbgt_else.24106:
+fbgt_cont.24107:
+	j	fbgt_cont.24085
+fbgt_else.24104:
+fbgt_cont.24105:
+	j	fbgt_cont.24085
+fbgt_else.24102:
+fbgt_cont.24103:
+	j	fbgt_cont.24085
+fbgt_else.24100:
+fbgt_cont.24101:
+	j	fbgt_cont.24085
+fbgt_else.24098:
+fbgt_cont.24099:
+	j	fbgt_cont.24085
+fbgt_else.24096:
+fbgt_cont.24097:
+	j	fbgt_cont.24085
+fbgt_else.24094:
+fbgt_cont.24095:
+	j	fbgt_cont.24085
+fbgt_else.24092:
+fbgt_cont.24093:
+	j	fbgt_cont.24085
+fbgt_else.24090:
+fbgt_cont.24091:
+	j	fbgt_cont.24085
+fbgt_else.24088:
+fbgt_cont.24089:
+	j	fbgt_cont.24085
+fbgt_else.24086:
+fbgt_cont.24087:
+	j	fbgt_cont.24085
+fbgt_else.24084:
 	fmov	%f1, %f2
-fbgt_cont.34025:
-	fblt	%f18, %f2, fbgt_else.34050
-	fblt	%f18, %f1, fbgt_else.34052
+fbgt_cont.24085:
+	fblt	%f18, %f2, fbgt_else.24110
+	fblt	%f18, %f1, fbgt_else.24112
 	fsub	%f0, %f18, %f1
-	flw	%f16, 495(%zero)
+	flw	%f16, 496(%zero)
 	fdiv	%f1, %f1, %f16
 	jal	reduction_2pi_sub2.2629
 	fmov	%f18, %f0
-	j	fbgt_cont.34051
-fbgt_else.34052:
-	flw	%f0, 495(%zero)
+	j	fbgt_cont.24111
+fbgt_else.24112:
+	flw	%f0, 496(%zero)
 	fdiv	%f1, %f1, %f0
 	fmov	%f0, %f18
 	jal	reduction_2pi_sub2.2629
 	fmov	%f18, %f0
-fbgt_cont.34053:
-	j	fbgt_cont.34051
-fbgt_else.34050:
-fbgt_cont.34051:
-	fblt	%f18, %f19, fbgt_else.34054
-	beqi	%a1, 0, bnei_else.34056
+fbgt_cont.24113:
+	j	fbgt_cont.24111
+fbgt_else.24110:
+fbgt_cont.24111:
+	fblt	%f18, %f19, fbgt_else.24114
+	beqi	%a1, 0, bnei_else.24116
 	add	%a1, %zero, %zero
-	j	fbgt_cont.34055
-bnei_else.34056:
+	j	fbgt_cont.24115
+bnei_else.24116:
 	add	%a1, %zero, %k1
-bnei_cont.34057:
-	j	fbgt_cont.34055
-fbgt_else.34054:
-fbgt_cont.34055:
-	fblt	%f18, %f19, fbgt_else.34058
+bnei_cont.24117:
+	j	fbgt_cont.24115
+fbgt_else.24114:
+fbgt_cont.24115:
+	fblt	%f18, %f19, fbgt_else.24118
 	fsub	%f18, %f18, %f19
-	j	fbgt_cont.34059
-fbgt_else.34058:
-fbgt_cont.34059:
-	fblt	%f18, %f20, fbgt_else.34060
+	j	fbgt_cont.24119
+fbgt_else.24118:
+fbgt_cont.24119:
+	fblt	%f18, %f20, fbgt_else.24120
 	fsub	%f18, %f19, %f18
-	j	fbgt_cont.34061
-fbgt_else.34060:
-fbgt_cont.34061:
-	fblt	%f21, %f18, fbgt_else.34062
+	j	fbgt_cont.24121
+fbgt_else.24120:
+fbgt_cont.24121:
+	fblt	%f21, %f18, fbgt_else.24122
 	fmul	%f22, %f18, %f18
 	fmul	%f16, %f22, %f22
 	flw	%f0, 477(%zero)
@@ -805,8 +2591,8 @@ fbgt_cont.34061:
 	fmul	%f0, %f0, %f22
 	fmul	%f0, %f0, %f16
 	fsub	%f18, %f1, %f0
-	j	fbgt_cont.34063
-fbgt_else.34062:
+	j	fbgt_cont.24123
+fbgt_else.24122:
 	fsub	%f0, %f20, %f18
 	fmul	%f18, %f0, %f0
 	fmul	%f16, %f18, %f18
@@ -820,128 +2606,128 @@ fbgt_else.34062:
 	fmul	%f0, %f0, %f18
 	fmul	%f0, %f0, %f16
 	fsub	%f18, %f1, %f0
-fbgt_cont.34063:
-	beqi	%a1, 0, bnei_else.34064
-	j	bnei_cont.34065
-bnei_else.34064:
+fbgt_cont.24123:
+	beqi	%a1, 0, bnei_else.24124
+	j	bnei_cont.24125
+bnei_else.24124:
 	fneg	%f18, %f18
-bnei_cont.34065:
+bnei_cont.24125:
 	flw	%f23, 1(%v1)
 	fabs	%f22, %f23
-	fblt	%f22, %f2, fbgt_else.34066
+	fblt	%f22, %f2, fbgt_else.24126
+	flw	%f1, 493(%zero)
+	fblt	%f22, %f1, fbgt_cont.24127
 	flw	%f1, 492(%zero)
-	fblt	%f22, %f1, fbgt_cont.34067
+	fblt	%f22, %f1, fbgt_cont.24127
 	flw	%f1, 491(%zero)
-	fblt	%f22, %f1, fbgt_cont.34067
+	fblt	%f22, %f1, fbgt_cont.24127
 	flw	%f1, 490(%zero)
-	fblt	%f22, %f1, fbgt_cont.34067
+	fblt	%f22, %f1, fbgt_cont.24127
 	flw	%f1, 489(%zero)
-	fblt	%f22, %f1, fbgt_cont.34067
+	fblt	%f22, %f1, fbgt_cont.24127
 	flw	%f1, 488(%zero)
-	fblt	%f22, %f1, fbgt_cont.34067
+	fblt	%f22, %f1, fbgt_cont.24127
 	flw	%f1, 487(%zero)
-	fblt	%f22, %f1, fbgt_cont.34067
+	fblt	%f22, %f1, fbgt_cont.24127
 	flw	%f1, 486(%zero)
-	fblt	%f22, %f1, fbgt_cont.34067
+	fblt	%f22, %f1, fbgt_cont.24127
 	flw	%f1, 485(%zero)
-	fblt	%f22, %f1, fbgt_cont.34067
+	fblt	%f22, %f1, fbgt_cont.24127
 	flw	%f1, 484(%zero)
-	fblt	%f22, %f1, fbgt_cont.34067
+	fblt	%f22, %f1, fbgt_cont.24127
 	flw	%f1, 483(%zero)
-	fblt	%f22, %f1, fbgt_cont.34067
+	fblt	%f22, %f1, fbgt_cont.24127
 	flw	%f1, 482(%zero)
-	fblt	%f22, %f1, fbgt_cont.34067
+	fblt	%f22, %f1, fbgt_cont.24127
 	flw	%f1, 481(%zero)
-	fblt	%f22, %f1, fbgt_cont.34067
-	flw	%f1, 480(%zero)
 	fmov	%f0, %f22
 	jal	reduction_2pi_sub1.2626
 	fmov	%f1, %f0
-	j	fbgt_cont.34067
-fbgt_else.34090:
-fbgt_cont.34091:
-	j	fbgt_cont.34067
-fbgt_else.34088:
-fbgt_cont.34089:
-	j	fbgt_cont.34067
-fbgt_else.34086:
-fbgt_cont.34087:
-	j	fbgt_cont.34067
-fbgt_else.34084:
-fbgt_cont.34085:
-	j	fbgt_cont.34067
-fbgt_else.34082:
-fbgt_cont.34083:
-	j	fbgt_cont.34067
-fbgt_else.34080:
-fbgt_cont.34081:
-	j	fbgt_cont.34067
-fbgt_else.34078:
-fbgt_cont.34079:
-	j	fbgt_cont.34067
-fbgt_else.34076:
-fbgt_cont.34077:
-	j	fbgt_cont.34067
-fbgt_else.34074:
-fbgt_cont.34075:
-	j	fbgt_cont.34067
-fbgt_else.34072:
-fbgt_cont.34073:
-	j	fbgt_cont.34067
-fbgt_else.34070:
-fbgt_cont.34071:
-	j	fbgt_cont.34067
-fbgt_else.34068:
-fbgt_cont.34069:
-	j	fbgt_cont.34067
-fbgt_else.34066:
+	j	fbgt_cont.24127
+fbgt_else.24150:
+fbgt_cont.24151:
+	j	fbgt_cont.24127
+fbgt_else.24148:
+fbgt_cont.24149:
+	j	fbgt_cont.24127
+fbgt_else.24146:
+fbgt_cont.24147:
+	j	fbgt_cont.24127
+fbgt_else.24144:
+fbgt_cont.24145:
+	j	fbgt_cont.24127
+fbgt_else.24142:
+fbgt_cont.24143:
+	j	fbgt_cont.24127
+fbgt_else.24140:
+fbgt_cont.24141:
+	j	fbgt_cont.24127
+fbgt_else.24138:
+fbgt_cont.24139:
+	j	fbgt_cont.24127
+fbgt_else.24136:
+fbgt_cont.24137:
+	j	fbgt_cont.24127
+fbgt_else.24134:
+fbgt_cont.24135:
+	j	fbgt_cont.24127
+fbgt_else.24132:
+fbgt_cont.24133:
+	j	fbgt_cont.24127
+fbgt_else.24130:
+fbgt_cont.24131:
+	j	fbgt_cont.24127
+fbgt_else.24128:
+fbgt_cont.24129:
+	j	fbgt_cont.24127
+fbgt_else.24126:
 	fmov	%f1, %f2
-fbgt_cont.34067:
-	fblt	%f22, %f2, fbgt_else.34092
-	fblt	%f22, %f1, fbgt_else.34094
+fbgt_cont.24127:
+	fblt	%f22, %f2, fbgt_else.24152
+	fblt	%f22, %f1, fbgt_else.24154
 	fsub	%f0, %f22, %f1
-	flw	%f16, 495(%zero)
+	flw	%f16, 496(%zero)
 	fdiv	%f1, %f1, %f16
 	jal	reduction_2pi_sub2.2629
 	fmov	%f22, %f0
-	j	fbgt_cont.34093
-fbgt_else.34094:
-	flw	%f0, 495(%zero)
+	j	fbgt_cont.24153
+fbgt_else.24154:
+	flw	%f0, 496(%zero)
 	fdiv	%f1, %f1, %f0
 	fmov	%f0, %f22
 	jal	reduction_2pi_sub2.2629
 	fmov	%f22, %f0
-fbgt_cont.34095:
-	j	fbgt_cont.34093
-fbgt_else.34092:
-fbgt_cont.34093:
-	fblt	%f22, %f19, fbgt_else.34096
+fbgt_cont.24155:
+	j	fbgt_cont.24153
+fbgt_else.24152:
+fbgt_cont.24153:
+	fblt	%f22, %f19, fbgt_else.24156
 	add	%a1, %zero, %zero
-	j	fbgt_cont.34097
-fbgt_else.34096:
+	j	fbgt_cont.24157
+fbgt_else.24156:
 	add	%a1, %zero, %k1
-fbgt_cont.34097:
-	fblt	%f22, %f19, fbgt_else.34098
+fbgt_cont.24157:
+	fblt	%f22, %f19, fbgt_else.24158
 	fsub	%f22, %f22, %f19
-	j	fbgt_cont.34099
-fbgt_else.34098:
-fbgt_cont.34099:
-	fblt	%f22, %f20, fbgt_else.34100
-	beqi	%a1, 0, bnei_else.34102
+	j	fbgt_cont.24159
+fbgt_else.24158:
+fbgt_cont.24159:
+	fblt	%f22, %f20, fbgt_else.24160
+	beqi	%a1, 0, bnei_else.24162
 	add	%a1, %zero, %zero
-	j	fbgt_cont.34101
-bnei_else.34102:
+	j	fbgt_cont.24161
+bnei_else.24162:
 	add	%a1, %zero, %k1
-bnei_cont.34103:
-	j	fbgt_cont.34101
-fbgt_else.34100:
-fbgt_cont.34101:
-	fblt	%f22, %f20, fbgt_else.34104
+bnei_cont.24163:
+	j	fbgt_cont.24161
+fbgt_else.24160:
+fbgt_cont.24161:
+	fblt	%f22, %f20, fbgt_else.24164
 	fsub	%f22, %f19, %f22
-	j	fbgt_cont.34105
-fbgt_else.34104:
-fbgt_cont.34105:
-	fblt	%f21, %f22, fbgt_else.34106
+	j	fbgt_cont.24165
+fbgt_else.24164:
+fbgt_cont.24165:
+	fblt	%f21, %f22, fbgt_else.24166
 	fmul	%f22, %f22, %f22
 	fmul	%f16, %f22, %f22
 	flw	%f0, 473(%zero)
@@ -954,145 +2740,145 @@ fbgt_cont.34105:
 	fmul	%f0, %f0, %f22
 	fmul	%f0, %f0, %f16
 	fsub	%f22, %f1, %f0
-	j	fbgt_cont.34107
-fbgt_else.34106:
+	j	fbgt_cont.24167
+fbgt_else.24166:
 	fsub	%f24, %f20, %f22
-	fmul	%f16, %f24, %f24
-	fmul	%f22, %f16, %f16
+	fmul	%f22, %f24, %f24
+	fmul	%f16, %f22, %f22
 	flw	%f0, 477(%zero)
 	fmul	%f0, %f0, %f24
-	fmul	%f0, %f0, %f16
+	fmul	%f0, %f0, %f22
 	fsub	%f1, %f24, %f0
 	flw	%f0, 476(%zero)
 	fmul	%f0, %f0, %f24
-	fmul	%f0, %f0, %f22
+	fmul	%f0, %f0, %f16
 	fadd	%f1, %f1, %f0
 	flw	%f0, 475(%zero)
 	fmul	%f0, %f0, %f24
-	fmul	%f0, %f0, %f16
 	fmul	%f0, %f0, %f22
+	fmul	%f0, %f0, %f16
 	fsub	%f22, %f1, %f0
-fbgt_cont.34107:
-	beqi	%a1, 0, bnei_else.34108
-	j	bnei_cont.34109
-bnei_else.34108:
+fbgt_cont.24167:
+	beqi	%a1, 0, bnei_else.24168
+	j	bnei_cont.24169
+bnei_else.24168:
 	fneg	%f22, %f22
-bnei_cont.34109:
-	fblt	%f23, %fzero, fbgt_else.34110
+bnei_cont.24169:
+	fblt	%f23, %fzero, fbgt_else.24170
 	add	%a1, %zero, %k1
-	j	fbgt_cont.34111
-fbgt_else.34110:
+	j	fbgt_cont.24171
+fbgt_else.24170:
 	add	%a1, %zero, %zero
-fbgt_cont.34111:
+fbgt_cont.24171:
 	fabs	%f23, %f23
-	fblt	%f23, %f2, fbgt_else.34112
+	fblt	%f23, %f2, fbgt_else.24172
+	flw	%f1, 493(%zero)
+	fblt	%f23, %f1, fbgt_cont.24173
 	flw	%f1, 492(%zero)
-	fblt	%f23, %f1, fbgt_cont.34113
+	fblt	%f23, %f1, fbgt_cont.24173
 	flw	%f1, 491(%zero)
-	fblt	%f23, %f1, fbgt_cont.34113
+	fblt	%f23, %f1, fbgt_cont.24173
 	flw	%f1, 490(%zero)
-	fblt	%f23, %f1, fbgt_cont.34113
+	fblt	%f23, %f1, fbgt_cont.24173
 	flw	%f1, 489(%zero)
-	fblt	%f23, %f1, fbgt_cont.34113
+	fblt	%f23, %f1, fbgt_cont.24173
 	flw	%f1, 488(%zero)
-	fblt	%f23, %f1, fbgt_cont.34113
+	fblt	%f23, %f1, fbgt_cont.24173
 	flw	%f1, 487(%zero)
-	fblt	%f23, %f1, fbgt_cont.34113
+	fblt	%f23, %f1, fbgt_cont.24173
 	flw	%f1, 486(%zero)
-	fblt	%f23, %f1, fbgt_cont.34113
+	fblt	%f23, %f1, fbgt_cont.24173
 	flw	%f1, 485(%zero)
-	fblt	%f23, %f1, fbgt_cont.34113
+	fblt	%f23, %f1, fbgt_cont.24173
 	flw	%f1, 484(%zero)
-	fblt	%f23, %f1, fbgt_cont.34113
+	fblt	%f23, %f1, fbgt_cont.24173
 	flw	%f1, 483(%zero)
-	fblt	%f23, %f1, fbgt_cont.34113
+	fblt	%f23, %f1, fbgt_cont.24173
 	flw	%f1, 482(%zero)
-	fblt	%f23, %f1, fbgt_cont.34113
+	fblt	%f23, %f1, fbgt_cont.24173
 	flw	%f1, 481(%zero)
-	fblt	%f23, %f1, fbgt_cont.34113
-	flw	%f1, 480(%zero)
 	fmov	%f0, %f23
 	jal	reduction_2pi_sub1.2626
 	fmov	%f1, %f0
-	j	fbgt_cont.34113
-fbgt_else.34136:
-fbgt_cont.34137:
-	j	fbgt_cont.34113
-fbgt_else.34134:
-fbgt_cont.34135:
-	j	fbgt_cont.34113
-fbgt_else.34132:
-fbgt_cont.34133:
-	j	fbgt_cont.34113
-fbgt_else.34130:
-fbgt_cont.34131:
-	j	fbgt_cont.34113
-fbgt_else.34128:
-fbgt_cont.34129:
-	j	fbgt_cont.34113
-fbgt_else.34126:
-fbgt_cont.34127:
-	j	fbgt_cont.34113
-fbgt_else.34124:
-fbgt_cont.34125:
-	j	fbgt_cont.34113
-fbgt_else.34122:
-fbgt_cont.34123:
-	j	fbgt_cont.34113
-fbgt_else.34120:
-fbgt_cont.34121:
-	j	fbgt_cont.34113
-fbgt_else.34118:
-fbgt_cont.34119:
-	j	fbgt_cont.34113
-fbgt_else.34116:
-fbgt_cont.34117:
-	j	fbgt_cont.34113
-fbgt_else.34114:
-fbgt_cont.34115:
-	j	fbgt_cont.34113
-fbgt_else.34112:
+	j	fbgt_cont.24173
+fbgt_else.24196:
+fbgt_cont.24197:
+	j	fbgt_cont.24173
+fbgt_else.24194:
+fbgt_cont.24195:
+	j	fbgt_cont.24173
+fbgt_else.24192:
+fbgt_cont.24193:
+	j	fbgt_cont.24173
+fbgt_else.24190:
+fbgt_cont.24191:
+	j	fbgt_cont.24173
+fbgt_else.24188:
+fbgt_cont.24189:
+	j	fbgt_cont.24173
+fbgt_else.24186:
+fbgt_cont.24187:
+	j	fbgt_cont.24173
+fbgt_else.24184:
+fbgt_cont.24185:
+	j	fbgt_cont.24173
+fbgt_else.24182:
+fbgt_cont.24183:
+	j	fbgt_cont.24173
+fbgt_else.24180:
+fbgt_cont.24181:
+	j	fbgt_cont.24173
+fbgt_else.24178:
+fbgt_cont.24179:
+	j	fbgt_cont.24173
+fbgt_else.24176:
+fbgt_cont.24177:
+	j	fbgt_cont.24173
+fbgt_else.24174:
+fbgt_cont.24175:
+	j	fbgt_cont.24173
+fbgt_else.24172:
 	fmov	%f1, %f2
-fbgt_cont.34113:
-	fblt	%f23, %f2, fbgt_else.34138
-	fblt	%f23, %f1, fbgt_else.34140
+fbgt_cont.24173:
+	fblt	%f23, %f2, fbgt_else.24198
+	fblt	%f23, %f1, fbgt_else.24200
 	fsub	%f0, %f23, %f1
-	flw	%f16, 495(%zero)
+	flw	%f16, 496(%zero)
 	fdiv	%f1, %f1, %f16
 	jal	reduction_2pi_sub2.2629
 	fmov	%f23, %f0
-	j	fbgt_cont.34139
-fbgt_else.34140:
-	flw	%f0, 495(%zero)
+	j	fbgt_cont.24199
+fbgt_else.24200:
+	flw	%f0, 496(%zero)
 	fdiv	%f1, %f1, %f0
 	fmov	%f0, %f23
 	jal	reduction_2pi_sub2.2629
 	fmov	%f23, %f0
-fbgt_cont.34141:
-	j	fbgt_cont.34139
-fbgt_else.34138:
-fbgt_cont.34139:
-	fblt	%f23, %f19, fbgt_else.34142
-	beqi	%a1, 0, bnei_else.34144
+fbgt_cont.24201:
+	j	fbgt_cont.24199
+fbgt_else.24198:
+fbgt_cont.24199:
+	fblt	%f23, %f19, fbgt_else.24202
+	beqi	%a1, 0, bnei_else.24204
 	add	%a1, %zero, %zero
-	j	fbgt_cont.34143
-bnei_else.34144:
+	j	fbgt_cont.24203
+bnei_else.24204:
 	add	%a1, %zero, %k1
-bnei_cont.34145:
-	j	fbgt_cont.34143
-fbgt_else.34142:
-fbgt_cont.34143:
-	fblt	%f23, %f19, fbgt_else.34146
+bnei_cont.24205:
+	j	fbgt_cont.24203
+fbgt_else.24202:
+fbgt_cont.24203:
+	fblt	%f23, %f19, fbgt_else.24206
 	fsub	%f23, %f23, %f19
-	j	fbgt_cont.34147
-fbgt_else.34146:
-fbgt_cont.34147:
-	fblt	%f23, %f20, fbgt_else.34148
+	j	fbgt_cont.24207
+fbgt_else.24206:
+fbgt_cont.24207:
+	fblt	%f23, %f20, fbgt_else.24208
 	fsub	%f23, %f19, %f23
-	j	fbgt_cont.34149
-fbgt_else.34148:
-fbgt_cont.34149:
-	fblt	%f21, %f23, fbgt_else.34150
+	j	fbgt_cont.24209
+fbgt_else.24208:
+fbgt_cont.24209:
+	fblt	%f21, %f23, fbgt_else.24210
 	fmul	%f24, %f23, %f23
 	fmul	%f16, %f24, %f24
 	flw	%f0, 477(%zero)
@@ -1108,8 +2894,8 @@ fbgt_cont.34149:
 	fmul	%f0, %f0, %f24
 	fmul	%f0, %f0, %f16
 	fsub	%f23, %f1, %f0
-	j	fbgt_cont.34151
-fbgt_else.34150:
+	j	fbgt_cont.24211
+fbgt_else.24210:
 	fsub	%f0, %f20, %f23
 	fmul	%f23, %f0, %f0
 	fmul	%f16, %f23, %f23
@@ -1123,128 +2909,128 @@ fbgt_else.34150:
 	fmul	%f0, %f0, %f23
 	fmul	%f0, %f0, %f16
 	fsub	%f23, %f1, %f0
-fbgt_cont.34151:
-	beqi	%a1, 0, bnei_else.34152
-	j	bnei_cont.34153
-bnei_else.34152:
+fbgt_cont.24211:
+	beqi	%a1, 0, bnei_else.24212
+	j	bnei_cont.24213
+bnei_else.24212:
 	fneg	%f23, %f23
-bnei_cont.34153:
+bnei_cont.24213:
 	flw	%f25, 2(%v1)
 	fabs	%f24, %f25
-	fblt	%f24, %f2, fbgt_else.34154
+	fblt	%f24, %f2, fbgt_else.24214
+	flw	%f1, 493(%zero)
+	fblt	%f24, %f1, fbgt_cont.24215
 	flw	%f1, 492(%zero)
-	fblt	%f24, %f1, fbgt_cont.34155
+	fblt	%f24, %f1, fbgt_cont.24215
 	flw	%f1, 491(%zero)
-	fblt	%f24, %f1, fbgt_cont.34155
+	fblt	%f24, %f1, fbgt_cont.24215
 	flw	%f1, 490(%zero)
-	fblt	%f24, %f1, fbgt_cont.34155
+	fblt	%f24, %f1, fbgt_cont.24215
 	flw	%f1, 489(%zero)
-	fblt	%f24, %f1, fbgt_cont.34155
+	fblt	%f24, %f1, fbgt_cont.24215
 	flw	%f1, 488(%zero)
-	fblt	%f24, %f1, fbgt_cont.34155
+	fblt	%f24, %f1, fbgt_cont.24215
 	flw	%f1, 487(%zero)
-	fblt	%f24, %f1, fbgt_cont.34155
+	fblt	%f24, %f1, fbgt_cont.24215
 	flw	%f1, 486(%zero)
-	fblt	%f24, %f1, fbgt_cont.34155
+	fblt	%f24, %f1, fbgt_cont.24215
 	flw	%f1, 485(%zero)
-	fblt	%f24, %f1, fbgt_cont.34155
+	fblt	%f24, %f1, fbgt_cont.24215
 	flw	%f1, 484(%zero)
-	fblt	%f24, %f1, fbgt_cont.34155
+	fblt	%f24, %f1, fbgt_cont.24215
 	flw	%f1, 483(%zero)
-	fblt	%f24, %f1, fbgt_cont.34155
+	fblt	%f24, %f1, fbgt_cont.24215
 	flw	%f1, 482(%zero)
-	fblt	%f24, %f1, fbgt_cont.34155
+	fblt	%f24, %f1, fbgt_cont.24215
 	flw	%f1, 481(%zero)
-	fblt	%f24, %f1, fbgt_cont.34155
-	flw	%f1, 480(%zero)
 	fmov	%f0, %f24
 	jal	reduction_2pi_sub1.2626
 	fmov	%f1, %f0
-	j	fbgt_cont.34155
-fbgt_else.34178:
-fbgt_cont.34179:
-	j	fbgt_cont.34155
-fbgt_else.34176:
-fbgt_cont.34177:
-	j	fbgt_cont.34155
-fbgt_else.34174:
-fbgt_cont.34175:
-	j	fbgt_cont.34155
-fbgt_else.34172:
-fbgt_cont.34173:
-	j	fbgt_cont.34155
-fbgt_else.34170:
-fbgt_cont.34171:
-	j	fbgt_cont.34155
-fbgt_else.34168:
-fbgt_cont.34169:
-	j	fbgt_cont.34155
-fbgt_else.34166:
-fbgt_cont.34167:
-	j	fbgt_cont.34155
-fbgt_else.34164:
-fbgt_cont.34165:
-	j	fbgt_cont.34155
-fbgt_else.34162:
-fbgt_cont.34163:
-	j	fbgt_cont.34155
-fbgt_else.34160:
-fbgt_cont.34161:
-	j	fbgt_cont.34155
-fbgt_else.34158:
-fbgt_cont.34159:
-	j	fbgt_cont.34155
-fbgt_else.34156:
-fbgt_cont.34157:
-	j	fbgt_cont.34155
-fbgt_else.34154:
+	j	fbgt_cont.24215
+fbgt_else.24238:
+fbgt_cont.24239:
+	j	fbgt_cont.24215
+fbgt_else.24236:
+fbgt_cont.24237:
+	j	fbgt_cont.24215
+fbgt_else.24234:
+fbgt_cont.24235:
+	j	fbgt_cont.24215
+fbgt_else.24232:
+fbgt_cont.24233:
+	j	fbgt_cont.24215
+fbgt_else.24230:
+fbgt_cont.24231:
+	j	fbgt_cont.24215
+fbgt_else.24228:
+fbgt_cont.24229:
+	j	fbgt_cont.24215
+fbgt_else.24226:
+fbgt_cont.24227:
+	j	fbgt_cont.24215
+fbgt_else.24224:
+fbgt_cont.24225:
+	j	fbgt_cont.24215
+fbgt_else.24222:
+fbgt_cont.24223:
+	j	fbgt_cont.24215
+fbgt_else.24220:
+fbgt_cont.24221:
+	j	fbgt_cont.24215
+fbgt_else.24218:
+fbgt_cont.24219:
+	j	fbgt_cont.24215
+fbgt_else.24216:
+fbgt_cont.24217:
+	j	fbgt_cont.24215
+fbgt_else.24214:
 	fmov	%f1, %f2
-fbgt_cont.34155:
-	fblt	%f24, %f2, fbgt_else.34180
-	fblt	%f24, %f1, fbgt_else.34182
+fbgt_cont.24215:
+	fblt	%f24, %f2, fbgt_else.24240
+	fblt	%f24, %f1, fbgt_else.24242
 	fsub	%f0, %f24, %f1
-	flw	%f16, 495(%zero)
+	flw	%f16, 496(%zero)
 	fdiv	%f1, %f1, %f16
 	jal	reduction_2pi_sub2.2629
 	fmov	%f24, %f0
-	j	fbgt_cont.34181
-fbgt_else.34182:
-	flw	%f0, 495(%zero)
+	j	fbgt_cont.24241
+fbgt_else.24242:
+	flw	%f0, 496(%zero)
 	fdiv	%f1, %f1, %f0
 	fmov	%f0, %f24
 	jal	reduction_2pi_sub2.2629
 	fmov	%f24, %f0
-fbgt_cont.34183:
-	j	fbgt_cont.34181
-fbgt_else.34180:
-fbgt_cont.34181:
-	fblt	%f24, %f19, fbgt_else.34184
+fbgt_cont.24243:
+	j	fbgt_cont.24241
+fbgt_else.24240:
+fbgt_cont.24241:
+	fblt	%f24, %f19, fbgt_else.24244
 	add	%a1, %zero, %zero
-	j	fbgt_cont.34185
-fbgt_else.34184:
+	j	fbgt_cont.24245
+fbgt_else.24244:
 	add	%a1, %zero, %k1
-fbgt_cont.34185:
-	fblt	%f24, %f19, fbgt_else.34186
+fbgt_cont.24245:
+	fblt	%f24, %f19, fbgt_else.24246
 	fsub	%f24, %f24, %f19
-	j	fbgt_cont.34187
-fbgt_else.34186:
-fbgt_cont.34187:
-	fblt	%f24, %f20, fbgt_else.34188
-	beqi	%a1, 0, bnei_else.34190
+	j	fbgt_cont.24247
+fbgt_else.24246:
+fbgt_cont.24247:
+	fblt	%f24, %f20, fbgt_else.24248
+	beqi	%a1, 0, bnei_else.24250
 	add	%a1, %zero, %zero
-	j	fbgt_cont.34189
-bnei_else.34190:
+	j	fbgt_cont.24249
+bnei_else.24250:
 	add	%a1, %zero, %k1
-bnei_cont.34191:
-	j	fbgt_cont.34189
-fbgt_else.34188:
-fbgt_cont.34189:
-	fblt	%f24, %f20, fbgt_else.34192
+bnei_cont.24251:
+	j	fbgt_cont.24249
+fbgt_else.24248:
+fbgt_cont.24249:
+	fblt	%f24, %f20, fbgt_else.24252
 	fsub	%f24, %f19, %f24
-	j	fbgt_cont.34193
-fbgt_else.34192:
-fbgt_cont.34193:
-	fblt	%f21, %f24, fbgt_else.34194
+	j	fbgt_cont.24253
+fbgt_else.24252:
+fbgt_cont.24253:
+	fblt	%f21, %f24, fbgt_else.24254
 	fmul	%f24, %f24, %f24
 	fmul	%f16, %f24, %f24
 	flw	%f0, 473(%zero)
@@ -1257,8 +3043,8 @@ fbgt_cont.34193:
 	fmul	%f0, %f0, %f24
 	fmul	%f0, %f0, %f16
 	fsub	%f24, %f1, %f0
-	j	fbgt_cont.34195
-fbgt_else.34194:
+	j	fbgt_cont.24255
+fbgt_else.24254:
 	fsub	%f26, %f20, %f24
 	fmul	%f24, %f26, %f26
 	fmul	%f16, %f24, %f24
@@ -1275,127 +3061,127 @@ fbgt_else.34194:
 	fmul	%f0, %f0, %f24
 	fmul	%f0, %f0, %f16
 	fsub	%f24, %f1, %f0
-fbgt_cont.34195:
-	beqi	%a1, 0, bnei_else.34196
-	j	bnei_cont.34197
-bnei_else.34196:
+fbgt_cont.24255:
+	beqi	%a1, 0, bnei_else.24256
+	j	bnei_cont.24257
+bnei_else.24256:
 	fneg	%f24, %f24
-bnei_cont.34197:
-	fblt	%f25, %fzero, fbgt_else.34198
+bnei_cont.24257:
+	fblt	%f25, %fzero, fbgt_else.24258
 	add	%a1, %zero, %k1
-	j	fbgt_cont.34199
-fbgt_else.34198:
+	j	fbgt_cont.24259
+fbgt_else.24258:
 	add	%a1, %zero, %zero
-fbgt_cont.34199:
+fbgt_cont.24259:
 	fabs	%f25, %f25
-	fblt	%f25, %f2, fbgt_else.34200
+	fblt	%f25, %f2, fbgt_else.24260
+	flw	%f1, 493(%zero)
+	fblt	%f25, %f1, fbgt_cont.24261
 	flw	%f1, 492(%zero)
-	fblt	%f25, %f1, fbgt_cont.34201
+	fblt	%f25, %f1, fbgt_cont.24261
 	flw	%f1, 491(%zero)
-	fblt	%f25, %f1, fbgt_cont.34201
+	fblt	%f25, %f1, fbgt_cont.24261
 	flw	%f1, 490(%zero)
-	fblt	%f25, %f1, fbgt_cont.34201
+	fblt	%f25, %f1, fbgt_cont.24261
 	flw	%f1, 489(%zero)
-	fblt	%f25, %f1, fbgt_cont.34201
+	fblt	%f25, %f1, fbgt_cont.24261
 	flw	%f1, 488(%zero)
-	fblt	%f25, %f1, fbgt_cont.34201
+	fblt	%f25, %f1, fbgt_cont.24261
 	flw	%f1, 487(%zero)
-	fblt	%f25, %f1, fbgt_cont.34201
+	fblt	%f25, %f1, fbgt_cont.24261
 	flw	%f1, 486(%zero)
-	fblt	%f25, %f1, fbgt_cont.34201
+	fblt	%f25, %f1, fbgt_cont.24261
 	flw	%f1, 485(%zero)
-	fblt	%f25, %f1, fbgt_cont.34201
+	fblt	%f25, %f1, fbgt_cont.24261
 	flw	%f1, 484(%zero)
-	fblt	%f25, %f1, fbgt_cont.34201
+	fblt	%f25, %f1, fbgt_cont.24261
 	flw	%f1, 483(%zero)
-	fblt	%f25, %f1, fbgt_cont.34201
+	fblt	%f25, %f1, fbgt_cont.24261
 	flw	%f1, 482(%zero)
-	fblt	%f25, %f1, fbgt_cont.34201
+	fblt	%f25, %f1, fbgt_cont.24261
 	flw	%f1, 481(%zero)
-	fblt	%f25, %f1, fbgt_cont.34201
-	flw	%f1, 480(%zero)
 	fmov	%f0, %f25
 	jal	reduction_2pi_sub1.2626
 	fmov	%f1, %f0
-	j	fbgt_cont.34201
-fbgt_else.34224:
-fbgt_cont.34225:
-	j	fbgt_cont.34201
-fbgt_else.34222:
-fbgt_cont.34223:
-	j	fbgt_cont.34201
-fbgt_else.34220:
-fbgt_cont.34221:
-	j	fbgt_cont.34201
-fbgt_else.34218:
-fbgt_cont.34219:
-	j	fbgt_cont.34201
-fbgt_else.34216:
-fbgt_cont.34217:
-	j	fbgt_cont.34201
-fbgt_else.34214:
-fbgt_cont.34215:
-	j	fbgt_cont.34201
-fbgt_else.34212:
-fbgt_cont.34213:
-	j	fbgt_cont.34201
-fbgt_else.34210:
-fbgt_cont.34211:
-	j	fbgt_cont.34201
-fbgt_else.34208:
-fbgt_cont.34209:
-	j	fbgt_cont.34201
-fbgt_else.34206:
-fbgt_cont.34207:
-	j	fbgt_cont.34201
-fbgt_else.34204:
-fbgt_cont.34205:
-	j	fbgt_cont.34201
-fbgt_else.34202:
-fbgt_cont.34203:
-	j	fbgt_cont.34201
-fbgt_else.34200:
+	j	fbgt_cont.24261
+fbgt_else.24284:
+fbgt_cont.24285:
+	j	fbgt_cont.24261
+fbgt_else.24282:
+fbgt_cont.24283:
+	j	fbgt_cont.24261
+fbgt_else.24280:
+fbgt_cont.24281:
+	j	fbgt_cont.24261
+fbgt_else.24278:
+fbgt_cont.24279:
+	j	fbgt_cont.24261
+fbgt_else.24276:
+fbgt_cont.24277:
+	j	fbgt_cont.24261
+fbgt_else.24274:
+fbgt_cont.24275:
+	j	fbgt_cont.24261
+fbgt_else.24272:
+fbgt_cont.24273:
+	j	fbgt_cont.24261
+fbgt_else.24270:
+fbgt_cont.24271:
+	j	fbgt_cont.24261
+fbgt_else.24268:
+fbgt_cont.24269:
+	j	fbgt_cont.24261
+fbgt_else.24266:
+fbgt_cont.24267:
+	j	fbgt_cont.24261
+fbgt_else.24264:
+fbgt_cont.24265:
+	j	fbgt_cont.24261
+fbgt_else.24262:
+fbgt_cont.24263:
+	j	fbgt_cont.24261
+fbgt_else.24260:
 	fmov	%f1, %f2
-fbgt_cont.34201:
-	fblt	%f25, %f2, fbgt_else.34226
-	fblt	%f25, %f1, fbgt_else.34228
+fbgt_cont.24261:
+	fblt	%f25, %f2, fbgt_else.24286
+	fblt	%f25, %f1, fbgt_else.24288
 	fsub	%f0, %f25, %f1
-	flw	%f16, 495(%zero)
+	flw	%f16, 496(%zero)
 	fdiv	%f1, %f1, %f16
 	jal	reduction_2pi_sub2.2629
 	fmov	%f25, %f0
-	j	fbgt_cont.34227
-fbgt_else.34228:
-	flw	%f0, 495(%zero)
+	j	fbgt_cont.24287
+fbgt_else.24288:
+	flw	%f0, 496(%zero)
 	fdiv	%f1, %f1, %f0
 	fmov	%f0, %f25
 	jal	reduction_2pi_sub2.2629
 	fmov	%f25, %f0
-fbgt_cont.34229:
-	j	fbgt_cont.34227
-fbgt_else.34226:
-fbgt_cont.34227:
-	fblt	%f25, %f19, fbgt_else.34230
-	beqi	%a1, 0, bnei_else.34232
+fbgt_cont.24289:
+	j	fbgt_cont.24287
+fbgt_else.24286:
+fbgt_cont.24287:
+	fblt	%f25, %f19, fbgt_else.24290
+	beqi	%a1, 0, bnei_else.24292
 	add	%a1, %zero, %zero
-	j	fbgt_cont.34231
-bnei_else.34232:
+	j	fbgt_cont.24291
+bnei_else.24292:
 	add	%a1, %zero, %k1
-bnei_cont.34233:
-	j	fbgt_cont.34231
-fbgt_else.34230:
-fbgt_cont.34231:
-	fblt	%f25, %f19, fbgt_else.34234
+bnei_cont.24293:
+	j	fbgt_cont.24291
+fbgt_else.24290:
+fbgt_cont.24291:
+	fblt	%f25, %f19, fbgt_else.24294
 	fsub	%f25, %f25, %f19
-	j	fbgt_cont.34235
-fbgt_else.34234:
-fbgt_cont.34235:
-	fblt	%f25, %f20, fbgt_else.34236
+	j	fbgt_cont.24295
+fbgt_else.24294:
+fbgt_cont.24295:
+	fblt	%f25, %f20, fbgt_else.24296
 	fsub	%f25, %f19, %f25
-	j	fbgt_cont.34237
-fbgt_else.34236:
-fbgt_cont.34237:
-	fblt	%f21, %f25, fbgt_else.34238
+	j	fbgt_cont.24297
+fbgt_else.24296:
+fbgt_cont.24297:
+	fblt	%f21, %f25, fbgt_else.24298
 	fmul	%f19, %f25, %f25
 	fmul	%f16, %f19, %f19
 	flw	%f0, 477(%zero)
@@ -1411,8 +3197,8 @@ fbgt_cont.34237:
 	fmul	%f0, %f0, %f19
 	fmul	%f0, %f0, %f16
 	fsub	%f0, %f1, %f0
-	j	fbgt_cont.34239
-fbgt_else.34238:
+	j	fbgt_cont.24299
+fbgt_else.24298:
 	fsub	%f0, %f20, %f25
 	fmul	%f19, %f0, %f0
 	fmul	%f16, %f19, %f19
@@ -1426,97 +3212,97 @@ fbgt_else.34238:
 	fmul	%f0, %f0, %f19
 	fmul	%f0, %f0, %f16
 	fsub	%f0, %f1, %f0
-fbgt_cont.34239:
-	beqi	%a1, 0, bnei_else.34240
-	j	bnei_cont.34241
-bnei_else.34240:
+fbgt_cont.24299:
+	beqi	%a1, 0, bnei_else.24300
+	j	bnei_cont.24301
+bnei_else.24300:
 	fneg	%f0, %f0
-bnei_cont.34241:
+bnei_cont.24301:
 	fmul	%f1, %f22, %f24
-	fmul	%f2, %f18, %f23
-	fmul	%f19, %f2, %f24
+	fmul	%f20, %f18, %f23
+	fmul	%f19, %f20, %f24
 	fmul	%f16, %f17, %f0
-	fsub	%f20, %f19, %f16
+	fsub	%f2, %f19, %f16
 	fmul	%f21, %f17, %f23
 	fmul	%f19, %f21, %f24
 	fmul	%f16, %f18, %f0
 	fadd	%f16, %f19, %f16
 	fmul	%f25, %f22, %f0
-	fmul	%f2, %f2, %f0
+	fmul	%f20, %f20, %f0
 	fmul	%f19, %f17, %f24
-	fadd	%f2, %f2, %f19
-	fmul	%f19, %f21, %f0
+	fadd	%f19, %f20, %f19
+	fmul	%f20, %f21, %f0
 	fmul	%f0, %f18, %f24
-	fsub	%f24, %f19, %f0
+	fsub	%f24, %f20, %f0
 	fneg	%f23, %f23
-	fmul	%f19, %f18, %f22
-	fmul	%f22, %f17, %f22
-	flw	%f18, 0(%v0)
-	flw	%f27, 1(%v0)
+	fmul	%f18, %f18, %f22
+	fmul	%f21, %f17, %f22
+	flw	%f27, 0(%v0)
+	flw	%f17, 1(%v0)
 	flw	%f26, 2(%v0)
 	fmul	%f0, %f1, %f1
-	fmul	%f17, %f18, %f0
+	fmul	%f20, %f27, %f0
 	fmul	%f0, %f25, %f25
-	fmul	%f0, %f27, %f0
-	fadd	%f17, %f17, %f0
+	fmul	%f0, %f17, %f0
+	fadd	%f20, %f20, %f0
 	fmul	%f0, %f23, %f23
 	fmul	%f0, %f26, %f0
-	fadd	%f0, %f17, %f0
+	fadd	%f0, %f20, %f0
 	fsw	%f0, 0(%v0)
-	fmul	%f0, %f20, %f20
-	fmul	%f17, %f18, %f0
 	fmul	%f0, %f2, %f2
-	fmul	%f0, %f27, %f0
-	fadd	%f17, %f17, %f0
+	fmul	%f20, %f27, %f0
 	fmul	%f0, %f19, %f19
+	fmul	%f0, %f17, %f0
+	fadd	%f20, %f20, %f0
+	fmul	%f0, %f18, %f18
 	fmul	%f0, %f26, %f0
-	fadd	%f0, %f17, %f0
+	fadd	%f0, %f20, %f0
 	fsw	%f0, 1(%v0)
 	fmul	%f0, %f16, %f16
-	fmul	%f17, %f18, %f0
+	fmul	%f20, %f27, %f0
 	fmul	%f0, %f24, %f24
-	fmul	%f0, %f27, %f0
-	fadd	%f17, %f17, %f0
-	fmul	%f0, %f22, %f22
+	fmul	%f0, %f17, %f0
+	fadd	%f20, %f20, %f0
+	fmul	%f0, %f21, %f21
 	fmul	%f0, %f26, %f0
-	fadd	%f0, %f17, %f0
+	fadd	%f0, %f20, %f0
 	fsw	%f0, 2(%v0)
-	flw	%f21, 495(%zero)
-	fmul	%f0, %f18, %f20
-	fmul	%f17, %f0, %f16
+	flw	%f20, 496(%zero)
 	fmul	%f0, %f27, %f2
+	fmul	%f22, %f0, %f16
+	fmul	%f0, %f17, %f19
 	fmul	%f0, %f0, %f24
-	fadd	%f17, %f17, %f0
-	fmul	%f0, %f26, %f19
-	fmul	%f0, %f0, %f22
-	fadd	%f0, %f17, %f0
-	fmul	%f0, %f21, %f0
+	fadd	%f22, %f22, %f0
+	fmul	%f0, %f26, %f18
+	fmul	%f0, %f0, %f21
+	fadd	%f0, %f22, %f0
+	fmul	%f0, %f20, %f0
 	fsw	%f0, 0(%v1)
-	fmul	%f18, %f18, %f1
-	fmul	%f1, %f18, %f16
-	fmul	%f17, %f27, %f25
+	fmul	%f22, %f27, %f1
+	fmul	%f1, %f22, %f16
+	fmul	%f17, %f17, %f25
 	fmul	%f0, %f17, %f24
 	fadd	%f1, %f1, %f0
 	fmul	%f16, %f26, %f23
-	fmul	%f0, %f16, %f22
+	fmul	%f0, %f16, %f21
 	fadd	%f0, %f1, %f0
-	fmul	%f0, %f21, %f0
+	fmul	%f0, %f20, %f0
 	fsw	%f0, 1(%v1)
-	fmul	%f1, %f18, %f20
-	fmul	%f0, %f17, %f2
+	fmul	%f1, %f22, %f2
+	fmul	%f0, %f17, %f19
 	fadd	%f1, %f1, %f0
-	fmul	%f0, %f16, %f19
+	fmul	%f0, %f16, %f18
 	fadd	%f0, %f1, %f0
-	fmul	%f0, %f21, %f0
+	fmul	%f0, %f20, %f0
 	add	%ra, %zero, %a0
 	fsw	%f0, 2(%v1)
 	jr	%ra
 read_nth_object.2782:
 	add	%a0, %zero, %v0
-	add	%a1, %zero, %ra
+	add	%a2, %zero, %ra
 	jal	min_caml_read_int
-	addi	%a2, %v0, 0
-	beqi	%a2, -1, bnei_else.34690
+	addi	%a1, %v0, 0
+	beqi	%a1, -1, bnei_else.24410
 	jal	min_caml_read_int
 	addi	%a3, %v0, 0
 	jal	min_caml_read_int
@@ -1546,12 +3332,12 @@ read_nth_object.2782:
 	jal	min_caml_read_float
 	fsw	%f0, 2(%s3)
 	jal	min_caml_read_float
-	fblt	%f0, %fzero, fbgt_else.34691
+	fblt	%f0, %fzero, fbgt_else.24411
 	add	%s4, %zero, %zero
-	j	fbgt_cont.34692
-fbgt_else.34691:
+	j	fbgt_cont.24412
+fbgt_else.24411:
 	add	%s4, %zero, %k1
-fbgt_cont.34692:
+fbgt_cont.24412:
 	addi	%v0, %s5, 0
 	fmov	%f0, %fzero
 	jal	min_caml_create_float_array
@@ -1574,9 +3360,9 @@ fbgt_cont.34692:
 	fmov	%f0, %fzero
 	jal	min_caml_create_float_array
 	addi	%s1, %v0, 0
-	beqi	%s0, 0, bnei_else.34693
+	beqi	%s0, 0, bnei_else.24413
 	jal	min_caml_read_float
-	flw	%f1, 469(%zero)
+	flw	%f1, 461(%zero)
 	fmul	%f0, %f0, %f1
 	fsw	%f0, 0(%s1)
 	jal	min_caml_read_float
@@ -1585,15 +3371,15 @@ fbgt_cont.34692:
 	jal	min_caml_read_float
 	fmul	%f0, %f0, %f1
 	fsw	%f0, 2(%s1)
-	j	bnei_cont.34694
-bnei_else.34693:
-bnei_cont.34694:
-	beqi	%a3, 2, bnei_else.34695
+	j	bnei_cont.24414
+bnei_else.24413:
+bnei_cont.24414:
+	beqi	%a3, 2, bnei_else.24415
 	add	%s7, %zero, %s4
-	j	bnei_cont.34696
-bnei_else.34695:
+	j	bnei_cont.24416
+bnei_else.24415:
 	add	%s7, %zero, %k1
-bnei_cont.34696:
+bnei_cont.24416:
 	addi	%v0, %zero, 4
 	fmov	%f0, %fzero
 	jal	min_caml_create_float_array
@@ -1609,18 +3395,18 @@ bnei_cont.34696:
 	sw	%s0, 3(%ra)
 	sw	%k0, 2(%ra)
 	sw	%a3, 1(%ra)
-	sw	%a2, 0(%ra)
+	sw	%a1, 0(%ra)
 	sw	%ra, 12(%a0)
-	beqi	%a3, 3, bnei_else.34697
-	beqi	%a3, 2, bnei_else.34699
-	j	bnei_cont.34698
-bnei_else.34699:
-	beqi	%s4, 0, bnei_else.34701
+	beqi	%a3, 3, bnei_else.24417
+	beqi	%a3, 2, bnei_else.24419
+	j	bnei_cont.24418
+bnei_else.24419:
+	beqi	%s4, 0, bnei_else.24421
 	add	%a0, %zero, %zero
-	j	bnei_cont.34702
-bnei_else.34701:
+	j	bnei_cont.24422
+bnei_else.24421:
 	add	%a0, %zero, %k1
-bnei_cont.34702:
+bnei_cont.24422:
 	flw	%f18, 0(%s2)
 	fmul	%f1, %f18, %f18
 	flw	%f17, 1(%s2)
@@ -1630,1319 +3416,262 @@ bnei_cont.34702:
 	fmul	%f0, %f16, %f16
 	fadd	%f0, %f1, %f0
 	fsqrt	%f1, %f0
-	fbne	%f1, %fzero, fbeq_else.34703
-	add	%a2, %zero, %k1
-	j	fbeq_cont.34704
-fbeq_else.34703:
-	add	%a2, %zero, %zero
-fbeq_cont.34704:
-	beqi	%a2, 0, bnei_else.34705
+	fbne	%f1, %fzero, fbeq_else.24423
+	add	%a1, %zero, %k1
+	j	fbeq_cont.24424
+fbeq_else.24423:
+	add	%a1, %zero, %zero
+fbeq_cont.24424:
+	beqi	%a1, 0, bnei_else.24425
 	fmov	%f0, %f30
-	j	bnei_cont.34706
-bnei_else.34705:
-	beqi	%a0, 0, bnei_else.34707
-	flw	%f0, 468(%zero)
+	j	bnei_cont.24426
+bnei_else.24425:
+	beqi	%a0, 0, bnei_else.24427
+	flw	%f0, 458(%zero)
 	fdiv	%f0, %f0, %f1
-	j	bnei_cont.34708
-bnei_else.34707:
+	j	bnei_cont.24428
+bnei_else.24427:
 	fdiv	%f0, %f30, %f1
-bnei_cont.34708:
-bnei_cont.34706:
+bnei_cont.24428:
+bnei_cont.24426:
 	fmul	%f1, %f18, %f0
 	fsw	%f1, 0(%s2)
 	fmul	%f1, %f17, %f0
 	fsw	%f1, 1(%s2)
 	fmul	%f0, %f16, %f0
 	fsw	%f0, 2(%s2)
-bnei_cont.34700:
-	j	bnei_cont.34698
-bnei_else.34697:
+bnei_cont.24420:
+	j	bnei_cont.24418
+bnei_else.24417:
 	flw	%f1, 0(%s2)
-	fbne	%f1, %fzero, fbeq_else.34709
+	fbne	%f1, %fzero, fbeq_else.24429
 	add	%a0, %zero, %k1
-	j	fbeq_cont.34710
-fbeq_else.34709:
+	j	fbeq_cont.24430
+fbeq_else.24429:
 	add	%a0, %zero, %zero
-fbeq_cont.34710:
-	beqi	%a0, 0, bnei_else.34711
+fbeq_cont.24430:
+	beqi	%a0, 0, bnei_else.24431
 	fmov	%f0, %fzero
-	j	bnei_cont.34712
-bnei_else.34711:
-	fbne	%f1, %fzero, fbeq_else.34713
+	j	bnei_cont.24432
+bnei_else.24431:
+	fbne	%f1, %fzero, fbeq_else.24433
 	add	%a0, %zero, %k1
-	j	fbeq_cont.34714
-fbeq_else.34713:
+	j	fbeq_cont.24434
+fbeq_else.24433:
 	add	%a0, %zero, %zero
-fbeq_cont.34714:
-	beqi	%a0, 0, bnei_else.34715
+fbeq_cont.24434:
+	beqi	%a0, 0, bnei_else.24435
 	fmov	%f0, %fzero
-	j	bnei_cont.34716
-bnei_else.34715:
-	fblt	%fzero, %f1, fbgt_else.34717
+	j	bnei_cont.24436
+bnei_else.24435:
+	fblt	%fzero, %f1, fbgt_else.24437
 	add	%a0, %zero, %zero
-	j	fbgt_cont.34718
-fbgt_else.34717:
+	j	fbgt_cont.24438
+fbgt_else.24437:
 	add	%a0, %zero, %k1
-fbgt_cont.34718:
-	beqi	%a0, 0, bnei_else.34719
+fbgt_cont.24438:
+	beqi	%a0, 0, bnei_else.24439
 	fmov	%f0, %f30
-	j	bnei_cont.34720
-bnei_else.34719:
-	flw	%f0, 468(%zero)
-bnei_cont.34720:
-bnei_cont.34716:
+	j	bnei_cont.24440
+bnei_else.24439:
+	flw	%f0, 458(%zero)
+bnei_cont.24440:
+bnei_cont.24436:
 	fmul	%f1, %f1, %f1
 	fdiv	%f0, %f0, %f1
-bnei_cont.34712:
+bnei_cont.24432:
 	fsw	%f0, 0(%s2)
 	flw	%f1, 1(%s2)
-	fbne	%f1, %fzero, fbeq_else.34721
+	fbne	%f1, %fzero, fbeq_else.24441
 	add	%a0, %zero, %k1
-	j	fbeq_cont.34722
-fbeq_else.34721:
+	j	fbeq_cont.24442
+fbeq_else.24441:
 	add	%a0, %zero, %zero
-fbeq_cont.34722:
-	beqi	%a0, 0, bnei_else.34723
+fbeq_cont.24442:
+	beqi	%a0, 0, bnei_else.24443
 	fmov	%f0, %fzero
-	j	bnei_cont.34724
-bnei_else.34723:
-	fbne	%f1, %fzero, fbeq_else.34725
+	j	bnei_cont.24444
+bnei_else.24443:
+	fbne	%f1, %fzero, fbeq_else.24445
 	add	%a0, %zero, %k1
-	j	fbeq_cont.34726
-fbeq_else.34725:
+	j	fbeq_cont.24446
+fbeq_else.24445:
 	add	%a0, %zero, %zero
-fbeq_cont.34726:
-	beqi	%a0, 0, bnei_else.34727
+fbeq_cont.24446:
+	beqi	%a0, 0, bnei_else.24447
 	fmov	%f0, %fzero
-	j	bnei_cont.34728
-bnei_else.34727:
-	fblt	%fzero, %f1, fbgt_else.34729
+	j	bnei_cont.24448
+bnei_else.24447:
+	fblt	%fzero, %f1, fbgt_else.24449
 	add	%a0, %zero, %zero
-	j	fbgt_cont.34730
-fbgt_else.34729:
+	j	fbgt_cont.24450
+fbgt_else.24449:
 	add	%a0, %zero, %k1
-fbgt_cont.34730:
-	beqi	%a0, 0, bnei_else.34731
+fbgt_cont.24450:
+	beqi	%a0, 0, bnei_else.24451
 	fmov	%f0, %f30
-	j	bnei_cont.34732
-bnei_else.34731:
-	flw	%f0, 468(%zero)
-bnei_cont.34732:
-bnei_cont.34728:
+	j	bnei_cont.24452
+bnei_else.24451:
+	flw	%f0, 458(%zero)
+bnei_cont.24452:
+bnei_cont.24448:
 	fmul	%f1, %f1, %f1
 	fdiv	%f0, %f0, %f1
-bnei_cont.34724:
+bnei_cont.24444:
 	fsw	%f0, 1(%s2)
 	flw	%f1, 2(%s2)
-	fbne	%f1, %fzero, fbeq_else.34733
+	fbne	%f1, %fzero, fbeq_else.24453
 	add	%a0, %zero, %k1
-	j	fbeq_cont.34734
-fbeq_else.34733:
+	j	fbeq_cont.24454
+fbeq_else.24453:
 	add	%a0, %zero, %zero
-fbeq_cont.34734:
-	beqi	%a0, 0, bnei_else.34735
+fbeq_cont.24454:
+	beqi	%a0, 0, bnei_else.24455
 	fmov	%f0, %fzero
-	j	bnei_cont.34736
-bnei_else.34735:
-	fbne	%f1, %fzero, fbeq_else.34737
+	j	bnei_cont.24456
+bnei_else.24455:
+	fbne	%f1, %fzero, fbeq_else.24457
 	add	%a0, %zero, %k1
-	j	fbeq_cont.34738
-fbeq_else.34737:
+	j	fbeq_cont.24458
+fbeq_else.24457:
 	add	%a0, %zero, %zero
-fbeq_cont.34738:
-	beqi	%a0, 0, bnei_else.34739
+fbeq_cont.24458:
+	beqi	%a0, 0, bnei_else.24459
 	fmov	%f0, %fzero
-	j	bnei_cont.34740
-bnei_else.34739:
-	fblt	%fzero, %f1, fbgt_else.34741
+	j	bnei_cont.24460
+bnei_else.24459:
+	fblt	%fzero, %f1, fbgt_else.24461
 	add	%a0, %zero, %zero
-	j	fbgt_cont.34742
-fbgt_else.34741:
+	j	fbgt_cont.24462
+fbgt_else.24461:
 	add	%a0, %zero, %k1
-fbgt_cont.34742:
-	beqi	%a0, 0, bnei_else.34743
+fbgt_cont.24462:
+	beqi	%a0, 0, bnei_else.24463
 	fmov	%f0, %f30
-	j	bnei_cont.34744
-bnei_else.34743:
-	flw	%f0, 468(%zero)
-bnei_cont.34744:
-bnei_cont.34740:
+	j	bnei_cont.24464
+bnei_else.24463:
+	flw	%f0, 458(%zero)
+bnei_cont.24464:
+bnei_cont.24460:
 	fmul	%f1, %f1, %f1
 	fdiv	%f0, %f0, %f1
-bnei_cont.34736:
+bnei_cont.24456:
 	fsw	%f0, 2(%s2)
-bnei_cont.34698:
-	beqi	%s0, 0, bnei_else.34745
-	flw	%f18, 0(%s1)
-	flw	%f19, 494(%zero)
-	fabs	%f17, %f18
-	flw	%f2, 493(%zero)
-	fblt	%f17, %f2, fbgt_else.34747
-	flw	%f1, 492(%zero)
-	fblt	%f17, %f1, fbgt_cont.34748
-	flw	%f1, 491(%zero)
-	fblt	%f17, %f1, fbgt_cont.34748
-	flw	%f1, 490(%zero)
-	fblt	%f17, %f1, fbgt_cont.34748
-	flw	%f1, 489(%zero)
-	fblt	%f17, %f1, fbgt_cont.34748
-	flw	%f1, 488(%zero)
-	fblt	%f17, %f1, fbgt_cont.34748
-	flw	%f1, 487(%zero)
-	fblt	%f17, %f1, fbgt_cont.34748
-	flw	%f1, 486(%zero)
-	fblt	%f17, %f1, fbgt_cont.34748
-	flw	%f1, 485(%zero)
-	fblt	%f17, %f1, fbgt_cont.34748
-	flw	%f1, 484(%zero)
-	fblt	%f17, %f1, fbgt_cont.34748
-	flw	%f1, 483(%zero)
-	fblt	%f17, %f1, fbgt_cont.34748
-	flw	%f1, 482(%zero)
-	fblt	%f17, %f1, fbgt_cont.34748
-	flw	%f1, 481(%zero)
-	fmov	%f0, %f17
-	jal	reduction_2pi_sub1.2626
-	fmov	%f1, %f0
-	j	fbgt_cont.34748
-fbgt_else.34769:
-fbgt_cont.34770:
-	j	fbgt_cont.34748
-fbgt_else.34767:
-fbgt_cont.34768:
-	j	fbgt_cont.34748
-fbgt_else.34765:
-fbgt_cont.34766:
-	j	fbgt_cont.34748
-fbgt_else.34763:
-fbgt_cont.34764:
-	j	fbgt_cont.34748
-fbgt_else.34761:
-fbgt_cont.34762:
-	j	fbgt_cont.34748
-fbgt_else.34759:
-fbgt_cont.34760:
-	j	fbgt_cont.34748
-fbgt_else.34757:
-fbgt_cont.34758:
-	j	fbgt_cont.34748
-fbgt_else.34755:
-fbgt_cont.34756:
-	j	fbgt_cont.34748
-fbgt_else.34753:
-fbgt_cont.34754:
-	j	fbgt_cont.34748
-fbgt_else.34751:
-fbgt_cont.34752:
-	j	fbgt_cont.34748
-fbgt_else.34749:
-fbgt_cont.34750:
-	j	fbgt_cont.34748
-fbgt_else.34747:
-	fmov	%f1, %f2
-fbgt_cont.34748:
-	fmov	%f0, %f17
-	jal	reduction_2pi_sub2.2629
-	fblt	%f0, %f19, fbgt_else.34771
-	add	%a0, %zero, %zero
-	j	fbgt_cont.34772
-fbgt_else.34771:
-	add	%a0, %zero, %k1
-fbgt_cont.34772:
-	fblt	%f0, %f19, fbgt_else.34773
-	fsub	%f0, %f0, %f19
-	j	fbgt_cont.34774
-fbgt_else.34773:
-fbgt_cont.34774:
-	flw	%f20, 479(%zero)
-	fblt	%f0, %f20, fbgt_else.34775
-	beqi	%a0, 0, bnei_else.34777
-	add	%a0, %zero, %zero
-	j	fbgt_cont.34776
-bnei_else.34777:
-	add	%a0, %zero, %k1
-bnei_cont.34778:
-	j	fbgt_cont.34776
-fbgt_else.34775:
-fbgt_cont.34776:
-	fblt	%f0, %f20, fbgt_else.34779
-	fsub	%f0, %f19, %f0
-	j	fbgt_cont.34780
-fbgt_else.34779:
-fbgt_cont.34780:
-	flw	%f21, 478(%zero)
-	fblt	%f21, %f0, fbgt_else.34781
-	fmul	%f17, %f0, %f0
-	fmul	%f16, %f17, %f17
-	flw	%f0, 473(%zero)
-	fmul	%f0, %f0, %f17
-	fsub	%f1, %f30, %f0
-	flw	%f0, 472(%zero)
-	fmul	%f0, %f0, %f16
-	fadd	%f1, %f1, %f0
-	flw	%f0, 471(%zero)
-	fmul	%f0, %f0, %f17
-	fmul	%f0, %f0, %f16
-	fsub	%f17, %f1, %f0
-	j	fbgt_cont.34782
-fbgt_else.34781:
-	fsub	%f22, %f20, %f0
-	fmul	%f17, %f22, %f22
-	fmul	%f16, %f17, %f17
-	flw	%f0, 477(%zero)
-	fmul	%f0, %f0, %f22
-	fmul	%f0, %f0, %f17
-	fsub	%f1, %f22, %f0
-	flw	%f0, 476(%zero)
-	fmul	%f0, %f0, %f22
-	fmul	%f0, %f0, %f16
-	fadd	%f1, %f1, %f0
-	flw	%f0, 475(%zero)
-	fmul	%f0, %f0, %f22
-	fmul	%f0, %f0, %f17
-	fmul	%f0, %f0, %f16
-	fsub	%f17, %f1, %f0
-fbgt_cont.34782:
-	beqi	%a0, 0, bnei_else.34783
-	j	bnei_cont.34784
-bnei_else.34783:
-	fneg	%f17, %f17
-bnei_cont.34784:
-	fblt	%f18, %fzero, fbgt_else.34785
-	add	%a0, %zero, %k1
-	j	fbgt_cont.34786
-fbgt_else.34785:
-	add	%a0, %zero, %zero
-fbgt_cont.34786:
-	fabs	%f18, %f18
-	fblt	%f18, %f2, fbgt_else.34787
-	flw	%f1, 492(%zero)
-	fblt	%f18, %f1, fbgt_cont.34788
-	flw	%f1, 491(%zero)
-	fblt	%f18, %f1, fbgt_cont.34788
-	flw	%f1, 490(%zero)
-	fblt	%f18, %f1, fbgt_cont.34788
-	flw	%f1, 489(%zero)
-	fblt	%f18, %f1, fbgt_cont.34788
-	flw	%f1, 488(%zero)
-	fblt	%f18, %f1, fbgt_cont.34788
-	flw	%f1, 487(%zero)
-	fblt	%f18, %f1, fbgt_cont.34788
-	flw	%f1, 486(%zero)
-	fblt	%f18, %f1, fbgt_cont.34788
-	flw	%f1, 485(%zero)
-	fblt	%f18, %f1, fbgt_cont.34788
-	flw	%f1, 484(%zero)
-	fblt	%f18, %f1, fbgt_cont.34788
-	flw	%f1, 483(%zero)
-	fblt	%f18, %f1, fbgt_cont.34788
-	flw	%f1, 482(%zero)
-	fblt	%f18, %f1, fbgt_cont.34788
-	flw	%f1, 481(%zero)
-	fmov	%f0, %f18
-	jal	reduction_2pi_sub1.2626
-	fmov	%f1, %f0
-	j	fbgt_cont.34788
-fbgt_else.34809:
-fbgt_cont.34810:
-	j	fbgt_cont.34788
-fbgt_else.34807:
-fbgt_cont.34808:
-	j	fbgt_cont.34788
-fbgt_else.34805:
-fbgt_cont.34806:
-	j	fbgt_cont.34788
-fbgt_else.34803:
-fbgt_cont.34804:
-	j	fbgt_cont.34788
-fbgt_else.34801:
-fbgt_cont.34802:
-	j	fbgt_cont.34788
-fbgt_else.34799:
-fbgt_cont.34800:
-	j	fbgt_cont.34788
-fbgt_else.34797:
-fbgt_cont.34798:
-	j	fbgt_cont.34788
-fbgt_else.34795:
-fbgt_cont.34796:
-	j	fbgt_cont.34788
-fbgt_else.34793:
-fbgt_cont.34794:
-	j	fbgt_cont.34788
-fbgt_else.34791:
-fbgt_cont.34792:
-	j	fbgt_cont.34788
-fbgt_else.34789:
-fbgt_cont.34790:
-	j	fbgt_cont.34788
-fbgt_else.34787:
-	fmov	%f1, %f2
-fbgt_cont.34788:
-	fmov	%f0, %f18
-	jal	reduction_2pi_sub2.2629
-	fblt	%f0, %f19, fbgt_else.34811
-	beqi	%a0, 0, bnei_else.34813
-	add	%a0, %zero, %zero
-	j	fbgt_cont.34812
-bnei_else.34813:
-	add	%a0, %zero, %k1
-bnei_cont.34814:
-	j	fbgt_cont.34812
-fbgt_else.34811:
-fbgt_cont.34812:
-	fblt	%f0, %f19, fbgt_else.34815
-	fsub	%f0, %f0, %f19
-	j	fbgt_cont.34816
-fbgt_else.34815:
-fbgt_cont.34816:
-	fblt	%f0, %f20, fbgt_else.34817
-	fsub	%f0, %f19, %f0
-	j	fbgt_cont.34818
-fbgt_else.34817:
-fbgt_cont.34818:
-	fblt	%f21, %f0, fbgt_else.34819
-	fmul	%f22, %f0, %f0
-	fmul	%f18, %f22, %f22
-	flw	%f1, 477(%zero)
-	fmul	%f1, %f1, %f0
-	fmul	%f1, %f1, %f22
-	fsub	%f16, %f0, %f1
-	flw	%f1, 476(%zero)
-	fmul	%f1, %f1, %f0
-	fmul	%f1, %f1, %f18
-	fadd	%f16, %f16, %f1
-	flw	%f1, 475(%zero)
-	fmul	%f0, %f1, %f0
-	fmul	%f0, %f0, %f22
-	fmul	%f0, %f0, %f18
-	fsub	%f18, %f16, %f0
-	j	fbgt_cont.34820
-fbgt_else.34819:
-	fsub	%f0, %f20, %f0
-	fmul	%f18, %f0, %f0
-	fmul	%f16, %f18, %f18
-	flw	%f0, 473(%zero)
-	fmul	%f0, %f0, %f18
-	fsub	%f1, %f30, %f0
-	flw	%f0, 472(%zero)
-	fmul	%f0, %f0, %f16
-	fadd	%f1, %f1, %f0
-	flw	%f0, 471(%zero)
-	fmul	%f0, %f0, %f18
-	fmul	%f0, %f0, %f16
-	fsub	%f18, %f1, %f0
-fbgt_cont.34820:
-	beqi	%a0, 0, bnei_else.34821
-	j	bnei_cont.34822
-bnei_else.34821:
-	fneg	%f18, %f18
-bnei_cont.34822:
-	flw	%f23, 1(%s1)
-	fabs	%f22, %f23
-	fblt	%f22, %f2, fbgt_else.34823
-	flw	%f1, 492(%zero)
-	fblt	%f22, %f1, fbgt_cont.34824
-	flw	%f1, 491(%zero)
-	fblt	%f22, %f1, fbgt_cont.34824
-	flw	%f1, 490(%zero)
-	fblt	%f22, %f1, fbgt_cont.34824
-	flw	%f1, 489(%zero)
-	fblt	%f22, %f1, fbgt_cont.34824
-	flw	%f1, 488(%zero)
-	fblt	%f22, %f1, fbgt_cont.34824
-	flw	%f1, 487(%zero)
-	fblt	%f22, %f1, fbgt_cont.34824
-	flw	%f1, 486(%zero)
-	fblt	%f22, %f1, fbgt_cont.34824
-	flw	%f1, 485(%zero)
-	fblt	%f22, %f1, fbgt_cont.34824
-	flw	%f1, 484(%zero)
-	fblt	%f22, %f1, fbgt_cont.34824
-	flw	%f1, 483(%zero)
-	fblt	%f22, %f1, fbgt_cont.34824
-	flw	%f1, 482(%zero)
-	fblt	%f22, %f1, fbgt_cont.34824
-	flw	%f1, 481(%zero)
-	fmov	%f0, %f22
-	jal	reduction_2pi_sub1.2626
-	fmov	%f1, %f0
-	j	fbgt_cont.34824
-fbgt_else.34845:
-fbgt_cont.34846:
-	j	fbgt_cont.34824
-fbgt_else.34843:
-fbgt_cont.34844:
-	j	fbgt_cont.34824
-fbgt_else.34841:
-fbgt_cont.34842:
-	j	fbgt_cont.34824
-fbgt_else.34839:
-fbgt_cont.34840:
-	j	fbgt_cont.34824
-fbgt_else.34837:
-fbgt_cont.34838:
-	j	fbgt_cont.34824
-fbgt_else.34835:
-fbgt_cont.34836:
-	j	fbgt_cont.34824
-fbgt_else.34833:
-fbgt_cont.34834:
-	j	fbgt_cont.34824
-fbgt_else.34831:
-fbgt_cont.34832:
-	j	fbgt_cont.34824
-fbgt_else.34829:
-fbgt_cont.34830:
-	j	fbgt_cont.34824
-fbgt_else.34827:
-fbgt_cont.34828:
-	j	fbgt_cont.34824
-fbgt_else.34825:
-fbgt_cont.34826:
-	j	fbgt_cont.34824
-fbgt_else.34823:
-	fmov	%f1, %f2
-fbgt_cont.34824:
-	fmov	%f0, %f22
-	jal	reduction_2pi_sub2.2629
-	fblt	%f0, %f19, fbgt_else.34847
-	add	%a0, %zero, %zero
-	j	fbgt_cont.34848
-fbgt_else.34847:
-	add	%a0, %zero, %k1
-fbgt_cont.34848:
-	fblt	%f0, %f19, fbgt_else.34849
-	fsub	%f0, %f0, %f19
-	j	fbgt_cont.34850
-fbgt_else.34849:
-fbgt_cont.34850:
-	fblt	%f0, %f20, fbgt_else.34851
-	beqi	%a0, 0, bnei_else.34853
-	add	%a0, %zero, %zero
-	j	fbgt_cont.34852
-bnei_else.34853:
-	add	%a0, %zero, %k1
-bnei_cont.34854:
-	j	fbgt_cont.34852
-fbgt_else.34851:
-fbgt_cont.34852:
-	fblt	%f0, %f20, fbgt_else.34855
-	fsub	%f0, %f19, %f0
-	j	fbgt_cont.34856
-fbgt_else.34855:
-fbgt_cont.34856:
-	fblt	%f21, %f0, fbgt_else.34857
-	fmul	%f22, %f0, %f0
-	fmul	%f16, %f22, %f22
-	flw	%f0, 473(%zero)
-	fmul	%f0, %f0, %f22
-	fsub	%f1, %f30, %f0
-	flw	%f0, 472(%zero)
-	fmul	%f0, %f0, %f16
-	fadd	%f1, %f1, %f0
-	flw	%f0, 471(%zero)
-	fmul	%f0, %f0, %f22
-	fmul	%f0, %f0, %f16
-	fsub	%f22, %f1, %f0
-	j	fbgt_cont.34858
-fbgt_else.34857:
-	fsub	%f24, %f20, %f0
-	fmul	%f16, %f24, %f24
-	fmul	%f22, %f16, %f16
-	flw	%f0, 477(%zero)
-	fmul	%f0, %f0, %f24
-	fmul	%f0, %f0, %f16
-	fsub	%f1, %f24, %f0
-	flw	%f0, 476(%zero)
-	fmul	%f0, %f0, %f24
-	fmul	%f0, %f0, %f22
-	fadd	%f1, %f1, %f0
-	flw	%f0, 475(%zero)
-	fmul	%f0, %f0, %f24
-	fmul	%f0, %f0, %f16
-	fmul	%f0, %f0, %f22
-	fsub	%f22, %f1, %f0
-fbgt_cont.34858:
-	beqi	%a0, 0, bnei_else.34859
-	j	bnei_cont.34860
-bnei_else.34859:
-	fneg	%f22, %f22
-bnei_cont.34860:
-	fblt	%f23, %fzero, fbgt_else.34861
-	add	%a0, %zero, %k1
-	j	fbgt_cont.34862
-fbgt_else.34861:
-	add	%a0, %zero, %zero
-fbgt_cont.34862:
-	fabs	%f23, %f23
-	fblt	%f23, %f2, fbgt_else.34863
-	flw	%f1, 492(%zero)
-	fblt	%f23, %f1, fbgt_cont.34864
-	flw	%f1, 491(%zero)
-	fblt	%f23, %f1, fbgt_cont.34864
-	flw	%f1, 490(%zero)
-	fblt	%f23, %f1, fbgt_cont.34864
-	flw	%f1, 489(%zero)
-	fblt	%f23, %f1, fbgt_cont.34864
-	flw	%f1, 488(%zero)
-	fblt	%f23, %f1, fbgt_cont.34864
-	flw	%f1, 487(%zero)
-	fblt	%f23, %f1, fbgt_cont.34864
-	flw	%f1, 486(%zero)
-	fblt	%f23, %f1, fbgt_cont.34864
-	flw	%f1, 485(%zero)
-	fblt	%f23, %f1, fbgt_cont.34864
-	flw	%f1, 484(%zero)
-	fblt	%f23, %f1, fbgt_cont.34864
-	flw	%f1, 483(%zero)
-	fblt	%f23, %f1, fbgt_cont.34864
-	flw	%f1, 482(%zero)
-	fblt	%f23, %f1, fbgt_cont.34864
-	flw	%f1, 481(%zero)
-	fmov	%f0, %f23
-	jal	reduction_2pi_sub1.2626
-	fmov	%f1, %f0
-	j	fbgt_cont.34864
-fbgt_else.34885:
-fbgt_cont.34886:
-	j	fbgt_cont.34864
-fbgt_else.34883:
-fbgt_cont.34884:
-	j	fbgt_cont.34864
-fbgt_else.34881:
-fbgt_cont.34882:
-	j	fbgt_cont.34864
-fbgt_else.34879:
-fbgt_cont.34880:
-	j	fbgt_cont.34864
-fbgt_else.34877:
-fbgt_cont.34878:
-	j	fbgt_cont.34864
-fbgt_else.34875:
-fbgt_cont.34876:
-	j	fbgt_cont.34864
-fbgt_else.34873:
-fbgt_cont.34874:
-	j	fbgt_cont.34864
-fbgt_else.34871:
-fbgt_cont.34872:
-	j	fbgt_cont.34864
-fbgt_else.34869:
-fbgt_cont.34870:
-	j	fbgt_cont.34864
-fbgt_else.34867:
-fbgt_cont.34868:
-	j	fbgt_cont.34864
-fbgt_else.34865:
-fbgt_cont.34866:
-	j	fbgt_cont.34864
-fbgt_else.34863:
-	fmov	%f1, %f2
-fbgt_cont.34864:
-	fmov	%f0, %f23
-	jal	reduction_2pi_sub2.2629
-	fblt	%f0, %f19, fbgt_else.34887
-	beqi	%a0, 0, bnei_else.34889
-	add	%a0, %zero, %zero
-	j	fbgt_cont.34888
-bnei_else.34889:
-	add	%a0, %zero, %k1
-bnei_cont.34890:
-	j	fbgt_cont.34888
-fbgt_else.34887:
-fbgt_cont.34888:
-	fblt	%f0, %f19, fbgt_else.34891
-	fsub	%f0, %f0, %f19
-	j	fbgt_cont.34892
-fbgt_else.34891:
-fbgt_cont.34892:
-	fblt	%f0, %f20, fbgt_else.34893
-	fsub	%f0, %f19, %f0
-	j	fbgt_cont.34894
-fbgt_else.34893:
-fbgt_cont.34894:
-	fblt	%f21, %f0, fbgt_else.34895
-	fmul	%f24, %f0, %f0
-	fmul	%f23, %f24, %f24
-	flw	%f1, 477(%zero)
-	fmul	%f1, %f1, %f0
-	fmul	%f1, %f1, %f24
-	fsub	%f16, %f0, %f1
-	flw	%f1, 476(%zero)
-	fmul	%f1, %f1, %f0
-	fmul	%f1, %f1, %f23
-	fadd	%f16, %f16, %f1
-	flw	%f1, 475(%zero)
-	fmul	%f0, %f1, %f0
-	fmul	%f0, %f0, %f24
-	fmul	%f0, %f0, %f23
-	fsub	%f23, %f16, %f0
-	j	fbgt_cont.34896
-fbgt_else.34895:
-	fsub	%f0, %f20, %f0
-	fmul	%f23, %f0, %f0
-	fmul	%f16, %f23, %f23
-	flw	%f0, 473(%zero)
-	fmul	%f0, %f0, %f23
-	fsub	%f1, %f30, %f0
-	flw	%f0, 472(%zero)
-	fmul	%f0, %f0, %f16
-	fadd	%f1, %f1, %f0
-	flw	%f0, 471(%zero)
-	fmul	%f0, %f0, %f23
-	fmul	%f0, %f0, %f16
-	fsub	%f23, %f1, %f0
-fbgt_cont.34896:
-	beqi	%a0, 0, bnei_else.34897
-	j	bnei_cont.34898
-bnei_else.34897:
-	fneg	%f23, %f23
-bnei_cont.34898:
-	flw	%f25, 2(%s1)
-	fabs	%f24, %f25
-	fblt	%f24, %f2, fbgt_else.34899
-	flw	%f1, 492(%zero)
-	fblt	%f24, %f1, fbgt_cont.34900
-	flw	%f1, 491(%zero)
-	fblt	%f24, %f1, fbgt_cont.34900
-	flw	%f1, 490(%zero)
-	fblt	%f24, %f1, fbgt_cont.34900
-	flw	%f1, 489(%zero)
-	fblt	%f24, %f1, fbgt_cont.34900
-	flw	%f1, 488(%zero)
-	fblt	%f24, %f1, fbgt_cont.34900
-	flw	%f1, 487(%zero)
-	fblt	%f24, %f1, fbgt_cont.34900
-	flw	%f1, 486(%zero)
-	fblt	%f24, %f1, fbgt_cont.34900
-	flw	%f1, 485(%zero)
-	fblt	%f24, %f1, fbgt_cont.34900
-	flw	%f1, 484(%zero)
-	fblt	%f24, %f1, fbgt_cont.34900
-	flw	%f1, 483(%zero)
-	fblt	%f24, %f1, fbgt_cont.34900
-	flw	%f1, 482(%zero)
-	fblt	%f24, %f1, fbgt_cont.34900
-	flw	%f1, 481(%zero)
-	fmov	%f0, %f24
-	jal	reduction_2pi_sub1.2626
-	fmov	%f1, %f0
-	j	fbgt_cont.34900
-fbgt_else.34921:
-fbgt_cont.34922:
-	j	fbgt_cont.34900
-fbgt_else.34919:
-fbgt_cont.34920:
-	j	fbgt_cont.34900
-fbgt_else.34917:
-fbgt_cont.34918:
-	j	fbgt_cont.34900
-fbgt_else.34915:
-fbgt_cont.34916:
-	j	fbgt_cont.34900
-fbgt_else.34913:
-fbgt_cont.34914:
-	j	fbgt_cont.34900
-fbgt_else.34911:
-fbgt_cont.34912:
-	j	fbgt_cont.34900
-fbgt_else.34909:
-fbgt_cont.34910:
-	j	fbgt_cont.34900
-fbgt_else.34907:
-fbgt_cont.34908:
-	j	fbgt_cont.34900
-fbgt_else.34905:
-fbgt_cont.34906:
-	j	fbgt_cont.34900
-fbgt_else.34903:
-fbgt_cont.34904:
-	j	fbgt_cont.34900
-fbgt_else.34901:
-fbgt_cont.34902:
-	j	fbgt_cont.34900
-fbgt_else.34899:
-	fmov	%f1, %f2
-fbgt_cont.34900:
-	fmov	%f0, %f24
-	jal	reduction_2pi_sub2.2629
-	fblt	%f0, %f19, fbgt_else.34923
-	add	%a0, %zero, %zero
-	j	fbgt_cont.34924
-fbgt_else.34923:
-	add	%a0, %zero, %k1
-fbgt_cont.34924:
-	fblt	%f0, %f19, fbgt_else.34925
-	fsub	%f0, %f0, %f19
-	j	fbgt_cont.34926
-fbgt_else.34925:
-fbgt_cont.34926:
-	fblt	%f0, %f20, fbgt_else.34927
-	beqi	%a0, 0, bnei_else.34929
-	add	%a0, %zero, %zero
-	j	fbgt_cont.34928
-bnei_else.34929:
-	add	%a0, %zero, %k1
-bnei_cont.34930:
-	j	fbgt_cont.34928
-fbgt_else.34927:
-fbgt_cont.34928:
-	fblt	%f0, %f20, fbgt_else.34931
-	fsub	%f0, %f19, %f0
-	j	fbgt_cont.34932
-fbgt_else.34931:
-fbgt_cont.34932:
-	fblt	%f21, %f0, fbgt_else.34933
-	fmul	%f24, %f0, %f0
-	fmul	%f16, %f24, %f24
-	flw	%f0, 473(%zero)
-	fmul	%f0, %f0, %f24
-	fsub	%f1, %f30, %f0
-	flw	%f0, 472(%zero)
-	fmul	%f0, %f0, %f16
-	fadd	%f1, %f1, %f0
-	flw	%f0, 471(%zero)
-	fmul	%f0, %f0, %f24
-	fmul	%f0, %f0, %f16
-	fsub	%f24, %f1, %f0
-	j	fbgt_cont.34934
-fbgt_else.34933:
-	fsub	%f26, %f20, %f0
-	fmul	%f24, %f26, %f26
-	fmul	%f16, %f24, %f24
-	flw	%f0, 477(%zero)
-	fmul	%f0, %f0, %f26
-	fmul	%f0, %f0, %f24
-	fsub	%f1, %f26, %f0
-	flw	%f0, 476(%zero)
-	fmul	%f0, %f0, %f26
-	fmul	%f0, %f0, %f16
-	fadd	%f1, %f1, %f0
-	flw	%f0, 475(%zero)
-	fmul	%f0, %f0, %f26
-	fmul	%f0, %f0, %f24
-	fmul	%f0, %f0, %f16
-	fsub	%f24, %f1, %f0
-fbgt_cont.34934:
-	beqi	%a0, 0, bnei_else.34935
-	j	bnei_cont.34936
-bnei_else.34935:
-	fneg	%f24, %f24
-bnei_cont.34936:
-	fblt	%f25, %fzero, fbgt_else.34937
-	add	%a0, %zero, %k1
-	j	fbgt_cont.34938
-fbgt_else.34937:
-	add	%a0, %zero, %zero
-fbgt_cont.34938:
-	fabs	%f25, %f25
-	fblt	%f25, %f2, fbgt_else.34939
-	flw	%f1, 492(%zero)
-	fblt	%f25, %f1, fbgt_cont.34940
-	flw	%f1, 491(%zero)
-	fblt	%f25, %f1, fbgt_cont.34940
-	flw	%f1, 490(%zero)
-	fblt	%f25, %f1, fbgt_cont.34940
-	flw	%f1, 489(%zero)
-	fblt	%f25, %f1, fbgt_cont.34940
-	flw	%f1, 488(%zero)
-	fblt	%f25, %f1, fbgt_cont.34940
-	flw	%f1, 487(%zero)
-	fblt	%f25, %f1, fbgt_cont.34940
-	flw	%f1, 486(%zero)
-	fblt	%f25, %f1, fbgt_cont.34940
-	flw	%f1, 485(%zero)
-	fblt	%f25, %f1, fbgt_cont.34940
-	flw	%f1, 484(%zero)
-	fblt	%f25, %f1, fbgt_cont.34940
-	flw	%f1, 483(%zero)
-	fblt	%f25, %f1, fbgt_cont.34940
-	flw	%f1, 482(%zero)
-	fblt	%f25, %f1, fbgt_cont.34940
-	flw	%f1, 481(%zero)
-	fmov	%f0, %f25
-	jal	reduction_2pi_sub1.2626
-	fmov	%f1, %f0
-	j	fbgt_cont.34940
-fbgt_else.34961:
-fbgt_cont.34962:
-	j	fbgt_cont.34940
-fbgt_else.34959:
-fbgt_cont.34960:
-	j	fbgt_cont.34940
-fbgt_else.34957:
-fbgt_cont.34958:
-	j	fbgt_cont.34940
-fbgt_else.34955:
-fbgt_cont.34956:
-	j	fbgt_cont.34940
-fbgt_else.34953:
-fbgt_cont.34954:
-	j	fbgt_cont.34940
-fbgt_else.34951:
-fbgt_cont.34952:
-	j	fbgt_cont.34940
-fbgt_else.34949:
-fbgt_cont.34950:
-	j	fbgt_cont.34940
-fbgt_else.34947:
-fbgt_cont.34948:
-	j	fbgt_cont.34940
-fbgt_else.34945:
-fbgt_cont.34946:
-	j	fbgt_cont.34940
-fbgt_else.34943:
-fbgt_cont.34944:
-	j	fbgt_cont.34940
-fbgt_else.34941:
-fbgt_cont.34942:
-	j	fbgt_cont.34940
-fbgt_else.34939:
-	fmov	%f1, %f2
-fbgt_cont.34940:
-	fmov	%f0, %f25
-	jal	reduction_2pi_sub2.2629
-	fblt	%f0, %f19, fbgt_else.34963
-	beqi	%a0, 0, bnei_else.34965
-	add	%a0, %zero, %zero
-	j	fbgt_cont.34964
-bnei_else.34965:
-	add	%a0, %zero, %k1
-bnei_cont.34966:
-	j	fbgt_cont.34964
-fbgt_else.34963:
-fbgt_cont.34964:
-	fblt	%f0, %f19, fbgt_else.34967
-	fsub	%f0, %f0, %f19
-	j	fbgt_cont.34968
-fbgt_else.34967:
-fbgt_cont.34968:
-	fblt	%f0, %f20, fbgt_else.34969
-	fsub	%f0, %f19, %f0
-	j	fbgt_cont.34970
-fbgt_else.34969:
-fbgt_cont.34970:
-	fblt	%f21, %f0, fbgt_else.34971
-	fmul	%f2, %f0, %f0
-	fmul	%f19, %f2, %f2
-	flw	%f1, 477(%zero)
-	fmul	%f1, %f1, %f0
-	fmul	%f1, %f1, %f2
-	fsub	%f16, %f0, %f1
-	flw	%f1, 476(%zero)
-	fmul	%f1, %f1, %f0
-	fmul	%f1, %f1, %f19
-	fadd	%f16, %f16, %f1
-	flw	%f1, 475(%zero)
-	fmul	%f0, %f1, %f0
-	fmul	%f0, %f0, %f2
-	fmul	%f0, %f0, %f19
-	fsub	%f0, %f16, %f0
-	j	fbgt_cont.34972
-fbgt_else.34971:
-	fsub	%f0, %f20, %f0
-	fmul	%f19, %f0, %f0
-	fmul	%f16, %f19, %f19
-	flw	%f0, 473(%zero)
-	fmul	%f0, %f0, %f19
-	fsub	%f1, %f30, %f0
-	flw	%f0, 472(%zero)
-	fmul	%f0, %f0, %f16
-	fadd	%f1, %f1, %f0
-	flw	%f0, 471(%zero)
-	fmul	%f0, %f0, %f19
-	fmul	%f0, %f0, %f16
-	fsub	%f0, %f1, %f0
-fbgt_cont.34972:
-	beqi	%a0, 0, bnei_else.34973
-	j	bnei_cont.34974
-bnei_else.34973:
-	fneg	%f0, %f0
-bnei_cont.34974:
-	fmul	%f1, %f22, %f24
-	fmul	%f2, %f18, %f23
-	fmul	%f19, %f2, %f24
-	fmul	%f16, %f17, %f0
-	fsub	%f20, %f19, %f16
-	fmul	%f21, %f17, %f23
-	fmul	%f19, %f21, %f24
-	fmul	%f16, %f18, %f0
-	fadd	%f16, %f19, %f16
-	fmul	%f25, %f22, %f0
-	fmul	%f2, %f2, %f0
-	fmul	%f19, %f17, %f24
-	fadd	%f2, %f2, %f19
-	fmul	%f19, %f21, %f0
-	fmul	%f0, %f18, %f24
-	fsub	%f24, %f19, %f0
-	fneg	%f23, %f23
-	fmul	%f19, %f18, %f22
-	fmul	%f22, %f17, %f22
-	flw	%f18, 0(%s2)
-	flw	%f27, 1(%s2)
-	flw	%f26, 2(%s2)
-	fmul	%f0, %f1, %f1
-	fmul	%f17, %f18, %f0
-	fmul	%f0, %f25, %f25
-	fmul	%f0, %f27, %f0
-	fadd	%f17, %f17, %f0
-	fmul	%f0, %f23, %f23
-	fmul	%f0, %f26, %f0
-	fadd	%f0, %f17, %f0
-	fsw	%f0, 0(%s2)
-	fmul	%f0, %f20, %f20
-	fmul	%f17, %f18, %f0
-	fmul	%f0, %f2, %f2
-	fmul	%f0, %f27, %f0
-	fadd	%f17, %f17, %f0
-	fmul	%f0, %f19, %f19
-	fmul	%f0, %f26, %f0
-	fadd	%f0, %f17, %f0
-	fsw	%f0, 1(%s2)
-	fmul	%f0, %f16, %f16
-	fmul	%f17, %f18, %f0
-	fmul	%f0, %f24, %f24
-	fmul	%f0, %f27, %f0
-	fadd	%f17, %f17, %f0
-	fmul	%f0, %f22, %f22
-	fmul	%f0, %f26, %f0
-	fadd	%f0, %f17, %f0
-	fsw	%f0, 2(%s2)
-	flw	%f21, 495(%zero)
-	fmul	%f0, %f18, %f20
-	fmul	%f17, %f0, %f16
-	fmul	%f0, %f27, %f2
-	fmul	%f0, %f0, %f24
-	fadd	%f17, %f17, %f0
-	fmul	%f0, %f26, %f19
-	fmul	%f0, %f0, %f22
-	fadd	%f0, %f17, %f0
-	fmul	%f0, %f21, %f0
-	fsw	%f0, 0(%s1)
-	fmul	%f18, %f18, %f1
-	fmul	%f1, %f18, %f16
-	fmul	%f17, %f27, %f25
-	fmul	%f0, %f17, %f24
-	fadd	%f1, %f1, %f0
-	fmul	%f16, %f26, %f23
-	fmul	%f0, %f16, %f22
-	fadd	%f0, %f1, %f0
-	fmul	%f0, %f21, %f0
-	fsw	%f0, 1(%s1)
-	fmul	%f1, %f18, %f20
-	fmul	%f0, %f17, %f2
-	fadd	%f1, %f1, %f0
-	fmul	%f0, %f16, %f19
-	fadd	%f0, %f1, %f0
-	fmul	%f0, %f21, %f0
-	fsw	%f0, 2(%s1)
-	j	bnei_cont.34746
-bnei_else.34745:
-bnei_cont.34746:
-	add	%ra, %zero, %a1
+bnei_cont.24418:
+	beqi	%s0, 0, bnei_else.24465
+	addi	%v1, %s1, 0
+	addi	%v0, %s2, 0
+	jal	rotate_quadratic_matrix.2779
+	j	bnei_cont.24466
+bnei_else.24465:
+bnei_cont.24466:
+	add	%ra, %zero, %a2
 	add	%v0, %zero, %k1
 	jr	%ra
-bnei_else.34690:
-	add	%ra, %zero, %a1
+bnei_else.24410:
+	add	%ra, %zero, %a2
 	add	%v0, %zero, %zero
 	jr	%ra
 read_object.2784:
-	add	%a2, %zero, %v0
-	add	%t7, %zero, %ra
-	blti	%a2, 60, bgti_else.35096
-	add	%ra, %zero, %t7
+	add	%t7, %zero, %v0
+	add	%t8, %zero, %ra
+	blti	%t7, 60, bgti_else.24551
+	add	%ra, %zero, %t8
 	jr	%ra
-bgti_else.35096:
-	jal	min_caml_read_int
-	addi	%a0, %v0, 0
-	beqi	%a0, -1, bnei_else.35098
-	jal	min_caml_read_int
-	addi	%a1, %v0, 0
-	jal	min_caml_read_int
-	addi	%a3, %v0, 0
-	jal	min_caml_read_int
-	addi	%k0, %v0, 0
-	addi	%s0, %zero, 3
-	addi	%v0, %s0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	addi	%s1, %v0, 0
-	jal	min_caml_read_float
-	fsw	%f0, 0(%s1)
-	jal	min_caml_read_float
-	fsw	%f0, 1(%s1)
-	addi	%s4, %zero, 2
-	jal	min_caml_read_float
-	fsw	%f0, 2(%s1)
-	addi	%v0, %s0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	addi	%s2, %v0, 0
-	jal	min_caml_read_float
-	fsw	%f0, 0(%s2)
-	jal	min_caml_read_float
-	fsw	%f0, 1(%s2)
-	jal	min_caml_read_float
-	fsw	%f0, 2(%s2)
-	jal	min_caml_read_float
-	fblt	%f0, %fzero, fbgt_else.35100
-	add	%s3, %zero, %zero
-	j	fbgt_cont.35101
-fbgt_else.35100:
-	add	%s3, %zero, %k1
-fbgt_cont.35101:
-	addi	%v0, %s4, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	addi	%s4, %v0, 0
-	jal	min_caml_read_float
-	fsw	%f0, 0(%s4)
-	jal	min_caml_read_float
-	fsw	%f0, 1(%s4)
-	addi	%v0, %s0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	addi	%s5, %v0, 0
-	jal	min_caml_read_float
-	fsw	%f0, 0(%s5)
-	jal	min_caml_read_float
-	fsw	%f0, 1(%s5)
-	jal	min_caml_read_float
-	fsw	%f0, 2(%s5)
-	addi	%v0, %s0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	addi	%s0, %v0, 0
-	beqi	%k0, 0, bnei_else.35102
-	jal	min_caml_read_float
-	flw	%f1, 469(%zero)
-	fmul	%f0, %f0, %f1
-	fsw	%f0, 0(%s0)
-	jal	min_caml_read_float
-	fmul	%f0, %f0, %f1
-	fsw	%f0, 1(%s0)
-	jal	min_caml_read_float
-	fmul	%f0, %f0, %f1
-	fsw	%f0, 2(%s0)
-	j	bnei_cont.35103
-bnei_else.35102:
-bnei_cont.35103:
-	beqi	%a1, 2, bnei_else.35104
-	add	%s6, %zero, %s3
-	j	bnei_cont.35105
-bnei_else.35104:
-	add	%s6, %zero, %k1
-bnei_cont.35105:
-	addi	%v0, %zero, 4
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	add	%ra, %zero, %hp
-	addi	%hp, %hp, 11
-	sw	%v0, 10(%ra)
-	sw	%s0, 9(%ra)
-	sw	%s5, 8(%ra)
-	sw	%s4, 7(%ra)
-	sw	%s6, 6(%ra)
-	sw	%s2, 5(%ra)
-	sw	%s1, 4(%ra)
-	sw	%k0, 3(%ra)
-	sw	%a3, 2(%ra)
-	sw	%a1, 1(%ra)
-	sw	%a0, 0(%ra)
-	sw	%ra, 12(%a2)
-	beqi	%a1, 3, bnei_else.35106
-	beqi	%a1, 2, bnei_else.35108
-	j	bnei_cont.35107
-bnei_else.35108:
-	beqi	%s3, 0, bnei_else.35110
-	add	%a0, %zero, %zero
-	j	bnei_cont.35111
-bnei_else.35110:
-	add	%a0, %zero, %k1
-bnei_cont.35111:
-	flw	%f18, 0(%s1)
-	fmul	%f1, %f18, %f18
-	flw	%f17, 1(%s1)
-	fmul	%f0, %f17, %f17
-	fadd	%f1, %f1, %f0
-	flw	%f16, 2(%s1)
-	fmul	%f0, %f16, %f16
-	fadd	%f0, %f1, %f0
-	fsqrt	%f1, %f0
-	fbne	%f1, %fzero, fbeq_else.35112
-	add	%a1, %zero, %k1
-	j	fbeq_cont.35113
-fbeq_else.35112:
-	add	%a1, %zero, %zero
-fbeq_cont.35113:
-	beqi	%a1, 0, bnei_else.35114
-	fmov	%f0, %f30
-	j	bnei_cont.35115
-bnei_else.35114:
-	beqi	%a0, 0, bnei_else.35116
-	flw	%f0, 468(%zero)
-	fdiv	%f0, %f0, %f1
-	j	bnei_cont.35117
-bnei_else.35116:
-	fdiv	%f0, %f30, %f1
-bnei_cont.35117:
-bnei_cont.35115:
-	fmul	%f1, %f18, %f0
-	fsw	%f1, 0(%s1)
-	fmul	%f1, %f17, %f0
-	fsw	%f1, 1(%s1)
-	fmul	%f0, %f16, %f0
-	fsw	%f0, 2(%s1)
-bnei_cont.35109:
-	j	bnei_cont.35107
-bnei_else.35106:
-	flw	%f1, 0(%s1)
-	fbne	%f1, %fzero, fbeq_else.35118
-	add	%a0, %zero, %k1
-	j	fbeq_cont.35119
-fbeq_else.35118:
-	add	%a0, %zero, %zero
-fbeq_cont.35119:
-	beqi	%a0, 0, bnei_else.35120
-	fmov	%f0, %fzero
-	j	bnei_cont.35121
-bnei_else.35120:
-	fbne	%f1, %fzero, fbeq_else.35122
-	add	%a0, %zero, %k1
-	j	fbeq_cont.35123
-fbeq_else.35122:
-	add	%a0, %zero, %zero
-fbeq_cont.35123:
-	beqi	%a0, 0, bnei_else.35124
-	fmov	%f0, %fzero
-	j	bnei_cont.35125
-bnei_else.35124:
-	fblt	%fzero, %f1, fbgt_else.35126
-	add	%a0, %zero, %zero
-	j	fbgt_cont.35127
-fbgt_else.35126:
-	add	%a0, %zero, %k1
-fbgt_cont.35127:
-	beqi	%a0, 0, bnei_else.35128
-	fmov	%f0, %f30
-	j	bnei_cont.35129
-bnei_else.35128:
-	flw	%f0, 468(%zero)
-bnei_cont.35129:
-bnei_cont.35125:
-	fmul	%f1, %f1, %f1
-	fdiv	%f0, %f0, %f1
-bnei_cont.35121:
-	fsw	%f0, 0(%s1)
-	flw	%f1, 1(%s1)
-	fbne	%f1, %fzero, fbeq_else.35130
-	add	%a0, %zero, %k1
-	j	fbeq_cont.35131
-fbeq_else.35130:
-	add	%a0, %zero, %zero
-fbeq_cont.35131:
-	beqi	%a0, 0, bnei_else.35132
-	fmov	%f0, %fzero
-	j	bnei_cont.35133
-bnei_else.35132:
-	fbne	%f1, %fzero, fbeq_else.35134
-	add	%a0, %zero, %k1
-	j	fbeq_cont.35135
-fbeq_else.35134:
-	add	%a0, %zero, %zero
-fbeq_cont.35135:
-	beqi	%a0, 0, bnei_else.35136
-	fmov	%f0, %fzero
-	j	bnei_cont.35137
-bnei_else.35136:
-	fblt	%fzero, %f1, fbgt_else.35138
-	add	%a0, %zero, %zero
-	j	fbgt_cont.35139
-fbgt_else.35138:
-	add	%a0, %zero, %k1
-fbgt_cont.35139:
-	beqi	%a0, 0, bnei_else.35140
-	fmov	%f0, %f30
-	j	bnei_cont.35141
-bnei_else.35140:
-	flw	%f0, 468(%zero)
-bnei_cont.35141:
-bnei_cont.35137:
-	fmul	%f1, %f1, %f1
-	fdiv	%f0, %f0, %f1
-bnei_cont.35133:
-	fsw	%f0, 1(%s1)
-	flw	%f1, 2(%s1)
-	fbne	%f1, %fzero, fbeq_else.35142
-	add	%a0, %zero, %k1
-	j	fbeq_cont.35143
-fbeq_else.35142:
-	add	%a0, %zero, %zero
-fbeq_cont.35143:
-	beqi	%a0, 0, bnei_else.35144
-	fmov	%f0, %fzero
-	j	bnei_cont.35145
-bnei_else.35144:
-	fbne	%f1, %fzero, fbeq_else.35146
-	add	%a0, %zero, %k1
-	j	fbeq_cont.35147
-fbeq_else.35146:
-	add	%a0, %zero, %zero
-fbeq_cont.35147:
-	beqi	%a0, 0, bnei_else.35148
-	fmov	%f0, %fzero
-	j	bnei_cont.35149
-bnei_else.35148:
-	fblt	%fzero, %f1, fbgt_else.35150
-	add	%a0, %zero, %zero
-	j	fbgt_cont.35151
-fbgt_else.35150:
-	add	%a0, %zero, %k1
-fbgt_cont.35151:
-	beqi	%a0, 0, bnei_else.35152
-	fmov	%f0, %f30
-	j	bnei_cont.35153
-bnei_else.35152:
-	flw	%f0, 468(%zero)
-bnei_cont.35153:
-bnei_cont.35149:
-	fmul	%f1, %f1, %f1
-	fdiv	%f0, %f0, %f1
-bnei_cont.35145:
-	fsw	%f0, 2(%s1)
-bnei_cont.35107:
-	beqi	%k0, 0, bnei_else.35154
-	addi	%v1, %s0, 0
-	addi	%v0, %s1, 0
-	jal	rotate_quadratic_matrix.2779
-	j	bnei_cont.35155
-bnei_else.35154:
-bnei_cont.35155:
-	add	%a0, %zero, %k1
-	j	bnei_cont.35099
-bnei_else.35098:
-	add	%a0, %zero, %zero
-bnei_cont.35099:
-	beqi	%a0, 0, bnei_else.35156
-	addi	%t8, %a2, 1
-	blti	%t8, 60, bgti_else.35157
-	add	%ra, %zero, %t7
-	jr	%ra
-bgti_else.35157:
-	addi	%v0, %t8, 0
+bgti_else.24551:
+	addi	%v0, %t7, 0
 	jal	read_nth_object.2782
-	beqi	%v0, 0, bnei_else.35159
-	addi	%v0, %t8, 1
-	add	%ra, %zero, %t7
-	j	read_object.2784
-bnei_else.35159:
-	add	%ra, %zero, %t7
-	sw	%t8, 0(%zero)
+	beqi	%v0, 0, bnei_else.24553
+	addi	%t7, %t7, 1
+	blti	%t7, 60, bgti_else.24554
+	add	%ra, %zero, %t8
 	jr	%ra
-bnei_else.35156:
-	add	%ra, %zero, %t7
-	sw	%a2, 0(%zero)
+bgti_else.24554:
+	addi	%v0, %t7, 0
+	jal	read_nth_object.2782
+	beqi	%v0, 0, bnei_else.24556
+	addi	%t7, %t7, 1
+	blti	%t7, 60, bgti_else.24557
+	add	%ra, %zero, %t8
+	jr	%ra
+bgti_else.24557:
+	addi	%v0, %t7, 0
+	jal	read_nth_object.2782
+	beqi	%v0, 0, bnei_else.24559
+	addi	%t7, %t7, 1
+	blti	%t7, 60, bgti_else.24560
+	add	%ra, %zero, %t8
+	jr	%ra
+bgti_else.24560:
+	addi	%v0, %t7, 0
+	jal	read_nth_object.2782
+	beqi	%v0, 0, bnei_else.24562
+	addi	%t7, %t7, 1
+	blti	%t7, 60, bgti_else.24563
+	add	%ra, %zero, %t8
+	jr	%ra
+bgti_else.24563:
+	addi	%v0, %t7, 0
+	jal	read_nth_object.2782
+	beqi	%v0, 0, bnei_else.24565
+	addi	%t7, %t7, 1
+	blti	%t7, 60, bgti_else.24566
+	add	%ra, %zero, %t8
+	jr	%ra
+bgti_else.24566:
+	addi	%v0, %t7, 0
+	jal	read_nth_object.2782
+	beqi	%v0, 0, bnei_else.24568
+	addi	%t7, %t7, 1
+	blti	%t7, 60, bgti_else.24569
+	add	%ra, %zero, %t8
+	jr	%ra
+bgti_else.24569:
+	addi	%v0, %t7, 0
+	jal	read_nth_object.2782
+	beqi	%v0, 0, bnei_else.24571
+	addi	%t7, %t7, 1
+	blti	%t7, 60, bgti_else.24572
+	add	%ra, %zero, %t8
+	jr	%ra
+bgti_else.24572:
+	addi	%v0, %t7, 0
+	jal	read_nth_object.2782
+	beqi	%v0, 0, bnei_else.24574
+	addi	%v0, %t7, 1
+	add	%ra, %zero, %t8
+	j	read_object.2784
+bnei_else.24574:
+	add	%ra, %zero, %t8
+	sw	%t7, 0(%zero)
+	jr	%ra
+bnei_else.24571:
+	add	%ra, %zero, %t8
+	sw	%t7, 0(%zero)
+	jr	%ra
+bnei_else.24568:
+	add	%ra, %zero, %t8
+	sw	%t7, 0(%zero)
+	jr	%ra
+bnei_else.24565:
+	add	%ra, %zero, %t8
+	sw	%t7, 0(%zero)
+	jr	%ra
+bnei_else.24562:
+	add	%ra, %zero, %t8
+	sw	%t7, 0(%zero)
+	jr	%ra
+bnei_else.24559:
+	add	%ra, %zero, %t8
+	sw	%t7, 0(%zero)
+	jr	%ra
+bnei_else.24556:
+	add	%ra, %zero, %t8
+	sw	%t7, 0(%zero)
+	jr	%ra
+bnei_else.24553:
+	add	%ra, %zero, %t8
+	sw	%t7, 0(%zero)
 	jr	%ra
 read_net_item.2788:
 	sw	%v0, 0(%sp)
@@ -2959,60 +3688,60 @@ read_net_item.2788:
 	addi	%sp, %sp, -9
 	addi	%t0, %v0, 0
 	addi	%a0, %zero, -1
-	beqi	%t0, -1, bnei_else.35232
+	beqi	%t0, -1, bnei_else.24655
 	lw	%a1, 0(%sp)
 	addi	%t1, %a1, 1
 	addi	%sp, %sp, 9
 	jal	min_caml_read_int
 	addi	%sp, %sp, -9
 	addi	%t2, %v0, 0
-	beqi	%t2, -1, bnei_else.35233
+	beqi	%t2, -1, bnei_else.24656
 	addi	%t3, %t1, 1
 	addi	%sp, %sp, 9
 	jal	min_caml_read_int
 	addi	%sp, %sp, -9
 	addi	%t4, %v0, 0
-	beqi	%t4, -1, bnei_else.35235
+	beqi	%t4, -1, bnei_else.24658
 	addi	%t5, %t3, 1
 	addi	%sp, %sp, 9
 	jal	min_caml_read_int
 	addi	%sp, %sp, -9
 	addi	%t6, %v0, 0
-	beqi	%t6, -1, bnei_else.35237
+	beqi	%t6, -1, bnei_else.24660
 	addi	%v0, %t5, 1
 	addi	%sp, %sp, 9
 	jal	read_net_item.2788
 	addi	%sp, %sp, -9
 	add	%at, %v0, %t5
 	sw	%t6, 0(%at)
-	j	bnei_cont.35238
-bnei_else.35237:
+	j	bnei_cont.24661
+bnei_else.24660:
 	addi	%v0, %t5, 1
 	addi	%v1, %a0, 0
 	addi	%sp, %sp, 9
 	jal	min_caml_create_array
 	addi	%sp, %sp, -9
-bnei_cont.35238:
+bnei_cont.24661:
 	add	%at, %v0, %t3
 	sw	%t4, 0(%at)
-	j	bnei_cont.35236
-bnei_else.35235:
+	j	bnei_cont.24659
+bnei_else.24658:
 	addi	%v0, %t3, 1
 	addi	%v1, %a0, 0
 	addi	%sp, %sp, 9
 	jal	min_caml_create_array
 	addi	%sp, %sp, -9
-bnei_cont.35236:
+bnei_cont.24659:
 	add	%at, %v0, %t1
 	sw	%t2, 0(%at)
-	j	bnei_cont.35234
-bnei_else.35233:
+	j	bnei_cont.24657
+bnei_else.24656:
 	addi	%v0, %t1, 1
 	addi	%v1, %a0, 0
 	addi	%sp, %sp, 9
 	jal	min_caml_create_array
 	addi	%sp, %sp, -9
-bnei_cont.35234:
+bnei_cont.24657:
 	lw	%a0, 0(%sp)
 	add	%at, %v0, %a0
 	sw	%t0, 0(%at)
@@ -3025,7 +3754,7 @@ bnei_cont.35234:
 	lw	%t0, 7(%sp)
 	lw	%ra, 8(%sp)
 	jr	%ra
-bnei_else.35232:
+bnei_else.24655:
 	lw	%a1, 0(%sp)
 	addi	%v0, %a1, 1
 	lw	%t6, 1(%sp)
@@ -3048,108 +3777,108 @@ read_or_network.2790:
 	addi	%sp, %sp, -4
 	addi	%a2, %v0, 0
 	addi	%a3, %zero, -1
-	beqi	%a2, -1, bnei_else.35314
+	beqi	%a2, -1, bnei_else.24739
 	addi	%sp, %sp, 4
 	jal	min_caml_read_int
 	addi	%sp, %sp, -4
 	addi	%k0, %v0, 0
-	beqi	%k0, -1, bnei_else.35316
+	beqi	%k0, -1, bnei_else.24741
 	addi	%sp, %sp, 4
 	jal	min_caml_read_int
 	addi	%sp, %sp, -4
 	addi	%s0, %v0, 0
-	beqi	%s0, -1, bnei_else.35318
+	beqi	%s0, -1, bnei_else.24743
 	addi	%v0, %zero, 3
 	addi	%sp, %sp, 4
 	jal	read_net_item.2788
 	addi	%sp, %sp, -4
 	addi	%v1, %v0, 0
 	sw	%s0, 2(%v1)
-	j	bnei_cont.35319
-bnei_else.35318:
+	j	bnei_cont.24744
+bnei_else.24743:
 	addi	%v0, %zero, 3
 	addi	%v1, %a3, 0
 	addi	%sp, %sp, 4
 	jal	min_caml_create_array
 	addi	%sp, %sp, -4
 	addi	%v1, %v0, 0
-bnei_cont.35319:
+bnei_cont.24744:
 	sw	%k0, 1(%v1)
-	j	bnei_cont.35317
-bnei_else.35316:
+	j	bnei_cont.24742
+bnei_else.24741:
 	addi	%v0, %zero, 2
 	addi	%v1, %a3, 0
 	addi	%sp, %sp, 4
 	jal	min_caml_create_array
 	addi	%sp, %sp, -4
 	addi	%v1, %v0, 0
-bnei_cont.35317:
+bnei_cont.24742:
 	sw	%a2, 0(%v1)
-	j	bnei_cont.35315
-bnei_else.35314:
+	j	bnei_cont.24740
+bnei_else.24739:
 	addi	%v1, %a3, 0
 	addi	%v0, %k1, 0
 	addi	%sp, %sp, 4
 	jal	min_caml_create_array
 	addi	%sp, %sp, -4
 	addi	%v1, %v0, 0
-bnei_cont.35315:
+bnei_cont.24740:
 	sw	%v1, 4(%sp)
 	lw	%a0, 0(%v1)
-	beqi	%a0, -1, bnei_else.35320
+	beqi	%a0, -1, bnei_else.24745
 	lw	%a0, 0(%sp)
 	addi	%t0, %a0, 1
 	addi	%sp, %sp, 5
 	jal	min_caml_read_int
 	addi	%sp, %sp, -5
 	addi	%a2, %v0, 0
-	beqi	%a2, -1, bnei_else.35321
+	beqi	%a2, -1, bnei_else.24746
 	addi	%sp, %sp, 5
 	jal	min_caml_read_int
 	addi	%sp, %sp, -5
 	addi	%k0, %v0, 0
-	beqi	%k0, -1, bnei_else.35323
+	beqi	%k0, -1, bnei_else.24748
 	addi	%v0, %zero, 2
 	addi	%sp, %sp, 5
 	jal	read_net_item.2788
 	addi	%sp, %sp, -5
 	addi	%t1, %v0, 0
 	sw	%k0, 1(%t1)
-	j	bnei_cont.35324
-bnei_else.35323:
+	j	bnei_cont.24749
+bnei_else.24748:
 	addi	%v0, %zero, 2
 	addi	%v1, %a3, 0
 	addi	%sp, %sp, 5
 	jal	min_caml_create_array
 	addi	%sp, %sp, -5
 	addi	%t1, %v0, 0
-bnei_cont.35324:
+bnei_cont.24749:
 	sw	%a2, 0(%t1)
-	j	bnei_cont.35322
-bnei_else.35321:
+	j	bnei_cont.24747
+bnei_else.24746:
 	addi	%v1, %a3, 0
 	addi	%v0, %k1, 0
 	addi	%sp, %sp, 5
 	jal	min_caml_create_array
 	addi	%sp, %sp, -5
 	addi	%t1, %v0, 0
-bnei_cont.35322:
+bnei_cont.24747:
 	lw	%a0, 0(%t1)
-	beqi	%a0, -1, bnei_else.35325
+	beqi	%a0, -1, bnei_else.24750
 	addi	%v0, %t0, 1
 	addi	%sp, %sp, 5
 	jal	read_or_network.2790
 	addi	%sp, %sp, -5
 	add	%at, %v0, %t0
 	sw	%t1, 0(%at)
-	j	bnei_cont.35326
-bnei_else.35325:
+	j	bnei_cont.24751
+bnei_else.24750:
 	addi	%v0, %t0, 1
 	addi	%v1, %t1, 0
 	addi	%sp, %sp, 5
 	jal	min_caml_create_array
 	addi	%sp, %sp, -5
-bnei_cont.35326:
+bnei_cont.24751:
 	lw	%a1, 4(%sp)
 	lw	%a0, 0(%sp)
 	add	%at, %v0, %a0
@@ -3158,7 +3887,7 @@ bnei_cont.35326:
 	lw	%t0, 2(%sp)
 	lw	%ra, 3(%sp)
 	jr	%ra
-bnei_else.35320:
+bnei_else.24745:
 	lw	%a0, 0(%sp)
 	addi	%v0, %a0, 1
 	lw	%t1, 1(%sp)
@@ -3171,3851 +3900,505 @@ read_and_network.2792:
 	jal	min_caml_read_int
 	addi	%k0, %v0, 0
 	addi	%s0, %zero, -1
-	beqi	%k0, -1, bnei_else.35379
+	beqi	%k0, -1, bnei_else.24806
 	jal	min_caml_read_int
 	addi	%s1, %v0, 0
-	beqi	%s1, -1, bnei_else.35381
+	beqi	%s1, -1, bnei_else.24808
 	jal	min_caml_read_int
 	addi	%s2, %v0, 0
-	beqi	%s2, -1, bnei_else.35383
+	beqi	%s2, -1, bnei_else.24810
 	addi	%v0, %zero, 3
 	jal	read_net_item.2788
 	sw	%s2, 2(%v0)
-	j	bnei_cont.35384
-bnei_else.35383:
+	j	bnei_cont.24811
+bnei_else.24810:
 	addi	%v0, %zero, 3
 	addi	%v1, %s0, 0
 	jal	min_caml_create_array
-bnei_cont.35384:
+bnei_cont.24811:
 	sw	%s1, 1(%v0)
-	j	bnei_cont.35382
-bnei_else.35381:
+	j	bnei_cont.24809
+bnei_else.24808:
 	addi	%v0, %zero, 2
 	addi	%v1, %s0, 0
 	jal	min_caml_create_array
-bnei_cont.35382:
+bnei_cont.24809:
 	sw	%k0, 0(%v0)
-	j	bnei_cont.35380
-bnei_else.35379:
+	j	bnei_cont.24807
+bnei_else.24806:
 	addi	%v1, %s0, 0
 	addi	%v0, %k1, 0
 	jal	min_caml_create_array
-bnei_cont.35380:
+bnei_cont.24807:
 	lw	%a0, 0(%v0)
-	beqi	%a0, -1, bnei_else.35385
+	beqi	%a0, -1, bnei_else.24812
 	sw	%v0, 83(%a2)
 	addi	%s1, %a2, 1
 	jal	min_caml_read_int
 	addi	%a2, %v0, 0
-	beqi	%a2, -1, bnei_else.35386
+	beqi	%a2, -1, bnei_else.24813
 	jal	min_caml_read_int
 	addi	%k0, %v0, 0
-	beqi	%k0, -1, bnei_else.35388
+	beqi	%k0, -1, bnei_else.24815
 	addi	%v0, %zero, 2
 	jal	read_net_item.2788
 	sw	%k0, 1(%v0)
-	j	bnei_cont.35389
-bnei_else.35388:
+	j	bnei_cont.24816
+bnei_else.24815:
 	addi	%v0, %zero, 2
 	addi	%v1, %s0, 0
 	jal	min_caml_create_array
-bnei_cont.35389:
+bnei_cont.24816:
 	sw	%a2, 0(%v0)
-	j	bnei_cont.35387
-bnei_else.35386:
+	j	bnei_cont.24814
+bnei_else.24813:
 	addi	%v1, %s0, 0
 	addi	%v0, %k1, 0
 	jal	min_caml_create_array
-bnei_cont.35387:
+bnei_cont.24814:
 	lw	%a0, 0(%v0)
-	beqi	%a0, -1, bnei_else.35390
+	beqi	%a0, -1, bnei_else.24817
 	sw	%v0, 83(%s1)
 	addi	%k0, %s1, 1
 	jal	min_caml_read_int
 	addi	%a2, %v0, 0
-	beqi	%a2, -1, bnei_else.35391
+	beqi	%a2, -1, bnei_else.24818
 	addi	%v0, %k1, 0
 	jal	read_net_item.2788
 	sw	%a2, 0(%v0)
-	j	bnei_cont.35392
-bnei_else.35391:
+	j	bnei_cont.24819
+bnei_else.24818:
 	addi	%v1, %s0, 0
 	addi	%v0, %k1, 0
 	jal	min_caml_create_array
-bnei_cont.35392:
+bnei_cont.24819:
 	lw	%a0, 0(%v0)
-	beqi	%a0, -1, bnei_else.35393
+	beqi	%a0, -1, bnei_else.24820
 	sw	%v0, 83(%k0)
 	addi	%a2, %k0, 1
 	addi	%v0, %zero, 0
 	jal	read_net_item.2788
 	lw	%a0, 0(%v0)
-	beqi	%a0, -1, bnei_else.35394
+	beqi	%a0, -1, bnei_else.24821
 	sw	%v0, 83(%a2)
 	addi	%v0, %a2, 1
 	add	%ra, %zero, %a3
 	j	read_and_network.2792
-bnei_else.35394:
+bnei_else.24821:
 	add	%ra, %zero, %a3
 	jr	%ra
-bnei_else.35393:
+bnei_else.24820:
 	add	%ra, %zero, %a3
 	jr	%ra
-bnei_else.35390:
+bnei_else.24817:
 	add	%ra, %zero, %a3
 	jr	%ra
-bnei_else.35385:
+bnei_else.24812:
 	add	%ra, %zero, %a3
 	jr	%ra
-iter_setup_dirvec_constants.2889:
-	add	%a0, %zero, %v0
-	add	%a1, %zero, %v1
-	add	%a2, %zero, %ra
-	blti	%a1, 0, bgti_else.35581
-	lw	%k0, 12(%a1)
-	lw	%s0, 1(%a0)
-	lw	%s1, 0(%a0)
-	lw	%a3, 1(%k0)
-	beqi	%a3, 1, bnei_else.35582
-	beqi	%a3, 2, bnei_else.35584
-	addi	%v0, %zero, 5
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	flw	%f19, 0(%s1)
-	flw	%f2, 1(%s1)
-	flw	%f24, 2(%s1)
-	fmul	%f1, %f19, %f19
-	lw	%a3, 4(%k0)
-	flw	%f0, 0(%a3)
-	fmul	%f16, %f1, %f0
-	fmul	%f1, %f2, %f2
-	lw	%a3, 4(%k0)
-	flw	%f0, 1(%a3)
-	fmul	%f0, %f1, %f0
-	fadd	%f16, %f16, %f0
-	fmul	%f1, %f24, %f24
-	lw	%a3, 4(%k0)
-	flw	%f0, 2(%a3)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	lw	%a3, 3(%k0)
-	beqi	%a3, 0, bnei_else.35586
-	fmul	%f16, %f2, %f24
-	lw	%a3, 9(%k0)
-	flw	%f1, 0(%a3)
-	fmul	%f1, %f16, %f1
-	fadd	%f16, %f0, %f1
-	fmul	%f1, %f24, %f19
-	lw	%a3, 9(%k0)
-	flw	%f0, 1(%a3)
-	fmul	%f0, %f1, %f0
-	fadd	%f16, %f16, %f0
-	fmul	%f1, %f19, %f2
-	lw	%a3, 9(%k0)
-	flw	%f0, 2(%a3)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	j	bnei_cont.35587
-bnei_else.35586:
-bnei_cont.35587:
-	lw	%a3, 4(%k0)
-	flw	%f1, 0(%a3)
-	fmul	%f1, %f19, %f1
-	fneg	%f17, %f1
-	lw	%a3, 4(%k0)
-	flw	%f1, 1(%a3)
-	fmul	%f1, %f2, %f1
-	fneg	%f21, %f1
-	lw	%a3, 4(%k0)
-	flw	%f1, 2(%a3)
-	fmul	%f1, %f24, %f1
-	fneg	%f20, %f1
-	fsw	%f0, 0(%v0)
-	lw	%a3, 3(%k0)
-	beqi	%a3, 0, bnei_else.35588
-	lw	%a3, 9(%k0)
-	flw	%f22, 1(%a3)
-	fmul	%f16, %f24, %f22
-	lw	%a3, 9(%k0)
-	flw	%f18, 2(%a3)
-	fmul	%f1, %f2, %f18
-	fadd	%f1, %f16, %f1
-	flw	%f23, 473(%zero)
-	fmul	%f1, %f1, %f23
-	fsub	%f1, %f17, %f1
-	fsw	%f1, 1(%v0)
-	lw	%a3, 9(%k0)
-	flw	%f17, 0(%a3)
-	fmul	%f16, %f24, %f17
-	fmul	%f1, %f19, %f18
-	fadd	%f1, %f16, %f1
-	fmul	%f1, %f1, %f23
-	fsub	%f1, %f21, %f1
-	fsw	%f1, 2(%v0)
-	fmul	%f16, %f2, %f17
-	fmul	%f1, %f19, %f22
-	fadd	%f1, %f16, %f1
-	fmul	%f1, %f1, %f23
-	fsub	%f1, %f20, %f1
-	fsw	%f1, 3(%v0)
-	j	bnei_cont.35589
-bnei_else.35588:
-	fsw	%f17, 1(%v0)
-	fsw	%f21, 2(%v0)
-	fsw	%f20, 3(%v0)
-bnei_cont.35589:
-	fbne	%f0, %fzero, fbeq_else.35590
-	add	%a3, %zero, %k1
-	j	fbeq_cont.35591
-fbeq_else.35590:
-	add	%a3, %zero, %zero
-fbeq_cont.35591:
-	beqi	%a3, 0, bnei_else.35592
-	j	bnei_cont.35593
-bnei_else.35592:
-	fdiv	%f0, %f30, %f0
-	fsw	%f0, 4(%v0)
-bnei_cont.35593:
-	add	%at, %s0, %a1
-	sw	%v0, 0(%at)
-	j	bnei_cont.35583
-bnei_else.35584:
-	addi	%v0, %zero, 4
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	flw	%f0, 0(%s1)
-	lw	%a3, 4(%k0)
-	flw	%f18, 0(%a3)
-	fmul	%f1, %f0, %f18
-	flw	%f0, 1(%s1)
-	lw	%a3, 4(%k0)
-	flw	%f17, 1(%a3)
-	fmul	%f0, %f0, %f17
-	fadd	%f1, %f1, %f0
-	flw	%f0, 2(%s1)
-	lw	%a3, 4(%k0)
-	flw	%f16, 2(%a3)
-	fmul	%f0, %f0, %f16
-	fadd	%f1, %f1, %f0
-	fblt	%fzero, %f1, fbgt_else.35594
-	add	%a3, %zero, %zero
-	j	fbgt_cont.35595
-fbgt_else.35594:
-	add	%a3, %zero, %k1
-fbgt_cont.35595:
-	beqi	%a3, 0, bnei_else.35596
-	flw	%f0, 468(%zero)
-	fdiv	%f0, %f0, %f1
-	fsw	%f0, 0(%v0)
-	fdiv	%f0, %f18, %f1
-	fneg	%f0, %f0
-	fsw	%f0, 1(%v0)
-	fdiv	%f0, %f17, %f1
-	fneg	%f0, %f0
-	fsw	%f0, 2(%v0)
-	fdiv	%f0, %f16, %f1
-	fneg	%f0, %f0
-	fsw	%f0, 3(%v0)
-	j	bnei_cont.35597
-bnei_else.35596:
-	fsw	%fzero, 0(%v0)
-bnei_cont.35597:
-	add	%at, %s0, %a1
-	sw	%v0, 0(%at)
-bnei_cont.35585:
-	j	bnei_cont.35583
-bnei_else.35582:
-	addi	%v0, %zero, 6
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	flw	%f1, 0(%s1)
-	fbne	%f1, %fzero, fbeq_else.35598
-	add	%a3, %zero, %k1
-	j	fbeq_cont.35599
-fbeq_else.35598:
-	add	%a3, %zero, %zero
-fbeq_cont.35599:
-	beqi	%a3, 0, bnei_else.35600
-	fsw	%fzero, 1(%v0)
-	j	bnei_cont.35601
-bnei_else.35600:
-	lw	%ra, 6(%k0)
-	fblt	%f1, %fzero, fbgt_else.35602
-	add	%a3, %zero, %zero
-	j	fbgt_cont.35603
-fbgt_else.35602:
-	add	%a3, %zero, %k1
-fbgt_cont.35603:
-	beqi	%ra, 0, bnei_else.35604
-	beqi	%a3, 0, bnei_else.35606
-	add	%a3, %zero, %zero
-	j	bnei_cont.35605
-bnei_else.35606:
-	add	%a3, %zero, %k1
-bnei_cont.35607:
-	j	bnei_cont.35605
-bnei_else.35604:
-bnei_cont.35605:
-	lw	%ra, 4(%k0)
-	flw	%f0, 0(%ra)
-	beqi	%a3, 0, bnei_else.35608
-	j	bnei_cont.35609
-bnei_else.35608:
-	fneg	%f0, %f0
-bnei_cont.35609:
-	fsw	%f0, 0(%v0)
-	fdiv	%f0, %f30, %f1
-	fsw	%f0, 1(%v0)
-bnei_cont.35601:
-	flw	%f1, 1(%s1)
-	fbne	%f1, %fzero, fbeq_else.35610
-	add	%a3, %zero, %k1
-	j	fbeq_cont.35611
-fbeq_else.35610:
-	add	%a3, %zero, %zero
-fbeq_cont.35611:
-	beqi	%a3, 0, bnei_else.35612
-	fsw	%fzero, 3(%v0)
-	j	bnei_cont.35613
-bnei_else.35612:
-	lw	%ra, 6(%k0)
-	fblt	%f1, %fzero, fbgt_else.35614
-	add	%a3, %zero, %zero
-	j	fbgt_cont.35615
-fbgt_else.35614:
-	add	%a3, %zero, %k1
-fbgt_cont.35615:
-	beqi	%ra, 0, bnei_else.35616
-	beqi	%a3, 0, bnei_else.35618
-	add	%a3, %zero, %zero
-	j	bnei_cont.35617
-bnei_else.35618:
-	add	%a3, %zero, %k1
-bnei_cont.35619:
-	j	bnei_cont.35617
-bnei_else.35616:
-bnei_cont.35617:
-	lw	%ra, 4(%k0)
-	flw	%f0, 1(%ra)
-	beqi	%a3, 0, bnei_else.35620
-	j	bnei_cont.35621
-bnei_else.35620:
-	fneg	%f0, %f0
-bnei_cont.35621:
-	fsw	%f0, 2(%v0)
-	fdiv	%f0, %f30, %f1
-	fsw	%f0, 3(%v0)
-bnei_cont.35613:
-	flw	%f1, 2(%s1)
-	fbne	%f1, %fzero, fbeq_else.35622
-	add	%a3, %zero, %k1
-	j	fbeq_cont.35623
-fbeq_else.35622:
-	add	%a3, %zero, %zero
-fbeq_cont.35623:
-	beqi	%a3, 0, bnei_else.35624
-	fsw	%fzero, 5(%v0)
-	j	bnei_cont.35625
-bnei_else.35624:
-	lw	%ra, 6(%k0)
-	fblt	%f1, %fzero, fbgt_else.35626
-	add	%a3, %zero, %zero
-	j	fbgt_cont.35627
-fbgt_else.35626:
-	add	%a3, %zero, %k1
-fbgt_cont.35627:
-	beqi	%ra, 0, bnei_else.35628
-	beqi	%a3, 0, bnei_else.35630
-	add	%a3, %zero, %zero
-	j	bnei_cont.35629
-bnei_else.35630:
-	add	%a3, %zero, %k1
-bnei_cont.35631:
-	j	bnei_cont.35629
-bnei_else.35628:
-bnei_cont.35629:
-	lw	%k0, 4(%k0)
-	flw	%f0, 2(%k0)
-	beqi	%a3, 0, bnei_else.35632
-	j	bnei_cont.35633
-bnei_else.35632:
-	fneg	%f0, %f0
-bnei_cont.35633:
-	fsw	%f0, 4(%v0)
-	fdiv	%f0, %f30, %f1
-	fsw	%f0, 5(%v0)
-bnei_cont.35625:
-	add	%at, %s0, %a1
-	sw	%v0, 0(%at)
-bnei_cont.35583:
-	addi	%a3, %a1, -1
-	blti	%a3, 0, bgti_else.35634
-	lw	%k0, 12(%a3)
-	lw	%s0, 1(%a0)
-	lw	%s1, 0(%a0)
-	lw	%a1, 1(%k0)
-	beqi	%a1, 1, bnei_else.35635
-	beqi	%a1, 2, bnei_else.35637
-	addi	%v0, %zero, 5
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	flw	%f18, 0(%s1)
-	flw	%f19, 1(%s1)
-	flw	%f21, 2(%s1)
-	fmul	%f1, %f18, %f18
-	lw	%a1, 4(%k0)
-	flw	%f0, 0(%a1)
-	fmul	%f16, %f1, %f0
-	fmul	%f1, %f19, %f19
-	lw	%a1, 4(%k0)
-	flw	%f0, 1(%a1)
-	fmul	%f0, %f1, %f0
-	fadd	%f16, %f16, %f0
-	fmul	%f1, %f21, %f21
-	lw	%a1, 4(%k0)
-	flw	%f0, 2(%a1)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	lw	%a1, 3(%k0)
-	beqi	%a1, 0, bnei_else.35639
-	fmul	%f16, %f19, %f21
-	lw	%a1, 9(%k0)
-	flw	%f1, 0(%a1)
-	fmul	%f1, %f16, %f1
-	fadd	%f16, %f0, %f1
-	fmul	%f1, %f21, %f18
-	lw	%a1, 9(%k0)
-	flw	%f0, 1(%a1)
-	fmul	%f0, %f1, %f0
-	fadd	%f16, %f16, %f0
-	fmul	%f1, %f18, %f19
-	lw	%a1, 9(%k0)
-	flw	%f0, 2(%a1)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	j	bnei_cont.35640
-bnei_else.35639:
-bnei_cont.35640:
-	lw	%a1, 4(%k0)
-	flw	%f1, 0(%a1)
-	fmul	%f1, %f18, %f1
-	fneg	%f22, %f1
-	lw	%a1, 4(%k0)
-	flw	%f1, 1(%a1)
-	fmul	%f1, %f19, %f1
-	fneg	%f20, %f1
-	lw	%a1, 4(%k0)
-	flw	%f1, 2(%a1)
-	fmul	%f1, %f21, %f1
-	fneg	%f17, %f1
-	fsw	%f0, 0(%v0)
-	lw	%a1, 3(%k0)
-	beqi	%a1, 0, bnei_else.35641
-	lw	%a1, 9(%k0)
-	flw	%f1, 1(%a1)
-	fmul	%f16, %f21, %f1
-	lw	%a1, 9(%k0)
-	flw	%f1, 2(%a1)
-	fmul	%f1, %f19, %f1
-	fadd	%f1, %f16, %f1
-	flw	%f2, 473(%zero)
-	fmul	%f1, %f1, %f2
-	fsub	%f1, %f22, %f1
-	fsw	%f1, 1(%v0)
-	lw	%a1, 9(%k0)
-	flw	%f1, 0(%a1)
-	fmul	%f16, %f21, %f1
-	lw	%a1, 9(%k0)
-	flw	%f1, 2(%a1)
-	fmul	%f1, %f18, %f1
-	fadd	%f1, %f16, %f1
-	fmul	%f1, %f1, %f2
-	fsub	%f1, %f20, %f1
-	fsw	%f1, 2(%v0)
-	lw	%a1, 9(%k0)
-	flw	%f1, 0(%a1)
-	fmul	%f16, %f19, %f1
-	lw	%a1, 9(%k0)
-	flw	%f1, 1(%a1)
-	fmul	%f1, %f18, %f1
-	fadd	%f1, %f16, %f1
-	fmul	%f1, %f1, %f2
-	fsub	%f1, %f17, %f1
-	fsw	%f1, 3(%v0)
-	j	bnei_cont.35642
-bnei_else.35641:
-	fsw	%f22, 1(%v0)
-	fsw	%f20, 2(%v0)
-	fsw	%f17, 3(%v0)
-bnei_cont.35642:
-	fbne	%f0, %fzero, fbeq_else.35643
-	add	%a1, %zero, %k1
-	j	fbeq_cont.35644
-fbeq_else.35643:
-	add	%a1, %zero, %zero
-fbeq_cont.35644:
-	beqi	%a1, 0, bnei_else.35645
-	j	bnei_cont.35646
-bnei_else.35645:
-	fdiv	%f0, %f30, %f0
-	fsw	%f0, 4(%v0)
-bnei_cont.35646:
-	add	%at, %s0, %a3
-	sw	%v0, 0(%at)
-	j	bnei_cont.35636
-bnei_else.35637:
-	addi	%v0, %zero, 4
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	flw	%f1, 0(%s1)
-	lw	%a1, 4(%k0)
-	flw	%f0, 0(%a1)
-	fmul	%f16, %f1, %f0
-	flw	%f1, 1(%s1)
-	lw	%a1, 4(%k0)
-	flw	%f0, 1(%a1)
-	fmul	%f0, %f1, %f0
-	fadd	%f16, %f16, %f0
-	flw	%f1, 2(%s1)
-	lw	%a1, 4(%k0)
-	flw	%f0, 2(%a1)
-	fmul	%f0, %f1, %f0
-	fadd	%f1, %f16, %f0
-	fblt	%fzero, %f1, fbgt_else.35647
-	add	%a1, %zero, %zero
-	j	fbgt_cont.35648
-fbgt_else.35647:
-	add	%a1, %zero, %k1
-fbgt_cont.35648:
-	beqi	%a1, 0, bnei_else.35649
-	flw	%f0, 468(%zero)
-	fdiv	%f0, %f0, %f1
-	fsw	%f0, 0(%v0)
-	lw	%a1, 4(%k0)
-	flw	%f0, 0(%a1)
-	fdiv	%f0, %f0, %f1
-	fneg	%f0, %f0
-	fsw	%f0, 1(%v0)
-	lw	%a1, 4(%k0)
-	flw	%f0, 1(%a1)
-	fdiv	%f0, %f0, %f1
-	fneg	%f0, %f0
-	fsw	%f0, 2(%v0)
-	lw	%a1, 4(%k0)
-	flw	%f0, 2(%a1)
-	fdiv	%f0, %f0, %f1
-	fneg	%f0, %f0
-	fsw	%f0, 3(%v0)
-	j	bnei_cont.35650
-bnei_else.35649:
-	fsw	%fzero, 0(%v0)
-bnei_cont.35650:
-	add	%at, %s0, %a3
-	sw	%v0, 0(%at)
-bnei_cont.35638:
-	j	bnei_cont.35636
-bnei_else.35635:
-	addi	%v0, %zero, 6
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	flw	%f1, 0(%s1)
-	fbne	%f1, %fzero, fbeq_else.35651
-	add	%a1, %zero, %k1
-	j	fbeq_cont.35652
-fbeq_else.35651:
-	add	%a1, %zero, %zero
-fbeq_cont.35652:
-	beqi	%a1, 0, bnei_else.35653
-	fsw	%fzero, 1(%v0)
-	j	bnei_cont.35654
-bnei_else.35653:
-	lw	%ra, 6(%k0)
-	fblt	%f1, %fzero, fbgt_else.35655
-	add	%a1, %zero, %zero
-	j	fbgt_cont.35656
-fbgt_else.35655:
-	add	%a1, %zero, %k1
-fbgt_cont.35656:
-	beqi	%ra, 0, bnei_else.35657
-	beqi	%a1, 0, bnei_else.35659
-	add	%a1, %zero, %zero
-	j	bnei_cont.35658
-bnei_else.35659:
-	add	%a1, %zero, %k1
-bnei_cont.35660:
-	j	bnei_cont.35658
-bnei_else.35657:
-bnei_cont.35658:
-	lw	%ra, 4(%k0)
-	flw	%f0, 0(%ra)
-	beqi	%a1, 0, bnei_else.35661
-	j	bnei_cont.35662
-bnei_else.35661:
-	fneg	%f0, %f0
-bnei_cont.35662:
-	fsw	%f0, 0(%v0)
-	fdiv	%f0, %f30, %f1
-	fsw	%f0, 1(%v0)
-bnei_cont.35654:
-	flw	%f1, 1(%s1)
-	fbne	%f1, %fzero, fbeq_else.35663
-	add	%a1, %zero, %k1
-	j	fbeq_cont.35664
-fbeq_else.35663:
-	add	%a1, %zero, %zero
-fbeq_cont.35664:
-	beqi	%a1, 0, bnei_else.35665
-	fsw	%fzero, 3(%v0)
-	j	bnei_cont.35666
-bnei_else.35665:
-	lw	%ra, 6(%k0)
-	fblt	%f1, %fzero, fbgt_else.35667
-	add	%a1, %zero, %zero
-	j	fbgt_cont.35668
-fbgt_else.35667:
-	add	%a1, %zero, %k1
-fbgt_cont.35668:
-	beqi	%ra, 0, bnei_else.35669
-	beqi	%a1, 0, bnei_else.35671
-	add	%a1, %zero, %zero
-	j	bnei_cont.35670
-bnei_else.35671:
-	add	%a1, %zero, %k1
-bnei_cont.35672:
-	j	bnei_cont.35670
-bnei_else.35669:
-bnei_cont.35670:
-	lw	%ra, 4(%k0)
-	flw	%f0, 1(%ra)
-	beqi	%a1, 0, bnei_else.35673
-	j	bnei_cont.35674
-bnei_else.35673:
-	fneg	%f0, %f0
-bnei_cont.35674:
-	fsw	%f0, 2(%v0)
-	fdiv	%f0, %f30, %f1
-	fsw	%f0, 3(%v0)
-bnei_cont.35666:
-	flw	%f1, 2(%s1)
-	fbne	%f1, %fzero, fbeq_else.35675
-	add	%a1, %zero, %k1
-	j	fbeq_cont.35676
-fbeq_else.35675:
-	add	%a1, %zero, %zero
-fbeq_cont.35676:
-	beqi	%a1, 0, bnei_else.35677
-	fsw	%fzero, 5(%v0)
-	j	bnei_cont.35678
-bnei_else.35677:
-	lw	%ra, 6(%k0)
-	fblt	%f1, %fzero, fbgt_else.35679
-	add	%a1, %zero, %zero
-	j	fbgt_cont.35680
-fbgt_else.35679:
-	add	%a1, %zero, %k1
-fbgt_cont.35680:
-	beqi	%ra, 0, bnei_else.35681
-	beqi	%a1, 0, bnei_else.35683
-	add	%a1, %zero, %zero
-	j	bnei_cont.35682
-bnei_else.35683:
-	add	%a1, %zero, %k1
-bnei_cont.35684:
-	j	bnei_cont.35682
-bnei_else.35681:
-bnei_cont.35682:
-	lw	%k0, 4(%k0)
-	flw	%f0, 2(%k0)
-	beqi	%a1, 0, bnei_else.35685
-	j	bnei_cont.35686
-bnei_else.35685:
-	fneg	%f0, %f0
-bnei_cont.35686:
-	fsw	%f0, 4(%v0)
-	fdiv	%f0, %f30, %f1
-	fsw	%f0, 5(%v0)
-bnei_cont.35678:
-	add	%at, %s0, %a3
-	sw	%v0, 0(%at)
-bnei_cont.35636:
-	addi	%v1, %a3, -1
-	add	%ra, %zero, %a2
-	addi	%v0, %a0, 0
-	j	iter_setup_dirvec_constants.2889
-bgti_else.35634:
-	add	%ra, %zero, %a2
-	jr	%ra
-bgti_else.35581:
-	add	%ra, %zero, %a2
-	jr	%ra
-setup_dirvec_constants.2892:
-	add	%a0, %zero, %v0
-	add	%a1, %zero, %ra
-	lw	%a2, 0(%zero)
-	addi	%a3, %a2, -1
-	blti	%a3, 0, bgti_else.35789
-	lw	%k0, 12(%a3)
-	lw	%s0, 1(%a0)
-	lw	%s1, 0(%a0)
-	lw	%a2, 1(%k0)
-	beqi	%a2, 1, bnei_else.35790
-	beqi	%a2, 2, bnei_else.35792
-	addi	%v0, %zero, 5
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	flw	%f18, 0(%s1)
-	flw	%f19, 1(%s1)
-	flw	%f21, 2(%s1)
-	fmul	%f1, %f18, %f18
-	lw	%a2, 4(%k0)
-	flw	%f0, 0(%a2)
-	fmul	%f16, %f1, %f0
-	fmul	%f1, %f19, %f19
-	lw	%a2, 4(%k0)
-	flw	%f0, 1(%a2)
-	fmul	%f0, %f1, %f0
-	fadd	%f16, %f16, %f0
-	fmul	%f1, %f21, %f21
-	lw	%a2, 4(%k0)
-	flw	%f0, 2(%a2)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	lw	%a2, 3(%k0)
-	beqi	%a2, 0, bnei_else.35794
-	fmul	%f16, %f19, %f21
-	lw	%a2, 9(%k0)
-	flw	%f1, 0(%a2)
-	fmul	%f1, %f16, %f1
-	fadd	%f16, %f0, %f1
-	fmul	%f1, %f21, %f18
-	lw	%a2, 9(%k0)
-	flw	%f0, 1(%a2)
-	fmul	%f0, %f1, %f0
-	fadd	%f16, %f16, %f0
-	fmul	%f1, %f18, %f19
-	lw	%a2, 9(%k0)
-	flw	%f0, 2(%a2)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	j	bnei_cont.35795
-bnei_else.35794:
-bnei_cont.35795:
-	lw	%a2, 4(%k0)
-	flw	%f1, 0(%a2)
-	fmul	%f1, %f18, %f1
-	fneg	%f22, %f1
-	lw	%a2, 4(%k0)
-	flw	%f1, 1(%a2)
-	fmul	%f1, %f19, %f1
-	fneg	%f20, %f1
-	lw	%a2, 4(%k0)
-	flw	%f1, 2(%a2)
-	fmul	%f1, %f21, %f1
-	fneg	%f17, %f1
-	fsw	%f0, 0(%v0)
-	lw	%a2, 3(%k0)
-	beqi	%a2, 0, bnei_else.35796
-	lw	%a2, 9(%k0)
-	flw	%f1, 1(%a2)
-	fmul	%f16, %f21, %f1
-	lw	%a2, 9(%k0)
-	flw	%f1, 2(%a2)
-	fmul	%f1, %f19, %f1
-	fadd	%f1, %f16, %f1
-	flw	%f2, 473(%zero)
-	fmul	%f1, %f1, %f2
-	fsub	%f1, %f22, %f1
-	fsw	%f1, 1(%v0)
-	lw	%a2, 9(%k0)
-	flw	%f1, 0(%a2)
-	fmul	%f16, %f21, %f1
-	lw	%a2, 9(%k0)
-	flw	%f1, 2(%a2)
-	fmul	%f1, %f18, %f1
-	fadd	%f1, %f16, %f1
-	fmul	%f1, %f1, %f2
-	fsub	%f1, %f20, %f1
-	fsw	%f1, 2(%v0)
-	lw	%a2, 9(%k0)
-	flw	%f1, 0(%a2)
-	fmul	%f16, %f19, %f1
-	lw	%a2, 9(%k0)
-	flw	%f1, 1(%a2)
-	fmul	%f1, %f18, %f1
-	fadd	%f1, %f16, %f1
-	fmul	%f1, %f1, %f2
-	fsub	%f1, %f17, %f1
-	fsw	%f1, 3(%v0)
-	j	bnei_cont.35797
-bnei_else.35796:
-	fsw	%f22, 1(%v0)
-	fsw	%f20, 2(%v0)
-	fsw	%f17, 3(%v0)
-bnei_cont.35797:
-	fbne	%f0, %fzero, fbeq_else.35798
-	add	%a2, %zero, %k1
-	j	fbeq_cont.35799
-fbeq_else.35798:
-	add	%a2, %zero, %zero
-fbeq_cont.35799:
-	beqi	%a2, 0, bnei_else.35800
-	j	bnei_cont.35801
-bnei_else.35800:
-	fdiv	%f0, %f30, %f0
-	fsw	%f0, 4(%v0)
-bnei_cont.35801:
-	add	%at, %s0, %a3
-	sw	%v0, 0(%at)
-	j	bnei_cont.35791
-bnei_else.35792:
-	addi	%v0, %zero, 4
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	flw	%f1, 0(%s1)
-	lw	%a2, 4(%k0)
-	flw	%f0, 0(%a2)
-	fmul	%f16, %f1, %f0
-	flw	%f1, 1(%s1)
-	lw	%a2, 4(%k0)
-	flw	%f0, 1(%a2)
-	fmul	%f0, %f1, %f0
-	fadd	%f16, %f16, %f0
-	flw	%f1, 2(%s1)
-	lw	%a2, 4(%k0)
-	flw	%f0, 2(%a2)
-	fmul	%f0, %f1, %f0
-	fadd	%f1, %f16, %f0
-	fblt	%fzero, %f1, fbgt_else.35802
-	add	%a2, %zero, %zero
-	j	fbgt_cont.35803
-fbgt_else.35802:
-	add	%a2, %zero, %k1
-fbgt_cont.35803:
-	beqi	%a2, 0, bnei_else.35804
-	flw	%f0, 468(%zero)
-	fdiv	%f0, %f0, %f1
-	fsw	%f0, 0(%v0)
-	lw	%a2, 4(%k0)
-	flw	%f0, 0(%a2)
-	fdiv	%f0, %f0, %f1
-	fneg	%f0, %f0
-	fsw	%f0, 1(%v0)
-	lw	%a2, 4(%k0)
-	flw	%f0, 1(%a2)
-	fdiv	%f0, %f0, %f1
-	fneg	%f0, %f0
-	fsw	%f0, 2(%v0)
-	lw	%a2, 4(%k0)
-	flw	%f0, 2(%a2)
-	fdiv	%f0, %f0, %f1
-	fneg	%f0, %f0
-	fsw	%f0, 3(%v0)
-	j	bnei_cont.35805
-bnei_else.35804:
-	fsw	%fzero, 0(%v0)
-bnei_cont.35805:
-	add	%at, %s0, %a3
-	sw	%v0, 0(%at)
-bnei_cont.35793:
-	j	bnei_cont.35791
-bnei_else.35790:
-	addi	%v0, %zero, 6
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	flw	%f1, 0(%s1)
-	fbne	%f1, %fzero, fbeq_else.35806
-	add	%a2, %zero, %k1
-	j	fbeq_cont.35807
-fbeq_else.35806:
-	add	%a2, %zero, %zero
-fbeq_cont.35807:
-	beqi	%a2, 0, bnei_else.35808
-	fsw	%fzero, 1(%v0)
-	j	bnei_cont.35809
-bnei_else.35808:
-	lw	%ra, 6(%k0)
-	fblt	%f1, %fzero, fbgt_else.35810
-	add	%a2, %zero, %zero
-	j	fbgt_cont.35811
-fbgt_else.35810:
-	add	%a2, %zero, %k1
-fbgt_cont.35811:
-	beqi	%ra, 0, bnei_else.35812
-	beqi	%a2, 0, bnei_else.35814
-	add	%a2, %zero, %zero
-	j	bnei_cont.35813
-bnei_else.35814:
-	add	%a2, %zero, %k1
-bnei_cont.35815:
-	j	bnei_cont.35813
-bnei_else.35812:
-bnei_cont.35813:
-	lw	%ra, 4(%k0)
-	flw	%f0, 0(%ra)
-	beqi	%a2, 0, bnei_else.35816
-	j	bnei_cont.35817
-bnei_else.35816:
-	fneg	%f0, %f0
-bnei_cont.35817:
-	fsw	%f0, 0(%v0)
-	fdiv	%f0, %f30, %f1
-	fsw	%f0, 1(%v0)
-bnei_cont.35809:
-	flw	%f1, 1(%s1)
-	fbne	%f1, %fzero, fbeq_else.35818
-	add	%a2, %zero, %k1
-	j	fbeq_cont.35819
-fbeq_else.35818:
-	add	%a2, %zero, %zero
-fbeq_cont.35819:
-	beqi	%a2, 0, bnei_else.35820
-	fsw	%fzero, 3(%v0)
-	j	bnei_cont.35821
-bnei_else.35820:
-	lw	%ra, 6(%k0)
-	fblt	%f1, %fzero, fbgt_else.35822
-	add	%a2, %zero, %zero
-	j	fbgt_cont.35823
-fbgt_else.35822:
-	add	%a2, %zero, %k1
-fbgt_cont.35823:
-	beqi	%ra, 0, bnei_else.35824
-	beqi	%a2, 0, bnei_else.35826
-	add	%a2, %zero, %zero
-	j	bnei_cont.35825
-bnei_else.35826:
-	add	%a2, %zero, %k1
-bnei_cont.35827:
-	j	bnei_cont.35825
-bnei_else.35824:
-bnei_cont.35825:
-	lw	%ra, 4(%k0)
-	flw	%f0, 1(%ra)
-	beqi	%a2, 0, bnei_else.35828
-	j	bnei_cont.35829
-bnei_else.35828:
-	fneg	%f0, %f0
-bnei_cont.35829:
-	fsw	%f0, 2(%v0)
-	fdiv	%f0, %f30, %f1
-	fsw	%f0, 3(%v0)
-bnei_cont.35821:
-	flw	%f1, 2(%s1)
-	fbne	%f1, %fzero, fbeq_else.35830
-	add	%a2, %zero, %k1
-	j	fbeq_cont.35831
-fbeq_else.35830:
-	add	%a2, %zero, %zero
-fbeq_cont.35831:
-	beqi	%a2, 0, bnei_else.35832
-	fsw	%fzero, 5(%v0)
-	j	bnei_cont.35833
-bnei_else.35832:
-	lw	%ra, 6(%k0)
-	fblt	%f1, %fzero, fbgt_else.35834
-	add	%a2, %zero, %zero
-	j	fbgt_cont.35835
-fbgt_else.35834:
-	add	%a2, %zero, %k1
-fbgt_cont.35835:
-	beqi	%ra, 0, bnei_else.35836
-	beqi	%a2, 0, bnei_else.35838
-	add	%a2, %zero, %zero
-	j	bnei_cont.35837
-bnei_else.35838:
-	add	%a2, %zero, %k1
-bnei_cont.35839:
-	j	bnei_cont.35837
-bnei_else.35836:
-bnei_cont.35837:
-	lw	%k0, 4(%k0)
-	flw	%f0, 2(%k0)
-	beqi	%a2, 0, bnei_else.35840
-	j	bnei_cont.35841
-bnei_else.35840:
-	fneg	%f0, %f0
-bnei_cont.35841:
-	fsw	%f0, 4(%v0)
-	fdiv	%f0, %f30, %f1
-	fsw	%f0, 5(%v0)
-bnei_cont.35833:
-	add	%at, %s0, %a3
-	sw	%v0, 0(%at)
-bnei_cont.35791:
-	addi	%v1, %a3, -1
-	add	%ra, %zero, %a1
-	addi	%v0, %a0, 0
-	j	iter_setup_dirvec_constants.2889
-bgti_else.35789:
-	add	%ra, %zero, %a1
-	jr	%ra
-setup_startp_constants.2894:
-	blti	%v1, 0, bgti_else.35877
-	lw	%a2, 12(%v1)
-	lw	%a3, 10(%a2)
-	lw	%a1, 1(%a2)
-	flw	%f1, 0(%v0)
-	lw	%a0, 5(%a2)
-	flw	%f0, 0(%a0)
-	fsub	%f0, %f1, %f0
-	fsw	%f0, 0(%a3)
-	flw	%f1, 1(%v0)
-	lw	%a0, 5(%a2)
-	flw	%f0, 1(%a0)
-	fsub	%f0, %f1, %f0
-	fsw	%f0, 1(%a3)
-	flw	%f1, 2(%v0)
-	lw	%a0, 5(%a2)
-	flw	%f0, 2(%a0)
-	fsub	%f0, %f1, %f0
-	fsw	%f0, 2(%a3)
-	beqi	%a1, 2, bnei_else.35878
-	addi	%at, %zero, 2
-	blt	%at, %a1, bgt_else.35880
-	j	bnei_cont.35879
-bgt_else.35880:
-	flw	%f17, 0(%a3)
-	flw	%f18, 1(%a3)
-	flw	%f19, 2(%a3)
-	fmul	%f1, %f17, %f17
-	lw	%a0, 4(%a2)
-	flw	%f0, 0(%a0)
-	fmul	%f16, %f1, %f0
-	fmul	%f1, %f18, %f18
-	lw	%a0, 4(%a2)
-	flw	%f0, 1(%a0)
-	fmul	%f0, %f1, %f0
-	fadd	%f16, %f16, %f0
-	fmul	%f1, %f19, %f19
-	lw	%a0, 4(%a2)
-	flw	%f0, 2(%a0)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	lw	%a0, 3(%a2)
-	beqi	%a0, 0, bnei_else.35882
-	fmul	%f16, %f18, %f19
-	lw	%a0, 9(%a2)
-	flw	%f1, 0(%a0)
-	fmul	%f1, %f16, %f1
-	fadd	%f16, %f0, %f1
-	fmul	%f1, %f19, %f17
-	lw	%a0, 9(%a2)
-	flw	%f0, 1(%a0)
-	fmul	%f0, %f1, %f0
-	fadd	%f16, %f16, %f0
-	fmul	%f1, %f17, %f18
-	lw	%a0, 9(%a2)
-	flw	%f0, 2(%a0)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	j	bnei_cont.35883
-bnei_else.35882:
-bnei_cont.35883:
-	beqi	%a1, 3, bnei_else.35884
-	j	bnei_cont.35885
-bnei_else.35884:
-	fsub	%f0, %f0, %f30
-bnei_cont.35885:
-	fsw	%f0, 3(%a3)
-bgt_cont.35881:
-	j	bnei_cont.35879
-bnei_else.35878:
-	lw	%a0, 4(%a2)
-	flw	%f1, 0(%a3)
-	flw	%f17, 1(%a3)
-	flw	%f16, 2(%a3)
-	flw	%f0, 0(%a0)
-	fmul	%f1, %f0, %f1
-	flw	%f0, 1(%a0)
-	fmul	%f0, %f0, %f17
-	fadd	%f1, %f1, %f0
-	flw	%f0, 2(%a0)
-	fmul	%f0, %f0, %f16
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 3(%a3)
-bnei_cont.35879:
-	addi	%v1, %v1, -1
-	j	setup_startp_constants.2894
-bgti_else.35877:
-	jr	%ra
-check_all_inside.2919:
-	add	%at, %v1, %v0
-	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.36031
-	lw	%a1, 12(%a0)
-	lw	%a0, 5(%a1)
-	flw	%f16, 0(%a0)
-	fsub	%f19, %f0, %f16
-	lw	%a0, 5(%a1)
-	flw	%f16, 1(%a0)
-	fsub	%f20, %f1, %f16
-	lw	%a0, 5(%a1)
-	flw	%f16, 2(%a0)
-	fsub	%f21, %f2, %f16
-	lw	%a0, 1(%a1)
-	beqi	%a0, 1, bnei_else.36032
-	beqi	%a0, 2, bnei_else.36034
-	fmul	%f17, %f19, %f19
-	lw	%a0, 4(%a1)
-	flw	%f16, 0(%a0)
-	fmul	%f18, %f17, %f16
-	fmul	%f17, %f20, %f20
-	lw	%a0, 4(%a1)
-	flw	%f16, 1(%a0)
-	fmul	%f16, %f17, %f16
-	fadd	%f18, %f18, %f16
-	fmul	%f17, %f21, %f21
-	lw	%a0, 4(%a1)
-	flw	%f16, 2(%a0)
-	fmul	%f16, %f17, %f16
-	fadd	%f16, %f18, %f16
-	lw	%a0, 3(%a1)
-	beqi	%a0, 0, bnei_else.36036
-	fmul	%f18, %f20, %f21
-	lw	%a0, 9(%a1)
-	flw	%f17, 0(%a0)
-	fmul	%f17, %f18, %f17
-	fadd	%f18, %f16, %f17
-	fmul	%f17, %f21, %f19
-	lw	%a0, 9(%a1)
-	flw	%f16, 1(%a0)
-	fmul	%f16, %f17, %f16
-	fadd	%f18, %f18, %f16
-	fmul	%f17, %f19, %f20
-	lw	%a0, 9(%a1)
-	flw	%f16, 2(%a0)
-	fmul	%f16, %f17, %f16
-	fadd	%f16, %f18, %f16
-	j	bnei_cont.36037
-bnei_else.36036:
-bnei_cont.36037:
-	lw	%a0, 1(%a1)
-	beqi	%a0, 3, bnei_else.36038
-	j	bnei_cont.36039
-bnei_else.36038:
-	fsub	%f16, %f16, %f30
-bnei_cont.36039:
-	lw	%a1, 6(%a1)
-	fblt	%f16, %fzero, fbgt_else.36040
-	add	%a0, %zero, %zero
-	j	fbgt_cont.36041
-fbgt_else.36040:
-	add	%a0, %zero, %k1
-fbgt_cont.36041:
-	beqi	%a1, 0, bnei_else.36042
-	beqi	%a0, 0, bnei_else.36044
-	add	%a0, %zero, %zero
-	j	bnei_cont.36043
-bnei_else.36044:
-	add	%a0, %zero, %k1
-bnei_cont.36045:
-	j	bnei_cont.36043
-bnei_else.36042:
-bnei_cont.36043:
-	beqi	%a0, 0, bnei_else.36046
-	add	%a0, %zero, %zero
-	j	bnei_cont.36033
-bnei_else.36046:
-	add	%a0, %zero, %k1
-bnei_cont.36047:
-	j	bnei_cont.36033
-bnei_else.36034:
-	lw	%a0, 4(%a1)
-	flw	%f16, 0(%a0)
-	fmul	%f17, %f16, %f19
-	flw	%f16, 1(%a0)
-	fmul	%f16, %f16, %f20
-	fadd	%f17, %f17, %f16
-	flw	%f16, 2(%a0)
-	fmul	%f16, %f16, %f21
-	fadd	%f16, %f17, %f16
-	lw	%a1, 6(%a1)
-	fblt	%f16, %fzero, fbgt_else.36048
-	add	%a0, %zero, %zero
-	j	fbgt_cont.36049
-fbgt_else.36048:
-	add	%a0, %zero, %k1
-fbgt_cont.36049:
-	beqi	%a1, 0, bnei_else.36050
-	beqi	%a0, 0, bnei_else.36052
-	add	%a0, %zero, %zero
-	j	bnei_cont.36051
-bnei_else.36052:
-	add	%a0, %zero, %k1
-bnei_cont.36053:
-	j	bnei_cont.36051
-bnei_else.36050:
-bnei_cont.36051:
-	beqi	%a0, 0, bnei_else.36054
-	add	%a0, %zero, %zero
-	j	bnei_cont.36033
-bnei_else.36054:
-	add	%a0, %zero, %k1
-bnei_cont.36055:
-bnei_cont.36035:
-	j	bnei_cont.36033
-bnei_else.36032:
-	fabs	%f17, %f19
-	lw	%a0, 4(%a1)
-	flw	%f16, 0(%a0)
-	fblt	%f17, %f16, fbgt_else.36056
-	add	%a0, %zero, %zero
-	j	fbgt_cont.36057
-fbgt_else.36056:
-	add	%a0, %zero, %k1
-fbgt_cont.36057:
-	beqi	%a0, 0, bnei_else.36058
-	fabs	%f17, %f20
-	lw	%a0, 4(%a1)
-	flw	%f16, 1(%a0)
-	fblt	%f17, %f16, fbgt_else.36060
-	add	%a0, %zero, %zero
-	j	fbgt_cont.36061
-fbgt_else.36060:
-	add	%a0, %zero, %k1
-fbgt_cont.36061:
-	beqi	%a0, 0, bnei_else.36062
-	fabs	%f17, %f21
-	lw	%a0, 4(%a1)
-	flw	%f16, 2(%a0)
-	fblt	%f17, %f16, fbgt_else.36064
-	add	%a0, %zero, %zero
-	j	bnei_cont.36059
-fbgt_else.36064:
-	add	%a0, %zero, %k1
-fbgt_cont.36065:
-	j	bnei_cont.36059
-bnei_else.36062:
-	add	%a0, %zero, %zero
-bnei_cont.36063:
-	j	bnei_cont.36059
-bnei_else.36058:
-	add	%a0, %zero, %zero
-bnei_cont.36059:
-	beqi	%a0, 0, bnei_else.36066
-	lw	%a0, 6(%a1)
-	j	bnei_cont.36067
-bnei_else.36066:
-	lw	%a0, 6(%a1)
-	beqi	%a0, 0, bnei_else.36068
-	add	%a0, %zero, %zero
-	j	bnei_cont.36069
-bnei_else.36068:
-	add	%a0, %zero, %k1
-bnei_cont.36069:
-bnei_cont.36067:
-bnei_cont.36033:
-	beqi	%a0, 0, bnei_else.36070
-	add	%v0, %zero, %zero
-	jr	%ra
-bnei_else.36070:
-	addi	%a1, %v0, 1
-	add	%at, %v1, %a1
-	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.36071
-	lw	%a2, 12(%a0)
-	lw	%a0, 5(%a2)
-	flw	%f16, 0(%a0)
-	fsub	%f19, %f0, %f16
-	lw	%a0, 5(%a2)
-	flw	%f16, 1(%a0)
-	fsub	%f20, %f1, %f16
-	lw	%a0, 5(%a2)
-	flw	%f16, 2(%a0)
-	fsub	%f21, %f2, %f16
-	lw	%a0, 1(%a2)
-	beqi	%a0, 1, bnei_else.36072
-	beqi	%a0, 2, bnei_else.36074
-	fmul	%f17, %f19, %f19
-	lw	%a0, 4(%a2)
-	flw	%f16, 0(%a0)
-	fmul	%f18, %f17, %f16
-	fmul	%f17, %f20, %f20
-	lw	%a0, 4(%a2)
-	flw	%f16, 1(%a0)
-	fmul	%f16, %f17, %f16
-	fadd	%f18, %f18, %f16
-	fmul	%f17, %f21, %f21
-	lw	%a0, 4(%a2)
-	flw	%f16, 2(%a0)
-	fmul	%f16, %f17, %f16
-	fadd	%f16, %f18, %f16
-	lw	%a0, 3(%a2)
-	beqi	%a0, 0, bnei_else.36076
-	fmul	%f18, %f20, %f21
-	lw	%a0, 9(%a2)
-	flw	%f17, 0(%a0)
-	fmul	%f17, %f18, %f17
-	fadd	%f18, %f16, %f17
-	fmul	%f17, %f21, %f19
-	lw	%a0, 9(%a2)
-	flw	%f16, 1(%a0)
-	fmul	%f16, %f17, %f16
-	fadd	%f18, %f18, %f16
-	fmul	%f17, %f19, %f20
-	lw	%a0, 9(%a2)
-	flw	%f16, 2(%a0)
-	fmul	%f16, %f17, %f16
-	fadd	%f16, %f18, %f16
-	j	bnei_cont.36077
-bnei_else.36076:
-bnei_cont.36077:
-	lw	%a0, 1(%a2)
-	beqi	%a0, 3, bnei_else.36078
-	j	bnei_cont.36079
-bnei_else.36078:
-	fsub	%f16, %f16, %f30
-bnei_cont.36079:
-	lw	%a2, 6(%a2)
-	fblt	%f16, %fzero, fbgt_else.36080
-	add	%a0, %zero, %zero
-	j	fbgt_cont.36081
-fbgt_else.36080:
-	add	%a0, %zero, %k1
-fbgt_cont.36081:
-	beqi	%a2, 0, bnei_else.36082
-	beqi	%a0, 0, bnei_else.36084
-	add	%a0, %zero, %zero
-	j	bnei_cont.36083
-bnei_else.36084:
-	add	%a0, %zero, %k1
-bnei_cont.36085:
-	j	bnei_cont.36083
-bnei_else.36082:
-bnei_cont.36083:
-	beqi	%a0, 0, bnei_else.36086
-	add	%a0, %zero, %zero
-	j	bnei_cont.36073
-bnei_else.36086:
-	add	%a0, %zero, %k1
-bnei_cont.36087:
-	j	bnei_cont.36073
-bnei_else.36074:
-	lw	%a0, 4(%a2)
-	flw	%f16, 0(%a0)
-	fmul	%f17, %f16, %f19
-	flw	%f16, 1(%a0)
-	fmul	%f16, %f16, %f20
-	fadd	%f17, %f17, %f16
-	flw	%f16, 2(%a0)
-	fmul	%f16, %f16, %f21
-	fadd	%f16, %f17, %f16
-	lw	%a2, 6(%a2)
-	fblt	%f16, %fzero, fbgt_else.36088
-	add	%a0, %zero, %zero
-	j	fbgt_cont.36089
-fbgt_else.36088:
-	add	%a0, %zero, %k1
-fbgt_cont.36089:
-	beqi	%a2, 0, bnei_else.36090
-	beqi	%a0, 0, bnei_else.36092
-	add	%a0, %zero, %zero
-	j	bnei_cont.36091
-bnei_else.36092:
-	add	%a0, %zero, %k1
-bnei_cont.36093:
-	j	bnei_cont.36091
-bnei_else.36090:
-bnei_cont.36091:
-	beqi	%a0, 0, bnei_else.36094
-	add	%a0, %zero, %zero
-	j	bnei_cont.36073
-bnei_else.36094:
-	add	%a0, %zero, %k1
-bnei_cont.36095:
-bnei_cont.36075:
-	j	bnei_cont.36073
-bnei_else.36072:
-	fabs	%f17, %f19
-	lw	%a0, 4(%a2)
-	flw	%f16, 0(%a0)
-	fblt	%f17, %f16, fbgt_else.36096
-	add	%a0, %zero, %zero
-	j	fbgt_cont.36097
-fbgt_else.36096:
-	add	%a0, %zero, %k1
-fbgt_cont.36097:
-	beqi	%a0, 0, bnei_else.36098
-	fabs	%f17, %f20
-	lw	%a0, 4(%a2)
-	flw	%f16, 1(%a0)
-	fblt	%f17, %f16, fbgt_else.36100
-	add	%a0, %zero, %zero
-	j	fbgt_cont.36101
-fbgt_else.36100:
-	add	%a0, %zero, %k1
-fbgt_cont.36101:
-	beqi	%a0, 0, bnei_else.36102
-	fabs	%f17, %f21
-	lw	%a0, 4(%a2)
-	flw	%f16, 2(%a0)
-	fblt	%f17, %f16, fbgt_else.36104
-	add	%a0, %zero, %zero
-	j	bnei_cont.36099
-fbgt_else.36104:
-	add	%a0, %zero, %k1
-fbgt_cont.36105:
-	j	bnei_cont.36099
-bnei_else.36102:
-	add	%a0, %zero, %zero
-bnei_cont.36103:
-	j	bnei_cont.36099
-bnei_else.36098:
-	add	%a0, %zero, %zero
-bnei_cont.36099:
-	beqi	%a0, 0, bnei_else.36106
-	lw	%a0, 6(%a2)
-	j	bnei_cont.36107
-bnei_else.36106:
-	lw	%a0, 6(%a2)
-	beqi	%a0, 0, bnei_else.36108
-	add	%a0, %zero, %zero
-	j	bnei_cont.36109
-bnei_else.36108:
-	add	%a0, %zero, %k1
-bnei_cont.36109:
-bnei_cont.36107:
-bnei_cont.36073:
-	beqi	%a0, 0, bnei_else.36110
-	add	%v0, %zero, %zero
-	jr	%ra
-bnei_else.36110:
-	addi	%a0, %a1, 1
-	addi	%v0, %a0, 0
-	j	check_all_inside.2919
-bnei_else.36071:
-	add	%v0, %zero, %k1
-	jr	%ra
-bnei_else.36031:
-	add	%v0, %zero, %k1
-	jr	%ra
-shadow_check_and_group.2925:
-	add	%a3, %zero, %v0
-	add	%k0, %zero, %ra
-	add	%at, %v1, %a3
-	lw	%a2, 0(%at)
-	beqi	%a2, -1, bnei_else.36306
-	lw	%a1, 12(%a2)
-	flw	%f19, 138(%zero)
-	lw	%a0, 5(%a1)
-	flw	%f0, 0(%a0)
-	fsub	%f21, %f19, %f0
-	flw	%f16, 139(%zero)
-	lw	%a0, 5(%a1)
-	flw	%f0, 1(%a0)
-	fsub	%f22, %f16, %f0
-	flw	%f18, 140(%zero)
-	lw	%a0, 5(%a1)
-	flw	%f0, 2(%a0)
-	fsub	%f23, %f18, %f0
-	lw	%a2, 187(%a2)
-	lw	%a0, 1(%a1)
-	beqi	%a0, 1, bnei_else.36307
-	beqi	%a0, 2, bnei_else.36309
-	flw	%f20, 0(%a2)
-	fbne	%f20, %fzero, fbeq_else.36311
-	add	%a0, %zero, %k1
-	j	fbeq_cont.36312
-fbeq_else.36311:
-	add	%a0, %zero, %zero
-fbeq_cont.36312:
-	beqi	%a0, 0, bnei_else.36313
-	add	%a0, %zero, %zero
-	j	bnei_cont.36308
-bnei_else.36313:
-	flw	%f0, 1(%a2)
-	fmul	%f1, %f0, %f21
-	flw	%f0, 2(%a2)
-	fmul	%f0, %f0, %f22
-	fadd	%f1, %f1, %f0
-	flw	%f0, 3(%a2)
-	fmul	%f0, %f0, %f23
-	fadd	%f2, %f1, %f0
-	fmul	%f1, %f21, %f21
-	lw	%a0, 4(%a1)
-	flw	%f0, 0(%a0)
-	fmul	%f17, %f1, %f0
-	fmul	%f1, %f22, %f22
-	lw	%a0, 4(%a1)
-	flw	%f0, 1(%a0)
-	fmul	%f0, %f1, %f0
-	fadd	%f17, %f17, %f0
-	fmul	%f1, %f23, %f23
-	lw	%a0, 4(%a1)
-	flw	%f0, 2(%a0)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f17, %f0
-	lw	%a0, 3(%a1)
-	beqi	%a0, 0, bnei_else.36315
-	fmul	%f17, %f22, %f23
-	lw	%a0, 9(%a1)
-	flw	%f1, 0(%a0)
-	fmul	%f1, %f17, %f1
-	fadd	%f17, %f0, %f1
-	fmul	%f1, %f23, %f21
-	lw	%a0, 9(%a1)
-	flw	%f0, 1(%a0)
-	fmul	%f0, %f1, %f0
-	fadd	%f17, %f17, %f0
-	fmul	%f1, %f21, %f22
-	lw	%a0, 9(%a1)
-	flw	%f0, 2(%a0)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f17, %f0
-	j	bnei_cont.36316
-bnei_else.36315:
-bnei_cont.36316:
-	lw	%a0, 1(%a1)
-	beqi	%a0, 3, bnei_else.36317
-	j	bnei_cont.36318
-bnei_else.36317:
-	fsub	%f0, %f0, %f30
-bnei_cont.36318:
-	fmul	%f1, %f2, %f2
-	fmul	%f0, %f20, %f0
-	fsub	%f0, %f1, %f0
-	fblt	%fzero, %f0, fbgt_else.36319
-	add	%a0, %zero, %zero
-	j	fbgt_cont.36320
-fbgt_else.36319:
-	add	%a0, %zero, %k1
-fbgt_cont.36320:
-	beqi	%a0, 0, bnei_else.36321
-	lw	%a0, 6(%a1)
-	beqi	%a0, 0, bnei_else.36323
-	fsqrt	%f0, %f0
-	fadd	%f1, %f2, %f0
-	flw	%f0, 4(%a2)
-	fmul	%f0, %f1, %f0
-	fsw	%f0, 135(%zero)
-	j	bnei_cont.36324
-bnei_else.36323:
-	fsqrt	%f0, %f0
-	fsub	%f1, %f2, %f0
-	flw	%f0, 4(%a2)
-	fmul	%f0, %f1, %f0
-	fsw	%f0, 135(%zero)
-bnei_cont.36324:
-	add	%a0, %zero, %k1
-	j	bnei_cont.36308
-bnei_else.36321:
-	add	%a0, %zero, %zero
-bnei_cont.36322:
-bnei_cont.36314:
-	j	bnei_cont.36308
-bnei_else.36309:
-	flw	%f0, 0(%a2)
-	fblt	%f0, %fzero, fbgt_else.36325
-	add	%a0, %zero, %zero
-	j	fbgt_cont.36326
-fbgt_else.36325:
-	add	%a0, %zero, %k1
-fbgt_cont.36326:
-	beqi	%a0, 0, bnei_else.36327
-	flw	%f0, 1(%a2)
-	fmul	%f1, %f0, %f21
-	flw	%f0, 2(%a2)
-	fmul	%f0, %f0, %f22
-	fadd	%f1, %f1, %f0
-	flw	%f0, 3(%a2)
-	fmul	%f0, %f0, %f23
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 135(%zero)
-	add	%a0, %zero, %k1
-	j	bnei_cont.36308
-bnei_else.36327:
-	add	%a0, %zero, %zero
-bnei_cont.36328:
-bnei_cont.36310:
-	j	bnei_cont.36308
-bnei_else.36307:
-	flw	%f0, 0(%a2)
-	fsub	%f0, %f0, %f21
-	flw	%f20, 1(%a2)
-	fmul	%f2, %f0, %f20
-	flw	%f17, 185(%zero)
-	fmul	%f0, %f2, %f17
-	fadd	%f0, %f0, %f22
-	fabs	%f1, %f0
-	lw	%a0, 4(%a1)
-	flw	%f0, 1(%a0)
-	fblt	%f1, %f0, fbgt_else.36329
-	add	%a0, %zero, %zero
-	j	fbgt_cont.36330
-fbgt_else.36329:
-	add	%a0, %zero, %k1
-fbgt_cont.36330:
-	beqi	%a0, 0, bnei_else.36331
-	flw	%f0, 186(%zero)
-	fmul	%f0, %f2, %f0
-	fadd	%f0, %f0, %f23
-	fabs	%f1, %f0
-	lw	%a0, 4(%a1)
-	flw	%f0, 2(%a0)
-	fblt	%f1, %f0, fbgt_else.36333
-	add	%a0, %zero, %zero
-	j	fbgt_cont.36334
-fbgt_else.36333:
-	add	%a0, %zero, %k1
-fbgt_cont.36334:
-	beqi	%a0, 0, bnei_else.36335
-	fbne	%f20, %fzero, fbeq_else.36337
-	add	%a0, %zero, %k1
-	j	fbeq_cont.36338
-fbeq_else.36337:
-	add	%a0, %zero, %zero
-fbeq_cont.36338:
-	beqi	%a0, 0, bnei_else.36339
-	add	%a0, %zero, %zero
-	j	bnei_cont.36332
-bnei_else.36339:
-	add	%a0, %zero, %k1
-bnei_cont.36340:
-	j	bnei_cont.36332
-bnei_else.36335:
-	add	%a0, %zero, %zero
-bnei_cont.36336:
-	j	bnei_cont.36332
-bnei_else.36331:
-	add	%a0, %zero, %zero
-bnei_cont.36332:
-	beqi	%a0, 0, bnei_else.36341
-	fsw	%f2, 135(%zero)
-	add	%a0, %zero, %k1
-	j	bnei_cont.36342
-bnei_else.36341:
-	flw	%f0, 2(%a2)
-	fsub	%f0, %f0, %f22
-	flw	%f24, 3(%a2)
-	fmul	%f2, %f0, %f24
-	flw	%f20, 184(%zero)
-	fmul	%f0, %f2, %f20
-	fadd	%f0, %f0, %f21
-	fabs	%f1, %f0
-	lw	%a0, 4(%a1)
-	flw	%f0, 0(%a0)
-	fblt	%f1, %f0, fbgt_else.36343
-	add	%a0, %zero, %zero
-	j	fbgt_cont.36344
-fbgt_else.36343:
-	add	%a0, %zero, %k1
-fbgt_cont.36344:
-	beqi	%a0, 0, bnei_else.36345
-	flw	%f0, 186(%zero)
-	fmul	%f0, %f2, %f0
-	fadd	%f0, %f0, %f23
-	fabs	%f1, %f0
-	lw	%a0, 4(%a1)
-	flw	%f0, 2(%a0)
-	fblt	%f1, %f0, fbgt_else.36347
-	add	%a0, %zero, %zero
-	j	fbgt_cont.36348
-fbgt_else.36347:
-	add	%a0, %zero, %k1
-fbgt_cont.36348:
-	beqi	%a0, 0, bnei_else.36349
-	fbne	%f24, %fzero, fbeq_else.36351
-	add	%a0, %zero, %k1
-	j	fbeq_cont.36352
-fbeq_else.36351:
-	add	%a0, %zero, %zero
-fbeq_cont.36352:
-	beqi	%a0, 0, bnei_else.36353
-	add	%a0, %zero, %zero
-	j	bnei_cont.36346
-bnei_else.36353:
-	add	%a0, %zero, %k1
-bnei_cont.36354:
-	j	bnei_cont.36346
-bnei_else.36349:
-	add	%a0, %zero, %zero
-bnei_cont.36350:
-	j	bnei_cont.36346
-bnei_else.36345:
-	add	%a0, %zero, %zero
-bnei_cont.36346:
-	beqi	%a0, 0, bnei_else.36355
-	fsw	%f2, 135(%zero)
-	addi	%a0, %zero, 2
-	j	bnei_cont.36356
-bnei_else.36355:
-	flw	%f0, 4(%a2)
-	fsub	%f0, %f0, %f23
-	flw	%f23, 5(%a2)
-	fmul	%f2, %f0, %f23
-	fmul	%f0, %f2, %f20
-	fadd	%f0, %f0, %f21
-	fabs	%f1, %f0
-	lw	%a0, 4(%a1)
-	flw	%f0, 0(%a0)
-	fblt	%f1, %f0, fbgt_else.36357
-	add	%a0, %zero, %zero
-	j	fbgt_cont.36358
-fbgt_else.36357:
-	add	%a0, %zero, %k1
-fbgt_cont.36358:
-	beqi	%a0, 0, bnei_else.36359
-	fmul	%f0, %f2, %f17
-	fadd	%f0, %f0, %f22
-	fabs	%f1, %f0
-	lw	%a0, 4(%a1)
-	flw	%f0, 1(%a0)
-	fblt	%f1, %f0, fbgt_else.36361
-	add	%a0, %zero, %zero
-	j	fbgt_cont.36362
-fbgt_else.36361:
-	add	%a0, %zero, %k1
-fbgt_cont.36362:
-	beqi	%a0, 0, bnei_else.36363
-	fbne	%f23, %fzero, fbeq_else.36365
-	add	%a0, %zero, %k1
-	j	fbeq_cont.36366
-fbeq_else.36365:
-	add	%a0, %zero, %zero
-fbeq_cont.36366:
-	beqi	%a0, 0, bnei_else.36367
-	add	%a0, %zero, %zero
-	j	bnei_cont.36360
-bnei_else.36367:
-	add	%a0, %zero, %k1
-bnei_cont.36368:
-	j	bnei_cont.36360
-bnei_else.36363:
-	add	%a0, %zero, %zero
-bnei_cont.36364:
-	j	bnei_cont.36360
-bnei_else.36359:
-	add	%a0, %zero, %zero
-bnei_cont.36360:
-	beqi	%a0, 0, bnei_else.36369
-	fsw	%f2, 135(%zero)
-	addi	%a0, %zero, 3
-	j	bnei_cont.36370
-bnei_else.36369:
-	add	%a0, %zero, %zero
-bnei_cont.36370:
-bnei_cont.36356:
-bnei_cont.36342:
-bnei_cont.36308:
-	flw	%f1, 135(%zero)
-	beqi	%a0, 0, bnei_else.36371
-	flw	%f0, 467(%zero)
-	fblt	%f1, %f0, fbgt_else.36373
-	add	%a0, %zero, %zero
-	j	bnei_cont.36372
-fbgt_else.36373:
-	add	%a0, %zero, %k1
-fbgt_cont.36374:
-	j	bnei_cont.36372
-bnei_else.36371:
-	add	%a0, %zero, %zero
-bnei_cont.36372:
-	beqi	%a0, 0, bnei_else.36375
-	flw	%f0, 466(%zero)
-	fadd	%f17, %f1, %f0
-	flw	%f0, 78(%zero)
-	fmul	%f0, %f0, %f17
-	fadd	%f0, %f0, %f19
-	flw	%f1, 79(%zero)
-	fmul	%f1, %f1, %f17
-	fadd	%f1, %f1, %f16
-	flw	%f16, 80(%zero)
-	fmul	%f16, %f16, %f17
-	fadd	%f2, %f16, %f18
-	lw	%a0, 0(%v1)
-	beqi	%a0, -1, bnei_else.36376
-	lw	%a1, 12(%a0)
-	lw	%a0, 5(%a1)
-	flw	%f16, 0(%a0)
-	fsub	%f19, %f0, %f16
-	lw	%a0, 5(%a1)
-	flw	%f16, 1(%a0)
-	fsub	%f20, %f1, %f16
-	lw	%a0, 5(%a1)
-	flw	%f16, 2(%a0)
-	fsub	%f21, %f2, %f16
-	lw	%a0, 1(%a1)
-	beqi	%a0, 1, bnei_else.36378
-	beqi	%a0, 2, bnei_else.36380
-	fmul	%f17, %f19, %f19
-	lw	%a0, 4(%a1)
-	flw	%f16, 0(%a0)
-	fmul	%f18, %f17, %f16
-	fmul	%f17, %f20, %f20
-	lw	%a0, 4(%a1)
-	flw	%f16, 1(%a0)
-	fmul	%f16, %f17, %f16
-	fadd	%f18, %f18, %f16
-	fmul	%f17, %f21, %f21
-	lw	%a0, 4(%a1)
-	flw	%f16, 2(%a0)
-	fmul	%f16, %f17, %f16
-	fadd	%f16, %f18, %f16
-	lw	%a0, 3(%a1)
-	beqi	%a0, 0, bnei_else.36382
-	fmul	%f18, %f20, %f21
-	lw	%a0, 9(%a1)
-	flw	%f17, 0(%a0)
-	fmul	%f17, %f18, %f17
-	fadd	%f18, %f16, %f17
-	fmul	%f17, %f21, %f19
-	lw	%a0, 9(%a1)
-	flw	%f16, 1(%a0)
-	fmul	%f16, %f17, %f16
-	fadd	%f18, %f18, %f16
-	fmul	%f17, %f19, %f20
-	lw	%a0, 9(%a1)
-	flw	%f16, 2(%a0)
-	fmul	%f16, %f17, %f16
-	fadd	%f16, %f18, %f16
-	j	bnei_cont.36383
-bnei_else.36382:
-bnei_cont.36383:
-	lw	%a0, 1(%a1)
-	beqi	%a0, 3, bnei_else.36384
-	j	bnei_cont.36385
-bnei_else.36384:
-	fsub	%f16, %f16, %f30
-bnei_cont.36385:
-	lw	%a1, 6(%a1)
-	fblt	%f16, %fzero, fbgt_else.36386
-	add	%a0, %zero, %zero
-	j	fbgt_cont.36387
-fbgt_else.36386:
-	add	%a0, %zero, %k1
-fbgt_cont.36387:
-	beqi	%a1, 0, bnei_else.36388
-	beqi	%a0, 0, bnei_else.36390
-	add	%a0, %zero, %zero
-	j	bnei_cont.36389
-bnei_else.36390:
-	add	%a0, %zero, %k1
-bnei_cont.36391:
-	j	bnei_cont.36389
-bnei_else.36388:
-bnei_cont.36389:
-	beqi	%a0, 0, bnei_else.36392
-	add	%a0, %zero, %zero
-	j	bnei_cont.36379
-bnei_else.36392:
-	add	%a0, %zero, %k1
-bnei_cont.36393:
-	j	bnei_cont.36379
-bnei_else.36380:
-	lw	%a0, 4(%a1)
-	flw	%f16, 0(%a0)
-	fmul	%f17, %f16, %f19
-	flw	%f16, 1(%a0)
-	fmul	%f16, %f16, %f20
-	fadd	%f17, %f17, %f16
-	flw	%f16, 2(%a0)
-	fmul	%f16, %f16, %f21
-	fadd	%f16, %f17, %f16
-	lw	%a1, 6(%a1)
-	fblt	%f16, %fzero, fbgt_else.36394
-	add	%a0, %zero, %zero
-	j	fbgt_cont.36395
-fbgt_else.36394:
-	add	%a0, %zero, %k1
-fbgt_cont.36395:
-	beqi	%a1, 0, bnei_else.36396
-	beqi	%a0, 0, bnei_else.36398
-	add	%a0, %zero, %zero
-	j	bnei_cont.36397
-bnei_else.36398:
-	add	%a0, %zero, %k1
-bnei_cont.36399:
-	j	bnei_cont.36397
-bnei_else.36396:
-bnei_cont.36397:
-	beqi	%a0, 0, bnei_else.36400
-	add	%a0, %zero, %zero
-	j	bnei_cont.36379
-bnei_else.36400:
-	add	%a0, %zero, %k1
-bnei_cont.36401:
-bnei_cont.36381:
-	j	bnei_cont.36379
-bnei_else.36378:
-	fabs	%f17, %f19
-	lw	%a0, 4(%a1)
-	flw	%f16, 0(%a0)
-	fblt	%f17, %f16, fbgt_else.36402
-	add	%a0, %zero, %zero
-	j	fbgt_cont.36403
-fbgt_else.36402:
-	add	%a0, %zero, %k1
-fbgt_cont.36403:
-	beqi	%a0, 0, bnei_else.36404
-	fabs	%f17, %f20
-	lw	%a0, 4(%a1)
-	flw	%f16, 1(%a0)
-	fblt	%f17, %f16, fbgt_else.36406
-	add	%a0, %zero, %zero
-	j	fbgt_cont.36407
-fbgt_else.36406:
-	add	%a0, %zero, %k1
-fbgt_cont.36407:
-	beqi	%a0, 0, bnei_else.36408
-	fabs	%f17, %f21
-	lw	%a0, 4(%a1)
-	flw	%f16, 2(%a0)
-	fblt	%f17, %f16, fbgt_else.36410
-	add	%a0, %zero, %zero
-	j	bnei_cont.36405
-fbgt_else.36410:
-	add	%a0, %zero, %k1
-fbgt_cont.36411:
-	j	bnei_cont.36405
-bnei_else.36408:
-	add	%a0, %zero, %zero
-bnei_cont.36409:
-	j	bnei_cont.36405
-bnei_else.36404:
-	add	%a0, %zero, %zero
-bnei_cont.36405:
-	beqi	%a0, 0, bnei_else.36412
-	lw	%a0, 6(%a1)
-	j	bnei_cont.36413
-bnei_else.36412:
-	lw	%a0, 6(%a1)
-	beqi	%a0, 0, bnei_else.36414
-	add	%a0, %zero, %zero
-	j	bnei_cont.36415
-bnei_else.36414:
-	add	%a0, %zero, %k1
-bnei_cont.36415:
-bnei_cont.36413:
-bnei_cont.36379:
-	beqi	%a0, 0, bnei_else.36416
-	add	%v0, %zero, %zero
-	j	bnei_cont.36377
-bnei_else.36416:
-	addi	%v0, %k1, 0
-	jal	check_all_inside.2919
-bnei_cont.36417:
-	j	bnei_cont.36377
-bnei_else.36376:
-	add	%v0, %zero, %k1
-bnei_cont.36377:
-	beqi	%v0, 0, bnei_else.36418
-	add	%ra, %zero, %k0
-	add	%v0, %zero, %k1
-	jr	%ra
-bnei_else.36418:
-	addi	%v0, %a3, 1
-	add	%ra, %zero, %k0
-	j	shadow_check_and_group.2925
-bnei_else.36375:
-	lw	%a0, 6(%a1)
-	beqi	%a0, 0, bnei_else.36419
-	addi	%v0, %a3, 1
-	add	%ra, %zero, %k0
-	j	shadow_check_and_group.2925
-bnei_else.36419:
-	add	%ra, %zero, %k0
-	add	%v0, %zero, %zero
-	jr	%ra
-bnei_else.36306:
-	add	%ra, %zero, %k0
-	add	%v0, %zero, %zero
-	jr	%ra
-shadow_check_one_or_group.2928:
-	add	%s0, %zero, %v0
-	add	%s1, %zero, %v1
-	add	%s2, %zero, %ra
-	add	%at, %s1, %s0
-	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.36462
-	lw	%v1, 83(%a0)
-	addi	%v0, %zero, 0
-	jal	shadow_check_and_group.2925
-	beqi	%v0, 0, bnei_else.36463
-	add	%ra, %zero, %s2
-	add	%v0, %zero, %k1
-	jr	%ra
-bnei_else.36463:
-	addi	%s0, %s0, 1
-	add	%at, %s1, %s0
-	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.36464
-	lw	%v1, 83(%a0)
-	addi	%v0, %zero, 0
-	jal	shadow_check_and_group.2925
-	beqi	%v0, 0, bnei_else.36465
-	add	%ra, %zero, %s2
-	add	%v0, %zero, %k1
-	jr	%ra
-bnei_else.36465:
-	addi	%s0, %s0, 1
-	add	%at, %s1, %s0
-	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.36466
-	lw	%v1, 83(%a0)
-	addi	%v0, %zero, 0
-	jal	shadow_check_and_group.2925
-	beqi	%v0, 0, bnei_else.36467
-	add	%ra, %zero, %s2
-	add	%v0, %zero, %k1
-	jr	%ra
-bnei_else.36467:
-	addi	%s0, %s0, 1
-	add	%at, %s1, %s0
-	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.36468
-	lw	%v1, 83(%a0)
-	addi	%v0, %zero, 0
-	jal	shadow_check_and_group.2925
-	beqi	%v0, 0, bnei_else.36469
-	add	%ra, %zero, %s2
-	add	%v0, %zero, %k1
-	jr	%ra
-bnei_else.36469:
-	addi	%v0, %s0, 1
-	add	%ra, %zero, %s2
-	addi	%v1, %s1, 0
-	j	shadow_check_one_or_group.2928
-bnei_else.36468:
-	add	%ra, %zero, %s2
-	add	%v0, %zero, %zero
-	jr	%ra
-bnei_else.36466:
-	add	%ra, %zero, %s2
-	add	%v0, %zero, %zero
-	jr	%ra
-bnei_else.36464:
-	add	%ra, %zero, %s2
-	add	%v0, %zero, %zero
-	jr	%ra
-bnei_else.36462:
-	add	%ra, %zero, %s2
-	add	%v0, %zero, %zero
-	jr	%ra
-shadow_check_one_or_matrix.2931:
-	add	%s3, %zero, %v0
-	add	%s4, %zero, %v1
-	add	%s5, %zero, %ra
-	add	%at, %s4, %s3
-	lw	%s6, 0(%at)
-	lw	%a1, 0(%s6)
-	beqi	%a1, -1, bnei_else.36644
-	beqi	%a1, 99, bnei_else.36645
-	lw	%a2, 12(%a1)
-	flw	%f1, 138(%zero)
-	lw	%a0, 5(%a2)
-	flw	%f0, 0(%a0)
-	fsub	%f19, %f1, %f0
-	flw	%f1, 139(%zero)
-	lw	%a0, 5(%a2)
-	flw	%f0, 1(%a0)
-	fsub	%f2, %f1, %f0
-	flw	%f1, 140(%zero)
-	lw	%a0, 5(%a2)
-	flw	%f0, 2(%a0)
-	fsub	%f20, %f1, %f0
-	lw	%a1, 187(%a1)
-	lw	%a0, 1(%a2)
-	beqi	%a0, 1, bnei_else.36647
-	beqi	%a0, 2, bnei_else.36649
-	flw	%f18, 0(%a1)
-	fbne	%f18, %fzero, fbeq_else.36651
-	add	%a0, %zero, %k1
-	j	fbeq_cont.36652
-fbeq_else.36651:
-	add	%a0, %zero, %zero
-fbeq_cont.36652:
-	beqi	%a0, 0, bnei_else.36653
-	add	%a0, %zero, %zero
-	j	bnei_cont.36648
-bnei_else.36653:
-	flw	%f0, 1(%a1)
-	fmul	%f1, %f0, %f19
-	flw	%f0, 2(%a1)
-	fmul	%f0, %f0, %f2
-	fadd	%f1, %f1, %f0
-	flw	%f0, 3(%a1)
-	fmul	%f0, %f0, %f20
-	fadd	%f17, %f1, %f0
-	fmul	%f1, %f19, %f19
-	lw	%a0, 4(%a2)
-	flw	%f0, 0(%a0)
-	fmul	%f16, %f1, %f0
-	fmul	%f1, %f2, %f2
-	lw	%a0, 4(%a2)
-	flw	%f0, 1(%a0)
-	fmul	%f0, %f1, %f0
-	fadd	%f16, %f16, %f0
-	fmul	%f1, %f20, %f20
-	lw	%a0, 4(%a2)
-	flw	%f0, 2(%a0)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	lw	%a0, 3(%a2)
-	beqi	%a0, 0, bnei_else.36655
-	fmul	%f16, %f2, %f20
-	lw	%a0, 9(%a2)
-	flw	%f1, 0(%a0)
-	fmul	%f1, %f16, %f1
-	fadd	%f16, %f0, %f1
-	fmul	%f1, %f20, %f19
-	lw	%a0, 9(%a2)
-	flw	%f0, 1(%a0)
-	fmul	%f0, %f1, %f0
-	fadd	%f16, %f16, %f0
-	fmul	%f1, %f19, %f2
-	lw	%a0, 9(%a2)
-	flw	%f0, 2(%a0)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	j	bnei_cont.36656
-bnei_else.36655:
-bnei_cont.36656:
-	lw	%a0, 1(%a2)
-	beqi	%a0, 3, bnei_else.36657
-	j	bnei_cont.36658
-bnei_else.36657:
-	fsub	%f0, %f0, %f30
-bnei_cont.36658:
-	fmul	%f1, %f17, %f17
-	fmul	%f0, %f18, %f0
-	fsub	%f0, %f1, %f0
-	fblt	%fzero, %f0, fbgt_else.36659
-	add	%a0, %zero, %zero
-	j	fbgt_cont.36660
-fbgt_else.36659:
-	add	%a0, %zero, %k1
-fbgt_cont.36660:
-	beqi	%a0, 0, bnei_else.36661
-	lw	%a0, 6(%a2)
-	beqi	%a0, 0, bnei_else.36663
-	fsqrt	%f0, %f0
-	fadd	%f1, %f17, %f0
-	flw	%f0, 4(%a1)
-	fmul	%f0, %f1, %f0
-	fsw	%f0, 135(%zero)
-	j	bnei_cont.36664
-bnei_else.36663:
-	fsqrt	%f0, %f0
-	fsub	%f1, %f17, %f0
-	flw	%f0, 4(%a1)
-	fmul	%f0, %f1, %f0
-	fsw	%f0, 135(%zero)
-bnei_cont.36664:
-	add	%a0, %zero, %k1
-	j	bnei_cont.36648
-bnei_else.36661:
-	add	%a0, %zero, %zero
-bnei_cont.36662:
-bnei_cont.36654:
-	j	bnei_cont.36648
-bnei_else.36649:
-	flw	%f0, 0(%a1)
-	fblt	%f0, %fzero, fbgt_else.36665
-	add	%a0, %zero, %zero
-	j	fbgt_cont.36666
-fbgt_else.36665:
-	add	%a0, %zero, %k1
-fbgt_cont.36666:
-	beqi	%a0, 0, bnei_else.36667
-	flw	%f0, 1(%a1)
-	fmul	%f1, %f0, %f19
-	flw	%f0, 2(%a1)
-	fmul	%f0, %f0, %f2
-	fadd	%f1, %f1, %f0
-	flw	%f0, 3(%a1)
-	fmul	%f0, %f0, %f20
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 135(%zero)
-	add	%a0, %zero, %k1
-	j	bnei_cont.36648
-bnei_else.36667:
-	add	%a0, %zero, %zero
-bnei_cont.36668:
-bnei_cont.36650:
-	j	bnei_cont.36648
-bnei_else.36647:
-	flw	%f0, 0(%a1)
-	fsub	%f0, %f0, %f19
-	flw	%f18, 1(%a1)
-	fmul	%f17, %f0, %f18
-	flw	%f16, 185(%zero)
-	fmul	%f0, %f17, %f16
-	fadd	%f0, %f0, %f2
-	fabs	%f1, %f0
-	lw	%a0, 4(%a2)
-	flw	%f0, 1(%a0)
-	fblt	%f1, %f0, fbgt_else.36669
-	add	%a0, %zero, %zero
-	j	fbgt_cont.36670
-fbgt_else.36669:
-	add	%a0, %zero, %k1
-fbgt_cont.36670:
-	beqi	%a0, 0, bnei_else.36671
-	flw	%f0, 186(%zero)
-	fmul	%f0, %f17, %f0
-	fadd	%f0, %f0, %f20
-	fabs	%f1, %f0
-	lw	%a0, 4(%a2)
-	flw	%f0, 2(%a0)
-	fblt	%f1, %f0, fbgt_else.36673
-	add	%a0, %zero, %zero
-	j	fbgt_cont.36674
-fbgt_else.36673:
-	add	%a0, %zero, %k1
-fbgt_cont.36674:
-	beqi	%a0, 0, bnei_else.36675
-	fbne	%f18, %fzero, fbeq_else.36677
-	add	%a0, %zero, %k1
-	j	fbeq_cont.36678
-fbeq_else.36677:
-	add	%a0, %zero, %zero
-fbeq_cont.36678:
-	beqi	%a0, 0, bnei_else.36679
-	add	%a0, %zero, %zero
-	j	bnei_cont.36672
-bnei_else.36679:
-	add	%a0, %zero, %k1
-bnei_cont.36680:
-	j	bnei_cont.36672
-bnei_else.36675:
-	add	%a0, %zero, %zero
-bnei_cont.36676:
-	j	bnei_cont.36672
-bnei_else.36671:
-	add	%a0, %zero, %zero
-bnei_cont.36672:
-	beqi	%a0, 0, bnei_else.36681
-	fsw	%f17, 135(%zero)
-	add	%a0, %zero, %k1
-	j	bnei_cont.36682
-bnei_else.36681:
-	flw	%f0, 2(%a1)
-	fsub	%f0, %f0, %f2
-	flw	%f18, 3(%a1)
-	fmul	%f17, %f0, %f18
-	flw	%f21, 184(%zero)
-	fmul	%f0, %f17, %f21
-	fadd	%f0, %f0, %f19
-	fabs	%f1, %f0
-	lw	%a0, 4(%a2)
-	flw	%f0, 0(%a0)
-	fblt	%f1, %f0, fbgt_else.36683
-	add	%a0, %zero, %zero
-	j	fbgt_cont.36684
-fbgt_else.36683:
-	add	%a0, %zero, %k1
-fbgt_cont.36684:
-	beqi	%a0, 0, bnei_else.36685
-	flw	%f0, 186(%zero)
-	fmul	%f0, %f17, %f0
-	fadd	%f0, %f0, %f20
-	fabs	%f1, %f0
-	lw	%a0, 4(%a2)
-	flw	%f0, 2(%a0)
-	fblt	%f1, %f0, fbgt_else.36687
-	add	%a0, %zero, %zero
-	j	fbgt_cont.36688
-fbgt_else.36687:
-	add	%a0, %zero, %k1
-fbgt_cont.36688:
-	beqi	%a0, 0, bnei_else.36689
-	fbne	%f18, %fzero, fbeq_else.36691
-	add	%a0, %zero, %k1
-	j	fbeq_cont.36692
-fbeq_else.36691:
-	add	%a0, %zero, %zero
-fbeq_cont.36692:
-	beqi	%a0, 0, bnei_else.36693
-	add	%a0, %zero, %zero
-	j	bnei_cont.36686
-bnei_else.36693:
-	add	%a0, %zero, %k1
-bnei_cont.36694:
-	j	bnei_cont.36686
-bnei_else.36689:
-	add	%a0, %zero, %zero
-bnei_cont.36690:
-	j	bnei_cont.36686
-bnei_else.36685:
-	add	%a0, %zero, %zero
-bnei_cont.36686:
-	beqi	%a0, 0, bnei_else.36695
-	fsw	%f17, 135(%zero)
-	addi	%a0, %zero, 2
-	j	bnei_cont.36696
-bnei_else.36695:
-	flw	%f0, 4(%a1)
-	fsub	%f0, %f0, %f20
-	flw	%f18, 5(%a1)
-	fmul	%f17, %f0, %f18
-	fmul	%f0, %f17, %f21
-	fadd	%f0, %f0, %f19
-	fabs	%f1, %f0
-	lw	%a0, 4(%a2)
-	flw	%f0, 0(%a0)
-	fblt	%f1, %f0, fbgt_else.36697
-	add	%a0, %zero, %zero
-	j	fbgt_cont.36698
-fbgt_else.36697:
-	add	%a0, %zero, %k1
-fbgt_cont.36698:
-	beqi	%a0, 0, bnei_else.36699
-	fmul	%f0, %f17, %f16
-	fadd	%f0, %f0, %f2
-	fabs	%f1, %f0
-	lw	%a0, 4(%a2)
-	flw	%f0, 1(%a0)
-	fblt	%f1, %f0, fbgt_else.36701
-	add	%a0, %zero, %zero
-	j	fbgt_cont.36702
-fbgt_else.36701:
-	add	%a0, %zero, %k1
-fbgt_cont.36702:
-	beqi	%a0, 0, bnei_else.36703
-	fbne	%f18, %fzero, fbeq_else.36705
-	add	%a0, %zero, %k1
-	j	fbeq_cont.36706
-fbeq_else.36705:
-	add	%a0, %zero, %zero
-fbeq_cont.36706:
-	beqi	%a0, 0, bnei_else.36707
-	add	%a0, %zero, %zero
-	j	bnei_cont.36700
-bnei_else.36707:
-	add	%a0, %zero, %k1
-bnei_cont.36708:
-	j	bnei_cont.36700
-bnei_else.36703:
-	add	%a0, %zero, %zero
-bnei_cont.36704:
-	j	bnei_cont.36700
-bnei_else.36699:
-	add	%a0, %zero, %zero
-bnei_cont.36700:
-	beqi	%a0, 0, bnei_else.36709
-	fsw	%f17, 135(%zero)
-	addi	%a0, %zero, 3
-	j	bnei_cont.36710
-bnei_else.36709:
-	add	%a0, %zero, %zero
-bnei_cont.36710:
-bnei_cont.36696:
-bnei_cont.36682:
-bnei_cont.36648:
-	beqi	%a0, 0, bnei_else.36711
-	flw	%f1, 135(%zero)
-	flw	%f0, 465(%zero)
-	fblt	%f1, %f0, fbgt_else.36713
-	add	%a0, %zero, %zero
-	j	fbgt_cont.36714
-fbgt_else.36713:
-	add	%a0, %zero, %k1
-fbgt_cont.36714:
-	beqi	%a0, 0, bnei_else.36715
-	lw	%a0, 1(%s6)
-	beqi	%a0, -1, bnei_else.36717
-	lw	%v1, 83(%a0)
-	addi	%v0, %zero, 0
-	jal	shadow_check_and_group.2925
-	beqi	%v0, 0, bnei_else.36719
-	add	%v0, %zero, %k1
-	j	bnei_cont.36718
-bnei_else.36719:
-	lw	%a0, 2(%s6)
-	beqi	%a0, -1, bnei_else.36721
-	lw	%v1, 83(%a0)
-	addi	%v0, %zero, 0
-	jal	shadow_check_and_group.2925
-	beqi	%v0, 0, bnei_else.36723
-	add	%v0, %zero, %k1
-	j	bnei_cont.36718
-bnei_else.36723:
-	lw	%a0, 3(%s6)
-	beqi	%a0, -1, bnei_else.36725
-	lw	%v1, 83(%a0)
-	addi	%v0, %zero, 0
-	jal	shadow_check_and_group.2925
-	beqi	%v0, 0, bnei_else.36727
-	add	%v0, %zero, %k1
-	j	bnei_cont.36718
-bnei_else.36727:
-	addi	%v0, %zero, 4
-	addi	%v1, %s6, 0
-	jal	shadow_check_one_or_group.2928
-bnei_cont.36728:
-	j	bnei_cont.36718
-bnei_else.36725:
-	add	%v0, %zero, %zero
-bnei_cont.36726:
-bnei_cont.36724:
-	j	bnei_cont.36718
-bnei_else.36721:
-	add	%v0, %zero, %zero
-bnei_cont.36722:
-bnei_cont.36720:
-	j	bnei_cont.36718
-bnei_else.36717:
-	add	%v0, %zero, %zero
-bnei_cont.36718:
-	beqi	%v0, 0, bnei_else.36729
-	add	%a0, %zero, %k1
-	j	bnei_cont.36646
-bnei_else.36729:
-	add	%a0, %zero, %zero
-bnei_cont.36730:
-	j	bnei_cont.36646
-bnei_else.36715:
-	add	%a0, %zero, %zero
-bnei_cont.36716:
-	j	bnei_cont.36646
-bnei_else.36711:
-	add	%a0, %zero, %zero
-bnei_cont.36712:
-	j	bnei_cont.36646
-bnei_else.36645:
-	add	%a0, %zero, %k1
-bnei_cont.36646:
-	beqi	%a0, 0, bnei_else.36731
-	lw	%a0, 1(%s6)
-	beqi	%a0, -1, bnei_else.36732
-	lw	%v1, 83(%a0)
-	addi	%v0, %zero, 0
-	jal	shadow_check_and_group.2925
-	beqi	%v0, 0, bnei_else.36734
-	add	%v0, %zero, %k1
-	j	bnei_cont.36733
-bnei_else.36734:
-	lw	%a0, 2(%s6)
-	beqi	%a0, -1, bnei_else.36736
-	lw	%v1, 83(%a0)
-	addi	%v0, %zero, 0
-	jal	shadow_check_and_group.2925
-	beqi	%v0, 0, bnei_else.36738
-	add	%v0, %zero, %k1
-	j	bnei_cont.36733
-bnei_else.36738:
-	lw	%a0, 3(%s6)
-	beqi	%a0, -1, bnei_else.36740
-	lw	%v1, 83(%a0)
-	addi	%v0, %zero, 0
-	jal	shadow_check_and_group.2925
-	beqi	%v0, 0, bnei_else.36742
-	add	%v0, %zero, %k1
-	j	bnei_cont.36733
-bnei_else.36742:
-	addi	%v0, %zero, 4
-	addi	%v1, %s6, 0
-	jal	shadow_check_one_or_group.2928
-bnei_cont.36743:
-	j	bnei_cont.36733
-bnei_else.36740:
-	add	%v0, %zero, %zero
-bnei_cont.36741:
-bnei_cont.36739:
-	j	bnei_cont.36733
-bnei_else.36736:
-	add	%v0, %zero, %zero
-bnei_cont.36737:
-bnei_cont.36735:
-	j	bnei_cont.36733
-bnei_else.36732:
-	add	%v0, %zero, %zero
-bnei_cont.36733:
-	beqi	%v0, 0, bnei_else.36744
-	add	%ra, %zero, %s5
-	add	%v0, %zero, %k1
-	jr	%ra
-bnei_else.36744:
-	addi	%v0, %s3, 1
-	add	%ra, %zero, %s5
-	addi	%v1, %s4, 0
-	j	shadow_check_one_or_matrix.2931
-bnei_else.36731:
-	addi	%v0, %s3, 1
-	add	%ra, %zero, %s5
-	addi	%v1, %s4, 0
-	j	shadow_check_one_or_matrix.2931
-bnei_else.36644:
-	add	%ra, %zero, %s5
-	add	%v0, %zero, %zero
-	jr	%ra
-solve_each_element.2934:
-	add	%a3, %zero, %v0
-	add	%k0, %zero, %a0
-	add	%s0, %zero, %ra
-	add	%at, %v1, %a3
-	lw	%s1, 0(%at)
-	beqi	%s1, -1, bnei_else.36990
-	lw	%a1, 12(%s1)
-	flw	%f19, 159(%zero)
-	lw	%a0, 5(%a1)
-	flw	%f0, 0(%a0)
-	fsub	%f21, %f19, %f0
-	flw	%f18, 160(%zero)
-	lw	%a0, 5(%a1)
-	flw	%f0, 1(%a0)
-	fsub	%f22, %f18, %f0
-	flw	%f17, 161(%zero)
-	lw	%a0, 5(%a1)
-	flw	%f0, 2(%a0)
-	fsub	%f23, %f17, %f0
-	lw	%a0, 1(%a1)
-	beqi	%a0, 1, bnei_else.36991
-	beqi	%a0, 2, bnei_else.36993
-	flw	%f28, 0(%k0)
-	flw	%f27, 1(%k0)
-	flw	%f29, 2(%k0)
-	fmul	%f0, %f28, %f28
-	lw	%a0, 4(%a1)
-	flw	%f25, 0(%a0)
-	fmul	%f1, %f0, %f25
-	fmul	%f0, %f27, %f27
-	lw	%a0, 4(%a1)
-	flw	%f24, 1(%a0)
-	fmul	%f0, %f0, %f24
-	fadd	%f1, %f1, %f0
-	fmul	%f0, %f29, %f29
-	lw	%a0, 4(%a1)
-	flw	%f20, 2(%a0)
-	fmul	%f0, %f0, %f20
-	fadd	%f0, %f1, %f0
-	lw	%a2, 3(%a1)
-	beqi	%a2, 0, bnei_else.36995
-	fmul	%f16, %f27, %f29
-	lw	%a0, 9(%a1)
-	flw	%f1, 0(%a0)
-	fmul	%f1, %f16, %f1
-	fadd	%f16, %f0, %f1
-	fmul	%f1, %f29, %f28
-	lw	%a0, 9(%a1)
-	flw	%f0, 1(%a0)
-	fmul	%f0, %f1, %f0
-	fadd	%f16, %f16, %f0
-	fmul	%f1, %f28, %f27
-	lw	%a0, 9(%a1)
-	flw	%f0, 2(%a0)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	j	bnei_cont.36996
-bnei_else.36995:
-bnei_cont.36996:
-	fbne	%f0, %fzero, fbeq_else.36997
-	add	%a0, %zero, %k1
-	j	fbeq_cont.36998
-fbeq_else.36997:
-	add	%a0, %zero, %zero
-fbeq_cont.36998:
-	beqi	%a0, 0, bnei_else.36999
-	add	%s2, %zero, %zero
-	j	bnei_cont.36992
-bnei_else.36999:
-	fmul	%f1, %f28, %f21
-	fmul	%f16, %f1, %f25
-	fmul	%f1, %f27, %f22
-	fmul	%f1, %f1, %f24
-	fadd	%f16, %f16, %f1
-	fmul	%f1, %f29, %f23
-	fmul	%f1, %f1, %f20
-	fadd	%f1, %f16, %f1
-	beqi	%a2, 0, bnei_else.37001
-	fmul	%f2, %f29, %f22
-	fmul	%f16, %f27, %f23
-	fadd	%f2, %f2, %f16
-	lw	%a0, 9(%a1)
-	flw	%f16, 0(%a0)
-	fmul	%f26, %f2, %f16
-	fmul	%f2, %f28, %f23
-	fmul	%f16, %f29, %f21
-	fadd	%f2, %f2, %f16
-	lw	%a0, 9(%a1)
-	flw	%f16, 1(%a0)
-	fmul	%f16, %f2, %f16
-	fadd	%f26, %f26, %f16
-	fmul	%f2, %f28, %f22
-	fmul	%f16, %f27, %f21
-	fadd	%f2, %f2, %f16
-	lw	%a0, 9(%a1)
-	flw	%f16, 2(%a0)
-	fmul	%f16, %f2, %f16
-	fadd	%f2, %f26, %f16
-	flw	%f16, 473(%zero)
-	fmul	%f16, %f2, %f16
-	fadd	%f1, %f1, %f16
-	j	bnei_cont.37002
-bnei_else.37001:
-bnei_cont.37002:
-	fmul	%f16, %f21, %f21
-	fmul	%f2, %f16, %f25
-	fmul	%f16, %f22, %f22
-	fmul	%f16, %f16, %f24
-	fadd	%f2, %f2, %f16
-	fmul	%f16, %f23, %f23
-	fmul	%f16, %f16, %f20
-	fadd	%f16, %f2, %f16
-	beqi	%a2, 0, bnei_else.37003
-	fmul	%f20, %f22, %f23
-	lw	%a0, 9(%a1)
-	flw	%f2, 0(%a0)
-	fmul	%f2, %f20, %f2
-	fadd	%f20, %f16, %f2
-	fmul	%f2, %f23, %f21
-	lw	%a0, 9(%a1)
-	flw	%f16, 1(%a0)
-	fmul	%f16, %f2, %f16
-	fadd	%f20, %f20, %f16
-	fmul	%f2, %f21, %f22
-	lw	%a0, 9(%a1)
-	flw	%f16, 2(%a0)
-	fmul	%f16, %f2, %f16
-	fadd	%f16, %f20, %f16
-	j	bnei_cont.37004
-bnei_else.37003:
-bnei_cont.37004:
-	lw	%a0, 1(%a1)
-	beqi	%a0, 3, bnei_else.37005
-	j	bnei_cont.37006
-bnei_else.37005:
-	fsub	%f16, %f16, %f30
-bnei_cont.37006:
-	fmul	%f2, %f1, %f1
-	fmul	%f16, %f0, %f16
-	fsub	%f16, %f2, %f16
-	fblt	%fzero, %f16, fbgt_else.37007
-	add	%a0, %zero, %zero
-	j	fbgt_cont.37008
-fbgt_else.37007:
-	add	%a0, %zero, %k1
-fbgt_cont.37008:
-	beqi	%a0, 0, bnei_else.37009
-	fsqrt	%f16, %f16
-	lw	%a0, 6(%a1)
-	beqi	%a0, 0, bnei_else.37011
-	j	bnei_cont.37012
-bnei_else.37011:
+solver_rect.2805:
+	flw	%f19, 0(%v1)
+	fbne	%f19, %fzero, fbeq_else.24945
+	add	%a0, %zero, %k1
+	j	fbeq_cont.24946
+fbeq_else.24945:
+	add	%a0, %zero, %zero
+fbeq_cont.24946:
+	beqi	%a0, 0, bnei_else.24947
+	add	%a0, %zero, %zero
+	j	bnei_cont.24948
+bnei_else.24947:
+	lw	%a2, 4(%v0)
+	lw	%a1, 6(%v0)
+	fblt	%f19, %fzero, fbgt_else.24949
+	add	%a0, %zero, %zero
+	j	fbgt_cont.24950
+fbgt_else.24949:
+	add	%a0, %zero, %k1
+fbgt_cont.24950:
+	beqi	%a1, 0, bnei_else.24951
+	beqi	%a0, 0, bnei_else.24953
+	add	%a0, %zero, %zero
+	j	bnei_cont.24952
+bnei_else.24953:
+	add	%a0, %zero, %k1
+bnei_cont.24954:
+	j	bnei_cont.24952
+bnei_else.24951:
+bnei_cont.24952:
+	flw	%f16, 0(%a2)
+	beqi	%a0, 0, bnei_else.24955
+	j	bnei_cont.24956
+bnei_else.24955:
 	fneg	%f16, %f16
-bnei_cont.37012:
-	fsub	%f1, %f16, %f1
-	fdiv	%f0, %f1, %f0
-	fsw	%f0, 135(%zero)
-	add	%s2, %zero, %k1
-	j	bnei_cont.36992
-bnei_else.37009:
-	add	%s2, %zero, %zero
-bnei_cont.37010:
-bnei_cont.37000:
-	j	bnei_cont.36992
-bnei_else.36993:
-	lw	%a0, 4(%a1)
-	flw	%f0, 0(%k0)
-	flw	%f24, 0(%a0)
-	fmul	%f1, %f0, %f24
-	flw	%f0, 1(%k0)
-	flw	%f20, 1(%a0)
-	fmul	%f0, %f0, %f20
-	fadd	%f1, %f1, %f0
-	flw	%f0, 2(%k0)
-	flw	%f2, 2(%a0)
-	fmul	%f0, %f0, %f2
-	fadd	%f16, %f1, %f0
-	fblt	%fzero, %f16, fbgt_else.37013
+bnei_cont.24956:
+	fsub	%f16, %f16, %f0
+	fdiv	%f18, %f16, %f19
+	flw	%f16, 1(%v1)
+	fmul	%f16, %f18, %f16
+	fadd	%f16, %f16, %f1
+	fabs	%f17, %f16
+	flw	%f16, 1(%a2)
+	fblt	%f17, %f16, fbgt_else.24957
 	add	%a0, %zero, %zero
-	j	fbgt_cont.37014
-fbgt_else.37013:
+	j	fbgt_cont.24958
+fbgt_else.24957:
 	add	%a0, %zero, %k1
-fbgt_cont.37014:
-	beqi	%a0, 0, bnei_else.37015
-	fmul	%f1, %f24, %f21
-	fmul	%f0, %f20, %f22
-	fadd	%f1, %f1, %f0
-	fmul	%f0, %f2, %f23
-	fadd	%f0, %f1, %f0
-	fneg	%f0, %f0
-	fdiv	%f0, %f0, %f16
-	fsw	%f0, 135(%zero)
-	add	%s2, %zero, %k1
-	j	bnei_cont.36992
-bnei_else.37015:
-	add	%s2, %zero, %zero
-bnei_cont.37016:
-bnei_cont.36994:
-	j	bnei_cont.36992
-bnei_else.36991:
-	flw	%f2, 0(%k0)
-	fbne	%f2, %fzero, fbeq_else.37017
+fbgt_cont.24958:
+	beqi	%a0, 0, bnei_else.24959
+	flw	%f16, 2(%v1)
+	fmul	%f16, %f18, %f16
+	fadd	%f16, %f16, %f2
+	fabs	%f17, %f16
+	flw	%f16, 2(%a2)
+	fblt	%f17, %f16, fbgt_else.24961
+	add	%a0, %zero, %zero
+	j	fbgt_cont.24962
+fbgt_else.24961:
 	add	%a0, %zero, %k1
-	j	fbeq_cont.37018
-fbeq_else.37017:
-	add	%a0, %zero, %zero
-fbeq_cont.37018:
-	beqi	%a0, 0, bnei_else.37019
-	add	%a0, %zero, %zero
-	j	bnei_cont.37020
-bnei_else.37019:
-	lw	%ra, 4(%a1)
-	lw	%a2, 6(%a1)
-	fblt	%f2, %fzero, fbgt_else.37021
-	add	%a0, %zero, %zero
-	j	fbgt_cont.37022
-fbgt_else.37021:
+fbgt_cont.24962:
+	beqi	%a0, 0, bnei_else.24963
+	fsw	%f18, 135(%zero)
 	add	%a0, %zero, %k1
-fbgt_cont.37022:
-	beqi	%a2, 0, bnei_else.37023
-	beqi	%a0, 0, bnei_else.37025
+	j	bnei_cont.24960
+bnei_else.24963:
 	add	%a0, %zero, %zero
-	j	bnei_cont.37024
-bnei_else.37025:
+bnei_cont.24964:
+	j	bnei_cont.24960
+bnei_else.24959:
+	add	%a0, %zero, %zero
+bnei_cont.24960:
+bnei_cont.24948:
+	beqi	%a0, 0, bnei_else.24965
+	add	%v0, %zero, %k1
+	jr	%ra
+bnei_else.24965:
+	flw	%f18, 1(%v1)
+	fbne	%f18, %fzero, fbeq_else.24966
 	add	%a0, %zero, %k1
-bnei_cont.37026:
-	j	bnei_cont.37024
-bnei_else.37023:
-bnei_cont.37024:
-	flw	%f0, 0(%ra)
-	beqi	%a0, 0, bnei_else.37027
-	j	bnei_cont.37028
-bnei_else.37027:
-	fneg	%f0, %f0
-bnei_cont.37028:
-	fsub	%f0, %f0, %f21
-	fdiv	%f16, %f0, %f2
-	flw	%f0, 1(%k0)
-	fmul	%f0, %f16, %f0
-	fadd	%f0, %f0, %f22
-	fabs	%f1, %f0
-	flw	%f0, 1(%ra)
-	fblt	%f1, %f0, fbgt_else.37029
+	j	fbeq_cont.24967
+fbeq_else.24966:
 	add	%a0, %zero, %zero
-	j	fbgt_cont.37030
-fbgt_else.37029:
+fbeq_cont.24967:
+	beqi	%a0, 0, bnei_else.24968
+	add	%a0, %zero, %zero
+	j	bnei_cont.24969
+bnei_else.24968:
+	lw	%a2, 4(%v0)
+	lw	%a1, 6(%v0)
+	fblt	%f18, %fzero, fbgt_else.24970
+	add	%a0, %zero, %zero
+	j	fbgt_cont.24971
+fbgt_else.24970:
 	add	%a0, %zero, %k1
-fbgt_cont.37030:
-	beqi	%a0, 0, bnei_else.37031
-	flw	%f0, 2(%k0)
-	fmul	%f0, %f16, %f0
-	fadd	%f0, %f0, %f23
-	fabs	%f1, %f0
-	flw	%f0, 2(%ra)
-	fblt	%f1, %f0, fbgt_else.37033
+fbgt_cont.24971:
+	beqi	%a1, 0, bnei_else.24972
+	beqi	%a0, 0, bnei_else.24974
 	add	%a0, %zero, %zero
-	j	fbgt_cont.37034
-fbgt_else.37033:
+	j	bnei_cont.24973
+bnei_else.24974:
 	add	%a0, %zero, %k1
-fbgt_cont.37034:
-	beqi	%a0, 0, bnei_else.37035
-	fsw	%f16, 135(%zero)
+bnei_cont.24975:
+	j	bnei_cont.24973
+bnei_else.24972:
+bnei_cont.24973:
+	flw	%f16, 1(%a2)
+	beqi	%a0, 0, bnei_else.24976
+	j	bnei_cont.24977
+bnei_else.24976:
+	fneg	%f16, %f16
+bnei_cont.24977:
+	fsub	%f16, %f16, %f1
+	fdiv	%f20, %f16, %f18
+	flw	%f16, 2(%v1)
+	fmul	%f16, %f20, %f16
+	fadd	%f16, %f16, %f2
+	fabs	%f17, %f16
+	flw	%f16, 2(%a2)
+	fblt	%f17, %f16, fbgt_else.24978
+	add	%a0, %zero, %zero
+	j	fbgt_cont.24979
+fbgt_else.24978:
 	add	%a0, %zero, %k1
-	j	bnei_cont.37032
-bnei_else.37035:
+fbgt_cont.24979:
+	beqi	%a0, 0, bnei_else.24980
+	fmul	%f16, %f20, %f19
+	fadd	%f16, %f16, %f0
+	fabs	%f17, %f16
+	flw	%f16, 0(%a2)
+	fblt	%f17, %f16, fbgt_else.24982
 	add	%a0, %zero, %zero
-bnei_cont.37036:
-	j	bnei_cont.37032
-bnei_else.37031:
-	add	%a0, %zero, %zero
-bnei_cont.37032:
-bnei_cont.37020:
-	beqi	%a0, 0, bnei_else.37037
-	add	%s2, %zero, %k1
-	j	bnei_cont.37038
-bnei_else.37037:
-	flw	%f16, 1(%k0)
-	fbne	%f16, %fzero, fbeq_else.37039
+	j	fbgt_cont.24983
+fbgt_else.24982:
 	add	%a0, %zero, %k1
-	j	fbeq_cont.37040
-fbeq_else.37039:
-	add	%a0, %zero, %zero
-fbeq_cont.37040:
-	beqi	%a0, 0, bnei_else.37041
-	add	%a0, %zero, %zero
-	j	bnei_cont.37042
-bnei_else.37041:
-	lw	%ra, 4(%a1)
-	lw	%a2, 6(%a1)
-	fblt	%f16, %fzero, fbgt_else.37043
-	add	%a0, %zero, %zero
-	j	fbgt_cont.37044
-fbgt_else.37043:
-	add	%a0, %zero, %k1
-fbgt_cont.37044:
-	beqi	%a2, 0, bnei_else.37045
-	beqi	%a0, 0, bnei_else.37047
-	add	%a0, %zero, %zero
-	j	bnei_cont.37046
-bnei_else.37047:
-	add	%a0, %zero, %k1
-bnei_cont.37048:
-	j	bnei_cont.37046
-bnei_else.37045:
-bnei_cont.37046:
-	flw	%f0, 1(%ra)
-	beqi	%a0, 0, bnei_else.37049
-	j	bnei_cont.37050
-bnei_else.37049:
-	fneg	%f0, %f0
-bnei_cont.37050:
-	fsub	%f0, %f0, %f22
-	fdiv	%f20, %f0, %f16
-	flw	%f0, 2(%k0)
-	fmul	%f0, %f20, %f0
-	fadd	%f0, %f0, %f23
-	fabs	%f1, %f0
-	flw	%f0, 2(%ra)
-	fblt	%f1, %f0, fbgt_else.37051
-	add	%a0, %zero, %zero
-	j	fbgt_cont.37052
-fbgt_else.37051:
-	add	%a0, %zero, %k1
-fbgt_cont.37052:
-	beqi	%a0, 0, bnei_else.37053
-	fmul	%f0, %f20, %f2
-	fadd	%f0, %f0, %f21
-	fabs	%f1, %f0
-	flw	%f0, 0(%ra)
-	fblt	%f1, %f0, fbgt_else.37055
-	add	%a0, %zero, %zero
-	j	fbgt_cont.37056
-fbgt_else.37055:
-	add	%a0, %zero, %k1
-fbgt_cont.37056:
-	beqi	%a0, 0, bnei_else.37057
+fbgt_cont.24983:
+	beqi	%a0, 0, bnei_else.24984
 	fsw	%f20, 135(%zero)
 	add	%a0, %zero, %k1
-	j	bnei_cont.37054
-bnei_else.37057:
+	j	bnei_cont.24981
+bnei_else.24984:
 	add	%a0, %zero, %zero
-bnei_cont.37058:
-	j	bnei_cont.37054
-bnei_else.37053:
+bnei_cont.24985:
+	j	bnei_cont.24981
+bnei_else.24980:
 	add	%a0, %zero, %zero
-bnei_cont.37054:
-bnei_cont.37042:
-	beqi	%a0, 0, bnei_else.37059
-	addi	%s2, %zero, 2
-	j	bnei_cont.37060
-bnei_else.37059:
-	flw	%f1, 2(%k0)
-	fbne	%f1, %fzero, fbeq_else.37061
+bnei_cont.24981:
+bnei_cont.24969:
+	beqi	%a0, 0, bnei_else.24986
+	addi	%v0, %zero, 2
+	jr	%ra
+bnei_else.24986:
+	flw	%f17, 2(%v1)
+	fbne	%f17, %fzero, fbeq_else.24987
 	add	%a0, %zero, %k1
-	j	fbeq_cont.37062
-fbeq_else.37061:
+	j	fbeq_cont.24988
+fbeq_else.24987:
 	add	%a0, %zero, %zero
-fbeq_cont.37062:
-	beqi	%a0, 0, bnei_else.37063
+fbeq_cont.24988:
+	beqi	%a0, 0, bnei_else.24989
 	add	%a0, %zero, %zero
-	j	bnei_cont.37064
-bnei_else.37063:
-	lw	%ra, 4(%a1)
-	lw	%a2, 6(%a1)
-	fblt	%f1, %fzero, fbgt_else.37065
+	j	bnei_cont.24990
+bnei_else.24989:
+	lw	%a2, 4(%v0)
+	lw	%a1, 6(%v0)
+	fblt	%f17, %fzero, fbgt_else.24991
 	add	%a0, %zero, %zero
-	j	fbgt_cont.37066
-fbgt_else.37065:
+	j	fbgt_cont.24992
+fbgt_else.24991:
 	add	%a0, %zero, %k1
-fbgt_cont.37066:
-	beqi	%a2, 0, bnei_else.37067
-	beqi	%a0, 0, bnei_else.37069
+fbgt_cont.24992:
+	beqi	%a1, 0, bnei_else.24993
+	beqi	%a0, 0, bnei_else.24995
 	add	%a0, %zero, %zero
-	j	bnei_cont.37068
-bnei_else.37069:
+	j	bnei_cont.24994
+bnei_else.24995:
 	add	%a0, %zero, %k1
-bnei_cont.37070:
-	j	bnei_cont.37068
-bnei_else.37067:
-bnei_cont.37068:
-	flw	%f0, 2(%ra)
-	beqi	%a0, 0, bnei_else.37071
-	j	bnei_cont.37072
-bnei_else.37071:
-	fneg	%f0, %f0
-bnei_cont.37072:
-	fsub	%f0, %f0, %f23
-	fdiv	%f20, %f0, %f1
-	fmul	%f0, %f20, %f2
-	fadd	%f0, %f0, %f21
+bnei_cont.24996:
+	j	bnei_cont.24994
+bnei_else.24993:
+bnei_cont.24994:
+	flw	%f16, 2(%a2)
+	beqi	%a0, 0, bnei_else.24997
+	j	bnei_cont.24998
+bnei_else.24997:
+	fneg	%f16, %f16
+bnei_cont.24998:
+	fsub	%f16, %f16, %f2
+	fdiv	%f17, %f16, %f17
+	fmul	%f16, %f17, %f19
+	fadd	%f0, %f16, %f0
+	fabs	%f16, %f0
+	flw	%f0, 0(%a2)
+	fblt	%f16, %f0, fbgt_else.24999
+	add	%a0, %zero, %zero
+	j	fbgt_cont.25000
+fbgt_else.24999:
+	add	%a0, %zero, %k1
+fbgt_cont.25000:
+	beqi	%a0, 0, bnei_else.25001
+	fmul	%f0, %f17, %f18
+	fadd	%f0, %f0, %f1
 	fabs	%f1, %f0
-	flw	%f0, 0(%ra)
-	fblt	%f1, %f0, fbgt_else.37073
+	flw	%f0, 1(%a2)
+	fblt	%f1, %f0, fbgt_else.25003
 	add	%a0, %zero, %zero
-	j	fbgt_cont.37074
-fbgt_else.37073:
+	j	fbgt_cont.25004
+fbgt_else.25003:
 	add	%a0, %zero, %k1
-fbgt_cont.37074:
-	beqi	%a0, 0, bnei_else.37075
-	fmul	%f0, %f20, %f16
-	fadd	%f0, %f0, %f22
-	fabs	%f1, %f0
-	flw	%f0, 1(%ra)
-	fblt	%f1, %f0, fbgt_else.37077
-	add	%a0, %zero, %zero
-	j	fbgt_cont.37078
-fbgt_else.37077:
+fbgt_cont.25004:
+	beqi	%a0, 0, bnei_else.25005
+	fsw	%f17, 135(%zero)
 	add	%a0, %zero, %k1
-fbgt_cont.37078:
-	beqi	%a0, 0, bnei_else.37079
-	fsw	%f20, 135(%zero)
-	add	%a0, %zero, %k1
-	j	bnei_cont.37076
-bnei_else.37079:
+	j	bnei_cont.25002
+bnei_else.25005:
 	add	%a0, %zero, %zero
-bnei_cont.37080:
-	j	bnei_cont.37076
-bnei_else.37075:
+bnei_cont.25006:
+	j	bnei_cont.25002
+bnei_else.25001:
 	add	%a0, %zero, %zero
-bnei_cont.37076:
-bnei_cont.37064:
-	beqi	%a0, 0, bnei_else.37081
-	addi	%s2, %zero, 3
-	j	bnei_cont.37082
-bnei_else.37081:
-	add	%s2, %zero, %zero
-bnei_cont.37082:
-bnei_cont.37060:
-bnei_cont.37038:
-bnei_cont.36992:
-	beqi	%s2, 0, bnei_else.37083
-	flw	%f1, 135(%zero)
-	fblt	%fzero, %f1, fbgt_else.37084
-	add	%a0, %zero, %zero
-	j	fbgt_cont.37085
-fbgt_else.37084:
-	add	%a0, %zero, %k1
-fbgt_cont.37085:
-	beqi	%a0, 0, bnei_else.37086
-	flw	%f0, 137(%zero)
-	fblt	%f1, %f0, fbgt_else.37088
-	add	%a0, %zero, %zero
-	j	fbgt_cont.37089
-fbgt_else.37088:
-	add	%a0, %zero, %k1
-fbgt_cont.37089:
-	beqi	%a0, 0, bnei_cont.37087
-	flw	%f0, 466(%zero)
-	fadd	%f22, %f1, %f0
-	flw	%f0, 0(%k0)
-	fmul	%f0, %f0, %f22
-	fadd	%f0, %f0, %f19
-	flw	%f1, 1(%k0)
-	fmul	%f1, %f1, %f22
-	fadd	%f1, %f1, %f18
-	flw	%f16, 2(%k0)
-	fmul	%f16, %f16, %f22
-	fadd	%f2, %f16, %f17
-	lw	%a0, 0(%v1)
-	beqi	%a0, -1, bnei_else.37092
-	lw	%a1, 12(%a0)
-	lw	%a0, 5(%a1)
-	flw	%f16, 0(%a0)
-	fsub	%f19, %f0, %f16
-	lw	%a0, 5(%a1)
-	flw	%f16, 1(%a0)
-	fsub	%f20, %f1, %f16
-	lw	%a0, 5(%a1)
-	flw	%f16, 2(%a0)
-	fsub	%f21, %f2, %f16
-	lw	%a0, 1(%a1)
-	beqi	%a0, 1, bnei_else.37094
-	beqi	%a0, 2, bnei_else.37096
-	fmul	%f17, %f19, %f19
-	lw	%a0, 4(%a1)
+bnei_cont.25002:
+bnei_cont.24990:
+	beqi	%a0, 0, bnei_else.25007
+	addi	%v0, %zero, 3
+	jr	%ra
+bnei_else.25007:
+	add	%v0, %zero, %zero
+	jr	%ra
+solver_second.2830:
+	flw	%f22, 0(%v1)
+	flw	%f21, 1(%v1)
+	flw	%f23, 2(%v1)
+	fmul	%f17, %f22, %f22
+	lw	%a0, 4(%v0)
 	flw	%f16, 0(%a0)
 	fmul	%f18, %f17, %f16
-	fmul	%f17, %f20, %f20
-	lw	%a0, 4(%a1)
-	flw	%f16, 1(%a0)
-	fmul	%f16, %f17, %f16
-	fadd	%f18, %f18, %f16
 	fmul	%f17, %f21, %f21
-	lw	%a0, 4(%a1)
-	flw	%f16, 2(%a0)
-	fmul	%f16, %f17, %f16
-	fadd	%f16, %f18, %f16
-	lw	%a0, 3(%a1)
-	beqi	%a0, 0, bnei_else.37098
-	fmul	%f18, %f20, %f21
-	lw	%a0, 9(%a1)
-	flw	%f17, 0(%a0)
-	fmul	%f17, %f18, %f17
-	fadd	%f18, %f16, %f17
-	fmul	%f17, %f21, %f19
-	lw	%a0, 9(%a1)
+	lw	%a0, 4(%v0)
 	flw	%f16, 1(%a0)
 	fmul	%f16, %f17, %f16
 	fadd	%f18, %f18, %f16
-	fmul	%f17, %f19, %f20
-	lw	%a0, 9(%a1)
+	fmul	%f17, %f23, %f23
+	lw	%a0, 4(%v0)
 	flw	%f16, 2(%a0)
 	fmul	%f16, %f17, %f16
 	fadd	%f16, %f18, %f16
-	j	bnei_cont.37099
-bnei_else.37098:
-bnei_cont.37099:
-	lw	%a0, 1(%a1)
-	beqi	%a0, 3, bnei_else.37100
-	j	bnei_cont.37101
-bnei_else.37100:
-	fsub	%f16, %f16, %f30
-bnei_cont.37101:
-	lw	%a1, 6(%a1)
-	fblt	%f16, %fzero, fbgt_else.37102
-	add	%a0, %zero, %zero
-	j	fbgt_cont.37103
-fbgt_else.37102:
-	add	%a0, %zero, %k1
-fbgt_cont.37103:
-	beqi	%a1, 0, bnei_else.37104
-	beqi	%a0, 0, bnei_else.37106
-	add	%a0, %zero, %zero
-	j	bnei_cont.37105
-bnei_else.37106:
-	add	%a0, %zero, %k1
-bnei_cont.37107:
-	j	bnei_cont.37105
-bnei_else.37104:
-bnei_cont.37105:
-	beqi	%a0, 0, bnei_else.37108
-	add	%a0, %zero, %zero
-	j	bnei_cont.37095
-bnei_else.37108:
-	add	%a0, %zero, %k1
-bnei_cont.37109:
-	j	bnei_cont.37095
-bnei_else.37096:
-	lw	%a0, 4(%a1)
-	flw	%f16, 0(%a0)
-	fmul	%f17, %f16, %f19
+	lw	%a0, 3(%v0)
+	beqi	%a0, 0, bnei_else.25055
+	fmul	%f18, %f21, %f23
+	lw	%a0, 9(%v0)
+	flw	%f17, 0(%a0)
+	fmul	%f17, %f18, %f17
+	fadd	%f18, %f16, %f17
+	fmul	%f17, %f23, %f22
+	lw	%a0, 9(%v0)
 	flw	%f16, 1(%a0)
-	fmul	%f16, %f16, %f20
-	fadd	%f17, %f17, %f16
+	fmul	%f16, %f17, %f16
+	fadd	%f18, %f18, %f16
+	fmul	%f17, %f22, %f21
+	lw	%a0, 9(%v0)
 	flw	%f16, 2(%a0)
-	fmul	%f16, %f16, %f21
-	fadd	%f16, %f17, %f16
-	lw	%a1, 6(%a1)
-	fblt	%f16, %fzero, fbgt_else.37110
-	add	%a0, %zero, %zero
-	j	fbgt_cont.37111
-fbgt_else.37110:
+	fmul	%f16, %f17, %f16
+	fadd	%f16, %f18, %f16
+	j	bnei_cont.25056
+bnei_else.25055:
+bnei_cont.25056:
+	fbne	%f16, %fzero, fbeq_else.25057
 	add	%a0, %zero, %k1
-fbgt_cont.37111:
-	beqi	%a1, 0, bnei_else.37112
-	beqi	%a0, 0, bnei_else.37114
+	j	fbeq_cont.25058
+fbeq_else.25057:
 	add	%a0, %zero, %zero
-	j	bnei_cont.37113
-bnei_else.37114:
-	add	%a0, %zero, %k1
-bnei_cont.37115:
-	j	bnei_cont.37113
-bnei_else.37112:
-bnei_cont.37113:
-	beqi	%a0, 0, bnei_else.37116
-	add	%a0, %zero, %zero
-	j	bnei_cont.37095
-bnei_else.37116:
-	add	%a0, %zero, %k1
-bnei_cont.37117:
-bnei_cont.37097:
-	j	bnei_cont.37095
-bnei_else.37094:
-	fabs	%f17, %f19
-	lw	%a0, 4(%a1)
-	flw	%f16, 0(%a0)
-	fblt	%f17, %f16, fbgt_else.37118
-	add	%a0, %zero, %zero
-	j	fbgt_cont.37119
-fbgt_else.37118:
-	add	%a0, %zero, %k1
-fbgt_cont.37119:
-	beqi	%a0, 0, bnei_else.37120
-	fabs	%f17, %f20
-	lw	%a0, 4(%a1)
-	flw	%f16, 1(%a0)
-	fblt	%f17, %f16, fbgt_else.37122
-	add	%a0, %zero, %zero
-	j	fbgt_cont.37123
-fbgt_else.37122:
-	add	%a0, %zero, %k1
-fbgt_cont.37123:
-	beqi	%a0, 0, bnei_else.37124
-	fabs	%f17, %f21
-	lw	%a0, 4(%a1)
-	flw	%f16, 2(%a0)
-	fblt	%f17, %f16, fbgt_else.37126
-	add	%a0, %zero, %zero
-	j	bnei_cont.37121
-fbgt_else.37126:
-	add	%a0, %zero, %k1
-fbgt_cont.37127:
-	j	bnei_cont.37121
-bnei_else.37124:
-	add	%a0, %zero, %zero
-bnei_cont.37125:
-	j	bnei_cont.37121
-bnei_else.37120:
-	add	%a0, %zero, %zero
-bnei_cont.37121:
-	beqi	%a0, 0, bnei_else.37128
-	lw	%a0, 6(%a1)
-	j	bnei_cont.37129
-bnei_else.37128:
-	lw	%a0, 6(%a1)
-	beqi	%a0, 0, bnei_else.37130
-	add	%a0, %zero, %zero
-	j	bnei_cont.37131
-bnei_else.37130:
-	add	%a0, %zero, %k1
-bnei_cont.37131:
-bnei_cont.37129:
-bnei_cont.37095:
-	beqi	%a0, 0, bnei_else.37132
+fbeq_cont.25058:
+	beqi	%a0, 0, bnei_else.25059
 	add	%v0, %zero, %zero
-	j	bnei_cont.37093
-bnei_else.37132:
-	addi	%v0, %k1, 0
-	jal	check_all_inside.2919
-bnei_cont.37133:
-	j	bnei_cont.37093
-bnei_else.37092:
-	add	%v0, %zero, %k1
-bnei_cont.37093:
-	beqi	%v0, 0, bnei_cont.37087
-	fsw	%f22, 137(%zero)
-	fsw	%f0, 138(%zero)
-	fsw	%f1, 139(%zero)
-	fsw	%f2, 140(%zero)
-	sw	%s1, 141(%zero)
-	sw	%s2, 136(%zero)
-	j	bnei_cont.37087
-bnei_else.37134:
-bnei_cont.37135:
-	j	bnei_cont.37087
-bnei_else.37090:
-bnei_cont.37091:
-	j	bnei_cont.37087
-bnei_else.37086:
-bnei_cont.37087:
-	addi	%v0, %a3, 1
-	add	%ra, %zero, %s0
-	addi	%a0, %k0, 0
-	j	solve_each_element.2934
-bnei_else.37083:
-	lw	%a0, 6(%a1)
-	beqi	%a0, 0, bnei_else.37136
-	addi	%v0, %a3, 1
-	add	%ra, %zero, %s0
-	addi	%a0, %k0, 0
-	j	solve_each_element.2934
-bnei_else.37136:
-	add	%ra, %zero, %s0
 	jr	%ra
-bnei_else.36990:
-	add	%ra, %zero, %s0
-	jr	%ra
-solve_one_or_network.2938:
-	add	%s3, %zero, %v0
-	add	%s4, %zero, %v1
-	add	%s5, %zero, %a0
-	add	%s6, %zero, %ra
-	add	%at, %s4, %s3
-	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.37189
-	lw	%v1, 83(%a0)
-	addi	%a0, %s5, 0
-	addi	%v0, %zero, 0
-	jal	solve_each_element.2934
-	addi	%s3, %s3, 1
-	add	%at, %s4, %s3
-	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.37190
-	lw	%v1, 83(%a0)
-	addi	%a0, %s5, 0
-	addi	%v0, %zero, 0
-	jal	solve_each_element.2934
-	addi	%s3, %s3, 1
-	add	%at, %s4, %s3
-	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.37191
-	lw	%v1, 83(%a0)
-	addi	%a0, %s5, 0
-	addi	%v0, %zero, 0
-	jal	solve_each_element.2934
-	addi	%s3, %s3, 1
-	add	%at, %s4, %s3
-	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.37192
-	lw	%v1, 83(%a0)
-	addi	%a0, %s5, 0
-	addi	%v0, %zero, 0
-	jal	solve_each_element.2934
-	addi	%s3, %s3, 1
-	add	%at, %s4, %s3
-	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.37193
-	lw	%v1, 83(%a0)
-	addi	%a0, %s5, 0
-	addi	%v0, %zero, 0
-	jal	solve_each_element.2934
-	addi	%s3, %s3, 1
-	add	%at, %s4, %s3
-	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.37194
-	lw	%v1, 83(%a0)
-	addi	%a0, %s5, 0
-	addi	%v0, %zero, 0
-	jal	solve_each_element.2934
-	addi	%s3, %s3, 1
-	add	%at, %s4, %s3
-	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.37195
-	lw	%v1, 83(%a0)
-	addi	%a0, %s5, 0
-	addi	%v0, %zero, 0
-	jal	solve_each_element.2934
-	addi	%s3, %s3, 1
-	add	%at, %s4, %s3
-	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.37196
-	lw	%v1, 83(%a0)
-	addi	%a0, %s5, 0
-	addi	%v0, %zero, 0
-	jal	solve_each_element.2934
-	addi	%v0, %s3, 1
-	add	%ra, %zero, %s6
-	addi	%a0, %s5, 0
-	addi	%v1, %s4, 0
-	j	solve_one_or_network.2938
-bnei_else.37196:
-	add	%ra, %zero, %s6
-	jr	%ra
-bnei_else.37195:
-	add	%ra, %zero, %s6
-	jr	%ra
-bnei_else.37194:
-	add	%ra, %zero, %s6
-	jr	%ra
-bnei_else.37193:
-	add	%ra, %zero, %s6
-	jr	%ra
-bnei_else.37192:
-	add	%ra, %zero, %s6
-	jr	%ra
-bnei_else.37191:
-	add	%ra, %zero, %s6
-	jr	%ra
-bnei_else.37190:
-	add	%ra, %zero, %s6
-	jr	%ra
-bnei_else.37189:
-	add	%ra, %zero, %s6
-	jr	%ra
-trace_or_matrix.2942:
-	add	%s7, %zero, %v0
-	add	%t7, %zero, %v1
-	add	%t8, %zero, %a0
-	add	%t9, %zero, %ra
-	add	%at, %t7, %s7
-	lw	%s3, 0(%at)
-	lw	%a0, 0(%s3)
-	beqi	%a0, -1, bnei_else.37609
-	beqi	%a0, 99, bnei_else.37610
-	lw	%a1, 12(%a0)
-	flw	%f1, 159(%zero)
-	lw	%a0, 5(%a1)
-	flw	%f0, 0(%a0)
-	fsub	%f19, %f1, %f0
-	flw	%f1, 160(%zero)
-	lw	%a0, 5(%a1)
-	flw	%f0, 1(%a0)
-	fsub	%f2, %f1, %f0
-	flw	%f1, 161(%zero)
-	lw	%a0, 5(%a1)
-	flw	%f0, 2(%a0)
-	fsub	%f20, %f1, %f0
-	lw	%a0, 1(%a1)
-	beqi	%a0, 1, bnei_else.37612
-	beqi	%a0, 2, bnei_else.37614
-	flw	%f25, 0(%t8)
-	flw	%f24, 1(%t8)
-	flw	%f26, 2(%t8)
-	fmul	%f0, %f25, %f25
-	lw	%a0, 4(%a1)
-	flw	%f23, 0(%a0)
-	fmul	%f1, %f0, %f23
-	fmul	%f0, %f24, %f24
-	lw	%a0, 4(%a1)
-	flw	%f21, 1(%a0)
-	fmul	%f0, %f0, %f21
-	fadd	%f1, %f1, %f0
-	fmul	%f0, %f26, %f26
-	lw	%a0, 4(%a1)
-	flw	%f18, 2(%a0)
-	fmul	%f0, %f0, %f18
-	fadd	%f0, %f1, %f0
-	lw	%a2, 3(%a1)
-	beqi	%a2, 0, bnei_else.37616
-	fmul	%f16, %f24, %f26
-	lw	%a0, 9(%a1)
-	flw	%f1, 0(%a0)
-	fmul	%f1, %f16, %f1
-	fadd	%f16, %f0, %f1
-	fmul	%f1, %f26, %f25
-	lw	%a0, 9(%a1)
-	flw	%f0, 1(%a0)
-	fmul	%f0, %f1, %f0
-	fadd	%f16, %f16, %f0
-	fmul	%f1, %f25, %f24
-	lw	%a0, 9(%a1)
-	flw	%f0, 2(%a0)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	j	bnei_cont.37617
-bnei_else.37616:
-bnei_cont.37617:
-	fbne	%f0, %fzero, fbeq_else.37618
-	add	%a0, %zero, %k1
-	j	fbeq_cont.37619
-fbeq_else.37618:
-	add	%a0, %zero, %zero
-fbeq_cont.37619:
-	beqi	%a0, 0, bnei_else.37620
-	add	%a0, %zero, %zero
-	j	bnei_cont.37613
-bnei_else.37620:
-	fmul	%f1, %f25, %f19
-	fmul	%f16, %f1, %f23
-	fmul	%f1, %f24, %f2
-	fmul	%f1, %f1, %f21
-	fadd	%f16, %f16, %f1
-	fmul	%f1, %f26, %f20
-	fmul	%f1, %f1, %f18
-	fadd	%f1, %f16, %f1
-	beqi	%a2, 0, bnei_else.37622
-	fmul	%f17, %f26, %f2
-	fmul	%f16, %f24, %f20
-	fadd	%f17, %f17, %f16
-	lw	%a0, 9(%a1)
-	flw	%f16, 0(%a0)
-	fmul	%f22, %f17, %f16
-	fmul	%f17, %f25, %f20
-	fmul	%f16, %f26, %f19
-	fadd	%f17, %f17, %f16
-	lw	%a0, 9(%a1)
-	flw	%f16, 1(%a0)
-	fmul	%f16, %f17, %f16
-	fadd	%f22, %f22, %f16
-	fmul	%f17, %f25, %f2
-	fmul	%f16, %f24, %f19
-	fadd	%f17, %f17, %f16
-	lw	%a0, 9(%a1)
-	flw	%f16, 2(%a0)
-	fmul	%f16, %f17, %f16
-	fadd	%f17, %f22, %f16
-	flw	%f16, 473(%zero)
-	fmul	%f16, %f17, %f16
-	fadd	%f1, %f1, %f16
-	j	bnei_cont.37623
-bnei_else.37622:
-bnei_cont.37623:
-	fmul	%f16, %f19, %f19
-	fmul	%f17, %f16, %f23
-	fmul	%f16, %f2, %f2
-	fmul	%f16, %f16, %f21
-	fadd	%f17, %f17, %f16
-	fmul	%f16, %f20, %f20
-	fmul	%f16, %f16, %f18
-	fadd	%f16, %f17, %f16
-	beqi	%a2, 0, bnei_else.37624
-	fmul	%f18, %f2, %f20
-	lw	%a0, 9(%a1)
+bnei_else.25059:
+	fmul	%f18, %f22, %f0
+	lw	%a0, 4(%v0)
 	flw	%f17, 0(%a0)
+	fmul	%f19, %f18, %f17
+	fmul	%f18, %f21, %f1
+	lw	%a0, 4(%v0)
+	flw	%f17, 1(%a0)
 	fmul	%f17, %f18, %f17
-	fadd	%f18, %f16, %f17
-	fmul	%f17, %f20, %f19
-	lw	%a0, 9(%a1)
-	flw	%f16, 1(%a0)
-	fmul	%f16, %f17, %f16
-	fadd	%f18, %f18, %f16
-	fmul	%f17, %f19, %f2
-	lw	%a0, 9(%a1)
-	flw	%f16, 2(%a0)
-	fmul	%f16, %f17, %f16
-	fadd	%f16, %f18, %f16
-	j	bnei_cont.37625
-bnei_else.37624:
-bnei_cont.37625:
-	lw	%a0, 1(%a1)
-	beqi	%a0, 3, bnei_else.37626
-	j	bnei_cont.37627
-bnei_else.37626:
-	fsub	%f16, %f16, %f30
-bnei_cont.37627:
-	fmul	%f17, %f1, %f1
-	fmul	%f16, %f0, %f16
-	fsub	%f16, %f17, %f16
-	fblt	%fzero, %f16, fbgt_else.37628
-	add	%a0, %zero, %zero
-	j	fbgt_cont.37629
-fbgt_else.37628:
-	add	%a0, %zero, %k1
-fbgt_cont.37629:
-	beqi	%a0, 0, bnei_else.37630
-	fsqrt	%f16, %f16
-	lw	%a0, 6(%a1)
-	beqi	%a0, 0, bnei_else.37632
-	j	bnei_cont.37633
-bnei_else.37632:
-	fneg	%f16, %f16
-bnei_cont.37633:
-	fsub	%f1, %f16, %f1
-	fdiv	%f0, %f1, %f0
-	fsw	%f0, 135(%zero)
-	add	%a0, %zero, %k1
-	j	bnei_cont.37613
-bnei_else.37630:
-	add	%a0, %zero, %zero
-bnei_cont.37631:
-bnei_cont.37621:
-	j	bnei_cont.37613
-bnei_else.37614:
-	lw	%a0, 4(%a1)
-	flw	%f0, 0(%t8)
-	flw	%f21, 0(%a0)
-	fmul	%f1, %f0, %f21
-	flw	%f0, 1(%t8)
-	flw	%f18, 1(%a0)
-	fmul	%f0, %f0, %f18
-	fadd	%f1, %f1, %f0
-	flw	%f0, 2(%t8)
+	fadd	%f19, %f19, %f17
+	fmul	%f18, %f23, %f2
+	lw	%a0, 4(%v0)
 	flw	%f17, 2(%a0)
-	fmul	%f0, %f0, %f17
-	fadd	%f16, %f1, %f0
-	fblt	%fzero, %f16, fbgt_else.37634
+	fmul	%f17, %f18, %f17
+	fadd	%f17, %f19, %f17
+	lw	%a0, 3(%v0)
+	beqi	%a0, 0, bnei_else.25060
+	fmul	%f19, %f23, %f1
+	fmul	%f18, %f21, %f2
+	fadd	%f19, %f19, %f18
+	lw	%a0, 9(%v0)
+	flw	%f18, 0(%a0)
+	fmul	%f20, %f19, %f18
+	fmul	%f19, %f22, %f2
+	fmul	%f18, %f23, %f0
+	fadd	%f19, %f19, %f18
+	lw	%a0, 9(%v0)
+	flw	%f18, 1(%a0)
+	fmul	%f18, %f19, %f18
+	fadd	%f20, %f20, %f18
+	fmul	%f19, %f22, %f1
+	fmul	%f18, %f21, %f0
+	fadd	%f19, %f19, %f18
+	lw	%a0, 9(%v0)
+	flw	%f18, 2(%a0)
+	fmul	%f18, %f19, %f18
+	fadd	%f19, %f20, %f18
+	flw	%f18, 473(%zero)
+	fmul	%f18, %f19, %f18
+	fadd	%f17, %f17, %f18
+	j	bnei_cont.25061
+bnei_else.25060:
+bnei_cont.25061:
+	fmul	%f19, %f0, %f0
+	lw	%a0, 4(%v0)
+	flw	%f18, 0(%a0)
+	fmul	%f20, %f19, %f18
+	fmul	%f19, %f1, %f1
+	lw	%a0, 4(%v0)
+	flw	%f18, 1(%a0)
+	fmul	%f18, %f19, %f18
+	fadd	%f20, %f20, %f18
+	fmul	%f19, %f2, %f2
+	lw	%a0, 4(%v0)
+	flw	%f18, 2(%a0)
+	fmul	%f18, %f19, %f18
+	fadd	%f18, %f20, %f18
+	lw	%a0, 3(%v0)
+	beqi	%a0, 0, bnei_else.25062
+	fmul	%f20, %f1, %f2
+	lw	%a0, 9(%v0)
+	flw	%f19, 0(%a0)
+	fmul	%f19, %f20, %f19
+	fadd	%f20, %f18, %f19
+	fmul	%f19, %f2, %f0
+	lw	%a0, 9(%v0)
+	flw	%f18, 1(%a0)
+	fmul	%f18, %f19, %f18
+	fadd	%f18, %f20, %f18
+	fmul	%f1, %f0, %f1
+	lw	%a0, 9(%v0)
+	flw	%f0, 2(%a0)
+	fmul	%f0, %f1, %f0
+	fadd	%f18, %f18, %f0
+	j	bnei_cont.25063
+bnei_else.25062:
+bnei_cont.25063:
+	lw	%a0, 1(%v0)
+	beqi	%a0, 3, bnei_else.25064
+	j	bnei_cont.25065
+bnei_else.25064:
+	fsub	%f18, %f18, %f30
+bnei_cont.25065:
+	fmul	%f1, %f17, %f17
+	fmul	%f0, %f16, %f18
+	fsub	%f0, %f1, %f0
+	fblt	%fzero, %f0, fbgt_else.25066
 	add	%a0, %zero, %zero
-	j	fbgt_cont.37635
-fbgt_else.37634:
+	j	fbgt_cont.25067
+fbgt_else.25066:
 	add	%a0, %zero, %k1
-fbgt_cont.37635:
-	beqi	%a0, 0, bnei_else.37636
-	fmul	%f1, %f21, %f19
-	fmul	%f0, %f18, %f2
-	fadd	%f1, %f1, %f0
-	fmul	%f0, %f17, %f20
-	fadd	%f0, %f1, %f0
+fbgt_cont.25067:
+	beqi	%a0, 0, bnei_else.25068
+	fsqrt	%f0, %f0
+	lw	%a0, 6(%v0)
+	beqi	%a0, 0, bnei_else.25069
+	j	bnei_cont.25070
+bnei_else.25069:
 	fneg	%f0, %f0
+bnei_cont.25070:
+	fsub	%f0, %f0, %f17
 	fdiv	%f0, %f0, %f16
 	fsw	%f0, 135(%zero)
-	add	%a0, %zero, %k1
-	j	bnei_cont.37613
-bnei_else.37636:
-	add	%a0, %zero, %zero
-bnei_cont.37637:
-bnei_cont.37615:
-	j	bnei_cont.37613
-bnei_else.37612:
-	flw	%f17, 0(%t8)
-	fbne	%f17, %fzero, fbeq_else.37638
-	add	%a0, %zero, %k1
-	j	fbeq_cont.37639
-fbeq_else.37638:
-	add	%a0, %zero, %zero
-fbeq_cont.37639:
-	beqi	%a0, 0, bnei_else.37640
-	add	%a0, %zero, %zero
-	j	bnei_cont.37641
-bnei_else.37640:
-	lw	%a3, 4(%a1)
-	lw	%a2, 6(%a1)
-	fblt	%f17, %fzero, fbgt_else.37642
-	add	%a0, %zero, %zero
-	j	fbgt_cont.37643
-fbgt_else.37642:
-	add	%a0, %zero, %k1
-fbgt_cont.37643:
-	beqi	%a2, 0, bnei_else.37644
-	beqi	%a0, 0, bnei_else.37646
-	add	%a0, %zero, %zero
-	j	bnei_cont.37645
-bnei_else.37646:
-	add	%a0, %zero, %k1
-bnei_cont.37647:
-	j	bnei_cont.37645
-bnei_else.37644:
-bnei_cont.37645:
-	flw	%f0, 0(%a3)
-	beqi	%a0, 0, bnei_else.37648
-	j	bnei_cont.37649
-bnei_else.37648:
-	fneg	%f0, %f0
-bnei_cont.37649:
-	fsub	%f0, %f0, %f19
-	fdiv	%f16, %f0, %f17
-	flw	%f0, 1(%t8)
-	fmul	%f0, %f16, %f0
-	fadd	%f0, %f0, %f2
-	fabs	%f1, %f0
-	flw	%f0, 1(%a3)
-	fblt	%f1, %f0, fbgt_else.37650
-	add	%a0, %zero, %zero
-	j	fbgt_cont.37651
-fbgt_else.37650:
-	add	%a0, %zero, %k1
-fbgt_cont.37651:
-	beqi	%a0, 0, bnei_else.37652
-	flw	%f0, 2(%t8)
-	fmul	%f0, %f16, %f0
-	fadd	%f0, %f0, %f20
-	fabs	%f1, %f0
-	flw	%f0, 2(%a3)
-	fblt	%f1, %f0, fbgt_else.37654
-	add	%a0, %zero, %zero
-	j	fbgt_cont.37655
-fbgt_else.37654:
-	add	%a0, %zero, %k1
-fbgt_cont.37655:
-	beqi	%a0, 0, bnei_else.37656
-	fsw	%f16, 135(%zero)
-	add	%a0, %zero, %k1
-	j	bnei_cont.37653
-bnei_else.37656:
-	add	%a0, %zero, %zero
-bnei_cont.37657:
-	j	bnei_cont.37653
-bnei_else.37652:
-	add	%a0, %zero, %zero
-bnei_cont.37653:
-bnei_cont.37641:
-	beqi	%a0, 0, bnei_else.37658
-	add	%a0, %zero, %k1
-	j	bnei_cont.37659
-bnei_else.37658:
-	flw	%f16, 1(%t8)
-	fbne	%f16, %fzero, fbeq_else.37660
-	add	%a0, %zero, %k1
-	j	fbeq_cont.37661
-fbeq_else.37660:
-	add	%a0, %zero, %zero
-fbeq_cont.37661:
-	beqi	%a0, 0, bnei_else.37662
-	add	%a0, %zero, %zero
-	j	bnei_cont.37663
-bnei_else.37662:
-	lw	%a3, 4(%a1)
-	lw	%a2, 6(%a1)
-	fblt	%f16, %fzero, fbgt_else.37664
-	add	%a0, %zero, %zero
-	j	fbgt_cont.37665
-fbgt_else.37664:
-	add	%a0, %zero, %k1
-fbgt_cont.37665:
-	beqi	%a2, 0, bnei_else.37666
-	beqi	%a0, 0, bnei_else.37668
-	add	%a0, %zero, %zero
-	j	bnei_cont.37667
-bnei_else.37668:
-	add	%a0, %zero, %k1
-bnei_cont.37669:
-	j	bnei_cont.37667
-bnei_else.37666:
-bnei_cont.37667:
-	flw	%f0, 1(%a3)
-	beqi	%a0, 0, bnei_else.37670
-	j	bnei_cont.37671
-bnei_else.37670:
-	fneg	%f0, %f0
-bnei_cont.37671:
-	fsub	%f0, %f0, %f2
-	fdiv	%f18, %f0, %f16
-	flw	%f0, 2(%t8)
-	fmul	%f0, %f18, %f0
-	fadd	%f0, %f0, %f20
-	fabs	%f1, %f0
-	flw	%f0, 2(%a3)
-	fblt	%f1, %f0, fbgt_else.37672
-	add	%a0, %zero, %zero
-	j	fbgt_cont.37673
-fbgt_else.37672:
-	add	%a0, %zero, %k1
-fbgt_cont.37673:
-	beqi	%a0, 0, bnei_else.37674
-	fmul	%f0, %f18, %f17
-	fadd	%f0, %f0, %f19
-	fabs	%f1, %f0
-	flw	%f0, 0(%a3)
-	fblt	%f1, %f0, fbgt_else.37676
-	add	%a0, %zero, %zero
-	j	fbgt_cont.37677
-fbgt_else.37676:
-	add	%a0, %zero, %k1
-fbgt_cont.37677:
-	beqi	%a0, 0, bnei_else.37678
-	fsw	%f18, 135(%zero)
-	add	%a0, %zero, %k1
-	j	bnei_cont.37675
-bnei_else.37678:
-	add	%a0, %zero, %zero
-bnei_cont.37679:
-	j	bnei_cont.37675
-bnei_else.37674:
-	add	%a0, %zero, %zero
-bnei_cont.37675:
-bnei_cont.37663:
-	beqi	%a0, 0, bnei_else.37680
-	addi	%a0, %zero, 2
-	j	bnei_cont.37681
-bnei_else.37680:
-	flw	%f1, 2(%t8)
-	fbne	%f1, %fzero, fbeq_else.37682
-	add	%a0, %zero, %k1
-	j	fbeq_cont.37683
-fbeq_else.37682:
-	add	%a0, %zero, %zero
-fbeq_cont.37683:
-	beqi	%a0, 0, bnei_else.37684
-	add	%a0, %zero, %zero
-	j	bnei_cont.37685
-bnei_else.37684:
-	lw	%a2, 4(%a1)
-	lw	%a1, 6(%a1)
-	fblt	%f1, %fzero, fbgt_else.37686
-	add	%a0, %zero, %zero
-	j	fbgt_cont.37687
-fbgt_else.37686:
-	add	%a0, %zero, %k1
-fbgt_cont.37687:
-	beqi	%a1, 0, bnei_else.37688
-	beqi	%a0, 0, bnei_else.37690
-	add	%a0, %zero, %zero
-	j	bnei_cont.37689
-bnei_else.37690:
-	add	%a0, %zero, %k1
-bnei_cont.37691:
-	j	bnei_cont.37689
-bnei_else.37688:
-bnei_cont.37689:
-	flw	%f0, 2(%a2)
-	beqi	%a0, 0, bnei_else.37692
-	j	bnei_cont.37693
-bnei_else.37692:
-	fneg	%f0, %f0
-bnei_cont.37693:
-	fsub	%f0, %f0, %f20
-	fdiv	%f18, %f0, %f1
-	fmul	%f0, %f18, %f17
-	fadd	%f0, %f0, %f19
-	fabs	%f1, %f0
+	add	%v0, %zero, %k1
+	jr	%ra
+bnei_else.25068:
+	add	%v0, %zero, %zero
+	jr	%ra
+solver.2836:
+	lw	%a1, 12(%v0)
+	flw	%f1, 0(%a0)
+	lw	%a2, 5(%a1)
 	flw	%f0, 0(%a2)
-	fblt	%f1, %f0, fbgt_else.37694
-	add	%a0, %zero, %zero
-	j	fbgt_cont.37695
-fbgt_else.37694:
-	add	%a0, %zero, %k1
-fbgt_cont.37695:
-	beqi	%a0, 0, bnei_else.37696
-	fmul	%f0, %f18, %f16
-	fadd	%f0, %f0, %f2
-	fabs	%f1, %f0
-	flw	%f0, 1(%a2)
-	fblt	%f1, %f0, fbgt_else.37698
-	add	%a0, %zero, %zero
-	j	fbgt_cont.37699
-fbgt_else.37698:
-	add	%a0, %zero, %k1
-fbgt_cont.37699:
-	beqi	%a0, 0, bnei_else.37700
-	fsw	%f18, 135(%zero)
-	add	%a0, %zero, %k1
-	j	bnei_cont.37697
-bnei_else.37700:
-	add	%a0, %zero, %zero
-bnei_cont.37701:
-	j	bnei_cont.37697
-bnei_else.37696:
-	add	%a0, %zero, %zero
-bnei_cont.37697:
-bnei_cont.37685:
-	beqi	%a0, 0, bnei_else.37702
-	addi	%a0, %zero, 3
-	j	bnei_cont.37703
-bnei_else.37702:
-	add	%a0, %zero, %zero
-bnei_cont.37703:
-bnei_cont.37681:
-bnei_cont.37659:
-bnei_cont.37613:
-	beqi	%a0, 0, bnei_cont.37611
-	flw	%f1, 135(%zero)
-	flw	%f0, 137(%zero)
-	fblt	%f1, %f0, fbgt_else.37706
-	add	%a0, %zero, %zero
-	j	fbgt_cont.37707
-fbgt_else.37706:
-	add	%a0, %zero, %k1
-fbgt_cont.37707:
-	beqi	%a0, 0, bnei_cont.37611
-	lw	%a0, 1(%s3)
-	beqi	%a0, -1, bnei_cont.37611
-	lw	%v1, 83(%a0)
-	addi	%a0, %t8, 0
-	addi	%v0, %zero, 0
-	jal	solve_each_element.2934
-	lw	%a0, 2(%s3)
-	beqi	%a0, -1, bnei_cont.37611
-	lw	%v1, 83(%a0)
-	addi	%a0, %t8, 0
-	addi	%v0, %zero, 0
-	jal	solve_each_element.2934
-	lw	%a0, 3(%s3)
-	beqi	%a0, -1, bnei_cont.37611
-	lw	%v1, 83(%a0)
-	addi	%a0, %t8, 0
-	addi	%v0, %zero, 0
-	jal	solve_each_element.2934
-	lw	%a0, 4(%s3)
-	beqi	%a0, -1, bnei_cont.37611
-	lw	%v1, 83(%a0)
-	addi	%a0, %t8, 0
-	addi	%v0, %zero, 0
-	jal	solve_each_element.2934
-	lw	%a0, 5(%s3)
-	beqi	%a0, -1, bnei_cont.37611
-	lw	%v1, 83(%a0)
-	addi	%a0, %t8, 0
-	addi	%v0, %zero, 0
-	jal	solve_each_element.2934
-	lw	%a0, 6(%s3)
-	beqi	%a0, -1, bnei_cont.37611
-	lw	%v1, 83(%a0)
-	addi	%a0, %t8, 0
-	addi	%v0, %zero, 0
-	jal	solve_each_element.2934
-	lw	%a0, 7(%s3)
-	beqi	%a0, -1, bnei_cont.37611
-	lw	%v1, 83(%a0)
-	addi	%a0, %t8, 0
-	addi	%v0, %zero, 0
-	jal	solve_each_element.2934
-	addi	%v0, %zero, 8
-	addi	%a0, %t8, 0
-	addi	%v1, %s3, 0
-	jal	solve_one_or_network.2938
-	j	bnei_cont.37611
-bnei_else.37722:
-bnei_cont.37723:
-	j	bnei_cont.37611
-bnei_else.37720:
-bnei_cont.37721:
-	j	bnei_cont.37611
-bnei_else.37718:
-bnei_cont.37719:
-	j	bnei_cont.37611
-bnei_else.37716:
-bnei_cont.37717:
-	j	bnei_cont.37611
-bnei_else.37714:
-bnei_cont.37715:
-	j	bnei_cont.37611
-bnei_else.37712:
-bnei_cont.37713:
-	j	bnei_cont.37611
-bnei_else.37710:
-bnei_cont.37711:
-	j	bnei_cont.37611
-bnei_else.37708:
-bnei_cont.37709:
-	j	bnei_cont.37611
-bnei_else.37704:
-bnei_cont.37705:
-	j	bnei_cont.37611
-bnei_else.37610:
-	lw	%a0, 1(%s3)
-	beqi	%a0, -1, bnei_else.37724
-	lw	%v1, 83(%a0)
-	addi	%a0, %t8, 0
-	addi	%v0, %zero, 0
-	jal	solve_each_element.2934
-	lw	%a0, 2(%s3)
-	beqi	%a0, -1, bnei_cont.37725
-	lw	%v1, 83(%a0)
-	addi	%a0, %t8, 0
-	addi	%v0, %zero, 0
-	jal	solve_each_element.2934
-	lw	%a0, 3(%s3)
-	beqi	%a0, -1, bnei_cont.37725
-	lw	%v1, 83(%a0)
-	addi	%a0, %t8, 0
-	addi	%v0, %zero, 0
-	jal	solve_each_element.2934
-	lw	%a0, 4(%s3)
-	beqi	%a0, -1, bnei_cont.37725
-	lw	%v1, 83(%a0)
-	addi	%a0, %t8, 0
-	addi	%v0, %zero, 0
-	jal	solve_each_element.2934
-	lw	%a0, 5(%s3)
-	beqi	%a0, -1, bnei_cont.37725
-	lw	%v1, 83(%a0)
-	addi	%a0, %t8, 0
-	addi	%v0, %zero, 0
-	jal	solve_each_element.2934
-	lw	%a0, 6(%s3)
-	beqi	%a0, -1, bnei_cont.37725
-	lw	%v1, 83(%a0)
-	addi	%a0, %t8, 0
-	addi	%v0, %zero, 0
-	jal	solve_each_element.2934
-	lw	%a0, 7(%s3)
-	beqi	%a0, -1, bnei_cont.37725
-	lw	%v1, 83(%a0)
-	addi	%a0, %t8, 0
-	addi	%v0, %zero, 0
-	jal	solve_each_element.2934
-	addi	%v0, %zero, 8
-	addi	%a0, %t8, 0
-	addi	%v1, %s3, 0
-	jal	solve_one_or_network.2938
-	j	bnei_cont.37725
-bnei_else.37736:
-bnei_cont.37737:
-	j	bnei_cont.37725
-bnei_else.37734:
-bnei_cont.37735:
-	j	bnei_cont.37725
-bnei_else.37732:
-bnei_cont.37733:
-	j	bnei_cont.37725
-bnei_else.37730:
-bnei_cont.37731:
-	j	bnei_cont.37725
-bnei_else.37728:
-bnei_cont.37729:
-	j	bnei_cont.37725
-bnei_else.37726:
-bnei_cont.37727:
-	j	bnei_cont.37725
-bnei_else.37724:
-bnei_cont.37725:
-bnei_cont.37611:
-	addi	%s7, %s7, 1
-	add	%at, %t7, %s7
-	lw	%s3, 0(%at)
-	lw	%a0, 0(%s3)
-	beqi	%a0, -1, bnei_else.37738
-	beqi	%a0, 99, bnei_else.37739
-	lw	%a1, 12(%a0)
-	flw	%f1, 159(%zero)
-	lw	%a0, 5(%a1)
-	flw	%f0, 0(%a0)
 	fsub	%f19, %f1, %f0
-	flw	%f1, 160(%zero)
-	lw	%a0, 5(%a1)
-	flw	%f0, 1(%a0)
+	flw	%f1, 1(%a0)
+	lw	%a2, 5(%a1)
+	flw	%f0, 1(%a2)
 	fsub	%f2, %f1, %f0
-	flw	%f1, 161(%zero)
+	flw	%f1, 2(%a0)
 	lw	%a0, 5(%a1)
 	flw	%f0, 2(%a0)
 	fsub	%f20, %f1, %f0
 	lw	%a0, 1(%a1)
-	beqi	%a0, 1, bnei_else.37741
-	beqi	%a0, 2, bnei_else.37743
-	flw	%f22, 0(%t8)
-	flw	%f21, 1(%t8)
-	flw	%f23, 2(%t8)
+	beqi	%a0, 1, bnei_else.25229
+	beqi	%a0, 2, bnei_else.25230
+	flw	%f22, 0(%v1)
+	flw	%f21, 1(%v1)
+	flw	%f23, 2(%v1)
 	fmul	%f1, %f22, %f22
 	lw	%a0, 4(%a1)
 	flw	%f0, 0(%a0)
@@ -7031,7 +4414,7 @@ bnei_cont.37611:
 	fmul	%f0, %f1, %f0
 	fadd	%f0, %f16, %f0
 	lw	%a0, 3(%a1)
-	beqi	%a0, 0, bnei_else.37745
+	beqi	%a0, 0, bnei_else.25231
 	fmul	%f16, %f21, %f23
 	lw	%a0, 9(%a1)
 	flw	%f1, 0(%a0)
@@ -7047,19 +4430,19 @@ bnei_cont.37611:
 	flw	%f0, 2(%a0)
 	fmul	%f0, %f1, %f0
 	fadd	%f0, %f16, %f0
-	j	bnei_cont.37746
-bnei_else.37745:
-bnei_cont.37746:
-	fbne	%f0, %fzero, fbeq_else.37747
+	j	bnei_cont.25232
+bnei_else.25231:
+bnei_cont.25232:
+	fbne	%f0, %fzero, fbeq_else.25233
 	add	%a0, %zero, %k1
-	j	fbeq_cont.37748
-fbeq_else.37747:
+	j	fbeq_cont.25234
+fbeq_else.25233:
 	add	%a0, %zero, %zero
-fbeq_cont.37748:
-	beqi	%a0, 0, bnei_else.37749
-	add	%a0, %zero, %zero
-	j	bnei_cont.37742
-bnei_else.37749:
+fbeq_cont.25234:
+	beqi	%a0, 0, bnei_else.25235
+	add	%v0, %zero, %zero
+	jr	%ra
+bnei_else.25235:
 	fmul	%f16, %f22, %f19
 	lw	%a0, 4(%a1)
 	flw	%f1, 0(%a0)
@@ -7075,7 +4458,7 @@ bnei_else.37749:
 	fmul	%f1, %f16, %f1
 	fadd	%f1, %f17, %f1
 	lw	%a0, 3(%a1)
-	beqi	%a0, 0, bnei_else.37751
+	beqi	%a0, 0, bnei_else.25236
 	fmul	%f17, %f23, %f2
 	fmul	%f16, %f21, %f20
 	fadd	%f17, %f17, %f16
@@ -7099,9 +4482,9 @@ bnei_else.37749:
 	flw	%f16, 473(%zero)
 	fmul	%f16, %f17, %f16
 	fadd	%f1, %f1, %f16
-	j	bnei_cont.37752
-bnei_else.37751:
-bnei_cont.37752:
+	j	bnei_cont.25237
+bnei_else.25236:
+bnei_cont.25237:
 	fmul	%f17, %f19, %f19
 	lw	%a0, 4(%a1)
 	flw	%f16, 0(%a0)
@@ -7117,7 +4500,7 @@ bnei_cont.37752:
 	fmul	%f16, %f17, %f16
 	fadd	%f16, %f18, %f16
 	lw	%a0, 3(%a1)
-	beqi	%a0, 0, bnei_else.37753
+	beqi	%a0, 0, bnei_else.25238
 	fmul	%f18, %f2, %f20
 	lw	%a0, 9(%a1)
 	flw	%f17, 0(%a0)
@@ -7133,62 +4516,60 @@ bnei_cont.37752:
 	flw	%f16, 2(%a0)
 	fmul	%f16, %f17, %f16
 	fadd	%f16, %f18, %f16
-	j	bnei_cont.37754
-bnei_else.37753:
-bnei_cont.37754:
+	j	bnei_cont.25239
+bnei_else.25238:
+bnei_cont.25239:
 	lw	%a0, 1(%a1)
-	beqi	%a0, 3, bnei_else.37755
-	j	bnei_cont.37756
-bnei_else.37755:
+	beqi	%a0, 3, bnei_else.25240
+	j	bnei_cont.25241
+bnei_else.25240:
 	fsub	%f16, %f16, %f30
-bnei_cont.37756:
+bnei_cont.25241:
 	fmul	%f17, %f1, %f1
 	fmul	%f16, %f0, %f16
 	fsub	%f16, %f17, %f16
-	fblt	%fzero, %f16, fbgt_else.37757
+	fblt	%fzero, %f16, fbgt_else.25242
 	add	%a0, %zero, %zero
-	j	fbgt_cont.37758
-fbgt_else.37757:
+	j	fbgt_cont.25243
+fbgt_else.25242:
 	add	%a0, %zero, %k1
-fbgt_cont.37758:
-	beqi	%a0, 0, bnei_else.37759
+fbgt_cont.25243:
+	beqi	%a0, 0, bnei_else.25244
 	fsqrt	%f16, %f16
 	lw	%a0, 6(%a1)
-	beqi	%a0, 0, bnei_else.37761
-	j	bnei_cont.37762
-bnei_else.37761:
+	beqi	%a0, 0, bnei_else.25245
+	j	bnei_cont.25246
+bnei_else.25245:
 	fneg	%f16, %f16
-bnei_cont.37762:
+bnei_cont.25246:
 	fsub	%f1, %f16, %f1
 	fdiv	%f0, %f1, %f0
 	fsw	%f0, 135(%zero)
-	add	%a0, %zero, %k1
-	j	bnei_cont.37742
-bnei_else.37759:
-	add	%a0, %zero, %zero
-bnei_cont.37760:
-bnei_cont.37750:
-	j	bnei_cont.37742
-bnei_else.37743:
+	add	%v0, %zero, %k1
+	jr	%ra
+bnei_else.25244:
+	add	%v0, %zero, %zero
+	jr	%ra
+bnei_else.25230:
 	lw	%a0, 4(%a1)
-	flw	%f0, 0(%t8)
+	flw	%f0, 0(%v1)
 	flw	%f21, 0(%a0)
 	fmul	%f1, %f0, %f21
-	flw	%f0, 1(%t8)
+	flw	%f0, 1(%v1)
 	flw	%f18, 1(%a0)
 	fmul	%f0, %f0, %f18
 	fadd	%f1, %f1, %f0
-	flw	%f0, 2(%t8)
+	flw	%f0, 2(%v1)
 	flw	%f17, 2(%a0)
 	fmul	%f0, %f0, %f17
 	fadd	%f16, %f1, %f0
-	fblt	%fzero, %f16, fbgt_else.37763
+	fblt	%fzero, %f16, fbgt_else.25247
 	add	%a0, %zero, %zero
-	j	fbgt_cont.37764
-fbgt_else.37763:
+	j	fbgt_cont.25248
+fbgt_else.25247:
 	add	%a0, %zero, %k1
-fbgt_cont.37764:
-	beqi	%a0, 0, bnei_else.37765
+fbgt_cont.25248:
+	beqi	%a0, 0, bnei_else.25249
 	fmul	%f1, %f21, %f19
 	fmul	%f0, %f18, %f2
 	fadd	%f1, %f1, %f0
@@ -7197,683 +4578,1141 @@ fbgt_cont.37764:
 	fneg	%f0, %f0
 	fdiv	%f0, %f0, %f16
 	fsw	%f0, 135(%zero)
+	add	%v0, %zero, %k1
+	jr	%ra
+bnei_else.25249:
+	add	%v0, %zero, %zero
+	jr	%ra
+bnei_else.25229:
+	flw	%f17, 0(%v1)
+	fbne	%f17, %fzero, fbeq_else.25250
 	add	%a0, %zero, %k1
-	j	bnei_cont.37742
-bnei_else.37765:
+	j	fbeq_cont.25251
+fbeq_else.25250:
 	add	%a0, %zero, %zero
-bnei_cont.37766:
-bnei_cont.37744:
-	j	bnei_cont.37742
-bnei_else.37741:
-	flw	%f17, 0(%t8)
-	fbne	%f17, %fzero, fbeq_else.37767
-	add	%a0, %zero, %k1
-	j	fbeq_cont.37768
-fbeq_else.37767:
+fbeq_cont.25251:
+	beqi	%a0, 0, bnei_else.25252
 	add	%a0, %zero, %zero
-fbeq_cont.37768:
-	beqi	%a0, 0, bnei_else.37769
-	add	%a0, %zero, %zero
-	j	bnei_cont.37770
-bnei_else.37769:
+	j	bnei_cont.25253
+bnei_else.25252:
 	lw	%a3, 4(%a1)
 	lw	%a2, 6(%a1)
-	fblt	%f17, %fzero, fbgt_else.37771
+	fblt	%f17, %fzero, fbgt_else.25254
 	add	%a0, %zero, %zero
-	j	fbgt_cont.37772
-fbgt_else.37771:
+	j	fbgt_cont.25255
+fbgt_else.25254:
 	add	%a0, %zero, %k1
-fbgt_cont.37772:
-	beqi	%a2, 0, bnei_else.37773
-	beqi	%a0, 0, bnei_else.37775
+fbgt_cont.25255:
+	beqi	%a2, 0, bnei_else.25256
+	beqi	%a0, 0, bnei_else.25258
 	add	%a0, %zero, %zero
-	j	bnei_cont.37774
-bnei_else.37775:
+	j	bnei_cont.25257
+bnei_else.25258:
 	add	%a0, %zero, %k1
-bnei_cont.37776:
-	j	bnei_cont.37774
-bnei_else.37773:
-bnei_cont.37774:
+bnei_cont.25259:
+	j	bnei_cont.25257
+bnei_else.25256:
+bnei_cont.25257:
 	flw	%f0, 0(%a3)
-	beqi	%a0, 0, bnei_else.37777
-	j	bnei_cont.37778
-bnei_else.37777:
+	beqi	%a0, 0, bnei_else.25260
+	j	bnei_cont.25261
+bnei_else.25260:
 	fneg	%f0, %f0
-bnei_cont.37778:
+bnei_cont.25261:
 	fsub	%f0, %f0, %f19
 	fdiv	%f16, %f0, %f17
-	flw	%f0, 1(%t8)
+	flw	%f0, 1(%v1)
 	fmul	%f0, %f16, %f0
 	fadd	%f0, %f0, %f2
 	fabs	%f1, %f0
 	flw	%f0, 1(%a3)
-	fblt	%f1, %f0, fbgt_else.37779
+	fblt	%f1, %f0, fbgt_else.25262
 	add	%a0, %zero, %zero
-	j	fbgt_cont.37780
-fbgt_else.37779:
+	j	fbgt_cont.25263
+fbgt_else.25262:
 	add	%a0, %zero, %k1
-fbgt_cont.37780:
-	beqi	%a0, 0, bnei_else.37781
-	flw	%f0, 2(%t8)
+fbgt_cont.25263:
+	beqi	%a0, 0, bnei_else.25264
+	flw	%f0, 2(%v1)
 	fmul	%f0, %f16, %f0
 	fadd	%f0, %f0, %f20
 	fabs	%f1, %f0
 	flw	%f0, 2(%a3)
-	fblt	%f1, %f0, fbgt_else.37783
+	fblt	%f1, %f0, fbgt_else.25266
 	add	%a0, %zero, %zero
-	j	fbgt_cont.37784
-fbgt_else.37783:
+	j	fbgt_cont.25267
+fbgt_else.25266:
 	add	%a0, %zero, %k1
-fbgt_cont.37784:
-	beqi	%a0, 0, bnei_else.37785
+fbgt_cont.25267:
+	beqi	%a0, 0, bnei_else.25268
 	fsw	%f16, 135(%zero)
 	add	%a0, %zero, %k1
-	j	bnei_cont.37782
-bnei_else.37785:
+	j	bnei_cont.25265
+bnei_else.25268:
 	add	%a0, %zero, %zero
-bnei_cont.37786:
-	j	bnei_cont.37782
-bnei_else.37781:
+bnei_cont.25269:
+	j	bnei_cont.25265
+bnei_else.25264:
 	add	%a0, %zero, %zero
-bnei_cont.37782:
-bnei_cont.37770:
-	beqi	%a0, 0, bnei_else.37787
+bnei_cont.25265:
+bnei_cont.25253:
+	beqi	%a0, 0, bnei_else.25270
+	add	%v0, %zero, %k1
+	jr	%ra
+bnei_else.25270:
+	flw	%f16, 1(%v1)
+	fbne	%f16, %fzero, fbeq_else.25271
 	add	%a0, %zero, %k1
-	j	bnei_cont.37788
-bnei_else.37787:
-	flw	%f16, 1(%t8)
-	fbne	%f16, %fzero, fbeq_else.37789
-	add	%a0, %zero, %k1
-	j	fbeq_cont.37790
-fbeq_else.37789:
+	j	fbeq_cont.25272
+fbeq_else.25271:
 	add	%a0, %zero, %zero
-fbeq_cont.37790:
-	beqi	%a0, 0, bnei_else.37791
+fbeq_cont.25272:
+	beqi	%a0, 0, bnei_else.25273
 	add	%a0, %zero, %zero
-	j	bnei_cont.37792
-bnei_else.37791:
+	j	bnei_cont.25274
+bnei_else.25273:
 	lw	%a3, 4(%a1)
 	lw	%a2, 6(%a1)
-	fblt	%f16, %fzero, fbgt_else.37793
+	fblt	%f16, %fzero, fbgt_else.25275
 	add	%a0, %zero, %zero
-	j	fbgt_cont.37794
-fbgt_else.37793:
+	j	fbgt_cont.25276
+fbgt_else.25275:
 	add	%a0, %zero, %k1
-fbgt_cont.37794:
-	beqi	%a2, 0, bnei_else.37795
-	beqi	%a0, 0, bnei_else.37797
+fbgt_cont.25276:
+	beqi	%a2, 0, bnei_else.25277
+	beqi	%a0, 0, bnei_else.25279
 	add	%a0, %zero, %zero
-	j	bnei_cont.37796
-bnei_else.37797:
+	j	bnei_cont.25278
+bnei_else.25279:
 	add	%a0, %zero, %k1
-bnei_cont.37798:
-	j	bnei_cont.37796
-bnei_else.37795:
-bnei_cont.37796:
+bnei_cont.25280:
+	j	bnei_cont.25278
+bnei_else.25277:
+bnei_cont.25278:
 	flw	%f0, 1(%a3)
-	beqi	%a0, 0, bnei_else.37799
-	j	bnei_cont.37800
-bnei_else.37799:
+	beqi	%a0, 0, bnei_else.25281
+	j	bnei_cont.25282
+bnei_else.25281:
 	fneg	%f0, %f0
-bnei_cont.37800:
+bnei_cont.25282:
 	fsub	%f0, %f0, %f2
 	fdiv	%f18, %f0, %f16
-	flw	%f0, 2(%t8)
+	flw	%f0, 2(%v1)
 	fmul	%f0, %f18, %f0
 	fadd	%f0, %f0, %f20
 	fabs	%f1, %f0
 	flw	%f0, 2(%a3)
-	fblt	%f1, %f0, fbgt_else.37801
+	fblt	%f1, %f0, fbgt_else.25283
 	add	%a0, %zero, %zero
-	j	fbgt_cont.37802
-fbgt_else.37801:
+	j	fbgt_cont.25284
+fbgt_else.25283:
 	add	%a0, %zero, %k1
-fbgt_cont.37802:
-	beqi	%a0, 0, bnei_else.37803
+fbgt_cont.25284:
+	beqi	%a0, 0, bnei_else.25285
 	fmul	%f0, %f18, %f17
 	fadd	%f0, %f0, %f19
 	fabs	%f1, %f0
 	flw	%f0, 0(%a3)
-	fblt	%f1, %f0, fbgt_else.37805
+	fblt	%f1, %f0, fbgt_else.25287
 	add	%a0, %zero, %zero
-	j	fbgt_cont.37806
-fbgt_else.37805:
+	j	fbgt_cont.25288
+fbgt_else.25287:
 	add	%a0, %zero, %k1
-fbgt_cont.37806:
-	beqi	%a0, 0, bnei_else.37807
+fbgt_cont.25288:
+	beqi	%a0, 0, bnei_else.25289
 	fsw	%f18, 135(%zero)
 	add	%a0, %zero, %k1
-	j	bnei_cont.37804
-bnei_else.37807:
+	j	bnei_cont.25286
+bnei_else.25289:
 	add	%a0, %zero, %zero
-bnei_cont.37808:
-	j	bnei_cont.37804
-bnei_else.37803:
+bnei_cont.25290:
+	j	bnei_cont.25286
+bnei_else.25285:
 	add	%a0, %zero, %zero
-bnei_cont.37804:
-bnei_cont.37792:
-	beqi	%a0, 0, bnei_else.37809
-	addi	%a0, %zero, 2
-	j	bnei_cont.37810
-bnei_else.37809:
-	flw	%f1, 2(%t8)
-	fbne	%f1, %fzero, fbeq_else.37811
+bnei_cont.25286:
+bnei_cont.25274:
+	beqi	%a0, 0, bnei_else.25291
+	addi	%v0, %zero, 2
+	jr	%ra
+bnei_else.25291:
+	flw	%f1, 2(%v1)
+	fbne	%f1, %fzero, fbeq_else.25292
 	add	%a0, %zero, %k1
-	j	fbeq_cont.37812
-fbeq_else.37811:
+	j	fbeq_cont.25293
+fbeq_else.25292:
 	add	%a0, %zero, %zero
-fbeq_cont.37812:
-	beqi	%a0, 0, bnei_else.37813
+fbeq_cont.25293:
+	beqi	%a0, 0, bnei_else.25294
 	add	%a0, %zero, %zero
-	j	bnei_cont.37814
-bnei_else.37813:
+	j	bnei_cont.25295
+bnei_else.25294:
 	lw	%a2, 4(%a1)
 	lw	%a1, 6(%a1)
-	fblt	%f1, %fzero, fbgt_else.37815
+	fblt	%f1, %fzero, fbgt_else.25296
 	add	%a0, %zero, %zero
-	j	fbgt_cont.37816
-fbgt_else.37815:
+	j	fbgt_cont.25297
+fbgt_else.25296:
 	add	%a0, %zero, %k1
-fbgt_cont.37816:
-	beqi	%a1, 0, bnei_else.37817
-	beqi	%a0, 0, bnei_else.37819
+fbgt_cont.25297:
+	beqi	%a1, 0, bnei_else.25298
+	beqi	%a0, 0, bnei_else.25300
 	add	%a0, %zero, %zero
-	j	bnei_cont.37818
-bnei_else.37819:
+	j	bnei_cont.25299
+bnei_else.25300:
 	add	%a0, %zero, %k1
-bnei_cont.37820:
-	j	bnei_cont.37818
-bnei_else.37817:
-bnei_cont.37818:
+bnei_cont.25301:
+	j	bnei_cont.25299
+bnei_else.25298:
+bnei_cont.25299:
 	flw	%f0, 2(%a2)
-	beqi	%a0, 0, bnei_else.37821
-	j	bnei_cont.37822
-bnei_else.37821:
+	beqi	%a0, 0, bnei_else.25302
+	j	bnei_cont.25303
+bnei_else.25302:
 	fneg	%f0, %f0
-bnei_cont.37822:
+bnei_cont.25303:
 	fsub	%f0, %f0, %f20
 	fdiv	%f18, %f0, %f1
 	fmul	%f0, %f18, %f17
 	fadd	%f0, %f0, %f19
 	fabs	%f1, %f0
 	flw	%f0, 0(%a2)
-	fblt	%f1, %f0, fbgt_else.37823
+	fblt	%f1, %f0, fbgt_else.25304
 	add	%a0, %zero, %zero
-	j	fbgt_cont.37824
-fbgt_else.37823:
+	j	fbgt_cont.25305
+fbgt_else.25304:
 	add	%a0, %zero, %k1
-fbgt_cont.37824:
-	beqi	%a0, 0, bnei_else.37825
+fbgt_cont.25305:
+	beqi	%a0, 0, bnei_else.25306
 	fmul	%f0, %f18, %f16
 	fadd	%f0, %f0, %f2
 	fabs	%f1, %f0
 	flw	%f0, 1(%a2)
-	fblt	%f1, %f0, fbgt_else.37827
+	fblt	%f1, %f0, fbgt_else.25308
 	add	%a0, %zero, %zero
-	j	fbgt_cont.37828
-fbgt_else.37827:
+	j	fbgt_cont.25309
+fbgt_else.25308:
 	add	%a0, %zero, %k1
-fbgt_cont.37828:
-	beqi	%a0, 0, bnei_else.37829
+fbgt_cont.25309:
+	beqi	%a0, 0, bnei_else.25310
 	fsw	%f18, 135(%zero)
 	add	%a0, %zero, %k1
-	j	bnei_cont.37826
-bnei_else.37829:
+	j	bnei_cont.25307
+bnei_else.25310:
 	add	%a0, %zero, %zero
-bnei_cont.37830:
-	j	bnei_cont.37826
-bnei_else.37825:
+bnei_cont.25311:
+	j	bnei_cont.25307
+bnei_else.25306:
 	add	%a0, %zero, %zero
-bnei_cont.37826:
-bnei_cont.37814:
-	beqi	%a0, 0, bnei_else.37831
-	addi	%a0, %zero, 3
-	j	bnei_cont.37832
-bnei_else.37831:
-	add	%a0, %zero, %zero
-bnei_cont.37832:
-bnei_cont.37810:
-bnei_cont.37788:
-bnei_cont.37742:
-	beqi	%a0, 0, bnei_cont.37740
-	flw	%f1, 135(%zero)
-	flw	%f0, 137(%zero)
-	fblt	%f1, %f0, fbgt_else.37835
-	add	%a0, %zero, %zero
-	j	fbgt_cont.37836
-fbgt_else.37835:
-	add	%a0, %zero, %k1
-fbgt_cont.37836:
-	beqi	%a0, 0, bnei_cont.37740
-	lw	%a0, 1(%s3)
-	beqi	%a0, -1, bnei_cont.37740
-	lw	%v1, 83(%a0)
-	addi	%a0, %t8, 0
-	addi	%v0, %zero, 0
-	jal	solve_each_element.2934
-	lw	%a0, 2(%s3)
-	beqi	%a0, -1, bnei_cont.37740
-	lw	%v1, 83(%a0)
-	addi	%a0, %t8, 0
-	addi	%v0, %zero, 0
-	jal	solve_each_element.2934
-	lw	%a0, 3(%s3)
-	beqi	%a0, -1, bnei_cont.37740
-	lw	%v1, 83(%a0)
-	addi	%a0, %t8, 0
-	addi	%v0, %zero, 0
-	jal	solve_each_element.2934
-	lw	%a0, 4(%s3)
-	beqi	%a0, -1, bnei_cont.37740
-	lw	%v1, 83(%a0)
-	addi	%a0, %t8, 0
-	addi	%v0, %zero, 0
-	jal	solve_each_element.2934
-	lw	%a0, 5(%s3)
-	beqi	%a0, -1, bnei_cont.37740
-	lw	%v1, 83(%a0)
-	addi	%a0, %t8, 0
-	addi	%v0, %zero, 0
-	jal	solve_each_element.2934
-	lw	%a0, 6(%s3)
-	beqi	%a0, -1, bnei_cont.37740
-	lw	%v1, 83(%a0)
-	addi	%a0, %t8, 0
-	addi	%v0, %zero, 0
-	jal	solve_each_element.2934
-	addi	%v0, %zero, 7
-	addi	%a0, %t8, 0
-	addi	%v1, %s3, 0
-	jal	solve_one_or_network.2938
-	j	bnei_cont.37740
-bnei_else.37849:
-bnei_cont.37850:
-	j	bnei_cont.37740
-bnei_else.37847:
-bnei_cont.37848:
-	j	bnei_cont.37740
-bnei_else.37845:
-bnei_cont.37846:
-	j	bnei_cont.37740
-bnei_else.37843:
-bnei_cont.37844:
-	j	bnei_cont.37740
-bnei_else.37841:
-bnei_cont.37842:
-	j	bnei_cont.37740
-bnei_else.37839:
-bnei_cont.37840:
-	j	bnei_cont.37740
-bnei_else.37837:
-bnei_cont.37838:
-	j	bnei_cont.37740
-bnei_else.37833:
-bnei_cont.37834:
-	j	bnei_cont.37740
-bnei_else.37739:
-	lw	%a0, 1(%s3)
-	beqi	%a0, -1, bnei_else.37851
-	lw	%v1, 83(%a0)
-	addi	%a0, %t8, 0
-	addi	%v0, %zero, 0
-	jal	solve_each_element.2934
-	lw	%a0, 2(%s3)
-	beqi	%a0, -1, bnei_cont.37852
-	lw	%v1, 83(%a0)
-	addi	%a0, %t8, 0
-	addi	%v0, %zero, 0
-	jal	solve_each_element.2934
-	lw	%a0, 3(%s3)
-	beqi	%a0, -1, bnei_cont.37852
-	lw	%v1, 83(%a0)
-	addi	%a0, %t8, 0
-	addi	%v0, %zero, 0
-	jal	solve_each_element.2934
-	lw	%a0, 4(%s3)
-	beqi	%a0, -1, bnei_cont.37852
-	lw	%v1, 83(%a0)
-	addi	%a0, %t8, 0
-	addi	%v0, %zero, 0
-	jal	solve_each_element.2934
-	lw	%a0, 5(%s3)
-	beqi	%a0, -1, bnei_cont.37852
-	lw	%v1, 83(%a0)
-	addi	%a0, %t8, 0
-	addi	%v0, %zero, 0
-	jal	solve_each_element.2934
-	lw	%a0, 6(%s3)
-	beqi	%a0, -1, bnei_cont.37852
-	lw	%v1, 83(%a0)
-	addi	%a0, %t8, 0
-	addi	%v0, %zero, 0
-	jal	solve_each_element.2934
-	addi	%v0, %zero, 7
-	addi	%a0, %t8, 0
-	addi	%v1, %s3, 0
-	jal	solve_one_or_network.2938
-	j	bnei_cont.37852
-bnei_else.37861:
-bnei_cont.37862:
-	j	bnei_cont.37852
-bnei_else.37859:
-bnei_cont.37860:
-	j	bnei_cont.37852
-bnei_else.37857:
-bnei_cont.37858:
-	j	bnei_cont.37852
-bnei_else.37855:
-bnei_cont.37856:
-	j	bnei_cont.37852
-bnei_else.37853:
-bnei_cont.37854:
-	j	bnei_cont.37852
-bnei_else.37851:
-bnei_cont.37852:
-bnei_cont.37740:
-	addi	%v0, %s7, 1
-	add	%ra, %zero, %t9
-	addi	%a0, %t8, 0
-	addi	%v1, %t7, 0
-	j	trace_or_matrix.2942
-bnei_else.37738:
-	add	%ra, %zero, %t9
+bnei_cont.25307:
+bnei_cont.25295:
+	beqi	%a0, 0, bnei_else.25312
+	addi	%v0, %zero, 3
 	jr	%ra
-bnei_else.37609:
-	add	%ra, %zero, %t9
+bnei_else.25312:
+	add	%v0, %zero, %zero
 	jr	%ra
-solve_each_element_fast.2948:
-	add	%a3, %zero, %v0
-	add	%k0, %zero, %a0
-	add	%s0, %zero, %ra
-	lw	%a1, 0(%k0)
-	add	%at, %v1, %a3
-	lw	%s1, 0(%at)
-	beqi	%s1, -1, bnei_else.38062
-	lw	%a2, 12(%s1)
-	lw	%s2, 10(%a2)
-	flw	%f19, 0(%s2)
-	flw	%f16, 1(%s2)
-	flw	%f17, 2(%s2)
-	lw	%a0, 1(%k0)
-	add	%at, %a0, %s1
-	lw	%ra, 0(%at)
-	lw	%a0, 1(%a2)
-	beqi	%a0, 1, bnei_else.38063
-	beqi	%a0, 2, bnei_else.38065
-	flw	%f18, 0(%ra)
-	fbne	%f18, %fzero, fbeq_else.38067
-	add	%a0, %zero, %k1
-	j	fbeq_cont.38068
-fbeq_else.38067:
+solver_rect_fast.2840:
+	flw	%f16, 0(%a0)
+	fsub	%f16, %f16, %f0
+	flw	%f20, 1(%a0)
+	fmul	%f19, %f16, %f20
+	flw	%f18, 1(%v1)
+	fmul	%f16, %f19, %f18
+	fadd	%f16, %f16, %f1
+	fabs	%f17, %f16
+	lw	%a1, 4(%v0)
+	flw	%f16, 1(%a1)
+	fblt	%f17, %f16, fbgt_else.25396
+	add	%a1, %zero, %zero
+	j	fbgt_cont.25397
+fbgt_else.25396:
+	add	%a1, %zero, %k1
+fbgt_cont.25397:
+	beqi	%a1, 0, bnei_else.25398
+	flw	%f16, 2(%v1)
+	fmul	%f16, %f19, %f16
+	fadd	%f16, %f16, %f2
+	fabs	%f17, %f16
+	lw	%a1, 4(%v0)
+	flw	%f16, 2(%a1)
+	fblt	%f17, %f16, fbgt_else.25400
+	add	%a1, %zero, %zero
+	j	fbgt_cont.25401
+fbgt_else.25400:
+	add	%a1, %zero, %k1
+fbgt_cont.25401:
+	beqi	%a1, 0, bnei_else.25402
+	fbne	%f20, %fzero, fbeq_else.25404
+	add	%a1, %zero, %k1
+	j	fbeq_cont.25405
+fbeq_else.25404:
+	add	%a1, %zero, %zero
+fbeq_cont.25405:
+	beqi	%a1, 0, bnei_else.25406
+	add	%a1, %zero, %zero
+	j	bnei_cont.25399
+bnei_else.25406:
+	add	%a1, %zero, %k1
+bnei_cont.25407:
+	j	bnei_cont.25399
+bnei_else.25402:
+	add	%a1, %zero, %zero
+bnei_cont.25403:
+	j	bnei_cont.25399
+bnei_else.25398:
+	add	%a1, %zero, %zero
+bnei_cont.25399:
+	beqi	%a1, 0, bnei_else.25408
+	fsw	%f19, 135(%zero)
+	add	%v0, %zero, %k1
+	jr	%ra
+bnei_else.25408:
+	flw	%f16, 2(%a0)
+	fsub	%f16, %f16, %f1
+	flw	%f21, 3(%a0)
+	fmul	%f19, %f16, %f21
+	flw	%f20, 0(%v1)
+	fmul	%f16, %f19, %f20
+	fadd	%f16, %f16, %f0
+	fabs	%f17, %f16
+	lw	%a1, 4(%v0)
+	flw	%f16, 0(%a1)
+	fblt	%f17, %f16, fbgt_else.25409
+	add	%a1, %zero, %zero
+	j	fbgt_cont.25410
+fbgt_else.25409:
+	add	%a1, %zero, %k1
+fbgt_cont.25410:
+	beqi	%a1, 0, bnei_else.25411
+	flw	%f16, 2(%v1)
+	fmul	%f16, %f19, %f16
+	fadd	%f16, %f16, %f2
+	fabs	%f17, %f16
+	lw	%a1, 4(%v0)
+	flw	%f16, 2(%a1)
+	fblt	%f17, %f16, fbgt_else.25413
+	add	%a1, %zero, %zero
+	j	fbgt_cont.25414
+fbgt_else.25413:
+	add	%a1, %zero, %k1
+fbgt_cont.25414:
+	beqi	%a1, 0, bnei_else.25415
+	fbne	%f21, %fzero, fbeq_else.25417
+	add	%a1, %zero, %k1
+	j	fbeq_cont.25418
+fbeq_else.25417:
+	add	%a1, %zero, %zero
+fbeq_cont.25418:
+	beqi	%a1, 0, bnei_else.25419
+	add	%a1, %zero, %zero
+	j	bnei_cont.25412
+bnei_else.25419:
+	add	%a1, %zero, %k1
+bnei_cont.25420:
+	j	bnei_cont.25412
+bnei_else.25415:
+	add	%a1, %zero, %zero
+bnei_cont.25416:
+	j	bnei_cont.25412
+bnei_else.25411:
+	add	%a1, %zero, %zero
+bnei_cont.25412:
+	beqi	%a1, 0, bnei_else.25421
+	fsw	%f19, 135(%zero)
+	addi	%v0, %zero, 2
+	jr	%ra
+bnei_else.25421:
+	flw	%f16, 4(%a0)
+	fsub	%f16, %f16, %f2
+	flw	%f19, 5(%a0)
+	fmul	%f17, %f16, %f19
+	fmul	%f16, %f17, %f20
+	fadd	%f0, %f16, %f0
+	fabs	%f16, %f0
+	lw	%a0, 4(%v0)
+	flw	%f0, 0(%a0)
+	fblt	%f16, %f0, fbgt_else.25422
 	add	%a0, %zero, %zero
-fbeq_cont.38068:
-	beqi	%a0, 0, bnei_else.38069
-	add	%s2, %zero, %zero
-	j	bnei_cont.38064
-bnei_else.38069:
-	flw	%f0, 1(%ra)
-	fmul	%f1, %f0, %f19
-	flw	%f0, 2(%ra)
-	fmul	%f0, %f0, %f16
-	fadd	%f1, %f1, %f0
-	flw	%f0, 3(%ra)
-	fmul	%f0, %f0, %f17
-	fadd	%f16, %f1, %f0
-	flw	%f0, 3(%s2)
-	fmul	%f1, %f16, %f16
-	fmul	%f0, %f18, %f0
+	j	fbgt_cont.25423
+fbgt_else.25422:
+	add	%a0, %zero, %k1
+fbgt_cont.25423:
+	beqi	%a0, 0, bnei_else.25424
+	fmul	%f0, %f17, %f18
+	fadd	%f0, %f0, %f1
+	fabs	%f1, %f0
+	lw	%a0, 4(%v0)
+	flw	%f0, 1(%a0)
+	fblt	%f1, %f0, fbgt_else.25426
+	add	%a0, %zero, %zero
+	j	fbgt_cont.25427
+fbgt_else.25426:
+	add	%a0, %zero, %k1
+fbgt_cont.25427:
+	beqi	%a0, 0, bnei_else.25428
+	fbne	%f19, %fzero, fbeq_else.25430
+	add	%a0, %zero, %k1
+	j	fbeq_cont.25431
+fbeq_else.25430:
+	add	%a0, %zero, %zero
+fbeq_cont.25431:
+	beqi	%a0, 0, bnei_else.25432
+	add	%a0, %zero, %zero
+	j	bnei_cont.25425
+bnei_else.25432:
+	add	%a0, %zero, %k1
+bnei_cont.25433:
+	j	bnei_cont.25425
+bnei_else.25428:
+	add	%a0, %zero, %zero
+bnei_cont.25429:
+	j	bnei_cont.25425
+bnei_else.25424:
+	add	%a0, %zero, %zero
+bnei_cont.25425:
+	beqi	%a0, 0, bnei_else.25434
+	fsw	%f17, 135(%zero)
+	addi	%v0, %zero, 3
+	jr	%ra
+bnei_else.25434:
+	add	%v0, %zero, %zero
+	jr	%ra
+solver_second_fast.2853:
+	flw	%f20, 0(%v1)
+	fbne	%f20, %fzero, fbeq_else.25476
+	add	%a0, %zero, %k1
+	j	fbeq_cont.25477
+fbeq_else.25476:
+	add	%a0, %zero, %zero
+fbeq_cont.25477:
+	beqi	%a0, 0, bnei_else.25478
+	add	%v0, %zero, %zero
+	jr	%ra
+bnei_else.25478:
+	flw	%f16, 1(%v1)
+	fmul	%f17, %f16, %f0
+	flw	%f16, 2(%v1)
+	fmul	%f16, %f16, %f1
+	fadd	%f17, %f17, %f16
+	flw	%f16, 3(%v1)
+	fmul	%f16, %f16, %f2
+	fadd	%f18, %f17, %f16
+	fmul	%f17, %f0, %f0
+	lw	%a0, 4(%v0)
+	flw	%f16, 0(%a0)
+	fmul	%f19, %f17, %f16
+	fmul	%f17, %f1, %f1
+	lw	%a0, 4(%v0)
+	flw	%f16, 1(%a0)
+	fmul	%f16, %f17, %f16
+	fadd	%f19, %f19, %f16
+	fmul	%f17, %f2, %f2
+	lw	%a0, 4(%v0)
+	flw	%f16, 2(%a0)
+	fmul	%f16, %f17, %f16
+	fadd	%f16, %f19, %f16
+	lw	%a0, 3(%v0)
+	beqi	%a0, 0, bnei_else.25479
+	fmul	%f19, %f1, %f2
+	lw	%a0, 9(%v0)
+	flw	%f17, 0(%a0)
+	fmul	%f17, %f19, %f17
+	fadd	%f19, %f16, %f17
+	fmul	%f17, %f2, %f0
+	lw	%a0, 9(%v0)
+	flw	%f16, 1(%a0)
+	fmul	%f16, %f17, %f16
+	fadd	%f16, %f19, %f16
+	fmul	%f1, %f0, %f1
+	lw	%a0, 9(%v0)
+	flw	%f0, 2(%a0)
+	fmul	%f0, %f1, %f0
+	fadd	%f16, %f16, %f0
+	j	bnei_cont.25480
+bnei_else.25479:
+bnei_cont.25480:
+	lw	%a0, 1(%v0)
+	beqi	%a0, 3, bnei_else.25481
+	j	bnei_cont.25482
+bnei_else.25481:
+	fsub	%f16, %f16, %f30
+bnei_cont.25482:
+	fmul	%f1, %f18, %f18
+	fmul	%f0, %f20, %f16
 	fsub	%f0, %f1, %f0
-	fblt	%fzero, %f0, fbgt_else.38071
+	fblt	%fzero, %f0, fbgt_else.25483
 	add	%a0, %zero, %zero
-	j	fbgt_cont.38072
-fbgt_else.38071:
+	j	fbgt_cont.25484
+fbgt_else.25483:
 	add	%a0, %zero, %k1
-fbgt_cont.38072:
-	beqi	%a0, 0, bnei_else.38073
-	lw	%a0, 6(%a2)
-	beqi	%a0, 0, bnei_else.38075
+fbgt_cont.25484:
+	beqi	%a0, 0, bnei_else.25485
+	lw	%a0, 6(%v0)
+	beqi	%a0, 0, bnei_else.25486
+	fsqrt	%f0, %f0
+	fadd	%f1, %f18, %f0
+	flw	%f0, 4(%v1)
+	fmul	%f0, %f1, %f0
+	fsw	%f0, 135(%zero)
+	j	bnei_cont.25487
+bnei_else.25486:
+	fsqrt	%f0, %f0
+	fsub	%f1, %f18, %f0
+	flw	%f0, 4(%v1)
+	fmul	%f0, %f1, %f0
+	fsw	%f0, 135(%zero)
+bnei_cont.25487:
+	add	%v0, %zero, %k1
+	jr	%ra
+bnei_else.25485:
+	add	%v0, %zero, %zero
+	jr	%ra
+solver_fast2.2877:
+	add	%a0, %zero, %v0
+	lw	%v0, 12(%a0)
+	lw	%a2, 10(%v0)
+	flw	%f0, 0(%a2)
+	flw	%f1, 1(%a2)
+	flw	%f2, 2(%a2)
+	lw	%a1, 1(%v1)
+	add	%at, %a1, %a0
+	lw	%a0, 0(%at)
+	lw	%a1, 1(%v0)
+	beqi	%a1, 1, bnei_else.25535
+	beqi	%a1, 2, bnei_else.25536
+	flw	%f17, 0(%a0)
+	fbne	%f17, %fzero, fbeq_else.25537
+	add	%a1, %zero, %k1
+	j	fbeq_cont.25538
+fbeq_else.25537:
+	add	%a1, %zero, %zero
+fbeq_cont.25538:
+	beqi	%a1, 0, bnei_else.25539
+	add	%v0, %zero, %zero
+	jr	%ra
+bnei_else.25539:
+	flw	%f16, 1(%a0)
+	fmul	%f16, %f16, %f0
+	flw	%f0, 2(%a0)
+	fmul	%f0, %f0, %f1
+	fadd	%f1, %f16, %f0
+	flw	%f0, 3(%a0)
+	fmul	%f0, %f0, %f2
+	fadd	%f16, %f1, %f0
+	flw	%f0, 3(%a2)
+	fmul	%f1, %f16, %f16
+	fmul	%f0, %f17, %f0
+	fsub	%f0, %f1, %f0
+	fblt	%fzero, %f0, fbgt_else.25540
+	add	%a1, %zero, %zero
+	j	fbgt_cont.25541
+fbgt_else.25540:
+	add	%a1, %zero, %k1
+fbgt_cont.25541:
+	beqi	%a1, 0, bnei_else.25542
+	lw	%a1, 6(%v0)
+	beqi	%a1, 0, bnei_else.25543
 	fsqrt	%f0, %f0
 	fadd	%f1, %f16, %f0
-	flw	%f0, 4(%ra)
+	flw	%f0, 4(%a0)
 	fmul	%f0, %f1, %f0
 	fsw	%f0, 135(%zero)
-	j	bnei_cont.38076
-bnei_else.38075:
+	j	bnei_cont.25544
+bnei_else.25543:
 	fsqrt	%f0, %f0
 	fsub	%f1, %f16, %f0
-	flw	%f0, 4(%ra)
+	flw	%f0, 4(%a0)
 	fmul	%f0, %f1, %f0
 	fsw	%f0, 135(%zero)
-bnei_cont.38076:
-	add	%s2, %zero, %k1
-	j	bnei_cont.38064
-bnei_else.38073:
-	add	%s2, %zero, %zero
-bnei_cont.38074:
-bnei_cont.38070:
-	j	bnei_cont.38064
-bnei_else.38065:
-	flw	%f1, 0(%ra)
-	fblt	%f1, %fzero, fbgt_else.38077
+bnei_cont.25544:
+	add	%v0, %zero, %k1
+	jr	%ra
+bnei_else.25542:
+	add	%v0, %zero, %zero
+	jr	%ra
+bnei_else.25536:
+	flw	%f1, 0(%a0)
+	fblt	%f1, %fzero, fbgt_else.25545
 	add	%a0, %zero, %zero
-	j	fbgt_cont.38078
-fbgt_else.38077:
+	j	fbgt_cont.25546
+fbgt_else.25545:
 	add	%a0, %zero, %k1
-fbgt_cont.38078:
-	beqi	%a0, 0, bnei_else.38079
-	flw	%f0, 3(%s2)
+fbgt_cont.25546:
+	beqi	%a0, 0, bnei_else.25547
+	flw	%f0, 3(%a2)
 	fmul	%f0, %f1, %f0
 	fsw	%f0, 135(%zero)
-	add	%s2, %zero, %k1
-	j	bnei_cont.38064
-bnei_else.38079:
-	add	%s2, %zero, %zero
-bnei_cont.38080:
-bnei_cont.38066:
-	j	bnei_cont.38064
-bnei_else.38063:
-	lw	%s2, 0(%k0)
-	flw	%f0, 0(%ra)
-	fsub	%f0, %f0, %f19
-	flw	%f20, 1(%ra)
-	fmul	%f2, %f0, %f20
-	flw	%f18, 1(%s2)
-	fmul	%f0, %f2, %f18
-	fadd	%f0, %f0, %f16
-	fabs	%f1, %f0
-	lw	%a0, 4(%a2)
-	flw	%f0, 1(%a0)
-	fblt	%f1, %f0, fbgt_else.38081
-	add	%a0, %zero, %zero
-	j	fbgt_cont.38082
-fbgt_else.38081:
+	add	%v0, %zero, %k1
+	jr	%ra
+bnei_else.25547:
+	add	%v0, %zero, %zero
+	jr	%ra
+bnei_else.25535:
+	lw	%v1, 0(%v1)
+	j	solver_rect_fast.2840
+setup_rect_table.2880:
+	add	%a0, %zero, %v0
+	add	%a1, %zero, %v1
+	add	%a2, %zero, %ra
+	addi	%v0, %zero, 6
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	flw	%f1, 0(%a0)
+	fbne	%f1, %fzero, fbeq_else.25622
+	add	%a3, %zero, %k1
+	j	fbeq_cont.25623
+fbeq_else.25622:
+	add	%a3, %zero, %zero
+fbeq_cont.25623:
+	beqi	%a3, 0, bnei_else.25624
+	fsw	%fzero, 1(%v0)
+	j	bnei_cont.25625
+bnei_else.25624:
+	lw	%k0, 6(%a1)
+	fblt	%f1, %fzero, fbgt_else.25626
+	add	%a3, %zero, %zero
+	j	fbgt_cont.25627
+fbgt_else.25626:
+	add	%a3, %zero, %k1
+fbgt_cont.25627:
+	beqi	%k0, 0, bnei_else.25628
+	beqi	%a3, 0, bnei_else.25630
+	add	%a3, %zero, %zero
+	j	bnei_cont.25629
+bnei_else.25630:
+	add	%a3, %zero, %k1
+bnei_cont.25631:
+	j	bnei_cont.25629
+bnei_else.25628:
+bnei_cont.25629:
+	lw	%k0, 4(%a1)
+	flw	%f0, 0(%k0)
+	beqi	%a3, 0, bnei_else.25632
+	j	bnei_cont.25633
+bnei_else.25632:
+	fneg	%f0, %f0
+bnei_cont.25633:
+	fsw	%f0, 0(%v0)
+	fdiv	%f0, %f30, %f1
+	fsw	%f0, 1(%v0)
+bnei_cont.25625:
+	flw	%f1, 1(%a0)
+	fbne	%f1, %fzero, fbeq_else.25634
+	add	%a3, %zero, %k1
+	j	fbeq_cont.25635
+fbeq_else.25634:
+	add	%a3, %zero, %zero
+fbeq_cont.25635:
+	beqi	%a3, 0, bnei_else.25636
+	fsw	%fzero, 3(%v0)
+	j	bnei_cont.25637
+bnei_else.25636:
+	lw	%k0, 6(%a1)
+	fblt	%f1, %fzero, fbgt_else.25638
+	add	%a3, %zero, %zero
+	j	fbgt_cont.25639
+fbgt_else.25638:
+	add	%a3, %zero, %k1
+fbgt_cont.25639:
+	beqi	%k0, 0, bnei_else.25640
+	beqi	%a3, 0, bnei_else.25642
+	add	%a3, %zero, %zero
+	j	bnei_cont.25641
+bnei_else.25642:
+	add	%a3, %zero, %k1
+bnei_cont.25643:
+	j	bnei_cont.25641
+bnei_else.25640:
+bnei_cont.25641:
+	lw	%k0, 4(%a1)
+	flw	%f0, 1(%k0)
+	beqi	%a3, 0, bnei_else.25644
+	j	bnei_cont.25645
+bnei_else.25644:
+	fneg	%f0, %f0
+bnei_cont.25645:
+	fsw	%f0, 2(%v0)
+	fdiv	%f0, %f30, %f1
+	fsw	%f0, 3(%v0)
+bnei_cont.25637:
+	flw	%f1, 2(%a0)
+	fbne	%f1, %fzero, fbeq_else.25646
 	add	%a0, %zero, %k1
-fbgt_cont.38082:
-	beqi	%a0, 0, bnei_else.38083
-	flw	%f0, 2(%s2)
-	fmul	%f0, %f2, %f0
-	fadd	%f0, %f0, %f17
-	fabs	%f1, %f0
-	lw	%a0, 4(%a2)
-	flw	%f0, 2(%a0)
-	fblt	%f1, %f0, fbgt_else.38085
+	j	fbeq_cont.25647
+fbeq_else.25646:
 	add	%a0, %zero, %zero
-	j	fbgt_cont.38086
-fbgt_else.38085:
+fbeq_cont.25647:
+	beqi	%a0, 0, bnei_else.25648
+	fsw	%fzero, 5(%v0)
+	j	bnei_cont.25649
+bnei_else.25648:
+	lw	%a3, 6(%a1)
+	fblt	%f1, %fzero, fbgt_else.25650
+	add	%a0, %zero, %zero
+	j	fbgt_cont.25651
+fbgt_else.25650:
 	add	%a0, %zero, %k1
-fbgt_cont.38086:
-	beqi	%a0, 0, bnei_else.38087
-	fbne	%f20, %fzero, fbeq_else.38089
+fbgt_cont.25651:
+	beqi	%a3, 0, bnei_else.25652
+	beqi	%a0, 0, bnei_else.25654
+	add	%a0, %zero, %zero
+	j	bnei_cont.25653
+bnei_else.25654:
 	add	%a0, %zero, %k1
-	j	fbeq_cont.38090
-fbeq_else.38089:
-	add	%a0, %zero, %zero
-fbeq_cont.38090:
-	beqi	%a0, 0, bnei_else.38091
-	add	%a0, %zero, %zero
-	j	bnei_cont.38084
-bnei_else.38091:
-	add	%a0, %zero, %k1
-bnei_cont.38092:
-	j	bnei_cont.38084
-bnei_else.38087:
-	add	%a0, %zero, %zero
-bnei_cont.38088:
-	j	bnei_cont.38084
-bnei_else.38083:
-	add	%a0, %zero, %zero
-bnei_cont.38084:
-	beqi	%a0, 0, bnei_else.38093
-	fsw	%f2, 135(%zero)
-	add	%s2, %zero, %k1
-	j	bnei_cont.38094
-bnei_else.38093:
-	flw	%f0, 2(%ra)
-	fsub	%f0, %f0, %f16
-	flw	%f21, 3(%ra)
-	fmul	%f2, %f0, %f21
-	flw	%f20, 0(%s2)
-	fmul	%f0, %f2, %f20
-	fadd	%f0, %f0, %f19
-	fabs	%f1, %f0
-	lw	%a0, 4(%a2)
+bnei_cont.25655:
+	j	bnei_cont.25653
+bnei_else.25652:
+bnei_cont.25653:
+	lw	%a1, 4(%a1)
+	flw	%f0, 2(%a1)
+	beqi	%a0, 0, bnei_else.25656
+	j	bnei_cont.25657
+bnei_else.25656:
+	fneg	%f0, %f0
+bnei_cont.25657:
+	fsw	%f0, 4(%v0)
+	fdiv	%f0, %f30, %f1
+	fsw	%f0, 5(%v0)
+bnei_cont.25649:
+	add	%ra, %zero, %a2
+	jr	%ra
+setup_second_table.2886:
+	add	%a0, %zero, %v0
+	add	%a1, %zero, %v1
+	add	%a2, %zero, %ra
+	addi	%v0, %zero, 5
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	flw	%f19, 0(%a0)
+	flw	%f2, 1(%a0)
+	flw	%f21, 2(%a0)
+	fmul	%f1, %f19, %f19
+	lw	%a0, 4(%a1)
 	flw	%f0, 0(%a0)
-	fblt	%f1, %f0, fbgt_else.38095
-	add	%a0, %zero, %zero
-	j	fbgt_cont.38096
-fbgt_else.38095:
-	add	%a0, %zero, %k1
-fbgt_cont.38096:
-	beqi	%a0, 0, bnei_else.38097
-	flw	%f0, 2(%s2)
-	fmul	%f0, %f2, %f0
-	fadd	%f0, %f0, %f17
-	fabs	%f1, %f0
-	lw	%a0, 4(%a2)
-	flw	%f0, 2(%a0)
-	fblt	%f1, %f0, fbgt_else.38099
-	add	%a0, %zero, %zero
-	j	fbgt_cont.38100
-fbgt_else.38099:
-	add	%a0, %zero, %k1
-fbgt_cont.38100:
-	beqi	%a0, 0, bnei_else.38101
-	fbne	%f21, %fzero, fbeq_else.38103
-	add	%a0, %zero, %k1
-	j	fbeq_cont.38104
-fbeq_else.38103:
-	add	%a0, %zero, %zero
-fbeq_cont.38104:
-	beqi	%a0, 0, bnei_else.38105
-	add	%a0, %zero, %zero
-	j	bnei_cont.38098
-bnei_else.38105:
-	add	%a0, %zero, %k1
-bnei_cont.38106:
-	j	bnei_cont.38098
-bnei_else.38101:
-	add	%a0, %zero, %zero
-bnei_cont.38102:
-	j	bnei_cont.38098
-bnei_else.38097:
-	add	%a0, %zero, %zero
-bnei_cont.38098:
-	beqi	%a0, 0, bnei_else.38107
-	fsw	%f2, 135(%zero)
-	addi	%s2, %zero, 2
-	j	bnei_cont.38108
-bnei_else.38107:
-	flw	%f0, 4(%ra)
-	fsub	%f0, %f0, %f17
-	flw	%f2, 5(%ra)
-	fmul	%f17, %f0, %f2
-	fmul	%f0, %f17, %f20
-	fadd	%f0, %f0, %f19
-	fabs	%f1, %f0
-	lw	%a0, 4(%a2)
-	flw	%f0, 0(%a0)
-	fblt	%f1, %f0, fbgt_else.38109
-	add	%a0, %zero, %zero
-	j	fbgt_cont.38110
-fbgt_else.38109:
-	add	%a0, %zero, %k1
-fbgt_cont.38110:
-	beqi	%a0, 0, bnei_else.38111
-	fmul	%f0, %f17, %f18
-	fadd	%f0, %f0, %f16
-	fabs	%f1, %f0
-	lw	%a0, 4(%a2)
+	fmul	%f16, %f1, %f0
+	fmul	%f1, %f2, %f2
+	lw	%a0, 4(%a1)
 	flw	%f0, 1(%a0)
-	fblt	%f1, %f0, fbgt_else.38113
-	add	%a0, %zero, %zero
-	j	fbgt_cont.38114
-fbgt_else.38113:
-	add	%a0, %zero, %k1
-fbgt_cont.38114:
-	beqi	%a0, 0, bnei_else.38115
-	fbne	%f2, %fzero, fbeq_else.38117
-	add	%a0, %zero, %k1
-	j	fbeq_cont.38118
-fbeq_else.38117:
-	add	%a0, %zero, %zero
-fbeq_cont.38118:
-	beqi	%a0, 0, bnei_else.38119
-	add	%a0, %zero, %zero
-	j	bnei_cont.38112
-bnei_else.38119:
-	add	%a0, %zero, %k1
-bnei_cont.38120:
-	j	bnei_cont.38112
-bnei_else.38115:
-	add	%a0, %zero, %zero
-bnei_cont.38116:
-	j	bnei_cont.38112
-bnei_else.38111:
-	add	%a0, %zero, %zero
-bnei_cont.38112:
-	beqi	%a0, 0, bnei_else.38121
-	fsw	%f17, 135(%zero)
-	addi	%s2, %zero, 3
-	j	bnei_cont.38122
-bnei_else.38121:
-	add	%s2, %zero, %zero
-bnei_cont.38122:
-bnei_cont.38108:
-bnei_cont.38094:
-bnei_cont.38064:
-	beqi	%s2, 0, bnei_else.38123
-	flw	%f1, 135(%zero)
-	fblt	%fzero, %f1, fbgt_else.38124
-	add	%a0, %zero, %zero
-	j	fbgt_cont.38125
-fbgt_else.38124:
-	add	%a0, %zero, %k1
-fbgt_cont.38125:
-	beqi	%a0, 0, bnei_else.38126
-	flw	%f0, 137(%zero)
-	fblt	%f1, %f0, fbgt_else.38128
-	add	%a0, %zero, %zero
-	j	fbgt_cont.38129
-fbgt_else.38128:
-	add	%a0, %zero, %k1
-fbgt_cont.38129:
-	beqi	%a0, 0, bnei_cont.38127
-	flw	%f0, 466(%zero)
-	fadd	%f22, %f1, %f0
-	flw	%f0, 0(%a1)
-	fmul	%f1, %f0, %f22
-	flw	%f0, 162(%zero)
-	fadd	%f0, %f1, %f0
-	flw	%f1, 1(%a1)
-	fmul	%f16, %f1, %f22
-	flw	%f1, 163(%zero)
+	fmul	%f0, %f1, %f0
+	fadd	%f16, %f16, %f0
+	fmul	%f1, %f21, %f21
+	lw	%a0, 4(%a1)
+	flw	%f0, 2(%a0)
+	fmul	%f0, %f1, %f0
+	fadd	%f0, %f16, %f0
+	lw	%a0, 3(%a1)
+	beqi	%a0, 0, bnei_else.25690
+	fmul	%f16, %f2, %f21
+	lw	%a0, 9(%a1)
+	flw	%f1, 0(%a0)
+	fmul	%f1, %f16, %f1
+	fadd	%f16, %f0, %f1
+	fmul	%f1, %f21, %f19
+	lw	%a0, 9(%a1)
+	flw	%f0, 1(%a0)
+	fmul	%f0, %f1, %f0
+	fadd	%f16, %f16, %f0
+	fmul	%f1, %f19, %f2
+	lw	%a0, 9(%a1)
+	flw	%f0, 2(%a0)
+	fmul	%f0, %f1, %f0
+	fadd	%f0, %f16, %f0
+	j	bnei_cont.25691
+bnei_else.25690:
+bnei_cont.25691:
+	lw	%a0, 4(%a1)
+	flw	%f1, 0(%a0)
+	fmul	%f1, %f19, %f1
+	fneg	%f22, %f1
+	lw	%a0, 4(%a1)
+	flw	%f1, 1(%a0)
+	fmul	%f1, %f2, %f1
+	fneg	%f20, %f1
+	lw	%a0, 4(%a1)
+	flw	%f1, 2(%a0)
+	fmul	%f1, %f21, %f1
+	fneg	%f17, %f1
+	fsw	%f0, 0(%v0)
+	lw	%a0, 3(%a1)
+	beqi	%a0, 0, bnei_else.25692
+	lw	%a0, 9(%a1)
+	flw	%f1, 1(%a0)
+	fmul	%f16, %f21, %f1
+	lw	%a0, 9(%a1)
+	flw	%f1, 2(%a0)
+	fmul	%f1, %f2, %f1
 	fadd	%f1, %f16, %f1
-	flw	%f16, 2(%a1)
-	fmul	%f17, %f16, %f22
-	flw	%f16, 164(%zero)
-	fadd	%f2, %f17, %f16
-	lw	%a0, 0(%v1)
-	beqi	%a0, -1, bnei_else.38132
+	flw	%f18, 473(%zero)
+	fmul	%f1, %f1, %f18
+	fsub	%f1, %f22, %f1
+	fsw	%f1, 1(%v0)
+	lw	%a0, 9(%a1)
+	flw	%f1, 0(%a0)
+	fmul	%f16, %f21, %f1
+	lw	%a0, 9(%a1)
+	flw	%f1, 2(%a0)
+	fmul	%f1, %f19, %f1
+	fadd	%f1, %f16, %f1
+	fmul	%f1, %f1, %f18
+	fsub	%f1, %f20, %f1
+	fsw	%f1, 2(%v0)
+	lw	%a0, 9(%a1)
+	flw	%f1, 0(%a0)
+	fmul	%f16, %f2, %f1
+	lw	%a0, 9(%a1)
+	flw	%f1, 1(%a0)
+	fmul	%f1, %f19, %f1
+	fadd	%f1, %f16, %f1
+	fmul	%f1, %f1, %f18
+	fsub	%f1, %f17, %f1
+	fsw	%f1, 3(%v0)
+	j	bnei_cont.25693
+bnei_else.25692:
+	fsw	%f22, 1(%v0)
+	fsw	%f20, 2(%v0)
+	fsw	%f17, 3(%v0)
+bnei_cont.25693:
+	fbne	%f0, %fzero, fbeq_else.25694
+	add	%a0, %zero, %k1
+	j	fbeq_cont.25695
+fbeq_else.25694:
+	add	%a0, %zero, %zero
+fbeq_cont.25695:
+	beqi	%a0, 0, bnei_else.25696
+	j	bnei_cont.25697
+bnei_else.25696:
+	fdiv	%f0, %f30, %f0
+	fsw	%f0, 4(%v0)
+bnei_cont.25697:
+	add	%ra, %zero, %a2
+	jr	%ra
+iter_setup_dirvec_constants.2889:
+	add	%s0, %zero, %v0
+	add	%s1, %zero, %v1
+	add	%s2, %zero, %ra
+	blti	%s1, 0, bgti_else.25750
+	lw	%a0, 12(%s1)
+	lw	%s3, 1(%s0)
+	lw	%a1, 0(%s0)
+	lw	%a2, 1(%a0)
+	beqi	%a2, 1, bnei_else.25751
+	beqi	%a2, 2, bnei_else.25753
+	addi	%v1, %a0, 0
+	addi	%v0, %a1, 0
+	jal	setup_second_table.2886
+	add	%at, %s3, %s1
+	sw	%v0, 0(%at)
+	j	bnei_cont.25752
+bnei_else.25753:
+	addi	%v0, %zero, 4
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	flw	%f0, 0(%a1)
+	lw	%a2, 4(%a0)
+	flw	%f18, 0(%a2)
+	fmul	%f1, %f0, %f18
+	flw	%f0, 1(%a1)
+	lw	%a2, 4(%a0)
+	flw	%f17, 1(%a2)
+	fmul	%f0, %f0, %f17
+	fadd	%f1, %f1, %f0
+	flw	%f0, 2(%a1)
+	lw	%a0, 4(%a0)
+	flw	%f16, 2(%a0)
+	fmul	%f0, %f0, %f16
+	fadd	%f1, %f1, %f0
+	fblt	%fzero, %f1, fbgt_else.25755
+	add	%a0, %zero, %zero
+	j	fbgt_cont.25756
+fbgt_else.25755:
+	add	%a0, %zero, %k1
+fbgt_cont.25756:
+	beqi	%a0, 0, bnei_else.25757
+	flw	%f0, 458(%zero)
+	fdiv	%f0, %f0, %f1
+	fsw	%f0, 0(%v0)
+	fdiv	%f0, %f18, %f1
+	fneg	%f0, %f0
+	fsw	%f0, 1(%v0)
+	fdiv	%f0, %f17, %f1
+	fneg	%f0, %f0
+	fsw	%f0, 2(%v0)
+	fdiv	%f0, %f16, %f1
+	fneg	%f0, %f0
+	fsw	%f0, 3(%v0)
+	j	bnei_cont.25758
+bnei_else.25757:
+	fsw	%fzero, 0(%v0)
+bnei_cont.25758:
+	add	%at, %s3, %s1
+	sw	%v0, 0(%at)
+bnei_cont.25754:
+	j	bnei_cont.25752
+bnei_else.25751:
+	addi	%v1, %a0, 0
+	addi	%v0, %a1, 0
+	jal	setup_rect_table.2880
+	add	%at, %s3, %s1
+	sw	%v0, 0(%at)
+bnei_cont.25752:
+	addi	%s1, %s1, -1
+	blti	%s1, 0, bgti_else.25759
+	lw	%a0, 12(%s1)
+	lw	%s3, 1(%s0)
+	lw	%a1, 0(%s0)
+	lw	%a2, 1(%a0)
+	beqi	%a2, 1, bnei_else.25760
+	beqi	%a2, 2, bnei_else.25762
+	addi	%v1, %a0, 0
+	addi	%v0, %a1, 0
+	jal	setup_second_table.2886
+	add	%at, %s3, %s1
+	sw	%v0, 0(%at)
+	j	bnei_cont.25761
+bnei_else.25762:
+	addi	%v0, %zero, 4
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	flw	%f1, 0(%a1)
+	lw	%a2, 4(%a0)
+	flw	%f0, 0(%a2)
+	fmul	%f16, %f1, %f0
+	flw	%f1, 1(%a1)
+	lw	%a2, 4(%a0)
+	flw	%f0, 1(%a2)
+	fmul	%f0, %f1, %f0
+	fadd	%f16, %f16, %f0
+	flw	%f1, 2(%a1)
+	lw	%a1, 4(%a0)
+	flw	%f0, 2(%a1)
+	fmul	%f0, %f1, %f0
+	fadd	%f1, %f16, %f0
+	fblt	%fzero, %f1, fbgt_else.25764
+	add	%a1, %zero, %zero
+	j	fbgt_cont.25765
+fbgt_else.25764:
+	add	%a1, %zero, %k1
+fbgt_cont.25765:
+	beqi	%a1, 0, bnei_else.25766
+	flw	%f0, 458(%zero)
+	fdiv	%f0, %f0, %f1
+	fsw	%f0, 0(%v0)
+	lw	%a1, 4(%a0)
+	flw	%f0, 0(%a1)
+	fdiv	%f0, %f0, %f1
+	fneg	%f0, %f0
+	fsw	%f0, 1(%v0)
+	lw	%a1, 4(%a0)
+	flw	%f0, 1(%a1)
+	fdiv	%f0, %f0, %f1
+	fneg	%f0, %f0
+	fsw	%f0, 2(%v0)
+	lw	%a0, 4(%a0)
+	flw	%f0, 2(%a0)
+	fdiv	%f0, %f0, %f1
+	fneg	%f0, %f0
+	fsw	%f0, 3(%v0)
+	j	bnei_cont.25767
+bnei_else.25766:
+	fsw	%fzero, 0(%v0)
+bnei_cont.25767:
+	add	%at, %s3, %s1
+	sw	%v0, 0(%at)
+bnei_cont.25763:
+	j	bnei_cont.25761
+bnei_else.25760:
+	addi	%v1, %a0, 0
+	addi	%v0, %a1, 0
+	jal	setup_rect_table.2880
+	add	%at, %s3, %s1
+	sw	%v0, 0(%at)
+bnei_cont.25761:
+	addi	%v1, %s1, -1
+	add	%ra, %zero, %s2
+	addi	%v0, %s0, 0
+	j	iter_setup_dirvec_constants.2889
+bgti_else.25759:
+	add	%ra, %zero, %s2
+	jr	%ra
+bgti_else.25750:
+	add	%ra, %zero, %s2
+	jr	%ra
+setup_dirvec_constants.2892:
+	add	%s0, %zero, %v0
+	add	%s1, %zero, %ra
+	lw	%a0, 0(%zero)
+	addi	%s2, %a0, -1
+	blti	%s2, 0, bgti_else.25806
+	lw	%a0, 12(%s2)
+	lw	%s3, 1(%s0)
+	lw	%a1, 0(%s0)
+	lw	%a2, 1(%a0)
+	beqi	%a2, 1, bnei_else.25807
+	beqi	%a2, 2, bnei_else.25809
+	addi	%v1, %a0, 0
+	addi	%v0, %a1, 0
+	jal	setup_second_table.2886
+	add	%at, %s3, %s2
+	sw	%v0, 0(%at)
+	j	bnei_cont.25808
+bnei_else.25809:
+	addi	%v0, %zero, 4
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	flw	%f1, 0(%a1)
+	lw	%a2, 4(%a0)
+	flw	%f0, 0(%a2)
+	fmul	%f16, %f1, %f0
+	flw	%f1, 1(%a1)
+	lw	%a2, 4(%a0)
+	flw	%f0, 1(%a2)
+	fmul	%f0, %f1, %f0
+	fadd	%f16, %f16, %f0
+	flw	%f1, 2(%a1)
+	lw	%a1, 4(%a0)
+	flw	%f0, 2(%a1)
+	fmul	%f0, %f1, %f0
+	fadd	%f1, %f16, %f0
+	fblt	%fzero, %f1, fbgt_else.25811
+	add	%a1, %zero, %zero
+	j	fbgt_cont.25812
+fbgt_else.25811:
+	add	%a1, %zero, %k1
+fbgt_cont.25812:
+	beqi	%a1, 0, bnei_else.25813
+	flw	%f0, 458(%zero)
+	fdiv	%f0, %f0, %f1
+	fsw	%f0, 0(%v0)
+	lw	%a1, 4(%a0)
+	flw	%f0, 0(%a1)
+	fdiv	%f0, %f0, %f1
+	fneg	%f0, %f0
+	fsw	%f0, 1(%v0)
+	lw	%a1, 4(%a0)
+	flw	%f0, 1(%a1)
+	fdiv	%f0, %f0, %f1
+	fneg	%f0, %f0
+	fsw	%f0, 2(%v0)
+	lw	%a0, 4(%a0)
+	flw	%f0, 2(%a0)
+	fdiv	%f0, %f0, %f1
+	fneg	%f0, %f0
+	fsw	%f0, 3(%v0)
+	j	bnei_cont.25814
+bnei_else.25813:
+	fsw	%fzero, 0(%v0)
+bnei_cont.25814:
+	add	%at, %s3, %s2
+	sw	%v0, 0(%at)
+bnei_cont.25810:
+	j	bnei_cont.25808
+bnei_else.25807:
+	addi	%v1, %a0, 0
+	addi	%v0, %a1, 0
+	jal	setup_rect_table.2880
+	add	%at, %s3, %s2
+	sw	%v0, 0(%at)
+bnei_cont.25808:
+	addi	%v1, %s2, -1
+	add	%ra, %zero, %s1
+	addi	%v0, %s0, 0
+	j	iter_setup_dirvec_constants.2889
+bgti_else.25806:
+	add	%ra, %zero, %s1
+	jr	%ra
+setup_startp_constants.2894:
+	blti	%v1, 0, bgti_else.25852
+	lw	%a2, 12(%v1)
+	lw	%a3, 10(%a2)
+	lw	%a1, 1(%a2)
+	flw	%f1, 0(%v0)
+	lw	%a0, 5(%a2)
+	flw	%f0, 0(%a0)
+	fsub	%f0, %f1, %f0
+	fsw	%f0, 0(%a3)
+	flw	%f1, 1(%v0)
+	lw	%a0, 5(%a2)
+	flw	%f0, 1(%a0)
+	fsub	%f0, %f1, %f0
+	fsw	%f0, 1(%a3)
+	flw	%f1, 2(%v0)
+	lw	%a0, 5(%a2)
+	flw	%f0, 2(%a0)
+	fsub	%f0, %f1, %f0
+	fsw	%f0, 2(%a3)
+	beqi	%a1, 2, bnei_else.25853
+	addi	%at, %zero, 2
+	blt	%at, %a1, bgt_else.25855
+	j	bnei_cont.25854
+bgt_else.25855:
+	flw	%f17, 0(%a3)
+	flw	%f18, 1(%a3)
+	flw	%f19, 2(%a3)
+	fmul	%f1, %f17, %f17
+	lw	%a0, 4(%a2)
+	flw	%f0, 0(%a0)
+	fmul	%f16, %f1, %f0
+	fmul	%f1, %f18, %f18
+	lw	%a0, 4(%a2)
+	flw	%f0, 1(%a0)
+	fmul	%f0, %f1, %f0
+	fadd	%f16, %f16, %f0
+	fmul	%f1, %f19, %f19
+	lw	%a0, 4(%a2)
+	flw	%f0, 2(%a0)
+	fmul	%f0, %f1, %f0
+	fadd	%f0, %f16, %f0
+	lw	%a0, 3(%a2)
+	beqi	%a0, 0, bnei_else.25857
+	fmul	%f16, %f18, %f19
+	lw	%a0, 9(%a2)
+	flw	%f1, 0(%a0)
+	fmul	%f1, %f16, %f1
+	fadd	%f16, %f0, %f1
+	fmul	%f1, %f19, %f17
+	lw	%a0, 9(%a2)
+	flw	%f0, 1(%a0)
+	fmul	%f0, %f1, %f0
+	fadd	%f16, %f16, %f0
+	fmul	%f1, %f17, %f18
+	lw	%a0, 9(%a2)
+	flw	%f0, 2(%a0)
+	fmul	%f0, %f1, %f0
+	fadd	%f0, %f16, %f0
+	j	bnei_cont.25858
+bnei_else.25857:
+bnei_cont.25858:
+	beqi	%a1, 3, bnei_else.25859
+	j	bnei_cont.25860
+bnei_else.25859:
+	fsub	%f0, %f0, %f30
+bnei_cont.25860:
+	fsw	%f0, 3(%a3)
+bgt_cont.25856:
+	j	bnei_cont.25854
+bnei_else.25853:
+	lw	%a0, 4(%a2)
+	flw	%f1, 0(%a3)
+	flw	%f17, 1(%a3)
+	flw	%f16, 2(%a3)
+	flw	%f0, 0(%a0)
+	fmul	%f1, %f0, %f1
+	flw	%f0, 1(%a0)
+	fmul	%f0, %f0, %f17
+	fadd	%f1, %f1, %f0
+	flw	%f0, 2(%a0)
+	fmul	%f0, %f0, %f16
+	fadd	%f0, %f1, %f0
+	fsw	%f0, 3(%a3)
+bnei_cont.25854:
+	addi	%v1, %v1, -1
+	j	setup_startp_constants.2894
+bgti_else.25852:
+	jr	%ra
+check_all_inside.2919:
+	add	%at, %v1, %v0
+	lw	%a0, 0(%at)
+	beqi	%a0, -1, bnei_else.26008
 	lw	%a1, 12(%a0)
 	lw	%a0, 5(%a1)
 	flw	%f16, 0(%a0)
@@ -7885,8 +5724,8 @@ fbgt_cont.38129:
 	flw	%f16, 2(%a0)
 	fsub	%f21, %f2, %f16
 	lw	%a0, 1(%a1)
-	beqi	%a0, 1, bnei_else.38134
-	beqi	%a0, 2, bnei_else.38136
+	beqi	%a0, 1, bnei_else.26009
+	beqi	%a0, 2, bnei_else.26011
 	fmul	%f17, %f19, %f19
 	lw	%a0, 4(%a1)
 	flw	%f16, 0(%a0)
@@ -7902,7 +5741,7 @@ fbgt_cont.38129:
 	fmul	%f16, %f17, %f16
 	fadd	%f16, %f18, %f16
 	lw	%a0, 3(%a1)
-	beqi	%a0, 0, bnei_else.38138
+	beqi	%a0, 0, bnei_else.26013
 	fmul	%f18, %f20, %f21
 	lw	%a0, 9(%a1)
 	flw	%f17, 0(%a0)
@@ -7918,40 +5757,40 @@ fbgt_cont.38129:
 	flw	%f16, 2(%a0)
 	fmul	%f16, %f17, %f16
 	fadd	%f16, %f18, %f16
-	j	bnei_cont.38139
-bnei_else.38138:
-bnei_cont.38139:
+	j	bnei_cont.26014
+bnei_else.26013:
+bnei_cont.26014:
 	lw	%a0, 1(%a1)
-	beqi	%a0, 3, bnei_else.38140
-	j	bnei_cont.38141
-bnei_else.38140:
+	beqi	%a0, 3, bnei_else.26015
+	j	bnei_cont.26016
+bnei_else.26015:
 	fsub	%f16, %f16, %f30
-bnei_cont.38141:
+bnei_cont.26016:
 	lw	%a1, 6(%a1)
-	fblt	%f16, %fzero, fbgt_else.38142
+	fblt	%f16, %fzero, fbgt_else.26017
 	add	%a0, %zero, %zero
-	j	fbgt_cont.38143
-fbgt_else.38142:
+	j	fbgt_cont.26018
+fbgt_else.26017:
 	add	%a0, %zero, %k1
-fbgt_cont.38143:
-	beqi	%a1, 0, bnei_else.38144
-	beqi	%a0, 0, bnei_else.38146
+fbgt_cont.26018:
+	beqi	%a1, 0, bnei_else.26019
+	beqi	%a0, 0, bnei_else.26021
 	add	%a0, %zero, %zero
-	j	bnei_cont.38145
-bnei_else.38146:
+	j	bnei_cont.26020
+bnei_else.26021:
 	add	%a0, %zero, %k1
-bnei_cont.38147:
-	j	bnei_cont.38145
-bnei_else.38144:
-bnei_cont.38145:
-	beqi	%a0, 0, bnei_else.38148
+bnei_cont.26022:
+	j	bnei_cont.26020
+bnei_else.26019:
+bnei_cont.26020:
+	beqi	%a0, 0, bnei_else.26023
 	add	%a0, %zero, %zero
-	j	bnei_cont.38135
-bnei_else.38148:
+	j	bnei_cont.26010
+bnei_else.26023:
 	add	%a0, %zero, %k1
-bnei_cont.38149:
-	j	bnei_cont.38135
-bnei_else.38136:
+bnei_cont.26024:
+	j	bnei_cont.26010
+bnei_else.26011:
 	lw	%a0, 4(%a1)
 	flw	%f16, 0(%a0)
 	fmul	%f17, %f16, %f19
@@ -7962,1036 +5801,2669 @@ bnei_else.38136:
 	fmul	%f16, %f16, %f21
 	fadd	%f16, %f17, %f16
 	lw	%a1, 6(%a1)
-	fblt	%f16, %fzero, fbgt_else.38150
+	fblt	%f16, %fzero, fbgt_else.26025
 	add	%a0, %zero, %zero
-	j	fbgt_cont.38151
-fbgt_else.38150:
+	j	fbgt_cont.26026
+fbgt_else.26025:
 	add	%a0, %zero, %k1
-fbgt_cont.38151:
-	beqi	%a1, 0, bnei_else.38152
-	beqi	%a0, 0, bnei_else.38154
+fbgt_cont.26026:
+	beqi	%a1, 0, bnei_else.26027
+	beqi	%a0, 0, bnei_else.26029
 	add	%a0, %zero, %zero
-	j	bnei_cont.38153
-bnei_else.38154:
+	j	bnei_cont.26028
+bnei_else.26029:
 	add	%a0, %zero, %k1
-bnei_cont.38155:
-	j	bnei_cont.38153
-bnei_else.38152:
-bnei_cont.38153:
-	beqi	%a0, 0, bnei_else.38156
+bnei_cont.26030:
+	j	bnei_cont.26028
+bnei_else.26027:
+bnei_cont.26028:
+	beqi	%a0, 0, bnei_else.26031
 	add	%a0, %zero, %zero
-	j	bnei_cont.38135
-bnei_else.38156:
+	j	bnei_cont.26010
+bnei_else.26031:
 	add	%a0, %zero, %k1
-bnei_cont.38157:
-bnei_cont.38137:
-	j	bnei_cont.38135
-bnei_else.38134:
+bnei_cont.26032:
+bnei_cont.26012:
+	j	bnei_cont.26010
+bnei_else.26009:
 	fabs	%f17, %f19
 	lw	%a0, 4(%a1)
 	flw	%f16, 0(%a0)
-	fblt	%f17, %f16, fbgt_else.38158
+	fblt	%f17, %f16, fbgt_else.26033
 	add	%a0, %zero, %zero
-	j	fbgt_cont.38159
-fbgt_else.38158:
+	j	fbgt_cont.26034
+fbgt_else.26033:
 	add	%a0, %zero, %k1
-fbgt_cont.38159:
-	beqi	%a0, 0, bnei_else.38160
+fbgt_cont.26034:
+	beqi	%a0, 0, bnei_else.26035
 	fabs	%f17, %f20
 	lw	%a0, 4(%a1)
 	flw	%f16, 1(%a0)
-	fblt	%f17, %f16, fbgt_else.38162
+	fblt	%f17, %f16, fbgt_else.26037
 	add	%a0, %zero, %zero
-	j	fbgt_cont.38163
-fbgt_else.38162:
+	j	fbgt_cont.26038
+fbgt_else.26037:
 	add	%a0, %zero, %k1
-fbgt_cont.38163:
-	beqi	%a0, 0, bnei_else.38164
+fbgt_cont.26038:
+	beqi	%a0, 0, bnei_else.26039
 	fabs	%f17, %f21
 	lw	%a0, 4(%a1)
 	flw	%f16, 2(%a0)
-	fblt	%f17, %f16, fbgt_else.38166
+	fblt	%f17, %f16, fbgt_else.26041
 	add	%a0, %zero, %zero
-	j	bnei_cont.38161
-fbgt_else.38166:
+	j	bnei_cont.26036
+fbgt_else.26041:
 	add	%a0, %zero, %k1
-fbgt_cont.38167:
-	j	bnei_cont.38161
-bnei_else.38164:
+fbgt_cont.26042:
+	j	bnei_cont.26036
+bnei_else.26039:
 	add	%a0, %zero, %zero
-bnei_cont.38165:
-	j	bnei_cont.38161
-bnei_else.38160:
+bnei_cont.26040:
+	j	bnei_cont.26036
+bnei_else.26035:
 	add	%a0, %zero, %zero
-bnei_cont.38161:
-	beqi	%a0, 0, bnei_else.38168
+bnei_cont.26036:
+	beqi	%a0, 0, bnei_else.26043
 	lw	%a0, 6(%a1)
-	j	bnei_cont.38169
-bnei_else.38168:
+	j	bnei_cont.26044
+bnei_else.26043:
 	lw	%a0, 6(%a1)
-	beqi	%a0, 0, bnei_else.38170
+	beqi	%a0, 0, bnei_else.26045
 	add	%a0, %zero, %zero
-	j	bnei_cont.38171
-bnei_else.38170:
+	j	bnei_cont.26046
+bnei_else.26045:
 	add	%a0, %zero, %k1
-bnei_cont.38171:
-bnei_cont.38169:
-bnei_cont.38135:
-	beqi	%a0, 0, bnei_else.38172
+bnei_cont.26046:
+bnei_cont.26044:
+bnei_cont.26010:
+	beqi	%a0, 0, bnei_else.26047
 	add	%v0, %zero, %zero
-	j	bnei_cont.38133
-bnei_else.38172:
+	jr	%ra
+bnei_else.26047:
+	addi	%a1, %v0, 1
+	add	%at, %v1, %a1
+	lw	%a0, 0(%at)
+	beqi	%a0, -1, bnei_else.26048
+	lw	%a2, 12(%a0)
+	lw	%a0, 5(%a2)
+	flw	%f16, 0(%a0)
+	fsub	%f19, %f0, %f16
+	lw	%a0, 5(%a2)
+	flw	%f16, 1(%a0)
+	fsub	%f20, %f1, %f16
+	lw	%a0, 5(%a2)
+	flw	%f16, 2(%a0)
+	fsub	%f21, %f2, %f16
+	lw	%a0, 1(%a2)
+	beqi	%a0, 1, bnei_else.26049
+	beqi	%a0, 2, bnei_else.26051
+	fmul	%f17, %f19, %f19
+	lw	%a0, 4(%a2)
+	flw	%f16, 0(%a0)
+	fmul	%f18, %f17, %f16
+	fmul	%f17, %f20, %f20
+	lw	%a0, 4(%a2)
+	flw	%f16, 1(%a0)
+	fmul	%f16, %f17, %f16
+	fadd	%f18, %f18, %f16
+	fmul	%f17, %f21, %f21
+	lw	%a0, 4(%a2)
+	flw	%f16, 2(%a0)
+	fmul	%f16, %f17, %f16
+	fadd	%f16, %f18, %f16
+	lw	%a0, 3(%a2)
+	beqi	%a0, 0, bnei_else.26053
+	fmul	%f18, %f20, %f21
+	lw	%a0, 9(%a2)
+	flw	%f17, 0(%a0)
+	fmul	%f17, %f18, %f17
+	fadd	%f18, %f16, %f17
+	fmul	%f17, %f21, %f19
+	lw	%a0, 9(%a2)
+	flw	%f16, 1(%a0)
+	fmul	%f16, %f17, %f16
+	fadd	%f18, %f18, %f16
+	fmul	%f17, %f19, %f20
+	lw	%a0, 9(%a2)
+	flw	%f16, 2(%a0)
+	fmul	%f16, %f17, %f16
+	fadd	%f16, %f18, %f16
+	j	bnei_cont.26054
+bnei_else.26053:
+bnei_cont.26054:
+	lw	%a0, 1(%a2)
+	beqi	%a0, 3, bnei_else.26055
+	j	bnei_cont.26056
+bnei_else.26055:
+	fsub	%f16, %f16, %f30
+bnei_cont.26056:
+	lw	%a2, 6(%a2)
+	fblt	%f16, %fzero, fbgt_else.26057
+	add	%a0, %zero, %zero
+	j	fbgt_cont.26058
+fbgt_else.26057:
+	add	%a0, %zero, %k1
+fbgt_cont.26058:
+	beqi	%a2, 0, bnei_else.26059
+	beqi	%a0, 0, bnei_else.26061
+	add	%a0, %zero, %zero
+	j	bnei_cont.26060
+bnei_else.26061:
+	add	%a0, %zero, %k1
+bnei_cont.26062:
+	j	bnei_cont.26060
+bnei_else.26059:
+bnei_cont.26060:
+	beqi	%a0, 0, bnei_else.26063
+	add	%a0, %zero, %zero
+	j	bnei_cont.26050
+bnei_else.26063:
+	add	%a0, %zero, %k1
+bnei_cont.26064:
+	j	bnei_cont.26050
+bnei_else.26051:
+	lw	%a0, 4(%a2)
+	flw	%f16, 0(%a0)
+	fmul	%f17, %f16, %f19
+	flw	%f16, 1(%a0)
+	fmul	%f16, %f16, %f20
+	fadd	%f17, %f17, %f16
+	flw	%f16, 2(%a0)
+	fmul	%f16, %f16, %f21
+	fadd	%f16, %f17, %f16
+	lw	%a2, 6(%a2)
+	fblt	%f16, %fzero, fbgt_else.26065
+	add	%a0, %zero, %zero
+	j	fbgt_cont.26066
+fbgt_else.26065:
+	add	%a0, %zero, %k1
+fbgt_cont.26066:
+	beqi	%a2, 0, bnei_else.26067
+	beqi	%a0, 0, bnei_else.26069
+	add	%a0, %zero, %zero
+	j	bnei_cont.26068
+bnei_else.26069:
+	add	%a0, %zero, %k1
+bnei_cont.26070:
+	j	bnei_cont.26068
+bnei_else.26067:
+bnei_cont.26068:
+	beqi	%a0, 0, bnei_else.26071
+	add	%a0, %zero, %zero
+	j	bnei_cont.26050
+bnei_else.26071:
+	add	%a0, %zero, %k1
+bnei_cont.26072:
+bnei_cont.26052:
+	j	bnei_cont.26050
+bnei_else.26049:
+	fabs	%f17, %f19
+	lw	%a0, 4(%a2)
+	flw	%f16, 0(%a0)
+	fblt	%f17, %f16, fbgt_else.26073
+	add	%a0, %zero, %zero
+	j	fbgt_cont.26074
+fbgt_else.26073:
+	add	%a0, %zero, %k1
+fbgt_cont.26074:
+	beqi	%a0, 0, bnei_else.26075
+	fabs	%f17, %f20
+	lw	%a0, 4(%a2)
+	flw	%f16, 1(%a0)
+	fblt	%f17, %f16, fbgt_else.26077
+	add	%a0, %zero, %zero
+	j	fbgt_cont.26078
+fbgt_else.26077:
+	add	%a0, %zero, %k1
+fbgt_cont.26078:
+	beqi	%a0, 0, bnei_else.26079
+	fabs	%f17, %f21
+	lw	%a0, 4(%a2)
+	flw	%f16, 2(%a0)
+	fblt	%f17, %f16, fbgt_else.26081
+	add	%a0, %zero, %zero
+	j	bnei_cont.26076
+fbgt_else.26081:
+	add	%a0, %zero, %k1
+fbgt_cont.26082:
+	j	bnei_cont.26076
+bnei_else.26079:
+	add	%a0, %zero, %zero
+bnei_cont.26080:
+	j	bnei_cont.26076
+bnei_else.26075:
+	add	%a0, %zero, %zero
+bnei_cont.26076:
+	beqi	%a0, 0, bnei_else.26083
+	lw	%a0, 6(%a2)
+	j	bnei_cont.26084
+bnei_else.26083:
+	lw	%a0, 6(%a2)
+	beqi	%a0, 0, bnei_else.26085
+	add	%a0, %zero, %zero
+	j	bnei_cont.26086
+bnei_else.26085:
+	add	%a0, %zero, %k1
+bnei_cont.26086:
+bnei_cont.26084:
+bnei_cont.26050:
+	beqi	%a0, 0, bnei_else.26087
+	add	%v0, %zero, %zero
+	jr	%ra
+bnei_else.26087:
+	addi	%a0, %a1, 1
+	addi	%v0, %a0, 0
+	j	check_all_inside.2919
+bnei_else.26048:
+	add	%v0, %zero, %k1
+	jr	%ra
+bnei_else.26008:
+	add	%v0, %zero, %k1
+	jr	%ra
+shadow_check_and_group.2925:
+	add	%a3, %zero, %v0
+	add	%k0, %zero, %v1
+	add	%s0, %zero, %ra
+	add	%at, %k0, %a3
+	lw	%a1, 0(%at)
+	beqi	%a1, -1, bnei_else.26201
+	lw	%a2, 12(%a1)
+	flw	%f24, 138(%zero)
+	lw	%a0, 5(%a2)
+	flw	%f0, 0(%a0)
+	fsub	%f0, %f24, %f0
+	flw	%f23, 139(%zero)
+	lw	%a0, 5(%a2)
+	flw	%f1, 1(%a0)
+	fsub	%f1, %f23, %f1
+	flw	%f22, 140(%zero)
+	lw	%a0, 5(%a2)
+	flw	%f16, 2(%a0)
+	fsub	%f2, %f22, %f16
+	lw	%v1, 187(%a1)
+	lw	%a0, 1(%a2)
+	beqi	%a0, 1, bnei_else.26202
+	beqi	%a0, 2, bnei_else.26204
+	addi	%v0, %a2, 0
+	jal	solver_second_fast.2853
+	j	bnei_cont.26203
+bnei_else.26204:
+	flw	%f16, 0(%v1)
+	fblt	%f16, %fzero, fbgt_else.26206
+	add	%a0, %zero, %zero
+	j	fbgt_cont.26207
+fbgt_else.26206:
+	add	%a0, %zero, %k1
+fbgt_cont.26207:
+	beqi	%a0, 0, bnei_else.26208
+	flw	%f16, 1(%v1)
+	fmul	%f16, %f16, %f0
+	flw	%f0, 2(%v1)
+	fmul	%f0, %f0, %f1
+	fadd	%f1, %f16, %f0
+	flw	%f0, 3(%v1)
+	fmul	%f0, %f0, %f2
+	fadd	%f0, %f1, %f0
+	fsw	%f0, 135(%zero)
+	add	%v0, %zero, %k1
+	j	bnei_cont.26203
+bnei_else.26208:
+	add	%v0, %zero, %zero
+bnei_cont.26209:
+bnei_cont.26205:
+	j	bnei_cont.26203
+bnei_else.26202:
+	addi	%a1, %zero, 184
+	addi	%a0, %v1, 0
+	addi	%v0, %a2, 0
+	addi	%v1, %a1, 0
+	jal	solver_rect_fast.2840
+bnei_cont.26203:
+	flw	%f1, 135(%zero)
+	beqi	%v0, 0, bnei_else.26210
+	flw	%f0, 457(%zero)
+	fblt	%f1, %f0, fbgt_else.26212
+	add	%a0, %zero, %zero
+	j	bnei_cont.26211
+fbgt_else.26212:
+	add	%a0, %zero, %k1
+fbgt_cont.26213:
+	j	bnei_cont.26211
+bnei_else.26210:
+	add	%a0, %zero, %zero
+bnei_cont.26211:
+	beqi	%a0, 0, bnei_else.26214
+	flw	%f0, 456(%zero)
+	fadd	%f17, %f1, %f0
+	flw	%f0, 78(%zero)
+	fmul	%f0, %f0, %f17
+	fadd	%f0, %f0, %f24
+	flw	%f1, 79(%zero)
+	fmul	%f1, %f1, %f17
+	fadd	%f1, %f1, %f23
+	flw	%f16, 80(%zero)
+	fmul	%f16, %f16, %f17
+	fadd	%f2, %f16, %f22
+	lw	%a0, 0(%k0)
+	beqi	%a0, -1, bnei_else.26215
+	lw	%a1, 12(%a0)
+	lw	%a0, 5(%a1)
+	flw	%f16, 0(%a0)
+	fsub	%f19, %f0, %f16
+	lw	%a0, 5(%a1)
+	flw	%f16, 1(%a0)
+	fsub	%f20, %f1, %f16
+	lw	%a0, 5(%a1)
+	flw	%f16, 2(%a0)
+	fsub	%f21, %f2, %f16
+	lw	%a0, 1(%a1)
+	beqi	%a0, 1, bnei_else.26217
+	beqi	%a0, 2, bnei_else.26219
+	fmul	%f17, %f19, %f19
+	lw	%a0, 4(%a1)
+	flw	%f16, 0(%a0)
+	fmul	%f18, %f17, %f16
+	fmul	%f17, %f20, %f20
+	lw	%a0, 4(%a1)
+	flw	%f16, 1(%a0)
+	fmul	%f16, %f17, %f16
+	fadd	%f18, %f18, %f16
+	fmul	%f17, %f21, %f21
+	lw	%a0, 4(%a1)
+	flw	%f16, 2(%a0)
+	fmul	%f16, %f17, %f16
+	fadd	%f16, %f18, %f16
+	lw	%a0, 3(%a1)
+	beqi	%a0, 0, bnei_else.26221
+	fmul	%f18, %f20, %f21
+	lw	%a0, 9(%a1)
+	flw	%f17, 0(%a0)
+	fmul	%f17, %f18, %f17
+	fadd	%f18, %f16, %f17
+	fmul	%f17, %f21, %f19
+	lw	%a0, 9(%a1)
+	flw	%f16, 1(%a0)
+	fmul	%f16, %f17, %f16
+	fadd	%f18, %f18, %f16
+	fmul	%f17, %f19, %f20
+	lw	%a0, 9(%a1)
+	flw	%f16, 2(%a0)
+	fmul	%f16, %f17, %f16
+	fadd	%f16, %f18, %f16
+	j	bnei_cont.26222
+bnei_else.26221:
+bnei_cont.26222:
+	lw	%a0, 1(%a1)
+	beqi	%a0, 3, bnei_else.26223
+	j	bnei_cont.26224
+bnei_else.26223:
+	fsub	%f16, %f16, %f30
+bnei_cont.26224:
+	lw	%a1, 6(%a1)
+	fblt	%f16, %fzero, fbgt_else.26225
+	add	%a0, %zero, %zero
+	j	fbgt_cont.26226
+fbgt_else.26225:
+	add	%a0, %zero, %k1
+fbgt_cont.26226:
+	beqi	%a1, 0, bnei_else.26227
+	beqi	%a0, 0, bnei_else.26229
+	add	%a0, %zero, %zero
+	j	bnei_cont.26228
+bnei_else.26229:
+	add	%a0, %zero, %k1
+bnei_cont.26230:
+	j	bnei_cont.26228
+bnei_else.26227:
+bnei_cont.26228:
+	beqi	%a0, 0, bnei_else.26231
+	add	%a0, %zero, %zero
+	j	bnei_cont.26218
+bnei_else.26231:
+	add	%a0, %zero, %k1
+bnei_cont.26232:
+	j	bnei_cont.26218
+bnei_else.26219:
+	lw	%a0, 4(%a1)
+	flw	%f16, 0(%a0)
+	fmul	%f17, %f16, %f19
+	flw	%f16, 1(%a0)
+	fmul	%f16, %f16, %f20
+	fadd	%f17, %f17, %f16
+	flw	%f16, 2(%a0)
+	fmul	%f16, %f16, %f21
+	fadd	%f16, %f17, %f16
+	lw	%a1, 6(%a1)
+	fblt	%f16, %fzero, fbgt_else.26233
+	add	%a0, %zero, %zero
+	j	fbgt_cont.26234
+fbgt_else.26233:
+	add	%a0, %zero, %k1
+fbgt_cont.26234:
+	beqi	%a1, 0, bnei_else.26235
+	beqi	%a0, 0, bnei_else.26237
+	add	%a0, %zero, %zero
+	j	bnei_cont.26236
+bnei_else.26237:
+	add	%a0, %zero, %k1
+bnei_cont.26238:
+	j	bnei_cont.26236
+bnei_else.26235:
+bnei_cont.26236:
+	beqi	%a0, 0, bnei_else.26239
+	add	%a0, %zero, %zero
+	j	bnei_cont.26218
+bnei_else.26239:
+	add	%a0, %zero, %k1
+bnei_cont.26240:
+bnei_cont.26220:
+	j	bnei_cont.26218
+bnei_else.26217:
+	fabs	%f17, %f19
+	lw	%a0, 4(%a1)
+	flw	%f16, 0(%a0)
+	fblt	%f17, %f16, fbgt_else.26241
+	add	%a0, %zero, %zero
+	j	fbgt_cont.26242
+fbgt_else.26241:
+	add	%a0, %zero, %k1
+fbgt_cont.26242:
+	beqi	%a0, 0, bnei_else.26243
+	fabs	%f17, %f20
+	lw	%a0, 4(%a1)
+	flw	%f16, 1(%a0)
+	fblt	%f17, %f16, fbgt_else.26245
+	add	%a0, %zero, %zero
+	j	fbgt_cont.26246
+fbgt_else.26245:
+	add	%a0, %zero, %k1
+fbgt_cont.26246:
+	beqi	%a0, 0, bnei_else.26247
+	fabs	%f17, %f21
+	lw	%a0, 4(%a1)
+	flw	%f16, 2(%a0)
+	fblt	%f17, %f16, fbgt_else.26249
+	add	%a0, %zero, %zero
+	j	bnei_cont.26244
+fbgt_else.26249:
+	add	%a0, %zero, %k1
+fbgt_cont.26250:
+	j	bnei_cont.26244
+bnei_else.26247:
+	add	%a0, %zero, %zero
+bnei_cont.26248:
+	j	bnei_cont.26244
+bnei_else.26243:
+	add	%a0, %zero, %zero
+bnei_cont.26244:
+	beqi	%a0, 0, bnei_else.26251
+	lw	%a0, 6(%a1)
+	j	bnei_cont.26252
+bnei_else.26251:
+	lw	%a0, 6(%a1)
+	beqi	%a0, 0, bnei_else.26253
+	add	%a0, %zero, %zero
+	j	bnei_cont.26254
+bnei_else.26253:
+	add	%a0, %zero, %k1
+bnei_cont.26254:
+bnei_cont.26252:
+bnei_cont.26218:
+	beqi	%a0, 0, bnei_else.26255
+	add	%v0, %zero, %zero
+	j	bnei_cont.26216
+bnei_else.26255:
+	addi	%v1, %k0, 0
 	addi	%v0, %k1, 0
 	jal	check_all_inside.2919
-bnei_cont.38173:
-	j	bnei_cont.38133
-bnei_else.38132:
+bnei_cont.26256:
+	j	bnei_cont.26216
+bnei_else.26215:
 	add	%v0, %zero, %k1
-bnei_cont.38133:
-	beqi	%v0, 0, bnei_cont.38127
+bnei_cont.26216:
+	beqi	%v0, 0, bnei_else.26257
+	add	%ra, %zero, %s0
+	add	%v0, %zero, %k1
+	jr	%ra
+bnei_else.26257:
+	addi	%v0, %a3, 1
+	add	%ra, %zero, %s0
+	addi	%v1, %k0, 0
+	j	shadow_check_and_group.2925
+bnei_else.26214:
+	lw	%a0, 6(%a2)
+	beqi	%a0, 0, bnei_else.26258
+	addi	%v0, %a3, 1
+	add	%ra, %zero, %s0
+	addi	%v1, %k0, 0
+	j	shadow_check_and_group.2925
+bnei_else.26258:
+	add	%ra, %zero, %s0
+	add	%v0, %zero, %zero
+	jr	%ra
+bnei_else.26201:
+	add	%ra, %zero, %s0
+	add	%v0, %zero, %zero
+	jr	%ra
+shadow_check_one_or_group.2928:
+	add	%s1, %zero, %v0
+	add	%s2, %zero, %v1
+	add	%s3, %zero, %ra
+	add	%at, %s2, %s1
+	lw	%a0, 0(%at)
+	beqi	%a0, -1, bnei_else.26303
+	lw	%v1, 83(%a0)
+	addi	%v0, %zero, 0
+	jal	shadow_check_and_group.2925
+	beqi	%v0, 0, bnei_else.26304
+	add	%ra, %zero, %s3
+	add	%v0, %zero, %k1
+	jr	%ra
+bnei_else.26304:
+	addi	%s1, %s1, 1
+	add	%at, %s2, %s1
+	lw	%a0, 0(%at)
+	beqi	%a0, -1, bnei_else.26305
+	lw	%v1, 83(%a0)
+	addi	%v0, %zero, 0
+	jal	shadow_check_and_group.2925
+	beqi	%v0, 0, bnei_else.26306
+	add	%ra, %zero, %s3
+	add	%v0, %zero, %k1
+	jr	%ra
+bnei_else.26306:
+	addi	%s1, %s1, 1
+	add	%at, %s2, %s1
+	lw	%a0, 0(%at)
+	beqi	%a0, -1, bnei_else.26307
+	lw	%v1, 83(%a0)
+	addi	%v0, %zero, 0
+	jal	shadow_check_and_group.2925
+	beqi	%v0, 0, bnei_else.26308
+	add	%ra, %zero, %s3
+	add	%v0, %zero, %k1
+	jr	%ra
+bnei_else.26308:
+	addi	%s1, %s1, 1
+	add	%at, %s2, %s1
+	lw	%a0, 0(%at)
+	beqi	%a0, -1, bnei_else.26309
+	lw	%v1, 83(%a0)
+	addi	%v0, %zero, 0
+	jal	shadow_check_and_group.2925
+	beqi	%v0, 0, bnei_else.26310
+	add	%ra, %zero, %s3
+	add	%v0, %zero, %k1
+	jr	%ra
+bnei_else.26310:
+	addi	%v0, %s1, 1
+	add	%ra, %zero, %s3
+	addi	%v1, %s2, 0
+	j	shadow_check_one_or_group.2928
+bnei_else.26309:
+	add	%ra, %zero, %s3
+	add	%v0, %zero, %zero
+	jr	%ra
+bnei_else.26307:
+	add	%ra, %zero, %s3
+	add	%v0, %zero, %zero
+	jr	%ra
+bnei_else.26305:
+	add	%ra, %zero, %s3
+	add	%v0, %zero, %zero
+	jr	%ra
+bnei_else.26303:
+	add	%ra, %zero, %s3
+	add	%v0, %zero, %zero
+	jr	%ra
+shadow_check_one_or_matrix.2931:
+	add	%s4, %zero, %v0
+	add	%s5, %zero, %v1
+	add	%s6, %zero, %ra
+	add	%at, %s5, %s4
+	lw	%s7, 0(%at)
+	lw	%a1, 0(%s7)
+	beqi	%a1, -1, bnei_else.26403
+	beqi	%a1, 99, bnei_else.26404
+	lw	%v0, 12(%a1)
+	flw	%f1, 138(%zero)
+	lw	%a0, 5(%v0)
+	flw	%f0, 0(%a0)
+	fsub	%f0, %f1, %f0
+	flw	%f16, 139(%zero)
+	lw	%a0, 5(%v0)
+	flw	%f1, 1(%a0)
+	fsub	%f1, %f16, %f1
+	flw	%f17, 140(%zero)
+	lw	%a0, 5(%v0)
+	flw	%f16, 2(%a0)
+	fsub	%f2, %f17, %f16
+	lw	%v1, 187(%a1)
+	lw	%a0, 1(%v0)
+	beqi	%a0, 1, bnei_else.26406
+	beqi	%a0, 2, bnei_else.26408
+	jal	solver_second_fast.2853
+	j	bnei_cont.26407
+bnei_else.26408:
+	flw	%f16, 0(%v1)
+	fblt	%f16, %fzero, fbgt_else.26410
+	add	%a0, %zero, %zero
+	j	fbgt_cont.26411
+fbgt_else.26410:
+	add	%a0, %zero, %k1
+fbgt_cont.26411:
+	beqi	%a0, 0, bnei_else.26412
+	flw	%f16, 1(%v1)
+	fmul	%f16, %f16, %f0
+	flw	%f0, 2(%v1)
+	fmul	%f0, %f0, %f1
+	fadd	%f1, %f16, %f0
+	flw	%f0, 3(%v1)
+	fmul	%f0, %f0, %f2
+	fadd	%f0, %f1, %f0
+	fsw	%f0, 135(%zero)
+	add	%v0, %zero, %k1
+	j	bnei_cont.26407
+bnei_else.26412:
+	add	%v0, %zero, %zero
+bnei_cont.26413:
+bnei_cont.26409:
+	j	bnei_cont.26407
+bnei_else.26406:
+	addi	%a1, %zero, 184
+	addi	%a0, %v1, 0
+	addi	%v1, %a1, 0
+	jal	solver_rect_fast.2840
+bnei_cont.26407:
+	beqi	%v0, 0, bnei_else.26414
+	flw	%f1, 135(%zero)
+	flw	%f0, 455(%zero)
+	fblt	%f1, %f0, fbgt_else.26416
+	add	%a0, %zero, %zero
+	j	fbgt_cont.26417
+fbgt_else.26416:
+	add	%a0, %zero, %k1
+fbgt_cont.26417:
+	beqi	%a0, 0, bnei_else.26418
+	lw	%a0, 1(%s7)
+	beqi	%a0, -1, bnei_else.26420
+	lw	%v1, 83(%a0)
+	addi	%v0, %zero, 0
+	jal	shadow_check_and_group.2925
+	beqi	%v0, 0, bnei_else.26422
+	add	%v0, %zero, %k1
+	j	bnei_cont.26421
+bnei_else.26422:
+	lw	%a0, 2(%s7)
+	beqi	%a0, -1, bnei_else.26424
+	lw	%v1, 83(%a0)
+	addi	%v0, %zero, 0
+	jal	shadow_check_and_group.2925
+	beqi	%v0, 0, bnei_else.26426
+	add	%v0, %zero, %k1
+	j	bnei_cont.26421
+bnei_else.26426:
+	lw	%a0, 3(%s7)
+	beqi	%a0, -1, bnei_else.26428
+	lw	%v1, 83(%a0)
+	addi	%v0, %zero, 0
+	jal	shadow_check_and_group.2925
+	beqi	%v0, 0, bnei_else.26430
+	add	%v0, %zero, %k1
+	j	bnei_cont.26421
+bnei_else.26430:
+	addi	%v0, %zero, 4
+	addi	%v1, %s7, 0
+	jal	shadow_check_one_or_group.2928
+bnei_cont.26431:
+	j	bnei_cont.26421
+bnei_else.26428:
+	add	%v0, %zero, %zero
+bnei_cont.26429:
+bnei_cont.26427:
+	j	bnei_cont.26421
+bnei_else.26424:
+	add	%v0, %zero, %zero
+bnei_cont.26425:
+bnei_cont.26423:
+	j	bnei_cont.26421
+bnei_else.26420:
+	add	%v0, %zero, %zero
+bnei_cont.26421:
+	beqi	%v0, 0, bnei_else.26432
+	add	%a0, %zero, %k1
+	j	bnei_cont.26405
+bnei_else.26432:
+	add	%a0, %zero, %zero
+bnei_cont.26433:
+	j	bnei_cont.26405
+bnei_else.26418:
+	add	%a0, %zero, %zero
+bnei_cont.26419:
+	j	bnei_cont.26405
+bnei_else.26414:
+	add	%a0, %zero, %zero
+bnei_cont.26415:
+	j	bnei_cont.26405
+bnei_else.26404:
+	add	%a0, %zero, %k1
+bnei_cont.26405:
+	beqi	%a0, 0, bnei_else.26434
+	lw	%a0, 1(%s7)
+	beqi	%a0, -1, bnei_else.26435
+	lw	%v1, 83(%a0)
+	addi	%v0, %zero, 0
+	jal	shadow_check_and_group.2925
+	beqi	%v0, 0, bnei_else.26437
+	add	%v0, %zero, %k1
+	j	bnei_cont.26436
+bnei_else.26437:
+	lw	%a0, 2(%s7)
+	beqi	%a0, -1, bnei_else.26439
+	lw	%v1, 83(%a0)
+	addi	%v0, %zero, 0
+	jal	shadow_check_and_group.2925
+	beqi	%v0, 0, bnei_else.26441
+	add	%v0, %zero, %k1
+	j	bnei_cont.26436
+bnei_else.26441:
+	lw	%a0, 3(%s7)
+	beqi	%a0, -1, bnei_else.26443
+	lw	%v1, 83(%a0)
+	addi	%v0, %zero, 0
+	jal	shadow_check_and_group.2925
+	beqi	%v0, 0, bnei_else.26445
+	add	%v0, %zero, %k1
+	j	bnei_cont.26436
+bnei_else.26445:
+	addi	%v0, %zero, 4
+	addi	%v1, %s7, 0
+	jal	shadow_check_one_or_group.2928
+bnei_cont.26446:
+	j	bnei_cont.26436
+bnei_else.26443:
+	add	%v0, %zero, %zero
+bnei_cont.26444:
+bnei_cont.26442:
+	j	bnei_cont.26436
+bnei_else.26439:
+	add	%v0, %zero, %zero
+bnei_cont.26440:
+bnei_cont.26438:
+	j	bnei_cont.26436
+bnei_else.26435:
+	add	%v0, %zero, %zero
+bnei_cont.26436:
+	beqi	%v0, 0, bnei_else.26447
+	add	%ra, %zero, %s6
+	add	%v0, %zero, %k1
+	jr	%ra
+bnei_else.26447:
+	addi	%v0, %s4, 1
+	add	%ra, %zero, %s6
+	addi	%v1, %s5, 0
+	j	shadow_check_one_or_matrix.2931
+bnei_else.26434:
+	addi	%v0, %s4, 1
+	add	%ra, %zero, %s6
+	addi	%v1, %s5, 0
+	j	shadow_check_one_or_matrix.2931
+bnei_else.26403:
+	add	%ra, %zero, %s6
+	add	%v0, %zero, %zero
+	jr	%ra
+solve_each_element.2934:
+	add	%a3, %zero, %v0
+	add	%k0, %zero, %v1
+	add	%s0, %zero, %a0
+	add	%s1, %zero, %ra
+	add	%at, %k0, %a3
+	lw	%s4, 0(%at)
+	beqi	%s4, -1, bnei_else.26569
+	lw	%s2, 12(%s4)
+	flw	%f26, 159(%zero)
+	lw	%a0, 5(%s2)
+	flw	%f0, 0(%a0)
+	fsub	%f0, %f26, %f0
+	flw	%f25, 160(%zero)
+	lw	%a0, 5(%s2)
+	flw	%f1, 1(%a0)
+	fsub	%f1, %f25, %f1
+	flw	%f24, 161(%zero)
+	lw	%a0, 5(%s2)
+	flw	%f16, 2(%a0)
+	fsub	%f2, %f24, %f16
+	lw	%a0, 1(%s2)
+	beqi	%a0, 1, bnei_else.26570
+	beqi	%a0, 2, bnei_else.26572
+	addi	%v1, %s0, 0
+	addi	%v0, %s2, 0
+	jal	solver_second.2830
+	addi	%s3, %v0, 0
+	j	bnei_cont.26571
+bnei_else.26572:
+	lw	%a0, 4(%s2)
+	flw	%f16, 0(%s0)
+	flw	%f20, 0(%a0)
+	fmul	%f17, %f16, %f20
+	flw	%f16, 1(%s0)
+	flw	%f19, 1(%a0)
+	fmul	%f16, %f16, %f19
+	fadd	%f17, %f17, %f16
+	flw	%f16, 2(%s0)
+	flw	%f18, 2(%a0)
+	fmul	%f16, %f16, %f18
+	fadd	%f17, %f17, %f16
+	fblt	%fzero, %f17, fbgt_else.26574
+	add	%a0, %zero, %zero
+	j	fbgt_cont.26575
+fbgt_else.26574:
+	add	%a0, %zero, %k1
+fbgt_cont.26575:
+	beqi	%a0, 0, bnei_else.26576
+	fmul	%f16, %f20, %f0
+	fmul	%f0, %f19, %f1
+	fadd	%f1, %f16, %f0
+	fmul	%f0, %f18, %f2
+	fadd	%f0, %f1, %f0
+	fneg	%f0, %f0
+	fdiv	%f0, %f0, %f17
+	fsw	%f0, 135(%zero)
+	add	%s3, %zero, %k1
+	j	bnei_cont.26571
+bnei_else.26576:
+	add	%s3, %zero, %zero
+bnei_cont.26577:
+bnei_cont.26573:
+	j	bnei_cont.26571
+bnei_else.26570:
+	addi	%v1, %s0, 0
+	addi	%v0, %s2, 0
+	jal	solver_rect.2805
+	addi	%s3, %v0, 0
+bnei_cont.26571:
+	beqi	%s3, 0, bnei_else.26578
+	flw	%f1, 135(%zero)
+	fblt	%fzero, %f1, fbgt_else.26579
+	add	%a0, %zero, %zero
+	j	fbgt_cont.26580
+fbgt_else.26579:
+	add	%a0, %zero, %k1
+fbgt_cont.26580:
+	beqi	%a0, 0, bnei_else.26581
+	flw	%f0, 137(%zero)
+	fblt	%f1, %f0, fbgt_else.26583
+	add	%a0, %zero, %zero
+	j	fbgt_cont.26584
+fbgt_else.26583:
+	add	%a0, %zero, %k1
+fbgt_cont.26584:
+	beqi	%a0, 0, bnei_cont.26582
+	flw	%f0, 456(%zero)
+	fadd	%f22, %f1, %f0
+	flw	%f0, 0(%s0)
+	fmul	%f0, %f0, %f22
+	fadd	%f0, %f0, %f26
+	flw	%f1, 1(%s0)
+	fmul	%f1, %f1, %f22
+	fadd	%f1, %f1, %f25
+	flw	%f16, 2(%s0)
+	fmul	%f16, %f16, %f22
+	fadd	%f2, %f16, %f24
+	lw	%a0, 0(%k0)
+	beqi	%a0, -1, bnei_else.26587
+	lw	%a1, 12(%a0)
+	lw	%a0, 5(%a1)
+	flw	%f16, 0(%a0)
+	fsub	%f19, %f0, %f16
+	lw	%a0, 5(%a1)
+	flw	%f16, 1(%a0)
+	fsub	%f20, %f1, %f16
+	lw	%a0, 5(%a1)
+	flw	%f16, 2(%a0)
+	fsub	%f21, %f2, %f16
+	lw	%a0, 1(%a1)
+	beqi	%a0, 1, bnei_else.26589
+	beqi	%a0, 2, bnei_else.26591
+	fmul	%f17, %f19, %f19
+	lw	%a0, 4(%a1)
+	flw	%f16, 0(%a0)
+	fmul	%f18, %f17, %f16
+	fmul	%f17, %f20, %f20
+	lw	%a0, 4(%a1)
+	flw	%f16, 1(%a0)
+	fmul	%f16, %f17, %f16
+	fadd	%f18, %f18, %f16
+	fmul	%f17, %f21, %f21
+	lw	%a0, 4(%a1)
+	flw	%f16, 2(%a0)
+	fmul	%f16, %f17, %f16
+	fadd	%f16, %f18, %f16
+	lw	%a0, 3(%a1)
+	beqi	%a0, 0, bnei_else.26593
+	fmul	%f18, %f20, %f21
+	lw	%a0, 9(%a1)
+	flw	%f17, 0(%a0)
+	fmul	%f17, %f18, %f17
+	fadd	%f18, %f16, %f17
+	fmul	%f17, %f21, %f19
+	lw	%a0, 9(%a1)
+	flw	%f16, 1(%a0)
+	fmul	%f16, %f17, %f16
+	fadd	%f18, %f18, %f16
+	fmul	%f17, %f19, %f20
+	lw	%a0, 9(%a1)
+	flw	%f16, 2(%a0)
+	fmul	%f16, %f17, %f16
+	fadd	%f16, %f18, %f16
+	j	bnei_cont.26594
+bnei_else.26593:
+bnei_cont.26594:
+	lw	%a0, 1(%a1)
+	beqi	%a0, 3, bnei_else.26595
+	j	bnei_cont.26596
+bnei_else.26595:
+	fsub	%f16, %f16, %f30
+bnei_cont.26596:
+	lw	%a1, 6(%a1)
+	fblt	%f16, %fzero, fbgt_else.26597
+	add	%a0, %zero, %zero
+	j	fbgt_cont.26598
+fbgt_else.26597:
+	add	%a0, %zero, %k1
+fbgt_cont.26598:
+	beqi	%a1, 0, bnei_else.26599
+	beqi	%a0, 0, bnei_else.26601
+	add	%a0, %zero, %zero
+	j	bnei_cont.26600
+bnei_else.26601:
+	add	%a0, %zero, %k1
+bnei_cont.26602:
+	j	bnei_cont.26600
+bnei_else.26599:
+bnei_cont.26600:
+	beqi	%a0, 0, bnei_else.26603
+	add	%a0, %zero, %zero
+	j	bnei_cont.26590
+bnei_else.26603:
+	add	%a0, %zero, %k1
+bnei_cont.26604:
+	j	bnei_cont.26590
+bnei_else.26591:
+	lw	%a0, 4(%a1)
+	flw	%f16, 0(%a0)
+	fmul	%f17, %f16, %f19
+	flw	%f16, 1(%a0)
+	fmul	%f16, %f16, %f20
+	fadd	%f17, %f17, %f16
+	flw	%f16, 2(%a0)
+	fmul	%f16, %f16, %f21
+	fadd	%f16, %f17, %f16
+	lw	%a1, 6(%a1)
+	fblt	%f16, %fzero, fbgt_else.26605
+	add	%a0, %zero, %zero
+	j	fbgt_cont.26606
+fbgt_else.26605:
+	add	%a0, %zero, %k1
+fbgt_cont.26606:
+	beqi	%a1, 0, bnei_else.26607
+	beqi	%a0, 0, bnei_else.26609
+	add	%a0, %zero, %zero
+	j	bnei_cont.26608
+bnei_else.26609:
+	add	%a0, %zero, %k1
+bnei_cont.26610:
+	j	bnei_cont.26608
+bnei_else.26607:
+bnei_cont.26608:
+	beqi	%a0, 0, bnei_else.26611
+	add	%a0, %zero, %zero
+	j	bnei_cont.26590
+bnei_else.26611:
+	add	%a0, %zero, %k1
+bnei_cont.26612:
+bnei_cont.26592:
+	j	bnei_cont.26590
+bnei_else.26589:
+	fabs	%f17, %f19
+	lw	%a0, 4(%a1)
+	flw	%f16, 0(%a0)
+	fblt	%f17, %f16, fbgt_else.26613
+	add	%a0, %zero, %zero
+	j	fbgt_cont.26614
+fbgt_else.26613:
+	add	%a0, %zero, %k1
+fbgt_cont.26614:
+	beqi	%a0, 0, bnei_else.26615
+	fabs	%f17, %f20
+	lw	%a0, 4(%a1)
+	flw	%f16, 1(%a0)
+	fblt	%f17, %f16, fbgt_else.26617
+	add	%a0, %zero, %zero
+	j	fbgt_cont.26618
+fbgt_else.26617:
+	add	%a0, %zero, %k1
+fbgt_cont.26618:
+	beqi	%a0, 0, bnei_else.26619
+	fabs	%f17, %f21
+	lw	%a0, 4(%a1)
+	flw	%f16, 2(%a0)
+	fblt	%f17, %f16, fbgt_else.26621
+	add	%a0, %zero, %zero
+	j	bnei_cont.26616
+fbgt_else.26621:
+	add	%a0, %zero, %k1
+fbgt_cont.26622:
+	j	bnei_cont.26616
+bnei_else.26619:
+	add	%a0, %zero, %zero
+bnei_cont.26620:
+	j	bnei_cont.26616
+bnei_else.26615:
+	add	%a0, %zero, %zero
+bnei_cont.26616:
+	beqi	%a0, 0, bnei_else.26623
+	lw	%a0, 6(%a1)
+	j	bnei_cont.26624
+bnei_else.26623:
+	lw	%a0, 6(%a1)
+	beqi	%a0, 0, bnei_else.26625
+	add	%a0, %zero, %zero
+	j	bnei_cont.26626
+bnei_else.26625:
+	add	%a0, %zero, %k1
+bnei_cont.26626:
+bnei_cont.26624:
+bnei_cont.26590:
+	beqi	%a0, 0, bnei_else.26627
+	add	%v0, %zero, %zero
+	j	bnei_cont.26588
+bnei_else.26627:
+	addi	%v1, %k0, 0
+	addi	%v0, %k1, 0
+	jal	check_all_inside.2919
+bnei_cont.26628:
+	j	bnei_cont.26588
+bnei_else.26587:
+	add	%v0, %zero, %k1
+bnei_cont.26588:
+	beqi	%v0, 0, bnei_cont.26582
 	fsw	%f22, 137(%zero)
 	fsw	%f0, 138(%zero)
 	fsw	%f1, 139(%zero)
 	fsw	%f2, 140(%zero)
-	sw	%s1, 141(%zero)
-	sw	%s2, 136(%zero)
-	j	bnei_cont.38127
-bnei_else.38174:
-bnei_cont.38175:
-	j	bnei_cont.38127
-bnei_else.38130:
-bnei_cont.38131:
-	j	bnei_cont.38127
-bnei_else.38126:
-bnei_cont.38127:
+	sw	%s4, 141(%zero)
+	sw	%s3, 136(%zero)
+	j	bnei_cont.26582
+bnei_else.26629:
+bnei_cont.26630:
+	j	bnei_cont.26582
+bnei_else.26585:
+bnei_cont.26586:
+	j	bnei_cont.26582
+bnei_else.26581:
+bnei_cont.26582:
 	addi	%v0, %a3, 1
-	add	%ra, %zero, %s0
-	addi	%a0, %k0, 0
-	j	solve_each_element_fast.2948
-bnei_else.38123:
-	lw	%a0, 6(%a2)
-	beqi	%a0, 0, bnei_else.38176
+	add	%ra, %zero, %s1
+	addi	%a0, %s0, 0
+	addi	%v1, %k0, 0
+	j	solve_each_element.2934
+bnei_else.26578:
+	lw	%a0, 6(%s2)
+	beqi	%a0, 0, bnei_else.26631
 	addi	%v0, %a3, 1
-	add	%ra, %zero, %s0
-	addi	%a0, %k0, 0
-	j	solve_each_element_fast.2948
-bnei_else.38176:
-	add	%ra, %zero, %s0
+	add	%ra, %zero, %s1
+	addi	%a0, %s0, 0
+	addi	%v1, %k0, 0
+	j	solve_each_element.2934
+bnei_else.26631:
+	add	%ra, %zero, %s1
 	jr	%ra
-bnei_else.38062:
-	add	%ra, %zero, %s0
+bnei_else.26569:
+	add	%ra, %zero, %s1
 	jr	%ra
-solve_one_or_network_fast.2952:
-	add	%s3, %zero, %v0
-	add	%s4, %zero, %v1
-	add	%s5, %zero, %a0
-	add	%s6, %zero, %ra
-	add	%at, %s4, %s3
+solve_one_or_network.2938:
+	add	%s5, %zero, %v0
+	add	%s6, %zero, %v1
+	add	%s7, %zero, %a0
+	add	%t7, %zero, %ra
+	add	%at, %s6, %s5
 	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.38229
+	beqi	%a0, -1, bnei_else.26686
 	lw	%v1, 83(%a0)
-	addi	%a0, %s5, 0
+	addi	%a0, %s7, 0
 	addi	%v0, %zero, 0
-	jal	solve_each_element_fast.2948
-	addi	%s3, %s3, 1
-	add	%at, %s4, %s3
+	jal	solve_each_element.2934
+	addi	%s5, %s5, 1
+	add	%at, %s6, %s5
 	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.38230
+	beqi	%a0, -1, bnei_else.26687
 	lw	%v1, 83(%a0)
-	addi	%a0, %s5, 0
+	addi	%a0, %s7, 0
 	addi	%v0, %zero, 0
-	jal	solve_each_element_fast.2948
-	addi	%s3, %s3, 1
-	add	%at, %s4, %s3
+	jal	solve_each_element.2934
+	addi	%s5, %s5, 1
+	add	%at, %s6, %s5
 	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.38231
+	beqi	%a0, -1, bnei_else.26688
 	lw	%v1, 83(%a0)
-	addi	%a0, %s5, 0
+	addi	%a0, %s7, 0
 	addi	%v0, %zero, 0
-	jal	solve_each_element_fast.2948
-	addi	%s3, %s3, 1
-	add	%at, %s4, %s3
+	jal	solve_each_element.2934
+	addi	%s5, %s5, 1
+	add	%at, %s6, %s5
 	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.38232
+	beqi	%a0, -1, bnei_else.26689
 	lw	%v1, 83(%a0)
-	addi	%a0, %s5, 0
+	addi	%a0, %s7, 0
 	addi	%v0, %zero, 0
-	jal	solve_each_element_fast.2948
-	addi	%s3, %s3, 1
-	add	%at, %s4, %s3
+	jal	solve_each_element.2934
+	addi	%s5, %s5, 1
+	add	%at, %s6, %s5
 	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.38233
+	beqi	%a0, -1, bnei_else.26690
 	lw	%v1, 83(%a0)
-	addi	%a0, %s5, 0
+	addi	%a0, %s7, 0
 	addi	%v0, %zero, 0
-	jal	solve_each_element_fast.2948
-	addi	%s3, %s3, 1
-	add	%at, %s4, %s3
+	jal	solve_each_element.2934
+	addi	%s5, %s5, 1
+	add	%at, %s6, %s5
 	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.38234
+	beqi	%a0, -1, bnei_else.26691
 	lw	%v1, 83(%a0)
-	addi	%a0, %s5, 0
+	addi	%a0, %s7, 0
 	addi	%v0, %zero, 0
-	jal	solve_each_element_fast.2948
-	addi	%s3, %s3, 1
-	add	%at, %s4, %s3
+	jal	solve_each_element.2934
+	addi	%s5, %s5, 1
+	add	%at, %s6, %s5
 	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.38235
+	beqi	%a0, -1, bnei_else.26692
 	lw	%v1, 83(%a0)
-	addi	%a0, %s5, 0
+	addi	%a0, %s7, 0
 	addi	%v0, %zero, 0
-	jal	solve_each_element_fast.2948
-	addi	%s3, %s3, 1
-	add	%at, %s4, %s3
+	jal	solve_each_element.2934
+	addi	%s5, %s5, 1
+	add	%at, %s6, %s5
 	lw	%a0, 0(%at)
-	beqi	%a0, -1, bnei_else.38236
+	beqi	%a0, -1, bnei_else.26693
 	lw	%v1, 83(%a0)
-	addi	%a0, %s5, 0
+	addi	%a0, %s7, 0
 	addi	%v0, %zero, 0
-	jal	solve_each_element_fast.2948
-	addi	%v0, %s3, 1
-	add	%ra, %zero, %s6
-	addi	%a0, %s5, 0
-	addi	%v1, %s4, 0
-	j	solve_one_or_network_fast.2952
-bnei_else.38236:
-	add	%ra, %zero, %s6
+	jal	solve_each_element.2934
+	addi	%v0, %s5, 1
+	add	%ra, %zero, %t7
+	addi	%a0, %s7, 0
+	addi	%v1, %s6, 0
+	j	solve_one_or_network.2938
+bnei_else.26693:
+	add	%ra, %zero, %t7
 	jr	%ra
-bnei_else.38235:
-	add	%ra, %zero, %s6
+bnei_else.26692:
+	add	%ra, %zero, %t7
 	jr	%ra
-bnei_else.38234:
-	add	%ra, %zero, %s6
+bnei_else.26691:
+	add	%ra, %zero, %t7
 	jr	%ra
-bnei_else.38233:
-	add	%ra, %zero, %s6
+bnei_else.26690:
+	add	%ra, %zero, %t7
 	jr	%ra
-bnei_else.38232:
-	add	%ra, %zero, %s6
+bnei_else.26689:
+	add	%ra, %zero, %t7
 	jr	%ra
-bnei_else.38231:
-	add	%ra, %zero, %s6
+bnei_else.26688:
+	add	%ra, %zero, %t7
 	jr	%ra
-bnei_else.38230:
-	add	%ra, %zero, %s6
+bnei_else.26687:
+	add	%ra, %zero, %t7
 	jr	%ra
-bnei_else.38229:
-	add	%ra, %zero, %s6
+bnei_else.26686:
+	add	%ra, %zero, %t7
 	jr	%ra
-trace_or_matrix_fast.2956:
-	add	%s7, %zero, %v0
-	add	%t7, %zero, %v1
+trace_or_matrix.2942:
+	sw	%v0, 0(%sp)
+	add	%t9, %zero, %v1
 	add	%t8, %zero, %a0
-	add	%t9, %zero, %ra
-	add	%at, %t7, %s7
-	lw	%s3, 0(%at)
-	lw	%a2, 0(%s3)
-	beqi	%a2, -1, bnei_else.38553
-	beqi	%a2, 99, bnei_else.38554
-	lw	%a1, 12(%a2)
-	lw	%a3, 10(%a1)
-	flw	%f19, 0(%a3)
-	flw	%f16, 1(%a3)
-	flw	%f17, 2(%a3)
-	lw	%a0, 1(%t8)
-	add	%at, %a0, %a2
-	lw	%a2, 0(%at)
-	lw	%a0, 1(%a1)
-	beqi	%a0, 1, bnei_else.38556
-	beqi	%a0, 2, bnei_else.38558
-	flw	%f18, 0(%a2)
-	fbne	%f18, %fzero, fbeq_else.38560
-	add	%a0, %zero, %k1
-	j	fbeq_cont.38561
-fbeq_else.38560:
-	add	%a0, %zero, %zero
-fbeq_cont.38561:
-	beqi	%a0, 0, bnei_else.38562
-	add	%a0, %zero, %zero
-	j	bnei_cont.38557
-bnei_else.38562:
-	flw	%f0, 1(%a2)
-	fmul	%f1, %f0, %f19
-	flw	%f0, 2(%a2)
-	fmul	%f0, %f0, %f16
-	fadd	%f1, %f1, %f0
-	flw	%f0, 3(%a2)
-	fmul	%f0, %f0, %f17
-	fadd	%f16, %f1, %f0
-	flw	%f0, 3(%a3)
-	fmul	%f1, %f16, %f16
-	fmul	%f0, %f18, %f0
+	sw	%ra, 1(%sp)
+	add	%at, %t9, %v0
+	lw	%s5, 0(%at)
+	lw	%a0, 0(%s5)
+	beqi	%a0, -1, bnei_else.26973
+	beqi	%a0, 99, bnei_else.26974
+	lw	%v0, 12(%a0)
+	flw	%f1, 159(%zero)
+	lw	%a0, 5(%v0)
+	flw	%f0, 0(%a0)
 	fsub	%f0, %f1, %f0
-	fblt	%fzero, %f0, fbgt_else.38564
+	flw	%f16, 160(%zero)
+	lw	%a0, 5(%v0)
+	flw	%f1, 1(%a0)
+	fsub	%f1, %f16, %f1
+	flw	%f17, 161(%zero)
+	lw	%a0, 5(%v0)
+	flw	%f16, 2(%a0)
+	fsub	%f2, %f17, %f16
+	lw	%a0, 1(%v0)
+	beqi	%a0, 1, bnei_else.26976
+	beqi	%a0, 2, bnei_else.26978
+	addi	%v1, %t8, 0
+	addi	%sp, %sp, 2
+	jal	solver_second.2830
+	addi	%sp, %sp, -2
+	j	bnei_cont.26977
+bnei_else.26978:
+	lw	%a0, 4(%v0)
+	flw	%f16, 0(%t8)
+	flw	%f20, 0(%a0)
+	fmul	%f17, %f16, %f20
+	flw	%f16, 1(%t8)
+	flw	%f19, 1(%a0)
+	fmul	%f16, %f16, %f19
+	fadd	%f17, %f17, %f16
+	flw	%f16, 2(%t8)
+	flw	%f18, 2(%a0)
+	fmul	%f16, %f16, %f18
+	fadd	%f17, %f17, %f16
+	fblt	%fzero, %f17, fbgt_else.26980
 	add	%a0, %zero, %zero
-	j	fbgt_cont.38565
-fbgt_else.38564:
+	j	fbgt_cont.26981
+fbgt_else.26980:
 	add	%a0, %zero, %k1
-fbgt_cont.38565:
-	beqi	%a0, 0, bnei_else.38566
-	lw	%a0, 6(%a1)
-	beqi	%a0, 0, bnei_else.38568
-	fsqrt	%f0, %f0
+fbgt_cont.26981:
+	beqi	%a0, 0, bnei_else.26982
+	fmul	%f16, %f20, %f0
+	fmul	%f0, %f19, %f1
 	fadd	%f1, %f16, %f0
-	flw	%f0, 4(%a2)
-	fmul	%f0, %f1, %f0
+	fmul	%f0, %f18, %f2
+	fadd	%f0, %f1, %f0
+	fneg	%f0, %f0
+	fdiv	%f0, %f0, %f17
 	fsw	%f0, 135(%zero)
-	j	bnei_cont.38569
-bnei_else.38568:
-	fsqrt	%f0, %f0
-	fsub	%f1, %f16, %f0
-	flw	%f0, 4(%a2)
-	fmul	%f0, %f1, %f0
-	fsw	%f0, 135(%zero)
-bnei_cont.38569:
-	add	%a0, %zero, %k1
-	j	bnei_cont.38557
-bnei_else.38566:
-	add	%a0, %zero, %zero
-bnei_cont.38567:
-bnei_cont.38563:
-	j	bnei_cont.38557
-bnei_else.38558:
-	flw	%f1, 0(%a2)
-	fblt	%f1, %fzero, fbgt_else.38570
-	add	%a0, %zero, %zero
-	j	fbgt_cont.38571
-fbgt_else.38570:
-	add	%a0, %zero, %k1
-fbgt_cont.38571:
-	beqi	%a0, 0, bnei_else.38572
-	flw	%f0, 3(%a3)
-	fmul	%f0, %f1, %f0
-	fsw	%f0, 135(%zero)
-	add	%a0, %zero, %k1
-	j	bnei_cont.38557
-bnei_else.38572:
-	add	%a0, %zero, %zero
-bnei_cont.38573:
-bnei_cont.38559:
-	j	bnei_cont.38557
-bnei_else.38556:
-	lw	%a3, 0(%t8)
-	flw	%f0, 0(%a2)
-	fsub	%f0, %f0, %f19
-	flw	%f20, 1(%a2)
-	fmul	%f2, %f0, %f20
-	flw	%f18, 1(%a3)
-	fmul	%f0, %f2, %f18
-	fadd	%f0, %f0, %f16
-	fabs	%f1, %f0
-	lw	%a0, 4(%a1)
-	flw	%f0, 1(%a0)
-	fblt	%f1, %f0, fbgt_else.38574
-	add	%a0, %zero, %zero
-	j	fbgt_cont.38575
-fbgt_else.38574:
-	add	%a0, %zero, %k1
-fbgt_cont.38575:
-	beqi	%a0, 0, bnei_else.38576
-	flw	%f0, 2(%a3)
-	fmul	%f0, %f2, %f0
-	fadd	%f0, %f0, %f17
-	fabs	%f1, %f0
-	lw	%a0, 4(%a1)
-	flw	%f0, 2(%a0)
-	fblt	%f1, %f0, fbgt_else.38578
-	add	%a0, %zero, %zero
-	j	fbgt_cont.38579
-fbgt_else.38578:
-	add	%a0, %zero, %k1
-fbgt_cont.38579:
-	beqi	%a0, 0, bnei_else.38580
-	fbne	%f20, %fzero, fbeq_else.38582
-	add	%a0, %zero, %k1
-	j	fbeq_cont.38583
-fbeq_else.38582:
-	add	%a0, %zero, %zero
-fbeq_cont.38583:
-	beqi	%a0, 0, bnei_else.38584
-	add	%a0, %zero, %zero
-	j	bnei_cont.38577
-bnei_else.38584:
-	add	%a0, %zero, %k1
-bnei_cont.38585:
-	j	bnei_cont.38577
-bnei_else.38580:
-	add	%a0, %zero, %zero
-bnei_cont.38581:
-	j	bnei_cont.38577
-bnei_else.38576:
-	add	%a0, %zero, %zero
-bnei_cont.38577:
-	beqi	%a0, 0, bnei_else.38586
-	fsw	%f2, 135(%zero)
-	add	%a0, %zero, %k1
-	j	bnei_cont.38587
-bnei_else.38586:
-	flw	%f0, 2(%a2)
-	fsub	%f0, %f0, %f16
-	flw	%f21, 3(%a2)
-	fmul	%f2, %f0, %f21
-	flw	%f20, 0(%a3)
-	fmul	%f0, %f2, %f20
-	fadd	%f0, %f0, %f19
-	fabs	%f1, %f0
-	lw	%a0, 4(%a1)
-	flw	%f0, 0(%a0)
-	fblt	%f1, %f0, fbgt_else.38588
-	add	%a0, %zero, %zero
-	j	fbgt_cont.38589
-fbgt_else.38588:
-	add	%a0, %zero, %k1
-fbgt_cont.38589:
-	beqi	%a0, 0, bnei_else.38590
-	flw	%f0, 2(%a3)
-	fmul	%f0, %f2, %f0
-	fadd	%f0, %f0, %f17
-	fabs	%f1, %f0
-	lw	%a0, 4(%a1)
-	flw	%f0, 2(%a0)
-	fblt	%f1, %f0, fbgt_else.38592
-	add	%a0, %zero, %zero
-	j	fbgt_cont.38593
-fbgt_else.38592:
-	add	%a0, %zero, %k1
-fbgt_cont.38593:
-	beqi	%a0, 0, bnei_else.38594
-	fbne	%f21, %fzero, fbeq_else.38596
-	add	%a0, %zero, %k1
-	j	fbeq_cont.38597
-fbeq_else.38596:
-	add	%a0, %zero, %zero
-fbeq_cont.38597:
-	beqi	%a0, 0, bnei_else.38598
-	add	%a0, %zero, %zero
-	j	bnei_cont.38591
-bnei_else.38598:
-	add	%a0, %zero, %k1
-bnei_cont.38599:
-	j	bnei_cont.38591
-bnei_else.38594:
-	add	%a0, %zero, %zero
-bnei_cont.38595:
-	j	bnei_cont.38591
-bnei_else.38590:
-	add	%a0, %zero, %zero
-bnei_cont.38591:
-	beqi	%a0, 0, bnei_else.38600
-	fsw	%f2, 135(%zero)
-	addi	%a0, %zero, 2
-	j	bnei_cont.38601
-bnei_else.38600:
-	flw	%f0, 4(%a2)
-	fsub	%f0, %f0, %f17
-	flw	%f2, 5(%a2)
-	fmul	%f17, %f0, %f2
-	fmul	%f0, %f17, %f20
-	fadd	%f0, %f0, %f19
-	fabs	%f1, %f0
-	lw	%a0, 4(%a1)
-	flw	%f0, 0(%a0)
-	fblt	%f1, %f0, fbgt_else.38602
-	add	%a0, %zero, %zero
-	j	fbgt_cont.38603
-fbgt_else.38602:
-	add	%a0, %zero, %k1
-fbgt_cont.38603:
-	beqi	%a0, 0, bnei_else.38604
-	fmul	%f0, %f17, %f18
-	fadd	%f0, %f0, %f16
-	fabs	%f1, %f0
-	lw	%a0, 4(%a1)
-	flw	%f0, 1(%a0)
-	fblt	%f1, %f0, fbgt_else.38606
-	add	%a0, %zero, %zero
-	j	fbgt_cont.38607
-fbgt_else.38606:
-	add	%a0, %zero, %k1
-fbgt_cont.38607:
-	beqi	%a0, 0, bnei_else.38608
-	fbne	%f2, %fzero, fbeq_else.38610
-	add	%a0, %zero, %k1
-	j	fbeq_cont.38611
-fbeq_else.38610:
-	add	%a0, %zero, %zero
-fbeq_cont.38611:
-	beqi	%a0, 0, bnei_else.38612
-	add	%a0, %zero, %zero
-	j	bnei_cont.38605
-bnei_else.38612:
-	add	%a0, %zero, %k1
-bnei_cont.38613:
-	j	bnei_cont.38605
-bnei_else.38608:
-	add	%a0, %zero, %zero
-bnei_cont.38609:
-	j	bnei_cont.38605
-bnei_else.38604:
-	add	%a0, %zero, %zero
-bnei_cont.38605:
-	beqi	%a0, 0, bnei_else.38614
-	fsw	%f17, 135(%zero)
-	addi	%a0, %zero, 3
-	j	bnei_cont.38615
-bnei_else.38614:
-	add	%a0, %zero, %zero
-bnei_cont.38615:
-bnei_cont.38601:
-bnei_cont.38587:
-bnei_cont.38557:
-	beqi	%a0, 0, bnei_cont.38555
+	add	%v0, %zero, %k1
+	j	bnei_cont.26977
+bnei_else.26982:
+	add	%v0, %zero, %zero
+bnei_cont.26983:
+bnei_cont.26979:
+	j	bnei_cont.26977
+bnei_else.26976:
+	addi	%v1, %t8, 0
+	addi	%sp, %sp, 2
+	jal	solver_rect.2805
+	addi	%sp, %sp, -2
+bnei_cont.26977:
+	beqi	%v0, 0, bnei_cont.26975
 	flw	%f1, 135(%zero)
 	flw	%f0, 137(%zero)
-	fblt	%f1, %f0, fbgt_else.38618
+	fblt	%f1, %f0, fbgt_else.26986
 	add	%a0, %zero, %zero
-	j	fbgt_cont.38619
-fbgt_else.38618:
+	j	fbgt_cont.26987
+fbgt_else.26986:
 	add	%a0, %zero, %k1
-fbgt_cont.38619:
-	beqi	%a0, 0, bnei_cont.38555
-	lw	%a0, 1(%s3)
-	beqi	%a0, -1, bnei_cont.38555
+fbgt_cont.26987:
+	beqi	%a0, 0, bnei_cont.26975
+	lw	%a0, 1(%s5)
+	beqi	%a0, -1, bnei_cont.26975
 	lw	%v1, 83(%a0)
 	addi	%a0, %t8, 0
 	addi	%v0, %zero, 0
-	jal	solve_each_element_fast.2948
-	lw	%a0, 2(%s3)
-	beqi	%a0, -1, bnei_cont.38555
+	addi	%sp, %sp, 2
+	jal	solve_each_element.2934
+	addi	%sp, %sp, -2
+	lw	%a0, 2(%s5)
+	beqi	%a0, -1, bnei_cont.26975
 	lw	%v1, 83(%a0)
 	addi	%a0, %t8, 0
 	addi	%v0, %zero, 0
-	jal	solve_each_element_fast.2948
-	lw	%a0, 3(%s3)
-	beqi	%a0, -1, bnei_cont.38555
+	addi	%sp, %sp, 2
+	jal	solve_each_element.2934
+	addi	%sp, %sp, -2
+	lw	%a0, 3(%s5)
+	beqi	%a0, -1, bnei_cont.26975
 	lw	%v1, 83(%a0)
 	addi	%a0, %t8, 0
 	addi	%v0, %zero, 0
-	jal	solve_each_element_fast.2948
-	lw	%a0, 4(%s3)
-	beqi	%a0, -1, bnei_cont.38555
+	addi	%sp, %sp, 2
+	jal	solve_each_element.2934
+	addi	%sp, %sp, -2
+	lw	%a0, 4(%s5)
+	beqi	%a0, -1, bnei_cont.26975
 	lw	%v1, 83(%a0)
 	addi	%a0, %t8, 0
 	addi	%v0, %zero, 0
-	jal	solve_each_element_fast.2948
-	lw	%a0, 5(%s3)
-	beqi	%a0, -1, bnei_cont.38555
+	addi	%sp, %sp, 2
+	jal	solve_each_element.2934
+	addi	%sp, %sp, -2
+	lw	%a0, 5(%s5)
+	beqi	%a0, -1, bnei_cont.26975
 	lw	%v1, 83(%a0)
 	addi	%a0, %t8, 0
 	addi	%v0, %zero, 0
-	jal	solve_each_element_fast.2948
-	lw	%a0, 6(%s3)
-	beqi	%a0, -1, bnei_cont.38555
+	addi	%sp, %sp, 2
+	jal	solve_each_element.2934
+	addi	%sp, %sp, -2
+	lw	%a0, 6(%s5)
+	beqi	%a0, -1, bnei_cont.26975
 	lw	%v1, 83(%a0)
 	addi	%a0, %t8, 0
 	addi	%v0, %zero, 0
-	jal	solve_each_element_fast.2948
-	lw	%a0, 7(%s3)
-	beqi	%a0, -1, bnei_cont.38555
+	addi	%sp, %sp, 2
+	jal	solve_each_element.2934
+	addi	%sp, %sp, -2
+	lw	%a0, 7(%s5)
+	beqi	%a0, -1, bnei_cont.26975
 	lw	%v1, 83(%a0)
 	addi	%a0, %t8, 0
 	addi	%v0, %zero, 0
-	jal	solve_each_element_fast.2948
+	addi	%sp, %sp, 2
+	jal	solve_each_element.2934
+	addi	%sp, %sp, -2
 	addi	%v0, %zero, 8
 	addi	%a0, %t8, 0
-	addi	%v1, %s3, 0
-	jal	solve_one_or_network_fast.2952
-	j	bnei_cont.38555
-bnei_else.38634:
-bnei_cont.38635:
-	j	bnei_cont.38555
-bnei_else.38632:
-bnei_cont.38633:
-	j	bnei_cont.38555
-bnei_else.38630:
-bnei_cont.38631:
-	j	bnei_cont.38555
-bnei_else.38628:
-bnei_cont.38629:
-	j	bnei_cont.38555
-bnei_else.38626:
-bnei_cont.38627:
-	j	bnei_cont.38555
-bnei_else.38624:
-bnei_cont.38625:
-	j	bnei_cont.38555
-bnei_else.38622:
-bnei_cont.38623:
-	j	bnei_cont.38555
-bnei_else.38620:
-bnei_cont.38621:
-	j	bnei_cont.38555
-bnei_else.38616:
-bnei_cont.38617:
-	j	bnei_cont.38555
-bnei_else.38554:
-	lw	%a0, 1(%s3)
-	beqi	%a0, -1, bnei_else.38636
+	addi	%v1, %s5, 0
+	addi	%sp, %sp, 2
+	jal	solve_one_or_network.2938
+	addi	%sp, %sp, -2
+	j	bnei_cont.26975
+bnei_else.27002:
+bnei_cont.27003:
+	j	bnei_cont.26975
+bnei_else.27000:
+bnei_cont.27001:
+	j	bnei_cont.26975
+bnei_else.26998:
+bnei_cont.26999:
+	j	bnei_cont.26975
+bnei_else.26996:
+bnei_cont.26997:
+	j	bnei_cont.26975
+bnei_else.26994:
+bnei_cont.26995:
+	j	bnei_cont.26975
+bnei_else.26992:
+bnei_cont.26993:
+	j	bnei_cont.26975
+bnei_else.26990:
+bnei_cont.26991:
+	j	bnei_cont.26975
+bnei_else.26988:
+bnei_cont.26989:
+	j	bnei_cont.26975
+bnei_else.26984:
+bnei_cont.26985:
+	j	bnei_cont.26975
+bnei_else.26974:
+	lw	%a0, 1(%s5)
+	beqi	%a0, -1, bnei_else.27004
 	lw	%v1, 83(%a0)
 	addi	%a0, %t8, 0
 	addi	%v0, %zero, 0
-	jal	solve_each_element_fast.2948
-	lw	%a0, 2(%s3)
-	beqi	%a0, -1, bnei_cont.38637
+	addi	%sp, %sp, 2
+	jal	solve_each_element.2934
+	addi	%sp, %sp, -2
+	lw	%a0, 2(%s5)
+	beqi	%a0, -1, bnei_cont.27005
 	lw	%v1, 83(%a0)
 	addi	%a0, %t8, 0
 	addi	%v0, %zero, 0
-	jal	solve_each_element_fast.2948
-	lw	%a0, 3(%s3)
-	beqi	%a0, -1, bnei_cont.38637
+	addi	%sp, %sp, 2
+	jal	solve_each_element.2934
+	addi	%sp, %sp, -2
+	lw	%a0, 3(%s5)
+	beqi	%a0, -1, bnei_cont.27005
 	lw	%v1, 83(%a0)
 	addi	%a0, %t8, 0
 	addi	%v0, %zero, 0
-	jal	solve_each_element_fast.2948
-	lw	%a0, 4(%s3)
-	beqi	%a0, -1, bnei_cont.38637
+	addi	%sp, %sp, 2
+	jal	solve_each_element.2934
+	addi	%sp, %sp, -2
+	lw	%a0, 4(%s5)
+	beqi	%a0, -1, bnei_cont.27005
 	lw	%v1, 83(%a0)
 	addi	%a0, %t8, 0
 	addi	%v0, %zero, 0
-	jal	solve_each_element_fast.2948
-	lw	%a0, 5(%s3)
-	beqi	%a0, -1, bnei_cont.38637
+	addi	%sp, %sp, 2
+	jal	solve_each_element.2934
+	addi	%sp, %sp, -2
+	lw	%a0, 5(%s5)
+	beqi	%a0, -1, bnei_cont.27005
 	lw	%v1, 83(%a0)
 	addi	%a0, %t8, 0
 	addi	%v0, %zero, 0
-	jal	solve_each_element_fast.2948
-	lw	%a0, 6(%s3)
-	beqi	%a0, -1, bnei_cont.38637
+	addi	%sp, %sp, 2
+	jal	solve_each_element.2934
+	addi	%sp, %sp, -2
+	lw	%a0, 6(%s5)
+	beqi	%a0, -1, bnei_cont.27005
 	lw	%v1, 83(%a0)
 	addi	%a0, %t8, 0
 	addi	%v0, %zero, 0
-	jal	solve_each_element_fast.2948
-	lw	%a0, 7(%s3)
-	beqi	%a0, -1, bnei_cont.38637
+	addi	%sp, %sp, 2
+	jal	solve_each_element.2934
+	addi	%sp, %sp, -2
+	lw	%a0, 7(%s5)
+	beqi	%a0, -1, bnei_cont.27005
 	lw	%v1, 83(%a0)
 	addi	%a0, %t8, 0
 	addi	%v0, %zero, 0
-	jal	solve_each_element_fast.2948
+	addi	%sp, %sp, 2
+	jal	solve_each_element.2934
+	addi	%sp, %sp, -2
 	addi	%v0, %zero, 8
 	addi	%a0, %t8, 0
-	addi	%v1, %s3, 0
-	jal	solve_one_or_network_fast.2952
-	j	bnei_cont.38637
-bnei_else.38648:
-bnei_cont.38649:
-	j	bnei_cont.38637
-bnei_else.38646:
-bnei_cont.38647:
-	j	bnei_cont.38637
-bnei_else.38644:
-bnei_cont.38645:
-	j	bnei_cont.38637
-bnei_else.38642:
-bnei_cont.38643:
-	j	bnei_cont.38637
-bnei_else.38640:
-bnei_cont.38641:
-	j	bnei_cont.38637
-bnei_else.38638:
-bnei_cont.38639:
-	j	bnei_cont.38637
-bnei_else.38636:
-bnei_cont.38637:
-bnei_cont.38555:
-	addi	%s7, %s7, 1
-	add	%at, %t7, %s7
+	addi	%v1, %s5, 0
+	addi	%sp, %sp, 2
+	jal	solve_one_or_network.2938
+	addi	%sp, %sp, -2
+	j	bnei_cont.27005
+bnei_else.27016:
+bnei_cont.27017:
+	j	bnei_cont.27005
+bnei_else.27014:
+bnei_cont.27015:
+	j	bnei_cont.27005
+bnei_else.27012:
+bnei_cont.27013:
+	j	bnei_cont.27005
+bnei_else.27010:
+bnei_cont.27011:
+	j	bnei_cont.27005
+bnei_else.27008:
+bnei_cont.27009:
+	j	bnei_cont.27005
+bnei_else.27006:
+bnei_cont.27007:
+	j	bnei_cont.27005
+bnei_else.27004:
+bnei_cont.27005:
+bnei_cont.26975:
+	lw	%a0, 0(%sp)
+	addi	%a0, %a0, 1
+	sw	%a0, 2(%sp)
+	add	%at, %t9, %a0
+	lw	%s5, 0(%at)
+	lw	%v0, 0(%s5)
+	beqi	%v0, -1, bnei_else.27018
+	beqi	%v0, 99, bnei_else.27019
+	addi	%a0, %zero, 159
+	addi	%v1, %t8, 0
+	addi	%sp, %sp, 3
+	jal	solver.2836
+	addi	%sp, %sp, -3
+	beqi	%v0, 0, bnei_cont.27020
+	flw	%f1, 135(%zero)
+	flw	%f0, 137(%zero)
+	fblt	%f1, %f0, fbgt_else.27023
+	add	%a0, %zero, %zero
+	j	fbgt_cont.27024
+fbgt_else.27023:
+	add	%a0, %zero, %k1
+fbgt_cont.27024:
+	beqi	%a0, 0, bnei_cont.27020
+	lw	%a0, 1(%s5)
+	beqi	%a0, -1, bnei_cont.27020
+	lw	%v1, 83(%a0)
+	addi	%a0, %t8, 0
+	addi	%v0, %zero, 0
+	addi	%sp, %sp, 3
+	jal	solve_each_element.2934
+	addi	%sp, %sp, -3
+	lw	%a0, 2(%s5)
+	beqi	%a0, -1, bnei_cont.27020
+	lw	%v1, 83(%a0)
+	addi	%a0, %t8, 0
+	addi	%v0, %zero, 0
+	addi	%sp, %sp, 3
+	jal	solve_each_element.2934
+	addi	%sp, %sp, -3
+	lw	%a0, 3(%s5)
+	beqi	%a0, -1, bnei_cont.27020
+	lw	%v1, 83(%a0)
+	addi	%a0, %t8, 0
+	addi	%v0, %zero, 0
+	addi	%sp, %sp, 3
+	jal	solve_each_element.2934
+	addi	%sp, %sp, -3
+	lw	%a0, 4(%s5)
+	beqi	%a0, -1, bnei_cont.27020
+	lw	%v1, 83(%a0)
+	addi	%a0, %t8, 0
+	addi	%v0, %zero, 0
+	addi	%sp, %sp, 3
+	jal	solve_each_element.2934
+	addi	%sp, %sp, -3
+	lw	%a0, 5(%s5)
+	beqi	%a0, -1, bnei_cont.27020
+	lw	%v1, 83(%a0)
+	addi	%a0, %t8, 0
+	addi	%v0, %zero, 0
+	addi	%sp, %sp, 3
+	jal	solve_each_element.2934
+	addi	%sp, %sp, -3
+	lw	%a0, 6(%s5)
+	beqi	%a0, -1, bnei_cont.27020
+	lw	%v1, 83(%a0)
+	addi	%a0, %t8, 0
+	addi	%v0, %zero, 0
+	addi	%sp, %sp, 3
+	jal	solve_each_element.2934
+	addi	%sp, %sp, -3
+	addi	%v0, %zero, 7
+	addi	%a0, %t8, 0
+	addi	%v1, %s5, 0
+	addi	%sp, %sp, 3
+	jal	solve_one_or_network.2938
+	addi	%sp, %sp, -3
+	j	bnei_cont.27020
+bnei_else.27037:
+bnei_cont.27038:
+	j	bnei_cont.27020
+bnei_else.27035:
+bnei_cont.27036:
+	j	bnei_cont.27020
+bnei_else.27033:
+bnei_cont.27034:
+	j	bnei_cont.27020
+bnei_else.27031:
+bnei_cont.27032:
+	j	bnei_cont.27020
+bnei_else.27029:
+bnei_cont.27030:
+	j	bnei_cont.27020
+bnei_else.27027:
+bnei_cont.27028:
+	j	bnei_cont.27020
+bnei_else.27025:
+bnei_cont.27026:
+	j	bnei_cont.27020
+bnei_else.27021:
+bnei_cont.27022:
+	j	bnei_cont.27020
+bnei_else.27019:
+	lw	%a0, 1(%s5)
+	beqi	%a0, -1, bnei_else.27039
+	lw	%v1, 83(%a0)
+	addi	%a0, %t8, 0
+	addi	%v0, %zero, 0
+	addi	%sp, %sp, 3
+	jal	solve_each_element.2934
+	addi	%sp, %sp, -3
+	lw	%a0, 2(%s5)
+	beqi	%a0, -1, bnei_cont.27040
+	lw	%v1, 83(%a0)
+	addi	%a0, %t8, 0
+	addi	%v0, %zero, 0
+	addi	%sp, %sp, 3
+	jal	solve_each_element.2934
+	addi	%sp, %sp, -3
+	lw	%a0, 3(%s5)
+	beqi	%a0, -1, bnei_cont.27040
+	lw	%v1, 83(%a0)
+	addi	%a0, %t8, 0
+	addi	%v0, %zero, 0
+	addi	%sp, %sp, 3
+	jal	solve_each_element.2934
+	addi	%sp, %sp, -3
+	lw	%a0, 4(%s5)
+	beqi	%a0, -1, bnei_cont.27040
+	lw	%v1, 83(%a0)
+	addi	%a0, %t8, 0
+	addi	%v0, %zero, 0
+	addi	%sp, %sp, 3
+	jal	solve_each_element.2934
+	addi	%sp, %sp, -3
+	lw	%a0, 5(%s5)
+	beqi	%a0, -1, bnei_cont.27040
+	lw	%v1, 83(%a0)
+	addi	%a0, %t8, 0
+	addi	%v0, %zero, 0
+	addi	%sp, %sp, 3
+	jal	solve_each_element.2934
+	addi	%sp, %sp, -3
+	lw	%a0, 6(%s5)
+	beqi	%a0, -1, bnei_cont.27040
+	lw	%v1, 83(%a0)
+	addi	%a0, %t8, 0
+	addi	%v0, %zero, 0
+	addi	%sp, %sp, 3
+	jal	solve_each_element.2934
+	addi	%sp, %sp, -3
+	addi	%v0, %zero, 7
+	addi	%a0, %t8, 0
+	addi	%v1, %s5, 0
+	addi	%sp, %sp, 3
+	jal	solve_one_or_network.2938
+	addi	%sp, %sp, -3
+	j	bnei_cont.27040
+bnei_else.27049:
+bnei_cont.27050:
+	j	bnei_cont.27040
+bnei_else.27047:
+bnei_cont.27048:
+	j	bnei_cont.27040
+bnei_else.27045:
+bnei_cont.27046:
+	j	bnei_cont.27040
+bnei_else.27043:
+bnei_cont.27044:
+	j	bnei_cont.27040
+bnei_else.27041:
+bnei_cont.27042:
+	j	bnei_cont.27040
+bnei_else.27039:
+bnei_cont.27040:
+bnei_cont.27020:
+	lw	%a0, 2(%sp)
+	addi	%v0, %a0, 1
+	lw	%ra, 1(%sp)
+	addi	%a0, %t8, 0
+	addi	%v1, %t9, 0
+	j	trace_or_matrix.2942
+bnei_else.27018:
+	lw	%ra, 1(%sp)
+	jr	%ra
+bnei_else.26973:
+	jr	%ra
+solve_each_element_fast.2948:
+	add	%a3, %zero, %v0
+	add	%k0, %zero, %v1
+	add	%s0, %zero, %a0
+	add	%s1, %zero, %ra
+	lw	%s4, 0(%s0)
+	add	%at, %k0, %a3
 	lw	%s3, 0(%at)
-	lw	%a1, 0(%s3)
-	beqi	%a1, -1, bnei_else.38650
-	beqi	%a1, 99, bnei_else.38651
-	lw	%a2, 12(%a1)
-	lw	%a3, 10(%a2)
-	flw	%f2, 0(%a3)
-	flw	%f16, 1(%a3)
-	flw	%f18, 2(%a3)
-	lw	%a0, 1(%t8)
-	add	%at, %a0, %a1
-	lw	%a1, 0(%at)
-	lw	%a0, 1(%a2)
-	beqi	%a0, 1, bnei_else.38653
-	beqi	%a0, 2, bnei_else.38655
-	flw	%f17, 0(%a1)
-	fbne	%f17, %fzero, fbeq_else.38657
-	add	%a0, %zero, %k1
-	j	fbeq_cont.38658
-fbeq_else.38657:
-	add	%a0, %zero, %zero
-fbeq_cont.38658:
-	beqi	%a0, 0, bnei_else.38659
-	add	%a0, %zero, %zero
-	j	bnei_cont.38654
-bnei_else.38659:
-	flw	%f0, 1(%a1)
-	fmul	%f1, %f0, %f2
-	flw	%f0, 2(%a1)
-	fmul	%f0, %f0, %f16
-	fadd	%f1, %f1, %f0
-	flw	%f0, 3(%a1)
-	fmul	%f0, %f0, %f18
+	beqi	%s3, -1, bnei_else.27189
+	lw	%a2, 12(%s3)
+	lw	%ra, 10(%a2)
+	flw	%f0, 0(%ra)
+	flw	%f1, 1(%ra)
+	flw	%f2, 2(%ra)
+	lw	%a0, 1(%s0)
+	add	%at, %a0, %s3
+	lw	%a0, 0(%at)
+	lw	%a1, 1(%a2)
+	beqi	%a1, 1, bnei_else.27190
+	beqi	%a1, 2, bnei_else.27192
+	flw	%f17, 0(%a0)
+	fbne	%f17, %fzero, fbeq_else.27194
+	add	%a1, %zero, %k1
+	j	fbeq_cont.27195
+fbeq_else.27194:
+	add	%a1, %zero, %zero
+fbeq_cont.27195:
+	beqi	%a1, 0, bnei_else.27196
+	add	%s2, %zero, %zero
+	j	bnei_cont.27191
+bnei_else.27196:
+	flw	%f16, 1(%a0)
+	fmul	%f16, %f16, %f0
+	flw	%f0, 2(%a0)
+	fmul	%f0, %f0, %f1
+	fadd	%f1, %f16, %f0
+	flw	%f0, 3(%a0)
+	fmul	%f0, %f0, %f2
 	fadd	%f16, %f1, %f0
-	flw	%f0, 3(%a3)
+	flw	%f0, 3(%ra)
 	fmul	%f1, %f16, %f16
 	fmul	%f0, %f17, %f0
 	fsub	%f0, %f1, %f0
-	fblt	%fzero, %f0, fbgt_else.38661
-	add	%a0, %zero, %zero
-	j	fbgt_cont.38662
-fbgt_else.38661:
-	add	%a0, %zero, %k1
-fbgt_cont.38662:
-	beqi	%a0, 0, bnei_else.38663
-	lw	%a0, 6(%a2)
-	beqi	%a0, 0, bnei_else.38665
+	fblt	%fzero, %f0, fbgt_else.27198
+	add	%a1, %zero, %zero
+	j	fbgt_cont.27199
+fbgt_else.27198:
+	add	%a1, %zero, %k1
+fbgt_cont.27199:
+	beqi	%a1, 0, bnei_else.27200
+	lw	%a1, 6(%a2)
+	beqi	%a1, 0, bnei_else.27202
 	fsqrt	%f0, %f0
 	fadd	%f1, %f16, %f0
-	flw	%f0, 4(%a1)
+	flw	%f0, 4(%a0)
 	fmul	%f0, %f1, %f0
 	fsw	%f0, 135(%zero)
-	j	bnei_cont.38666
-bnei_else.38665:
+	j	bnei_cont.27203
+bnei_else.27202:
 	fsqrt	%f0, %f0
 	fsub	%f1, %f16, %f0
-	flw	%f0, 4(%a1)
+	flw	%f0, 4(%a0)
 	fmul	%f0, %f1, %f0
 	fsw	%f0, 135(%zero)
-bnei_cont.38666:
-	add	%a0, %zero, %k1
-	j	bnei_cont.38654
-bnei_else.38663:
+bnei_cont.27203:
+	add	%s2, %zero, %k1
+	j	bnei_cont.27191
+bnei_else.27200:
+	add	%s2, %zero, %zero
+bnei_cont.27201:
+bnei_cont.27197:
+	j	bnei_cont.27191
+bnei_else.27192:
+	flw	%f1, 0(%a0)
+	fblt	%f1, %fzero, fbgt_else.27204
 	add	%a0, %zero, %zero
-bnei_cont.38664:
-bnei_cont.38660:
-	j	bnei_cont.38654
-bnei_else.38655:
-	flw	%f1, 0(%a1)
-	fblt	%f1, %fzero, fbgt_else.38667
-	add	%a0, %zero, %zero
-	j	fbgt_cont.38668
-fbgt_else.38667:
+	j	fbgt_cont.27205
+fbgt_else.27204:
 	add	%a0, %zero, %k1
-fbgt_cont.38668:
-	beqi	%a0, 0, bnei_else.38669
-	flw	%f0, 3(%a3)
+fbgt_cont.27205:
+	beqi	%a0, 0, bnei_else.27206
+	flw	%f0, 3(%ra)
 	fmul	%f0, %f1, %f0
 	fsw	%f0, 135(%zero)
-	add	%a0, %zero, %k1
-	j	bnei_cont.38654
-bnei_else.38669:
+	add	%s2, %zero, %k1
+	j	bnei_cont.27191
+bnei_else.27206:
+	add	%s2, %zero, %zero
+bnei_cont.27207:
+bnei_cont.27193:
+	j	bnei_cont.27191
+bnei_else.27190:
+	lw	%v1, 0(%s0)
+	addi	%v0, %a2, 0
+	jal	solver_rect_fast.2840
+	addi	%s2, %v0, 0
+bnei_cont.27191:
+	beqi	%s2, 0, bnei_else.27208
+	flw	%f1, 135(%zero)
+	fblt	%fzero, %f1, fbgt_else.27209
 	add	%a0, %zero, %zero
-bnei_cont.38670:
-bnei_cont.38656:
-	j	bnei_cont.38654
-bnei_else.38653:
-	lw	%a3, 0(%t8)
-	flw	%f0, 0(%a1)
-	fsub	%f0, %f0, %f2
-	flw	%f21, 1(%a1)
-	fmul	%f20, %f0, %f21
-	flw	%f19, 1(%a3)
-	fmul	%f0, %f20, %f19
-	fadd	%f0, %f0, %f16
-	fabs	%f0, %f0
-	lw	%a0, 4(%a2)
-	flw	%f17, 1(%a0)
-	fblt	%f0, %f17, fbgt_else.38671
-	add	%a0, %zero, %zero
-	j	fbgt_cont.38672
-fbgt_else.38671:
+	j	fbgt_cont.27210
+fbgt_else.27209:
 	add	%a0, %zero, %k1
-fbgt_cont.38672:
-	beqi	%a0, 0, bnei_else.38673
-	flw	%f0, 2(%a3)
-	fmul	%f0, %f20, %f0
-	fadd	%f0, %f0, %f18
-	fabs	%f1, %f0
-	lw	%a0, 4(%a2)
+fbgt_cont.27210:
+	beqi	%a0, 0, bnei_else.27211
+	flw	%f0, 137(%zero)
+	fblt	%f1, %f0, fbgt_else.27213
+	add	%a0, %zero, %zero
+	j	fbgt_cont.27214
+fbgt_else.27213:
+	add	%a0, %zero, %k1
+fbgt_cont.27214:
+	beqi	%a0, 0, bnei_cont.27212
+	flw	%f0, 456(%zero)
+	fadd	%f22, %f1, %f0
+	flw	%f0, 0(%s4)
+	fmul	%f1, %f0, %f22
+	flw	%f0, 162(%zero)
+	fadd	%f0, %f1, %f0
+	flw	%f1, 1(%s4)
+	fmul	%f16, %f1, %f22
+	flw	%f1, 163(%zero)
+	fadd	%f1, %f16, %f1
+	flw	%f16, 2(%s4)
+	fmul	%f17, %f16, %f22
+	flw	%f16, 164(%zero)
+	fadd	%f2, %f17, %f16
+	lw	%a0, 0(%k0)
+	beqi	%a0, -1, bnei_else.27217
+	lw	%a1, 12(%a0)
+	lw	%a0, 5(%a1)
+	flw	%f16, 0(%a0)
+	fsub	%f19, %f0, %f16
+	lw	%a0, 5(%a1)
+	flw	%f16, 1(%a0)
+	fsub	%f20, %f1, %f16
+	lw	%a0, 5(%a1)
+	flw	%f16, 2(%a0)
+	fsub	%f21, %f2, %f16
+	lw	%a0, 1(%a1)
+	beqi	%a0, 1, bnei_else.27219
+	beqi	%a0, 2, bnei_else.27221
+	fmul	%f17, %f19, %f19
+	lw	%a0, 4(%a1)
+	flw	%f16, 0(%a0)
+	fmul	%f18, %f17, %f16
+	fmul	%f17, %f20, %f20
+	lw	%a0, 4(%a1)
+	flw	%f16, 1(%a0)
+	fmul	%f16, %f17, %f16
+	fadd	%f18, %f18, %f16
+	fmul	%f17, %f21, %f21
+	lw	%a0, 4(%a1)
+	flw	%f16, 2(%a0)
+	fmul	%f16, %f17, %f16
+	fadd	%f16, %f18, %f16
+	lw	%a0, 3(%a1)
+	beqi	%a0, 0, bnei_else.27223
+	fmul	%f18, %f20, %f21
+	lw	%a0, 9(%a1)
+	flw	%f17, 0(%a0)
+	fmul	%f17, %f18, %f17
+	fadd	%f18, %f16, %f17
+	fmul	%f17, %f21, %f19
+	lw	%a0, 9(%a1)
+	flw	%f16, 1(%a0)
+	fmul	%f16, %f17, %f16
+	fadd	%f18, %f18, %f16
+	fmul	%f17, %f19, %f20
+	lw	%a0, 9(%a1)
+	flw	%f16, 2(%a0)
+	fmul	%f16, %f17, %f16
+	fadd	%f16, %f18, %f16
+	j	bnei_cont.27224
+bnei_else.27223:
+bnei_cont.27224:
+	lw	%a0, 1(%a1)
+	beqi	%a0, 3, bnei_else.27225
+	j	bnei_cont.27226
+bnei_else.27225:
+	fsub	%f16, %f16, %f30
+bnei_cont.27226:
+	lw	%a1, 6(%a1)
+	fblt	%f16, %fzero, fbgt_else.27227
+	add	%a0, %zero, %zero
+	j	fbgt_cont.27228
+fbgt_else.27227:
+	add	%a0, %zero, %k1
+fbgt_cont.27228:
+	beqi	%a1, 0, bnei_else.27229
+	beqi	%a0, 0, bnei_else.27231
+	add	%a0, %zero, %zero
+	j	bnei_cont.27230
+bnei_else.27231:
+	add	%a0, %zero, %k1
+bnei_cont.27232:
+	j	bnei_cont.27230
+bnei_else.27229:
+bnei_cont.27230:
+	beqi	%a0, 0, bnei_else.27233
+	add	%a0, %zero, %zero
+	j	bnei_cont.27220
+bnei_else.27233:
+	add	%a0, %zero, %k1
+bnei_cont.27234:
+	j	bnei_cont.27220
+bnei_else.27221:
+	lw	%a0, 4(%a1)
+	flw	%f16, 0(%a0)
+	fmul	%f17, %f16, %f19
+	flw	%f16, 1(%a0)
+	fmul	%f16, %f16, %f20
+	fadd	%f17, %f17, %f16
+	flw	%f16, 2(%a0)
+	fmul	%f16, %f16, %f21
+	fadd	%f16, %f17, %f16
+	lw	%a1, 6(%a1)
+	fblt	%f16, %fzero, fbgt_else.27235
+	add	%a0, %zero, %zero
+	j	fbgt_cont.27236
+fbgt_else.27235:
+	add	%a0, %zero, %k1
+fbgt_cont.27236:
+	beqi	%a1, 0, bnei_else.27237
+	beqi	%a0, 0, bnei_else.27239
+	add	%a0, %zero, %zero
+	j	bnei_cont.27238
+bnei_else.27239:
+	add	%a0, %zero, %k1
+bnei_cont.27240:
+	j	bnei_cont.27238
+bnei_else.27237:
+bnei_cont.27238:
+	beqi	%a0, 0, bnei_else.27241
+	add	%a0, %zero, %zero
+	j	bnei_cont.27220
+bnei_else.27241:
+	add	%a0, %zero, %k1
+bnei_cont.27242:
+bnei_cont.27222:
+	j	bnei_cont.27220
+bnei_else.27219:
+	fabs	%f17, %f19
+	lw	%a0, 4(%a1)
+	flw	%f16, 0(%a0)
+	fblt	%f17, %f16, fbgt_else.27243
+	add	%a0, %zero, %zero
+	j	fbgt_cont.27244
+fbgt_else.27243:
+	add	%a0, %zero, %k1
+fbgt_cont.27244:
+	beqi	%a0, 0, bnei_else.27245
+	fabs	%f17, %f20
+	lw	%a0, 4(%a1)
+	flw	%f16, 1(%a0)
+	fblt	%f17, %f16, fbgt_else.27247
+	add	%a0, %zero, %zero
+	j	fbgt_cont.27248
+fbgt_else.27247:
+	add	%a0, %zero, %k1
+fbgt_cont.27248:
+	beqi	%a0, 0, bnei_else.27249
+	fabs	%f17, %f21
+	lw	%a0, 4(%a1)
+	flw	%f16, 2(%a0)
+	fblt	%f17, %f16, fbgt_else.27251
+	add	%a0, %zero, %zero
+	j	bnei_cont.27246
+fbgt_else.27251:
+	add	%a0, %zero, %k1
+fbgt_cont.27252:
+	j	bnei_cont.27246
+bnei_else.27249:
+	add	%a0, %zero, %zero
+bnei_cont.27250:
+	j	bnei_cont.27246
+bnei_else.27245:
+	add	%a0, %zero, %zero
+bnei_cont.27246:
+	beqi	%a0, 0, bnei_else.27253
+	lw	%a0, 6(%a1)
+	j	bnei_cont.27254
+bnei_else.27253:
+	lw	%a0, 6(%a1)
+	beqi	%a0, 0, bnei_else.27255
+	add	%a0, %zero, %zero
+	j	bnei_cont.27256
+bnei_else.27255:
+	add	%a0, %zero, %k1
+bnei_cont.27256:
+bnei_cont.27254:
+bnei_cont.27220:
+	beqi	%a0, 0, bnei_else.27257
+	add	%v0, %zero, %zero
+	j	bnei_cont.27218
+bnei_else.27257:
+	addi	%v1, %k0, 0
+	addi	%v0, %k1, 0
+	jal	check_all_inside.2919
+bnei_cont.27258:
+	j	bnei_cont.27218
+bnei_else.27217:
+	add	%v0, %zero, %k1
+bnei_cont.27218:
+	beqi	%v0, 0, bnei_cont.27212
+	fsw	%f22, 137(%zero)
+	fsw	%f0, 138(%zero)
+	fsw	%f1, 139(%zero)
+	fsw	%f2, 140(%zero)
+	sw	%s3, 141(%zero)
+	sw	%s2, 136(%zero)
+	j	bnei_cont.27212
+bnei_else.27259:
+bnei_cont.27260:
+	j	bnei_cont.27212
+bnei_else.27215:
+bnei_cont.27216:
+	j	bnei_cont.27212
+bnei_else.27211:
+bnei_cont.27212:
+	addi	%v0, %a3, 1
+	add	%ra, %zero, %s1
+	addi	%a0, %s0, 0
+	addi	%v1, %k0, 0
+	j	solve_each_element_fast.2948
+bnei_else.27208:
+	lw	%a0, 6(%a2)
+	beqi	%a0, 0, bnei_else.27261
+	addi	%v0, %a3, 1
+	add	%ra, %zero, %s1
+	addi	%a0, %s0, 0
+	addi	%v1, %k0, 0
+	j	solve_each_element_fast.2948
+bnei_else.27261:
+	add	%ra, %zero, %s1
+	jr	%ra
+bnei_else.27189:
+	add	%ra, %zero, %s1
+	jr	%ra
+solve_one_or_network_fast.2952:
+	add	%s5, %zero, %v0
+	add	%s6, %zero, %v1
+	add	%s7, %zero, %a0
+	add	%t7, %zero, %ra
+	add	%at, %s6, %s5
+	lw	%a0, 0(%at)
+	beqi	%a0, -1, bnei_else.27316
+	lw	%v1, 83(%a0)
+	addi	%a0, %s7, 0
+	addi	%v0, %zero, 0
+	jal	solve_each_element_fast.2948
+	addi	%s5, %s5, 1
+	add	%at, %s6, %s5
+	lw	%a0, 0(%at)
+	beqi	%a0, -1, bnei_else.27317
+	lw	%v1, 83(%a0)
+	addi	%a0, %s7, 0
+	addi	%v0, %zero, 0
+	jal	solve_each_element_fast.2948
+	addi	%s5, %s5, 1
+	add	%at, %s6, %s5
+	lw	%a0, 0(%at)
+	beqi	%a0, -1, bnei_else.27318
+	lw	%v1, 83(%a0)
+	addi	%a0, %s7, 0
+	addi	%v0, %zero, 0
+	jal	solve_each_element_fast.2948
+	addi	%s5, %s5, 1
+	add	%at, %s6, %s5
+	lw	%a0, 0(%at)
+	beqi	%a0, -1, bnei_else.27319
+	lw	%v1, 83(%a0)
+	addi	%a0, %s7, 0
+	addi	%v0, %zero, 0
+	jal	solve_each_element_fast.2948
+	addi	%s5, %s5, 1
+	add	%at, %s6, %s5
+	lw	%a0, 0(%at)
+	beqi	%a0, -1, bnei_else.27320
+	lw	%v1, 83(%a0)
+	addi	%a0, %s7, 0
+	addi	%v0, %zero, 0
+	jal	solve_each_element_fast.2948
+	addi	%s5, %s5, 1
+	add	%at, %s6, %s5
+	lw	%a0, 0(%at)
+	beqi	%a0, -1, bnei_else.27321
+	lw	%v1, 83(%a0)
+	addi	%a0, %s7, 0
+	addi	%v0, %zero, 0
+	jal	solve_each_element_fast.2948
+	addi	%s5, %s5, 1
+	add	%at, %s6, %s5
+	lw	%a0, 0(%at)
+	beqi	%a0, -1, bnei_else.27322
+	lw	%v1, 83(%a0)
+	addi	%a0, %s7, 0
+	addi	%v0, %zero, 0
+	jal	solve_each_element_fast.2948
+	addi	%s5, %s5, 1
+	add	%at, %s6, %s5
+	lw	%a0, 0(%at)
+	beqi	%a0, -1, bnei_else.27323
+	lw	%v1, 83(%a0)
+	addi	%a0, %s7, 0
+	addi	%v0, %zero, 0
+	jal	solve_each_element_fast.2948
+	addi	%v0, %s5, 1
+	add	%ra, %zero, %t7
+	addi	%a0, %s7, 0
+	addi	%v1, %s6, 0
+	j	solve_one_or_network_fast.2952
+bnei_else.27323:
+	add	%ra, %zero, %t7
+	jr	%ra
+bnei_else.27322:
+	add	%ra, %zero, %t7
+	jr	%ra
+bnei_else.27321:
+	add	%ra, %zero, %t7
+	jr	%ra
+bnei_else.27320:
+	add	%ra, %zero, %t7
+	jr	%ra
+bnei_else.27319:
+	add	%ra, %zero, %t7
+	jr	%ra
+bnei_else.27318:
+	add	%ra, %zero, %t7
+	jr	%ra
+bnei_else.27317:
+	add	%ra, %zero, %t7
+	jr	%ra
+bnei_else.27316:
+	add	%ra, %zero, %t7
+	jr	%ra
+trace_or_matrix_fast.2956:
+	sw	%v0, 0(%sp)
+	add	%t9, %zero, %v1
+	add	%t8, %zero, %a0
+	sw	%ra, 1(%sp)
+	add	%at, %t9, %v0
+	lw	%s5, 0(%at)
+	lw	%a1, 0(%s5)
+	beqi	%a1, -1, bnei_else.27633
+	beqi	%a1, 99, bnei_else.27634
+	lw	%v0, 12(%a1)
+	lw	%a2, 10(%v0)
+	flw	%f0, 0(%a2)
+	flw	%f1, 1(%a2)
+	flw	%f2, 2(%a2)
+	lw	%a0, 1(%t8)
+	add	%at, %a0, %a1
+	lw	%a0, 0(%at)
+	lw	%a1, 1(%v0)
+	beqi	%a1, 1, bnei_else.27636
+	beqi	%a1, 2, bnei_else.27638
+	flw	%f17, 0(%a0)
+	fbne	%f17, %fzero, fbeq_else.27640
+	add	%a1, %zero, %k1
+	j	fbeq_cont.27641
+fbeq_else.27640:
+	add	%a1, %zero, %zero
+fbeq_cont.27641:
+	beqi	%a1, 0, bnei_else.27642
+	add	%v0, %zero, %zero
+	j	bnei_cont.27637
+bnei_else.27642:
+	flw	%f16, 1(%a0)
+	fmul	%f16, %f16, %f0
 	flw	%f0, 2(%a0)
-	fblt	%f1, %f0, fbgt_else.38675
+	fmul	%f0, %f0, %f1
+	fadd	%f1, %f16, %f0
+	flw	%f0, 3(%a0)
+	fmul	%f0, %f0, %f2
+	fadd	%f16, %f1, %f0
+	flw	%f0, 3(%a2)
+	fmul	%f1, %f16, %f16
+	fmul	%f0, %f17, %f0
+	fsub	%f0, %f1, %f0
+	fblt	%fzero, %f0, fbgt_else.27644
+	add	%a1, %zero, %zero
+	j	fbgt_cont.27645
+fbgt_else.27644:
+	add	%a1, %zero, %k1
+fbgt_cont.27645:
+	beqi	%a1, 0, bnei_else.27646
+	lw	%a1, 6(%v0)
+	beqi	%a1, 0, bnei_else.27648
+	fsqrt	%f0, %f0
+	fadd	%f1, %f16, %f0
+	flw	%f0, 4(%a0)
+	fmul	%f0, %f1, %f0
+	fsw	%f0, 135(%zero)
+	j	bnei_cont.27649
+bnei_else.27648:
+	fsqrt	%f0, %f0
+	fsub	%f1, %f16, %f0
+	flw	%f0, 4(%a0)
+	fmul	%f0, %f1, %f0
+	fsw	%f0, 135(%zero)
+bnei_cont.27649:
+	add	%v0, %zero, %k1
+	j	bnei_cont.27637
+bnei_else.27646:
+	add	%v0, %zero, %zero
+bnei_cont.27647:
+bnei_cont.27643:
+	j	bnei_cont.27637
+bnei_else.27638:
+	flw	%f1, 0(%a0)
+	fblt	%f1, %fzero, fbgt_else.27650
 	add	%a0, %zero, %zero
-	j	fbgt_cont.38676
-fbgt_else.38675:
+	j	fbgt_cont.27651
+fbgt_else.27650:
 	add	%a0, %zero, %k1
-fbgt_cont.38676:
-	beqi	%a0, 0, bnei_else.38677
-	fbne	%f21, %fzero, fbeq_else.38679
-	add	%a0, %zero, %k1
-	j	fbeq_cont.38680
-fbeq_else.38679:
-	add	%a0, %zero, %zero
-fbeq_cont.38680:
-	beqi	%a0, 0, bnei_else.38681
-	add	%a0, %zero, %zero
-	j	bnei_cont.38674
-bnei_else.38681:
-	add	%a0, %zero, %k1
-bnei_cont.38682:
-	j	bnei_cont.38674
-bnei_else.38677:
-	add	%a0, %zero, %zero
-bnei_cont.38678:
-	j	bnei_cont.38674
-bnei_else.38673:
-	add	%a0, %zero, %zero
-bnei_cont.38674:
-	beqi	%a0, 0, bnei_else.38683
-	fsw	%f20, 135(%zero)
-	add	%a0, %zero, %k1
-	j	bnei_cont.38684
-bnei_else.38683:
-	flw	%f0, 2(%a1)
-	fsub	%f0, %f0, %f16
-	flw	%f23, 3(%a1)
-	fmul	%f20, %f0, %f23
-	flw	%f22, 0(%a3)
-	fmul	%f0, %f20, %f22
-	fadd	%f0, %f0, %f2
-	fabs	%f0, %f0
-	lw	%a0, 4(%a2)
-	flw	%f21, 0(%a0)
-	fblt	%f0, %f21, fbgt_else.38685
-	add	%a0, %zero, %zero
-	j	fbgt_cont.38686
-fbgt_else.38685:
-	add	%a0, %zero, %k1
-fbgt_cont.38686:
-	beqi	%a0, 0, bnei_else.38687
-	flw	%f0, 2(%a3)
-	fmul	%f0, %f20, %f0
-	fadd	%f0, %f0, %f18
-	fabs	%f1, %f0
-	lw	%a0, 4(%a2)
-	flw	%f0, 2(%a0)
-	fblt	%f1, %f0, fbgt_else.38689
-	add	%a0, %zero, %zero
-	j	fbgt_cont.38690
-fbgt_else.38689:
-	add	%a0, %zero, %k1
-fbgt_cont.38690:
-	beqi	%a0, 0, bnei_else.38691
-	fbne	%f23, %fzero, fbeq_else.38693
-	add	%a0, %zero, %k1
-	j	fbeq_cont.38694
-fbeq_else.38693:
-	add	%a0, %zero, %zero
-fbeq_cont.38694:
-	beqi	%a0, 0, bnei_else.38695
-	add	%a0, %zero, %zero
-	j	bnei_cont.38688
-bnei_else.38695:
-	add	%a0, %zero, %k1
-bnei_cont.38696:
-	j	bnei_cont.38688
-bnei_else.38691:
-	add	%a0, %zero, %zero
-bnei_cont.38692:
-	j	bnei_cont.38688
-bnei_else.38687:
-	add	%a0, %zero, %zero
-bnei_cont.38688:
-	beqi	%a0, 0, bnei_else.38697
-	fsw	%f20, 135(%zero)
-	addi	%a0, %zero, 2
-	j	bnei_cont.38698
-bnei_else.38697:
-	flw	%f0, 4(%a1)
-	fsub	%f0, %f0, %f18
-	flw	%f18, 5(%a1)
-	fmul	%f1, %f0, %f18
-	fmul	%f0, %f1, %f22
-	fadd	%f0, %f0, %f2
-	fabs	%f0, %f0
-	fblt	%f0, %f21, fbgt_else.38699
-	add	%a0, %zero, %zero
-	j	fbgt_cont.38700
-fbgt_else.38699:
-	add	%a0, %zero, %k1
-fbgt_cont.38700:
-	beqi	%a0, 0, bnei_else.38701
-	fmul	%f0, %f1, %f19
-	fadd	%f0, %f0, %f16
-	fabs	%f0, %f0
-	fblt	%f0, %f17, fbgt_else.38703
-	add	%a0, %zero, %zero
-	j	fbgt_cont.38704
-fbgt_else.38703:
-	add	%a0, %zero, %k1
-fbgt_cont.38704:
-	beqi	%a0, 0, bnei_else.38705
-	fbne	%f18, %fzero, fbeq_else.38707
-	add	%a0, %zero, %k1
-	j	fbeq_cont.38708
-fbeq_else.38707:
-	add	%a0, %zero, %zero
-fbeq_cont.38708:
-	beqi	%a0, 0, bnei_else.38709
-	add	%a0, %zero, %zero
-	j	bnei_cont.38702
-bnei_else.38709:
-	add	%a0, %zero, %k1
-bnei_cont.38710:
-	j	bnei_cont.38702
-bnei_else.38705:
-	add	%a0, %zero, %zero
-bnei_cont.38706:
-	j	bnei_cont.38702
-bnei_else.38701:
-	add	%a0, %zero, %zero
-bnei_cont.38702:
-	beqi	%a0, 0, bnei_else.38711
-	fsw	%f1, 135(%zero)
-	addi	%a0, %zero, 3
-	j	bnei_cont.38712
-bnei_else.38711:
-	add	%a0, %zero, %zero
-bnei_cont.38712:
-bnei_cont.38698:
-bnei_cont.38684:
-bnei_cont.38654:
-	beqi	%a0, 0, bnei_cont.38652
+fbgt_cont.27651:
+	beqi	%a0, 0, bnei_else.27652
+	flw	%f0, 3(%a2)
+	fmul	%f0, %f1, %f0
+	fsw	%f0, 135(%zero)
+	add	%v0, %zero, %k1
+	j	bnei_cont.27637
+bnei_else.27652:
+	add	%v0, %zero, %zero
+bnei_cont.27653:
+bnei_cont.27639:
+	j	bnei_cont.27637
+bnei_else.27636:
+	lw	%v1, 0(%t8)
+	addi	%sp, %sp, 2
+	jal	solver_rect_fast.2840
+	addi	%sp, %sp, -2
+bnei_cont.27637:
+	beqi	%v0, 0, bnei_cont.27635
 	flw	%f1, 135(%zero)
 	flw	%f0, 137(%zero)
-	fblt	%f1, %f0, fbgt_else.38715
+	fblt	%f1, %f0, fbgt_else.27656
 	add	%a0, %zero, %zero
-	j	fbgt_cont.38716
-fbgt_else.38715:
+	j	fbgt_cont.27657
+fbgt_else.27656:
 	add	%a0, %zero, %k1
-fbgt_cont.38716:
-	beqi	%a0, 0, bnei_cont.38652
-	lw	%a0, 1(%s3)
-	beqi	%a0, -1, bnei_cont.38652
+fbgt_cont.27657:
+	beqi	%a0, 0, bnei_cont.27635
+	lw	%a0, 1(%s5)
+	beqi	%a0, -1, bnei_cont.27635
 	lw	%v1, 83(%a0)
 	addi	%a0, %t8, 0
 	addi	%v0, %zero, 0
+	addi	%sp, %sp, 2
 	jal	solve_each_element_fast.2948
-	lw	%a0, 2(%s3)
-	beqi	%a0, -1, bnei_cont.38652
+	addi	%sp, %sp, -2
+	lw	%a0, 2(%s5)
+	beqi	%a0, -1, bnei_cont.27635
 	lw	%v1, 83(%a0)
 	addi	%a0, %t8, 0
 	addi	%v0, %zero, 0
+	addi	%sp, %sp, 2
 	jal	solve_each_element_fast.2948
-	lw	%a0, 3(%s3)
-	beqi	%a0, -1, bnei_cont.38652
+	addi	%sp, %sp, -2
+	lw	%a0, 3(%s5)
+	beqi	%a0, -1, bnei_cont.27635
 	lw	%v1, 83(%a0)
 	addi	%a0, %t8, 0
 	addi	%v0, %zero, 0
+	addi	%sp, %sp, 2
 	jal	solve_each_element_fast.2948
-	lw	%a0, 4(%s3)
-	beqi	%a0, -1, bnei_cont.38652
+	addi	%sp, %sp, -2
+	lw	%a0, 4(%s5)
+	beqi	%a0, -1, bnei_cont.27635
 	lw	%v1, 83(%a0)
 	addi	%a0, %t8, 0
 	addi	%v0, %zero, 0
+	addi	%sp, %sp, 2
 	jal	solve_each_element_fast.2948
-	lw	%a0, 5(%s3)
-	beqi	%a0, -1, bnei_cont.38652
+	addi	%sp, %sp, -2
+	lw	%a0, 5(%s5)
+	beqi	%a0, -1, bnei_cont.27635
 	lw	%v1, 83(%a0)
 	addi	%a0, %t8, 0
 	addi	%v0, %zero, 0
+	addi	%sp, %sp, 2
 	jal	solve_each_element_fast.2948
-	lw	%a0, 6(%s3)
-	beqi	%a0, -1, bnei_cont.38652
+	addi	%sp, %sp, -2
+	lw	%a0, 6(%s5)
+	beqi	%a0, -1, bnei_cont.27635
 	lw	%v1, 83(%a0)
 	addi	%a0, %t8, 0
 	addi	%v0, %zero, 0
+	addi	%sp, %sp, 2
 	jal	solve_each_element_fast.2948
+	addi	%sp, %sp, -2
+	lw	%a0, 7(%s5)
+	beqi	%a0, -1, bnei_cont.27635
+	lw	%v1, 83(%a0)
+	addi	%a0, %t8, 0
+	addi	%v0, %zero, 0
+	addi	%sp, %sp, 2
+	jal	solve_each_element_fast.2948
+	addi	%sp, %sp, -2
+	addi	%v0, %zero, 8
+	addi	%a0, %t8, 0
+	addi	%v1, %s5, 0
+	addi	%sp, %sp, 2
+	jal	solve_one_or_network_fast.2952
+	addi	%sp, %sp, -2
+	j	bnei_cont.27635
+bnei_else.27672:
+bnei_cont.27673:
+	j	bnei_cont.27635
+bnei_else.27670:
+bnei_cont.27671:
+	j	bnei_cont.27635
+bnei_else.27668:
+bnei_cont.27669:
+	j	bnei_cont.27635
+bnei_else.27666:
+bnei_cont.27667:
+	j	bnei_cont.27635
+bnei_else.27664:
+bnei_cont.27665:
+	j	bnei_cont.27635
+bnei_else.27662:
+bnei_cont.27663:
+	j	bnei_cont.27635
+bnei_else.27660:
+bnei_cont.27661:
+	j	bnei_cont.27635
+bnei_else.27658:
+bnei_cont.27659:
+	j	bnei_cont.27635
+bnei_else.27654:
+bnei_cont.27655:
+	j	bnei_cont.27635
+bnei_else.27634:
+	lw	%a0, 1(%s5)
+	beqi	%a0, -1, bnei_else.27674
+	lw	%v1, 83(%a0)
+	addi	%a0, %t8, 0
+	addi	%v0, %zero, 0
+	addi	%sp, %sp, 2
+	jal	solve_each_element_fast.2948
+	addi	%sp, %sp, -2
+	lw	%a0, 2(%s5)
+	beqi	%a0, -1, bnei_cont.27675
+	lw	%v1, 83(%a0)
+	addi	%a0, %t8, 0
+	addi	%v0, %zero, 0
+	addi	%sp, %sp, 2
+	jal	solve_each_element_fast.2948
+	addi	%sp, %sp, -2
+	lw	%a0, 3(%s5)
+	beqi	%a0, -1, bnei_cont.27675
+	lw	%v1, 83(%a0)
+	addi	%a0, %t8, 0
+	addi	%v0, %zero, 0
+	addi	%sp, %sp, 2
+	jal	solve_each_element_fast.2948
+	addi	%sp, %sp, -2
+	lw	%a0, 4(%s5)
+	beqi	%a0, -1, bnei_cont.27675
+	lw	%v1, 83(%a0)
+	addi	%a0, %t8, 0
+	addi	%v0, %zero, 0
+	addi	%sp, %sp, 2
+	jal	solve_each_element_fast.2948
+	addi	%sp, %sp, -2
+	lw	%a0, 5(%s5)
+	beqi	%a0, -1, bnei_cont.27675
+	lw	%v1, 83(%a0)
+	addi	%a0, %t8, 0
+	addi	%v0, %zero, 0
+	addi	%sp, %sp, 2
+	jal	solve_each_element_fast.2948
+	addi	%sp, %sp, -2
+	lw	%a0, 6(%s5)
+	beqi	%a0, -1, bnei_cont.27675
+	lw	%v1, 83(%a0)
+	addi	%a0, %t8, 0
+	addi	%v0, %zero, 0
+	addi	%sp, %sp, 2
+	jal	solve_each_element_fast.2948
+	addi	%sp, %sp, -2
+	lw	%a0, 7(%s5)
+	beqi	%a0, -1, bnei_cont.27675
+	lw	%v1, 83(%a0)
+	addi	%a0, %t8, 0
+	addi	%v0, %zero, 0
+	addi	%sp, %sp, 2
+	jal	solve_each_element_fast.2948
+	addi	%sp, %sp, -2
+	addi	%v0, %zero, 8
+	addi	%a0, %t8, 0
+	addi	%v1, %s5, 0
+	addi	%sp, %sp, 2
+	jal	solve_one_or_network_fast.2952
+	addi	%sp, %sp, -2
+	j	bnei_cont.27675
+bnei_else.27686:
+bnei_cont.27687:
+	j	bnei_cont.27675
+bnei_else.27684:
+bnei_cont.27685:
+	j	bnei_cont.27675
+bnei_else.27682:
+bnei_cont.27683:
+	j	bnei_cont.27675
+bnei_else.27680:
+bnei_cont.27681:
+	j	bnei_cont.27675
+bnei_else.27678:
+bnei_cont.27679:
+	j	bnei_cont.27675
+bnei_else.27676:
+bnei_cont.27677:
+	j	bnei_cont.27675
+bnei_else.27674:
+bnei_cont.27675:
+bnei_cont.27635:
+	lw	%a0, 0(%sp)
+	addi	%a0, %a0, 1
+	sw	%a0, 2(%sp)
+	add	%at, %t9, %a0
+	lw	%s5, 0(%at)
+	lw	%v0, 0(%s5)
+	beqi	%v0, -1, bnei_else.27688
+	beqi	%v0, 99, bnei_else.27689
+	addi	%v1, %t8, 0
+	addi	%sp, %sp, 3
+	jal	solver_fast2.2877
+	addi	%sp, %sp, -3
+	beqi	%v0, 0, bnei_cont.27690
+	flw	%f1, 135(%zero)
+	flw	%f0, 137(%zero)
+	fblt	%f1, %f0, fbgt_else.27693
+	add	%a0, %zero, %zero
+	j	fbgt_cont.27694
+fbgt_else.27693:
+	add	%a0, %zero, %k1
+fbgt_cont.27694:
+	beqi	%a0, 0, bnei_cont.27690
+	lw	%a0, 1(%s5)
+	beqi	%a0, -1, bnei_cont.27690
+	lw	%v1, 83(%a0)
+	addi	%a0, %t8, 0
+	addi	%v0, %zero, 0
+	addi	%sp, %sp, 3
+	jal	solve_each_element_fast.2948
+	addi	%sp, %sp, -3
+	lw	%a0, 2(%s5)
+	beqi	%a0, -1, bnei_cont.27690
+	lw	%v1, 83(%a0)
+	addi	%a0, %t8, 0
+	addi	%v0, %zero, 0
+	addi	%sp, %sp, 3
+	jal	solve_each_element_fast.2948
+	addi	%sp, %sp, -3
+	lw	%a0, 3(%s5)
+	beqi	%a0, -1, bnei_cont.27690
+	lw	%v1, 83(%a0)
+	addi	%a0, %t8, 0
+	addi	%v0, %zero, 0
+	addi	%sp, %sp, 3
+	jal	solve_each_element_fast.2948
+	addi	%sp, %sp, -3
+	lw	%a0, 4(%s5)
+	beqi	%a0, -1, bnei_cont.27690
+	lw	%v1, 83(%a0)
+	addi	%a0, %t8, 0
+	addi	%v0, %zero, 0
+	addi	%sp, %sp, 3
+	jal	solve_each_element_fast.2948
+	addi	%sp, %sp, -3
+	lw	%a0, 5(%s5)
+	beqi	%a0, -1, bnei_cont.27690
+	lw	%v1, 83(%a0)
+	addi	%a0, %t8, 0
+	addi	%v0, %zero, 0
+	addi	%sp, %sp, 3
+	jal	solve_each_element_fast.2948
+	addi	%sp, %sp, -3
+	lw	%a0, 6(%s5)
+	beqi	%a0, -1, bnei_cont.27690
+	lw	%v1, 83(%a0)
+	addi	%a0, %t8, 0
+	addi	%v0, %zero, 0
+	addi	%sp, %sp, 3
+	jal	solve_each_element_fast.2948
+	addi	%sp, %sp, -3
 	addi	%v0, %zero, 7
 	addi	%a0, %t8, 0
-	addi	%v1, %s3, 0
+	addi	%v1, %s5, 0
+	addi	%sp, %sp, 3
 	jal	solve_one_or_network_fast.2952
-	j	bnei_cont.38652
-bnei_else.38729:
-bnei_cont.38730:
-	j	bnei_cont.38652
-bnei_else.38727:
-bnei_cont.38728:
-	j	bnei_cont.38652
-bnei_else.38725:
-bnei_cont.38726:
-	j	bnei_cont.38652
-bnei_else.38723:
-bnei_cont.38724:
-	j	bnei_cont.38652
-bnei_else.38721:
-bnei_cont.38722:
-	j	bnei_cont.38652
-bnei_else.38719:
-bnei_cont.38720:
-	j	bnei_cont.38652
-bnei_else.38717:
-bnei_cont.38718:
-	j	bnei_cont.38652
-bnei_else.38713:
-bnei_cont.38714:
-	j	bnei_cont.38652
-bnei_else.38651:
-	lw	%a0, 1(%s3)
-	beqi	%a0, -1, bnei_else.38731
+	addi	%sp, %sp, -3
+	j	bnei_cont.27690
+bnei_else.27707:
+bnei_cont.27708:
+	j	bnei_cont.27690
+bnei_else.27705:
+bnei_cont.27706:
+	j	bnei_cont.27690
+bnei_else.27703:
+bnei_cont.27704:
+	j	bnei_cont.27690
+bnei_else.27701:
+bnei_cont.27702:
+	j	bnei_cont.27690
+bnei_else.27699:
+bnei_cont.27700:
+	j	bnei_cont.27690
+bnei_else.27697:
+bnei_cont.27698:
+	j	bnei_cont.27690
+bnei_else.27695:
+bnei_cont.27696:
+	j	bnei_cont.27690
+bnei_else.27691:
+bnei_cont.27692:
+	j	bnei_cont.27690
+bnei_else.27689:
+	lw	%a0, 1(%s5)
+	beqi	%a0, -1, bnei_else.27709
 	lw	%v1, 83(%a0)
 	addi	%a0, %t8, 0
 	addi	%v0, %zero, 0
+	addi	%sp, %sp, 3
 	jal	solve_each_element_fast.2948
-	lw	%a0, 2(%s3)
-	beqi	%a0, -1, bnei_cont.38732
+	addi	%sp, %sp, -3
+	lw	%a0, 2(%s5)
+	beqi	%a0, -1, bnei_cont.27710
 	lw	%v1, 83(%a0)
 	addi	%a0, %t8, 0
 	addi	%v0, %zero, 0
+	addi	%sp, %sp, 3
 	jal	solve_each_element_fast.2948
-	lw	%a0, 3(%s3)
-	beqi	%a0, -1, bnei_cont.38732
+	addi	%sp, %sp, -3
+	lw	%a0, 3(%s5)
+	beqi	%a0, -1, bnei_cont.27710
 	lw	%v1, 83(%a0)
 	addi	%a0, %t8, 0
 	addi	%v0, %zero, 0
+	addi	%sp, %sp, 3
 	jal	solve_each_element_fast.2948
-	lw	%a0, 4(%s3)
-	beqi	%a0, -1, bnei_cont.38732
+	addi	%sp, %sp, -3
+	lw	%a0, 4(%s5)
+	beqi	%a0, -1, bnei_cont.27710
 	lw	%v1, 83(%a0)
 	addi	%a0, %t8, 0
 	addi	%v0, %zero, 0
+	addi	%sp, %sp, 3
 	jal	solve_each_element_fast.2948
-	lw	%a0, 5(%s3)
-	beqi	%a0, -1, bnei_cont.38732
+	addi	%sp, %sp, -3
+	lw	%a0, 5(%s5)
+	beqi	%a0, -1, bnei_cont.27710
 	lw	%v1, 83(%a0)
 	addi	%a0, %t8, 0
 	addi	%v0, %zero, 0
+	addi	%sp, %sp, 3
 	jal	solve_each_element_fast.2948
-	lw	%a0, 6(%s3)
-	beqi	%a0, -1, bnei_cont.38732
+	addi	%sp, %sp, -3
+	lw	%a0, 6(%s5)
+	beqi	%a0, -1, bnei_cont.27710
 	lw	%v1, 83(%a0)
 	addi	%a0, %t8, 0
 	addi	%v0, %zero, 0
+	addi	%sp, %sp, 3
 	jal	solve_each_element_fast.2948
+	addi	%sp, %sp, -3
 	addi	%v0, %zero, 7
 	addi	%a0, %t8, 0
-	addi	%v1, %s3, 0
+	addi	%v1, %s5, 0
+	addi	%sp, %sp, 3
 	jal	solve_one_or_network_fast.2952
-	j	bnei_cont.38732
-bnei_else.38741:
-bnei_cont.38742:
-	j	bnei_cont.38732
-bnei_else.38739:
-bnei_cont.38740:
-	j	bnei_cont.38732
-bnei_else.38737:
-bnei_cont.38738:
-	j	bnei_cont.38732
-bnei_else.38735:
-bnei_cont.38736:
-	j	bnei_cont.38732
-bnei_else.38733:
-bnei_cont.38734:
-	j	bnei_cont.38732
-bnei_else.38731:
-bnei_cont.38732:
-bnei_cont.38652:
-	addi	%v0, %s7, 1
-	add	%ra, %zero, %t9
+	addi	%sp, %sp, -3
+	j	bnei_cont.27710
+bnei_else.27719:
+bnei_cont.27720:
+	j	bnei_cont.27710
+bnei_else.27717:
+bnei_cont.27718:
+	j	bnei_cont.27710
+bnei_else.27715:
+bnei_cont.27716:
+	j	bnei_cont.27710
+bnei_else.27713:
+bnei_cont.27714:
+	j	bnei_cont.27710
+bnei_else.27711:
+bnei_cont.27712:
+	j	bnei_cont.27710
+bnei_else.27709:
+bnei_cont.27710:
+bnei_cont.27690:
+	lw	%a0, 2(%sp)
+	addi	%v0, %a0, 1
+	lw	%ra, 1(%sp)
 	addi	%a0, %t8, 0
-	addi	%v1, %t7, 0
+	addi	%v1, %t9, 0
 	j	trace_or_matrix_fast.2956
-bnei_else.38650:
-	add	%ra, %zero, %t9
+bnei_else.27688:
+	lw	%ra, 1(%sp)
 	jr	%ra
-bnei_else.38553:
-	add	%ra, %zero, %t9
+bnei_else.27633:
+	jr	%ra
+get_nvector_second.2966:
+	flw	%f1, 138(%zero)
+	lw	%a0, 5(%v0)
+	flw	%f0, 0(%a0)
+	fsub	%f19, %f1, %f0
+	flw	%f1, 139(%zero)
+	lw	%a0, 5(%v0)
+	flw	%f0, 1(%a0)
+	fsub	%f17, %f1, %f0
+	flw	%f1, 140(%zero)
+	lw	%a0, 5(%v0)
+	flw	%f0, 2(%a0)
+	fsub	%f20, %f1, %f0
+	lw	%a0, 4(%v0)
+	flw	%f0, 0(%a0)
+	fmul	%f21, %f19, %f0
+	lw	%a0, 4(%v0)
+	flw	%f0, 1(%a0)
+	fmul	%f2, %f17, %f0
+	lw	%a0, 4(%v0)
+	flw	%f0, 2(%a0)
+	fmul	%f16, %f20, %f0
+	lw	%a0, 3(%v0)
+	beqi	%a0, 0, bnei_else.27756
+	lw	%a0, 9(%v0)
+	flw	%f0, 2(%a0)
+	fmul	%f1, %f17, %f0
+	lw	%a0, 9(%v0)
+	flw	%f0, 1(%a0)
+	fmul	%f0, %f20, %f0
+	fadd	%f0, %f1, %f0
+	flw	%f18, 473(%zero)
+	fmul	%f0, %f0, %f18
+	fadd	%f0, %f21, %f0
+	fsw	%f0, 142(%zero)
+	lw	%a0, 9(%v0)
+	flw	%f0, 2(%a0)
+	fmul	%f1, %f19, %f0
+	lw	%a0, 9(%v0)
+	flw	%f0, 0(%a0)
+	fmul	%f0, %f20, %f0
+	fadd	%f0, %f1, %f0
+	fmul	%f0, %f0, %f18
+	fadd	%f0, %f2, %f0
+	fsw	%f0, 143(%zero)
+	lw	%a0, 9(%v0)
+	flw	%f0, 1(%a0)
+	fmul	%f1, %f19, %f0
+	lw	%a0, 9(%v0)
+	flw	%f0, 0(%a0)
+	fmul	%f0, %f17, %f0
+	fadd	%f0, %f1, %f0
+	fmul	%f0, %f0, %f18
+	fadd	%f0, %f16, %f0
+	fsw	%f0, 144(%zero)
+	j	bnei_cont.27757
+bnei_else.27756:
+	fsw	%f21, 142(%zero)
+	fsw	%f2, 143(%zero)
+	fsw	%f16, 144(%zero)
+bnei_cont.27757:
+	lw	%a1, 6(%v0)
+	flw	%f18, 142(%zero)
+	fmul	%f1, %f18, %f18
+	flw	%f17, 143(%zero)
+	fmul	%f0, %f17, %f17
+	fadd	%f1, %f1, %f0
+	flw	%f16, 144(%zero)
+	fmul	%f0, %f16, %f16
+	fadd	%f0, %f1, %f0
+	fsqrt	%f1, %f0
+	fbne	%f1, %fzero, fbeq_else.27758
+	add	%a0, %zero, %k1
+	j	fbeq_cont.27759
+fbeq_else.27758:
+	add	%a0, %zero, %zero
+fbeq_cont.27759:
+	beqi	%a0, 0, bnei_else.27760
+	fmov	%f0, %f30
+	j	bnei_cont.27761
+bnei_else.27760:
+	beqi	%a1, 0, bnei_else.27762
+	flw	%f0, 458(%zero)
+	fdiv	%f0, %f0, %f1
+	j	bnei_cont.27763
+bnei_else.27762:
+	fdiv	%f0, %f30, %f1
+bnei_cont.27763:
+bnei_cont.27761:
+	fmul	%f1, %f18, %f0
+	fsw	%f1, 142(%zero)
+	fmul	%f1, %f17, %f0
+	fsw	%f1, 143(%zero)
+	fmul	%f0, %f16, %f0
+	fsw	%f0, 144(%zero)
 	jr	%ra
 utexture.2971:
 	add	%a0, %zero, %ra
@@ -9005,13 +8477,13 @@ utexture.2971:
 	lw	%a1, 8(%v0)
 	flw	%f0, 2(%a1)
 	fsw	%f0, 147(%zero)
-	beqi	%a2, 1, bnei_else.38969
-	beqi	%a2, 2, bnei_else.38970
-	beqi	%a2, 3, bnei_else.38971
-	beqi	%a2, 4, bnei_else.38972
+	beqi	%a2, 1, bnei_else.27991
+	beqi	%a2, 2, bnei_else.27992
+	beqi	%a2, 3, bnei_else.27993
+	beqi	%a2, 4, bnei_else.27994
 	add	%ra, %zero, %a0
 	jr	%ra
-bnei_else.38972:
+bnei_else.27994:
 	flw	%f1, 0(%v1)
 	lw	%a1, 5(%v0)
 	flw	%f0, 0(%a1)
@@ -9032,65 +8504,65 @@ bnei_else.38972:
 	fmul	%f0, %f18, %f18
 	fadd	%f17, %f1, %f0
 	fabs	%f0, %f19
-	flw	%f16, 464(%zero)
-	fblt	%f0, %f16, fbgt_else.38974
+	flw	%f16, 454(%zero)
+	fblt	%f0, %f16, fbgt_else.27996
 	add	%a1, %zero, %zero
-	j	fbgt_cont.38975
-fbgt_else.38974:
+	j	fbgt_cont.27997
+fbgt_else.27996:
 	add	%a1, %zero, %k1
-fbgt_cont.38975:
-	beqi	%a1, 0, bnei_else.38976
-	flw	%f1, 463(%zero)
-	j	bnei_cont.38977
-bnei_else.38976:
+fbgt_cont.27997:
+	beqi	%a1, 0, bnei_else.27998
+	flw	%f1, 453(%zero)
+	j	bnei_cont.27999
+bnei_else.27998:
 	fdiv	%f0, %f18, %f19
 	fabs	%f2, %f0
-	fblt	%f2, %fzero, fbgt_else.38978
+	fblt	%f2, %fzero, fbgt_else.28000
 	add	%a1, %zero, %k1
-	j	fbgt_cont.38979
-fbgt_else.38978:
+	j	fbgt_cont.28001
+fbgt_else.28000:
 	add	%a1, %zero, %zero
-fbgt_cont.38979:
+fbgt_cont.28001:
 	fabs	%f19, %f2
+	flw	%f0, 469(%zero)
+	fblt	%f19, %f0, fbgt_else.28002
 	flw	%f0, 462(%zero)
-	fblt	%f19, %f0, fbgt_else.38980
-	flw	%f0, 455(%zero)
-	fblt	%f19, %f0, fbgt_else.38982
+	fblt	%f19, %f0, fbgt_else.28004
 	flw	%f18, 479(%zero)
 	fdiv	%f20, %f30, %f19
 	fmul	%f21, %f20, %f20
 	fmul	%f2, %f21, %f21
 	fmul	%f19, %f2, %f2
-	flw	%f0, 461(%zero)
+	flw	%f0, 468(%zero)
 	fmul	%f0, %f0, %f20
 	fmul	%f0, %f0, %f21
 	fsub	%f1, %f20, %f0
-	flw	%f0, 460(%zero)
+	flw	%f0, 467(%zero)
 	fmul	%f0, %f0, %f20
 	fmul	%f0, %f0, %f2
 	fadd	%f1, %f1, %f0
-	flw	%f0, 459(%zero)
+	flw	%f0, 466(%zero)
 	fmul	%f0, %f0, %f20
 	fmul	%f0, %f0, %f21
 	fmul	%f0, %f0, %f2
 	fsub	%f1, %f1, %f0
-	flw	%f0, 458(%zero)
+	flw	%f0, 465(%zero)
 	fmul	%f0, %f0, %f20
 	fmul	%f0, %f0, %f19
 	fadd	%f1, %f1, %f0
-	flw	%f0, 457(%zero)
+	flw	%f0, 464(%zero)
 	fmul	%f0, %f0, %f20
 	fmul	%f0, %f0, %f21
 	fmul	%f0, %f0, %f19
 	fsub	%f1, %f1, %f0
-	flw	%f0, 456(%zero)
+	flw	%f0, 463(%zero)
 	fmul	%f0, %f0, %f20
 	fmul	%f0, %f0, %f2
 	fmul	%f0, %f0, %f19
 	fadd	%f0, %f1, %f0
 	fsub	%f0, %f18, %f0
-	j	fbgt_cont.38983
-fbgt_else.38982:
+	j	fbgt_cont.28005
+fbgt_else.28004:
 	flw	%f18, 478(%zero)
 	fsub	%f1, %f19, %f30
 	fadd	%f0, %f19, %f30
@@ -9098,78 +8570,78 @@ fbgt_else.38982:
 	fmul	%f21, %f20, %f20
 	fmul	%f2, %f21, %f21
 	fmul	%f19, %f2, %f2
-	flw	%f0, 461(%zero)
+	flw	%f0, 468(%zero)
 	fmul	%f0, %f0, %f20
 	fmul	%f0, %f0, %f21
 	fsub	%f1, %f20, %f0
-	flw	%f0, 460(%zero)
+	flw	%f0, 467(%zero)
 	fmul	%f0, %f0, %f20
 	fmul	%f0, %f0, %f2
 	fadd	%f1, %f1, %f0
-	flw	%f0, 459(%zero)
+	flw	%f0, 466(%zero)
 	fmul	%f0, %f0, %f20
 	fmul	%f0, %f0, %f21
 	fmul	%f0, %f0, %f2
 	fsub	%f1, %f1, %f0
-	flw	%f0, 458(%zero)
+	flw	%f0, 465(%zero)
 	fmul	%f0, %f0, %f20
 	fmul	%f0, %f0, %f19
 	fadd	%f1, %f1, %f0
-	flw	%f0, 457(%zero)
+	flw	%f0, 464(%zero)
 	fmul	%f0, %f0, %f20
 	fmul	%f0, %f0, %f21
 	fmul	%f0, %f0, %f19
 	fsub	%f1, %f1, %f0
-	flw	%f0, 456(%zero)
+	flw	%f0, 463(%zero)
 	fmul	%f0, %f0, %f20
 	fmul	%f0, %f0, %f2
 	fmul	%f0, %f0, %f19
 	fadd	%f0, %f1, %f0
 	fadd	%f0, %f18, %f0
-fbgt_cont.38983:
-	beqi	%a1, 0, bnei_else.38984
-	j	fbgt_cont.38981
-bnei_else.38984:
+fbgt_cont.28005:
+	beqi	%a1, 0, bnei_else.28006
+	j	fbgt_cont.28003
+bnei_else.28006:
 	fneg	%f0, %f0
-bnei_cont.38985:
-	j	fbgt_cont.38981
-fbgt_else.38980:
+bnei_cont.28007:
+	j	fbgt_cont.28003
+fbgt_else.28002:
 	fmul	%f20, %f2, %f2
 	fmul	%f19, %f20, %f20
 	fmul	%f18, %f19, %f19
-	flw	%f0, 461(%zero)
+	flw	%f0, 468(%zero)
 	fmul	%f0, %f0, %f2
 	fmul	%f0, %f0, %f20
 	fsub	%f1, %f2, %f0
-	flw	%f0, 460(%zero)
+	flw	%f0, 467(%zero)
 	fmul	%f0, %f0, %f2
 	fmul	%f0, %f0, %f19
 	fadd	%f1, %f1, %f0
-	flw	%f0, 459(%zero)
+	flw	%f0, 466(%zero)
 	fmul	%f0, %f0, %f2
 	fmul	%f0, %f0, %f20
 	fmul	%f0, %f0, %f19
 	fsub	%f1, %f1, %f0
-	flw	%f0, 458(%zero)
+	flw	%f0, 465(%zero)
 	fmul	%f0, %f0, %f2
 	fmul	%f0, %f0, %f18
 	fadd	%f1, %f1, %f0
-	flw	%f0, 457(%zero)
+	flw	%f0, 464(%zero)
 	fmul	%f0, %f0, %f2
 	fmul	%f0, %f0, %f20
 	fmul	%f0, %f0, %f18
 	fsub	%f1, %f1, %f0
-	flw	%f0, 456(%zero)
+	flw	%f0, 463(%zero)
 	fmul	%f0, %f0, %f2
 	fmul	%f0, %f0, %f19
 	fmul	%f0, %f0, %f18
 	fadd	%f0, %f1, %f0
-fbgt_cont.38981:
-	flw	%f1, 454(%zero)
+fbgt_cont.28003:
+	flw	%f1, 452(%zero)
 	fmul	%f1, %f0, %f1
-	flw	%f0, 453(%zero)
+	flw	%f0, 451(%zero)
 	fdiv	%f1, %f1, %f0
-bnei_cont.38977:
+bnei_cont.27999:
 	floor	%f0, %f1
 	fsub	%f18, %f1, %f0
 	flw	%f1, 1(%v1)
@@ -9181,64 +8653,64 @@ bnei_cont.38977:
 	fsqrt	%f0, %f0
 	fmul	%f1, %f1, %f0
 	fabs	%f0, %f17
-	fblt	%f0, %f16, fbgt_else.38986
+	fblt	%f0, %f16, fbgt_else.28008
 	add	%a1, %zero, %zero
-	j	fbgt_cont.38987
-fbgt_else.38986:
+	j	fbgt_cont.28009
+fbgt_else.28008:
 	add	%a1, %zero, %k1
-fbgt_cont.38987:
-	beqi	%a1, 0, bnei_else.38988
-	flw	%f1, 463(%zero)
-	j	bnei_cont.38989
-bnei_else.38988:
+fbgt_cont.28009:
+	beqi	%a1, 0, bnei_else.28010
+	flw	%f1, 453(%zero)
+	j	bnei_cont.28011
+bnei_else.28010:
 	fdiv	%f0, %f1, %f17
 	fabs	%f19, %f0
-	fblt	%f19, %fzero, fbgt_else.38990
+	fblt	%f19, %fzero, fbgt_else.28012
 	add	%a1, %zero, %k1
-	j	fbgt_cont.38991
-fbgt_else.38990:
+	j	fbgt_cont.28013
+fbgt_else.28012:
 	add	%a1, %zero, %zero
-fbgt_cont.38991:
+fbgt_cont.28013:
 	fabs	%f17, %f19
+	flw	%f0, 469(%zero)
+	fblt	%f17, %f0, fbgt_else.28014
 	flw	%f0, 462(%zero)
-	fblt	%f17, %f0, fbgt_else.38992
-	flw	%f0, 455(%zero)
-	fblt	%f17, %f0, fbgt_else.38994
+	fblt	%f17, %f0, fbgt_else.28016
 	flw	%f16, 479(%zero)
 	fdiv	%f2, %f30, %f17
 	fmul	%f20, %f2, %f2
 	fmul	%f19, %f20, %f20
 	fmul	%f17, %f19, %f19
-	flw	%f0, 461(%zero)
+	flw	%f0, 468(%zero)
 	fmul	%f0, %f0, %f2
 	fmul	%f0, %f0, %f20
 	fsub	%f1, %f2, %f0
-	flw	%f0, 460(%zero)
+	flw	%f0, 467(%zero)
 	fmul	%f0, %f0, %f2
 	fmul	%f0, %f0, %f19
 	fadd	%f1, %f1, %f0
-	flw	%f0, 459(%zero)
+	flw	%f0, 466(%zero)
 	fmul	%f0, %f0, %f2
 	fmul	%f0, %f0, %f20
 	fmul	%f0, %f0, %f19
 	fsub	%f1, %f1, %f0
-	flw	%f0, 458(%zero)
+	flw	%f0, 465(%zero)
 	fmul	%f0, %f0, %f2
 	fmul	%f0, %f0, %f17
 	fadd	%f1, %f1, %f0
-	flw	%f0, 457(%zero)
+	flw	%f0, 464(%zero)
 	fmul	%f0, %f0, %f2
 	fmul	%f0, %f0, %f20
 	fmul	%f0, %f0, %f17
 	fsub	%f1, %f1, %f0
-	flw	%f0, 456(%zero)
+	flw	%f0, 463(%zero)
 	fmul	%f0, %f0, %f2
 	fmul	%f0, %f0, %f19
 	fmul	%f0, %f0, %f17
 	fadd	%f0, %f1, %f0
 	fsub	%f0, %f16, %f0
-	j	fbgt_cont.38995
-fbgt_else.38994:
+	j	fbgt_cont.28017
+fbgt_else.28016:
 	flw	%f16, 478(%zero)
 	fsub	%f1, %f17, %f30
 	fadd	%f0, %f17, %f30
@@ -9246,81 +8718,81 @@ fbgt_else.38994:
 	fmul	%f20, %f2, %f2
 	fmul	%f19, %f20, %f20
 	fmul	%f17, %f19, %f19
-	flw	%f0, 461(%zero)
+	flw	%f0, 468(%zero)
 	fmul	%f0, %f0, %f2
 	fmul	%f0, %f0, %f20
 	fsub	%f1, %f2, %f0
-	flw	%f0, 460(%zero)
+	flw	%f0, 467(%zero)
 	fmul	%f0, %f0, %f2
 	fmul	%f0, %f0, %f19
 	fadd	%f1, %f1, %f0
-	flw	%f0, 459(%zero)
+	flw	%f0, 466(%zero)
 	fmul	%f0, %f0, %f2
 	fmul	%f0, %f0, %f20
 	fmul	%f0, %f0, %f19
 	fsub	%f1, %f1, %f0
-	flw	%f0, 458(%zero)
+	flw	%f0, 465(%zero)
 	fmul	%f0, %f0, %f2
 	fmul	%f0, %f0, %f17
 	fadd	%f1, %f1, %f0
-	flw	%f0, 457(%zero)
+	flw	%f0, 464(%zero)
 	fmul	%f0, %f0, %f2
 	fmul	%f0, %f0, %f20
 	fmul	%f0, %f0, %f17
 	fsub	%f1, %f1, %f0
-	flw	%f0, 456(%zero)
+	flw	%f0, 463(%zero)
 	fmul	%f0, %f0, %f2
 	fmul	%f0, %f0, %f19
 	fmul	%f0, %f0, %f17
 	fadd	%f0, %f1, %f0
 	fadd	%f0, %f16, %f0
-fbgt_cont.38995:
-	beqi	%a1, 0, bnei_else.38996
-	j	fbgt_cont.38993
-bnei_else.38996:
+fbgt_cont.28017:
+	beqi	%a1, 0, bnei_else.28018
+	j	fbgt_cont.28015
+bnei_else.28018:
 	fneg	%f0, %f0
-bnei_cont.38997:
-	j	fbgt_cont.38993
-fbgt_else.38992:
+bnei_cont.28019:
+	j	fbgt_cont.28015
+fbgt_else.28014:
 	fmul	%f2, %f19, %f19
 	fmul	%f17, %f2, %f2
 	fmul	%f16, %f17, %f17
-	flw	%f0, 461(%zero)
+	flw	%f0, 468(%zero)
 	fmul	%f0, %f0, %f19
 	fmul	%f0, %f0, %f2
 	fsub	%f1, %f19, %f0
-	flw	%f0, 460(%zero)
+	flw	%f0, 467(%zero)
 	fmul	%f0, %f0, %f19
 	fmul	%f0, %f0, %f17
 	fadd	%f1, %f1, %f0
-	flw	%f0, 459(%zero)
+	flw	%f0, 466(%zero)
 	fmul	%f0, %f0, %f19
 	fmul	%f0, %f0, %f2
 	fmul	%f0, %f0, %f17
 	fsub	%f1, %f1, %f0
-	flw	%f0, 458(%zero)
+	flw	%f0, 465(%zero)
 	fmul	%f0, %f0, %f19
 	fmul	%f0, %f0, %f16
 	fadd	%f1, %f1, %f0
-	flw	%f0, 457(%zero)
+	flw	%f0, 464(%zero)
 	fmul	%f0, %f0, %f19
 	fmul	%f0, %f0, %f2
 	fmul	%f0, %f0, %f16
 	fsub	%f1, %f1, %f0
-	flw	%f0, 456(%zero)
+	flw	%f0, 463(%zero)
 	fmul	%f0, %f0, %f19
 	fmul	%f0, %f0, %f17
 	fmul	%f0, %f0, %f16
 	fadd	%f0, %f1, %f0
-fbgt_cont.38993:
-	flw	%f1, 454(%zero)
+fbgt_cont.28015:
+	flw	%f1, 452(%zero)
 	fmul	%f1, %f0, %f1
-	flw	%f0, 453(%zero)
+	flw	%f0, 451(%zero)
 	fdiv	%f1, %f1, %f0
-bnei_cont.38989:
+bnei_cont.28011:
 	floor	%f0, %f1
 	fsub	%f17, %f1, %f0
-	flw	%f1, 452(%zero)
+	flw	%f1, 450(%zero)
 	flw	%f16, 473(%zero)
 	fsub	%f0, %f16, %f18
 	fmul	%f0, %f0, %f0
@@ -9328,25 +8800,25 @@ bnei_cont.38989:
 	fsub	%f0, %f16, %f17
 	fmul	%f0, %f0, %f0
 	fsub	%f0, %f1, %f0
-	fblt	%f0, %fzero, fbgt_else.38998
+	fblt	%f0, %fzero, fbgt_else.28020
 	add	%a1, %zero, %zero
-	j	fbgt_cont.38999
-fbgt_else.38998:
+	j	fbgt_cont.28021
+fbgt_else.28020:
 	add	%a1, %zero, %k1
-fbgt_cont.38999:
-	beqi	%a1, 0, bnei_else.39000
+fbgt_cont.28021:
+	beqi	%a1, 0, bnei_else.28022
 	fmov	%f0, %fzero
-	j	bnei_cont.39001
-bnei_else.39000:
-bnei_cont.39001:
-	flw	%f1, 451(%zero)
+	j	bnei_cont.28023
+bnei_else.28022:
+bnei_cont.28023:
+	flw	%f1, 449(%zero)
 	fmul	%f1, %f1, %f0
-	flw	%f0, 450(%zero)
+	flw	%f0, 448(%zero)
 	fdiv	%f0, %f1, %f0
 	add	%ra, %zero, %a0
 	fsw	%f0, 147(%zero)
 	jr	%ra
-bnei_else.38971:
+bnei_else.27993:
 	flw	%f1, 0(%v1)
 	lw	%a1, 5(%v0)
 	flw	%f0, 0(%a1)
@@ -9359,131 +8831,131 @@ bnei_else.38971:
 	fmul	%f0, %f0, %f0
 	fadd	%f0, %f1, %f0
 	fsqrt	%f1, %f0
-	flw	%f0, 449(%zero)
+	flw	%f0, 447(%zero)
 	fdiv	%f1, %f1, %f0
 	floor	%f0, %f1
 	fsub	%f1, %f1, %f0
-	flw	%f0, 453(%zero)
+	flw	%f0, 451(%zero)
 	fmul	%f0, %f1, %f0
-	flw	%f18, 494(%zero)
+	flw	%f18, 495(%zero)
 	fabs	%f17, %f0
-	flw	%f2, 493(%zero)
-	fblt	%f17, %f2, fbgt_else.39003
+	flw	%f2, 494(%zero)
+	fblt	%f17, %f2, fbgt_else.28025
+	flw	%f1, 493(%zero)
+	fblt	%f17, %f1, fbgt_cont.28026
 	flw	%f1, 492(%zero)
-	fblt	%f17, %f1, fbgt_cont.39004
+	fblt	%f17, %f1, fbgt_cont.28026
 	flw	%f1, 491(%zero)
-	fblt	%f17, %f1, fbgt_cont.39004
+	fblt	%f17, %f1, fbgt_cont.28026
 	flw	%f1, 490(%zero)
-	fblt	%f17, %f1, fbgt_cont.39004
+	fblt	%f17, %f1, fbgt_cont.28026
 	flw	%f1, 489(%zero)
-	fblt	%f17, %f1, fbgt_cont.39004
+	fblt	%f17, %f1, fbgt_cont.28026
 	flw	%f1, 488(%zero)
-	fblt	%f17, %f1, fbgt_cont.39004
+	fblt	%f17, %f1, fbgt_cont.28026
 	flw	%f1, 487(%zero)
-	fblt	%f17, %f1, fbgt_cont.39004
+	fblt	%f17, %f1, fbgt_cont.28026
 	flw	%f1, 486(%zero)
-	fblt	%f17, %f1, fbgt_cont.39004
+	fblt	%f17, %f1, fbgt_cont.28026
 	flw	%f1, 485(%zero)
-	fblt	%f17, %f1, fbgt_cont.39004
+	fblt	%f17, %f1, fbgt_cont.28026
 	flw	%f1, 484(%zero)
-	fblt	%f17, %f1, fbgt_cont.39004
+	fblt	%f17, %f1, fbgt_cont.28026
 	flw	%f1, 483(%zero)
-	fblt	%f17, %f1, fbgt_cont.39004
+	fblt	%f17, %f1, fbgt_cont.28026
 	flw	%f1, 482(%zero)
-	fblt	%f17, %f1, fbgt_cont.39004
+	fblt	%f17, %f1, fbgt_cont.28026
 	flw	%f1, 481(%zero)
-	fblt	%f17, %f1, fbgt_cont.39004
-	flw	%f1, 480(%zero)
 	fmov	%f0, %f17
 	jal	reduction_2pi_sub1.2626
 	fmov	%f1, %f0
-	j	fbgt_cont.39004
-fbgt_else.39027:
-fbgt_cont.39028:
-	j	fbgt_cont.39004
-fbgt_else.39025:
-fbgt_cont.39026:
-	j	fbgt_cont.39004
-fbgt_else.39023:
-fbgt_cont.39024:
-	j	fbgt_cont.39004
-fbgt_else.39021:
-fbgt_cont.39022:
-	j	fbgt_cont.39004
-fbgt_else.39019:
-fbgt_cont.39020:
-	j	fbgt_cont.39004
-fbgt_else.39017:
-fbgt_cont.39018:
-	j	fbgt_cont.39004
-fbgt_else.39015:
-fbgt_cont.39016:
-	j	fbgt_cont.39004
-fbgt_else.39013:
-fbgt_cont.39014:
-	j	fbgt_cont.39004
-fbgt_else.39011:
-fbgt_cont.39012:
-	j	fbgt_cont.39004
-fbgt_else.39009:
-fbgt_cont.39010:
-	j	fbgt_cont.39004
-fbgt_else.39007:
-fbgt_cont.39008:
-	j	fbgt_cont.39004
-fbgt_else.39005:
-fbgt_cont.39006:
-	j	fbgt_cont.39004
-fbgt_else.39003:
+	j	fbgt_cont.28026
+fbgt_else.28049:
+fbgt_cont.28050:
+	j	fbgt_cont.28026
+fbgt_else.28047:
+fbgt_cont.28048:
+	j	fbgt_cont.28026
+fbgt_else.28045:
+fbgt_cont.28046:
+	j	fbgt_cont.28026
+fbgt_else.28043:
+fbgt_cont.28044:
+	j	fbgt_cont.28026
+fbgt_else.28041:
+fbgt_cont.28042:
+	j	fbgt_cont.28026
+fbgt_else.28039:
+fbgt_cont.28040:
+	j	fbgt_cont.28026
+fbgt_else.28037:
+fbgt_cont.28038:
+	j	fbgt_cont.28026
+fbgt_else.28035:
+fbgt_cont.28036:
+	j	fbgt_cont.28026
+fbgt_else.28033:
+fbgt_cont.28034:
+	j	fbgt_cont.28026
+fbgt_else.28031:
+fbgt_cont.28032:
+	j	fbgt_cont.28026
+fbgt_else.28029:
+fbgt_cont.28030:
+	j	fbgt_cont.28026
+fbgt_else.28027:
+fbgt_cont.28028:
+	j	fbgt_cont.28026
+fbgt_else.28025:
 	fmov	%f1, %f2
-fbgt_cont.39004:
-	fblt	%f17, %f2, fbgt_else.39029
-	fblt	%f17, %f1, fbgt_else.39031
+fbgt_cont.28026:
+	fblt	%f17, %f2, fbgt_else.28051
+	fblt	%f17, %f1, fbgt_else.28053
 	fsub	%f0, %f17, %f1
-	flw	%f16, 495(%zero)
+	flw	%f16, 496(%zero)
 	fdiv	%f1, %f1, %f16
 	jal	reduction_2pi_sub2.2629
 	fmov	%f17, %f0
-	j	fbgt_cont.39030
-fbgt_else.39031:
-	flw	%f0, 495(%zero)
+	j	fbgt_cont.28052
+fbgt_else.28053:
+	flw	%f0, 496(%zero)
 	fdiv	%f1, %f1, %f0
 	fmov	%f0, %f17
 	jal	reduction_2pi_sub2.2629
 	fmov	%f17, %f0
-fbgt_cont.39032:
-	j	fbgt_cont.39030
-fbgt_else.39029:
-fbgt_cont.39030:
-	fblt	%f17, %f18, fbgt_else.39033
+fbgt_cont.28054:
+	j	fbgt_cont.28052
+fbgt_else.28051:
+fbgt_cont.28052:
+	fblt	%f17, %f18, fbgt_else.28055
 	add	%a1, %zero, %zero
-	j	fbgt_cont.39034
-fbgt_else.39033:
+	j	fbgt_cont.28056
+fbgt_else.28055:
 	add	%a1, %zero, %k1
-fbgt_cont.39034:
-	fblt	%f17, %f18, fbgt_else.39035
+fbgt_cont.28056:
+	fblt	%f17, %f18, fbgt_else.28057
 	fsub	%f17, %f17, %f18
-	j	fbgt_cont.39036
-fbgt_else.39035:
-fbgt_cont.39036:
+	j	fbgt_cont.28058
+fbgt_else.28057:
+fbgt_cont.28058:
 	flw	%f1, 479(%zero)
-	fblt	%f17, %f1, fbgt_else.39037
-	beqi	%a1, 0, bnei_else.39039
+	fblt	%f17, %f1, fbgt_else.28059
+	beqi	%a1, 0, bnei_else.28061
 	add	%a1, %zero, %zero
-	j	fbgt_cont.39038
-bnei_else.39039:
+	j	fbgt_cont.28060
+bnei_else.28061:
 	add	%a1, %zero, %k1
-bnei_cont.39040:
-	j	fbgt_cont.39038
-fbgt_else.39037:
-fbgt_cont.39038:
-	fblt	%f17, %f1, fbgt_else.39041
+bnei_cont.28062:
+	j	fbgt_cont.28060
+fbgt_else.28059:
+fbgt_cont.28060:
+	fblt	%f17, %f1, fbgt_else.28063
 	fsub	%f17, %f18, %f17
-	j	fbgt_cont.39042
-fbgt_else.39041:
-fbgt_cont.39042:
+	j	fbgt_cont.28064
+fbgt_else.28063:
+fbgt_cont.28064:
 	flw	%f0, 478(%zero)
-	fblt	%f0, %f17, fbgt_else.39043
+	fblt	%f0, %f17, fbgt_else.28065
 	fmul	%f17, %f17, %f17
 	fmul	%f16, %f17, %f17
 	flw	%f0, 473(%zero)
@@ -9496,8 +8968,8 @@ fbgt_cont.39042:
 	fmul	%f0, %f0, %f17
 	fmul	%f0, %f0, %f16
 	fsub	%f0, %f1, %f0
-	j	fbgt_cont.39044
-fbgt_else.39043:
+	j	fbgt_cont.28066
+fbgt_else.28065:
 	fsub	%f18, %f1, %f17
 	fmul	%f17, %f18, %f18
 	fmul	%f16, %f17, %f17
@@ -9514,14 +8986,14 @@ fbgt_else.39043:
 	fmul	%f0, %f0, %f17
 	fmul	%f0, %f0, %f16
 	fsub	%f0, %f1, %f0
-fbgt_cont.39044:
-	beqi	%a1, 0, bnei_else.39045
-	j	bnei_cont.39046
-bnei_else.39045:
+fbgt_cont.28066:
+	beqi	%a1, 0, bnei_else.28067
+	j	bnei_cont.28068
+bnei_else.28067:
 	fneg	%f0, %f0
-bnei_cont.39046:
+bnei_cont.28068:
 	fmul	%f16, %f0, %f0
-	flw	%f1, 451(%zero)
+	flw	%f1, 449(%zero)
 	fmul	%f0, %f16, %f1
 	fsw	%f0, 146(%zero)
 	fsub	%f0, %f30, %f16
@@ -9529,129 +9001,129 @@ bnei_cont.39046:
 	add	%ra, %zero, %a0
 	fsw	%f0, 147(%zero)
 	jr	%ra
-bnei_else.38970:
+bnei_else.27992:
 	flw	%f1, 1(%v1)
-	flw	%f0, 448(%zero)
+	flw	%f0, 446(%zero)
 	fmul	%f0, %f1, %f0
-	flw	%f18, 494(%zero)
-	fblt	%f0, %fzero, fbgt_else.39048
+	flw	%f18, 495(%zero)
+	fblt	%f0, %fzero, fbgt_else.28070
 	add	%a1, %zero, %k1
-	j	fbgt_cont.39049
-fbgt_else.39048:
+	j	fbgt_cont.28071
+fbgt_else.28070:
 	add	%a1, %zero, %zero
-fbgt_cont.39049:
+fbgt_cont.28071:
 	fabs	%f17, %f0
-	flw	%f2, 493(%zero)
-	fblt	%f17, %f2, fbgt_else.39050
+	flw	%f2, 494(%zero)
+	fblt	%f17, %f2, fbgt_else.28072
+	flw	%f1, 493(%zero)
+	fblt	%f17, %f1, fbgt_cont.28073
 	flw	%f1, 492(%zero)
-	fblt	%f17, %f1, fbgt_cont.39051
+	fblt	%f17, %f1, fbgt_cont.28073
 	flw	%f1, 491(%zero)
-	fblt	%f17, %f1, fbgt_cont.39051
+	fblt	%f17, %f1, fbgt_cont.28073
 	flw	%f1, 490(%zero)
-	fblt	%f17, %f1, fbgt_cont.39051
+	fblt	%f17, %f1, fbgt_cont.28073
 	flw	%f1, 489(%zero)
-	fblt	%f17, %f1, fbgt_cont.39051
+	fblt	%f17, %f1, fbgt_cont.28073
 	flw	%f1, 488(%zero)
-	fblt	%f17, %f1, fbgt_cont.39051
+	fblt	%f17, %f1, fbgt_cont.28073
 	flw	%f1, 487(%zero)
-	fblt	%f17, %f1, fbgt_cont.39051
+	fblt	%f17, %f1, fbgt_cont.28073
 	flw	%f1, 486(%zero)
-	fblt	%f17, %f1, fbgt_cont.39051
+	fblt	%f17, %f1, fbgt_cont.28073
 	flw	%f1, 485(%zero)
-	fblt	%f17, %f1, fbgt_cont.39051
+	fblt	%f17, %f1, fbgt_cont.28073
 	flw	%f1, 484(%zero)
-	fblt	%f17, %f1, fbgt_cont.39051
+	fblt	%f17, %f1, fbgt_cont.28073
 	flw	%f1, 483(%zero)
-	fblt	%f17, %f1, fbgt_cont.39051
+	fblt	%f17, %f1, fbgt_cont.28073
 	flw	%f1, 482(%zero)
-	fblt	%f17, %f1, fbgt_cont.39051
+	fblt	%f17, %f1, fbgt_cont.28073
 	flw	%f1, 481(%zero)
-	fblt	%f17, %f1, fbgt_cont.39051
-	flw	%f1, 480(%zero)
 	fmov	%f0, %f17
 	jal	reduction_2pi_sub1.2626
 	fmov	%f1, %f0
-	j	fbgt_cont.39051
-fbgt_else.39074:
-fbgt_cont.39075:
-	j	fbgt_cont.39051
-fbgt_else.39072:
-fbgt_cont.39073:
-	j	fbgt_cont.39051
-fbgt_else.39070:
-fbgt_cont.39071:
-	j	fbgt_cont.39051
-fbgt_else.39068:
-fbgt_cont.39069:
-	j	fbgt_cont.39051
-fbgt_else.39066:
-fbgt_cont.39067:
-	j	fbgt_cont.39051
-fbgt_else.39064:
-fbgt_cont.39065:
-	j	fbgt_cont.39051
-fbgt_else.39062:
-fbgt_cont.39063:
-	j	fbgt_cont.39051
-fbgt_else.39060:
-fbgt_cont.39061:
-	j	fbgt_cont.39051
-fbgt_else.39058:
-fbgt_cont.39059:
-	j	fbgt_cont.39051
-fbgt_else.39056:
-fbgt_cont.39057:
-	j	fbgt_cont.39051
-fbgt_else.39054:
-fbgt_cont.39055:
-	j	fbgt_cont.39051
-fbgt_else.39052:
-fbgt_cont.39053:
-	j	fbgt_cont.39051
-fbgt_else.39050:
+	j	fbgt_cont.28073
+fbgt_else.28096:
+fbgt_cont.28097:
+	j	fbgt_cont.28073
+fbgt_else.28094:
+fbgt_cont.28095:
+	j	fbgt_cont.28073
+fbgt_else.28092:
+fbgt_cont.28093:
+	j	fbgt_cont.28073
+fbgt_else.28090:
+fbgt_cont.28091:
+	j	fbgt_cont.28073
+fbgt_else.28088:
+fbgt_cont.28089:
+	j	fbgt_cont.28073
+fbgt_else.28086:
+fbgt_cont.28087:
+	j	fbgt_cont.28073
+fbgt_else.28084:
+fbgt_cont.28085:
+	j	fbgt_cont.28073
+fbgt_else.28082:
+fbgt_cont.28083:
+	j	fbgt_cont.28073
+fbgt_else.28080:
+fbgt_cont.28081:
+	j	fbgt_cont.28073
+fbgt_else.28078:
+fbgt_cont.28079:
+	j	fbgt_cont.28073
+fbgt_else.28076:
+fbgt_cont.28077:
+	j	fbgt_cont.28073
+fbgt_else.28074:
+fbgt_cont.28075:
+	j	fbgt_cont.28073
+fbgt_else.28072:
 	fmov	%f1, %f2
-fbgt_cont.39051:
-	fblt	%f17, %f2, fbgt_else.39076
-	fblt	%f17, %f1, fbgt_else.39078
+fbgt_cont.28073:
+	fblt	%f17, %f2, fbgt_else.28098
+	fblt	%f17, %f1, fbgt_else.28100
 	fsub	%f0, %f17, %f1
-	flw	%f16, 495(%zero)
+	flw	%f16, 496(%zero)
 	fdiv	%f1, %f1, %f16
 	jal	reduction_2pi_sub2.2629
 	fmov	%f17, %f0
-	j	fbgt_cont.39077
-fbgt_else.39078:
-	flw	%f0, 495(%zero)
+	j	fbgt_cont.28099
+fbgt_else.28100:
+	flw	%f0, 496(%zero)
 	fdiv	%f1, %f1, %f0
 	fmov	%f0, %f17
 	jal	reduction_2pi_sub2.2629
 	fmov	%f17, %f0
-fbgt_cont.39079:
-	j	fbgt_cont.39077
-fbgt_else.39076:
-fbgt_cont.39077:
-	fblt	%f17, %f18, fbgt_else.39080
-	beqi	%a1, 0, bnei_else.39082
+fbgt_cont.28101:
+	j	fbgt_cont.28099
+fbgt_else.28098:
+fbgt_cont.28099:
+	fblt	%f17, %f18, fbgt_else.28102
+	beqi	%a1, 0, bnei_else.28104
 	add	%a1, %zero, %zero
-	j	fbgt_cont.39081
-bnei_else.39082:
+	j	fbgt_cont.28103
+bnei_else.28104:
 	add	%a1, %zero, %k1
-bnei_cont.39083:
-	j	fbgt_cont.39081
-fbgt_else.39080:
-fbgt_cont.39081:
-	fblt	%f17, %f18, fbgt_else.39084
+bnei_cont.28105:
+	j	fbgt_cont.28103
+fbgt_else.28102:
+fbgt_cont.28103:
+	fblt	%f17, %f18, fbgt_else.28106
 	fsub	%f17, %f17, %f18
-	j	fbgt_cont.39085
-fbgt_else.39084:
-fbgt_cont.39085:
+	j	fbgt_cont.28107
+fbgt_else.28106:
+fbgt_cont.28107:
 	flw	%f1, 479(%zero)
-	fblt	%f17, %f1, fbgt_else.39086
+	fblt	%f17, %f1, fbgt_else.28108
 	fsub	%f17, %f18, %f17
-	j	fbgt_cont.39087
-fbgt_else.39086:
-fbgt_cont.39087:
+	j	fbgt_cont.28109
+fbgt_else.28108:
+fbgt_cont.28109:
 	flw	%f0, 478(%zero)
-	fblt	%f0, %f17, fbgt_else.39088
+	fblt	%f0, %f17, fbgt_else.28110
 	fmul	%f18, %f17, %f17
 	fmul	%f16, %f18, %f18
 	flw	%f0, 477(%zero)
@@ -9667,8 +9139,8 @@ fbgt_cont.39087:
 	fmul	%f0, %f0, %f18
 	fmul	%f0, %f0, %f16
 	fsub	%f0, %f1, %f0
-	j	fbgt_cont.39089
-fbgt_else.39088:
+	j	fbgt_cont.28111
+fbgt_else.28110:
 	fsub	%f0, %f1, %f17
 	fmul	%f17, %f0, %f0
 	fmul	%f16, %f17, %f17
@@ -9682,14 +9154,14 @@ fbgt_else.39088:
 	fmul	%f0, %f0, %f17
 	fmul	%f0, %f0, %f16
 	fsub	%f0, %f1, %f0
-fbgt_cont.39089:
-	beqi	%a1, 0, bnei_else.39090
-	j	bnei_cont.39091
-bnei_else.39090:
+fbgt_cont.28111:
+	beqi	%a1, 0, bnei_else.28112
+	j	bnei_cont.28113
+bnei_else.28112:
 	fneg	%f0, %f0
-bnei_cont.39091:
+bnei_cont.28113:
 	fmul	%f16, %f0, %f0
-	flw	%f1, 451(%zero)
+	flw	%f1, 449(%zero)
 	fmul	%f0, %f1, %f16
 	fsw	%f0, 145(%zero)
 	fsub	%f0, %f30, %f16
@@ -9697,24 +9169,24 @@ bnei_cont.39091:
 	add	%ra, %zero, %a0
 	fsw	%f0, 146(%zero)
 	jr	%ra
-bnei_else.38969:
+bnei_else.27991:
 	flw	%f1, 0(%v1)
 	lw	%a1, 5(%v0)
 	flw	%f0, 0(%a1)
 	fsub	%f1, %f1, %f0
-	flw	%f18, 447(%zero)
+	flw	%f18, 445(%zero)
 	fmul	%f0, %f1, %f18
 	floor	%f0, %f0
-	flw	%f17, 446(%zero)
+	flw	%f17, 444(%zero)
 	fmul	%f0, %f0, %f17
 	fsub	%f0, %f1, %f0
-	flw	%f16, 449(%zero)
-	fblt	%f0, %f16, fbgt_else.39093
+	flw	%f16, 447(%zero)
+	fblt	%f0, %f16, fbgt_else.28115
 	add	%a1, %zero, %zero
-	j	fbgt_cont.39094
-fbgt_else.39093:
+	j	fbgt_cont.28116
+fbgt_else.28115:
 	add	%a1, %zero, %k1
-fbgt_cont.39094:
+fbgt_cont.28116:
 	flw	%f1, 2(%v1)
 	lw	%a2, 5(%v0)
 	flw	%f0, 2(%a2)
@@ -9723,28 +9195,28 @@ fbgt_cont.39094:
 	floor	%f0, %f0
 	fmul	%f0, %f0, %f17
 	fsub	%f0, %f1, %f0
-	fblt	%f0, %f16, fbgt_else.39095
+	fblt	%f0, %f16, fbgt_else.28117
 	add	%a2, %zero, %zero
-	j	fbgt_cont.39096
-fbgt_else.39095:
+	j	fbgt_cont.28118
+fbgt_else.28117:
 	add	%a2, %zero, %k1
-fbgt_cont.39096:
-	beqi	%a1, 0, bnei_else.39097
-	beqi	%a2, 0, bnei_else.39099
-	flw	%f0, 451(%zero)
-	j	bnei_cont.39098
-bnei_else.39099:
+fbgt_cont.28118:
+	beqi	%a1, 0, bnei_else.28119
+	beqi	%a2, 0, bnei_else.28121
+	flw	%f0, 449(%zero)
+	j	bnei_cont.28120
+bnei_else.28121:
 	fmov	%f0, %fzero
-bnei_cont.39100:
-	j	bnei_cont.39098
-bnei_else.39097:
-	beqi	%a2, 0, bnei_else.39101
+bnei_cont.28122:
+	j	bnei_cont.28120
+bnei_else.28119:
+	beqi	%a2, 0, bnei_else.28123
 	fmov	%f0, %fzero
-	j	bnei_cont.39102
-bnei_else.39101:
-	flw	%f0, 451(%zero)
-bnei_cont.39102:
-bnei_cont.39098:
+	j	bnei_cont.28124
+bnei_else.28123:
+	flw	%f0, 449(%zero)
+bnei_cont.28124:
+bnei_cont.28120:
 	add	%ra, %zero, %a0
 	fsw	%f0, 146(%zero)
 	jr	%ra
@@ -9757,10 +9229,10 @@ trace_reflections.2978:
 	sw	%t1, 3(%sp)
 	sw	%t0, 4(%sp)
 	sw	%ra, 5(%sp)
-	blti	%v0, 0, bgti_else.39203
+	blti	%v0, 0, bgti_else.28227
 	lw	%t2, 254(%v0)
 	lw	%t0, 1(%t2)
-	flw	%f0, 445(%zero)
+	flw	%f0, 443(%zero)
 	fsw	%f0, 137(%zero)
 	lw	%t1, 134(%zero)
 	addi	%a0, %t0, 0
@@ -9770,40 +9242,40 @@ trace_reflections.2978:
 	jal	trace_or_matrix_fast.2956
 	addi	%sp, %sp, -6
 	flw	%f1, 137(%zero)
-	flw	%f0, 465(%zero)
-	fblt	%f0, %f1, fbgt_else.39204
+	flw	%f0, 455(%zero)
+	fblt	%f0, %f1, fbgt_else.28228
 	add	%a0, %zero, %zero
-	j	fbgt_cont.39205
-fbgt_else.39204:
+	j	fbgt_cont.28229
+fbgt_else.28228:
 	add	%a0, %zero, %k1
-fbgt_cont.39205:
-	beqi	%a0, 0, bnei_else.39206
-	flw	%f0, 444(%zero)
-	fblt	%f1, %f0, fbgt_else.39208
+fbgt_cont.28229:
+	beqi	%a0, 0, bnei_else.28230
+	flw	%f0, 442(%zero)
+	fblt	%f1, %f0, fbgt_else.28232
 	add	%a0, %zero, %zero
-	j	bnei_cont.39207
-fbgt_else.39208:
+	j	bnei_cont.28231
+fbgt_else.28232:
 	add	%a0, %zero, %k1
-fbgt_cont.39209:
-	j	bnei_cont.39207
-bnei_else.39206:
+fbgt_cont.28233:
+	j	bnei_cont.28231
+bnei_else.28230:
 	add	%a0, %zero, %zero
-bnei_cont.39207:
-	beqi	%a0, 0, bnei_else.39210
+bnei_cont.28231:
+	beqi	%a0, 0, bnei_else.28234
 	lw	%a0, 141(%zero)
 	sll	%a1, %a0, 2
 	lw	%a0, 136(%zero)
 	add	%a1, %a1, %a0
 	lw	%a0, 0(%t2)
-	bne	%a1, %a0, bnei_cont.39211
+	bne	%a1, %a0, bnei_cont.28235
 	addi	%v1, %t1, 0
 	addi	%v0, %zero, 0
 	addi	%sp, %sp, 6
 	jal	shadow_check_one_or_matrix.2931
 	addi	%sp, %sp, -6
-	beqi	%v0, 0, bnei_else.39214
-	j	bnei_cont.39211
-bnei_else.39214:
+	beqi	%v0, 0, bnei_else.28238
+	j	bnei_cont.28235
+bnei_else.28238:
 	lw	%a0, 0(%t0)
 	flw	%f1, 142(%zero)
 	flw	%f0, 0(%a0)
@@ -9833,13 +9305,13 @@ bnei_else.39214:
 	fmul	%f0, %f1, %f0
 	fadd	%f0, %f16, %f0
 	fmul	%f16, %f18, %f0
-	fblt	%fzero, %f17, fbgt_else.39216
+	fblt	%fzero, %f17, fbgt_else.28240
 	add	%a0, %zero, %zero
-	j	fbgt_cont.39217
-fbgt_else.39216:
+	j	fbgt_cont.28241
+fbgt_else.28240:
 	add	%a0, %zero, %k1
-fbgt_cont.39217:
-	beqi	%a0, 0, bnei_else.39218
+fbgt_cont.28241:
+	beqi	%a0, 0, bnei_else.28242
 	flw	%f1, 151(%zero)
 	flw	%f0, 145(%zero)
 	fmul	%f0, %f17, %f0
@@ -9855,16 +9327,16 @@ fbgt_cont.39217:
 	fmul	%f0, %f17, %f0
 	fadd	%f0, %f1, %f0
 	fsw	%f0, 153(%zero)
-	j	bnei_cont.39219
-bnei_else.39218:
-bnei_cont.39219:
-	fblt	%fzero, %f16, fbgt_else.39220
+	j	bnei_cont.28243
+bnei_else.28242:
+bnei_cont.28243:
+	fblt	%fzero, %f16, fbgt_else.28244
 	add	%a0, %zero, %zero
-	j	fbgt_cont.39221
-fbgt_else.39220:
+	j	fbgt_cont.28245
+fbgt_else.28244:
 	add	%a0, %zero, %k1
-fbgt_cont.39221:
-	beqi	%a0, 0, bnei_cont.39211
+fbgt_cont.28245:
+	beqi	%a0, 0, bnei_cont.28235
 	fmul	%f0, %f16, %f16
 	fmul	%f0, %f0, %f0
 	fmul	%f1, %f0, %f26
@@ -9877,16 +9349,16 @@ fbgt_cont.39221:
 	flw	%f0, 153(%zero)
 	fadd	%f0, %f0, %f1
 	fsw	%f0, 153(%zero)
-	j	bnei_cont.39211
-bnei_else.39222:
-bnei_cont.39223:
-bnei_cont.39215:
-	j	bnei_cont.39211
-beq_else.39212:
-beq_cont.39213:
-	j	bnei_cont.39211
-bnei_else.39210:
-bnei_cont.39211:
+	j	bnei_cont.28235
+bnei_else.28246:
+bnei_cont.28247:
+bnei_cont.28239:
+	j	bnei_cont.28235
+beq_else.28236:
+beq_cont.28237:
+	j	bnei_cont.28235
+bnei_else.28234:
+bnei_cont.28235:
 	lw	%a0, 0(%sp)
 	addi	%v0, %a0, -1
 	lw	%t2, 2(%sp)
@@ -9897,10 +9369,10 @@ bnei_cont.39211:
 	fmov	%f1, %f26
 	fmov	%f0, %f25
 	j	trace_reflections.2978
-bgti_else.39203:
+bgti_else.28227:
 	jr	%ra
 trace_ray.2983:
-	fmov	%f3, %f0
+	fmov	%f27, %f0
 	fsw	%f1, 0(%sp)
 	sw	%v0, 1(%sp)
 	add	%a1, %zero, %v1
@@ -9909,10 +9381,10 @@ trace_ray.2983:
 	sw	%t0, 4(%sp)
 	sw	%ra, 5(%sp)
 	addi	%at, %zero, 4
-	blt	%at, %v0, bgt_else.39477
+	blt	%at, %v0, bgt_else.28486
 	lw	%a0, 2(%a0)
 	sw	%a0, 6(%sp)
-	flw	%f0, 445(%zero)
+	flw	%f0, 443(%zero)
 	fsw	%f0, 137(%zero)
 	lw	%v1, 134(%zero)
 	sw	%v1, 7(%sp)
@@ -9923,133 +9395,44 @@ trace_ray.2983:
 	addi	%sp, %sp, -8
 	flw	%f1, 137(%zero)
 	fsw	%f1, 8(%sp)
-	flw	%f0, 465(%zero)
-	fblt	%f0, %f1, fbgt_else.39478
+	flw	%f0, 455(%zero)
+	fblt	%f0, %f1, fbgt_else.28487
 	add	%a0, %zero, %zero
-	j	fbgt_cont.39479
-fbgt_else.39478:
+	j	fbgt_cont.28488
+fbgt_else.28487:
 	add	%a0, %zero, %k1
-fbgt_cont.39479:
-	beqi	%a0, 0, bnei_else.39480
-	flw	%f1, 444(%zero)
+fbgt_cont.28488:
+	beqi	%a0, 0, bnei_else.28489
+	flw	%f1, 442(%zero)
 	flw	%f0, 8(%sp)
-	fblt	%f0, %f1, fbgt_else.39482
+	fblt	%f0, %f1, fbgt_else.28491
 	add	%a0, %zero, %zero
-	j	bnei_cont.39481
-fbgt_else.39482:
+	j	bnei_cont.28490
+fbgt_else.28491:
 	add	%a0, %zero, %k1
-fbgt_cont.39483:
-	j	bnei_cont.39481
-bnei_else.39480:
+fbgt_cont.28492:
+	j	bnei_cont.28490
+bnei_else.28489:
 	add	%a0, %zero, %zero
-bnei_cont.39481:
-	beqi	%a0, 0, bnei_else.39484
+bnei_cont.28490:
+	beqi	%a0, 0, bnei_else.28493
 	lw	%a3, 141(%zero)
 	lw	%t0, 12(%a3)
 	lw	%a0, 2(%t0)
 	sw	%a0, 9(%sp)
 	lw	%a0, 7(%t0)
 	flw	%f0, 0(%a0)
-	fmul	%f25, %f0, %f3
+	fmul	%f0, %f0, %f27
+	fsw	%f0, 10(%sp)
 	lw	%a0, 1(%t0)
-	beqi	%a0, 1, bnei_else.39485
-	beqi	%a0, 2, bnei_else.39487
-	flw	%f1, 138(%zero)
-	lw	%a0, 5(%t0)
-	flw	%f0, 0(%a0)
-	fsub	%f19, %f1, %f0
-	flw	%f1, 139(%zero)
-	lw	%a0, 5(%t0)
-	flw	%f0, 1(%a0)
-	fsub	%f17, %f1, %f0
-	flw	%f1, 140(%zero)
-	lw	%a0, 5(%t0)
-	flw	%f0, 2(%a0)
-	fsub	%f20, %f1, %f0
-	lw	%a0, 4(%t0)
-	flw	%f0, 0(%a0)
-	fmul	%f21, %f19, %f0
-	lw	%a0, 4(%t0)
-	flw	%f0, 1(%a0)
-	fmul	%f2, %f17, %f0
-	lw	%a0, 4(%t0)
-	flw	%f0, 2(%a0)
-	fmul	%f16, %f20, %f0
-	lw	%a0, 3(%t0)
-	beqi	%a0, 0, bnei_else.39489
-	lw	%a0, 9(%t0)
-	flw	%f0, 2(%a0)
-	fmul	%f1, %f17, %f0
-	lw	%a0, 9(%t0)
-	flw	%f0, 1(%a0)
-	fmul	%f0, %f20, %f0
-	fadd	%f0, %f1, %f0
-	flw	%f18, 473(%zero)
-	fmul	%f0, %f0, %f18
-	fadd	%f0, %f21, %f0
-	fsw	%f0, 142(%zero)
-	lw	%a0, 9(%t0)
-	flw	%f0, 2(%a0)
-	fmul	%f1, %f19, %f0
-	lw	%a0, 9(%t0)
-	flw	%f0, 0(%a0)
-	fmul	%f0, %f20, %f0
-	fadd	%f0, %f1, %f0
-	fmul	%f0, %f0, %f18
-	fadd	%f0, %f2, %f0
-	fsw	%f0, 143(%zero)
-	lw	%a0, 9(%t0)
-	flw	%f0, 1(%a0)
-	fmul	%f1, %f19, %f0
-	lw	%a0, 9(%t0)
-	flw	%f0, 0(%a0)
-	fmul	%f0, %f17, %f0
-	fadd	%f0, %f1, %f0
-	fmul	%f0, %f0, %f18
-	fadd	%f0, %f16, %f0
-	fsw	%f0, 144(%zero)
-	j	bnei_cont.39490
-bnei_else.39489:
-	fsw	%f21, 142(%zero)
-	fsw	%f2, 143(%zero)
-	fsw	%f16, 144(%zero)
-bnei_cont.39490:
-	lw	%a1, 6(%t0)
-	flw	%f18, 142(%zero)
-	fmul	%f1, %f18, %f18
-	flw	%f17, 143(%zero)
-	fmul	%f0, %f17, %f17
-	fadd	%f1, %f1, %f0
-	flw	%f16, 144(%zero)
-	fmul	%f0, %f16, %f16
-	fadd	%f0, %f1, %f0
-	fsqrt	%f1, %f0
-	fbne	%f1, %fzero, fbeq_else.39491
-	add	%a0, %zero, %k1
-	j	fbeq_cont.39492
-fbeq_else.39491:
-	add	%a0, %zero, %zero
-fbeq_cont.39492:
-	beqi	%a0, 0, bnei_else.39493
-	fmov	%f0, %f30
-	j	bnei_cont.39494
-bnei_else.39493:
-	beqi	%a1, 0, bnei_else.39495
-	flw	%f0, 468(%zero)
-	fdiv	%f0, %f0, %f1
-	j	bnei_cont.39496
-bnei_else.39495:
-	fdiv	%f0, %f30, %f1
-bnei_cont.39496:
-bnei_cont.39494:
-	fmul	%f1, %f18, %f0
-	fsw	%f1, 142(%zero)
-	fmul	%f1, %f17, %f0
-	fsw	%f1, 143(%zero)
-	fmul	%f0, %f16, %f0
-	fsw	%f0, 144(%zero)
-	j	bnei_cont.39486
-bnei_else.39487:
+	beqi	%a0, 1, bnei_else.28494
+	beqi	%a0, 2, bnei_else.28496
+	addi	%v0, %t0, 0
+	addi	%sp, %sp, 11
+	jal	get_nvector_second.2966
+	addi	%sp, %sp, -11
+	j	bnei_cont.28495
+bnei_else.28496:
 	lw	%a0, 4(%t0)
 	flw	%f0, 0(%a0)
 	fneg	%f0, %f0
@@ -10062,9 +9445,9 @@ bnei_else.39487:
 	flw	%f0, 2(%a0)
 	fneg	%f0, %f0
 	fsw	%f0, 144(%zero)
-bnei_cont.39488:
-	j	bnei_cont.39486
-bnei_else.39485:
+bnei_cont.28497:
+	j	bnei_cont.28495
+bnei_else.28494:
 	lw	%a0, 136(%zero)
 	fsw	%fzero, 142(%zero)
 	fsw	%fzero, 143(%zero)
@@ -10073,43 +9456,44 @@ bnei_else.39485:
 	lw	%a0, 2(%sp)
 	add	%at, %a0, %a1
 	flw	%f0, 0(%at)
-	fbne	%f0, %fzero, fbeq_else.39497
+	fbne	%f0, %fzero, fbeq_else.28498
 	add	%a0, %zero, %k1
-	j	fbeq_cont.39498
-fbeq_else.39497:
+	j	fbeq_cont.28499
+fbeq_else.28498:
 	add	%a0, %zero, %zero
-fbeq_cont.39498:
-	beqi	%a0, 0, bnei_else.39499
+fbeq_cont.28499:
+	beqi	%a0, 0, bnei_else.28500
 	fmov	%f0, %fzero
-	j	bnei_cont.39500
-bnei_else.39499:
-	fblt	%fzero, %f0, fbgt_else.39501
+	j	bnei_cont.28501
+bnei_else.28500:
+	fblt	%fzero, %f0, fbgt_else.28502
 	add	%a0, %zero, %zero
-	j	fbgt_cont.39502
-fbgt_else.39501:
+	j	fbgt_cont.28503
+fbgt_else.28502:
 	add	%a0, %zero, %k1
-fbgt_cont.39502:
-	beqi	%a0, 0, bnei_else.39503
+fbgt_cont.28503:
+	beqi	%a0, 0, bnei_else.28504
 	fmov	%f0, %f30
-	j	bnei_cont.39504
-bnei_else.39503:
-	flw	%f0, 468(%zero)
-bnei_cont.39504:
-bnei_cont.39500:
+	j	bnei_cont.28505
+bnei_else.28504:
+	flw	%f0, 458(%zero)
+bnei_cont.28505:
+bnei_cont.28501:
 	fneg	%f0, %f0
 	fsw	%f0, 142(%a1)
-bnei_cont.39486:
-	flw	%f26, 138(%zero)
-	fsw	%f26, 159(%zero)
-	flw	%f27, 139(%zero)
-	fsw	%f27, 160(%zero)
-	flw	%f28, 140(%zero)
-	fsw	%f28, 161(%zero)
+bnei_cont.28495:
+	flw	%f0, 138(%zero)
+	fsw	%f0, 11(%sp)
+	fsw	%f0, 159(%zero)
+	flw	%f25, 139(%zero)
+	fsw	%f25, 160(%zero)
+	flw	%f26, 140(%zero)
+	fsw	%f26, 161(%zero)
 	addi	%v1, %zero, 138
 	addi	%v0, %t0, 0
-	addi	%sp, %sp, 10
+	addi	%sp, %sp, 12
 	jal	utexture.2971
-	addi	%sp, %sp, -10
+	addi	%sp, %sp, -12
 	sll	%a1, %a3, 2
 	lw	%a0, 136(%zero)
 	add	%a1, %a1, %a0
@@ -10121,25 +9505,26 @@ bnei_cont.39486:
 	lw	%a0, 1(%a1)
 	add	%at, %a0, %a2
 	lw	%a0, 0(%at)
-	fsw	%f26, 0(%a0)
-	fsw	%f27, 1(%a0)
-	fsw	%f28, 2(%a0)
+	flw	%f0, 11(%sp)
+	fsw	%f0, 0(%a0)
+	fsw	%f25, 1(%a0)
+	fsw	%f26, 2(%a0)
 	lw	%a1, 3(%a1)
 	lw	%a0, 7(%t0)
 	flw	%f1, 0(%a0)
 	flw	%f0, 473(%zero)
-	fblt	%f1, %f0, fbgt_else.39505
+	fblt	%f1, %f0, fbgt_else.28506
 	add	%a0, %zero, %zero
-	j	fbgt_cont.39506
-fbgt_else.39505:
+	j	fbgt_cont.28507
+fbgt_else.28506:
 	add	%a0, %zero, %k1
-fbgt_cont.39506:
-	beqi	%a0, 0, bnei_else.39507
+fbgt_cont.28507:
+	beqi	%a0, 0, bnei_else.28508
 	lw	%a0, 1(%sp)
 	add	%at, %a1, %a0
 	sw	%zero, 0(%at)
-	j	bnei_cont.39508
-bnei_else.39507:
+	j	bnei_cont.28509
+bnei_else.28508:
 	lw	%a2, 1(%sp)
 	add	%at, %a1, %a2
 	sw	%k1, 0(%at)
@@ -10153,8 +9538,9 @@ bnei_else.39507:
 	fsw	%f0, 1(%a0)
 	flw	%f0, 147(%zero)
 	fsw	%f0, 2(%a0)
-	flw	%f0, 443(%zero)
-	fmul	%f1, %f0, %f25
+	flw	%f1, 441(%zero)
+	flw	%f0, 10(%sp)
+	fmul	%f1, %f1, %f0
 	flw	%f0, 0(%a0)
 	fmul	%f0, %f0, %f1
 	fsw	%f0, 0(%a0)
@@ -10173,69 +9559,70 @@ bnei_else.39507:
 	fsw	%f0, 1(%a0)
 	flw	%f0, 144(%zero)
 	fsw	%f0, 2(%a0)
-bnei_cont.39508:
-	flw	%f19, 442(%zero)
+bnei_cont.28509:
+	flw	%f19, 440(%zero)
 	lw	%a0, 2(%sp)
 	flw	%f16, 0(%a0)
-	flw	%f5, 142(%zero)
-	fmul	%f1, %f16, %f5
+	flw	%f3, 142(%zero)
+	fmul	%f1, %f16, %f3
 	flw	%f17, 1(%a0)
-	flw	%f4, 143(%zero)
-	fmul	%f0, %f17, %f4
+	flw	%f29, 143(%zero)
+	fmul	%f0, %f17, %f29
 	fadd	%f1, %f1, %f0
 	flw	%f18, 2(%a0)
-	flw	%f29, 144(%zero)
-	fmul	%f0, %f18, %f29
+	flw	%f28, 144(%zero)
+	fmul	%f0, %f18, %f28
 	fadd	%f0, %f1, %f0
 	fmul	%f1, %f19, %f0
-	fmul	%f0, %f1, %f5
+	fmul	%f0, %f1, %f3
 	fadd	%f0, %f16, %f0
 	fsw	%f0, 0(%a0)
-	fmul	%f0, %f1, %f4
+	fmul	%f0, %f1, %f29
 	fadd	%f0, %f17, %f0
 	fsw	%f0, 1(%a0)
-	fmul	%f0, %f1, %f29
+	fmul	%f0, %f1, %f28
 	fadd	%f0, %f18, %f0
 	fsw	%f0, 2(%a0)
 	lw	%a0, 7(%t0)
 	flw	%f0, 1(%a0)
-	fmul	%f0, %f3, %f0
-	fsw	%f0, 10(%sp)
+	fmul	%f0, %f27, %f0
+	fsw	%f0, 12(%sp)
 	lw	%v1, 7(%sp)
 	addi	%v0, %zero, 0
-	addi	%sp, %sp, 11
+	addi	%sp, %sp, 13
 	jal	shadow_check_one_or_matrix.2931
-	addi	%sp, %sp, -11
-	beqi	%v0, 0, bnei_else.39509
-	j	bnei_cont.39510
-bnei_else.39509:
+	addi	%sp, %sp, -13
+	beqi	%v0, 0, bnei_else.28510
+	j	bnei_cont.28511
+bnei_else.28510:
 	flw	%f19, 78(%zero)
-	fmul	%f1, %f5, %f19
-	flw	%f18, 79(%zero)
-	fmul	%f0, %f4, %f18
-	fadd	%f1, %f1, %f0
-	flw	%f17, 80(%zero)
+	fmul	%f1, %f3, %f19
+	flw	%f17, 79(%zero)
 	fmul	%f0, %f29, %f17
+	fadd	%f1, %f1, %f0
+	flw	%f18, 80(%zero)
+	fmul	%f0, %f28, %f18
 	fadd	%f0, %f1, %f0
-	fneg	%f0, %f0
-	fmul	%f16, %f0, %f25
+	fneg	%f1, %f0
+	flw	%f0, 10(%sp)
+	fmul	%f16, %f1, %f0
 	lw	%a0, 2(%sp)
 	flw	%f0, 0(%a0)
 	fmul	%f1, %f0, %f19
 	flw	%f0, 1(%a0)
-	fmul	%f0, %f0, %f18
+	fmul	%f0, %f0, %f17
 	fadd	%f1, %f1, %f0
 	flw	%f0, 2(%a0)
-	fmul	%f0, %f0, %f17
+	fmul	%f0, %f0, %f18
 	fadd	%f0, %f1, %f0
 	fneg	%f17, %f0
-	fblt	%fzero, %f16, fbgt_else.39511
+	fblt	%fzero, %f16, fbgt_else.28512
 	add	%a0, %zero, %zero
-	j	fbgt_cont.39512
-fbgt_else.39511:
+	j	fbgt_cont.28513
+fbgt_else.28512:
 	add	%a0, %zero, %k1
-fbgt_cont.39512:
-	beqi	%a0, 0, bnei_else.39513
+fbgt_cont.28513:
+	beqi	%a0, 0, bnei_else.28514
 	flw	%f1, 151(%zero)
 	flw	%f0, 145(%zero)
 	fmul	%f0, %f16, %f0
@@ -10251,19 +9638,19 @@ fbgt_cont.39512:
 	fmul	%f0, %f16, %f0
 	fadd	%f0, %f1, %f0
 	fsw	%f0, 153(%zero)
-	j	bnei_cont.39514
-bnei_else.39513:
-bnei_cont.39514:
-	fblt	%fzero, %f17, fbgt_else.39515
+	j	bnei_cont.28515
+bnei_else.28514:
+bnei_cont.28515:
+	fblt	%fzero, %f17, fbgt_else.28516
 	add	%a0, %zero, %zero
-	j	fbgt_cont.39516
-fbgt_else.39515:
+	j	fbgt_cont.28517
+fbgt_else.28516:
 	add	%a0, %zero, %k1
-fbgt_cont.39516:
-	beqi	%a0, 0, bnei_else.39517
+fbgt_cont.28517:
+	beqi	%a0, 0, bnei_else.28518
 	fmul	%f0, %f17, %f17
 	fmul	%f1, %f0, %f0
-	flw	%f0, 10(%sp)
+	flw	%f0, 12(%sp)
 	fmul	%f1, %f1, %f0
 	flw	%f0, 151(%zero)
 	fadd	%f0, %f0, %f1
@@ -10274,55 +9661,56 @@ fbgt_cont.39516:
 	flw	%f0, 153(%zero)
 	fadd	%f0, %f0, %f1
 	fsw	%f0, 153(%zero)
-	j	bnei_cont.39518
-bnei_else.39517:
-bnei_cont.39518:
-bnei_cont.39510:
-	fsw	%f26, 162(%zero)
-	fsw	%f27, 163(%zero)
-	fsw	%f28, 164(%zero)
+	j	bnei_cont.28519
+bnei_else.28518:
+bnei_cont.28519:
+bnei_cont.28511:
+	flw	%f0, 11(%sp)
+	fsw	%f0, 162(%zero)
+	fsw	%f25, 163(%zero)
+	fsw	%f26, 164(%zero)
 	lw	%a0, 0(%zero)
 	addi	%v1, %a0, -1
 	addi	%v0, %zero, 138
-	addi	%sp, %sp, 11
+	addi	%sp, %sp, 13
 	jal	setup_startp_constants.2894
-	addi	%sp, %sp, -11
+	addi	%sp, %sp, -13
 	lw	%a0, 434(%zero)
 	addi	%v0, %a0, -1
-	flw	%f1, 10(%sp)
+	flw	%f1, 12(%sp)
+	flw	%f0, 10(%sp)
 	lw	%v1, 2(%sp)
-	fmov	%f0, %f25
-	addi	%sp, %sp, 11
+	addi	%sp, %sp, 13
 	jal	trace_reflections.2978
-	addi	%sp, %sp, -11
-	flw	%f0, 441(%zero)
-	fblt	%f0, %f3, fbgt_else.39519
+	addi	%sp, %sp, -13
+	flw	%f0, 439(%zero)
+	fblt	%f0, %f27, fbgt_else.28520
 	add	%a0, %zero, %zero
-	j	fbgt_cont.39520
-fbgt_else.39519:
+	j	fbgt_cont.28521
+fbgt_else.28520:
 	add	%a0, %zero, %k1
-fbgt_cont.39520:
-	beqi	%a0, 0, bnei_else.39521
+fbgt_cont.28521:
+	beqi	%a0, 0, bnei_else.28522
 	lw	%a0, 1(%sp)
-	blti	%a0, 4, bgti_else.39522
-	j	bgti_cont.39523
-bgti_else.39522:
+	blti	%a0, 4, bgti_else.28523
+	j	bgti_cont.28524
+bgti_else.28523:
 	addi	%a2, %a0, 1
 	addi	%a1, %zero, -1
 	lw	%a0, 6(%sp)
 	add	%at, %a0, %a2
 	sw	%a1, 0(%at)
-bgti_cont.39523:
+bgti_cont.28524:
 	lw	%a0, 9(%sp)
-	beqi	%a0, 2, bnei_else.39524
+	beqi	%a0, 2, bnei_else.28525
 	lw	%t0, 4(%sp)
 	lw	%ra, 5(%sp)
 	jr	%ra
-bnei_else.39524:
+bnei_else.28525:
 	lw	%a0, 7(%t0)
 	flw	%f0, 0(%a0)
 	fsub	%f0, %f30, %f0
-	fmul	%f0, %f3, %f0
+	fmul	%f0, %f27, %f0
 	lw	%a0, 1(%sp)
 	addi	%v0, %a0, 1
 	flw	%f16, 0(%sp)
@@ -10333,17 +9721,17 @@ bnei_else.39524:
 	lw	%a0, 3(%sp)
 	lw	%v1, 2(%sp)
 	j	trace_ray.2983
-bnei_else.39521:
+bnei_else.28522:
 	lw	%t0, 4(%sp)
 	lw	%ra, 5(%sp)
 	jr	%ra
-bnei_else.39484:
+bnei_else.28493:
 	addi	%a2, %zero, -1
 	lw	%a1, 6(%sp)
 	lw	%a0, 1(%sp)
 	add	%at, %a1, %a0
 	sw	%a2, 0(%at)
-	beqi	%a0, 0, bnei_else.39527
+	beqi	%a0, 0, bnei_else.28528
 	lw	%a0, 2(%sp)
 	flw	%f1, 0(%a0)
 	flw	%f0, 78(%zero)
@@ -10357,16 +9745,16 @@ bnei_else.39484:
 	fmul	%f0, %f1, %f0
 	fadd	%f0, %f16, %f0
 	fneg	%f1, %f0
-	fblt	%fzero, %f1, fbgt_else.39528
+	fblt	%fzero, %f1, fbgt_else.28529
 	add	%a0, %zero, %zero
-	j	fbgt_cont.39529
-fbgt_else.39528:
+	j	fbgt_cont.28530
+fbgt_else.28529:
 	add	%a0, %zero, %k1
-fbgt_cont.39529:
-	beqi	%a0, 0, bnei_else.39530
+fbgt_cont.28530:
+	beqi	%a0, 0, bnei_else.28531
 	fmul	%f0, %f1, %f1
 	fmul	%f0, %f0, %f1
-	fmul	%f1, %f0, %f3
+	fmul	%f1, %f0, %f27
 	flw	%f0, 81(%zero)
 	fmul	%f1, %f1, %f0
 	flw	%f0, 151(%zero)
@@ -10381,22 +9769,22 @@ fbgt_cont.39529:
 	lw	%ra, 5(%sp)
 	fsw	%f0, 153(%zero)
 	jr	%ra
-bnei_else.39530:
+bnei_else.28531:
 	lw	%t0, 4(%sp)
 	lw	%ra, 5(%sp)
 	jr	%ra
-bnei_else.39527:
+bnei_else.28528:
 	lw	%t0, 4(%sp)
 	lw	%ra, 5(%sp)
 	jr	%ra
-bgt_else.39477:
+bgt_else.28486:
 	jr	%ra
 trace_diffuse_ray.2989:
 	fmov	%f25, %f0
 	add	%a0, %zero, %v0
 	sw	%a0, 0(%sp)
 	sw	%ra, 1(%sp)
-	flw	%f0, 445(%zero)
+	flw	%f0, 443(%zero)
 	fsw	%f0, 137(%zero)
 	lw	%v1, 134(%zero)
 	sw	%v1, 2(%sp)
@@ -10405,144 +9793,54 @@ trace_diffuse_ray.2989:
 	jal	trace_or_matrix_fast.2956
 	addi	%sp, %sp, -3
 	flw	%f1, 137(%zero)
-	flw	%f0, 465(%zero)
-	fblt	%f0, %f1, fbgt_else.39669
+	flw	%f0, 455(%zero)
+	fblt	%f0, %f1, fbgt_else.28648
 	add	%a0, %zero, %zero
-	j	fbgt_cont.39670
-fbgt_else.39669:
+	j	fbgt_cont.28649
+fbgt_else.28648:
 	add	%a0, %zero, %k1
-fbgt_cont.39670:
-	beqi	%a0, 0, bnei_else.39671
-	flw	%f0, 444(%zero)
-	fblt	%f1, %f0, fbgt_else.39673
+fbgt_cont.28649:
+	beqi	%a0, 0, bnei_else.28650
+	flw	%f0, 442(%zero)
+	fblt	%f1, %f0, fbgt_else.28652
 	add	%a0, %zero, %zero
-	j	bnei_cont.39672
-fbgt_else.39673:
+	j	bnei_cont.28651
+fbgt_else.28652:
 	add	%a0, %zero, %k1
-fbgt_cont.39674:
-	j	bnei_cont.39672
-bnei_else.39671:
+fbgt_cont.28653:
+	j	bnei_cont.28651
+bnei_else.28650:
 	add	%a0, %zero, %zero
-bnei_cont.39672:
-	beqi	%a0, 0, bnei_else.39675
+bnei_cont.28651:
+	beqi	%a0, 0, bnei_else.28654
 	lw	%a0, 141(%zero)
-	lw	%s7, 12(%a0)
+	lw	%t7, 12(%a0)
 	lw	%a0, 0(%sp)
 	lw	%a2, 0(%a0)
-	lw	%a0, 1(%s7)
-	beqi	%a0, 1, bnei_else.39676
-	beqi	%a0, 2, bnei_else.39678
-	flw	%f1, 138(%zero)
-	lw	%a0, 5(%s7)
-	flw	%f0, 0(%a0)
-	fsub	%f18, %f1, %f0
-	flw	%f1, 139(%zero)
-	lw	%a0, 5(%s7)
-	flw	%f0, 1(%a0)
-	fsub	%f17, %f1, %f0
-	flw	%f1, 140(%zero)
-	lw	%a0, 5(%s7)
-	flw	%f0, 2(%a0)
-	fsub	%f20, %f1, %f0
-	lw	%a0, 4(%s7)
-	flw	%f0, 0(%a0)
-	fmul	%f21, %f18, %f0
-	lw	%a0, 4(%s7)
-	flw	%f0, 1(%a0)
-	fmul	%f2, %f17, %f0
-	lw	%a0, 4(%s7)
-	flw	%f0, 2(%a0)
-	fmul	%f16, %f20, %f0
-	lw	%a0, 3(%s7)
-	beqi	%a0, 0, bnei_else.39680
-	lw	%a0, 9(%s7)
-	flw	%f0, 2(%a0)
-	fmul	%f1, %f17, %f0
-	lw	%a0, 9(%s7)
-	flw	%f0, 1(%a0)
-	fmul	%f0, %f20, %f0
-	fadd	%f0, %f1, %f0
-	flw	%f19, 473(%zero)
-	fmul	%f0, %f0, %f19
-	fadd	%f0, %f21, %f0
-	fsw	%f0, 142(%zero)
-	lw	%a0, 9(%s7)
-	flw	%f0, 2(%a0)
-	fmul	%f1, %f18, %f0
-	lw	%a0, 9(%s7)
-	flw	%f0, 0(%a0)
-	fmul	%f0, %f20, %f0
-	fadd	%f0, %f1, %f0
-	fmul	%f0, %f0, %f19
-	fadd	%f0, %f2, %f0
-	fsw	%f0, 143(%zero)
-	lw	%a0, 9(%s7)
-	flw	%f0, 1(%a0)
-	fmul	%f1, %f18, %f0
-	lw	%a0, 9(%s7)
-	flw	%f0, 0(%a0)
-	fmul	%f0, %f17, %f0
-	fadd	%f0, %f1, %f0
-	fmul	%f0, %f0, %f19
-	fadd	%f0, %f16, %f0
-	fsw	%f0, 144(%zero)
-	j	bnei_cont.39681
-bnei_else.39680:
-	fsw	%f21, 142(%zero)
-	fsw	%f2, 143(%zero)
-	fsw	%f16, 144(%zero)
-bnei_cont.39681:
-	lw	%a1, 6(%s7)
-	flw	%f18, 142(%zero)
-	fmul	%f1, %f18, %f18
-	flw	%f17, 143(%zero)
-	fmul	%f0, %f17, %f17
-	fadd	%f1, %f1, %f0
-	flw	%f16, 144(%zero)
-	fmul	%f0, %f16, %f16
-	fadd	%f0, %f1, %f0
-	fsqrt	%f1, %f0
-	fbne	%f1, %fzero, fbeq_else.39682
-	add	%a0, %zero, %k1
-	j	fbeq_cont.39683
-fbeq_else.39682:
-	add	%a0, %zero, %zero
-fbeq_cont.39683:
-	beqi	%a0, 0, bnei_else.39684
-	fmov	%f0, %f30
-	j	bnei_cont.39685
-bnei_else.39684:
-	beqi	%a1, 0, bnei_else.39686
-	flw	%f0, 468(%zero)
-	fdiv	%f0, %f0, %f1
-	j	bnei_cont.39687
-bnei_else.39686:
-	fdiv	%f0, %f30, %f1
-bnei_cont.39687:
-bnei_cont.39685:
-	fmul	%f1, %f18, %f0
-	fsw	%f1, 142(%zero)
-	fmul	%f1, %f17, %f0
-	fsw	%f1, 143(%zero)
-	fmul	%f0, %f16, %f0
-	fsw	%f0, 144(%zero)
-	j	bnei_cont.39677
-bnei_else.39678:
-	lw	%a0, 4(%s7)
+	lw	%a0, 1(%t7)
+	beqi	%a0, 1, bnei_else.28655
+	beqi	%a0, 2, bnei_else.28657
+	addi	%v0, %t7, 0
+	addi	%sp, %sp, 3
+	jal	get_nvector_second.2966
+	addi	%sp, %sp, -3
+	j	bnei_cont.28656
+bnei_else.28657:
+	lw	%a0, 4(%t7)
 	flw	%f0, 0(%a0)
 	fneg	%f0, %f0
 	fsw	%f0, 142(%zero)
-	lw	%a0, 4(%s7)
+	lw	%a0, 4(%t7)
 	flw	%f0, 1(%a0)
 	fneg	%f0, %f0
 	fsw	%f0, 143(%zero)
-	lw	%a0, 4(%s7)
+	lw	%a0, 4(%t7)
 	flw	%f0, 2(%a0)
 	fneg	%f0, %f0
 	fsw	%f0, 144(%zero)
-bnei_cont.39679:
-	j	bnei_cont.39677
-bnei_else.39676:
+bnei_cont.28658:
+	j	bnei_cont.28656
+bnei_else.28655:
 	lw	%a0, 136(%zero)
 	fsw	%fzero, 142(%zero)
 	fsw	%fzero, 143(%zero)
@@ -10550,34 +9848,34 @@ bnei_else.39676:
 	addi	%a1, %a0, -1
 	add	%at, %a2, %a1
 	flw	%f0, 0(%at)
-	fbne	%f0, %fzero, fbeq_else.39688
+	fbne	%f0, %fzero, fbeq_else.28659
 	add	%a0, %zero, %k1
-	j	fbeq_cont.39689
-fbeq_else.39688:
+	j	fbeq_cont.28660
+fbeq_else.28659:
 	add	%a0, %zero, %zero
-fbeq_cont.39689:
-	beqi	%a0, 0, bnei_else.39690
+fbeq_cont.28660:
+	beqi	%a0, 0, bnei_else.28661
 	fmov	%f0, %fzero
-	j	bnei_cont.39691
-bnei_else.39690:
-	fblt	%fzero, %f0, fbgt_else.39692
+	j	bnei_cont.28662
+bnei_else.28661:
+	fblt	%fzero, %f0, fbgt_else.28663
 	add	%a0, %zero, %zero
-	j	fbgt_cont.39693
-fbgt_else.39692:
+	j	fbgt_cont.28664
+fbgt_else.28663:
 	add	%a0, %zero, %k1
-fbgt_cont.39693:
-	beqi	%a0, 0, bnei_else.39694
+fbgt_cont.28664:
+	beqi	%a0, 0, bnei_else.28665
 	fmov	%f0, %f30
-	j	bnei_cont.39695
-bnei_else.39694:
-	flw	%f0, 468(%zero)
-bnei_cont.39695:
-bnei_cont.39691:
+	j	bnei_cont.28666
+bnei_else.28665:
+	flw	%f0, 458(%zero)
+bnei_cont.28666:
+bnei_cont.28662:
 	fneg	%f0, %f0
 	fsw	%f0, 142(%a1)
-bnei_cont.39677:
+bnei_cont.28656:
 	addi	%v1, %zero, 138
-	addi	%v0, %s7, 0
+	addi	%v0, %t7, 0
 	addi	%sp, %sp, 3
 	jal	utexture.2971
 	addi	%sp, %sp, -3
@@ -10586,10 +9884,10 @@ bnei_cont.39677:
 	addi	%sp, %sp, 3
 	jal	shadow_check_one_or_matrix.2931
 	addi	%sp, %sp, -3
-	beqi	%v0, 0, bnei_else.39696
+	beqi	%v0, 0, bnei_else.28667
 	lw	%ra, 1(%sp)
 	jr	%ra
-bnei_else.39696:
+bnei_else.28667:
 	flw	%f1, 142(%zero)
 	flw	%f0, 78(%zero)
 	fmul	%f16, %f1, %f0
@@ -10602,19 +9900,19 @@ bnei_else.39696:
 	fmul	%f0, %f1, %f0
 	fadd	%f0, %f16, %f0
 	fneg	%f0, %f0
-	fblt	%fzero, %f0, fbgt_else.39698
+	fblt	%fzero, %f0, fbgt_else.28669
 	add	%a0, %zero, %zero
-	j	fbgt_cont.39699
-fbgt_else.39698:
+	j	fbgt_cont.28670
+fbgt_else.28669:
 	add	%a0, %zero, %k1
-fbgt_cont.39699:
-	beqi	%a0, 0, bnei_else.39700
-	j	bnei_cont.39701
-bnei_else.39700:
+fbgt_cont.28670:
+	beqi	%a0, 0, bnei_else.28671
+	j	bnei_cont.28672
+bnei_else.28671:
 	fmov	%f0, %fzero
-bnei_cont.39701:
+bnei_cont.28672:
 	fmul	%f1, %f25, %f0
-	lw	%a0, 7(%s7)
+	lw	%a0, 7(%t7)
 	flw	%f0, 0(%a0)
 	fmul	%f16, %f1, %f0
 	flw	%f1, 148(%zero)
@@ -10634,7 +9932,7 @@ bnei_cont.39701:
 	lw	%ra, 1(%sp)
 	fsw	%f0, 150(%zero)
 	jr	%ra
-bnei_else.39675:
+bnei_else.28654:
 	lw	%ra, 1(%sp)
 	jr	%ra
 iter_trace_diffuse_rays.2992:
@@ -10642,10 +9940,11 @@ iter_trace_diffuse_rays.2992:
 	sw	%v1, 1(%sp)
 	sw	%a0, 2(%sp)
 	sw	%a1, 3(%sp)
-	sw	%t1, 4(%sp)
-	sw	%t0, 5(%sp)
-	sw	%ra, 6(%sp)
-	blti	%a1, 0, bgti_else.40711
+	sw	%t2, 4(%sp)
+	sw	%t1, 5(%sp)
+	sw	%t0, 6(%sp)
+	sw	%ra, 7(%sp)
+	blti	%a1, 0, bgti_else.29071
 	add	%at, %v0, %a1
 	lw	%t0, 0(%at)
 	lw	%a0, 0(%t0)
@@ -10660,535 +9959,207 @@ iter_trace_diffuse_rays.2992:
 	flw	%f27, 2(%v1)
 	fmul	%f0, %f0, %f27
 	fadd	%f1, %f1, %f0
-	fblt	%f1, %fzero, fbgt_else.40712
+	fblt	%f1, %fzero, fbgt_else.29072
 	add	%a0, %zero, %zero
-	j	fbgt_cont.40713
-fbgt_else.40712:
+	j	fbgt_cont.29073
+fbgt_else.29072:
 	add	%a0, %zero, %k1
-fbgt_cont.40713:
-	beqi	%a0, 0, bnei_else.40714
+fbgt_cont.29073:
+	beqi	%a0, 0, bnei_else.29074
 	lw	%a0, 3(%sp)
 	addi	%a1, %a0, 1
 	lw	%a0, 0(%sp)
 	add	%at, %a0, %a1
 	lw	%t0, 0(%at)
-	flw	%f0, 440(%zero)
+	flw	%f0, 438(%zero)
 	fdiv	%f28, %f1, %f0
-	flw	%f0, 445(%zero)
+	flw	%f0, 443(%zero)
 	fsw	%f0, 137(%zero)
 	lw	%t1, 134(%zero)
-	lw	%s3, 0(%t1)
-	lw	%a2, 0(%s3)
-	beqi	%a2, -1, bnei_else.40716
-	beqi	%a2, 99, bnei_else.40718
-	lw	%a3, 12(%a2)
-	lw	%a1, 10(%a3)
-	flw	%f20, 0(%a1)
-	flw	%f16, 1(%a1)
-	flw	%f18, 2(%a1)
-	lw	%a0, 1(%t0)
-	add	%at, %a0, %a2
-	lw	%a2, 0(%at)
-	lw	%a0, 1(%a3)
-	beqi	%a0, 1, bnei_else.40720
-	beqi	%a0, 2, bnei_else.40722
-	flw	%f17, 0(%a2)
-	fbne	%f17, %fzero, fbeq_else.40724
-	add	%a0, %zero, %k1
-	j	fbeq_cont.40725
-fbeq_else.40724:
-	add	%a0, %zero, %zero
-fbeq_cont.40725:
-	beqi	%a0, 0, bnei_else.40726
-	add	%a0, %zero, %zero
-	j	bnei_cont.40721
-bnei_else.40726:
-	flw	%f0, 1(%a2)
-	fmul	%f1, %f0, %f20
-	flw	%f0, 2(%a2)
-	fmul	%f0, %f0, %f16
-	fadd	%f1, %f1, %f0
-	flw	%f0, 3(%a2)
-	fmul	%f0, %f0, %f18
-	fadd	%f16, %f1, %f0
-	flw	%f0, 3(%a1)
-	fmul	%f1, %f16, %f16
-	fmul	%f0, %f17, %f0
-	fsub	%f0, %f1, %f0
-	fblt	%fzero, %f0, fbgt_else.40728
-	add	%a0, %zero, %zero
-	j	fbgt_cont.40729
-fbgt_else.40728:
-	add	%a0, %zero, %k1
-fbgt_cont.40729:
-	beqi	%a0, 0, bnei_else.40730
-	lw	%a0, 6(%a3)
-	beqi	%a0, 0, bnei_else.40732
-	fsqrt	%f0, %f0
-	fadd	%f1, %f16, %f0
-	flw	%f0, 4(%a2)
-	fmul	%f0, %f1, %f0
-	fsw	%f0, 135(%zero)
-	j	bnei_cont.40733
-bnei_else.40732:
-	fsqrt	%f0, %f0
-	fsub	%f1, %f16, %f0
-	flw	%f0, 4(%a2)
-	fmul	%f0, %f1, %f0
-	fsw	%f0, 135(%zero)
-bnei_cont.40733:
-	add	%a0, %zero, %k1
-	j	bnei_cont.40721
-bnei_else.40730:
-	add	%a0, %zero, %zero
-bnei_cont.40731:
-bnei_cont.40727:
-	j	bnei_cont.40721
-bnei_else.40722:
-	flw	%f1, 0(%a2)
-	fblt	%f1, %fzero, fbgt_else.40734
-	add	%a0, %zero, %zero
-	j	fbgt_cont.40735
-fbgt_else.40734:
-	add	%a0, %zero, %k1
-fbgt_cont.40735:
-	beqi	%a0, 0, bnei_else.40736
-	flw	%f0, 3(%a1)
-	fmul	%f0, %f1, %f0
-	fsw	%f0, 135(%zero)
-	add	%a0, %zero, %k1
-	j	bnei_cont.40721
-bnei_else.40736:
-	add	%a0, %zero, %zero
-bnei_cont.40737:
-bnei_cont.40723:
-	j	bnei_cont.40721
-bnei_else.40720:
-	lw	%a1, 0(%t0)
-	flw	%f0, 0(%a2)
-	fsub	%f0, %f0, %f20
-	flw	%f21, 1(%a2)
-	fmul	%f2, %f0, %f21
-	flw	%f19, 1(%a1)
-	fmul	%f0, %f2, %f19
-	fadd	%f0, %f0, %f16
-	fabs	%f0, %f0
-	lw	%a0, 4(%a3)
-	flw	%f17, 1(%a0)
-	fblt	%f0, %f17, fbgt_else.40738
-	add	%a0, %zero, %zero
-	j	fbgt_cont.40739
-fbgt_else.40738:
-	add	%a0, %zero, %k1
-fbgt_cont.40739:
-	beqi	%a0, 0, bnei_else.40740
-	flw	%f0, 2(%a1)
-	fmul	%f0, %f2, %f0
-	fadd	%f0, %f0, %f18
-	fabs	%f1, %f0
-	lw	%a0, 4(%a3)
-	flw	%f0, 2(%a0)
-	fblt	%f1, %f0, fbgt_else.40742
-	add	%a0, %zero, %zero
-	j	fbgt_cont.40743
-fbgt_else.40742:
-	add	%a0, %zero, %k1
-fbgt_cont.40743:
-	beqi	%a0, 0, bnei_else.40744
-	fbne	%f21, %fzero, fbeq_else.40746
-	add	%a0, %zero, %k1
-	j	fbeq_cont.40747
-fbeq_else.40746:
-	add	%a0, %zero, %zero
-fbeq_cont.40747:
-	beqi	%a0, 0, bnei_else.40748
-	add	%a0, %zero, %zero
-	j	bnei_cont.40741
-bnei_else.40748:
-	add	%a0, %zero, %k1
-bnei_cont.40749:
-	j	bnei_cont.40741
-bnei_else.40744:
-	add	%a0, %zero, %zero
-bnei_cont.40745:
-	j	bnei_cont.40741
-bnei_else.40740:
-	add	%a0, %zero, %zero
-bnei_cont.40741:
-	beqi	%a0, 0, bnei_else.40750
-	fsw	%f2, 135(%zero)
-	add	%a0, %zero, %k1
-	j	bnei_cont.40751
-bnei_else.40750:
-	flw	%f0, 2(%a2)
-	fsub	%f0, %f0, %f16
-	flw	%f22, 3(%a2)
-	fmul	%f23, %f0, %f22
-	flw	%f21, 0(%a1)
-	fmul	%f0, %f23, %f21
-	fadd	%f0, %f0, %f20
-	fabs	%f0, %f0
-	lw	%a0, 4(%a3)
-	flw	%f2, 0(%a0)
-	fblt	%f0, %f2, fbgt_else.40752
-	add	%a0, %zero, %zero
-	j	fbgt_cont.40753
-fbgt_else.40752:
-	add	%a0, %zero, %k1
-fbgt_cont.40753:
-	beqi	%a0, 0, bnei_else.40754
-	flw	%f0, 2(%a1)
-	fmul	%f0, %f23, %f0
-	fadd	%f0, %f0, %f18
-	fabs	%f1, %f0
-	lw	%a0, 4(%a3)
-	flw	%f0, 2(%a0)
-	fblt	%f1, %f0, fbgt_else.40756
-	add	%a0, %zero, %zero
-	j	fbgt_cont.40757
-fbgt_else.40756:
-	add	%a0, %zero, %k1
-fbgt_cont.40757:
-	beqi	%a0, 0, bnei_else.40758
-	fbne	%f22, %fzero, fbeq_else.40760
-	add	%a0, %zero, %k1
-	j	fbeq_cont.40761
-fbeq_else.40760:
-	add	%a0, %zero, %zero
-fbeq_cont.40761:
-	beqi	%a0, 0, bnei_else.40762
-	add	%a0, %zero, %zero
-	j	bnei_cont.40755
-bnei_else.40762:
-	add	%a0, %zero, %k1
-bnei_cont.40763:
-	j	bnei_cont.40755
-bnei_else.40758:
-	add	%a0, %zero, %zero
-bnei_cont.40759:
-	j	bnei_cont.40755
-bnei_else.40754:
-	add	%a0, %zero, %zero
-bnei_cont.40755:
-	beqi	%a0, 0, bnei_else.40764
-	fsw	%f23, 135(%zero)
-	addi	%a0, %zero, 2
-	j	bnei_cont.40765
-bnei_else.40764:
-	flw	%f0, 4(%a2)
-	fsub	%f0, %f0, %f18
-	flw	%f18, 5(%a2)
-	fmul	%f1, %f0, %f18
-	fmul	%f0, %f1, %f21
-	fadd	%f0, %f0, %f20
-	fabs	%f0, %f0
-	fblt	%f0, %f2, fbgt_else.40766
-	add	%a0, %zero, %zero
-	j	fbgt_cont.40767
-fbgt_else.40766:
-	add	%a0, %zero, %k1
-fbgt_cont.40767:
-	beqi	%a0, 0, bnei_else.40768
-	fmul	%f0, %f1, %f19
-	fadd	%f0, %f0, %f16
-	fabs	%f0, %f0
-	fblt	%f0, %f17, fbgt_else.40770
-	add	%a0, %zero, %zero
-	j	fbgt_cont.40771
-fbgt_else.40770:
-	add	%a0, %zero, %k1
-fbgt_cont.40771:
-	beqi	%a0, 0, bnei_else.40772
-	fbne	%f18, %fzero, fbeq_else.40774
-	add	%a0, %zero, %k1
-	j	fbeq_cont.40775
-fbeq_else.40774:
-	add	%a0, %zero, %zero
-fbeq_cont.40775:
-	beqi	%a0, 0, bnei_else.40776
-	add	%a0, %zero, %zero
-	j	bnei_cont.40769
-bnei_else.40776:
-	add	%a0, %zero, %k1
-bnei_cont.40777:
-	j	bnei_cont.40769
-bnei_else.40772:
-	add	%a0, %zero, %zero
-bnei_cont.40773:
-	j	bnei_cont.40769
-bnei_else.40768:
-	add	%a0, %zero, %zero
-bnei_cont.40769:
-	beqi	%a0, 0, bnei_else.40778
-	fsw	%f1, 135(%zero)
-	addi	%a0, %zero, 3
-	j	bnei_cont.40779
-bnei_else.40778:
-	add	%a0, %zero, %zero
-bnei_cont.40779:
-bnei_cont.40765:
-bnei_cont.40751:
-bnei_cont.40721:
-	beqi	%a0, 0, bnei_cont.40719
+	lw	%s5, 0(%t1)
+	lw	%v0, 0(%s5)
+	beqi	%v0, -1, bnei_else.29076
+	beqi	%v0, 99, bnei_else.29078
+	addi	%v1, %t0, 0
+	addi	%sp, %sp, 8
+	jal	solver_fast2.2877
+	addi	%sp, %sp, -8
+	beqi	%v0, 0, bnei_cont.29079
 	flw	%f1, 135(%zero)
 	flw	%f0, 137(%zero)
-	fblt	%f1, %f0, fbgt_else.40782
+	fblt	%f1, %f0, fbgt_else.29082
 	add	%a0, %zero, %zero
-	j	fbgt_cont.40783
-fbgt_else.40782:
+	j	fbgt_cont.29083
+fbgt_else.29082:
 	add	%a0, %zero, %k1
-fbgt_cont.40783:
-	beqi	%a0, 0, bnei_cont.40719
-	lw	%a0, 1(%s3)
-	beqi	%a0, -1, bnei_cont.40719
+fbgt_cont.29083:
+	beqi	%a0, 0, bnei_cont.29079
+	lw	%a0, 1(%s5)
+	beqi	%a0, -1, bnei_cont.29079
 	lw	%v1, 83(%a0)
 	addi	%a0, %t0, 0
 	addi	%v0, %zero, 0
-	addi	%sp, %sp, 7
+	addi	%sp, %sp, 8
 	jal	solve_each_element_fast.2948
-	addi	%sp, %sp, -7
-	lw	%a0, 2(%s3)
-	beqi	%a0, -1, bnei_cont.40719
+	addi	%sp, %sp, -8
+	lw	%a0, 2(%s5)
+	beqi	%a0, -1, bnei_cont.29079
 	lw	%v1, 83(%a0)
 	addi	%a0, %t0, 0
 	addi	%v0, %zero, 0
-	addi	%sp, %sp, 7
+	addi	%sp, %sp, 8
 	jal	solve_each_element_fast.2948
-	addi	%sp, %sp, -7
-	lw	%a0, 3(%s3)
-	beqi	%a0, -1, bnei_cont.40719
+	addi	%sp, %sp, -8
+	lw	%a0, 3(%s5)
+	beqi	%a0, -1, bnei_cont.29079
 	lw	%v1, 83(%a0)
 	addi	%a0, %t0, 0
 	addi	%v0, %zero, 0
-	addi	%sp, %sp, 7
+	addi	%sp, %sp, 8
 	jal	solve_each_element_fast.2948
-	addi	%sp, %sp, -7
-	lw	%a0, 4(%s3)
-	beqi	%a0, -1, bnei_cont.40719
+	addi	%sp, %sp, -8
+	lw	%a0, 4(%s5)
+	beqi	%a0, -1, bnei_cont.29079
 	lw	%v1, 83(%a0)
 	addi	%a0, %t0, 0
 	addi	%v0, %zero, 0
-	addi	%sp, %sp, 7
+	addi	%sp, %sp, 8
 	jal	solve_each_element_fast.2948
-	addi	%sp, %sp, -7
+	addi	%sp, %sp, -8
 	addi	%v0, %zero, 5
 	addi	%a0, %t0, 0
-	addi	%v1, %s3, 0
-	addi	%sp, %sp, 7
+	addi	%v1, %s5, 0
+	addi	%sp, %sp, 8
 	jal	solve_one_or_network_fast.2952
-	addi	%sp, %sp, -7
-	j	bnei_cont.40719
-bnei_else.40792:
-bnei_cont.40793:
-	j	bnei_cont.40719
-bnei_else.40790:
-bnei_cont.40791:
-	j	bnei_cont.40719
-bnei_else.40788:
-bnei_cont.40789:
-	j	bnei_cont.40719
-bnei_else.40786:
-bnei_cont.40787:
-	j	bnei_cont.40719
-bnei_else.40784:
-bnei_cont.40785:
-	j	bnei_cont.40719
-bnei_else.40780:
-bnei_cont.40781:
-	j	bnei_cont.40719
-bnei_else.40718:
-	lw	%a0, 1(%s3)
-	beqi	%a0, -1, bnei_else.40794
+	addi	%sp, %sp, -8
+	j	bnei_cont.29079
+bnei_else.29092:
+bnei_cont.29093:
+	j	bnei_cont.29079
+bnei_else.29090:
+bnei_cont.29091:
+	j	bnei_cont.29079
+bnei_else.29088:
+bnei_cont.29089:
+	j	bnei_cont.29079
+bnei_else.29086:
+bnei_cont.29087:
+	j	bnei_cont.29079
+bnei_else.29084:
+bnei_cont.29085:
+	j	bnei_cont.29079
+bnei_else.29080:
+bnei_cont.29081:
+	j	bnei_cont.29079
+bnei_else.29078:
+	lw	%a0, 1(%s5)
+	beqi	%a0, -1, bnei_else.29094
 	lw	%v1, 83(%a0)
 	addi	%a0, %t0, 0
 	addi	%v0, %zero, 0
-	addi	%sp, %sp, 7
+	addi	%sp, %sp, 8
 	jal	solve_each_element_fast.2948
-	addi	%sp, %sp, -7
-	lw	%a0, 2(%s3)
-	beqi	%a0, -1, bnei_cont.40795
+	addi	%sp, %sp, -8
+	lw	%a0, 2(%s5)
+	beqi	%a0, -1, bnei_cont.29095
 	lw	%v1, 83(%a0)
 	addi	%a0, %t0, 0
 	addi	%v0, %zero, 0
-	addi	%sp, %sp, 7
+	addi	%sp, %sp, 8
 	jal	solve_each_element_fast.2948
-	addi	%sp, %sp, -7
-	lw	%a0, 3(%s3)
-	beqi	%a0, -1, bnei_cont.40795
+	addi	%sp, %sp, -8
+	lw	%a0, 3(%s5)
+	beqi	%a0, -1, bnei_cont.29095
 	lw	%v1, 83(%a0)
 	addi	%a0, %t0, 0
 	addi	%v0, %zero, 0
-	addi	%sp, %sp, 7
+	addi	%sp, %sp, 8
 	jal	solve_each_element_fast.2948
-	addi	%sp, %sp, -7
-	lw	%a0, 4(%s3)
-	beqi	%a0, -1, bnei_cont.40795
+	addi	%sp, %sp, -8
+	lw	%a0, 4(%s5)
+	beqi	%a0, -1, bnei_cont.29095
 	lw	%v1, 83(%a0)
 	addi	%a0, %t0, 0
 	addi	%v0, %zero, 0
-	addi	%sp, %sp, 7
+	addi	%sp, %sp, 8
 	jal	solve_each_element_fast.2948
-	addi	%sp, %sp, -7
+	addi	%sp, %sp, -8
 	addi	%v0, %zero, 5
 	addi	%a0, %t0, 0
-	addi	%v1, %s3, 0
-	addi	%sp, %sp, 7
+	addi	%v1, %s5, 0
+	addi	%sp, %sp, 8
 	jal	solve_one_or_network_fast.2952
-	addi	%sp, %sp, -7
-	j	bnei_cont.40795
-bnei_else.40800:
-bnei_cont.40801:
-	j	bnei_cont.40795
-bnei_else.40798:
-bnei_cont.40799:
-	j	bnei_cont.40795
-bnei_else.40796:
-bnei_cont.40797:
-	j	bnei_cont.40795
-bnei_else.40794:
-bnei_cont.40795:
-bnei_cont.40719:
+	addi	%sp, %sp, -8
+	j	bnei_cont.29095
+bnei_else.29100:
+bnei_cont.29101:
+	j	bnei_cont.29095
+bnei_else.29098:
+bnei_cont.29099:
+	j	bnei_cont.29095
+bnei_else.29096:
+bnei_cont.29097:
+	j	bnei_cont.29095
+bnei_else.29094:
+bnei_cont.29095:
+bnei_cont.29079:
 	addi	%a0, %t0, 0
 	addi	%v1, %t1, 0
 	addi	%v0, %k1, 0
-	addi	%sp, %sp, 7
+	addi	%sp, %sp, 8
 	jal	trace_or_matrix_fast.2956
-	addi	%sp, %sp, -7
-	j	bnei_cont.40717
-bnei_else.40716:
-bnei_cont.40717:
+	addi	%sp, %sp, -8
+	j	bnei_cont.29077
+bnei_else.29076:
+bnei_cont.29077:
 	flw	%f1, 137(%zero)
-	flw	%f0, 465(%zero)
-	fblt	%f0, %f1, fbgt_else.40802
+	flw	%f0, 455(%zero)
+	fblt	%f0, %f1, fbgt_else.29102
 	add	%a0, %zero, %zero
-	j	fbgt_cont.40803
-fbgt_else.40802:
+	j	fbgt_cont.29103
+fbgt_else.29102:
 	add	%a0, %zero, %k1
-fbgt_cont.40803:
-	beqi	%a0, 0, bnei_else.40804
-	flw	%f0, 444(%zero)
-	fblt	%f1, %f0, fbgt_else.40806
+fbgt_cont.29103:
+	beqi	%a0, 0, bnei_else.29104
+	flw	%f0, 442(%zero)
+	fblt	%f1, %f0, fbgt_else.29106
 	add	%a0, %zero, %zero
-	j	bnei_cont.40805
-fbgt_else.40806:
+	j	bnei_cont.29105
+fbgt_else.29106:
 	add	%a0, %zero, %k1
-fbgt_cont.40807:
-	j	bnei_cont.40805
-bnei_else.40804:
+fbgt_cont.29107:
+	j	bnei_cont.29105
+bnei_else.29104:
 	add	%a0, %zero, %zero
-bnei_cont.40805:
-	beqi	%a0, 0, bnei_cont.40715
+bnei_cont.29105:
+	beqi	%a0, 0, bnei_cont.29075
 	lw	%a0, 141(%zero)
-	lw	%s7, 12(%a0)
+	lw	%t2, 12(%a0)
 	lw	%a2, 0(%t0)
-	lw	%a0, 1(%s7)
-	beqi	%a0, 1, bnei_else.40810
-	beqi	%a0, 2, bnei_else.40812
-	flw	%f1, 138(%zero)
-	lw	%a0, 5(%s7)
-	flw	%f0, 0(%a0)
-	fsub	%f18, %f1, %f0
-	flw	%f1, 139(%zero)
-	lw	%a0, 5(%s7)
-	flw	%f0, 1(%a0)
-	fsub	%f19, %f1, %f0
-	flw	%f1, 140(%zero)
-	lw	%a0, 5(%s7)
-	flw	%f0, 2(%a0)
-	fsub	%f22, %f1, %f0
-	lw	%a0, 4(%s7)
-	flw	%f0, 0(%a0)
-	fmul	%f23, %f18, %f0
-	lw	%a0, 4(%s7)
-	flw	%f0, 1(%a0)
-	fmul	%f21, %f19, %f0
-	lw	%a0, 4(%s7)
-	flw	%f0, 2(%a0)
-	fmul	%f17, %f22, %f0
-	lw	%a0, 3(%s7)
-	beqi	%a0, 0, bnei_else.40814
-	lw	%a0, 9(%s7)
-	flw	%f16, 2(%a0)
-	fmul	%f1, %f19, %f16
-	lw	%a0, 9(%s7)
-	flw	%f20, 1(%a0)
-	fmul	%f0, %f22, %f20
-	fadd	%f0, %f1, %f0
-	flw	%f2, 473(%zero)
-	fmul	%f0, %f0, %f2
-	fadd	%f0, %f23, %f0
-	fsw	%f0, 142(%zero)
-	fmul	%f1, %f18, %f16
-	lw	%a0, 9(%s7)
-	flw	%f16, 0(%a0)
-	fmul	%f0, %f22, %f16
-	fadd	%f0, %f1, %f0
-	fmul	%f0, %f0, %f2
-	fadd	%f0, %f21, %f0
-	fsw	%f0, 143(%zero)
-	fmul	%f1, %f18, %f20
-	fmul	%f0, %f19, %f16
-	fadd	%f0, %f1, %f0
-	fmul	%f0, %f0, %f2
-	fadd	%f0, %f17, %f0
-	fsw	%f0, 144(%zero)
-	j	bnei_cont.40815
-bnei_else.40814:
-	fsw	%f23, 142(%zero)
-	fsw	%f21, 143(%zero)
-	fsw	%f17, 144(%zero)
-bnei_cont.40815:
-	lw	%a1, 6(%s7)
-	flw	%f18, 142(%zero)
-	fmul	%f1, %f18, %f18
-	flw	%f17, 143(%zero)
-	fmul	%f0, %f17, %f17
-	fadd	%f1, %f1, %f0
-	flw	%f16, 144(%zero)
-	fmul	%f0, %f16, %f16
-	fadd	%f0, %f1, %f0
-	fsqrt	%f1, %f0
-	fbne	%f1, %fzero, fbeq_else.40816
-	add	%a0, %zero, %k1
-	j	fbeq_cont.40817
-fbeq_else.40816:
-	add	%a0, %zero, %zero
-fbeq_cont.40817:
-	beqi	%a0, 0, bnei_else.40818
-	fmov	%f0, %f30
-	j	bnei_cont.40819
-bnei_else.40818:
-	beqi	%a1, 0, bnei_else.40820
-	flw	%f0, 468(%zero)
-	fdiv	%f0, %f0, %f1
-	j	bnei_cont.40821
-bnei_else.40820:
-	fdiv	%f0, %f30, %f1
-bnei_cont.40821:
-bnei_cont.40819:
-	fmul	%f1, %f18, %f0
-	fsw	%f1, 142(%zero)
-	fmul	%f1, %f17, %f0
-	fsw	%f1, 143(%zero)
-	fmul	%f0, %f16, %f0
-	fsw	%f0, 144(%zero)
-	j	bnei_cont.40811
-bnei_else.40812:
-	lw	%a0, 4(%s7)
+	lw	%a0, 1(%t2)
+	beqi	%a0, 1, bnei_else.29110
+	beqi	%a0, 2, bnei_else.29112
+	addi	%v0, %t2, 0
+	addi	%sp, %sp, 8
+	jal	get_nvector_second.2966
+	addi	%sp, %sp, -8
+	j	bnei_cont.29111
+bnei_else.29112:
+	lw	%a0, 4(%t2)
 	flw	%f0, 0(%a0)
 	fneg	%f0, %f0
 	fsw	%f0, 142(%zero)
-	lw	%a0, 4(%s7)
+	lw	%a0, 4(%t2)
 	flw	%f0, 1(%a0)
 	fneg	%f0, %f0
 	fsw	%f0, 143(%zero)
-	lw	%a0, 4(%s7)
+	lw	%a0, 4(%t2)
 	flw	%f0, 2(%a0)
 	fneg	%f0, %f0
 	fsw	%f0, 144(%zero)
-bnei_cont.40813:
-	j	bnei_cont.40811
-bnei_else.40810:
+bnei_cont.29113:
+	j	bnei_cont.29111
+bnei_else.29110:
 	lw	%a0, 136(%zero)
 	fsw	%fzero, 142(%zero)
 	fsw	%fzero, 143(%zero)
@@ -11196,45 +10167,45 @@ bnei_else.40810:
 	addi	%a1, %a0, -1
 	add	%at, %a2, %a1
 	flw	%f0, 0(%at)
-	fbne	%f0, %fzero, fbeq_else.40822
+	fbne	%f0, %fzero, fbeq_else.29114
 	add	%a0, %zero, %k1
-	j	fbeq_cont.40823
-fbeq_else.40822:
+	j	fbeq_cont.29115
+fbeq_else.29114:
 	add	%a0, %zero, %zero
-fbeq_cont.40823:
-	beqi	%a0, 0, bnei_else.40824
+fbeq_cont.29115:
+	beqi	%a0, 0, bnei_else.29116
 	fmov	%f0, %fzero
-	j	bnei_cont.40825
-bnei_else.40824:
-	fblt	%fzero, %f0, fbgt_else.40826
+	j	bnei_cont.29117
+bnei_else.29116:
+	fblt	%fzero, %f0, fbgt_else.29118
 	add	%a0, %zero, %zero
-	j	fbgt_cont.40827
-fbgt_else.40826:
+	j	fbgt_cont.29119
+fbgt_else.29118:
 	add	%a0, %zero, %k1
-fbgt_cont.40827:
-	beqi	%a0, 0, bnei_else.40828
+fbgt_cont.29119:
+	beqi	%a0, 0, bnei_else.29120
 	fmov	%f0, %f30
-	j	bnei_cont.40829
-bnei_else.40828:
-	flw	%f0, 468(%zero)
-bnei_cont.40829:
-bnei_cont.40825:
+	j	bnei_cont.29121
+bnei_else.29120:
+	flw	%f0, 458(%zero)
+bnei_cont.29121:
+bnei_cont.29117:
 	fneg	%f0, %f0
 	fsw	%f0, 142(%a1)
-bnei_cont.40811:
+bnei_cont.29111:
 	addi	%v1, %zero, 138
-	addi	%v0, %s7, 0
-	addi	%sp, %sp, 7
+	addi	%v0, %t2, 0
+	addi	%sp, %sp, 8
 	jal	utexture.2971
-	addi	%sp, %sp, -7
+	addi	%sp, %sp, -8
 	addi	%v1, %t1, 0
 	addi	%v0, %zero, 0
-	addi	%sp, %sp, 7
+	addi	%sp, %sp, 8
 	jal	shadow_check_one_or_matrix.2931
-	addi	%sp, %sp, -7
-	beqi	%v0, 0, bnei_else.40830
-	j	bnei_cont.40715
-bnei_else.40830:
+	addi	%sp, %sp, -8
+	beqi	%v0, 0, bnei_else.29122
+	j	bnei_cont.29075
+bnei_else.29122:
 	flw	%f1, 142(%zero)
 	flw	%f0, 78(%zero)
 	fmul	%f16, %f1, %f0
@@ -11247,19 +10218,19 @@ bnei_else.40830:
 	fmul	%f0, %f1, %f0
 	fadd	%f0, %f16, %f0
 	fneg	%f0, %f0
-	fblt	%fzero, %f0, fbgt_else.40832
+	fblt	%fzero, %f0, fbgt_else.29124
 	add	%a0, %zero, %zero
-	j	fbgt_cont.40833
-fbgt_else.40832:
+	j	fbgt_cont.29125
+fbgt_else.29124:
 	add	%a0, %zero, %k1
-fbgt_cont.40833:
-	beqi	%a0, 0, bnei_else.40834
-	j	bnei_cont.40835
-bnei_else.40834:
+fbgt_cont.29125:
+	beqi	%a0, 0, bnei_else.29126
+	j	bnei_cont.29127
+bnei_else.29126:
 	fmov	%f0, %fzero
-bnei_cont.40835:
+bnei_cont.29127:
 	fmul	%f1, %f28, %f0
-	lw	%a0, 7(%s7)
+	lw	%a0, 7(%t2)
 	flw	%f0, 0(%a0)
 	fmul	%f16, %f1, %f0
 	flw	%f1, 148(%zero)
@@ -11277,529 +10248,201 @@ bnei_cont.40835:
 	fmul	%f0, %f16, %f0
 	fadd	%f0, %f1, %f0
 	fsw	%f0, 150(%zero)
-bnei_cont.40831:
-	j	bnei_cont.40715
-bnei_else.40808:
-bnei_cont.40809:
-	j	bnei_cont.40715
-bnei_else.40714:
-	flw	%f0, 439(%zero)
+bnei_cont.29123:
+	j	bnei_cont.29075
+bnei_else.29108:
+bnei_cont.29109:
+	j	bnei_cont.29075
+bnei_else.29074:
+	flw	%f0, 437(%zero)
 	fdiv	%f28, %f1, %f0
-	flw	%f0, 445(%zero)
+	flw	%f0, 443(%zero)
 	fsw	%f0, 137(%zero)
 	lw	%t1, 134(%zero)
-	lw	%s3, 0(%t1)
-	lw	%a2, 0(%s3)
-	beqi	%a2, -1, bnei_else.40836
-	beqi	%a2, 99, bnei_else.40838
-	lw	%a3, 12(%a2)
-	lw	%a1, 10(%a3)
-	flw	%f20, 0(%a1)
-	flw	%f16, 1(%a1)
-	flw	%f18, 2(%a1)
-	lw	%a0, 1(%t0)
-	add	%at, %a0, %a2
-	lw	%a2, 0(%at)
-	lw	%a0, 1(%a3)
-	beqi	%a0, 1, bnei_else.40840
-	beqi	%a0, 2, bnei_else.40842
-	flw	%f17, 0(%a2)
-	fbne	%f17, %fzero, fbeq_else.40844
-	add	%a0, %zero, %k1
-	j	fbeq_cont.40845
-fbeq_else.40844:
-	add	%a0, %zero, %zero
-fbeq_cont.40845:
-	beqi	%a0, 0, bnei_else.40846
-	add	%a0, %zero, %zero
-	j	bnei_cont.40841
-bnei_else.40846:
-	flw	%f0, 1(%a2)
-	fmul	%f1, %f0, %f20
-	flw	%f0, 2(%a2)
-	fmul	%f0, %f0, %f16
-	fadd	%f1, %f1, %f0
-	flw	%f0, 3(%a2)
-	fmul	%f0, %f0, %f18
-	fadd	%f16, %f1, %f0
-	flw	%f0, 3(%a1)
-	fmul	%f1, %f16, %f16
-	fmul	%f0, %f17, %f0
-	fsub	%f0, %f1, %f0
-	fblt	%fzero, %f0, fbgt_else.40848
-	add	%a0, %zero, %zero
-	j	fbgt_cont.40849
-fbgt_else.40848:
-	add	%a0, %zero, %k1
-fbgt_cont.40849:
-	beqi	%a0, 0, bnei_else.40850
-	lw	%a0, 6(%a3)
-	beqi	%a0, 0, bnei_else.40852
-	fsqrt	%f0, %f0
-	fadd	%f1, %f16, %f0
-	flw	%f0, 4(%a2)
-	fmul	%f0, %f1, %f0
-	fsw	%f0, 135(%zero)
-	j	bnei_cont.40853
-bnei_else.40852:
-	fsqrt	%f0, %f0
-	fsub	%f1, %f16, %f0
-	flw	%f0, 4(%a2)
-	fmul	%f0, %f1, %f0
-	fsw	%f0, 135(%zero)
-bnei_cont.40853:
-	add	%a0, %zero, %k1
-	j	bnei_cont.40841
-bnei_else.40850:
-	add	%a0, %zero, %zero
-bnei_cont.40851:
-bnei_cont.40847:
-	j	bnei_cont.40841
-bnei_else.40842:
-	flw	%f1, 0(%a2)
-	fblt	%f1, %fzero, fbgt_else.40854
-	add	%a0, %zero, %zero
-	j	fbgt_cont.40855
-fbgt_else.40854:
-	add	%a0, %zero, %k1
-fbgt_cont.40855:
-	beqi	%a0, 0, bnei_else.40856
-	flw	%f0, 3(%a1)
-	fmul	%f0, %f1, %f0
-	fsw	%f0, 135(%zero)
-	add	%a0, %zero, %k1
-	j	bnei_cont.40841
-bnei_else.40856:
-	add	%a0, %zero, %zero
-bnei_cont.40857:
-bnei_cont.40843:
-	j	bnei_cont.40841
-bnei_else.40840:
-	lw	%a1, 0(%t0)
-	flw	%f0, 0(%a2)
-	fsub	%f0, %f0, %f20
-	flw	%f21, 1(%a2)
-	fmul	%f2, %f0, %f21
-	flw	%f19, 1(%a1)
-	fmul	%f0, %f2, %f19
-	fadd	%f0, %f0, %f16
-	fabs	%f0, %f0
-	lw	%a0, 4(%a3)
-	flw	%f17, 1(%a0)
-	fblt	%f0, %f17, fbgt_else.40858
-	add	%a0, %zero, %zero
-	j	fbgt_cont.40859
-fbgt_else.40858:
-	add	%a0, %zero, %k1
-fbgt_cont.40859:
-	beqi	%a0, 0, bnei_else.40860
-	flw	%f0, 2(%a1)
-	fmul	%f0, %f2, %f0
-	fadd	%f0, %f0, %f18
-	fabs	%f1, %f0
-	lw	%a0, 4(%a3)
-	flw	%f0, 2(%a0)
-	fblt	%f1, %f0, fbgt_else.40862
-	add	%a0, %zero, %zero
-	j	fbgt_cont.40863
-fbgt_else.40862:
-	add	%a0, %zero, %k1
-fbgt_cont.40863:
-	beqi	%a0, 0, bnei_else.40864
-	fbne	%f21, %fzero, fbeq_else.40866
-	add	%a0, %zero, %k1
-	j	fbeq_cont.40867
-fbeq_else.40866:
-	add	%a0, %zero, %zero
-fbeq_cont.40867:
-	beqi	%a0, 0, bnei_else.40868
-	add	%a0, %zero, %zero
-	j	bnei_cont.40861
-bnei_else.40868:
-	add	%a0, %zero, %k1
-bnei_cont.40869:
-	j	bnei_cont.40861
-bnei_else.40864:
-	add	%a0, %zero, %zero
-bnei_cont.40865:
-	j	bnei_cont.40861
-bnei_else.40860:
-	add	%a0, %zero, %zero
-bnei_cont.40861:
-	beqi	%a0, 0, bnei_else.40870
-	fsw	%f2, 135(%zero)
-	add	%a0, %zero, %k1
-	j	bnei_cont.40871
-bnei_else.40870:
-	flw	%f0, 2(%a2)
-	fsub	%f0, %f0, %f16
-	flw	%f22, 3(%a2)
-	fmul	%f23, %f0, %f22
-	flw	%f21, 0(%a1)
-	fmul	%f0, %f23, %f21
-	fadd	%f0, %f0, %f20
-	fabs	%f0, %f0
-	lw	%a0, 4(%a3)
-	flw	%f2, 0(%a0)
-	fblt	%f0, %f2, fbgt_else.40872
-	add	%a0, %zero, %zero
-	j	fbgt_cont.40873
-fbgt_else.40872:
-	add	%a0, %zero, %k1
-fbgt_cont.40873:
-	beqi	%a0, 0, bnei_else.40874
-	flw	%f0, 2(%a1)
-	fmul	%f0, %f23, %f0
-	fadd	%f0, %f0, %f18
-	fabs	%f1, %f0
-	lw	%a0, 4(%a3)
-	flw	%f0, 2(%a0)
-	fblt	%f1, %f0, fbgt_else.40876
-	add	%a0, %zero, %zero
-	j	fbgt_cont.40877
-fbgt_else.40876:
-	add	%a0, %zero, %k1
-fbgt_cont.40877:
-	beqi	%a0, 0, bnei_else.40878
-	fbne	%f22, %fzero, fbeq_else.40880
-	add	%a0, %zero, %k1
-	j	fbeq_cont.40881
-fbeq_else.40880:
-	add	%a0, %zero, %zero
-fbeq_cont.40881:
-	beqi	%a0, 0, bnei_else.40882
-	add	%a0, %zero, %zero
-	j	bnei_cont.40875
-bnei_else.40882:
-	add	%a0, %zero, %k1
-bnei_cont.40883:
-	j	bnei_cont.40875
-bnei_else.40878:
-	add	%a0, %zero, %zero
-bnei_cont.40879:
-	j	bnei_cont.40875
-bnei_else.40874:
-	add	%a0, %zero, %zero
-bnei_cont.40875:
-	beqi	%a0, 0, bnei_else.40884
-	fsw	%f23, 135(%zero)
-	addi	%a0, %zero, 2
-	j	bnei_cont.40885
-bnei_else.40884:
-	flw	%f0, 4(%a2)
-	fsub	%f0, %f0, %f18
-	flw	%f18, 5(%a2)
-	fmul	%f1, %f0, %f18
-	fmul	%f0, %f1, %f21
-	fadd	%f0, %f0, %f20
-	fabs	%f0, %f0
-	fblt	%f0, %f2, fbgt_else.40886
-	add	%a0, %zero, %zero
-	j	fbgt_cont.40887
-fbgt_else.40886:
-	add	%a0, %zero, %k1
-fbgt_cont.40887:
-	beqi	%a0, 0, bnei_else.40888
-	fmul	%f0, %f1, %f19
-	fadd	%f0, %f0, %f16
-	fabs	%f0, %f0
-	fblt	%f0, %f17, fbgt_else.40890
-	add	%a0, %zero, %zero
-	j	fbgt_cont.40891
-fbgt_else.40890:
-	add	%a0, %zero, %k1
-fbgt_cont.40891:
-	beqi	%a0, 0, bnei_else.40892
-	fbne	%f18, %fzero, fbeq_else.40894
-	add	%a0, %zero, %k1
-	j	fbeq_cont.40895
-fbeq_else.40894:
-	add	%a0, %zero, %zero
-fbeq_cont.40895:
-	beqi	%a0, 0, bnei_else.40896
-	add	%a0, %zero, %zero
-	j	bnei_cont.40889
-bnei_else.40896:
-	add	%a0, %zero, %k1
-bnei_cont.40897:
-	j	bnei_cont.40889
-bnei_else.40892:
-	add	%a0, %zero, %zero
-bnei_cont.40893:
-	j	bnei_cont.40889
-bnei_else.40888:
-	add	%a0, %zero, %zero
-bnei_cont.40889:
-	beqi	%a0, 0, bnei_else.40898
-	fsw	%f1, 135(%zero)
-	addi	%a0, %zero, 3
-	j	bnei_cont.40899
-bnei_else.40898:
-	add	%a0, %zero, %zero
-bnei_cont.40899:
-bnei_cont.40885:
-bnei_cont.40871:
-bnei_cont.40841:
-	beqi	%a0, 0, bnei_cont.40839
+	lw	%s5, 0(%t1)
+	lw	%v0, 0(%s5)
+	beqi	%v0, -1, bnei_else.29128
+	beqi	%v0, 99, bnei_else.29130
+	addi	%v1, %t0, 0
+	addi	%sp, %sp, 8
+	jal	solver_fast2.2877
+	addi	%sp, %sp, -8
+	beqi	%v0, 0, bnei_cont.29131
 	flw	%f1, 135(%zero)
 	flw	%f0, 137(%zero)
-	fblt	%f1, %f0, fbgt_else.40902
+	fblt	%f1, %f0, fbgt_else.29134
 	add	%a0, %zero, %zero
-	j	fbgt_cont.40903
-fbgt_else.40902:
+	j	fbgt_cont.29135
+fbgt_else.29134:
 	add	%a0, %zero, %k1
-fbgt_cont.40903:
-	beqi	%a0, 0, bnei_cont.40839
-	lw	%a0, 1(%s3)
-	beqi	%a0, -1, bnei_cont.40839
+fbgt_cont.29135:
+	beqi	%a0, 0, bnei_cont.29131
+	lw	%a0, 1(%s5)
+	beqi	%a0, -1, bnei_cont.29131
 	lw	%v1, 83(%a0)
 	addi	%a0, %t0, 0
 	addi	%v0, %zero, 0
-	addi	%sp, %sp, 7
+	addi	%sp, %sp, 8
 	jal	solve_each_element_fast.2948
-	addi	%sp, %sp, -7
-	lw	%a0, 2(%s3)
-	beqi	%a0, -1, bnei_cont.40839
+	addi	%sp, %sp, -8
+	lw	%a0, 2(%s5)
+	beqi	%a0, -1, bnei_cont.29131
 	lw	%v1, 83(%a0)
 	addi	%a0, %t0, 0
 	addi	%v0, %zero, 0
-	addi	%sp, %sp, 7
+	addi	%sp, %sp, 8
 	jal	solve_each_element_fast.2948
-	addi	%sp, %sp, -7
-	lw	%a0, 3(%s3)
-	beqi	%a0, -1, bnei_cont.40839
+	addi	%sp, %sp, -8
+	lw	%a0, 3(%s5)
+	beqi	%a0, -1, bnei_cont.29131
 	lw	%v1, 83(%a0)
 	addi	%a0, %t0, 0
 	addi	%v0, %zero, 0
-	addi	%sp, %sp, 7
+	addi	%sp, %sp, 8
 	jal	solve_each_element_fast.2948
-	addi	%sp, %sp, -7
-	lw	%a0, 4(%s3)
-	beqi	%a0, -1, bnei_cont.40839
+	addi	%sp, %sp, -8
+	lw	%a0, 4(%s5)
+	beqi	%a0, -1, bnei_cont.29131
 	lw	%v1, 83(%a0)
 	addi	%a0, %t0, 0
 	addi	%v0, %zero, 0
-	addi	%sp, %sp, 7
+	addi	%sp, %sp, 8
 	jal	solve_each_element_fast.2948
-	addi	%sp, %sp, -7
+	addi	%sp, %sp, -8
 	addi	%v0, %zero, 5
 	addi	%a0, %t0, 0
-	addi	%v1, %s3, 0
-	addi	%sp, %sp, 7
+	addi	%v1, %s5, 0
+	addi	%sp, %sp, 8
 	jal	solve_one_or_network_fast.2952
-	addi	%sp, %sp, -7
-	j	bnei_cont.40839
-bnei_else.40912:
-bnei_cont.40913:
-	j	bnei_cont.40839
-bnei_else.40910:
-bnei_cont.40911:
-	j	bnei_cont.40839
-bnei_else.40908:
-bnei_cont.40909:
-	j	bnei_cont.40839
-bnei_else.40906:
-bnei_cont.40907:
-	j	bnei_cont.40839
-bnei_else.40904:
-bnei_cont.40905:
-	j	bnei_cont.40839
-bnei_else.40900:
-bnei_cont.40901:
-	j	bnei_cont.40839
-bnei_else.40838:
-	lw	%a0, 1(%s3)
-	beqi	%a0, -1, bnei_else.40914
+	addi	%sp, %sp, -8
+	j	bnei_cont.29131
+bnei_else.29144:
+bnei_cont.29145:
+	j	bnei_cont.29131
+bnei_else.29142:
+bnei_cont.29143:
+	j	bnei_cont.29131
+bnei_else.29140:
+bnei_cont.29141:
+	j	bnei_cont.29131
+bnei_else.29138:
+bnei_cont.29139:
+	j	bnei_cont.29131
+bnei_else.29136:
+bnei_cont.29137:
+	j	bnei_cont.29131
+bnei_else.29132:
+bnei_cont.29133:
+	j	bnei_cont.29131
+bnei_else.29130:
+	lw	%a0, 1(%s5)
+	beqi	%a0, -1, bnei_else.29146
 	lw	%v1, 83(%a0)
 	addi	%a0, %t0, 0
 	addi	%v0, %zero, 0
-	addi	%sp, %sp, 7
+	addi	%sp, %sp, 8
 	jal	solve_each_element_fast.2948
-	addi	%sp, %sp, -7
-	lw	%a0, 2(%s3)
-	beqi	%a0, -1, bnei_cont.40915
+	addi	%sp, %sp, -8
+	lw	%a0, 2(%s5)
+	beqi	%a0, -1, bnei_cont.29147
 	lw	%v1, 83(%a0)
 	addi	%a0, %t0, 0
 	addi	%v0, %zero, 0
-	addi	%sp, %sp, 7
+	addi	%sp, %sp, 8
 	jal	solve_each_element_fast.2948
-	addi	%sp, %sp, -7
-	lw	%a0, 3(%s3)
-	beqi	%a0, -1, bnei_cont.40915
+	addi	%sp, %sp, -8
+	lw	%a0, 3(%s5)
+	beqi	%a0, -1, bnei_cont.29147
 	lw	%v1, 83(%a0)
 	addi	%a0, %t0, 0
 	addi	%v0, %zero, 0
-	addi	%sp, %sp, 7
+	addi	%sp, %sp, 8
 	jal	solve_each_element_fast.2948
-	addi	%sp, %sp, -7
-	lw	%a0, 4(%s3)
-	beqi	%a0, -1, bnei_cont.40915
+	addi	%sp, %sp, -8
+	lw	%a0, 4(%s5)
+	beqi	%a0, -1, bnei_cont.29147
 	lw	%v1, 83(%a0)
 	addi	%a0, %t0, 0
 	addi	%v0, %zero, 0
-	addi	%sp, %sp, 7
+	addi	%sp, %sp, 8
 	jal	solve_each_element_fast.2948
-	addi	%sp, %sp, -7
+	addi	%sp, %sp, -8
 	addi	%v0, %zero, 5
 	addi	%a0, %t0, 0
-	addi	%v1, %s3, 0
-	addi	%sp, %sp, 7
+	addi	%v1, %s5, 0
+	addi	%sp, %sp, 8
 	jal	solve_one_or_network_fast.2952
-	addi	%sp, %sp, -7
-	j	bnei_cont.40915
-bnei_else.40920:
-bnei_cont.40921:
-	j	bnei_cont.40915
-bnei_else.40918:
-bnei_cont.40919:
-	j	bnei_cont.40915
-bnei_else.40916:
-bnei_cont.40917:
-	j	bnei_cont.40915
-bnei_else.40914:
-bnei_cont.40915:
-bnei_cont.40839:
+	addi	%sp, %sp, -8
+	j	bnei_cont.29147
+bnei_else.29152:
+bnei_cont.29153:
+	j	bnei_cont.29147
+bnei_else.29150:
+bnei_cont.29151:
+	j	bnei_cont.29147
+bnei_else.29148:
+bnei_cont.29149:
+	j	bnei_cont.29147
+bnei_else.29146:
+bnei_cont.29147:
+bnei_cont.29131:
 	addi	%a0, %t0, 0
 	addi	%v1, %t1, 0
 	addi	%v0, %k1, 0
-	addi	%sp, %sp, 7
+	addi	%sp, %sp, 8
 	jal	trace_or_matrix_fast.2956
-	addi	%sp, %sp, -7
-	j	bnei_cont.40837
-bnei_else.40836:
-bnei_cont.40837:
+	addi	%sp, %sp, -8
+	j	bnei_cont.29129
+bnei_else.29128:
+bnei_cont.29129:
 	flw	%f1, 137(%zero)
-	flw	%f0, 465(%zero)
-	fblt	%f0, %f1, fbgt_else.40922
+	flw	%f0, 455(%zero)
+	fblt	%f0, %f1, fbgt_else.29154
 	add	%a0, %zero, %zero
-	j	fbgt_cont.40923
-fbgt_else.40922:
+	j	fbgt_cont.29155
+fbgt_else.29154:
 	add	%a0, %zero, %k1
-fbgt_cont.40923:
-	beqi	%a0, 0, bnei_else.40924
-	flw	%f0, 444(%zero)
-	fblt	%f1, %f0, fbgt_else.40926
+fbgt_cont.29155:
+	beqi	%a0, 0, bnei_else.29156
+	flw	%f0, 442(%zero)
+	fblt	%f1, %f0, fbgt_else.29158
 	add	%a0, %zero, %zero
-	j	bnei_cont.40925
-fbgt_else.40926:
+	j	bnei_cont.29157
+fbgt_else.29158:
 	add	%a0, %zero, %k1
-fbgt_cont.40927:
-	j	bnei_cont.40925
-bnei_else.40924:
+fbgt_cont.29159:
+	j	bnei_cont.29157
+bnei_else.29156:
 	add	%a0, %zero, %zero
-bnei_cont.40925:
-	beqi	%a0, 0, bnei_else.40928
+bnei_cont.29157:
+	beqi	%a0, 0, bnei_else.29160
 	lw	%a0, 141(%zero)
-	lw	%s7, 12(%a0)
+	lw	%t2, 12(%a0)
 	lw	%a2, 0(%t0)
-	lw	%a0, 1(%s7)
-	beqi	%a0, 1, bnei_else.40930
-	beqi	%a0, 2, bnei_else.40932
-	flw	%f1, 138(%zero)
-	lw	%a0, 5(%s7)
-	flw	%f0, 0(%a0)
-	fsub	%f18, %f1, %f0
-	flw	%f1, 139(%zero)
-	lw	%a0, 5(%s7)
-	flw	%f0, 1(%a0)
-	fsub	%f19, %f1, %f0
-	flw	%f1, 140(%zero)
-	lw	%a0, 5(%s7)
-	flw	%f0, 2(%a0)
-	fsub	%f22, %f1, %f0
-	lw	%a0, 4(%s7)
-	flw	%f0, 0(%a0)
-	fmul	%f23, %f18, %f0
-	lw	%a0, 4(%s7)
-	flw	%f0, 1(%a0)
-	fmul	%f21, %f19, %f0
-	lw	%a0, 4(%s7)
-	flw	%f0, 2(%a0)
-	fmul	%f17, %f22, %f0
-	lw	%a0, 3(%s7)
-	beqi	%a0, 0, bnei_else.40934
-	lw	%a0, 9(%s7)
-	flw	%f16, 2(%a0)
-	fmul	%f1, %f19, %f16
-	lw	%a0, 9(%s7)
-	flw	%f20, 1(%a0)
-	fmul	%f0, %f22, %f20
-	fadd	%f0, %f1, %f0
-	flw	%f2, 473(%zero)
-	fmul	%f0, %f0, %f2
-	fadd	%f0, %f23, %f0
-	fsw	%f0, 142(%zero)
-	fmul	%f1, %f18, %f16
-	lw	%a0, 9(%s7)
-	flw	%f16, 0(%a0)
-	fmul	%f0, %f22, %f16
-	fadd	%f0, %f1, %f0
-	fmul	%f0, %f0, %f2
-	fadd	%f0, %f21, %f0
-	fsw	%f0, 143(%zero)
-	fmul	%f1, %f18, %f20
-	fmul	%f0, %f19, %f16
-	fadd	%f0, %f1, %f0
-	fmul	%f0, %f0, %f2
-	fadd	%f0, %f17, %f0
-	fsw	%f0, 144(%zero)
-	j	bnei_cont.40935
-bnei_else.40934:
-	fsw	%f23, 142(%zero)
-	fsw	%f21, 143(%zero)
-	fsw	%f17, 144(%zero)
-bnei_cont.40935:
-	lw	%a1, 6(%s7)
-	flw	%f18, 142(%zero)
-	fmul	%f1, %f18, %f18
-	flw	%f17, 143(%zero)
-	fmul	%f0, %f17, %f17
-	fadd	%f1, %f1, %f0
-	flw	%f16, 144(%zero)
-	fmul	%f0, %f16, %f16
-	fadd	%f0, %f1, %f0
-	fsqrt	%f1, %f0
-	fbne	%f1, %fzero, fbeq_else.40936
-	add	%a0, %zero, %k1
-	j	fbeq_cont.40937
-fbeq_else.40936:
-	add	%a0, %zero, %zero
-fbeq_cont.40937:
-	beqi	%a0, 0, bnei_else.40938
-	fmov	%f0, %f30
-	j	bnei_cont.40939
-bnei_else.40938:
-	beqi	%a1, 0, bnei_else.40940
-	flw	%f0, 468(%zero)
-	fdiv	%f0, %f0, %f1
-	j	bnei_cont.40941
-bnei_else.40940:
-	fdiv	%f0, %f30, %f1
-bnei_cont.40941:
-bnei_cont.40939:
-	fmul	%f1, %f18, %f0
-	fsw	%f1, 142(%zero)
-	fmul	%f1, %f17, %f0
-	fsw	%f1, 143(%zero)
-	fmul	%f0, %f16, %f0
-	fsw	%f0, 144(%zero)
-	j	bnei_cont.40931
-bnei_else.40932:
-	lw	%a0, 4(%s7)
+	lw	%a0, 1(%t2)
+	beqi	%a0, 1, bnei_else.29162
+	beqi	%a0, 2, bnei_else.29164
+	addi	%v0, %t2, 0
+	addi	%sp, %sp, 8
+	jal	get_nvector_second.2966
+	addi	%sp, %sp, -8
+	j	bnei_cont.29163
+bnei_else.29164:
+	lw	%a0, 4(%t2)
 	flw	%f0, 0(%a0)
 	fneg	%f0, %f0
 	fsw	%f0, 142(%zero)
-	lw	%a0, 4(%s7)
+	lw	%a0, 4(%t2)
 	flw	%f0, 1(%a0)
 	fneg	%f0, %f0
 	fsw	%f0, 143(%zero)
-	lw	%a0, 4(%s7)
+	lw	%a0, 4(%t2)
 	flw	%f0, 2(%a0)
 	fneg	%f0, %f0
 	fsw	%f0, 144(%zero)
-bnei_cont.40933:
-	j	bnei_cont.40931
-bnei_else.40930:
+bnei_cont.29165:
+	j	bnei_cont.29163
+bnei_else.29162:
 	lw	%a0, 136(%zero)
 	fsw	%fzero, 142(%zero)
 	fsw	%fzero, 143(%zero)
@@ -11807,45 +10450,45 @@ bnei_else.40930:
 	addi	%a1, %a0, -1
 	add	%at, %a2, %a1
 	flw	%f0, 0(%at)
-	fbne	%f0, %fzero, fbeq_else.40942
+	fbne	%f0, %fzero, fbeq_else.29166
 	add	%a0, %zero, %k1
-	j	fbeq_cont.40943
-fbeq_else.40942:
+	j	fbeq_cont.29167
+fbeq_else.29166:
 	add	%a0, %zero, %zero
-fbeq_cont.40943:
-	beqi	%a0, 0, bnei_else.40944
+fbeq_cont.29167:
+	beqi	%a0, 0, bnei_else.29168
 	fmov	%f0, %fzero
-	j	bnei_cont.40945
-bnei_else.40944:
-	fblt	%fzero, %f0, fbgt_else.40946
+	j	bnei_cont.29169
+bnei_else.29168:
+	fblt	%fzero, %f0, fbgt_else.29170
 	add	%a0, %zero, %zero
-	j	fbgt_cont.40947
-fbgt_else.40946:
+	j	fbgt_cont.29171
+fbgt_else.29170:
 	add	%a0, %zero, %k1
-fbgt_cont.40947:
-	beqi	%a0, 0, bnei_else.40948
+fbgt_cont.29171:
+	beqi	%a0, 0, bnei_else.29172
 	fmov	%f0, %f30
-	j	bnei_cont.40949
-bnei_else.40948:
-	flw	%f0, 468(%zero)
-bnei_cont.40949:
-bnei_cont.40945:
+	j	bnei_cont.29173
+bnei_else.29172:
+	flw	%f0, 458(%zero)
+bnei_cont.29173:
+bnei_cont.29169:
 	fneg	%f0, %f0
 	fsw	%f0, 142(%a1)
-bnei_cont.40931:
+bnei_cont.29163:
 	addi	%v1, %zero, 138
-	addi	%v0, %s7, 0
-	addi	%sp, %sp, 7
+	addi	%v0, %t2, 0
+	addi	%sp, %sp, 8
 	jal	utexture.2971
-	addi	%sp, %sp, -7
+	addi	%sp, %sp, -8
 	addi	%v1, %t1, 0
 	addi	%v0, %zero, 0
-	addi	%sp, %sp, 7
+	addi	%sp, %sp, 8
 	jal	shadow_check_one_or_matrix.2931
-	addi	%sp, %sp, -7
-	beqi	%v0, 0, bnei_else.40950
-	j	bnei_cont.40929
-bnei_else.40950:
+	addi	%sp, %sp, -8
+	beqi	%v0, 0, bnei_else.29174
+	j	bnei_cont.29161
+bnei_else.29174:
 	flw	%f1, 142(%zero)
 	flw	%f0, 78(%zero)
 	fmul	%f16, %f1, %f0
@@ -11858,19 +10501,19 @@ bnei_else.40950:
 	fmul	%f0, %f1, %f0
 	fadd	%f0, %f16, %f0
 	fneg	%f0, %f0
-	fblt	%fzero, %f0, fbgt_else.40952
+	fblt	%fzero, %f0, fbgt_else.29176
 	add	%a0, %zero, %zero
-	j	fbgt_cont.40953
-fbgt_else.40952:
+	j	fbgt_cont.29177
+fbgt_else.29176:
 	add	%a0, %zero, %k1
-fbgt_cont.40953:
-	beqi	%a0, 0, bnei_else.40954
-	j	bnei_cont.40955
-bnei_else.40954:
+fbgt_cont.29177:
+	beqi	%a0, 0, bnei_else.29178
+	j	bnei_cont.29179
+bnei_else.29178:
 	fmov	%f0, %fzero
-bnei_cont.40955:
+bnei_cont.29179:
 	fmul	%f1, %f28, %f0
-	lw	%a0, 7(%s7)
+	lw	%a0, 7(%t2)
 	flw	%f0, 0(%a0)
 	fmul	%f16, %f1, %f0
 	flw	%f1, 148(%zero)
@@ -11888,18 +10531,18 @@ bnei_cont.40955:
 	fmul	%f0, %f16, %f0
 	fadd	%f0, %f1, %f0
 	fsw	%f0, 150(%zero)
-bnei_cont.40951:
-	j	bnei_cont.40929
-bnei_else.40928:
-bnei_cont.40929:
-bnei_cont.40715:
+bnei_cont.29175:
+	j	bnei_cont.29161
+bnei_else.29160:
+bnei_cont.29161:
+bnei_cont.29075:
 	lw	%a0, 3(%sp)
 	addi	%t0, %a0, -2
-	blti	%t0, 0, bgti_else.40956
+	blti	%t0, 0, bgti_else.29180
 	lw	%a0, 0(%sp)
 	add	%at, %a0, %t0
-	lw	%t1, 0(%at)
-	lw	%a0, 0(%t1)
+	lw	%v0, 0(%at)
+	lw	%a0, 0(%v0)
 	flw	%f0, 0(%a0)
 	fmul	%f1, %f0, %f25
 	flw	%f0, 1(%a0)
@@ -11908,1075 +10551,59 @@ bnei_cont.40715:
 	flw	%f0, 2(%a0)
 	fmul	%f0, %f0, %f27
 	fadd	%f1, %f1, %f0
-	fblt	%f1, %fzero, fbgt_else.40957
+	fblt	%f1, %fzero, fbgt_else.29181
 	add	%a0, %zero, %zero
-	j	fbgt_cont.40958
-fbgt_else.40957:
+	j	fbgt_cont.29182
+fbgt_else.29181:
 	add	%a0, %zero, %k1
-fbgt_cont.40958:
-	beqi	%a0, 0, bnei_else.40959
+fbgt_cont.29182:
+	beqi	%a0, 0, bnei_else.29183
 	addi	%a1, %t0, 1
 	lw	%a0, 0(%sp)
 	add	%at, %a0, %a1
-	lw	%t1, 0(%at)
-	flw	%f0, 440(%zero)
-	fdiv	%f25, %f1, %f0
-	flw	%f0, 445(%zero)
-	fsw	%f0, 137(%zero)
-	lw	%v1, 134(%zero)
-	sw	%v1, 7(%sp)
-	addi	%a0, %t1, 0
-	addi	%v0, %zero, 0
+	lw	%v0, 0(%at)
+	flw	%f0, 438(%zero)
+	fdiv	%f0, %f1, %f0
 	addi	%sp, %sp, 8
-	jal	trace_or_matrix_fast.2956
+	jal	trace_diffuse_ray.2989
 	addi	%sp, %sp, -8
-	flw	%f1, 137(%zero)
-	flw	%f0, 465(%zero)
-	fblt	%f0, %f1, fbgt_else.40961
-	add	%a0, %zero, %zero
-	j	fbgt_cont.40962
-fbgt_else.40961:
-	add	%a0, %zero, %k1
-fbgt_cont.40962:
-	beqi	%a0, 0, bnei_else.40963
-	flw	%f0, 444(%zero)
-	fblt	%f1, %f0, fbgt_else.40965
-	add	%a0, %zero, %zero
-	j	bnei_cont.40964
-fbgt_else.40965:
-	add	%a0, %zero, %k1
-fbgt_cont.40966:
-	j	bnei_cont.40964
-bnei_else.40963:
-	add	%a0, %zero, %zero
-bnei_cont.40964:
-	beqi	%a0, 0, bnei_cont.40960
-	lw	%a0, 141(%zero)
-	lw	%s7, 12(%a0)
-	lw	%a2, 0(%t1)
-	lw	%a0, 1(%s7)
-	beqi	%a0, 1, bnei_else.40969
-	beqi	%a0, 2, bnei_else.40971
-	flw	%f1, 138(%zero)
-	lw	%a0, 5(%s7)
-	flw	%f0, 0(%a0)
-	fsub	%f18, %f1, %f0
-	flw	%f1, 139(%zero)
-	lw	%a0, 5(%s7)
-	flw	%f0, 1(%a0)
-	fsub	%f17, %f1, %f0
-	flw	%f1, 140(%zero)
-	lw	%a0, 5(%s7)
-	flw	%f0, 2(%a0)
-	fsub	%f20, %f1, %f0
-	lw	%a0, 4(%s7)
-	flw	%f0, 0(%a0)
-	fmul	%f21, %f18, %f0
-	lw	%a0, 4(%s7)
-	flw	%f0, 1(%a0)
-	fmul	%f2, %f17, %f0
-	lw	%a0, 4(%s7)
-	flw	%f0, 2(%a0)
-	fmul	%f16, %f20, %f0
-	lw	%a0, 3(%s7)
-	beqi	%a0, 0, bnei_else.40973
-	lw	%a0, 9(%s7)
-	flw	%f0, 2(%a0)
-	fmul	%f1, %f17, %f0
-	lw	%a0, 9(%s7)
-	flw	%f0, 1(%a0)
-	fmul	%f0, %f20, %f0
-	fadd	%f0, %f1, %f0
-	flw	%f19, 473(%zero)
-	fmul	%f0, %f0, %f19
-	fadd	%f0, %f21, %f0
-	fsw	%f0, 142(%zero)
-	lw	%a0, 9(%s7)
-	flw	%f0, 2(%a0)
-	fmul	%f1, %f18, %f0
-	lw	%a0, 9(%s7)
-	flw	%f0, 0(%a0)
-	fmul	%f0, %f20, %f0
-	fadd	%f0, %f1, %f0
-	fmul	%f0, %f0, %f19
-	fadd	%f0, %f2, %f0
-	fsw	%f0, 143(%zero)
-	lw	%a0, 9(%s7)
-	flw	%f0, 1(%a0)
-	fmul	%f1, %f18, %f0
-	lw	%a0, 9(%s7)
-	flw	%f0, 0(%a0)
-	fmul	%f0, %f17, %f0
-	fadd	%f0, %f1, %f0
-	fmul	%f0, %f0, %f19
-	fadd	%f0, %f16, %f0
-	fsw	%f0, 144(%zero)
-	j	bnei_cont.40974
-bnei_else.40973:
-	fsw	%f21, 142(%zero)
-	fsw	%f2, 143(%zero)
-	fsw	%f16, 144(%zero)
-bnei_cont.40974:
-	lw	%a1, 6(%s7)
-	flw	%f18, 142(%zero)
-	fmul	%f1, %f18, %f18
-	flw	%f17, 143(%zero)
-	fmul	%f0, %f17, %f17
-	fadd	%f1, %f1, %f0
-	flw	%f16, 144(%zero)
-	fmul	%f0, %f16, %f16
-	fadd	%f0, %f1, %f0
-	fsqrt	%f1, %f0
-	fbne	%f1, %fzero, fbeq_else.40975
-	add	%a0, %zero, %k1
-	j	fbeq_cont.40976
-fbeq_else.40975:
-	add	%a0, %zero, %zero
-fbeq_cont.40976:
-	beqi	%a0, 0, bnei_else.40977
-	fmov	%f0, %f30
-	j	bnei_cont.40978
-bnei_else.40977:
-	beqi	%a1, 0, bnei_else.40979
-	flw	%f0, 468(%zero)
-	fdiv	%f0, %f0, %f1
-	j	bnei_cont.40980
-bnei_else.40979:
-	fdiv	%f0, %f30, %f1
-bnei_cont.40980:
-bnei_cont.40978:
-	fmul	%f1, %f18, %f0
-	fsw	%f1, 142(%zero)
-	fmul	%f1, %f17, %f0
-	fsw	%f1, 143(%zero)
-	fmul	%f0, %f16, %f0
-	fsw	%f0, 144(%zero)
-	j	bnei_cont.40970
-bnei_else.40971:
-	lw	%a0, 4(%s7)
-	flw	%f0, 0(%a0)
-	fneg	%f0, %f0
-	fsw	%f0, 142(%zero)
-	lw	%a0, 4(%s7)
-	flw	%f0, 1(%a0)
-	fneg	%f0, %f0
-	fsw	%f0, 143(%zero)
-	lw	%a0, 4(%s7)
-	flw	%f0, 2(%a0)
-	fneg	%f0, %f0
-	fsw	%f0, 144(%zero)
-bnei_cont.40972:
-	j	bnei_cont.40970
-bnei_else.40969:
-	lw	%a0, 136(%zero)
-	fsw	%fzero, 142(%zero)
-	fsw	%fzero, 143(%zero)
-	fsw	%fzero, 144(%zero)
-	addi	%a1, %a0, -1
-	add	%at, %a2, %a1
-	flw	%f0, 0(%at)
-	fbne	%f0, %fzero, fbeq_else.40981
-	add	%a0, %zero, %k1
-	j	fbeq_cont.40982
-fbeq_else.40981:
-	add	%a0, %zero, %zero
-fbeq_cont.40982:
-	beqi	%a0, 0, bnei_else.40983
-	fmov	%f0, %fzero
-	j	bnei_cont.40984
-bnei_else.40983:
-	fblt	%fzero, %f0, fbgt_else.40985
-	add	%a0, %zero, %zero
-	j	fbgt_cont.40986
-fbgt_else.40985:
-	add	%a0, %zero, %k1
-fbgt_cont.40986:
-	beqi	%a0, 0, bnei_else.40987
-	fmov	%f0, %f30
-	j	bnei_cont.40988
-bnei_else.40987:
-	flw	%f0, 468(%zero)
-bnei_cont.40988:
-bnei_cont.40984:
-	fneg	%f0, %f0
-	fsw	%f0, 142(%a1)
-bnei_cont.40970:
-	addi	%v1, %zero, 138
-	addi	%v0, %s7, 0
+	j	bnei_cont.29184
+bnei_else.29183:
+	flw	%f0, 437(%zero)
+	fdiv	%f0, %f1, %f0
 	addi	%sp, %sp, 8
-	jal	utexture.2971
+	jal	trace_diffuse_ray.2989
 	addi	%sp, %sp, -8
-	lw	%v1, 7(%sp)
-	addi	%v0, %zero, 0
-	addi	%sp, %sp, 8
-	jal	shadow_check_one_or_matrix.2931
-	addi	%sp, %sp, -8
-	beqi	%v0, 0, bnei_else.40989
-	j	bnei_cont.40960
-bnei_else.40989:
-	flw	%f1, 142(%zero)
-	flw	%f0, 78(%zero)
-	fmul	%f16, %f1, %f0
-	flw	%f1, 143(%zero)
-	flw	%f0, 79(%zero)
-	fmul	%f0, %f1, %f0
-	fadd	%f16, %f16, %f0
-	flw	%f1, 144(%zero)
-	flw	%f0, 80(%zero)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	fneg	%f0, %f0
-	fblt	%fzero, %f0, fbgt_else.40991
-	add	%a0, %zero, %zero
-	j	fbgt_cont.40992
-fbgt_else.40991:
-	add	%a0, %zero, %k1
-fbgt_cont.40992:
-	beqi	%a0, 0, bnei_else.40993
-	j	bnei_cont.40994
-bnei_else.40993:
-	fmov	%f0, %fzero
-bnei_cont.40994:
-	fmul	%f1, %f25, %f0
-	lw	%a0, 7(%s7)
-	flw	%f0, 0(%a0)
-	fmul	%f16, %f1, %f0
-	flw	%f1, 148(%zero)
-	flw	%f0, 145(%zero)
-	fmul	%f0, %f16, %f0
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 148(%zero)
-	flw	%f1, 149(%zero)
-	flw	%f0, 146(%zero)
-	fmul	%f0, %f16, %f0
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 149(%zero)
-	flw	%f1, 150(%zero)
-	flw	%f0, 147(%zero)
-	fmul	%f0, %f16, %f0
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 150(%zero)
-bnei_cont.40990:
-	j	bnei_cont.40960
-bnei_else.40967:
-bnei_cont.40968:
-	j	bnei_cont.40960
-bnei_else.40959:
-	flw	%f0, 439(%zero)
-	fdiv	%f25, %f1, %f0
-	flw	%f0, 445(%zero)
-	fsw	%f0, 137(%zero)
-	lw	%v1, 134(%zero)
-	sw	%v1, 8(%sp)
-	addi	%a0, %t1, 0
-	addi	%v0, %zero, 0
-	addi	%sp, %sp, 9
-	jal	trace_or_matrix_fast.2956
-	addi	%sp, %sp, -9
-	flw	%f1, 137(%zero)
-	flw	%f0, 465(%zero)
-	fblt	%f0, %f1, fbgt_else.40995
-	add	%a0, %zero, %zero
-	j	fbgt_cont.40996
-fbgt_else.40995:
-	add	%a0, %zero, %k1
-fbgt_cont.40996:
-	beqi	%a0, 0, bnei_else.40997
-	flw	%f0, 444(%zero)
-	fblt	%f1, %f0, fbgt_else.40999
-	add	%a0, %zero, %zero
-	j	bnei_cont.40998
-fbgt_else.40999:
-	add	%a0, %zero, %k1
-fbgt_cont.41000:
-	j	bnei_cont.40998
-bnei_else.40997:
-	add	%a0, %zero, %zero
-bnei_cont.40998:
-	beqi	%a0, 0, bnei_else.41001
-	lw	%a0, 141(%zero)
-	lw	%s7, 12(%a0)
-	lw	%a2, 0(%t1)
-	lw	%a0, 1(%s7)
-	beqi	%a0, 1, bnei_else.41003
-	beqi	%a0, 2, bnei_else.41005
-	flw	%f1, 138(%zero)
-	lw	%a0, 5(%s7)
-	flw	%f0, 0(%a0)
-	fsub	%f18, %f1, %f0
-	flw	%f1, 139(%zero)
-	lw	%a0, 5(%s7)
-	flw	%f0, 1(%a0)
-	fsub	%f17, %f1, %f0
-	flw	%f1, 140(%zero)
-	lw	%a0, 5(%s7)
-	flw	%f0, 2(%a0)
-	fsub	%f20, %f1, %f0
-	lw	%a0, 4(%s7)
-	flw	%f0, 0(%a0)
-	fmul	%f21, %f18, %f0
-	lw	%a0, 4(%s7)
-	flw	%f0, 1(%a0)
-	fmul	%f2, %f17, %f0
-	lw	%a0, 4(%s7)
-	flw	%f0, 2(%a0)
-	fmul	%f16, %f20, %f0
-	lw	%a0, 3(%s7)
-	beqi	%a0, 0, bnei_else.41007
-	lw	%a0, 9(%s7)
-	flw	%f0, 2(%a0)
-	fmul	%f1, %f17, %f0
-	lw	%a0, 9(%s7)
-	flw	%f0, 1(%a0)
-	fmul	%f0, %f20, %f0
-	fadd	%f0, %f1, %f0
-	flw	%f19, 473(%zero)
-	fmul	%f0, %f0, %f19
-	fadd	%f0, %f21, %f0
-	fsw	%f0, 142(%zero)
-	lw	%a0, 9(%s7)
-	flw	%f0, 2(%a0)
-	fmul	%f1, %f18, %f0
-	lw	%a0, 9(%s7)
-	flw	%f0, 0(%a0)
-	fmul	%f0, %f20, %f0
-	fadd	%f0, %f1, %f0
-	fmul	%f0, %f0, %f19
-	fadd	%f0, %f2, %f0
-	fsw	%f0, 143(%zero)
-	lw	%a0, 9(%s7)
-	flw	%f0, 1(%a0)
-	fmul	%f1, %f18, %f0
-	lw	%a0, 9(%s7)
-	flw	%f0, 0(%a0)
-	fmul	%f0, %f17, %f0
-	fadd	%f0, %f1, %f0
-	fmul	%f0, %f0, %f19
-	fadd	%f0, %f16, %f0
-	fsw	%f0, 144(%zero)
-	j	bnei_cont.41008
-bnei_else.41007:
-	fsw	%f21, 142(%zero)
-	fsw	%f2, 143(%zero)
-	fsw	%f16, 144(%zero)
-bnei_cont.41008:
-	lw	%a1, 6(%s7)
-	flw	%f18, 142(%zero)
-	fmul	%f1, %f18, %f18
-	flw	%f17, 143(%zero)
-	fmul	%f0, %f17, %f17
-	fadd	%f1, %f1, %f0
-	flw	%f16, 144(%zero)
-	fmul	%f0, %f16, %f16
-	fadd	%f0, %f1, %f0
-	fsqrt	%f1, %f0
-	fbne	%f1, %fzero, fbeq_else.41009
-	add	%a0, %zero, %k1
-	j	fbeq_cont.41010
-fbeq_else.41009:
-	add	%a0, %zero, %zero
-fbeq_cont.41010:
-	beqi	%a0, 0, bnei_else.41011
-	fmov	%f0, %f30
-	j	bnei_cont.41012
-bnei_else.41011:
-	beqi	%a1, 0, bnei_else.41013
-	flw	%f0, 468(%zero)
-	fdiv	%f0, %f0, %f1
-	j	bnei_cont.41014
-bnei_else.41013:
-	fdiv	%f0, %f30, %f1
-bnei_cont.41014:
-bnei_cont.41012:
-	fmul	%f1, %f18, %f0
-	fsw	%f1, 142(%zero)
-	fmul	%f1, %f17, %f0
-	fsw	%f1, 143(%zero)
-	fmul	%f0, %f16, %f0
-	fsw	%f0, 144(%zero)
-	j	bnei_cont.41004
-bnei_else.41005:
-	lw	%a0, 4(%s7)
-	flw	%f0, 0(%a0)
-	fneg	%f0, %f0
-	fsw	%f0, 142(%zero)
-	lw	%a0, 4(%s7)
-	flw	%f0, 1(%a0)
-	fneg	%f0, %f0
-	fsw	%f0, 143(%zero)
-	lw	%a0, 4(%s7)
-	flw	%f0, 2(%a0)
-	fneg	%f0, %f0
-	fsw	%f0, 144(%zero)
-bnei_cont.41006:
-	j	bnei_cont.41004
-bnei_else.41003:
-	lw	%a0, 136(%zero)
-	fsw	%fzero, 142(%zero)
-	fsw	%fzero, 143(%zero)
-	fsw	%fzero, 144(%zero)
-	addi	%a1, %a0, -1
-	add	%at, %a2, %a1
-	flw	%f0, 0(%at)
-	fbne	%f0, %fzero, fbeq_else.41015
-	add	%a0, %zero, %k1
-	j	fbeq_cont.41016
-fbeq_else.41015:
-	add	%a0, %zero, %zero
-fbeq_cont.41016:
-	beqi	%a0, 0, bnei_else.41017
-	fmov	%f0, %fzero
-	j	bnei_cont.41018
-bnei_else.41017:
-	fblt	%fzero, %f0, fbgt_else.41019
-	add	%a0, %zero, %zero
-	j	fbgt_cont.41020
-fbgt_else.41019:
-	add	%a0, %zero, %k1
-fbgt_cont.41020:
-	beqi	%a0, 0, bnei_else.41021
-	fmov	%f0, %f30
-	j	bnei_cont.41022
-bnei_else.41021:
-	flw	%f0, 468(%zero)
-bnei_cont.41022:
-bnei_cont.41018:
-	fneg	%f0, %f0
-	fsw	%f0, 142(%a1)
-bnei_cont.41004:
-	addi	%v1, %zero, 138
-	addi	%v0, %s7, 0
-	addi	%sp, %sp, 9
-	jal	utexture.2971
-	addi	%sp, %sp, -9
-	lw	%v1, 8(%sp)
-	addi	%v0, %zero, 0
-	addi	%sp, %sp, 9
-	jal	shadow_check_one_or_matrix.2931
-	addi	%sp, %sp, -9
-	beqi	%v0, 0, bnei_else.41023
-	j	bnei_cont.41002
-bnei_else.41023:
-	flw	%f1, 142(%zero)
-	flw	%f0, 78(%zero)
-	fmul	%f16, %f1, %f0
-	flw	%f1, 143(%zero)
-	flw	%f0, 79(%zero)
-	fmul	%f0, %f1, %f0
-	fadd	%f16, %f16, %f0
-	flw	%f1, 144(%zero)
-	flw	%f0, 80(%zero)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	fneg	%f0, %f0
-	fblt	%fzero, %f0, fbgt_else.41025
-	add	%a0, %zero, %zero
-	j	fbgt_cont.41026
-fbgt_else.41025:
-	add	%a0, %zero, %k1
-fbgt_cont.41026:
-	beqi	%a0, 0, bnei_else.41027
-	j	bnei_cont.41028
-bnei_else.41027:
-	fmov	%f0, %fzero
-bnei_cont.41028:
-	fmul	%f1, %f25, %f0
-	lw	%a0, 7(%s7)
-	flw	%f0, 0(%a0)
-	fmul	%f16, %f1, %f0
-	flw	%f1, 148(%zero)
-	flw	%f0, 145(%zero)
-	fmul	%f0, %f16, %f0
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 148(%zero)
-	flw	%f1, 149(%zero)
-	flw	%f0, 146(%zero)
-	fmul	%f0, %f16, %f0
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 149(%zero)
-	flw	%f1, 150(%zero)
-	flw	%f0, 147(%zero)
-	fmul	%f0, %f16, %f0
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 150(%zero)
-bnei_cont.41024:
-	j	bnei_cont.41002
-bnei_else.41001:
-bnei_cont.41002:
-bnei_cont.40960:
+bnei_cont.29184:
 	addi	%a1, %t0, -2
-	lw	%t1, 4(%sp)
-	lw	%t0, 5(%sp)
-	lw	%ra, 6(%sp)
+	lw	%t2, 4(%sp)
+	lw	%t1, 5(%sp)
+	lw	%t0, 6(%sp)
+	lw	%ra, 7(%sp)
 	lw	%a0, 2(%sp)
 	lw	%v1, 1(%sp)
 	lw	%v0, 0(%sp)
 	j	iter_trace_diffuse_rays.2992
-bgti_else.40956:
-	lw	%t1, 4(%sp)
-	lw	%t0, 5(%sp)
-	lw	%ra, 6(%sp)
+bgti_else.29180:
+	lw	%t2, 4(%sp)
+	lw	%t1, 5(%sp)
+	lw	%t0, 6(%sp)
+	lw	%ra, 7(%sp)
 	jr	%ra
-bgti_else.40711:
+bgti_else.29071:
 	jr	%ra
-trace_diffuse_rays.2997:
-	sw	%v0, 0(%sp)
-	sw	%v1, 1(%sp)
-	add	%v0, %zero, %a0
-	sw	%v0, 2(%sp)
-	sw	%t1, 3(%sp)
-	sw	%t0, 4(%sp)
-	sw	%ra, 5(%sp)
-	flw	%f0, 0(%v0)
-	fsw	%f0, 162(%zero)
-	flw	%f0, 1(%v0)
-	fsw	%f0, 163(%zero)
-	flw	%f0, 2(%v0)
-	fsw	%f0, 164(%zero)
-	lw	%a0, 0(%zero)
-	addi	%v1, %a0, -1
-	addi	%sp, %sp, 6
-	jal	setup_startp_constants.2894
-	addi	%sp, %sp, -6
-	lw	%a0, 0(%sp)
-	lw	%t0, 118(%a0)
-	lw	%a1, 0(%t0)
-	flw	%f1, 0(%a1)
-	lw	%a0, 1(%sp)
-	flw	%f0, 0(%a0)
-	fmul	%f16, %f1, %f0
-	flw	%f1, 1(%a1)
-	flw	%f0, 1(%a0)
-	fmul	%f0, %f1, %f0
-	fadd	%f16, %f16, %f0
-	flw	%f1, 2(%a1)
-	flw	%f0, 2(%a0)
-	fmul	%f0, %f1, %f0
-	fadd	%f1, %f16, %f0
-	fblt	%f1, %fzero, fbgt_else.41280
-	add	%a0, %zero, %zero
-	j	fbgt_cont.41281
-fbgt_else.41280:
-	add	%a0, %zero, %k1
-fbgt_cont.41281:
-	beqi	%a0, 0, bnei_else.41282
-	lw	%a0, 0(%sp)
-	lw	%t0, 119(%a0)
-	flw	%f0, 440(%zero)
-	fdiv	%f25, %f1, %f0
-	flw	%f0, 445(%zero)
-	fsw	%f0, 137(%zero)
-	lw	%t1, 134(%zero)
-	addi	%a0, %t0, 0
-	addi	%v1, %t1, 0
-	addi	%v0, %zero, 0
-	addi	%sp, %sp, 6
-	jal	trace_or_matrix_fast.2956
-	addi	%sp, %sp, -6
-	flw	%f1, 137(%zero)
-	flw	%f0, 465(%zero)
-	fblt	%f0, %f1, fbgt_else.41284
-	add	%a0, %zero, %zero
-	j	fbgt_cont.41285
-fbgt_else.41284:
-	add	%a0, %zero, %k1
-fbgt_cont.41285:
-	beqi	%a0, 0, bnei_else.41286
-	flw	%f0, 444(%zero)
-	fblt	%f1, %f0, fbgt_else.41288
-	add	%a0, %zero, %zero
-	j	bnei_cont.41287
-fbgt_else.41288:
-	add	%a0, %zero, %k1
-fbgt_cont.41289:
-	j	bnei_cont.41287
-bnei_else.41286:
-	add	%a0, %zero, %zero
-bnei_cont.41287:
-	beqi	%a0, 0, bnei_cont.41283
-	lw	%a0, 141(%zero)
-	lw	%s7, 12(%a0)
-	lw	%a2, 0(%t0)
-	lw	%a0, 1(%s7)
-	beqi	%a0, 1, bnei_else.41292
-	beqi	%a0, 2, bnei_else.41294
-	flw	%f1, 138(%zero)
-	lw	%a0, 5(%s7)
-	flw	%f0, 0(%a0)
-	fsub	%f18, %f1, %f0
-	flw	%f1, 139(%zero)
-	lw	%a0, 5(%s7)
-	flw	%f0, 1(%a0)
-	fsub	%f17, %f1, %f0
-	flw	%f1, 140(%zero)
-	lw	%a0, 5(%s7)
-	flw	%f0, 2(%a0)
-	fsub	%f20, %f1, %f0
-	lw	%a0, 4(%s7)
-	flw	%f0, 0(%a0)
-	fmul	%f21, %f18, %f0
-	lw	%a0, 4(%s7)
-	flw	%f0, 1(%a0)
-	fmul	%f2, %f17, %f0
-	lw	%a0, 4(%s7)
-	flw	%f0, 2(%a0)
-	fmul	%f16, %f20, %f0
-	lw	%a0, 3(%s7)
-	beqi	%a0, 0, bnei_else.41296
-	lw	%a0, 9(%s7)
-	flw	%f0, 2(%a0)
-	fmul	%f1, %f17, %f0
-	lw	%a0, 9(%s7)
-	flw	%f0, 1(%a0)
-	fmul	%f0, %f20, %f0
-	fadd	%f0, %f1, %f0
-	flw	%f19, 473(%zero)
-	fmul	%f0, %f0, %f19
-	fadd	%f0, %f21, %f0
-	fsw	%f0, 142(%zero)
-	lw	%a0, 9(%s7)
-	flw	%f0, 2(%a0)
-	fmul	%f1, %f18, %f0
-	lw	%a0, 9(%s7)
-	flw	%f0, 0(%a0)
-	fmul	%f0, %f20, %f0
-	fadd	%f0, %f1, %f0
-	fmul	%f0, %f0, %f19
-	fadd	%f0, %f2, %f0
-	fsw	%f0, 143(%zero)
-	lw	%a0, 9(%s7)
-	flw	%f0, 1(%a0)
-	fmul	%f1, %f18, %f0
-	lw	%a0, 9(%s7)
-	flw	%f0, 0(%a0)
-	fmul	%f0, %f17, %f0
-	fadd	%f0, %f1, %f0
-	fmul	%f0, %f0, %f19
-	fadd	%f0, %f16, %f0
-	fsw	%f0, 144(%zero)
-	j	bnei_cont.41297
-bnei_else.41296:
-	fsw	%f21, 142(%zero)
-	fsw	%f2, 143(%zero)
-	fsw	%f16, 144(%zero)
-bnei_cont.41297:
-	lw	%a1, 6(%s7)
-	flw	%f18, 142(%zero)
-	fmul	%f1, %f18, %f18
-	flw	%f17, 143(%zero)
-	fmul	%f0, %f17, %f17
-	fadd	%f1, %f1, %f0
-	flw	%f16, 144(%zero)
-	fmul	%f0, %f16, %f16
-	fadd	%f0, %f1, %f0
-	fsqrt	%f1, %f0
-	fbne	%f1, %fzero, fbeq_else.41298
-	add	%a0, %zero, %k1
-	j	fbeq_cont.41299
-fbeq_else.41298:
-	add	%a0, %zero, %zero
-fbeq_cont.41299:
-	beqi	%a0, 0, bnei_else.41300
-	fmov	%f0, %f30
-	j	bnei_cont.41301
-bnei_else.41300:
-	beqi	%a1, 0, bnei_else.41302
-	flw	%f0, 468(%zero)
-	fdiv	%f0, %f0, %f1
-	j	bnei_cont.41303
-bnei_else.41302:
-	fdiv	%f0, %f30, %f1
-bnei_cont.41303:
-bnei_cont.41301:
-	fmul	%f1, %f18, %f0
-	fsw	%f1, 142(%zero)
-	fmul	%f1, %f17, %f0
-	fsw	%f1, 143(%zero)
-	fmul	%f0, %f16, %f0
-	fsw	%f0, 144(%zero)
-	j	bnei_cont.41293
-bnei_else.41294:
-	lw	%a0, 4(%s7)
-	flw	%f0, 0(%a0)
-	fneg	%f0, %f0
-	fsw	%f0, 142(%zero)
-	lw	%a0, 4(%s7)
-	flw	%f0, 1(%a0)
-	fneg	%f0, %f0
-	fsw	%f0, 143(%zero)
-	lw	%a0, 4(%s7)
-	flw	%f0, 2(%a0)
-	fneg	%f0, %f0
-	fsw	%f0, 144(%zero)
-bnei_cont.41295:
-	j	bnei_cont.41293
-bnei_else.41292:
-	lw	%a0, 136(%zero)
-	fsw	%fzero, 142(%zero)
-	fsw	%fzero, 143(%zero)
-	fsw	%fzero, 144(%zero)
-	addi	%a1, %a0, -1
-	add	%at, %a2, %a1
-	flw	%f0, 0(%at)
-	fbne	%f0, %fzero, fbeq_else.41304
-	add	%a0, %zero, %k1
-	j	fbeq_cont.41305
-fbeq_else.41304:
-	add	%a0, %zero, %zero
-fbeq_cont.41305:
-	beqi	%a0, 0, bnei_else.41306
-	fmov	%f0, %fzero
-	j	bnei_cont.41307
-bnei_else.41306:
-	fblt	%fzero, %f0, fbgt_else.41308
-	add	%a0, %zero, %zero
-	j	fbgt_cont.41309
-fbgt_else.41308:
-	add	%a0, %zero, %k1
-fbgt_cont.41309:
-	beqi	%a0, 0, bnei_else.41310
-	fmov	%f0, %f30
-	j	bnei_cont.41311
-bnei_else.41310:
-	flw	%f0, 468(%zero)
-bnei_cont.41311:
-bnei_cont.41307:
-	fneg	%f0, %f0
-	fsw	%f0, 142(%a1)
-bnei_cont.41293:
-	addi	%v1, %zero, 138
-	addi	%v0, %s7, 0
-	addi	%sp, %sp, 6
-	jal	utexture.2971
-	addi	%sp, %sp, -6
-	addi	%v1, %t1, 0
-	addi	%v0, %zero, 0
-	addi	%sp, %sp, 6
-	jal	shadow_check_one_or_matrix.2931
-	addi	%sp, %sp, -6
-	beqi	%v0, 0, bnei_else.41312
-	j	bnei_cont.41283
-bnei_else.41312:
-	flw	%f1, 142(%zero)
-	flw	%f0, 78(%zero)
-	fmul	%f16, %f1, %f0
-	flw	%f1, 143(%zero)
-	flw	%f0, 79(%zero)
-	fmul	%f0, %f1, %f0
-	fadd	%f16, %f16, %f0
-	flw	%f1, 144(%zero)
-	flw	%f0, 80(%zero)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	fneg	%f0, %f0
-	fblt	%fzero, %f0, fbgt_else.41314
-	add	%a0, %zero, %zero
-	j	fbgt_cont.41315
-fbgt_else.41314:
-	add	%a0, %zero, %k1
-fbgt_cont.41315:
-	beqi	%a0, 0, bnei_else.41316
-	j	bnei_cont.41317
-bnei_else.41316:
-	fmov	%f0, %fzero
-bnei_cont.41317:
-	fmul	%f1, %f25, %f0
-	lw	%a0, 7(%s7)
-	flw	%f0, 0(%a0)
-	fmul	%f16, %f1, %f0
-	flw	%f1, 148(%zero)
-	flw	%f0, 145(%zero)
-	fmul	%f0, %f16, %f0
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 148(%zero)
-	flw	%f1, 149(%zero)
-	flw	%f0, 146(%zero)
-	fmul	%f0, %f16, %f0
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 149(%zero)
-	flw	%f1, 150(%zero)
-	flw	%f0, 147(%zero)
-	fmul	%f0, %f16, %f0
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 150(%zero)
-bnei_cont.41313:
-	j	bnei_cont.41283
-bnei_else.41290:
-bnei_cont.41291:
-	j	bnei_cont.41283
-bnei_else.41282:
-	flw	%f0, 439(%zero)
-	fdiv	%f25, %f1, %f0
-	flw	%f0, 445(%zero)
-	fsw	%f0, 137(%zero)
-	lw	%t1, 134(%zero)
-	addi	%a0, %t0, 0
-	addi	%v1, %t1, 0
-	addi	%v0, %zero, 0
-	addi	%sp, %sp, 6
-	jal	trace_or_matrix_fast.2956
-	addi	%sp, %sp, -6
-	flw	%f1, 137(%zero)
-	flw	%f0, 465(%zero)
-	fblt	%f0, %f1, fbgt_else.41318
-	add	%a0, %zero, %zero
-	j	fbgt_cont.41319
-fbgt_else.41318:
-	add	%a0, %zero, %k1
-fbgt_cont.41319:
-	beqi	%a0, 0, bnei_else.41320
-	flw	%f0, 444(%zero)
-	fblt	%f1, %f0, fbgt_else.41322
-	add	%a0, %zero, %zero
-	j	bnei_cont.41321
-fbgt_else.41322:
-	add	%a0, %zero, %k1
-fbgt_cont.41323:
-	j	bnei_cont.41321
-bnei_else.41320:
-	add	%a0, %zero, %zero
-bnei_cont.41321:
-	beqi	%a0, 0, bnei_else.41324
-	lw	%a0, 141(%zero)
-	lw	%s7, 12(%a0)
-	lw	%a2, 0(%t0)
-	lw	%a0, 1(%s7)
-	beqi	%a0, 1, bnei_else.41326
-	beqi	%a0, 2, bnei_else.41328
-	flw	%f1, 138(%zero)
-	lw	%a0, 5(%s7)
-	flw	%f0, 0(%a0)
-	fsub	%f18, %f1, %f0
-	flw	%f1, 139(%zero)
-	lw	%a0, 5(%s7)
-	flw	%f0, 1(%a0)
-	fsub	%f17, %f1, %f0
-	flw	%f1, 140(%zero)
-	lw	%a0, 5(%s7)
-	flw	%f0, 2(%a0)
-	fsub	%f20, %f1, %f0
-	lw	%a0, 4(%s7)
-	flw	%f0, 0(%a0)
-	fmul	%f21, %f18, %f0
-	lw	%a0, 4(%s7)
-	flw	%f0, 1(%a0)
-	fmul	%f2, %f17, %f0
-	lw	%a0, 4(%s7)
-	flw	%f0, 2(%a0)
-	fmul	%f16, %f20, %f0
-	lw	%a0, 3(%s7)
-	beqi	%a0, 0, bnei_else.41330
-	lw	%a0, 9(%s7)
-	flw	%f0, 2(%a0)
-	fmul	%f1, %f17, %f0
-	lw	%a0, 9(%s7)
-	flw	%f0, 1(%a0)
-	fmul	%f0, %f20, %f0
-	fadd	%f0, %f1, %f0
-	flw	%f19, 473(%zero)
-	fmul	%f0, %f0, %f19
-	fadd	%f0, %f21, %f0
-	fsw	%f0, 142(%zero)
-	lw	%a0, 9(%s7)
-	flw	%f0, 2(%a0)
-	fmul	%f1, %f18, %f0
-	lw	%a0, 9(%s7)
-	flw	%f0, 0(%a0)
-	fmul	%f0, %f20, %f0
-	fadd	%f0, %f1, %f0
-	fmul	%f0, %f0, %f19
-	fadd	%f0, %f2, %f0
-	fsw	%f0, 143(%zero)
-	lw	%a0, 9(%s7)
-	flw	%f0, 1(%a0)
-	fmul	%f1, %f18, %f0
-	lw	%a0, 9(%s7)
-	flw	%f0, 0(%a0)
-	fmul	%f0, %f17, %f0
-	fadd	%f0, %f1, %f0
-	fmul	%f0, %f0, %f19
-	fadd	%f0, %f16, %f0
-	fsw	%f0, 144(%zero)
-	j	bnei_cont.41331
-bnei_else.41330:
-	fsw	%f21, 142(%zero)
-	fsw	%f2, 143(%zero)
-	fsw	%f16, 144(%zero)
-bnei_cont.41331:
-	lw	%a1, 6(%s7)
-	flw	%f18, 142(%zero)
-	fmul	%f1, %f18, %f18
-	flw	%f17, 143(%zero)
-	fmul	%f0, %f17, %f17
-	fadd	%f1, %f1, %f0
-	flw	%f16, 144(%zero)
-	fmul	%f0, %f16, %f16
-	fadd	%f0, %f1, %f0
-	fsqrt	%f1, %f0
-	fbne	%f1, %fzero, fbeq_else.41332
-	add	%a0, %zero, %k1
-	j	fbeq_cont.41333
-fbeq_else.41332:
-	add	%a0, %zero, %zero
-fbeq_cont.41333:
-	beqi	%a0, 0, bnei_else.41334
-	fmov	%f0, %f30
-	j	bnei_cont.41335
-bnei_else.41334:
-	beqi	%a1, 0, bnei_else.41336
-	flw	%f0, 468(%zero)
-	fdiv	%f0, %f0, %f1
-	j	bnei_cont.41337
-bnei_else.41336:
-	fdiv	%f0, %f30, %f1
-bnei_cont.41337:
-bnei_cont.41335:
-	fmul	%f1, %f18, %f0
-	fsw	%f1, 142(%zero)
-	fmul	%f1, %f17, %f0
-	fsw	%f1, 143(%zero)
-	fmul	%f0, %f16, %f0
-	fsw	%f0, 144(%zero)
-	j	bnei_cont.41327
-bnei_else.41328:
-	lw	%a0, 4(%s7)
-	flw	%f0, 0(%a0)
-	fneg	%f0, %f0
-	fsw	%f0, 142(%zero)
-	lw	%a0, 4(%s7)
-	flw	%f0, 1(%a0)
-	fneg	%f0, %f0
-	fsw	%f0, 143(%zero)
-	lw	%a0, 4(%s7)
-	flw	%f0, 2(%a0)
-	fneg	%f0, %f0
-	fsw	%f0, 144(%zero)
-bnei_cont.41329:
-	j	bnei_cont.41327
-bnei_else.41326:
-	lw	%a0, 136(%zero)
-	fsw	%fzero, 142(%zero)
-	fsw	%fzero, 143(%zero)
-	fsw	%fzero, 144(%zero)
-	addi	%a1, %a0, -1
-	add	%at, %a2, %a1
-	flw	%f0, 0(%at)
-	fbne	%f0, %fzero, fbeq_else.41338
-	add	%a0, %zero, %k1
-	j	fbeq_cont.41339
-fbeq_else.41338:
-	add	%a0, %zero, %zero
-fbeq_cont.41339:
-	beqi	%a0, 0, bnei_else.41340
-	fmov	%f0, %fzero
-	j	bnei_cont.41341
-bnei_else.41340:
-	fblt	%fzero, %f0, fbgt_else.41342
-	add	%a0, %zero, %zero
-	j	fbgt_cont.41343
-fbgt_else.41342:
-	add	%a0, %zero, %k1
-fbgt_cont.41343:
-	beqi	%a0, 0, bnei_else.41344
-	fmov	%f0, %f30
-	j	bnei_cont.41345
-bnei_else.41344:
-	flw	%f0, 468(%zero)
-bnei_cont.41345:
-bnei_cont.41341:
-	fneg	%f0, %f0
-	fsw	%f0, 142(%a1)
-bnei_cont.41327:
-	addi	%v1, %zero, 138
-	addi	%v0, %s7, 0
-	addi	%sp, %sp, 6
-	jal	utexture.2971
-	addi	%sp, %sp, -6
-	addi	%v1, %t1, 0
-	addi	%v0, %zero, 0
-	addi	%sp, %sp, 6
-	jal	shadow_check_one_or_matrix.2931
-	addi	%sp, %sp, -6
-	beqi	%v0, 0, bnei_else.41346
-	j	bnei_cont.41325
-bnei_else.41346:
-	flw	%f1, 142(%zero)
-	flw	%f0, 78(%zero)
-	fmul	%f16, %f1, %f0
-	flw	%f1, 143(%zero)
-	flw	%f0, 79(%zero)
-	fmul	%f0, %f1, %f0
-	fadd	%f16, %f16, %f0
-	flw	%f1, 144(%zero)
-	flw	%f0, 80(%zero)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	fneg	%f0, %f0
-	fblt	%fzero, %f0, fbgt_else.41348
-	add	%a0, %zero, %zero
-	j	fbgt_cont.41349
-fbgt_else.41348:
-	add	%a0, %zero, %k1
-fbgt_cont.41349:
-	beqi	%a0, 0, bnei_else.41350
-	j	bnei_cont.41351
-bnei_else.41350:
-	fmov	%f0, %fzero
-bnei_cont.41351:
-	fmul	%f1, %f25, %f0
-	lw	%a0, 7(%s7)
-	flw	%f0, 0(%a0)
-	fmul	%f16, %f1, %f0
-	flw	%f1, 148(%zero)
-	flw	%f0, 145(%zero)
-	fmul	%f0, %f16, %f0
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 148(%zero)
-	flw	%f1, 149(%zero)
-	flw	%f0, 146(%zero)
-	fmul	%f0, %f16, %f0
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 149(%zero)
-	flw	%f1, 150(%zero)
-	flw	%f0, 147(%zero)
-	fmul	%f0, %f16, %f0
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 150(%zero)
-bnei_cont.41347:
-	j	bnei_cont.41325
-bnei_else.41324:
-bnei_cont.41325:
-bnei_cont.41283:
-	addi	%a1, %zero, 116
-	lw	%t1, 3(%sp)
-	lw	%t0, 4(%sp)
-	lw	%ra, 5(%sp)
-	lw	%a0, 2(%sp)
-	lw	%v1, 1(%sp)
-	lw	%v0, 0(%sp)
-	j	iter_trace_diffuse_rays.2992
-do_without_neighbors.3014:
-	sw	%v0, 0(%sp)
-	sw	%v1, 1(%sp)
+calc_diffuse_using_1point.3005:
+	sw	%v1, 0(%sp)
+	sw	%t4, 1(%sp)
 	sw	%t3, 2(%sp)
 	sw	%t2, 3(%sp)
 	sw	%t1, 4(%sp)
 	sw	%t0, 5(%sp)
 	sw	%ra, 6(%sp)
-	addi	%at, %zero, 4
-	blt	%at, %v1, bgt_else.41502
-	lw	%a0, 2(%v0)
-	add	%at, %a0, %v1
-	lw	%a0, 0(%at)
-	blti	%a0, 0, bgti_else.41503
-	lw	%a0, 3(%v0)
-	add	%at, %a0, %v1
-	lw	%a0, 0(%at)
-	beqi	%a0, 0, bnei_else.41504
 	lw	%a0, 5(%v0)
 	lw	%a2, 7(%v0)
 	lw	%a1, 1(%v0)
-	lw	%t1, 4(%v0)
+	lw	%t2, 4(%v0)
 	add	%at, %a0, %v1
 	lw	%a0, 0(%at)
 	flw	%f0, 0(%a0)
@@ -12986,716 +10613,591 @@ do_without_neighbors.3014:
 	flw	%f0, 2(%a0)
 	fsw	%f0, 150(%zero)
 	lw	%a0, 6(%v0)
-	lw	%t2, 0(%a0)
+	lw	%t3, 0(%a0)
+	add	%at, %a2, %v1
+	lw	%t1, 0(%at)
+	add	%at, %a1, %v1
+	lw	%t0, 0(%at)
+	beqi	%t3, 0, bnei_else.29313
+	lw	%t4, 179(%zero)
+	flw	%f0, 0(%t0)
+	fsw	%f0, 162(%zero)
+	flw	%f0, 1(%t0)
+	fsw	%f0, 163(%zero)
+	flw	%f0, 2(%t0)
+	fsw	%f0, 164(%zero)
+	lw	%a0, 0(%zero)
+	addi	%v1, %a0, -1
+	addi	%v0, %t0, 0
+	addi	%sp, %sp, 7
+	jal	setup_startp_constants.2894
+	addi	%sp, %sp, -7
+	lw	%v0, 118(%t4)
+	lw	%a0, 0(%v0)
+	flw	%f1, 0(%a0)
+	flw	%f0, 0(%t1)
+	fmul	%f16, %f1, %f0
+	flw	%f1, 1(%a0)
+	flw	%f0, 1(%t1)
+	fmul	%f0, %f1, %f0
+	fadd	%f16, %f16, %f0
+	flw	%f1, 2(%a0)
+	flw	%f0, 2(%t1)
+	fmul	%f0, %f1, %f0
+	fadd	%f1, %f16, %f0
+	fblt	%f1, %fzero, fbgt_else.29315
+	add	%a0, %zero, %zero
+	j	fbgt_cont.29316
+fbgt_else.29315:
+	add	%a0, %zero, %k1
+fbgt_cont.29316:
+	beqi	%a0, 0, bnei_else.29317
+	lw	%v0, 119(%t4)
+	flw	%f0, 438(%zero)
+	fdiv	%f0, %f1, %f0
+	addi	%sp, %sp, 7
+	jal	trace_diffuse_ray.2989
+	addi	%sp, %sp, -7
+	j	bnei_cont.29318
+bnei_else.29317:
+	flw	%f0, 437(%zero)
+	fdiv	%f0, %f1, %f0
+	addi	%sp, %sp, 7
+	jal	trace_diffuse_ray.2989
+	addi	%sp, %sp, -7
+bnei_cont.29318:
+	addi	%a1, %zero, 116
+	addi	%a0, %t0, 0
+	addi	%v1, %t1, 0
+	addi	%v0, %t4, 0
+	addi	%sp, %sp, 7
+	jal	iter_trace_diffuse_rays.2992
+	addi	%sp, %sp, -7
+	j	bnei_cont.29314
+bnei_else.29313:
+bnei_cont.29314:
+	beqi	%t3, 1, bnei_else.29319
+	lw	%t4, 180(%zero)
+	flw	%f0, 0(%t0)
+	fsw	%f0, 162(%zero)
+	flw	%f0, 1(%t0)
+	fsw	%f0, 163(%zero)
+	flw	%f0, 2(%t0)
+	fsw	%f0, 164(%zero)
+	lw	%a0, 0(%zero)
+	addi	%v1, %a0, -1
+	addi	%v0, %t0, 0
+	addi	%sp, %sp, 7
+	jal	setup_startp_constants.2894
+	addi	%sp, %sp, -7
+	lw	%v0, 118(%t4)
+	lw	%a0, 0(%v0)
+	flw	%f1, 0(%a0)
+	flw	%f0, 0(%t1)
+	fmul	%f16, %f1, %f0
+	flw	%f1, 1(%a0)
+	flw	%f0, 1(%t1)
+	fmul	%f0, %f1, %f0
+	fadd	%f16, %f16, %f0
+	flw	%f1, 2(%a0)
+	flw	%f0, 2(%t1)
+	fmul	%f0, %f1, %f0
+	fadd	%f1, %f16, %f0
+	fblt	%f1, %fzero, fbgt_else.29321
+	add	%a0, %zero, %zero
+	j	fbgt_cont.29322
+fbgt_else.29321:
+	add	%a0, %zero, %k1
+fbgt_cont.29322:
+	beqi	%a0, 0, bnei_else.29323
+	lw	%v0, 119(%t4)
+	flw	%f0, 438(%zero)
+	fdiv	%f0, %f1, %f0
+	addi	%sp, %sp, 7
+	jal	trace_diffuse_ray.2989
+	addi	%sp, %sp, -7
+	j	bnei_cont.29324
+bnei_else.29323:
+	flw	%f0, 437(%zero)
+	fdiv	%f0, %f1, %f0
+	addi	%sp, %sp, 7
+	jal	trace_diffuse_ray.2989
+	addi	%sp, %sp, -7
+bnei_cont.29324:
+	addi	%a1, %zero, 116
+	addi	%a0, %t0, 0
+	addi	%v1, %t1, 0
+	addi	%v0, %t4, 0
+	addi	%sp, %sp, 7
+	jal	iter_trace_diffuse_rays.2992
+	addi	%sp, %sp, -7
+	j	bnei_cont.29320
+bnei_else.29319:
+bnei_cont.29320:
+	beqi	%t3, 2, bnei_else.29325
+	lw	%t4, 181(%zero)
+	flw	%f0, 0(%t0)
+	fsw	%f0, 162(%zero)
+	flw	%f0, 1(%t0)
+	fsw	%f0, 163(%zero)
+	flw	%f0, 2(%t0)
+	fsw	%f0, 164(%zero)
+	lw	%a0, 0(%zero)
+	addi	%v1, %a0, -1
+	addi	%v0, %t0, 0
+	addi	%sp, %sp, 7
+	jal	setup_startp_constants.2894
+	addi	%sp, %sp, -7
+	lw	%v0, 118(%t4)
+	lw	%a0, 0(%v0)
+	flw	%f1, 0(%a0)
+	flw	%f0, 0(%t1)
+	fmul	%f16, %f1, %f0
+	flw	%f1, 1(%a0)
+	flw	%f0, 1(%t1)
+	fmul	%f0, %f1, %f0
+	fadd	%f16, %f16, %f0
+	flw	%f1, 2(%a0)
+	flw	%f0, 2(%t1)
+	fmul	%f0, %f1, %f0
+	fadd	%f1, %f16, %f0
+	fblt	%f1, %fzero, fbgt_else.29327
+	add	%a0, %zero, %zero
+	j	fbgt_cont.29328
+fbgt_else.29327:
+	add	%a0, %zero, %k1
+fbgt_cont.29328:
+	beqi	%a0, 0, bnei_else.29329
+	lw	%v0, 119(%t4)
+	flw	%f0, 438(%zero)
+	fdiv	%f0, %f1, %f0
+	addi	%sp, %sp, 7
+	jal	trace_diffuse_ray.2989
+	addi	%sp, %sp, -7
+	j	bnei_cont.29330
+bnei_else.29329:
+	flw	%f0, 437(%zero)
+	fdiv	%f0, %f1, %f0
+	addi	%sp, %sp, 7
+	jal	trace_diffuse_ray.2989
+	addi	%sp, %sp, -7
+bnei_cont.29330:
+	addi	%a1, %zero, 116
+	addi	%a0, %t0, 0
+	addi	%v1, %t1, 0
+	addi	%v0, %t4, 0
+	addi	%sp, %sp, 7
+	jal	iter_trace_diffuse_rays.2992
+	addi	%sp, %sp, -7
+	j	bnei_cont.29326
+bnei_else.29325:
+bnei_cont.29326:
+	beqi	%t3, 3, bnei_else.29331
+	lw	%t4, 182(%zero)
+	flw	%f0, 0(%t0)
+	fsw	%f0, 162(%zero)
+	flw	%f0, 1(%t0)
+	fsw	%f0, 163(%zero)
+	flw	%f0, 2(%t0)
+	fsw	%f0, 164(%zero)
+	lw	%a0, 0(%zero)
+	addi	%v1, %a0, -1
+	addi	%v0, %t0, 0
+	addi	%sp, %sp, 7
+	jal	setup_startp_constants.2894
+	addi	%sp, %sp, -7
+	lw	%v0, 118(%t4)
+	lw	%a0, 0(%v0)
+	flw	%f1, 0(%a0)
+	flw	%f0, 0(%t1)
+	fmul	%f16, %f1, %f0
+	flw	%f1, 1(%a0)
+	flw	%f0, 1(%t1)
+	fmul	%f0, %f1, %f0
+	fadd	%f16, %f16, %f0
+	flw	%f1, 2(%a0)
+	flw	%f0, 2(%t1)
+	fmul	%f0, %f1, %f0
+	fadd	%f1, %f16, %f0
+	fblt	%f1, %fzero, fbgt_else.29333
+	add	%a0, %zero, %zero
+	j	fbgt_cont.29334
+fbgt_else.29333:
+	add	%a0, %zero, %k1
+fbgt_cont.29334:
+	beqi	%a0, 0, bnei_else.29335
+	lw	%v0, 119(%t4)
+	flw	%f0, 438(%zero)
+	fdiv	%f0, %f1, %f0
+	addi	%sp, %sp, 7
+	jal	trace_diffuse_ray.2989
+	addi	%sp, %sp, -7
+	j	bnei_cont.29336
+bnei_else.29335:
+	flw	%f0, 437(%zero)
+	fdiv	%f0, %f1, %f0
+	addi	%sp, %sp, 7
+	jal	trace_diffuse_ray.2989
+	addi	%sp, %sp, -7
+bnei_cont.29336:
+	addi	%a1, %zero, 116
+	addi	%a0, %t0, 0
+	addi	%v1, %t1, 0
+	addi	%v0, %t4, 0
+	addi	%sp, %sp, 7
+	jal	iter_trace_diffuse_rays.2992
+	addi	%sp, %sp, -7
+	j	bnei_cont.29332
+bnei_else.29331:
+bnei_cont.29332:
+	beqi	%t3, 4, bnei_else.29337
+	lw	%t3, 183(%zero)
+	flw	%f0, 0(%t0)
+	fsw	%f0, 162(%zero)
+	flw	%f0, 1(%t0)
+	fsw	%f0, 163(%zero)
+	flw	%f0, 2(%t0)
+	fsw	%f0, 164(%zero)
+	lw	%a0, 0(%zero)
+	addi	%v1, %a0, -1
+	addi	%v0, %t0, 0
+	addi	%sp, %sp, 7
+	jal	setup_startp_constants.2894
+	addi	%sp, %sp, -7
+	lw	%v0, 118(%t3)
+	lw	%a0, 0(%v0)
+	flw	%f1, 0(%a0)
+	flw	%f0, 0(%t1)
+	fmul	%f16, %f1, %f0
+	flw	%f1, 1(%a0)
+	flw	%f0, 1(%t1)
+	fmul	%f0, %f1, %f0
+	fadd	%f16, %f16, %f0
+	flw	%f1, 2(%a0)
+	flw	%f0, 2(%t1)
+	fmul	%f0, %f1, %f0
+	fadd	%f1, %f16, %f0
+	fblt	%f1, %fzero, fbgt_else.29339
+	add	%a0, %zero, %zero
+	j	fbgt_cont.29340
+fbgt_else.29339:
+	add	%a0, %zero, %k1
+fbgt_cont.29340:
+	beqi	%a0, 0, bnei_else.29341
+	lw	%v0, 119(%t3)
+	flw	%f0, 438(%zero)
+	fdiv	%f0, %f1, %f0
+	addi	%sp, %sp, 7
+	jal	trace_diffuse_ray.2989
+	addi	%sp, %sp, -7
+	j	bnei_cont.29342
+bnei_else.29341:
+	flw	%f0, 437(%zero)
+	fdiv	%f0, %f1, %f0
+	addi	%sp, %sp, 7
+	jal	trace_diffuse_ray.2989
+	addi	%sp, %sp, -7
+bnei_cont.29342:
+	addi	%a1, %zero, 116
+	addi	%a0, %t0, 0
+	addi	%v1, %t1, 0
+	addi	%v0, %t3, 0
+	addi	%sp, %sp, 7
+	jal	iter_trace_diffuse_rays.2992
+	addi	%sp, %sp, -7
+	j	bnei_cont.29338
+bnei_else.29337:
+bnei_cont.29338:
+	lw	%a0, 0(%sp)
+	add	%at, %t2, %a0
+	lw	%a0, 0(%at)
+	flw	%f16, 151(%zero)
+	flw	%f1, 0(%a0)
+	flw	%f0, 148(%zero)
+	fmul	%f0, %f1, %f0
+	fadd	%f0, %f16, %f0
+	fsw	%f0, 151(%zero)
+	flw	%f16, 152(%zero)
+	flw	%f1, 1(%a0)
+	flw	%f0, 149(%zero)
+	fmul	%f0, %f1, %f0
+	fadd	%f0, %f16, %f0
+	fsw	%f0, 152(%zero)
+	flw	%f16, 153(%zero)
+	flw	%f1, 2(%a0)
+	flw	%f0, 150(%zero)
+	fmul	%f0, %f1, %f0
+	fadd	%f0, %f16, %f0
+	lw	%t4, 1(%sp)
+	lw	%t3, 2(%sp)
+	lw	%t2, 3(%sp)
+	lw	%t1, 4(%sp)
+	lw	%t0, 5(%sp)
+	lw	%ra, 6(%sp)
+	fsw	%f0, 153(%zero)
+	jr	%ra
+calc_diffuse_using_5points.3008:
+	add	%at, %v1, %v0
+	lw	%a3, 0(%at)
+	lw	%s2, 5(%a3)
+	addi	%a3, %v0, -1
+	add	%at, %a0, %a3
+	lw	%a3, 0(%at)
+	lw	%s1, 5(%a3)
+	add	%at, %a0, %v0
+	lw	%s0, 0(%at)
+	lw	%k0, 5(%s0)
+	addi	%a3, %v0, 1
+	add	%at, %a0, %a3
+	lw	%a0, 0(%at)
+	lw	%a3, 5(%a0)
+	add	%at, %a1, %v0
+	lw	%a0, 0(%at)
+	lw	%a1, 5(%a0)
+	add	%at, %s2, %a2
+	lw	%a0, 0(%at)
+	flw	%f0, 0(%a0)
+	fsw	%f0, 148(%zero)
+	flw	%f0, 1(%a0)
+	fsw	%f0, 149(%zero)
+	flw	%f0, 2(%a0)
+	fsw	%f0, 150(%zero)
+	add	%at, %s1, %a2
+	lw	%a0, 0(%at)
+	flw	%f1, 148(%zero)
+	flw	%f0, 0(%a0)
+	fadd	%f0, %f1, %f0
+	fsw	%f0, 148(%zero)
+	flw	%f1, 149(%zero)
+	flw	%f0, 1(%a0)
+	fadd	%f0, %f1, %f0
+	fsw	%f0, 149(%zero)
+	flw	%f1, 150(%zero)
+	flw	%f0, 2(%a0)
+	fadd	%f0, %f1, %f0
+	fsw	%f0, 150(%zero)
+	add	%at, %k0, %a2
+	lw	%a0, 0(%at)
+	flw	%f1, 148(%zero)
+	flw	%f0, 0(%a0)
+	fadd	%f0, %f1, %f0
+	fsw	%f0, 148(%zero)
+	flw	%f1, 149(%zero)
+	flw	%f0, 1(%a0)
+	fadd	%f0, %f1, %f0
+	fsw	%f0, 149(%zero)
+	flw	%f1, 150(%zero)
+	flw	%f0, 2(%a0)
+	fadd	%f0, %f1, %f0
+	fsw	%f0, 150(%zero)
+	add	%at, %a3, %a2
+	lw	%a0, 0(%at)
+	flw	%f1, 148(%zero)
+	flw	%f0, 0(%a0)
+	fadd	%f0, %f1, %f0
+	fsw	%f0, 148(%zero)
+	flw	%f1, 149(%zero)
+	flw	%f0, 1(%a0)
+	fadd	%f0, %f1, %f0
+	fsw	%f0, 149(%zero)
+	flw	%f1, 150(%zero)
+	flw	%f0, 2(%a0)
+	fadd	%f0, %f1, %f0
+	fsw	%f0, 150(%zero)
+	add	%at, %a1, %a2
+	lw	%a0, 0(%at)
+	flw	%f1, 148(%zero)
+	flw	%f0, 0(%a0)
+	fadd	%f0, %f1, %f0
+	fsw	%f0, 148(%zero)
+	flw	%f1, 149(%zero)
+	flw	%f0, 1(%a0)
+	fadd	%f0, %f1, %f0
+	fsw	%f0, 149(%zero)
+	flw	%f1, 150(%zero)
+	flw	%f0, 2(%a0)
+	fadd	%f0, %f1, %f0
+	fsw	%f0, 150(%zero)
+	lw	%a0, 4(%s0)
+	add	%at, %a0, %a2
+	lw	%a0, 0(%at)
+	flw	%f16, 151(%zero)
+	flw	%f1, 0(%a0)
+	flw	%f0, 148(%zero)
+	fmul	%f0, %f1, %f0
+	fadd	%f0, %f16, %f0
+	fsw	%f0, 151(%zero)
+	flw	%f16, 152(%zero)
+	flw	%f1, 1(%a0)
+	flw	%f0, 149(%zero)
+	fmul	%f0, %f1, %f0
+	fadd	%f0, %f16, %f0
+	fsw	%f0, 152(%zero)
+	flw	%f16, 153(%zero)
+	flw	%f1, 2(%a0)
+	flw	%f0, 150(%zero)
+	fmul	%f0, %f1, %f0
+	fadd	%f0, %f16, %f0
+	fsw	%f0, 153(%zero)
+	jr	%ra
+do_without_neighbors.3014:
+	sw	%v0, 0(%sp)
+	sw	%v1, 1(%sp)
+	sw	%t2, 2(%sp)
+	sw	%t1, 3(%sp)
+	sw	%t0, 4(%sp)
+	sw	%ra, 5(%sp)
+	addi	%at, %zero, 4
+	blt	%at, %v1, bgt_else.29484
+	lw	%a0, 2(%v0)
+	add	%at, %a0, %v1
+	lw	%a0, 0(%at)
+	blti	%a0, 0, bgti_else.29485
+	lw	%a0, 3(%v0)
+	add	%at, %a0, %v1
+	lw	%a0, 0(%at)
+	beqi	%a0, 0, bnei_else.29486
+	lw	%a3, 5(%v0)
+	lw	%a2, 7(%v0)
+	lw	%a1, 1(%v0)
+	lw	%a0, 4(%v0)
+	sw	%a0, 6(%sp)
+	add	%at, %a3, %v1
+	lw	%a0, 0(%at)
+	flw	%f0, 0(%a0)
+	fsw	%f0, 148(%zero)
+	flw	%f0, 1(%a0)
+	fsw	%f0, 149(%zero)
+	flw	%f0, 2(%a0)
+	fsw	%f0, 150(%zero)
+	lw	%a0, 6(%v0)
+	lw	%t1, 0(%a0)
 	add	%at, %a2, %v1
 	lw	%t0, 0(%at)
 	add	%at, %a1, %v1
-	lw	%t3, 0(%at)
-	beqi	%t2, 0, bnei_else.41506
+	lw	%t2, 0(%at)
+	beqi	%t1, 0, bnei_else.29488
 	lw	%k0, 179(%zero)
-	flw	%f0, 0(%t3)
+	flw	%f0, 0(%t2)
 	fsw	%f0, 162(%zero)
-	flw	%f0, 1(%t3)
+	flw	%f0, 1(%t2)
 	fsw	%f0, 163(%zero)
-	flw	%f0, 2(%t3)
+	flw	%f0, 2(%t2)
 	fsw	%f0, 164(%zero)
 	lw	%a0, 0(%zero)
 	addi	%v1, %a0, -1
-	addi	%v0, %t3, 0
+	addi	%v0, %t2, 0
 	addi	%sp, %sp, 7
 	jal	setup_startp_constants.2894
 	addi	%sp, %sp, -7
 	addi	%a1, %zero, 118
-	addi	%a0, %t3, 0
+	addi	%a0, %t2, 0
 	addi	%v1, %t0, 0
 	addi	%v0, %k0, 0
 	addi	%sp, %sp, 7
 	jal	iter_trace_diffuse_rays.2992
 	addi	%sp, %sp, -7
-	j	bnei_cont.41507
-bnei_else.41506:
-bnei_cont.41507:
-	beqi	%t2, 1, bnei_else.41508
+	j	bnei_cont.29489
+bnei_else.29488:
+bnei_cont.29489:
+	beqi	%t1, 1, bnei_else.29490
 	lw	%k0, 180(%zero)
-	flw	%f0, 0(%t3)
+	flw	%f0, 0(%t2)
 	fsw	%f0, 162(%zero)
-	flw	%f0, 1(%t3)
+	flw	%f0, 1(%t2)
 	fsw	%f0, 163(%zero)
-	flw	%f0, 2(%t3)
+	flw	%f0, 2(%t2)
 	fsw	%f0, 164(%zero)
 	lw	%a0, 0(%zero)
 	addi	%v1, %a0, -1
-	addi	%v0, %t3, 0
+	addi	%v0, %t2, 0
 	addi	%sp, %sp, 7
 	jal	setup_startp_constants.2894
 	addi	%sp, %sp, -7
 	addi	%a1, %zero, 118
-	addi	%a0, %t3, 0
+	addi	%a0, %t2, 0
 	addi	%v1, %t0, 0
 	addi	%v0, %k0, 0
 	addi	%sp, %sp, 7
 	jal	iter_trace_diffuse_rays.2992
 	addi	%sp, %sp, -7
-	j	bnei_cont.41509
-bnei_else.41508:
-bnei_cont.41509:
-	beqi	%t2, 2, bnei_else.41510
+	j	bnei_cont.29491
+bnei_else.29490:
+bnei_cont.29491:
+	beqi	%t1, 2, bnei_else.29492
 	lw	%k0, 181(%zero)
-	flw	%f0, 0(%t3)
+	flw	%f0, 0(%t2)
 	fsw	%f0, 162(%zero)
-	flw	%f0, 1(%t3)
+	flw	%f0, 1(%t2)
 	fsw	%f0, 163(%zero)
-	flw	%f0, 2(%t3)
+	flw	%f0, 2(%t2)
 	fsw	%f0, 164(%zero)
 	lw	%a0, 0(%zero)
 	addi	%v1, %a0, -1
-	addi	%v0, %t3, 0
+	addi	%v0, %t2, 0
 	addi	%sp, %sp, 7
 	jal	setup_startp_constants.2894
 	addi	%sp, %sp, -7
 	addi	%a1, %zero, 118
-	addi	%a0, %t3, 0
+	addi	%a0, %t2, 0
 	addi	%v1, %t0, 0
 	addi	%v0, %k0, 0
 	addi	%sp, %sp, 7
 	jal	iter_trace_diffuse_rays.2992
 	addi	%sp, %sp, -7
-	j	bnei_cont.41511
-bnei_else.41510:
-bnei_cont.41511:
-	beqi	%t2, 3, bnei_else.41512
+	j	bnei_cont.29493
+bnei_else.29492:
+bnei_cont.29493:
+	beqi	%t1, 3, bnei_else.29494
 	lw	%k0, 182(%zero)
-	flw	%f0, 0(%t3)
+	flw	%f0, 0(%t2)
 	fsw	%f0, 162(%zero)
-	flw	%f0, 1(%t3)
+	flw	%f0, 1(%t2)
 	fsw	%f0, 163(%zero)
-	flw	%f0, 2(%t3)
+	flw	%f0, 2(%t2)
 	fsw	%f0, 164(%zero)
 	lw	%a0, 0(%zero)
 	addi	%v1, %a0, -1
-	addi	%v0, %t3, 0
+	addi	%v0, %t2, 0
 	addi	%sp, %sp, 7
 	jal	setup_startp_constants.2894
 	addi	%sp, %sp, -7
 	addi	%a1, %zero, 118
-	addi	%a0, %t3, 0
+	addi	%a0, %t2, 0
 	addi	%v1, %t0, 0
 	addi	%v0, %k0, 0
 	addi	%sp, %sp, 7
 	jal	iter_trace_diffuse_rays.2992
 	addi	%sp, %sp, -7
-	j	bnei_cont.41513
-bnei_else.41512:
-bnei_cont.41513:
-	beqi	%t2, 4, bnei_else.41514
+	j	bnei_cont.29495
+bnei_else.29494:
+bnei_cont.29495:
+	beqi	%t1, 4, bnei_else.29496
 	lw	%k0, 183(%zero)
-	flw	%f0, 0(%t3)
+	flw	%f0, 0(%t2)
 	fsw	%f0, 162(%zero)
-	flw	%f0, 1(%t3)
+	flw	%f0, 1(%t2)
 	fsw	%f0, 163(%zero)
-	flw	%f0, 2(%t3)
+	flw	%f0, 2(%t2)
 	fsw	%f0, 164(%zero)
 	lw	%a0, 0(%zero)
 	addi	%v1, %a0, -1
-	addi	%v0, %t3, 0
+	addi	%v0, %t2, 0
 	addi	%sp, %sp, 7
 	jal	setup_startp_constants.2894
 	addi	%sp, %sp, -7
 	addi	%a1, %zero, 118
-	addi	%a0, %t3, 0
+	addi	%a0, %t2, 0
 	addi	%v1, %t0, 0
 	addi	%v0, %k0, 0
 	addi	%sp, %sp, 7
 	jal	iter_trace_diffuse_rays.2992
 	addi	%sp, %sp, -7
-	j	bnei_cont.41515
-bnei_else.41514:
-bnei_cont.41515:
+	j	bnei_cont.29497
+bnei_else.29496:
+bnei_cont.29497:
+	lw	%a1, 6(%sp)
 	lw	%a0, 1(%sp)
-	add	%at, %t1, %a0
-	lw	%a0, 0(%at)
-	flw	%f16, 151(%zero)
-	flw	%f1, 0(%a0)
-	flw	%f0, 148(%zero)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	fsw	%f0, 151(%zero)
-	flw	%f16, 152(%zero)
-	flw	%f1, 1(%a0)
-	flw	%f0, 149(%zero)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	fsw	%f0, 152(%zero)
-	flw	%f16, 153(%zero)
-	flw	%f1, 2(%a0)
-	flw	%f0, 150(%zero)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	fsw	%f0, 153(%zero)
-	j	bnei_cont.41505
-bnei_else.41504:
-bnei_cont.41505:
-	lw	%a0, 1(%sp)
-	addi	%t2, %a0, 1
-	addi	%at, %zero, 4
-	blt	%at, %t2, bgt_else.41516
-	lw	%k0, 0(%sp)
-	lw	%a0, 2(%k0)
-	add	%at, %a0, %t2
-	lw	%a0, 0(%at)
-	blti	%a0, 0, bgti_else.41517
-	lw	%a0, 3(%k0)
-	add	%at, %a0, %t2
-	lw	%a0, 0(%at)
-	beqi	%a0, 0, bnei_else.41518
-	lw	%a3, 5(%k0)
-	lw	%a2, 7(%k0)
-	lw	%a1, 1(%k0)
-	lw	%a0, 4(%k0)
-	sw	%a0, 7(%sp)
-	add	%at, %a3, %t2
-	lw	%a0, 0(%at)
-	flw	%f0, 0(%a0)
-	fsw	%f0, 148(%zero)
-	flw	%f0, 1(%a0)
-	fsw	%f0, 149(%zero)
-	flw	%f0, 2(%a0)
-	fsw	%f0, 150(%zero)
-	lw	%a0, 6(%k0)
-	lw	%t3, 0(%a0)
-	add	%at, %a2, %t2
-	lw	%t1, 0(%at)
-	add	%at, %a1, %t2
-	lw	%t0, 0(%at)
-	beqi	%t3, 0, bnei_else.41520
-	lw	%v0, 179(%zero)
-	addi	%a0, %t0, 0
-	addi	%v1, %t1, 0
-	addi	%sp, %sp, 8
-	jal	trace_diffuse_rays.2997
-	addi	%sp, %sp, -8
-	j	bnei_cont.41521
-bnei_else.41520:
-bnei_cont.41521:
-	beqi	%t3, 1, bnei_else.41522
-	lw	%v0, 180(%zero)
-	addi	%a0, %t0, 0
-	addi	%v1, %t1, 0
-	addi	%sp, %sp, 8
-	jal	trace_diffuse_rays.2997
-	addi	%sp, %sp, -8
-	j	bnei_cont.41523
-bnei_else.41522:
-bnei_cont.41523:
-	beqi	%t3, 2, bnei_else.41524
-	lw	%v0, 181(%zero)
-	addi	%a0, %t0, 0
-	addi	%v1, %t1, 0
-	addi	%sp, %sp, 8
-	jal	trace_diffuse_rays.2997
-	addi	%sp, %sp, -8
-	j	bnei_cont.41525
-bnei_else.41524:
-bnei_cont.41525:
-	beqi	%t3, 3, bnei_else.41526
-	lw	%v0, 182(%zero)
-	addi	%a0, %t0, 0
-	addi	%v1, %t1, 0
-	addi	%sp, %sp, 8
-	jal	trace_diffuse_rays.2997
-	addi	%sp, %sp, -8
-	j	bnei_cont.41527
-bnei_else.41526:
-bnei_cont.41527:
-	beqi	%t3, 4, bnei_else.41528
-	lw	%v0, 183(%zero)
-	addi	%a0, %t0, 0
-	addi	%v1, %t1, 0
-	addi	%sp, %sp, 8
-	jal	trace_diffuse_rays.2997
-	addi	%sp, %sp, -8
-	j	bnei_cont.41529
-bnei_else.41528:
-bnei_cont.41529:
-	lw	%a0, 7(%sp)
-	add	%at, %a0, %t2
-	lw	%a0, 0(%at)
-	flw	%f16, 151(%zero)
-	flw	%f1, 0(%a0)
-	flw	%f0, 148(%zero)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	fsw	%f0, 151(%zero)
-	flw	%f16, 152(%zero)
-	flw	%f1, 1(%a0)
-	flw	%f0, 149(%zero)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	fsw	%f0, 152(%zero)
-	flw	%f16, 153(%zero)
-	flw	%f1, 2(%a0)
-	flw	%f0, 150(%zero)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	fsw	%f0, 153(%zero)
-	j	bnei_cont.41519
-bnei_else.41518:
-bnei_cont.41519:
-	addi	%v1, %t2, 1
-	lw	%t3, 2(%sp)
-	lw	%t2, 3(%sp)
-	lw	%t1, 4(%sp)
-	lw	%t0, 5(%sp)
-	lw	%ra, 6(%sp)
-	lw	%v0, 0(%sp)
-	j	do_without_neighbors.3014
-bgti_else.41517:
-	lw	%t3, 2(%sp)
-	lw	%t2, 3(%sp)
-	lw	%t1, 4(%sp)
-	lw	%t0, 5(%sp)
-	lw	%ra, 6(%sp)
-	jr	%ra
-bgt_else.41516:
-	lw	%t3, 2(%sp)
-	lw	%t2, 3(%sp)
-	lw	%t1, 4(%sp)
-	lw	%t0, 5(%sp)
-	lw	%ra, 6(%sp)
-	jr	%ra
-bgti_else.41503:
-	jr	%ra
-bgt_else.41502:
-	jr	%ra
-try_exploit_neighbors.3030:
-	sw	%a3, 0(%sp)
-	sw	%ra, 1(%sp)
-	add	%at, %a1, %v0
-	lw	%s0, 0(%at)
-	sw	%s0, 2(%sp)
-	addi	%at, %zero, 4
-	blt	%at, %a3, bgt_else.41746
-	lw	%k0, 2(%s0)
-	add	%at, %k0, %a3
-	lw	%k0, 0(%at)
-	blti	%k0, 0, bgti_else.41747
-	lw	%k0, 2(%s0)
-	add	%at, %k0, %a3
-	lw	%s0, 0(%at)
-	add	%at, %a0, %v0
-	lw	%ra, 0(%at)
-	lw	%k0, 2(%ra)
-	add	%at, %k0, %a3
-	lw	%k0, 0(%at)
-	bne	%k0, %s0, beq_else.41748
-	add	%at, %a2, %v0
-	lw	%k0, 0(%at)
-	lw	%k0, 2(%k0)
-	add	%at, %k0, %a3
-	lw	%k0, 0(%at)
-	bne	%k0, %s0, beq_else.41750
-	addi	%k0, %v0, -1
-	add	%at, %a1, %k0
-	lw	%k0, 0(%at)
-	lw	%k0, 2(%k0)
-	add	%at, %k0, %a3
-	lw	%k0, 0(%at)
-	bne	%k0, %s0, beq_else.41752
-	addi	%k0, %v0, 1
-	add	%at, %a1, %k0
-	lw	%k0, 0(%at)
-	lw	%k0, 2(%k0)
-	add	%at, %k0, %a3
-	lw	%a3, 0(%at)
-	bne	%a3, %s0, beq_else.41754
-	add	%a3, %zero, %k1
-	j	beq_cont.41749
-beq_else.41754:
-	add	%a3, %zero, %zero
-beq_cont.41755:
-	j	beq_cont.41749
-beq_else.41752:
-	add	%a3, %zero, %zero
-beq_cont.41753:
-	j	beq_cont.41749
-beq_else.41750:
-	add	%a3, %zero, %zero
-beq_cont.41751:
-	j	beq_cont.41749
-beq_else.41748:
-	add	%a3, %zero, %zero
-beq_cont.41749:
-	beqi	%a3, 0, bnei_else.41756
-	lw	%s3, 2(%sp)
-	lw	%a3, 3(%s3)
-	lw	%s2, 0(%sp)
-	add	%at, %a3, %s2
-	lw	%a3, 0(%at)
-	beqi	%a3, 0, bnei_else.41757
-	lw	%s5, 5(%ra)
-	addi	%a3, %v0, -1
-	add	%at, %a1, %a3
-	lw	%a3, 0(%at)
-	lw	%s4, 5(%a3)
-	lw	%s1, 5(%s3)
-	addi	%a3, %v0, 1
-	add	%at, %a1, %a3
-	lw	%a3, 0(%at)
-	lw	%s0, 5(%a3)
-	add	%at, %a2, %v0
-	lw	%a3, 0(%at)
-	lw	%k0, 5(%a3)
-	add	%at, %s5, %s2
-	lw	%a3, 0(%at)
-	flw	%f0, 0(%a3)
-	fsw	%f0, 148(%zero)
-	flw	%f0, 1(%a3)
-	fsw	%f0, 149(%zero)
-	flw	%f0, 2(%a3)
-	fsw	%f0, 150(%zero)
-	add	%at, %s4, %s2
-	lw	%a3, 0(%at)
-	flw	%f1, 148(%zero)
-	flw	%f0, 0(%a3)
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 148(%zero)
-	flw	%f1, 149(%zero)
-	flw	%f0, 1(%a3)
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 149(%zero)
-	flw	%f1, 150(%zero)
-	flw	%f0, 2(%a3)
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 150(%zero)
-	add	%at, %s1, %s2
-	lw	%a3, 0(%at)
-	flw	%f1, 148(%zero)
-	flw	%f0, 0(%a3)
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 148(%zero)
-	flw	%f1, 149(%zero)
-	flw	%f0, 1(%a3)
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 149(%zero)
-	flw	%f1, 150(%zero)
-	flw	%f0, 2(%a3)
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 150(%zero)
-	add	%at, %s0, %s2
-	lw	%a3, 0(%at)
-	flw	%f1, 148(%zero)
-	flw	%f0, 0(%a3)
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 148(%zero)
-	flw	%f1, 149(%zero)
-	flw	%f0, 1(%a3)
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 149(%zero)
-	flw	%f1, 150(%zero)
-	flw	%f0, 2(%a3)
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 150(%zero)
-	add	%at, %k0, %s2
-	lw	%a3, 0(%at)
-	flw	%f1, 148(%zero)
-	flw	%f0, 0(%a3)
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 148(%zero)
-	flw	%f1, 149(%zero)
-	flw	%f0, 1(%a3)
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 149(%zero)
-	flw	%f1, 150(%zero)
-	flw	%f0, 2(%a3)
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 150(%zero)
-	lw	%a3, 4(%s3)
-	add	%at, %a3, %s2
-	lw	%a3, 0(%at)
-	flw	%f16, 151(%zero)
-	flw	%f1, 0(%a3)
-	flw	%f0, 148(%zero)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	fsw	%f0, 151(%zero)
-	flw	%f16, 152(%zero)
-	flw	%f1, 1(%a3)
-	flw	%f0, 149(%zero)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	fsw	%f0, 152(%zero)
-	flw	%f16, 153(%zero)
-	flw	%f1, 2(%a3)
-	flw	%f0, 150(%zero)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	fsw	%f0, 153(%zero)
-	j	bnei_cont.41758
-bnei_else.41757:
-bnei_cont.41758:
-	lw	%a3, 0(%sp)
-	addi	%k0, %a3, 1
-	addi	%at, %zero, 4
-	blt	%at, %k0, bgt_else.41759
-	lw	%s0, 2(%sp)
-	lw	%a3, 2(%s0)
-	add	%at, %a3, %k0
-	lw	%a3, 0(%at)
-	blti	%a3, 0, bgti_else.41760
-	lw	%a3, 2(%s0)
-	add	%at, %a3, %k0
-	lw	%s0, 0(%at)
-	lw	%a3, 2(%ra)
-	add	%at, %a3, %k0
-	lw	%a3, 0(%at)
-	bne	%a3, %s0, beq_else.41761
-	add	%at, %a2, %v0
-	lw	%a3, 0(%at)
-	lw	%a3, 2(%a3)
-	add	%at, %a3, %k0
-	lw	%a3, 0(%at)
-	bne	%a3, %s0, beq_else.41763
-	addi	%a3, %v0, -1
-	add	%at, %a1, %a3
-	lw	%a3, 0(%at)
-	lw	%a3, 2(%a3)
-	add	%at, %a3, %k0
-	lw	%a3, 0(%at)
-	bne	%a3, %s0, beq_else.41765
-	addi	%a3, %v0, 1
-	add	%at, %a1, %a3
-	lw	%a3, 0(%at)
-	lw	%a3, 2(%a3)
-	add	%at, %a3, %k0
-	lw	%a3, 0(%at)
-	bne	%a3, %s0, beq_else.41767
-	add	%a3, %zero, %k1
-	j	beq_cont.41762
-beq_else.41767:
-	add	%a3, %zero, %zero
-beq_cont.41768:
-	j	beq_cont.41762
-beq_else.41765:
-	add	%a3, %zero, %zero
-beq_cont.41766:
-	j	beq_cont.41762
-beq_else.41763:
-	add	%a3, %zero, %zero
-beq_cont.41764:
-	j	beq_cont.41762
-beq_else.41761:
-	add	%a3, %zero, %zero
-beq_cont.41762:
-	beqi	%a3, 0, bnei_else.41769
-	lw	%s3, 2(%sp)
-	lw	%a3, 3(%s3)
-	add	%at, %a3, %k0
-	lw	%a3, 0(%at)
-	beqi	%a3, 0, bnei_else.41770
-	lw	%s4, 5(%ra)
-	addi	%a3, %v0, -1
-	add	%at, %a1, %a3
-	lw	%a3, 0(%at)
-	lw	%s2, 5(%a3)
-	lw	%s1, 5(%s3)
-	addi	%a3, %v0, 1
-	add	%at, %a1, %a3
-	lw	%a3, 0(%at)
-	lw	%s0, 5(%a3)
-	add	%at, %a2, %v0
-	lw	%a3, 0(%at)
-	lw	%ra, 5(%a3)
-	add	%at, %s4, %k0
-	lw	%a3, 0(%at)
-	flw	%f0, 0(%a3)
-	fsw	%f0, 148(%zero)
-	flw	%f0, 1(%a3)
-	fsw	%f0, 149(%zero)
-	flw	%f0, 2(%a3)
-	fsw	%f0, 150(%zero)
-	add	%at, %s2, %k0
-	lw	%a3, 0(%at)
-	flw	%f1, 148(%zero)
-	flw	%f0, 0(%a3)
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 148(%zero)
-	flw	%f1, 149(%zero)
-	flw	%f0, 1(%a3)
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 149(%zero)
-	flw	%f1, 150(%zero)
-	flw	%f0, 2(%a3)
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 150(%zero)
-	add	%at, %s1, %k0
-	lw	%a3, 0(%at)
-	flw	%f1, 148(%zero)
-	flw	%f0, 0(%a3)
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 148(%zero)
-	flw	%f1, 149(%zero)
-	flw	%f0, 1(%a3)
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 149(%zero)
-	flw	%f1, 150(%zero)
-	flw	%f0, 2(%a3)
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 150(%zero)
-	add	%at, %s0, %k0
-	lw	%a3, 0(%at)
-	flw	%f1, 148(%zero)
-	flw	%f0, 0(%a3)
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 148(%zero)
-	flw	%f1, 149(%zero)
-	flw	%f0, 1(%a3)
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 149(%zero)
-	flw	%f1, 150(%zero)
-	flw	%f0, 2(%a3)
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 150(%zero)
-	add	%at, %ra, %k0
-	lw	%a3, 0(%at)
-	flw	%f1, 148(%zero)
-	flw	%f0, 0(%a3)
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 148(%zero)
-	flw	%f1, 149(%zero)
-	flw	%f0, 1(%a3)
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 149(%zero)
-	flw	%f1, 150(%zero)
-	flw	%f0, 2(%a3)
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 150(%zero)
-	lw	%a3, 4(%s3)
-	add	%at, %a3, %k0
-	lw	%a3, 0(%at)
-	flw	%f16, 151(%zero)
-	flw	%f1, 0(%a3)
-	flw	%f0, 148(%zero)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	fsw	%f0, 151(%zero)
-	flw	%f16, 152(%zero)
-	flw	%f1, 1(%a3)
-	flw	%f0, 149(%zero)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	fsw	%f0, 152(%zero)
-	flw	%f16, 153(%zero)
-	flw	%f1, 2(%a3)
-	flw	%f0, 150(%zero)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	fsw	%f0, 153(%zero)
-	j	bnei_cont.41771
-bnei_else.41770:
-bnei_cont.41771:
-	addi	%a3, %k0, 1
-	lw	%ra, 1(%sp)
-	j	try_exploit_neighbors.3030
-bnei_else.41769:
-	lw	%ra, 1(%sp)
-	lw	%v0, 2(%sp)
-	addi	%v1, %k0, 0
-	j	do_without_neighbors.3014
-bgti_else.41760:
-	lw	%ra, 1(%sp)
-	jr	%ra
-bgt_else.41759:
-	lw	%ra, 1(%sp)
-	jr	%ra
-bnei_else.41756:
-	lw	%ra, 0(%sp)
-	addi	%at, %zero, 4
-	blt	%at, %ra, bgt_else.41774
-	lw	%k0, 2(%sp)
-	lw	%a0, 2(%k0)
-	add	%at, %a0, %ra
-	lw	%a0, 0(%at)
-	blti	%a0, 0, bgti_else.41775
-	lw	%a0, 3(%k0)
-	add	%at, %a0, %ra
-	lw	%a0, 0(%at)
-	beqi	%a0, 0, bnei_else.41776
-	lw	%a1, 5(%k0)
-	lw	%a3, 7(%k0)
-	lw	%a2, 1(%k0)
-	lw	%a0, 4(%k0)
-	sw	%a0, 3(%sp)
-	add	%at, %a1, %ra
-	lw	%a0, 0(%at)
-	flw	%f0, 0(%a0)
-	fsw	%f0, 148(%zero)
-	flw	%f0, 1(%a0)
-	fsw	%f0, 149(%zero)
-	flw	%f0, 2(%a0)
-	fsw	%f0, 150(%zero)
-	lw	%a0, 6(%k0)
-	lw	%a1, 0(%a0)
-	sw	%a1, 4(%sp)
-	add	%at, %a3, %ra
-	lw	%v1, 0(%at)
-	sw	%v1, 5(%sp)
-	add	%at, %a2, %ra
-	lw	%a0, 0(%at)
-	sw	%a0, 6(%sp)
-	beqi	%a1, 0, bnei_else.41778
-	lw	%v0, 179(%zero)
-	addi	%sp, %sp, 7
-	jal	trace_diffuse_rays.2997
-	addi	%sp, %sp, -7
-	j	bnei_cont.41779
-bnei_else.41778:
-bnei_cont.41779:
-	lw	%a0, 4(%sp)
-	beqi	%a0, 1, bnei_else.41780
-	lw	%v0, 180(%zero)
-	lw	%a0, 6(%sp)
-	lw	%v1, 5(%sp)
-	addi	%sp, %sp, 7
-	jal	trace_diffuse_rays.2997
-	addi	%sp, %sp, -7
-	j	bnei_cont.41781
-bnei_else.41780:
-bnei_cont.41781:
-	lw	%a0, 4(%sp)
-	beqi	%a0, 2, bnei_else.41782
-	lw	%v0, 181(%zero)
-	lw	%a0, 6(%sp)
-	lw	%v1, 5(%sp)
-	addi	%sp, %sp, 7
-	jal	trace_diffuse_rays.2997
-	addi	%sp, %sp, -7
-	j	bnei_cont.41783
-bnei_else.41782:
-bnei_cont.41783:
-	lw	%a0, 4(%sp)
-	beqi	%a0, 3, bnei_else.41784
-	lw	%v0, 182(%zero)
-	lw	%a0, 6(%sp)
-	lw	%v1, 5(%sp)
-	addi	%sp, %sp, 7
-	jal	trace_diffuse_rays.2997
-	addi	%sp, %sp, -7
-	j	bnei_cont.41785
-bnei_else.41784:
-bnei_cont.41785:
-	lw	%a0, 4(%sp)
-	beqi	%a0, 4, bnei_else.41786
-	lw	%v0, 183(%zero)
-	lw	%a0, 6(%sp)
-	lw	%v1, 5(%sp)
-	addi	%sp, %sp, 7
-	jal	trace_diffuse_rays.2997
-	addi	%sp, %sp, -7
-	j	bnei_cont.41787
-bnei_else.41786:
-bnei_cont.41787:
-	lw	%a1, 3(%sp)
-	lw	%a0, 0(%sp)
 	add	%at, %a1, %a0
 	lw	%a0, 0(%at)
 	flw	%f16, 151(%zero)
@@ -13716,24 +11218,1629 @@ bnei_cont.41787:
 	fmul	%f0, %f1, %f0
 	fadd	%f0, %f16, %f0
 	fsw	%f0, 153(%zero)
-	j	bnei_cont.41777
-bnei_else.41776:
-bnei_cont.41777:
+	j	bnei_cont.29487
+bnei_else.29486:
+bnei_cont.29487:
+	lw	%a0, 1(%sp)
+	addi	%t0, %a0, 1
+	addi	%at, %zero, 4
+	blt	%at, %t0, bgt_else.29498
+	lw	%v0, 0(%sp)
+	lw	%a0, 2(%v0)
+	add	%at, %a0, %t0
+	lw	%a0, 0(%at)
+	blti	%a0, 0, bgti_else.29499
+	lw	%a0, 3(%v0)
+	add	%at, %a0, %t0
+	lw	%a0, 0(%at)
+	beqi	%a0, 0, bnei_else.29500
+	addi	%v1, %t0, 0
+	addi	%sp, %sp, 7
+	jal	calc_diffuse_using_1point.3005
+	addi	%sp, %sp, -7
+	j	bnei_cont.29501
+bnei_else.29500:
+bnei_cont.29501:
+	addi	%v1, %t0, 1
+	lw	%t2, 2(%sp)
+	lw	%t1, 3(%sp)
+	lw	%t0, 4(%sp)
+	lw	%ra, 5(%sp)
+	lw	%v0, 0(%sp)
+	j	do_without_neighbors.3014
+bgti_else.29499:
+	lw	%t2, 2(%sp)
+	lw	%t1, 3(%sp)
+	lw	%t0, 4(%sp)
+	lw	%ra, 5(%sp)
+	jr	%ra
+bgt_else.29498:
+	lw	%t2, 2(%sp)
+	lw	%t1, 3(%sp)
+	lw	%t0, 4(%sp)
+	lw	%ra, 5(%sp)
+	jr	%ra
+bgti_else.29485:
+	jr	%ra
+bgt_else.29484:
+	jr	%ra
+try_exploit_neighbors.3030:
+	add	%s3, %zero, %v1
+	add	%v1, %zero, %a0
+	add	%s4, %zero, %a1
+	add	%s5, %zero, %a2
+	sw	%a3, 0(%sp)
+	sw	%ra, 1(%sp)
+	add	%at, %s4, %v0
+	lw	%a1, 0(%at)
+	sw	%a1, 2(%sp)
+	addi	%at, %zero, 4
+	blt	%at, %a3, bgt_else.29672
+	lw	%a0, 2(%a1)
+	add	%at, %a0, %a3
+	lw	%a0, 0(%at)
+	blti	%a0, 0, bgti_else.29673
+	lw	%a0, 2(%a1)
+	add	%at, %a0, %a3
+	lw	%a1, 0(%at)
+	add	%at, %v1, %v0
+	lw	%k0, 0(%at)
+	lw	%a0, 2(%k0)
+	add	%at, %a0, %a3
+	lw	%a0, 0(%at)
+	bne	%a0, %a1, beq_else.29674
+	add	%at, %s5, %v0
+	lw	%a0, 0(%at)
+	lw	%a0, 2(%a0)
+	add	%at, %a0, %a3
+	lw	%a0, 0(%at)
+	bne	%a0, %a1, beq_else.29676
+	addi	%a0, %v0, -1
+	add	%at, %s4, %a0
+	lw	%a0, 0(%at)
+	lw	%a0, 2(%a0)
+	add	%at, %a0, %a3
+	lw	%a0, 0(%at)
+	bne	%a0, %a1, beq_else.29678
+	addi	%a0, %v0, 1
+	add	%at, %s4, %a0
+	lw	%a0, 0(%at)
+	lw	%a0, 2(%a0)
+	add	%at, %a0, %a3
+	lw	%a0, 0(%at)
+	bne	%a0, %a1, beq_else.29680
+	add	%a0, %zero, %k1
+	j	beq_cont.29675
+beq_else.29680:
+	add	%a0, %zero, %zero
+beq_cont.29681:
+	j	beq_cont.29675
+beq_else.29678:
+	add	%a0, %zero, %zero
+beq_cont.29679:
+	j	beq_cont.29675
+beq_else.29676:
+	add	%a0, %zero, %zero
+beq_cont.29677:
+	j	beq_cont.29675
+beq_else.29674:
+	add	%a0, %zero, %zero
+beq_cont.29675:
+	beqi	%a0, 0, bnei_else.29682
+	lw	%s0, 2(%sp)
+	lw	%a0, 3(%s0)
+	lw	%ra, 0(%sp)
+	add	%at, %a0, %ra
+	lw	%a0, 0(%at)
+	beqi	%a0, 0, bnei_else.29683
+	lw	%s2, 5(%k0)
+	addi	%a0, %v0, -1
+	add	%at, %s4, %a0
+	lw	%a0, 0(%at)
+	lw	%s1, 5(%a0)
+	lw	%a3, 5(%s0)
+	addi	%a0, %v0, 1
+	add	%at, %s4, %a0
+	lw	%a0, 0(%at)
+	lw	%a2, 5(%a0)
+	add	%at, %s5, %v0
+	lw	%a0, 0(%at)
+	lw	%a1, 5(%a0)
+	add	%at, %s2, %ra
+	lw	%a0, 0(%at)
+	flw	%f0, 0(%a0)
+	fsw	%f0, 148(%zero)
+	flw	%f0, 1(%a0)
+	fsw	%f0, 149(%zero)
+	flw	%f0, 2(%a0)
+	fsw	%f0, 150(%zero)
+	add	%at, %s1, %ra
+	lw	%a0, 0(%at)
+	flw	%f1, 148(%zero)
+	flw	%f0, 0(%a0)
+	fadd	%f0, %f1, %f0
+	fsw	%f0, 148(%zero)
+	flw	%f1, 149(%zero)
+	flw	%f0, 1(%a0)
+	fadd	%f0, %f1, %f0
+	fsw	%f0, 149(%zero)
+	flw	%f1, 150(%zero)
+	flw	%f0, 2(%a0)
+	fadd	%f0, %f1, %f0
+	fsw	%f0, 150(%zero)
+	add	%at, %a3, %ra
+	lw	%a0, 0(%at)
+	flw	%f1, 148(%zero)
+	flw	%f0, 0(%a0)
+	fadd	%f0, %f1, %f0
+	fsw	%f0, 148(%zero)
+	flw	%f1, 149(%zero)
+	flw	%f0, 1(%a0)
+	fadd	%f0, %f1, %f0
+	fsw	%f0, 149(%zero)
+	flw	%f1, 150(%zero)
+	flw	%f0, 2(%a0)
+	fadd	%f0, %f1, %f0
+	fsw	%f0, 150(%zero)
+	add	%at, %a2, %ra
+	lw	%a0, 0(%at)
+	flw	%f1, 148(%zero)
+	flw	%f0, 0(%a0)
+	fadd	%f0, %f1, %f0
+	fsw	%f0, 148(%zero)
+	flw	%f1, 149(%zero)
+	flw	%f0, 1(%a0)
+	fadd	%f0, %f1, %f0
+	fsw	%f0, 149(%zero)
+	flw	%f1, 150(%zero)
+	flw	%f0, 2(%a0)
+	fadd	%f0, %f1, %f0
+	fsw	%f0, 150(%zero)
+	add	%at, %a1, %ra
+	lw	%a0, 0(%at)
+	flw	%f1, 148(%zero)
+	flw	%f0, 0(%a0)
+	fadd	%f0, %f1, %f0
+	fsw	%f0, 148(%zero)
+	flw	%f1, 149(%zero)
+	flw	%f0, 1(%a0)
+	fadd	%f0, %f1, %f0
+	fsw	%f0, 149(%zero)
+	flw	%f1, 150(%zero)
+	flw	%f0, 2(%a0)
+	fadd	%f0, %f1, %f0
+	fsw	%f0, 150(%zero)
+	lw	%a0, 4(%s0)
+	add	%at, %a0, %ra
+	lw	%a0, 0(%at)
+	flw	%f16, 151(%zero)
+	flw	%f1, 0(%a0)
+	flw	%f0, 148(%zero)
+	fmul	%f0, %f1, %f0
+	fadd	%f0, %f16, %f0
+	fsw	%f0, 151(%zero)
+	flw	%f16, 152(%zero)
+	flw	%f1, 1(%a0)
+	flw	%f0, 149(%zero)
+	fmul	%f0, %f1, %f0
+	fadd	%f0, %f16, %f0
+	fsw	%f0, 152(%zero)
+	flw	%f16, 153(%zero)
+	flw	%f1, 2(%a0)
+	flw	%f0, 150(%zero)
+	fmul	%f0, %f1, %f0
+	fadd	%f0, %f16, %f0
+	fsw	%f0, 153(%zero)
+	j	bnei_cont.29684
+bnei_else.29683:
+bnei_cont.29684:
+	lw	%a0, 0(%sp)
+	addi	%a2, %a0, 1
+	addi	%at, %zero, 4
+	blt	%at, %a2, bgt_else.29685
+	lw	%a1, 2(%sp)
+	lw	%a0, 2(%a1)
+	add	%at, %a0, %a2
+	lw	%a0, 0(%at)
+	blti	%a0, 0, bgti_else.29686
+	lw	%a0, 2(%a1)
+	add	%at, %a0, %a2
+	lw	%a1, 0(%at)
+	lw	%a0, 2(%k0)
+	add	%at, %a0, %a2
+	lw	%a0, 0(%at)
+	bne	%a0, %a1, beq_else.29687
+	add	%at, %s5, %v0
+	lw	%a0, 0(%at)
+	lw	%a0, 2(%a0)
+	add	%at, %a0, %a2
+	lw	%a0, 0(%at)
+	bne	%a0, %a1, beq_else.29689
+	addi	%a0, %v0, -1
+	add	%at, %s4, %a0
+	lw	%a0, 0(%at)
+	lw	%a0, 2(%a0)
+	add	%at, %a0, %a2
+	lw	%a0, 0(%at)
+	bne	%a0, %a1, beq_else.29691
+	addi	%a0, %v0, 1
+	add	%at, %s4, %a0
+	lw	%a0, 0(%at)
+	lw	%a0, 2(%a0)
+	add	%at, %a0, %a2
+	lw	%a0, 0(%at)
+	bne	%a0, %a1, beq_else.29693
+	add	%a0, %zero, %k1
+	j	beq_cont.29688
+beq_else.29693:
+	add	%a0, %zero, %zero
+beq_cont.29694:
+	j	beq_cont.29688
+beq_else.29691:
+	add	%a0, %zero, %zero
+beq_cont.29692:
+	j	beq_cont.29688
+beq_else.29689:
+	add	%a0, %zero, %zero
+beq_cont.29690:
+	j	beq_cont.29688
+beq_else.29687:
+	add	%a0, %zero, %zero
+beq_cont.29688:
+	beqi	%a0, 0, bnei_else.29695
+	lw	%a0, 2(%sp)
+	lw	%a0, 3(%a0)
+	add	%at, %a0, %a2
+	lw	%a0, 0(%at)
+	beqi	%a0, 0, bnei_else.29696
+	addi	%a1, %s5, 0
+	addi	%a0, %s4, 0
+	addi	%sp, %sp, 3
+	jal	calc_diffuse_using_5points.3008
+	addi	%sp, %sp, -3
+	j	bnei_cont.29697
+bnei_else.29696:
+bnei_cont.29697:
+	addi	%a3, %a2, 1
+	lw	%ra, 1(%sp)
+	addi	%a2, %s5, 0
+	addi	%a1, %s4, 0
+	addi	%a0, %v1, 0
+	addi	%v1, %s3, 0
+	j	try_exploit_neighbors.3030
+bnei_else.29695:
+	lw	%ra, 1(%sp)
+	lw	%v0, 2(%sp)
+	addi	%v1, %a2, 0
+	j	do_without_neighbors.3014
+bgti_else.29686:
+	lw	%ra, 1(%sp)
+	jr	%ra
+bgt_else.29685:
+	lw	%ra, 1(%sp)
+	jr	%ra
+bnei_else.29682:
+	lw	%v1, 0(%sp)
+	addi	%at, %zero, 4
+	blt	%at, %v1, bgt_else.29700
+	lw	%v0, 2(%sp)
+	lw	%a0, 2(%v0)
+	add	%at, %a0, %v1
+	lw	%a0, 0(%at)
+	blti	%a0, 0, bgti_else.29701
+	lw	%a0, 3(%v0)
+	add	%at, %a0, %v1
+	lw	%a0, 0(%at)
+	beqi	%a0, 0, bnei_else.29702
+	addi	%sp, %sp, 3
+	jal	calc_diffuse_using_1point.3005
+	addi	%sp, %sp, -3
+	j	bnei_cont.29703
+bnei_else.29702:
+bnei_cont.29703:
 	lw	%a0, 0(%sp)
 	addi	%v1, %a0, 1
 	lw	%ra, 1(%sp)
 	lw	%v0, 2(%sp)
 	j	do_without_neighbors.3014
-bgti_else.41775:
+bgti_else.29701:
 	lw	%ra, 1(%sp)
 	jr	%ra
-bgt_else.41774:
+bgt_else.29700:
 	lw	%ra, 1(%sp)
 	jr	%ra
-bgti_else.41747:
+bgti_else.29673:
 	jr	%ra
-bgt_else.41746:
+bgt_else.29672:
 	jr	%ra
+write_ppm_header.3037:
+	add	%a1, %zero, %ra
+	addi	%v0, %zero, 80
+	jal	min_caml_print_char
+	addi	%v0, %zero, 51
+	jal	min_caml_print_char
+	addi	%a2, %zero, 10
+	addi	%v0, %a2, 0
+	jal	min_caml_print_char
+	lw	%k0, 154(%zero)
+	blti	%k0, 10, bgti_else.30442
+	blti	%k0, 20, bgti_else.30444
+	blti	%k0, 30, bgti_else.30446
+	blti	%k0, 40, bgti_else.30448
+	addi	%a0, %k0, -40
+	blti	%a0, 10, bgti_else.30450
+	blti	%a0, 20, bgti_else.30452
+	blti	%a0, 30, bgti_else.30454
+	blti	%a0, 40, bgti_else.30456
+	addi	%v0, %a0, -40
+	addi	%v1, %zero, 8
+	jal	print_int_sub1.2641
+	addi	%a3, %v0, 0
+	j	bgti_cont.30443
+bgti_else.30456:
+	addi	%a3, %zero, 7
+bgti_cont.30457:
+	j	bgti_cont.30443
+bgti_else.30454:
+	addi	%a3, %zero, 6
+bgti_cont.30455:
+	j	bgti_cont.30443
+bgti_else.30452:
+	addi	%a3, %zero, 5
+bgti_cont.30453:
+	j	bgti_cont.30443
+bgti_else.30450:
+	addi	%a3, %zero, 4
+bgti_cont.30451:
+	j	bgti_cont.30443
+bgti_else.30448:
+	addi	%a3, %zero, 3
+bgti_cont.30449:
+	j	bgti_cont.30443
+bgti_else.30446:
+	addi	%a3, %zero, 2
+bgti_cont.30447:
+	j	bgti_cont.30443
+bgti_else.30444:
+	add	%a3, %zero, %k1
+bgti_cont.30445:
+	j	bgti_cont.30443
+bgti_else.30442:
+	add	%a3, %zero, %zero
+bgti_cont.30443:
+	blti	%k0, 10, bgti_else.30458
+	blti	%k0, 20, bgti_else.30460
+	blti	%k0, 30, bgti_else.30462
+	blti	%k0, 40, bgti_else.30464
+	addi	%k0, %k0, -40
+	blti	%k0, 10, bgti_cont.30459
+	blti	%k0, 20, bgti_else.30468
+	blti	%k0, 30, bgti_else.30470
+	blti	%k0, 40, bgti_else.30472
+	addi	%k0, %k0, -40
+	blti	%k0, 10, bgti_cont.30459
+	blti	%k0, 20, bgti_else.30476
+	blti	%k0, 30, bgti_else.30478
+	blti	%k0, 40, bgti_else.30480
+	addi	%k0, %k0, -40
+	blti	%k0, 10, bgti_cont.30459
+	blti	%k0, 20, bgti_else.30484
+	blti	%k0, 30, bgti_else.30486
+	blti	%k0, 40, bgti_else.30488
+	addi	%k0, %k0, -40
+	blti	%k0, 10, bgti_cont.30459
+	blti	%k0, 20, bgti_else.30492
+	blti	%k0, 30, bgti_else.30494
+	blti	%k0, 40, bgti_else.30496
+	addi	%k0, %k0, -40
+	blti	%k0, 10, bgti_cont.30459
+	blti	%k0, 20, bgti_else.30500
+	blti	%k0, 30, bgti_else.30502
+	blti	%k0, 40, bgti_else.30504
+	addi	%v0, %k0, -40
+	jal	print_int_sub2.2644
+	addi	%k0, %v0, 0
+	j	bgti_cont.30459
+bgti_else.30504:
+	addi	%k0, %k0, -30
+bgti_cont.30505:
+	j	bgti_cont.30459
+bgti_else.30502:
+	addi	%k0, %k0, -20
+bgti_cont.30503:
+	j	bgti_cont.30459
+bgti_else.30500:
+	addi	%k0, %k0, -10
+bgti_cont.30501:
+	j	bgti_cont.30459
+bgti_else.30498:
+bgti_cont.30499:
+	j	bgti_cont.30459
+bgti_else.30496:
+	addi	%k0, %k0, -30
+bgti_cont.30497:
+	j	bgti_cont.30459
+bgti_else.30494:
+	addi	%k0, %k0, -20
+bgti_cont.30495:
+	j	bgti_cont.30459
+bgti_else.30492:
+	addi	%k0, %k0, -10
+bgti_cont.30493:
+	j	bgti_cont.30459
+bgti_else.30490:
+bgti_cont.30491:
+	j	bgti_cont.30459
+bgti_else.30488:
+	addi	%k0, %k0, -30
+bgti_cont.30489:
+	j	bgti_cont.30459
+bgti_else.30486:
+	addi	%k0, %k0, -20
+bgti_cont.30487:
+	j	bgti_cont.30459
+bgti_else.30484:
+	addi	%k0, %k0, -10
+bgti_cont.30485:
+	j	bgti_cont.30459
+bgti_else.30482:
+bgti_cont.30483:
+	j	bgti_cont.30459
+bgti_else.30480:
+	addi	%k0, %k0, -30
+bgti_cont.30481:
+	j	bgti_cont.30459
+bgti_else.30478:
+	addi	%k0, %k0, -20
+bgti_cont.30479:
+	j	bgti_cont.30459
+bgti_else.30476:
+	addi	%k0, %k0, -10
+bgti_cont.30477:
+	j	bgti_cont.30459
+bgti_else.30474:
+bgti_cont.30475:
+	j	bgti_cont.30459
+bgti_else.30472:
+	addi	%k0, %k0, -30
+bgti_cont.30473:
+	j	bgti_cont.30459
+bgti_else.30470:
+	addi	%k0, %k0, -20
+bgti_cont.30471:
+	j	bgti_cont.30459
+bgti_else.30468:
+	addi	%k0, %k0, -10
+bgti_cont.30469:
+	j	bgti_cont.30459
+bgti_else.30466:
+bgti_cont.30467:
+	j	bgti_cont.30459
+bgti_else.30464:
+	addi	%k0, %k0, -30
+bgti_cont.30465:
+	j	bgti_cont.30459
+bgti_else.30462:
+	addi	%k0, %k0, -20
+bgti_cont.30463:
+	j	bgti_cont.30459
+bgti_else.30460:
+	addi	%k0, %k0, -10
+bgti_cont.30461:
+	j	bgti_cont.30459
+bgti_else.30458:
+bgti_cont.30459:
+	blt	%zero, %a3, bgt_else.30506
+	addi	%v0, %k0, 48
+	jal	min_caml_print_char
+	j	bgt_cont.30507
+bgt_else.30506:
+	blti	%a3, 10, bgti_else.30508
+	blti	%a3, 20, bgti_else.30510
+	blti	%a3, 30, bgti_else.30512
+	blti	%a3, 40, bgti_else.30514
+	addi	%a0, %a3, -40
+	blti	%a0, 10, bgti_else.30516
+	blti	%a0, 20, bgti_else.30518
+	blti	%a0, 30, bgti_else.30520
+	blti	%a0, 40, bgti_else.30522
+	addi	%v0, %a0, -40
+	addi	%v1, %zero, 8
+	jal	print_int_sub1.2641
+	addi	%a0, %v0, 0
+	j	bgti_cont.30509
+bgti_else.30522:
+	addi	%a0, %zero, 7
+bgti_cont.30523:
+	j	bgti_cont.30509
+bgti_else.30520:
+	addi	%a0, %zero, 6
+bgti_cont.30521:
+	j	bgti_cont.30509
+bgti_else.30518:
+	addi	%a0, %zero, 5
+bgti_cont.30519:
+	j	bgti_cont.30509
+bgti_else.30516:
+	addi	%a0, %zero, 4
+bgti_cont.30517:
+	j	bgti_cont.30509
+bgti_else.30514:
+	addi	%a0, %zero, 3
+bgti_cont.30515:
+	j	bgti_cont.30509
+bgti_else.30512:
+	addi	%a0, %zero, 2
+bgti_cont.30513:
+	j	bgti_cont.30509
+bgti_else.30510:
+	add	%a0, %zero, %k1
+bgti_cont.30511:
+	j	bgti_cont.30509
+bgti_else.30508:
+	add	%a0, %zero, %zero
+bgti_cont.30509:
+	blti	%a3, 10, bgti_else.30524
+	blti	%a3, 20, bgti_else.30526
+	blti	%a3, 30, bgti_else.30528
+	blti	%a3, 40, bgti_else.30530
+	addi	%a3, %a3, -40
+	blti	%a3, 10, bgti_cont.30525
+	blti	%a3, 20, bgti_else.30534
+	blti	%a3, 30, bgti_else.30536
+	blti	%a3, 40, bgti_else.30538
+	addi	%a3, %a3, -40
+	blti	%a3, 10, bgti_cont.30525
+	blti	%a3, 20, bgti_else.30542
+	blti	%a3, 30, bgti_else.30544
+	blti	%a3, 40, bgti_else.30546
+	addi	%a3, %a3, -40
+	blti	%a3, 10, bgti_cont.30525
+	blti	%a3, 20, bgti_else.30550
+	blti	%a3, 30, bgti_else.30552
+	blti	%a3, 40, bgti_else.30554
+	addi	%a3, %a3, -40
+	blti	%a3, 10, bgti_cont.30525
+	blti	%a3, 20, bgti_else.30558
+	blti	%a3, 30, bgti_else.30560
+	blti	%a3, 40, bgti_else.30562
+	addi	%a3, %a3, -40
+	blti	%a3, 10, bgti_cont.30525
+	blti	%a3, 20, bgti_else.30566
+	blti	%a3, 30, bgti_else.30568
+	blti	%a3, 40, bgti_else.30570
+	addi	%v0, %a3, -40
+	jal	print_int_sub2.2644
+	addi	%a3, %v0, 0
+	j	bgti_cont.30525
+bgti_else.30570:
+	addi	%a3, %a3, -30
+bgti_cont.30571:
+	j	bgti_cont.30525
+bgti_else.30568:
+	addi	%a3, %a3, -20
+bgti_cont.30569:
+	j	bgti_cont.30525
+bgti_else.30566:
+	addi	%a3, %a3, -10
+bgti_cont.30567:
+	j	bgti_cont.30525
+bgti_else.30564:
+bgti_cont.30565:
+	j	bgti_cont.30525
+bgti_else.30562:
+	addi	%a3, %a3, -30
+bgti_cont.30563:
+	j	bgti_cont.30525
+bgti_else.30560:
+	addi	%a3, %a3, -20
+bgti_cont.30561:
+	j	bgti_cont.30525
+bgti_else.30558:
+	addi	%a3, %a3, -10
+bgti_cont.30559:
+	j	bgti_cont.30525
+bgti_else.30556:
+bgti_cont.30557:
+	j	bgti_cont.30525
+bgti_else.30554:
+	addi	%a3, %a3, -30
+bgti_cont.30555:
+	j	bgti_cont.30525
+bgti_else.30552:
+	addi	%a3, %a3, -20
+bgti_cont.30553:
+	j	bgti_cont.30525
+bgti_else.30550:
+	addi	%a3, %a3, -10
+bgti_cont.30551:
+	j	bgti_cont.30525
+bgti_else.30548:
+bgti_cont.30549:
+	j	bgti_cont.30525
+bgti_else.30546:
+	addi	%a3, %a3, -30
+bgti_cont.30547:
+	j	bgti_cont.30525
+bgti_else.30544:
+	addi	%a3, %a3, -20
+bgti_cont.30545:
+	j	bgti_cont.30525
+bgti_else.30542:
+	addi	%a3, %a3, -10
+bgti_cont.30543:
+	j	bgti_cont.30525
+bgti_else.30540:
+bgti_cont.30541:
+	j	bgti_cont.30525
+bgti_else.30538:
+	addi	%a3, %a3, -30
+bgti_cont.30539:
+	j	bgti_cont.30525
+bgti_else.30536:
+	addi	%a3, %a3, -20
+bgti_cont.30537:
+	j	bgti_cont.30525
+bgti_else.30534:
+	addi	%a3, %a3, -10
+bgti_cont.30535:
+	j	bgti_cont.30525
+bgti_else.30532:
+bgti_cont.30533:
+	j	bgti_cont.30525
+bgti_else.30530:
+	addi	%a3, %a3, -30
+bgti_cont.30531:
+	j	bgti_cont.30525
+bgti_else.30528:
+	addi	%a3, %a3, -20
+bgti_cont.30529:
+	j	bgti_cont.30525
+bgti_else.30526:
+	addi	%a3, %a3, -10
+bgti_cont.30527:
+	j	bgti_cont.30525
+bgti_else.30524:
+bgti_cont.30525:
+	blt	%zero, %a0, bgt_else.30572
+	addi	%v0, %a3, 48
+	jal	min_caml_print_char
+	addi	%v0, %k0, 48
+	jal	min_caml_print_char
+	j	bgt_cont.30573
+bgt_else.30572:
+	blti	%a0, 10, bgti_else.30574
+	blti	%a0, 20, bgti_else.30576
+	blti	%a0, 30, bgti_else.30578
+	blti	%a0, 40, bgti_else.30580
+	addi	%a0, %a0, -40
+	blti	%a0, 10, bgti_cont.30575
+	blti	%a0, 20, bgti_else.30584
+	blti	%a0, 30, bgti_else.30586
+	blti	%a0, 40, bgti_else.30588
+	addi	%a0, %a0, -40
+	blti	%a0, 10, bgti_cont.30575
+	blti	%a0, 20, bgti_else.30592
+	blti	%a0, 30, bgti_else.30594
+	blti	%a0, 40, bgti_else.30596
+	addi	%a0, %a0, -40
+	blti	%a0, 10, bgti_cont.30575
+	blti	%a0, 20, bgti_else.30600
+	blti	%a0, 30, bgti_else.30602
+	blti	%a0, 40, bgti_else.30604
+	addi	%a0, %a0, -40
+	blti	%a0, 10, bgti_cont.30575
+	blti	%a0, 20, bgti_else.30608
+	blti	%a0, 30, bgti_else.30610
+	blti	%a0, 40, bgti_else.30612
+	addi	%a0, %a0, -40
+	blti	%a0, 10, bgti_cont.30575
+	blti	%a0, 20, bgti_else.30616
+	blti	%a0, 30, bgti_else.30618
+	blti	%a0, 40, bgti_else.30620
+	addi	%v0, %a0, -40
+	jal	print_int_sub2.2644
+	addi	%a0, %v0, 0
+	j	bgti_cont.30575
+bgti_else.30620:
+	addi	%a0, %a0, -30
+bgti_cont.30621:
+	j	bgti_cont.30575
+bgti_else.30618:
+	addi	%a0, %a0, -20
+bgti_cont.30619:
+	j	bgti_cont.30575
+bgti_else.30616:
+	addi	%a0, %a0, -10
+bgti_cont.30617:
+	j	bgti_cont.30575
+bgti_else.30614:
+bgti_cont.30615:
+	j	bgti_cont.30575
+bgti_else.30612:
+	addi	%a0, %a0, -30
+bgti_cont.30613:
+	j	bgti_cont.30575
+bgti_else.30610:
+	addi	%a0, %a0, -20
+bgti_cont.30611:
+	j	bgti_cont.30575
+bgti_else.30608:
+	addi	%a0, %a0, -10
+bgti_cont.30609:
+	j	bgti_cont.30575
+bgti_else.30606:
+bgti_cont.30607:
+	j	bgti_cont.30575
+bgti_else.30604:
+	addi	%a0, %a0, -30
+bgti_cont.30605:
+	j	bgti_cont.30575
+bgti_else.30602:
+	addi	%a0, %a0, -20
+bgti_cont.30603:
+	j	bgti_cont.30575
+bgti_else.30600:
+	addi	%a0, %a0, -10
+bgti_cont.30601:
+	j	bgti_cont.30575
+bgti_else.30598:
+bgti_cont.30599:
+	j	bgti_cont.30575
+bgti_else.30596:
+	addi	%a0, %a0, -30
+bgti_cont.30597:
+	j	bgti_cont.30575
+bgti_else.30594:
+	addi	%a0, %a0, -20
+bgti_cont.30595:
+	j	bgti_cont.30575
+bgti_else.30592:
+	addi	%a0, %a0, -10
+bgti_cont.30593:
+	j	bgti_cont.30575
+bgti_else.30590:
+bgti_cont.30591:
+	j	bgti_cont.30575
+bgti_else.30588:
+	addi	%a0, %a0, -30
+bgti_cont.30589:
+	j	bgti_cont.30575
+bgti_else.30586:
+	addi	%a0, %a0, -20
+bgti_cont.30587:
+	j	bgti_cont.30575
+bgti_else.30584:
+	addi	%a0, %a0, -10
+bgti_cont.30585:
+	j	bgti_cont.30575
+bgti_else.30582:
+bgti_cont.30583:
+	j	bgti_cont.30575
+bgti_else.30580:
+	addi	%a0, %a0, -30
+bgti_cont.30581:
+	j	bgti_cont.30575
+bgti_else.30578:
+	addi	%a0, %a0, -20
+bgti_cont.30579:
+	j	bgti_cont.30575
+bgti_else.30576:
+	addi	%a0, %a0, -10
+bgti_cont.30577:
+	j	bgti_cont.30575
+bgti_else.30574:
+bgti_cont.30575:
+	addi	%v0, %a0, 48
+	jal	min_caml_print_char
+	addi	%v0, %a3, 48
+	jal	min_caml_print_char
+	addi	%v0, %k0, 48
+	jal	min_caml_print_char
+bgt_cont.30573:
+bgt_cont.30507:
+	addi	%a3, %zero, 32
+	addi	%v0, %a3, 0
+	jal	min_caml_print_char
+	lw	%s0, 155(%zero)
+	blti	%s0, 10, bgti_else.30622
+	blti	%s0, 20, bgti_else.30624
+	blti	%s0, 30, bgti_else.30626
+	blti	%s0, 40, bgti_else.30628
+	addi	%a0, %s0, -40
+	blti	%a0, 10, bgti_else.30630
+	blti	%a0, 20, bgti_else.30632
+	blti	%a0, 30, bgti_else.30634
+	blti	%a0, 40, bgti_else.30636
+	addi	%v0, %a0, -40
+	addi	%v1, %zero, 8
+	jal	print_int_sub1.2641
+	addi	%k0, %v0, 0
+	j	bgti_cont.30623
+bgti_else.30636:
+	addi	%k0, %zero, 7
+bgti_cont.30637:
+	j	bgti_cont.30623
+bgti_else.30634:
+	addi	%k0, %zero, 6
+bgti_cont.30635:
+	j	bgti_cont.30623
+bgti_else.30632:
+	addi	%k0, %zero, 5
+bgti_cont.30633:
+	j	bgti_cont.30623
+bgti_else.30630:
+	addi	%k0, %zero, 4
+bgti_cont.30631:
+	j	bgti_cont.30623
+bgti_else.30628:
+	addi	%k0, %zero, 3
+bgti_cont.30629:
+	j	bgti_cont.30623
+bgti_else.30626:
+	addi	%k0, %zero, 2
+bgti_cont.30627:
+	j	bgti_cont.30623
+bgti_else.30624:
+	add	%k0, %zero, %k1
+bgti_cont.30625:
+	j	bgti_cont.30623
+bgti_else.30622:
+	add	%k0, %zero, %zero
+bgti_cont.30623:
+	blti	%s0, 10, bgti_else.30638
+	blti	%s0, 20, bgti_else.30640
+	blti	%s0, 30, bgti_else.30642
+	blti	%s0, 40, bgti_else.30644
+	addi	%s0, %s0, -40
+	blti	%s0, 10, bgti_cont.30639
+	blti	%s0, 20, bgti_else.30648
+	blti	%s0, 30, bgti_else.30650
+	blti	%s0, 40, bgti_else.30652
+	addi	%s0, %s0, -40
+	blti	%s0, 10, bgti_cont.30639
+	blti	%s0, 20, bgti_else.30656
+	blti	%s0, 30, bgti_else.30658
+	blti	%s0, 40, bgti_else.30660
+	addi	%s0, %s0, -40
+	blti	%s0, 10, bgti_cont.30639
+	blti	%s0, 20, bgti_else.30664
+	blti	%s0, 30, bgti_else.30666
+	blti	%s0, 40, bgti_else.30668
+	addi	%s0, %s0, -40
+	blti	%s0, 10, bgti_cont.30639
+	blti	%s0, 20, bgti_else.30672
+	blti	%s0, 30, bgti_else.30674
+	blti	%s0, 40, bgti_else.30676
+	addi	%s0, %s0, -40
+	blti	%s0, 10, bgti_cont.30639
+	blti	%s0, 20, bgti_else.30680
+	blti	%s0, 30, bgti_else.30682
+	blti	%s0, 40, bgti_else.30684
+	addi	%v0, %s0, -40
+	jal	print_int_sub2.2644
+	addi	%s0, %v0, 0
+	j	bgti_cont.30639
+bgti_else.30684:
+	addi	%s0, %s0, -30
+bgti_cont.30685:
+	j	bgti_cont.30639
+bgti_else.30682:
+	addi	%s0, %s0, -20
+bgti_cont.30683:
+	j	bgti_cont.30639
+bgti_else.30680:
+	addi	%s0, %s0, -10
+bgti_cont.30681:
+	j	bgti_cont.30639
+bgti_else.30678:
+bgti_cont.30679:
+	j	bgti_cont.30639
+bgti_else.30676:
+	addi	%s0, %s0, -30
+bgti_cont.30677:
+	j	bgti_cont.30639
+bgti_else.30674:
+	addi	%s0, %s0, -20
+bgti_cont.30675:
+	j	bgti_cont.30639
+bgti_else.30672:
+	addi	%s0, %s0, -10
+bgti_cont.30673:
+	j	bgti_cont.30639
+bgti_else.30670:
+bgti_cont.30671:
+	j	bgti_cont.30639
+bgti_else.30668:
+	addi	%s0, %s0, -30
+bgti_cont.30669:
+	j	bgti_cont.30639
+bgti_else.30666:
+	addi	%s0, %s0, -20
+bgti_cont.30667:
+	j	bgti_cont.30639
+bgti_else.30664:
+	addi	%s0, %s0, -10
+bgti_cont.30665:
+	j	bgti_cont.30639
+bgti_else.30662:
+bgti_cont.30663:
+	j	bgti_cont.30639
+bgti_else.30660:
+	addi	%s0, %s0, -30
+bgti_cont.30661:
+	j	bgti_cont.30639
+bgti_else.30658:
+	addi	%s0, %s0, -20
+bgti_cont.30659:
+	j	bgti_cont.30639
+bgti_else.30656:
+	addi	%s0, %s0, -10
+bgti_cont.30657:
+	j	bgti_cont.30639
+bgti_else.30654:
+bgti_cont.30655:
+	j	bgti_cont.30639
+bgti_else.30652:
+	addi	%s0, %s0, -30
+bgti_cont.30653:
+	j	bgti_cont.30639
+bgti_else.30650:
+	addi	%s0, %s0, -20
+bgti_cont.30651:
+	j	bgti_cont.30639
+bgti_else.30648:
+	addi	%s0, %s0, -10
+bgti_cont.30649:
+	j	bgti_cont.30639
+bgti_else.30646:
+bgti_cont.30647:
+	j	bgti_cont.30639
+bgti_else.30644:
+	addi	%s0, %s0, -30
+bgti_cont.30645:
+	j	bgti_cont.30639
+bgti_else.30642:
+	addi	%s0, %s0, -20
+bgti_cont.30643:
+	j	bgti_cont.30639
+bgti_else.30640:
+	addi	%s0, %s0, -10
+bgti_cont.30641:
+	j	bgti_cont.30639
+bgti_else.30638:
+bgti_cont.30639:
+	blt	%zero, %k0, bgt_else.30686
+	addi	%v0, %s0, 48
+	jal	min_caml_print_char
+	j	bgt_cont.30687
+bgt_else.30686:
+	blti	%k0, 10, bgti_else.30688
+	blti	%k0, 20, bgti_else.30690
+	blti	%k0, 30, bgti_else.30692
+	blti	%k0, 40, bgti_else.30694
+	addi	%a0, %k0, -40
+	blti	%a0, 10, bgti_else.30696
+	blti	%a0, 20, bgti_else.30698
+	blti	%a0, 30, bgti_else.30700
+	blti	%a0, 40, bgti_else.30702
+	addi	%v0, %a0, -40
+	addi	%v1, %zero, 8
+	jal	print_int_sub1.2641
+	addi	%a0, %v0, 0
+	j	bgti_cont.30689
+bgti_else.30702:
+	addi	%a0, %zero, 7
+bgti_cont.30703:
+	j	bgti_cont.30689
+bgti_else.30700:
+	addi	%a0, %zero, 6
+bgti_cont.30701:
+	j	bgti_cont.30689
+bgti_else.30698:
+	addi	%a0, %zero, 5
+bgti_cont.30699:
+	j	bgti_cont.30689
+bgti_else.30696:
+	addi	%a0, %zero, 4
+bgti_cont.30697:
+	j	bgti_cont.30689
+bgti_else.30694:
+	addi	%a0, %zero, 3
+bgti_cont.30695:
+	j	bgti_cont.30689
+bgti_else.30692:
+	addi	%a0, %zero, 2
+bgti_cont.30693:
+	j	bgti_cont.30689
+bgti_else.30690:
+	add	%a0, %zero, %k1
+bgti_cont.30691:
+	j	bgti_cont.30689
+bgti_else.30688:
+	add	%a0, %zero, %zero
+bgti_cont.30689:
+	blti	%k0, 10, bgti_else.30704
+	blti	%k0, 20, bgti_else.30706
+	blti	%k0, 30, bgti_else.30708
+	blti	%k0, 40, bgti_else.30710
+	addi	%k0, %k0, -40
+	blti	%k0, 10, bgti_cont.30705
+	blti	%k0, 20, bgti_else.30714
+	blti	%k0, 30, bgti_else.30716
+	blti	%k0, 40, bgti_else.30718
+	addi	%k0, %k0, -40
+	blti	%k0, 10, bgti_cont.30705
+	blti	%k0, 20, bgti_else.30722
+	blti	%k0, 30, bgti_else.30724
+	blti	%k0, 40, bgti_else.30726
+	addi	%k0, %k0, -40
+	blti	%k0, 10, bgti_cont.30705
+	blti	%k0, 20, bgti_else.30730
+	blti	%k0, 30, bgti_else.30732
+	blti	%k0, 40, bgti_else.30734
+	addi	%k0, %k0, -40
+	blti	%k0, 10, bgti_cont.30705
+	blti	%k0, 20, bgti_else.30738
+	blti	%k0, 30, bgti_else.30740
+	blti	%k0, 40, bgti_else.30742
+	addi	%k0, %k0, -40
+	blti	%k0, 10, bgti_cont.30705
+	blti	%k0, 20, bgti_else.30746
+	blti	%k0, 30, bgti_else.30748
+	blti	%k0, 40, bgti_else.30750
+	addi	%v0, %k0, -40
+	jal	print_int_sub2.2644
+	addi	%k0, %v0, 0
+	j	bgti_cont.30705
+bgti_else.30750:
+	addi	%k0, %k0, -30
+bgti_cont.30751:
+	j	bgti_cont.30705
+bgti_else.30748:
+	addi	%k0, %k0, -20
+bgti_cont.30749:
+	j	bgti_cont.30705
+bgti_else.30746:
+	addi	%k0, %k0, -10
+bgti_cont.30747:
+	j	bgti_cont.30705
+bgti_else.30744:
+bgti_cont.30745:
+	j	bgti_cont.30705
+bgti_else.30742:
+	addi	%k0, %k0, -30
+bgti_cont.30743:
+	j	bgti_cont.30705
+bgti_else.30740:
+	addi	%k0, %k0, -20
+bgti_cont.30741:
+	j	bgti_cont.30705
+bgti_else.30738:
+	addi	%k0, %k0, -10
+bgti_cont.30739:
+	j	bgti_cont.30705
+bgti_else.30736:
+bgti_cont.30737:
+	j	bgti_cont.30705
+bgti_else.30734:
+	addi	%k0, %k0, -30
+bgti_cont.30735:
+	j	bgti_cont.30705
+bgti_else.30732:
+	addi	%k0, %k0, -20
+bgti_cont.30733:
+	j	bgti_cont.30705
+bgti_else.30730:
+	addi	%k0, %k0, -10
+bgti_cont.30731:
+	j	bgti_cont.30705
+bgti_else.30728:
+bgti_cont.30729:
+	j	bgti_cont.30705
+bgti_else.30726:
+	addi	%k0, %k0, -30
+bgti_cont.30727:
+	j	bgti_cont.30705
+bgti_else.30724:
+	addi	%k0, %k0, -20
+bgti_cont.30725:
+	j	bgti_cont.30705
+bgti_else.30722:
+	addi	%k0, %k0, -10
+bgti_cont.30723:
+	j	bgti_cont.30705
+bgti_else.30720:
+bgti_cont.30721:
+	j	bgti_cont.30705
+bgti_else.30718:
+	addi	%k0, %k0, -30
+bgti_cont.30719:
+	j	bgti_cont.30705
+bgti_else.30716:
+	addi	%k0, %k0, -20
+bgti_cont.30717:
+	j	bgti_cont.30705
+bgti_else.30714:
+	addi	%k0, %k0, -10
+bgti_cont.30715:
+	j	bgti_cont.30705
+bgti_else.30712:
+bgti_cont.30713:
+	j	bgti_cont.30705
+bgti_else.30710:
+	addi	%k0, %k0, -30
+bgti_cont.30711:
+	j	bgti_cont.30705
+bgti_else.30708:
+	addi	%k0, %k0, -20
+bgti_cont.30709:
+	j	bgti_cont.30705
+bgti_else.30706:
+	addi	%k0, %k0, -10
+bgti_cont.30707:
+	j	bgti_cont.30705
+bgti_else.30704:
+bgti_cont.30705:
+	blt	%zero, %a0, bgt_else.30752
+	addi	%v0, %k0, 48
+	jal	min_caml_print_char
+	addi	%v0, %s0, 48
+	jal	min_caml_print_char
+	j	bgt_cont.30753
+bgt_else.30752:
+	blti	%a0, 10, bgti_else.30754
+	blti	%a0, 20, bgti_else.30756
+	blti	%a0, 30, bgti_else.30758
+	blti	%a0, 40, bgti_else.30760
+	addi	%a0, %a0, -40
+	blti	%a0, 10, bgti_cont.30755
+	blti	%a0, 20, bgti_else.30764
+	blti	%a0, 30, bgti_else.30766
+	blti	%a0, 40, bgti_else.30768
+	addi	%a0, %a0, -40
+	blti	%a0, 10, bgti_cont.30755
+	blti	%a0, 20, bgti_else.30772
+	blti	%a0, 30, bgti_else.30774
+	blti	%a0, 40, bgti_else.30776
+	addi	%a0, %a0, -40
+	blti	%a0, 10, bgti_cont.30755
+	blti	%a0, 20, bgti_else.30780
+	blti	%a0, 30, bgti_else.30782
+	blti	%a0, 40, bgti_else.30784
+	addi	%a0, %a0, -40
+	blti	%a0, 10, bgti_cont.30755
+	blti	%a0, 20, bgti_else.30788
+	blti	%a0, 30, bgti_else.30790
+	blti	%a0, 40, bgti_else.30792
+	addi	%a0, %a0, -40
+	blti	%a0, 10, bgti_cont.30755
+	blti	%a0, 20, bgti_else.30796
+	blti	%a0, 30, bgti_else.30798
+	blti	%a0, 40, bgti_else.30800
+	addi	%v0, %a0, -40
+	jal	print_int_sub2.2644
+	addi	%a0, %v0, 0
+	j	bgti_cont.30755
+bgti_else.30800:
+	addi	%a0, %a0, -30
+bgti_cont.30801:
+	j	bgti_cont.30755
+bgti_else.30798:
+	addi	%a0, %a0, -20
+bgti_cont.30799:
+	j	bgti_cont.30755
+bgti_else.30796:
+	addi	%a0, %a0, -10
+bgti_cont.30797:
+	j	bgti_cont.30755
+bgti_else.30794:
+bgti_cont.30795:
+	j	bgti_cont.30755
+bgti_else.30792:
+	addi	%a0, %a0, -30
+bgti_cont.30793:
+	j	bgti_cont.30755
+bgti_else.30790:
+	addi	%a0, %a0, -20
+bgti_cont.30791:
+	j	bgti_cont.30755
+bgti_else.30788:
+	addi	%a0, %a0, -10
+bgti_cont.30789:
+	j	bgti_cont.30755
+bgti_else.30786:
+bgti_cont.30787:
+	j	bgti_cont.30755
+bgti_else.30784:
+	addi	%a0, %a0, -30
+bgti_cont.30785:
+	j	bgti_cont.30755
+bgti_else.30782:
+	addi	%a0, %a0, -20
+bgti_cont.30783:
+	j	bgti_cont.30755
+bgti_else.30780:
+	addi	%a0, %a0, -10
+bgti_cont.30781:
+	j	bgti_cont.30755
+bgti_else.30778:
+bgti_cont.30779:
+	j	bgti_cont.30755
+bgti_else.30776:
+	addi	%a0, %a0, -30
+bgti_cont.30777:
+	j	bgti_cont.30755
+bgti_else.30774:
+	addi	%a0, %a0, -20
+bgti_cont.30775:
+	j	bgti_cont.30755
+bgti_else.30772:
+	addi	%a0, %a0, -10
+bgti_cont.30773:
+	j	bgti_cont.30755
+bgti_else.30770:
+bgti_cont.30771:
+	j	bgti_cont.30755
+bgti_else.30768:
+	addi	%a0, %a0, -30
+bgti_cont.30769:
+	j	bgti_cont.30755
+bgti_else.30766:
+	addi	%a0, %a0, -20
+bgti_cont.30767:
+	j	bgti_cont.30755
+bgti_else.30764:
+	addi	%a0, %a0, -10
+bgti_cont.30765:
+	j	bgti_cont.30755
+bgti_else.30762:
+bgti_cont.30763:
+	j	bgti_cont.30755
+bgti_else.30760:
+	addi	%a0, %a0, -30
+bgti_cont.30761:
+	j	bgti_cont.30755
+bgti_else.30758:
+	addi	%a0, %a0, -20
+bgti_cont.30759:
+	j	bgti_cont.30755
+bgti_else.30756:
+	addi	%a0, %a0, -10
+bgti_cont.30757:
+	j	bgti_cont.30755
+bgti_else.30754:
+bgti_cont.30755:
+	addi	%v0, %a0, 48
+	jal	min_caml_print_char
+	addi	%v0, %k0, 48
+	jal	min_caml_print_char
+	addi	%v0, %s0, 48
+	jal	min_caml_print_char
+bgt_cont.30753:
+bgt_cont.30687:
+	addi	%v0, %a3, 0
+	jal	min_caml_print_char
+	addi	%v0, %zero, 175
+	addi	%a3, %zero, 8
+	addi	%v1, %a3, 0
+	jal	print_int_sub1.2641
+	addi	%k0, %v0, 0
+	addi	%v0, %zero, 15
+	jal	print_int_sub2.2644
+	addi	%s0, %v0, 0
+	blt	%zero, %k0, bgt_else.30802
+	addi	%v0, %s0, 48
+	jal	min_caml_print_char
+	j	bgt_cont.30803
+bgt_else.30802:
+	blti	%k0, 10, bgti_else.30804
+	blti	%k0, 20, bgti_else.30806
+	blti	%k0, 30, bgti_else.30808
+	blti	%k0, 40, bgti_else.30810
+	addi	%a0, %k0, -40
+	blti	%a0, 10, bgti_else.30812
+	blti	%a0, 20, bgti_else.30814
+	blti	%a0, 30, bgti_else.30816
+	blti	%a0, 40, bgti_else.30818
+	addi	%v0, %a0, -40
+	addi	%v1, %a3, 0
+	jal	print_int_sub1.2641
+	addi	%a0, %v0, 0
+	j	bgti_cont.30805
+bgti_else.30818:
+	addi	%a0, %zero, 7
+bgti_cont.30819:
+	j	bgti_cont.30805
+bgti_else.30816:
+	addi	%a0, %zero, 6
+bgti_cont.30817:
+	j	bgti_cont.30805
+bgti_else.30814:
+	addi	%a0, %zero, 5
+bgti_cont.30815:
+	j	bgti_cont.30805
+bgti_else.30812:
+	addi	%a0, %zero, 4
+bgti_cont.30813:
+	j	bgti_cont.30805
+bgti_else.30810:
+	addi	%a0, %zero, 3
+bgti_cont.30811:
+	j	bgti_cont.30805
+bgti_else.30808:
+	addi	%a0, %zero, 2
+bgti_cont.30809:
+	j	bgti_cont.30805
+bgti_else.30806:
+	add	%a0, %zero, %k1
+bgti_cont.30807:
+	j	bgti_cont.30805
+bgti_else.30804:
+	add	%a0, %zero, %zero
+bgti_cont.30805:
+	blti	%k0, 10, bgti_else.30820
+	blti	%k0, 20, bgti_else.30822
+	blti	%k0, 30, bgti_else.30824
+	blti	%k0, 40, bgti_else.30826
+	addi	%k0, %k0, -40
+	blti	%k0, 10, bgti_cont.30821
+	blti	%k0, 20, bgti_else.30830
+	blti	%k0, 30, bgti_else.30832
+	blti	%k0, 40, bgti_else.30834
+	addi	%k0, %k0, -40
+	blti	%k0, 10, bgti_cont.30821
+	blti	%k0, 20, bgti_else.30838
+	blti	%k0, 30, bgti_else.30840
+	blti	%k0, 40, bgti_else.30842
+	addi	%k0, %k0, -40
+	blti	%k0, 10, bgti_cont.30821
+	blti	%k0, 20, bgti_else.30846
+	blti	%k0, 30, bgti_else.30848
+	blti	%k0, 40, bgti_else.30850
+	addi	%k0, %k0, -40
+	blti	%k0, 10, bgti_cont.30821
+	blti	%k0, 20, bgti_else.30854
+	blti	%k0, 30, bgti_else.30856
+	blti	%k0, 40, bgti_else.30858
+	addi	%k0, %k0, -40
+	blti	%k0, 10, bgti_cont.30821
+	blti	%k0, 20, bgti_else.30862
+	blti	%k0, 30, bgti_else.30864
+	blti	%k0, 40, bgti_else.30866
+	addi	%v0, %k0, -40
+	jal	print_int_sub2.2644
+	addi	%k0, %v0, 0
+	j	bgti_cont.30821
+bgti_else.30866:
+	addi	%k0, %k0, -30
+bgti_cont.30867:
+	j	bgti_cont.30821
+bgti_else.30864:
+	addi	%k0, %k0, -20
+bgti_cont.30865:
+	j	bgti_cont.30821
+bgti_else.30862:
+	addi	%k0, %k0, -10
+bgti_cont.30863:
+	j	bgti_cont.30821
+bgti_else.30860:
+bgti_cont.30861:
+	j	bgti_cont.30821
+bgti_else.30858:
+	addi	%k0, %k0, -30
+bgti_cont.30859:
+	j	bgti_cont.30821
+bgti_else.30856:
+	addi	%k0, %k0, -20
+bgti_cont.30857:
+	j	bgti_cont.30821
+bgti_else.30854:
+	addi	%k0, %k0, -10
+bgti_cont.30855:
+	j	bgti_cont.30821
+bgti_else.30852:
+bgti_cont.30853:
+	j	bgti_cont.30821
+bgti_else.30850:
+	addi	%k0, %k0, -30
+bgti_cont.30851:
+	j	bgti_cont.30821
+bgti_else.30848:
+	addi	%k0, %k0, -20
+bgti_cont.30849:
+	j	bgti_cont.30821
+bgti_else.30846:
+	addi	%k0, %k0, -10
+bgti_cont.30847:
+	j	bgti_cont.30821
+bgti_else.30844:
+bgti_cont.30845:
+	j	bgti_cont.30821
+bgti_else.30842:
+	addi	%k0, %k0, -30
+bgti_cont.30843:
+	j	bgti_cont.30821
+bgti_else.30840:
+	addi	%k0, %k0, -20
+bgti_cont.30841:
+	j	bgti_cont.30821
+bgti_else.30838:
+	addi	%k0, %k0, -10
+bgti_cont.30839:
+	j	bgti_cont.30821
+bgti_else.30836:
+bgti_cont.30837:
+	j	bgti_cont.30821
+bgti_else.30834:
+	addi	%k0, %k0, -30
+bgti_cont.30835:
+	j	bgti_cont.30821
+bgti_else.30832:
+	addi	%k0, %k0, -20
+bgti_cont.30833:
+	j	bgti_cont.30821
+bgti_else.30830:
+	addi	%k0, %k0, -10
+bgti_cont.30831:
+	j	bgti_cont.30821
+bgti_else.30828:
+bgti_cont.30829:
+	j	bgti_cont.30821
+bgti_else.30826:
+	addi	%k0, %k0, -30
+bgti_cont.30827:
+	j	bgti_cont.30821
+bgti_else.30824:
+	addi	%k0, %k0, -20
+bgti_cont.30825:
+	j	bgti_cont.30821
+bgti_else.30822:
+	addi	%k0, %k0, -10
+bgti_cont.30823:
+	j	bgti_cont.30821
+bgti_else.30820:
+bgti_cont.30821:
+	blt	%zero, %a0, bgt_else.30868
+	addi	%v0, %k0, 48
+	jal	min_caml_print_char
+	addi	%v0, %s0, 48
+	jal	min_caml_print_char
+	j	bgt_cont.30869
+bgt_else.30868:
+	blti	%a0, 10, bgti_else.30870
+	blti	%a0, 20, bgti_else.30872
+	blti	%a0, 30, bgti_else.30874
+	blti	%a0, 40, bgti_else.30876
+	addi	%a0, %a0, -40
+	blti	%a0, 10, bgti_cont.30871
+	blti	%a0, 20, bgti_else.30880
+	blti	%a0, 30, bgti_else.30882
+	blti	%a0, 40, bgti_else.30884
+	addi	%a0, %a0, -40
+	blti	%a0, 10, bgti_cont.30871
+	blti	%a0, 20, bgti_else.30888
+	blti	%a0, 30, bgti_else.30890
+	blti	%a0, 40, bgti_else.30892
+	addi	%a0, %a0, -40
+	blti	%a0, 10, bgti_cont.30871
+	blti	%a0, 20, bgti_else.30896
+	blti	%a0, 30, bgti_else.30898
+	blti	%a0, 40, bgti_else.30900
+	addi	%a0, %a0, -40
+	blti	%a0, 10, bgti_cont.30871
+	blti	%a0, 20, bgti_else.30904
+	blti	%a0, 30, bgti_else.30906
+	blti	%a0, 40, bgti_else.30908
+	addi	%a0, %a0, -40
+	blti	%a0, 10, bgti_cont.30871
+	blti	%a0, 20, bgti_else.30912
+	blti	%a0, 30, bgti_else.30914
+	blti	%a0, 40, bgti_else.30916
+	addi	%v0, %a0, -40
+	jal	print_int_sub2.2644
+	addi	%a0, %v0, 0
+	j	bgti_cont.30871
+bgti_else.30916:
+	addi	%a0, %a0, -30
+bgti_cont.30917:
+	j	bgti_cont.30871
+bgti_else.30914:
+	addi	%a0, %a0, -20
+bgti_cont.30915:
+	j	bgti_cont.30871
+bgti_else.30912:
+	addi	%a0, %a0, -10
+bgti_cont.30913:
+	j	bgti_cont.30871
+bgti_else.30910:
+bgti_cont.30911:
+	j	bgti_cont.30871
+bgti_else.30908:
+	addi	%a0, %a0, -30
+bgti_cont.30909:
+	j	bgti_cont.30871
+bgti_else.30906:
+	addi	%a0, %a0, -20
+bgti_cont.30907:
+	j	bgti_cont.30871
+bgti_else.30904:
+	addi	%a0, %a0, -10
+bgti_cont.30905:
+	j	bgti_cont.30871
+bgti_else.30902:
+bgti_cont.30903:
+	j	bgti_cont.30871
+bgti_else.30900:
+	addi	%a0, %a0, -30
+bgti_cont.30901:
+	j	bgti_cont.30871
+bgti_else.30898:
+	addi	%a0, %a0, -20
+bgti_cont.30899:
+	j	bgti_cont.30871
+bgti_else.30896:
+	addi	%a0, %a0, -10
+bgti_cont.30897:
+	j	bgti_cont.30871
+bgti_else.30894:
+bgti_cont.30895:
+	j	bgti_cont.30871
+bgti_else.30892:
+	addi	%a0, %a0, -30
+bgti_cont.30893:
+	j	bgti_cont.30871
+bgti_else.30890:
+	addi	%a0, %a0, -20
+bgti_cont.30891:
+	j	bgti_cont.30871
+bgti_else.30888:
+	addi	%a0, %a0, -10
+bgti_cont.30889:
+	j	bgti_cont.30871
+bgti_else.30886:
+bgti_cont.30887:
+	j	bgti_cont.30871
+bgti_else.30884:
+	addi	%a0, %a0, -30
+bgti_cont.30885:
+	j	bgti_cont.30871
+bgti_else.30882:
+	addi	%a0, %a0, -20
+bgti_cont.30883:
+	j	bgti_cont.30871
+bgti_else.30880:
+	addi	%a0, %a0, -10
+bgti_cont.30881:
+	j	bgti_cont.30871
+bgti_else.30878:
+bgti_cont.30879:
+	j	bgti_cont.30871
+bgti_else.30876:
+	addi	%a0, %a0, -30
+bgti_cont.30877:
+	j	bgti_cont.30871
+bgti_else.30874:
+	addi	%a0, %a0, -20
+bgti_cont.30875:
+	j	bgti_cont.30871
+bgti_else.30872:
+	addi	%a0, %a0, -10
+bgti_cont.30873:
+	j	bgti_cont.30871
+bgti_else.30870:
+bgti_cont.30871:
+	addi	%v0, %a0, 48
+	jal	min_caml_print_char
+	addi	%v0, %k0, 48
+	jal	min_caml_print_char
+	addi	%v0, %s0, 48
+	jal	min_caml_print_char
+bgt_cont.30869:
+bgt_cont.30803:
+	add	%ra, %zero, %a1
+	addi	%v0, %a2, 0
+	j	min_caml_print_char
 pretrace_diffuse_rays.3043:
 	sw	%v0, 0(%sp)
 	sw	%v1, 1(%sp)
@@ -13741,15 +12848,15 @@ pretrace_diffuse_rays.3043:
 	sw	%t0, 3(%sp)
 	sw	%ra, 4(%sp)
 	addi	%at, %zero, 4
-	blt	%at, %v1, bgt_else.41893
+	blt	%at, %v1, bgt_else.31021
 	lw	%a0, 2(%v0)
 	add	%at, %a0, %v1
 	lw	%a0, 0(%at)
-	blti	%a0, 0, bgti_else.41894
+	blti	%a0, 0, bgti_else.31022
 	lw	%a0, 3(%v0)
 	add	%at, %a0, %v1
 	lw	%a0, 0(%at)
-	beqi	%a0, 0, bnei_else.41895
+	beqi	%a0, 0, bnei_else.31023
 	lw	%a0, 6(%v0)
 	lw	%a2, 0(%a0)
 	fsw	%fzero, 148(%zero)
@@ -13791,22 +12898,22 @@ pretrace_diffuse_rays.3043:
 	fsw	%f0, 1(%a0)
 	flw	%f0, 150(%zero)
 	fsw	%f0, 2(%a0)
-	j	bnei_cont.41896
-bnei_else.41895:
-bnei_cont.41896:
+	j	bnei_cont.31024
+bnei_else.31023:
+bnei_cont.31024:
 	lw	%a0, 1(%sp)
 	addi	%t0, %a0, 1
 	addi	%at, %zero, 4
-	blt	%at, %t0, bgt_else.41897
+	blt	%at, %t0, bgt_else.31025
 	lw	%a1, 0(%sp)
 	lw	%a0, 2(%a1)
 	add	%at, %a0, %t0
 	lw	%a0, 0(%at)
-	blti	%a0, 0, bgti_else.41898
+	blti	%a0, 0, bgti_else.31026
 	lw	%a0, 3(%a1)
 	add	%at, %a0, %t0
 	lw	%a0, 0(%at)
-	beqi	%a0, 0, bnei_else.41899
+	beqi	%a0, 0, bnei_else.31027
 	lw	%a0, 6(%a1)
 	lw	%a0, 0(%a0)
 	fsw	%fzero, 148(%zero)
@@ -13848,28 +12955,28 @@ bnei_cont.41896:
 	flw	%f0, 2(%a0)
 	fmul	%f0, %f1, %f0
 	fadd	%f1, %f16, %f0
-	fblt	%f1, %fzero, fbgt_else.41901
+	fblt	%f1, %fzero, fbgt_else.31029
 	add	%a0, %zero, %zero
-	j	fbgt_cont.41902
-fbgt_else.41901:
+	j	fbgt_cont.31030
+fbgt_else.31029:
 	add	%a0, %zero, %k1
-fbgt_cont.41902:
-	beqi	%a0, 0, bnei_else.41903
+fbgt_cont.31030:
+	beqi	%a0, 0, bnei_else.31031
 	lw	%a0, 5(%sp)
 	lw	%v0, 119(%a0)
-	flw	%f0, 440(%zero)
+	flw	%f0, 438(%zero)
 	fdiv	%f0, %f1, %f0
 	addi	%sp, %sp, 7
 	jal	trace_diffuse_ray.2989
 	addi	%sp, %sp, -7
-	j	bnei_cont.41904
-bnei_else.41903:
-	flw	%f0, 439(%zero)
+	j	bnei_cont.31032
+bnei_else.31031:
+	flw	%f0, 437(%zero)
 	fdiv	%f0, %f1, %f0
 	addi	%sp, %sp, 7
 	jal	trace_diffuse_ray.2989
 	addi	%sp, %sp, -7
-bnei_cont.41904:
+bnei_cont.31032:
 	addi	%a1, %zero, 116
 	lw	%v1, 6(%sp)
 	lw	%v0, 5(%sp)
@@ -13887,28 +12994,28 @@ bnei_cont.41904:
 	fsw	%f0, 1(%a0)
 	flw	%f0, 150(%zero)
 	fsw	%f0, 2(%a0)
-	j	bnei_cont.41900
-bnei_else.41899:
-bnei_cont.41900:
+	j	bnei_cont.31028
+bnei_else.31027:
+bnei_cont.31028:
 	addi	%v1, %t0, 1
 	lw	%t1, 2(%sp)
 	lw	%t0, 3(%sp)
 	lw	%ra, 4(%sp)
 	lw	%v0, 0(%sp)
 	j	pretrace_diffuse_rays.3043
-bgti_else.41898:
+bgti_else.31026:
 	lw	%t1, 2(%sp)
 	lw	%t0, 3(%sp)
 	lw	%ra, 4(%sp)
 	jr	%ra
-bgt_else.41897:
+bgt_else.31025:
 	lw	%t1, 2(%sp)
 	lw	%t0, 3(%sp)
 	lw	%ra, 4(%sp)
 	jr	%ra
-bgti_else.41894:
+bgti_else.31022:
 	jr	%ra
-bgt_else.41893:
+bgt_else.31021:
 	jr	%ra
 pretrace_pixels.3046:
 	fsw	%f0, 0(%sp)
@@ -13922,7 +13029,7 @@ pretrace_pixels.3046:
 	sw	%t1, 8(%sp)
 	sw	%t0, 9(%sp)
 	sw	%ra, 10(%sp)
-	blti	%v1, 0, bgti_else.42002
+	blti	%v1, 0, bgti_else.31132
 	flw	%f17, 158(%zero)
 	lw	%a0, 156(%zero)
 	sub	%a0, %v1, %a0
@@ -13949,18 +13056,18 @@ pretrace_pixels.3046:
 	fmul	%f0, %f16, %f16
 	fadd	%f0, %f1, %f0
 	fsqrt	%f0, %f0
-	fbne	%f0, %fzero, fbeq_else.42003
+	fbne	%f0, %fzero, fbeq_else.31133
 	add	%a0, %zero, %k1
-	j	fbeq_cont.42004
-fbeq_else.42003:
+	j	fbeq_cont.31134
+fbeq_else.31133:
 	add	%a0, %zero, %zero
-fbeq_cont.42004:
-	beqi	%a0, 0, bnei_else.42005
+fbeq_cont.31134:
+	beqi	%a0, 0, bnei_else.31135
 	fmov	%f0, %f30
-	j	bnei_cont.42006
-bnei_else.42005:
+	j	bnei_cont.31136
+bnei_else.31135:
 	fdiv	%f0, %f30, %f0
-bnei_cont.42006:
+bnei_cont.31136:
 	fmul	%f1, %f18, %f0
 	fsw	%f1, 174(%zero)
 	fmul	%f1, %f17, %f0
@@ -14000,10 +13107,10 @@ bnei_cont.42006:
 	sw	%a0, 0(%a1)
 	lw	%a0, 2(%t0)
 	lw	%a0, 0(%a0)
-	blti	%a0, 0, bgti_else.42007
+	blti	%a0, 0, bgti_else.31137
 	lw	%a0, 3(%t0)
 	lw	%a0, 0(%a0)
-	beqi	%a0, 0, bnei_else.42009
+	beqi	%a0, 0, bnei_else.31139
 	lw	%a0, 6(%t0)
 	lw	%a2, 0(%a0)
 	fsw	%fzero, 148(%zero)
@@ -14039,27 +13146,27 @@ bnei_cont.42006:
 	flw	%f0, 2(%t2)
 	fmul	%f0, %f1, %f0
 	fadd	%f1, %f16, %f0
-	fblt	%f1, %fzero, fbgt_else.42011
+	fblt	%f1, %fzero, fbgt_else.31141
 	add	%a0, %zero, %zero
-	j	fbgt_cont.42012
-fbgt_else.42011:
+	j	fbgt_cont.31142
+fbgt_else.31141:
 	add	%a0, %zero, %k1
-fbgt_cont.42012:
-	beqi	%a0, 0, bnei_else.42013
+fbgt_cont.31142:
+	beqi	%a0, 0, bnei_else.31143
 	lw	%v0, 119(%t1)
-	flw	%f0, 440(%zero)
+	flw	%f0, 438(%zero)
 	fdiv	%f0, %f1, %f0
 	addi	%sp, %sp, 11
 	jal	trace_diffuse_ray.2989
 	addi	%sp, %sp, -11
-	j	bnei_cont.42014
-bnei_else.42013:
-	flw	%f0, 439(%zero)
+	j	bnei_cont.31144
+bnei_else.31143:
+	flw	%f0, 437(%zero)
 	fdiv	%f0, %f1, %f0
 	addi	%sp, %sp, 11
 	jal	trace_diffuse_ray.2989
 	addi	%sp, %sp, -11
-bnei_cont.42014:
+bnei_cont.31144:
 	addi	%a1, %zero, 116
 	addi	%a0, %t3, 0
 	addi	%v1, %t2, 0
@@ -14075,26 +13182,26 @@ bnei_cont.42014:
 	fsw	%f0, 1(%a0)
 	flw	%f0, 150(%zero)
 	fsw	%f0, 2(%a0)
-	j	bnei_cont.42010
-bnei_else.42009:
-bnei_cont.42010:
+	j	bnei_cont.31140
+bnei_else.31139:
+bnei_cont.31140:
 	addi	%v1, %k1, 0
 	addi	%v0, %t0, 0
 	addi	%sp, %sp, 11
 	jal	pretrace_diffuse_rays.3043
 	addi	%sp, %sp, -11
-	j	bgti_cont.42008
-bgti_else.42007:
-bgti_cont.42008:
+	j	bgti_cont.31138
+bgti_else.31137:
+bgti_cont.31138:
 	lw	%a0, 4(%sp)
 	addi	%v1, %a0, -1
 	lw	%a0, 5(%sp)
 	addi	%a0, %a0, 1
-	blti	%a0, 5, bgti_else.42015
+	blti	%a0, 5, bgti_else.31145
 	addi	%a0, %a0, -5
-	j	bgti_cont.42016
-bgti_else.42015:
-bgti_cont.42016:
+	j	bgti_cont.31146
+bgti_else.31145:
+bgti_cont.31146:
 	lw	%t3, 6(%sp)
 	lw	%t2, 7(%sp)
 	lw	%t1, 8(%sp)
@@ -14105,7 +13212,7 @@ bgti_cont.42016:
 	flw	%f0, 0(%sp)
 	lw	%v0, 3(%sp)
 	j	pretrace_pixels.3046
-bgti_else.42002:
+bgti_else.31132:
 	jr	%ra
 scan_pixel.3057:
 	sw	%v0, 0(%sp)
@@ -14113,18 +13220,16 @@ scan_pixel.3057:
 	sw	%a0, 2(%sp)
 	sw	%a1, 3(%sp)
 	sw	%a2, 4(%sp)
-	sw	%t4, 5(%sp)
-	sw	%t3, 6(%sp)
-	sw	%t2, 7(%sp)
-	sw	%t1, 8(%sp)
+	sw	%t2, 5(%sp)
+	sw	%t1, 6(%sp)
 	add	%a0, %zero, %t0
-	sw	%a0, 9(%sp)
-	sw	%ra, 10(%sp)
+	sw	%a0, 7(%sp)
+	sw	%ra, 8(%sp)
 	lw	%t0, 154(%zero)
-	blt	%v0, %t0, bgt_else.44336
+	blt	%v0, %t0, bgt_else.32317
 	add	%t0, %zero, %a0
 	jr	%ra
-bgt_else.44336:
+bgt_else.32317:
 	add	%at, %a1, %v0
 	lw	%t1, 0(%at)
 	lw	%a0, 0(%t1)
@@ -14135,1262 +13240,1092 @@ bgt_else.44336:
 	flw	%f0, 2(%a0)
 	fsw	%f0, 153(%zero)
 	lw	%a1, 155(%zero)
-	sw	%a1, 11(%sp)
+	sw	%a1, 9(%sp)
 	addi	%a0, %v1, 1
-	sw	%a0, 12(%sp)
-	blt	%a0, %a1, bgt_else.44338
+	sw	%a0, 10(%sp)
+	blt	%a0, %a1, bgt_else.32319
 	add	%a0, %zero, %zero
-	j	bgt_cont.44339
-bgt_else.44338:
-	blt	%zero, %v1, bgt_else.44340
+	j	bgt_cont.32320
+bgt_else.32319:
+	blt	%zero, %v1, bgt_else.32321
 	add	%a0, %zero, %zero
-	j	bgt_cont.44341
-bgt_else.44340:
+	j	bgt_cont.32322
+bgt_else.32321:
 	addi	%a0, %v0, 1
-	blt	%a0, %t0, bgt_else.44342
+	blt	%a0, %t0, bgt_else.32323
 	add	%a0, %zero, %zero
-	j	bgt_cont.44343
-bgt_else.44342:
-	blt	%zero, %v0, bgt_else.44344
+	j	bgt_cont.32324
+bgt_else.32323:
+	blt	%zero, %v0, bgt_else.32325
 	add	%a0, %zero, %zero
-	j	bgt_cont.44345
-bgt_else.44344:
+	j	bgt_cont.32326
+bgt_else.32325:
 	add	%a0, %zero, %k1
-bgt_cont.44345:
-bgt_cont.44343:
-bgt_cont.44341:
-bgt_cont.44339:
-	beqi	%a0, 0, bnei_else.44346
+bgt_cont.32326:
+bgt_cont.32324:
+bgt_cont.32322:
+bgt_cont.32320:
+	beqi	%a0, 0, bnei_else.32327
 	lw	%a0, 2(%t1)
 	lw	%a0, 0(%a0)
-	blti	%a0, 0, bnei_cont.44347
+	blti	%a0, 0, bnei_cont.32328
 	lw	%a0, 2(%t1)
 	lw	%a2, 0(%a0)
 	lw	%a0, 2(%sp)
-	lw	%k0, 0(%sp)
-	add	%at, %a0, %k0
-	lw	%a3, 0(%at)
-	lw	%a0, 2(%a3)
-	lw	%a0, 0(%a0)
-	bne	%a0, %a2, beq_else.44350
-	lw	%a0, 4(%sp)
-	add	%at, %a0, %k0
+	lw	%a3, 0(%sp)
+	add	%at, %a0, %a3
 	lw	%a0, 0(%at)
 	lw	%a0, 2(%a0)
 	lw	%a0, 0(%a0)
-	bne	%a0, %a2, beq_else.44352
-	addi	%a0, %k0, -1
+	bne	%a0, %a2, beq_else.32331
+	lw	%a0, 4(%sp)
+	add	%at, %a0, %a3
+	lw	%a0, 0(%at)
+	lw	%a0, 2(%a0)
+	lw	%a0, 0(%a0)
+	bne	%a0, %a2, beq_else.32333
+	addi	%a0, %a3, -1
 	lw	%a1, 3(%sp)
 	add	%at, %a1, %a0
 	lw	%a0, 0(%at)
 	lw	%a0, 2(%a0)
 	lw	%a0, 0(%a0)
-	bne	%a0, %a2, beq_else.44354
-	addi	%a0, %k0, 1
+	bne	%a0, %a2, beq_else.32335
+	addi	%a0, %a3, 1
 	add	%at, %a1, %a0
 	lw	%a0, 0(%at)
 	lw	%a0, 2(%a0)
 	lw	%a0, 0(%a0)
-	bne	%a0, %a2, beq_else.44356
+	bne	%a0, %a2, beq_else.32337
 	add	%a0, %zero, %k1
-	j	beq_cont.44351
-beq_else.44356:
+	j	beq_cont.32332
+beq_else.32337:
 	add	%a0, %zero, %zero
-beq_cont.44357:
-	j	beq_cont.44351
-beq_else.44354:
+beq_cont.32338:
+	j	beq_cont.32332
+beq_else.32335:
 	add	%a0, %zero, %zero
-beq_cont.44355:
-	j	beq_cont.44351
-beq_else.44352:
+beq_cont.32336:
+	j	beq_cont.32332
+beq_else.32333:
 	add	%a0, %zero, %zero
-beq_cont.44353:
-	j	beq_cont.44351
-beq_else.44350:
+beq_cont.32334:
+	j	beq_cont.32332
+beq_else.32331:
 	add	%a0, %zero, %zero
-beq_cont.44351:
-	beqi	%a0, 0, bnei_else.44358
+beq_cont.32332:
+	beqi	%a0, 0, bnei_else.32339
 	lw	%a0, 3(%t1)
 	lw	%a0, 0(%a0)
-	beqi	%a0, 0, bnei_else.44360
-	lw	%s0, 5(%a3)
-	lw	%ra, 0(%sp)
-	addi	%a0, %ra, -1
-	lw	%a1, 3(%sp)
-	add	%at, %a1, %a0
-	lw	%a0, 0(%at)
-	lw	%k0, 5(%a0)
-	lw	%a3, 5(%t1)
-	addi	%a0, %ra, 1
-	add	%at, %a1, %a0
-	lw	%a0, 0(%at)
-	lw	%a2, 5(%a0)
-	lw	%a0, 4(%sp)
-	add	%at, %a0, %ra
-	lw	%a0, 0(%at)
-	lw	%a1, 5(%a0)
-	lw	%a0, 0(%s0)
-	flw	%f0, 0(%a0)
-	fsw	%f0, 148(%zero)
-	flw	%f0, 1(%a0)
-	fsw	%f0, 149(%zero)
-	flw	%f0, 2(%a0)
-	fsw	%f0, 150(%zero)
-	lw	%a0, 0(%k0)
-	flw	%f1, 148(%zero)
-	flw	%f0, 0(%a0)
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 148(%zero)
-	flw	%f1, 149(%zero)
-	flw	%f0, 1(%a0)
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 149(%zero)
-	flw	%f1, 150(%zero)
-	flw	%f0, 2(%a0)
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 150(%zero)
-	lw	%a0, 0(%a3)
-	flw	%f1, 148(%zero)
-	flw	%f0, 0(%a0)
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 148(%zero)
-	flw	%f1, 149(%zero)
-	flw	%f0, 1(%a0)
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 149(%zero)
-	flw	%f1, 150(%zero)
-	flw	%f0, 2(%a0)
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 150(%zero)
-	lw	%a0, 0(%a2)
-	flw	%f1, 148(%zero)
-	flw	%f0, 0(%a0)
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 148(%zero)
-	flw	%f1, 149(%zero)
-	flw	%f0, 1(%a0)
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 149(%zero)
-	flw	%f1, 150(%zero)
-	flw	%f0, 2(%a0)
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 150(%zero)
-	lw	%a0, 0(%a1)
-	flw	%f1, 148(%zero)
-	flw	%f0, 0(%a0)
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 148(%zero)
-	flw	%f1, 149(%zero)
-	flw	%f0, 1(%a0)
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 149(%zero)
-	flw	%f1, 150(%zero)
-	flw	%f0, 2(%a0)
-	fadd	%f0, %f1, %f0
-	fsw	%f0, 150(%zero)
-	lw	%a0, 4(%t1)
-	lw	%a0, 0(%a0)
-	flw	%f16, 151(%zero)
-	flw	%f1, 0(%a0)
-	flw	%f0, 148(%zero)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	fsw	%f0, 151(%zero)
-	flw	%f16, 152(%zero)
-	flw	%f1, 1(%a0)
-	flw	%f0, 149(%zero)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	fsw	%f0, 152(%zero)
-	flw	%f16, 153(%zero)
-	flw	%f1, 2(%a0)
-	flw	%f0, 150(%zero)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	fsw	%f0, 153(%zero)
-	j	bnei_cont.44361
-bnei_else.44360:
-bnei_cont.44361:
+	beqi	%a0, 0, bnei_else.32341
+	lw	%a1, 4(%sp)
+	lw	%a0, 3(%sp)
+	lw	%v1, 2(%sp)
+	lw	%v0, 0(%sp)
+	addi	%a2, %zero, 0
+	addi	%sp, %sp, 11
+	jal	calc_diffuse_using_5points.3008
+	addi	%sp, %sp, -11
+	j	bnei_cont.32342
+bnei_else.32341:
+bnei_cont.32342:
 	lw	%a2, 4(%sp)
 	lw	%a1, 3(%sp)
 	lw	%a0, 2(%sp)
 	lw	%v1, 1(%sp)
 	lw	%v0, 0(%sp)
 	addi	%a3, %k1, 0
-	addi	%sp, %sp, 13
+	addi	%sp, %sp, 11
 	jal	try_exploit_neighbors.3030
-	addi	%sp, %sp, -13
-	j	bnei_cont.44347
-bnei_else.44358:
+	addi	%sp, %sp, -11
+	j	bnei_cont.32328
+bnei_else.32339:
 	addi	%v1, %zero, 0
 	addi	%v0, %t1, 0
-	addi	%sp, %sp, 13
+	addi	%sp, %sp, 11
 	jal	do_without_neighbors.3014
-	addi	%sp, %sp, -13
-bnei_cont.44359:
-	j	bnei_cont.44347
-bgti_else.44348:
-bgti_cont.44349:
-	j	bnei_cont.44347
-bnei_else.44346:
+	addi	%sp, %sp, -11
+bnei_cont.32340:
+	j	bnei_cont.32328
+bgti_else.32329:
+bgti_cont.32330:
+	j	bnei_cont.32328
+bnei_else.32327:
 	lw	%a0, 2(%t1)
 	lw	%a0, 0(%a0)
-	blti	%a0, 0, bgti_else.44362
+	blti	%a0, 0, bgti_else.32343
 	lw	%a0, 3(%t1)
 	lw	%a0, 0(%a0)
-	beqi	%a0, 0, bnei_else.44364
-	lw	%a3, 5(%t1)
-	lw	%a2, 7(%t1)
-	lw	%a1, 1(%t1)
-	lw	%a0, 4(%t1)
-	sw	%a0, 13(%sp)
-	lw	%a0, 0(%a3)
-	flw	%f0, 0(%a0)
-	fsw	%f0, 148(%zero)
-	flw	%f0, 1(%a0)
-	fsw	%f0, 149(%zero)
-	flw	%f0, 2(%a0)
-	fsw	%f0, 150(%zero)
-	lw	%a0, 6(%t1)
-	lw	%t4, 0(%a0)
-	lw	%t3, 0(%a2)
-	lw	%t2, 0(%a1)
-	beqi	%t4, 0, bnei_else.44366
-	lw	%v0, 179(%zero)
-	addi	%a0, %t2, 0
-	addi	%v1, %t3, 0
-	addi	%sp, %sp, 14
-	jal	trace_diffuse_rays.2997
-	addi	%sp, %sp, -14
-	j	bnei_cont.44367
-bnei_else.44366:
-bnei_cont.44367:
-	beqi	%t4, 1, bnei_else.44368
-	lw	%v0, 180(%zero)
-	addi	%a0, %t2, 0
-	addi	%v1, %t3, 0
-	addi	%sp, %sp, 14
-	jal	trace_diffuse_rays.2997
-	addi	%sp, %sp, -14
-	j	bnei_cont.44369
-bnei_else.44368:
-bnei_cont.44369:
-	beqi	%t4, 2, bnei_else.44370
-	lw	%v0, 181(%zero)
-	addi	%a0, %t2, 0
-	addi	%v1, %t3, 0
-	addi	%sp, %sp, 14
-	jal	trace_diffuse_rays.2997
-	addi	%sp, %sp, -14
-	j	bnei_cont.44371
-bnei_else.44370:
-bnei_cont.44371:
-	beqi	%t4, 3, bnei_else.44372
-	lw	%v0, 182(%zero)
-	addi	%a0, %t2, 0
-	addi	%v1, %t3, 0
-	addi	%sp, %sp, 14
-	jal	trace_diffuse_rays.2997
-	addi	%sp, %sp, -14
-	j	bnei_cont.44373
-bnei_else.44372:
-bnei_cont.44373:
-	beqi	%t4, 4, bnei_else.44374
-	lw	%v0, 183(%zero)
-	addi	%a0, %t2, 0
-	addi	%v1, %t3, 0
-	addi	%sp, %sp, 14
-	jal	trace_diffuse_rays.2997
-	addi	%sp, %sp, -14
-	j	bnei_cont.44375
-bnei_else.44374:
-bnei_cont.44375:
-	lw	%a0, 13(%sp)
-	lw	%a0, 0(%a0)
-	flw	%f16, 151(%zero)
-	flw	%f1, 0(%a0)
-	flw	%f0, 148(%zero)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	fsw	%f0, 151(%zero)
-	flw	%f16, 152(%zero)
-	flw	%f1, 1(%a0)
-	flw	%f0, 149(%zero)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	fsw	%f0, 152(%zero)
-	flw	%f16, 153(%zero)
-	flw	%f1, 2(%a0)
-	flw	%f0, 150(%zero)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	fsw	%f0, 153(%zero)
-	j	bnei_cont.44365
-bnei_else.44364:
-bnei_cont.44365:
+	beqi	%a0, 0, bnei_else.32345
+	addi	%v1, %zero, 0
+	addi	%v0, %t1, 0
+	addi	%sp, %sp, 11
+	jal	calc_diffuse_using_1point.3005
+	addi	%sp, %sp, -11
+	j	bnei_cont.32346
+bnei_else.32345:
+bnei_cont.32346:
 	addi	%v1, %k1, 0
 	addi	%v0, %t1, 0
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, 11
 	jal	do_without_neighbors.3014
-	addi	%sp, %sp, -14
-	j	bgti_cont.44363
-bgti_else.44362:
-bgti_cont.44363:
-bnei_cont.44347:
+	addi	%sp, %sp, -11
+	j	bgti_cont.32344
+bgti_else.32343:
+bgti_cont.32344:
+bnei_cont.32328:
 	flw	%f0, 151(%zero)
 	ftoi	%a1, %f0
 	addi	%at, %zero, 255
-	blt	%at, %a1, bgt_else.44376
-	blti	%a1, 0, bgti_else.44378
-	j	bgt_cont.44377
-bgti_else.44378:
+	blt	%at, %a1, bgt_else.32347
+	blti	%a1, 0, bgti_else.32349
+	j	bgt_cont.32348
+bgti_else.32349:
 	add	%a1, %zero, %zero
-bgti_cont.44379:
-	j	bgt_cont.44377
-bgt_else.44376:
+bgti_cont.32350:
+	j	bgt_cont.32348
+bgt_else.32347:
 	addi	%a1, %zero, 255
-bgt_cont.44377:
+bgt_cont.32348:
 	addi	%v1, %zero, 0
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, 11
 	jal	print_int_sub1.2641
-	addi	%sp, %sp, -14
+	addi	%sp, %sp, -11
 	addi	%a2, %v0, 0
-	addi	%t1, %zero, 10
-	blti	%a1, 10, bgti_else.44380
-	blti	%a1, 20, bgti_else.44382
-	blti	%a1, 30, bgti_else.44384
-	blti	%a1, 40, bgti_else.44386
+	addi	%a0, %zero, 10
+	blti	%a1, 10, bgti_else.32351
+	blti	%a1, 20, bgti_else.32353
+	blti	%a1, 30, bgti_else.32355
+	blti	%a1, 40, bgti_else.32357
 	addi	%a1, %a1, -40
-	blti	%a1, 10, bgti_cont.44381
-	blti	%a1, 20, bgti_else.44390
-	blti	%a1, 30, bgti_else.44392
-	blti	%a1, 40, bgti_else.44394
+	blti	%a1, 10, bgti_cont.32352
+	blti	%a1, 20, bgti_else.32361
+	blti	%a1, 30, bgti_else.32363
+	blti	%a1, 40, bgti_else.32365
 	addi	%a1, %a1, -40
-	blti	%a1, 10, bgti_cont.44381
-	blti	%a1, 20, bgti_else.44398
-	blti	%a1, 30, bgti_else.44400
-	blti	%a1, 40, bgti_else.44402
+	blti	%a1, 10, bgti_cont.32352
+	blti	%a1, 20, bgti_else.32369
+	blti	%a1, 30, bgti_else.32371
+	blti	%a1, 40, bgti_else.32373
 	addi	%a1, %a1, -40
-	blti	%a1, 10, bgti_cont.44381
-	blti	%a1, 20, bgti_else.44406
-	blti	%a1, 30, bgti_else.44408
-	blti	%a1, 40, bgti_else.44410
+	blti	%a1, 10, bgti_cont.32352
+	blti	%a1, 20, bgti_else.32377
+	blti	%a1, 30, bgti_else.32379
+	blti	%a1, 40, bgti_else.32381
 	addi	%v0, %a1, -40
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, 11
 	jal	print_int_sub2.2644
-	addi	%sp, %sp, -14
+	addi	%sp, %sp, -11
 	addi	%a1, %v0, 0
-	j	bgti_cont.44381
-bgti_else.44410:
+	j	bgti_cont.32352
+bgti_else.32381:
 	addi	%a1, %a1, -30
-bgti_cont.44411:
-	j	bgti_cont.44381
-bgti_else.44408:
+bgti_cont.32382:
+	j	bgti_cont.32352
+bgti_else.32379:
 	addi	%a1, %a1, -20
-bgti_cont.44409:
-	j	bgti_cont.44381
-bgti_else.44406:
+bgti_cont.32380:
+	j	bgti_cont.32352
+bgti_else.32377:
 	addi	%a1, %a1, -10
-bgti_cont.44407:
-	j	bgti_cont.44381
-bgti_else.44404:
-bgti_cont.44405:
-	j	bgti_cont.44381
-bgti_else.44402:
+bgti_cont.32378:
+	j	bgti_cont.32352
+bgti_else.32375:
+bgti_cont.32376:
+	j	bgti_cont.32352
+bgti_else.32373:
 	addi	%a1, %a1, -30
-bgti_cont.44403:
-	j	bgti_cont.44381
-bgti_else.44400:
+bgti_cont.32374:
+	j	bgti_cont.32352
+bgti_else.32371:
 	addi	%a1, %a1, -20
-bgti_cont.44401:
-	j	bgti_cont.44381
-bgti_else.44398:
+bgti_cont.32372:
+	j	bgti_cont.32352
+bgti_else.32369:
 	addi	%a1, %a1, -10
-bgti_cont.44399:
-	j	bgti_cont.44381
-bgti_else.44396:
-bgti_cont.44397:
-	j	bgti_cont.44381
-bgti_else.44394:
+bgti_cont.32370:
+	j	bgti_cont.32352
+bgti_else.32367:
+bgti_cont.32368:
+	j	bgti_cont.32352
+bgti_else.32365:
 	addi	%a1, %a1, -30
-bgti_cont.44395:
-	j	bgti_cont.44381
-bgti_else.44392:
+bgti_cont.32366:
+	j	bgti_cont.32352
+bgti_else.32363:
 	addi	%a1, %a1, -20
-bgti_cont.44393:
-	j	bgti_cont.44381
-bgti_else.44390:
+bgti_cont.32364:
+	j	bgti_cont.32352
+bgti_else.32361:
 	addi	%a1, %a1, -10
-bgti_cont.44391:
-	j	bgti_cont.44381
-bgti_else.44388:
-bgti_cont.44389:
-	j	bgti_cont.44381
-bgti_else.44386:
+bgti_cont.32362:
+	j	bgti_cont.32352
+bgti_else.32359:
+bgti_cont.32360:
+	j	bgti_cont.32352
+bgti_else.32357:
 	addi	%a1, %a1, -30
-bgti_cont.44387:
-	j	bgti_cont.44381
-bgti_else.44384:
+bgti_cont.32358:
+	j	bgti_cont.32352
+bgti_else.32355:
 	addi	%a1, %a1, -20
-bgti_cont.44385:
-	j	bgti_cont.44381
-bgti_else.44382:
+bgti_cont.32356:
+	j	bgti_cont.32352
+bgti_else.32353:
 	addi	%a1, %a1, -10
-bgti_cont.44383:
-	j	bgti_cont.44381
-bgti_else.44380:
-bgti_cont.44381:
-	blt	%zero, %a2, bgt_else.44412
+bgti_cont.32354:
+	j	bgti_cont.32352
+bgti_else.32351:
+bgti_cont.32352:
+	blt	%zero, %a2, bgt_else.32383
 	addi	%v0, %a1, 48
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, 11
 	jal	min_caml_print_char
-	addi	%sp, %sp, -14
-	j	bgt_cont.44413
-bgt_else.44412:
+	addi	%sp, %sp, -11
+	j	bgt_cont.32384
+bgt_else.32383:
 	addi	%v1, %zero, 0
 	addi	%v0, %a2, 0
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, 11
 	jal	print_int_sub1.2641
-	addi	%sp, %sp, -14
+	addi	%sp, %sp, -11
 	addi	%a0, %v0, 0
-	blti	%a2, 10, bgti_else.44414
-	blti	%a2, 20, bgti_else.44416
-	blti	%a2, 30, bgti_else.44418
-	blti	%a2, 40, bgti_else.44420
+	blti	%a2, 10, bgti_else.32385
+	blti	%a2, 20, bgti_else.32387
+	blti	%a2, 30, bgti_else.32389
+	blti	%a2, 40, bgti_else.32391
 	addi	%a2, %a2, -40
-	blti	%a2, 10, bgti_cont.44415
-	blti	%a2, 20, bgti_else.44424
-	blti	%a2, 30, bgti_else.44426
-	blti	%a2, 40, bgti_else.44428
+	blti	%a2, 10, bgti_cont.32386
+	blti	%a2, 20, bgti_else.32395
+	blti	%a2, 30, bgti_else.32397
+	blti	%a2, 40, bgti_else.32399
 	addi	%a2, %a2, -40
-	blti	%a2, 10, bgti_cont.44415
-	blti	%a2, 20, bgti_else.44432
-	blti	%a2, 30, bgti_else.44434
-	blti	%a2, 40, bgti_else.44436
+	blti	%a2, 10, bgti_cont.32386
+	blti	%a2, 20, bgti_else.32403
+	blti	%a2, 30, bgti_else.32405
+	blti	%a2, 40, bgti_else.32407
 	addi	%a2, %a2, -40
-	blti	%a2, 10, bgti_cont.44415
-	blti	%a2, 20, bgti_else.44440
-	blti	%a2, 30, bgti_else.44442
-	blti	%a2, 40, bgti_else.44444
+	blti	%a2, 10, bgti_cont.32386
+	blti	%a2, 20, bgti_else.32411
+	blti	%a2, 30, bgti_else.32413
+	blti	%a2, 40, bgti_else.32415
 	addi	%v0, %a2, -40
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, 11
 	jal	print_int_sub2.2644
-	addi	%sp, %sp, -14
+	addi	%sp, %sp, -11
 	addi	%a2, %v0, 0
-	j	bgti_cont.44415
-bgti_else.44444:
+	j	bgti_cont.32386
+bgti_else.32415:
 	addi	%a2, %a2, -30
-bgti_cont.44445:
-	j	bgti_cont.44415
-bgti_else.44442:
+bgti_cont.32416:
+	j	bgti_cont.32386
+bgti_else.32413:
 	addi	%a2, %a2, -20
-bgti_cont.44443:
-	j	bgti_cont.44415
-bgti_else.44440:
+bgti_cont.32414:
+	j	bgti_cont.32386
+bgti_else.32411:
 	addi	%a2, %a2, -10
-bgti_cont.44441:
-	j	bgti_cont.44415
-bgti_else.44438:
-bgti_cont.44439:
-	j	bgti_cont.44415
-bgti_else.44436:
+bgti_cont.32412:
+	j	bgti_cont.32386
+bgti_else.32409:
+bgti_cont.32410:
+	j	bgti_cont.32386
+bgti_else.32407:
 	addi	%a2, %a2, -30
-bgti_cont.44437:
-	j	bgti_cont.44415
-bgti_else.44434:
+bgti_cont.32408:
+	j	bgti_cont.32386
+bgti_else.32405:
 	addi	%a2, %a2, -20
-bgti_cont.44435:
-	j	bgti_cont.44415
-bgti_else.44432:
+bgti_cont.32406:
+	j	bgti_cont.32386
+bgti_else.32403:
 	addi	%a2, %a2, -10
-bgti_cont.44433:
-	j	bgti_cont.44415
-bgti_else.44430:
-bgti_cont.44431:
-	j	bgti_cont.44415
-bgti_else.44428:
+bgti_cont.32404:
+	j	bgti_cont.32386
+bgti_else.32401:
+bgti_cont.32402:
+	j	bgti_cont.32386
+bgti_else.32399:
 	addi	%a2, %a2, -30
-bgti_cont.44429:
-	j	bgti_cont.44415
-bgti_else.44426:
+bgti_cont.32400:
+	j	bgti_cont.32386
+bgti_else.32397:
 	addi	%a2, %a2, -20
-bgti_cont.44427:
-	j	bgti_cont.44415
-bgti_else.44424:
+bgti_cont.32398:
+	j	bgti_cont.32386
+bgti_else.32395:
 	addi	%a2, %a2, -10
-bgti_cont.44425:
-	j	bgti_cont.44415
-bgti_else.44422:
-bgti_cont.44423:
-	j	bgti_cont.44415
-bgti_else.44420:
+bgti_cont.32396:
+	j	bgti_cont.32386
+bgti_else.32393:
+bgti_cont.32394:
+	j	bgti_cont.32386
+bgti_else.32391:
 	addi	%a2, %a2, -30
-bgti_cont.44421:
-	j	bgti_cont.44415
-bgti_else.44418:
+bgti_cont.32392:
+	j	bgti_cont.32386
+bgti_else.32389:
 	addi	%a2, %a2, -20
-bgti_cont.44419:
-	j	bgti_cont.44415
-bgti_else.44416:
+bgti_cont.32390:
+	j	bgti_cont.32386
+bgti_else.32387:
 	addi	%a2, %a2, -10
-bgti_cont.44417:
-	j	bgti_cont.44415
-bgti_else.44414:
-bgti_cont.44415:
-	blt	%zero, %a0, bgt_else.44446
+bgti_cont.32388:
+	j	bgti_cont.32386
+bgti_else.32385:
+bgti_cont.32386:
+	blt	%zero, %a0, bgt_else.32417
 	addi	%v0, %a2, 48
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, 11
 	jal	min_caml_print_char
-	addi	%sp, %sp, -14
+	addi	%sp, %sp, -11
 	addi	%v0, %a1, 48
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, 11
 	jal	min_caml_print_char
-	addi	%sp, %sp, -14
-	j	bgt_cont.44447
-bgt_else.44446:
-	blti	%a0, 10, bgti_else.44448
-	blti	%a0, 20, bgti_else.44450
-	blti	%a0, 30, bgti_else.44452
-	blti	%a0, 40, bgti_else.44454
+	addi	%sp, %sp, -11
+	j	bgt_cont.32418
+bgt_else.32417:
+	blti	%a0, 10, bgti_else.32419
+	blti	%a0, 20, bgti_else.32421
+	blti	%a0, 30, bgti_else.32423
+	blti	%a0, 40, bgti_else.32425
 	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_cont.44449
-	blti	%a0, 20, bgti_else.44458
-	blti	%a0, 30, bgti_else.44460
-	blti	%a0, 40, bgti_else.44462
+	blti	%a0, 10, bgti_cont.32420
+	blti	%a0, 20, bgti_else.32429
+	blti	%a0, 30, bgti_else.32431
+	blti	%a0, 40, bgti_else.32433
 	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_cont.44449
-	blti	%a0, 20, bgti_else.44466
-	blti	%a0, 30, bgti_else.44468
-	blti	%a0, 40, bgti_else.44470
+	blti	%a0, 10, bgti_cont.32420
+	blti	%a0, 20, bgti_else.32437
+	blti	%a0, 30, bgti_else.32439
+	blti	%a0, 40, bgti_else.32441
 	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_cont.44449
-	blti	%a0, 20, bgti_else.44474
-	blti	%a0, 30, bgti_else.44476
-	blti	%a0, 40, bgti_else.44478
+	blti	%a0, 10, bgti_cont.32420
+	blti	%a0, 20, bgti_else.32445
+	blti	%a0, 30, bgti_else.32447
+	blti	%a0, 40, bgti_else.32449
 	addi	%v0, %a0, -40
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, 11
 	jal	print_int_sub2.2644
-	addi	%sp, %sp, -14
+	addi	%sp, %sp, -11
 	addi	%a0, %v0, 0
-	j	bgti_cont.44449
-bgti_else.44478:
+	j	bgti_cont.32420
+bgti_else.32449:
 	addi	%a0, %a0, -30
-bgti_cont.44479:
-	j	bgti_cont.44449
-bgti_else.44476:
+bgti_cont.32450:
+	j	bgti_cont.32420
+bgti_else.32447:
 	addi	%a0, %a0, -20
-bgti_cont.44477:
-	j	bgti_cont.44449
-bgti_else.44474:
+bgti_cont.32448:
+	j	bgti_cont.32420
+bgti_else.32445:
 	addi	%a0, %a0, -10
-bgti_cont.44475:
-	j	bgti_cont.44449
-bgti_else.44472:
-bgti_cont.44473:
-	j	bgti_cont.44449
-bgti_else.44470:
+bgti_cont.32446:
+	j	bgti_cont.32420
+bgti_else.32443:
+bgti_cont.32444:
+	j	bgti_cont.32420
+bgti_else.32441:
 	addi	%a0, %a0, -30
-bgti_cont.44471:
-	j	bgti_cont.44449
-bgti_else.44468:
+bgti_cont.32442:
+	j	bgti_cont.32420
+bgti_else.32439:
 	addi	%a0, %a0, -20
-bgti_cont.44469:
-	j	bgti_cont.44449
-bgti_else.44466:
+bgti_cont.32440:
+	j	bgti_cont.32420
+bgti_else.32437:
 	addi	%a0, %a0, -10
-bgti_cont.44467:
-	j	bgti_cont.44449
-bgti_else.44464:
-bgti_cont.44465:
-	j	bgti_cont.44449
-bgti_else.44462:
+bgti_cont.32438:
+	j	bgti_cont.32420
+bgti_else.32435:
+bgti_cont.32436:
+	j	bgti_cont.32420
+bgti_else.32433:
 	addi	%a0, %a0, -30
-bgti_cont.44463:
-	j	bgti_cont.44449
-bgti_else.44460:
+bgti_cont.32434:
+	j	bgti_cont.32420
+bgti_else.32431:
 	addi	%a0, %a0, -20
-bgti_cont.44461:
-	j	bgti_cont.44449
-bgti_else.44458:
+bgti_cont.32432:
+	j	bgti_cont.32420
+bgti_else.32429:
 	addi	%a0, %a0, -10
-bgti_cont.44459:
-	j	bgti_cont.44449
-bgti_else.44456:
-bgti_cont.44457:
-	j	bgti_cont.44449
-bgti_else.44454:
+bgti_cont.32430:
+	j	bgti_cont.32420
+bgti_else.32427:
+bgti_cont.32428:
+	j	bgti_cont.32420
+bgti_else.32425:
 	addi	%a0, %a0, -30
-bgti_cont.44455:
-	j	bgti_cont.44449
-bgti_else.44452:
+bgti_cont.32426:
+	j	bgti_cont.32420
+bgti_else.32423:
 	addi	%a0, %a0, -20
-bgti_cont.44453:
-	j	bgti_cont.44449
-bgti_else.44450:
+bgti_cont.32424:
+	j	bgti_cont.32420
+bgti_else.32421:
 	addi	%a0, %a0, -10
-bgti_cont.44451:
-	j	bgti_cont.44449
-bgti_else.44448:
-bgti_cont.44449:
+bgti_cont.32422:
+	j	bgti_cont.32420
+bgti_else.32419:
+bgti_cont.32420:
 	addi	%v0, %a0, 48
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, 11
 	jal	min_caml_print_char
-	addi	%sp, %sp, -14
+	addi	%sp, %sp, -11
 	addi	%v0, %a2, 48
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, 11
 	jal	min_caml_print_char
-	addi	%sp, %sp, -14
+	addi	%sp, %sp, -11
 	addi	%v0, %a1, 48
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, 11
 	jal	min_caml_print_char
-	addi	%sp, %sp, -14
-bgt_cont.44447:
-bgt_cont.44413:
-	addi	%t2, %zero, 32
-	addi	%v0, %t2, 0
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, -11
+bgt_cont.32418:
+bgt_cont.32384:
+	addi	%t1, %zero, 32
+	addi	%v0, %t1, 0
+	addi	%sp, %sp, 11
 	jal	min_caml_print_char
-	addi	%sp, %sp, -14
+	addi	%sp, %sp, -11
 	flw	%f0, 152(%zero)
 	ftoi	%a1, %f0
 	addi	%at, %zero, 255
-	blt	%at, %a1, bgt_else.44480
-	blti	%a1, 0, bgti_else.44482
-	j	bgt_cont.44481
-bgti_else.44482:
+	blt	%at, %a1, bgt_else.32451
+	blti	%a1, 0, bgti_else.32453
+	j	bgt_cont.32452
+bgti_else.32453:
 	add	%a1, %zero, %zero
-bgti_cont.44483:
-	j	bgt_cont.44481
-bgt_else.44480:
+bgti_cont.32454:
+	j	bgt_cont.32452
+bgt_else.32451:
 	addi	%a1, %zero, 255
-bgt_cont.44481:
+bgt_cont.32452:
 	addi	%v1, %zero, 0
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, 11
 	jal	print_int_sub1.2641
-	addi	%sp, %sp, -14
+	addi	%sp, %sp, -11
 	addi	%a2, %v0, 0
-	blti	%a1, 10, bgti_else.44484
-	blti	%a1, 20, bgti_else.44486
-	blti	%a1, 30, bgti_else.44488
-	blti	%a1, 40, bgti_else.44490
+	blti	%a1, 10, bgti_else.32455
+	blti	%a1, 20, bgti_else.32457
+	blti	%a1, 30, bgti_else.32459
+	blti	%a1, 40, bgti_else.32461
 	addi	%a1, %a1, -40
-	blti	%a1, 10, bgti_cont.44485
-	blti	%a1, 20, bgti_else.44494
-	blti	%a1, 30, bgti_else.44496
-	blti	%a1, 40, bgti_else.44498
+	blti	%a1, 10, bgti_cont.32456
+	blti	%a1, 20, bgti_else.32465
+	blti	%a1, 30, bgti_else.32467
+	blti	%a1, 40, bgti_else.32469
 	addi	%a1, %a1, -40
-	blti	%a1, 10, bgti_cont.44485
-	blti	%a1, 20, bgti_else.44502
-	blti	%a1, 30, bgti_else.44504
-	blti	%a1, 40, bgti_else.44506
+	blti	%a1, 10, bgti_cont.32456
+	blti	%a1, 20, bgti_else.32473
+	blti	%a1, 30, bgti_else.32475
+	blti	%a1, 40, bgti_else.32477
 	addi	%a1, %a1, -40
-	blti	%a1, 10, bgti_cont.44485
-	blti	%a1, 20, bgti_else.44510
-	blti	%a1, 30, bgti_else.44512
-	blti	%a1, 40, bgti_else.44514
+	blti	%a1, 10, bgti_cont.32456
+	blti	%a1, 20, bgti_else.32481
+	blti	%a1, 30, bgti_else.32483
+	blti	%a1, 40, bgti_else.32485
 	addi	%v0, %a1, -40
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, 11
 	jal	print_int_sub2.2644
-	addi	%sp, %sp, -14
+	addi	%sp, %sp, -11
 	addi	%a1, %v0, 0
-	j	bgti_cont.44485
-bgti_else.44514:
+	j	bgti_cont.32456
+bgti_else.32485:
 	addi	%a1, %a1, -30
-bgti_cont.44515:
-	j	bgti_cont.44485
-bgti_else.44512:
+bgti_cont.32486:
+	j	bgti_cont.32456
+bgti_else.32483:
 	addi	%a1, %a1, -20
-bgti_cont.44513:
-	j	bgti_cont.44485
-bgti_else.44510:
+bgti_cont.32484:
+	j	bgti_cont.32456
+bgti_else.32481:
 	addi	%a1, %a1, -10
-bgti_cont.44511:
-	j	bgti_cont.44485
-bgti_else.44508:
-bgti_cont.44509:
-	j	bgti_cont.44485
-bgti_else.44506:
+bgti_cont.32482:
+	j	bgti_cont.32456
+bgti_else.32479:
+bgti_cont.32480:
+	j	bgti_cont.32456
+bgti_else.32477:
 	addi	%a1, %a1, -30
-bgti_cont.44507:
-	j	bgti_cont.44485
-bgti_else.44504:
+bgti_cont.32478:
+	j	bgti_cont.32456
+bgti_else.32475:
 	addi	%a1, %a1, -20
-bgti_cont.44505:
-	j	bgti_cont.44485
-bgti_else.44502:
+bgti_cont.32476:
+	j	bgti_cont.32456
+bgti_else.32473:
 	addi	%a1, %a1, -10
-bgti_cont.44503:
-	j	bgti_cont.44485
-bgti_else.44500:
-bgti_cont.44501:
-	j	bgti_cont.44485
-bgti_else.44498:
+bgti_cont.32474:
+	j	bgti_cont.32456
+bgti_else.32471:
+bgti_cont.32472:
+	j	bgti_cont.32456
+bgti_else.32469:
 	addi	%a1, %a1, -30
-bgti_cont.44499:
-	j	bgti_cont.44485
-bgti_else.44496:
+bgti_cont.32470:
+	j	bgti_cont.32456
+bgti_else.32467:
 	addi	%a1, %a1, -20
-bgti_cont.44497:
-	j	bgti_cont.44485
-bgti_else.44494:
+bgti_cont.32468:
+	j	bgti_cont.32456
+bgti_else.32465:
 	addi	%a1, %a1, -10
-bgti_cont.44495:
-	j	bgti_cont.44485
-bgti_else.44492:
-bgti_cont.44493:
-	j	bgti_cont.44485
-bgti_else.44490:
+bgti_cont.32466:
+	j	bgti_cont.32456
+bgti_else.32463:
+bgti_cont.32464:
+	j	bgti_cont.32456
+bgti_else.32461:
 	addi	%a1, %a1, -30
-bgti_cont.44491:
-	j	bgti_cont.44485
-bgti_else.44488:
+bgti_cont.32462:
+	j	bgti_cont.32456
+bgti_else.32459:
 	addi	%a1, %a1, -20
-bgti_cont.44489:
-	j	bgti_cont.44485
-bgti_else.44486:
+bgti_cont.32460:
+	j	bgti_cont.32456
+bgti_else.32457:
 	addi	%a1, %a1, -10
-bgti_cont.44487:
-	j	bgti_cont.44485
-bgti_else.44484:
-bgti_cont.44485:
-	blt	%zero, %a2, bgt_else.44516
+bgti_cont.32458:
+	j	bgti_cont.32456
+bgti_else.32455:
+bgti_cont.32456:
+	blt	%zero, %a2, bgt_else.32487
 	addi	%v0, %a1, 48
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, 11
 	jal	min_caml_print_char
-	addi	%sp, %sp, -14
-	j	bgt_cont.44517
-bgt_else.44516:
+	addi	%sp, %sp, -11
+	j	bgt_cont.32488
+bgt_else.32487:
 	addi	%v1, %zero, 0
 	addi	%v0, %a2, 0
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, 11
 	jal	print_int_sub1.2641
-	addi	%sp, %sp, -14
+	addi	%sp, %sp, -11
 	addi	%a0, %v0, 0
-	blti	%a2, 10, bgti_else.44518
-	blti	%a2, 20, bgti_else.44520
-	blti	%a2, 30, bgti_else.44522
-	blti	%a2, 40, bgti_else.44524
+	blti	%a2, 10, bgti_else.32489
+	blti	%a2, 20, bgti_else.32491
+	blti	%a2, 30, bgti_else.32493
+	blti	%a2, 40, bgti_else.32495
 	addi	%a2, %a2, -40
-	blti	%a2, 10, bgti_cont.44519
-	blti	%a2, 20, bgti_else.44528
-	blti	%a2, 30, bgti_else.44530
-	blti	%a2, 40, bgti_else.44532
+	blti	%a2, 10, bgti_cont.32490
+	blti	%a2, 20, bgti_else.32499
+	blti	%a2, 30, bgti_else.32501
+	blti	%a2, 40, bgti_else.32503
 	addi	%a2, %a2, -40
-	blti	%a2, 10, bgti_cont.44519
-	blti	%a2, 20, bgti_else.44536
-	blti	%a2, 30, bgti_else.44538
-	blti	%a2, 40, bgti_else.44540
+	blti	%a2, 10, bgti_cont.32490
+	blti	%a2, 20, bgti_else.32507
+	blti	%a2, 30, bgti_else.32509
+	blti	%a2, 40, bgti_else.32511
 	addi	%a2, %a2, -40
-	blti	%a2, 10, bgti_cont.44519
-	blti	%a2, 20, bgti_else.44544
-	blti	%a2, 30, bgti_else.44546
-	blti	%a2, 40, bgti_else.44548
+	blti	%a2, 10, bgti_cont.32490
+	blti	%a2, 20, bgti_else.32515
+	blti	%a2, 30, bgti_else.32517
+	blti	%a2, 40, bgti_else.32519
 	addi	%v0, %a2, -40
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, 11
 	jal	print_int_sub2.2644
-	addi	%sp, %sp, -14
+	addi	%sp, %sp, -11
 	addi	%a2, %v0, 0
-	j	bgti_cont.44519
-bgti_else.44548:
+	j	bgti_cont.32490
+bgti_else.32519:
 	addi	%a2, %a2, -30
-bgti_cont.44549:
-	j	bgti_cont.44519
-bgti_else.44546:
+bgti_cont.32520:
+	j	bgti_cont.32490
+bgti_else.32517:
 	addi	%a2, %a2, -20
-bgti_cont.44547:
-	j	bgti_cont.44519
-bgti_else.44544:
+bgti_cont.32518:
+	j	bgti_cont.32490
+bgti_else.32515:
 	addi	%a2, %a2, -10
-bgti_cont.44545:
-	j	bgti_cont.44519
-bgti_else.44542:
-bgti_cont.44543:
-	j	bgti_cont.44519
-bgti_else.44540:
+bgti_cont.32516:
+	j	bgti_cont.32490
+bgti_else.32513:
+bgti_cont.32514:
+	j	bgti_cont.32490
+bgti_else.32511:
 	addi	%a2, %a2, -30
-bgti_cont.44541:
-	j	bgti_cont.44519
-bgti_else.44538:
+bgti_cont.32512:
+	j	bgti_cont.32490
+bgti_else.32509:
 	addi	%a2, %a2, -20
-bgti_cont.44539:
-	j	bgti_cont.44519
-bgti_else.44536:
+bgti_cont.32510:
+	j	bgti_cont.32490
+bgti_else.32507:
 	addi	%a2, %a2, -10
-bgti_cont.44537:
-	j	bgti_cont.44519
-bgti_else.44534:
-bgti_cont.44535:
-	j	bgti_cont.44519
-bgti_else.44532:
+bgti_cont.32508:
+	j	bgti_cont.32490
+bgti_else.32505:
+bgti_cont.32506:
+	j	bgti_cont.32490
+bgti_else.32503:
 	addi	%a2, %a2, -30
-bgti_cont.44533:
-	j	bgti_cont.44519
-bgti_else.44530:
+bgti_cont.32504:
+	j	bgti_cont.32490
+bgti_else.32501:
 	addi	%a2, %a2, -20
-bgti_cont.44531:
-	j	bgti_cont.44519
-bgti_else.44528:
+bgti_cont.32502:
+	j	bgti_cont.32490
+bgti_else.32499:
 	addi	%a2, %a2, -10
-bgti_cont.44529:
-	j	bgti_cont.44519
-bgti_else.44526:
-bgti_cont.44527:
-	j	bgti_cont.44519
-bgti_else.44524:
+bgti_cont.32500:
+	j	bgti_cont.32490
+bgti_else.32497:
+bgti_cont.32498:
+	j	bgti_cont.32490
+bgti_else.32495:
 	addi	%a2, %a2, -30
-bgti_cont.44525:
-	j	bgti_cont.44519
-bgti_else.44522:
+bgti_cont.32496:
+	j	bgti_cont.32490
+bgti_else.32493:
 	addi	%a2, %a2, -20
-bgti_cont.44523:
-	j	bgti_cont.44519
-bgti_else.44520:
+bgti_cont.32494:
+	j	bgti_cont.32490
+bgti_else.32491:
 	addi	%a2, %a2, -10
-bgti_cont.44521:
-	j	bgti_cont.44519
-bgti_else.44518:
-bgti_cont.44519:
-	blt	%zero, %a0, bgt_else.44550
+bgti_cont.32492:
+	j	bgti_cont.32490
+bgti_else.32489:
+bgti_cont.32490:
+	blt	%zero, %a0, bgt_else.32521
 	addi	%v0, %a2, 48
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, 11
 	jal	min_caml_print_char
-	addi	%sp, %sp, -14
+	addi	%sp, %sp, -11
 	addi	%v0, %a1, 48
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, 11
 	jal	min_caml_print_char
-	addi	%sp, %sp, -14
-	j	bgt_cont.44551
-bgt_else.44550:
-	blti	%a0, 10, bgti_else.44552
-	blti	%a0, 20, bgti_else.44554
-	blti	%a0, 30, bgti_else.44556
-	blti	%a0, 40, bgti_else.44558
+	addi	%sp, %sp, -11
+	j	bgt_cont.32522
+bgt_else.32521:
+	blti	%a0, 10, bgti_else.32523
+	blti	%a0, 20, bgti_else.32525
+	blti	%a0, 30, bgti_else.32527
+	blti	%a0, 40, bgti_else.32529
 	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_cont.44553
-	blti	%a0, 20, bgti_else.44562
-	blti	%a0, 30, bgti_else.44564
-	blti	%a0, 40, bgti_else.44566
+	blti	%a0, 10, bgti_cont.32524
+	blti	%a0, 20, bgti_else.32533
+	blti	%a0, 30, bgti_else.32535
+	blti	%a0, 40, bgti_else.32537
 	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_cont.44553
-	blti	%a0, 20, bgti_else.44570
-	blti	%a0, 30, bgti_else.44572
-	blti	%a0, 40, bgti_else.44574
+	blti	%a0, 10, bgti_cont.32524
+	blti	%a0, 20, bgti_else.32541
+	blti	%a0, 30, bgti_else.32543
+	blti	%a0, 40, bgti_else.32545
 	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_cont.44553
-	blti	%a0, 20, bgti_else.44578
-	blti	%a0, 30, bgti_else.44580
-	blti	%a0, 40, bgti_else.44582
+	blti	%a0, 10, bgti_cont.32524
+	blti	%a0, 20, bgti_else.32549
+	blti	%a0, 30, bgti_else.32551
+	blti	%a0, 40, bgti_else.32553
 	addi	%v0, %a0, -40
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, 11
 	jal	print_int_sub2.2644
-	addi	%sp, %sp, -14
+	addi	%sp, %sp, -11
 	addi	%a0, %v0, 0
-	j	bgti_cont.44553
-bgti_else.44582:
+	j	bgti_cont.32524
+bgti_else.32553:
 	addi	%a0, %a0, -30
-bgti_cont.44583:
-	j	bgti_cont.44553
-bgti_else.44580:
+bgti_cont.32554:
+	j	bgti_cont.32524
+bgti_else.32551:
 	addi	%a0, %a0, -20
-bgti_cont.44581:
-	j	bgti_cont.44553
-bgti_else.44578:
+bgti_cont.32552:
+	j	bgti_cont.32524
+bgti_else.32549:
 	addi	%a0, %a0, -10
-bgti_cont.44579:
-	j	bgti_cont.44553
-bgti_else.44576:
-bgti_cont.44577:
-	j	bgti_cont.44553
-bgti_else.44574:
+bgti_cont.32550:
+	j	bgti_cont.32524
+bgti_else.32547:
+bgti_cont.32548:
+	j	bgti_cont.32524
+bgti_else.32545:
 	addi	%a0, %a0, -30
-bgti_cont.44575:
-	j	bgti_cont.44553
-bgti_else.44572:
+bgti_cont.32546:
+	j	bgti_cont.32524
+bgti_else.32543:
 	addi	%a0, %a0, -20
-bgti_cont.44573:
-	j	bgti_cont.44553
-bgti_else.44570:
+bgti_cont.32544:
+	j	bgti_cont.32524
+bgti_else.32541:
 	addi	%a0, %a0, -10
-bgti_cont.44571:
-	j	bgti_cont.44553
-bgti_else.44568:
-bgti_cont.44569:
-	j	bgti_cont.44553
-bgti_else.44566:
+bgti_cont.32542:
+	j	bgti_cont.32524
+bgti_else.32539:
+bgti_cont.32540:
+	j	bgti_cont.32524
+bgti_else.32537:
 	addi	%a0, %a0, -30
-bgti_cont.44567:
-	j	bgti_cont.44553
-bgti_else.44564:
+bgti_cont.32538:
+	j	bgti_cont.32524
+bgti_else.32535:
 	addi	%a0, %a0, -20
-bgti_cont.44565:
-	j	bgti_cont.44553
-bgti_else.44562:
+bgti_cont.32536:
+	j	bgti_cont.32524
+bgti_else.32533:
 	addi	%a0, %a0, -10
-bgti_cont.44563:
-	j	bgti_cont.44553
-bgti_else.44560:
-bgti_cont.44561:
-	j	bgti_cont.44553
-bgti_else.44558:
+bgti_cont.32534:
+	j	bgti_cont.32524
+bgti_else.32531:
+bgti_cont.32532:
+	j	bgti_cont.32524
+bgti_else.32529:
 	addi	%a0, %a0, -30
-bgti_cont.44559:
-	j	bgti_cont.44553
-bgti_else.44556:
+bgti_cont.32530:
+	j	bgti_cont.32524
+bgti_else.32527:
 	addi	%a0, %a0, -20
-bgti_cont.44557:
-	j	bgti_cont.44553
-bgti_else.44554:
+bgti_cont.32528:
+	j	bgti_cont.32524
+bgti_else.32525:
 	addi	%a0, %a0, -10
-bgti_cont.44555:
-	j	bgti_cont.44553
-bgti_else.44552:
-bgti_cont.44553:
+bgti_cont.32526:
+	j	bgti_cont.32524
+bgti_else.32523:
+bgti_cont.32524:
 	addi	%v0, %a0, 48
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, 11
 	jal	min_caml_print_char
-	addi	%sp, %sp, -14
+	addi	%sp, %sp, -11
 	addi	%v0, %a2, 48
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, 11
 	jal	min_caml_print_char
-	addi	%sp, %sp, -14
+	addi	%sp, %sp, -11
 	addi	%v0, %a1, 48
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, 11
 	jal	min_caml_print_char
-	addi	%sp, %sp, -14
-bgt_cont.44551:
-bgt_cont.44517:
-	addi	%v0, %t2, 0
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, -11
+bgt_cont.32522:
+bgt_cont.32488:
+	addi	%v0, %t1, 0
+	addi	%sp, %sp, 11
 	jal	min_caml_print_char
-	addi	%sp, %sp, -14
+	addi	%sp, %sp, -11
 	flw	%f0, 153(%zero)
 	ftoi	%a1, %f0
 	addi	%at, %zero, 255
-	blt	%at, %a1, bgt_else.44584
-	blti	%a1, 0, bgti_else.44586
-	j	bgt_cont.44585
-bgti_else.44586:
+	blt	%at, %a1, bgt_else.32555
+	blti	%a1, 0, bgti_else.32557
+	j	bgt_cont.32556
+bgti_else.32557:
 	add	%a1, %zero, %zero
-bgti_cont.44587:
-	j	bgt_cont.44585
-bgt_else.44584:
+bgti_cont.32558:
+	j	bgt_cont.32556
+bgt_else.32555:
 	addi	%a1, %zero, 255
-bgt_cont.44585:
+bgt_cont.32556:
 	addi	%v1, %zero, 0
 	addi	%v0, %a1, 0
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, 11
 	jal	print_int_sub1.2641
-	addi	%sp, %sp, -14
+	addi	%sp, %sp, -11
 	addi	%a2, %v0, 0
-	blti	%a1, 10, bgti_else.44588
-	blti	%a1, 20, bgti_else.44590
-	blti	%a1, 30, bgti_else.44592
-	blti	%a1, 40, bgti_else.44594
+	blti	%a1, 10, bgti_else.32559
+	blti	%a1, 20, bgti_else.32561
+	blti	%a1, 30, bgti_else.32563
+	blti	%a1, 40, bgti_else.32565
 	addi	%a1, %a1, -40
-	blti	%a1, 10, bgti_cont.44589
-	blti	%a1, 20, bgti_else.44598
-	blti	%a1, 30, bgti_else.44600
-	blti	%a1, 40, bgti_else.44602
+	blti	%a1, 10, bgti_cont.32560
+	blti	%a1, 20, bgti_else.32569
+	blti	%a1, 30, bgti_else.32571
+	blti	%a1, 40, bgti_else.32573
 	addi	%a1, %a1, -40
-	blti	%a1, 10, bgti_cont.44589
-	blti	%a1, 20, bgti_else.44606
-	blti	%a1, 30, bgti_else.44608
-	blti	%a1, 40, bgti_else.44610
+	blti	%a1, 10, bgti_cont.32560
+	blti	%a1, 20, bgti_else.32577
+	blti	%a1, 30, bgti_else.32579
+	blti	%a1, 40, bgti_else.32581
 	addi	%a1, %a1, -40
-	blti	%a1, 10, bgti_cont.44589
-	blti	%a1, 20, bgti_else.44614
-	blti	%a1, 30, bgti_else.44616
-	blti	%a1, 40, bgti_else.44618
+	blti	%a1, 10, bgti_cont.32560
+	blti	%a1, 20, bgti_else.32585
+	blti	%a1, 30, bgti_else.32587
+	blti	%a1, 40, bgti_else.32589
 	addi	%v0, %a1, -40
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, 11
 	jal	print_int_sub2.2644
-	addi	%sp, %sp, -14
+	addi	%sp, %sp, -11
 	addi	%a1, %v0, 0
-	j	bgti_cont.44589
-bgti_else.44618:
+	j	bgti_cont.32560
+bgti_else.32589:
 	addi	%a1, %a1, -30
-bgti_cont.44619:
-	j	bgti_cont.44589
-bgti_else.44616:
+bgti_cont.32590:
+	j	bgti_cont.32560
+bgti_else.32587:
 	addi	%a1, %a1, -20
-bgti_cont.44617:
-	j	bgti_cont.44589
-bgti_else.44614:
+bgti_cont.32588:
+	j	bgti_cont.32560
+bgti_else.32585:
 	addi	%a1, %a1, -10
-bgti_cont.44615:
-	j	bgti_cont.44589
-bgti_else.44612:
-bgti_cont.44613:
-	j	bgti_cont.44589
-bgti_else.44610:
+bgti_cont.32586:
+	j	bgti_cont.32560
+bgti_else.32583:
+bgti_cont.32584:
+	j	bgti_cont.32560
+bgti_else.32581:
 	addi	%a1, %a1, -30
-bgti_cont.44611:
-	j	bgti_cont.44589
-bgti_else.44608:
+bgti_cont.32582:
+	j	bgti_cont.32560
+bgti_else.32579:
 	addi	%a1, %a1, -20
-bgti_cont.44609:
-	j	bgti_cont.44589
-bgti_else.44606:
+bgti_cont.32580:
+	j	bgti_cont.32560
+bgti_else.32577:
 	addi	%a1, %a1, -10
-bgti_cont.44607:
-	j	bgti_cont.44589
-bgti_else.44604:
-bgti_cont.44605:
-	j	bgti_cont.44589
-bgti_else.44602:
+bgti_cont.32578:
+	j	bgti_cont.32560
+bgti_else.32575:
+bgti_cont.32576:
+	j	bgti_cont.32560
+bgti_else.32573:
 	addi	%a1, %a1, -30
-bgti_cont.44603:
-	j	bgti_cont.44589
-bgti_else.44600:
+bgti_cont.32574:
+	j	bgti_cont.32560
+bgti_else.32571:
 	addi	%a1, %a1, -20
-bgti_cont.44601:
-	j	bgti_cont.44589
-bgti_else.44598:
+bgti_cont.32572:
+	j	bgti_cont.32560
+bgti_else.32569:
 	addi	%a1, %a1, -10
-bgti_cont.44599:
-	j	bgti_cont.44589
-bgti_else.44596:
-bgti_cont.44597:
-	j	bgti_cont.44589
-bgti_else.44594:
+bgti_cont.32570:
+	j	bgti_cont.32560
+bgti_else.32567:
+bgti_cont.32568:
+	j	bgti_cont.32560
+bgti_else.32565:
 	addi	%a1, %a1, -30
-bgti_cont.44595:
-	j	bgti_cont.44589
-bgti_else.44592:
+bgti_cont.32566:
+	j	bgti_cont.32560
+bgti_else.32563:
 	addi	%a1, %a1, -20
-bgti_cont.44593:
-	j	bgti_cont.44589
-bgti_else.44590:
+bgti_cont.32564:
+	j	bgti_cont.32560
+bgti_else.32561:
 	addi	%a1, %a1, -10
-bgti_cont.44591:
-	j	bgti_cont.44589
-bgti_else.44588:
-bgti_cont.44589:
-	blt	%zero, %a2, bgt_else.44620
+bgti_cont.32562:
+	j	bgti_cont.32560
+bgti_else.32559:
+bgti_cont.32560:
+	blt	%zero, %a2, bgt_else.32591
 	addi	%v0, %a1, 48
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, 11
 	jal	min_caml_print_char
-	addi	%sp, %sp, -14
-	j	bgt_cont.44621
-bgt_else.44620:
+	addi	%sp, %sp, -11
+	j	bgt_cont.32592
+bgt_else.32591:
 	addi	%v1, %zero, 0
 	addi	%v0, %a2, 0
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, 11
 	jal	print_int_sub1.2641
-	addi	%sp, %sp, -14
+	addi	%sp, %sp, -11
 	addi	%a0, %v0, 0
-	blti	%a2, 10, bgti_else.44622
-	blti	%a2, 20, bgti_else.44624
-	blti	%a2, 30, bgti_else.44626
-	blti	%a2, 40, bgti_else.44628
+	blti	%a2, 10, bgti_else.32593
+	blti	%a2, 20, bgti_else.32595
+	blti	%a2, 30, bgti_else.32597
+	blti	%a2, 40, bgti_else.32599
 	addi	%a2, %a2, -40
-	blti	%a2, 10, bgti_cont.44623
-	blti	%a2, 20, bgti_else.44632
-	blti	%a2, 30, bgti_else.44634
-	blti	%a2, 40, bgti_else.44636
+	blti	%a2, 10, bgti_cont.32594
+	blti	%a2, 20, bgti_else.32603
+	blti	%a2, 30, bgti_else.32605
+	blti	%a2, 40, bgti_else.32607
 	addi	%a2, %a2, -40
-	blti	%a2, 10, bgti_cont.44623
-	blti	%a2, 20, bgti_else.44640
-	blti	%a2, 30, bgti_else.44642
-	blti	%a2, 40, bgti_else.44644
+	blti	%a2, 10, bgti_cont.32594
+	blti	%a2, 20, bgti_else.32611
+	blti	%a2, 30, bgti_else.32613
+	blti	%a2, 40, bgti_else.32615
 	addi	%a2, %a2, -40
-	blti	%a2, 10, bgti_cont.44623
-	blti	%a2, 20, bgti_else.44648
-	blti	%a2, 30, bgti_else.44650
-	blti	%a2, 40, bgti_else.44652
+	blti	%a2, 10, bgti_cont.32594
+	blti	%a2, 20, bgti_else.32619
+	blti	%a2, 30, bgti_else.32621
+	blti	%a2, 40, bgti_else.32623
 	addi	%v0, %a2, -40
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, 11
 	jal	print_int_sub2.2644
-	addi	%sp, %sp, -14
+	addi	%sp, %sp, -11
 	addi	%a2, %v0, 0
-	j	bgti_cont.44623
-bgti_else.44652:
+	j	bgti_cont.32594
+bgti_else.32623:
 	addi	%a2, %a2, -30
-bgti_cont.44653:
-	j	bgti_cont.44623
-bgti_else.44650:
+bgti_cont.32624:
+	j	bgti_cont.32594
+bgti_else.32621:
 	addi	%a2, %a2, -20
-bgti_cont.44651:
-	j	bgti_cont.44623
-bgti_else.44648:
+bgti_cont.32622:
+	j	bgti_cont.32594
+bgti_else.32619:
 	addi	%a2, %a2, -10
-bgti_cont.44649:
-	j	bgti_cont.44623
-bgti_else.44646:
-bgti_cont.44647:
-	j	bgti_cont.44623
-bgti_else.44644:
+bgti_cont.32620:
+	j	bgti_cont.32594
+bgti_else.32617:
+bgti_cont.32618:
+	j	bgti_cont.32594
+bgti_else.32615:
 	addi	%a2, %a2, -30
-bgti_cont.44645:
-	j	bgti_cont.44623
-bgti_else.44642:
+bgti_cont.32616:
+	j	bgti_cont.32594
+bgti_else.32613:
 	addi	%a2, %a2, -20
-bgti_cont.44643:
-	j	bgti_cont.44623
-bgti_else.44640:
+bgti_cont.32614:
+	j	bgti_cont.32594
+bgti_else.32611:
 	addi	%a2, %a2, -10
-bgti_cont.44641:
-	j	bgti_cont.44623
-bgti_else.44638:
-bgti_cont.44639:
-	j	bgti_cont.44623
-bgti_else.44636:
+bgti_cont.32612:
+	j	bgti_cont.32594
+bgti_else.32609:
+bgti_cont.32610:
+	j	bgti_cont.32594
+bgti_else.32607:
 	addi	%a2, %a2, -30
-bgti_cont.44637:
-	j	bgti_cont.44623
-bgti_else.44634:
+bgti_cont.32608:
+	j	bgti_cont.32594
+bgti_else.32605:
 	addi	%a2, %a2, -20
-bgti_cont.44635:
-	j	bgti_cont.44623
-bgti_else.44632:
+bgti_cont.32606:
+	j	bgti_cont.32594
+bgti_else.32603:
 	addi	%a2, %a2, -10
-bgti_cont.44633:
-	j	bgti_cont.44623
-bgti_else.44630:
-bgti_cont.44631:
-	j	bgti_cont.44623
-bgti_else.44628:
+bgti_cont.32604:
+	j	bgti_cont.32594
+bgti_else.32601:
+bgti_cont.32602:
+	j	bgti_cont.32594
+bgti_else.32599:
 	addi	%a2, %a2, -30
-bgti_cont.44629:
-	j	bgti_cont.44623
-bgti_else.44626:
+bgti_cont.32600:
+	j	bgti_cont.32594
+bgti_else.32597:
 	addi	%a2, %a2, -20
-bgti_cont.44627:
-	j	bgti_cont.44623
-bgti_else.44624:
+bgti_cont.32598:
+	j	bgti_cont.32594
+bgti_else.32595:
 	addi	%a2, %a2, -10
-bgti_cont.44625:
-	j	bgti_cont.44623
-bgti_else.44622:
-bgti_cont.44623:
-	blt	%zero, %a0, bgt_else.44654
+bgti_cont.32596:
+	j	bgti_cont.32594
+bgti_else.32593:
+bgti_cont.32594:
+	blt	%zero, %a0, bgt_else.32625
 	addi	%v0, %a2, 48
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, 11
 	jal	min_caml_print_char
-	addi	%sp, %sp, -14
+	addi	%sp, %sp, -11
 	addi	%v0, %a1, 48
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, 11
 	jal	min_caml_print_char
-	addi	%sp, %sp, -14
-	j	bgt_cont.44655
-bgt_else.44654:
-	blti	%a0, 10, bgti_else.44656
-	blti	%a0, 20, bgti_else.44658
-	blti	%a0, 30, bgti_else.44660
-	blti	%a0, 40, bgti_else.44662
+	addi	%sp, %sp, -11
+	j	bgt_cont.32626
+bgt_else.32625:
+	blti	%a0, 10, bgti_else.32627
+	blti	%a0, 20, bgti_else.32629
+	blti	%a0, 30, bgti_else.32631
+	blti	%a0, 40, bgti_else.32633
 	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_cont.44657
-	blti	%a0, 20, bgti_else.44666
-	blti	%a0, 30, bgti_else.44668
-	blti	%a0, 40, bgti_else.44670
+	blti	%a0, 10, bgti_cont.32628
+	blti	%a0, 20, bgti_else.32637
+	blti	%a0, 30, bgti_else.32639
+	blti	%a0, 40, bgti_else.32641
 	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_cont.44657
-	blti	%a0, 20, bgti_else.44674
-	blti	%a0, 30, bgti_else.44676
-	blti	%a0, 40, bgti_else.44678
+	blti	%a0, 10, bgti_cont.32628
+	blti	%a0, 20, bgti_else.32645
+	blti	%a0, 30, bgti_else.32647
+	blti	%a0, 40, bgti_else.32649
 	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_cont.44657
-	blti	%a0, 20, bgti_else.44682
-	blti	%a0, 30, bgti_else.44684
-	blti	%a0, 40, bgti_else.44686
+	blti	%a0, 10, bgti_cont.32628
+	blti	%a0, 20, bgti_else.32653
+	blti	%a0, 30, bgti_else.32655
+	blti	%a0, 40, bgti_else.32657
 	addi	%v0, %a0, -40
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, 11
 	jal	print_int_sub2.2644
-	addi	%sp, %sp, -14
+	addi	%sp, %sp, -11
 	addi	%a0, %v0, 0
-	j	bgti_cont.44657
-bgti_else.44686:
+	j	bgti_cont.32628
+bgti_else.32657:
 	addi	%a0, %a0, -30
-bgti_cont.44687:
-	j	bgti_cont.44657
-bgti_else.44684:
+bgti_cont.32658:
+	j	bgti_cont.32628
+bgti_else.32655:
 	addi	%a0, %a0, -20
-bgti_cont.44685:
-	j	bgti_cont.44657
-bgti_else.44682:
+bgti_cont.32656:
+	j	bgti_cont.32628
+bgti_else.32653:
 	addi	%a0, %a0, -10
-bgti_cont.44683:
-	j	bgti_cont.44657
-bgti_else.44680:
-bgti_cont.44681:
-	j	bgti_cont.44657
-bgti_else.44678:
+bgti_cont.32654:
+	j	bgti_cont.32628
+bgti_else.32651:
+bgti_cont.32652:
+	j	bgti_cont.32628
+bgti_else.32649:
 	addi	%a0, %a0, -30
-bgti_cont.44679:
-	j	bgti_cont.44657
-bgti_else.44676:
+bgti_cont.32650:
+	j	bgti_cont.32628
+bgti_else.32647:
 	addi	%a0, %a0, -20
-bgti_cont.44677:
-	j	bgti_cont.44657
-bgti_else.44674:
+bgti_cont.32648:
+	j	bgti_cont.32628
+bgti_else.32645:
 	addi	%a0, %a0, -10
-bgti_cont.44675:
-	j	bgti_cont.44657
-bgti_else.44672:
-bgti_cont.44673:
-	j	bgti_cont.44657
-bgti_else.44670:
+bgti_cont.32646:
+	j	bgti_cont.32628
+bgti_else.32643:
+bgti_cont.32644:
+	j	bgti_cont.32628
+bgti_else.32641:
 	addi	%a0, %a0, -30
-bgti_cont.44671:
-	j	bgti_cont.44657
-bgti_else.44668:
+bgti_cont.32642:
+	j	bgti_cont.32628
+bgti_else.32639:
 	addi	%a0, %a0, -20
-bgti_cont.44669:
-	j	bgti_cont.44657
-bgti_else.44666:
+bgti_cont.32640:
+	j	bgti_cont.32628
+bgti_else.32637:
 	addi	%a0, %a0, -10
-bgti_cont.44667:
-	j	bgti_cont.44657
-bgti_else.44664:
-bgti_cont.44665:
-	j	bgti_cont.44657
-bgti_else.44662:
+bgti_cont.32638:
+	j	bgti_cont.32628
+bgti_else.32635:
+bgti_cont.32636:
+	j	bgti_cont.32628
+bgti_else.32633:
 	addi	%a0, %a0, -30
-bgti_cont.44663:
-	j	bgti_cont.44657
-bgti_else.44660:
+bgti_cont.32634:
+	j	bgti_cont.32628
+bgti_else.32631:
 	addi	%a0, %a0, -20
-bgti_cont.44661:
-	j	bgti_cont.44657
-bgti_else.44658:
+bgti_cont.32632:
+	j	bgti_cont.32628
+bgti_else.32629:
 	addi	%a0, %a0, -10
-bgti_cont.44659:
-	j	bgti_cont.44657
-bgti_else.44656:
-bgti_cont.44657:
+bgti_cont.32630:
+	j	bgti_cont.32628
+bgti_else.32627:
+bgti_cont.32628:
 	addi	%v0, %a0, 48
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, 11
 	jal	min_caml_print_char
-	addi	%sp, %sp, -14
+	addi	%sp, %sp, -11
 	addi	%v0, %a2, 48
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, 11
 	jal	min_caml_print_char
-	addi	%sp, %sp, -14
+	addi	%sp, %sp, -11
 	addi	%v0, %a1, 48
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, 11
 	jal	min_caml_print_char
-	addi	%sp, %sp, -14
-bgt_cont.44655:
-bgt_cont.44621:
-	addi	%v0, %t1, 0
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, -11
+bgt_cont.32626:
+bgt_cont.32592:
+	addi	%v0, %zero, 10
+	addi	%sp, %sp, 11
 	jal	min_caml_print_char
-	addi	%sp, %sp, -14
+	addi	%sp, %sp, -11
 	lw	%a0, 0(%sp)
-	addi	%t3, %a0, 1
-	blt	%t3, %t0, bgt_else.44688
-	lw	%t4, 5(%sp)
-	lw	%t3, 6(%sp)
-	lw	%t2, 7(%sp)
-	lw	%t1, 8(%sp)
-	lw	%t0, 9(%sp)
-	lw	%ra, 10(%sp)
+	addi	%t2, %a0, 1
+	blt	%t2, %t0, bgt_else.32659
+	lw	%t2, 5(%sp)
+	lw	%t1, 6(%sp)
+	lw	%t0, 7(%sp)
+	lw	%ra, 8(%sp)
 	jr	%ra
-bgt_else.44688:
+bgt_else.32659:
 	lw	%a0, 3(%sp)
-	add	%at, %a0, %t3
+	add	%at, %a0, %t2
 	lw	%v0, 0(%at)
 	lw	%a0, 0(%v0)
 	flw	%f0, 0(%a0)
@@ -15399,1186 +14334,113 @@ bgt_else.44688:
 	fsw	%f0, 152(%zero)
 	flw	%f0, 2(%a0)
 	fsw	%f0, 153(%zero)
-	lw	%a1, 11(%sp)
-	lw	%a0, 12(%sp)
-	blt	%a0, %a1, bgt_else.44690
+	lw	%a1, 9(%sp)
+	lw	%a0, 10(%sp)
+	blt	%a0, %a1, bgt_else.32661
 	add	%a0, %zero, %zero
-	j	bgt_cont.44691
-bgt_else.44690:
+	j	bgt_cont.32662
+bgt_else.32661:
 	lw	%a0, 1(%sp)
-	blt	%zero, %a0, bgt_else.44692
+	blt	%zero, %a0, bgt_else.32663
 	add	%a0, %zero, %zero
-	j	bgt_cont.44693
-bgt_else.44692:
-	addi	%a0, %t3, 1
-	blt	%a0, %t0, bgt_else.44694
+	j	bgt_cont.32664
+bgt_else.32663:
+	addi	%a0, %t2, 1
+	blt	%a0, %t0, bgt_else.32665
 	add	%a0, %zero, %zero
-	j	bgt_cont.44695
-bgt_else.44694:
-	blt	%zero, %t3, bgt_else.44696
+	j	bgt_cont.32666
+bgt_else.32665:
+	blt	%zero, %t2, bgt_else.32667
 	add	%a0, %zero, %zero
-	j	bgt_cont.44697
-bgt_else.44696:
+	j	bgt_cont.32668
+bgt_else.32667:
 	add	%a0, %zero, %k1
-bgt_cont.44697:
-bgt_cont.44695:
-bgt_cont.44693:
-bgt_cont.44691:
-	beqi	%a0, 0, bnei_else.44698
+bgt_cont.32668:
+bgt_cont.32666:
+bgt_cont.32664:
+bgt_cont.32662:
+	beqi	%a0, 0, bnei_else.32669
 	lw	%a2, 4(%sp)
 	lw	%a1, 3(%sp)
 	lw	%a0, 2(%sp)
 	lw	%v1, 1(%sp)
 	addi	%a3, %zero, 0
-	addi	%v0, %t3, 0
-	addi	%sp, %sp, 14
+	addi	%v0, %t2, 0
+	addi	%sp, %sp, 11
 	jal	try_exploit_neighbors.3030
-	addi	%sp, %sp, -14
-	j	bnei_cont.44699
-bnei_else.44698:
+	addi	%sp, %sp, -11
+	j	bnei_cont.32670
+bnei_else.32669:
 	addi	%v1, %zero, 0
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, 11
 	jal	do_without_neighbors.3014
-	addi	%sp, %sp, -14
-bnei_cont.44699:
+	addi	%sp, %sp, -11
+bnei_cont.32670:
 	flw	%f0, 151(%zero)
-	ftoi	%a1, %f0
+	ftoi	%v0, %f0
 	addi	%at, %zero, 255
-	blt	%at, %a1, bgt_else.44700
-	blti	%a1, 0, bgti_else.44702
-	j	bgt_cont.44701
-bgti_else.44702:
-	add	%a1, %zero, %zero
-bgti_cont.44703:
-	j	bgt_cont.44701
-bgt_else.44700:
-	addi	%a1, %zero, 255
-bgt_cont.44701:
-	blti	%a1, 10, bgti_else.44704
-	blti	%a1, 20, bgti_else.44706
-	blti	%a1, 30, bgti_else.44708
-	blti	%a1, 40, bgti_else.44710
-	addi	%a0, %a1, -40
-	blti	%a0, 10, bgti_else.44712
-	blti	%a0, 20, bgti_else.44714
-	blti	%a0, 30, bgti_else.44716
-	blti	%a0, 40, bgti_else.44718
-	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_else.44720
-	blti	%a0, 20, bgti_else.44722
-	blti	%a0, 30, bgti_else.44724
-	blti	%a0, 40, bgti_else.44726
-	addi	%v0, %a0, -40
-	addi	%v1, %zero, 12
-	addi	%sp, %sp, 14
-	jal	print_int_sub1.2641
-	addi	%sp, %sp, -14
-	addi	%a2, %v0, 0
-	j	bgti_cont.44705
-bgti_else.44726:
-	addi	%a2, %zero, 11
-bgti_cont.44727:
-	j	bgti_cont.44705
-bgti_else.44724:
-	addi	%a2, %zero, 10
-bgti_cont.44725:
-	j	bgti_cont.44705
-bgti_else.44722:
-	addi	%a2, %zero, 9
-bgti_cont.44723:
-	j	bgti_cont.44705
-bgti_else.44720:
-	addi	%a2, %zero, 8
-bgti_cont.44721:
-	j	bgti_cont.44705
-bgti_else.44718:
-	addi	%a2, %zero, 7
-bgti_cont.44719:
-	j	bgti_cont.44705
-bgti_else.44716:
-	addi	%a2, %zero, 6
-bgti_cont.44717:
-	j	bgti_cont.44705
-bgti_else.44714:
-	addi	%a2, %zero, 5
-bgti_cont.44715:
-	j	bgti_cont.44705
-bgti_else.44712:
-	addi	%a2, %zero, 4
-bgti_cont.44713:
-	j	bgti_cont.44705
-bgti_else.44710:
-	addi	%a2, %zero, 3
-bgti_cont.44711:
-	j	bgti_cont.44705
-bgti_else.44708:
-	addi	%a2, %zero, 2
-bgti_cont.44709:
-	j	bgti_cont.44705
-bgti_else.44706:
-	add	%a2, %zero, %k1
-bgti_cont.44707:
-	j	bgti_cont.44705
-bgti_else.44704:
-	add	%a2, %zero, %zero
-bgti_cont.44705:
-	blti	%a1, 10, bgti_else.44728
-	blti	%a1, 20, bgti_else.44730
-	blti	%a1, 30, bgti_else.44732
-	blti	%a1, 40, bgti_else.44734
-	addi	%a1, %a1, -40
-	blti	%a1, 10, bgti_cont.44729
-	blti	%a1, 20, bgti_else.44738
-	blti	%a1, 30, bgti_else.44740
-	blti	%a1, 40, bgti_else.44742
-	addi	%a1, %a1, -40
-	blti	%a1, 10, bgti_cont.44729
-	blti	%a1, 20, bgti_else.44746
-	blti	%a1, 30, bgti_else.44748
-	blti	%a1, 40, bgti_else.44750
-	addi	%v0, %a1, -40
-	addi	%sp, %sp, 14
-	jal	print_int_sub2.2644
-	addi	%sp, %sp, -14
-	addi	%a1, %v0, 0
-	j	bgti_cont.44729
-bgti_else.44750:
-	addi	%a1, %a1, -30
-bgti_cont.44751:
-	j	bgti_cont.44729
-bgti_else.44748:
-	addi	%a1, %a1, -20
-bgti_cont.44749:
-	j	bgti_cont.44729
-bgti_else.44746:
-	addi	%a1, %a1, -10
-bgti_cont.44747:
-	j	bgti_cont.44729
-bgti_else.44744:
-bgti_cont.44745:
-	j	bgti_cont.44729
-bgti_else.44742:
-	addi	%a1, %a1, -30
-bgti_cont.44743:
-	j	bgti_cont.44729
-bgti_else.44740:
-	addi	%a1, %a1, -20
-bgti_cont.44741:
-	j	bgti_cont.44729
-bgti_else.44738:
-	addi	%a1, %a1, -10
-bgti_cont.44739:
-	j	bgti_cont.44729
-bgti_else.44736:
-bgti_cont.44737:
-	j	bgti_cont.44729
-bgti_else.44734:
-	addi	%a1, %a1, -30
-bgti_cont.44735:
-	j	bgti_cont.44729
-bgti_else.44732:
-	addi	%a1, %a1, -20
-bgti_cont.44733:
-	j	bgti_cont.44729
-bgti_else.44730:
-	addi	%a1, %a1, -10
-bgti_cont.44731:
-	j	bgti_cont.44729
-bgti_else.44728:
-bgti_cont.44729:
-	blt	%zero, %a2, bgt_else.44752
-	addi	%v0, %a1, 48
-	addi	%sp, %sp, 14
-	jal	min_caml_print_char
-	addi	%sp, %sp, -14
-	j	bgt_cont.44753
-bgt_else.44752:
-	blti	%a2, 10, bgti_else.44754
-	blti	%a2, 20, bgti_else.44756
-	blti	%a2, 30, bgti_else.44758
-	blti	%a2, 40, bgti_else.44760
-	addi	%a0, %a2, -40
-	blti	%a0, 10, bgti_else.44762
-	blti	%a0, 20, bgti_else.44764
-	blti	%a0, 30, bgti_else.44766
-	blti	%a0, 40, bgti_else.44768
-	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_else.44770
-	blti	%a0, 20, bgti_else.44772
-	blti	%a0, 30, bgti_else.44774
-	blti	%a0, 40, bgti_else.44776
-	addi	%v0, %a0, -40
-	addi	%v1, %zero, 12
-	addi	%sp, %sp, 14
-	jal	print_int_sub1.2641
-	addi	%sp, %sp, -14
-	addi	%a0, %v0, 0
-	j	bgti_cont.44755
-bgti_else.44776:
-	addi	%a0, %zero, 11
-bgti_cont.44777:
-	j	bgti_cont.44755
-bgti_else.44774:
-	addi	%a0, %zero, 10
-bgti_cont.44775:
-	j	bgti_cont.44755
-bgti_else.44772:
-	addi	%a0, %zero, 9
-bgti_cont.44773:
-	j	bgti_cont.44755
-bgti_else.44770:
-	addi	%a0, %zero, 8
-bgti_cont.44771:
-	j	bgti_cont.44755
-bgti_else.44768:
-	addi	%a0, %zero, 7
-bgti_cont.44769:
-	j	bgti_cont.44755
-bgti_else.44766:
-	addi	%a0, %zero, 6
-bgti_cont.44767:
-	j	bgti_cont.44755
-bgti_else.44764:
-	addi	%a0, %zero, 5
-bgti_cont.44765:
-	j	bgti_cont.44755
-bgti_else.44762:
-	addi	%a0, %zero, 4
-bgti_cont.44763:
-	j	bgti_cont.44755
-bgti_else.44760:
-	addi	%a0, %zero, 3
-bgti_cont.44761:
-	j	bgti_cont.44755
-bgti_else.44758:
-	addi	%a0, %zero, 2
-bgti_cont.44759:
-	j	bgti_cont.44755
-bgti_else.44756:
-	add	%a0, %zero, %k1
-bgti_cont.44757:
-	j	bgti_cont.44755
-bgti_else.44754:
-	add	%a0, %zero, %zero
-bgti_cont.44755:
-	blti	%a2, 10, bgti_else.44778
-	blti	%a2, 20, bgti_else.44780
-	blti	%a2, 30, bgti_else.44782
-	blti	%a2, 40, bgti_else.44784
-	addi	%a2, %a2, -40
-	blti	%a2, 10, bgti_cont.44779
-	blti	%a2, 20, bgti_else.44788
-	blti	%a2, 30, bgti_else.44790
-	blti	%a2, 40, bgti_else.44792
-	addi	%a2, %a2, -40
-	blti	%a2, 10, bgti_cont.44779
-	blti	%a2, 20, bgti_else.44796
-	blti	%a2, 30, bgti_else.44798
-	blti	%a2, 40, bgti_else.44800
-	addi	%v0, %a2, -40
-	addi	%sp, %sp, 14
-	jal	print_int_sub2.2644
-	addi	%sp, %sp, -14
-	addi	%a2, %v0, 0
-	j	bgti_cont.44779
-bgti_else.44800:
-	addi	%a2, %a2, -30
-bgti_cont.44801:
-	j	bgti_cont.44779
-bgti_else.44798:
-	addi	%a2, %a2, -20
-bgti_cont.44799:
-	j	bgti_cont.44779
-bgti_else.44796:
-	addi	%a2, %a2, -10
-bgti_cont.44797:
-	j	bgti_cont.44779
-bgti_else.44794:
-bgti_cont.44795:
-	j	bgti_cont.44779
-bgti_else.44792:
-	addi	%a2, %a2, -30
-bgti_cont.44793:
-	j	bgti_cont.44779
-bgti_else.44790:
-	addi	%a2, %a2, -20
-bgti_cont.44791:
-	j	bgti_cont.44779
-bgti_else.44788:
-	addi	%a2, %a2, -10
-bgti_cont.44789:
-	j	bgti_cont.44779
-bgti_else.44786:
-bgti_cont.44787:
-	j	bgti_cont.44779
-bgti_else.44784:
-	addi	%a2, %a2, -30
-bgti_cont.44785:
-	j	bgti_cont.44779
-bgti_else.44782:
-	addi	%a2, %a2, -20
-bgti_cont.44783:
-	j	bgti_cont.44779
-bgti_else.44780:
-	addi	%a2, %a2, -10
-bgti_cont.44781:
-	j	bgti_cont.44779
-bgti_else.44778:
-bgti_cont.44779:
-	blt	%zero, %a0, bgt_else.44802
-	addi	%v0, %a2, 48
-	addi	%sp, %sp, 14
-	jal	min_caml_print_char
-	addi	%sp, %sp, -14
-	addi	%v0, %a1, 48
-	addi	%sp, %sp, 14
-	jal	min_caml_print_char
-	addi	%sp, %sp, -14
-	j	bgt_cont.44803
-bgt_else.44802:
-	blti	%a0, 10, bgti_else.44804
-	blti	%a0, 20, bgti_else.44806
-	blti	%a0, 30, bgti_else.44808
-	blti	%a0, 40, bgti_else.44810
-	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_cont.44805
-	blti	%a0, 20, bgti_else.44814
-	blti	%a0, 30, bgti_else.44816
-	blti	%a0, 40, bgti_else.44818
-	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_cont.44805
-	blti	%a0, 20, bgti_else.44822
-	blti	%a0, 30, bgti_else.44824
-	blti	%a0, 40, bgti_else.44826
-	addi	%v0, %a0, -40
-	addi	%sp, %sp, 14
-	jal	print_int_sub2.2644
-	addi	%sp, %sp, -14
-	addi	%a0, %v0, 0
-	j	bgti_cont.44805
-bgti_else.44826:
-	addi	%a0, %a0, -30
-bgti_cont.44827:
-	j	bgti_cont.44805
-bgti_else.44824:
-	addi	%a0, %a0, -20
-bgti_cont.44825:
-	j	bgti_cont.44805
-bgti_else.44822:
-	addi	%a0, %a0, -10
-bgti_cont.44823:
-	j	bgti_cont.44805
-bgti_else.44820:
-bgti_cont.44821:
-	j	bgti_cont.44805
-bgti_else.44818:
-	addi	%a0, %a0, -30
-bgti_cont.44819:
-	j	bgti_cont.44805
-bgti_else.44816:
-	addi	%a0, %a0, -20
-bgti_cont.44817:
-	j	bgti_cont.44805
-bgti_else.44814:
-	addi	%a0, %a0, -10
-bgti_cont.44815:
-	j	bgti_cont.44805
-bgti_else.44812:
-bgti_cont.44813:
-	j	bgti_cont.44805
-bgti_else.44810:
-	addi	%a0, %a0, -30
-bgti_cont.44811:
-	j	bgti_cont.44805
-bgti_else.44808:
-	addi	%a0, %a0, -20
-bgti_cont.44809:
-	j	bgti_cont.44805
-bgti_else.44806:
-	addi	%a0, %a0, -10
-bgti_cont.44807:
-	j	bgti_cont.44805
-bgti_else.44804:
-bgti_cont.44805:
-	addi	%v0, %a0, 48
-	addi	%sp, %sp, 14
-	jal	min_caml_print_char
-	addi	%sp, %sp, -14
-	addi	%v0, %a2, 48
-	addi	%sp, %sp, 14
-	jal	min_caml_print_char
-	addi	%sp, %sp, -14
-	addi	%v0, %a1, 48
-	addi	%sp, %sp, 14
-	jal	min_caml_print_char
-	addi	%sp, %sp, -14
-bgt_cont.44803:
-bgt_cont.44753:
-	addi	%v0, %t2, 0
-	addi	%sp, %sp, 14
-	jal	min_caml_print_char
-	addi	%sp, %sp, -14
-	flw	%f0, 152(%zero)
-	ftoi	%a1, %f0
-	addi	%at, %zero, 255
-	blt	%at, %a1, bgt_else.44828
-	blti	%a1, 0, bgti_else.44830
-	j	bgt_cont.44829
-bgti_else.44830:
-	add	%a1, %zero, %zero
-bgti_cont.44831:
-	j	bgt_cont.44829
-bgt_else.44828:
-	addi	%a1, %zero, 255
-bgt_cont.44829:
-	blti	%a1, 10, bgti_else.44832
-	blti	%a1, 20, bgti_else.44834
-	blti	%a1, 30, bgti_else.44836
-	blti	%a1, 40, bgti_else.44838
-	addi	%a0, %a1, -40
-	blti	%a0, 10, bgti_else.44840
-	blti	%a0, 20, bgti_else.44842
-	blti	%a0, 30, bgti_else.44844
-	blti	%a0, 40, bgti_else.44846
-	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_else.44848
-	blti	%a0, 20, bgti_else.44850
-	blti	%a0, 30, bgti_else.44852
-	blti	%a0, 40, bgti_else.44854
-	addi	%v0, %a0, -40
-	addi	%v1, %zero, 12
-	addi	%sp, %sp, 14
-	jal	print_int_sub1.2641
-	addi	%sp, %sp, -14
-	addi	%a2, %v0, 0
-	j	bgti_cont.44833
-bgti_else.44854:
-	addi	%a2, %zero, 11
-bgti_cont.44855:
-	j	bgti_cont.44833
-bgti_else.44852:
-	addi	%a2, %zero, 10
-bgti_cont.44853:
-	j	bgti_cont.44833
-bgti_else.44850:
-	addi	%a2, %zero, 9
-bgti_cont.44851:
-	j	bgti_cont.44833
-bgti_else.44848:
-	addi	%a2, %zero, 8
-bgti_cont.44849:
-	j	bgti_cont.44833
-bgti_else.44846:
-	addi	%a2, %zero, 7
-bgti_cont.44847:
-	j	bgti_cont.44833
-bgti_else.44844:
-	addi	%a2, %zero, 6
-bgti_cont.44845:
-	j	bgti_cont.44833
-bgti_else.44842:
-	addi	%a2, %zero, 5
-bgti_cont.44843:
-	j	bgti_cont.44833
-bgti_else.44840:
-	addi	%a2, %zero, 4
-bgti_cont.44841:
-	j	bgti_cont.44833
-bgti_else.44838:
-	addi	%a2, %zero, 3
-bgti_cont.44839:
-	j	bgti_cont.44833
-bgti_else.44836:
-	addi	%a2, %zero, 2
-bgti_cont.44837:
-	j	bgti_cont.44833
-bgti_else.44834:
-	add	%a2, %zero, %k1
-bgti_cont.44835:
-	j	bgti_cont.44833
-bgti_else.44832:
-	add	%a2, %zero, %zero
-bgti_cont.44833:
-	blti	%a1, 10, bgti_else.44856
-	blti	%a1, 20, bgti_else.44858
-	blti	%a1, 30, bgti_else.44860
-	blti	%a1, 40, bgti_else.44862
-	addi	%a1, %a1, -40
-	blti	%a1, 10, bgti_cont.44857
-	blti	%a1, 20, bgti_else.44866
-	blti	%a1, 30, bgti_else.44868
-	blti	%a1, 40, bgti_else.44870
-	addi	%a1, %a1, -40
-	blti	%a1, 10, bgti_cont.44857
-	blti	%a1, 20, bgti_else.44874
-	blti	%a1, 30, bgti_else.44876
-	blti	%a1, 40, bgti_else.44878
-	addi	%v0, %a1, -40
-	addi	%sp, %sp, 14
-	jal	print_int_sub2.2644
-	addi	%sp, %sp, -14
-	addi	%a1, %v0, 0
-	j	bgti_cont.44857
-bgti_else.44878:
-	addi	%a1, %a1, -30
-bgti_cont.44879:
-	j	bgti_cont.44857
-bgti_else.44876:
-	addi	%a1, %a1, -20
-bgti_cont.44877:
-	j	bgti_cont.44857
-bgti_else.44874:
-	addi	%a1, %a1, -10
-bgti_cont.44875:
-	j	bgti_cont.44857
-bgti_else.44872:
-bgti_cont.44873:
-	j	bgti_cont.44857
-bgti_else.44870:
-	addi	%a1, %a1, -30
-bgti_cont.44871:
-	j	bgti_cont.44857
-bgti_else.44868:
-	addi	%a1, %a1, -20
-bgti_cont.44869:
-	j	bgti_cont.44857
-bgti_else.44866:
-	addi	%a1, %a1, -10
-bgti_cont.44867:
-	j	bgti_cont.44857
-bgti_else.44864:
-bgti_cont.44865:
-	j	bgti_cont.44857
-bgti_else.44862:
-	addi	%a1, %a1, -30
-bgti_cont.44863:
-	j	bgti_cont.44857
-bgti_else.44860:
-	addi	%a1, %a1, -20
-bgti_cont.44861:
-	j	bgti_cont.44857
-bgti_else.44858:
-	addi	%a1, %a1, -10
-bgti_cont.44859:
-	j	bgti_cont.44857
-bgti_else.44856:
-bgti_cont.44857:
-	blt	%zero, %a2, bgt_else.44880
-	addi	%v0, %a1, 48
-	addi	%sp, %sp, 14
-	jal	min_caml_print_char
-	addi	%sp, %sp, -14
-	j	bgt_cont.44881
-bgt_else.44880:
-	blti	%a2, 10, bgti_else.44882
-	blti	%a2, 20, bgti_else.44884
-	blti	%a2, 30, bgti_else.44886
-	blti	%a2, 40, bgti_else.44888
-	addi	%a0, %a2, -40
-	blti	%a0, 10, bgti_else.44890
-	blti	%a0, 20, bgti_else.44892
-	blti	%a0, 30, bgti_else.44894
-	blti	%a0, 40, bgti_else.44896
-	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_else.44898
-	blti	%a0, 20, bgti_else.44900
-	blti	%a0, 30, bgti_else.44902
-	blti	%a0, 40, bgti_else.44904
-	addi	%v0, %a0, -40
-	addi	%v1, %zero, 12
-	addi	%sp, %sp, 14
-	jal	print_int_sub1.2641
-	addi	%sp, %sp, -14
-	addi	%a0, %v0, 0
-	j	bgti_cont.44883
-bgti_else.44904:
-	addi	%a0, %zero, 11
-bgti_cont.44905:
-	j	bgti_cont.44883
-bgti_else.44902:
-	addi	%a0, %zero, 10
-bgti_cont.44903:
-	j	bgti_cont.44883
-bgti_else.44900:
-	addi	%a0, %zero, 9
-bgti_cont.44901:
-	j	bgti_cont.44883
-bgti_else.44898:
-	addi	%a0, %zero, 8
-bgti_cont.44899:
-	j	bgti_cont.44883
-bgti_else.44896:
-	addi	%a0, %zero, 7
-bgti_cont.44897:
-	j	bgti_cont.44883
-bgti_else.44894:
-	addi	%a0, %zero, 6
-bgti_cont.44895:
-	j	bgti_cont.44883
-bgti_else.44892:
-	addi	%a0, %zero, 5
-bgti_cont.44893:
-	j	bgti_cont.44883
-bgti_else.44890:
-	addi	%a0, %zero, 4
-bgti_cont.44891:
-	j	bgti_cont.44883
-bgti_else.44888:
-	addi	%a0, %zero, 3
-bgti_cont.44889:
-	j	bgti_cont.44883
-bgti_else.44886:
-	addi	%a0, %zero, 2
-bgti_cont.44887:
-	j	bgti_cont.44883
-bgti_else.44884:
-	add	%a0, %zero, %k1
-bgti_cont.44885:
-	j	bgti_cont.44883
-bgti_else.44882:
-	add	%a0, %zero, %zero
-bgti_cont.44883:
-	blti	%a2, 10, bgti_else.44906
-	blti	%a2, 20, bgti_else.44908
-	blti	%a2, 30, bgti_else.44910
-	blti	%a2, 40, bgti_else.44912
-	addi	%a2, %a2, -40
-	blti	%a2, 10, bgti_cont.44907
-	blti	%a2, 20, bgti_else.44916
-	blti	%a2, 30, bgti_else.44918
-	blti	%a2, 40, bgti_else.44920
-	addi	%a2, %a2, -40
-	blti	%a2, 10, bgti_cont.44907
-	blti	%a2, 20, bgti_else.44924
-	blti	%a2, 30, bgti_else.44926
-	blti	%a2, 40, bgti_else.44928
-	addi	%v0, %a2, -40
-	addi	%sp, %sp, 14
-	jal	print_int_sub2.2644
-	addi	%sp, %sp, -14
-	addi	%a2, %v0, 0
-	j	bgti_cont.44907
-bgti_else.44928:
-	addi	%a2, %a2, -30
-bgti_cont.44929:
-	j	bgti_cont.44907
-bgti_else.44926:
-	addi	%a2, %a2, -20
-bgti_cont.44927:
-	j	bgti_cont.44907
-bgti_else.44924:
-	addi	%a2, %a2, -10
-bgti_cont.44925:
-	j	bgti_cont.44907
-bgti_else.44922:
-bgti_cont.44923:
-	j	bgti_cont.44907
-bgti_else.44920:
-	addi	%a2, %a2, -30
-bgti_cont.44921:
-	j	bgti_cont.44907
-bgti_else.44918:
-	addi	%a2, %a2, -20
-bgti_cont.44919:
-	j	bgti_cont.44907
-bgti_else.44916:
-	addi	%a2, %a2, -10
-bgti_cont.44917:
-	j	bgti_cont.44907
-bgti_else.44914:
-bgti_cont.44915:
-	j	bgti_cont.44907
-bgti_else.44912:
-	addi	%a2, %a2, -30
-bgti_cont.44913:
-	j	bgti_cont.44907
-bgti_else.44910:
-	addi	%a2, %a2, -20
-bgti_cont.44911:
-	j	bgti_cont.44907
-bgti_else.44908:
-	addi	%a2, %a2, -10
-bgti_cont.44909:
-	j	bgti_cont.44907
-bgti_else.44906:
-bgti_cont.44907:
-	blt	%zero, %a0, bgt_else.44930
-	addi	%v0, %a2, 48
-	addi	%sp, %sp, 14
-	jal	min_caml_print_char
-	addi	%sp, %sp, -14
-	addi	%v0, %a1, 48
-	addi	%sp, %sp, 14
-	jal	min_caml_print_char
-	addi	%sp, %sp, -14
-	j	bgt_cont.44931
-bgt_else.44930:
-	blti	%a0, 10, bgti_else.44932
-	blti	%a0, 20, bgti_else.44934
-	blti	%a0, 30, bgti_else.44936
-	blti	%a0, 40, bgti_else.44938
-	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_cont.44933
-	blti	%a0, 20, bgti_else.44942
-	blti	%a0, 30, bgti_else.44944
-	blti	%a0, 40, bgti_else.44946
-	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_cont.44933
-	blti	%a0, 20, bgti_else.44950
-	blti	%a0, 30, bgti_else.44952
-	blti	%a0, 40, bgti_else.44954
-	addi	%v0, %a0, -40
-	addi	%sp, %sp, 14
-	jal	print_int_sub2.2644
-	addi	%sp, %sp, -14
-	addi	%a0, %v0, 0
-	j	bgti_cont.44933
-bgti_else.44954:
-	addi	%a0, %a0, -30
-bgti_cont.44955:
-	j	bgti_cont.44933
-bgti_else.44952:
-	addi	%a0, %a0, -20
-bgti_cont.44953:
-	j	bgti_cont.44933
-bgti_else.44950:
-	addi	%a0, %a0, -10
-bgti_cont.44951:
-	j	bgti_cont.44933
-bgti_else.44948:
-bgti_cont.44949:
-	j	bgti_cont.44933
-bgti_else.44946:
-	addi	%a0, %a0, -30
-bgti_cont.44947:
-	j	bgti_cont.44933
-bgti_else.44944:
-	addi	%a0, %a0, -20
-bgti_cont.44945:
-	j	bgti_cont.44933
-bgti_else.44942:
-	addi	%a0, %a0, -10
-bgti_cont.44943:
-	j	bgti_cont.44933
-bgti_else.44940:
-bgti_cont.44941:
-	j	bgti_cont.44933
-bgti_else.44938:
-	addi	%a0, %a0, -30
-bgti_cont.44939:
-	j	bgti_cont.44933
-bgti_else.44936:
-	addi	%a0, %a0, -20
-bgti_cont.44937:
-	j	bgti_cont.44933
-bgti_else.44934:
-	addi	%a0, %a0, -10
-bgti_cont.44935:
-	j	bgti_cont.44933
-bgti_else.44932:
-bgti_cont.44933:
-	addi	%v0, %a0, 48
-	addi	%sp, %sp, 14
-	jal	min_caml_print_char
-	addi	%sp, %sp, -14
-	addi	%v0, %a2, 48
-	addi	%sp, %sp, 14
-	jal	min_caml_print_char
-	addi	%sp, %sp, -14
-	addi	%v0, %a1, 48
-	addi	%sp, %sp, 14
-	jal	min_caml_print_char
-	addi	%sp, %sp, -14
-bgt_cont.44931:
-bgt_cont.44881:
-	addi	%v0, %t2, 0
-	addi	%sp, %sp, 14
-	jal	min_caml_print_char
-	addi	%sp, %sp, -14
-	flw	%f0, 153(%zero)
-	ftoi	%a1, %f0
-	addi	%at, %zero, 255
-	blt	%at, %a1, bgt_else.44956
-	blti	%a1, 0, bgti_else.44958
-	j	bgt_cont.44957
-bgti_else.44958:
-	add	%a1, %zero, %zero
-bgti_cont.44959:
-	j	bgt_cont.44957
-bgt_else.44956:
-	addi	%a1, %zero, 255
-bgt_cont.44957:
-	blti	%a1, 10, bgti_else.44960
-	blti	%a1, 20, bgti_else.44962
-	blti	%a1, 30, bgti_else.44964
-	blti	%a1, 40, bgti_else.44966
-	addi	%a0, %a1, -40
-	blti	%a0, 10, bgti_else.44968
-	blti	%a0, 20, bgti_else.44970
-	blti	%a0, 30, bgti_else.44972
-	blti	%a0, 40, bgti_else.44974
-	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_else.44976
-	blti	%a0, 20, bgti_else.44978
-	blti	%a0, 30, bgti_else.44980
-	blti	%a0, 40, bgti_else.44982
-	addi	%v0, %a0, -40
-	addi	%v1, %zero, 12
-	addi	%sp, %sp, 14
-	jal	print_int_sub1.2641
-	addi	%sp, %sp, -14
-	addi	%a2, %v0, 0
-	j	bgti_cont.44961
-bgti_else.44982:
-	addi	%a2, %zero, 11
-bgti_cont.44983:
-	j	bgti_cont.44961
-bgti_else.44980:
-	addi	%a2, %zero, 10
-bgti_cont.44981:
-	j	bgti_cont.44961
-bgti_else.44978:
-	addi	%a2, %zero, 9
-bgti_cont.44979:
-	j	bgti_cont.44961
-bgti_else.44976:
-	addi	%a2, %zero, 8
-bgti_cont.44977:
-	j	bgti_cont.44961
-bgti_else.44974:
-	addi	%a2, %zero, 7
-bgti_cont.44975:
-	j	bgti_cont.44961
-bgti_else.44972:
-	addi	%a2, %zero, 6
-bgti_cont.44973:
-	j	bgti_cont.44961
-bgti_else.44970:
-	addi	%a2, %zero, 5
-bgti_cont.44971:
-	j	bgti_cont.44961
-bgti_else.44968:
-	addi	%a2, %zero, 4
-bgti_cont.44969:
-	j	bgti_cont.44961
-bgti_else.44966:
-	addi	%a2, %zero, 3
-bgti_cont.44967:
-	j	bgti_cont.44961
-bgti_else.44964:
-	addi	%a2, %zero, 2
-bgti_cont.44965:
-	j	bgti_cont.44961
-bgti_else.44962:
-	add	%a2, %zero, %k1
-bgti_cont.44963:
-	j	bgti_cont.44961
-bgti_else.44960:
-	add	%a2, %zero, %zero
-bgti_cont.44961:
-	blti	%a1, 10, bgti_else.44984
-	blti	%a1, 20, bgti_else.44986
-	blti	%a1, 30, bgti_else.44988
-	blti	%a1, 40, bgti_else.44990
-	addi	%a1, %a1, -40
-	blti	%a1, 10, bgti_cont.44985
-	blti	%a1, 20, bgti_else.44994
-	blti	%a1, 30, bgti_else.44996
-	blti	%a1, 40, bgti_else.44998
-	addi	%a1, %a1, -40
-	blti	%a1, 10, bgti_cont.44985
-	blti	%a1, 20, bgti_else.45002
-	blti	%a1, 30, bgti_else.45004
-	blti	%a1, 40, bgti_else.45006
-	addi	%v0, %a1, -40
-	addi	%sp, %sp, 14
-	jal	print_int_sub2.2644
-	addi	%sp, %sp, -14
-	addi	%a1, %v0, 0
-	j	bgti_cont.44985
-bgti_else.45006:
-	addi	%a1, %a1, -30
-bgti_cont.45007:
-	j	bgti_cont.44985
-bgti_else.45004:
-	addi	%a1, %a1, -20
-bgti_cont.45005:
-	j	bgti_cont.44985
-bgti_else.45002:
-	addi	%a1, %a1, -10
-bgti_cont.45003:
-	j	bgti_cont.44985
-bgti_else.45000:
-bgti_cont.45001:
-	j	bgti_cont.44985
-bgti_else.44998:
-	addi	%a1, %a1, -30
-bgti_cont.44999:
-	j	bgti_cont.44985
-bgti_else.44996:
-	addi	%a1, %a1, -20
-bgti_cont.44997:
-	j	bgti_cont.44985
-bgti_else.44994:
-	addi	%a1, %a1, -10
-bgti_cont.44995:
-	j	bgti_cont.44985
-bgti_else.44992:
-bgti_cont.44993:
-	j	bgti_cont.44985
-bgti_else.44990:
-	addi	%a1, %a1, -30
-bgti_cont.44991:
-	j	bgti_cont.44985
-bgti_else.44988:
-	addi	%a1, %a1, -20
-bgti_cont.44989:
-	j	bgti_cont.44985
-bgti_else.44986:
-	addi	%a1, %a1, -10
-bgti_cont.44987:
-	j	bgti_cont.44985
-bgti_else.44984:
-bgti_cont.44985:
-	blt	%zero, %a2, bgt_else.45008
-	addi	%v0, %a1, 48
-	addi	%sp, %sp, 14
-	jal	min_caml_print_char
-	addi	%sp, %sp, -14
-	j	bgt_cont.45009
-bgt_else.45008:
-	blti	%a2, 10, bgti_else.45010
-	blti	%a2, 20, bgti_else.45012
-	blti	%a2, 30, bgti_else.45014
-	blti	%a2, 40, bgti_else.45016
-	addi	%a0, %a2, -40
-	blti	%a0, 10, bgti_else.45018
-	blti	%a0, 20, bgti_else.45020
-	blti	%a0, 30, bgti_else.45022
-	blti	%a0, 40, bgti_else.45024
-	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_else.45026
-	blti	%a0, 20, bgti_else.45028
-	blti	%a0, 30, bgti_else.45030
-	blti	%a0, 40, bgti_else.45032
-	addi	%v0, %a0, -40
-	addi	%v1, %zero, 12
-	addi	%sp, %sp, 14
-	jal	print_int_sub1.2641
-	addi	%sp, %sp, -14
-	addi	%a0, %v0, 0
-	j	bgti_cont.45011
-bgti_else.45032:
-	addi	%a0, %zero, 11
-bgti_cont.45033:
-	j	bgti_cont.45011
-bgti_else.45030:
-	addi	%a0, %zero, 10
-bgti_cont.45031:
-	j	bgti_cont.45011
-bgti_else.45028:
-	addi	%a0, %zero, 9
-bgti_cont.45029:
-	j	bgti_cont.45011
-bgti_else.45026:
-	addi	%a0, %zero, 8
-bgti_cont.45027:
-	j	bgti_cont.45011
-bgti_else.45024:
-	addi	%a0, %zero, 7
-bgti_cont.45025:
-	j	bgti_cont.45011
-bgti_else.45022:
-	addi	%a0, %zero, 6
-bgti_cont.45023:
-	j	bgti_cont.45011
-bgti_else.45020:
-	addi	%a0, %zero, 5
-bgti_cont.45021:
-	j	bgti_cont.45011
-bgti_else.45018:
-	addi	%a0, %zero, 4
-bgti_cont.45019:
-	j	bgti_cont.45011
-bgti_else.45016:
-	addi	%a0, %zero, 3
-bgti_cont.45017:
-	j	bgti_cont.45011
-bgti_else.45014:
-	addi	%a0, %zero, 2
-bgti_cont.45015:
-	j	bgti_cont.45011
-bgti_else.45012:
-	add	%a0, %zero, %k1
-bgti_cont.45013:
-	j	bgti_cont.45011
-bgti_else.45010:
-	add	%a0, %zero, %zero
-bgti_cont.45011:
-	blti	%a2, 10, bgti_else.45034
-	blti	%a2, 20, bgti_else.45036
-	blti	%a2, 30, bgti_else.45038
-	blti	%a2, 40, bgti_else.45040
-	addi	%a2, %a2, -40
-	blti	%a2, 10, bgti_cont.45035
-	blti	%a2, 20, bgti_else.45044
-	blti	%a2, 30, bgti_else.45046
-	blti	%a2, 40, bgti_else.45048
-	addi	%a2, %a2, -40
-	blti	%a2, 10, bgti_cont.45035
-	blti	%a2, 20, bgti_else.45052
-	blti	%a2, 30, bgti_else.45054
-	blti	%a2, 40, bgti_else.45056
-	addi	%v0, %a2, -40
-	addi	%sp, %sp, 14
-	jal	print_int_sub2.2644
-	addi	%sp, %sp, -14
-	addi	%a2, %v0, 0
-	j	bgti_cont.45035
-bgti_else.45056:
-	addi	%a2, %a2, -30
-bgti_cont.45057:
-	j	bgti_cont.45035
-bgti_else.45054:
-	addi	%a2, %a2, -20
-bgti_cont.45055:
-	j	bgti_cont.45035
-bgti_else.45052:
-	addi	%a2, %a2, -10
-bgti_cont.45053:
-	j	bgti_cont.45035
-bgti_else.45050:
-bgti_cont.45051:
-	j	bgti_cont.45035
-bgti_else.45048:
-	addi	%a2, %a2, -30
-bgti_cont.45049:
-	j	bgti_cont.45035
-bgti_else.45046:
-	addi	%a2, %a2, -20
-bgti_cont.45047:
-	j	bgti_cont.45035
-bgti_else.45044:
-	addi	%a2, %a2, -10
-bgti_cont.45045:
-	j	bgti_cont.45035
-bgti_else.45042:
-bgti_cont.45043:
-	j	bgti_cont.45035
-bgti_else.45040:
-	addi	%a2, %a2, -30
-bgti_cont.45041:
-	j	bgti_cont.45035
-bgti_else.45038:
-	addi	%a2, %a2, -20
-bgti_cont.45039:
-	j	bgti_cont.45035
-bgti_else.45036:
-	addi	%a2, %a2, -10
-bgti_cont.45037:
-	j	bgti_cont.45035
-bgti_else.45034:
-bgti_cont.45035:
-	blt	%zero, %a0, bgt_else.45058
-	addi	%v0, %a2, 48
-	addi	%sp, %sp, 14
-	jal	min_caml_print_char
-	addi	%sp, %sp, -14
-	addi	%v0, %a1, 48
-	addi	%sp, %sp, 14
-	jal	min_caml_print_char
-	addi	%sp, %sp, -14
-	j	bgt_cont.45059
-bgt_else.45058:
-	blti	%a0, 10, bgti_else.45060
-	blti	%a0, 20, bgti_else.45062
-	blti	%a0, 30, bgti_else.45064
-	blti	%a0, 40, bgti_else.45066
-	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_cont.45061
-	blti	%a0, 20, bgti_else.45070
-	blti	%a0, 30, bgti_else.45072
-	blti	%a0, 40, bgti_else.45074
-	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_cont.45061
-	blti	%a0, 20, bgti_else.45078
-	blti	%a0, 30, bgti_else.45080
-	blti	%a0, 40, bgti_else.45082
-	addi	%v0, %a0, -40
-	addi	%sp, %sp, 14
-	jal	print_int_sub2.2644
-	addi	%sp, %sp, -14
-	addi	%a0, %v0, 0
-	j	bgti_cont.45061
-bgti_else.45082:
-	addi	%a0, %a0, -30
-bgti_cont.45083:
-	j	bgti_cont.45061
-bgti_else.45080:
-	addi	%a0, %a0, -20
-bgti_cont.45081:
-	j	bgti_cont.45061
-bgti_else.45078:
-	addi	%a0, %a0, -10
-bgti_cont.45079:
-	j	bgti_cont.45061
-bgti_else.45076:
-bgti_cont.45077:
-	j	bgti_cont.45061
-bgti_else.45074:
-	addi	%a0, %a0, -30
-bgti_cont.45075:
-	j	bgti_cont.45061
-bgti_else.45072:
-	addi	%a0, %a0, -20
-bgti_cont.45073:
-	j	bgti_cont.45061
-bgti_else.45070:
-	addi	%a0, %a0, -10
-bgti_cont.45071:
-	j	bgti_cont.45061
-bgti_else.45068:
-bgti_cont.45069:
-	j	bgti_cont.45061
-bgti_else.45066:
-	addi	%a0, %a0, -30
-bgti_cont.45067:
-	j	bgti_cont.45061
-bgti_else.45064:
-	addi	%a0, %a0, -20
-bgti_cont.45065:
-	j	bgti_cont.45061
-bgti_else.45062:
-	addi	%a0, %a0, -10
-bgti_cont.45063:
-	j	bgti_cont.45061
-bgti_else.45060:
-bgti_cont.45061:
-	addi	%v0, %a0, 48
-	addi	%sp, %sp, 14
-	jal	min_caml_print_char
-	addi	%sp, %sp, -14
-	addi	%v0, %a2, 48
-	addi	%sp, %sp, 14
-	jal	min_caml_print_char
-	addi	%sp, %sp, -14
-	addi	%v0, %a1, 48
-	addi	%sp, %sp, 14
-	jal	min_caml_print_char
-	addi	%sp, %sp, -14
-bgt_cont.45059:
-bgt_cont.45009:
+	blt	%at, %v0, bgt_else.32671
+	blti	%v0, 0, bgti_else.32673
+	j	bgt_cont.32672
+bgti_else.32673:
+	add	%v0, %zero, %zero
+bgti_cont.32674:
+	j	bgt_cont.32672
+bgt_else.32671:
+	addi	%v0, %zero, 255
+bgt_cont.32672:
+	addi	%sp, %sp, 11
+	jal	print_int.2646
+	addi	%sp, %sp, -11
 	addi	%v0, %t1, 0
-	addi	%sp, %sp, 14
+	addi	%sp, %sp, 11
 	jal	min_caml_print_char
-	addi	%sp, %sp, -14
-	addi	%v0, %t3, 1
-	lw	%t4, 5(%sp)
-	lw	%t3, 6(%sp)
-	lw	%t2, 7(%sp)
-	lw	%t1, 8(%sp)
-	lw	%t0, 9(%sp)
-	lw	%ra, 10(%sp)
+	addi	%sp, %sp, -11
+	flw	%f0, 152(%zero)
+	ftoi	%v0, %f0
+	addi	%at, %zero, 255
+	blt	%at, %v0, bgt_else.32675
+	blti	%v0, 0, bgti_else.32677
+	j	bgt_cont.32676
+bgti_else.32677:
+	add	%v0, %zero, %zero
+bgti_cont.32678:
+	j	bgt_cont.32676
+bgt_else.32675:
+	addi	%v0, %zero, 255
+bgt_cont.32676:
+	addi	%sp, %sp, 11
+	jal	print_int.2646
+	addi	%sp, %sp, -11
+	addi	%v0, %t1, 0
+	addi	%sp, %sp, 11
+	jal	min_caml_print_char
+	addi	%sp, %sp, -11
+	flw	%f0, 153(%zero)
+	ftoi	%v0, %f0
+	addi	%at, %zero, 255
+	blt	%at, %v0, bgt_else.32679
+	blti	%v0, 0, bgti_else.32681
+	j	bgt_cont.32680
+bgti_else.32681:
+	add	%v0, %zero, %zero
+bgti_cont.32682:
+	j	bgt_cont.32680
+bgt_else.32679:
+	addi	%v0, %zero, 255
+bgt_cont.32680:
+	addi	%sp, %sp, 11
+	jal	print_int.2646
+	addi	%sp, %sp, -11
+	addi	%v0, %zero, 10
+	addi	%sp, %sp, 11
+	jal	min_caml_print_char
+	addi	%sp, %sp, -11
+	addi	%v0, %t2, 1
+	lw	%t2, 5(%sp)
+	lw	%t1, 6(%sp)
+	lw	%t0, 7(%sp)
+	lw	%ra, 8(%sp)
 	lw	%a2, 4(%sp)
 	lw	%a1, 3(%sp)
 	lw	%a0, 2(%sp)
@@ -16600,15 +14462,15 @@ scan_line.3063:
 	sw	%a1, 8(%sp)
 	sw	%ra, 9(%sp)
 	lw	%t0, 155(%zero)
-	blt	%a3, %t0, bgt_else.46365
+	blt	%a3, %t0, bgt_else.32850
 	add	%t0, %zero, %a1
 	jr	%ra
-bgt_else.46365:
+bgt_else.32850:
 	addi	%a1, %t0, -1
 	sw	%a1, 10(%sp)
-	blt	%a3, %a1, bgt_else.46367
-	j	bgt_cont.46368
-bgt_else.46367:
+	blt	%a3, %a1, bgt_else.32852
+	j	bgt_cont.32853
+bgt_else.32852:
 	addi	%a2, %a3, 1
 	flw	%f1, 158(%zero)
 	lw	%a1, 157(%zero)
@@ -16632,11 +14494,11 @@ bgt_else.46367:
 	addi	%sp, %sp, 11
 	jal	pretrace_pixels.3046
 	addi	%sp, %sp, -11
-bgt_cont.46368:
+bgt_cont.32853:
 	lw	%t1, 154(%zero)
-	blt	%zero, %t1, bgt_else.46369
-	j	bgt_cont.46370
-bgt_else.46369:
+	blt	%zero, %t1, bgt_else.32854
+	j	bgt_cont.32855
+bgt_else.32854:
 	lw	%a0, 2(%sp)
 	lw	%v0, 0(%a0)
 	lw	%a0, 0(%v0)
@@ -16648,23 +14510,23 @@ bgt_else.46369:
 	fsw	%f0, 153(%zero)
 	lw	%a1, 0(%sp)
 	addi	%a0, %a1, 1
-	blt	%a0, %t0, bgt_else.46371
-	j	bgt_cont.46372
-bgt_else.46371:
-	blt	%zero, %a1, bgt_else.46373
-	j	bgt_cont.46374
-bgt_else.46373:
-	blt	%k1, %t1, bgt_else.46375
-	j	bgt_cont.46376
-bgt_else.46375:
-bgt_cont.46376:
-	blt	%at, %t1, bgt_else.46377
-	j	bgt_cont.46378
-bgt_else.46377:
-bgt_cont.46378:
-bgt_cont.46374:
-bgt_cont.46372:
-	beqi	%zero, 0, bnei_else.46379
+	blt	%a0, %t0, bgt_else.32856
+	j	bgt_cont.32857
+bgt_else.32856:
+	blt	%zero, %a1, bgt_else.32858
+	j	bgt_cont.32859
+bgt_else.32858:
+	blt	%k1, %t1, bgt_else.32860
+	j	bgt_cont.32861
+bgt_else.32860:
+bgt_cont.32861:
+	blt	%at, %t1, bgt_else.32862
+	j	bgt_cont.32863
+bgt_else.32862:
+bgt_cont.32863:
+bgt_cont.32859:
+bgt_cont.32857:
+	beqi	%zero, 0, bnei_else.32864
 	lw	%a2, 3(%sp)
 	lw	%a1, 2(%sp)
 	lw	%a0, 1(%sp)
@@ -16674,1143 +14536,71 @@ bgt_cont.46372:
 	addi	%sp, %sp, 11
 	jal	try_exploit_neighbors.3030
 	addi	%sp, %sp, -11
-	j	bnei_cont.46380
-bnei_else.46379:
+	j	bnei_cont.32865
+bnei_else.32864:
 	addi	%v1, %zero, 0
 	addi	%sp, %sp, 11
 	jal	do_without_neighbors.3014
 	addi	%sp, %sp, -11
-bnei_cont.46380:
+bnei_cont.32865:
 	flw	%f0, 151(%zero)
-	ftoi	%a1, %f0
+	ftoi	%v0, %f0
 	addi	%at, %zero, 255
-	blt	%at, %a1, bgt_else.46381
-	blti	%a1, 0, bgti_else.46383
-	j	bgt_cont.46382
-bgti_else.46383:
-	add	%a1, %zero, %zero
-bgti_cont.46384:
-	j	bgt_cont.46382
-bgt_else.46381:
-	addi	%a1, %zero, 255
-bgt_cont.46382:
-	addi	%a3, %zero, 10
-	blti	%a1, 10, bgti_else.46385
-	blti	%a1, 20, bgti_else.46387
-	blti	%a1, 30, bgti_else.46389
-	blti	%a1, 40, bgti_else.46391
-	addi	%a0, %a1, -40
-	blti	%a0, 10, bgti_else.46393
-	blti	%a0, 20, bgti_else.46395
-	blti	%a0, 30, bgti_else.46397
-	blti	%a0, 40, bgti_else.46399
-	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_else.46401
-	blti	%a0, 20, bgti_else.46403
-	blti	%a0, 30, bgti_else.46405
-	blti	%a0, 40, bgti_else.46407
-	addi	%v0, %a0, -40
-	addi	%v1, %zero, 12
+	blt	%at, %v0, bgt_else.32866
+	blti	%v0, 0, bgti_else.32868
+	j	bgt_cont.32867
+bgti_else.32868:
+	add	%v0, %zero, %zero
+bgti_cont.32869:
+	j	bgt_cont.32867
+bgt_else.32866:
+	addi	%v0, %zero, 255
+bgt_cont.32867:
 	addi	%sp, %sp, 11
-	jal	print_int_sub1.2641
+	jal	print_int.2646
 	addi	%sp, %sp, -11
-	addi	%a2, %v0, 0
-	j	bgti_cont.46386
-bgti_else.46407:
-	addi	%a2, %zero, 11
-bgti_cont.46408:
-	j	bgti_cont.46386
-bgti_else.46405:
-	addi	%a2, %zero, 10
-bgti_cont.46406:
-	j	bgti_cont.46386
-bgti_else.46403:
-	addi	%a2, %zero, 9
-bgti_cont.46404:
-	j	bgti_cont.46386
-bgti_else.46401:
-	addi	%a2, %zero, 8
-bgti_cont.46402:
-	j	bgti_cont.46386
-bgti_else.46399:
-	addi	%a2, %zero, 7
-bgti_cont.46400:
-	j	bgti_cont.46386
-bgti_else.46397:
-	addi	%a2, %zero, 6
-bgti_cont.46398:
-	j	bgti_cont.46386
-bgti_else.46395:
-	addi	%a2, %zero, 5
-bgti_cont.46396:
-	j	bgti_cont.46386
-bgti_else.46393:
-	addi	%a2, %zero, 4
-bgti_cont.46394:
-	j	bgti_cont.46386
-bgti_else.46391:
-	addi	%a2, %zero, 3
-bgti_cont.46392:
-	j	bgti_cont.46386
-bgti_else.46389:
-	addi	%a2, %zero, 2
-bgti_cont.46390:
-	j	bgti_cont.46386
-bgti_else.46387:
-	add	%a2, %zero, %k1
-bgti_cont.46388:
-	j	bgti_cont.46386
-bgti_else.46385:
-	add	%a2, %zero, %zero
-bgti_cont.46386:
-	blti	%a1, 10, bgti_else.46409
-	blti	%a1, 20, bgti_else.46411
-	blti	%a1, 30, bgti_else.46413
-	blti	%a1, 40, bgti_else.46415
-	addi	%a1, %a1, -40
-	blti	%a1, 10, bgti_cont.46410
-	blti	%a1, 20, bgti_else.46419
-	blti	%a1, 30, bgti_else.46421
-	blti	%a1, 40, bgti_else.46423
-	addi	%a1, %a1, -40
-	blti	%a1, 10, bgti_cont.46410
-	blti	%a1, 20, bgti_else.46427
-	blti	%a1, 30, bgti_else.46429
-	blti	%a1, 40, bgti_else.46431
-	addi	%v0, %a1, -40
-	addi	%sp, %sp, 11
-	jal	print_int_sub2.2644
-	addi	%sp, %sp, -11
-	addi	%a1, %v0, 0
-	j	bgti_cont.46410
-bgti_else.46431:
-	addi	%a1, %a1, -30
-bgti_cont.46432:
-	j	bgti_cont.46410
-bgti_else.46429:
-	addi	%a1, %a1, -20
-bgti_cont.46430:
-	j	bgti_cont.46410
-bgti_else.46427:
-	addi	%a1, %a1, -10
-bgti_cont.46428:
-	j	bgti_cont.46410
-bgti_else.46425:
-bgti_cont.46426:
-	j	bgti_cont.46410
-bgti_else.46423:
-	addi	%a1, %a1, -30
-bgti_cont.46424:
-	j	bgti_cont.46410
-bgti_else.46421:
-	addi	%a1, %a1, -20
-bgti_cont.46422:
-	j	bgti_cont.46410
-bgti_else.46419:
-	addi	%a1, %a1, -10
-bgti_cont.46420:
-	j	bgti_cont.46410
-bgti_else.46417:
-bgti_cont.46418:
-	j	bgti_cont.46410
-bgti_else.46415:
-	addi	%a1, %a1, -30
-bgti_cont.46416:
-	j	bgti_cont.46410
-bgti_else.46413:
-	addi	%a1, %a1, -20
-bgti_cont.46414:
-	j	bgti_cont.46410
-bgti_else.46411:
-	addi	%a1, %a1, -10
-bgti_cont.46412:
-	j	bgti_cont.46410
-bgti_else.46409:
-bgti_cont.46410:
-	blt	%zero, %a2, bgt_else.46433
-	addi	%v0, %a1, 48
-	addi	%sp, %sp, 11
-	jal	min_caml_print_char
-	addi	%sp, %sp, -11
-	j	bgt_cont.46434
-bgt_else.46433:
-	blti	%a2, 10, bgti_else.46435
-	blti	%a2, 20, bgti_else.46437
-	blti	%a2, 30, bgti_else.46439
-	blti	%a2, 40, bgti_else.46441
-	addi	%a0, %a2, -40
-	blti	%a0, 10, bgti_else.46443
-	blti	%a0, 20, bgti_else.46445
-	blti	%a0, 30, bgti_else.46447
-	blti	%a0, 40, bgti_else.46449
-	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_else.46451
-	blti	%a0, 20, bgti_else.46453
-	blti	%a0, 30, bgti_else.46455
-	blti	%a0, 40, bgti_else.46457
-	addi	%v0, %a0, -40
-	addi	%v1, %zero, 12
-	addi	%sp, %sp, 11
-	jal	print_int_sub1.2641
-	addi	%sp, %sp, -11
-	addi	%a0, %v0, 0
-	j	bgti_cont.46436
-bgti_else.46457:
-	addi	%a0, %zero, 11
-bgti_cont.46458:
-	j	bgti_cont.46436
-bgti_else.46455:
-	addi	%a0, %zero, 10
-bgti_cont.46456:
-	j	bgti_cont.46436
-bgti_else.46453:
-	addi	%a0, %zero, 9
-bgti_cont.46454:
-	j	bgti_cont.46436
-bgti_else.46451:
-	addi	%a0, %zero, 8
-bgti_cont.46452:
-	j	bgti_cont.46436
-bgti_else.46449:
-	addi	%a0, %zero, 7
-bgti_cont.46450:
-	j	bgti_cont.46436
-bgti_else.46447:
-	addi	%a0, %zero, 6
-bgti_cont.46448:
-	j	bgti_cont.46436
-bgti_else.46445:
-	addi	%a0, %zero, 5
-bgti_cont.46446:
-	j	bgti_cont.46436
-bgti_else.46443:
-	addi	%a0, %zero, 4
-bgti_cont.46444:
-	j	bgti_cont.46436
-bgti_else.46441:
-	addi	%a0, %zero, 3
-bgti_cont.46442:
-	j	bgti_cont.46436
-bgti_else.46439:
-	addi	%a0, %zero, 2
-bgti_cont.46440:
-	j	bgti_cont.46436
-bgti_else.46437:
-	add	%a0, %zero, %k1
-bgti_cont.46438:
-	j	bgti_cont.46436
-bgti_else.46435:
-	add	%a0, %zero, %zero
-bgti_cont.46436:
-	blti	%a2, 10, bgti_else.46459
-	blti	%a2, 20, bgti_else.46461
-	blti	%a2, 30, bgti_else.46463
-	blti	%a2, 40, bgti_else.46465
-	addi	%a2, %a2, -40
-	blti	%a2, 10, bgti_cont.46460
-	blti	%a2, 20, bgti_else.46469
-	blti	%a2, 30, bgti_else.46471
-	blti	%a2, 40, bgti_else.46473
-	addi	%a2, %a2, -40
-	blti	%a2, 10, bgti_cont.46460
-	blti	%a2, 20, bgti_else.46477
-	blti	%a2, 30, bgti_else.46479
-	blti	%a2, 40, bgti_else.46481
-	addi	%v0, %a2, -40
-	addi	%sp, %sp, 11
-	jal	print_int_sub2.2644
-	addi	%sp, %sp, -11
-	addi	%a2, %v0, 0
-	j	bgti_cont.46460
-bgti_else.46481:
-	addi	%a2, %a2, -30
-bgti_cont.46482:
-	j	bgti_cont.46460
-bgti_else.46479:
-	addi	%a2, %a2, -20
-bgti_cont.46480:
-	j	bgti_cont.46460
-bgti_else.46477:
-	addi	%a2, %a2, -10
-bgti_cont.46478:
-	j	bgti_cont.46460
-bgti_else.46475:
-bgti_cont.46476:
-	j	bgti_cont.46460
-bgti_else.46473:
-	addi	%a2, %a2, -30
-bgti_cont.46474:
-	j	bgti_cont.46460
-bgti_else.46471:
-	addi	%a2, %a2, -20
-bgti_cont.46472:
-	j	bgti_cont.46460
-bgti_else.46469:
-	addi	%a2, %a2, -10
-bgti_cont.46470:
-	j	bgti_cont.46460
-bgti_else.46467:
-bgti_cont.46468:
-	j	bgti_cont.46460
-bgti_else.46465:
-	addi	%a2, %a2, -30
-bgti_cont.46466:
-	j	bgti_cont.46460
-bgti_else.46463:
-	addi	%a2, %a2, -20
-bgti_cont.46464:
-	j	bgti_cont.46460
-bgti_else.46461:
-	addi	%a2, %a2, -10
-bgti_cont.46462:
-	j	bgti_cont.46460
-bgti_else.46459:
-bgti_cont.46460:
-	blt	%zero, %a0, bgt_else.46483
-	addi	%v0, %a2, 48
-	addi	%sp, %sp, 11
-	jal	min_caml_print_char
-	addi	%sp, %sp, -11
-	addi	%v0, %a1, 48
-	addi	%sp, %sp, 11
-	jal	min_caml_print_char
-	addi	%sp, %sp, -11
-	j	bgt_cont.46484
-bgt_else.46483:
-	blti	%a0, 10, bgti_else.46485
-	blti	%a0, 20, bgti_else.46487
-	blti	%a0, 30, bgti_else.46489
-	blti	%a0, 40, bgti_else.46491
-	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_cont.46486
-	blti	%a0, 20, bgti_else.46495
-	blti	%a0, 30, bgti_else.46497
-	blti	%a0, 40, bgti_else.46499
-	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_cont.46486
-	blti	%a0, 20, bgti_else.46503
-	blti	%a0, 30, bgti_else.46505
-	blti	%a0, 40, bgti_else.46507
-	addi	%v0, %a0, -40
-	addi	%sp, %sp, 11
-	jal	print_int_sub2.2644
-	addi	%sp, %sp, -11
-	addi	%a0, %v0, 0
-	j	bgti_cont.46486
-bgti_else.46507:
-	addi	%a0, %a0, -30
-bgti_cont.46508:
-	j	bgti_cont.46486
-bgti_else.46505:
-	addi	%a0, %a0, -20
-bgti_cont.46506:
-	j	bgti_cont.46486
-bgti_else.46503:
-	addi	%a0, %a0, -10
-bgti_cont.46504:
-	j	bgti_cont.46486
-bgti_else.46501:
-bgti_cont.46502:
-	j	bgti_cont.46486
-bgti_else.46499:
-	addi	%a0, %a0, -30
-bgti_cont.46500:
-	j	bgti_cont.46486
-bgti_else.46497:
-	addi	%a0, %a0, -20
-bgti_cont.46498:
-	j	bgti_cont.46486
-bgti_else.46495:
-	addi	%a0, %a0, -10
-bgti_cont.46496:
-	j	bgti_cont.46486
-bgti_else.46493:
-bgti_cont.46494:
-	j	bgti_cont.46486
-bgti_else.46491:
-	addi	%a0, %a0, -30
-bgti_cont.46492:
-	j	bgti_cont.46486
-bgti_else.46489:
-	addi	%a0, %a0, -20
-bgti_cont.46490:
-	j	bgti_cont.46486
-bgti_else.46487:
-	addi	%a0, %a0, -10
-bgti_cont.46488:
-	j	bgti_cont.46486
-bgti_else.46485:
-bgti_cont.46486:
-	addi	%v0, %a0, 48
-	addi	%sp, %sp, 11
-	jal	min_caml_print_char
-	addi	%sp, %sp, -11
-	addi	%v0, %a2, 48
-	addi	%sp, %sp, 11
-	jal	min_caml_print_char
-	addi	%sp, %sp, -11
-	addi	%v0, %a1, 48
-	addi	%sp, %sp, 11
-	jal	min_caml_print_char
-	addi	%sp, %sp, -11
-bgt_cont.46484:
-bgt_cont.46434:
-	addi	%a1, %zero, 32
-	addi	%v0, %a1, 0
+	addi	%k0, %zero, 32
+	addi	%v0, %k0, 0
 	addi	%sp, %sp, 11
 	jal	min_caml_print_char
 	addi	%sp, %sp, -11
 	flw	%f0, 152(%zero)
-	ftoi	%a2, %f0
+	ftoi	%v0, %f0
 	addi	%at, %zero, 255
-	blt	%at, %a2, bgt_else.46509
-	blti	%a2, 0, bgti_else.46511
-	j	bgt_cont.46510
-bgti_else.46511:
-	add	%a2, %zero, %zero
-bgti_cont.46512:
-	j	bgt_cont.46510
-bgt_else.46509:
-	addi	%a2, %zero, 255
-bgt_cont.46510:
-	blti	%a2, 10, bgti_else.46513
-	blti	%a2, 20, bgti_else.46515
-	blti	%a2, 30, bgti_else.46517
-	blti	%a2, 40, bgti_else.46519
-	addi	%a0, %a2, -40
-	blti	%a0, 10, bgti_else.46521
-	blti	%a0, 20, bgti_else.46523
-	blti	%a0, 30, bgti_else.46525
-	blti	%a0, 40, bgti_else.46527
-	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_else.46529
-	blti	%a0, 20, bgti_else.46531
-	blti	%a0, 30, bgti_else.46533
-	blti	%a0, 40, bgti_else.46535
-	addi	%v0, %a0, -40
-	addi	%v1, %zero, 12
+	blt	%at, %v0, bgt_else.32870
+	blti	%v0, 0, bgti_else.32872
+	j	bgt_cont.32871
+bgti_else.32872:
+	add	%v0, %zero, %zero
+bgti_cont.32873:
+	j	bgt_cont.32871
+bgt_else.32870:
+	addi	%v0, %zero, 255
+bgt_cont.32871:
 	addi	%sp, %sp, 11
-	jal	print_int_sub1.2641
+	jal	print_int.2646
 	addi	%sp, %sp, -11
-	addi	%k0, %v0, 0
-	j	bgti_cont.46514
-bgti_else.46535:
-	addi	%k0, %zero, 11
-bgti_cont.46536:
-	j	bgti_cont.46514
-bgti_else.46533:
-	addi	%k0, %zero, 10
-bgti_cont.46534:
-	j	bgti_cont.46514
-bgti_else.46531:
-	addi	%k0, %zero, 9
-bgti_cont.46532:
-	j	bgti_cont.46514
-bgti_else.46529:
-	addi	%k0, %zero, 8
-bgti_cont.46530:
-	j	bgti_cont.46514
-bgti_else.46527:
-	addi	%k0, %zero, 7
-bgti_cont.46528:
-	j	bgti_cont.46514
-bgti_else.46525:
-	addi	%k0, %zero, 6
-bgti_cont.46526:
-	j	bgti_cont.46514
-bgti_else.46523:
-	addi	%k0, %zero, 5
-bgti_cont.46524:
-	j	bgti_cont.46514
-bgti_else.46521:
-	addi	%k0, %zero, 4
-bgti_cont.46522:
-	j	bgti_cont.46514
-bgti_else.46519:
-	addi	%k0, %zero, 3
-bgti_cont.46520:
-	j	bgti_cont.46514
-bgti_else.46517:
-	addi	%k0, %zero, 2
-bgti_cont.46518:
-	j	bgti_cont.46514
-bgti_else.46515:
-	add	%k0, %zero, %k1
-bgti_cont.46516:
-	j	bgti_cont.46514
-bgti_else.46513:
-	add	%k0, %zero, %zero
-bgti_cont.46514:
-	blti	%a2, 10, bgti_else.46537
-	blti	%a2, 20, bgti_else.46539
-	blti	%a2, 30, bgti_else.46541
-	blti	%a2, 40, bgti_else.46543
-	addi	%a2, %a2, -40
-	blti	%a2, 10, bgti_cont.46538
-	blti	%a2, 20, bgti_else.46547
-	blti	%a2, 30, bgti_else.46549
-	blti	%a2, 40, bgti_else.46551
-	addi	%a2, %a2, -40
-	blti	%a2, 10, bgti_cont.46538
-	blti	%a2, 20, bgti_else.46555
-	blti	%a2, 30, bgti_else.46557
-	blti	%a2, 40, bgti_else.46559
-	addi	%v0, %a2, -40
-	addi	%sp, %sp, 11
-	jal	print_int_sub2.2644
-	addi	%sp, %sp, -11
-	addi	%a2, %v0, 0
-	j	bgti_cont.46538
-bgti_else.46559:
-	addi	%a2, %a2, -30
-bgti_cont.46560:
-	j	bgti_cont.46538
-bgti_else.46557:
-	addi	%a2, %a2, -20
-bgti_cont.46558:
-	j	bgti_cont.46538
-bgti_else.46555:
-	addi	%a2, %a2, -10
-bgti_cont.46556:
-	j	bgti_cont.46538
-bgti_else.46553:
-bgti_cont.46554:
-	j	bgti_cont.46538
-bgti_else.46551:
-	addi	%a2, %a2, -30
-bgti_cont.46552:
-	j	bgti_cont.46538
-bgti_else.46549:
-	addi	%a2, %a2, -20
-bgti_cont.46550:
-	j	bgti_cont.46538
-bgti_else.46547:
-	addi	%a2, %a2, -10
-bgti_cont.46548:
-	j	bgti_cont.46538
-bgti_else.46545:
-bgti_cont.46546:
-	j	bgti_cont.46538
-bgti_else.46543:
-	addi	%a2, %a2, -30
-bgti_cont.46544:
-	j	bgti_cont.46538
-bgti_else.46541:
-	addi	%a2, %a2, -20
-bgti_cont.46542:
-	j	bgti_cont.46538
-bgti_else.46539:
-	addi	%a2, %a2, -10
-bgti_cont.46540:
-	j	bgti_cont.46538
-bgti_else.46537:
-bgti_cont.46538:
-	blt	%zero, %k0, bgt_else.46561
-	addi	%v0, %a2, 48
-	addi	%sp, %sp, 11
-	jal	min_caml_print_char
-	addi	%sp, %sp, -11
-	j	bgt_cont.46562
-bgt_else.46561:
-	blti	%k0, 10, bgti_else.46563
-	blti	%k0, 20, bgti_else.46565
-	blti	%k0, 30, bgti_else.46567
-	blti	%k0, 40, bgti_else.46569
-	addi	%a0, %k0, -40
-	blti	%a0, 10, bgti_else.46571
-	blti	%a0, 20, bgti_else.46573
-	blti	%a0, 30, bgti_else.46575
-	blti	%a0, 40, bgti_else.46577
-	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_else.46579
-	blti	%a0, 20, bgti_else.46581
-	blti	%a0, 30, bgti_else.46583
-	blti	%a0, 40, bgti_else.46585
-	addi	%v0, %a0, -40
-	addi	%v1, %zero, 12
-	addi	%sp, %sp, 11
-	jal	print_int_sub1.2641
-	addi	%sp, %sp, -11
-	addi	%a0, %v0, 0
-	j	bgti_cont.46564
-bgti_else.46585:
-	addi	%a0, %zero, 11
-bgti_cont.46586:
-	j	bgti_cont.46564
-bgti_else.46583:
-	addi	%a0, %zero, 10
-bgti_cont.46584:
-	j	bgti_cont.46564
-bgti_else.46581:
-	addi	%a0, %zero, 9
-bgti_cont.46582:
-	j	bgti_cont.46564
-bgti_else.46579:
-	addi	%a0, %zero, 8
-bgti_cont.46580:
-	j	bgti_cont.46564
-bgti_else.46577:
-	addi	%a0, %zero, 7
-bgti_cont.46578:
-	j	bgti_cont.46564
-bgti_else.46575:
-	addi	%a0, %zero, 6
-bgti_cont.46576:
-	j	bgti_cont.46564
-bgti_else.46573:
-	addi	%a0, %zero, 5
-bgti_cont.46574:
-	j	bgti_cont.46564
-bgti_else.46571:
-	addi	%a0, %zero, 4
-bgti_cont.46572:
-	j	bgti_cont.46564
-bgti_else.46569:
-	addi	%a0, %zero, 3
-bgti_cont.46570:
-	j	bgti_cont.46564
-bgti_else.46567:
-	addi	%a0, %zero, 2
-bgti_cont.46568:
-	j	bgti_cont.46564
-bgti_else.46565:
-	add	%a0, %zero, %k1
-bgti_cont.46566:
-	j	bgti_cont.46564
-bgti_else.46563:
-	add	%a0, %zero, %zero
-bgti_cont.46564:
-	blti	%k0, 10, bgti_else.46587
-	blti	%k0, 20, bgti_else.46589
-	blti	%k0, 30, bgti_else.46591
-	blti	%k0, 40, bgti_else.46593
-	addi	%k0, %k0, -40
-	blti	%k0, 10, bgti_cont.46588
-	blti	%k0, 20, bgti_else.46597
-	blti	%k0, 30, bgti_else.46599
-	blti	%k0, 40, bgti_else.46601
-	addi	%k0, %k0, -40
-	blti	%k0, 10, bgti_cont.46588
-	blti	%k0, 20, bgti_else.46605
-	blti	%k0, 30, bgti_else.46607
-	blti	%k0, 40, bgti_else.46609
-	addi	%v0, %k0, -40
-	addi	%sp, %sp, 11
-	jal	print_int_sub2.2644
-	addi	%sp, %sp, -11
-	addi	%k0, %v0, 0
-	j	bgti_cont.46588
-bgti_else.46609:
-	addi	%k0, %k0, -30
-bgti_cont.46610:
-	j	bgti_cont.46588
-bgti_else.46607:
-	addi	%k0, %k0, -20
-bgti_cont.46608:
-	j	bgti_cont.46588
-bgti_else.46605:
-	addi	%k0, %k0, -10
-bgti_cont.46606:
-	j	bgti_cont.46588
-bgti_else.46603:
-bgti_cont.46604:
-	j	bgti_cont.46588
-bgti_else.46601:
-	addi	%k0, %k0, -30
-bgti_cont.46602:
-	j	bgti_cont.46588
-bgti_else.46599:
-	addi	%k0, %k0, -20
-bgti_cont.46600:
-	j	bgti_cont.46588
-bgti_else.46597:
-	addi	%k0, %k0, -10
-bgti_cont.46598:
-	j	bgti_cont.46588
-bgti_else.46595:
-bgti_cont.46596:
-	j	bgti_cont.46588
-bgti_else.46593:
-	addi	%k0, %k0, -30
-bgti_cont.46594:
-	j	bgti_cont.46588
-bgti_else.46591:
-	addi	%k0, %k0, -20
-bgti_cont.46592:
-	j	bgti_cont.46588
-bgti_else.46589:
-	addi	%k0, %k0, -10
-bgti_cont.46590:
-	j	bgti_cont.46588
-bgti_else.46587:
-bgti_cont.46588:
-	blt	%zero, %a0, bgt_else.46611
-	addi	%v0, %k0, 48
-	addi	%sp, %sp, 11
-	jal	min_caml_print_char
-	addi	%sp, %sp, -11
-	addi	%v0, %a2, 48
-	addi	%sp, %sp, 11
-	jal	min_caml_print_char
-	addi	%sp, %sp, -11
-	j	bgt_cont.46612
-bgt_else.46611:
-	blti	%a0, 10, bgti_else.46613
-	blti	%a0, 20, bgti_else.46615
-	blti	%a0, 30, bgti_else.46617
-	blti	%a0, 40, bgti_else.46619
-	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_cont.46614
-	blti	%a0, 20, bgti_else.46623
-	blti	%a0, 30, bgti_else.46625
-	blti	%a0, 40, bgti_else.46627
-	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_cont.46614
-	blti	%a0, 20, bgti_else.46631
-	blti	%a0, 30, bgti_else.46633
-	blti	%a0, 40, bgti_else.46635
-	addi	%v0, %a0, -40
-	addi	%sp, %sp, 11
-	jal	print_int_sub2.2644
-	addi	%sp, %sp, -11
-	addi	%a0, %v0, 0
-	j	bgti_cont.46614
-bgti_else.46635:
-	addi	%a0, %a0, -30
-bgti_cont.46636:
-	j	bgti_cont.46614
-bgti_else.46633:
-	addi	%a0, %a0, -20
-bgti_cont.46634:
-	j	bgti_cont.46614
-bgti_else.46631:
-	addi	%a0, %a0, -10
-bgti_cont.46632:
-	j	bgti_cont.46614
-bgti_else.46629:
-bgti_cont.46630:
-	j	bgti_cont.46614
-bgti_else.46627:
-	addi	%a0, %a0, -30
-bgti_cont.46628:
-	j	bgti_cont.46614
-bgti_else.46625:
-	addi	%a0, %a0, -20
-bgti_cont.46626:
-	j	bgti_cont.46614
-bgti_else.46623:
-	addi	%a0, %a0, -10
-bgti_cont.46624:
-	j	bgti_cont.46614
-bgti_else.46621:
-bgti_cont.46622:
-	j	bgti_cont.46614
-bgti_else.46619:
-	addi	%a0, %a0, -30
-bgti_cont.46620:
-	j	bgti_cont.46614
-bgti_else.46617:
-	addi	%a0, %a0, -20
-bgti_cont.46618:
-	j	bgti_cont.46614
-bgti_else.46615:
-	addi	%a0, %a0, -10
-bgti_cont.46616:
-	j	bgti_cont.46614
-bgti_else.46613:
-bgti_cont.46614:
-	addi	%v0, %a0, 48
-	addi	%sp, %sp, 11
-	jal	min_caml_print_char
-	addi	%sp, %sp, -11
-	addi	%v0, %k0, 48
-	addi	%sp, %sp, 11
-	jal	min_caml_print_char
-	addi	%sp, %sp, -11
-	addi	%v0, %a2, 48
-	addi	%sp, %sp, 11
-	jal	min_caml_print_char
-	addi	%sp, %sp, -11
-bgt_cont.46612:
-bgt_cont.46562:
-	addi	%v0, %a1, 0
+	addi	%v0, %k0, 0
 	addi	%sp, %sp, 11
 	jal	min_caml_print_char
 	addi	%sp, %sp, -11
 	flw	%f0, 153(%zero)
-	ftoi	%a1, %f0
+	ftoi	%v0, %f0
 	addi	%at, %zero, 255
-	blt	%at, %a1, bgt_else.46637
-	blti	%a1, 0, bgti_else.46639
-	j	bgt_cont.46638
-bgti_else.46639:
-	add	%a1, %zero, %zero
-bgti_cont.46640:
-	j	bgt_cont.46638
-bgt_else.46637:
-	addi	%a1, %zero, 255
-bgt_cont.46638:
-	blti	%a1, 10, bgti_else.46641
-	blti	%a1, 20, bgti_else.46643
-	blti	%a1, 30, bgti_else.46645
-	blti	%a1, 40, bgti_else.46647
-	addi	%a0, %a1, -40
-	blti	%a0, 10, bgti_else.46649
-	blti	%a0, 20, bgti_else.46651
-	blti	%a0, 30, bgti_else.46653
-	blti	%a0, 40, bgti_else.46655
-	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_else.46657
-	blti	%a0, 20, bgti_else.46659
-	blti	%a0, 30, bgti_else.46661
-	blti	%a0, 40, bgti_else.46663
-	addi	%v0, %a0, -40
-	addi	%v1, %zero, 12
+	blt	%at, %v0, bgt_else.32874
+	blti	%v0, 0, bgti_else.32876
+	j	bgt_cont.32875
+bgti_else.32876:
+	add	%v0, %zero, %zero
+bgti_cont.32877:
+	j	bgt_cont.32875
+bgt_else.32874:
+	addi	%v0, %zero, 255
+bgt_cont.32875:
 	addi	%sp, %sp, 11
-	jal	print_int_sub1.2641
+	jal	print_int.2646
 	addi	%sp, %sp, -11
-	addi	%a2, %v0, 0
-	j	bgti_cont.46642
-bgti_else.46663:
-	addi	%a2, %zero, 11
-bgti_cont.46664:
-	j	bgti_cont.46642
-bgti_else.46661:
-	addi	%a2, %zero, 10
-bgti_cont.46662:
-	j	bgti_cont.46642
-bgti_else.46659:
-	addi	%a2, %zero, 9
-bgti_cont.46660:
-	j	bgti_cont.46642
-bgti_else.46657:
-	addi	%a2, %zero, 8
-bgti_cont.46658:
-	j	bgti_cont.46642
-bgti_else.46655:
-	addi	%a2, %zero, 7
-bgti_cont.46656:
-	j	bgti_cont.46642
-bgti_else.46653:
-	addi	%a2, %zero, 6
-bgti_cont.46654:
-	j	bgti_cont.46642
-bgti_else.46651:
-	addi	%a2, %zero, 5
-bgti_cont.46652:
-	j	bgti_cont.46642
-bgti_else.46649:
-	addi	%a2, %zero, 4
-bgti_cont.46650:
-	j	bgti_cont.46642
-bgti_else.46647:
-	addi	%a2, %zero, 3
-bgti_cont.46648:
-	j	bgti_cont.46642
-bgti_else.46645:
-	addi	%a2, %zero, 2
-bgti_cont.46646:
-	j	bgti_cont.46642
-bgti_else.46643:
-	add	%a2, %zero, %k1
-bgti_cont.46644:
-	j	bgti_cont.46642
-bgti_else.46641:
-	add	%a2, %zero, %zero
-bgti_cont.46642:
-	blti	%a1, 10, bgti_else.46665
-	blti	%a1, 20, bgti_else.46667
-	blti	%a1, 30, bgti_else.46669
-	blti	%a1, 40, bgti_else.46671
-	addi	%a1, %a1, -40
-	blti	%a1, 10, bgti_cont.46666
-	blti	%a1, 20, bgti_else.46675
-	blti	%a1, 30, bgti_else.46677
-	blti	%a1, 40, bgti_else.46679
-	addi	%a1, %a1, -40
-	blti	%a1, 10, bgti_cont.46666
-	blti	%a1, 20, bgti_else.46683
-	blti	%a1, 30, bgti_else.46685
-	blti	%a1, 40, bgti_else.46687
-	addi	%v0, %a1, -40
-	addi	%sp, %sp, 11
-	jal	print_int_sub2.2644
-	addi	%sp, %sp, -11
-	addi	%a1, %v0, 0
-	j	bgti_cont.46666
-bgti_else.46687:
-	addi	%a1, %a1, -30
-bgti_cont.46688:
-	j	bgti_cont.46666
-bgti_else.46685:
-	addi	%a1, %a1, -20
-bgti_cont.46686:
-	j	bgti_cont.46666
-bgti_else.46683:
-	addi	%a1, %a1, -10
-bgti_cont.46684:
-	j	bgti_cont.46666
-bgti_else.46681:
-bgti_cont.46682:
-	j	bgti_cont.46666
-bgti_else.46679:
-	addi	%a1, %a1, -30
-bgti_cont.46680:
-	j	bgti_cont.46666
-bgti_else.46677:
-	addi	%a1, %a1, -20
-bgti_cont.46678:
-	j	bgti_cont.46666
-bgti_else.46675:
-	addi	%a1, %a1, -10
-bgti_cont.46676:
-	j	bgti_cont.46666
-bgti_else.46673:
-bgti_cont.46674:
-	j	bgti_cont.46666
-bgti_else.46671:
-	addi	%a1, %a1, -30
-bgti_cont.46672:
-	j	bgti_cont.46666
-bgti_else.46669:
-	addi	%a1, %a1, -20
-bgti_cont.46670:
-	j	bgti_cont.46666
-bgti_else.46667:
-	addi	%a1, %a1, -10
-bgti_cont.46668:
-	j	bgti_cont.46666
-bgti_else.46665:
-bgti_cont.46666:
-	blt	%zero, %a2, bgt_else.46689
-	addi	%v0, %a1, 48
-	addi	%sp, %sp, 11
-	jal	min_caml_print_char
-	addi	%sp, %sp, -11
-	j	bgt_cont.46690
-bgt_else.46689:
-	blti	%a2, 10, bgti_else.46691
-	blti	%a2, 20, bgti_else.46693
-	blti	%a2, 30, bgti_else.46695
-	blti	%a2, 40, bgti_else.46697
-	addi	%a0, %a2, -40
-	blti	%a0, 10, bgti_else.46699
-	blti	%a0, 20, bgti_else.46701
-	blti	%a0, 30, bgti_else.46703
-	blti	%a0, 40, bgti_else.46705
-	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_else.46707
-	blti	%a0, 20, bgti_else.46709
-	blti	%a0, 30, bgti_else.46711
-	blti	%a0, 40, bgti_else.46713
-	addi	%v0, %a0, -40
-	addi	%v1, %zero, 12
-	addi	%sp, %sp, 11
-	jal	print_int_sub1.2641
-	addi	%sp, %sp, -11
-	addi	%a0, %v0, 0
-	j	bgti_cont.46692
-bgti_else.46713:
-	addi	%a0, %zero, 11
-bgti_cont.46714:
-	j	bgti_cont.46692
-bgti_else.46711:
-	addi	%a0, %zero, 10
-bgti_cont.46712:
-	j	bgti_cont.46692
-bgti_else.46709:
-	addi	%a0, %zero, 9
-bgti_cont.46710:
-	j	bgti_cont.46692
-bgti_else.46707:
-	addi	%a0, %zero, 8
-bgti_cont.46708:
-	j	bgti_cont.46692
-bgti_else.46705:
-	addi	%a0, %zero, 7
-bgti_cont.46706:
-	j	bgti_cont.46692
-bgti_else.46703:
-	addi	%a0, %zero, 6
-bgti_cont.46704:
-	j	bgti_cont.46692
-bgti_else.46701:
-	addi	%a0, %zero, 5
-bgti_cont.46702:
-	j	bgti_cont.46692
-bgti_else.46699:
-	addi	%a0, %zero, 4
-bgti_cont.46700:
-	j	bgti_cont.46692
-bgti_else.46697:
-	addi	%a0, %zero, 3
-bgti_cont.46698:
-	j	bgti_cont.46692
-bgti_else.46695:
-	addi	%a0, %zero, 2
-bgti_cont.46696:
-	j	bgti_cont.46692
-bgti_else.46693:
-	add	%a0, %zero, %k1
-bgti_cont.46694:
-	j	bgti_cont.46692
-bgti_else.46691:
-	add	%a0, %zero, %zero
-bgti_cont.46692:
-	blti	%a2, 10, bgti_else.46715
-	blti	%a2, 20, bgti_else.46717
-	blti	%a2, 30, bgti_else.46719
-	blti	%a2, 40, bgti_else.46721
-	addi	%a2, %a2, -40
-	blti	%a2, 10, bgti_cont.46716
-	blti	%a2, 20, bgti_else.46725
-	blti	%a2, 30, bgti_else.46727
-	blti	%a2, 40, bgti_else.46729
-	addi	%a2, %a2, -40
-	blti	%a2, 10, bgti_cont.46716
-	blti	%a2, 20, bgti_else.46733
-	blti	%a2, 30, bgti_else.46735
-	blti	%a2, 40, bgti_else.46737
-	addi	%v0, %a2, -40
-	addi	%sp, %sp, 11
-	jal	print_int_sub2.2644
-	addi	%sp, %sp, -11
-	addi	%a2, %v0, 0
-	j	bgti_cont.46716
-bgti_else.46737:
-	addi	%a2, %a2, -30
-bgti_cont.46738:
-	j	bgti_cont.46716
-bgti_else.46735:
-	addi	%a2, %a2, -20
-bgti_cont.46736:
-	j	bgti_cont.46716
-bgti_else.46733:
-	addi	%a2, %a2, -10
-bgti_cont.46734:
-	j	bgti_cont.46716
-bgti_else.46731:
-bgti_cont.46732:
-	j	bgti_cont.46716
-bgti_else.46729:
-	addi	%a2, %a2, -30
-bgti_cont.46730:
-	j	bgti_cont.46716
-bgti_else.46727:
-	addi	%a2, %a2, -20
-bgti_cont.46728:
-	j	bgti_cont.46716
-bgti_else.46725:
-	addi	%a2, %a2, -10
-bgti_cont.46726:
-	j	bgti_cont.46716
-bgti_else.46723:
-bgti_cont.46724:
-	j	bgti_cont.46716
-bgti_else.46721:
-	addi	%a2, %a2, -30
-bgti_cont.46722:
-	j	bgti_cont.46716
-bgti_else.46719:
-	addi	%a2, %a2, -20
-bgti_cont.46720:
-	j	bgti_cont.46716
-bgti_else.46717:
-	addi	%a2, %a2, -10
-bgti_cont.46718:
-	j	bgti_cont.46716
-bgti_else.46715:
-bgti_cont.46716:
-	blt	%zero, %a0, bgt_else.46739
-	addi	%v0, %a2, 48
-	addi	%sp, %sp, 11
-	jal	min_caml_print_char
-	addi	%sp, %sp, -11
-	addi	%v0, %a1, 48
-	addi	%sp, %sp, 11
-	jal	min_caml_print_char
-	addi	%sp, %sp, -11
-	j	bgt_cont.46740
-bgt_else.46739:
-	blti	%a0, 10, bgti_else.46741
-	blti	%a0, 20, bgti_else.46743
-	blti	%a0, 30, bgti_else.46745
-	blti	%a0, 40, bgti_else.46747
-	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_cont.46742
-	blti	%a0, 20, bgti_else.46751
-	blti	%a0, 30, bgti_else.46753
-	blti	%a0, 40, bgti_else.46755
-	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_cont.46742
-	blti	%a0, 20, bgti_else.46759
-	blti	%a0, 30, bgti_else.46761
-	blti	%a0, 40, bgti_else.46763
-	addi	%v0, %a0, -40
-	addi	%sp, %sp, 11
-	jal	print_int_sub2.2644
-	addi	%sp, %sp, -11
-	addi	%a0, %v0, 0
-	j	bgti_cont.46742
-bgti_else.46763:
-	addi	%a0, %a0, -30
-bgti_cont.46764:
-	j	bgti_cont.46742
-bgti_else.46761:
-	addi	%a0, %a0, -20
-bgti_cont.46762:
-	j	bgti_cont.46742
-bgti_else.46759:
-	addi	%a0, %a0, -10
-bgti_cont.46760:
-	j	bgti_cont.46742
-bgti_else.46757:
-bgti_cont.46758:
-	j	bgti_cont.46742
-bgti_else.46755:
-	addi	%a0, %a0, -30
-bgti_cont.46756:
-	j	bgti_cont.46742
-bgti_else.46753:
-	addi	%a0, %a0, -20
-bgti_cont.46754:
-	j	bgti_cont.46742
-bgti_else.46751:
-	addi	%a0, %a0, -10
-bgti_cont.46752:
-	j	bgti_cont.46742
-bgti_else.46749:
-bgti_cont.46750:
-	j	bgti_cont.46742
-bgti_else.46747:
-	addi	%a0, %a0, -30
-bgti_cont.46748:
-	j	bgti_cont.46742
-bgti_else.46745:
-	addi	%a0, %a0, -20
-bgti_cont.46746:
-	j	bgti_cont.46742
-bgti_else.46743:
-	addi	%a0, %a0, -10
-bgti_cont.46744:
-	j	bgti_cont.46742
-bgti_else.46741:
-bgti_cont.46742:
-	addi	%v0, %a0, 48
-	addi	%sp, %sp, 11
-	jal	min_caml_print_char
-	addi	%sp, %sp, -11
-	addi	%v0, %a2, 48
-	addi	%sp, %sp, 11
-	jal	min_caml_print_char
-	addi	%sp, %sp, -11
-	addi	%v0, %a1, 48
-	addi	%sp, %sp, 11
-	jal	min_caml_print_char
-	addi	%sp, %sp, -11
-bgt_cont.46740:
-bgt_cont.46690:
-	addi	%v0, %a3, 0
+	addi	%v0, %zero, 10
 	addi	%sp, %sp, 11
 	jal	min_caml_print_char
 	addi	%sp, %sp, -11
@@ -17822,28 +14612,28 @@ bgt_cont.46690:
 	addi	%sp, %sp, 11
 	jal	scan_pixel.3057
 	addi	%sp, %sp, -11
-bgt_cont.46370:
+bgt_cont.32855:
 	lw	%a0, 0(%sp)
 	addi	%t2, %a0, 1
 	lw	%a0, 4(%sp)
 	addi	%t3, %a0, 2
-	blti	%t3, 5, bgti_else.46765
+	blti	%t3, 5, bgti_else.32878
 	addi	%t3, %t3, -5
-	j	bgti_cont.46766
-bgti_else.46765:
-bgti_cont.46766:
-	blt	%t2, %t0, bgt_else.46767
+	j	bgti_cont.32879
+bgti_else.32878:
+bgti_cont.32879:
+	blt	%t2, %t0, bgt_else.32880
 	lw	%t3, 5(%sp)
 	lw	%t2, 6(%sp)
 	lw	%t1, 7(%sp)
 	lw	%t0, 8(%sp)
 	lw	%ra, 9(%sp)
 	jr	%ra
-bgt_else.46767:
+bgt_else.32880:
 	lw	%a0, 10(%sp)
-	blt	%t2, %a0, bgt_else.46769
-	j	bgt_cont.46770
-bgt_else.46769:
+	blt	%t2, %a0, bgt_else.32882
+	j	bgt_cont.32883
+bgt_else.32882:
 	addi	%a1, %t2, 1
 	flw	%f1, 158(%zero)
 	lw	%a0, 157(%zero)
@@ -17868,7 +14658,7 @@ bgt_else.46769:
 	addi	%sp, %sp, 11
 	jal	pretrace_pixels.3046
 	addi	%sp, %sp, -11
-bgt_cont.46770:
+bgt_cont.32883:
 	lw	%a2, 1(%sp)
 	lw	%a1, 3(%sp)
 	lw	%a0, 2(%sp)
@@ -17879,11 +14669,11 @@ bgt_cont.46770:
 	addi	%sp, %sp, -11
 	addi	%v0, %t2, 1
 	addi	%a2, %t3, 2
-	blti	%a2, 5, bgti_else.46771
+	blti	%a2, 5, bgti_else.32884
 	addi	%a2, %a2, -5
-	j	bgti_cont.46772
-bgti_else.46771:
-bgti_cont.46772:
+	j	bgti_cont.32885
+bgti_else.32884:
+bgti_cont.32885:
 	lw	%t3, 5(%sp)
 	lw	%t2, 6(%sp)
 	lw	%t1, 7(%sp)
@@ -17893,919 +14683,910 @@ bgti_cont.46772:
 	lw	%a0, 1(%sp)
 	lw	%v1, 3(%sp)
 	j	scan_line.3063
-init_line_elements.3073:
-	add	%a1, %zero, %v0
-	add	%a2, %zero, %v1
-	add	%a3, %zero, %ra
-	blti	%a2, 0, bgti_else.46803
-	addi	%k0, %zero, 3
-	addi	%v0, %k0, 0
+create_pixel.3071:
+	add	%a1, %zero, %ra
+	addi	%a2, %zero, 3
+	addi	%v0, %a2, 0
 	fmov	%f0, %fzero
 	jal	min_caml_create_float_array
-	addi	%s0, %v0, 0
-	addi	%v0, %k0, 0
+	addi	%a3, %v0, 0
+	addi	%v0, %a2, 0
 	fmov	%f0, %fzero
 	jal	min_caml_create_float_array
 	addi	%v1, %v0, 0
-	addi	%s1, %zero, 5
-	addi	%v0, %s1, 0
+	addi	%k0, %zero, 5
+	addi	%v0, %k0, 0
+	jal	min_caml_create_array
+	addi	%s0, %v0, 0
+	addi	%v0, %a2, 0
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	sw	%v0, 1(%s0)
+	addi	%v0, %a2, 0
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	sw	%v0, 2(%s0)
+	addi	%v0, %a2, 0
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	sw	%v0, 3(%s0)
+	addi	%v0, %a2, 0
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	sw	%v0, 4(%s0)
+	addi	%v1, %zero, 0
+	addi	%v0, %k0, 0
+	jal	min_caml_create_array
+	addi	%s1, %v0, 0
+	addi	%v1, %zero, 0
+	addi	%v0, %k0, 0
 	jal	min_caml_create_array
 	addi	%s2, %v0, 0
+	addi	%v0, %a2, 0
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	addi	%v1, %v0, 0
 	addi	%v0, %k0, 0
+	jal	min_caml_create_array
+	addi	%s3, %v0, 0
+	addi	%v0, %a2, 0
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	sw	%v0, 1(%s3)
+	addi	%v0, %a2, 0
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	sw	%v0, 2(%s3)
+	addi	%v0, %a2, 0
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	sw	%v0, 3(%s3)
+	addi	%v0, %a2, 0
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	sw	%v0, 4(%s3)
+	addi	%v0, %a2, 0
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	addi	%v1, %v0, 0
+	addi	%v0, %k0, 0
+	jal	min_caml_create_array
+	addi	%s4, %v0, 0
+	addi	%v0, %a2, 0
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	sw	%v0, 1(%s4)
+	addi	%v0, %a2, 0
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	sw	%v0, 2(%s4)
+	addi	%v0, %a2, 0
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	sw	%v0, 3(%s4)
+	addi	%v0, %a2, 0
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	sw	%v0, 4(%s4)
+	addi	%v1, %zero, 0
+	addi	%v0, %k1, 0
+	jal	min_caml_create_array
+	addi	%s5, %v0, 0
+	addi	%v0, %a2, 0
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	addi	%v1, %v0, 0
+	addi	%v0, %k0, 0
+	jal	min_caml_create_array
+	addi	%a0, %v0, 0
+	addi	%v0, %a2, 0
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	sw	%v0, 1(%a0)
+	addi	%v0, %a2, 0
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	sw	%v0, 2(%a0)
+	addi	%v0, %a2, 0
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	sw	%v0, 3(%a0)
+	addi	%v0, %a2, 0
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	sw	%v0, 4(%a0)
+	add	%v0, %zero, %hp
+	addi	%hp, %hp, 8
+	sw	%a0, 7(%v0)
+	sw	%s5, 6(%v0)
+	sw	%s4, 5(%v0)
+	sw	%s3, 4(%v0)
+	sw	%s2, 3(%v0)
+	sw	%s1, 2(%v0)
+	sw	%s0, 1(%v0)
+	sw	%a3, 0(%v0)
+	add	%ra, %zero, %a1
+	jr	%ra
+init_line_elements.3073:
+	add	%s6, %zero, %v0
+	add	%a1, %zero, %v1
+	add	%s7, %zero, %ra
+	blti	%a1, 0, bgti_else.32938
+	addi	%t7, %zero, 3
+	addi	%v0, %t7, 0
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	addi	%a2, %v0, 0
+	addi	%v0, %t7, 0
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	addi	%v1, %v0, 0
+	addi	%t8, %zero, 5
+	addi	%v0, %t8, 0
+	jal	min_caml_create_array
+	addi	%a3, %v0, 0
+	addi	%v0, %t7, 0
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	sw	%v0, 1(%a3)
+	addi	%v0, %t7, 0
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	sw	%v0, 2(%a3)
+	addi	%v0, %t7, 0
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	sw	%v0, 3(%a3)
+	addi	%v0, %t7, 0
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	sw	%v0, 4(%a3)
+	addi	%v1, %zero, 0
+	addi	%v0, %t8, 0
+	jal	min_caml_create_array
+	addi	%k0, %v0, 0
+	addi	%v1, %zero, 0
+	addi	%v0, %t8, 0
+	jal	min_caml_create_array
+	addi	%s0, %v0, 0
+	addi	%v0, %t7, 0
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	addi	%v1, %v0, 0
+	addi	%v0, %t8, 0
+	jal	min_caml_create_array
+	addi	%s1, %v0, 0
+	addi	%v0, %t7, 0
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	sw	%v0, 1(%s1)
+	addi	%v0, %t7, 0
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	sw	%v0, 2(%s1)
+	addi	%v0, %t7, 0
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	sw	%v0, 3(%s1)
+	addi	%v0, %t7, 0
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	sw	%v0, 4(%s1)
+	addi	%v0, %t7, 0
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	addi	%v1, %v0, 0
+	addi	%v0, %t8, 0
+	jal	min_caml_create_array
+	addi	%s2, %v0, 0
+	addi	%v0, %t7, 0
 	fmov	%f0, %fzero
 	jal	min_caml_create_float_array
 	sw	%v0, 1(%s2)
-	addi	%v0, %k0, 0
+	addi	%v0, %t7, 0
 	fmov	%f0, %fzero
 	jal	min_caml_create_float_array
 	sw	%v0, 2(%s2)
-	addi	%v0, %k0, 0
+	addi	%v0, %t7, 0
 	fmov	%f0, %fzero
 	jal	min_caml_create_float_array
 	sw	%v0, 3(%s2)
-	addi	%v0, %k0, 0
+	addi	%v0, %t7, 0
 	fmov	%f0, %fzero
 	jal	min_caml_create_float_array
 	sw	%v0, 4(%s2)
 	addi	%v1, %zero, 0
-	addi	%v0, %s1, 0
-	jal	min_caml_create_array
-	addi	%s3, %v0, 0
-	addi	%v1, %zero, 0
-	addi	%v0, %s1, 0
-	jal	min_caml_create_array
-	addi	%s4, %v0, 0
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	addi	%v1, %v0, 0
-	addi	%v0, %s1, 0
-	jal	min_caml_create_array
-	addi	%s5, %v0, 0
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 1(%s5)
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 2(%s5)
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 3(%s5)
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 4(%s5)
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	addi	%v1, %v0, 0
-	addi	%v0, %s1, 0
-	jal	min_caml_create_array
-	addi	%s6, %v0, 0
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 1(%s6)
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 2(%s6)
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 3(%s6)
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 4(%s6)
-	addi	%v1, %zero, 0
 	addi	%v0, %k1, 0
 	jal	min_caml_create_array
-	addi	%s7, %v0, 0
-	addi	%v0, %k0, 0
+	addi	%s3, %v0, 0
+	addi	%v0, %t7, 0
 	fmov	%f0, %fzero
 	jal	min_caml_create_float_array
 	addi	%v1, %v0, 0
-	addi	%v0, %s1, 0
+	addi	%v0, %t8, 0
 	jal	min_caml_create_array
 	addi	%a0, %v0, 0
-	addi	%v0, %k0, 0
+	addi	%v0, %t7, 0
 	fmov	%f0, %fzero
 	jal	min_caml_create_float_array
 	sw	%v0, 1(%a0)
-	addi	%v0, %k0, 0
+	addi	%v0, %t7, 0
 	fmov	%f0, %fzero
 	jal	min_caml_create_float_array
 	sw	%v0, 2(%a0)
-	addi	%v0, %k0, 0
+	addi	%v0, %t7, 0
 	fmov	%f0, %fzero
 	jal	min_caml_create_float_array
 	sw	%v0, 3(%a0)
-	addi	%v0, %k0, 0
+	addi	%v0, %t7, 0
 	fmov	%f0, %fzero
 	jal	min_caml_create_float_array
 	sw	%v0, 4(%a0)
 	add	%ra, %zero, %hp
 	addi	%hp, %hp, 8
 	sw	%a0, 7(%ra)
-	sw	%s7, 6(%ra)
-	sw	%s6, 5(%ra)
-	sw	%s5, 4(%ra)
-	sw	%s4, 3(%ra)
-	sw	%s3, 2(%ra)
-	sw	%s2, 1(%ra)
-	sw	%s0, 0(%ra)
-	add	%at, %a1, %a2
-	sw	%ra, 0(%at)
-	addi	%s4, %a2, -1
-	blti	%s4, 0, bgti_else.46804
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	addi	%a2, %v0, 0
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	addi	%v1, %v0, 0
-	addi	%v0, %s1, 0
-	jal	min_caml_create_array
-	addi	%s0, %v0, 0
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 1(%s0)
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 2(%s0)
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 3(%s0)
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 4(%s0)
-	addi	%v1, %zero, 0
-	addi	%v0, %s1, 0
-	jal	min_caml_create_array
-	addi	%s2, %v0, 0
-	addi	%v1, %zero, 0
-	addi	%v0, %s1, 0
-	jal	min_caml_create_array
-	addi	%s3, %v0, 0
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	addi	%v1, %v0, 0
-	addi	%v0, %s1, 0
-	jal	min_caml_create_array
-	addi	%s5, %v0, 0
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 1(%s5)
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 2(%s5)
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 3(%s5)
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 4(%s5)
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	addi	%v1, %v0, 0
-	addi	%v0, %s1, 0
-	jal	min_caml_create_array
-	addi	%s6, %v0, 0
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 1(%s6)
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 2(%s6)
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 3(%s6)
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 4(%s6)
-	addi	%v1, %zero, 0
-	addi	%v0, %k1, 0
-	jal	min_caml_create_array
-	addi	%s7, %v0, 0
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	addi	%v1, %v0, 0
-	addi	%v0, %s1, 0
-	jal	min_caml_create_array
-	addi	%a0, %v0, 0
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 1(%a0)
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 2(%a0)
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 3(%a0)
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 4(%a0)
-	add	%ra, %zero, %hp
-	addi	%hp, %hp, 8
-	sw	%a0, 7(%ra)
-	sw	%s7, 6(%ra)
-	sw	%s6, 5(%ra)
-	sw	%s5, 4(%ra)
-	sw	%s3, 3(%ra)
-	sw	%s2, 2(%ra)
-	sw	%s0, 1(%ra)
+	sw	%s3, 6(%ra)
+	sw	%s2, 5(%ra)
+	sw	%s1, 4(%ra)
+	sw	%s0, 3(%ra)
+	sw	%k0, 2(%ra)
+	sw	%a3, 1(%ra)
 	sw	%a2, 0(%ra)
-	add	%at, %a1, %s4
+	add	%at, %s6, %a1
 	sw	%ra, 0(%at)
-	addi	%s4, %s4, -1
-	blti	%s4, 0, bgti_else.46805
-	addi	%v0, %k0, 0
+	addi	%t9, %a1, -1
+	blti	%t9, 0, bgti_else.32939
+	jal	create_pixel.3071
+	add	%at, %s6, %t9
+	sw	%v0, 0(%at)
+	addi	%s0, %t9, -1
+	blti	%s0, 0, bgti_else.32940
+	addi	%v0, %t7, 0
 	fmov	%f0, %fzero
 	jal	min_caml_create_float_array
-	addi	%a2, %v0, 0
-	addi	%v0, %k0, 0
+	addi	%a1, %v0, 0
+	addi	%v0, %t7, 0
 	fmov	%f0, %fzero
 	jal	min_caml_create_float_array
 	addi	%v1, %v0, 0
-	addi	%v0, %s1, 0
+	addi	%v0, %t8, 0
 	jal	min_caml_create_array
-	addi	%s0, %v0, 0
-	addi	%v0, %k0, 0
+	addi	%a2, %v0, 0
+	addi	%v0, %t7, 0
 	fmov	%f0, %fzero
 	jal	min_caml_create_float_array
-	sw	%v0, 1(%s0)
-	addi	%v0, %k0, 0
+	sw	%v0, 1(%a2)
+	addi	%v0, %t7, 0
 	fmov	%f0, %fzero
 	jal	min_caml_create_float_array
-	sw	%v0, 2(%s0)
-	addi	%v0, %k0, 0
+	sw	%v0, 2(%a2)
+	addi	%v0, %t7, 0
 	fmov	%f0, %fzero
 	jal	min_caml_create_float_array
-	sw	%v0, 3(%s0)
-	addi	%v0, %k0, 0
+	sw	%v0, 3(%a2)
+	addi	%v0, %t7, 0
 	fmov	%f0, %fzero
 	jal	min_caml_create_float_array
-	sw	%v0, 4(%s0)
+	sw	%v0, 4(%a2)
 	addi	%v1, %zero, 0
-	addi	%v0, %s1, 0
+	addi	%v0, %t8, 0
+	jal	min_caml_create_array
+	addi	%a3, %v0, 0
+	addi	%v1, %zero, 0
+	addi	%v0, %t8, 0
+	jal	min_caml_create_array
+	addi	%k0, %v0, 0
+	addi	%v0, %t7, 0
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	addi	%v1, %v0, 0
+	addi	%v0, %t8, 0
+	jal	min_caml_create_array
+	addi	%s1, %v0, 0
+	addi	%v0, %t7, 0
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	sw	%v0, 1(%s1)
+	addi	%v0, %t7, 0
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	sw	%v0, 2(%s1)
+	addi	%v0, %t7, 0
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	sw	%v0, 3(%s1)
+	addi	%v0, %t7, 0
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	sw	%v0, 4(%s1)
+	addi	%v0, %t7, 0
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	addi	%v1, %v0, 0
+	addi	%v0, %t8, 0
 	jal	min_caml_create_array
 	addi	%s2, %v0, 0
-	addi	%v1, %zero, 0
-	addi	%v0, %s1, 0
-	jal	min_caml_create_array
-	addi	%s3, %v0, 0
-	addi	%v0, %k0, 0
+	addi	%v0, %t7, 0
 	fmov	%f0, %fzero
 	jal	min_caml_create_float_array
-	addi	%v1, %v0, 0
-	addi	%v0, %s1, 0
-	jal	min_caml_create_array
-	addi	%s5, %v0, 0
-	addi	%v0, %k0, 0
+	sw	%v0, 1(%s2)
+	addi	%v0, %t7, 0
 	fmov	%f0, %fzero
 	jal	min_caml_create_float_array
-	sw	%v0, 1(%s5)
-	addi	%v0, %k0, 0
+	sw	%v0, 2(%s2)
+	addi	%v0, %t7, 0
 	fmov	%f0, %fzero
 	jal	min_caml_create_float_array
-	sw	%v0, 2(%s5)
-	addi	%v0, %k0, 0
+	sw	%v0, 3(%s2)
+	addi	%v0, %t7, 0
 	fmov	%f0, %fzero
 	jal	min_caml_create_float_array
-	sw	%v0, 3(%s5)
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 4(%s5)
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	addi	%v1, %v0, 0
-	addi	%v0, %s1, 0
-	jal	min_caml_create_array
-	addi	%s6, %v0, 0
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 1(%s6)
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 2(%s6)
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 3(%s6)
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 4(%s6)
+	sw	%v0, 4(%s2)
 	addi	%v1, %zero, 0
 	addi	%v0, %k1, 0
 	jal	min_caml_create_array
-	addi	%s7, %v0, 0
-	addi	%v0, %k0, 0
+	addi	%s3, %v0, 0
+	addi	%v0, %t7, 0
 	fmov	%f0, %fzero
 	jal	min_caml_create_float_array
 	addi	%v1, %v0, 0
-	addi	%v0, %s1, 0
+	addi	%v0, %t8, 0
 	jal	min_caml_create_array
 	addi	%a0, %v0, 0
-	addi	%v0, %k0, 0
+	addi	%v0, %t7, 0
 	fmov	%f0, %fzero
 	jal	min_caml_create_float_array
 	sw	%v0, 1(%a0)
-	addi	%v0, %k0, 0
+	addi	%v0, %t7, 0
 	fmov	%f0, %fzero
 	jal	min_caml_create_float_array
 	sw	%v0, 2(%a0)
-	addi	%v0, %k0, 0
+	addi	%v0, %t7, 0
 	fmov	%f0, %fzero
 	jal	min_caml_create_float_array
 	sw	%v0, 3(%a0)
-	addi	%v0, %k0, 0
+	addi	%v0, %t7, 0
 	fmov	%f0, %fzero
 	jal	min_caml_create_float_array
 	sw	%v0, 4(%a0)
 	add	%ra, %zero, %hp
 	addi	%hp, %hp, 8
 	sw	%a0, 7(%ra)
-	sw	%s7, 6(%ra)
-	sw	%s6, 5(%ra)
-	sw	%s5, 4(%ra)
-	sw	%s3, 3(%ra)
-	sw	%s2, 2(%ra)
-	sw	%s0, 1(%ra)
-	sw	%a2, 0(%ra)
-	add	%at, %a1, %s4
+	sw	%s3, 6(%ra)
+	sw	%s2, 5(%ra)
+	sw	%s1, 4(%ra)
+	sw	%k0, 3(%ra)
+	sw	%a3, 2(%ra)
+	sw	%a2, 1(%ra)
+	sw	%a1, 0(%ra)
+	add	%at, %s6, %s0
 	sw	%ra, 0(%at)
-	addi	%s4, %s4, -1
-	blti	%s4, 0, bgti_else.46806
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	addi	%a2, %v0, 0
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	addi	%v1, %v0, 0
-	addi	%v0, %s1, 0
-	jal	min_caml_create_array
-	addi	%s0, %v0, 0
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 1(%s0)
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 2(%s0)
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 3(%s0)
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 4(%s0)
-	addi	%v1, %zero, 0
-	addi	%v0, %s1, 0
-	jal	min_caml_create_array
-	addi	%s2, %v0, 0
-	addi	%v1, %zero, 0
-	addi	%v0, %s1, 0
-	jal	min_caml_create_array
-	addi	%s3, %v0, 0
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	addi	%v1, %v0, 0
-	addi	%v0, %s1, 0
-	jal	min_caml_create_array
-	addi	%s5, %v0, 0
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 1(%s5)
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 2(%s5)
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 3(%s5)
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 4(%s5)
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	addi	%v1, %v0, 0
-	addi	%v0, %s1, 0
-	jal	min_caml_create_array
-	addi	%s6, %v0, 0
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 1(%s6)
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 2(%s6)
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 3(%s6)
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 4(%s6)
-	addi	%v1, %zero, 0
-	addi	%v0, %k1, 0
-	jal	min_caml_create_array
-	addi	%s7, %v0, 0
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	addi	%v1, %v0, 0
-	addi	%v0, %s1, 0
-	jal	min_caml_create_array
-	addi	%a0, %v0, 0
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 1(%a0)
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 2(%a0)
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 3(%a0)
-	addi	%v0, %k0, 0
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	sw	%v0, 4(%a0)
-	add	%k0, %zero, %hp
-	addi	%hp, %hp, 8
-	sw	%a0, 7(%k0)
-	sw	%s7, 6(%k0)
-	sw	%s6, 5(%k0)
-	sw	%s5, 4(%k0)
-	sw	%s3, 3(%k0)
-	sw	%s2, 2(%k0)
-	sw	%s0, 1(%k0)
-	sw	%a2, 0(%k0)
-	add	%at, %a1, %s4
-	sw	%k0, 0(%at)
-	addi	%v1, %s4, -1
-	add	%ra, %zero, %a3
-	addi	%v0, %a1, 0
+	addi	%t7, %s0, -1
+	blti	%t7, 0, bgti_else.32941
+	jal	create_pixel.3071
+	add	%at, %s6, %t7
+	sw	%v0, 0(%at)
+	addi	%v1, %t7, -1
+	add	%ra, %zero, %s7
+	addi	%v0, %s6, 0
 	j	init_line_elements.3073
-bgti_else.46806:
-	add	%ra, %zero, %a3
-	add	%v0, %zero, %a1
+bgti_else.32941:
+	add	%ra, %zero, %s7
+	add	%v0, %zero, %s6
 	jr	%ra
-bgti_else.46805:
-	add	%ra, %zero, %a3
-	add	%v0, %zero, %a1
+bgti_else.32940:
+	add	%ra, %zero, %s7
+	add	%v0, %zero, %s6
 	jr	%ra
-bgti_else.46804:
-	add	%ra, %zero, %a3
-	add	%v0, %zero, %a1
+bgti_else.32939:
+	add	%ra, %zero, %s7
+	add	%v0, %zero, %s6
 	jr	%ra
-bgti_else.46803:
-	add	%ra, %zero, %a3
-	add	%v0, %zero, %a1
+bgti_else.32938:
+	add	%ra, %zero, %s7
+	add	%v0, %zero, %s6
 	jr	%ra
 calc_dirvec.3083:
-	fmov	%f17, %f2
-	add	%a1, %zero, %ra
-	blti	%v0, 5, bgti_else.47237
+	fmov	%f20, %f2
+	add	%a1, %zero, %a0
+	add	%a2, %zero, %ra
+	blti	%v0, 5, bgti_else.33350
 	fmul	%f17, %f0, %f0
 	fmul	%f16, %f1, %f1
 	fadd	%f16, %f17, %f16
 	fadd	%f16, %f16, %f30
-	fsqrt	%f16, %f16
-	fdiv	%f19, %f0, %f16
-	fdiv	%f17, %f1, %f16
-	fdiv	%f18, %f30, %f16
+	fsqrt	%f17, %f16
+	fdiv	%f19, %f0, %f17
+	fdiv	%f16, %f1, %f17
+	fdiv	%f18, %f30, %f17
 	lw	%a3, 179(%v1)
+	add	%at, %a3, %a1
+	lw	%a0, 0(%at)
+	lw	%a0, 0(%a0)
+	fsw	%f19, 0(%a0)
+	fsw	%f16, 1(%a0)
+	fsw	%f18, 2(%a0)
+	addi	%a0, %a1, 40
 	add	%at, %a3, %a0
-	lw	%a2, 0(%at)
-	lw	%a2, 0(%a2)
-	fsw	%f19, 0(%a2)
-	fsw	%f17, 1(%a2)
-	fsw	%f18, 2(%a2)
-	addi	%a2, %a0, 40
-	add	%at, %a3, %a2
-	lw	%a2, 0(%at)
-	lw	%a2, 0(%a2)
-	fneg	%f0, %f17
-	fsw	%f19, 0(%a2)
-	fsw	%f18, 1(%a2)
-	fsw	%f0, 2(%a2)
-	addi	%a2, %a0, 80
-	add	%at, %a3, %a2
-	lw	%a2, 0(%at)
-	lw	%a2, 0(%a2)
+	lw	%a0, 0(%at)
+	lw	%a0, 0(%a0)
+	fneg	%f0, %f16
+	fsw	%f19, 0(%a0)
+	fsw	%f18, 1(%a0)
+	fsw	%f0, 2(%a0)
+	addi	%a0, %a1, 80
+	add	%at, %a3, %a0
+	lw	%a0, 0(%at)
+	lw	%a0, 0(%a0)
 	fneg	%f1, %f19
-	fneg	%f0, %f17
-	fsw	%f18, 0(%a2)
-	fsw	%f1, 1(%a2)
-	fsw	%f0, 2(%a2)
-	addi	%a2, %a0, 1
-	add	%at, %a3, %a2
-	lw	%a2, 0(%at)
-	lw	%a2, 0(%a2)
-	fneg	%f16, %f19
-	fneg	%f1, %f17
+	fneg	%f0, %f16
+	fsw	%f18, 0(%a0)
+	fsw	%f1, 1(%a0)
+	fsw	%f0, 2(%a0)
+	addi	%a0, %a1, 1
+	add	%at, %a3, %a0
+	lw	%a0, 0(%at)
+	lw	%a0, 0(%a0)
+	fneg	%f17, %f19
+	fneg	%f1, %f16
 	fneg	%f0, %f18
-	fsw	%f16, 0(%a2)
-	fsw	%f1, 1(%a2)
-	fsw	%f0, 2(%a2)
-	addi	%a2, %a0, 41
-	add	%at, %a3, %a2
-	lw	%a2, 0(%at)
-	lw	%a2, 0(%a2)
+	fsw	%f17, 0(%a0)
+	fsw	%f1, 1(%a0)
+	fsw	%f0, 2(%a0)
+	addi	%a0, %a1, 41
+	add	%at, %a3, %a0
+	lw	%a0, 0(%at)
+	lw	%a0, 0(%a0)
 	fneg	%f1, %f19
 	fneg	%f0, %f18
-	fsw	%f1, 0(%a2)
-	fsw	%f0, 1(%a2)
-	fsw	%f17, 2(%a2)
-	addi	%a0, %a0, 81
+	fsw	%f1, 0(%a0)
+	fsw	%f0, 1(%a0)
+	fsw	%f16, 2(%a0)
+	addi	%a0, %a1, 81
 	add	%at, %a3, %a0
 	lw	%a0, 0(%at)
 	lw	%a0, 0(%a0)
 	fneg	%f0, %f18
 	fsw	%f0, 0(%a0)
 	fsw	%f19, 1(%a0)
-	add	%ra, %zero, %a1
-	fsw	%f17, 2(%a0)
+	add	%ra, %zero, %a2
+	fsw	%f16, 2(%a0)
 	jr	%ra
-bgti_else.47237:
+bgti_else.33350:
 	fmul	%f0, %f1, %f1
-	flw	%f20, 441(%zero)
-	fadd	%f0, %f0, %f20
-	fsqrt	%f19, %f0
-	fdiv	%f2, %f30, %f19
-	fblt	%f2, %fzero, fbgt_else.47239
-	add	%a2, %zero, %k1
-	j	fbgt_cont.47240
-fbgt_else.47239:
-	add	%a2, %zero, %zero
-fbgt_cont.47240:
-	fabs	%f18, %f2
-	flw	%f21, 462(%zero)
-	fblt	%f18, %f21, fbgt_else.47241
-	flw	%f0, 455(%zero)
-	fblt	%f18, %f0, fbgt_else.47243
-	flw	%f16, 479(%zero)
-	fdiv	%f22, %f30, %f18
-	fmul	%f23, %f22, %f22
-	fmul	%f2, %f23, %f23
-	fmul	%f18, %f2, %f2
-	flw	%f0, 461(%zero)
-	fmul	%f0, %f0, %f22
-	fmul	%f0, %f0, %f23
-	fsub	%f1, %f22, %f0
-	flw	%f0, 460(%zero)
-	fmul	%f0, %f0, %f22
-	fmul	%f0, %f0, %f2
-	fadd	%f1, %f1, %f0
-	flw	%f0, 459(%zero)
-	fmul	%f0, %f0, %f22
-	fmul	%f0, %f0, %f23
-	fmul	%f0, %f0, %f2
-	fsub	%f1, %f1, %f0
-	flw	%f0, 458(%zero)
-	fmul	%f0, %f0, %f22
-	fmul	%f0, %f0, %f18
-	fadd	%f1, %f1, %f0
-	flw	%f0, 457(%zero)
-	fmul	%f0, %f0, %f22
-	fmul	%f0, %f0, %f23
-	fmul	%f0, %f0, %f18
-	fsub	%f1, %f1, %f0
-	flw	%f0, 456(%zero)
-	fmul	%f0, %f0, %f22
-	fmul	%f0, %f0, %f2
-	fmul	%f0, %f0, %f18
-	fadd	%f0, %f1, %f0
-	fsub	%f0, %f16, %f0
-	j	fbgt_cont.47244
-fbgt_else.47243:
-	flw	%f16, 478(%zero)
-	fsub	%f1, %f18, %f30
-	fadd	%f0, %f18, %f30
-	fdiv	%f22, %f1, %f0
-	fmul	%f23, %f22, %f22
-	fmul	%f2, %f23, %f23
-	fmul	%f18, %f2, %f2
-	flw	%f0, 461(%zero)
-	fmul	%f0, %f0, %f22
-	fmul	%f0, %f0, %f23
-	fsub	%f1, %f22, %f0
-	flw	%f0, 460(%zero)
-	fmul	%f0, %f0, %f22
-	fmul	%f0, %f0, %f2
-	fadd	%f1, %f1, %f0
-	flw	%f0, 459(%zero)
-	fmul	%f0, %f0, %f22
-	fmul	%f0, %f0, %f23
-	fmul	%f0, %f0, %f2
-	fsub	%f1, %f1, %f0
-	flw	%f0, 458(%zero)
-	fmul	%f0, %f0, %f22
-	fmul	%f0, %f0, %f18
-	fadd	%f1, %f1, %f0
-	flw	%f0, 457(%zero)
-	fmul	%f0, %f0, %f22
-	fmul	%f0, %f0, %f23
-	fmul	%f0, %f0, %f18
-	fsub	%f1, %f1, %f0
-	flw	%f0, 456(%zero)
-	fmul	%f0, %f0, %f22
-	fmul	%f0, %f0, %f2
-	fmul	%f0, %f0, %f18
-	fadd	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-fbgt_cont.47244:
-	beqi	%a2, 0, bnei_else.47245
-	j	fbgt_cont.47242
-bnei_else.47245:
-	fneg	%f0, %f0
-bnei_cont.47246:
-	j	fbgt_cont.47242
-fbgt_else.47241:
-	fmul	%f22, %f2, %f2
-	fmul	%f18, %f22, %f22
-	fmul	%f16, %f18, %f18
-	flw	%f0, 461(%zero)
-	fmul	%f0, %f0, %f2
-	fmul	%f0, %f0, %f22
-	fsub	%f1, %f2, %f0
-	flw	%f0, 460(%zero)
-	fmul	%f0, %f0, %f2
-	fmul	%f0, %f0, %f18
-	fadd	%f1, %f1, %f0
-	flw	%f0, 459(%zero)
-	fmul	%f0, %f0, %f2
-	fmul	%f0, %f0, %f22
-	fmul	%f0, %f0, %f18
-	fsub	%f1, %f1, %f0
-	flw	%f0, 458(%zero)
-	fmul	%f0, %f0, %f2
-	fmul	%f0, %f0, %f16
-	fadd	%f1, %f1, %f0
-	flw	%f0, 457(%zero)
-	fmul	%f0, %f0, %f2
-	fmul	%f0, %f0, %f22
-	fmul	%f0, %f0, %f16
-	fsub	%f1, %f1, %f0
-	flw	%f0, 456(%zero)
-	fmul	%f0, %f0, %f2
-	fmul	%f0, %f0, %f18
-	fmul	%f0, %f0, %f16
-	fadd	%f0, %f1, %f0
-fbgt_cont.47242:
-	fmul	%f23, %f0, %f17
-	flw	%f22, 494(%zero)
-	fblt	%f23, %fzero, fbgt_else.47247
-	add	%a2, %zero, %k1
-	j	fbgt_cont.47248
-fbgt_else.47247:
-	add	%a2, %zero, %zero
-fbgt_cont.47248:
-	fabs	%f18, %f23
-	flw	%f2, 493(%zero)
-	fblt	%f18, %f2, fbgt_else.47249
+	flw	%f23, 439(%zero)
+	fadd	%f0, %f0, %f23
+	fsqrt	%f21, %f0
+	fdiv	%f0, %f30, %f21
+	jal	atan.2639
+	fmul	%f18, %f0, %f20
+	flw	%f22, 495(%zero)
+	fblt	%f18, %fzero, fbgt_else.33352
+	add	%a0, %zero, %k1
+	j	fbgt_cont.33353
+fbgt_else.33352:
+	add	%a0, %zero, %zero
+fbgt_cont.33353:
+	fabs	%f17, %f18
+	flw	%f24, 494(%zero)
+	fblt	%f17, %f24, fbgt_else.33354
+	flw	%f0, 493(%zero)
+	fblt	%f17, %f0, fbgt_cont.33355
 	flw	%f0, 492(%zero)
-	fblt	%f18, %f0, fbgt_cont.47250
+	fblt	%f17, %f0, fbgt_cont.33355
 	flw	%f0, 491(%zero)
-	fblt	%f18, %f0, fbgt_cont.47250
+	fblt	%f17, %f0, fbgt_cont.33355
 	flw	%f0, 490(%zero)
-	fblt	%f18, %f0, fbgt_cont.47250
+	fblt	%f17, %f0, fbgt_cont.33355
 	flw	%f0, 489(%zero)
-	fblt	%f18, %f0, fbgt_cont.47250
+	fblt	%f17, %f0, fbgt_cont.33355
 	flw	%f0, 488(%zero)
-	fblt	%f18, %f0, fbgt_cont.47250
+	fblt	%f17, %f0, fbgt_cont.33355
 	flw	%f0, 487(%zero)
-	fblt	%f18, %f0, fbgt_cont.47250
+	fblt	%f17, %f0, fbgt_cont.33355
 	flw	%f0, 486(%zero)
-	fblt	%f18, %f0, fbgt_cont.47250
+	fblt	%f17, %f0, fbgt_cont.33355
 	flw	%f0, 485(%zero)
-	fblt	%f18, %f0, fbgt_cont.47250
+	fblt	%f17, %f0, fbgt_cont.33355
 	flw	%f0, 484(%zero)
-	fblt	%f18, %f0, fbgt_cont.47250
-	flw	%f0, 483(%zero)
-	fblt	%f18, %f0, fbgt_cont.47250
-	flw	%f1, 482(%zero)
+	fblt	%f17, %f0, fbgt_cont.33355
+	flw	%f1, 483(%zero)
+	fmov	%f0, %f17
+	jal	reduction_2pi_sub1.2626
+	j	fbgt_cont.33355
+fbgt_else.33374:
+fbgt_cont.33375:
+	j	fbgt_cont.33355
+fbgt_else.33372:
+fbgt_cont.33373:
+	j	fbgt_cont.33355
+fbgt_else.33370:
+fbgt_cont.33371:
+	j	fbgt_cont.33355
+fbgt_else.33368:
+fbgt_cont.33369:
+	j	fbgt_cont.33355
+fbgt_else.33366:
+fbgt_cont.33367:
+	j	fbgt_cont.33355
+fbgt_else.33364:
+fbgt_cont.33365:
+	j	fbgt_cont.33355
+fbgt_else.33362:
+fbgt_cont.33363:
+	j	fbgt_cont.33355
+fbgt_else.33360:
+fbgt_cont.33361:
+	j	fbgt_cont.33355
+fbgt_else.33358:
+fbgt_cont.33359:
+	j	fbgt_cont.33355
+fbgt_else.33356:
+fbgt_cont.33357:
+	j	fbgt_cont.33355
+fbgt_else.33354:
+	fmov	%f0, %f24
+fbgt_cont.33355:
+	fblt	%f17, %f24, fbgt_else.33376
+	fblt	%f17, %f0, fbgt_else.33378
+	fsub	%f17, %f17, %f0
+	flw	%f16, 496(%zero)
+	fdiv	%f0, %f0, %f16
+	fblt	%f17, %f24, fbgt_cont.33377
+	fblt	%f17, %f0, fbgt_else.33382
+	fsub	%f17, %f17, %f0
+	fdiv	%f1, %f0, %f16
+	fblt	%f17, %f24, fbgt_cont.33377
+	fblt	%f17, %f1, fbgt_else.33386
+	fsub	%f0, %f17, %f1
+	fdiv	%f1, %f1, %f16
+	fmov	%f2, %f24
+	jal	reduction_2pi_sub2.2629
+	fmov	%f17, %f0
+	j	fbgt_cont.33377
+fbgt_else.33386:
+	fdiv	%f1, %f1, %f16
+	fmov	%f2, %f24
+	fmov	%f0, %f17
+	jal	reduction_2pi_sub2.2629
+	fmov	%f17, %f0
+fbgt_cont.33387:
+	j	fbgt_cont.33377
+fbgt_else.33384:
+fbgt_cont.33385:
+	j	fbgt_cont.33377
+fbgt_else.33382:
+	fdiv	%f1, %f0, %f16
+	fblt	%f17, %f24, fbgt_cont.33377
+	fblt	%f17, %f1, fbgt_else.33390
+	fsub	%f0, %f17, %f1
+	fdiv	%f1, %f1, %f16
+	fmov	%f2, %f24
+	jal	reduction_2pi_sub2.2629
+	fmov	%f17, %f0
+	j	fbgt_cont.33377
+fbgt_else.33390:
+	fdiv	%f1, %f1, %f16
+	fmov	%f2, %f24
+	fmov	%f0, %f17
+	jal	reduction_2pi_sub2.2629
+	fmov	%f17, %f0
+fbgt_cont.33391:
+	j	fbgt_cont.33377
+fbgt_else.33388:
+fbgt_cont.33389:
+fbgt_cont.33383:
+	j	fbgt_cont.33377
+fbgt_else.33380:
+fbgt_cont.33381:
+	j	fbgt_cont.33377
+fbgt_else.33378:
+	flw	%f16, 496(%zero)
+	fdiv	%f0, %f0, %f16
+	fblt	%f17, %f24, fbgt_cont.33377
+	fblt	%f17, %f0, fbgt_else.33394
+	fsub	%f17, %f17, %f0
+	fdiv	%f1, %f0, %f16
+	fblt	%f17, %f24, fbgt_cont.33377
+	fblt	%f17, %f1, fbgt_else.33398
+	fsub	%f0, %f17, %f1
+	fdiv	%f1, %f1, %f16
+	fmov	%f2, %f24
+	jal	reduction_2pi_sub2.2629
+	fmov	%f17, %f0
+	j	fbgt_cont.33377
+fbgt_else.33398:
+	fdiv	%f1, %f1, %f16
+	fmov	%f2, %f24
+	fmov	%f0, %f17
+	jal	reduction_2pi_sub2.2629
+	fmov	%f17, %f0
+fbgt_cont.33399:
+	j	fbgt_cont.33377
+fbgt_else.33396:
+fbgt_cont.33397:
+	j	fbgt_cont.33377
+fbgt_else.33394:
+	fdiv	%f1, %f0, %f16
+	fblt	%f17, %f24, fbgt_cont.33377
+	fblt	%f17, %f1, fbgt_else.33402
+	fsub	%f0, %f17, %f1
+	fdiv	%f1, %f1, %f16
+	fmov	%f2, %f24
+	jal	reduction_2pi_sub2.2629
+	fmov	%f17, %f0
+	j	fbgt_cont.33377
+fbgt_else.33402:
+	fdiv	%f1, %f1, %f16
+	fmov	%f2, %f24
+	fmov	%f0, %f17
+	jal	reduction_2pi_sub2.2629
+	fmov	%f17, %f0
+fbgt_cont.33403:
+	j	fbgt_cont.33377
+fbgt_else.33400:
+fbgt_cont.33401:
+fbgt_cont.33395:
+	j	fbgt_cont.33377
+fbgt_else.33392:
+fbgt_cont.33393:
+fbgt_cont.33379:
+	j	fbgt_cont.33377
+fbgt_else.33376:
+fbgt_cont.33377:
+	fblt	%f17, %f22, fbgt_else.33404
+	beqi	%a0, 0, bnei_else.33406
+	add	%a0, %zero, %zero
+	j	fbgt_cont.33405
+bnei_else.33406:
+	add	%a0, %zero, %k1
+bnei_cont.33407:
+	j	fbgt_cont.33405
+fbgt_else.33404:
+fbgt_cont.33405:
+	fblt	%f17, %f22, fbgt_else.33408
+	fsub	%f17, %f17, %f22
+	j	fbgt_cont.33409
+fbgt_else.33408:
+fbgt_cont.33409:
+	flw	%f25, 479(%zero)
+	fblt	%f17, %f25, fbgt_else.33410
+	fsub	%f17, %f22, %f17
+	j	fbgt_cont.33411
+fbgt_else.33410:
+fbgt_cont.33411:
+	flw	%f26, 478(%zero)
+	fblt	%f26, %f17, fbgt_else.33412
+	fmul	%f19, %f17, %f17
+	fmul	%f16, %f19, %f19
+	flw	%f0, 477(%zero)
+	fmul	%f0, %f0, %f17
+	fmul	%f0, %f0, %f19
+	fsub	%f1, %f17, %f0
+	flw	%f0, 476(%zero)
+	fmul	%f0, %f0, %f17
+	fmul	%f0, %f0, %f16
+	fadd	%f1, %f1, %f0
+	flw	%f0, 475(%zero)
+	fmul	%f0, %f0, %f17
+	fmul	%f0, %f0, %f19
+	fmul	%f0, %f0, %f16
+	fsub	%f17, %f1, %f0
+	j	fbgt_cont.33413
+fbgt_else.33412:
+	fsub	%f0, %f25, %f17
+	fmul	%f17, %f0, %f0
+	fmul	%f16, %f17, %f17
+	flw	%f0, 473(%zero)
+	fmul	%f0, %f0, %f17
+	fsub	%f1, %f30, %f0
+	flw	%f0, 472(%zero)
+	fmul	%f0, %f0, %f16
+	fadd	%f1, %f1, %f0
+	flw	%f0, 471(%zero)
+	fmul	%f0, %f0, %f17
+	fmul	%f0, %f0, %f16
+	fsub	%f17, %f1, %f0
+fbgt_cont.33413:
+	beqi	%a0, 0, bnei_else.33414
+	j	bnei_cont.33415
+bnei_else.33414:
+	fneg	%f17, %f17
+bnei_cont.33415:
+	fabs	%f18, %f18
+	fblt	%f18, %f24, fbgt_else.33416
+	flw	%f0, 493(%zero)
+	fblt	%f18, %f0, fbgt_cont.33417
+	flw	%f0, 492(%zero)
+	fblt	%f18, %f0, fbgt_cont.33417
+	flw	%f0, 491(%zero)
+	fblt	%f18, %f0, fbgt_cont.33417
+	flw	%f0, 490(%zero)
+	fblt	%f18, %f0, fbgt_cont.33417
+	flw	%f0, 489(%zero)
+	fblt	%f18, %f0, fbgt_cont.33417
+	flw	%f0, 488(%zero)
+	fblt	%f18, %f0, fbgt_cont.33417
+	flw	%f0, 487(%zero)
+	fblt	%f18, %f0, fbgt_cont.33417
+	flw	%f0, 486(%zero)
+	fblt	%f18, %f0, fbgt_cont.33417
+	flw	%f0, 485(%zero)
+	fblt	%f18, %f0, fbgt_cont.33417
+	flw	%f0, 484(%zero)
+	fblt	%f18, %f0, fbgt_cont.33417
+	flw	%f1, 483(%zero)
 	fmov	%f0, %f18
 	jal	reduction_2pi_sub1.2626
-	j	fbgt_cont.47250
-fbgt_else.47269:
-fbgt_cont.47270:
-	j	fbgt_cont.47250
-fbgt_else.47267:
-fbgt_cont.47268:
-	j	fbgt_cont.47250
-fbgt_else.47265:
-fbgt_cont.47266:
-	j	fbgt_cont.47250
-fbgt_else.47263:
-fbgt_cont.47264:
-	j	fbgt_cont.47250
-fbgt_else.47261:
-fbgt_cont.47262:
-	j	fbgt_cont.47250
-fbgt_else.47259:
-fbgt_cont.47260:
-	j	fbgt_cont.47250
-fbgt_else.47257:
-fbgt_cont.47258:
-	j	fbgt_cont.47250
-fbgt_else.47255:
-fbgt_cont.47256:
-	j	fbgt_cont.47250
-fbgt_else.47253:
-fbgt_cont.47254:
-	j	fbgt_cont.47250
-fbgt_else.47251:
-fbgt_cont.47252:
-	j	fbgt_cont.47250
-fbgt_else.47249:
-	fmov	%f0, %f2
-fbgt_cont.47250:
-	fblt	%f18, %f2, fbgt_else.47271
-	fblt	%f18, %f0, fbgt_else.47273
+	j	fbgt_cont.33417
+fbgt_else.33436:
+fbgt_cont.33437:
+	j	fbgt_cont.33417
+fbgt_else.33434:
+fbgt_cont.33435:
+	j	fbgt_cont.33417
+fbgt_else.33432:
+fbgt_cont.33433:
+	j	fbgt_cont.33417
+fbgt_else.33430:
+fbgt_cont.33431:
+	j	fbgt_cont.33417
+fbgt_else.33428:
+fbgt_cont.33429:
+	j	fbgt_cont.33417
+fbgt_else.33426:
+fbgt_cont.33427:
+	j	fbgt_cont.33417
+fbgt_else.33424:
+fbgt_cont.33425:
+	j	fbgt_cont.33417
+fbgt_else.33422:
+fbgt_cont.33423:
+	j	fbgt_cont.33417
+fbgt_else.33420:
+fbgt_cont.33421:
+	j	fbgt_cont.33417
+fbgt_else.33418:
+fbgt_cont.33419:
+	j	fbgt_cont.33417
+fbgt_else.33416:
+	fmov	%f0, %f24
+fbgt_cont.33417:
+	fblt	%f18, %f24, fbgt_else.33438
+	fblt	%f18, %f0, fbgt_else.33440
 	fsub	%f18, %f18, %f0
-	flw	%f16, 495(%zero)
+	flw	%f16, 496(%zero)
 	fdiv	%f0, %f0, %f16
-	fblt	%f18, %f2, fbgt_cont.47272
-	fblt	%f18, %f0, fbgt_else.47277
+	fblt	%f18, %f24, fbgt_cont.33439
+	fblt	%f18, %f0, fbgt_else.33444
 	fsub	%f18, %f18, %f0
 	fdiv	%f1, %f0, %f16
-	fblt	%f18, %f2, fbgt_cont.47272
-	fblt	%f18, %f1, fbgt_else.47281
+	fblt	%f18, %f24, fbgt_cont.33439
+	fblt	%f18, %f1, fbgt_else.33448
 	fsub	%f0, %f18, %f1
 	fdiv	%f1, %f1, %f16
+	fmov	%f2, %f24
 	jal	reduction_2pi_sub2.2629
 	fmov	%f18, %f0
-	j	fbgt_cont.47272
-fbgt_else.47281:
+	j	fbgt_cont.33439
+fbgt_else.33448:
 	fdiv	%f1, %f1, %f16
+	fmov	%f2, %f24
 	fmov	%f0, %f18
 	jal	reduction_2pi_sub2.2629
 	fmov	%f18, %f0
-fbgt_cont.47282:
-	j	fbgt_cont.47272
-fbgt_else.47279:
-fbgt_cont.47280:
-	j	fbgt_cont.47272
-fbgt_else.47277:
+fbgt_cont.33449:
+	j	fbgt_cont.33439
+fbgt_else.33446:
+fbgt_cont.33447:
+	j	fbgt_cont.33439
+fbgt_else.33444:
 	fdiv	%f1, %f0, %f16
-	fblt	%f18, %f2, fbgt_cont.47272
-	fblt	%f18, %f1, fbgt_else.47285
+	fblt	%f18, %f24, fbgt_cont.33439
+	fblt	%f18, %f1, fbgt_else.33452
 	fsub	%f0, %f18, %f1
 	fdiv	%f1, %f1, %f16
+	fmov	%f2, %f24
 	jal	reduction_2pi_sub2.2629
 	fmov	%f18, %f0
-	j	fbgt_cont.47272
-fbgt_else.47285:
+	j	fbgt_cont.33439
+fbgt_else.33452:
 	fdiv	%f1, %f1, %f16
+	fmov	%f2, %f24
 	fmov	%f0, %f18
 	jal	reduction_2pi_sub2.2629
 	fmov	%f18, %f0
-fbgt_cont.47286:
-	j	fbgt_cont.47272
-fbgt_else.47283:
-fbgt_cont.47284:
-fbgt_cont.47278:
-	j	fbgt_cont.47272
-fbgt_else.47275:
-fbgt_cont.47276:
-	j	fbgt_cont.47272
-fbgt_else.47273:
-	flw	%f16, 495(%zero)
+fbgt_cont.33453:
+	j	fbgt_cont.33439
+fbgt_else.33450:
+fbgt_cont.33451:
+fbgt_cont.33445:
+	j	fbgt_cont.33439
+fbgt_else.33442:
+fbgt_cont.33443:
+	j	fbgt_cont.33439
+fbgt_else.33440:
+	flw	%f16, 496(%zero)
 	fdiv	%f0, %f0, %f16
-	fblt	%f18, %f2, fbgt_cont.47272
-	fblt	%f18, %f0, fbgt_else.47289
+	fblt	%f18, %f24, fbgt_cont.33439
+	fblt	%f18, %f0, fbgt_else.33456
 	fsub	%f18, %f18, %f0
 	fdiv	%f1, %f0, %f16
-	fblt	%f18, %f2, fbgt_cont.47272
-	fblt	%f18, %f1, fbgt_else.47293
+	fblt	%f18, %f24, fbgt_cont.33439
+	fblt	%f18, %f1, fbgt_else.33460
 	fsub	%f0, %f18, %f1
 	fdiv	%f1, %f1, %f16
+	fmov	%f2, %f24
 	jal	reduction_2pi_sub2.2629
 	fmov	%f18, %f0
-	j	fbgt_cont.47272
-fbgt_else.47293:
+	j	fbgt_cont.33439
+fbgt_else.33460:
 	fdiv	%f1, %f1, %f16
+	fmov	%f2, %f24
 	fmov	%f0, %f18
 	jal	reduction_2pi_sub2.2629
 	fmov	%f18, %f0
-fbgt_cont.47294:
-	j	fbgt_cont.47272
-fbgt_else.47291:
-fbgt_cont.47292:
-	j	fbgt_cont.47272
-fbgt_else.47289:
+fbgt_cont.33461:
+	j	fbgt_cont.33439
+fbgt_else.33458:
+fbgt_cont.33459:
+	j	fbgt_cont.33439
+fbgt_else.33456:
 	fdiv	%f1, %f0, %f16
-	fblt	%f18, %f2, fbgt_cont.47272
-	fblt	%f18, %f1, fbgt_else.47297
+	fblt	%f18, %f24, fbgt_cont.33439
+	fblt	%f18, %f1, fbgt_else.33464
 	fsub	%f0, %f18, %f1
 	fdiv	%f1, %f1, %f16
+	fmov	%f2, %f24
 	jal	reduction_2pi_sub2.2629
 	fmov	%f18, %f0
-	j	fbgt_cont.47272
-fbgt_else.47297:
+	j	fbgt_cont.33439
+fbgt_else.33464:
 	fdiv	%f1, %f1, %f16
+	fmov	%f2, %f24
 	fmov	%f0, %f18
 	jal	reduction_2pi_sub2.2629
 	fmov	%f18, %f0
-fbgt_cont.47298:
-	j	fbgt_cont.47272
-fbgt_else.47295:
-fbgt_cont.47296:
-fbgt_cont.47290:
-	j	fbgt_cont.47272
-fbgt_else.47287:
-fbgt_cont.47288:
-fbgt_cont.47274:
-	j	fbgt_cont.47272
-fbgt_else.47271:
-fbgt_cont.47272:
-	fblt	%f18, %f22, fbgt_else.47299
-	beqi	%a2, 0, bnei_else.47301
-	add	%a2, %zero, %zero
-	j	fbgt_cont.47300
-bnei_else.47301:
-	add	%a2, %zero, %k1
-bnei_cont.47302:
-	j	fbgt_cont.47300
-fbgt_else.47299:
-fbgt_cont.47300:
-	fblt	%f18, %f22, fbgt_else.47303
+fbgt_cont.33465:
+	j	fbgt_cont.33439
+fbgt_else.33462:
+fbgt_cont.33463:
+fbgt_cont.33457:
+	j	fbgt_cont.33439
+fbgt_else.33454:
+fbgt_cont.33455:
+fbgt_cont.33441:
+	j	fbgt_cont.33439
+fbgt_else.33438:
+fbgt_cont.33439:
+	fblt	%f18, %f22, fbgt_else.33466
+	add	%a0, %zero, %zero
+	j	fbgt_cont.33467
+fbgt_else.33466:
+	add	%a0, %zero, %k1
+fbgt_cont.33467:
+	fblt	%f18, %f22, fbgt_else.33468
 	fsub	%f18, %f18, %f22
-	j	fbgt_cont.47304
-fbgt_else.47303:
-fbgt_cont.47304:
-	flw	%f24, 479(%zero)
-	fblt	%f18, %f24, fbgt_else.47305
+	j	fbgt_cont.33469
+fbgt_else.33468:
+fbgt_cont.33469:
+	fblt	%f18, %f25, fbgt_else.33470
+	beqi	%a0, 0, bnei_else.33472
+	add	%a0, %zero, %zero
+	j	fbgt_cont.33471
+bnei_else.33472:
+	add	%a0, %zero, %k1
+bnei_cont.33473:
+	j	fbgt_cont.33471
+fbgt_else.33470:
+fbgt_cont.33471:
+	fblt	%f18, %f25, fbgt_else.33474
 	fsub	%f18, %f22, %f18
-	j	fbgt_cont.47306
-fbgt_else.47305:
-fbgt_cont.47306:
-	flw	%f25, 478(%zero)
-	fblt	%f25, %f18, fbgt_else.47307
-	fmul	%f26, %f18, %f18
-	fmul	%f16, %f26, %f26
-	flw	%f0, 477(%zero)
-	fmul	%f0, %f0, %f18
-	fmul	%f0, %f0, %f26
-	fsub	%f1, %f18, %f0
-	flw	%f0, 476(%zero)
-	fmul	%f0, %f0, %f18
-	fmul	%f0, %f0, %f16
-	fadd	%f1, %f1, %f0
-	flw	%f0, 475(%zero)
-	fmul	%f0, %f0, %f18
-	fmul	%f0, %f0, %f26
-	fmul	%f0, %f0, %f16
-	fsub	%f18, %f1, %f0
-	j	fbgt_cont.47308
-fbgt_else.47307:
-	fsub	%f0, %f24, %f18
-	fmul	%f18, %f0, %f0
+	j	fbgt_cont.33475
+fbgt_else.33474:
+fbgt_cont.33475:
+	fblt	%f26, %f18, fbgt_else.33476
+	fmul	%f18, %f18, %f18
 	fmul	%f16, %f18, %f18
 	flw	%f0, 473(%zero)
 	fmul	%f0, %f0, %f18
@@ -18816,549 +15597,15 @@ fbgt_else.47307:
 	flw	%f0, 471(%zero)
 	fmul	%f0, %f0, %f18
 	fmul	%f0, %f0, %f16
-	fsub	%f18, %f1, %f0
-fbgt_cont.47308:
-	beqi	%a2, 0, bnei_else.47309
-	j	bnei_cont.47310
-bnei_else.47309:
-	fneg	%f18, %f18
-bnei_cont.47310:
-	fabs	%f23, %f23
-	fblt	%f23, %f2, fbgt_else.47311
-	flw	%f0, 492(%zero)
-	fblt	%f23, %f0, fbgt_cont.47312
-	flw	%f0, 491(%zero)
-	fblt	%f23, %f0, fbgt_cont.47312
-	flw	%f0, 490(%zero)
-	fblt	%f23, %f0, fbgt_cont.47312
-	flw	%f0, 489(%zero)
-	fblt	%f23, %f0, fbgt_cont.47312
-	flw	%f0, 488(%zero)
-	fblt	%f23, %f0, fbgt_cont.47312
-	flw	%f0, 487(%zero)
-	fblt	%f23, %f0, fbgt_cont.47312
-	flw	%f0, 486(%zero)
-	fblt	%f23, %f0, fbgt_cont.47312
-	flw	%f0, 485(%zero)
-	fblt	%f23, %f0, fbgt_cont.47312
-	flw	%f0, 484(%zero)
-	fblt	%f23, %f0, fbgt_cont.47312
-	flw	%f0, 483(%zero)
-	fblt	%f23, %f0, fbgt_cont.47312
-	flw	%f1, 482(%zero)
-	fmov	%f0, %f23
-	jal	reduction_2pi_sub1.2626
-	j	fbgt_cont.47312
-fbgt_else.47331:
-fbgt_cont.47332:
-	j	fbgt_cont.47312
-fbgt_else.47329:
-fbgt_cont.47330:
-	j	fbgt_cont.47312
-fbgt_else.47327:
-fbgt_cont.47328:
-	j	fbgt_cont.47312
-fbgt_else.47325:
-fbgt_cont.47326:
-	j	fbgt_cont.47312
-fbgt_else.47323:
-fbgt_cont.47324:
-	j	fbgt_cont.47312
-fbgt_else.47321:
-fbgt_cont.47322:
-	j	fbgt_cont.47312
-fbgt_else.47319:
-fbgt_cont.47320:
-	j	fbgt_cont.47312
-fbgt_else.47317:
-fbgt_cont.47318:
-	j	fbgt_cont.47312
-fbgt_else.47315:
-fbgt_cont.47316:
-	j	fbgt_cont.47312
-fbgt_else.47313:
-fbgt_cont.47314:
-	j	fbgt_cont.47312
-fbgt_else.47311:
-	fmov	%f0, %f2
-fbgt_cont.47312:
-	fblt	%f23, %f2, fbgt_else.47333
-	fblt	%f23, %f0, fbgt_else.47335
-	fsub	%f23, %f23, %f0
-	flw	%f16, 495(%zero)
-	fdiv	%f0, %f0, %f16
-	fblt	%f23, %f2, fbgt_cont.47334
-	fblt	%f23, %f0, fbgt_else.47339
-	fsub	%f23, %f23, %f0
-	fdiv	%f1, %f0, %f16
-	fblt	%f23, %f2, fbgt_cont.47334
-	fblt	%f23, %f1, fbgt_else.47343
-	fsub	%f0, %f23, %f1
-	fdiv	%f1, %f1, %f16
-	jal	reduction_2pi_sub2.2629
-	fmov	%f23, %f0
-	j	fbgt_cont.47334
-fbgt_else.47343:
-	fdiv	%f1, %f1, %f16
-	fmov	%f0, %f23
-	jal	reduction_2pi_sub2.2629
-	fmov	%f23, %f0
-fbgt_cont.47344:
-	j	fbgt_cont.47334
-fbgt_else.47341:
-fbgt_cont.47342:
-	j	fbgt_cont.47334
-fbgt_else.47339:
-	fdiv	%f1, %f0, %f16
-	fblt	%f23, %f2, fbgt_cont.47334
-	fblt	%f23, %f1, fbgt_else.47347
-	fsub	%f0, %f23, %f1
-	fdiv	%f1, %f1, %f16
-	jal	reduction_2pi_sub2.2629
-	fmov	%f23, %f0
-	j	fbgt_cont.47334
-fbgt_else.47347:
-	fdiv	%f1, %f1, %f16
-	fmov	%f0, %f23
-	jal	reduction_2pi_sub2.2629
-	fmov	%f23, %f0
-fbgt_cont.47348:
-	j	fbgt_cont.47334
-fbgt_else.47345:
-fbgt_cont.47346:
-fbgt_cont.47340:
-	j	fbgt_cont.47334
-fbgt_else.47337:
-fbgt_cont.47338:
-	j	fbgt_cont.47334
-fbgt_else.47335:
-	flw	%f16, 495(%zero)
-	fdiv	%f0, %f0, %f16
-	fblt	%f23, %f2, fbgt_cont.47334
-	fblt	%f23, %f0, fbgt_else.47351
-	fsub	%f23, %f23, %f0
-	fdiv	%f1, %f0, %f16
-	fblt	%f23, %f2, fbgt_cont.47334
-	fblt	%f23, %f1, fbgt_else.47355
-	fsub	%f0, %f23, %f1
-	fdiv	%f1, %f1, %f16
-	jal	reduction_2pi_sub2.2629
-	fmov	%f23, %f0
-	j	fbgt_cont.47334
-fbgt_else.47355:
-	fdiv	%f1, %f1, %f16
-	fmov	%f0, %f23
-	jal	reduction_2pi_sub2.2629
-	fmov	%f23, %f0
-fbgt_cont.47356:
-	j	fbgt_cont.47334
-fbgt_else.47353:
-fbgt_cont.47354:
-	j	fbgt_cont.47334
-fbgt_else.47351:
-	fdiv	%f1, %f0, %f16
-	fblt	%f23, %f2, fbgt_cont.47334
-	fblt	%f23, %f1, fbgt_else.47359
-	fsub	%f0, %f23, %f1
-	fdiv	%f1, %f1, %f16
-	jal	reduction_2pi_sub2.2629
-	fmov	%f23, %f0
-	j	fbgt_cont.47334
-fbgt_else.47359:
-	fdiv	%f1, %f1, %f16
-	fmov	%f0, %f23
-	jal	reduction_2pi_sub2.2629
-	fmov	%f23, %f0
-fbgt_cont.47360:
-	j	fbgt_cont.47334
-fbgt_else.47357:
-fbgt_cont.47358:
-fbgt_cont.47352:
-	j	fbgt_cont.47334
-fbgt_else.47349:
-fbgt_cont.47350:
-fbgt_cont.47336:
-	j	fbgt_cont.47334
-fbgt_else.47333:
-fbgt_cont.47334:
-	fblt	%f23, %f22, fbgt_else.47361
-	add	%a2, %zero, %zero
-	j	fbgt_cont.47362
-fbgt_else.47361:
-	add	%a2, %zero, %k1
-fbgt_cont.47362:
-	fblt	%f23, %f22, fbgt_else.47363
-	fsub	%f23, %f23, %f22
-	j	fbgt_cont.47364
-fbgt_else.47363:
-fbgt_cont.47364:
-	fblt	%f23, %f24, fbgt_else.47365
-	beqi	%a2, 0, bnei_else.47367
-	add	%a2, %zero, %zero
-	j	fbgt_cont.47366
-bnei_else.47367:
-	add	%a2, %zero, %k1
-bnei_cont.47368:
-	j	fbgt_cont.47366
-fbgt_else.47365:
-fbgt_cont.47366:
-	fblt	%f23, %f24, fbgt_else.47369
-	fsub	%f23, %f22, %f23
-	j	fbgt_cont.47370
-fbgt_else.47369:
-fbgt_cont.47370:
-	fblt	%f25, %f23, fbgt_else.47371
-	fmul	%f23, %f23, %f23
-	fmul	%f16, %f23, %f23
-	flw	%f0, 473(%zero)
-	fmul	%f0, %f0, %f23
-	fsub	%f1, %f30, %f0
-	flw	%f0, 472(%zero)
-	fmul	%f0, %f0, %f16
-	fadd	%f1, %f1, %f0
-	flw	%f0, 471(%zero)
-	fmul	%f0, %f0, %f23
-	fmul	%f0, %f0, %f16
 	fsub	%f0, %f1, %f0
-	j	fbgt_cont.47372
-fbgt_else.47371:
-	fsub	%f26, %f24, %f23
-	fmul	%f23, %f26, %f26
-	fmul	%f16, %f23, %f23
-	flw	%f0, 477(%zero)
-	fmul	%f0, %f0, %f26
-	fmul	%f0, %f0, %f23
-	fsub	%f1, %f26, %f0
-	flw	%f0, 476(%zero)
-	fmul	%f0, %f0, %f26
-	fmul	%f0, %f0, %f16
-	fadd	%f1, %f1, %f0
-	flw	%f0, 475(%zero)
-	fmul	%f0, %f0, %f26
-	fmul	%f0, %f0, %f23
-	fmul	%f0, %f0, %f16
-	fsub	%f0, %f1, %f0
-fbgt_cont.47372:
-	beqi	%a2, 0, bnei_else.47373
-	j	bnei_cont.47374
-bnei_else.47373:
-	fneg	%f0, %f0
-bnei_cont.47374:
-	fdiv	%f0, %f18, %f0
-	fmul	%f18, %f0, %f19
-	addi	%v0, %v0, 1
-	fmul	%f0, %f18, %f18
-	fadd	%f0, %f0, %f20
-	fsqrt	%f20, %f0
-	fdiv	%f16, %f30, %f20
-	fblt	%f16, %fzero, fbgt_else.47375
-	add	%a2, %zero, %k1
-	j	fbgt_cont.47376
-fbgt_else.47375:
-	add	%a2, %zero, %zero
-fbgt_cont.47376:
-	fabs	%f19, %f16
-	fblt	%f19, %f21, fbgt_else.47377
-	flw	%f0, 455(%zero)
-	fblt	%f19, %f0, fbgt_else.47379
-	fdiv	%f21, %f30, %f19
-	fmul	%f23, %f21, %f21
-	fmul	%f19, %f23, %f23
-	fmul	%f16, %f19, %f19
-	flw	%f0, 461(%zero)
-	fmul	%f0, %f0, %f21
-	fmul	%f0, %f0, %f23
-	fsub	%f1, %f21, %f0
-	flw	%f0, 460(%zero)
-	fmul	%f0, %f0, %f21
-	fmul	%f0, %f0, %f19
-	fadd	%f1, %f1, %f0
-	flw	%f0, 459(%zero)
-	fmul	%f0, %f0, %f21
-	fmul	%f0, %f0, %f23
-	fmul	%f0, %f0, %f19
-	fsub	%f1, %f1, %f0
-	flw	%f0, 458(%zero)
-	fmul	%f0, %f0, %f21
-	fmul	%f0, %f0, %f16
-	fadd	%f1, %f1, %f0
-	flw	%f0, 457(%zero)
-	fmul	%f0, %f0, %f21
-	fmul	%f0, %f0, %f23
-	fmul	%f0, %f0, %f16
-	fsub	%f1, %f1, %f0
-	flw	%f0, 456(%zero)
-	fmul	%f0, %f0, %f21
-	fmul	%f0, %f0, %f19
-	fmul	%f0, %f0, %f16
-	fadd	%f0, %f1, %f0
-	fsub	%f0, %f24, %f0
-	j	fbgt_cont.47380
-fbgt_else.47379:
-	fsub	%f1, %f19, %f30
-	fadd	%f0, %f19, %f30
-	fdiv	%f21, %f1, %f0
-	fmul	%f23, %f21, %f21
-	fmul	%f19, %f23, %f23
-	fmul	%f16, %f19, %f19
-	flw	%f0, 461(%zero)
-	fmul	%f0, %f0, %f21
-	fmul	%f0, %f0, %f23
-	fsub	%f1, %f21, %f0
-	flw	%f0, 460(%zero)
-	fmul	%f0, %f0, %f21
-	fmul	%f0, %f0, %f19
-	fadd	%f1, %f1, %f0
-	flw	%f0, 459(%zero)
-	fmul	%f0, %f0, %f21
-	fmul	%f0, %f0, %f23
-	fmul	%f0, %f0, %f19
-	fsub	%f1, %f1, %f0
-	flw	%f0, 458(%zero)
-	fmul	%f0, %f0, %f21
-	fmul	%f0, %f0, %f16
-	fadd	%f1, %f1, %f0
-	flw	%f0, 457(%zero)
-	fmul	%f0, %f0, %f21
-	fmul	%f0, %f0, %f23
-	fmul	%f0, %f0, %f16
-	fsub	%f1, %f1, %f0
-	flw	%f0, 456(%zero)
-	fmul	%f0, %f0, %f21
-	fmul	%f0, %f0, %f19
-	fmul	%f0, %f0, %f16
-	fadd	%f0, %f1, %f0
-	fadd	%f0, %f25, %f0
-fbgt_cont.47380:
-	beqi	%a2, 0, bnei_else.47381
-	j	fbgt_cont.47378
-bnei_else.47381:
-	fneg	%f0, %f0
-bnei_cont.47382:
-	j	fbgt_cont.47378
-fbgt_else.47377:
-	fmul	%f23, %f16, %f16
-	fmul	%f21, %f23, %f23
-	fmul	%f19, %f21, %f21
-	flw	%f0, 461(%zero)
-	fmul	%f0, %f0, %f16
-	fmul	%f0, %f0, %f23
-	fsub	%f1, %f16, %f0
-	flw	%f0, 460(%zero)
-	fmul	%f0, %f0, %f16
-	fmul	%f0, %f0, %f21
-	fadd	%f1, %f1, %f0
-	flw	%f0, 459(%zero)
-	fmul	%f0, %f0, %f16
-	fmul	%f0, %f0, %f23
-	fmul	%f0, %f0, %f21
-	fsub	%f1, %f1, %f0
-	flw	%f0, 458(%zero)
-	fmul	%f0, %f0, %f16
-	fmul	%f0, %f0, %f19
-	fadd	%f1, %f1, %f0
-	flw	%f0, 457(%zero)
-	fmul	%f0, %f0, %f16
-	fmul	%f0, %f0, %f23
-	fmul	%f0, %f0, %f19
-	fsub	%f1, %f1, %f0
-	flw	%f0, 456(%zero)
-	fmul	%f0, %f0, %f16
-	fmul	%f0, %f0, %f21
-	fmul	%f0, %f0, %f19
-	fadd	%f0, %f1, %f0
-fbgt_cont.47378:
-	fmul	%f21, %f0, %f3
-	fblt	%f21, %fzero, fbgt_else.47383
-	add	%a2, %zero, %k1
-	j	fbgt_cont.47384
-fbgt_else.47383:
-	add	%a2, %zero, %zero
-fbgt_cont.47384:
-	fabs	%f19, %f21
-	fblt	%f19, %f2, fbgt_else.47385
-	flw	%f0, 492(%zero)
-	fblt	%f19, %f0, fbgt_cont.47386
-	flw	%f0, 491(%zero)
-	fblt	%f19, %f0, fbgt_cont.47386
-	flw	%f0, 490(%zero)
-	fblt	%f19, %f0, fbgt_cont.47386
-	flw	%f0, 489(%zero)
-	fblt	%f19, %f0, fbgt_cont.47386
-	flw	%f0, 488(%zero)
-	fblt	%f19, %f0, fbgt_cont.47386
-	flw	%f0, 487(%zero)
-	fblt	%f19, %f0, fbgt_cont.47386
-	flw	%f0, 486(%zero)
-	fblt	%f19, %f0, fbgt_cont.47386
-	flw	%f0, 485(%zero)
-	fblt	%f19, %f0, fbgt_cont.47386
-	flw	%f0, 484(%zero)
-	fblt	%f19, %f0, fbgt_cont.47386
-	flw	%f0, 483(%zero)
-	fblt	%f19, %f0, fbgt_cont.47386
-	flw	%f1, 482(%zero)
-	fmov	%f0, %f19
-	jal	reduction_2pi_sub1.2626
-	j	fbgt_cont.47386
-fbgt_else.47405:
-fbgt_cont.47406:
-	j	fbgt_cont.47386
-fbgt_else.47403:
-fbgt_cont.47404:
-	j	fbgt_cont.47386
-fbgt_else.47401:
-fbgt_cont.47402:
-	j	fbgt_cont.47386
-fbgt_else.47399:
-fbgt_cont.47400:
-	j	fbgt_cont.47386
-fbgt_else.47397:
-fbgt_cont.47398:
-	j	fbgt_cont.47386
-fbgt_else.47395:
-fbgt_cont.47396:
-	j	fbgt_cont.47386
-fbgt_else.47393:
-fbgt_cont.47394:
-	j	fbgt_cont.47386
-fbgt_else.47391:
-fbgt_cont.47392:
-	j	fbgt_cont.47386
-fbgt_else.47389:
-fbgt_cont.47390:
-	j	fbgt_cont.47386
-fbgt_else.47387:
-fbgt_cont.47388:
-	j	fbgt_cont.47386
-fbgt_else.47385:
-	fmov	%f0, %f2
-fbgt_cont.47386:
-	fblt	%f19, %f2, fbgt_else.47407
-	fblt	%f19, %f0, fbgt_else.47409
-	fsub	%f19, %f19, %f0
-	flw	%f16, 495(%zero)
-	fdiv	%f0, %f0, %f16
-	fblt	%f19, %f2, fbgt_cont.47408
-	fblt	%f19, %f0, fbgt_else.47413
-	fsub	%f19, %f19, %f0
-	fdiv	%f1, %f0, %f16
-	fblt	%f19, %f2, fbgt_cont.47408
-	fblt	%f19, %f1, fbgt_else.47417
-	fsub	%f0, %f19, %f1
-	fdiv	%f1, %f1, %f16
-	jal	reduction_2pi_sub2.2629
-	fmov	%f19, %f0
-	j	fbgt_cont.47408
-fbgt_else.47417:
-	fdiv	%f1, %f1, %f16
-	fmov	%f0, %f19
-	jal	reduction_2pi_sub2.2629
-	fmov	%f19, %f0
-fbgt_cont.47418:
-	j	fbgt_cont.47408
-fbgt_else.47415:
-fbgt_cont.47416:
-	j	fbgt_cont.47408
-fbgt_else.47413:
-	fdiv	%f1, %f0, %f16
-	fblt	%f19, %f2, fbgt_cont.47408
-	fblt	%f19, %f1, fbgt_else.47421
-	fsub	%f0, %f19, %f1
-	fdiv	%f1, %f1, %f16
-	jal	reduction_2pi_sub2.2629
-	fmov	%f19, %f0
-	j	fbgt_cont.47408
-fbgt_else.47421:
-	fdiv	%f1, %f1, %f16
-	fmov	%f0, %f19
-	jal	reduction_2pi_sub2.2629
-	fmov	%f19, %f0
-fbgt_cont.47422:
-	j	fbgt_cont.47408
-fbgt_else.47419:
-fbgt_cont.47420:
-fbgt_cont.47414:
-	j	fbgt_cont.47408
-fbgt_else.47411:
-fbgt_cont.47412:
-	j	fbgt_cont.47408
-fbgt_else.47409:
-	flw	%f16, 495(%zero)
-	fdiv	%f0, %f0, %f16
-	fblt	%f19, %f2, fbgt_cont.47408
-	fblt	%f19, %f0, fbgt_else.47425
-	fsub	%f19, %f19, %f0
-	fdiv	%f1, %f0, %f16
-	fblt	%f19, %f2, fbgt_cont.47408
-	fblt	%f19, %f1, fbgt_else.47429
-	fsub	%f0, %f19, %f1
-	fdiv	%f1, %f1, %f16
-	jal	reduction_2pi_sub2.2629
-	fmov	%f19, %f0
-	j	fbgt_cont.47408
-fbgt_else.47429:
-	fdiv	%f1, %f1, %f16
-	fmov	%f0, %f19
-	jal	reduction_2pi_sub2.2629
-	fmov	%f19, %f0
-fbgt_cont.47430:
-	j	fbgt_cont.47408
-fbgt_else.47427:
-fbgt_cont.47428:
-	j	fbgt_cont.47408
-fbgt_else.47425:
-	fdiv	%f1, %f0, %f16
-	fblt	%f19, %f2, fbgt_cont.47408
-	fblt	%f19, %f1, fbgt_else.47433
-	fsub	%f0, %f19, %f1
-	fdiv	%f1, %f1, %f16
-	jal	reduction_2pi_sub2.2629
-	fmov	%f19, %f0
-	j	fbgt_cont.47408
-fbgt_else.47433:
-	fdiv	%f1, %f1, %f16
-	fmov	%f0, %f19
-	jal	reduction_2pi_sub2.2629
-	fmov	%f19, %f0
-fbgt_cont.47434:
-	j	fbgt_cont.47408
-fbgt_else.47431:
-fbgt_cont.47432:
-fbgt_cont.47426:
-	j	fbgt_cont.47408
-fbgt_else.47423:
-fbgt_cont.47424:
-fbgt_cont.47410:
-	j	fbgt_cont.47408
-fbgt_else.47407:
-fbgt_cont.47408:
-	fblt	%f19, %f22, fbgt_else.47435
-	beqi	%a2, 0, bnei_else.47437
-	add	%a2, %zero, %zero
-	j	fbgt_cont.47436
-bnei_else.47437:
-	add	%a2, %zero, %k1
-bnei_cont.47438:
-	j	fbgt_cont.47436
-fbgt_else.47435:
-fbgt_cont.47436:
-	fblt	%f19, %f22, fbgt_else.47439
-	fsub	%f19, %f19, %f22
-	j	fbgt_cont.47440
-fbgt_else.47439:
-fbgt_cont.47440:
-	fblt	%f19, %f24, fbgt_else.47441
-	fsub	%f19, %f22, %f19
-	j	fbgt_cont.47442
-fbgt_else.47441:
-fbgt_cont.47442:
-	fblt	%f25, %f19, fbgt_else.47443
-	fmul	%f23, %f19, %f19
-	fmul	%f16, %f23, %f23
+	j	fbgt_cont.33477
+fbgt_else.33476:
+	fsub	%f19, %f25, %f18
+	fmul	%f18, %f19, %f19
+	fmul	%f16, %f18, %f18
 	flw	%f0, 477(%zero)
 	fmul	%f0, %f0, %f19
-	fmul	%f0, %f0, %f23
+	fmul	%f0, %f0, %f18
 	fsub	%f1, %f19, %f0
 	flw	%f0, 476(%zero)
 	fmul	%f0, %f0, %f19
@@ -19366,276 +15613,508 @@ fbgt_cont.47442:
 	fadd	%f1, %f1, %f0
 	flw	%f0, 475(%zero)
 	fmul	%f0, %f0, %f19
-	fmul	%f0, %f0, %f23
-	fmul	%f0, %f0, %f16
-	fsub	%f19, %f1, %f0
-	j	fbgt_cont.47444
-fbgt_else.47443:
-	fsub	%f0, %f24, %f19
-	fmul	%f19, %f0, %f0
-	fmul	%f16, %f19, %f19
-	flw	%f0, 473(%zero)
-	fmul	%f0, %f0, %f19
-	fsub	%f1, %f30, %f0
-	flw	%f0, 472(%zero)
-	fmul	%f0, %f0, %f16
-	fadd	%f1, %f1, %f0
-	flw	%f0, 471(%zero)
-	fmul	%f0, %f0, %f19
-	fmul	%f0, %f0, %f16
-	fsub	%f19, %f1, %f0
-fbgt_cont.47444:
-	beqi	%a2, 0, bnei_else.47445
-	j	bnei_cont.47446
-bnei_else.47445:
-	fneg	%f19, %f19
-bnei_cont.47446:
-	fabs	%f21, %f21
-	fblt	%f21, %f2, fbgt_else.47447
-	flw	%f0, 492(%zero)
-	fblt	%f21, %f0, fbgt_cont.47448
-	flw	%f0, 491(%zero)
-	fblt	%f21, %f0, fbgt_cont.47448
-	flw	%f0, 490(%zero)
-	fblt	%f21, %f0, fbgt_cont.47448
-	flw	%f0, 489(%zero)
-	fblt	%f21, %f0, fbgt_cont.47448
-	flw	%f0, 488(%zero)
-	fblt	%f21, %f0, fbgt_cont.47448
-	flw	%f0, 487(%zero)
-	fblt	%f21, %f0, fbgt_cont.47448
-	flw	%f0, 486(%zero)
-	fblt	%f21, %f0, fbgt_cont.47448
-	flw	%f0, 485(%zero)
-	fblt	%f21, %f0, fbgt_cont.47448
-	flw	%f0, 484(%zero)
-	fblt	%f21, %f0, fbgt_cont.47448
-	flw	%f0, 483(%zero)
-	fblt	%f21, %f0, fbgt_cont.47448
-	flw	%f1, 482(%zero)
-	fmov	%f0, %f21
-	jal	reduction_2pi_sub1.2626
-	j	fbgt_cont.47448
-fbgt_else.47467:
-fbgt_cont.47468:
-	j	fbgt_cont.47448
-fbgt_else.47465:
-fbgt_cont.47466:
-	j	fbgt_cont.47448
-fbgt_else.47463:
-fbgt_cont.47464:
-	j	fbgt_cont.47448
-fbgt_else.47461:
-fbgt_cont.47462:
-	j	fbgt_cont.47448
-fbgt_else.47459:
-fbgt_cont.47460:
-	j	fbgt_cont.47448
-fbgt_else.47457:
-fbgt_cont.47458:
-	j	fbgt_cont.47448
-fbgt_else.47455:
-fbgt_cont.47456:
-	j	fbgt_cont.47448
-fbgt_else.47453:
-fbgt_cont.47454:
-	j	fbgt_cont.47448
-fbgt_else.47451:
-fbgt_cont.47452:
-	j	fbgt_cont.47448
-fbgt_else.47449:
-fbgt_cont.47450:
-	j	fbgt_cont.47448
-fbgt_else.47447:
-	fmov	%f0, %f2
-fbgt_cont.47448:
-	fblt	%f21, %f2, fbgt_else.47469
-	fblt	%f21, %f0, fbgt_else.47471
-	fsub	%f21, %f21, %f0
-	flw	%f16, 495(%zero)
-	fdiv	%f0, %f0, %f16
-	fblt	%f21, %f2, fbgt_cont.47470
-	fblt	%f21, %f0, fbgt_else.47475
-	fsub	%f21, %f21, %f0
-	fdiv	%f1, %f0, %f16
-	fblt	%f21, %f2, fbgt_cont.47470
-	fblt	%f21, %f1, fbgt_else.47479
-	fsub	%f0, %f21, %f1
-	fdiv	%f1, %f1, %f16
-	jal	reduction_2pi_sub2.2629
-	fmov	%f21, %f0
-	j	fbgt_cont.47470
-fbgt_else.47479:
-	fdiv	%f1, %f1, %f16
-	fmov	%f0, %f21
-	jal	reduction_2pi_sub2.2629
-	fmov	%f21, %f0
-fbgt_cont.47480:
-	j	fbgt_cont.47470
-fbgt_else.47477:
-fbgt_cont.47478:
-	j	fbgt_cont.47470
-fbgt_else.47475:
-	fdiv	%f1, %f0, %f16
-	fblt	%f21, %f2, fbgt_cont.47470
-	fblt	%f21, %f1, fbgt_else.47483
-	fsub	%f0, %f21, %f1
-	fdiv	%f1, %f1, %f16
-	jal	reduction_2pi_sub2.2629
-	fmov	%f21, %f0
-	j	fbgt_cont.47470
-fbgt_else.47483:
-	fdiv	%f1, %f1, %f16
-	fmov	%f0, %f21
-	jal	reduction_2pi_sub2.2629
-	fmov	%f21, %f0
-fbgt_cont.47484:
-	j	fbgt_cont.47470
-fbgt_else.47481:
-fbgt_cont.47482:
-fbgt_cont.47476:
-	j	fbgt_cont.47470
-fbgt_else.47473:
-fbgt_cont.47474:
-	j	fbgt_cont.47470
-fbgt_else.47471:
-	flw	%f16, 495(%zero)
-	fdiv	%f0, %f0, %f16
-	fblt	%f21, %f2, fbgt_cont.47470
-	fblt	%f21, %f0, fbgt_else.47487
-	fsub	%f21, %f21, %f0
-	fdiv	%f1, %f0, %f16
-	fblt	%f21, %f2, fbgt_cont.47470
-	fblt	%f21, %f1, fbgt_else.47491
-	fsub	%f0, %f21, %f1
-	fdiv	%f1, %f1, %f16
-	jal	reduction_2pi_sub2.2629
-	fmov	%f21, %f0
-	j	fbgt_cont.47470
-fbgt_else.47491:
-	fdiv	%f1, %f1, %f16
-	fmov	%f0, %f21
-	jal	reduction_2pi_sub2.2629
-	fmov	%f21, %f0
-fbgt_cont.47492:
-	j	fbgt_cont.47470
-fbgt_else.47489:
-fbgt_cont.47490:
-	j	fbgt_cont.47470
-fbgt_else.47487:
-	fdiv	%f1, %f0, %f16
-	fblt	%f21, %f2, fbgt_cont.47470
-	fblt	%f21, %f1, fbgt_else.47495
-	fsub	%f0, %f21, %f1
-	fdiv	%f1, %f1, %f16
-	jal	reduction_2pi_sub2.2629
-	fmov	%f21, %f0
-	j	fbgt_cont.47470
-fbgt_else.47495:
-	fdiv	%f1, %f1, %f16
-	fmov	%f0, %f21
-	jal	reduction_2pi_sub2.2629
-	fmov	%f21, %f0
-fbgt_cont.47496:
-	j	fbgt_cont.47470
-fbgt_else.47493:
-fbgt_cont.47494:
-fbgt_cont.47488:
-	j	fbgt_cont.47470
-fbgt_else.47485:
-fbgt_cont.47486:
-fbgt_cont.47472:
-	j	fbgt_cont.47470
-fbgt_else.47469:
-fbgt_cont.47470:
-	fblt	%f21, %f22, fbgt_else.47497
-	add	%a2, %zero, %zero
-	j	fbgt_cont.47498
-fbgt_else.47497:
-	add	%a2, %zero, %k1
-fbgt_cont.47498:
-	fblt	%f21, %f22, fbgt_else.47499
-	fsub	%f21, %f21, %f22
-	j	fbgt_cont.47500
-fbgt_else.47499:
-fbgt_cont.47500:
-	fblt	%f21, %f24, fbgt_else.47501
-	beqi	%a2, 0, bnei_else.47503
-	add	%a2, %zero, %zero
-	j	fbgt_cont.47502
-bnei_else.47503:
-	add	%a2, %zero, %k1
-bnei_cont.47504:
-	j	fbgt_cont.47502
-fbgt_else.47501:
-fbgt_cont.47502:
-	fblt	%f21, %f24, fbgt_else.47505
-	fsub	%f21, %f22, %f21
-	j	fbgt_cont.47506
-fbgt_else.47505:
-fbgt_cont.47506:
-	fblt	%f25, %f21, fbgt_else.47507
-	fmul	%f2, %f21, %f21
-	fmul	%f16, %f2, %f2
-	flw	%f0, 473(%zero)
-	fmul	%f0, %f0, %f2
-	fsub	%f1, %f30, %f0
-	flw	%f0, 472(%zero)
-	fmul	%f0, %f0, %f16
-	fadd	%f1, %f1, %f0
-	flw	%f0, 471(%zero)
-	fmul	%f0, %f0, %f2
+	fmul	%f0, %f0, %f18
 	fmul	%f0, %f0, %f16
 	fsub	%f0, %f1, %f0
-	j	fbgt_cont.47508
-fbgt_else.47507:
-	fsub	%f21, %f24, %f21
-	fmul	%f2, %f21, %f21
-	fmul	%f16, %f2, %f2
+fbgt_cont.33477:
+	beqi	%a0, 0, bnei_else.33478
+	j	bnei_cont.33479
+bnei_else.33478:
+	fneg	%f0, %f0
+bnei_cont.33479:
+	fdiv	%f0, %f17, %f0
+	fmul	%f21, %f0, %f21
+	addi	%v0, %v0, 1
+	fmul	%f0, %f21, %f21
+	fadd	%f0, %f0, %f23
+	fsqrt	%f23, %f0
+	fdiv	%f0, %f30, %f23
+	jal	atan.2639
+	fmul	%f18, %f0, %f3
+	fblt	%f18, %fzero, fbgt_else.33480
+	add	%a0, %zero, %k1
+	j	fbgt_cont.33481
+fbgt_else.33480:
+	add	%a0, %zero, %zero
+fbgt_cont.33481:
+	fabs	%f17, %f18
+	fblt	%f17, %f24, fbgt_else.33482
+	flw	%f0, 493(%zero)
+	fblt	%f17, %f0, fbgt_cont.33483
+	flw	%f0, 492(%zero)
+	fblt	%f17, %f0, fbgt_cont.33483
+	flw	%f0, 491(%zero)
+	fblt	%f17, %f0, fbgt_cont.33483
+	flw	%f0, 490(%zero)
+	fblt	%f17, %f0, fbgt_cont.33483
+	flw	%f0, 489(%zero)
+	fblt	%f17, %f0, fbgt_cont.33483
+	flw	%f0, 488(%zero)
+	fblt	%f17, %f0, fbgt_cont.33483
+	flw	%f0, 487(%zero)
+	fblt	%f17, %f0, fbgt_cont.33483
+	flw	%f0, 486(%zero)
+	fblt	%f17, %f0, fbgt_cont.33483
+	flw	%f0, 485(%zero)
+	fblt	%f17, %f0, fbgt_cont.33483
+	flw	%f0, 484(%zero)
+	fblt	%f17, %f0, fbgt_cont.33483
+	flw	%f1, 483(%zero)
+	fmov	%f0, %f17
+	jal	reduction_2pi_sub1.2626
+	j	fbgt_cont.33483
+fbgt_else.33502:
+fbgt_cont.33503:
+	j	fbgt_cont.33483
+fbgt_else.33500:
+fbgt_cont.33501:
+	j	fbgt_cont.33483
+fbgt_else.33498:
+fbgt_cont.33499:
+	j	fbgt_cont.33483
+fbgt_else.33496:
+fbgt_cont.33497:
+	j	fbgt_cont.33483
+fbgt_else.33494:
+fbgt_cont.33495:
+	j	fbgt_cont.33483
+fbgt_else.33492:
+fbgt_cont.33493:
+	j	fbgt_cont.33483
+fbgt_else.33490:
+fbgt_cont.33491:
+	j	fbgt_cont.33483
+fbgt_else.33488:
+fbgt_cont.33489:
+	j	fbgt_cont.33483
+fbgt_else.33486:
+fbgt_cont.33487:
+	j	fbgt_cont.33483
+fbgt_else.33484:
+fbgt_cont.33485:
+	j	fbgt_cont.33483
+fbgt_else.33482:
+	fmov	%f0, %f24
+fbgt_cont.33483:
+	fblt	%f17, %f24, fbgt_else.33504
+	fblt	%f17, %f0, fbgt_else.33506
+	fsub	%f17, %f17, %f0
+	flw	%f16, 496(%zero)
+	fdiv	%f0, %f0, %f16
+	fblt	%f17, %f24, fbgt_cont.33505
+	fblt	%f17, %f0, fbgt_else.33510
+	fsub	%f17, %f17, %f0
+	fdiv	%f1, %f0, %f16
+	fblt	%f17, %f24, fbgt_cont.33505
+	fblt	%f17, %f1, fbgt_else.33514
+	fsub	%f0, %f17, %f1
+	fdiv	%f1, %f1, %f16
+	fmov	%f2, %f24
+	jal	reduction_2pi_sub2.2629
+	fmov	%f17, %f0
+	j	fbgt_cont.33505
+fbgt_else.33514:
+	fdiv	%f1, %f1, %f16
+	fmov	%f2, %f24
+	fmov	%f0, %f17
+	jal	reduction_2pi_sub2.2629
+	fmov	%f17, %f0
+fbgt_cont.33515:
+	j	fbgt_cont.33505
+fbgt_else.33512:
+fbgt_cont.33513:
+	j	fbgt_cont.33505
+fbgt_else.33510:
+	fdiv	%f1, %f0, %f16
+	fblt	%f17, %f24, fbgt_cont.33505
+	fblt	%f17, %f1, fbgt_else.33518
+	fsub	%f0, %f17, %f1
+	fdiv	%f1, %f1, %f16
+	fmov	%f2, %f24
+	jal	reduction_2pi_sub2.2629
+	fmov	%f17, %f0
+	j	fbgt_cont.33505
+fbgt_else.33518:
+	fdiv	%f1, %f1, %f16
+	fmov	%f2, %f24
+	fmov	%f0, %f17
+	jal	reduction_2pi_sub2.2629
+	fmov	%f17, %f0
+fbgt_cont.33519:
+	j	fbgt_cont.33505
+fbgt_else.33516:
+fbgt_cont.33517:
+fbgt_cont.33511:
+	j	fbgt_cont.33505
+fbgt_else.33508:
+fbgt_cont.33509:
+	j	fbgt_cont.33505
+fbgt_else.33506:
+	flw	%f16, 496(%zero)
+	fdiv	%f0, %f0, %f16
+	fblt	%f17, %f24, fbgt_cont.33505
+	fblt	%f17, %f0, fbgt_else.33522
+	fsub	%f17, %f17, %f0
+	fdiv	%f1, %f0, %f16
+	fblt	%f17, %f24, fbgt_cont.33505
+	fblt	%f17, %f1, fbgt_else.33526
+	fsub	%f0, %f17, %f1
+	fdiv	%f1, %f1, %f16
+	fmov	%f2, %f24
+	jal	reduction_2pi_sub2.2629
+	fmov	%f17, %f0
+	j	fbgt_cont.33505
+fbgt_else.33526:
+	fdiv	%f1, %f1, %f16
+	fmov	%f2, %f24
+	fmov	%f0, %f17
+	jal	reduction_2pi_sub2.2629
+	fmov	%f17, %f0
+fbgt_cont.33527:
+	j	fbgt_cont.33505
+fbgt_else.33524:
+fbgt_cont.33525:
+	j	fbgt_cont.33505
+fbgt_else.33522:
+	fdiv	%f1, %f0, %f16
+	fblt	%f17, %f24, fbgt_cont.33505
+	fblt	%f17, %f1, fbgt_else.33530
+	fsub	%f0, %f17, %f1
+	fdiv	%f1, %f1, %f16
+	fmov	%f2, %f24
+	jal	reduction_2pi_sub2.2629
+	fmov	%f17, %f0
+	j	fbgt_cont.33505
+fbgt_else.33530:
+	fdiv	%f1, %f1, %f16
+	fmov	%f2, %f24
+	fmov	%f0, %f17
+	jal	reduction_2pi_sub2.2629
+	fmov	%f17, %f0
+fbgt_cont.33531:
+	j	fbgt_cont.33505
+fbgt_else.33528:
+fbgt_cont.33529:
+fbgt_cont.33523:
+	j	fbgt_cont.33505
+fbgt_else.33520:
+fbgt_cont.33521:
+fbgt_cont.33507:
+	j	fbgt_cont.33505
+fbgt_else.33504:
+fbgt_cont.33505:
+	fblt	%f17, %f22, fbgt_else.33532
+	beqi	%a0, 0, bnei_else.33534
+	add	%a0, %zero, %zero
+	j	fbgt_cont.33533
+bnei_else.33534:
+	add	%a0, %zero, %k1
+bnei_cont.33535:
+	j	fbgt_cont.33533
+fbgt_else.33532:
+fbgt_cont.33533:
+	fblt	%f17, %f22, fbgt_else.33536
+	fsub	%f17, %f17, %f22
+	j	fbgt_cont.33537
+fbgt_else.33536:
+fbgt_cont.33537:
+	fblt	%f17, %f25, fbgt_else.33538
+	fsub	%f17, %f22, %f17
+	j	fbgt_cont.33539
+fbgt_else.33538:
+fbgt_cont.33539:
+	fblt	%f26, %f17, fbgt_else.33540
+	fmul	%f19, %f17, %f17
+	fmul	%f16, %f19, %f19
 	flw	%f0, 477(%zero)
-	fmul	%f0, %f0, %f21
-	fmul	%f0, %f0, %f2
-	fsub	%f1, %f21, %f0
+	fmul	%f0, %f0, %f17
+	fmul	%f0, %f0, %f19
+	fsub	%f1, %f17, %f0
 	flw	%f0, 476(%zero)
-	fmul	%f0, %f0, %f21
+	fmul	%f0, %f0, %f17
 	fmul	%f0, %f0, %f16
 	fadd	%f1, %f1, %f0
 	flw	%f0, 475(%zero)
-	fmul	%f0, %f0, %f21
-	fmul	%f0, %f0, %f2
+	fmul	%f0, %f0, %f17
+	fmul	%f0, %f0, %f19
+	fmul	%f0, %f0, %f16
+	fsub	%f17, %f1, %f0
+	j	fbgt_cont.33541
+fbgt_else.33540:
+	fsub	%f0, %f25, %f17
+	fmul	%f17, %f0, %f0
+	fmul	%f16, %f17, %f17
+	flw	%f0, 473(%zero)
+	fmul	%f0, %f0, %f17
+	fsub	%f1, %f30, %f0
+	flw	%f0, 472(%zero)
+	fmul	%f0, %f0, %f16
+	fadd	%f1, %f1, %f0
+	flw	%f0, 471(%zero)
+	fmul	%f0, %f0, %f17
+	fmul	%f0, %f0, %f16
+	fsub	%f17, %f1, %f0
+fbgt_cont.33541:
+	beqi	%a0, 0, bnei_else.33542
+	j	bnei_cont.33543
+bnei_else.33542:
+	fneg	%f17, %f17
+bnei_cont.33543:
+	fabs	%f18, %f18
+	fblt	%f18, %f24, fbgt_else.33544
+	flw	%f0, 493(%zero)
+	fblt	%f18, %f0, fbgt_cont.33545
+	flw	%f0, 492(%zero)
+	fblt	%f18, %f0, fbgt_cont.33545
+	flw	%f0, 491(%zero)
+	fblt	%f18, %f0, fbgt_cont.33545
+	flw	%f0, 490(%zero)
+	fblt	%f18, %f0, fbgt_cont.33545
+	flw	%f0, 489(%zero)
+	fblt	%f18, %f0, fbgt_cont.33545
+	flw	%f0, 488(%zero)
+	fblt	%f18, %f0, fbgt_cont.33545
+	flw	%f0, 487(%zero)
+	fblt	%f18, %f0, fbgt_cont.33545
+	flw	%f0, 486(%zero)
+	fblt	%f18, %f0, fbgt_cont.33545
+	flw	%f0, 485(%zero)
+	fblt	%f18, %f0, fbgt_cont.33545
+	flw	%f0, 484(%zero)
+	fblt	%f18, %f0, fbgt_cont.33545
+	flw	%f1, 483(%zero)
+	fmov	%f0, %f18
+	jal	reduction_2pi_sub1.2626
+	j	fbgt_cont.33545
+fbgt_else.33564:
+fbgt_cont.33565:
+	j	fbgt_cont.33545
+fbgt_else.33562:
+fbgt_cont.33563:
+	j	fbgt_cont.33545
+fbgt_else.33560:
+fbgt_cont.33561:
+	j	fbgt_cont.33545
+fbgt_else.33558:
+fbgt_cont.33559:
+	j	fbgt_cont.33545
+fbgt_else.33556:
+fbgt_cont.33557:
+	j	fbgt_cont.33545
+fbgt_else.33554:
+fbgt_cont.33555:
+	j	fbgt_cont.33545
+fbgt_else.33552:
+fbgt_cont.33553:
+	j	fbgt_cont.33545
+fbgt_else.33550:
+fbgt_cont.33551:
+	j	fbgt_cont.33545
+fbgt_else.33548:
+fbgt_cont.33549:
+	j	fbgt_cont.33545
+fbgt_else.33546:
+fbgt_cont.33547:
+	j	fbgt_cont.33545
+fbgt_else.33544:
+	fmov	%f0, %f24
+fbgt_cont.33545:
+	fblt	%f18, %f24, fbgt_else.33566
+	fblt	%f18, %f0, fbgt_else.33568
+	fsub	%f18, %f18, %f0
+	flw	%f16, 496(%zero)
+	fdiv	%f0, %f0, %f16
+	fblt	%f18, %f24, fbgt_cont.33567
+	fblt	%f18, %f0, fbgt_else.33572
+	fsub	%f18, %f18, %f0
+	fdiv	%f1, %f0, %f16
+	fblt	%f18, %f24, fbgt_cont.33567
+	fblt	%f18, %f1, fbgt_else.33576
+	fsub	%f0, %f18, %f1
+	fdiv	%f1, %f1, %f16
+	fmov	%f2, %f24
+	jal	reduction_2pi_sub2.2629
+	fmov	%f18, %f0
+	j	fbgt_cont.33567
+fbgt_else.33576:
+	fdiv	%f1, %f1, %f16
+	fmov	%f2, %f24
+	fmov	%f0, %f18
+	jal	reduction_2pi_sub2.2629
+	fmov	%f18, %f0
+fbgt_cont.33577:
+	j	fbgt_cont.33567
+fbgt_else.33574:
+fbgt_cont.33575:
+	j	fbgt_cont.33567
+fbgt_else.33572:
+	fdiv	%f1, %f0, %f16
+	fblt	%f18, %f24, fbgt_cont.33567
+	fblt	%f18, %f1, fbgt_else.33580
+	fsub	%f0, %f18, %f1
+	fdiv	%f1, %f1, %f16
+	fmov	%f2, %f24
+	jal	reduction_2pi_sub2.2629
+	fmov	%f18, %f0
+	j	fbgt_cont.33567
+fbgt_else.33580:
+	fdiv	%f1, %f1, %f16
+	fmov	%f2, %f24
+	fmov	%f0, %f18
+	jal	reduction_2pi_sub2.2629
+	fmov	%f18, %f0
+fbgt_cont.33581:
+	j	fbgt_cont.33567
+fbgt_else.33578:
+fbgt_cont.33579:
+fbgt_cont.33573:
+	j	fbgt_cont.33567
+fbgt_else.33570:
+fbgt_cont.33571:
+	j	fbgt_cont.33567
+fbgt_else.33568:
+	flw	%f16, 496(%zero)
+	fdiv	%f0, %f0, %f16
+	fblt	%f18, %f24, fbgt_cont.33567
+	fblt	%f18, %f0, fbgt_else.33584
+	fsub	%f18, %f18, %f0
+	fdiv	%f1, %f0, %f16
+	fblt	%f18, %f24, fbgt_cont.33567
+	fblt	%f18, %f1, fbgt_else.33588
+	fsub	%f0, %f18, %f1
+	fdiv	%f1, %f1, %f16
+	fmov	%f2, %f24
+	jal	reduction_2pi_sub2.2629
+	fmov	%f18, %f0
+	j	fbgt_cont.33567
+fbgt_else.33588:
+	fdiv	%f1, %f1, %f16
+	fmov	%f2, %f24
+	fmov	%f0, %f18
+	jal	reduction_2pi_sub2.2629
+	fmov	%f18, %f0
+fbgt_cont.33589:
+	j	fbgt_cont.33567
+fbgt_else.33586:
+fbgt_cont.33587:
+	j	fbgt_cont.33567
+fbgt_else.33584:
+	fdiv	%f1, %f0, %f16
+	fblt	%f18, %f24, fbgt_cont.33567
+	fblt	%f18, %f1, fbgt_else.33592
+	fsub	%f0, %f18, %f1
+	fdiv	%f1, %f1, %f16
+	fmov	%f2, %f24
+	jal	reduction_2pi_sub2.2629
+	fmov	%f18, %f0
+	j	fbgt_cont.33567
+fbgt_else.33592:
+	fdiv	%f1, %f1, %f16
+	fmov	%f2, %f24
+	fmov	%f0, %f18
+	jal	reduction_2pi_sub2.2629
+	fmov	%f18, %f0
+fbgt_cont.33593:
+	j	fbgt_cont.33567
+fbgt_else.33590:
+fbgt_cont.33591:
+fbgt_cont.33585:
+	j	fbgt_cont.33567
+fbgt_else.33582:
+fbgt_cont.33583:
+fbgt_cont.33569:
+	j	fbgt_cont.33567
+fbgt_else.33566:
+fbgt_cont.33567:
+	fblt	%f18, %f22, fbgt_else.33594
+	add	%a0, %zero, %zero
+	j	fbgt_cont.33595
+fbgt_else.33594:
+	add	%a0, %zero, %k1
+fbgt_cont.33595:
+	fblt	%f18, %f22, fbgt_else.33596
+	fsub	%f18, %f18, %f22
+	j	fbgt_cont.33597
+fbgt_else.33596:
+fbgt_cont.33597:
+	fblt	%f18, %f25, fbgt_else.33598
+	beqi	%a0, 0, bnei_else.33600
+	add	%a0, %zero, %zero
+	j	fbgt_cont.33599
+bnei_else.33600:
+	add	%a0, %zero, %k1
+bnei_cont.33601:
+	j	fbgt_cont.33599
+fbgt_else.33598:
+fbgt_cont.33599:
+	fblt	%f18, %f25, fbgt_else.33602
+	fsub	%f18, %f22, %f18
+	j	fbgt_cont.33603
+fbgt_else.33602:
+fbgt_cont.33603:
+	fblt	%f26, %f18, fbgt_else.33604
+	fmul	%f18, %f18, %f18
+	fmul	%f16, %f18, %f18
+	flw	%f0, 473(%zero)
+	fmul	%f0, %f0, %f18
+	fsub	%f1, %f30, %f0
+	flw	%f0, 472(%zero)
+	fmul	%f0, %f0, %f16
+	fadd	%f1, %f1, %f0
+	flw	%f0, 471(%zero)
+	fmul	%f0, %f0, %f18
 	fmul	%f0, %f0, %f16
 	fsub	%f0, %f1, %f0
-fbgt_cont.47508:
-	beqi	%a2, 0, bnei_else.47509
-	j	bnei_cont.47510
-bnei_else.47509:
+	j	fbgt_cont.33605
+fbgt_else.33604:
+	fsub	%f19, %f25, %f18
+	fmul	%f16, %f19, %f19
+	fmul	%f18, %f16, %f16
+	flw	%f0, 477(%zero)
+	fmul	%f0, %f0, %f19
+	fmul	%f0, %f0, %f16
+	fsub	%f1, %f19, %f0
+	flw	%f0, 476(%zero)
+	fmul	%f0, %f0, %f19
+	fmul	%f0, %f0, %f18
+	fadd	%f1, %f1, %f0
+	flw	%f0, 475(%zero)
+	fmul	%f0, %f0, %f19
+	fmul	%f0, %f0, %f16
+	fmul	%f0, %f0, %f18
+	fsub	%f0, %f1, %f0
+fbgt_cont.33605:
+	beqi	%a0, 0, bnei_else.33606
+	j	bnei_cont.33607
+bnei_else.33606:
 	fneg	%f0, %f0
-bnei_cont.47510:
-	fdiv	%f0, %f19, %f0
-	fmul	%f1, %f0, %f20
-	add	%ra, %zero, %a1
-	fmov	%f2, %f17
-	fmov	%f0, %f18
+bnei_cont.33607:
+	fdiv	%f0, %f17, %f0
+	fmul	%f1, %f0, %f23
+	add	%ra, %zero, %a2
+	addi	%a0, %a1, 0
+	fmov	%f2, %f20
+	fmov	%f0, %f21
 	j	calc_dirvec.3083
 calc_dirvecs.3091:
 	fmov	%f3, %f0
 	add	%k0, %zero, %v0
 	add	%s0, %zero, %a0
 	add	%s1, %zero, %ra
-	blti	%k0, 0, bgti_else.47543
+	blti	%k0, 0, bgti_else.33642
 	itof	%f0, %k0
-	flw	%f28, 460(%zero)
-	fmul	%f0, %f0, %f28
-	flw	%f27, 438(%zero)
-	fsub	%f2, %f0, %f27
+	flw	%f27, 467(%zero)
+	fmul	%f0, %f0, %f27
+	flw	%f28, 436(%zero)
+	fsub	%f2, %f0, %f28
 	addi	%a0, %s0, 0
 	addi	%v0, %zero, 0
 	fmov	%f1, %fzero
 	fmov	%f0, %fzero
 	jal	calc_dirvec.3083
 	itof	%f0, %k0
-	fmul	%f0, %f0, %f28
-	flw	%f29, 441(%zero)
+	fmul	%f0, %f0, %f27
+	flw	%f29, 439(%zero)
 	fadd	%f2, %f0, %f29
 	addi	%s2, %s0, 2
 	addi	%a0, %s2, 0
@@ -19645,22 +16124,22 @@ calc_dirvecs.3091:
 	jal	calc_dirvec.3083
 	addi	%k0, %k0, -1
 	addi	%v1, %v1, 1
-	blti	%v1, 5, bgti_else.47544
+	blti	%v1, 5, bgti_else.33643
 	addi	%v1, %v1, -5
-	j	bgti_cont.47545
-bgti_else.47544:
-bgti_cont.47545:
-	blti	%k0, 0, bgti_else.47546
+	j	bgti_cont.33644
+bgti_else.33643:
+bgti_cont.33644:
+	blti	%k0, 0, bgti_else.33645
 	itof	%f0, %k0
-	fmul	%f0, %f0, %f28
-	fsub	%f2, %f0, %f27
+	fmul	%f0, %f0, %f27
+	fsub	%f2, %f0, %f28
 	addi	%a0, %s0, 0
 	addi	%v0, %zero, 0
 	fmov	%f1, %fzero
 	fmov	%f0, %fzero
 	jal	calc_dirvec.3083
 	itof	%f0, %k0
-	fmul	%f0, %f0, %f28
+	fmul	%f0, %f0, %f27
 	fadd	%f2, %f0, %f29
 	addi	%a0, %s2, 0
 	addi	%v0, %zero, 0
@@ -19669,31 +16148,33 @@ bgti_cont.47545:
 	jal	calc_dirvec.3083
 	addi	%v0, %k0, -1
 	addi	%v1, %v1, 1
-	blti	%v1, 5, bgti_else.47547
+	blti	%v1, 5, bgti_else.33646
 	addi	%v1, %v1, -5
-	j	bgti_cont.47548
-bgti_else.47547:
-bgti_cont.47548:
+	j	bgti_cont.33647
+bgti_else.33646:
+bgti_cont.33647:
 	add	%ra, %zero, %s1
 	addi	%a0, %s0, 0
 	fmov	%f0, %f3
 	j	calc_dirvecs.3091
-bgti_else.47546:
+bgti_else.33645:
 	add	%ra, %zero, %s1
 	jr	%ra
-bgti_else.47543:
+bgti_else.33642:
 	add	%ra, %zero, %s1
 	jr	%ra
 calc_dirvec_rows.3096:
 	add	%s3, %zero, %v0
 	add	%s4, %zero, %v1
 	add	%s5, %zero, %a0
+	fsw	%f5, 0(%sp)
+	fsw	%f4, 1(%sp)
 	add	%s6, %zero, %ra
-	blti	%s3, 0, bgti_else.47586
+	blti	%s3, 0, bgti_else.33710
 	itof	%f0, %s3
-	flw	%f4, 460(%zero)
+	flw	%f4, 467(%zero)
 	fmul	%f0, %f0, %f4
-	flw	%f5, 438(%zero)
+	flw	%f5, 436(%zero)
 	fsub	%f3, %f0, %f5
 	addi	%s7, %zero, 4
 	itof	%f0, %s7
@@ -19704,64 +16185,76 @@ calc_dirvec_rows.3096:
 	addi	%v0, %zero, 0
 	fmov	%f1, %fzero
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 2
 	jal	calc_dirvec.3083
+	addi	%sp, %sp, -2
 	itof	%f0, %s7
 	fmul	%f1, %f0, %f4
-	flw	%f0, 441(%zero)
+	flw	%f0, 439(%zero)
 	fadd	%f2, %f1, %f0
 	addi	%a0, %s5, 2
 	addi	%v1, %s4, 0
 	addi	%v0, %zero, 0
 	fmov	%f1, %fzero
 	fmov	%f0, %fzero
+	addi	%sp, %sp, 2
 	jal	calc_dirvec.3083
+	addi	%sp, %sp, -2
 	addi	%v0, %zero, 3
 	addi	%v1, %s4, 1
-	blti	%v1, 5, bgti_else.47587
+	blti	%v1, 5, bgti_else.33711
 	addi	%v1, %v1, -5
-	j	bgti_cont.47588
-bgti_else.47587:
-bgti_cont.47588:
+	j	bgti_cont.33712
+bgti_else.33711:
+bgti_cont.33712:
 	addi	%a0, %s5, 0
 	fmov	%f0, %f3
+	addi	%sp, %sp, 2
 	jal	calc_dirvecs.3091
+	addi	%sp, %sp, -2
 	addi	%t7, %s3, -1
 	addi	%s3, %s4, 2
-	blti	%s3, 5, bgti_else.47589
+	blti	%s3, 5, bgti_else.33713
 	addi	%s3, %s3, -5
-	j	bgti_cont.47590
-bgti_else.47589:
-bgti_cont.47590:
+	j	bgti_cont.33714
+bgti_else.33713:
+bgti_cont.33714:
 	addi	%s4, %s5, 4
-	blti	%t7, 0, bgti_else.47591
+	blti	%t7, 0, bgti_else.33715
 	itof	%f0, %t7
 	fmul	%f0, %f0, %f4
 	fsub	%f0, %f0, %f5
 	addi	%a0, %s4, 0
 	addi	%v1, %s3, 0
 	addi	%v0, %s7, 0
+	addi	%sp, %sp, 2
 	jal	calc_dirvecs.3091
+	addi	%sp, %sp, -2
 	addi	%v0, %t7, -1
 	addi	%v1, %s3, 2
-	blti	%v1, 5, bgti_else.47592
+	blti	%v1, 5, bgti_else.33716
 	addi	%v1, %v1, -5
-	j	bgti_cont.47593
-bgti_else.47592:
-bgti_cont.47593:
+	j	bgti_cont.33717
+bgti_else.33716:
+bgti_cont.33717:
 	addi	%a0, %s4, 4
+	flw	%f5, 0(%sp)
+	flw	%f4, 1(%sp)
 	add	%ra, %zero, %s6
 	j	calc_dirvec_rows.3096
-bgti_else.47591:
+bgti_else.33715:
+	flw	%f5, 0(%sp)
+	flw	%f4, 1(%sp)
 	add	%ra, %zero, %s6
 	jr	%ra
-bgti_else.47586:
+bgti_else.33710:
 	add	%ra, %zero, %s6
 	jr	%ra
 create_dirvec_elements.3102:
 	add	%a1, %zero, %v0
 	add	%a2, %zero, %v1
 	add	%a3, %zero, %ra
-	blti	%a2, 0, bgti_else.47630
+	blti	%a2, 0, bgti_else.33756
 	addi	%k0, %zero, 3
 	addi	%v0, %k0, 0
 	fmov	%f0, %fzero
@@ -19778,7 +16271,7 @@ create_dirvec_elements.3102:
 	add	%at, %a1, %a2
 	sw	%a0, 0(%at)
 	addi	%s0, %a2, -1
-	blti	%s0, 0, bgti_else.47631
+	blti	%s0, 0, bgti_else.33757
 	addi	%v0, %k0, 0
 	fmov	%f0, %fzero
 	jal	min_caml_create_float_array
@@ -19793,7 +16286,7 @@ create_dirvec_elements.3102:
 	add	%at, %a1, %s0
 	sw	%a0, 0(%at)
 	addi	%s0, %s0, -1
-	blti	%s0, 0, bgti_else.47632
+	blti	%s0, 0, bgti_else.33758
 	addi	%v0, %k0, 0
 	fmov	%f0, %fzero
 	jal	min_caml_create_float_array
@@ -19808,7 +16301,7 @@ create_dirvec_elements.3102:
 	add	%at, %a1, %s0
 	sw	%a0, 0(%at)
 	addi	%s0, %s0, -1
-	blti	%s0, 0, bgti_else.47633
+	blti	%s0, 0, bgti_else.33759
 	addi	%v0, %k0, 0
 	fmov	%f0, %fzero
 	jal	min_caml_create_float_array
@@ -19826,22 +16319,22 @@ create_dirvec_elements.3102:
 	add	%ra, %zero, %a3
 	addi	%v0, %a1, 0
 	j	create_dirvec_elements.3102
-bgti_else.47633:
+bgti_else.33759:
 	add	%ra, %zero, %a3
 	jr	%ra
-bgti_else.47632:
+bgti_else.33758:
 	add	%ra, %zero, %a3
 	jr	%ra
-bgti_else.47631:
+bgti_else.33757:
 	add	%ra, %zero, %a3
 	jr	%ra
-bgti_else.47630:
+bgti_else.33756:
 	add	%ra, %zero, %a3
 	jr	%ra
 create_dirvecs.3105:
 	add	%s2, %zero, %v0
 	add	%s3, %zero, %ra
-	blti	%s2, 0, bgti_else.47664
+	blti	%s2, 0, bgti_else.33792
 	addi	%s6, %zero, 120
 	addi	%s4, %zero, 3
 	addi	%v0, %s4, 0
@@ -19901,7 +16394,7 @@ create_dirvecs.3105:
 	addi	%v0, %a2, 0
 	jal	create_dirvec_elements.3102
 	addi	%s2, %s2, -1
-	blti	%s2, 0, bgti_else.47665
+	blti	%s2, 0, bgti_else.33793
 	addi	%v0, %s4, 0
 	fmov	%f0, %fzero
 	jal	min_caml_create_float_array
@@ -19947,701 +16440,474 @@ create_dirvecs.3105:
 	addi	%v0, %s2, -1
 	add	%ra, %zero, %s3
 	j	create_dirvecs.3105
-bgti_else.47665:
+bgti_else.33793:
 	add	%ra, %zero, %s3
 	jr	%ra
-bgti_else.47664:
+bgti_else.33792:
 	add	%ra, %zero, %s3
 	jr	%ra
 init_dirvec_constants.3107:
-	add	%s2, %zero, %v0
-	add	%s3, %zero, %v1
-	add	%s4, %zero, %ra
-	blti	%s3, 0, bgti_else.47783
-	add	%at, %s2, %s3
+	add	%s4, %zero, %v0
+	add	%s5, %zero, %v1
+	add	%s6, %zero, %ra
+	blti	%s5, 0, bgti_else.33847
+	add	%at, %s4, %s5
 	lw	%v0, 0(%at)
 	lw	%a0, 0(%zero)
-	addi	%s5, %a0, -1
-	addi	%v1, %s5, 0
+	addi	%s7, %a0, -1
+	addi	%v1, %s7, 0
 	jal	iter_setup_dirvec_constants.2889
-	addi	%s3, %s3, -1
-	blti	%s3, 0, bgti_else.47784
-	add	%at, %s2, %s3
-	lw	%a1, 0(%at)
-	blti	%s5, 0, bgti_else.47785
-	lw	%a2, 12(%s5)
-	lw	%a3, 1(%a1)
-	lw	%k0, 0(%a1)
-	lw	%a0, 1(%a2)
-	beqi	%a0, 1, bnei_else.47787
-	beqi	%a0, 2, bnei_else.47789
-	addi	%v0, %zero, 5
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	flw	%f18, 0(%k0)
-	flw	%f19, 1(%k0)
-	flw	%f21, 2(%k0)
-	fmul	%f1, %f18, %f18
-	lw	%a0, 4(%a2)
-	flw	%f0, 0(%a0)
-	fmul	%f16, %f1, %f0
-	fmul	%f1, %f19, %f19
-	lw	%a0, 4(%a2)
-	flw	%f0, 1(%a0)
-	fmul	%f0, %f1, %f0
-	fadd	%f16, %f16, %f0
-	fmul	%f1, %f21, %f21
-	lw	%a0, 4(%a2)
-	flw	%f0, 2(%a0)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	lw	%a0, 3(%a2)
-	beqi	%a0, 0, bnei_else.47791
-	fmul	%f16, %f19, %f21
-	lw	%a0, 9(%a2)
-	flw	%f1, 0(%a0)
-	fmul	%f1, %f16, %f1
-	fadd	%f16, %f0, %f1
-	fmul	%f1, %f21, %f18
-	lw	%a0, 9(%a2)
-	flw	%f0, 1(%a0)
-	fmul	%f0, %f1, %f0
-	fadd	%f16, %f16, %f0
-	fmul	%f1, %f18, %f19
-	lw	%a0, 9(%a2)
-	flw	%f0, 2(%a0)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	j	bnei_cont.47792
-bnei_else.47791:
-bnei_cont.47792:
-	lw	%a0, 4(%a2)
-	flw	%f1, 0(%a0)
-	fmul	%f1, %f18, %f1
-	fneg	%f22, %f1
-	lw	%a0, 4(%a2)
-	flw	%f1, 1(%a0)
-	fmul	%f1, %f19, %f1
-	fneg	%f20, %f1
-	lw	%a0, 4(%a2)
-	flw	%f1, 2(%a0)
-	fmul	%f1, %f21, %f1
-	fneg	%f17, %f1
-	fsw	%f0, 0(%v0)
-	lw	%a0, 3(%a2)
-	beqi	%a0, 0, bnei_else.47793
-	lw	%a0, 9(%a2)
-	flw	%f1, 1(%a0)
-	fmul	%f16, %f21, %f1
-	lw	%a0, 9(%a2)
-	flw	%f1, 2(%a0)
-	fmul	%f1, %f19, %f1
-	fadd	%f1, %f16, %f1
-	flw	%f2, 473(%zero)
-	fmul	%f1, %f1, %f2
-	fsub	%f1, %f22, %f1
-	fsw	%f1, 1(%v0)
-	lw	%a0, 9(%a2)
-	flw	%f1, 0(%a0)
-	fmul	%f16, %f21, %f1
-	lw	%a0, 9(%a2)
-	flw	%f1, 2(%a0)
-	fmul	%f1, %f18, %f1
-	fadd	%f1, %f16, %f1
-	fmul	%f1, %f1, %f2
-	fsub	%f1, %f20, %f1
-	fsw	%f1, 2(%v0)
-	lw	%a0, 9(%a2)
-	flw	%f1, 0(%a0)
-	fmul	%f16, %f19, %f1
-	lw	%a0, 9(%a2)
-	flw	%f1, 1(%a0)
-	fmul	%f1, %f18, %f1
-	fadd	%f1, %f16, %f1
-	fmul	%f1, %f1, %f2
-	fsub	%f1, %f17, %f1
-	fsw	%f1, 3(%v0)
-	j	bnei_cont.47794
-bnei_else.47793:
-	fsw	%f22, 1(%v0)
-	fsw	%f20, 2(%v0)
-	fsw	%f17, 3(%v0)
-bnei_cont.47794:
-	fbne	%f0, %fzero, fbeq_else.47795
-	add	%a0, %zero, %k1
-	j	fbeq_cont.47796
-fbeq_else.47795:
-	add	%a0, %zero, %zero
-fbeq_cont.47796:
-	beqi	%a0, 0, bnei_else.47797
-	j	bnei_cont.47798
-bnei_else.47797:
-	fdiv	%f0, %f30, %f0
-	fsw	%f0, 4(%v0)
-bnei_cont.47798:
-	add	%at, %a3, %s5
+	addi	%s5, %s5, -1
+	blti	%s5, 0, bgti_else.33848
+	add	%at, %s4, %s5
+	lw	%s0, 0(%at)
+	blti	%s7, 0, bgti_else.33849
+	lw	%a0, 12(%s7)
+	lw	%s1, 1(%s0)
+	lw	%a1, 0(%s0)
+	lw	%a2, 1(%a0)
+	beqi	%a2, 1, bnei_else.33851
+	beqi	%a2, 2, bnei_else.33853
+	addi	%v1, %a0, 0
+	addi	%v0, %a1, 0
+	jal	setup_second_table.2886
+	add	%at, %s1, %s7
 	sw	%v0, 0(%at)
-	j	bnei_cont.47788
-bnei_else.47789:
+	j	bnei_cont.33852
+bnei_else.33853:
 	addi	%v0, %zero, 4
 	fmov	%f0, %fzero
 	jal	min_caml_create_float_array
-	flw	%f1, 0(%k0)
-	lw	%a0, 4(%a2)
-	flw	%f0, 0(%a0)
+	flw	%f1, 0(%a1)
+	lw	%a2, 4(%a0)
+	flw	%f0, 0(%a2)
 	fmul	%f16, %f1, %f0
-	flw	%f1, 1(%k0)
-	lw	%a0, 4(%a2)
-	flw	%f0, 1(%a0)
+	flw	%f1, 1(%a1)
+	lw	%a2, 4(%a0)
+	flw	%f0, 1(%a2)
 	fmul	%f0, %f1, %f0
 	fadd	%f16, %f16, %f0
-	flw	%f1, 2(%k0)
-	lw	%a0, 4(%a2)
-	flw	%f0, 2(%a0)
+	flw	%f1, 2(%a1)
+	lw	%a1, 4(%a0)
+	flw	%f0, 2(%a1)
 	fmul	%f0, %f1, %f0
 	fadd	%f1, %f16, %f0
-	fblt	%fzero, %f1, fbgt_else.47799
-	add	%a0, %zero, %zero
-	j	fbgt_cont.47800
-fbgt_else.47799:
-	add	%a0, %zero, %k1
-fbgt_cont.47800:
-	beqi	%a0, 0, bnei_else.47801
-	flw	%f0, 468(%zero)
+	fblt	%fzero, %f1, fbgt_else.33855
+	add	%a1, %zero, %zero
+	j	fbgt_cont.33856
+fbgt_else.33855:
+	add	%a1, %zero, %k1
+fbgt_cont.33856:
+	beqi	%a1, 0, bnei_else.33857
+	flw	%f0, 458(%zero)
 	fdiv	%f0, %f0, %f1
 	fsw	%f0, 0(%v0)
-	lw	%a0, 4(%a2)
-	flw	%f0, 0(%a0)
+	lw	%a1, 4(%a0)
+	flw	%f0, 0(%a1)
 	fdiv	%f0, %f0, %f1
 	fneg	%f0, %f0
 	fsw	%f0, 1(%v0)
-	lw	%a0, 4(%a2)
-	flw	%f0, 1(%a0)
+	lw	%a1, 4(%a0)
+	flw	%f0, 1(%a1)
 	fdiv	%f0, %f0, %f1
 	fneg	%f0, %f0
 	fsw	%f0, 2(%v0)
-	lw	%a0, 4(%a2)
+	lw	%a0, 4(%a0)
 	flw	%f0, 2(%a0)
 	fdiv	%f0, %f0, %f1
 	fneg	%f0, %f0
 	fsw	%f0, 3(%v0)
-	j	bnei_cont.47802
-bnei_else.47801:
+	j	bnei_cont.33858
+bnei_else.33857:
 	fsw	%fzero, 0(%v0)
-bnei_cont.47802:
-	add	%at, %a3, %s5
+bnei_cont.33858:
+	add	%at, %s1, %s7
 	sw	%v0, 0(%at)
-bnei_cont.47790:
-	j	bnei_cont.47788
-bnei_else.47787:
-	addi	%v0, %zero, 6
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	flw	%f1, 0(%k0)
-	fbne	%f1, %fzero, fbeq_else.47803
-	add	%a0, %zero, %k1
-	j	fbeq_cont.47804
-fbeq_else.47803:
-	add	%a0, %zero, %zero
-fbeq_cont.47804:
-	beqi	%a0, 0, bnei_else.47805
-	fsw	%fzero, 1(%v0)
-	j	bnei_cont.47806
-bnei_else.47805:
-	lw	%ra, 6(%a2)
-	fblt	%f1, %fzero, fbgt_else.47807
-	add	%a0, %zero, %zero
-	j	fbgt_cont.47808
-fbgt_else.47807:
-	add	%a0, %zero, %k1
-fbgt_cont.47808:
-	beqi	%ra, 0, bnei_else.47809
-	beqi	%a0, 0, bnei_else.47811
-	add	%a0, %zero, %zero
-	j	bnei_cont.47810
-bnei_else.47811:
-	add	%a0, %zero, %k1
-bnei_cont.47812:
-	j	bnei_cont.47810
-bnei_else.47809:
-bnei_cont.47810:
-	lw	%ra, 4(%a2)
-	flw	%f0, 0(%ra)
-	beqi	%a0, 0, bnei_else.47813
-	j	bnei_cont.47814
-bnei_else.47813:
-	fneg	%f0, %f0
-bnei_cont.47814:
-	fsw	%f0, 0(%v0)
-	fdiv	%f0, %f30, %f1
-	fsw	%f0, 1(%v0)
-bnei_cont.47806:
-	flw	%f1, 1(%k0)
-	fbne	%f1, %fzero, fbeq_else.47815
-	add	%a0, %zero, %k1
-	j	fbeq_cont.47816
-fbeq_else.47815:
-	add	%a0, %zero, %zero
-fbeq_cont.47816:
-	beqi	%a0, 0, bnei_else.47817
-	fsw	%fzero, 3(%v0)
-	j	bnei_cont.47818
-bnei_else.47817:
-	lw	%ra, 6(%a2)
-	fblt	%f1, %fzero, fbgt_else.47819
-	add	%a0, %zero, %zero
-	j	fbgt_cont.47820
-fbgt_else.47819:
-	add	%a0, %zero, %k1
-fbgt_cont.47820:
-	beqi	%ra, 0, bnei_else.47821
-	beqi	%a0, 0, bnei_else.47823
-	add	%a0, %zero, %zero
-	j	bnei_cont.47822
-bnei_else.47823:
-	add	%a0, %zero, %k1
-bnei_cont.47824:
-	j	bnei_cont.47822
-bnei_else.47821:
-bnei_cont.47822:
-	lw	%ra, 4(%a2)
-	flw	%f0, 1(%ra)
-	beqi	%a0, 0, bnei_else.47825
-	j	bnei_cont.47826
-bnei_else.47825:
-	fneg	%f0, %f0
-bnei_cont.47826:
-	fsw	%f0, 2(%v0)
-	fdiv	%f0, %f30, %f1
-	fsw	%f0, 3(%v0)
-bnei_cont.47818:
-	flw	%f1, 2(%k0)
-	fbne	%f1, %fzero, fbeq_else.47827
-	add	%a0, %zero, %k1
-	j	fbeq_cont.47828
-fbeq_else.47827:
-	add	%a0, %zero, %zero
-fbeq_cont.47828:
-	beqi	%a0, 0, bnei_else.47829
-	fsw	%fzero, 5(%v0)
-	j	bnei_cont.47830
-bnei_else.47829:
-	lw	%k0, 6(%a2)
-	fblt	%f1, %fzero, fbgt_else.47831
-	add	%a0, %zero, %zero
-	j	fbgt_cont.47832
-fbgt_else.47831:
-	add	%a0, %zero, %k1
-fbgt_cont.47832:
-	beqi	%k0, 0, bnei_else.47833
-	beqi	%a0, 0, bnei_else.47835
-	add	%a0, %zero, %zero
-	j	bnei_cont.47834
-bnei_else.47835:
-	add	%a0, %zero, %k1
-bnei_cont.47836:
-	j	bnei_cont.47834
-bnei_else.47833:
-bnei_cont.47834:
-	lw	%a2, 4(%a2)
-	flw	%f0, 2(%a2)
-	beqi	%a0, 0, bnei_else.47837
-	j	bnei_cont.47838
-bnei_else.47837:
-	fneg	%f0, %f0
-bnei_cont.47838:
-	fsw	%f0, 4(%v0)
-	fdiv	%f0, %f30, %f1
-	fsw	%f0, 5(%v0)
-bnei_cont.47830:
-	add	%at, %a3, %s5
-	sw	%v0, 0(%at)
-bnei_cont.47788:
-	addi	%v1, %s5, -1
+bnei_cont.33854:
+	j	bnei_cont.33852
+bnei_else.33851:
+	addi	%v1, %a0, 0
 	addi	%v0, %a1, 0
+	jal	setup_rect_table.2880
+	add	%at, %s1, %s7
+	sw	%v0, 0(%at)
+bnei_cont.33852:
+	addi	%v1, %s7, -1
+	addi	%v0, %s0, 0
 	jal	iter_setup_dirvec_constants.2889
-	j	bgti_cont.47786
-bgti_else.47785:
-bgti_cont.47786:
-	addi	%s3, %s3, -1
-	blti	%s3, 0, bgti_else.47839
-	add	%at, %s2, %s3
+	j	bgti_cont.33850
+bgti_else.33849:
+bgti_cont.33850:
+	addi	%s5, %s5, -1
+	blti	%s5, 0, bgti_else.33859
+	add	%at, %s4, %s5
 	lw	%v0, 0(%at)
-	addi	%v1, %s5, 0
+	addi	%v1, %s7, 0
 	jal	iter_setup_dirvec_constants.2889
-	addi	%s3, %s3, -1
-	blti	%s3, 0, bgti_else.47840
-	add	%at, %s2, %s3
+	addi	%s5, %s5, -1
+	blti	%s5, 0, bgti_else.33860
+	add	%at, %s4, %s5
 	lw	%v0, 0(%at)
 	jal	setup_dirvec_constants.2892
-	addi	%v1, %s3, -1
-	add	%ra, %zero, %s4
-	addi	%v0, %s2, 0
+	addi	%v1, %s5, -1
+	add	%ra, %zero, %s6
+	addi	%v0, %s4, 0
 	j	init_dirvec_constants.3107
-bgti_else.47840:
-	add	%ra, %zero, %s4
+bgti_else.33860:
+	add	%ra, %zero, %s6
 	jr	%ra
-bgti_else.47839:
-	add	%ra, %zero, %s4
+bgti_else.33859:
+	add	%ra, %zero, %s6
 	jr	%ra
-bgti_else.47784:
-	add	%ra, %zero, %s4
+bgti_else.33848:
+	add	%ra, %zero, %s6
 	jr	%ra
-bgti_else.47783:
-	add	%ra, %zero, %s4
+bgti_else.33847:
+	add	%ra, %zero, %s6
 	jr	%ra
 init_vecset_constants.3110:
-	add	%s6, %zero, %v0
-	add	%s7, %zero, %ra
-	blti	%s6, 0, bgti_else.48058
-	lw	%s2, 179(%s6)
+	add	%t7, %zero, %v0
+	add	%t8, %zero, %ra
+	blti	%t7, 0, bgti_else.33950
+	lw	%s4, 179(%t7)
 	addi	%a0, %zero, 119
-	lw	%a1, 119(%s2)
+	lw	%s0, 119(%s4)
 	lw	%a0, 0(%zero)
-	addi	%t7, %a0, -1
-	blti	%t7, 0, bgti_else.48059
-	lw	%a2, 12(%t7)
-	lw	%a3, 1(%a1)
-	lw	%k0, 0(%a1)
-	lw	%a0, 1(%a2)
-	beqi	%a0, 1, bnei_else.48061
-	beqi	%a0, 2, bnei_else.48063
-	addi	%v0, %zero, 5
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	flw	%f18, 0(%k0)
-	flw	%f19, 1(%k0)
-	flw	%f21, 2(%k0)
-	fmul	%f1, %f18, %f18
-	lw	%a0, 4(%a2)
-	flw	%f0, 0(%a0)
-	fmul	%f16, %f1, %f0
-	fmul	%f1, %f19, %f19
-	lw	%a0, 4(%a2)
-	flw	%f0, 1(%a0)
-	fmul	%f0, %f1, %f0
-	fadd	%f16, %f16, %f0
-	fmul	%f1, %f21, %f21
-	lw	%a0, 4(%a2)
-	flw	%f0, 2(%a0)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	lw	%a0, 3(%a2)
-	beqi	%a0, 0, bnei_else.48065
-	fmul	%f16, %f19, %f21
-	lw	%a0, 9(%a2)
-	flw	%f1, 0(%a0)
-	fmul	%f1, %f16, %f1
-	fadd	%f16, %f0, %f1
-	fmul	%f1, %f21, %f18
-	lw	%a0, 9(%a2)
-	flw	%f0, 1(%a0)
-	fmul	%f0, %f1, %f0
-	fadd	%f16, %f16, %f0
-	fmul	%f1, %f18, %f19
-	lw	%a0, 9(%a2)
-	flw	%f0, 2(%a0)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	j	bnei_cont.48066
-bnei_else.48065:
-bnei_cont.48066:
-	lw	%a0, 4(%a2)
-	flw	%f1, 0(%a0)
-	fmul	%f1, %f18, %f1
-	fneg	%f22, %f1
-	lw	%a0, 4(%a2)
-	flw	%f1, 1(%a0)
-	fmul	%f1, %f19, %f1
-	fneg	%f20, %f1
-	lw	%a0, 4(%a2)
-	flw	%f1, 2(%a0)
-	fmul	%f1, %f21, %f1
-	fneg	%f17, %f1
-	fsw	%f0, 0(%v0)
-	lw	%a0, 3(%a2)
-	beqi	%a0, 0, bnei_else.48067
-	lw	%a0, 9(%a2)
-	flw	%f1, 1(%a0)
-	fmul	%f16, %f21, %f1
-	lw	%a0, 9(%a2)
-	flw	%f1, 2(%a0)
-	fmul	%f1, %f19, %f1
-	fadd	%f1, %f16, %f1
-	flw	%f2, 473(%zero)
-	fmul	%f1, %f1, %f2
-	fsub	%f1, %f22, %f1
-	fsw	%f1, 1(%v0)
-	lw	%a0, 9(%a2)
-	flw	%f1, 0(%a0)
-	fmul	%f16, %f21, %f1
-	lw	%a0, 9(%a2)
-	flw	%f1, 2(%a0)
-	fmul	%f1, %f18, %f1
-	fadd	%f1, %f16, %f1
-	fmul	%f1, %f1, %f2
-	fsub	%f1, %f20, %f1
-	fsw	%f1, 2(%v0)
-	lw	%a0, 9(%a2)
-	flw	%f1, 0(%a0)
-	fmul	%f16, %f19, %f1
-	lw	%a0, 9(%a2)
-	flw	%f1, 1(%a0)
-	fmul	%f1, %f18, %f1
-	fadd	%f1, %f16, %f1
-	fmul	%f1, %f1, %f2
-	fsub	%f1, %f17, %f1
-	fsw	%f1, 3(%v0)
-	j	bnei_cont.48068
-bnei_else.48067:
-	fsw	%f22, 1(%v0)
-	fsw	%f20, 2(%v0)
-	fsw	%f17, 3(%v0)
-bnei_cont.48068:
-	fbne	%f0, %fzero, fbeq_else.48069
-	add	%a0, %zero, %k1
-	j	fbeq_cont.48070
-fbeq_else.48069:
-	add	%a0, %zero, %zero
-fbeq_cont.48070:
-	beqi	%a0, 0, bnei_else.48071
-	j	bnei_cont.48072
-bnei_else.48071:
-	fdiv	%f0, %f30, %f0
-	fsw	%f0, 4(%v0)
-bnei_cont.48072:
-	add	%at, %a3, %t7
+	addi	%t9, %a0, -1
+	blti	%t9, 0, bgti_else.33951
+	lw	%a0, 12(%t9)
+	lw	%s1, 1(%s0)
+	lw	%a1, 0(%s0)
+	lw	%a2, 1(%a0)
+	beqi	%a2, 1, bnei_else.33953
+	beqi	%a2, 2, bnei_else.33955
+	addi	%v1, %a0, 0
+	addi	%v0, %a1, 0
+	jal	setup_second_table.2886
+	add	%at, %s1, %t9
 	sw	%v0, 0(%at)
-	j	bnei_cont.48062
-bnei_else.48063:
+	j	bnei_cont.33954
+bnei_else.33955:
 	addi	%v0, %zero, 4
 	fmov	%f0, %fzero
 	jal	min_caml_create_float_array
-	flw	%f1, 0(%k0)
-	lw	%a0, 4(%a2)
-	flw	%f0, 0(%a0)
+	flw	%f1, 0(%a1)
+	lw	%a2, 4(%a0)
+	flw	%f0, 0(%a2)
 	fmul	%f16, %f1, %f0
-	flw	%f1, 1(%k0)
-	lw	%a0, 4(%a2)
-	flw	%f0, 1(%a0)
+	flw	%f1, 1(%a1)
+	lw	%a2, 4(%a0)
+	flw	%f0, 1(%a2)
 	fmul	%f0, %f1, %f0
 	fadd	%f16, %f16, %f0
-	flw	%f1, 2(%k0)
-	lw	%a0, 4(%a2)
-	flw	%f0, 2(%a0)
+	flw	%f1, 2(%a1)
+	lw	%a1, 4(%a0)
+	flw	%f0, 2(%a1)
 	fmul	%f0, %f1, %f0
 	fadd	%f1, %f16, %f0
-	fblt	%fzero, %f1, fbgt_else.48073
-	add	%a0, %zero, %zero
-	j	fbgt_cont.48074
-fbgt_else.48073:
-	add	%a0, %zero, %k1
-fbgt_cont.48074:
-	beqi	%a0, 0, bnei_else.48075
-	flw	%f0, 468(%zero)
+	fblt	%fzero, %f1, fbgt_else.33957
+	add	%a1, %zero, %zero
+	j	fbgt_cont.33958
+fbgt_else.33957:
+	add	%a1, %zero, %k1
+fbgt_cont.33958:
+	beqi	%a1, 0, bnei_else.33959
+	flw	%f0, 458(%zero)
 	fdiv	%f0, %f0, %f1
 	fsw	%f0, 0(%v0)
-	lw	%a0, 4(%a2)
-	flw	%f0, 0(%a0)
+	lw	%a1, 4(%a0)
+	flw	%f0, 0(%a1)
 	fdiv	%f0, %f0, %f1
 	fneg	%f0, %f0
 	fsw	%f0, 1(%v0)
-	lw	%a0, 4(%a2)
-	flw	%f0, 1(%a0)
+	lw	%a1, 4(%a0)
+	flw	%f0, 1(%a1)
 	fdiv	%f0, %f0, %f1
 	fneg	%f0, %f0
 	fsw	%f0, 2(%v0)
-	lw	%a0, 4(%a2)
+	lw	%a0, 4(%a0)
 	flw	%f0, 2(%a0)
 	fdiv	%f0, %f0, %f1
 	fneg	%f0, %f0
 	fsw	%f0, 3(%v0)
-	j	bnei_cont.48076
-bnei_else.48075:
+	j	bnei_cont.33960
+bnei_else.33959:
 	fsw	%fzero, 0(%v0)
-bnei_cont.48076:
-	add	%at, %a3, %t7
+bnei_cont.33960:
+	add	%at, %s1, %t9
 	sw	%v0, 0(%at)
-bnei_cont.48064:
-	j	bnei_cont.48062
-bnei_else.48061:
-	addi	%v0, %zero, 6
-	fmov	%f0, %fzero
-	jal	min_caml_create_float_array
-	flw	%f1, 0(%k0)
-	fbne	%f1, %fzero, fbeq_else.48077
-	add	%a0, %zero, %k1
-	j	fbeq_cont.48078
-fbeq_else.48077:
-	add	%a0, %zero, %zero
-fbeq_cont.48078:
-	beqi	%a0, 0, bnei_else.48079
-	fsw	%fzero, 1(%v0)
-	j	bnei_cont.48080
-bnei_else.48079:
-	lw	%ra, 6(%a2)
-	fblt	%f1, %fzero, fbgt_else.48081
-	add	%a0, %zero, %zero
-	j	fbgt_cont.48082
-fbgt_else.48081:
-	add	%a0, %zero, %k1
-fbgt_cont.48082:
-	beqi	%ra, 0, bnei_else.48083
-	beqi	%a0, 0, bnei_else.48085
-	add	%a0, %zero, %zero
-	j	bnei_cont.48084
-bnei_else.48085:
-	add	%a0, %zero, %k1
-bnei_cont.48086:
-	j	bnei_cont.48084
-bnei_else.48083:
-bnei_cont.48084:
-	lw	%ra, 4(%a2)
-	flw	%f0, 0(%ra)
-	beqi	%a0, 0, bnei_else.48087
-	j	bnei_cont.48088
-bnei_else.48087:
-	fneg	%f0, %f0
-bnei_cont.48088:
-	fsw	%f0, 0(%v0)
-	fdiv	%f0, %f30, %f1
-	fsw	%f0, 1(%v0)
-bnei_cont.48080:
-	flw	%f1, 1(%k0)
-	fbne	%f1, %fzero, fbeq_else.48089
-	add	%a0, %zero, %k1
-	j	fbeq_cont.48090
-fbeq_else.48089:
-	add	%a0, %zero, %zero
-fbeq_cont.48090:
-	beqi	%a0, 0, bnei_else.48091
-	fsw	%fzero, 3(%v0)
-	j	bnei_cont.48092
-bnei_else.48091:
-	lw	%ra, 6(%a2)
-	fblt	%f1, %fzero, fbgt_else.48093
-	add	%a0, %zero, %zero
-	j	fbgt_cont.48094
-fbgt_else.48093:
-	add	%a0, %zero, %k1
-fbgt_cont.48094:
-	beqi	%ra, 0, bnei_else.48095
-	beqi	%a0, 0, bnei_else.48097
-	add	%a0, %zero, %zero
-	j	bnei_cont.48096
-bnei_else.48097:
-	add	%a0, %zero, %k1
-bnei_cont.48098:
-	j	bnei_cont.48096
-bnei_else.48095:
-bnei_cont.48096:
-	lw	%ra, 4(%a2)
-	flw	%f0, 1(%ra)
-	beqi	%a0, 0, bnei_else.48099
-	j	bnei_cont.48100
-bnei_else.48099:
-	fneg	%f0, %f0
-bnei_cont.48100:
-	fsw	%f0, 2(%v0)
-	fdiv	%f0, %f30, %f1
-	fsw	%f0, 3(%v0)
-bnei_cont.48092:
-	flw	%f1, 2(%k0)
-	fbne	%f1, %fzero, fbeq_else.48101
-	add	%a0, %zero, %k1
-	j	fbeq_cont.48102
-fbeq_else.48101:
-	add	%a0, %zero, %zero
-fbeq_cont.48102:
-	beqi	%a0, 0, bnei_else.48103
-	fsw	%fzero, 5(%v0)
-	j	bnei_cont.48104
-bnei_else.48103:
-	lw	%k0, 6(%a2)
-	fblt	%f1, %fzero, fbgt_else.48105
-	add	%a0, %zero, %zero
-	j	fbgt_cont.48106
-fbgt_else.48105:
-	add	%a0, %zero, %k1
-fbgt_cont.48106:
-	beqi	%k0, 0, bnei_else.48107
-	beqi	%a0, 0, bnei_else.48109
-	add	%a0, %zero, %zero
-	j	bnei_cont.48108
-bnei_else.48109:
-	add	%a0, %zero, %k1
-bnei_cont.48110:
-	j	bnei_cont.48108
-bnei_else.48107:
-bnei_cont.48108:
-	lw	%a2, 4(%a2)
-	flw	%f0, 2(%a2)
-	beqi	%a0, 0, bnei_else.48111
-	j	bnei_cont.48112
-bnei_else.48111:
-	fneg	%f0, %f0
-bnei_cont.48112:
-	fsw	%f0, 4(%v0)
-	fdiv	%f0, %f30, %f1
-	fsw	%f0, 5(%v0)
-bnei_cont.48104:
-	add	%at, %a3, %t7
-	sw	%v0, 0(%at)
-bnei_cont.48062:
-	addi	%v1, %t7, -1
+bnei_cont.33956:
+	j	bnei_cont.33954
+bnei_else.33953:
+	addi	%v1, %a0, 0
 	addi	%v0, %a1, 0
+	jal	setup_rect_table.2880
+	add	%at, %s1, %t9
+	sw	%v0, 0(%at)
+bnei_cont.33954:
+	addi	%v1, %t9, -1
+	addi	%v0, %s0, 0
 	jal	iter_setup_dirvec_constants.2889
-	j	bgti_cont.48060
-bgti_else.48059:
-bgti_cont.48060:
-	addi	%t9, %zero, 118
-	lw	%v0, 118(%s2)
-	addi	%v1, %t7, 0
+	j	bgti_cont.33952
+bgti_else.33951:
+bgti_cont.33952:
+	addi	%a0, %zero, 118
+	lw	%v0, 118(%s4)
+	addi	%v1, %t9, 0
 	jal	iter_setup_dirvec_constants.2889
-	addi	%t8, %zero, 117
-	lw	%v0, 117(%s2)
+	addi	%a0, %zero, 117
+	lw	%v0, 117(%s4)
 	jal	setup_dirvec_constants.2892
 	addi	%v1, %zero, 116
-	addi	%v0, %s2, 0
+	addi	%v0, %s4, 0
 	jal	init_dirvec_constants.3107
-	addi	%s6, %s6, -1
-	blti	%s6, 0, bgti_else.48113
-	lw	%s2, 179(%s6)
-	lw	%v0, 119(%s2)
-	addi	%v1, %t7, 0
-	jal	iter_setup_dirvec_constants.2889
-	lw	%v0, 118(%s2)
-	jal	setup_dirvec_constants.2892
-	addi	%v1, %t8, 0
-	addi	%v0, %s2, 0
-	jal	init_dirvec_constants.3107
-	addi	%s6, %s6, -1
-	blti	%s6, 0, bgti_else.48114
-	lw	%s2, 179(%s6)
-	lw	%v0, 119(%s2)
-	jal	setup_dirvec_constants.2892
+	addi	%t7, %t7, -1
+	blti	%t7, 0, bgti_else.33961
+	lw	%s4, 179(%t7)
+	lw	%v0, 119(%s4)
 	addi	%v1, %t9, 0
-	addi	%v0, %s2, 0
+	jal	iter_setup_dirvec_constants.2889
+	lw	%v0, 118(%s4)
+	jal	setup_dirvec_constants.2892
+	addi	%v1, %zero, 117
+	addi	%v0, %s4, 0
 	jal	init_dirvec_constants.3107
-	addi	%s6, %s6, -1
-	blti	%s6, 0, bgti_else.48115
-	lw	%v0, 179(%s6)
+	addi	%t7, %t7, -1
+	blti	%t7, 0, bgti_else.33962
+	lw	%s4, 179(%t7)
+	lw	%v0, 119(%s4)
+	jal	setup_dirvec_constants.2892
+	addi	%v1, %zero, 118
+	addi	%v0, %s4, 0
+	jal	init_dirvec_constants.3107
+	addi	%t7, %t7, -1
+	blti	%t7, 0, bgti_else.33963
+	lw	%v0, 179(%t7)
 	addi	%v1, %zero, 119
 	jal	init_dirvec_constants.3107
-	addi	%v0, %s6, -1
-	add	%ra, %zero, %s7
+	addi	%v0, %t7, -1
+	add	%ra, %zero, %t8
 	j	init_vecset_constants.3110
-bgti_else.48115:
-	add	%ra, %zero, %s7
+bgti_else.33963:
+	add	%ra, %zero, %t8
 	jr	%ra
-bgti_else.48114:
-	add	%ra, %zero, %s7
+bgti_else.33962:
+	add	%ra, %zero, %t8
 	jr	%ra
-bgti_else.48113:
-	add	%ra, %zero, %s7
+bgti_else.33961:
+	add	%ra, %zero, %t8
 	jr	%ra
-bgti_else.48058:
-	add	%ra, %zero, %s7
+bgti_else.33950:
+	add	%ra, %zero, %t8
+	jr	%ra
+setup_reflections.3127:
+	add	%s4, %zero, %ra
+	blti	%v0, 0, bgti_else.34042
+	lw	%a1, 12(%v0)
+	lw	%a0, 2(%a1)
+	beqi	%a0, 2, bnei_else.34043
+	add	%ra, %zero, %s4
+	jr	%ra
+bnei_else.34043:
+	lw	%a0, 7(%a1)
+	flw	%f0, 0(%a0)
+	fblt	%f0, %f30, fbgt_else.34045
+	add	%a0, %zero, %zero
+	j	fbgt_cont.34046
+fbgt_else.34045:
+	add	%a0, %zero, %k1
+fbgt_cont.34046:
+	beqi	%a0, 0, bnei_else.34047
+	lw	%a0, 1(%a1)
+	beqi	%a0, 1, bnei_else.34048
+	beqi	%a0, 2, bnei_else.34049
+	add	%ra, %zero, %s4
+	jr	%ra
+bnei_else.34049:
+	sll	%a0, %v0, 2
+	addi	%s5, %a0, 1
+	lw	%s6, 434(%zero)
+	lw	%a0, 7(%a1)
+	flw	%f0, 0(%a0)
+	fsub	%f23, %f30, %f0
+	lw	%a0, 4(%a1)
+	flw	%f17, 78(%zero)
+	flw	%f0, 0(%a0)
+	fmul	%f1, %f17, %f0
+	flw	%f16, 79(%zero)
+	flw	%f0, 1(%a0)
+	fmul	%f0, %f16, %f0
+	fadd	%f1, %f1, %f0
+	flw	%f19, 80(%zero)
+	flw	%f0, 2(%a0)
+	fmul	%f0, %f19, %f0
+	fadd	%f18, %f1, %f0
+	flw	%f1, 496(%zero)
+	lw	%a0, 4(%a1)
+	flw	%f0, 0(%a0)
+	fmul	%f0, %f1, %f0
+	fmul	%f0, %f0, %f18
+	fsub	%f17, %f0, %f17
+	lw	%a0, 4(%a1)
+	flw	%f0, 1(%a0)
+	fmul	%f0, %f1, %f0
+	fmul	%f0, %f0, %f18
+	fsub	%f16, %f0, %f16
+	lw	%a0, 4(%a1)
+	flw	%f0, 2(%a0)
+	fmul	%f0, %f1, %f0
+	fmul	%f0, %f0, %f18
+	fsub	%f1, %f0, %f19
+	addi	%v0, %zero, 3
+	fmov	%f0, %fzero
+	jal	min_caml_create_float_array
+	addi	%a1, %v0, 0
+	lw	%a2, 0(%zero)
+	addi	%v1, %a1, 0
+	addi	%v0, %a2, 0
+	jal	min_caml_create_array
+	add	%s7, %zero, %hp
+	addi	%hp, %hp, 2
+	sw	%v0, 1(%s7)
+	sw	%a1, 0(%s7)
+	fsw	%f17, 0(%a1)
+	fsw	%f16, 1(%a1)
+	fsw	%f1, 2(%a1)
+	addi	%v1, %a2, -1
+	addi	%v0, %s7, 0
+	jal	iter_setup_dirvec_constants.2889
+	add	%a0, %zero, %hp
+	addi	%hp, %hp, 3
+	fsw	%f23, 2(%a0)
+	sw	%s7, 1(%a0)
+	sw	%s5, 0(%a0)
+	sw	%a0, 254(%s6)
+	addi	%a0, %s6, 1
+	add	%ra, %zero, %s4
+	sw	%a0, 434(%zero)
+	jr	%ra
+bnei_else.34048:
+	sll	%s7, %v0, 2
+	lw	%t7, 434(%zero)
+	lw	%a0, 7(%a1)
+	flw	%f0, 0(%a0)
+	fsub	%f28, %f30, %f0
+	flw	%f1, 78(%zero)
+	fneg	%f27, %f1
+	flw	%f26, 79(%zero)
+	fneg	%f25, %f26
+	flw	%f24, 80(%zero)
+	fneg	%f23, %f24
+	addi	%a0, %s7, 1
+	sw	%a0, 0(%sp)
+	addi	%s5, %zero, 3
+	addi	%v0, %s5, 0
+	fmov	%f0, %fzero
+	addi	%sp, %sp, 1
+	jal	min_caml_create_float_array
+	addi	%sp, %sp, -1
+	addi	%a1, %v0, 0
+	lw	%s6, 0(%zero)
+	addi	%v1, %a1, 0
+	addi	%v0, %s6, 0
+	addi	%sp, %sp, 1
+	jal	min_caml_create_array
+	addi	%sp, %sp, -1
+	add	%t8, %zero, %hp
+	addi	%hp, %hp, 2
+	sw	%v0, 1(%t8)
+	sw	%a1, 0(%t8)
+	fsw	%f1, 0(%a1)
+	fsw	%f25, 1(%a1)
+	fsw	%f23, 2(%a1)
+	addi	%t9, %s6, -1
+	addi	%v1, %t9, 0
+	addi	%v0, %t8, 0
+	addi	%sp, %sp, 1
+	jal	iter_setup_dirvec_constants.2889
+	addi	%sp, %sp, -1
+	add	%a0, %zero, %hp
+	addi	%hp, %hp, 3
+	fsw	%f28, 2(%a0)
+	sw	%t8, 1(%a0)
+	lw	%a1, 0(%sp)
+	sw	%a1, 0(%a0)
+	sw	%a0, 254(%t7)
+	addi	%a0, %t7, 1
+	sw	%a0, 1(%sp)
+	addi	%a0, %s7, 2
+	sw	%a0, 2(%sp)
+	addi	%v0, %s5, 0
+	fmov	%f0, %fzero
+	addi	%sp, %sp, 3
+	jal	min_caml_create_float_array
+	addi	%sp, %sp, -3
+	addi	%a1, %v0, 0
+	addi	%v1, %a1, 0
+	addi	%v0, %s6, 0
+	addi	%sp, %sp, 3
+	jal	min_caml_create_array
+	addi	%sp, %sp, -3
+	add	%t8, %zero, %hp
+	addi	%hp, %hp, 2
+	sw	%v0, 1(%t8)
+	sw	%a1, 0(%t8)
+	fsw	%f27, 0(%a1)
+	fsw	%f26, 1(%a1)
+	fsw	%f23, 2(%a1)
+	addi	%v1, %t9, 0
+	addi	%v0, %t8, 0
+	addi	%sp, %sp, 3
+	jal	iter_setup_dirvec_constants.2889
+	addi	%sp, %sp, -3
+	add	%a0, %zero, %hp
+	addi	%hp, %hp, 3
+	fsw	%f28, 2(%a0)
+	sw	%t8, 1(%a0)
+	lw	%a1, 2(%sp)
+	sw	%a1, 0(%a0)
+	lw	%a1, 1(%sp)
+	sw	%a0, 254(%a1)
+	addi	%t8, %t7, 2
+	addi	%s7, %s7, 3
+	addi	%v0, %s5, 0
+	fmov	%f0, %fzero
+	addi	%sp, %sp, 3
+	jal	min_caml_create_float_array
+	addi	%sp, %sp, -3
+	addi	%a1, %v0, 0
+	addi	%v1, %a1, 0
+	addi	%v0, %s6, 0
+	addi	%sp, %sp, 3
+	jal	min_caml_create_array
+	addi	%sp, %sp, -3
+	add	%s5, %zero, %hp
+	addi	%hp, %hp, 2
+	sw	%v0, 1(%s5)
+	sw	%a1, 0(%s5)
+	fsw	%f27, 0(%a1)
+	fsw	%f25, 1(%a1)
+	fsw	%f24, 2(%a1)
+	addi	%v1, %t9, 0
+	addi	%v0, %s5, 0
+	addi	%sp, %sp, 3
+	jal	iter_setup_dirvec_constants.2889
+	addi	%sp, %sp, -3
+	add	%a0, %zero, %hp
+	addi	%hp, %hp, 3
+	fsw	%f28, 2(%a0)
+	sw	%s5, 1(%a0)
+	sw	%s7, 0(%a0)
+	sw	%a0, 254(%t8)
+	addi	%a0, %t7, 3
+	add	%ra, %zero, %s4
+	sw	%a0, 434(%zero)
+	jr	%ra
+bnei_else.34047:
+	add	%ra, %zero, %s4
+	jr	%ra
+bgti_else.34042:
+	add	%ra, %zero, %s4
 	jr	%ra
 .global	min_caml_start
 min_caml_start:
@@ -20681,7 +16947,7 @@ min_caml_start:
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
 	jal	min_caml_create_float_extarray
-	flw	%f0, 451(%zero)
+	flw	%f0, 449(%zero)
 	addi	%v1, %zero, 81
 	addi	%v0, %k1, 0
 	jal	min_caml_create_float_extarray
@@ -20710,7 +16976,7 @@ min_caml_start:
 	addi	%v1, %zero, 0
 	addi	%v0, %k1, 0
 	jal	min_caml_create_extarray
-	flw	%f0, 445(%zero)
+	flw	%f0, 443(%zero)
 	addi	%v1, %zero, 137
 	addi	%v0, %k1, 0
 	jal	min_caml_create_float_extarray
@@ -20837,7 +17103,7 @@ min_caml_start:
 	addi	%a0, %zero, 64
 	sw	%a0, 156(%zero)
 	sw	%a0, 157(%zero)
-	flw	%f1, 437(%zero)
+	flw	%f1, 435(%zero)
 	itof	%f0, %a1
 	fdiv	%f0, %f1, %f0
 	fsw	%f0, 158(%zero)
@@ -21022,562 +17288,27 @@ min_caml_start:
 	addi	%sp, %sp, 1
 	jal	min_caml_create_array
 	addi	%sp, %sp, -1
-	addi	%a1, %v0, 0
+	addi	%s6, %v0, 0
 	lw	%a0, 0(%sp)
-	addi	%t7, %a0, -2
-	blti	%t7, 0, bgti_else.50473
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 1
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -1
-	addi	%a2, %v0, 0
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 1
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -1
-	addi	%v1, %v0, 0
-	addi	%v0, %zero, 5
-	addi	%sp, %sp, 1
-	jal	min_caml_create_array
-	addi	%sp, %sp, -1
-	addi	%a3, %v0, 0
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 1
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -1
-	sw	%v0, 1(%a3)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 1
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -1
-	sw	%v0, 2(%a3)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 1
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -1
-	sw	%v0, 3(%a3)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 1
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -1
-	sw	%v0, 4(%a3)
-	addi	%v0, %zero, 5
-	addi	%v1, %zero, 0
-	addi	%sp, %sp, 1
-	jal	min_caml_create_array
-	addi	%sp, %sp, -1
-	addi	%k0, %v0, 0
-	addi	%v0, %zero, 5
-	addi	%v1, %zero, 0
-	addi	%sp, %sp, 1
-	jal	min_caml_create_array
-	addi	%sp, %sp, -1
-	addi	%s0, %v0, 0
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 1
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -1
-	addi	%v1, %v0, 0
-	addi	%v0, %zero, 5
-	addi	%sp, %sp, 1
-	jal	min_caml_create_array
-	addi	%sp, %sp, -1
-	addi	%s1, %v0, 0
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 1
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -1
-	sw	%v0, 1(%s1)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 1
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -1
-	sw	%v0, 2(%s1)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 1
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -1
-	sw	%v0, 3(%s1)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 1
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -1
-	sw	%v0, 4(%s1)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 1
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -1
-	addi	%v1, %v0, 0
-	addi	%v0, %zero, 5
-	addi	%sp, %sp, 1
-	jal	min_caml_create_array
-	addi	%sp, %sp, -1
-	addi	%s2, %v0, 0
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 1
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -1
-	sw	%v0, 1(%s2)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 1
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -1
-	sw	%v0, 2(%s2)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 1
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -1
-	sw	%v0, 3(%s2)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 1
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -1
-	sw	%v0, 4(%s2)
-	addi	%v1, %zero, 0
-	addi	%v0, %k1, 0
-	addi	%sp, %sp, 1
-	jal	min_caml_create_array
-	addi	%sp, %sp, -1
-	addi	%s3, %v0, 0
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 1
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -1
-	addi	%v1, %v0, 0
-	addi	%v0, %zero, 5
-	addi	%sp, %sp, 1
-	jal	min_caml_create_array
-	addi	%sp, %sp, -1
-	addi	%a0, %v0, 0
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 1
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -1
-	sw	%v0, 1(%a0)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 1
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -1
-	sw	%v0, 2(%a0)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 1
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -1
-	sw	%v0, 3(%a0)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 1
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -1
-	sw	%v0, 4(%a0)
-	add	%ra, %zero, %hp
-	addi	%hp, %hp, 8
-	sw	%a0, 7(%ra)
-	sw	%s3, 6(%ra)
-	sw	%s2, 5(%ra)
-	sw	%s1, 4(%ra)
-	sw	%s0, 3(%ra)
-	sw	%k0, 2(%ra)
-	sw	%a3, 1(%ra)
-	sw	%a2, 0(%ra)
-	add	%at, %a1, %t7
-	sw	%ra, 0(%at)
-	addi	%v1, %t7, -1
-	addi	%v0, %a1, 0
-	addi	%sp, %sp, 1
-	jal	init_line_elements.3073
-	addi	%sp, %sp, -1
-	addi	%a1, %v0, 0
-	j	bgti_cont.50474
-bgti_else.50473:
-bgti_cont.50474:
-	sw	%a1, 1(%sp)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
+	addi	%a0, %a0, -2
+	sw	%a0, 1(%sp)
+	blti	%a0, 0, bgti_else.34269
 	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
+	jal	create_pixel.3071
 	addi	%sp, %sp, -2
-	addi	%a1, %v0, 0
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	addi	%v1, %v0, 0
-	addi	%v0, %zero, 5
-	addi	%sp, %sp, 2
-	jal	min_caml_create_array
-	addi	%sp, %sp, -2
-	addi	%a2, %v0, 0
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	sw	%v0, 1(%a2)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	sw	%v0, 2(%a2)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	sw	%v0, 3(%a2)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	sw	%v0, 4(%a2)
-	addi	%v0, %zero, 5
-	addi	%v1, %zero, 0
-	addi	%sp, %sp, 2
-	jal	min_caml_create_array
-	addi	%sp, %sp, -2
-	addi	%a3, %v0, 0
-	addi	%v0, %zero, 5
-	addi	%v1, %zero, 0
-	addi	%sp, %sp, 2
-	jal	min_caml_create_array
-	addi	%sp, %sp, -2
-	addi	%k0, %v0, 0
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	addi	%v1, %v0, 0
-	addi	%v0, %zero, 5
-	addi	%sp, %sp, 2
-	jal	min_caml_create_array
-	addi	%sp, %sp, -2
-	addi	%s0, %v0, 0
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	sw	%v0, 1(%s0)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	sw	%v0, 2(%s0)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	sw	%v0, 3(%s0)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	sw	%v0, 4(%s0)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	addi	%v1, %v0, 0
-	addi	%v0, %zero, 5
-	addi	%sp, %sp, 2
-	jal	min_caml_create_array
-	addi	%sp, %sp, -2
-	addi	%s1, %v0, 0
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	sw	%v0, 1(%s1)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	sw	%v0, 2(%s1)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	sw	%v0, 3(%s1)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	sw	%v0, 4(%s1)
-	addi	%v1, %zero, 0
-	addi	%v0, %k1, 0
-	addi	%sp, %sp, 2
-	jal	min_caml_create_array
-	addi	%sp, %sp, -2
-	addi	%s2, %v0, 0
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	addi	%v1, %v0, 0
-	addi	%v0, %zero, 5
-	addi	%sp, %sp, 2
-	jal	min_caml_create_array
-	addi	%sp, %sp, -2
-	addi	%a0, %v0, 0
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	sw	%v0, 1(%a0)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	sw	%v0, 2(%a0)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	sw	%v0, 3(%a0)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	sw	%v0, 4(%a0)
-	add	%v1, %zero, %hp
-	addi	%hp, %hp, 8
-	sw	%a0, 7(%v1)
-	sw	%s2, 6(%v1)
-	sw	%s1, 5(%v1)
-	sw	%s0, 4(%v1)
-	sw	%k0, 3(%v1)
-	sw	%a3, 2(%v1)
-	sw	%a2, 1(%v1)
-	sw	%a1, 0(%v1)
-	lw	%v0, 0(%sp)
-	addi	%sp, %sp, 2
-	jal	min_caml_create_array
-	addi	%sp, %sp, -2
-	addi	%a1, %v0, 0
-	blti	%t7, 0, bgti_else.50475
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	addi	%a2, %v0, 0
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	addi	%v1, %v0, 0
-	addi	%v0, %zero, 5
-	addi	%sp, %sp, 2
-	jal	min_caml_create_array
-	addi	%sp, %sp, -2
-	addi	%a3, %v0, 0
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	sw	%v0, 1(%a3)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	sw	%v0, 2(%a3)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	sw	%v0, 3(%a3)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	sw	%v0, 4(%a3)
-	addi	%v0, %zero, 5
-	addi	%v1, %zero, 0
-	addi	%sp, %sp, 2
-	jal	min_caml_create_array
-	addi	%sp, %sp, -2
-	addi	%k0, %v0, 0
-	addi	%v0, %zero, 5
-	addi	%v1, %zero, 0
-	addi	%sp, %sp, 2
-	jal	min_caml_create_array
-	addi	%sp, %sp, -2
-	addi	%s0, %v0, 0
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	addi	%v1, %v0, 0
-	addi	%v0, %zero, 5
-	addi	%sp, %sp, 2
-	jal	min_caml_create_array
-	addi	%sp, %sp, -2
-	addi	%s1, %v0, 0
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	sw	%v0, 1(%s1)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	sw	%v0, 2(%s1)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	sw	%v0, 3(%s1)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	sw	%v0, 4(%s1)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	addi	%v1, %v0, 0
-	addi	%v0, %zero, 5
-	addi	%sp, %sp, 2
-	jal	min_caml_create_array
-	addi	%sp, %sp, -2
-	addi	%s2, %v0, 0
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	sw	%v0, 1(%s2)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	sw	%v0, 2(%s2)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	sw	%v0, 3(%s2)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	sw	%v0, 4(%s2)
-	addi	%v1, %zero, 0
-	addi	%v0, %k1, 0
-	addi	%sp, %sp, 2
-	jal	min_caml_create_array
-	addi	%sp, %sp, -2
-	addi	%s3, %v0, 0
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	addi	%v1, %v0, 0
-	addi	%v0, %zero, 5
-	addi	%sp, %sp, 2
-	jal	min_caml_create_array
-	addi	%sp, %sp, -2
-	addi	%a0, %v0, 0
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	sw	%v0, 1(%a0)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	sw	%v0, 2(%a0)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	sw	%v0, 3(%a0)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 2
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -2
-	sw	%v0, 4(%a0)
-	add	%ra, %zero, %hp
-	addi	%hp, %hp, 8
-	sw	%a0, 7(%ra)
-	sw	%s3, 6(%ra)
-	sw	%s2, 5(%ra)
-	sw	%s1, 4(%ra)
-	sw	%s0, 3(%ra)
-	sw	%k0, 2(%ra)
-	sw	%a3, 1(%ra)
-	sw	%a2, 0(%ra)
-	add	%at, %a1, %t7
-	sw	%ra, 0(%at)
-	addi	%v1, %t7, -1
-	addi	%v0, %a1, 0
+	lw	%a0, 1(%sp)
+	add	%at, %s6, %a0
+	sw	%v0, 0(%at)
+	addi	%v1, %a0, -1
+	addi	%v0, %s6, 0
 	addi	%sp, %sp, 2
 	jal	init_line_elements.3073
 	addi	%sp, %sp, -2
-	addi	%a1, %v0, 0
-	j	bgti_cont.50476
-bgti_else.50475:
-bgti_cont.50476:
-	sw	%a1, 2(%sp)
+	addi	%s6, %v0, 0
+	j	bgti_cont.34270
+bgti_else.34269:
+bgti_cont.34270:
+	sw	%s6, 2(%sp)
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
 	addi	%sp, %sp, 3
@@ -21756,3089 +17487,495 @@ bgti_cont.50476:
 	addi	%sp, %sp, 3
 	jal	min_caml_create_array
 	addi	%sp, %sp, -3
-	addi	%a1, %v0, 0
-	blti	%t7, 0, bgti_else.50477
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
+	addi	%s6, %v0, 0
+	lw	%a0, 1(%sp)
+	blti	%a0, 0, bgti_else.34271
 	addi	%sp, %sp, 3
-	jal	min_caml_create_float_array
+	jal	create_pixel.3071
 	addi	%sp, %sp, -3
-	addi	%a2, %v0, 0
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 3
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -3
-	addi	%v1, %v0, 0
-	addi	%v0, %zero, 5
-	addi	%sp, %sp, 3
-	jal	min_caml_create_array
-	addi	%sp, %sp, -3
-	addi	%a3, %v0, 0
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 3
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -3
-	sw	%v0, 1(%a3)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 3
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -3
-	sw	%v0, 2(%a3)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 3
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -3
-	sw	%v0, 3(%a3)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 3
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -3
-	sw	%v0, 4(%a3)
-	addi	%v0, %zero, 5
-	addi	%v1, %zero, 0
-	addi	%sp, %sp, 3
-	jal	min_caml_create_array
-	addi	%sp, %sp, -3
-	addi	%k0, %v0, 0
-	addi	%v0, %zero, 5
-	addi	%v1, %zero, 0
-	addi	%sp, %sp, 3
-	jal	min_caml_create_array
-	addi	%sp, %sp, -3
-	addi	%s0, %v0, 0
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 3
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -3
-	addi	%v1, %v0, 0
-	addi	%v0, %zero, 5
-	addi	%sp, %sp, 3
-	jal	min_caml_create_array
-	addi	%sp, %sp, -3
-	addi	%s1, %v0, 0
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 3
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -3
-	sw	%v0, 1(%s1)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 3
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -3
-	sw	%v0, 2(%s1)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 3
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -3
-	sw	%v0, 3(%s1)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 3
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -3
-	sw	%v0, 4(%s1)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 3
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -3
-	addi	%v1, %v0, 0
-	addi	%v0, %zero, 5
-	addi	%sp, %sp, 3
-	jal	min_caml_create_array
-	addi	%sp, %sp, -3
-	addi	%s2, %v0, 0
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 3
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -3
-	sw	%v0, 1(%s2)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 3
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -3
-	sw	%v0, 2(%s2)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 3
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -3
-	sw	%v0, 3(%s2)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 3
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -3
-	sw	%v0, 4(%s2)
-	addi	%v1, %zero, 0
-	addi	%v0, %k1, 0
-	addi	%sp, %sp, 3
-	jal	min_caml_create_array
-	addi	%sp, %sp, -3
-	addi	%s3, %v0, 0
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 3
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -3
-	addi	%v1, %v0, 0
-	addi	%v0, %zero, 5
-	addi	%sp, %sp, 3
-	jal	min_caml_create_array
-	addi	%sp, %sp, -3
-	addi	%a0, %v0, 0
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 3
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -3
-	sw	%v0, 1(%a0)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 3
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -3
-	sw	%v0, 2(%a0)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 3
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -3
-	sw	%v0, 3(%a0)
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 3
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -3
-	sw	%v0, 4(%a0)
-	add	%ra, %zero, %hp
-	addi	%hp, %hp, 8
-	sw	%a0, 7(%ra)
-	sw	%s3, 6(%ra)
-	sw	%s2, 5(%ra)
-	sw	%s1, 4(%ra)
-	sw	%s0, 3(%ra)
-	sw	%k0, 2(%ra)
-	sw	%a3, 1(%ra)
-	sw	%a2, 0(%ra)
-	add	%at, %a1, %t7
-	sw	%ra, 0(%at)
-	addi	%v1, %t7, -1
-	addi	%v0, %a1, 0
+	lw	%a0, 1(%sp)
+	add	%at, %s6, %a0
+	sw	%v0, 0(%at)
+	addi	%v1, %a0, -1
+	addi	%v0, %s6, 0
 	addi	%sp, %sp, 3
 	jal	init_line_elements.3073
 	addi	%sp, %sp, -3
+	addi	%s6, %v0, 0
+	j	bgti_cont.34272
+bgti_else.34271:
+bgti_cont.34272:
+	sw	%s6, 3(%sp)
+	addi	%v0, %zero, 3
+	fmov	%f0, %fzero
+	addi	%sp, %sp, 4
+	jal	min_caml_create_float_array
+	addi	%sp, %sp, -4
 	addi	%a1, %v0, 0
-	j	bgti_cont.50478
-bgti_else.50477:
-bgti_cont.50478:
-	sw	%a1, 3(%sp)
+	addi	%v0, %zero, 3
+	fmov	%f0, %fzero
 	addi	%sp, %sp, 4
-	jal	min_caml_read_float
+	jal	min_caml_create_float_array
 	addi	%sp, %sp, -4
-	fsw	%f0, 72(%zero)
+	addi	%v1, %v0, 0
+	addi	%v0, %zero, 5
 	addi	%sp, %sp, 4
-	jal	min_caml_read_float
+	jal	min_caml_create_array
 	addi	%sp, %sp, -4
-	fsw	%f0, 73(%zero)
+	addi	%a2, %v0, 0
+	addi	%v0, %zero, 3
+	fmov	%f0, %fzero
 	addi	%sp, %sp, 4
-	jal	min_caml_read_float
+	jal	min_caml_create_float_array
 	addi	%sp, %sp, -4
-	fsw	%f0, 74(%zero)
+	sw	%v0, 1(%a2)
+	addi	%v0, %zero, 3
+	fmov	%f0, %fzero
 	addi	%sp, %sp, 4
-	jal	min_caml_read_float
+	jal	min_caml_create_float_array
 	addi	%sp, %sp, -4
-	flw	%f19, 469(%zero)
-	fmul	%f20, %f0, %f19
-	flw	%f18, 494(%zero)
-	fabs	%f17, %f20
-	flw	%f2, 493(%zero)
-	fblt	%f17, %f2, fbgt_else.50479
-	flw	%f0, 492(%zero)
-	fblt	%f17, %f0, fbgt_cont.50480
-	flw	%f0, 491(%zero)
-	fblt	%f17, %f0, fbgt_cont.50480
-	flw	%f0, 490(%zero)
-	fblt	%f17, %f0, fbgt_cont.50480
-	flw	%f0, 489(%zero)
-	fblt	%f17, %f0, fbgt_cont.50480
-	flw	%f0, 488(%zero)
-	fblt	%f17, %f0, fbgt_cont.50480
-	flw	%f0, 487(%zero)
-	fblt	%f17, %f0, fbgt_cont.50480
-	flw	%f0, 486(%zero)
-	fblt	%f17, %f0, fbgt_cont.50480
-	flw	%f0, 485(%zero)
-	fblt	%f17, %f0, fbgt_cont.50480
-	flw	%f0, 484(%zero)
-	fblt	%f17, %f0, fbgt_cont.50480
-	flw	%f1, 483(%zero)
-	fmov	%f0, %f17
+	sw	%v0, 2(%a2)
+	addi	%v0, %zero, 3
+	fmov	%f0, %fzero
 	addi	%sp, %sp, 4
-	jal	reduction_2pi_sub1.2626
+	jal	min_caml_create_float_array
 	addi	%sp, %sp, -4
-	j	fbgt_cont.50480
-fbgt_else.50497:
-fbgt_cont.50498:
-	j	fbgt_cont.50480
-fbgt_else.50495:
-fbgt_cont.50496:
-	j	fbgt_cont.50480
-fbgt_else.50493:
-fbgt_cont.50494:
-	j	fbgt_cont.50480
-fbgt_else.50491:
-fbgt_cont.50492:
-	j	fbgt_cont.50480
-fbgt_else.50489:
-fbgt_cont.50490:
-	j	fbgt_cont.50480
-fbgt_else.50487:
-fbgt_cont.50488:
-	j	fbgt_cont.50480
-fbgt_else.50485:
-fbgt_cont.50486:
-	j	fbgt_cont.50480
-fbgt_else.50483:
-fbgt_cont.50484:
-	j	fbgt_cont.50480
-fbgt_else.50481:
-fbgt_cont.50482:
-	j	fbgt_cont.50480
-fbgt_else.50479:
-	fmov	%f0, %f2
-fbgt_cont.50480:
-	fblt	%f17, %f2, fbgt_else.50499
-	fblt	%f17, %f0, fbgt_else.50501
-	fsub	%f17, %f17, %f0
-	flw	%f16, 495(%zero)
-	fdiv	%f1, %f0, %f16
-	fblt	%f17, %f2, fbgt_cont.50500
-	fblt	%f17, %f1, fbgt_else.50505
-	fsub	%f0, %f17, %f1
-	fdiv	%f1, %f1, %f16
+	sw	%v0, 3(%a2)
+	addi	%v0, %zero, 3
+	fmov	%f0, %fzero
 	addi	%sp, %sp, 4
-	jal	reduction_2pi_sub2.2629
+	jal	min_caml_create_float_array
 	addi	%sp, %sp, -4
-	fmov	%f17, %f0
-	j	fbgt_cont.50500
-fbgt_else.50505:
-	fdiv	%f1, %f1, %f16
-	fmov	%f0, %f17
+	sw	%v0, 4(%a2)
+	addi	%v0, %zero, 5
+	addi	%v1, %zero, 0
 	addi	%sp, %sp, 4
-	jal	reduction_2pi_sub2.2629
+	jal	min_caml_create_array
 	addi	%sp, %sp, -4
-	fmov	%f17, %f0
-fbgt_cont.50506:
-	j	fbgt_cont.50500
-fbgt_else.50503:
-fbgt_cont.50504:
-	j	fbgt_cont.50500
-fbgt_else.50501:
-	flw	%f16, 495(%zero)
-	fdiv	%f1, %f0, %f16
-	fblt	%f17, %f2, fbgt_cont.50500
-	fblt	%f17, %f1, fbgt_else.50509
-	fsub	%f0, %f17, %f1
-	fdiv	%f1, %f1, %f16
+	addi	%a3, %v0, 0
+	addi	%v0, %zero, 5
+	addi	%v1, %zero, 0
 	addi	%sp, %sp, 4
-	jal	reduction_2pi_sub2.2629
+	jal	min_caml_create_array
 	addi	%sp, %sp, -4
-	fmov	%f17, %f0
-	j	fbgt_cont.50500
-fbgt_else.50509:
-	fdiv	%f1, %f1, %f16
-	fmov	%f0, %f17
+	addi	%k0, %v0, 0
+	addi	%v0, %zero, 3
+	fmov	%f0, %fzero
 	addi	%sp, %sp, 4
-	jal	reduction_2pi_sub2.2629
+	jal	min_caml_create_float_array
 	addi	%sp, %sp, -4
-	fmov	%f17, %f0
-fbgt_cont.50510:
-	j	fbgt_cont.50500
-fbgt_else.50507:
-fbgt_cont.50508:
-fbgt_cont.50502:
-	j	fbgt_cont.50500
-fbgt_else.50499:
-fbgt_cont.50500:
-	fblt	%f17, %f18, fbgt_else.50511
-	add	%a0, %zero, %zero
-	j	fbgt_cont.50512
-fbgt_else.50511:
-	add	%a0, %zero, %k1
-fbgt_cont.50512:
-	fblt	%f17, %f18, fbgt_else.50513
-	fsub	%f17, %f17, %f18
-	j	fbgt_cont.50514
-fbgt_else.50513:
-fbgt_cont.50514:
-	flw	%f21, 479(%zero)
-	fblt	%f17, %f21, fbgt_else.50515
-	beqi	%a0, 0, bnei_else.50517
-	add	%a0, %zero, %zero
-	j	fbgt_cont.50516
-bnei_else.50517:
-	add	%a0, %zero, %k1
-bnei_cont.50518:
-	j	fbgt_cont.50516
-fbgt_else.50515:
-fbgt_cont.50516:
-	fblt	%f17, %f21, fbgt_else.50519
-	fsub	%f17, %f18, %f17
-	j	fbgt_cont.50520
-fbgt_else.50519:
-fbgt_cont.50520:
-	flw	%f22, 478(%zero)
-	fblt	%f22, %f17, fbgt_else.50521
-	fmul	%f17, %f17, %f17
-	fmul	%f16, %f17, %f17
-	flw	%f0, 473(%zero)
-	fmul	%f0, %f0, %f17
-	fsub	%f1, %f30, %f0
-	flw	%f0, 472(%zero)
-	fmul	%f0, %f0, %f16
-	fadd	%f1, %f1, %f0
-	flw	%f0, 471(%zero)
-	fmul	%f0, %f0, %f17
-	fmul	%f0, %f0, %f16
-	fsub	%f17, %f1, %f0
-	j	fbgt_cont.50522
-fbgt_else.50521:
-	fsub	%f23, %f21, %f17
-	fmul	%f17, %f23, %f23
-	fmul	%f16, %f17, %f17
-	flw	%f0, 477(%zero)
-	fmul	%f0, %f0, %f23
-	fmul	%f0, %f0, %f17
-	fsub	%f1, %f23, %f0
-	flw	%f0, 476(%zero)
-	fmul	%f0, %f0, %f23
-	fmul	%f0, %f0, %f16
-	fadd	%f1, %f1, %f0
-	flw	%f0, 475(%zero)
-	fmul	%f0, %f0, %f23
-	fmul	%f0, %f0, %f17
-	fmul	%f0, %f0, %f16
-	fsub	%f17, %f1, %f0
-fbgt_cont.50522:
-	beqi	%a0, 0, bnei_else.50523
-	j	bnei_cont.50524
-bnei_else.50523:
-	fneg	%f17, %f17
-bnei_cont.50524:
-	fblt	%f20, %fzero, fbgt_else.50525
-	add	%a0, %zero, %k1
-	j	fbgt_cont.50526
-fbgt_else.50525:
-	add	%a0, %zero, %zero
-fbgt_cont.50526:
-	fabs	%f20, %f20
-	fblt	%f20, %f2, fbgt_else.50527
-	flw	%f0, 492(%zero)
-	fblt	%f20, %f0, fbgt_cont.50528
-	flw	%f0, 491(%zero)
-	fblt	%f20, %f0, fbgt_cont.50528
-	flw	%f0, 490(%zero)
-	fblt	%f20, %f0, fbgt_cont.50528
-	flw	%f0, 489(%zero)
-	fblt	%f20, %f0, fbgt_cont.50528
-	flw	%f0, 488(%zero)
-	fblt	%f20, %f0, fbgt_cont.50528
-	flw	%f0, 487(%zero)
-	fblt	%f20, %f0, fbgt_cont.50528
-	flw	%f0, 486(%zero)
-	fblt	%f20, %f0, fbgt_cont.50528
-	flw	%f0, 485(%zero)
-	fblt	%f20, %f0, fbgt_cont.50528
-	flw	%f0, 484(%zero)
-	fblt	%f20, %f0, fbgt_cont.50528
-	flw	%f1, 483(%zero)
-	fmov	%f0, %f20
+	addi	%v1, %v0, 0
+	addi	%v0, %zero, 5
 	addi	%sp, %sp, 4
-	jal	reduction_2pi_sub1.2626
+	jal	min_caml_create_array
 	addi	%sp, %sp, -4
-	j	fbgt_cont.50528
-fbgt_else.50545:
-fbgt_cont.50546:
-	j	fbgt_cont.50528
-fbgt_else.50543:
-fbgt_cont.50544:
-	j	fbgt_cont.50528
-fbgt_else.50541:
-fbgt_cont.50542:
-	j	fbgt_cont.50528
-fbgt_else.50539:
-fbgt_cont.50540:
-	j	fbgt_cont.50528
-fbgt_else.50537:
-fbgt_cont.50538:
-	j	fbgt_cont.50528
-fbgt_else.50535:
-fbgt_cont.50536:
-	j	fbgt_cont.50528
-fbgt_else.50533:
-fbgt_cont.50534:
-	j	fbgt_cont.50528
-fbgt_else.50531:
-fbgt_cont.50532:
-	j	fbgt_cont.50528
-fbgt_else.50529:
-fbgt_cont.50530:
-	j	fbgt_cont.50528
-fbgt_else.50527:
-	fmov	%f0, %f2
-fbgt_cont.50528:
-	fblt	%f20, %f2, fbgt_else.50547
-	fblt	%f20, %f0, fbgt_else.50549
-	fsub	%f20, %f20, %f0
-	flw	%f16, 495(%zero)
-	fdiv	%f1, %f0, %f16
-	fblt	%f20, %f2, fbgt_cont.50548
-	fblt	%f20, %f1, fbgt_else.50553
-	fsub	%f0, %f20, %f1
-	fdiv	%f1, %f1, %f16
+	addi	%s0, %v0, 0
+	addi	%v0, %zero, 3
+	fmov	%f0, %fzero
 	addi	%sp, %sp, 4
-	jal	reduction_2pi_sub2.2629
+	jal	min_caml_create_float_array
 	addi	%sp, %sp, -4
-	fmov	%f20, %f0
-	j	fbgt_cont.50548
-fbgt_else.50553:
-	fdiv	%f1, %f1, %f16
-	fmov	%f0, %f20
+	sw	%v0, 1(%s0)
+	addi	%v0, %zero, 3
+	fmov	%f0, %fzero
 	addi	%sp, %sp, 4
-	jal	reduction_2pi_sub2.2629
+	jal	min_caml_create_float_array
 	addi	%sp, %sp, -4
-	fmov	%f20, %f0
-fbgt_cont.50554:
-	j	fbgt_cont.50548
-fbgt_else.50551:
-fbgt_cont.50552:
-	j	fbgt_cont.50548
-fbgt_else.50549:
-	flw	%f16, 495(%zero)
-	fdiv	%f1, %f0, %f16
-	fblt	%f20, %f2, fbgt_cont.50548
-	fblt	%f20, %f1, fbgt_else.50557
-	fsub	%f0, %f20, %f1
-	fdiv	%f1, %f1, %f16
+	sw	%v0, 2(%s0)
+	addi	%v0, %zero, 3
+	fmov	%f0, %fzero
 	addi	%sp, %sp, 4
-	jal	reduction_2pi_sub2.2629
+	jal	min_caml_create_float_array
 	addi	%sp, %sp, -4
-	fmov	%f20, %f0
-	j	fbgt_cont.50548
-fbgt_else.50557:
-	fdiv	%f1, %f1, %f16
-	fmov	%f0, %f20
+	sw	%v0, 3(%s0)
+	addi	%v0, %zero, 3
+	fmov	%f0, %fzero
 	addi	%sp, %sp, 4
-	jal	reduction_2pi_sub2.2629
+	jal	min_caml_create_float_array
 	addi	%sp, %sp, -4
-	fmov	%f20, %f0
-fbgt_cont.50558:
-	j	fbgt_cont.50548
-fbgt_else.50555:
-fbgt_cont.50556:
-fbgt_cont.50550:
-	j	fbgt_cont.50548
-fbgt_else.50547:
-fbgt_cont.50548:
-	fblt	%f20, %f18, fbgt_else.50559
-	beqi	%a0, 0, bnei_else.50561
-	add	%a0, %zero, %zero
-	j	fbgt_cont.50560
-bnei_else.50561:
-	add	%a0, %zero, %k1
-bnei_cont.50562:
-	j	fbgt_cont.50560
-fbgt_else.50559:
-fbgt_cont.50560:
-	fblt	%f20, %f18, fbgt_else.50563
-	fsub	%f20, %f20, %f18
-	j	fbgt_cont.50564
-fbgt_else.50563:
-fbgt_cont.50564:
-	fblt	%f20, %f21, fbgt_else.50565
-	fsub	%f20, %f18, %f20
-	j	fbgt_cont.50566
-fbgt_else.50565:
-fbgt_cont.50566:
-	fblt	%f22, %f20, fbgt_else.50567
-	fmul	%f23, %f20, %f20
-	fmul	%f16, %f23, %f23
-	flw	%f0, 477(%zero)
-	fmul	%f0, %f0, %f20
-	fmul	%f0, %f0, %f23
-	fsub	%f1, %f20, %f0
-	flw	%f0, 476(%zero)
-	fmul	%f0, %f0, %f20
-	fmul	%f0, %f0, %f16
-	fadd	%f1, %f1, %f0
-	flw	%f0, 475(%zero)
-	fmul	%f0, %f0, %f20
-	fmul	%f0, %f0, %f23
-	fmul	%f0, %f0, %f16
-	fsub	%f20, %f1, %f0
-	j	fbgt_cont.50568
-fbgt_else.50567:
-	fsub	%f0, %f21, %f20
-	fmul	%f20, %f0, %f0
-	fmul	%f16, %f20, %f20
-	flw	%f0, 473(%zero)
-	fmul	%f0, %f0, %f20
-	fsub	%f1, %f30, %f0
-	flw	%f0, 472(%zero)
-	fmul	%f0, %f0, %f16
-	fadd	%f1, %f1, %f0
-	flw	%f0, 471(%zero)
-	fmul	%f0, %f0, %f20
-	fmul	%f0, %f0, %f16
-	fsub	%f20, %f1, %f0
-fbgt_cont.50568:
-	beqi	%a0, 0, bnei_else.50569
-	j	bnei_cont.50570
-bnei_else.50569:
-	fneg	%f20, %f20
-bnei_cont.50570:
+	sw	%v0, 4(%s0)
+	addi	%v0, %zero, 3
+	fmov	%f0, %fzero
 	addi	%sp, %sp, 4
-	jal	min_caml_read_float
+	jal	min_caml_create_float_array
 	addi	%sp, %sp, -4
-	fmul	%f24, %f0, %f19
-	fabs	%f23, %f24
-	fblt	%f23, %f2, fbgt_else.50571
-	flw	%f0, 492(%zero)
-	fblt	%f23, %f0, fbgt_cont.50572
-	flw	%f0, 491(%zero)
-	fblt	%f23, %f0, fbgt_cont.50572
-	flw	%f0, 490(%zero)
-	fblt	%f23, %f0, fbgt_cont.50572
-	flw	%f0, 489(%zero)
-	fblt	%f23, %f0, fbgt_cont.50572
-	flw	%f0, 488(%zero)
-	fblt	%f23, %f0, fbgt_cont.50572
-	flw	%f0, 487(%zero)
-	fblt	%f23, %f0, fbgt_cont.50572
-	flw	%f0, 486(%zero)
-	fblt	%f23, %f0, fbgt_cont.50572
-	flw	%f0, 485(%zero)
-	fblt	%f23, %f0, fbgt_cont.50572
-	flw	%f0, 484(%zero)
-	fblt	%f23, %f0, fbgt_cont.50572
-	flw	%f1, 483(%zero)
-	fmov	%f0, %f23
+	addi	%v1, %v0, 0
+	addi	%v0, %zero, 5
 	addi	%sp, %sp, 4
-	jal	reduction_2pi_sub1.2626
+	jal	min_caml_create_array
 	addi	%sp, %sp, -4
-	j	fbgt_cont.50572
-fbgt_else.50589:
-fbgt_cont.50590:
-	j	fbgt_cont.50572
-fbgt_else.50587:
-fbgt_cont.50588:
-	j	fbgt_cont.50572
-fbgt_else.50585:
-fbgt_cont.50586:
-	j	fbgt_cont.50572
-fbgt_else.50583:
-fbgt_cont.50584:
-	j	fbgt_cont.50572
-fbgt_else.50581:
-fbgt_cont.50582:
-	j	fbgt_cont.50572
-fbgt_else.50579:
-fbgt_cont.50580:
-	j	fbgt_cont.50572
-fbgt_else.50577:
-fbgt_cont.50578:
-	j	fbgt_cont.50572
-fbgt_else.50575:
-fbgt_cont.50576:
-	j	fbgt_cont.50572
-fbgt_else.50573:
-fbgt_cont.50574:
-	j	fbgt_cont.50572
-fbgt_else.50571:
-	fmov	%f0, %f2
-fbgt_cont.50572:
-	fblt	%f23, %f2, fbgt_else.50591
-	fblt	%f23, %f0, fbgt_else.50593
-	fsub	%f23, %f23, %f0
-	flw	%f16, 495(%zero)
-	fdiv	%f1, %f0, %f16
-	fblt	%f23, %f2, fbgt_cont.50592
-	fblt	%f23, %f1, fbgt_else.50597
-	fsub	%f0, %f23, %f1
-	fdiv	%f1, %f1, %f16
+	addi	%s1, %v0, 0
+	addi	%v0, %zero, 3
+	fmov	%f0, %fzero
 	addi	%sp, %sp, 4
-	jal	reduction_2pi_sub2.2629
+	jal	min_caml_create_float_array
 	addi	%sp, %sp, -4
-	fmov	%f23, %f0
-	j	fbgt_cont.50592
-fbgt_else.50597:
-	fdiv	%f1, %f1, %f16
-	fmov	%f0, %f23
+	sw	%v0, 1(%s1)
+	addi	%v0, %zero, 3
+	fmov	%f0, %fzero
 	addi	%sp, %sp, 4
-	jal	reduction_2pi_sub2.2629
+	jal	min_caml_create_float_array
 	addi	%sp, %sp, -4
-	fmov	%f23, %f0
-fbgt_cont.50598:
-	j	fbgt_cont.50592
-fbgt_else.50595:
-fbgt_cont.50596:
-	j	fbgt_cont.50592
-fbgt_else.50593:
-	flw	%f16, 495(%zero)
-	fdiv	%f1, %f0, %f16
-	fblt	%f23, %f2, fbgt_cont.50592
-	fblt	%f23, %f1, fbgt_else.50601
-	fsub	%f0, %f23, %f1
-	fdiv	%f1, %f1, %f16
+	sw	%v0, 2(%s1)
+	addi	%v0, %zero, 3
+	fmov	%f0, %fzero
 	addi	%sp, %sp, 4
-	jal	reduction_2pi_sub2.2629
+	jal	min_caml_create_float_array
 	addi	%sp, %sp, -4
-	fmov	%f23, %f0
-	j	fbgt_cont.50592
-fbgt_else.50601:
-	fdiv	%f1, %f1, %f16
-	fmov	%f0, %f23
+	sw	%v0, 3(%s1)
+	addi	%v0, %zero, 3
+	fmov	%f0, %fzero
 	addi	%sp, %sp, 4
-	jal	reduction_2pi_sub2.2629
+	jal	min_caml_create_float_array
 	addi	%sp, %sp, -4
-	fmov	%f23, %f0
-fbgt_cont.50602:
-	j	fbgt_cont.50592
-fbgt_else.50599:
-fbgt_cont.50600:
-fbgt_cont.50594:
-	j	fbgt_cont.50592
-fbgt_else.50591:
-fbgt_cont.50592:
-	fblt	%f23, %f18, fbgt_else.50603
-	add	%a0, %zero, %zero
-	j	fbgt_cont.50604
-fbgt_else.50603:
-	add	%a0, %zero, %k1
-fbgt_cont.50604:
-	fblt	%f23, %f18, fbgt_else.50605
-	fsub	%f23, %f23, %f18
-	j	fbgt_cont.50606
-fbgt_else.50605:
-fbgt_cont.50606:
-	fblt	%f23, %f21, fbgt_else.50607
-	beqi	%a0, 0, bnei_else.50609
-	add	%a0, %zero, %zero
-	j	fbgt_cont.50608
-bnei_else.50609:
-	add	%a0, %zero, %k1
-bnei_cont.50610:
-	j	fbgt_cont.50608
-fbgt_else.50607:
-fbgt_cont.50608:
-	fblt	%f23, %f21, fbgt_else.50611
-	fsub	%f23, %f18, %f23
-	j	fbgt_cont.50612
-fbgt_else.50611:
-fbgt_cont.50612:
-	fblt	%f22, %f23, fbgt_else.50613
-	fmul	%f23, %f23, %f23
-	fmul	%f16, %f23, %f23
-	flw	%f0, 473(%zero)
-	fmul	%f0, %f0, %f23
-	fsub	%f1, %f30, %f0
-	flw	%f0, 472(%zero)
-	fmul	%f0, %f0, %f16
-	fadd	%f1, %f1, %f0
-	flw	%f0, 471(%zero)
-	fmul	%f0, %f0, %f23
-	fmul	%f0, %f0, %f16
-	fsub	%f23, %f1, %f0
-	j	fbgt_cont.50614
-fbgt_else.50613:
-	fsub	%f25, %f21, %f23
-	fmul	%f23, %f25, %f25
-	fmul	%f16, %f23, %f23
-	flw	%f0, 477(%zero)
-	fmul	%f0, %f0, %f25
-	fmul	%f0, %f0, %f23
-	fsub	%f1, %f25, %f0
-	flw	%f0, 476(%zero)
-	fmul	%f0, %f0, %f25
-	fmul	%f0, %f0, %f16
-	fadd	%f1, %f1, %f0
-	flw	%f0, 475(%zero)
-	fmul	%f0, %f0, %f25
-	fmul	%f0, %f0, %f23
-	fmul	%f0, %f0, %f16
-	fsub	%f23, %f1, %f0
-fbgt_cont.50614:
-	beqi	%a0, 0, bnei_else.50615
-	j	bnei_cont.50616
-bnei_else.50615:
-	fneg	%f23, %f23
-bnei_cont.50616:
-	fblt	%f24, %fzero, fbgt_else.50617
-	add	%a0, %zero, %k1
-	j	fbgt_cont.50618
-fbgt_else.50617:
-	add	%a0, %zero, %zero
-fbgt_cont.50618:
-	fabs	%f24, %f24
-	fblt	%f24, %f2, fbgt_else.50619
-	flw	%f0, 492(%zero)
-	fblt	%f24, %f0, fbgt_cont.50620
-	flw	%f0, 491(%zero)
-	fblt	%f24, %f0, fbgt_cont.50620
-	flw	%f0, 490(%zero)
-	fblt	%f24, %f0, fbgt_cont.50620
-	flw	%f0, 489(%zero)
-	fblt	%f24, %f0, fbgt_cont.50620
-	flw	%f0, 488(%zero)
-	fblt	%f24, %f0, fbgt_cont.50620
-	flw	%f0, 487(%zero)
-	fblt	%f24, %f0, fbgt_cont.50620
-	flw	%f0, 486(%zero)
-	fblt	%f24, %f0, fbgt_cont.50620
-	flw	%f0, 485(%zero)
-	fblt	%f24, %f0, fbgt_cont.50620
-	flw	%f0, 484(%zero)
-	fblt	%f24, %f0, fbgt_cont.50620
-	flw	%f1, 483(%zero)
-	fmov	%f0, %f24
+	sw	%v0, 4(%s1)
+	addi	%v1, %zero, 0
+	addi	%v0, %k1, 0
 	addi	%sp, %sp, 4
-	jal	reduction_2pi_sub1.2626
+	jal	min_caml_create_array
 	addi	%sp, %sp, -4
-	j	fbgt_cont.50620
-fbgt_else.50637:
-fbgt_cont.50638:
-	j	fbgt_cont.50620
-fbgt_else.50635:
-fbgt_cont.50636:
-	j	fbgt_cont.50620
-fbgt_else.50633:
-fbgt_cont.50634:
-	j	fbgt_cont.50620
-fbgt_else.50631:
-fbgt_cont.50632:
-	j	fbgt_cont.50620
-fbgt_else.50629:
-fbgt_cont.50630:
-	j	fbgt_cont.50620
-fbgt_else.50627:
-fbgt_cont.50628:
-	j	fbgt_cont.50620
-fbgt_else.50625:
-fbgt_cont.50626:
-	j	fbgt_cont.50620
-fbgt_else.50623:
-fbgt_cont.50624:
-	j	fbgt_cont.50620
-fbgt_else.50621:
-fbgt_cont.50622:
-	j	fbgt_cont.50620
-fbgt_else.50619:
-	fmov	%f0, %f2
-fbgt_cont.50620:
-	fblt	%f24, %f2, fbgt_else.50639
-	fblt	%f24, %f0, fbgt_else.50641
-	fsub	%f24, %f24, %f0
-	flw	%f16, 495(%zero)
-	fdiv	%f1, %f0, %f16
-	fblt	%f24, %f2, fbgt_cont.50640
-	fblt	%f24, %f1, fbgt_else.50645
-	fsub	%f0, %f24, %f1
-	fdiv	%f1, %f1, %f16
+	addi	%s2, %v0, 0
+	addi	%v0, %zero, 3
+	fmov	%f0, %fzero
 	addi	%sp, %sp, 4
-	jal	reduction_2pi_sub2.2629
+	jal	min_caml_create_float_array
 	addi	%sp, %sp, -4
-	fmov	%f24, %f0
-	j	fbgt_cont.50640
-fbgt_else.50645:
-	fdiv	%f1, %f1, %f16
-	fmov	%f0, %f24
+	addi	%v1, %v0, 0
+	addi	%v0, %zero, 5
 	addi	%sp, %sp, 4
-	jal	reduction_2pi_sub2.2629
+	jal	min_caml_create_array
 	addi	%sp, %sp, -4
-	fmov	%f24, %f0
-fbgt_cont.50646:
-	j	fbgt_cont.50640
-fbgt_else.50643:
-fbgt_cont.50644:
-	j	fbgt_cont.50640
-fbgt_else.50641:
-	flw	%f16, 495(%zero)
-	fdiv	%f1, %f0, %f16
-	fblt	%f24, %f2, fbgt_cont.50640
-	fblt	%f24, %f1, fbgt_else.50649
-	fsub	%f0, %f24, %f1
-	fdiv	%f1, %f1, %f16
+	addi	%a0, %v0, 0
+	addi	%v0, %zero, 3
+	fmov	%f0, %fzero
 	addi	%sp, %sp, 4
-	jal	reduction_2pi_sub2.2629
+	jal	min_caml_create_float_array
 	addi	%sp, %sp, -4
-	fmov	%f24, %f0
-	j	fbgt_cont.50640
-fbgt_else.50649:
-	fdiv	%f1, %f1, %f16
-	fmov	%f0, %f24
+	sw	%v0, 1(%a0)
+	addi	%v0, %zero, 3
+	fmov	%f0, %fzero
 	addi	%sp, %sp, 4
-	jal	reduction_2pi_sub2.2629
+	jal	min_caml_create_float_array
 	addi	%sp, %sp, -4
-	fmov	%f24, %f0
-fbgt_cont.50650:
-	j	fbgt_cont.50640
-fbgt_else.50647:
-fbgt_cont.50648:
-fbgt_cont.50642:
-	j	fbgt_cont.50640
-fbgt_else.50639:
-fbgt_cont.50640:
-	fblt	%f24, %f18, fbgt_else.50651
-	beqi	%a0, 0, bnei_else.50653
-	add	%a0, %zero, %zero
-	j	fbgt_cont.50652
-bnei_else.50653:
-	add	%a0, %zero, %k1
-bnei_cont.50654:
-	j	fbgt_cont.50652
-fbgt_else.50651:
-fbgt_cont.50652:
-	fblt	%f24, %f18, fbgt_else.50655
-	fsub	%f24, %f24, %f18
-	j	fbgt_cont.50656
-fbgt_else.50655:
-fbgt_cont.50656:
-	fblt	%f24, %f21, fbgt_else.50657
-	fsub	%f24, %f18, %f24
-	j	fbgt_cont.50658
-fbgt_else.50657:
-fbgt_cont.50658:
-	fblt	%f22, %f24, fbgt_else.50659
-	fmul	%f25, %f24, %f24
-	fmul	%f16, %f25, %f25
-	flw	%f0, 477(%zero)
-	fmul	%f0, %f0, %f24
-	fmul	%f0, %f0, %f25
-	fsub	%f1, %f24, %f0
-	flw	%f0, 476(%zero)
-	fmul	%f0, %f0, %f24
-	fmul	%f0, %f0, %f16
-	fadd	%f1, %f1, %f0
-	flw	%f0, 475(%zero)
-	fmul	%f0, %f0, %f24
-	fmul	%f0, %f0, %f25
-	fmul	%f0, %f0, %f16
-	fsub	%f0, %f1, %f0
-	j	fbgt_cont.50660
-fbgt_else.50659:
-	fsub	%f0, %f21, %f24
-	fmul	%f24, %f0, %f0
-	fmul	%f16, %f24, %f24
-	flw	%f0, 473(%zero)
-	fmul	%f0, %f0, %f24
-	fsub	%f1, %f30, %f0
-	flw	%f0, 472(%zero)
-	fmul	%f0, %f0, %f16
-	fadd	%f1, %f1, %f0
-	flw	%f0, 471(%zero)
-	fmul	%f0, %f0, %f24
-	fmul	%f0, %f0, %f16
-	fsub	%f0, %f1, %f0
-fbgt_cont.50660:
-	beqi	%a0, 0, bnei_else.50661
-	j	bnei_cont.50662
-bnei_else.50661:
-	fneg	%f0, %f0
-bnei_cont.50662:
-	fmul	%f1, %f17, %f0
-	flw	%f16, 436(%zero)
-	fmul	%f1, %f1, %f16
-	fsw	%f1, 171(%zero)
-	flw	%f1, 435(%zero)
-	fmul	%f1, %f20, %f1
-	fsw	%f1, 172(%zero)
-	fmul	%f1, %f17, %f23
-	fmul	%f1, %f1, %f16
-	fsw	%f1, 173(%zero)
-	fsw	%f23, 165(%zero)
-	fsw	%fzero, 166(%zero)
-	fneg	%f1, %f0
-	fsw	%f1, 167(%zero)
-	fneg	%f1, %f20
-	fmul	%f0, %f1, %f0
-	fsw	%f0, 168(%zero)
-	fneg	%f0, %f17
-	fsw	%f0, 169(%zero)
-	fneg	%f0, %f20
-	fmul	%f0, %f0, %f23
-	fsw	%f0, 170(%zero)
-	flw	%f1, 72(%zero)
-	flw	%f0, 171(%zero)
-	fsw	%f0, 4(%sp)
-	fsub	%f0, %f1, %f0
-	fsw	%f0, 75(%zero)
-	flw	%f1, 73(%zero)
-	flw	%f0, 172(%zero)
-	fsw	%f0, 5(%sp)
-	fsub	%f0, %f1, %f0
-	fsw	%f0, 76(%zero)
-	flw	%f1, 74(%zero)
-	flw	%f0, 173(%zero)
-	fsw	%f0, 6(%sp)
-	fsub	%f0, %f1, %f0
-	fsw	%f0, 77(%zero)
-	addi	%sp, %sp, 7
+	sw	%v0, 2(%a0)
+	addi	%v0, %zero, 3
+	fmov	%f0, %fzero
+	addi	%sp, %sp, 4
+	jal	min_caml_create_float_array
+	addi	%sp, %sp, -4
+	sw	%v0, 3(%a0)
+	addi	%v0, %zero, 3
+	fmov	%f0, %fzero
+	addi	%sp, %sp, 4
+	jal	min_caml_create_float_array
+	addi	%sp, %sp, -4
+	sw	%v0, 4(%a0)
+	add	%v1, %zero, %hp
+	addi	%hp, %hp, 8
+	sw	%a0, 7(%v1)
+	sw	%s2, 6(%v1)
+	sw	%s1, 5(%v1)
+	sw	%s0, 4(%v1)
+	sw	%k0, 3(%v1)
+	sw	%a3, 2(%v1)
+	sw	%a2, 1(%v1)
+	sw	%a1, 0(%v1)
+	lw	%v0, 0(%sp)
+	addi	%sp, %sp, 4
+	jal	min_caml_create_array
+	addi	%sp, %sp, -4
+	addi	%s6, %v0, 0
+	lw	%a0, 1(%sp)
+	blti	%a0, 0, bgti_else.34273
+	addi	%sp, %sp, 4
+	jal	create_pixel.3071
+	addi	%sp, %sp, -4
+	lw	%a0, 1(%sp)
+	add	%at, %s6, %a0
+	sw	%v0, 0(%at)
+	addi	%v1, %a0, -1
+	addi	%v0, %s6, 0
+	addi	%sp, %sp, 4
+	jal	init_line_elements.3073
+	addi	%sp, %sp, -4
+	addi	%s6, %v0, 0
+	j	bgti_cont.34274
+bgti_else.34273:
+bgti_cont.34274:
+	sw	%s6, 4(%sp)
+	addi	%sp, %sp, 5
+	jal	read_screen_settings.2775
+	addi	%sp, %sp, -5
+	addi	%sp, %sp, 5
 	jal	min_caml_read_int
-	addi	%sp, %sp, -7
-	addi	%sp, %sp, 7
+	addi	%sp, %sp, -5
+	addi	%sp, %sp, 5
 	jal	min_caml_read_float
-	addi	%sp, %sp, -7
-	fmul	%f20, %f0, %f19
-	fblt	%f20, %fzero, fbgt_else.50663
-	add	%a0, %zero, %k1
-	j	fbgt_cont.50664
-fbgt_else.50663:
-	add	%a0, %zero, %zero
-fbgt_cont.50664:
-	fabs	%f17, %f20
-	fblt	%f17, %f2, fbgt_else.50665
-	flw	%f0, 492(%zero)
-	fblt	%f17, %f0, fbgt_cont.50666
-	flw	%f0, 491(%zero)
-	fblt	%f17, %f0, fbgt_cont.50666
-	flw	%f0, 490(%zero)
-	fblt	%f17, %f0, fbgt_cont.50666
-	flw	%f0, 489(%zero)
-	fblt	%f17, %f0, fbgt_cont.50666
-	flw	%f0, 488(%zero)
-	fblt	%f17, %f0, fbgt_cont.50666
-	flw	%f0, 487(%zero)
-	fblt	%f17, %f0, fbgt_cont.50666
-	flw	%f0, 486(%zero)
-	fblt	%f17, %f0, fbgt_cont.50666
-	flw	%f0, 485(%zero)
-	fblt	%f17, %f0, fbgt_cont.50666
-	flw	%f0, 484(%zero)
-	fblt	%f17, %f0, fbgt_cont.50666
-	flw	%f1, 483(%zero)
-	fmov	%f0, %f17
-	addi	%sp, %sp, 7
-	jal	reduction_2pi_sub1.2626
-	addi	%sp, %sp, -7
-	j	fbgt_cont.50666
-fbgt_else.50683:
-fbgt_cont.50684:
-	j	fbgt_cont.50666
-fbgt_else.50681:
-fbgt_cont.50682:
-	j	fbgt_cont.50666
-fbgt_else.50679:
-fbgt_cont.50680:
-	j	fbgt_cont.50666
-fbgt_else.50677:
-fbgt_cont.50678:
-	j	fbgt_cont.50666
-fbgt_else.50675:
-fbgt_cont.50676:
-	j	fbgt_cont.50666
-fbgt_else.50673:
-fbgt_cont.50674:
-	j	fbgt_cont.50666
-fbgt_else.50671:
-fbgt_cont.50672:
-	j	fbgt_cont.50666
-fbgt_else.50669:
-fbgt_cont.50670:
-	j	fbgt_cont.50666
-fbgt_else.50667:
-fbgt_cont.50668:
-	j	fbgt_cont.50666
-fbgt_else.50665:
-	fmov	%f0, %f2
-fbgt_cont.50666:
-	fblt	%f17, %f2, fbgt_else.50685
-	fblt	%f17, %f0, fbgt_else.50687
-	fsub	%f17, %f17, %f0
-	flw	%f16, 495(%zero)
-	fdiv	%f1, %f0, %f16
-	fblt	%f17, %f2, fbgt_cont.50686
-	fblt	%f17, %f1, fbgt_else.50691
-	fsub	%f0, %f17, %f1
-	fdiv	%f1, %f1, %f16
-	addi	%sp, %sp, 7
-	jal	reduction_2pi_sub2.2629
-	addi	%sp, %sp, -7
-	fmov	%f17, %f0
-	j	fbgt_cont.50686
-fbgt_else.50691:
-	fdiv	%f1, %f1, %f16
-	fmov	%f0, %f17
-	addi	%sp, %sp, 7
-	jal	reduction_2pi_sub2.2629
-	addi	%sp, %sp, -7
-	fmov	%f17, %f0
-fbgt_cont.50692:
-	j	fbgt_cont.50686
-fbgt_else.50689:
-fbgt_cont.50690:
-	j	fbgt_cont.50686
-fbgt_else.50687:
-	flw	%f16, 495(%zero)
-	fdiv	%f1, %f0, %f16
-	fblt	%f17, %f2, fbgt_cont.50686
-	fblt	%f17, %f1, fbgt_else.50695
-	fsub	%f0, %f17, %f1
-	fdiv	%f1, %f1, %f16
-	addi	%sp, %sp, 7
-	jal	reduction_2pi_sub2.2629
-	addi	%sp, %sp, -7
-	fmov	%f17, %f0
-	j	fbgt_cont.50686
-fbgt_else.50695:
-	fdiv	%f1, %f1, %f16
-	fmov	%f0, %f17
-	addi	%sp, %sp, 7
-	jal	reduction_2pi_sub2.2629
-	addi	%sp, %sp, -7
-	fmov	%f17, %f0
-fbgt_cont.50696:
-	j	fbgt_cont.50686
-fbgt_else.50693:
-fbgt_cont.50694:
-fbgt_cont.50688:
-	j	fbgt_cont.50686
-fbgt_else.50685:
-fbgt_cont.50686:
-	fblt	%f17, %f18, fbgt_else.50697
-	beqi	%a0, 0, bnei_else.50699
-	add	%a0, %zero, %zero
-	j	fbgt_cont.50698
-bnei_else.50699:
-	add	%a0, %zero, %k1
-bnei_cont.50700:
-	j	fbgt_cont.50698
-fbgt_else.50697:
-fbgt_cont.50698:
-	fblt	%f17, %f18, fbgt_else.50701
-	fsub	%f17, %f17, %f18
-	j	fbgt_cont.50702
-fbgt_else.50701:
-fbgt_cont.50702:
-	fblt	%f17, %f21, fbgt_else.50703
-	fsub	%f17, %f18, %f17
-	j	fbgt_cont.50704
-fbgt_else.50703:
-fbgt_cont.50704:
-	fblt	%f22, %f17, fbgt_else.50705
-	fmul	%f23, %f17, %f17
-	fmul	%f16, %f23, %f23
-	flw	%f0, 477(%zero)
-	fmul	%f0, %f0, %f17
-	fmul	%f0, %f0, %f23
-	fsub	%f1, %f17, %f0
-	flw	%f0, 476(%zero)
-	fmul	%f0, %f0, %f17
-	fmul	%f0, %f0, %f16
-	fadd	%f1, %f1, %f0
-	flw	%f0, 475(%zero)
-	fmul	%f0, %f0, %f17
-	fmul	%f0, %f0, %f23
-	fmul	%f0, %f0, %f16
-	fsub	%f0, %f1, %f0
-	j	fbgt_cont.50706
-fbgt_else.50705:
-	fsub	%f0, %f21, %f17
-	fmul	%f17, %f0, %f0
-	fmul	%f16, %f17, %f17
-	flw	%f0, 473(%zero)
-	fmul	%f0, %f0, %f17
-	fsub	%f1, %f30, %f0
-	flw	%f0, 472(%zero)
-	fmul	%f0, %f0, %f16
-	fadd	%f1, %f1, %f0
-	flw	%f0, 471(%zero)
-	fmul	%f0, %f0, %f17
-	fmul	%f0, %f0, %f16
-	fsub	%f0, %f1, %f0
-fbgt_cont.50706:
-	beqi	%a0, 0, bnei_else.50707
-	j	bnei_cont.50708
-bnei_else.50707:
-	fneg	%f0, %f0
-bnei_cont.50708:
+	addi	%sp, %sp, -5
+	flw	%f20, 461(%zero)
+	fmul	%f19, %f0, %f20
+	fmov	%f0, %f19
+	addi	%sp, %sp, 5
+	jal	sin.2637
+	addi	%sp, %sp, -5
 	fneg	%f0, %f0
 	fsw	%f0, 79(%zero)
-	addi	%sp, %sp, 7
+	addi	%sp, %sp, 5
 	jal	min_caml_read_float
-	addi	%sp, %sp, -7
-	fmul	%f19, %f0, %f19
-	fabs	%f17, %f20
-	fblt	%f17, %f2, fbgt_else.50709
-	flw	%f0, 492(%zero)
-	fblt	%f17, %f0, fbgt_cont.50710
-	flw	%f0, 491(%zero)
-	fblt	%f17, %f0, fbgt_cont.50710
-	flw	%f0, 490(%zero)
-	fblt	%f17, %f0, fbgt_cont.50710
-	flw	%f0, 489(%zero)
-	fblt	%f17, %f0, fbgt_cont.50710
-	flw	%f0, 488(%zero)
-	fblt	%f17, %f0, fbgt_cont.50710
-	flw	%f0, 487(%zero)
-	fblt	%f17, %f0, fbgt_cont.50710
-	flw	%f0, 486(%zero)
-	fblt	%f17, %f0, fbgt_cont.50710
-	flw	%f0, 485(%zero)
-	fblt	%f17, %f0, fbgt_cont.50710
-	flw	%f0, 484(%zero)
-	fblt	%f17, %f0, fbgt_cont.50710
-	flw	%f1, 483(%zero)
-	fmov	%f0, %f17
-	addi	%sp, %sp, 7
-	jal	reduction_2pi_sub1.2626
-	addi	%sp, %sp, -7
-	j	fbgt_cont.50710
-fbgt_else.50727:
-fbgt_cont.50728:
-	j	fbgt_cont.50710
-fbgt_else.50725:
-fbgt_cont.50726:
-	j	fbgt_cont.50710
-fbgt_else.50723:
-fbgt_cont.50724:
-	j	fbgt_cont.50710
-fbgt_else.50721:
-fbgt_cont.50722:
-	j	fbgt_cont.50710
-fbgt_else.50719:
-fbgt_cont.50720:
-	j	fbgt_cont.50710
-fbgt_else.50717:
-fbgt_cont.50718:
-	j	fbgt_cont.50710
-fbgt_else.50715:
-fbgt_cont.50716:
-	j	fbgt_cont.50710
-fbgt_else.50713:
-fbgt_cont.50714:
-	j	fbgt_cont.50710
-fbgt_else.50711:
-fbgt_cont.50712:
-	j	fbgt_cont.50710
-fbgt_else.50709:
-	fmov	%f0, %f2
-fbgt_cont.50710:
-	fblt	%f17, %f2, fbgt_else.50729
-	fblt	%f17, %f0, fbgt_else.50731
-	fsub	%f17, %f17, %f0
-	flw	%f16, 495(%zero)
-	fdiv	%f1, %f0, %f16
-	fblt	%f17, %f2, fbgt_cont.50730
-	fblt	%f17, %f1, fbgt_else.50735
-	fsub	%f0, %f17, %f1
-	fdiv	%f1, %f1, %f16
-	addi	%sp, %sp, 7
-	jal	reduction_2pi_sub2.2629
-	addi	%sp, %sp, -7
-	fmov	%f17, %f0
-	j	fbgt_cont.50730
-fbgt_else.50735:
-	fdiv	%f1, %f1, %f16
-	fmov	%f0, %f17
-	addi	%sp, %sp, 7
-	jal	reduction_2pi_sub2.2629
-	addi	%sp, %sp, -7
-	fmov	%f17, %f0
-fbgt_cont.50736:
-	j	fbgt_cont.50730
-fbgt_else.50733:
-fbgt_cont.50734:
-	j	fbgt_cont.50730
-fbgt_else.50731:
-	flw	%f16, 495(%zero)
-	fdiv	%f1, %f0, %f16
-	fblt	%f17, %f2, fbgt_cont.50730
-	fblt	%f17, %f1, fbgt_else.50739
-	fsub	%f0, %f17, %f1
-	fdiv	%f1, %f1, %f16
-	addi	%sp, %sp, 7
-	jal	reduction_2pi_sub2.2629
-	addi	%sp, %sp, -7
-	fmov	%f17, %f0
-	j	fbgt_cont.50730
-fbgt_else.50739:
-	fdiv	%f1, %f1, %f16
-	fmov	%f0, %f17
-	addi	%sp, %sp, 7
-	jal	reduction_2pi_sub2.2629
-	addi	%sp, %sp, -7
-	fmov	%f17, %f0
-fbgt_cont.50740:
-	j	fbgt_cont.50730
-fbgt_else.50737:
-fbgt_cont.50738:
-fbgt_cont.50732:
-	j	fbgt_cont.50730
-fbgt_else.50729:
-fbgt_cont.50730:
-	fblt	%f17, %f18, fbgt_else.50741
-	add	%a0, %zero, %zero
-	j	fbgt_cont.50742
-fbgt_else.50741:
-	add	%a0, %zero, %k1
-fbgt_cont.50742:
-	fblt	%f17, %f18, fbgt_else.50743
-	fsub	%f17, %f17, %f18
-	j	fbgt_cont.50744
-fbgt_else.50743:
-fbgt_cont.50744:
-	fblt	%f17, %f21, fbgt_else.50745
-	beqi	%a0, 0, bnei_else.50747
-	add	%a0, %zero, %zero
-	j	fbgt_cont.50746
-bnei_else.50747:
-	add	%a0, %zero, %k1
-bnei_cont.50748:
-	j	fbgt_cont.50746
-fbgt_else.50745:
-fbgt_cont.50746:
-	fblt	%f17, %f21, fbgt_else.50749
-	fsub	%f17, %f18, %f17
-	j	fbgt_cont.50750
-fbgt_else.50749:
-fbgt_cont.50750:
-	fblt	%f22, %f17, fbgt_else.50751
-	fmul	%f17, %f17, %f17
-	fmul	%f16, %f17, %f17
-	flw	%f0, 473(%zero)
-	fmul	%f0, %f0, %f17
-	fsub	%f1, %f30, %f0
-	flw	%f0, 472(%zero)
-	fmul	%f0, %f0, %f16
-	fadd	%f1, %f1, %f0
-	flw	%f0, 471(%zero)
-	fmul	%f0, %f0, %f17
-	fmul	%f0, %f0, %f16
-	fsub	%f17, %f1, %f0
-	j	fbgt_cont.50752
-fbgt_else.50751:
-	fsub	%f20, %f21, %f17
-	fmul	%f17, %f20, %f20
-	fmul	%f16, %f17, %f17
-	flw	%f0, 477(%zero)
-	fmul	%f0, %f0, %f20
-	fmul	%f0, %f0, %f17
-	fsub	%f1, %f20, %f0
-	flw	%f0, 476(%zero)
-	fmul	%f0, %f0, %f20
-	fmul	%f0, %f0, %f16
-	fadd	%f1, %f1, %f0
-	flw	%f0, 475(%zero)
-	fmul	%f0, %f0, %f20
-	fmul	%f0, %f0, %f17
-	fmul	%f0, %f0, %f16
-	fsub	%f17, %f1, %f0
-fbgt_cont.50752:
-	beqi	%a0, 0, bnei_else.50753
-	j	bnei_cont.50754
-bnei_else.50753:
-	fneg	%f17, %f17
-bnei_cont.50754:
-	fblt	%f19, %fzero, fbgt_else.50755
-	add	%a0, %zero, %k1
-	j	fbgt_cont.50756
-fbgt_else.50755:
-	add	%a0, %zero, %zero
-fbgt_cont.50756:
-	fabs	%f20, %f19
-	fblt	%f20, %f2, fbgt_else.50757
-	flw	%f0, 492(%zero)
-	fblt	%f20, %f0, fbgt_cont.50758
-	flw	%f0, 491(%zero)
-	fblt	%f20, %f0, fbgt_cont.50758
-	flw	%f0, 490(%zero)
-	fblt	%f20, %f0, fbgt_cont.50758
-	flw	%f0, 489(%zero)
-	fblt	%f20, %f0, fbgt_cont.50758
-	flw	%f0, 488(%zero)
-	fblt	%f20, %f0, fbgt_cont.50758
-	flw	%f0, 487(%zero)
-	fblt	%f20, %f0, fbgt_cont.50758
-	flw	%f0, 486(%zero)
-	fblt	%f20, %f0, fbgt_cont.50758
-	flw	%f0, 485(%zero)
-	fblt	%f20, %f0, fbgt_cont.50758
-	flw	%f0, 484(%zero)
-	fblt	%f20, %f0, fbgt_cont.50758
-	flw	%f1, 483(%zero)
+	addi	%sp, %sp, -5
+	fmul	%f20, %f0, %f20
+	fmov	%f0, %f19
+	addi	%sp, %sp, 5
+	jal	cos.2635
+	addi	%sp, %sp, -5
+	fmov	%f19, %f0
 	fmov	%f0, %f20
-	addi	%sp, %sp, 7
-	jal	reduction_2pi_sub1.2626
-	addi	%sp, %sp, -7
-	j	fbgt_cont.50758
-fbgt_else.50775:
-fbgt_cont.50776:
-	j	fbgt_cont.50758
-fbgt_else.50773:
-fbgt_cont.50774:
-	j	fbgt_cont.50758
-fbgt_else.50771:
-fbgt_cont.50772:
-	j	fbgt_cont.50758
-fbgt_else.50769:
-fbgt_cont.50770:
-	j	fbgt_cont.50758
-fbgt_else.50767:
-fbgt_cont.50768:
-	j	fbgt_cont.50758
-fbgt_else.50765:
-fbgt_cont.50766:
-	j	fbgt_cont.50758
-fbgt_else.50763:
-fbgt_cont.50764:
-	j	fbgt_cont.50758
-fbgt_else.50761:
-fbgt_cont.50762:
-	j	fbgt_cont.50758
-fbgt_else.50759:
-fbgt_cont.50760:
-	j	fbgt_cont.50758
-fbgt_else.50757:
-	fmov	%f0, %f2
-fbgt_cont.50758:
-	fblt	%f20, %f2, fbgt_else.50777
-	fblt	%f20, %f0, fbgt_else.50779
-	fsub	%f20, %f20, %f0
-	flw	%f16, 495(%zero)
-	fdiv	%f1, %f0, %f16
-	fblt	%f20, %f2, fbgt_cont.50778
-	fblt	%f20, %f1, fbgt_else.50783
-	fsub	%f0, %f20, %f1
-	fdiv	%f1, %f1, %f16
-	addi	%sp, %sp, 7
-	jal	reduction_2pi_sub2.2629
-	addi	%sp, %sp, -7
-	fmov	%f20, %f0
-	j	fbgt_cont.50778
-fbgt_else.50783:
-	fdiv	%f1, %f1, %f16
-	fmov	%f0, %f20
-	addi	%sp, %sp, 7
-	jal	reduction_2pi_sub2.2629
-	addi	%sp, %sp, -7
-	fmov	%f20, %f0
-fbgt_cont.50784:
-	j	fbgt_cont.50778
-fbgt_else.50781:
-fbgt_cont.50782:
-	j	fbgt_cont.50778
-fbgt_else.50779:
-	flw	%f16, 495(%zero)
-	fdiv	%f1, %f0, %f16
-	fblt	%f20, %f2, fbgt_cont.50778
-	fblt	%f20, %f1, fbgt_else.50787
-	fsub	%f0, %f20, %f1
-	fdiv	%f1, %f1, %f16
-	addi	%sp, %sp, 7
-	jal	reduction_2pi_sub2.2629
-	addi	%sp, %sp, -7
-	fmov	%f20, %f0
-	j	fbgt_cont.50778
-fbgt_else.50787:
-	fdiv	%f1, %f1, %f16
-	fmov	%f0, %f20
-	addi	%sp, %sp, 7
-	jal	reduction_2pi_sub2.2629
-	addi	%sp, %sp, -7
-	fmov	%f20, %f0
-fbgt_cont.50788:
-	j	fbgt_cont.50778
-fbgt_else.50785:
-fbgt_cont.50786:
-fbgt_cont.50780:
-	j	fbgt_cont.50778
-fbgt_else.50777:
-fbgt_cont.50778:
-	fblt	%f20, %f18, fbgt_else.50789
-	beqi	%a0, 0, bnei_else.50791
-	add	%a0, %zero, %zero
-	j	fbgt_cont.50790
-bnei_else.50791:
-	add	%a0, %zero, %k1
-bnei_cont.50792:
-	j	fbgt_cont.50790
-fbgt_else.50789:
-fbgt_cont.50790:
-	fblt	%f20, %f18, fbgt_else.50793
-	fsub	%f20, %f20, %f18
-	j	fbgt_cont.50794
-fbgt_else.50793:
-fbgt_cont.50794:
-	fblt	%f20, %f21, fbgt_else.50795
-	fsub	%f20, %f18, %f20
-	j	fbgt_cont.50796
-fbgt_else.50795:
-fbgt_cont.50796:
-	fblt	%f22, %f20, fbgt_else.50797
-	fmul	%f23, %f20, %f20
-	fmul	%f16, %f23, %f23
-	flw	%f0, 477(%zero)
-	fmul	%f0, %f0, %f20
-	fmul	%f0, %f0, %f23
-	fsub	%f1, %f20, %f0
-	flw	%f0, 476(%zero)
-	fmul	%f0, %f0, %f20
-	fmul	%f0, %f0, %f16
-	fadd	%f1, %f1, %f0
-	flw	%f0, 475(%zero)
-	fmul	%f0, %f0, %f20
-	fmul	%f0, %f0, %f23
-	fmul	%f0, %f0, %f16
-	fsub	%f0, %f1, %f0
-	j	fbgt_cont.50798
-fbgt_else.50797:
-	fsub	%f0, %f21, %f20
-	fmul	%f20, %f0, %f0
-	fmul	%f16, %f20, %f20
-	flw	%f0, 473(%zero)
-	fmul	%f0, %f0, %f20
-	fsub	%f1, %f30, %f0
-	flw	%f0, 472(%zero)
-	fmul	%f0, %f0, %f16
-	fadd	%f1, %f1, %f0
-	flw	%f0, 471(%zero)
-	fmul	%f0, %f0, %f20
-	fmul	%f0, %f0, %f16
-	fsub	%f0, %f1, %f0
-fbgt_cont.50798:
-	beqi	%a0, 0, bnei_else.50799
-	j	bnei_cont.50800
-bnei_else.50799:
-	fneg	%f0, %f0
-bnei_cont.50800:
-	fmul	%f0, %f17, %f0
+	addi	%sp, %sp, 5
+	jal	sin.2637
+	addi	%sp, %sp, -5
+	fmul	%f0, %f19, %f0
 	fsw	%f0, 78(%zero)
-	fabs	%f19, %f19
-	fblt	%f19, %f2, fbgt_else.50801
-	flw	%f0, 492(%zero)
-	fblt	%f19, %f0, fbgt_cont.50802
-	flw	%f0, 491(%zero)
-	fblt	%f19, %f0, fbgt_cont.50802
-	flw	%f0, 490(%zero)
-	fblt	%f19, %f0, fbgt_cont.50802
-	flw	%f0, 489(%zero)
-	fblt	%f19, %f0, fbgt_cont.50802
-	flw	%f0, 488(%zero)
-	fblt	%f19, %f0, fbgt_cont.50802
-	flw	%f0, 487(%zero)
-	fblt	%f19, %f0, fbgt_cont.50802
-	flw	%f0, 486(%zero)
-	fblt	%f19, %f0, fbgt_cont.50802
-	flw	%f0, 485(%zero)
-	fblt	%f19, %f0, fbgt_cont.50802
-	flw	%f0, 484(%zero)
-	fblt	%f19, %f0, fbgt_cont.50802
-	flw	%f1, 483(%zero)
-	fmov	%f0, %f19
-	addi	%sp, %sp, 7
-	jal	reduction_2pi_sub1.2626
-	addi	%sp, %sp, -7
-	j	fbgt_cont.50802
-fbgt_else.50819:
-fbgt_cont.50820:
-	j	fbgt_cont.50802
-fbgt_else.50817:
-fbgt_cont.50818:
-	j	fbgt_cont.50802
-fbgt_else.50815:
-fbgt_cont.50816:
-	j	fbgt_cont.50802
-fbgt_else.50813:
-fbgt_cont.50814:
-	j	fbgt_cont.50802
-fbgt_else.50811:
-fbgt_cont.50812:
-	j	fbgt_cont.50802
-fbgt_else.50809:
-fbgt_cont.50810:
-	j	fbgt_cont.50802
-fbgt_else.50807:
-fbgt_cont.50808:
-	j	fbgt_cont.50802
-fbgt_else.50805:
-fbgt_cont.50806:
-	j	fbgt_cont.50802
-fbgt_else.50803:
-fbgt_cont.50804:
-	j	fbgt_cont.50802
-fbgt_else.50801:
-	fmov	%f0, %f2
-fbgt_cont.50802:
-	fblt	%f19, %f2, fbgt_else.50821
-	fblt	%f19, %f0, fbgt_else.50823
-	fsub	%f19, %f19, %f0
-	flw	%f16, 495(%zero)
-	fdiv	%f1, %f0, %f16
-	fblt	%f19, %f2, fbgt_cont.50822
-	fblt	%f19, %f1, fbgt_else.50827
-	fsub	%f0, %f19, %f1
-	fdiv	%f1, %f1, %f16
-	addi	%sp, %sp, 7
-	jal	reduction_2pi_sub2.2629
-	addi	%sp, %sp, -7
-	fmov	%f19, %f0
-	j	fbgt_cont.50822
-fbgt_else.50827:
-	fdiv	%f1, %f1, %f16
-	fmov	%f0, %f19
-	addi	%sp, %sp, 7
-	jal	reduction_2pi_sub2.2629
-	addi	%sp, %sp, -7
-	fmov	%f19, %f0
-fbgt_cont.50828:
-	j	fbgt_cont.50822
-fbgt_else.50825:
-fbgt_cont.50826:
-	j	fbgt_cont.50822
-fbgt_else.50823:
-	flw	%f16, 495(%zero)
-	fdiv	%f1, %f0, %f16
-	fblt	%f19, %f2, fbgt_cont.50822
-	fblt	%f19, %f1, fbgt_else.50831
-	fsub	%f0, %f19, %f1
-	fdiv	%f1, %f1, %f16
-	addi	%sp, %sp, 7
-	jal	reduction_2pi_sub2.2629
-	addi	%sp, %sp, -7
-	fmov	%f19, %f0
-	j	fbgt_cont.50822
-fbgt_else.50831:
-	fdiv	%f1, %f1, %f16
-	fmov	%f0, %f19
-	addi	%sp, %sp, 7
-	jal	reduction_2pi_sub2.2629
-	addi	%sp, %sp, -7
-	fmov	%f19, %f0
-fbgt_cont.50832:
-	j	fbgt_cont.50822
-fbgt_else.50829:
-fbgt_cont.50830:
-fbgt_cont.50824:
-	j	fbgt_cont.50822
-fbgt_else.50821:
-fbgt_cont.50822:
-	fblt	%f19, %f18, fbgt_else.50833
-	add	%a0, %zero, %zero
-	j	fbgt_cont.50834
-fbgt_else.50833:
-	add	%a0, %zero, %k1
-fbgt_cont.50834:
-	fblt	%f19, %f18, fbgt_else.50835
-	fsub	%f19, %f19, %f18
-	j	fbgt_cont.50836
-fbgt_else.50835:
-fbgt_cont.50836:
-	fblt	%f19, %f21, fbgt_else.50837
-	beqi	%a0, 0, bnei_else.50839
-	add	%a0, %zero, %zero
-	j	fbgt_cont.50838
-bnei_else.50839:
-	add	%a0, %zero, %k1
-bnei_cont.50840:
-	j	fbgt_cont.50838
-fbgt_else.50837:
-fbgt_cont.50838:
-	fblt	%f19, %f21, fbgt_else.50841
-	fsub	%f19, %f18, %f19
-	j	fbgt_cont.50842
-fbgt_else.50841:
-fbgt_cont.50842:
-	fblt	%f22, %f19, fbgt_else.50843
-	fmul	%f18, %f19, %f19
-	fmul	%f16, %f18, %f18
-	flw	%f0, 473(%zero)
-	fmul	%f0, %f0, %f18
-	fsub	%f1, %f30, %f0
-	flw	%f0, 472(%zero)
-	fmul	%f0, %f0, %f16
-	fadd	%f1, %f1, %f0
-	flw	%f0, 471(%zero)
-	fmul	%f0, %f0, %f18
-	fmul	%f0, %f0, %f16
-	fsub	%f0, %f1, %f0
-	j	fbgt_cont.50844
-fbgt_else.50843:
-	fsub	%f19, %f21, %f19
-	fmul	%f18, %f19, %f19
-	fmul	%f16, %f18, %f18
-	flw	%f0, 477(%zero)
-	fmul	%f0, %f0, %f19
-	fmul	%f0, %f0, %f18
-	fsub	%f1, %f19, %f0
-	flw	%f0, 476(%zero)
-	fmul	%f0, %f0, %f19
-	fmul	%f0, %f0, %f16
-	fadd	%f1, %f1, %f0
-	flw	%f0, 475(%zero)
-	fmul	%f0, %f0, %f19
-	fmul	%f0, %f0, %f18
-	fmul	%f0, %f0, %f16
-	fsub	%f0, %f1, %f0
-fbgt_cont.50844:
-	beqi	%a0, 0, bnei_else.50845
-	j	bnei_cont.50846
-bnei_else.50845:
-	fneg	%f0, %f0
-bnei_cont.50846:
-	fmul	%f0, %f17, %f0
+	fmov	%f0, %f20
+	addi	%sp, %sp, 5
+	jal	cos.2635
+	addi	%sp, %sp, -5
+	fmul	%f0, %f19, %f0
 	fsw	%f0, 80(%zero)
-	addi	%sp, %sp, 7
+	addi	%sp, %sp, 5
 	jal	min_caml_read_float
-	addi	%sp, %sp, -7
+	addi	%sp, %sp, -5
 	fsw	%f0, 81(%zero)
 	addi	%v0, %zero, 0
-	addi	%sp, %sp, 7
+	addi	%sp, %sp, 5
+	jal	read_nth_object.2782
+	addi	%sp, %sp, -5
+	beqi	%v0, 0, bnei_else.34275
+	addi	%v0, %k1, 0
+	addi	%sp, %sp, 5
+	jal	read_nth_object.2782
+	addi	%sp, %sp, -5
+	beqi	%v0, 0, bnei_else.34277
+	addi	%v0, %zero, 2
+	addi	%sp, %sp, 5
+	jal	read_nth_object.2782
+	addi	%sp, %sp, -5
+	beqi	%v0, 0, bnei_else.34279
+	addi	%v0, %zero, 3
+	addi	%sp, %sp, 5
+	jal	read_nth_object.2782
+	addi	%sp, %sp, -5
+	beqi	%v0, 0, bnei_else.34281
+	addi	%v0, %zero, 4
+	addi	%sp, %sp, 5
 	jal	read_object.2784
-	addi	%sp, %sp, -7
+	addi	%sp, %sp, -5
+	j	bnei_cont.34276
+bnei_else.34281:
+	addi	%a0, %zero, 3
+	sw	%a0, 0(%zero)
+bnei_cont.34282:
+	j	bnei_cont.34276
+bnei_else.34279:
+	addi	%a0, %zero, 2
+	sw	%a0, 0(%zero)
+bnei_cont.34280:
+	j	bnei_cont.34276
+bnei_else.34277:
+	sw	%k1, 0(%zero)
+bnei_cont.34278:
+	j	bnei_cont.34276
+bnei_else.34275:
+	sw	%zero, 0(%zero)
+bnei_cont.34276:
 	addi	%v0, %zero, 0
-	addi	%sp, %sp, 7
+	addi	%sp, %sp, 5
 	jal	read_net_item.2788
-	addi	%sp, %sp, -7
+	addi	%sp, %sp, -5
 	lw	%a0, 0(%v0)
-	beqi	%a0, -1, bnei_else.50847
+	beqi	%a0, -1, bnei_else.34283
 	sw	%v0, 83(%zero)
 	addi	%v0, %k1, 0
-	addi	%sp, %sp, 7
+	addi	%sp, %sp, 5
 	jal	read_and_network.2792
-	addi	%sp, %sp, -7
-	j	bnei_cont.50848
-bnei_else.50847:
-bnei_cont.50848:
+	addi	%sp, %sp, -5
+	j	bnei_cont.34284
+bnei_else.34283:
+bnei_cont.34284:
 	addi	%v0, %zero, 0
-	addi	%sp, %sp, 7
+	addi	%sp, %sp, 5
 	jal	read_net_item.2788
-	addi	%sp, %sp, -7
+	addi	%sp, %sp, -5
 	addi	%s1, %v0, 0
 	lw	%a0, 0(%s1)
-	beqi	%a0, -1, bnei_else.50849
+	beqi	%a0, -1, bnei_else.34285
 	addi	%v0, %k1, 0
-	addi	%sp, %sp, 7
+	addi	%sp, %sp, 5
 	jal	read_or_network.2790
-	addi	%sp, %sp, -7
+	addi	%sp, %sp, -5
 	sw	%s1, 0(%v0)
-	j	bnei_cont.50850
-bnei_else.50849:
+	j	bnei_cont.34286
+bnei_else.34285:
 	addi	%v1, %s1, 0
 	addi	%v0, %k1, 0
-	addi	%sp, %sp, 7
+	addi	%sp, %sp, 5
 	jal	min_caml_create_array
-	addi	%sp, %sp, -7
-bnei_cont.50850:
+	addi	%sp, %sp, -5
+bnei_cont.34286:
 	sw	%v0, 134(%zero)
-	addi	%v0, %zero, 80
-	addi	%sp, %sp, 7
-	jal	min_caml_print_char
-	addi	%sp, %sp, -7
-	addi	%v0, %zero, 51
-	addi	%sp, %sp, 7
-	jal	min_caml_print_char
-	addi	%sp, %sp, -7
-	addi	%a1, %zero, 10
-	addi	%v0, %a1, 0
-	addi	%sp, %sp, 7
-	jal	min_caml_print_char
-	addi	%sp, %sp, -7
-	lw	%v0, 0(%sp)
-	addi	%v1, %zero, 0
-	addi	%sp, %sp, 7
-	jal	print_int_sub1.2641
-	addi	%sp, %sp, -7
-	addi	%a2, %v0, 0
-	lw	%a3, 0(%sp)
-	blti	%a3, 10, bgti_else.50851
-	blti	%a3, 20, bgti_else.50853
-	blti	%a3, 30, bgti_else.50855
-	blti	%a3, 40, bgti_else.50857
-	addi	%a3, %a3, -40
-	blti	%a3, 10, bgti_cont.50852
-	blti	%a3, 20, bgti_else.50861
-	blti	%a3, 30, bgti_else.50863
-	blti	%a3, 40, bgti_else.50865
-	addi	%a3, %a3, -40
-	blti	%a3, 10, bgti_cont.50852
-	blti	%a3, 20, bgti_else.50869
-	blti	%a3, 30, bgti_else.50871
-	blti	%a3, 40, bgti_else.50873
-	addi	%a3, %a3, -40
-	blti	%a3, 10, bgti_cont.50852
-	blti	%a3, 20, bgti_else.50877
-	blti	%a3, 30, bgti_else.50879
-	blti	%a3, 40, bgti_else.50881
-	addi	%v0, %a3, -40
-	addi	%sp, %sp, 7
-	jal	print_int_sub2.2644
-	addi	%sp, %sp, -7
-	addi	%a3, %v0, 0
-	j	bgti_cont.50852
-bgti_else.50881:
-	addi	%a3, %a3, -30
-bgti_cont.50882:
-	j	bgti_cont.50852
-bgti_else.50879:
-	addi	%a3, %a3, -20
-bgti_cont.50880:
-	j	bgti_cont.50852
-bgti_else.50877:
-	addi	%a3, %a3, -10
-bgti_cont.50878:
-	j	bgti_cont.50852
-bgti_else.50875:
-bgti_cont.50876:
-	j	bgti_cont.50852
-bgti_else.50873:
-	addi	%a3, %a3, -30
-bgti_cont.50874:
-	j	bgti_cont.50852
-bgti_else.50871:
-	addi	%a3, %a3, -20
-bgti_cont.50872:
-	j	bgti_cont.50852
-bgti_else.50869:
-	addi	%a3, %a3, -10
-bgti_cont.50870:
-	j	bgti_cont.50852
-bgti_else.50867:
-bgti_cont.50868:
-	j	bgti_cont.50852
-bgti_else.50865:
-	addi	%a3, %a3, -30
-bgti_cont.50866:
-	j	bgti_cont.50852
-bgti_else.50863:
-	addi	%a3, %a3, -20
-bgti_cont.50864:
-	j	bgti_cont.50852
-bgti_else.50861:
-	addi	%a3, %a3, -10
-bgti_cont.50862:
-	j	bgti_cont.50852
-bgti_else.50859:
-bgti_cont.50860:
-	j	bgti_cont.50852
-bgti_else.50857:
-	addi	%a3, %a3, -30
-bgti_cont.50858:
-	j	bgti_cont.50852
-bgti_else.50855:
-	addi	%a3, %a3, -20
-bgti_cont.50856:
-	j	bgti_cont.50852
-bgti_else.50853:
-	addi	%a3, %a3, -10
-bgti_cont.50854:
-	j	bgti_cont.50852
-bgti_else.50851:
-bgti_cont.50852:
-	blt	%zero, %a2, bgt_else.50883
-	addi	%v0, %a3, 48
-	addi	%sp, %sp, 7
-	jal	min_caml_print_char
-	addi	%sp, %sp, -7
-	j	bgt_cont.50884
-bgt_else.50883:
-	addi	%v1, %zero, 0
-	addi	%v0, %a2, 0
-	addi	%sp, %sp, 7
-	jal	print_int_sub1.2641
-	addi	%sp, %sp, -7
-	addi	%a0, %v0, 0
-	blti	%a2, 10, bgti_else.50885
-	blti	%a2, 20, bgti_else.50887
-	blti	%a2, 30, bgti_else.50889
-	blti	%a2, 40, bgti_else.50891
-	addi	%a2, %a2, -40
-	blti	%a2, 10, bgti_cont.50886
-	blti	%a2, 20, bgti_else.50895
-	blti	%a2, 30, bgti_else.50897
-	blti	%a2, 40, bgti_else.50899
-	addi	%a2, %a2, -40
-	blti	%a2, 10, bgti_cont.50886
-	blti	%a2, 20, bgti_else.50903
-	blti	%a2, 30, bgti_else.50905
-	blti	%a2, 40, bgti_else.50907
-	addi	%a2, %a2, -40
-	blti	%a2, 10, bgti_cont.50886
-	blti	%a2, 20, bgti_else.50911
-	blti	%a2, 30, bgti_else.50913
-	blti	%a2, 40, bgti_else.50915
-	addi	%v0, %a2, -40
-	addi	%sp, %sp, 7
-	jal	print_int_sub2.2644
-	addi	%sp, %sp, -7
-	addi	%a2, %v0, 0
-	j	bgti_cont.50886
-bgti_else.50915:
-	addi	%a2, %a2, -30
-bgti_cont.50916:
-	j	bgti_cont.50886
-bgti_else.50913:
-	addi	%a2, %a2, -20
-bgti_cont.50914:
-	j	bgti_cont.50886
-bgti_else.50911:
-	addi	%a2, %a2, -10
-bgti_cont.50912:
-	j	bgti_cont.50886
-bgti_else.50909:
-bgti_cont.50910:
-	j	bgti_cont.50886
-bgti_else.50907:
-	addi	%a2, %a2, -30
-bgti_cont.50908:
-	j	bgti_cont.50886
-bgti_else.50905:
-	addi	%a2, %a2, -20
-bgti_cont.50906:
-	j	bgti_cont.50886
-bgti_else.50903:
-	addi	%a2, %a2, -10
-bgti_cont.50904:
-	j	bgti_cont.50886
-bgti_else.50901:
-bgti_cont.50902:
-	j	bgti_cont.50886
-bgti_else.50899:
-	addi	%a2, %a2, -30
-bgti_cont.50900:
-	j	bgti_cont.50886
-bgti_else.50897:
-	addi	%a2, %a2, -20
-bgti_cont.50898:
-	j	bgti_cont.50886
-bgti_else.50895:
-	addi	%a2, %a2, -10
-bgti_cont.50896:
-	j	bgti_cont.50886
-bgti_else.50893:
-bgti_cont.50894:
-	j	bgti_cont.50886
-bgti_else.50891:
-	addi	%a2, %a2, -30
-bgti_cont.50892:
-	j	bgti_cont.50886
-bgti_else.50889:
-	addi	%a2, %a2, -20
-bgti_cont.50890:
-	j	bgti_cont.50886
-bgti_else.50887:
-	addi	%a2, %a2, -10
-bgti_cont.50888:
-	j	bgti_cont.50886
-bgti_else.50885:
-bgti_cont.50886:
-	blt	%zero, %a0, bgt_else.50917
-	addi	%v0, %a2, 48
-	addi	%sp, %sp, 7
-	jal	min_caml_print_char
-	addi	%sp, %sp, -7
-	addi	%v0, %a3, 48
-	addi	%sp, %sp, 7
-	jal	min_caml_print_char
-	addi	%sp, %sp, -7
-	j	bgt_cont.50918
-bgt_else.50917:
-	blti	%a0, 10, bgti_else.50919
-	blti	%a0, 20, bgti_else.50921
-	blti	%a0, 30, bgti_else.50923
-	blti	%a0, 40, bgti_else.50925
-	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_cont.50920
-	blti	%a0, 20, bgti_else.50929
-	blti	%a0, 30, bgti_else.50931
-	blti	%a0, 40, bgti_else.50933
-	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_cont.50920
-	blti	%a0, 20, bgti_else.50937
-	blti	%a0, 30, bgti_else.50939
-	blti	%a0, 40, bgti_else.50941
-	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_cont.50920
-	blti	%a0, 20, bgti_else.50945
-	blti	%a0, 30, bgti_else.50947
-	blti	%a0, 40, bgti_else.50949
-	addi	%v0, %a0, -40
-	addi	%sp, %sp, 7
-	jal	print_int_sub2.2644
-	addi	%sp, %sp, -7
-	addi	%a0, %v0, 0
-	j	bgti_cont.50920
-bgti_else.50949:
-	addi	%a0, %a0, -30
-bgti_cont.50950:
-	j	bgti_cont.50920
-bgti_else.50947:
-	addi	%a0, %a0, -20
-bgti_cont.50948:
-	j	bgti_cont.50920
-bgti_else.50945:
-	addi	%a0, %a0, -10
-bgti_cont.50946:
-	j	bgti_cont.50920
-bgti_else.50943:
-bgti_cont.50944:
-	j	bgti_cont.50920
-bgti_else.50941:
-	addi	%a0, %a0, -30
-bgti_cont.50942:
-	j	bgti_cont.50920
-bgti_else.50939:
-	addi	%a0, %a0, -20
-bgti_cont.50940:
-	j	bgti_cont.50920
-bgti_else.50937:
-	addi	%a0, %a0, -10
-bgti_cont.50938:
-	j	bgti_cont.50920
-bgti_else.50935:
-bgti_cont.50936:
-	j	bgti_cont.50920
-bgti_else.50933:
-	addi	%a0, %a0, -30
-bgti_cont.50934:
-	j	bgti_cont.50920
-bgti_else.50931:
-	addi	%a0, %a0, -20
-bgti_cont.50932:
-	j	bgti_cont.50920
-bgti_else.50929:
-	addi	%a0, %a0, -10
-bgti_cont.50930:
-	j	bgti_cont.50920
-bgti_else.50927:
-bgti_cont.50928:
-	j	bgti_cont.50920
-bgti_else.50925:
-	addi	%a0, %a0, -30
-bgti_cont.50926:
-	j	bgti_cont.50920
-bgti_else.50923:
-	addi	%a0, %a0, -20
-bgti_cont.50924:
-	j	bgti_cont.50920
-bgti_else.50921:
-	addi	%a0, %a0, -10
-bgti_cont.50922:
-	j	bgti_cont.50920
-bgti_else.50919:
-bgti_cont.50920:
-	addi	%v0, %a0, 48
-	addi	%sp, %sp, 7
-	jal	min_caml_print_char
-	addi	%sp, %sp, -7
-	addi	%v0, %a2, 48
-	addi	%sp, %sp, 7
-	jal	min_caml_print_char
-	addi	%sp, %sp, -7
-	addi	%v0, %a3, 48
-	addi	%sp, %sp, 7
-	jal	min_caml_print_char
-	addi	%sp, %sp, -7
-bgt_cont.50918:
-bgt_cont.50884:
-	addi	%a2, %zero, 32
-	addi	%v0, %a2, 0
-	addi	%sp, %sp, 7
-	jal	min_caml_print_char
-	addi	%sp, %sp, -7
-	lw	%a3, 155(%zero)
-	addi	%v1, %zero, 0
-	addi	%v0, %a3, 0
-	addi	%sp, %sp, 7
-	jal	print_int_sub1.2641
-	addi	%sp, %sp, -7
-	addi	%k0, %v0, 0
-	blti	%a3, 10, bgti_else.50951
-	blti	%a3, 20, bgti_else.50953
-	blti	%a3, 30, bgti_else.50955
-	blti	%a3, 40, bgti_else.50957
-	addi	%a3, %a3, -40
-	blti	%a3, 10, bgti_cont.50952
-	blti	%a3, 20, bgti_else.50961
-	blti	%a3, 30, bgti_else.50963
-	blti	%a3, 40, bgti_else.50965
-	addi	%a3, %a3, -40
-	blti	%a3, 10, bgti_cont.50952
-	blti	%a3, 20, bgti_else.50969
-	blti	%a3, 30, bgti_else.50971
-	blti	%a3, 40, bgti_else.50973
-	addi	%a3, %a3, -40
-	blti	%a3, 10, bgti_cont.50952
-	blti	%a3, 20, bgti_else.50977
-	blti	%a3, 30, bgti_else.50979
-	blti	%a3, 40, bgti_else.50981
-	addi	%v0, %a3, -40
-	addi	%sp, %sp, 7
-	jal	print_int_sub2.2644
-	addi	%sp, %sp, -7
-	addi	%a3, %v0, 0
-	j	bgti_cont.50952
-bgti_else.50981:
-	addi	%a3, %a3, -30
-bgti_cont.50982:
-	j	bgti_cont.50952
-bgti_else.50979:
-	addi	%a3, %a3, -20
-bgti_cont.50980:
-	j	bgti_cont.50952
-bgti_else.50977:
-	addi	%a3, %a3, -10
-bgti_cont.50978:
-	j	bgti_cont.50952
-bgti_else.50975:
-bgti_cont.50976:
-	j	bgti_cont.50952
-bgti_else.50973:
-	addi	%a3, %a3, -30
-bgti_cont.50974:
-	j	bgti_cont.50952
-bgti_else.50971:
-	addi	%a3, %a3, -20
-bgti_cont.50972:
-	j	bgti_cont.50952
-bgti_else.50969:
-	addi	%a3, %a3, -10
-bgti_cont.50970:
-	j	bgti_cont.50952
-bgti_else.50967:
-bgti_cont.50968:
-	j	bgti_cont.50952
-bgti_else.50965:
-	addi	%a3, %a3, -30
-bgti_cont.50966:
-	j	bgti_cont.50952
-bgti_else.50963:
-	addi	%a3, %a3, -20
-bgti_cont.50964:
-	j	bgti_cont.50952
-bgti_else.50961:
-	addi	%a3, %a3, -10
-bgti_cont.50962:
-	j	bgti_cont.50952
-bgti_else.50959:
-bgti_cont.50960:
-	j	bgti_cont.50952
-bgti_else.50957:
-	addi	%a3, %a3, -30
-bgti_cont.50958:
-	j	bgti_cont.50952
-bgti_else.50955:
-	addi	%a3, %a3, -20
-bgti_cont.50956:
-	j	bgti_cont.50952
-bgti_else.50953:
-	addi	%a3, %a3, -10
-bgti_cont.50954:
-	j	bgti_cont.50952
-bgti_else.50951:
-bgti_cont.50952:
-	blt	%zero, %k0, bgt_else.50983
-	addi	%v0, %a3, 48
-	addi	%sp, %sp, 7
-	jal	min_caml_print_char
-	addi	%sp, %sp, -7
-	j	bgt_cont.50984
-bgt_else.50983:
-	addi	%v1, %zero, 0
-	addi	%v0, %k0, 0
-	addi	%sp, %sp, 7
-	jal	print_int_sub1.2641
-	addi	%sp, %sp, -7
-	addi	%a0, %v0, 0
-	blti	%k0, 10, bgti_else.50985
-	blti	%k0, 20, bgti_else.50987
-	blti	%k0, 30, bgti_else.50989
-	blti	%k0, 40, bgti_else.50991
-	addi	%k0, %k0, -40
-	blti	%k0, 10, bgti_cont.50986
-	blti	%k0, 20, bgti_else.50995
-	blti	%k0, 30, bgti_else.50997
-	blti	%k0, 40, bgti_else.50999
-	addi	%k0, %k0, -40
-	blti	%k0, 10, bgti_cont.50986
-	blti	%k0, 20, bgti_else.51003
-	blti	%k0, 30, bgti_else.51005
-	blti	%k0, 40, bgti_else.51007
-	addi	%k0, %k0, -40
-	blti	%k0, 10, bgti_cont.50986
-	blti	%k0, 20, bgti_else.51011
-	blti	%k0, 30, bgti_else.51013
-	blti	%k0, 40, bgti_else.51015
-	addi	%v0, %k0, -40
-	addi	%sp, %sp, 7
-	jal	print_int_sub2.2644
-	addi	%sp, %sp, -7
-	addi	%k0, %v0, 0
-	j	bgti_cont.50986
-bgti_else.51015:
-	addi	%k0, %k0, -30
-bgti_cont.51016:
-	j	bgti_cont.50986
-bgti_else.51013:
-	addi	%k0, %k0, -20
-bgti_cont.51014:
-	j	bgti_cont.50986
-bgti_else.51011:
-	addi	%k0, %k0, -10
-bgti_cont.51012:
-	j	bgti_cont.50986
-bgti_else.51009:
-bgti_cont.51010:
-	j	bgti_cont.50986
-bgti_else.51007:
-	addi	%k0, %k0, -30
-bgti_cont.51008:
-	j	bgti_cont.50986
-bgti_else.51005:
-	addi	%k0, %k0, -20
-bgti_cont.51006:
-	j	bgti_cont.50986
-bgti_else.51003:
-	addi	%k0, %k0, -10
-bgti_cont.51004:
-	j	bgti_cont.50986
-bgti_else.51001:
-bgti_cont.51002:
-	j	bgti_cont.50986
-bgti_else.50999:
-	addi	%k0, %k0, -30
-bgti_cont.51000:
-	j	bgti_cont.50986
-bgti_else.50997:
-	addi	%k0, %k0, -20
-bgti_cont.50998:
-	j	bgti_cont.50986
-bgti_else.50995:
-	addi	%k0, %k0, -10
-bgti_cont.50996:
-	j	bgti_cont.50986
-bgti_else.50993:
-bgti_cont.50994:
-	j	bgti_cont.50986
-bgti_else.50991:
-	addi	%k0, %k0, -30
-bgti_cont.50992:
-	j	bgti_cont.50986
-bgti_else.50989:
-	addi	%k0, %k0, -20
-bgti_cont.50990:
-	j	bgti_cont.50986
-bgti_else.50987:
-	addi	%k0, %k0, -10
-bgti_cont.50988:
-	j	bgti_cont.50986
-bgti_else.50985:
-bgti_cont.50986:
-	blt	%zero, %a0, bgt_else.51017
-	addi	%v0, %k0, 48
-	addi	%sp, %sp, 7
-	jal	min_caml_print_char
-	addi	%sp, %sp, -7
-	addi	%v0, %a3, 48
-	addi	%sp, %sp, 7
-	jal	min_caml_print_char
-	addi	%sp, %sp, -7
-	j	bgt_cont.51018
-bgt_else.51017:
-	blti	%a0, 10, bgti_else.51019
-	blti	%a0, 20, bgti_else.51021
-	blti	%a0, 30, bgti_else.51023
-	blti	%a0, 40, bgti_else.51025
-	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_cont.51020
-	blti	%a0, 20, bgti_else.51029
-	blti	%a0, 30, bgti_else.51031
-	blti	%a0, 40, bgti_else.51033
-	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_cont.51020
-	blti	%a0, 20, bgti_else.51037
-	blti	%a0, 30, bgti_else.51039
-	blti	%a0, 40, bgti_else.51041
-	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_cont.51020
-	blti	%a0, 20, bgti_else.51045
-	blti	%a0, 30, bgti_else.51047
-	blti	%a0, 40, bgti_else.51049
-	addi	%v0, %a0, -40
-	addi	%sp, %sp, 7
-	jal	print_int_sub2.2644
-	addi	%sp, %sp, -7
-	addi	%a0, %v0, 0
-	j	bgti_cont.51020
-bgti_else.51049:
-	addi	%a0, %a0, -30
-bgti_cont.51050:
-	j	bgti_cont.51020
-bgti_else.51047:
-	addi	%a0, %a0, -20
-bgti_cont.51048:
-	j	bgti_cont.51020
-bgti_else.51045:
-	addi	%a0, %a0, -10
-bgti_cont.51046:
-	j	bgti_cont.51020
-bgti_else.51043:
-bgti_cont.51044:
-	j	bgti_cont.51020
-bgti_else.51041:
-	addi	%a0, %a0, -30
-bgti_cont.51042:
-	j	bgti_cont.51020
-bgti_else.51039:
-	addi	%a0, %a0, -20
-bgti_cont.51040:
-	j	bgti_cont.51020
-bgti_else.51037:
-	addi	%a0, %a0, -10
-bgti_cont.51038:
-	j	bgti_cont.51020
-bgti_else.51035:
-bgti_cont.51036:
-	j	bgti_cont.51020
-bgti_else.51033:
-	addi	%a0, %a0, -30
-bgti_cont.51034:
-	j	bgti_cont.51020
-bgti_else.51031:
-	addi	%a0, %a0, -20
-bgti_cont.51032:
-	j	bgti_cont.51020
-bgti_else.51029:
-	addi	%a0, %a0, -10
-bgti_cont.51030:
-	j	bgti_cont.51020
-bgti_else.51027:
-bgti_cont.51028:
-	j	bgti_cont.51020
-bgti_else.51025:
-	addi	%a0, %a0, -30
-bgti_cont.51026:
-	j	bgti_cont.51020
-bgti_else.51023:
-	addi	%a0, %a0, -20
-bgti_cont.51024:
-	j	bgti_cont.51020
-bgti_else.51021:
-	addi	%a0, %a0, -10
-bgti_cont.51022:
-	j	bgti_cont.51020
-bgti_else.51019:
-bgti_cont.51020:
-	addi	%v0, %a0, 48
-	addi	%sp, %sp, 7
-	jal	min_caml_print_char
-	addi	%sp, %sp, -7
-	addi	%v0, %k0, 48
-	addi	%sp, %sp, 7
-	jal	min_caml_print_char
-	addi	%sp, %sp, -7
-	addi	%v0, %a3, 48
-	addi	%sp, %sp, 7
-	jal	min_caml_print_char
-	addi	%sp, %sp, -7
-bgt_cont.51018:
-bgt_cont.50984:
-	addi	%v0, %a2, 0
-	addi	%sp, %sp, 7
-	jal	min_caml_print_char
-	addi	%sp, %sp, -7
-	addi	%v0, %zero, 255
-	addi	%v1, %zero, 0
-	addi	%sp, %sp, 7
-	jal	print_int_sub1.2641
-	addi	%sp, %sp, -7
-	addi	%a2, %v0, 0
-	addi	%v0, %zero, 95
-	addi	%sp, %sp, 7
-	jal	print_int_sub2.2644
-	addi	%sp, %sp, -7
-	addi	%a3, %v0, 0
-	blt	%zero, %a2, bgt_else.51051
-	addi	%v0, %a3, 48
-	addi	%sp, %sp, 7
-	jal	min_caml_print_char
-	addi	%sp, %sp, -7
-	j	bgt_cont.51052
-bgt_else.51051:
-	addi	%v1, %zero, 0
-	addi	%v0, %a2, 0
-	addi	%sp, %sp, 7
-	jal	print_int_sub1.2641
-	addi	%sp, %sp, -7
-	addi	%a0, %v0, 0
-	blti	%a2, 10, bgti_else.51053
-	blti	%a2, 20, bgti_else.51055
-	blti	%a2, 30, bgti_else.51057
-	blti	%a2, 40, bgti_else.51059
-	addi	%a2, %a2, -40
-	blti	%a2, 10, bgti_cont.51054
-	blti	%a2, 20, bgti_else.51063
-	blti	%a2, 30, bgti_else.51065
-	blti	%a2, 40, bgti_else.51067
-	addi	%a2, %a2, -40
-	blti	%a2, 10, bgti_cont.51054
-	blti	%a2, 20, bgti_else.51071
-	blti	%a2, 30, bgti_else.51073
-	blti	%a2, 40, bgti_else.51075
-	addi	%a2, %a2, -40
-	blti	%a2, 10, bgti_cont.51054
-	blti	%a2, 20, bgti_else.51079
-	blti	%a2, 30, bgti_else.51081
-	blti	%a2, 40, bgti_else.51083
-	addi	%v0, %a2, -40
-	addi	%sp, %sp, 7
-	jal	print_int_sub2.2644
-	addi	%sp, %sp, -7
-	addi	%a2, %v0, 0
-	j	bgti_cont.51054
-bgti_else.51083:
-	addi	%a2, %a2, -30
-bgti_cont.51084:
-	j	bgti_cont.51054
-bgti_else.51081:
-	addi	%a2, %a2, -20
-bgti_cont.51082:
-	j	bgti_cont.51054
-bgti_else.51079:
-	addi	%a2, %a2, -10
-bgti_cont.51080:
-	j	bgti_cont.51054
-bgti_else.51077:
-bgti_cont.51078:
-	j	bgti_cont.51054
-bgti_else.51075:
-	addi	%a2, %a2, -30
-bgti_cont.51076:
-	j	bgti_cont.51054
-bgti_else.51073:
-	addi	%a2, %a2, -20
-bgti_cont.51074:
-	j	bgti_cont.51054
-bgti_else.51071:
-	addi	%a2, %a2, -10
-bgti_cont.51072:
-	j	bgti_cont.51054
-bgti_else.51069:
-bgti_cont.51070:
-	j	bgti_cont.51054
-bgti_else.51067:
-	addi	%a2, %a2, -30
-bgti_cont.51068:
-	j	bgti_cont.51054
-bgti_else.51065:
-	addi	%a2, %a2, -20
-bgti_cont.51066:
-	j	bgti_cont.51054
-bgti_else.51063:
-	addi	%a2, %a2, -10
-bgti_cont.51064:
-	j	bgti_cont.51054
-bgti_else.51061:
-bgti_cont.51062:
-	j	bgti_cont.51054
-bgti_else.51059:
-	addi	%a2, %a2, -30
-bgti_cont.51060:
-	j	bgti_cont.51054
-bgti_else.51057:
-	addi	%a2, %a2, -20
-bgti_cont.51058:
-	j	bgti_cont.51054
-bgti_else.51055:
-	addi	%a2, %a2, -10
-bgti_cont.51056:
-	j	bgti_cont.51054
-bgti_else.51053:
-bgti_cont.51054:
-	blt	%zero, %a0, bgt_else.51085
-	addi	%v0, %a2, 48
-	addi	%sp, %sp, 7
-	jal	min_caml_print_char
-	addi	%sp, %sp, -7
-	addi	%v0, %a3, 48
-	addi	%sp, %sp, 7
-	jal	min_caml_print_char
-	addi	%sp, %sp, -7
-	j	bgt_cont.51086
-bgt_else.51085:
-	blti	%a0, 10, bgti_else.51087
-	blti	%a0, 20, bgti_else.51089
-	blti	%a0, 30, bgti_else.51091
-	blti	%a0, 40, bgti_else.51093
-	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_cont.51088
-	blti	%a0, 20, bgti_else.51097
-	blti	%a0, 30, bgti_else.51099
-	blti	%a0, 40, bgti_else.51101
-	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_cont.51088
-	blti	%a0, 20, bgti_else.51105
-	blti	%a0, 30, bgti_else.51107
-	blti	%a0, 40, bgti_else.51109
-	addi	%a0, %a0, -40
-	blti	%a0, 10, bgti_cont.51088
-	blti	%a0, 20, bgti_else.51113
-	blti	%a0, 30, bgti_else.51115
-	blti	%a0, 40, bgti_else.51117
-	addi	%v0, %a0, -40
-	addi	%sp, %sp, 7
-	jal	print_int_sub2.2644
-	addi	%sp, %sp, -7
-	addi	%a0, %v0, 0
-	j	bgti_cont.51088
-bgti_else.51117:
-	addi	%a0, %a0, -30
-bgti_cont.51118:
-	j	bgti_cont.51088
-bgti_else.51115:
-	addi	%a0, %a0, -20
-bgti_cont.51116:
-	j	bgti_cont.51088
-bgti_else.51113:
-	addi	%a0, %a0, -10
-bgti_cont.51114:
-	j	bgti_cont.51088
-bgti_else.51111:
-bgti_cont.51112:
-	j	bgti_cont.51088
-bgti_else.51109:
-	addi	%a0, %a0, -30
-bgti_cont.51110:
-	j	bgti_cont.51088
-bgti_else.51107:
-	addi	%a0, %a0, -20
-bgti_cont.51108:
-	j	bgti_cont.51088
-bgti_else.51105:
-	addi	%a0, %a0, -10
-bgti_cont.51106:
-	j	bgti_cont.51088
-bgti_else.51103:
-bgti_cont.51104:
-	j	bgti_cont.51088
-bgti_else.51101:
-	addi	%a0, %a0, -30
-bgti_cont.51102:
-	j	bgti_cont.51088
-bgti_else.51099:
-	addi	%a0, %a0, -20
-bgti_cont.51100:
-	j	bgti_cont.51088
-bgti_else.51097:
-	addi	%a0, %a0, -10
-bgti_cont.51098:
-	j	bgti_cont.51088
-bgti_else.51095:
-bgti_cont.51096:
-	j	bgti_cont.51088
-bgti_else.51093:
-	addi	%a0, %a0, -30
-bgti_cont.51094:
-	j	bgti_cont.51088
-bgti_else.51091:
-	addi	%a0, %a0, -20
-bgti_cont.51092:
-	j	bgti_cont.51088
-bgti_else.51089:
-	addi	%a0, %a0, -10
-bgti_cont.51090:
-	j	bgti_cont.51088
-bgti_else.51087:
-bgti_cont.51088:
-	addi	%v0, %a0, 48
-	addi	%sp, %sp, 7
-	jal	min_caml_print_char
-	addi	%sp, %sp, -7
-	addi	%v0, %a2, 48
-	addi	%sp, %sp, 7
-	jal	min_caml_print_char
-	addi	%sp, %sp, -7
-	addi	%v0, %a3, 48
-	addi	%sp, %sp, 7
-	jal	min_caml_print_char
-	addi	%sp, %sp, -7
-bgt_cont.51086:
-bgt_cont.51052:
-	addi	%v0, %a1, 0
-	addi	%sp, %sp, 7
-	jal	min_caml_print_char
-	addi	%sp, %sp, -7
+	addi	%sp, %sp, 5
+	jal	write_ppm_header.3037
+	addi	%sp, %sp, -5
 	addi	%a2, %zero, 120
 	addi	%v0, %zero, 3
 	fmov	%f0, %fzero
-	addi	%sp, %sp, 7
+	addi	%sp, %sp, 5
 	jal	min_caml_create_float_array
-	addi	%sp, %sp, -7
+	addi	%sp, %sp, -5
 	addi	%a1, %v0, 0
 	lw	%v0, 0(%zero)
-	sw	%v0, 7(%sp)
+	sw	%v0, 5(%sp)
 	addi	%v1, %a1, 0
-	addi	%sp, %sp, 8
+	addi	%sp, %sp, 6
 	jal	min_caml_create_array
-	addi	%sp, %sp, -8
+	addi	%sp, %sp, -6
 	add	%v1, %zero, %hp
 	addi	%hp, %hp, 2
 	sw	%v0, 1(%v1)
 	sw	%a1, 0(%v1)
 	addi	%v0, %a2, 0
-	addi	%sp, %sp, 8
+	addi	%sp, %sp, 6
 	jal	min_caml_create_array
-	addi	%sp, %sp, -8
+	addi	%sp, %sp, -6
 	sw	%v0, 183(%zero)
 	lw	%t8, 183(%zero)
 	addi	%v1, %zero, 118
 	addi	%v0, %t8, 0
-	addi	%sp, %sp, 8
+	addi	%sp, %sp, 6
 	jal	create_dirvec_elements.3102
-	addi	%sp, %sp, -8
+	addi	%sp, %sp, -6
 	addi	%v0, %zero, 3
-	addi	%sp, %sp, 8
+	addi	%sp, %sp, 6
 	jal	create_dirvecs.3105
-	addi	%sp, %sp, -8
+	addi	%sp, %sp, -6
 	addi	%a0, %zero, 9
 	itof	%f1, %a0
-	flw	%f0, 460(%zero)
+	flw	%f0, 467(%zero)
 	fmul	%f1, %f1, %f0
-	flw	%f0, 438(%zero)
+	flw	%f0, 436(%zero)
 	fsub	%f0, %f1, %f0
 	addi	%v0, %zero, 4
 	addi	%a0, %zero, 0
 	addi	%v1, %zero, 0
-	addi	%sp, %sp, 8
+	addi	%sp, %sp, 6
 	jal	calc_dirvecs.3091
-	addi	%sp, %sp, -8
+	addi	%sp, %sp, -6
 	addi	%v0, %zero, 8
 	addi	%a0, %zero, 4
 	addi	%v1, %zero, 2
-	addi	%sp, %sp, 8
+	addi	%sp, %sp, 6
 	jal	calc_dirvec_rows.3096
-	addi	%sp, %sp, -8
+	addi	%sp, %sp, -6
 	addi	%v1, %zero, 119
 	addi	%v0, %t8, 0
-	addi	%sp, %sp, 8
+	addi	%sp, %sp, 6
 	jal	init_dirvec_constants.3107
-	addi	%sp, %sp, -8
+	addi	%sp, %sp, -6
 	addi	%v0, %zero, 3
-	addi	%sp, %sp, 8
+	addi	%sp, %sp, 6
 	jal	init_vecset_constants.3110
-	addi	%sp, %sp, -8
-	flw	%f25, 78(%zero)
-	fsw	%f25, 184(%zero)
-	flw	%f26, 79(%zero)
-	fsw	%f26, 185(%zero)
-	flw	%f27, 80(%zero)
-	fsw	%f27, 186(%zero)
-	lw	%a0, 7(%sp)
-	addi	%s2, %a0, -1
-	blti	%s2, 0, bgti_else.51119
-	lw	%a1, 12(%s2)
-	lw	%a0, 1(%a1)
-	beqi	%a0, 1, bnei_else.51121
-	beqi	%a0, 2, bnei_else.51123
-	addi	%v0, %zero, 5
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 8
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -8
-	flw	%f19, 184(%zero)
-	flw	%f2, 185(%zero)
-	flw	%f21, 186(%zero)
-	fmul	%f1, %f19, %f19
-	lw	%a0, 4(%a1)
-	flw	%f0, 0(%a0)
-	fmul	%f16, %f1, %f0
-	fmul	%f1, %f2, %f2
-	lw	%a0, 4(%a1)
-	flw	%f0, 1(%a0)
-	fmul	%f0, %f1, %f0
-	fadd	%f16, %f16, %f0
-	fmul	%f1, %f21, %f21
-	lw	%a0, 4(%a1)
-	flw	%f0, 2(%a0)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	lw	%a0, 3(%a1)
-	beqi	%a0, 0, bnei_else.51125
-	fmul	%f16, %f2, %f21
-	lw	%a0, 9(%a1)
-	flw	%f1, 0(%a0)
-	fmul	%f1, %f16, %f1
-	fadd	%f16, %f0, %f1
-	fmul	%f1, %f21, %f19
-	lw	%a0, 9(%a1)
-	flw	%f0, 1(%a0)
-	fmul	%f0, %f1, %f0
-	fadd	%f16, %f16, %f0
-	fmul	%f1, %f19, %f2
-	lw	%a0, 9(%a1)
-	flw	%f0, 2(%a0)
-	fmul	%f0, %f1, %f0
-	fadd	%f0, %f16, %f0
-	j	bnei_cont.51126
-bnei_else.51125:
-bnei_cont.51126:
-	lw	%a0, 4(%a1)
-	flw	%f1, 0(%a0)
-	fmul	%f1, %f19, %f1
-	fneg	%f22, %f1
-	lw	%a0, 4(%a1)
-	flw	%f1, 1(%a0)
-	fmul	%f1, %f2, %f1
-	fneg	%f20, %f1
-	lw	%a0, 4(%a1)
-	flw	%f1, 2(%a0)
-	fmul	%f1, %f21, %f1
-	fneg	%f17, %f1
-	fsw	%f0, 0(%v0)
-	lw	%a0, 3(%a1)
-	beqi	%a0, 0, bnei_else.51127
-	lw	%a0, 9(%a1)
-	flw	%f1, 1(%a0)
-	fmul	%f16, %f21, %f1
-	lw	%a0, 9(%a1)
-	flw	%f1, 2(%a0)
-	fmul	%f1, %f2, %f1
-	fadd	%f1, %f16, %f1
-	flw	%f18, 473(%zero)
-	fmul	%f1, %f1, %f18
-	fsub	%f1, %f22, %f1
-	fsw	%f1, 1(%v0)
-	lw	%a0, 9(%a1)
-	flw	%f1, 0(%a0)
-	fmul	%f16, %f21, %f1
-	lw	%a0, 9(%a1)
-	flw	%f1, 2(%a0)
-	fmul	%f1, %f19, %f1
-	fadd	%f1, %f16, %f1
-	fmul	%f1, %f1, %f18
-	fsub	%f1, %f20, %f1
-	fsw	%f1, 2(%v0)
-	lw	%a0, 9(%a1)
-	flw	%f1, 0(%a0)
-	fmul	%f16, %f2, %f1
-	lw	%a0, 9(%a1)
-	flw	%f1, 1(%a0)
-	fmul	%f1, %f19, %f1
-	fadd	%f1, %f16, %f1
-	fmul	%f1, %f1, %f18
-	fsub	%f1, %f17, %f1
-	fsw	%f1, 3(%v0)
-	j	bnei_cont.51128
-bnei_else.51127:
-	fsw	%f22, 1(%v0)
-	fsw	%f20, 2(%v0)
-	fsw	%f17, 3(%v0)
-bnei_cont.51128:
-	fbne	%f0, %fzero, fbeq_else.51129
-	add	%a0, %zero, %k1
-	j	fbeq_cont.51130
-fbeq_else.51129:
-	add	%a0, %zero, %zero
-fbeq_cont.51130:
-	beqi	%a0, 0, bnei_else.51131
-	j	bnei_cont.51132
-bnei_else.51131:
-	fdiv	%f0, %f30, %f0
-	fsw	%f0, 4(%v0)
-bnei_cont.51132:
-	sw	%v0, 187(%s2)
-	j	bnei_cont.51122
-bnei_else.51123:
+	addi	%sp, %sp, -6
+	flw	%f0, 78(%zero)
+	fsw	%f0, 184(%zero)
+	flw	%f0, 79(%zero)
+	fsw	%f0, 185(%zero)
+	flw	%f0, 80(%zero)
+	fsw	%f0, 186(%zero)
+	lw	%a0, 5(%sp)
+	addi	%s4, %a0, -1
+	blti	%s4, 0, bgti_else.34287
+	lw	%a0, 12(%s4)
+	lw	%a1, 1(%a0)
+	beqi	%a1, 1, bnei_else.34289
+	beqi	%a1, 2, bnei_else.34291
+	addi	%v0, %zero, 184
+	addi	%v1, %a0, 0
+	addi	%sp, %sp, 6
+	jal	setup_second_table.2886
+	addi	%sp, %sp, -6
+	sw	%v0, 187(%s4)
+	j	bnei_cont.34290
+bnei_else.34291:
 	addi	%v0, %zero, 4
 	fmov	%f0, %fzero
-	addi	%sp, %sp, 8
+	addi	%sp, %sp, 6
 	jal	min_caml_create_float_array
-	addi	%sp, %sp, -8
+	addi	%sp, %sp, -6
 	flw	%f1, 184(%zero)
-	lw	%a0, 4(%a1)
-	flw	%f0, 0(%a0)
+	lw	%a1, 4(%a0)
+	flw	%f0, 0(%a1)
 	fmul	%f16, %f1, %f0
 	flw	%f1, 185(%zero)
-	lw	%a0, 4(%a1)
-	flw	%f0, 1(%a0)
+	lw	%a1, 4(%a0)
+	flw	%f0, 1(%a1)
 	fmul	%f0, %f1, %f0
 	fadd	%f16, %f16, %f0
 	flw	%f1, 186(%zero)
-	lw	%a0, 4(%a1)
-	flw	%f0, 2(%a0)
+	lw	%a1, 4(%a0)
+	flw	%f0, 2(%a1)
 	fmul	%f0, %f1, %f0
 	fadd	%f1, %f16, %f0
-	fblt	%fzero, %f1, fbgt_else.51133
-	add	%a0, %zero, %zero
-	j	fbgt_cont.51134
-fbgt_else.51133:
-	add	%a0, %zero, %k1
-fbgt_cont.51134:
-	beqi	%a0, 0, bnei_else.51135
-	flw	%f0, 468(%zero)
+	fblt	%fzero, %f1, fbgt_else.34293
+	add	%a1, %zero, %zero
+	j	fbgt_cont.34294
+fbgt_else.34293:
+	add	%a1, %zero, %k1
+fbgt_cont.34294:
+	beqi	%a1, 0, bnei_else.34295
+	flw	%f0, 458(%zero)
 	fdiv	%f0, %f0, %f1
 	fsw	%f0, 0(%v0)
-	lw	%a0, 4(%a1)
-	flw	%f0, 0(%a0)
+	lw	%a1, 4(%a0)
+	flw	%f0, 0(%a1)
 	fdiv	%f0, %f0, %f1
 	fneg	%f0, %f0
 	fsw	%f0, 1(%v0)
-	lw	%a0, 4(%a1)
-	flw	%f0, 1(%a0)
+	lw	%a1, 4(%a0)
+	flw	%f0, 1(%a1)
 	fdiv	%f0, %f0, %f1
 	fneg	%f0, %f0
 	fsw	%f0, 2(%v0)
-	lw	%a0, 4(%a1)
+	lw	%a0, 4(%a0)
 	flw	%f0, 2(%a0)
 	fdiv	%f0, %f0, %f1
 	fneg	%f0, %f0
 	fsw	%f0, 3(%v0)
-	j	bnei_cont.51136
-bnei_else.51135:
+	j	bnei_cont.34296
+bnei_else.34295:
 	fsw	%fzero, 0(%v0)
-bnei_cont.51136:
-	sw	%v0, 187(%s2)
-bnei_cont.51124:
-	j	bnei_cont.51122
-bnei_else.51121:
-	addi	%v0, %zero, 6
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 8
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -8
-	flw	%f1, 184(%zero)
-	fbne	%f1, %fzero, fbeq_else.51137
-	add	%a0, %zero, %k1
-	j	fbeq_cont.51138
-fbeq_else.51137:
-	add	%a0, %zero, %zero
-fbeq_cont.51138:
-	beqi	%a0, 0, bnei_else.51139
-	fsw	%fzero, 1(%v0)
-	j	bnei_cont.51140
-bnei_else.51139:
-	lw	%a2, 6(%a1)
-	fblt	%f1, %fzero, fbgt_else.51141
-	add	%a0, %zero, %zero
-	j	fbgt_cont.51142
-fbgt_else.51141:
-	add	%a0, %zero, %k1
-fbgt_cont.51142:
-	beqi	%a2, 0, bnei_else.51143
-	beqi	%a0, 0, bnei_else.51145
-	add	%a0, %zero, %zero
-	j	bnei_cont.51144
-bnei_else.51145:
-	add	%a0, %zero, %k1
-bnei_cont.51146:
-	j	bnei_cont.51144
-bnei_else.51143:
-bnei_cont.51144:
-	lw	%a2, 4(%a1)
-	flw	%f0, 0(%a2)
-	beqi	%a0, 0, bnei_else.51147
-	j	bnei_cont.51148
-bnei_else.51147:
-	fneg	%f0, %f0
-bnei_cont.51148:
-	fsw	%f0, 0(%v0)
-	fdiv	%f0, %f30, %f1
-	fsw	%f0, 1(%v0)
-bnei_cont.51140:
-	flw	%f1, 185(%zero)
-	fbne	%f1, %fzero, fbeq_else.51149
-	add	%a0, %zero, %k1
-	j	fbeq_cont.51150
-fbeq_else.51149:
-	add	%a0, %zero, %zero
-fbeq_cont.51150:
-	beqi	%a0, 0, bnei_else.51151
-	fsw	%fzero, 3(%v0)
-	j	bnei_cont.51152
-bnei_else.51151:
-	lw	%a2, 6(%a1)
-	fblt	%f1, %fzero, fbgt_else.51153
-	add	%a0, %zero, %zero
-	j	fbgt_cont.51154
-fbgt_else.51153:
-	add	%a0, %zero, %k1
-fbgt_cont.51154:
-	beqi	%a2, 0, bnei_else.51155
-	beqi	%a0, 0, bnei_else.51157
-	add	%a0, %zero, %zero
-	j	bnei_cont.51156
-bnei_else.51157:
-	add	%a0, %zero, %k1
-bnei_cont.51158:
-	j	bnei_cont.51156
-bnei_else.51155:
-bnei_cont.51156:
-	lw	%a2, 4(%a1)
-	flw	%f0, 1(%a2)
-	beqi	%a0, 0, bnei_else.51159
-	j	bnei_cont.51160
-bnei_else.51159:
-	fneg	%f0, %f0
-bnei_cont.51160:
-	fsw	%f0, 2(%v0)
-	fdiv	%f0, %f30, %f1
-	fsw	%f0, 3(%v0)
-bnei_cont.51152:
-	flw	%f1, 186(%zero)
-	fbne	%f1, %fzero, fbeq_else.51161
-	add	%a0, %zero, %k1
-	j	fbeq_cont.51162
-fbeq_else.51161:
-	add	%a0, %zero, %zero
-fbeq_cont.51162:
-	beqi	%a0, 0, bnei_else.51163
-	fsw	%fzero, 5(%v0)
-	j	bnei_cont.51164
-bnei_else.51163:
-	lw	%a2, 6(%a1)
-	fblt	%f1, %fzero, fbgt_else.51165
-	add	%a0, %zero, %zero
-	j	fbgt_cont.51166
-fbgt_else.51165:
-	add	%a0, %zero, %k1
-fbgt_cont.51166:
-	beqi	%a2, 0, bnei_else.51167
-	beqi	%a0, 0, bnei_else.51169
-	add	%a0, %zero, %zero
-	j	bnei_cont.51168
-bnei_else.51169:
-	add	%a0, %zero, %k1
-bnei_cont.51170:
-	j	bnei_cont.51168
-bnei_else.51167:
-bnei_cont.51168:
-	lw	%a1, 4(%a1)
-	flw	%f0, 2(%a1)
-	beqi	%a0, 0, bnei_else.51171
-	j	bnei_cont.51172
-bnei_else.51171:
-	fneg	%f0, %f0
-bnei_cont.51172:
-	fsw	%f0, 4(%v0)
-	fdiv	%f0, %f30, %f1
-	fsw	%f0, 5(%v0)
-bnei_cont.51164:
-	sw	%v0, 187(%s2)
-bnei_cont.51122:
-	addi	%v1, %s2, -1
+bnei_cont.34296:
+	sw	%v0, 187(%s4)
+bnei_cont.34292:
+	j	bnei_cont.34290
+bnei_else.34289:
+	addi	%v0, %zero, 184
+	addi	%v1, %a0, 0
+	addi	%sp, %sp, 6
+	jal	setup_rect_table.2880
+	addi	%sp, %sp, -6
+	sw	%v0, 187(%s4)
+bnei_cont.34290:
+	addi	%v1, %s4, -1
 	addi	%v0, %zero, 247
-	addi	%sp, %sp, 8
+	addi	%sp, %sp, 6
 	jal	iter_setup_dirvec_constants.2889
-	addi	%sp, %sp, -8
-	j	bgti_cont.51120
-bgti_else.51119:
-bgti_cont.51120:
-	blti	%s2, 0, bgti_else.51173
-	lw	%a1, 12(%s2)
-	lw	%a0, 2(%a1)
-	beqi	%a0, 2, bnei_else.51175
-	j	bgti_cont.51174
-bnei_else.51175:
-	lw	%a0, 7(%a1)
-	flw	%f0, 0(%a0)
-	fblt	%f0, %f30, fbgt_else.51177
-	add	%a0, %zero, %zero
-	j	fbgt_cont.51178
-fbgt_else.51177:
-	add	%a0, %zero, %k1
-fbgt_cont.51178:
-	beqi	%a0, 0, bgti_cont.51174
-	lw	%a0, 1(%a1)
-	beqi	%a0, 1, bnei_else.51181
-	beqi	%a0, 2, bnei_else.51183
-	j	bgti_cont.51174
-bnei_else.51183:
-	sll	%a0, %s2, 2
-	addi	%s4, %a0, 1
-	lw	%s5, 434(%zero)
-	lw	%a0, 7(%a1)
-	flw	%f0, 0(%a0)
-	fsub	%f28, %f30, %f0
-	lw	%a0, 4(%a1)
-	flw	%f0, 0(%a0)
-	fmul	%f1, %f25, %f0
-	flw	%f0, 1(%a0)
-	fmul	%f0, %f26, %f0
-	fadd	%f1, %f1, %f0
-	flw	%f0, 2(%a0)
-	fmul	%f0, %f27, %f0
-	fadd	%f18, %f1, %f0
-	flw	%f1, 495(%zero)
-	lw	%a0, 4(%a1)
-	flw	%f0, 0(%a0)
-	fmul	%f0, %f1, %f0
-	fmul	%f0, %f0, %f18
-	fsub	%f17, %f0, %f25
-	lw	%a0, 4(%a1)
-	flw	%f0, 1(%a0)
-	fmul	%f0, %f1, %f0
-	fmul	%f0, %f0, %f18
-	fsub	%f16, %f0, %f26
-	lw	%a0, 4(%a1)
-	flw	%f0, 2(%a0)
-	fmul	%f0, %f1, %f0
-	fmul	%f0, %f0, %f18
-	fsub	%f1, %f0, %f27
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 8
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -8
-	addi	%a1, %v0, 0
-	lw	%v0, 7(%sp)
-	addi	%v1, %a1, 0
-	addi	%sp, %sp, 8
-	jal	min_caml_create_array
-	addi	%sp, %sp, -8
-	add	%s3, %zero, %hp
-	addi	%hp, %hp, 2
-	sw	%v0, 1(%s3)
-	sw	%a1, 0(%s3)
-	fsw	%f17, 0(%a1)
-	fsw	%f16, 1(%a1)
-	fsw	%f1, 2(%a1)
-	addi	%v1, %s2, 0
-	addi	%v0, %s3, 0
-	addi	%sp, %sp, 8
-	jal	iter_setup_dirvec_constants.2889
-	addi	%sp, %sp, -8
-	add	%a0, %zero, %hp
-	addi	%hp, %hp, 3
-	fsw	%f28, 2(%a0)
-	sw	%s3, 1(%a0)
-	sw	%s4, 0(%a0)
-	sw	%a0, 254(%s5)
-	addi	%a0, %s5, 1
-	sw	%a0, 434(%zero)
-bnei_cont.51184:
-	j	bgti_cont.51174
-bnei_else.51181:
-	sll	%s4, %s2, 2
-	lw	%s5, 434(%zero)
-	lw	%a0, 7(%a1)
-	flw	%f0, 0(%a0)
-	fsub	%f4, %f30, %f0
-	fneg	%f3, %f25
-	fneg	%f29, %f26
-	fneg	%f28, %f27
-	addi	%s6, %s4, 1
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 8
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -8
-	addi	%a1, %v0, 0
-	lw	%v0, 7(%sp)
-	addi	%v1, %a1, 0
-	addi	%sp, %sp, 8
-	jal	min_caml_create_array
-	addi	%sp, %sp, -8
-	add	%s3, %zero, %hp
-	addi	%hp, %hp, 2
-	sw	%v0, 1(%s3)
-	sw	%a1, 0(%s3)
-	fsw	%f25, 0(%a1)
-	fsw	%f29, 1(%a1)
-	fsw	%f28, 2(%a1)
-	addi	%v1, %s2, 0
-	addi	%v0, %s3, 0
-	addi	%sp, %sp, 8
-	jal	iter_setup_dirvec_constants.2889
-	addi	%sp, %sp, -8
-	add	%a0, %zero, %hp
-	addi	%hp, %hp, 3
-	fsw	%f4, 2(%a0)
-	sw	%s3, 1(%a0)
-	sw	%s6, 0(%a0)
-	sw	%a0, 254(%s5)
-	addi	%s3, %s5, 1
-	addi	%s6, %s4, 2
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 8
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -8
-	addi	%a1, %v0, 0
-	lw	%v0, 7(%sp)
-	addi	%v1, %a1, 0
-	addi	%sp, %sp, 8
-	jal	min_caml_create_array
-	addi	%sp, %sp, -8
-	add	%s7, %zero, %hp
-	addi	%hp, %hp, 2
-	sw	%v0, 1(%s7)
-	sw	%a1, 0(%s7)
-	fsw	%f3, 0(%a1)
-	fsw	%f26, 1(%a1)
-	fsw	%f28, 2(%a1)
-	addi	%v1, %s2, 0
-	addi	%v0, %s7, 0
-	addi	%sp, %sp, 8
-	jal	iter_setup_dirvec_constants.2889
-	addi	%sp, %sp, -8
-	add	%a0, %zero, %hp
-	addi	%hp, %hp, 3
-	fsw	%f4, 2(%a0)
-	sw	%s7, 1(%a0)
-	sw	%s6, 0(%a0)
-	sw	%a0, 254(%s3)
-	addi	%s6, %s5, 2
-	addi	%s4, %s4, 3
-	addi	%v0, %zero, 3
-	fmov	%f0, %fzero
-	addi	%sp, %sp, 8
-	jal	min_caml_create_float_array
-	addi	%sp, %sp, -8
-	addi	%a1, %v0, 0
-	lw	%v0, 7(%sp)
-	addi	%v1, %a1, 0
-	addi	%sp, %sp, 8
-	jal	min_caml_create_array
-	addi	%sp, %sp, -8
-	add	%s3, %zero, %hp
-	addi	%hp, %hp, 2
-	sw	%v0, 1(%s3)
-	sw	%a1, 0(%s3)
-	fsw	%f3, 0(%a1)
-	fsw	%f29, 1(%a1)
-	fsw	%f27, 2(%a1)
-	addi	%v1, %s2, 0
-	addi	%v0, %s3, 0
-	addi	%sp, %sp, 8
-	jal	iter_setup_dirvec_constants.2889
-	addi	%sp, %sp, -8
-	add	%a0, %zero, %hp
-	addi	%hp, %hp, 3
-	fsw	%f4, 2(%a0)
-	sw	%s3, 1(%a0)
-	sw	%s4, 0(%a0)
-	sw	%a0, 254(%s6)
-	addi	%a0, %s5, 3
-	sw	%a0, 434(%zero)
-bnei_cont.51182:
-	j	bgti_cont.51174
-bnei_else.51179:
-bnei_cont.51180:
-bnei_cont.51176:
-	j	bgti_cont.51174
-bgti_else.51173:
-bgti_cont.51174:
+	addi	%sp, %sp, -6
+	j	bgti_cont.34288
+bgti_else.34287:
+bgti_cont.34288:
+	addi	%v0, %s4, 0
+	addi	%sp, %sp, 6
+	jal	setup_reflections.3127
+	addi	%sp, %sp, -6
 	flw	%f1, 158(%zero)
 	lw	%a0, 157(%zero)
 	sub	%a0, %zero, %a0
@@ -24846,30 +17983,30 @@ bgti_cont.51174:
 	fmul	%f17, %f1, %f0
 	flw	%f0, 168(%zero)
 	fmul	%f1, %f17, %f0
-	flw	%f0, 4(%sp)
+	flw	%f0, 171(%zero)
 	fadd	%f0, %f1, %f0
 	flw	%f1, 169(%zero)
 	fmul	%f16, %f17, %f1
-	flw	%f1, 5(%sp)
+	flw	%f1, 172(%zero)
 	fadd	%f1, %f16, %f1
 	flw	%f16, 170(%zero)
 	fmul	%f17, %f17, %f16
-	flw	%f16, 6(%sp)
+	flw	%f16, 173(%zero)
 	fadd	%f2, %f17, %f16
 	lw	%a0, 0(%sp)
 	addi	%v1, %a0, -1
-	lw	%v0, 2(%sp)
+	lw	%v0, 3(%sp)
 	addi	%a0, %zero, 0
-	addi	%sp, %sp, 8
+	addi	%sp, %sp, 6
 	jal	pretrace_pixels.3046
-	addi	%sp, %sp, -8
+	addi	%sp, %sp, -6
 	addi	%a2, %zero, 2
-	lw	%a1, 3(%sp)
-	lw	%a0, 2(%sp)
-	lw	%v1, 1(%sp)
+	lw	%a1, 4(%sp)
+	lw	%a0, 3(%sp)
+	lw	%v1, 2(%sp)
 	addi	%v0, %zero, 0
-	addi	%sp, %sp, 8
+	addi	%sp, %sp, 6
 	jal	scan_line.3063
-	addi	%sp, %sp, -8
+	addi	%sp, %sp, -6
 	add	%g0, %zero, %zero
 	ret
