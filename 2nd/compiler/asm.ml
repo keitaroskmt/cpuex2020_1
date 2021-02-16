@@ -145,7 +145,11 @@ let reg_map =
 (* クロージャがでない前提で, %k1を1, %f30を1.0に定める *)
 let reg_one = "%k1"
 let reg_fone = "%f30"
-let specialregs = [("%k1", Type.Int); ("%f30", Type.Float); ("%fp", Type.Int); ("%hp", Type.Int); ("%sp", Type.Int); ("%ra", Type.Int); ("%at", Type.Int); ("%zero", Type.Int); ("%fzero", Type.Float)] 
+(* 定数レジスタ 0.01, -0.2 余ったので *)
+let reg_f001 = "%f9"
+let reg_f_02 = "%f10"
+
+let specialregs = [(reg_one, Type.Int); (reg_fone, Type.Float); (reg_f001, Type.Float); (reg_f_02, Type.Float); ("%hp", Type.Int); ("%sp", Type.Int); ("%ra", Type.Int); ("%at", Type.Int); ("%zero", Type.Int); ("%fzero", Type.Float)] 
 
 (* raytracerでは, 整数引数6つ, 浮動小数点引数引数4つが上限 *)
 let iargregs = 
@@ -161,15 +165,15 @@ let icalleesaves =
         in List.map (fun x -> (x, Type.Int)) icalleesaves'
 
 let fcalleesaves = 
-    let fcalleesaves' = ["%f4"; "%f5"; "%f6"; "%f7"; "%f8"; "%f9"; "%f10"; "%f11"; "%f12"; "%f13";"%f14"; "%f15"]
+    let fcalleesaves' = ["%f4"; "%f5"; "%f6"; "%f7"; "%f8"]
         in List.map (fun x -> (x, Type.Float)) fcalleesaves'
 
 let icallersaves = 
-    let icallersaves' = ["%t7"; "%s0"; "%s1"; "%s2"; "%s3"; "%s4"; "%s5"; "%s6"; "%s7"; "%t8"; "%t9"; "%k0"]
+    let icallersaves' = ["%t7"; "%s0"; "%s1"; "%s2"; "%s3"; "%s4"; "%s5"; "%s6"; "%s7"; "%t8"; "%t9"; "%k0"; "%fp"]
         in List.map (fun x -> (x, Type.Int)) icallersaves'
 
 let fcallersaves =
-    let fcallersaves' = ["%f16"; "%f17"; "%f18"; "%f19"; "%f20"; "%f21"; "%f22"; "%f23"; "%f24"; "%f25"; "%f26"; "%f27"; "%f28"; "%f29"]
+    let fcallersaves' = ["%f11"; "%f12"; "%f13";"%f14"; "%f15"; "%f16"; "%f17"; "%f18"; "%f19"; "%f20"; "%f21"; "%f22"; "%f23"; "%f24"; "%f25"; "%f26"; "%f27"; "%f28"; "%f29"]
         in List.map (fun x -> (x, Type.Float)) fcallersaves'
 
 

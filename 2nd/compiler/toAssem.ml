@@ -479,10 +479,16 @@ let f dc option (Prog(data, fundefs, e)) =
   load_imm reg_hp (Int32.of_int (!FixAddress.hp_init + float_hp));
 
   (* 定数レジスタの初期化 *)
-  load_imm "%k1" (Int32.of_int 1);
+  load_imm reg_one (Int32.of_int 1);
   load_imm reg_at (get 1.0);
   emit (Sw(reg_at, 0, reg_hp));
-  emit (FLw("%f30", 0, reg_hp));
+  emit (FLw(reg_fone, 0, reg_hp));
+  load_imm reg_at (get 0.01);
+  emit (Sw(reg_at, 0, reg_hp));
+  emit (FLw(reg_f001, 0, reg_hp));
+  load_imm reg_at (get (-0.2));
+  emit (Sw(reg_at, 0, reg_hp));
+  emit (FLw(reg_f_02, 0, reg_hp));
 
   emit (Comment("# ------------ Text Section -------------------\n"));
   emit (Comment(".section\t\".text\"\n"));

@@ -18,6 +18,8 @@ let rec g env = function
         (match f with
         | 0.0 -> g (M.add x reg_fzero env) e
         | 1.0 -> g (M.add x reg_fone env) e
+        | 0.01 -> g (M.add x reg_f001 env) e
+        | (-0.2) -> g (M.add x reg_f_02 env) e
         | _ -> Let((x, t), SetF(l), g env e))
 
     (* coalescingが効く? *)
@@ -28,6 +30,8 @@ let rec g env = function
         (match f with
         | 0.0 -> Ans(FMovD(reg_fzero))
         | 1.0 -> Ans(FMovD(reg_fone))
+        | 0.01 -> Ans(FMovD(reg_f001))
+        | (-0.2) -> Ans(FMovD(reg_f_02))
         | _ -> Ans(SetF(l)))
 
     | Ans(exp) -> Ans(g' env exp)

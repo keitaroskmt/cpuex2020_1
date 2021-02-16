@@ -55,7 +55,7 @@ let lexbuf (outchan, datachan) l = (* バッファをコンパイルしてチャンネルへ出力す
                                         (KNormal.f
                                             (Typing.f
                                                 (Parser.exp Lexer.token l))))))))))))
-                                                    *)
+                                                *)
 
 let syntax_check f =
     let inchan = open_in (f ^ ".ml") in

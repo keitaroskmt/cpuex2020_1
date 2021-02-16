@@ -49,6 +49,7 @@ let rec kernel_atan x =
     +. 0.060035485 *. x *. x4 *. x8
 in
 
+(*
 let rec reduction_2pi_sub1 s t =  (* while (x >= p) *)
     if s < t then t else reduction_2pi_sub1 s (2.0 *. t) in
 
@@ -62,15 +63,14 @@ let rec reduction_2pi x =
     let p = reduction_2pi_sub1 x pi2 in
     reduction_2pi_sub2 x p pi2
 in
+*)
 
-(*
 let rec reduction_2pi x =
     let pi = 3.14159265358979 in
     let pi2 = 2.0 *. pi in
     let d = floor (x /. pi2) in
     x -. d *. pi2
 in
-*)
 
 let rec cos x =
     let pi = 3.14159265358979 in
