@@ -8,7 +8,7 @@ output [31:0] doa,dob;
 reg [31:0] ram [140000:0];
 reg [31:0] doa,dob;
 initial begin
-    $readmemb("main_data.mem",ram,0,12000);
+    $readmemb("main_128_100b_data.mem",ram,0,12000);
 end
 
 always @(posedge clka)

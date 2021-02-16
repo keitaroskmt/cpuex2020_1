@@ -249,29 +249,29 @@ assign floatstall2 = (counter2 == fstallN2) ? 1'b0 : 1'b1; //wait until counter 
 assign floatstall = floatstall1 || floatstall2;
 
 
-assign fstallN1 = (FPUControlE1 == 5'b00001) ? 5'd1 //fadd
-                        :((FPUControlE1 == 5'b00011) ? 5'd1 //fsub
-                        :((FPUControlE1 == 5'b00101) ? 5'd1 //fmul
-                        :((FPUControlE1 == 5'b00111) ? 5'd3 //fdiv
+assign fstallN1 = (FPUControlE1 == 5'b00001) ? 5'd2 //fadd
+                        :((FPUControlE1 == 5'b00011) ? 5'd2 //fsub
+                        :((FPUControlE1 == 5'b00101) ? 5'd2 //fmul
+                        :((FPUControlE1 == 5'b00111) ? 5'd5 //fdiv
                         :((FPUControlE1 == 5'b01001) ? 5'd0 //fneg
                         :((FPUControlE1 == 5'b01011) ? 5'd0 //fabs
                         :((FPUControlE1 == 5'b01101) ? 5'd2 //fsqrt
                         :((FPUControlE1 == 5'b01111) ? 5'd0 //fmov
-                        :((FPUControlE1 == 5'b10001) ? 5'd0 //ftoi
-                        :((FPUControlE1 == 5'b10011) ? 5'd0 //itof
+                        :((FPUControlE1 == 5'b10001) ? 5'd1 //ftoi
+                        :((FPUControlE1 == 5'b10011) ? 5'd1 //itof
                         :((FPUControlE1 == 5'b10101) ? 5'd0 //floor
                         : 5'd0))))))))));
 
-assign fstallN2 = (FPUControlE2 == 5'b00001) ? 5'd1 //fadd
-                        :((FPUControlE2 == 5'b00011) ? 5'd1 //fsub
-                        :((FPUControlE2 == 5'b00101) ? 5'd1 //fmul
-                        :((FPUControlE2 == 5'b00111) ? 5'd3 //fdiv
+assign fstallN2 = (FPUControlE2 == 5'b00001) ? 5'd2 //fadd
+                        :((FPUControlE2 == 5'b00011) ? 5'd2 //fsub
+                        :((FPUControlE2 == 5'b00101) ? 5'd2 //fmul
+                        :((FPUControlE2 == 5'b00111) ? 5'd5 //fdiv
                         :((FPUControlE2 == 5'b01001) ? 5'd0 //fneg
                         :((FPUControlE2 == 5'b01011) ? 5'd0 //fabs
                         :((FPUControlE2 == 5'b01101) ? 5'd2 //fsqrt
                         :((FPUControlE2 == 5'b01111) ? 5'd0 //fmov
-                        :((FPUControlE2 == 5'b10001) ? 5'd0 //ftoi
-                        :((FPUControlE2 == 5'b10011) ? 5'd0 //itof
+                        :((FPUControlE2 == 5'b10001) ? 5'd1 //ftoi
+                        :((FPUControlE2 == 5'b10011) ? 5'd1 //itof
                         :((FPUControlE2 == 5'b10101) ? 5'd0 //floor
                         : 5'd0))))))))));
 

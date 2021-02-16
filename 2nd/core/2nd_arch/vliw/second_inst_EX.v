@@ -45,7 +45,7 @@ module second_inst_EX
                         :((ForwardaE2 == 4'b1001) ? write_backKept2
                         :((ForwardaE2 == 4'b0101) ? read_dataKept3
                         : read_dataKept4)))))));
-    assign forwardedbE2 = (ForwardbE2 == 3'b000) ? srcbE2
+    assign forwardedbE2 = (ForwardbE2 == 4'b0000) ? srcbE2
                         :((ForwardbE2 == 4'b0001) ? write_backM1
                         :((ForwardbE2 == 4'b0010) ? write_backM2
                         :((ForwardbE2 == 4'b0011) ? read_dataW3

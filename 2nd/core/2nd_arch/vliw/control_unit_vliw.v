@@ -30,9 +30,11 @@ module control_unit_vliw
      output wire [2:0] RegConcat2,
      output wire RegWrite3,
      output wire MemWrite3,
+     //output wire SrcReg3,
      output wire [2:0] RegConcat3,
      output wire RegWrite4,
      output wire MemWrite4,
+     //output wire SrcReg4,
      output wire [2:0] RegConcat4
      );
 
@@ -149,12 +151,15 @@ module mem_access_decoder
     (input wire [5:0] Op,
      output wire RegWrite,
      output wire MemWrite,
+     //output wire SrcReg,
      output wire [2:0] RegConcat
      );
 
-    assign {RegWrite,MemWrite,RegConcat} =
-        (Op == 6'b000110) ? {1'b1,1'b0,3'd0} // lw
-        : ((Op == 6'b000111) ? {1'b0,1'b1,3'd0} // sw
+    assign {RegWrite,MemWrite,LoadReg,RegConcat} =
+        (Op == 6'b000110) ? {1'b1,1'b0,1'b0,3'd0} // lw
+        : ((Op == 6'b000111) ? {1'b0,1'b1,1'b0,3'd0} // sw
+        //: ((Op == 6'b011001) ? {1'b0,1'b1,1'b1,3'd0} // lwr
+        //: ((Op == 6'b011010) ? {1'b0,1'b1,1'b1,3'd0} // swr
         : ((Op == 6'b010100) ? {1'b1,1'b0,3'b010} // flw
         : ((Op == 6'b010101) ? {1'b0,1'b1,3'b010} // fsw
         : 5'd0)));

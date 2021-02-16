@@ -11,7 +11,7 @@ reg [31:0] doa,dob;
 reg [31:0] dout;
 
 initial begin
-    $readmemb("main_data.mem",ram,0,12000);
+    $readmemb("main_128_200b_data.mem",ram,0,12000);
 end
 always @(posedge clk) begin
     if (ena) begin

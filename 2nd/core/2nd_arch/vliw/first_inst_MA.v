@@ -26,8 +26,8 @@ module first_inst_MA
     wire done_afterM1;
     wire Branch_destM1;
     reg Hazard_existenceM1;
-    wire [31:0] forwardedaM1;
-    wire [31:0] forwardedbM1;
+    (*mark_debug = "true"*)wire [31:0] forwardedaM1;
+    (*mark_debug = "true"*)wire [31:0] forwardedbM1;
 
     always @(posedge clk) begin
         if(~rstn)begin

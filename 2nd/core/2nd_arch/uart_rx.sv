@@ -1,6 +1,6 @@
 `default_nettype none
 
-module uart_rx #(CLK_PER_HALF_BIT = 500) (
+module uart_rx #(CLK_PER_HALF_BIT = 100) (
    output logic [7:0] rdata,
    output logic       rdata_ready,
    output logic       ferr,

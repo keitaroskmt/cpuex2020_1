@@ -50,8 +50,8 @@ module vliw_arch
     wire OutD1;
     wire Branch_predictedD1;
     wire Hazard_existenceD1;
-    wire [31:0] srcaD1;
-    wire [31:0] srcbD1;
+    (*mark_debug = "true"*)wire [31:0] srcaD1;
+    (*mark_debug = "true"*)wire [31:0] srcbD1;
     wire [31:0] ImmD1;
     wire branchD1;
     wire [31:0] pc_plusD1;
@@ -91,8 +91,8 @@ module vliw_arch
     wire RegDstD2;
     wire [1:0] Lui_OriD2;
     wire [2:0] RegConcatD2;
-    wire [31:0] srcaD2;
-    wire [31:0] srcbD2;
+    (*mark_debug = "true"*)wire [31:0] srcaD2;
+    (*mark_debug = "true"*)wire [31:0] srcbD2;
     wire [31:0] ImmD2;
     reg RegWriteDE2;
     reg [2:0] ALUControlDE2;
@@ -110,8 +110,8 @@ module vliw_arch
     wire [31:0] instD3;
     wire RegWriteD3;
     wire MemWriteD3;
-    wire [31:0] srcaD3;
-    wire [31:0] srcbD3;
+    (*mark_debug = "true"*)wire [31:0] srcaD3;
+    (*mark_debug = "true"*)wire [31:0] srcbD3;
     wire [31:0] ImmD3;
     reg RegWriteDE3;
     reg MemWriteDE3;
@@ -125,8 +125,8 @@ module vliw_arch
     wire [31:0] instD4;
     wire RegWriteD4;
     wire MemWriteD4;
-    wire [31:0] srcaD4;
-    wire [31:0] srcbD4;
+    (*mark_debug = "true"*)wire [31:0] srcaD4;
+    (*mark_debug = "true"*)wire [31:0] srcbD4;
     wire [31:0] ImmD4;
     reg RegWriteDE4;
     reg MemWriteDE4;
@@ -156,7 +156,7 @@ module vliw_arch
     wire [5:0] rdE1;
     wire [4:0] shamtE1;
     wire [31:0] ImmE1;
-    wire [31:0] cal_resultE1;
+    (*mark_debug = "true"*)wire [31:0] cal_resultE1;
     wire branchE1;
     wire [31:0] pc_plusE1;
     wire [31:0] pc_branchE1;
@@ -200,7 +200,7 @@ module vliw_arch
     wire [5:0] writeRegE2;
     wire [4:0] shamtE2;
     wire [31:0] ImmE2;
-    wire [31:0] cal_resultE2;
+    (*mark_debug = "true"*)wire [31:0] cal_resultE2;
     wire [3:0] ForwardaE2;
     wire [3:0] ForwardbE2;
     reg RegWriteEM2;
@@ -216,14 +216,12 @@ module vliw_arch
     wire [5:0] rsE3;
     wire [5:0] rtE3;
     wire [31:0] ImmE3;
-    wire [31:0] alu_resultE3;
+    (*mark_debug = "true"*)wire [31:0] alu_resultE3;
     wire [3:0] ForwardaE3;
     wire [3:0] ForwardbE3;
     reg RegWriteEM3;
     reg MemWriteEM3;
-    reg [31:0] srcbEM3;
     reg [5:0] rtEM3;
-    reg [31:0] alu_resultEM3;
     ////4th inst
     wire RegWriteE4;
     wire MemWriteE4;
@@ -234,14 +232,12 @@ module vliw_arch
     wire [5:0] rsE4;
     wire [5:0] rtE4;
     wire [31:0] ImmE4;
-    wire [31:0] alu_resultE4;
+    (*mark_debug = "true"*)wire [31:0] alu_resultE4;
     wire [3:0] ForwardaE4;
     wire [3:0] ForwardbE4;
     reg RegWriteEM4;
     reg MemWriteEM4;
-    reg [31:0] srcbEM4;
     reg [5:0] rtEM4;
-    reg [31:0] alu_resultEM4;
 //MA
     //1st inst
     wire LeavelinkM1;
@@ -547,9 +543,9 @@ module vliw_arch
             RegWriteEM2 <= 0;
             {writeRegEM2,cal_resultEM2} <= 0;
             {RegWriteEM3,MemWriteEM3} <= 0;
-            {rtEM3,alu_resultEM3,srcbEM3} <= 0;
+            rtEM3 <= 0;
             {RegWriteEM4,MemWriteEM4} <= 0;
-            {rtEM4,alu_resultEM4,srcbEM4} <= 0;
+            rtEM4 <= 0;
         end else begin
             if(FlushM || branchM1) begin
                 {LeavelinkEM1,RegWriteEM1,BranchEM1,BltEM1,Branch_predictedEM1} <= 0;
@@ -557,18 +553,18 @@ module vliw_arch
                 RegWriteEM2 <= 0;
                 {writeRegEM2,cal_resultEM2} <= 0;
                 {RegWriteEM3,MemWriteEM3} <= 0;
-                {rtEM3,alu_resultEM3,srcbEM3} <= 0;
+                rtEM3 <= 0;
                 {RegWriteEM4,MemWriteEM4} <= 0;
-                {rtEM4,alu_resultEM4,srcbEM4} <= 0;
+                rtEM4 <= 0;
             end else begin
                 {LeavelinkEM1,RegWriteEM1,BranchEM1,BltEM1,Branch_predictedEM1} <= {LeavelinkE1,RegWriteE1,BranchE1,BltE1,Branch_predictedE1};
                 {rsEM1,rtEM1,writeRegEM1,cal_resultEM1,pc_plusEM1,pc_branchEM1,doneEM1,branchsrcaEM1,branchsrcbEM1} <= {rsE1,rtE1,writeRegE1,cal_resultE1,pc_plusE1,pc_branchE1,done_afterE1,branchsrcaE1,branchsrcbE1};
                 RegWriteEM2 <= RegWriteE2;
                 {writeRegEM2,cal_resultEM2} <= {writeRegE2,cal_resultE2};
                 {RegWriteEM3,MemWriteEM3} <= {RegWriteE3,MemWriteE3};
-                {rtEM3,alu_resultEM3,srcbEM3} <= {rtE3,alu_resultE3,forwardedbE3};
+                rtEM3 <= rtE3;
                 {RegWriteEM4,MemWriteEM4} <= {RegWriteE4,MemWriteE4};
-                {rtEM4,alu_resultEM4,srcbEM4} <= {rtE4,alu_resultE4,forwardedbE4};
+                rtEM4 <= rtE4;
             end
         end
     end
@@ -584,10 +580,10 @@ module vliw_arch
     assign write_backM2 = cal_resultM2;
     //3rd instruction
     assign {RegWriteM3,MemWriteM3} = {RegWriteEM3,MemWriteEM3};
-    assign {writeRegM3,alu_resultM3,srcbM3} = {rtEM3,alu_resultEM3,srcbEM3};
+    assign writeRegM3 = rtEM3;
     //4th instruction
     assign {RegWriteM4,MemWriteM4} = {RegWriteEM4,MemWriteEM4};
-    assign {writeRegM4,alu_resultM4,srcbM4} = {rtEM4,alu_resultEM4,srcbEM4};
+    assign writeRegM4 = rtEM4;
     reg en;
 
     //data_mem_bl_vliw dmb(clk,en,MemWriteM3,alu_resultM3,srcbM3,read_dataW3);

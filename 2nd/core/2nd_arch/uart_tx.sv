@@ -1,6 +1,6 @@
 `default_nettype none
 
-module uart_tx #(CLK_PER_HALF_BIT = 500) ( // 115200bits/s 120MHz:521 110MHz:478 100MHz:435 90MHz:391 75MHz:326
+module uart_tx #(CLK_PER_HALF_BIT = 100) ( //921600bits/s 190MHz:103 180Mhz:98 460800bits/s  200MHz:217 190MHz:207 180MHz:196 170MHz:185 160MHz:174
                input wire [7:0] sdata,
                input wire       tx_start,
                output logic     tx_busy,
@@ -41,7 +41,7 @@ module uart_tx #(CLK_PER_HALF_BIT = 500) ( // 115200bits/s 120MHz:521 110MHz:478
       end else begin
          if (counter == e_clk_bit || rst_ctr) begin
             counter <= 0;
-         end else if (status != s_idle)begin //もとのcodeではs_idle時にcounterは常に動いて�?て、counterがe_clk_bitになった瞬間にnextを立てて�?てもs_idle時にはそれを見て状態�?�移しな�?ので "問題な�?" と�?�?実�?になって�?たが実�?�counterがe_clk_bitになったと同時にたまたまtx_startがたち、nextがたつと同時にs_start_bitに状態�?�移が行われて�?ると、nextが加味されて次クロ�?クでさらに次の状態へと遷移してしま�?こととなり�?�s_start_bitをe_clk_bit�?保つことができな�?。よってcounterはs_idleに遷移時に0にし�?�さらにs_idle時にはインクリメントしな�?と�?�?実�?に変更�?
+         end else if (status != s_idle)begin //もとのcodeではs_idle時にcounterは常に動いて?��?て、counterがe_clk_bitになった瞬間にnextを立てて?��?てもs_idle時にはそれを見て状態�??��移しな?��?ので "問題な?��?" と?��??��?実�?になって?��?たが実�??��counterがe_clk_bitになったと同時にたまたまtx_startがたち、nextがたつと同時にs_start_bitに状態�??��移が行われて?��?ると、nextが加味されて次クロ?��?クでさらに次の状態へと遷移してしま?��?こととなり�??��s_start_bitをe_clk_bit?��?保つことができな?��?。よってcounterはs_idleに遷移時に0にし�??��さらにs_idle時にはインクリメントしな?��?と?��??��?実�?に変更?��?
             counter <= counter + 1;
          end
          if (~rst_ctr && counter == e_clk_bit) begin
@@ -80,7 +80,7 @@ module uart_tx #(CLK_PER_HALF_BIT = 500) ( // 115200bits/s 120MHz:521 110MHz:478
                txd <= 1;
                status <= s_idle;
                tx_busy <= 0;
-               //counter <= 0; //s_idle時�?�counterは0に固�?
+               //counter <= 0; //s_idle時�??��counterは0に固?��?
             end
          end else if (next) begin
             if (status == s_bit_7) begin
