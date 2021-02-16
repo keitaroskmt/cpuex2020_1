@@ -1,6 +1,6 @@
 // Single-Port Block RAM Read-First Mode
 // rams_sp_rf.v
-module rams_sp_rf (clk,en,we, addr, di, dout);
+module rams_sp_rf2 (clk,en,we, addr, di, dout);
 
 input clk;
 input we;
@@ -10,11 +10,11 @@ input [31:0] di;
 output [31:0] dout;
 
 
-(*ram_style = "block"*)reg [31:0] RAM [400000:0];
+(*ram_style = "block"*)reg [31:0] RAM [20000:0];
 reg [31:0] dout;
 
 initial begin
-    $readmemb("main_data.mem",RAM,0,12000);
+    $readmemb("main.mem",RAM,0,20000);
 end
 
 //integer i;

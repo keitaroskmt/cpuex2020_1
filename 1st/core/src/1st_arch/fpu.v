@@ -17,12 +17,16 @@ wire [31:0] sqrt;
 wire [31:0] branch;
 wire [31:0] neg;
 wire [31:0] abs;
+wire [31:0] fint;
+wire [31:0] ifloat;
+wire [31:0] ffloor;
 wire slt;
 wire [32:0] dif;
 wire ovfa;
 wire ovfs;
 wire ovfm;
 wire ovfd;
+wire [31:0] fpu_result_pre;
 
 fadd fad(srcA,srcB,add,ovfa,clk,rstn);
 fsub fsb(srcA,srcB,sub,ovfs,clk,rstn);
@@ -31,7 +35,9 @@ fdiv fdv(srcA,srcB,div,ovfd,clk,rstn);
 fneg fng(srcB,neg);
 fabs fas(srcB,abs);
 fsqrt fsq(srcB,sqrt,clk,rstn);
-
+ftoi fi(srcA,fint,clk,rstn);
+itof itf(srcA,ifloat,clk,rstn);
+floor fl(srcA,ffloor,clk,rstn);
 
 //fslt
 assign dif = srcA + (~srcB) + 1'b1;
@@ -47,7 +53,7 @@ assign zero = (srcA[30:0]==31'h00000000 &&srcB[30:0]==31'h00000000) ? 1'b1
 
 
 
-assign fpu_result = (fpu_control == 4'b0000) ? add
+assign fpu_result_pre = (fpu_control == 4'b0000) ? add
                     :((fpu_control == 4'b001) ? sub
                     :((fpu_control == 4'b0010) ? mul
                     :((fpu_control == 4'b0011) ? div
@@ -55,7 +61,12 @@ assign fpu_result = (fpu_control == 4'b0000) ? add
                     :((fpu_control == 4'b0101) ? abs
                     :((fpu_control == 4'b0110) ? sqrt
                     :((fpu_control == 4'b0111) ? {31'b0,slt}
-                    : 31'd0)))))));
+                    :((fpu_control == 4'b1000) ? ifloat
+                    :((fpu_control == 4'b1001) ? fint
+                    :((fpu_control == 4'b1010) ? ffloor
+                    : 31'd0))))))))));
+
+assign fpu_result = (fpu_result_pre == 32'h80000000) ? 32'h00000000 : fpu_result_pre;
 
 endmodule
 
