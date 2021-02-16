@@ -1,5 +1,8 @@
 open Output
 
+let string s = lexbuf (stdout, stdout) (Lexing.from_string s) (* 文字列をコンパイルして標準出力に表示する (caml2html: main_string) *)
+
+
 let file f = (* ファイルをコンパイルしてファイルに出力する (caml2html: main_file) *)
  (let inchan = open_in (f ^ ".ml") in
   let outchan = open_out (f ^ ".s") in
@@ -10,13 +13,13 @@ let file f = (* ファイルをコンパイルしてファイルに出力する (caml2html: main_file
     close_out outchan;
     close_out datachan;
   with
-  | e -> (close_in inchan; close_out outchan; close_out datachan; raise e));
+  | e -> (close_in inchan; close_out outchan; close_out datachan; raise e))
   (*syntax_check f;
   knormal_check f;
   alpha_check f;
   cse_check f;
-  iter_check f;*)
-  closure_check f
+  iter_check f;
+  closure_check f*)
 
 let () = (* ここからコンパイラの実行が開始される (caml2html: main_entry) *)
   let files = ref [] in

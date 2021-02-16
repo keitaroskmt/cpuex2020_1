@@ -1,0 +1,144 @@
+LetRec
+	name : 
+		(inprod : Float list -> Float list -> Int -> Float)
+	args : 
+		[(v1 : Float list), (v2 : Float list), (i : Int)]
+	body : 
+		Let
+			(Ti24 : Int)
+			Int 0
+			IfLE
+				Ti24
+				i
+				Let
+					(Td27 : Float)
+					Let
+						(Td25 : Float)
+						Get
+							v1
+							i
+						Let
+							(Td26 : Float)
+							Get
+								v2
+								i
+							FMul
+								Td25
+								Td26
+					Let
+						(Td30 : Float)
+						Let
+							(Ti29 : Int)
+							Let
+								(Ti28 : Int)
+								Int 1
+								Sub
+									i
+									Ti28
+							App
+								inprod
+								[v1, v2, Ti29]
+						FAdd
+							Td27
+							Td30
+				Float 0.
+	Let
+		(v1 : Float list)
+		Let
+			(Ti7 : Int)
+			Int 3
+			Let
+				(Td8 : Float)
+				Float 1.
+				ExtFunApp
+					create_float_array
+					[Ti7, Td8]
+		Let
+			(Tu6 : ())
+			Let
+				(Ti9 : Int)
+				Int 0
+				Let
+					(Td10 : Float)
+					Float 1.23
+					Put
+						v1
+						Ti9
+						Td10
+			Let
+				(Tu5 : ())
+				Let
+					(Ti11 : Int)
+					Int 1
+					Let
+						(Td12 : Float)
+						Float 1.23
+						Put
+							v1
+							Ti11
+							Td12
+				Let
+					(Tu4 : ())
+					Let
+						(Ti13 : Int)
+						Int 2
+						Let
+							(Td14 : Float)
+							Float 1.23
+							Put
+								v1
+								Ti13
+								Td14
+					Let
+						(v2 : Float list)
+						Let
+							(Ti15 : Int)
+							Int 3
+							Let
+								(Td16 : Float)
+								Float 1.
+								ExtFunApp
+									create_float_array
+									[Ti15, Td16]
+						Let
+							(Tu3 : ())
+							Let
+								(Ti17 : Int)
+								Int 0
+								Let
+									(Td18 : Float)
+									Float 4.56
+									Put
+										v2
+										Ti17
+										Td18
+							Let
+								(Tu2 : ())
+								Let
+									(Ti19 : Int)
+									Int 1
+									Let
+										(Td20 : Float)
+										Float 4.56
+										Put
+											v2
+											Ti19
+											Td20
+								Let
+									(Tu1 : ())
+									Let
+										(Ti21 : Int)
+										Int 2
+										Let
+											(Td22 : Float)
+											Float 4.56
+											Put
+												v2
+												Ti21
+												Td22
+									Let
+										(Ti23 : Int)
+										Int 2
+										App
+											inprod
+											[v1, v2, Ti23]

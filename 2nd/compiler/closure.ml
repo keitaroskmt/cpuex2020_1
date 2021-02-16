@@ -21,6 +21,7 @@ type t = (* クロージャ変換後の式 (caml2html: closure_t) *)
   | AppCls of Id.t * Id.t list
   | AppDir of Id.l * Id.t list
   | Tuple of Id.t list
+  | ExtTuple of (Id.t list * int)
   | LetTuple of (Id.t * Type.t) list * Id.t * t
   | Get of Id.t * Id.t
   | Put of Id.t * Id.t * Id.t
@@ -53,7 +54,7 @@ let rec fv = function
   | Var(x) -> fv_unit x
   | MakeCls((x, t), { entry = l; actual_fv = ys }, e) -> S.remove x (S.union (fv_list ys) (fv e))
   | AppCls(x, ys) -> fv_list (x :: ys)
-  | AppDir(_, xs) | Tuple(xs) -> fv_list xs
+  | AppDir(_, xs) | Tuple(xs) | ExtTuple(xs, _) -> fv_list xs
   | LetTuple(xts, y, e) -> S.union (fv_unit y) (S.diff (fv e) (fv_list (List.map fst xts)))
   | Put(x, y, z) -> fv_list [x; y; z]
 
@@ -111,6 +112,7 @@ let rec g env known = function (* クロージャ変換ルーチン本体 (caml2html: closure
       AppDir(Id.L(x), ys)
   | KNormal.App(f, xs) -> AppCls(f, xs)
   | KNormal.Tuple(xs) -> Tuple(xs)
+  | KNormal.ExtTuple(xs, addr) -> ExtTuple(xs, addr)
   | KNormal.LetTuple(xts, y, e) -> LetTuple(xts, y, g (M.add_list xts env) known e)
   | KNormal.Get(x, y) -> Get(x, y)
   | KNormal.Put(x, y, z) -> Put(x, y, z)
@@ -252,6 +254,13 @@ let closure_debug oc l =
             (Printf.fprintf oc "Tuple\n";
              print_tab (level+1);
              print_id_list e1;
+             Printf.fprintf oc "\n")
+        | ExtTuple (e1, e2) ->
+            (Printf.fprintf oc "ExtTuple\n";
+             print_tab (level+1);
+             print_id_list e1;
+             print_tab (level+1);
+             print_int e2;
              Printf.fprintf oc "\n")
         | LetTuple (e1, e2, e3) ->
             (Printf.fprintf oc "LetTuple\n";

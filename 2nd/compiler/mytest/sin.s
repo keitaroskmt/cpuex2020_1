@@ -5,7 +5,7 @@
 	lui	%sp, 1
 	ori	%sp, %sp, 64464
 	lui	%hp, 0
-	ori	%hp, %hp, 14
+	ori	%hp, %hp, 15
 # ------------ Text Section -------------------
 .section	".text"
 	j	min_caml_start
@@ -18,11 +18,37 @@ min_caml_print_char:
 min_caml_read_int:
 	addi	%v0, %zero, 0
 	in	%v0
+	addi	%v1, %zero, 0
+	in	%v1
+	sll	%v1, %v1, 8
+	or	%v0, %v0, %v1
+	addi	%v1, %zero, 0
+	in	%v1
+	sll	%v1, %v1, 16
+	or	%v0, %v0, %v1
+	addi	%v1, %zero, 0
+	in	%v1
+	sll	%v1, %v1, 24
+	or	%v0, %v0, %v1
 	jr	%ra
 # min_caml_read_float
 min_caml_read_float:
-	fmov	%f0, %fzero
-	fin	%f0
+	addi	%v0, %zero, 0
+	in	%v0
+	addi	%v1, %zero, 0
+	in	%v1
+	sll	%v1, %v1, 8
+	or	%v0, %v0, %v1
+	addi	%v1, %zero, 0
+	in	%v1
+	sll	%v1, %v1, 16
+	or	%v0, %v0, %v1
+	addi	%v1, %zero, 0
+	in	%v1
+	sll	%v1, %v1, 24
+	or	%v0, %v0, %v1
+	sw	%v0, 0(%hp)
+	flw	%f0, 0(%hp)
 	jr	%ra
 #  min_caml_create_array
 min_caml_create_array:
@@ -38,14 +64,14 @@ create_array_cont:
 	j	create_array_loop
 #  min_caml_create_float_array
 min_caml_create_float_array:
-	addi	%a0, %v0, 0
+	addi	%v1, %v0, 0
 	addi	%v0, %hp, 0
 create_float_array_loop:
-	bne	%a0, %zero, create_float_array_cont
+	bne	%v1, %zero, create_float_array_cont
 	jr	%ra
 create_float_array_cont:
 	fsw	%f0, 0(%hp)
-	addi	%a0, %a0, -1
+	addi	%v1, %v1, -1
 	addi	%hp, %hp, 1
 	j	create_float_array_loop
 #  min_caml_create_extarray
@@ -73,170 +99,153 @@ create_float_extarray_cont:
 	addi	%v1, %v1, 1
 	j	create_float_extarray_loop
 # ------------ body ---------------------------
-kernel_sin.214:
-	fmul	%f1, %f0, %f0
-	fmul	%f2, %f1, %f1
-	flw	%f3, 13(%zero)
-	fmul	%f3, %f3, %f0
-	fmul	%f3, %f3, %f1
-	fsub	%f3, %f0, %f3
-	flw	%f4, 12(%zero)
-	fmul	%f4, %f4, %f0
-	fmul	%f4, %f4, %f2
-	fadd	%f3, %f3, %f4
-	flw	%f4, 11(%zero)
-	fmul	%f0, %f4, %f0
-	fmul	%f0, %f0, %f1
-	fmul	%f0, %f0, %f2
-	fsub	%f0, %f3, %f0
+kernel_sin.219:
+	fmul	%f18, %f0, %f0
+	fmul	%f17, %f18, %f18
+	flw	%f1, 14(%zero)
+	fmul	%f1, %f1, %f0
+	fmul	%f1, %f1, %f18
+	fsub	%f16, %f0, %f1
+	flw	%f1, 13(%zero)
+	fmul	%f1, %f1, %f0
+	fmul	%f1, %f1, %f17
+	fadd	%f16, %f16, %f1
+	flw	%f1, 12(%zero)
+	fmul	%f0, %f1, %f0
+	fmul	%f0, %f0, %f18
+	fmul	%f0, %f0, %f17
+	fsub	%f0, %f16, %f0
 	jr	%ra
-kernel_cos.216:
-	fmul	%f0, %f0, %f0
-	fmul	%f1, %f0, %f0
-	flw	%f2, 10(%zero)
-	flw	%f3, 9(%zero)
-	fmul	%f3, %f3, %f0
-	fsub	%f2, %f2, %f3
-	flw	%f3, 8(%zero)
-	fmul	%f3, %f3, %f1
-	fadd	%f2, %f2, %f3
-	flw	%f3, 7(%zero)
-	fmul	%f0, %f3, %f0
-	fmul	%f0, %f0, %f1
-	fsub	%f0, %f2, %f0
+kernel_cos.221:
+	fmul	%f17, %f0, %f0
+	fmul	%f16, %f17, %f17
+	flw	%f1, 11(%zero)
+	flw	%f0, 10(%zero)
+	fmul	%f0, %f0, %f17
+	fsub	%f1, %f1, %f0
+	flw	%f0, 9(%zero)
+	fmul	%f0, %f0, %f16
+	fadd	%f1, %f1, %f0
+	flw	%f0, 8(%zero)
+	fmul	%f0, %f0, %f17
+	fmul	%f0, %f0, %f16
+	fsub	%f0, %f1, %f0
 	jr	%ra
-f.297:
-	fblt	%f0, %f1, fbgt_else.474
-	flw	%f2, 6(%zero)
-	fmul	%f1, %f2, %f1
-	j	f.297
-fbgt_else.474:
+reduction_2pi_sub1.225:
+	fmov	%f16, %f0
 	fmov	%f0, %f1
+	fblt	%f16, %f0, fbgt_else.533
+	flw	%f1, 7(%zero)
+	fmul	%f1, %f1, %f0
+	fmov	%f0, %f16
+	j	reduction_2pi_sub1.225
+fbgt_else.533:
 	jr	%ra
-g.301:
-	flw	%f2, 1(%k1)
-	fblt	%f0, %f2, fbgt_else.475
-	fblt	%f0, %f1, fbgt_else.476
+reduction_2pi_sub2.228:
+	fblt	%f0, %f2, fbgt_else.558
+	fblt	%f0, %f1, fbgt_else.559
 	fsub	%f0, %f0, %f1
-	flw	%f2, 6(%zero)
-	fdiv	%f1, %f1, %f2
-	lw	%at, 0(%k1)
-	jr	%at
-fbgt_else.476:
-	flw	%f2, 6(%zero)
-	fdiv	%f1, %f1, %f2
-	lw	%at, 0(%k1)
-	jr	%at
-fbgt_else.475:
+	flw	%f16, 7(%zero)
+	fdiv	%f1, %f1, %f16
+	j	reduction_2pi_sub2.228
+fbgt_else.559:
+	flw	%f16, 7(%zero)
+	fdiv	%f1, %f1, %f16
+	j	reduction_2pi_sub2.228
+fbgt_else.558:
 	jr	%ra
-reduction_2pi.220:
-	flw	%f1, 5(%zero)
-	fsw	%f0, 0(%sp)
-	fsw	%f1, 1(%sp)
-	sw	%ra, 2(%sp)
-	addi	%sp, %sp, 3
-	jal	f.297
-	addi	%sp, %sp, -3
-	lw	%ra, 2(%sp)
+reduction_2pi.232:
+	fmov	%f17, %f0
+	add	%a0, %zero, %ra
+	flw	%f2, 6(%zero)
+	fmov	%f1, %f2
+	fmov	%f0, %f17
+	addi	%sp, %sp, 0
+	jal	reduction_2pi_sub1.225
+	addi	%sp, %sp, 0
 	fmov	%f1, %f0
-	add	%k1, %zero, %hp
-	addi	%hp, %hp, 2
-	addi	%v0, %zero, g.301
-	sw	%v0, 0(%k1)
-	flw	%f0, 1(%sp)
-	fsw	%f0, 1(%k1)
-	flw	%f0, 0(%sp)
-	lw	%at, 0(%k1)
-	jr	%at
-sin.224:
+	add	%ra, %zero, %a0
+	fmov	%f0, %f17
+	j	reduction_2pi_sub2.228
+sin.236:
+	add	%a1, %zero, %ra
+	flw	%f18, 5(%zero)
 	flw	%f1, 4(%zero)
-	flw	%f2, 3(%zero)
-	fblt	%f0, %f2, fbgt_else.477
-	addi	%v0, %zero, 1
-	j	fbgt_cont.478
-fbgt_else.477:
-	addi	%v0, %zero, 0
-fbgt_cont.478:
+	fblt	%f0, %f1, fbgt_else.617
+	addi	%a2, %zero, 1
+	j	fbgt_cont.618
+fbgt_else.617:
+	addi	%a2, %zero, 0
+fbgt_cont.618:
 	fabs	%f0, %f0
-	sw	%v0, 0(%sp)
-	fsw	%f1, 1(%sp)
-	sw	%ra, 2(%sp)
-	addi	%sp, %sp, 3
-	jal	reduction_2pi.220
-	addi	%sp, %sp, -3
-	lw	%ra, 2(%sp)
-	flw	%f1, 1(%sp)
-	fblt	%f0, %f1, fbgt_else.479
-	lw	%v0, 0(%sp)
-	beqi	%v0, 0, bnei_else.481
-	addi	%v0, %zero, 0
-	j	bnei_cont.482
-bnei_else.481:
-	addi	%v0, %zero, 1
-bnei_cont.482:
-	j	fbgt_cont.480
-fbgt_else.479:
-	lw	%v0, 0(%sp)
-fbgt_cont.480:
-	fblt	%f0, %f1, fbgt_else.483
-	fsub	%f0, %f0, %f1
-	j	fbgt_cont.484
-fbgt_else.483:
-fbgt_cont.484:
-	flw	%f2, 2(%zero)
-	fblt	%f0, %f2, fbgt_else.485
-	fsub	%f0, %f1, %f0
-	j	fbgt_cont.486
-fbgt_else.485:
-fbgt_cont.486:
-	flw	%f1, 1(%zero)
-	sw	%v0, 2(%sp)
-	fblt	%f1, %f0, fbgt_else.487
-	sw	%ra, 3(%sp)
-	addi	%sp, %sp, 4
-	jal	kernel_sin.214
-	addi	%sp, %sp, -4
-	lw	%ra, 3(%sp)
-	j	fbgt_cont.488
-fbgt_else.487:
+	addi	%sp, %sp, 0
+	jal	reduction_2pi.232
+	addi	%sp, %sp, 0
+	fblt	%f0, %f18, fbgt_else.619
+	beqi	%a2, 0, bnei_else.621
+	addi	%a2, %zero, 0
+	j	fbgt_cont.620
+bnei_else.621:
+	addi	%a2, %zero, 1
+bnei_cont.622:
+	j	fbgt_cont.620
+fbgt_else.619:
+fbgt_cont.620:
+	fblt	%f0, %f18, fbgt_else.623
+	fsub	%f0, %f0, %f18
+	j	fbgt_cont.624
+fbgt_else.623:
+fbgt_cont.624:
+	flw	%f16, 3(%zero)
+	fblt	%f0, %f16, fbgt_else.625
+	fsub	%f0, %f18, %f0
+	j	fbgt_cont.626
+fbgt_else.625:
+fbgt_cont.626:
 	flw	%f1, 2(%zero)
-	fsub	%f0, %f1, %f0
-	sw	%ra, 3(%sp)
-	addi	%sp, %sp, 4
-	jal	kernel_cos.216
-	addi	%sp, %sp, -4
-	lw	%ra, 3(%sp)
-fbgt_cont.488:
-	lw	%v0, 2(%sp)
-	beqi	%v0, 0, bnei_else.489
+	fblt	%f1, %f0, fbgt_else.627
+	addi	%sp, %sp, 0
+	jal	kernel_sin.219
+	addi	%sp, %sp, 0
+	j	fbgt_cont.628
+fbgt_else.627:
+	fsub	%f0, %f16, %f0
+	addi	%sp, %sp, 0
+	jal	kernel_cos.221
+	addi	%sp, %sp, 0
+fbgt_cont.628:
+	beqi	%a2, 0, bnei_else.629
+	add	%ra, %zero, %a1
 	jr	%ra
-bnei_else.489:
+bnei_else.629:
+	add	%ra, %zero, %a1
 	fneg	%f0, %f0
 	jr	%ra
-rad.228:
-	flw	%f1, 0(%zero)
+rad.240:
+	flw	%f1, 1(%zero)
 	fmul	%f0, %f0, %f1
 	jr	%ra
 .global	min_caml_start
 min_caml_start:
-	sw	%ra, 0(%sp)
-	addi	%sp, %sp, 1
-	jal	min_caml_read_float
-	addi	%sp, %sp, -1
-	lw	%ra, 0(%sp)
-	sw	%ra, 0(%sp)
-	addi	%sp, %sp, 1
-	jal	rad.228
-	addi	%sp, %sp, -1
-	lw	%ra, 0(%sp)
-	sw	%ra, 0(%sp)
-	addi	%sp, %sp, 1
-	jal	sin.224
-	addi	%sp, %sp, -1
-	lw	%ra, 0(%sp)
-	sw	%ra, 0(%sp)
-	addi	%sp, %sp, 1
-	jal	min_caml_print_float
-	addi	%sp, %sp, -1
-	lw	%ra, 0(%sp)
+	flw	%f0, 0(%zero)
+	addi	%sp, %sp, 0
+	jal	rad.240
+	addi	%sp, %sp, 0
+	fmov	%f19, %f0
+	fmov	%f0, %f19
+	addi	%sp, %sp, 0
+	jal	sin.236
+	addi	%sp, %sp, 0
+	fmov	%f20, %f0
+	fmov	%f0, %f19
+	addi	%sp, %sp, 0
+	jal	sin.236
+	addi	%sp, %sp, 0
+	fmov	%f21, %f0
+	fmov	%f0, %f19
+	addi	%sp, %sp, 0
+	jal	sin.236
+	addi	%sp, %sp, 0
+	fadd	%f1, %f20, %f21
+	fadd	%g0, %f1, %f0
 	ret

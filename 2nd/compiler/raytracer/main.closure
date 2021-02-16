@@ -14861,10 +14861,10 @@ body
 																																																																																																																																																																																								[light_dirvec.2586, pretrace_line.3034, scan_line.3044]
 																																																																																																																																																																																							Let
 																																																																																																																																																																																								(Ti338.3114 : Int)
-																																																																																																																																																																																								Int 128
+																																																																																																																																																																																								Int 64
 																																																																																																																																																																																								Let
 																																																																																																																																																																																									(Ti339.3115 : Int)
-																																																																																																																																																																																									Int 128
+																																																																																																																																																																																									Int 64
 																																																																																																																																																																																									Let
 																																																																																																																																																																																										(Tu252.3113 : ())
 																																																																																																																																																																																										AppCls

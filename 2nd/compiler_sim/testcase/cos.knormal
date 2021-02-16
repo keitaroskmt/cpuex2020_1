@@ -1,0 +1,1290 @@
+LetRec
+	name : 
+		(fequal : Int -> Int -> Bool)
+	args : 
+		[(e1 : Int), (e2 : Int)]
+	body : 
+		IfEq
+			e1
+			e2
+			Int 1
+			Int 0
+	LetRec
+		name : 
+			(fless : Int -> Int -> Bool)
+		args : 
+			[(e1 : Int), (e2 : Int)]
+		body : 
+			IfLE
+				e2
+				e1
+				Int 0
+				Int 1
+		LetRec
+			name : 
+				(fispos : Float -> Bool)
+			args : 
+				[(x : Float)]
+			body : 
+				Let
+					(Td171 : Float)
+					Float 0.
+					IfLE
+						x
+						Td171
+						Int 0
+						Int 1
+			LetRec
+				name : 
+					(fisneg : Float -> Bool)
+				args : 
+					[(x : Float)]
+				body : 
+					Let
+						(Td170 : Float)
+						Float 0.
+						IfLE
+							Td170
+							x
+							Int 0
+							Int 1
+				LetRec
+					name : 
+						(fiszero : Float -> Bool)
+					args : 
+						[(x : Float)]
+					body : 
+						Let
+							(Td169 : Float)
+							Float 0.
+							IfEq
+								x
+								Td169
+								Int 1
+								Int 0
+					LetRec
+						name : 
+							(xor : Bool -> Bool -> Bool)
+						args : 
+							[(x : Bool), (y : Bool)]
+						body : 
+							Let
+								(Ti167 : Int)
+								Int 0
+								IfEq
+									x
+									Ti167
+									Var y
+									Let
+										(Ti168 : Int)
+										Int 0
+										IfEq
+											y
+											Ti168
+											Int 1
+											Int 0
+						LetRec
+							name : 
+								(fhalf : Float -> Float)
+							args : 
+								[(x : Float)]
+							body : 
+								Let
+									(Td166 : Float)
+									Float 0.5
+									FMul
+										x
+										Td166
+							LetRec
+								name : 
+									(fsqr : Float -> Float)
+								args : 
+									[(x : Float)]
+								body : 
+									FMul
+										x
+										x
+								LetRec
+									name : 
+										(int_of_float_sub1 : Float -> Int -> Int)
+									args : 
+										[(x : Float), (n : Int)]
+									body : 
+										Let
+											(Td161 : Float)
+											Float 8388608.
+											IfLE
+												Td161
+												x
+												Let
+													(Td163 : Float)
+													Let
+														(Td162 : Float)
+														Float 8388608.
+														FSub
+															x
+															Td162
+													Let
+														(Ti165 : Int)
+														Let
+															(Ti164 : Int)
+															Int 1
+															Add
+																n
+																Ti164
+														App
+															int_of_float_sub1
+															[Td163, Ti165]
+												Var n
+									LetRec
+										name : 
+											(int_of_float_sub2 : Float -> Float)
+										args : 
+											[(x : Float)]
+										body : 
+											Let
+												(Td158 : Float)
+												Float 8388608.
+												IfLE
+													Td158
+													x
+													Let
+														(Td160 : Float)
+														Let
+															(Td159 : Float)
+															Float 8388608.
+															FSub
+																x
+																Td159
+														App
+															int_of_float_sub2
+															[Td160]
+													Var x
+										LetRec
+											name : 
+												(int_of_float_sub3 : Int -> Int -> Int)
+											args : 
+												[(m : Int), (acm : Int)]
+											body : 
+												Let
+													(Ti153 : Int)
+													Int 0
+													IfEq
+														m
+														Ti153
+														Var acm
+														Let
+															(Ti155 : Int)
+															Let
+																(Ti154 : Int)
+																Int 1
+																Sub
+																	m
+																	Ti154
+															Let
+																(Ti157 : Int)
+																Let
+																	(Ti156 : Int)
+																	Int 8388608
+																	Add
+																		Ti156
+																		acm
+																App
+																	int_of_float_sub3
+																	[Ti155, Ti157]
+											LetRec
+												name : 
+													(int_of_float : Float -> Int)
+												args : 
+													[(x : Float)]
+												body : 
+													Let
+														(flag : Bool)
+														Let
+															(Td136 : Float)
+															Float 0.
+															IfLE
+																Td136
+																x
+																Int 1
+																Int 0
+														Let
+															(x_abs : Float)
+															ExtFunApp
+																fabs
+																[x]
+															Let
+																(res : Int)
+																Let
+																	(Td137 : Float)
+																	Float 8388608.
+																	IfLE
+																		Td137
+																		x_abs
+																		Let
+																			(Ti143 : Int)
+																			Let
+																				(Ti141 : Int)
+																				Let
+																					(Td140 : Float)
+																					Let
+																						(Td138 : Float)
+																						App
+																							int_of_float_sub2
+																							[x_abs]
+																						Let
+																							(Td139 : Float)
+																							Float 8388608.
+																							FAdd
+																								Td138
+																								Td139
+																					ExtFunApp
+																						ftoi
+																						[Td140]
+																				Let
+																					(Ti142 : Int)
+																					Int 1258291200
+																					Sub
+																						Ti141
+																						Ti142
+																			Let
+																				(Ti147 : Int)
+																				Let
+																					(Ti145 : Int)
+																					Let
+																						(Ti144 : Int)
+																						Int 0
+																						App
+																							int_of_float_sub1
+																							[x_abs, Ti144]
+																					Let
+																						(Ti146 : Int)
+																						Int 0
+																						App
+																							int_of_float_sub3
+																							[Ti145, Ti146]
+																				Add
+																					Ti143
+																					Ti147
+																		Let
+																			(Ti150 : Int)
+																			Let
+																				(Td149 : Float)
+																				Let
+																					(Td148 : Float)
+																					Float 8388608.
+																					FAdd
+																						x_abs
+																						Td148
+																				ExtFunApp
+																					ftoi
+																					[Td149]
+																			Let
+																				(Ti151 : Int)
+																				Int 1258291200
+																				Sub
+																					Ti150
+																					Ti151
+																Let
+																	(Ti152 : Int)
+																	Int 0
+																	IfEq
+																		flag
+																		Ti152
+																		Neg
+																			res
+																		Var res
+												LetRec
+													name : 
+														(float_of_int_sub1 : Int -> Int -> Int)
+													args : 
+														[(x : Int), (n : Int)]
+													body : 
+														Let
+															(Ti131 : Int)
+															Int 8388608
+															IfLE
+																Ti131
+																x
+																Let
+																	(Ti133 : Int)
+																	Let
+																		(Ti132 : Int)
+																		Int 8388608
+																		Sub
+																			x
+																			Ti132
+																	Let
+																		(Ti135 : Int)
+																		Let
+																			(Ti134 : Int)
+																			Int 1
+																			Add
+																				n
+																				Ti134
+																		App
+																			float_of_int_sub1
+																			[Ti133, Ti135]
+																Var n
+													LetRec
+														name : 
+															(float_of_int_sub2 : Int -> Int)
+														args : 
+															[(x : Int)]
+														body : 
+															Let
+																(Ti128 : Int)
+																Int 8388608
+																IfLE
+																	Ti128
+																	x
+																	Let
+																		(Ti130 : Int)
+																		Let
+																			(Ti129 : Int)
+																			Int 8388608
+																			Sub
+																				x
+																				Ti129
+																		App
+																			float_of_int_sub2
+																			[Ti130]
+																	Var x
+														LetRec
+															name : 
+																(float_of_int_sub3 : Int -> Float -> Float)
+															args : 
+																[(m : Int), (acm : Float)]
+															body : 
+																Let
+																	(Ti123 : Int)
+																	Int 0
+																	IfEq
+																		m
+																		Ti123
+																		Var acm
+																		Let
+																			(Ti125 : Int)
+																			Let
+																				(Ti124 : Int)
+																				Int 1
+																				Sub
+																					m
+																					Ti124
+																			Let
+																				(Td127 : Float)
+																				Let
+																					(Td126 : Float)
+																					Float 8388608.
+																					FAdd
+																						Td126
+																						acm
+																				App
+																					float_of_int_sub3
+																					[Ti125, Td127]
+															LetRec
+																name : 
+																	(float_of_int : Int -> Float)
+																args : 
+																	[(x : Int)]
+																body : 
+																	Let
+																		(flag : Bool)
+																		Let
+																			(Ti105 : Int)
+																			Int 0
+																			IfLE
+																				x
+																				Ti105
+																				Int 0
+																				Int 1
+																		Let
+																			(x_abs : Int)
+																			Let
+																				(Ti106 : Int)
+																				Int 0
+																				IfLE
+																					Ti106
+																					x
+																					Var x
+																					Neg
+																						x
+																			Let
+																				(res : Float)
+																				Let
+																					(Ti107 : Int)
+																					Int 8388608
+																					IfLE
+																						Ti107
+																						x_abs
+																						Let
+																							(Td113 : Float)
+																							Let
+																								(Td111 : Float)
+																								Let
+																									(Ti110 : Int)
+																									Let
+																										(Ti108 : Int)
+																										App
+																											float_of_int_sub2
+																											[x_abs]
+																										Let
+																											(Ti109 : Int)
+																											Int 1258291200
+																											Add
+																												Ti108
+																												Ti109
+																									ExtFunApp
+																										itof
+																										[Ti110]
+																								Let
+																									(Td112 : Float)
+																									Float 8388608.
+																									FSub
+																										Td111
+																										Td112
+																							Let
+																								(Td117 : Float)
+																								Let
+																									(Ti115 : Int)
+																									Let
+																										(Ti114 : Int)
+																										Int 0
+																										App
+																											float_of_int_sub1
+																											[x_abs, Ti114]
+																									Let
+																										(Td116 : Float)
+																										Float 0.
+																										App
+																											float_of_int_sub3
+																											[Ti115, Td116]
+																								FAdd
+																									Td113
+																									Td117
+																						Let
+																							(Td120 : Float)
+																							Let
+																								(Ti119 : Int)
+																								Let
+																									(Ti118 : Int)
+																									Int 1258291200
+																									Add
+																										x_abs
+																										Ti118
+																								ExtFunApp
+																									itof
+																									[Ti119]
+																							Let
+																								(Td121 : Float)
+																								Float 8388608.
+																								FSub
+																									Td120
+																									Td121
+																				Let
+																					(Ti122 : Int)
+																					Int 0
+																					IfEq
+																						flag
+																						Ti122
+																						ExtFunApp
+																							fneg
+																							[res]
+																						Var res
+																LetRec
+																	name : 
+																		(floor : Float -> Float)
+																	args : 
+																		[(x : Float)]
+																	body : 
+																		Let
+																			(flag : Bool)
+																			Let
+																				(Td100 : Float)
+																				Float 0.
+																				IfLE
+																					Td100
+																					x
+																					Int 1
+																					Int 0
+																			Let
+																				(x_abs : Float)
+																				ExtFunApp
+																					fabs
+																					[x]
+																				Let
+																					(res : Float)
+																					Let
+																						(Td101 : Float)
+																						Float 8388608.
+																						IfLE
+																							Td101
+																							x_abs
+																							Var x_abs
+																							Let
+																								(Ti102 : Int)
+																								App
+																									int_of_float
+																									[x_abs]
+																								App
+																									float_of_int
+																									[Ti102]
+																					Let
+																						(res_ : Float)
+																						Let
+																							(Ti103 : Int)
+																							Int 0
+																							IfEq
+																								flag
+																								Ti103
+																								ExtFunApp
+																									fneg
+																									[res]
+																								Var res
+																						IfLE
+																							res_
+																							x
+																							Var res_
+																							Let
+																								(Td104 : Float)
+																								Float 1.
+																								FSub
+																									res_
+																									Td104
+																	LetRec
+																		name : 
+																			(kernel_sin : Float -> Float)
+																		args : 
+																			[(x : Float)]
+																		body : 
+																			Let
+																				(x2 : Float)
+																				FMul
+																					x
+																					x
+																				Let
+																					(x4 : Float)
+																					FMul
+																						x2
+																						x2
+																					Let
+																						(Td95 : Float)
+																						Let
+																							(Td91 : Float)
+																							Let
+																								(Td90 : Float)
+																								Let
+																									(Td89 : Float)
+																									Let
+																										(Td88 : Float)
+																										Float 0.16666668
+																										FMul
+																											Td88
+																											x
+																									FMul
+																										Td89
+																										x2
+																								FSub
+																									x
+																									Td90
+																							Let
+																								(Td94 : Float)
+																								Let
+																									(Td93 : Float)
+																									Let
+																										(Td92 : Float)
+																										Float 0.008332824
+																										FMul
+																											Td92
+																											x
+																									FMul
+																										Td93
+																										x4
+																								FAdd
+																									Td91
+																									Td94
+																						Let
+																							(Td99 : Float)
+																							Let
+																								(Td98 : Float)
+																								Let
+																									(Td97 : Float)
+																									Let
+																										(Td96 : Float)
+																										Float 0.00019587841
+																										FMul
+																											Td96
+																											x
+																									FMul
+																										Td97
+																										x2
+																								FMul
+																									Td98
+																									x4
+																							FSub
+																								Td95
+																								Td99
+																		LetRec
+																			name : 
+																				(kernel_cos : Float -> Float)
+																			args : 
+																				[(x : Float)]
+																			body : 
+																				Let
+																					(x2 : Float)
+																					FMul
+																						x
+																						x
+																					Let
+																						(x4 : Float)
+																						FMul
+																							x2
+																							x2
+																						Let
+																							(Td84 : Float)
+																							Let
+																								(Td81 : Float)
+																								Let
+																									(Td78 : Float)
+																									Float 1.
+																									Let
+																										(Td80 : Float)
+																										Let
+																											(Td79 : Float)
+																											Float 0.5
+																											FMul
+																												Td79
+																												x2
+																										FSub
+																											Td78
+																											Td80
+																								Let
+																									(Td83 : Float)
+																									Let
+																										(Td82 : Float)
+																										Float 0.04166368
+																										FMul
+																											Td82
+																											x4
+																									FAdd
+																										Td81
+																										Td83
+																							Let
+																								(Td87 : Float)
+																								Let
+																									(Td86 : Float)
+																									Let
+																										(Td85 : Float)
+																										Float 0.0013695068
+																										FMul
+																											Td85
+																											x2
+																									FMul
+																										Td86
+																										x4
+																								FSub
+																									Td84
+																									Td87
+																			LetRec
+																				name : 
+																					(kernel_atan : Float -> Float)
+																				args : 
+																					[(x : Float)]
+																				body : 
+																					Let
+																						(x2 : Float)
+																						FMul
+																							x
+																							x
+																						Let
+																							(x4 : Float)
+																							FMul
+																								x2
+																								x2
+																							Let
+																								(x8 : Float)
+																								FMul
+																									x4
+																									x4
+																								Let
+																									(Td73 : Float)
+																									Let
+																										(Td68 : Float)
+																										Let
+																											(Td64 : Float)
+																											Let
+																												(Td59 : Float)
+																												Let
+																													(Td55 : Float)
+																													Let
+																														(Td54 : Float)
+																														Let
+																															(Td53 : Float)
+																															Let
+																																(Td52 : Float)
+																																Float 0.3333333
+																																FMul
+																																	Td52
+																																	x
+																															FMul
+																																Td53
+																																x2
+																														FSub
+																															x
+																															Td54
+																													Let
+																														(Td58 : Float)
+																														Let
+																															(Td57 : Float)
+																															Let
+																																(Td56 : Float)
+																																Float 0.2
+																																FMul
+																																	Td56
+																																	x
+																															FMul
+																																Td57
+																																x4
+																														FAdd
+																															Td55
+																															Td58
+																												Let
+																													(Td63 : Float)
+																													Let
+																														(Td62 : Float)
+																														Let
+																															(Td61 : Float)
+																															Let
+																																(Td60 : Float)
+																																Float 0.142857142
+																																FMul
+																																	Td60
+																																	x
+																															FMul
+																																Td61
+																																x2
+																														FMul
+																															Td62
+																															x4
+																													FSub
+																														Td59
+																														Td63
+																											Let
+																												(Td67 : Float)
+																												Let
+																													(Td66 : Float)
+																													Let
+																														(Td65 : Float)
+																														Float 0.111111104
+																														FMul
+																															Td65
+																															x
+																													FMul
+																														Td66
+																														x8
+																												FAdd
+																													Td64
+																													Td67
+																										Let
+																											(Td72 : Float)
+																											Let
+																												(Td71 : Float)
+																												Let
+																													(Td70 : Float)
+																													Let
+																														(Td69 : Float)
+																														Float 0.08976446
+																														FMul
+																															Td69
+																															x
+																													FMul
+																														Td70
+																														x2
+																												FMul
+																													Td71
+																													x8
+																											FSub
+																												Td68
+																												Td72
+																									Let
+																										(Td77 : Float)
+																										Let
+																											(Td76 : Float)
+																											Let
+																												(Td75 : Float)
+																												Let
+																													(Td74 : Float)
+																													Float 0.060035485
+																													FMul
+																														Td74
+																														x
+																												FMul
+																													Td75
+																													x4
+																											FMul
+																												Td76
+																												x8
+																										FAdd
+																											Td73
+																											Td77
+																				LetRec
+																					name : 
+																						(reduction_2pi : Float -> Float)
+																					args : 
+																						[(x : Float)]
+																					body : 
+																						Let
+																							(pi : Float)
+																							Float 3.14159265359
+																							Let
+																								(pi2 : Float)
+																								Let
+																									(Td44 : Float)
+																									Float 2.
+																									FMul
+																										Td44
+																										pi
+																								LetRec
+																									name : 
+																										(f : Float -> Float -> Float)
+																									args : 
+																										[(s : Float), (t : Float)]
+																									body : 
+																										IfLE
+																											t
+																											s
+																											Let
+																												(Td51 : Float)
+																												Let
+																													(Td50 : Float)
+																													Float 2.
+																													FMul
+																														Td50
+																														t
+																												App
+																													f
+																													[s, Td51]
+																											Var t
+																									Let
+																										(p : Float)
+																										App
+																											f
+																											[x, pi2]
+																										LetRec
+																											name : 
+																												(g : Float -> Float -> Float)
+																											args : 
+																												[(s : Float), (t : Float)]
+																											body : 
+																												IfLE
+																													pi2
+																													s
+																													IfLE
+																														t
+																														s
+																														Let
+																															(Td45 : Float)
+																															FSub
+																																s
+																																t
+																															Let
+																																(Td47 : Float)
+																																Let
+																																	(Td46 : Float)
+																																	Float 2.
+																																	FDiv
+																																		t
+																																		Td46
+																																App
+																																	g
+																																	[Td45, Td47]
+																														Let
+																															(Td49 : Float)
+																															Let
+																																(Td48 : Float)
+																																Float 2.
+																																FDiv
+																																	t
+																																	Td48
+																															App
+																																g
+																																[s, Td49]
+																													Var s
+																											App
+																												g
+																												[x, p]
+																					LetRec
+																						name : 
+																							(cos : Float -> Float)
+																						args : 
+																							[(x : Float)]
+																						body : 
+																							Let
+																								(pi : Float)
+																								Float 3.14159265359
+																								Let
+																									(flag : Bool)
+																									Int 1
+																									Let
+																										(x : Float)
+																										Let
+																											(Td31 : Float)
+																											ExtFunApp
+																												fabs
+																												[x]
+																											App
+																												reduction_2pi
+																												[Td31]
+																										Let
+																											(flag : Bool)
+																											IfLE
+																												pi
+																												x
+																												Let
+																													(Ti32 : Int)
+																													Int 0
+																													IfEq
+																														flag
+																														Ti32
+																														Int 1
+																														Int 0
+																												Var flag
+																											Let
+																												(x : Float)
+																												IfLE
+																													pi
+																													x
+																													FSub
+																														x
+																														pi
+																													Var x
+																												Let
+																													(flag : Bool)
+																													Let
+																														(Td34 : Float)
+																														Let
+																															(Td33 : Float)
+																															Float 2.
+																															FDiv
+																																pi
+																																Td33
+																														IfLE
+																															Td34
+																															x
+																															Let
+																																(Ti35 : Int)
+																																Int 0
+																																IfEq
+																																	flag
+																																	Ti35
+																																	Int 1
+																																	Int 0
+																															Var flag
+																													Let
+																														(x : Float)
+																														Let
+																															(Td37 : Float)
+																															Let
+																																(Td36 : Float)
+																																Float 2.
+																																FDiv
+																																	pi
+																																	Td36
+																															IfLE
+																																Td37
+																																x
+																																FSub
+																																	pi
+																																	x
+																																Var x
+																														Let
+																															(res : Float)
+																															Let
+																																(Td39 : Float)
+																																Let
+																																	(Td38 : Float)
+																																	Float 4.
+																																	FDiv
+																																		pi
+																																		Td38
+																																IfLE
+																																	x
+																																	Td39
+																																	App
+																																		kernel_cos
+																																		[x]
+																																	Let
+																																		(Td42 : Float)
+																																		Let
+																																			(Td41 : Float)
+																																			Let
+																																				(Td40 : Float)
+																																				Float 2.
+																																				FDiv
+																																					pi
+																																					Td40
+																																			FSub
+																																				Td41
+																																				x
+																																		App
+																																			kernel_sin
+																																			[Td42]
+																															Let
+																																(Ti43 : Int)
+																																Int 0
+																																IfEq
+																																	flag
+																																	Ti43
+																																	ExtFunApp
+																																		fneg
+																																		[res]
+																																	Var res
+																						LetRec
+																							name : 
+																								(sin : Float -> Float)
+																							args : 
+																								[(x : Float)]
+																							body : 
+																								Let
+																									(pi : Float)
+																									Float 3.14159265359
+																									Let
+																										(flag : Bool)
+																										Let
+																											(Td20 : Float)
+																											Float 0.
+																											IfLE
+																												Td20
+																												x
+																												Int 1
+																												Int 0
+																										Let
+																											(x : Float)
+																											Let
+																												(Td21 : Float)
+																												ExtFunApp
+																													fabs
+																													[x]
+																												App
+																													reduction_2pi
+																													[Td21]
+																											Let
+																												(flag : Bool)
+																												IfLE
+																													pi
+																													x
+																													Let
+																														(Ti22 : Int)
+																														Int 0
+																														IfEq
+																															flag
+																															Ti22
+																															Int 1
+																															Int 0
+																													Var flag
+																												Let
+																													(x : Float)
+																													IfLE
+																														pi
+																														x
+																														FSub
+																															x
+																															pi
+																														Var x
+																													Let
+																														(x : Float)
+																														Let
+																															(Td24 : Float)
+																															Let
+																																(Td23 : Float)
+																																Float 2.
+																																FDiv
+																																	pi
+																																	Td23
+																															IfLE
+																																Td24
+																																x
+																																FSub
+																																	pi
+																																	x
+																																Var x
+																														Let
+																															(res : Float)
+																															Let
+																																(Td26 : Float)
+																																Let
+																																	(Td25 : Float)
+																																	Float 4.
+																																	FDiv
+																																		pi
+																																		Td25
+																																IfLE
+																																	x
+																																	Td26
+																																	App
+																																		kernel_sin
+																																		[x]
+																																	Let
+																																		(Td29 : Float)
+																																		Let
+																																			(Td28 : Float)
+																																			Let
+																																				(Td27 : Float)
+																																				Float 2.
+																																				FDiv
+																																					pi
+																																					Td27
+																																			FSub
+																																				Td28
+																																				x
+																																		App
+																																			kernel_cos
+																																			[Td29]
+																															Let
+																																(Ti30 : Int)
+																																Int 0
+																																IfEq
+																																	flag
+																																	Ti30
+																																	ExtFunApp
+																																		fneg
+																																		[res]
+																																	Var res
+																							LetRec
+																								name : 
+																									(atan : Float -> Float)
+																								args : 
+																									[(x : Float)]
+																								body : 
+																									Let
+																										(pi : Float)
+																										Float 3.14159265359
+																										Let
+																											(flag : Bool)
+																											Let
+																												(Td3 : Float)
+																												Float 0.
+																												IfLE
+																													Td3
+																													x
+																													Int 1
+																													Int 0
+																											Let
+																												(x_abs : Float)
+																												ExtFunApp
+																													fabs
+																													[x]
+																												Let
+																													(Td4 : Float)
+																													Float 0.4375
+																													IfLE
+																														Td4
+																														x_abs
+																														Let
+																															(res : Float)
+																															Let
+																																(Td5 : Float)
+																																Float 2.4375
+																																IfLE
+																																	Td5
+																																	x_abs
+																																	Let
+																																		(Td7 : Float)
+																																		Let
+																																			(Td6 : Float)
+																																			Float 2.
+																																			FDiv
+																																				pi
+																																				Td6
+																																		Let
+																																			(Td10 : Float)
+																																			Let
+																																				(Td9 : Float)
+																																				Let
+																																					(Td8 : Float)
+																																					Float 1.
+																																					FDiv
+																																						Td8
+																																						x_abs
+																																				App
+																																					kernel_atan
+																																					[Td9]
+																																			FSub
+																																				Td7
+																																				Td10
+																																	Let
+																																		(Td12 : Float)
+																																		Let
+																																			(Td11 : Float)
+																																			Float 4.
+																																			FDiv
+																																				pi
+																																				Td11
+																																		Let
+																																			(Td18 : Float)
+																																			Let
+																																				(Td17 : Float)
+																																				Let
+																																					(Td14 : Float)
+																																					Let
+																																						(Td13 : Float)
+																																						Float 1.
+																																						FSub
+																																							x_abs
+																																							Td13
+																																					Let
+																																						(Td16 : Float)
+																																						Let
+																																							(Td15 : Float)
+																																							Float 1.
+																																							FAdd
+																																								x_abs
+																																								Td15
+																																						FDiv
+																																							Td14
+																																							Td16
+																																				App
+																																					kernel_atan
+																																					[Td17]
+																																			FAdd
+																																				Td12
+																																				Td18
+																															Let
+																																(Ti19 : Int)
+																																Int 0
+																																IfEq
+																																	flag
+																																	Ti19
+																																	ExtFunApp
+																																		fneg
+																																		[res]
+																																	Var res
+																														App
+																															kernel_atan
+																															[x]
+																								LetRec
+																									name : 
+																										(rad : Float -> Float)
+																									args : 
+																										[(x : Float)]
+																									body : 
+																										Let
+																											(Td2 : Float)
+																											Float 0.017453293
+																											FMul
+																												x
+																												Td2
+																									Let
+																										(v1 : Float)
+																										Let
+																											(Td1 : Float)
+																											Float 10.
+																											App
+																												rad
+																												[Td1]
+																										Let
+																											(cos_v1 : Float)
+																											App
+																												cos
+																												[v1]
+																											Var cos_v1

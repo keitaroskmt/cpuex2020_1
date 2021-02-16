@@ -1,1 +1,2 @@
-val f : Asm.prog -> Asm.prog
+val h : Asm.fundef -> Asm.fundef
+val f : Asm.t -> Asm.t

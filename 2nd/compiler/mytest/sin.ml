@@ -125,18 +125,19 @@ let rec kernel_atan x =
     +. 0.060035485 *. x *. x4 *. x8
 in
 
+let rec reduction_2pi_sub1 s t =  (* while (x >= p) *)
+    if s < t then t else reduction_2pi_sub1 s (2.0 *. t) in
+
+let rec reduction_2pi_sub2 s t pi2 = (* while (x >= pi2) *)
+    if s < pi2 then s else  
+    if s >= t then reduction_2pi_sub2 (s -. t) (t /. 2.0) pi2 else reduction_2pi_sub2 s (t /. 2.0) pi2 in
+
 let rec reduction_2pi x =
     let pi = 3.14159265358979 in
     let pi2 = 2.0 *. pi in
-    let rec f s t = (* while (x >= p) *)
-        if s < t then t else f s (2.0 *. t) in
-    let p = f x pi2 in
-    let rec g s t = (* while (x >= pi2) *)
-        if s < pi2 then s else
-        if s >= t then g (s -. t) (t /. 2.0) else g s (t /. 2.0) in
-    g x p
+    let p = reduction_2pi_sub1 x pi2 in
+    reduction_2pi_sub2 x p pi2
 in
-
 (* tenuki
 let rec reduction_2pi x =
     let pi = 3.14159265358979 in
@@ -191,7 +192,7 @@ in
 let rec rad x =
     x *. 0.017453293
 in
-let v1 = rad (read_float ()) in
-let sin_v1 = sin v1
-in
-print_float sin_v1
+let sin_v1 = sin (rad 10.0) in
+let sin_v2 = sin (rad 10.0) in
+let sin_v3 = sin (rad 10.0) in
+sin_v1 +. sin_v2 +. sin_v3

@@ -1,0 +1,48 @@
+LetRec
+	name : 
+		(fib : Int -> Int)
+	args : 
+		[(n : Int)]
+	body : 
+		Let
+			(Ti2 : Int)
+			Int 1
+			IfLE
+				n
+				Ti2
+				Var n
+				Let
+					(Ti5 : Int)
+					Let
+						(Ti4 : Int)
+						Let
+							(Ti3 : Int)
+							Int 1
+							Sub
+								n
+								Ti3
+						App
+							fib
+							[Ti4]
+					Let
+						(Ti8 : Int)
+						Let
+							(Ti7 : Int)
+							Let
+								(Ti6 : Int)
+								Int 2
+								Sub
+									n
+									Ti6
+							App
+								fib
+								[Ti7]
+						Add
+							Ti5
+							Ti8
+	Let
+		(Ti1 : Int)
+		Int 20
+		App
+			fib
+			[Ti1]

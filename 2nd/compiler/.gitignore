@@ -1,6 +1,7 @@
 *.bak
 *~
 *.dup
+*.o
 min-caml
 min-caml.opt
 min-caml.top
