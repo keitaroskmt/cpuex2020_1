@@ -1,0 +1,73 @@
+Prog 
+fundef 
+	name : 
+		(L (inprod.13): Float list -> Float list -> Int -> Float)
+	args : 
+		[(v1.14 : Float list), (v2.15 : Float list), (i.16 : Int)]
+	formal_fv : 
+		[]
+	body : 
+		Let
+			(Ti6.24 : Int)
+			Int 0
+			IfLE
+				Ti6.24
+				i.16
+				Let
+					(Td7.29 : Float)
+					Get
+						v1.14
+						i.16
+					Let
+						(Td8.30 : Float)
+						Get
+							v2.15
+							i.16
+						Let
+							(Td9.25 : Float)
+							FMul
+								Td7.29
+								Td8.30
+							Let
+								(Ti10.28 : Int)
+								Int 1
+								Let
+									(Ti11.27 : Int)
+									Sub
+										i.16
+										Ti10.28
+									Let
+										(Td12.26 : Float)
+										AppDir
+											L (inprod.13)
+											[v1.14, v2.15, Ti11.27]
+										FAdd
+											Td9.25
+											Td12.26
+				Float 0.
+body 
+	Let
+		(Ti1.22 : Int)
+		Int 3
+		Let
+			(Td2.23 : Float)
+			Float 1.23
+			Let
+				(v1.17 : Float list)
+				AppDir
+					L (min_caml_create_float_array)
+					[Ti1.22, Td2.23]
+				Let
+					(Td4.21 : Float)
+					Float 4.56
+					Let
+						(v2.18 : Float list)
+						AppDir
+							L (min_caml_create_float_array)
+							[Ti1.22, Td4.21]
+						Let
+							(Ti5.19 : Int)
+							Int 2
+							AppDir
+								L (inprod.13)
+								[v1.17, v2.18, Ti5.19]

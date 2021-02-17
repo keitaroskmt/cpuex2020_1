@@ -37,13 +37,118 @@ fundef
 										i.35
 										Ti29.66
 									Let
-										(Td31.64 : Float)
-										AppDir
-											L (inprod.32)
-											[v1.33, v2.34, Ti30.65]
-										FAdd
-											Td28.63
-											Td31.64
+										(Ti25.62.76 : Int)
+										Int 0
+										Let
+											(Td31.64 : Float)
+											IfLE
+												Ti25.62.76
+												Ti30.65
+												Let
+													(Td26.67.77 : Float)
+													Get
+														v1.33
+														Ti30.65
+													Let
+														(Td27.68.78 : Float)
+														Get
+															v2.34
+															Ti30.65
+														Let
+															(Td28.63.79 : Float)
+															FMul
+																Td26.67.77
+																Td27.68.78
+															Let
+																(Ti29.66.80 : Int)
+																Int 1
+																Let
+																	(Ti30.65.81 : Int)
+																	Sub
+																		Ti30.65
+																		Ti29.66.80
+																	Let
+																		(Ti25.62.97 : Int)
+																		Int 0
+																		Let
+																			(Td31.64.82 : Float)
+																			IfLE
+																				Ti25.62.97
+																				Ti30.65.81
+																				Let
+																					(Td26.67.98 : Float)
+																					Get
+																						v1.33
+																						Ti30.65.81
+																					Let
+																						(Td27.68.99 : Float)
+																						Get
+																							v2.34
+																							Ti30.65.81
+																						Let
+																							(Td28.63.100 : Float)
+																							FMul
+																								Td26.67.98
+																								Td27.68.99
+																							Let
+																								(Ti29.66.101 : Int)
+																								Int 1
+																								Let
+																									(Ti30.65.102 : Int)
+																									Sub
+																										Ti30.65.81
+																										Ti29.66.101
+																									Let
+																										(Ti25.62.76.103 : Int)
+																										Int 0
+																										Let
+																											(Td31.64.104 : Float)
+																											IfLE
+																												Ti25.62.76.103
+																												Ti30.65.102
+																												Let
+																													(Td26.67.77.105 : Float)
+																													Get
+																														v1.33
+																														Ti30.65.102
+																													Let
+																														(Td27.68.78.106 : Float)
+																														Get
+																															v2.34
+																															Ti30.65.102
+																														Let
+																															(Td28.63.79.107 : Float)
+																															FMul
+																																Td26.67.77.105
+																																Td27.68.78.106
+																															Let
+																																(Ti29.66.80.108 : Int)
+																																Int 1
+																																Let
+																																	(Ti30.65.81.109 : Int)
+																																	Sub
+																																		Ti30.65.102
+																																		Ti29.66.80.108
+																																	Let
+																																		(Td31.64.82.110 : Float)
+																																		AppDir
+																																			L (inprod.32)
+																																			[v1.33, v2.34, Ti30.65.81.109]
+																																		FAdd
+																																			Td28.63.79.107
+																																			Td31.64.82.110
+																												Float 0.
+																											FAdd
+																												Td28.63.100
+																												Td31.64.104
+																				Float 0.
+																			FAdd
+																				Td28.63.79
+																				Td31.64.82
+												Float 0.
+											FAdd
+												Td28.63
+												Td31.64
 				Float 0.
 body 
 	Let
@@ -144,10 +249,79 @@ body
 																										(Ti23.45 : Int)
 																										Int 2
 																										Let
-																											(Td24.44 : Float)
-																											AppDir
-																												L (inprod.32)
-																												[v1.36, v2.40, Ti23.45]
-																											AppDir
-																												L (min_caml_print_float)
-																												[Td24.44]
+																											(Td26.67.70 : Float)
+																											Get
+																												v1.36
+																												Ti23.45
+																											Let
+																												(Td27.68.71 : Float)
+																												Get
+																													v2.40
+																													Ti23.45
+																												Let
+																													(Td28.63.72 : Float)
+																													FMul
+																														Td26.67.70
+																														Td27.68.71
+																													Let
+																														(Ti30.65.74 : Int)
+																														Int 1
+																														Let
+																															(Td26.67.84 : Float)
+																															Get
+																																v1.36
+																																Ti30.65.74
+																															Let
+																																(Td27.68.85 : Float)
+																																Get
+																																	v2.40
+																																	Ti30.65.74
+																																Let
+																																	(Td28.63.86 : Float)
+																																	FMul
+																																		Td26.67.84
+																																		Td27.68.85
+																																	Let
+																																		(Ti30.65.88 : Int)
+																																		Int 0
+																																		Let
+																																			(Td26.67.77.91 : Float)
+																																			Get
+																																				v1.36
+																																				Ti30.65.88
+																																			Let
+																																				(Td27.68.78.92 : Float)
+																																				Get
+																																					v2.40
+																																					Ti30.65.88
+																																				Let
+																																					(Td28.63.79.93 : Float)
+																																					FMul
+																																						Td26.67.77.91
+																																						Td27.68.78.92
+																																					Let
+																																						(Ti30.65.81.95 : Int)
+																																						Int -1
+																																						Let
+																																							(Td31.64.82.96 : Float)
+																																							AppDir
+																																								L (inprod.32)
+																																								[v1.36, v2.40, Ti30.65.81.95]
+																																							Let
+																																								(Td31.64.90 : Float)
+																																								FAdd
+																																									Td28.63.79.93
+																																									Td31.64.82.96
+																																								Let
+																																									(Td31.64.75 : Float)
+																																									FAdd
+																																										Td28.63.86
+																																										Td31.64.90
+																																									Let
+																																										(Td24.44 : Float)
+																																										FAdd
+																																											Td28.63.72
+																																											Td31.64.75
+																																										AppDir
+																																											L (min_caml_print_float)
+																																											[Td24.44]

@@ -29,6 +29,7 @@ type t =
   | FSqr of Id.t
   | Ftoi of Id.t
   | Itof of Id.t
+  | Floor of Id.t
 type fundef = { name : Id.l * Type.t;
                 args : (Id.t * Type.t) list;
                 formal_fv : (Id.t * Type.t) list;

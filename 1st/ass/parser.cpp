@@ -1,6 +1,6 @@
 #include "parser.hpp"
 
-Parser::Parser(const char *fname) {
+Parser::Parser(string fname) {
     file_name = fname;
     current_num = 0;
     data_num = 0;
@@ -9,6 +9,8 @@ Parser::Parser(const char *fname) {
 
 int Parser::parse_file() {
     fstream f;
+    // preprocess_file(f);
+
     string line;
 
     f.open(file_name, ios::in);
@@ -84,6 +86,87 @@ void Parser::parse_code(string line) {
         cerr << "Parse error in " << line << endl;
         exit(1);
     }
+}
+
+// addiの引数にラベルが来るときで16bitをはみ出すときの応急処置
+void Parser::preprocess_file(fstream &f) {
+    string line;
+
+    f.open(file_name, ios::in);
+    if (!f.is_open()) {
+        cerr << "cannot open file" << endl;
+        return;
+    }
+
+    while (getline(f, line)) {
+        // removes comment
+        auto itr = line.find("#");
+        if (itr != string::npos) {
+            line.erase(itr, line.size());
+        }
+        if (line != "") {
+            preprocess_buffer.push_back(line);
+        }
+    }
+    f.close();
+
+
+    while (true) {
+        bool update = false;
+        int line_num = 0;
+        for (auto line : preprocess_buffer) {
+            smatch res;
+
+            // label
+            if (regex_match(line, res, regex("^(.+?):\\s*\n?$"))) {
+                label_map[res[1].str()] = line_num;
+            }
+            // comment or blank
+            else if (regex_match(line, res, regex("\\s*\n?$"))) {
+            }
+            // .sectionなど
+            else if (regex_match(line, res, regex("^[.](.+?)\n?$"))) {
+            }
+            else {
+                line_num++;
+            }
+
+            if (regex_match(line, res, regex("^\taddi\t(.+?), (.+?), (.+?)\n?$"))) {
+                if (label_map.count(res[3].str()) > 0 && label_map.at(res[3].str()) * 4 > 32767) {
+                    cout << res[3].str() << endl;
+                    update = true;
+                    assert((-1 >> 1) == -1); // 算術右シフト
+                    int upper = (label_map[res[3].str()] * 4) >> 16;
+                    int lower = (label_map[res[3].str()] * 4) & 0xffff;
+                    buffer_tmp.push_back("\tlui\t%at, " + to_string(upper));
+                    buffer_tmp.push_back("\tori\t%at, %at, " + to_string(lower));
+                    buffer_tmp.push_back("\tadd\t" + res[1].str() + ", " + res[2].str() + ", %at");
+                } else {
+                    buffer_tmp.push_back(line);
+                }
+            } else {
+                buffer_tmp.push_back(line);
+            }
+        }
+
+        preprocess_buffer = buffer_tmp;
+        buffer_tmp = {};
+        if (!update) break;
+    }
+
+
+    f.open(file_name, ios::out | ios::trunc);
+    if (!f.is_open()) {
+        cerr << "cannot open file" << endl;
+        return;
+    }
+    for (auto line : preprocess_buffer) {
+        f << line << endl;
+    }
+
+    f.close();
+
+    return;
 }
 
 int Parser::get_linenum_by_label(string label) {

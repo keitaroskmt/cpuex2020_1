@@ -1,0 +1,49 @@
+Prog 
+fundef 
+	name : 
+		(L (float_fib.9): Float -> Float)
+	args : 
+		[(n.10 : Float)]
+	formal_fv : 
+		[]
+	body : 
+		Let
+			(Td2.12 : Float)
+			Float 1.
+			IfLE
+				n.10
+				Td2.12
+				Var n.10
+				Let
+					(Td4.17 : Float)
+					FSub
+						n.10
+						Td2.12
+					Let
+						(Td5.13 : Float)
+						AppDir
+							L (float_fib.9)
+							[Td4.17]
+						Let
+							(Td6.16 : Float)
+							Float 2.
+							Let
+								(Td7.15 : Float)
+								FSub
+									n.10
+									Td6.16
+								Let
+									(Td8.14 : Float)
+									AppDir
+										L (float_fib.9)
+										[Td7.15]
+									FAdd
+										Td5.13
+										Td8.14
+body 
+	Let
+		(Td1.11 : Float)
+		Float 10.
+		AppDir
+			L (float_fib.9)
+			[Td1.11]

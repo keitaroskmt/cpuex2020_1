@@ -26,6 +26,7 @@ and exp =
   | FSqr of Id.t
   | Ftoi of Id.t
   | Itof of Id.t
+  | Floor of Id.t
   | LdF of Id.t * id_or_imm
   | StF of Id.t * Id.t * id_or_imm
   | Comment of string
@@ -60,7 +61,6 @@ val reg_ra : Id.t
 val reg_at : Id.t
 
 val sp_init : int
-val hp_init : int
 
 val reg_fsw : Id.t
 val reg_fat : Id.t
@@ -71,4 +71,6 @@ val is_reg : Id.t -> bool
 val fv : t -> Id.t list
 val concat : t -> Id.t * Type.t -> t -> t
 
+(*
 val align : int -> int
+*)

@@ -37,13 +37,118 @@ fundef
 										i.17
 										Ti11.30
 									Let
-										(Td13.28 : Float)
-										AppDir
-											L (inprod.14)
-											[v1.15, v2.16, Ti12.29]
-										FAdd
-											Td10.27
-											Td13.28
+										(Ti7.26.40 : Int)
+										Int 0
+										Let
+											(Td13.28 : Float)
+											IfLE
+												Ti7.26.40
+												Ti12.29
+												Let
+													(Td8.31.41 : Float)
+													Get
+														v1.15
+														Ti12.29
+													Let
+														(Td9.32.42 : Float)
+														Get
+															v2.16
+															Ti12.29
+														Let
+															(Td10.27.43 : Float)
+															FMul
+																Td8.31.41
+																Td9.32.42
+															Let
+																(Ti11.30.44 : Int)
+																Int 1
+																Let
+																	(Ti12.29.45 : Int)
+																	Sub
+																		Ti12.29
+																		Ti11.30.44
+																	Let
+																		(Ti7.26.61 : Int)
+																		Int 0
+																		Let
+																			(Td13.28.46 : Float)
+																			IfLE
+																				Ti7.26.61
+																				Ti12.29.45
+																				Let
+																					(Td8.31.62 : Float)
+																					Get
+																						v1.15
+																						Ti12.29.45
+																					Let
+																						(Td9.32.63 : Float)
+																						Get
+																							v2.16
+																							Ti12.29.45
+																						Let
+																							(Td10.27.64 : Float)
+																							FMul
+																								Td8.31.62
+																								Td9.32.63
+																							Let
+																								(Ti11.30.65 : Int)
+																								Int 1
+																								Let
+																									(Ti12.29.66 : Int)
+																									Sub
+																										Ti12.29.45
+																										Ti11.30.65
+																									Let
+																										(Ti7.26.40.67 : Int)
+																										Int 0
+																										Let
+																											(Td13.28.68 : Float)
+																											IfLE
+																												Ti7.26.40.67
+																												Ti12.29.66
+																												Let
+																													(Td8.31.41.69 : Float)
+																													Get
+																														v1.15
+																														Ti12.29.66
+																													Let
+																														(Td9.32.42.70 : Float)
+																														Get
+																															v2.16
+																															Ti12.29.66
+																														Let
+																															(Td10.27.43.71 : Float)
+																															FMul
+																																Td8.31.41.69
+																																Td9.32.42.70
+																															Let
+																																(Ti11.30.44.72 : Int)
+																																Int 1
+																																Let
+																																	(Ti12.29.45.73 : Int)
+																																	Sub
+																																		Ti12.29.66
+																																		Ti11.30.44.72
+																																	Let
+																																		(Td13.28.46.74 : Float)
+																																		AppDir
+																																			L (inprod.14)
+																																			[v1.15, v2.16, Ti12.29.45.73]
+																																		FAdd
+																																			Td10.27.43.71
+																																			Td13.28.46.74
+																												Float 0.
+																											FAdd
+																												Td10.27.64
+																												Td13.28.68
+																				Float 0.
+																			FAdd
+																				Td10.27.43
+																				Td13.28.46
+												Float 0.
+											FAdd
+												Td10.27
+												Td13.28
 				Float 0.
 body 
 	Let
@@ -72,10 +177,79 @@ body
 								(Ti5.21 : Int)
 								Int 2
 								Let
-									(Td6.20 : Float)
-									AppDir
-										L (inprod.14)
-										[v1.18, v2.19, Ti5.21]
-									AppDir
-										L (min_caml_print_float)
-										[Td6.20]
+									(Td8.31.34 : Float)
+									Get
+										v1.18
+										Ti5.21
+									Let
+										(Td9.32.35 : Float)
+										Get
+											v2.19
+											Ti5.21
+										Let
+											(Td10.27.36 : Float)
+											FMul
+												Td8.31.34
+												Td9.32.35
+											Let
+												(Ti12.29.38 : Int)
+												Int 1
+												Let
+													(Td8.31.48 : Float)
+													Get
+														v1.18
+														Ti12.29.38
+													Let
+														(Td9.32.49 : Float)
+														Get
+															v2.19
+															Ti12.29.38
+														Let
+															(Td10.27.50 : Float)
+															FMul
+																Td8.31.48
+																Td9.32.49
+															Let
+																(Ti12.29.52 : Int)
+																Int 0
+																Let
+																	(Td8.31.41.55 : Float)
+																	Get
+																		v1.18
+																		Ti12.29.52
+																	Let
+																		(Td9.32.42.56 : Float)
+																		Get
+																			v2.19
+																			Ti12.29.52
+																		Let
+																			(Td10.27.43.57 : Float)
+																			FMul
+																				Td8.31.41.55
+																				Td9.32.42.56
+																			Let
+																				(Ti12.29.45.59 : Int)
+																				Int -1
+																				Let
+																					(Td13.28.46.60 : Float)
+																					AppDir
+																						L (inprod.14)
+																						[v1.18, v2.19, Ti12.29.45.59]
+																					Let
+																						(Td13.28.54 : Float)
+																						FAdd
+																							Td10.27.43.57
+																							Td13.28.46.60
+																						Let
+																							(Td13.28.39 : Float)
+																							FAdd
+																								Td10.27.50
+																								Td13.28.54
+																							Let
+																								(Td6.20 : Float)
+																								FAdd
+																									Td10.27.36
+																									Td13.28.39
+																								AppDir
+																									L (min_caml_print_float)
+																									[Td6.20]

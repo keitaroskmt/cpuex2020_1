@@ -18,6 +18,7 @@ in
 let rec fsqr x = x *. x
 in
 
+(*
 (* int -> float 中身同じbitを itofでハードウェア実装 *)
 (* float -> int 中身同じbitを ftoiでハードウェア実装 *)
 
@@ -93,6 +94,7 @@ let rec floor x =
         if flag then res else fneg res in
     if res_ > x then res_ -. 1.0 else res_
 in
+*)
 
 let rec kernel_sin x =
     let x2 = x *. x in
@@ -183,5 +185,39 @@ let rec atan x =
         if x_abs < 2.4375 then pi /. 4.0 +. kernel_atan ((x_abs -. 1.0) /. (x_abs +. 1.0))
         else pi /. 2.0 -. kernel_atan (1.0 /. x_abs) in
         if flag then res else fneg res
+    )
+in
+
+(* 10で割った商 *)
+let rec print_int_sub1 x n =
+    if x < 10 then n else print_int_sub1 (x - 10) (n + 1)
+in
+
+(* 10で割ったあまり *)
+let rec print_int_sub2 x =
+    if x < 10 then x else print_int_sub2 (x - 10)
+in
+
+let rec print_int x =
+    let d1 = print_int_sub1 x 0 in
+    let r1 = print_int_sub2 x in
+    if d1 > 0 then
+    (
+        let d2 = print_int_sub1 d1 0 in
+        let r2 = print_int_sub2 d1 in
+        if d2 > 0 then
+        (
+            let r3 = print_int_sub2 d2 in
+            print_char (48 + r3);
+            print_char (48 + r2);
+            print_char (48 + r1)
+        )
+        else (
+            print_char (48 + r2);
+            print_char (48 + r1)
+        )
+    )
+    else (
+        print_char (48 + r1)
     )
 in
