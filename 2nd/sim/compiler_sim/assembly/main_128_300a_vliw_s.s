@@ -6,7 +6,7 @@
 	nop
 	nop
 	ori	%sp, %sp, 44464
-	ori	%hp, %hp, 483
+	ori	%hp, %hp, 496
 
 	nop
 	nop
@@ -171,53 +171,23 @@ create_array_loop:
 	nop
 	nop
 	nop
-	beqi	%a0, 0, create_array_exit
+	bne	%a0, %zero, create_array_cont
 
 	nop
+	nop
+	nop
+	jr	%ra
+
+create_array_cont:
 	nop
 	nop
 	sw	%v1, 0(%hp)
-
-	nop
-	nop
-	addi	%hp, %hp, 1
-	beqi	%a0, 1, create_array_exit
-
-	nop
-	nop
-	nop
-	sw	%v1, 0(%hp)
-
-	nop
-	nop
-	addi	%hp, %hp, 1
-	beqi	%a0, 2, create_array_exit
-
-	nop
-	nop
-	nop
-	sw	%v1, 0(%hp)
-
-	nop
-	nop
-	addi	%hp, %hp, 1
-	beqi	%a0, 3, create_array_exit
-
-	nop
-	nop
-	sw	%v1, 0(%hp)
-	addi	%a0, %a0, -4
+	addi	%a0, %a0, -1
 
 	nop
 	nop
 	addi	%hp, %hp, 1
 	j	create_array_loop
-
-create_array_exit:
-	nop
-	nop
-	nop
-	jr	%ra
 
 min_caml_create_float_array:
 	nop

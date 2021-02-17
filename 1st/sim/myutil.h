@@ -3,6 +3,7 @@
 void print_state();
 void print_stats();
 void print_label_stats();
+void print_time(clock_t start_time);
 std::string get_line(int size);
 bool isnum(std::string s);
 
