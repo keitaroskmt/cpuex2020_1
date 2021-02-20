@@ -8,6 +8,9 @@ input [7:0] dia;
 output [7:0] dob;
 reg [7:0] ram [0:200000];
 reg [7:0] doa,dob;
+initial begin
+    $readmemb("tx_buf_init.mem",RAM,0,6);
+end
 always @(posedge clk) begin
  if (ena) begin
  if (wea)
