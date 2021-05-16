@@ -97,6 +97,7 @@ let find' x' regenv =
 let rec g dest cont regenv = function (* 命令列のレジスタ割り当て (caml2html: regalloc_g) *)
   | Ans(exp) -> g'_and_restore dest cont regenv exp
   | Let((x, t) as xt, exp, e) ->
+       (*(if (not (M.mem x regenv)) then Format.eprintf "%s\n" x else Format.eprintf "::%s\n" x);*)
       assert (not (M.mem x regenv));
       let cont' = concat e dest cont in
       let (e1', regenv1) = g'_and_restore xt cont' regenv exp in
@@ -137,6 +138,7 @@ and g' dest cont regenv = function (* 各命令のレジスタ割り当て (caml2html: regal
   | FSqr(x) -> (Ans(FSqr(find x Type.Float regenv)), regenv)
   | Ftoi(x) -> (Ans(Ftoi(find x Type.Float regenv)), regenv)
   | Itof(x) -> (Ans(Itof(find x Type.Int regenv)), regenv)
+  | Floor(x) -> (Ans(Floor(find x Type.Float regenv)), regenv)
   | LdF(x, y') -> (Ans(LdF(find x Type.Int regenv, find' y' regenv)), regenv)
   | StF(x, y, z') -> (Ans(StF(find x Type.Float regenv, find y Type.Int regenv, find' z' regenv)), regenv)
   | IfEq(x, y', e1, e2) as exp -> g'_if dest cont regenv exp (fun e1' e2' -> IfEq(find x Type.Int regenv, find' y' regenv, e1', e2')) e1 e2

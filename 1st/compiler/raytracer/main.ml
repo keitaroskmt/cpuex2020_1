@@ -106,6 +106,7 @@ in
 let rec fsqr x = x *. x
 in
 
+(*
 (* int -> float 中身同じbitを itofでハードウェア実装 *)
 (* float -> int 中身同じbitを ftoiでハードウェア実装 *)
 
@@ -128,7 +129,7 @@ let rec int_of_float_sub3 m acm =
 in
 
 let rec int_of_float x =
-    let flag = if fisneg x then false else true in
+    let flag = x >= 0.0 in
     let x_abs = fabs x in
     let res =
     (
@@ -160,7 +161,7 @@ let rec float_of_int_sub3 m acm =
 in
 
 let rec float_of_int x =
-    let flag = if x < 0 then false else true in
+    let flag = x > 0 in
     let x_abs = if x < 0 then -x else x in
     let res =
     (
@@ -173,14 +174,15 @@ let rec float_of_int x =
 in
 
 let rec floor x =
-    let flag = if fisneg x then false else true in
+    let flag = x >= 0.0 in
     let x_abs = fabs x in
     let res =
         if x_abs >= 8388608.0 then x_abs else float_of_int (int_of_float x_abs) in
-    let resm =
-        if res > x then res -. 1.0 else res in
-    if flag then resm else fneg resm
+    let res_ =
+        if flag then res else fneg res in
+    if res_ > x then res_ -. 1.0 else res_
 in
+*)
 
 let rec kernel_sin x =
     let x2 = x *. x in
@@ -217,7 +219,7 @@ let rec reduction_2pi x =
     let pi = 3.14159265358979 in
     let pi2 = 2.0 *. pi in
     let rec f s t = (* while (x >= p) *)
-        if s < t then t else f t (2.0 *. s) in
+        if s < t then t else f s (2.0 *. t) in
     let p = f x pi2 in
     let rec g s t = (* while (x >= pi2) *)
         if s < pi2 then s else
@@ -250,7 +252,7 @@ in
 
 let rec sin x =
     let pi = 3.14159265358979 in
-    let flag = if fisneg x then false else true in
+    let flag = x >= 0.0 in
     let x = reduction_2pi (fabs x) in
     (* if (x >= pi) *)
     let flag = if x >= pi then not flag else flag in
@@ -263,7 +265,7 @@ in
 
 let rec atan x =
     let pi = 3.14159265358979 in
-    let flag = if fisneg x then false else true in
+    let flag = x >= 0.0 in
     let x_abs = fabs x in
     if x_abs < 0.4375 then kernel_atan x
     else (
@@ -271,6 +273,40 @@ let rec atan x =
         if x_abs < 2.4375 then pi /. 4.0 +. kernel_atan ((x_abs -. 1.0) /. (x_abs +. 1.0))
         else pi /. 2.0 -. kernel_atan (1.0 /. x_abs) in
         if flag then res else fneg res
+    )
+in
+
+(* 10で割った商 *)
+let rec print_int_sub1 x n =
+    if x < 10 then n else print_int_sub1 (x - 10) (n + 1)
+in
+
+(* 10で割ったあまり *)
+let rec print_int_sub2 x =
+    if x < 10 then x else print_int_sub2 (x - 10)
+in
+
+let rec print_int x =
+    let d1 = print_int_sub1 x 0 in
+    let r1 = print_int_sub2 x in
+    if d1 > 0 then
+    (
+        let d2 = print_int_sub1 d1 0 in
+        let r2 = print_int_sub2 d1 in
+        if d2 > 0 then
+        (
+            let r3 = print_int_sub2 d2 in
+            print_char (48 + r3);
+            print_char (48 + r2);
+            print_char (48 + r1)
+        )
+        else (
+            print_char (48 + r2);
+            print_char (48 + r1)
+        )
+    )
+    else (
+        print_char (48 + r1)
     )
 in
 (****************************************************************)
@@ -2580,6 +2616,6 @@ let rec rt size_x size_y =
 )
 in
 
-let _ = rt 512 512
+let _ = rt 128 128
 
 in 0

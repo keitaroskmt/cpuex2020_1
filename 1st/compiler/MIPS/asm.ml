@@ -28,6 +28,7 @@ and exp = (* 一つ一つの命令に対応する式 (caml2html: sparcasm_exp) *)
   | FSqr of Id.t
   | Ftoi of Id.t
   | Itof of Id.t
+  | Floor of Id.t
   | LdF of Id.t * id_or_imm
   | StF of Id.t * Id.t * id_or_imm
   | Comment of string
@@ -72,8 +73,11 @@ let reg_fat = "%f30" (* for assembler *)
 let reg_fzero = "%fzero"
 let is_reg x = (x.[0] = '%')
 
-let hp_init = 8192
-let sp_init = 16384
+(*
+let hp_init = 60000
+let sp_init = 600000
+*)
+let sp_init = 130000
 
 (* super-tenuki *)
 let rec remove_and_uniq xs = function
@@ -85,7 +89,7 @@ let rec remove_and_uniq xs = function
 let fv_id_or_imm = function V(x) -> [x] | _ -> []
 let rec fv_exp = function
   | Nop | Set(_) | SetF(_) | SetL(_) | Comment(_) | Restore(_) -> []
-  | Mov(x) | Neg(x) | FMovD(x) | FNegD(x) | FAbs(x) | FSqr(x) | Ftoi(x) | Itof(x) | Save(x, _) -> [x]
+  | Mov(x) | Neg(x) | FMovD(x) | FNegD(x) | FAbs(x) | FSqr(x) | Ftoi(x) | Itof(x) | Floor(x) | Save(x, _) -> [x]
   | Add(x, y') | Sub(x, y') | Mul(x, y') | Div(x, y') | SLL(x, y') | Ld(x, y') | LdF(x, y') -> x :: fv_id_or_imm y'
   | St(x, y, z') | StF(x, y, z') -> x :: y :: fv_id_or_imm z'
   | FAddD(x, y) | FSubD(x, y) | FMulD(x, y) | FDivD(x, y) -> [x; y]
@@ -104,4 +108,6 @@ let rec concat e1 xt e2 =
   | Ans(exp) -> Let(xt, exp, e2)
   | Let(yt, exp, e1') -> Let(yt, exp, concat e1' xt e2)
 
+(*
 let align i = (if i mod 8 = 0 then i else i + 4)
+*)

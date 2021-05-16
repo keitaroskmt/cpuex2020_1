@@ -12,7 +12,7 @@ int main ()
   float limit = 2.0;
   float zr, zi, zr2, zi2, cr, ci, tr, ti;
 
-  w = 400;
+  w = 10;
   h = w;
 
   for(y=0;y<h;y++)

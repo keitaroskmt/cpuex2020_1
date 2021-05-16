@@ -29,24 +29,33 @@ type t = (* クロージャ変換後の式 (caml2html: closure_t) *)
   | FSqr of Id.t
   | Ftoi of Id.t
   | Itof of Id.t
+  | Floor of Id.t
 type fundef = { name : Id.l * Type.t;
                 args : (Id.t * Type.t) list;
                 formal_fv : (Id.t * Type.t) list;
                 body : t }
 type prog = Prog of fundef list * t
 
+let fv_unit x =
+    if List.mem_assoc x !FixAddress.global_address then S.empty else S.singleton x
+
+let rec fv_list l =
+    match l with
+    | [] -> S.empty
+    | x :: rest -> S.union (fv_unit x) (fv_list rest)
+
 let rec fv = function
   | Unit | Int(_) | Float(_) | ExtArray(_) -> S.empty
-  | Neg(x) | FNeg(x) | FAbs(x) | FSqr(x) | Ftoi(x) | Itof(x) -> S.singleton x
-  | Add(x, y) | Sub(x, y) | Mul(x, y) | Div(x, y) | FAdd(x, y) | FSub(x, y) | FMul(x, y) | FDiv(x, y) | Get(x, y) -> S.of_list [x; y]
-  | IfEq(x, y, e1, e2)| IfLE(x, y, e1, e2) -> S.add x (S.add y (S.union (fv e1) (fv e2)))
+  | Neg(x) | FNeg(x) | FAbs(x) | FSqr(x) | Ftoi(x) | Itof(x) | Floor(x) -> fv_unit x
+  | Add(x, y) | Sub(x, y) | Mul(x, y) | Div(x, y) | FAdd(x, y) | FSub(x, y) | FMul(x, y) | FDiv(x, y) | Get(x, y) -> fv_list [x; y]
+  | IfEq(x, y, e1, e2)| IfLE(x, y, e1, e2) -> S.union (fv_unit x) (S.union (fv_unit y) (S.union (fv e1) (fv e2)))
   | Let((x, t), e1, e2) -> S.union (fv e1) (S.remove x (fv e2))
-  | Var(x) -> S.singleton x
-  | MakeCls((x, t), { entry = l; actual_fv = ys }, e) -> S.remove x (S.union (S.of_list ys) (fv e))
-  | AppCls(x, ys) -> S.of_list (x :: ys)
-  | AppDir(_, xs) | Tuple(xs) -> S.of_list xs
-  | LetTuple(xts, y, e) -> S.add y (S.diff (fv e) (S.of_list (List.map fst xts)))
-  | Put(x, y, z) -> S.of_list [x; y; z]
+  | Var(x) -> fv_unit x
+  | MakeCls((x, t), { entry = l; actual_fv = ys }, e) -> S.remove x (S.union (fv_list ys) (fv e))
+  | AppCls(x, ys) -> fv_list (x :: ys)
+  | AppDir(_, xs) | Tuple(xs) -> fv_list xs
+  | LetTuple(xts, y, e) -> S.union (fv_unit y) (S.diff (fv e) (fv_list (List.map fst xts)))
+  | Put(x, y, z) -> fv_list [x; y; z]
 
 let toplevel : fundef list ref = ref []
 
@@ -111,8 +120,9 @@ let rec g env known = function (* クロージャ変換ルーチン本体 (caml2html: closure
         | "fabs" -> FAbs(List.hd ys)
         | "fneg" -> FNeg(List.hd ys)
         | "sqrt" -> FSqr(List.hd ys)
-        | "ftoi" -> Ftoi(List.hd ys)
-        | "itof" -> Itof(List.hd ys)
+        | "int_of_float" -> Ftoi(List.hd ys)
+        | "float_of_int" -> Itof(List.hd ys)
+        | "floor" -> Floor(List.hd ys)
         | _ -> AppDir(Id.L("min_caml_" ^ x), ys))
 
 let f e =
@@ -284,6 +294,10 @@ let closure_debug oc l =
              Printf.fprintf oc "%s\n" e1)
         | Itof e1 ->
             (Printf.fprintf oc "Itof\n";
+             print_tab (level+1);
+             Printf.fprintf oc "%s\n" e1)
+        | Floor e1 ->
+            (Printf.fprintf oc "Floor\n";
              print_tab (level+1);
              Printf.fprintf oc "%s\n" e1)
         )

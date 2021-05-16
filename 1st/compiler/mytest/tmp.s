@@ -1,10 +1,10 @@
 .section	".rodata"
 .align	8
 # ------------ Initialize register ------------
-	lui	%sp, 0
-	ori	%sp, %sp, 16384
+	lui	%sp, 9
+	ori	%sp, %sp, 10176
 	lui	%hp, 0
-	ori	%hp, %hp, 8192
+	ori	%hp, %hp, 60000
 # ------------ Initialize float table ---------
 	lui	%at, 16256
 	ori	%at, %at, 0
@@ -20,16 +20,6 @@
 # ------------ libmincaml.S -------------------
 # min_caml_print_char
 min_caml_print_char:
-	out	%v0
-	jr	%ra
-# min_caml_print_int
-min_caml_print_int:
-	out	%v0
-	srl	%v0, %v0, 8
-	out	%v0
-	srl	%v0, %v0, 8
-	out	%v0
-	srl	%v0, %v0, 8
 	out	%v0
 	jr	%ra
 # min_caml_read_int
@@ -96,7 +86,9 @@ create_float_array_cont:
 f.8:
 	slti	%at, %v0, 0
 	bne	%at, %zero, beq_else.21
-	flw	%f0, 8192(%zero)
+	lui	%at, 0
+	ori	%at, %at, 60000
+	flw	%f0, 0(%at)# 1.000000
 	addi	%v0, %v0, -1
 	fsw	%f0, 0(%sp)
 	sw	%ra, 4(%sp)
@@ -108,7 +100,9 @@ f.8:
 	fadd	%f0, %f1, %f0
 	jr	%ra
 beq_else.21:
-	flw	%f0, 8196(%zero)
+	lui	%at, 0
+	ori	%at, %at, 60004
+	flw	%f0, 0(%at)# 0.000000
 	jr	%ra
 .global	min_caml_start
 min_caml_start:

@@ -1,0 +1,48 @@
+LetRec
+	name : 
+		(float_fib : Float -> Float)
+	args : 
+		[(n : Float)]
+	body : 
+		Let
+			(Td2 : Float)
+			Float 1.
+			IfLE
+				n
+				Td2
+				Var n
+				Let
+					(Td5 : Float)
+					Let
+						(Td4 : Float)
+						Let
+							(Td3 : Float)
+							Float 1.
+							FSub
+								n
+								Td3
+						App
+							float_fib
+							[Td4]
+					Let
+						(Td8 : Float)
+						Let
+							(Td7 : Float)
+							Let
+								(Td6 : Float)
+								Float 2.
+								FSub
+									n
+									Td6
+							App
+								float_fib
+								[Td7]
+						FAdd
+							Td5
+							Td8
+	Let
+		(Td1 : Float)
+		Float 10.
+		App
+			float_fib
+			[Td1]

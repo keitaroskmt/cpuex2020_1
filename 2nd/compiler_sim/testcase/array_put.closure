@@ -1,0 +1,118 @@
+Prog 
+fundef 
+	name : 
+		(L (inprod.31): Float list -> Float list -> Int -> Float)
+	args : 
+		[(v1.32 : Float list), (v2.33 : Float list), (i.34 : Int)]
+	formal_fv : 
+		[]
+	body : 
+		Let
+			(Ti24.60 : Int)
+			Int 0
+			IfLE
+				Ti24.60
+				i.34
+				Let
+					(Td25.65 : Float)
+					Get
+						v1.32
+						i.34
+					Let
+						(Td26.66 : Float)
+						Get
+							v2.33
+							i.34
+						Let
+							(Td27.61 : Float)
+							FMul
+								Td25.65
+								Td26.66
+							Let
+								(Ti28.64 : Int)
+								Int 1
+								Let
+									(Ti29.63 : Int)
+									Sub
+										i.34
+										Ti28.64
+									Let
+										(Td30.62 : Float)
+										AppDir
+											L (inprod.31)
+											[v1.32, v2.33, Ti29.63]
+										FAdd
+											Td27.61
+											Td30.62
+				Float 0.
+body 
+	Let
+		(Ti7.58 : Int)
+		Int 3
+		Let
+			(Td8.59 : Float)
+			Float 1.
+			Let
+				(v1.35 : Float list)
+				AppDir
+					L (min_caml_create_float_array)
+					[Ti7.58, Td8.59]
+				Let
+					(Ti9.56 : Int)
+					Int 0
+					Let
+						(Td10.57 : Float)
+						Float 1.23
+						Let
+							(Tu6.36 : ())
+							Put
+								v1.35
+								Ti9.56
+								Td10.57
+							Let
+								(Ti11.54 : Int)
+								Int 1
+								Let
+									(Tu5.37 : ())
+									Put
+										v1.35
+										Ti11.54
+										Td10.57
+									Let
+										(Ti13.52 : Int)
+										Int 2
+										Let
+											(Tu4.38 : ())
+											Put
+												v1.35
+												Ti13.52
+												Td10.57
+											Let
+												(v2.39 : Float list)
+												AppDir
+													L (min_caml_create_float_array)
+													[Ti7.58, Td8.59]
+												Let
+													(Td18.49 : Float)
+													Float 4.56
+													Let
+														(Tu3.40 : ())
+														Put
+															v2.39
+															Ti9.56
+															Td18.49
+														Let
+															(Tu2.41 : ())
+															Put
+																v2.39
+																Ti11.54
+																Td18.49
+															Let
+																(Tu1.42 : ())
+																Put
+																	v2.39
+																	Ti13.52
+																	Td18.49
+																AppDir
+																	L (inprod.31)
+																	[v1.35, v2.39, Ti13.52]

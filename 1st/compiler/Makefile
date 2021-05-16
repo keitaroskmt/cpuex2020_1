@@ -25,13 +25,14 @@ clean:: nobackup
 # inline.mli inline.ml constFold.mli constFold.ml elim.mli elim.ml \
 # closure.mli closure.ml asm.mli asm.ml virtual.mli virtual.ml \
 # simm.mli simm.ml regAlloc.mli regAlloc.ml emit.mli emit.ml \
-# main.mli main.ml
+# main.mli main_io.ml
 
 SOURCES = float.c type.ml id.ml m.ml s.ml \
 typing.mli typing.ml syntax.ml parser.mly lexer.mll kNormal.mli kNormal.ml \
 alpha.mli alpha.ml beta.mli beta.ml assoc.mli assoc.ml \
 cse.mli cse.ml \
 inline.mli inline.ml constFold.mli constFold.ml elim.mli elim.ml \
+fixAddress.mli fixAddress.ml \
 closure.mli closure.ml asm.mli asm.ml virtual.mli virtual.ml \
 simm.mli simm.ml regAlloc.mli regAlloc.ml emit.mli emit.ml \
 output.ml main.mli main.ml
@@ -44,14 +45,14 @@ output.ml main.mli main.ml
 # inprod inprod-rec inprod-loop matmul matmul-flat \
 # manyargs tmp
 
-TESTS = fib float_fib adder tmp array_make array_put int_io sin cos
+TESTS = fib float_fib adder array_make array_put sin cos mandelbrot
 
 do_test: $(TESTS:%=mytest/%.s)
 
 .PRECIOUS: mytest/%.s
 TRASH = $(TESTS:%=mytest/%.s) $(TESTS:%=mytest/%) $(TESTS:%=mytest/%.res) $(TESTS:%=mytest/%.ans) $(TESTS:%=mytest/%.cmp) \
 	$(TESTS:%=mytest/%.iter) $(TESTS:%=mytest/%.closure) $(TESTS:%=mytest/%.cse) $(TESTS:%=test/%.alpha) \
-	$(TESTS:%=mytest/%.knormal) $(TESTS:%=mytest/%.synt)
+	$(TESTS:%=mytest/%.knormal) $(TESTS:%=mytest/%.synt) $(TESTS:%=mytest/%.data)
 
 mytest/%.s: $(RESULT) mytest/%.ml
 	./$(RESULT) mytest/$*
@@ -74,7 +75,7 @@ mytest/%.s: $(RESULT) mytest/%.ml
 # test/%.cmp: test/%.res test/%.ans
 # 	diff $^ > $@
 
-min-caml.html: main.mli main.ml id.ml m.ml s.ml \
+min-caml.html: main.mli ../ass/mytest/main_io.ml id.ml m.ml s.ml \
 		syntax.ml type.ml parser.mly lexer.mll typing.mli typing.ml kNormal.mli kNormal.ml \
 		alpha.mli alpha.ml beta.mli beta.ml assoc.mli assoc.ml \
 		inline.mli inline.ml constFold.mli constFold.ml elim.mli elim.ml \

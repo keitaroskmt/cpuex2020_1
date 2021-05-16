@@ -249,9 +249,13 @@ let rec float_of_int_test () =
 
 let f_max = 8388608.0
 
+let rec pow x n =
+    if n = 0 then x else x *. (pow x (n-1))
+
 let rec floor_test () = 
     let var = ref 0.0 in
     let max = ref 0.0 in
+    (* let f_max = pow 2.0 127 in *)
 	Random.self_init ();
 
 	(* 正の数 *)
@@ -342,11 +346,10 @@ let rec sin_test () =
         Printf.printf "ulp   : %ld\n" x;
         max := if !max < diff then diff else !max;
         max_ulp := if !max_ulp < x then x else !max_ulp;
-        if !max_ulp > 1000l then(
+        if !max_ulp > 1000l then (
             Printf.printf "%ld\n" (ftoi (mysin !var));
          failwith "error";
-        )
-
+        );
 		i := !i + 1;
     done;
 

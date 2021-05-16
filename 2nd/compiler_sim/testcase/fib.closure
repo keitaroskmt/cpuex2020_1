@@ -1,0 +1,49 @@
+Prog 
+fundef 
+	name : 
+		(L (fib.9): Int -> Int)
+	args : 
+		[(n.10 : Int)]
+	formal_fv : 
+		[]
+	body : 
+		Let
+			(Ti2.12 : Int)
+			Int 1
+			IfLE
+				n.10
+				Ti2.12
+				Var n.10
+				Let
+					(Ti4.17 : Int)
+					Sub
+						n.10
+						Ti2.12
+					Let
+						(Ti5.13 : Int)
+						AppDir
+							L (fib.9)
+							[Ti4.17]
+						Let
+							(Ti6.16 : Int)
+							Int 2
+							Let
+								(Ti7.15 : Int)
+								Sub
+									n.10
+									Ti6.16
+								Let
+									(Ti8.14 : Int)
+									AppDir
+										L (fib.9)
+										[Ti7.15]
+									Add
+										Ti5.13
+										Ti8.14
+body 
+	Let
+		(Ti1.11 : Int)
+		Int 20
+		AppDir
+			L (fib.9)
+			[Ti1.11]

@@ -171,9 +171,9 @@ simm.annot
 regAlloc.annot
 emit.annot
 main.annot
-.cmi
-.cmo
-.cmx
+*.cmi
+*.cmo
+*.cmx
 .o
 .d
 dllmin-caml_stubs.so

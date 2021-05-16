@@ -19,8 +19,8 @@ let locate x =
     | y :: zs when x = y -> 0 :: List.map succ (loc zs)
     | y :: zs -> List.map succ (loc zs) in
   loc !stackmap
-let offset x = 4 * List.hd (locate x)
-let stacksize () = align ((List.length !stackmap + 1) * 4)
+let offset x = if (locate x) = [] then (Printf.fprintf stdout ("%s\n") x; failwith "err") else List.hd (locate x)
+let stacksize () = List.length !stackmap + 1
 
 let pp_id_or_imm = function
   | V(x) -> x
@@ -46,8 +46,8 @@ let rec get_float_address label data n =
     match data with
     | [] -> raise Float_address_error
     | (Id.L(x), d) :: rest ->
-        (if x = label then (hp_init + n, d)
-        else get_float_address label rest (n + 4))
+        (if x = label then (!FixAddress.hp_init + n, d)
+        else get_float_address label rest (n + 1))
 
 let load_imm oc dest v =
     let upper = Int32.shift_right_logical v 16 in
@@ -61,17 +61,36 @@ let load_imm oc dest v =
     Printf.fprintf oc "\tori\t%s, %s, %ld\n" dest dest lower
     *)
 
-let rec load_float_imm oc data n =
+let rec to_bits x i =
+    if i = 32 then "" else
+         (to_bits (Int32.shift_right x 1) (i+1)) ^
+             (if (Int32.logand x 1l) = 1l then "1" else "0")
+
+(* データセクション 応急処置 *)
+let rec preprocess_data dc i =
+    if i = 0 then () else
+       (Printf.fprintf dc "%s\n" (to_bits 0l 0);
+        preprocess_data dc (i-1))
+
+let rec load_float_imm dc data acc =
     match data with
-    | [] -> ()
+    | [] -> acc
     | (Id.L(x), d) :: rest ->
+    (*
+        Printf.fprintf dc "%ld\n" (get d);
+        Printf.fprintf dc "%f\n" d;
+        *)
+        Printf.fprintf dc "%s\n" (to_bits (get d) 0);
+            load_float_imm dc rest (acc + 1)
+    (*
         (load_imm oc reg_at (get d);
         Printf.fprintf oc "\tsw\t%s, 0(%s)\n" reg_at reg_hp;
-        Printf.fprintf oc "\taddi\t%s, %s, 4\n" reg_hp reg_hp;
+        Printf.fprintf oc "\taddi\t%s, %s, 1\n" reg_hp reg_hp;
         load_float_imm oc rest (n+1))
+    *)
 
 let addi oc r1 r2 i =
-    if -65536 <= i && i <= 65535 then
+    if -32768 <= i && i <= 32767 then
         Printf.fprintf oc "\taddi\t%s, %s, %d\n" r1 r2 i
     else
        (
@@ -101,7 +120,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprime) *)
             Printf.fprintf oc "\tflw\t%s, %d(%s)\n" x addr reg_zero
         else
            (load_imm oc reg_at (Int32.of_int addr);
-            Printf.fprintf oc "\tflw\t%s, 0(%s) # %f\n" x reg_at d)
+            Printf.fprintf oc "\tflw\t%s, 0(%s)# %f\n" x reg_at d)
   | NonTail(x), SetL(Id.L(y)) ->
       Printf.fprintf oc "\taddi\t%s, %s, %s\n" x reg_zero y
   | NonTail(x), Mov(y) when x = y -> ()
@@ -171,6 +190,8 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprime) *)
         Printf.fprintf oc "\tftoi\t%s, %s\n" x y
   | NonTail(x), Itof(y) ->
         Printf.fprintf oc "\titof\t%s, %s\n" x y
+  | NonTail(x), Floor(y) ->
+        Printf.fprintf oc "\tfloor\t%s, %s\n" x y
   | NonTail(x), LdF(y, z') ->
        (match z' with
        | V(z) -> Printf.fprintf oc "\tadd\t%s, %s, %s\n" reg_at y z;
@@ -207,7 +228,7 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprime) *)
   | Tail, (Set _ | SetL _ | Mov _ | Neg _ | Add _ | Sub _ | Mul _ | Div _ | Ftoi _ | SLL _ | Ld _ as exp) ->
       g' oc (NonTail(regs.(0)), exp);
       Printf.fprintf oc "\tjr\t%s\n" reg_ra;
-  | Tail, (SetF _ | FMovD _ | FNegD _ | FAbs _ | FSqr _ | Itof _ | FAddD _ | FSubD _ | FMulD _ | FDivD _ | LdF _ as exp) ->
+  | Tail, (SetF _ | FMovD _ | FNegD _ | FAbs _ | FSqr _ | Itof _ | Floor _ | FAddD _ | FSubD _ | FMulD _ | FDivD _ | LdF _ as exp) ->
       g' oc (NonTail(fregs.(0)), exp);
       Printf.fprintf oc "\tjr\t%s\n" reg_ra;
   | Tail, (Restore(x) as exp) ->
@@ -280,12 +301,12 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprime) *)
   | NonTail(a), CallCls(x, ys, zs) ->
       g'_args oc [(x, reg_cl)] ys zs;
       let ss = stacksize () in
-      Printf.fprintf oc "\tsw\t%s, %d(%s)\n" reg_ra (ss - 4) reg_sp;
+      Printf.fprintf oc "\tsw\t%s, %d(%s)\n" reg_ra (ss - 1) reg_sp;
       addi oc reg_sp reg_sp ss;
       Printf.fprintf oc "\tlw\t%s, 0(%s)\n" reg_at reg_cl;
       Printf.fprintf oc "\tjalr\t%s\n" reg_at;
       addi oc reg_sp reg_sp (-ss);
-      Printf.fprintf oc "\tlw\t%s, %d(%s)\n" reg_ra (ss - 4) reg_sp;
+      Printf.fprintf oc "\tlw\t%s, %d(%s)\n" reg_ra (ss - 1) reg_sp;
       if List.mem a allregs && a <> regs.(0) then
         Printf.fprintf oc "\taddi\t%s, %s, 0\n" a regs.(0)
       else if List.mem a allfregs && a <> fregs.(0) then
@@ -293,11 +314,11 @@ and g' oc = function (* 各命令のアセンブリ生成 (caml2html: emit_gprime) *)
   | NonTail(a), CallDir(Id.L(x), ys, zs) ->
       g'_args oc [] ys zs;
       let ss = stacksize () in
-      Printf.fprintf oc "\tsw\t%s, %d(%s)\n" reg_ra (ss - 4) reg_sp;
+      Printf.fprintf oc "\tsw\t%s, %d(%s)\n" reg_ra (ss - 1) reg_sp;
       addi oc reg_sp reg_sp ss;
       Printf.fprintf oc "\tjal\t%s\n" x;
       addi oc reg_sp reg_sp (-ss);
-      Printf.fprintf oc "\tlw\t%s, %d(%s)\n" reg_ra (ss - 4) reg_sp;
+      Printf.fprintf oc "\tlw\t%s, %d(%s)\n" reg_ra (ss - 1) reg_sp;
       if List.mem a allregs && a <> regs.(0) then
         Printf.fprintf oc "\taddi\t%s, %s, 0\n" a regs.(0)
       else if List.mem a allfregs && a <> fregs.(0) then
@@ -350,16 +371,18 @@ let h oc { name = Id.L(x); args = _; fargs = _; body = e; ret = _ } =
   stackmap := [];
   g oc (Tail, e)
 
-let f oc (Prog(data, fundefs, e)) =
+let f (oc, dc) (Prog(data, fundefs, e)) =
   Format.eprintf "generating assembly...@.";
   Printf.fprintf oc ".section\t\".rodata\"\n";
   Printf.fprintf oc ".align\t8\n";
+  Printf.fprintf oc "# ------------ Initialize float table ---------\n";
+  preprocess_data dc !FixAddress.hp_init;
+  Format.eprintf "hp_init: %d\n" !FixAddress.hp_init;
+  let float_hp = load_float_imm dc data 0 in
+  float_table := data;
   Printf.fprintf oc "# ------------ Initialize register ------------\n";
   load_imm oc reg_sp (Int32.of_int sp_init);
-  load_imm oc reg_hp (Int32.of_int hp_init);
-  Printf.fprintf oc "# ------------ Initialize float table ---------\n";
-  load_float_imm oc data 0;
-  float_table := data;
+  load_imm oc reg_hp (Int32.of_int (!FixAddress.hp_init + float_hp));
   Printf.fprintf oc "# ------------ Text Section -------------------\n";
   Printf.fprintf oc ".section\t\".text\"\n";
     Printf.fprintf oc "\tj\tmin_caml_start\n";

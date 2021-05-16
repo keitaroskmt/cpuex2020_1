@@ -1,0 +1,72 @@
+LetRec
+	name : 
+		(inprod : Float list -> Float list -> Int -> Float)
+	args : 
+		[(v1 : Float list), (v2 : Float list), (i : Int)]
+	body : 
+		Let
+			(Ti6 : Int)
+			Int 0
+			IfLE
+				Ti6
+				i
+				Let
+					(Td9 : Float)
+					Let
+						(Td7 : Float)
+						Get
+							v1
+							i
+						Let
+							(Td8 : Float)
+							Get
+								v2
+								i
+							FMul
+								Td7
+								Td8
+					Let
+						(Td12 : Float)
+						Let
+							(Ti11 : Int)
+							Let
+								(Ti10 : Int)
+								Int 1
+								Sub
+									i
+									Ti10
+							App
+								inprod
+								[v1, v2, Ti11]
+						FAdd
+							Td9
+							Td12
+				Float 0.
+	Let
+		(v1 : Float list)
+		Let
+			(Ti1 : Int)
+			Int 3
+			Let
+				(Td2 : Float)
+				Float 1.23
+				ExtFunApp
+					create_float_array
+					[Ti1, Td2]
+		Let
+			(v2 : Float list)
+			Let
+				(Ti3 : Int)
+				Int 3
+				Let
+					(Td4 : Float)
+					Float 4.56
+					ExtFunApp
+						create_float_array
+						[Ti3, Td4]
+			Let
+				(Ti5 : Int)
+				Int 2
+				App
+					inprod
+					[v1, v2, Ti5]
