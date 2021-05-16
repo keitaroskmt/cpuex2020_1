@@ -5,7 +5,7 @@ module multi_control_unit(
     input wire [5:0]    Funct,
     input wire          clk,
     input wire          rstn,
-    input wire          UBusy,
+   // input wire          UBusy,
     input wire          Rx_ready,
     output wire         IorD,
     output wire         MemWrite,
@@ -47,7 +47,7 @@ assign RegConcat = (Op == 6'b010111) ? 3'b110 //slt
                    :((Op[4:3]==2'b10) ? 3'b111
                    : 3'b000)))))))); //浮動小数命令のとき�??��レジスタのアドレスに位置をつける. RegConcat = {rs,rt,rd}
 
-multi_main_decoder md(Op,Funct,clk,rstn,UBusy,Rx_ready,IorD,MemWrite,IRWrite,PCWrite_temp,Branch,ToggleEqual,PCSrc_temp,FPUControl,ALUorFPU,ALUSrcB,ALUSrcA,AndiOri,RegWrite,RegDst,MemtoReg,ALUOp,BorL,Out,Tx_start,state);
+multi_main_decoder md(Op,Funct,clk,rstn,Rx_ready,IorD,MemWrite,IRWrite,PCWrite_temp,Branch,ToggleEqual,PCSrc_temp,FPUControl,ALUorFPU,ALUSrcB,ALUSrcA,AndiOri,RegWrite,RegDst,MemtoReg,ALUOp,BorL,Out,Tx_start,state);
 multi_ALU_decoder ad(Op,Funct,ALUOp,PCSrc_temp,PCWrite_temp,state,ALUControl,PCSrc,PCWrite,ShiftD,Shift);
 
 endmodule
@@ -58,7 +58,7 @@ module multi_main_decoder(
     input wire [5:0]   Funct,
     input wire         clk,
     input wire         rstn,
-    input wire         UBusy,
+    //input wire         UBusy,
     input wire         Rx_ready,
     output reg         IorD,
     output reg         MemWrite,
@@ -603,7 +603,6 @@ always @(posedge clk) begin
         state <= s_Out;
         Tx_start <= 1'b0;
     end else if (state == s_Out) begin
-        if (~UBusy) begin
         state <= s_Fetch;
         IorD     <= 1'b0;
         ALUSrcA  <= 1'b0;
@@ -615,7 +614,6 @@ always @(posedge clk) begin
         PCWrite_temp  <= 1'b1;
         RegWrite <= 1'b0;
         MemWrite <= 1'b0;
-        end
     end else if (state == s_InWait) begin
         if (Rx_ready) begin
           state <= s_InPre;

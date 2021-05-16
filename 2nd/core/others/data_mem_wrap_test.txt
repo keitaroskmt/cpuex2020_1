@@ -1,0 +1,8 @@
+sw %a0 0(%sp)   sw %a1 1(%sp)   nop   nop
+lw %a8 0(%sp)   lw %a9 1(%sp)   nop   nop
+sw %a2 2(%sp)   sw %a3 3(%sp)   nop   nop
+sw %a4 4(%sp)   sw %a5 5(%sp)   nop   nop
+sw %a6 6(%sp)   sw %a7 7(%sp)   nop   nop
+lw %a10 2(%sp)  lw %a11 7(%sp)
+lw %a12 4(%sp)  lw %a13 5($sp)
+
